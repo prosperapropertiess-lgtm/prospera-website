@@ -3,6 +3,7 @@ import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PopupController from "@/components/ui/PopupController";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -53,6 +54,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <PopupController />
         </body>
     </html>
   );

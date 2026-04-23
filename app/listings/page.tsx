@@ -210,10 +210,10 @@ export default function ListingsPage() {
                           ${p.price.toLocaleString()}<span className="text-sm text-gray-400 font-sans">/mo</span>
                         </p>
                         <Link
-                          href="/contact"
+                          href={`/listings/${p.id}`}
                           className="px-4 py-2 bg-[#0A1628] text-white text-xs rounded hover:bg-[#7B1C1C] transition-colors"
                         >
-                          Inquire
+                          View Details
                         </Link>
                       </div>
                     </div>
