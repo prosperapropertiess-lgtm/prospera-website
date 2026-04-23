@@ -2,16 +2,18 @@
 
 :root {
   --cream: #FAF8F5;
-  --navy: #0A1628;
-  --gold: #C5A55A;
-  --gold-light: #D4BC7E;
+  --navy: #0D1B2A;
+  --slate: #2D4A5E;
+  --burgundy: #7B1C1C;
+  --burgundy-light: #9B2E2E;
 }
 
 @theme inline {
   --color-cream: var(--cream);
   --color-navy: var(--navy);
-  --color-gold: var(--gold);
-  --color-gold-light: var(--gold-light);
+  --color-slate: var(--slate);
+  --color-burgundy: var(--burgundy);
+  --color-burgundy-light: var(--burgundy-light);
   --font-cormorant: var(--font-cormorant);
   --font-inter: var(--font-inter);
 }

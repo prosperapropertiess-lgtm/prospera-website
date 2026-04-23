@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ComingSoon() {
   const [email, setEmail] = useState("");
@@ -32,63 +33,66 @@ export default function ComingSoon() {
       className="min-h-screen flex flex-col items-center justify-center px-6 py-16"
       style={{ backgroundColor: "#FAF8F5" }}
     >
-      {/* Gold divider top */}
-      <div className="w-16 h-px mb-10" style={{ backgroundColor: "#C5A55A" }} />
+      {/* Logo */}
+      <div className="mb-6">
+        <Image
+          src="/logo.png"
+          alt="Prospera Properties"
+          width={200}
+          height={200}
+          priority
+          style={{ mixBlendMode: "multiply" }}
+        />
+      </div>
 
-      {/* Brand */}
-      <p
-        className="text-xs uppercase tracking-[0.3em] mb-10"
-        style={{ color: "#C5A55A", fontFamily: "var(--font-inter)" }}
-      >
-        Prospera Properties
-      </p>
+      {/* Burgundy divider */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
+        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+      </div>
 
       {/* Headline */}
       <h1
-        className="text-5xl sm:text-6xl md:text-7xl font-light text-center leading-tight mb-8 max-w-3xl"
-        style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+        className="text-5xl sm:text-6xl md:text-7xl font-light text-center leading-tight mb-6 max-w-3xl"
+        style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
       >
         Something Beautiful
         <br />
-        <span className="italic" style={{ color: "#C5A55A" }}>
+        <span className="italic" style={{ color: "#7B1C1C" }}>
           Is Coming
         </span>
       </h1>
 
-      {/* Ornament */}
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
-        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
-      </div>
-
       {/* Subtitle */}
       <p
         className="text-base sm:text-lg text-center max-w-xl leading-relaxed mb-4"
-        style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.75 }}
+        style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.75 }}
       >
         We&apos;re building a new standard in property management — where owners feel confident
         and tenants feel at home.
       </p>
+
+      {/* Cities */}
       <p
-        className="text-sm text-center mb-12"
-        style={{ color: "#C5A55A", fontFamily: "var(--font-inter)", letterSpacing: "0.1em" }}
+        className="text-sm text-center mb-12 uppercase tracking-widest"
+        style={{ color: "#2D4A5E", fontFamily: "var(--font-inter)" }}
       >
-        Launching in London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Sarnia
+        London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Sarnia
       </p>
 
       {/* Email capture */}
       {status === "success" ? (
         <div className="text-center">
           <p
-            className="text-lg mb-2"
-            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+            className="text-2xl mb-2"
+            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
           >
             You&apos;re on the list.
           </p>
           <p
             className="text-sm"
-            style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.6 }}
+            style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.6 }}
           >
             We&apos;ll be in touch when we launch.
           </p>
@@ -107,8 +111,8 @@ export default function ComingSoon() {
             className="flex-1 px-5 py-3 text-sm outline-none border"
             style={{
               backgroundColor: "#FAF8F5",
-              color: "#0A1628",
-              borderColor: "#C5A55A",
+              color: "#0D1B2A",
+              borderColor: "#7B1C1C",
               fontFamily: "var(--font-inter)",
             }}
           />
@@ -117,7 +121,7 @@ export default function ComingSoon() {
             disabled={status === "loading"}
             className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50"
             style={{
-              backgroundColor: "#0A1628",
+              backgroundColor: "#0D1B2A",
               color: "#FAF8F5",
               fontFamily: "var(--font-inter)",
             }}
@@ -130,19 +134,23 @@ export default function ComingSoon() {
       {status === "error" && (
         <p
           className="mt-4 text-sm"
-          style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.6 }}
+          style={{ color: "#7B1C1C", fontFamily: "var(--font-inter)" }}
         >
           Something went wrong. Please try again.
         </p>
       )}
 
-      {/* Gold divider bottom */}
-      <div className="w-16 h-px mt-16" style={{ backgroundColor: "#C5A55A" }} />
+      {/* Bottom divider */}
+      <div className="flex items-center gap-4 mt-16 mb-8">
+        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
+        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+      </div>
 
       {/* Footer */}
       <p
-        className="mt-8 text-xs"
-        style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.4 }}
+        className="text-xs"
+        style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.4 }}
       >
         &copy; {new Date().getFullYear()} Prospera Properties
       </p>
