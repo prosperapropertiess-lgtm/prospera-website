@@ -3,7 +3,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management in Sarnia, Ontario — Prospera Properties",
+  title: "Property Management in Sarnia, Ontario",
   description: "Professional property management in Sarnia, ON. Serving landlords near St. Clair College, the industrial corridor, and surrounding neighbourhoods.",
 };
 

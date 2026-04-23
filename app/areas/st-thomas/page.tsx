@@ -3,7 +3,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management in St. Thomas, Ontario — Prospera Properties",
+  title: "Property Management in St. Thomas, Ontario",
   description: "Professional property management in St. Thomas, ON. Serving landlords across St. Thomas with tenant screening, rent collection, and full maintenance coordination.",
 };
 

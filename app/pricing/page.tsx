@@ -1,6 +1,12 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description: "Transparent property management pricing with no hidden fees. See how Prospera Properties compares to typical Ontario property managers.",
+};
 
 const plans = [
   {

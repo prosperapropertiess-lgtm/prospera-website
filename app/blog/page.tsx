@@ -3,7 +3,7 @@ import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog — Prospera Properties",
+  title: "Blog",
   description: "Landlord tips, tenant resources, Ontario market updates, and property management guides from Prospera Properties.",
 };
 

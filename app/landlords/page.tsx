@@ -3,6 +3,12 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Property Management for Landlords",
+  description: "Prospera Properties manages your London, St. Thomas, or Sarnia rental — tenant screening, rent collection, maintenance, and more. Transparent fees, no markups.",
+};
 
 const painPoints = [
   { problem: "Tired of chasing rent?", solution: "Guaranteed on-time collection", icon: "💰" },

@@ -3,7 +3,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management in London, Ontario — Prospera Properties",
+  title: "Property Management in London, Ontario",
   description: "Professional property management in London, ON. Tenant screening, rent collection, maintenance, and more. Serving Old North, Byron, East London, and beyond.",
 };
 
