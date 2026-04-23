@@ -1,159 +1,533 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import FadeIn from "@/components/animations/FadeIn";
+import CounterAnimation from "@/components/animations/CounterAnimation";
 
-export default function ComingSoon() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+// ── Hero ──────────────────────────────────────────────────────────────────────
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email) return;
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setEmail("");
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  }
-
+function Hero() {
   return (
-    <main
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-16"
-      style={{ backgroundColor: "#FAF8F5" }}
-    >
-      {/* Logo */}
-      <div className="mb-6">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
         <Image
-          src="/logo.png"
-          alt="Prospera Properties"
-          width={200}
-          height={200}
+          src="https://picsum.photos/seed/prospera-hero/1600/900"
+          alt="Beautiful rental property"
+          fill
           priority
-          style={{ mixBlendMode: "multiply" }}
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center" }}
+        />
+        {/* Warm overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, rgba(10,22,40,0.65) 0%, rgba(10,22,40,0.4) 60%, rgba(123,28,28,0.25) 100%)" }}
         />
       </div>
 
-      {/* Burgundy divider */}
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
-      </div>
-
-      {/* Headline */}
-      <h1
-        className="text-5xl sm:text-6xl md:text-7xl font-light text-center leading-tight mb-6 max-w-3xl"
-        style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-      >
-        Something Beautiful
-        <br />
-        <span className="italic" style={{ color: "#7B1C1C" }}>
-          Is Coming
-        </span>
-      </h1>
-
-      {/* Subtitle */}
-      <p
-        className="text-base sm:text-lg text-center max-w-xl leading-relaxed mb-4"
-        style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.75 }}
-      >
-        We&apos;re building a new standard in property management — where owners feel confident
-        and tenants feel at home.
-      </p>
-
-      {/* Cities */}
-      <p
-        className="text-sm text-center mb-12 uppercase tracking-widest"
-        style={{ color: "#2D4A5E", fontFamily: "var(--font-inter)" }}
-      >
-        London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Sarnia
-      </p>
-
-      {/* Email capture */}
-      {status === "success" ? (
-        <div className="text-center">
-          <p
-            className="text-2xl mb-2"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-          >
-            You&apos;re on the list.
-          </p>
-          <p
-            className="text-sm"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.6 }}
-          >
-            We&apos;ll be in touch when we launch.
-          </p>
-        </div>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-md flex flex-col sm:flex-row gap-3"
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-6"
         >
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email address"
-            required
-            className="flex-1 px-5 py-3 text-sm outline-none border"
+          <span
+            className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5"
             style={{
-              backgroundColor: "#FAF8F5",
-              color: "#0D1B2A",
-              borderColor: "#7B1C1C",
-              fontFamily: "var(--font-inter)",
+              borderColor: "rgba(250,248,245,0.4)",
+              color: "rgba(250,248,245,0.8)",
+              border: "1px solid",
+              fontFamily: "var(--font-dm-sans)",
             }}
-          />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50"
+          >
+            London · St. Thomas · Sarnia
+          </span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-6"
+          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+        >
+          Property Management
+          <br />
+          <em>That Actually Cares.</em>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-base sm:text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
+          style={{ color: "rgba(250,248,245,0.80)", fontFamily: "var(--font-dm-sans)" }}
+        >
+          Serving landlords and tenants across London, St. Thomas, and Sarnia, Ontario —
+          with transparency, responsiveness, and genuine care.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link
+            href="/landlords"
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
             style={{
-              backgroundColor: "#0D1B2A",
+              backgroundColor: "#7B1C1C",
               color: "#FAF8F5",
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-dm-sans)",
             }}
           >
-            {status === "loading" ? "..." : "Notify Me"}
-          </button>
-        </form>
-      )}
-
-      {status === "error" && (
-        <p
-          className="mt-4 text-sm"
-          style={{ color: "#7B1C1C", fontFamily: "var(--font-inter)" }}
-        >
-          Something went wrong. Please try again.
-        </p>
-      )}
-
-      {/* Bottom divider */}
-      <div className="flex items-center gap-4 mt-16 mb-8">
-        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-16 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+            I&apos;m a Landlord
+          </Link>
+          <Link
+            href="/tenants"
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
+            style={{
+              backgroundColor: "transparent",
+              color: "#FAF8F5",
+              border: "1px solid rgba(250,248,245,0.6)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            I&apos;m a Tenant
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Footer */}
-      <p
-        className="text-xs"
-        style={{ color: "#0D1B2A", fontFamily: "var(--font-inter)", opacity: 0.4 }}
+      {/* Scroll chevron */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        &copy; {new Date().getFullYear()} Prospera Properties
-      </p>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.6)" strokeWidth="1.5">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+// ── Stats Bar ─────────────────────────────────────────────────────────────────
+
+function StatsBar() {
+  const stats = [
+    { value: 50, suffix: "+", label: "Properties Managed" },
+    { value: 3, suffix: "", label: "Cities Served" },
+    { value: 5, suffix: "+", label: "Years in Business" },
+  ];
+
+  return (
+    <section
+      className="py-16 px-5 sm:px-8"
+      style={{ backgroundColor: "#F5F0EB" }}
+    >
+      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
+        {stats.map((stat, i) => (
+          <FadeIn key={stat.label} delay={i * 0.1}>
+            <div>
+              <div
+                className="text-5xl sm:text-6xl font-light mb-2"
+                style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+              >
+                <CounterAnimation target={stat.value} suffix={stat.suffix} />
+              </div>
+              <div
+                className="text-xs font-semibold uppercase tracking-widest"
+                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ── Two-Column Split ──────────────────────────────────────────────────────────
+
+function TwoColumnSplit() {
+  return (
+    <section className="py-0" style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {/* Landlords */}
+        <div className="relative min-h-[480px] sm:min-h-[560px] flex items-end overflow-hidden group">
+          <Image
+            src="https://picsum.photos/seed/prospera-landlord/800/600"
+            alt="Rental property exterior"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "cover", objectPosition: "center", transition: "transform 0.6s ease" }}
+            className="group-hover:scale-105"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.1) 60%)" }}
+          />
+          <FadeIn className="relative z-10 p-8 sm:p-12" direction="up">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              For Landlords
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            >
+              Own rental property?
+              <br />
+              <em>We handle everything.</em>
+            </h2>
+            <p
+              className="text-sm leading-relaxed mb-6 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              From tenant screening to rent collection and maintenance — we take the stress out of property ownership.
+            </p>
+            <Link
+              href="/landlords"
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
+              style={{
+                backgroundColor: "#7B1C1C",
+                color: "#FAF8F5",
+                fontFamily: "var(--font-dm-sans)",
+              }}
+            >
+              Learn More
+            </Link>
+          </FadeIn>
+        </div>
+
+        {/* Tenants */}
+        <div className="relative min-h-[480px] sm:min-h-[560px] flex items-end overflow-hidden group">
+          <Image
+            src="https://picsum.photos/seed/prospera-tenant/800/600"
+            alt="Modern apartment interior"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "cover", objectPosition: "center", transition: "transform 0.6s ease" }}
+            className="group-hover:scale-105"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.1) 60%)" }}
+          />
+          <FadeIn className="relative z-10 p-8 sm:p-12" direction="up" delay={0.1}>
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              For Tenants
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            >
+              Looking for a home?
+              <br />
+              <em>Find your next rental.</em>
+            </h2>
+            <p
+              className="text-sm leading-relaxed mb-6 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Browse quality rentals in London, St. Thomas, and Sarnia — professionally managed, well-maintained.
+            </p>
+            <Link
+              href="/tenants"
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
+              style={{
+                backgroundColor: "#2D4A5E",
+                color: "#FAF8F5",
+                fontFamily: "var(--font-dm-sans)",
+              }}
+            >
+              View Listings
+            </Link>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── How It Works ──────────────────────────────────────────────────────────────
+
+function HowItWorks() {
+  const steps = [
+    {
+      number: "01",
+      title: "Tell Us About Your Property",
+      description: "Share details about your rental property or tell us what you're looking for. We'll take it from there.",
+    },
+    {
+      number: "02",
+      title: "We Find and Screen Tenants",
+      description: "Our thorough vetting process means only qualified, reliable tenants move into your property.",
+    },
+    {
+      number: "03",
+      title: "You Collect Rent, Stress-Free",
+      description: "Sit back while we handle rent collection, maintenance requests, inspections, and everything in between.",
+    },
+  ];
+
+  return (
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="max-w-6xl mx-auto">
+        <FadeIn className="text-center mb-16">
+          <span
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          >
+            How It Works
+          </span>
+          <h2
+            className="text-4xl sm:text-5xl font-light leading-tight"
+            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+          >
+            Property management
+            <br />
+            <em>made simple.</em>
+          </h2>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, i) => (
+            <FadeIn key={step.number} delay={i * 0.15} direction="up">
+              <div
+                className="p-8 h-full"
+                style={{ backgroundColor: "#F5F0EB", border: "1px solid rgba(10,22,40,0.06)" }}
+              >
+                <div
+                  className="text-5xl font-light mb-6"
+                  style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.6 }}
+                >
+                  {step.number}
+                </div>
+                <h3
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "rgba(10,22,40,0.65)", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  {step.description}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────────────
+
+const testimonials = [
+  {
+    quote: "Prospera took over my London property and I've had zero headaches since. Rent comes in on time, tenants are happy, and I get clear updates every month. Couldn't ask for more.",
+    author: "Ebin J.",
+    role: "Landlord in London, ON",
+  },
+  {
+    quote: "Finally found a property management company that actually picks up the phone. They handled a plumbing issue the same day — my tenant was thrilled. That's the standard they set every time.",
+    author: "Ebin K.",
+    role: "Landlord in St. Thomas, ON",
+  },
+  {
+    quote: "As a tenant, I've dealt with unresponsive landlords my whole life. Prospera is different — professional, respectful, and they actually maintain the property. I renewed immediately.",
+    author: "Ebin M.",
+    role: "Tenant in Sarnia, ON",
+  },
+];
+
+function Testimonials() {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+  const next = () => setCurrent((c) => (c + 1) % testimonials.length);
+
+  return (
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <div className="max-w-3xl mx-auto">
+        <FadeIn className="text-center mb-16">
+          <span
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          >
+            What People Say
+          </span>
+          <h2
+            className="text-4xl sm:text-5xl font-light"
+            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+          >
+            Trusted by landlords
+            <br />
+            <em>and tenants alike.</em>
+          </h2>
+        </FadeIn>
+
+        <div className="relative min-h-[200px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="text-center"
+            >
+              {/* Quote mark */}
+              <div
+                className="text-7xl font-light mb-4 leading-none"
+                style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.4 }}
+              >
+                &ldquo;
+              </div>
+              <p
+                className="text-lg sm:text-xl leading-relaxed mb-8"
+                style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+              >
+                {testimonials[current].quote}
+              </p>
+              <div
+                className="text-sm font-semibold mb-1"
+                style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
+              >
+                {testimonials[current].author}
+              </div>
+              <div
+                className="text-xs uppercase tracking-widest"
+                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              >
+                {testimonials[current].role}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Controls */}
+        <div className="flex items-center justify-center gap-6 mt-10">
+          <button
+            onClick={prev}
+            className="w-10 h-10 flex items-center justify-center border transition-colors duration-200 hover:bg-navy"
+            style={{ borderColor: "rgba(10,22,40,0.2)", color: "#0A1628" }}
+            aria-label="Previous"
+          >
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <div className="flex gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className="w-2 h-2 rounded-full transition-all duration-200"
+                style={{
+                  backgroundColor: i === current ? "#7B1C1C" : "rgba(10,22,40,0.2)",
+                  transform: i === current ? "scale(1.25)" : "scale(1)",
+                }}
+                aria-label={`Go to testimonial ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            className="w-10 h-10 flex items-center justify-center border transition-colors duration-200"
+            style={{ borderColor: "rgba(10,22,40,0.2)", color: "#0A1628" }}
+            aria-label="Next"
+          >
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CTA Banner ────────────────────────────────────────────────────────────────
+
+function CTABanner() {
+  return (
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <FadeIn className="max-w-3xl mx-auto text-center">
+        <span
+          className="inline-block text-xs font-semibold uppercase tracking-widest mb-6"
+          style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+        >
+          Get Started
+        </span>
+        <h2
+          className="text-4xl sm:text-5xl font-light mb-6 leading-tight"
+          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+        >
+          Ready to stop managing
+          <br />
+          <em>your property alone?</em>
+        </h2>
+        <p
+          className="text-base leading-relaxed mb-10 max-w-xl mx-auto"
+          style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+        >
+          Let us handle the hard parts. Get a free, no-obligation consultation and find out how Prospera can work for you.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-block px-10 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
+          style={{
+            backgroundColor: "#7B1C1C",
+            color: "#FAF8F5",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
+          Get a Free Quote
+        </Link>
+      </FadeIn>
+    </section>
+  );
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
+
+export default function HomePage() {
+  return (
+    <main>
+      <Hero />
+      <StatsBar />
+      <TwoColumnSplit />
+      <HowItWorks />
+      <Testimonials />
+      <CTABanner />
     </main>
   );
 }
