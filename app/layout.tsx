@@ -16,14 +16,29 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Prospera Properties — Coming Soon",
+  title: {
+    default: "Prospera Properties — Property Management in London, St. Thomas & Sarnia",
+    template: "%s — Prospera Properties",
+  },
   description:
-    "Prospera Properties is launching soon in London, St. Thomas, and Sarnia. Join our waitlist to be the first to know.",
+    "Prospera Properties offers professional property management in London, St. Thomas, and Sarnia, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
+  keywords: ["property management London Ontario", "property management St Thomas Ontario", "property management Sarnia Ontario", "rental property management Ontario", "landlord services Ontario"],
   openGraph: {
-    title: "Prospera Properties — Coming Soon",
+    title: "Prospera Properties — Property Management in Ontario",
     description:
-      "A new standard in property management. Launching soon in London, St. Thomas, and Sarnia.",
+      "Professional property management across London, St. Thomas, and Sarnia. Tenant screening, rent collection, and full maintenance coordination.",
     type: "website",
+    url: "https://www.prosperaproperties.co",
+    siteName: "Prospera Properties",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prospera Properties",
+    description: "Property management in London, St. Thomas & Sarnia, Ontario.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

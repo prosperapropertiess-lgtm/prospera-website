@@ -4,10 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Home", href: "/" },
   { label: "For Landlords", href: "/landlords" },
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
