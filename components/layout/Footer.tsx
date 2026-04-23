@@ -39,7 +39,6 @@ export default function Footer() {
             >
               Property management that actually cares — for landlords and tenants across Southwestern Ontario.
             </p>
-            {/* Social links */}
             <div className="flex items-center gap-4">
               <a
                 href="#"

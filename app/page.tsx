@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 
@@ -12,7 +12,6 @@ import CounterAnimation from "@/components/animations/CounterAnimation";
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src="https://picsum.photos/seed/prospera-hero/1600/900"
@@ -22,14 +21,12 @@ function Hero() {
           sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
-        {/* Warm overlay */}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, rgba(10,22,40,0.65) 0%, rgba(10,22,40,0.4) 60%, rgba(123,28,28,0.25) 100%)" }}
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -38,11 +35,10 @@ function Hero() {
           className="mb-6"
         >
           <span
-            className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5"
+            className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 border"
             style={{
               borderColor: "rgba(250,248,245,0.4)",
               color: "rgba(250,248,245,0.8)",
-              border: "1px solid",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -81,24 +77,15 @@ function Hero() {
         >
           <Link
             href="/landlords"
-            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
-            style={{
-              backgroundColor: "#7B1C1C",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] hover:scale-105"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             I&apos;m a Landlord
           </Link>
           <Link
             href="/tenants"
-            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
-            style={{
-              backgroundColor: "transparent",
-              color: "#FAF8F5",
-              border: "1px solid rgba(250,248,245,0.6)",
-              fontFamily: "var(--font-dm-sans)",
-            }}
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest border border-[rgba(250,248,245,0.6)] text-[#FAF8F5] transition-all duration-200 hover:bg-white/10"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             I&apos;m a Tenant
           </Link>
@@ -135,10 +122,7 @@ function StatsBar() {
   ];
 
   return (
-    <section
-      className="py-16 px-5 sm:px-8"
-      style={{ backgroundColor: "#F5F0EB" }}
-    >
+    <section className="py-16 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
         {stats.map((stat, i) => (
           <FadeIn key={stat.label} delay={i * 0.1}>
@@ -167,7 +151,7 @@ function StatsBar() {
 
 function TwoColumnSplit() {
   return (
-    <section className="py-0" style={{ backgroundColor: "#FAF8F5" }}>
+    <section style={{ backgroundColor: "#FAF8F5" }}>
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Landlords */}
         <div className="relative min-h-[480px] sm:min-h-[560px] flex items-end overflow-hidden group">
@@ -176,8 +160,8 @@ function TwoColumnSplit() {
             alt="Rental property exterior"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: "cover", objectPosition: "center", transition: "transform 0.6s ease" }}
-            className="group-hover:scale-105"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            className="transition-transform duration-700 group-hover:scale-105"
           />
           <div
             className="absolute inset-0"
@@ -185,14 +169,14 @@ function TwoColumnSplit() {
           />
           <FadeIn className="relative z-10 p-8 sm:p-12" direction="up">
             <span
-              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               For Landlords
             </span>
             <h2
-              className="text-3xl sm:text-4xl font-light mb-4 leading-tight"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight text-[#FAF8F5]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Own rental property?
               <br />
@@ -206,12 +190,8 @@ function TwoColumnSplit() {
             </p>
             <Link
               href="/landlords"
-              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
-              style={{
-                backgroundColor: "#7B1C1C",
-                color: "#FAF8F5",
-                fontFamily: "var(--font-dm-sans)",
-              }}
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Learn More
             </Link>
@@ -225,23 +205,23 @@ function TwoColumnSplit() {
             alt="Modern apartment interior"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: "cover", objectPosition: "center", transition: "transform 0.6s ease" }}
-            className="group-hover:scale-105"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            className="transition-transform duration-700 group-hover:scale-105"
           />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.1) 60%)" }}
+            style={{ background: "linear-gradient(to top, rgba(45,74,94,0.80) 0%, rgba(45,74,94,0.1) 60%)" }}
           />
           <FadeIn className="relative z-10 p-8 sm:p-12" direction="up" delay={0.1}>
             <span
-              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               For Tenants
             </span>
             <h2
-              className="text-3xl sm:text-4xl font-light mb-4 leading-tight"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight text-[#FAF8F5]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Looking for a home?
               <br />
@@ -255,12 +235,8 @@ function TwoColumnSplit() {
             </p>
             <Link
               href="/tenants"
-              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
-              style={{
-                backgroundColor: "#2D4A5E",
-                color: "#FAF8F5",
-                fontFamily: "var(--font-dm-sans)",
-              }}
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest bg-[#2D4A5E] text-[#FAF8F5] transition-all duration-200 hover:bg-[#3a5f78]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               View Listings
             </Link>
@@ -297,14 +273,14 @@ function HowItWorks() {
       <div className="max-w-6xl mx-auto">
         <FadeIn className="text-center mb-16">
           <span
-            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             How It Works
           </span>
           <h2
-            className="text-4xl sm:text-5xl font-light leading-tight"
-            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+            className="text-4xl sm:text-5xl font-light leading-tight text-[#0A1628]"
+            style={{ fontFamily: "var(--font-cormorant)" }}
           >
             Property management
             <br />
@@ -326,8 +302,8 @@ function HowItWorks() {
                   {step.number}
                 </div>
                 <h3
-                  className="text-xl font-semibold mb-3"
-                  style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+                  className="text-xl font-semibold mb-3 text-[#0A1628]"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   {step.title}
                 </h3>
@@ -377,14 +353,14 @@ function Testimonials() {
       <div className="max-w-3xl mx-auto">
         <FadeIn className="text-center mb-16">
           <span
-            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             What People Say
           </span>
           <h2
-            className="text-4xl sm:text-5xl font-light"
-            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+            className="text-4xl sm:text-5xl font-light text-[#0A1628]"
+            style={{ fontFamily: "var(--font-cormorant)" }}
           >
             Trusted by landlords
             <br />
@@ -402,28 +378,27 @@ function Testimonials() {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              {/* Quote mark */}
               <div
-                className="text-7xl font-light mb-4 leading-none"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.4 }}
+                className="text-7xl font-light mb-4 leading-none text-[#7B1C1C]"
+                style={{ fontFamily: "var(--font-cormorant)", opacity: 0.4 }}
               >
                 &ldquo;
               </div>
               <p
-                className="text-lg sm:text-xl leading-relaxed mb-8"
-                style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+                className="text-lg sm:text-xl leading-relaxed mb-8 text-[#0A1628]"
+                style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 {testimonials[current].quote}
               </p>
               <div
-                className="text-sm font-semibold mb-1"
-                style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
+                className="text-sm font-semibold mb-1 text-[#0A1628]"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {testimonials[current].author}
               </div>
               <div
-                className="text-xs uppercase tracking-widest"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                className="text-xs uppercase tracking-widest text-[#7B1C1C]"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {testimonials[current].role}
               </div>
@@ -435,9 +410,8 @@ function Testimonials() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={prev}
-            className="w-10 h-10 flex items-center justify-center border transition-colors duration-200 hover:bg-navy"
-            style={{ borderColor: "rgba(10,22,40,0.2)", color: "#0A1628" }}
-            aria-label="Previous"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(10,22,40,0.2)] text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+            aria-label="Previous testimonial"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <polyline points="15 18 9 12 15 6" />
@@ -461,9 +435,8 @@ function Testimonials() {
 
           <button
             onClick={next}
-            className="w-10 h-10 flex items-center justify-center border transition-colors duration-200"
-            style={{ borderColor: "rgba(10,22,40,0.2)", color: "#0A1628" }}
-            aria-label="Next"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(10,22,40,0.2)] text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+            aria-label="Next testimonial"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <polyline points="9 18 15 12 9 6" />
@@ -482,14 +455,14 @@ function CTABanner() {
     <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
       <FadeIn className="max-w-3xl mx-auto text-center">
         <span
-          className="inline-block text-xs font-semibold uppercase tracking-widest mb-6"
-          style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          className="inline-block text-xs font-semibold uppercase tracking-widest mb-6 text-[#7B1C1C]"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Get Started
         </span>
         <h2
-          className="text-4xl sm:text-5xl font-light mb-6 leading-tight"
-          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          className="text-4xl sm:text-5xl font-light mb-6 leading-tight text-[#FAF8F5]"
+          style={{ fontFamily: "var(--font-cormorant)" }}
         >
           Ready to stop managing
           <br />
@@ -503,12 +476,8 @@ function CTABanner() {
         </p>
         <Link
           href="/contact"
-          className="inline-block px-10 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90 hover:scale-105"
-          style={{
-            backgroundColor: "#7B1C1C",
-            color: "#FAF8F5",
-            fontFamily: "var(--font-dm-sans)",
-          }}
+          className="inline-block px-10 py-4 text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] hover:scale-105"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Get a Free Quote
         </Link>
@@ -521,13 +490,13 @@ function CTABanner() {
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
       <StatsBar />
       <TwoColumnSplit />
       <HowItWorks />
       <Testimonials />
       <CTABanner />
-    </main>
+    </>
   );
 }
