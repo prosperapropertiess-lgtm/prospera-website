@@ -1,65 +1,151 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+
+export default function ComingSoon() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main
+      className="min-h-screen flex flex-col items-center justify-center px-6 py-16"
+      style={{ backgroundColor: "#FAF8F5" }}
+    >
+      {/* Gold divider top */}
+      <div className="w-16 h-px mb-10" style={{ backgroundColor: "#C5A55A" }} />
+
+      {/* Brand */}
+      <p
+        className="text-xs uppercase tracking-[0.3em] mb-10"
+        style={{ color: "#C5A55A", fontFamily: "var(--font-inter)" }}
+      >
+        Prospera Properties
+      </p>
+
+      {/* Headline */}
+      <h1
+        className="text-5xl sm:text-6xl md:text-7xl font-light text-center leading-tight mb-8 max-w-3xl"
+        style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+      >
+        Something Beautiful
+        <br />
+        <span className="italic" style={{ color: "#C5A55A" }}>
+          Is Coming
+        </span>
+      </h1>
+
+      {/* Ornament */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
+        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
+      </div>
+
+      {/* Subtitle */}
+      <p
+        className="text-base sm:text-lg text-center max-w-xl leading-relaxed mb-4"
+        style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.75 }}
+      >
+        We&apos;re building a new standard in property management — where owners feel confident
+        and tenants feel at home.
+      </p>
+      <p
+        className="text-sm text-center mb-12"
+        style={{ color: "#C5A55A", fontFamily: "var(--font-inter)", letterSpacing: "0.1em" }}
+      >
+        Launching in London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Sarnia
+      </p>
+
+      {/* Email capture */}
+      {status === "success" ? (
+        <div className="text-center">
+          <p
+            className="text-lg mb-2"
+            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+          >
+            You&apos;re on the list.
+          </p>
+          <p
+            className="text-sm"
+            style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.6 }}
+          >
+            We&apos;ll be in touch when we launch.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md flex flex-col sm:flex-row gap-3"
+        >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email address"
+            required
+            className="flex-1 px-5 py-3 text-sm outline-none border"
+            style={{
+              backgroundColor: "#FAF8F5",
+              color: "#0A1628",
+              borderColor: "#C5A55A",
+              fontFamily: "var(--font-inter)",
+            }}
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50"
+            style={{
+              backgroundColor: "#0A1628",
+              color: "#FAF8F5",
+              fontFamily: "var(--font-inter)",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            {status === "loading" ? "..." : "Notify Me"}
+          </button>
+        </form>
+      )}
+
+      {status === "error" && (
+        <p
+          className="mt-4 text-sm"
+          style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.6 }}
+        >
+          Something went wrong. Please try again.
+        </p>
+      )}
+
+      {/* Gold divider bottom */}
+      <div className="w-16 h-px mt-16" style={{ backgroundColor: "#C5A55A" }} />
+
+      {/* Footer */}
+      <p
+        className="mt-8 text-xs"
+        style={{ color: "#0A1628", fontFamily: "var(--font-inter)", opacity: 0.4 }}
+      >
+        &copy; {new Date().getFullYear()} Prospera Properties
+      </p>
+    </main>
   );
 }
