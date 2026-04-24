@@ -448,6 +448,130 @@ function Testimonials() {
   );
 }
 
+// ── Blog Preview ─────────────────────────────────────────────────────────────
+
+const latestPosts = [
+  {
+    slug: "ontario-landlord-tenant-act-2026",
+    title: "Ontario Landlord Tenant Act: What You Need to Know in 2026",
+    excerpt: "A plain-English breakdown of the Residential Tenancies Act — your rights, your obligations, and what changed recently.",
+    date: "2026-04-15",
+    category: "Landlord Tips",
+    readTime: "8 min read",
+  },
+  {
+    slug: "tenant-screening-red-flags",
+    title: "5 Red Flags When Screening Tenants (And How to Handle Them)",
+    excerpt: "Finding great tenants starts with knowing what to watch for. Here are five warning signs that experienced landlords never ignore.",
+    date: "2026-04-05",
+    category: "Landlord Tips",
+    readTime: "7 min read",
+  },
+  {
+    slug: "property-management-fees-ontario",
+    title: "Property Management Fees in Ontario: What's Normal in 2026?",
+    excerpt: "Before you hire a property manager, understand what you should be paying — and the hidden fees to watch out for.",
+    date: "2026-03-28",
+    category: "Landlord Tips",
+    readTime: "6 min read",
+  },
+];
+
+function BlogPreview() {
+  return (
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="max-w-6xl mx-auto">
+        <FadeIn className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              From the Blog
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-light leading-tight text-[#0A1628]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Guides for landlords
+              <br />
+              <em>and tenants.</em>
+            </h2>
+          </div>
+          <Link
+            href="/blog"
+            className="text-sm font-semibold uppercase tracking-widest text-[#7B1C1C] border-b border-[#7B1C1C] pb-0.5 hover:opacity-70 transition-opacity whitespace-nowrap"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+          >
+            Read All Articles →
+          </Link>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {latestPosts.map((post, i) => (
+            <FadeIn key={post.slug} delay={i * 0.12} direction="up">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group flex flex-col h-full bg-white border hover:shadow-md transition-shadow"
+                style={{ borderColor: "#E8E4DF" }}
+              >
+                <div
+                  className="h-44 flex items-center justify-center text-4xl"
+                  style={{ backgroundColor: "#F5F0EB" }}
+                >
+                  📰
+                </div>
+                <div className="flex flex-col flex-1 p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="text-xs uppercase tracking-wider px-2 py-1 bg-[#0A1628] text-[#FAF8F5]"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {post.category}
+                    </span>
+                    <span
+                      className="text-xs text-gray-400"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {post.readTime}
+                    </span>
+                  </div>
+                  <h3
+                    className="text-xl font-medium mb-3 leading-snug group-hover:text-[#7B1C1C] transition-colors"
+                    style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    {post.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed flex-1 mb-4"
+                    style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {post.excerpt}
+                  </p>
+                  <div
+                    className="flex items-center justify-between pt-4 border-t mt-auto"
+                    style={{ borderColor: "#E8E4DF" }}
+                  >
+                    <span className="text-xs text-gray-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                      {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
+                    </span>
+                    <span
+                      className="text-xs uppercase tracking-wider group-hover:text-[#7B1C1C] transition-colors"
+                      style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Read →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── CTA Banner ────────────────────────────────────────────────────────────────
 
 function CTABanner() {
@@ -496,6 +620,7 @@ export default function HomePage() {
       <TwoColumnSplit />
       <HowItWorks />
       <Testimonials />
+      <BlogPreview />
       <CTABanner />
     </>
   );
