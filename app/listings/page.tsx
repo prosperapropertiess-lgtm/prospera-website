@@ -18,6 +18,9 @@ interface Property {
   pet_friendly: boolean;
   parking: boolean;
   available: boolean;
+  utilities_included: boolean;
+  utilities_list: string[] | null;
+  images: string[] | null;
 }
 
 const CITIES = ["All Cities", "London", "St. Thomas", "Sarnia"];
@@ -30,6 +33,10 @@ const placeholderImages = [
   "https://picsum.photos/seed/prop4/800/500",
   "https://picsum.photos/seed/prop5/800/500",
 ];
+
+function getImage(p: Property, i: number) {
+  return p.images?.[0] || placeholderImages[i % placeholderImages.length];
+}
 
 export default function ListingsPage() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -170,16 +177,21 @@ export default function ListingsPage() {
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <Image
-                        src={placeholderImages[i % placeholderImages.length]}
+                        src={getImage(p, i)}
                         alt={p.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                         unoptimized
                       />
-                      <div className="absolute top-3 left-3">
+                      <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
                         <span className="bg-[#7B1C1C] text-white text-xs px-2.5 py-1 rounded-full font-medium">
                           Available
                         </span>
+                        {p.utilities_included && (
+                          <span className="bg-[#C5A55A] text-white text-xs px-2.5 py-1 rounded-full font-medium">
+                            Utilities Incl.
+                          </span>
+                        )}
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">

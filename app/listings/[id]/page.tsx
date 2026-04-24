@@ -20,6 +20,9 @@ interface Property {
   parking: boolean;
   available: boolean;
   buildium_link?: string;
+  utilities_included: boolean;
+  utilities_list: string[] | null;
+  images: string[] | null;
 }
 
 const placeholderImages = [
@@ -27,6 +30,11 @@ const placeholderImages = [
   "https://picsum.photos/seed/detail2/1200/700",
   "https://picsum.photos/seed/detail3/1200/700",
 ];
+
+function getGallery(property: Property) {
+  if (property.images && property.images.length > 0) return property.images;
+  return placeholderImages;
+}
 
 export default function PropertyDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -87,7 +95,7 @@ export default function PropertyDetailPage() {
       <section className="px-6 max-w-5xl mx-auto mb-10">
         <div className="relative h-[420px] md:h-[520px] overflow-hidden">
           <Image
-            src={placeholderImages[activeImage]}
+            src={getGallery(property)[activeImage] || getGallery(property)[0]}
             alt={property.title}
             fill
             className="object-cover"
@@ -95,29 +103,39 @@ export default function PropertyDetailPage() {
             priority
           />
           {property.available && (
-            <div className="absolute top-4 left-4">
+            <div className="absolute top-4 left-4 flex gap-2">
               <span
                 className="text-xs uppercase tracking-widest px-3 py-1.5"
                 style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Available
               </span>
+              {property.utilities_included && (
+                <span
+                  className="text-xs uppercase tracking-widest px-3 py-1.5"
+                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Utilities Incl.
+                </span>
+              )}
             </div>
           )}
         </div>
         {/* Thumbnails */}
-        <div className="flex gap-2 mt-2">
-          {placeholderImages.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveImage(i)}
-              className="relative h-20 w-28 overflow-hidden flex-shrink-0 transition-opacity"
-              style={{ opacity: activeImage === i ? 1 : 0.5 }}
-            >
-              <Image src={img} alt="" fill className="object-cover" unoptimized />
-            </button>
-          ))}
-        </div>
+        {getGallery(property).length > 1 && (
+          <div className="flex gap-2 mt-2">
+            {getGallery(property).map((img, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveImage(i)}
+                className="relative h-20 w-28 overflow-hidden flex-shrink-0 transition-opacity"
+                style={{ opacity: activeImage === i ? 1 : 0.5 }}
+              >
+                <Image src={img} alt="" fill className="object-cover" unoptimized />
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Main content grid */}
@@ -183,6 +201,12 @@ export default function PropertyDetailPage() {
               {[
                 { label: "Pet Friendly", value: property.pet_friendly ? "Yes" : "No" },
                 { label: "Parking", value: property.parking ? "Included" : "Not included" },
+                {
+                  label: "Utilities",
+                  value: property.utilities_included
+                    ? (property.utilities_list?.length ? property.utilities_list.join(", ") : "Included")
+                    : "Not included",
+                },
                 { label: "Managed By", value: "Prospera Properties" },
                 { label: "City", value: property.city },
               ].map((f) => (
@@ -280,6 +304,7 @@ export default function PropertyDetailPage() {
                   ["Bathrooms", String(property.bathrooms)],
                   ["Pets", property.pet_friendly ? "Allowed" : "No pets"],
                   ["Parking", property.parking ? "Included" : "Not included"],
+                  ["Utilities", property.utilities_included ? (property.utilities_list?.join(", ") || "Included") : "Not included"],
                 ].map(([label, val]) => (
                   <div key={label} className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
                     <span style={{ color: "#9B9B9B" }}>{label}</span>
