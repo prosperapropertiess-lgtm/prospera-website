@@ -2,6 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import RentEstimator from "@/components/ui/RentEstimator";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Property Management for Landlords",
+  description: "Prospera Properties manages your London, St. Thomas, or Sarnia rental — tenant screening, rent collection, maintenance, and more. Transparent fees, no markups.",
+};
 
 const painPoints = [
   { problem: "Tired of chasing rent?", solution: "Guaranteed on-time collection", icon: "💰" },
@@ -56,9 +63,9 @@ export default function LandlordsPage() {
             <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
               We handle your tenants, maintenance, and rent collection — so you can enjoy the income without the headaches.
             </p>
-            <Link href="/contact" className="inline-block px-8 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+            <a href="#rent-estimator" className="inline-block px-8 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
               Get a Free Rental Estimate
-            </Link>
+            </a>
           </FadeIn>
         </div>
       </section>
@@ -107,6 +114,11 @@ export default function LandlordsPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Rent Estimator */}
+      <section className="py-0">
+        <RentEstimator />
       </section>
 
       {/* Pricing Comparison */}

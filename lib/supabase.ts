@@ -1,22 +1,21 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-let _supabase: SupabaseClient | null = null;
+let _client: SupabaseClient | null = null;
 
 export function getSupabase(): SupabaseClient {
-  if (!_supabase) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    if (!url || !key) {
-      throw new Error("Missing Supabase environment variables");
-    }
-    _supabase = createClient(url, key);
-  }
-  return _supabase;
+  if (_client) return _client;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error("Supabase env vars not configured");
+  _client = createClient(url, key);
+  return _client;
 }
 
-// Keep named export for backwards-compat — lazily resolved on first access
+// Lazy proxy — evaluated only at request time, not build time
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const supabase = new Proxy({} as SupabaseClient, {
   get(_target, prop) {
-    return (getSupabase() as unknown as Record<string | symbol, unknown>)[prop];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (getSupabase() as any)[prop];
   },
 });

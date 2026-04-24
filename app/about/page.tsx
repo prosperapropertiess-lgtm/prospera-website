@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Ebin & Our Story",
+  description: "Meet Ebin Jaison — founder of Prospera Properties. A hands-on property manager serving landlords and tenants across London, St. Thomas, and Sarnia, Ontario.",
+};
 
 const values = [
   { title: "Transparency First", desc: "No hidden fees. No vague answers. You always know what we're doing and why." },

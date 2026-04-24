@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rentals for Tenants",
+  description: "Find quality rental homes in London, St. Thomas, and Sarnia, Ontario. Professionally managed by Prospera Properties — well-maintained, responsive, and fair.",
+};
 
 const features = [
   { icon: "🏠", title: "Well-Maintained Properties", desc: "Regular inspections and fast repairs. We don't let issues linger — your home stays in top condition." },

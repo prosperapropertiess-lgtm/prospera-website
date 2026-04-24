@@ -3,6 +3,7 @@ import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PopupController from "@/components/ui/PopupController";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -17,14 +18,29 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Prospera Properties — Property Management in London, St. Thomas & Sarnia",
+  title: {
+    default: "Prospera Properties — Property Management in London, St. Thomas & Sarnia",
+    template: "%s — Prospera Properties",
+  },
   description:
-    "Prospera Properties provides professional property management across London, St. Thomas, and Sarnia, Ontario. Serving landlords and tenants with care.",
+    "Prospera Properties offers professional property management in London, St. Thomas, and Sarnia, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
+  keywords: ["property management London Ontario", "property management St Thomas Ontario", "property management Sarnia Ontario", "rental property management Ontario", "landlord services Ontario"],
   openGraph: {
-    title: "Prospera Properties — Property Management That Actually Cares",
+    title: "Prospera Properties — Property Management in Ontario",
     description:
-      "Professional property management across London, St. Thomas, and Sarnia, Ontario.",
+      "Professional property management across London, St. Thomas, and Sarnia. Tenant screening, rent collection, and full maintenance coordination.",
     type: "website",
+    url: "https://www.prosperaproperties.co",
+    siteName: "Prospera Properties",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prospera Properties",
+    description: "Property management in London, St. Thomas & Sarnia, Ontario.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -39,6 +55,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <PopupController />
       </body>
     </html>
   );

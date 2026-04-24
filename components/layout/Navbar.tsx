@@ -6,10 +6,12 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Home", href: "/" },
   { label: "For Landlords", href: "/landlords" },
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
+  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
