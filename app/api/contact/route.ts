@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
         // Confirmation to the person who submitted
         await resend.emails.send({
-          from: "Prospera Properties <onboarding@resend.dev>",
+          from: "Prospera Properties <hello@prosperaproperties.co>",
           reply_to: "prosperapropertiess@gmail.com",
           to: email,
           subject: "We received your message — Prospera Properties",
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
         // Notification to Ebin
         await resend.emails.send({
-          from: "Prospera Properties <onboarding@resend.dev>",
+          from: "Prospera Properties <hello@prosperaproperties.co>",
           to: "prosperapropertiess@gmail.com",
           subject: `New ${type || "contact"} inquiry from ${name}`,
           html: `
