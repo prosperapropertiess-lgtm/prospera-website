@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
@@ -6,86 +5,190 @@ import RentEstimator from "@/components/ui/RentEstimator";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management for Landlords",
-  description: "Prospera Properties manages your London, St. Thomas, or Strathroy rental — tenant screening, rent collection, maintenance, and more. Transparent fees, no markups.",
+  title: "Property Management for Landlords with 1–5 Doors",
+  description:
+    "Prospera Properties manages your London, St. Thomas, or Strathroy rental — tenant screening, rent collection, maintenance, zero markups. Built for small landlords.",
 };
 
+// ── Data ──────────────────────────────────────────────────────────────────────
+
 const painPoints = [
-  { problem: "Tired of chasing rent?", solution: "Guaranteed on-time collection", icon: "💰" },
-  { problem: "Maintenance calls at 2 AM?", solution: "24/7 emergency coordination", icon: "🔧" },
-  { problem: "Can't find good tenants?", solution: "Thorough screening & vetting", icon: "✅" },
+  {
+    icon: "⌚",
+    label: "Self-managing while working full time",
+    desc: "The rental is supposed to be passive income. Instead it's your second job — evenings, weekends, and the occasional 11pm call.",
+  },
+  {
+    icon: "⚠",
+    label: "One bad tenant ruins the whole year",
+    desc: "When you only have 1–3 units, a single bad placement doesn't just cost money. It costs sleep, time, and sometimes the mortgage.",
+  },
+  {
+    icon: "?",
+    label: "Is your rent even priced right?",
+    desc: "Price too high, it sits vacant. Too low, you leave hundreds on the table every month. Getting it right takes market knowledge you don't have time to build.",
+  },
+  {
+    icon: "⚖",
+    label: "The LTB process feels like a trap",
+    desc: "Ontario landlord-tenant law is complex. One missed step on an N4, and suddenly you're three months in with no rent and no recourse.",
+  },
 ];
 
 const steps = [
-  { n: "01", title: "Introduce Your Property", desc: "We inspect, assess the market, and set a strategy to maximize your rental income from day one." },
-  { n: "02", title: "We Prepare Everything", desc: "Professional photos, minor touch-ups, and marketing copy that actually attracts quality tenants." },
-  { n: "03", title: "Strategic Marketing", desc: "Your listing goes live on all major platforms — MLS, Kijiji, Facebook Marketplace, and more." },
-  { n: "04", title: "Thorough Tenant Screening", desc: "Background checks, credit reports, income verification, and reference calls — we don't skip steps." },
-  { n: "05", title: "Move-In Coordination", desc: "Lease signing, key handover, move-in inspection — all handled with zero stress on your end." },
-  { n: "06", title: "Ongoing Management", desc: "Monthly rent collection, maintenance tracking, regular inspections, and transparent monthly statements." },
-];
-
-const pricing = [
-  { feature: "Monthly Management Fee", prospera: "8–10%", typical: "10–15%" },
-  { feature: "Tenant Placement Fee", prospera: "Half month's rent", typical: "Full month's rent" },
-  { feature: "Lease Renewal Fee", prospera: "Free", typical: "$150–$300" },
-  { feature: "Vacancy Fee", prospera: "None", typical: "50% of month" },
-  { feature: "Maintenance Markup", prospera: "0%", typical: "10–20%" },
-  { feature: "Photo & Listing", prospera: "Included", typical: "$200–$500" },
-  { feature: "Setup Fee", prospera: "None", typical: "$200–$500" },
-  { feature: "24/7 Emergency Support", prospera: "✓", typical: "Sometimes" },
-  { feature: "Monthly Statements", prospera: "✓", typical: "✓" },
-  { feature: "Online Owner Portal", prospera: "✓", typical: "Varies" },
+  {
+    n: "01",
+    title: "Property Walkthrough & Strategy",
+    desc: "We inspect the unit, assess the market, and agree on a rent price and positioning strategy. No guesswork.",
+  },
+  {
+    n: "02",
+    title: "Photography + Listing Launch",
+    desc: "Professional photos, a listing that actually sells the unit — live on all major platforms within days.",
+  },
+  {
+    n: "03",
+    title: "Thorough Tenant Screening",
+    desc: "Credit check. Income verification (2.5–3× rent). Criminal background. Direct landlord reference calls. Every single application.",
+  },
+  {
+    n: "04",
+    title: "Lease Signed, Keys Handed",
+    desc: "Ontario-compliant lease, move-in inspection report with photos, key handover — all handled.",
+  },
+  {
+    n: "05",
+    title: "Rent Collected Every Month",
+    desc: "Online payments, immediate follow-up on any late payment, deposited to you with a clear statement.",
+  },
+  {
+    n: "06",
+    title: "Maintenance Start to Finish",
+    desc: "Trusted contractors, 24/7 emergency line, zero markup. You hear about it when it's done.",
+  },
 ];
 
 const faqs = [
-  { q: "What's included in your management fee?", a: "Everything — tenant communication, rent collection, maintenance coordination, monthly statements, lease renewals, and annual inspections. No hidden fees." },
-  { q: "How do you screen tenants?", a: "We run full credit checks, criminal background checks, income verification (looking for 2.5–3x rent), and contact previous landlords directly. We take this seriously." },
-  { q: "What happens if a tenant doesn't pay?", a: "We follow up immediately — day 1 of late payment. We handle the full N4 notice process and guide you through next steps if needed. We're in your corner." },
-  { q: "Can I still be involved in major decisions?", a: "Absolutely. We handle the day-to-day so you don't have to, but you're always consulted on larger maintenance items, rent increases, and lease changes." },
-  { q: "What areas do you cover?", a: "We currently manage properties in London, St. Thomas, and Strathroy, Ontario. Reach out if your property is nearby — we may be able to help." },
-  { q: "How quickly can you find a tenant?", a: "Typically 2–4 weeks for a well-priced property. We'll give you an honest timeline and a clear market analysis before we start." },
+  {
+    q: "What's actually included in the management fee?",
+    a: "Everything — tenant communication, rent collection, maintenance coordination, monthly statements, lease renewals, and move-in/move-out inspections. No add-ons, no hidden fees.",
+  },
+  {
+    q: "How do you screen tenants?",
+    a: "Full credit check, criminal background check, income verification (we look for 2.5–3× rent), and direct calls to previous landlords. We've done 25+ placements. All paying rent. We don't skip steps.",
+  },
+  {
+    q: "What if a tenant stops paying?",
+    a: "We follow up on day 1. We handle the N4 process and guide you through every step if escalation is needed. In two years and 25+ placements, we haven't had to go there yet — but we know the process cold if we do.",
+  },
+  {
+    q: "Can I still be involved in major decisions?",
+    a: "Always. We handle the day-to-day so you don't have to think about it. But for larger maintenance, rent increases, or lease changes — you're always consulted.",
+  },
+  {
+    q: "What areas do you cover?",
+    a: "London, St. Thomas, and Strathroy, Ontario. Reach out if your property is nearby — we may be able to help.",
+  },
+  {
+    q: "How long does it take to find a tenant?",
+    a: "Typically 2–4 weeks for a well-priced property. We'll give you an honest timeline and a clear market analysis before we start.",
+  },
 ];
+
+// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function LandlordsPage() {
   return (
-    <>
+    <div style={{ backgroundColor: "#FAF8F5" }}>
       {/* Hero */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden">
-        <Image src="https://picsum.photos/seed/landlord-hero/1600/900" alt="Property management" fill className="object-cover" priority unoptimized />
-        <div className="absolute inset-0 bg-[#0A1628]/60" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-white">
-          <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-5">For Landlords</p>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light leading-tight mb-6">
-              Property Management With<br />Guaranteed Peace of Mind.
-            </h1>
-            <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
-              We handle your tenants, maintenance, and rent collection — so you can enjoy the income without the headaches.
-            </p>
-            <a href="#rent-estimator" className="inline-block px-8 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
-              Get a Free Rental Estimate
+      <section className="pt-36 pb-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+        <FadeIn>
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-5"
+            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          >
+            For Landlords
+          </p>
+          <h1
+            className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-6"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          >
+            Property management built for
+            <br />
+            <em style={{ color: "#C4B08A" }}>landlords with 1 to 5 doors.</em>
+          </h1>
+          <p
+            className="text-base max-w-xl mx-auto mb-10 leading-relaxed"
+            style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            You don&apos;t need a corporate property management company built for
+            500-unit portfolios. You need someone who actually picks up the phone,
+            knows the tenant personally, and treats your one property like it
+            matters — because it does.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#pricing"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              See Pricing
             </a>
-          </FadeIn>
-        </div>
+            <a
+              href="#rent-estimator"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-white/5"
+              style={{ borderColor: "rgba(250,248,245,0.25)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Get a Free Rent Estimate
+            </a>
+          </div>
+        </FadeIn>
       </section>
 
       {/* Pain Points */}
-      <section className="py-20 px-6 bg-[#FAF8F5]">
+      <section className="py-24 px-5 sm:px-8">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">
-              We solve the problems landlords hate most.
+            <p
+              className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              The Real Problems
+            </p>
+            <h2
+              className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
+              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            >
+              Small landlords face problems
+              <br />
+              <em>big companies don&apos;t care about.</em>
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {painPoints.map((p, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
-                  <div className="text-4xl mb-4">{p.icon}</div>
-                  <p className="text-sm text-[#7B1C1C] font-medium mb-2">{p.problem}</p>
-                  <div className="w-8 h-px bg-[#C5A55A] mx-auto my-3" />
-                  <p className="font-[family-name:var(--font-cormorant)] text-xl text-[#0A1628]">{p.solution}</p>
+              <FadeIn key={i} delay={i * 0.08}>
+                <div
+                  className="bg-white border p-7"
+                  style={{ borderColor: "#E8E4DF" }}
+                >
+                  <span
+                    className="block text-2xl mb-4"
+                    style={{ color: "#7B1C1C" }}
+                  >
+                    {p.icon}
+                  </span>
+                  <h3
+                    className="font-semibold text-base mb-2"
+                    style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {p.label}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {p.desc}
+                  </p>
                 </div>
               </FadeIn>
             ))}
@@ -94,20 +197,47 @@ export default function LandlordsPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">The Process</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light text-[#0A1628] text-center mb-16">How It Works</h2>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              The Process
+            </p>
+            <h2
+              className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
+              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            >
+              From first call to
+              <br />
+              <em>completely hands-off.</em>
+            </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.08}>
                 <div className="flex gap-6">
-                  <p className="font-[family-name:var(--font-cormorant)] text-5xl font-light text-[#7B1C1C]/20 leading-none flex-shrink-0">{step.n}</p>
+                  <p
+                    className="text-5xl font-light leading-none flex-shrink-0"
+                    style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.25 }}
+                  >
+                    {step.n}
+                  </p>
                   <div>
-                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#0A1628] mb-2">{step.title}</h3>
-                    <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
+                    <h3
+                      className="text-xl font-medium mb-2"
+                      style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {step.desc}
+                    </p>
                   </div>
                 </div>
               </FadeIn>
@@ -117,69 +247,305 @@ export default function LandlordsPage() {
       </section>
 
       {/* Rent Estimator */}
-      <section className="py-0">
+      <section id="rent-estimator" className="py-0">
         <RentEstimator />
       </section>
 
-      {/* Pricing Comparison */}
-      <section className="py-24 px-6 bg-[#FAF8F5]">
-        <div className="max-w-4xl mx-auto">
+      {/* Pricing */}
+      <section id="pricing" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+        <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">Transparent Pricing</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">
-              Us vs. the Competition
+            <p
+              className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Transparent Pricing
+            </p>
+            <h2
+              className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
+              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            >
+              Simple plans.
+              <br />
+              <em>No hidden fees. Ever.</em>
             </h2>
+            <p
+              className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
+              style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Zero maintenance markup on all plans. Zero setup fee. Lease renewal always free.
+              The only number you pay is the one listed below.
+            </p>
           </FadeIn>
-          <FadeIn delay={0.1}>
-            <div className="overflow-x-auto rounded-xl shadow-sm border border-gray-200">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-[#0A1628] text-white">
-                    <th className="text-left px-6 py-4 font-medium">Feature</th>
-                    <th className="text-center px-6 py-4 font-medium text-[#C5A55A]">Prospera Properties</th>
-                    <th className="text-center px-6 py-4 font-medium text-gray-400">Typical PM</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricing.map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                      <td className="px-6 py-4 text-[#0A1628]">{row.feature}</td>
-                      <td className="px-6 py-4 text-center font-medium text-[#7B1C1C]">{row.prospera}</td>
-                      <td className="px-6 py-4 text-center text-gray-500">{row.typical}</td>
-                    </tr>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Basic */}
+            <FadeIn delay={0.08}>
+              <div
+                className="bg-white border p-8 h-full flex flex-col"
+                style={{ borderColor: "#E8E4DF" }}
+              >
+                <p
+                  className="text-xs font-semibold uppercase tracking-widest mb-3"
+                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Basic
+                </p>
+                <div className="mb-1">
+                  <span
+                    className="text-5xl font-light"
+                    style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    10%
+                  </span>
+                  <span
+                    className="text-sm ml-1"
+                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    /mo
+                  </span>
+                </div>
+                <p
+                  className="text-xs mb-7"
+                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  + 1 full month&apos;s rent (placement)
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {[
+                    "Tenant screening & placement",
+                    "Rent collection",
+                    "Maintenance coordination",
+                    "Monthly statements",
+                    "Lease management",
+                    "Move-in / move-out inspection",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#7A7A7A" }}>✓</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        {item}
+                      </span>
+                    </li>
                   ))}
-                </tbody>
-              </table>
+                </ul>
+                <Link
+                  href="/contact"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-gray-50"
+                  style={{ borderColor: "#E8E4DF", color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </FadeIn>
+
+            {/* Standard — most popular */}
+            <FadeIn delay={0.12}>
+              <div
+                className="border p-8 h-full flex flex-col relative"
+                style={{ backgroundColor: "#0D1B2A", borderColor: "#0D1B2A" }}
+              >
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
+                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Most Popular
+                </div>
+                <p
+                  className="text-xs font-semibold uppercase tracking-widest mb-3"
+                  style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Standard
+                </p>
+                <div className="mb-1">
+                  <span
+                    className="text-5xl font-light"
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    12%
+                  </span>
+                  <span
+                    className="text-sm ml-1"
+                    style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    /mo
+                  </span>
+                </div>
+                <p
+                  className="text-xs mb-7"
+                  style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  + 50% of one month&apos;s rent (placement)
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {[
+                    "Everything in Basic",
+                    "Priority response time",
+                    "Semi-annual property inspection",
+                    "Rent increase advisory",
+                    "Market rent review included",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#7B1C1C" }}>✓</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/contact"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </FadeIn>
+
+            {/* Gold — best value */}
+            <FadeIn delay={0.16}>
+              <div
+                className="bg-white border p-8 h-full flex flex-col relative"
+                style={{ borderColor: "#C4B08A" }}
+              >
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
+                  style={{ backgroundColor: "#C4B08A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Best Value
+                </div>
+                <p
+                  className="text-xs font-semibold uppercase tracking-widest mb-3"
+                  style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Gold
+                </p>
+                <div className="mb-1">
+                  <span
+                    className="text-5xl font-light"
+                    style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    15%
+                  </span>
+                  <span
+                    className="text-sm ml-1"
+                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    /mo
+                  </span>
+                </div>
+                <p
+                  className="text-xs mb-2"
+                  style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}
+                >
+                  Tenant placement FREE
+                </p>
+                <p
+                  className="text-xs mb-7"
+                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  At $1,500/mo rent, placement saves you $1,500+
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {[
+                    "Everything in Standard",
+                    "Free tenant placement (every time)",
+                    "Quarterly property inspection",
+                    "Annual investment review",
+                    "Direct line to Ebin",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#C4B08A" }}>✓</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/contact"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-80"
+                  style={{ borderColor: "#C4B08A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(196,176,138,0.08)" }}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Pricing reassurance */}
+          <FadeIn delay={0.2}>
+            <div
+              className="mt-8 p-6 text-center border"
+              style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
+            >
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+              >
+                All plans include: <strong style={{ color: "#0D1B2A" }}>zero maintenance markup</strong> · <strong style={{ color: "#0D1B2A" }}>no setup fee</strong> · <strong style={{ color: "#0D1B2A" }}>no vacancy fee</strong> · <strong style={{ color: "#0D1B2A" }}>free lease renewal</strong>
+              </p>
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">Common Questions</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">FAQ</h2>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Common Questions
+            </p>
+            <h2
+              className="text-4xl font-light text-center mb-14 leading-tight"
+              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            >
+              Straight answers.
+            </h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-[#0A1628] py-20 px-6 text-center text-white">
+      <section className="py-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#0D1B2A" }}>
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light mb-5">
-            Let&apos;s talk about your property.
+          <h2
+            className="text-4xl sm:text-5xl font-light mb-5 leading-tight"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          >
+            Don&apos;t let one bad tenant
+            <br />
+            <em style={{ color: "#C4B08A" }}>cost you the whole year.</em>
           </h2>
-          <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
-            No pressure. Just an honest conversation about what your property could earn and what we can do for you.
+          <p
+            className="text-sm mb-8 max-w-md mx-auto"
+            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Free consultation. Honest assessment. No pressure.
           </p>
-          <Link href="/contact" className="inline-block px-10 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+          <Link
+            href="/contact"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          >
             Get a Free Quote
           </Link>
         </FadeIn>
       </section>
-    </>
+    </div>
   );
 }

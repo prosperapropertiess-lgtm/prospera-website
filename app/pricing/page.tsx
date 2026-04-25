@@ -10,39 +10,56 @@ export const metadata: Metadata = {
 
 const plans = [
   {
-    name: "Tenant Placement",
-    price: "Half Month",
-    period: "one-time",
-    tagline: "We find and vet your tenant — you take it from there.",
+    name: "Basic",
+    price: "10%",
+    period: "of monthly rent",
+    placement: "+ 1 full month's rent (placement)",
+    tagline: "Full management, straightforward pricing.",
     features: [
-      "Professional listing & photography",
-      "Marketing on all major platforms",
-      "Tenant screening (credit, background, income)",
-      "Reference checks",
-      "Lease preparation",
-      "Move-in coordination & inspection",
+      "Tenant screening & placement",
+      "Rent collection",
+      "Maintenance coordination (0% markup)",
+      "Monthly statements",
+      "Lease management & renewals",
+      "Move-in / move-out inspection",
     ],
     cta: "Get Started",
     highlight: false,
+    badge: "",
   },
   {
-    name: "Full Management",
-    price: "8–10%",
+    name: "Standard",
+    price: "12%",
     period: "of monthly rent",
-    tagline: "Everything handled. You collect the money, we do the work.",
+    placement: "+ 50% of one month's rent (placement)",
+    tagline: "The most popular choice for active landlords.",
     features: [
-      "Everything in Tenant Placement",
-      "Monthly rent collection",
-      "24/7 maintenance coordination",
-      "Regular property inspections",
-      "Monthly owner statements",
-      "Lease renewals (no extra fee)",
-      "Online owner portal (Buildium)",
-      "Tenant communication",
-      "Move-out inspection & deposit",
+      "Everything in Basic",
+      "Priority response time",
+      "Semi-annual property inspection",
+      "Rent increase advisory",
+      "Market rent review included",
     ],
-    cta: "Get a Quote",
+    cta: "Get Started",
     highlight: true,
+    badge: "Most Popular",
+  },
+  {
+    name: "Gold",
+    price: "15%",
+    period: "of monthly rent",
+    placement: "Tenant placement FREE (every time)",
+    tagline: "Maximum coverage. Free placement every turn.",
+    features: [
+      "Everything in Standard",
+      "Free tenant placement always",
+      "Quarterly property inspection",
+      "Annual investment review",
+      "Direct line to Ebin",
+    ],
+    cta: "Get Started",
+    highlight: false,
+    badge: "Best Value",
   },
 ];
 
@@ -57,9 +74,9 @@ const included = [
 
 const faqs = [
   { q: "Is there a long-term contract?", a: "We ask for a 3-month initial agreement to get things set up properly. After that it's month-to-month. We earn your business by doing a great job, not by locking you in." },
-  { q: "What does 8–10% actually come out to?", a: "On a $2,000/month rental, that's $160–$200/month. Most landlords find that more than pays for itself once they factor in their saved time and fewer headaches." },
+  { q: "What does 10–15% actually come out to?", a: "On a $1,500/month rental, Basic (10%) is $150/month. Gold (15%) is $225/month — and includes free tenant placement every time, which alone is worth $1,500+. Most landlords on Gold recoup the difference in the first vacancy." },
   { q: "Are there any other fees I should know about?", a: "Occasionally repairs require us to coordinate with contractors — you pay the contractor directly at cost. We never mark up repairs. That's it." },
-  { q: "What if I only need help finding a tenant?", a: "That's exactly what the Tenant Placement plan is for. We charge half a month's rent, find you a vetted tenant, and you manage from there." },
+  { q: "What if I only need help finding a tenant?", a: "Reach out and we can talk about a standalone placement — it's not a formal plan but we're happy to discuss. Most landlords end up finding full management makes more sense once we walk through it." },
   { q: "Do you charge if the property is vacant?", a: "No. We don't get paid when your property isn't earning. That keeps us motivated to fill vacancies fast." },
 ];
 
@@ -81,23 +98,81 @@ export default function PricingPage() {
 
       {/* Plans */}
       <section className="pb-24 px-6 bg-[#FAF8F5]">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan, i) => (
             <FadeIn key={plan.name} delay={i * 0.1}>
-              <div className={`rounded-2xl p-8 h-full flex flex-col border ${plan.highlight ? "bg-[#0A1628] border-[#0A1628] text-white" : "bg-white border-gray-100 shadow-sm text-[#0A1628]"}`}>
-                <div className="mb-6">
-                  <p className={`text-xs uppercase tracking-widest mb-2 ${plan.highlight ? "text-[#C5A55A]" : "text-[#7B1C1C]"}`}>{plan.name}</p>
-                  <div className="flex items-end gap-2 mb-2">
-                    <p className={`font-[family-name:var(--font-cormorant)] text-5xl font-light ${plan.highlight ? "text-white" : "text-[#0A1628]"}`}>{plan.price}</p>
-                    <p className={`text-sm mb-1.5 ${plan.highlight ? "text-white/60" : "text-gray-400"}`}>{plan.period}</p>
+              <div className={`relative p-8 h-full flex flex-col border ${plan.highlight ? "bg-[#0D1B2A] border-[#0D1B2A] text-white" : "bg-white border-[#E8E4DF] text-[#0D1B2A]"}`}>
+                {plan.badge && (
+                  <div
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
+                    style={{
+                      backgroundColor: plan.highlight ? "#7B1C1C" : "#C4B08A",
+                      color: plan.highlight ? "#FAF8F5" : "#0D1B2A",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
+                    {plan.badge}
                   </div>
-                  <p className={`text-sm leading-relaxed ${plan.highlight ? "text-white/70" : "text-[#2D4A5E]"}`}>{plan.tagline}</p>
+                )}
+                <div className="mb-6">
+                  <p
+                    className="text-xs uppercase tracking-widest mb-3"
+                    style={{
+                      color: plan.highlight ? "#7B1C1C" : "#7A7A7A",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
+                    {plan.name}
+                  </p>
+                  <div className="flex items-end gap-2 mb-1">
+                    <p
+                      className="text-5xl font-light"
+                      style={{ color: plan.highlight ? "#FAF8F5" : "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                    >
+                      {plan.price}
+                    </p>
+                    <p
+                      className="text-sm mb-1.5"
+                      style={{ color: plan.highlight ? "rgba(250,248,245,0.5)" : "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {plan.period}
+                    </p>
+                  </div>
+                  <p
+                    className="text-xs mb-4"
+                    style={{
+                      color: plan.name === "Gold"
+                        ? "#2D6A4F"
+                        : plan.highlight
+                        ? "rgba(250,248,245,0.5)"
+                        : "#7A7A7A",
+                      fontFamily: "var(--font-dm-sans)",
+                      fontWeight: plan.name === "Gold" ? 600 : 400,
+                    }}
+                  >
+                    {plan.placement}
+                  </p>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: plan.highlight ? "rgba(250,248,245,0.6)" : "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {plan.tagline}
+                  </p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((f, j) => (
-                    <li key={j} className={`flex items-start gap-3 text-sm ${plan.highlight ? "text-white/80" : "text-[#2D4A5E]"}`}>
-                      <span className={`mt-0.5 flex-shrink-0 ${plan.highlight ? "text-[#C5A55A]" : "text-[#7B1C1C]"}`}>✓</span>
+                    <li
+                      key={j}
+                      className="flex items-start gap-3 text-sm"
+                      style={{ color: plan.highlight ? "rgba(250,248,245,0.75)" : "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      <span
+                        className="mt-0.5 flex-shrink-0 text-xs"
+                        style={{ color: plan.highlight ? "#7B1C1C" : plan.name === "Gold" ? "#C4B08A" : "#7B1C1C" }}
+                      >
+                        ✓
+                      </span>
                       {f}
                     </li>
                   ))}
@@ -105,7 +180,13 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className={`block text-center py-3.5 rounded text-sm font-medium uppercase tracking-wide transition-colors ${plan.highlight ? "bg-[#7B1C1C] text-white hover:bg-[#9B2E2E]" : "bg-[#0A1628] text-white hover:bg-[#7B1C1C]"}`}
+                  className="block text-center py-3.5 text-xs font-semibold uppercase tracking-widest transition-all hover:opacity-80"
+                  style={{
+                    backgroundColor: plan.highlight ? "#7B1C1C" : "transparent",
+                    color: plan.highlight ? "#FAF8F5" : "#0D1B2A",
+                    border: plan.highlight ? "none" : "1px solid #E8E4DF",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
                 >
                   {plan.cta}
                 </Link>
@@ -113,6 +194,19 @@ export default function PricingPage() {
             </FadeIn>
           ))}
         </div>
+
+        {/* Reassurance bar */}
+        <FadeIn delay={0.3}>
+          <div className="max-w-5xl mx-auto mt-6 p-5 text-center border border-[#E8E4DF] bg-white">
+            <p className="text-xs text-[#7A7A7A]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+              All plans include:{" "}
+              <strong className="text-[#0D1B2A]">zero maintenance markup</strong> ·{" "}
+              <strong className="text-[#0D1B2A]">no setup fee</strong> ·{" "}
+              <strong className="text-[#0D1B2A]">no vacancy fee</strong> ·{" "}
+              <strong className="text-[#0D1B2A]">free lease renewal</strong>
+            </p>
+          </div>
+        </FadeIn>
       </section>
 
       {/* What's Included / Comparison */}
