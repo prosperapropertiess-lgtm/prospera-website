@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PopupController from "@/components/ui/PopupController";
+import { Analytics } from "@vercel/analytics/next";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -56,6 +57,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <PopupController />
+        <Analytics />
       </body>
     </html>
   );
