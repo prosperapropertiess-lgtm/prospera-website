@@ -24,7 +24,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[#0A1628]/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-5">Our Story</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#7B1C1C] mb-5">Our Story</p>
             <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light leading-tight">
               Property Management Built on Trust.
             </h1>
@@ -89,7 +89,7 @@ export default function AboutPage() {
       {/* Service Area */}
       <section className="py-24 px-6 bg-[#0A1628] text-white text-center">
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4">Where We Operate</p>
+          <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-4">Where We Operate</p>
           <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light mb-8">
             London · St. Thomas · Sarnia
           </h2>

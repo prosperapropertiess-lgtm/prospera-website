@@ -113,7 +113,7 @@ export default function PropertyDetailPage() {
               {property.utilities_included && (
                 <span
                   className="text-xs uppercase tracking-widest px-3 py-1.5"
-                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#2D4A5E", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Utilities Incl.
                 </span>

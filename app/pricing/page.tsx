@@ -86,7 +86,7 @@ export default function PricingPage() {
             <FadeIn key={plan.name} delay={i * 0.1}>
               <div className={`rounded-2xl p-8 h-full flex flex-col border ${plan.highlight ? "bg-[#0A1628] border-[#0A1628] text-white" : "bg-white border-gray-100 shadow-sm text-[#0A1628]"}`}>
                 <div className="mb-6">
-                  <p className={`text-xs uppercase tracking-widest mb-2 ${plan.highlight ? "text-[#C5A55A]" : "text-[#7B1C1C]"}`}>{plan.name}</p>
+                  <p className={`text-xs uppercase tracking-widest mb-2 ${plan.highlight ? "text-[#FAF8F5]" : "text-[#7B1C1C]"}`}>{plan.name}</p>
                   <div className="flex items-end gap-2 mb-2">
                     <p className={`font-[family-name:var(--font-cormorant)] text-5xl font-light ${plan.highlight ? "text-white" : "text-[#0A1628]"}`}>{plan.price}</p>
                     <p className={`text-sm mb-1.5 ${plan.highlight ? "text-white/60" : "text-gray-400"}`}>{plan.period}</p>
@@ -97,7 +97,7 @@ export default function PricingPage() {
                 <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((f, j) => (
                     <li key={j} className={`flex items-start gap-3 text-sm ${plan.highlight ? "text-white/80" : "text-[#2D4A5E]"}`}>
-                      <span className={`mt-0.5 flex-shrink-0 ${plan.highlight ? "text-[#C5A55A]" : "text-[#7B1C1C]"}`}>✓</span>
+                      <span className={`mt-0.5 flex-shrink-0 ${plan.highlight ? "text-[#FAF8F5]" : "text-[#7B1C1C]"}`}>✓</span>
                       {f}
                     </li>
                   ))}

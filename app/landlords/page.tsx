@@ -56,7 +56,7 @@ export default function LandlordsPage() {
         <div className="absolute inset-0 bg-[#0A1628]/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white">
           <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-5">For Landlords</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#7B1C1C] mb-5">For Landlords</p>
             <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light leading-tight mb-6">
               Property Management With<br />Guaranteed Peace of Mind.
             </h1>
@@ -84,7 +84,7 @@ export default function LandlordsPage() {
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
                   <div className="text-4xl mb-4">{p.icon}</div>
                   <p className="text-sm text-[#7B1C1C] font-medium mb-2">{p.problem}</p>
-                  <div className="w-8 h-px bg-[#C5A55A] mx-auto my-3" />
+                  <div className="w-8 h-px bg-[#7B1C1C] mx-auto my-3" />
                   <p className="font-[family-name:var(--font-cormorant)] text-xl text-[#0A1628]">{p.solution}</p>
                 </div>
               </FadeIn>
@@ -136,7 +136,7 @@ export default function LandlordsPage() {
                 <thead>
                   <tr className="bg-[#0A1628] text-white">
                     <th className="text-left px-6 py-4 font-medium">Feature</th>
-                    <th className="text-center px-6 py-4 font-medium text-[#C5A55A]">Prospera Properties</th>
+                    <th className="text-center px-6 py-4 font-medium text-[#FAF8F5]">Prospera Properties</th>
                     <th className="text-center px-6 py-4 font-medium text-gray-400">Typical PM</th>
                   </tr>
                 </thead>
