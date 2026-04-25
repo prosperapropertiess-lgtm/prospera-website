@@ -17,7 +17,7 @@ export default function ResourcesPage() {
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
             Free for Ontario Landlords
           </p>
-          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
             Free Landlord Resources
           </h1>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -30,7 +30,7 @@ export default function ResourcesPage() {
       <section className="px-6 py-6 border-b" style={{ borderColor: "#E8E4DF" }}>
         <div className="max-w-6xl mx-auto flex flex-wrap gap-3">
           {["Forms", "Templates", "Guides", "Checklists"].map((label) => (
-            <span key={label} className="text-xs uppercase tracking-wider px-3 py-1.5 border" style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+            <span key={label} className="text-xs uppercase tracking-wider px-3 py-1.5 border" style={{ borderColor: "#0A1628", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}>
               {label}
             </span>
           ))}
@@ -41,7 +41,7 @@ export default function ResourcesPage() {
       <ResourcesGrid />
 
       {/* Bottom CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0A1628" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Rental Property?

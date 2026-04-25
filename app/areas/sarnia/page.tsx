@@ -25,7 +25,7 @@ export default function SarniaPage() {
   return (
     <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
       {/* Hero */}
-      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#0A1628" }}>
         <FadeIn>
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
             Sarnia, Ontario
@@ -51,7 +51,7 @@ export default function SarniaPage() {
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-3xl font-light mb-1" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                 {s.value}
               </p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
@@ -66,7 +66,7 @@ export default function SarniaPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Who Rents in Sarnia
             </h2>
             <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -78,7 +78,7 @@ export default function SarniaPage() {
               <FadeIn key={p.title} delay={i * 0.08}>
                 <div className="bg-white border p-6" style={{ borderColor: "#E8E4DF" }}>
                   <span className="text-2xl mb-3 block">{p.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                     {p.title}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -95,7 +95,7 @@ export default function SarniaPage() {
       <section className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Sarnia Rental Market — 2026
             </h2>
           </FadeIn>
@@ -103,7 +103,7 @@ export default function SarniaPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 <thead>
-                  <tr style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5" }}>
+                  <tr style={{ backgroundColor: "#0A1628", color: "#FAF8F5" }}>
                     <th className="text-left p-4">Unit Type</th>
                     <th className="p-4 text-right">Average Monthly Rent</th>
                   </tr>
@@ -115,8 +115,8 @@ export default function SarniaPage() {
                     { type: "3 Bedroom", avg: "$1,750" },
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
-                      <td className="p-4 font-medium" style={{ color: "#0D1B2A" }}>{row.type}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#0D1B2A" }}>{row.avg}</td>
+                      <td className="p-4 font-medium" style={{ color: "#0A1628" }}>{row.type}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#0A1628" }}>{row.avg}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -130,7 +130,7 @@ export default function SarniaPage() {
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-6" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Why Sarnia Landlords Work With Prospera
             </h2>
           </FadeIn>
@@ -154,7 +154,7 @@ export default function SarniaPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0A1628" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in Sarnia?

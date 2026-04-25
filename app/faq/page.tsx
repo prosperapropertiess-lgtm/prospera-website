@@ -17,7 +17,7 @@ export default function FAQPage() {
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
             Questions & Answers
           </p>
-          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
             Frequently Asked Questions
           </h1>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -33,7 +33,7 @@ export default function FAQPage() {
       <section className="py-16 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-2xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Still Have Questions?
             </h2>
             <p className="text-sm mb-8" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -43,14 +43,14 @@ export default function FAQPage() {
               <Link
                 href="/contact"
                 className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Contact Us
               </Link>
               <a
                 href="tel:+15196971227"
-                className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
-                style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+                style={{ borderColor: "#0A1628", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
               >
                 (519) 697-1227
               </a>

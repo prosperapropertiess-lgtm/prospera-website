@@ -68,7 +68,7 @@ export default function PropertyDetailPage() {
   if (!property) {
     return (
       <div className="min-h-screen pt-32 px-6 text-center" style={{ backgroundColor: "#FAF8F5" }}>
-        <p className="text-2xl mb-4" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>
+        <p className="text-2xl mb-4" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>
           Property not found.
         </p>
         <Link href="/listings" className="text-sm underline" style={{ color: "#7B1C1C" }}>
@@ -145,7 +145,7 @@ export default function PropertyDetailPage() {
           {/* Title + price */}
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+              <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                 {property.title}
               </h1>
               <p className="text-sm" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -153,7 +153,7 @@ export default function PropertyDetailPage() {
               </p>
             </div>
             <div className="shrink-0">
-              <p className="text-4xl font-light" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-4xl font-light" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                 ${property.price.toLocaleString()}
                 <span className="text-base" style={{ color: "#9B9B9B" }}>/mo</span>
               </p>
@@ -163,28 +163,28 @@ export default function PropertyDetailPage() {
           {/* Key stats */}
           <div className="flex flex-wrap gap-6 py-6 border-y mb-8" style={{ borderColor: "#E8E4DF" }}>
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>{property.bedrooms}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>{property.bedrooms}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>Bedrooms</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>{property.bathrooms}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>{property.bathrooms}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>Bathrooms</p>
             </div>
             {property.sqft && (
               <div className="text-center">
-                <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>{property.sqft.toLocaleString()}</p>
+                <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>{property.sqft.toLocaleString()}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>Sq Ft</p>
               </div>
             )}
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>{property.city}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>{property.city}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>City</p>
             </div>
           </div>
 
           {/* Description */}
           <div className="mb-10">
-            <h2 className="text-2xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-2xl font-light mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               About This Home
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: "#2C2C2C", fontFamily: "var(--font-dm-sans)" }}>
@@ -194,7 +194,7 @@ export default function PropertyDetailPage() {
 
           {/* Features */}
           <div className="mb-10">
-            <h2 className="text-2xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-2xl font-light mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Property Features
             </h2>
             <div className="grid grid-cols-2 gap-3">
@@ -214,7 +214,7 @@ export default function PropertyDetailPage() {
                   <span className="text-sm" style={{ color: "#7B1C1C" }}>✓</span>
                   <div>
                     <p className="text-xs uppercase tracking-wider" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>{f.label}</p>
-                    <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>{f.value}</p>
+                    <p className="text-sm font-medium" style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}>{f.value}</p>
                   </div>
                 </div>
               ))}
@@ -223,7 +223,7 @@ export default function PropertyDetailPage() {
 
           {/* Commute calculator */}
           <div className="mb-10 p-6 border" style={{ borderColor: "#E8E4DF", backgroundColor: "#F5F0EB" }}>
-            <h2 className="text-2xl font-light mb-2" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-2xl font-light mb-2" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Commute Calculator
             </h2>
             <p className="text-sm mb-5" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -236,7 +236,7 @@ export default function PropertyDetailPage() {
                 onChange={(e) => setCommuteAddress(e.target.value)}
                 placeholder="Enter an address or place"
                 className="flex-1 px-4 py-3 text-sm outline-none border"
-                style={{ borderColor: "#E8E4DF", backgroundColor: "white", fontFamily: "var(--font-dm-sans)", color: "#0D1B2A" }}
+                style={{ borderColor: "#E8E4DF", backgroundColor: "white", fontFamily: "var(--font-dm-sans)", color: "#0A1628" }}
               />
               <button
                 onClick={() => {
@@ -247,7 +247,7 @@ export default function PropertyDetailPage() {
                   }
                 }}
                 className="px-5 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Check
               </button>
@@ -267,7 +267,7 @@ export default function PropertyDetailPage() {
         <div className="lg:col-span-1">
           <div className="sticky top-28">
             <div className="border p-6" style={{ borderColor: "#E8E4DF", backgroundColor: "white" }}>
-              <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>
+              <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>
                 ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#9B9B9B" }}>/mo</span>
               </p>
               <p className="text-xs mb-6" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -288,8 +288,8 @@ export default function PropertyDetailPage() {
 
               <Link
                 href={`/contact?property=${encodeURIComponent(property.title)}`}
-                className="block w-full py-3 text-xs uppercase tracking-widest text-center border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
-                style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                className="block w-full py-3 text-xs uppercase tracking-widest text-center border transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+                style={{ borderColor: "#0A1628", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
               >
                 Schedule a Viewing
               </Link>
@@ -308,7 +308,7 @@ export default function PropertyDetailPage() {
                 ].map(([label, val]) => (
                   <div key={label} className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
                     <span style={{ color: "#9B9B9B" }}>{label}</span>
-                    <span style={{ color: "#0D1B2A" }}>{val}</span>
+                    <span style={{ color: "#0A1628" }}>{val}</span>
                   </div>
                 ))}
               </div>

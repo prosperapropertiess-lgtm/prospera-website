@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const CATEGORIES = ["All", "Landlord Tips", "Tenant Resources", "Market Updates", "Ontario Law"];
 
 const categoryColors: Record<string, string> = {
-  "Landlord Tips": "bg-[#0D1B2A] text-[#FAF8F5]",
+  "Landlord Tips": "bg-[#0A1628] text-[#FAF8F5]",
   "Tenant Resources": "bg-[#2D4A5E] text-[#FAF8F5]",
   "Market Updates": "bg-[#7B1C1C] text-[#FAF8F5]",
   "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
@@ -27,7 +27,7 @@ export default function BlogPage() {
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
             Insights & Resources
           </p>
-          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
             The Prospera Blog
           </h1>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -42,8 +42,8 @@ export default function BlogPage() {
           {CATEGORIES.map((cat) => (
             <span
               key={cat}
-              className="px-4 py-1.5 text-xs uppercase tracking-wider border cursor-pointer hover:bg-[#0D1B2A] hover:text-[#FAF8F5] transition-colors"
-              style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+              className="px-4 py-1.5 text-xs uppercase tracking-wider border cursor-pointer hover:bg-[#0A1628] hover:text-[#FAF8F5] transition-colors"
+              style={{ borderColor: "#0A1628", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
             >
               {cat}
             </span>
@@ -78,7 +78,7 @@ export default function BlogPage() {
                   {/* Category + read time */}
                   <div className="flex items-center gap-3 mb-3">
                     <span
-                      className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#0D1B2A] text-[#FAF8F5]"}`}
+                      className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#0A1628] text-[#FAF8F5]"}`}
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {post.category}
@@ -91,7 +91,7 @@ export default function BlogPage() {
                   {/* Title */}
                   <h2
                     className="text-xl font-medium mb-3 group-hover:text-[#7B1C1C] transition-colors leading-snug"
-                    style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
                   >
                     {post.title}
                   </h2>
@@ -111,7 +111,7 @@ export default function BlogPage() {
                     </span>
                     <span
                       className="text-xs uppercase tracking-wider group-hover:text-[#7B1C1C] transition-colors"
-                      style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Read →
                     </span>
@@ -124,7 +124,7 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#0A1628" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Get New Articles in Your Inbox

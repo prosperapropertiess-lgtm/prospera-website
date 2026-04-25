@@ -38,7 +38,7 @@ export default function LondonPage() {
       {/* Hero */}
       <section
         className="pt-36 pb-24 px-6 text-center"
-        style={{ backgroundColor: "#0D1B2A" }}
+        style={{ backgroundColor: "#0A1628" }}
       >
         <FadeIn>
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
@@ -65,7 +65,7 @@ export default function LondonPage() {
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-3xl font-light mb-1" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                 {s.value}
               </p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
@@ -80,7 +80,7 @@ export default function LondonPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for London Landlords
             </h2>
             <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -92,7 +92,7 @@ export default function LondonPage() {
               <FadeIn key={s.title} delay={i * 0.08}>
                 <div className="bg-white border p-6" style={{ borderColor: "#E8E4DF" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                     {s.title}
                   </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -109,7 +109,7 @@ export default function LondonPage() {
       <section className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               We Know London's Neighbourhoods
             </h2>
             <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -122,7 +122,7 @@ export default function LondonPage() {
                 <div className="bg-white border p-5 flex gap-4" style={{ borderColor: "#E8E4DF" }}>
                   <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#7B1C1C" }} />
                   <div>
-                    <h3 className="font-medium mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+                    <h3 className="font-medium mb-1" style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}>
                       {n.name}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -140,7 +140,7 @@ export default function LondonPage() {
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
               London Rental Market — 2026 Snapshot
             </h2>
           </FadeIn>
@@ -148,7 +148,7 @@ export default function LondonPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 <thead>
-                  <tr style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5" }}>
+                  <tr style={{ backgroundColor: "#0A1628", color: "#FAF8F5" }}>
                     <th className="text-left p-4">Unit Type</th>
                     <th className="p-4 text-right">Low</th>
                     <th className="p-4 text-right">Average</th>
@@ -163,9 +163,9 @@ export default function LondonPage() {
                     { type: "3 Bedroom", low: "$2,100", avg: "$2,450", high: "$2,950" },
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
-                      <td className="p-4 font-medium" style={{ color: "#0D1B2A" }}>{row.type}</td>
+                      <td className="p-4 font-medium" style={{ color: "#0A1628" }}>{row.type}</td>
                       <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#0D1B2A" }}>{row.avg}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#0A1628" }}>{row.avg}</td>
                       <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.high}</td>
                     </tr>
                   ))}
@@ -177,7 +177,7 @@ export default function LondonPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0A1628" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in London, Ontario?

@@ -58,7 +58,7 @@ export default function RentEstimator() {
         <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
-        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
           What Could Your Property Rent For?
         </h2>
         <p className="text-sm mb-8" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -71,7 +71,7 @@ export default function RentEstimator() {
             value={city}
             onChange={(e) => { setCity(e.target.value); setResult(null); }}
             className="flex-1 px-4 py-3 text-sm outline-none border"
-            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: city ? "#0D1B2A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: city ? "#0A1628" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Select city</option>
             <option value="London">London, ON</option>
@@ -83,7 +83,7 @@ export default function RentEstimator() {
             value={beds}
             onChange={(e) => { setBeds(e.target.value ? Number(e.target.value) : ""); setResult(null); }}
             className="flex-1 px-4 py-3 text-sm outline-none border"
-            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: beds !== "" ? "#0D1B2A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: beds !== "" ? "#0A1628" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Bedrooms</option>
             <option value="1">1 Bedroom</option>
@@ -96,7 +96,7 @@ export default function RentEstimator() {
             onClick={estimate}
             disabled={!city || beds === ""}
             className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-40"
-            style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Estimate
           </button>
@@ -106,7 +106,7 @@ export default function RentEstimator() {
         {result && (
           <div className="border bg-white p-6 mt-2" style={{ borderColor: "#E8E4DF" }}>
             <div className="flex items-baseline gap-3 mb-3">
-              <p className="text-5xl font-light" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-5xl font-light" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>
                 ${result.low.toLocaleString()} – ${result.high.toLocaleString()}
               </p>
               <span className="text-sm" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>/month</span>
@@ -132,7 +132,7 @@ export default function RentEstimator() {
                     placeholder="Your email address"
                     required
                     className="flex-1 px-4 py-3 text-sm outline-none border"
-                    style={{ borderColor: "#E8E4DF", backgroundColor: "#FAF8F5", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ borderColor: "#E8E4DF", backgroundColor: "#FAF8F5", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
                   />
                   <button
                     type="submit"
