@@ -51,7 +51,13 @@ export default function Navbar() {
               width={120}
               height={60}
               priority
-              style={{ mixBlendMode: "multiply", height: "60px", width: "auto" }}
+              style={{
+                height: "60px",
+                width: "auto",
+                filter: scrolled ? "none" : "brightness(0) invert(1)",
+                mixBlendMode: scrolled ? "multiply" : "normal",
+                transition: "filter 0.3s",
+              }}
             />
           </Link>
 
@@ -61,8 +67,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium tracking-wide text-[#0A1628] hover:text-[#7B1C1C] transition-colors duration-200"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
+                className="text-sm font-medium tracking-wide transition-colors duration-200"
+                style={{
+                  color: scrolled ? "#0A1628" : "#FAF8F5",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
               >
                 {link.label}
               </Link>
@@ -75,8 +84,12 @@ export default function Navbar() {
               href={BUILDIUM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest border border-[#0A1628] text-[#0A1628] transition-all duration-200 hover:bg-[#0A1628] hover:text-[#FAF8F5]"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200"
+              style={{
+                border: `1px solid ${scrolled ? "#0A1628" : "rgba(250,248,245,0.5)"}`,
+                color: scrolled ? "#0A1628" : "#FAF8F5",
+                fontFamily: "var(--font-dm-sans)",
+              }}
             >
               Landlord Login
             </a>
@@ -97,18 +110,21 @@ export default function Navbar() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
           >
-            <span
-              className="block w-6 h-px bg-[#0A1628] transition-all duration-300 origin-center"
-              style={{ transform: menuOpen ? "translateY(3.5px) rotate(45deg)" : "" }}
-            />
-            <span
-              className="block w-6 h-px bg-[#0A1628] transition-all duration-300"
-              style={{ opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block w-6 h-px bg-[#0A1628] transition-all duration-300 origin-center"
-              style={{ transform: menuOpen ? "translateY(-3.5px) rotate(-45deg)" : "" }}
-            />
+            {[
+              menuOpen ? "translateY(3.5px) rotate(45deg)" : "",
+              "",
+              menuOpen ? "translateY(-3.5px) rotate(-45deg)" : "",
+            ].map((transform, i) => (
+              <span
+                key={i}
+                className="block w-6 h-px transition-all duration-300 origin-center"
+                style={{
+                  backgroundColor: scrolled || menuOpen ? "#0A1628" : "#FAF8F5",
+                  transform,
+                  opacity: i === 1 && menuOpen ? 0 : 1,
+                }}
+              />
+            ))}
           </button>
         </div>
       </header>
