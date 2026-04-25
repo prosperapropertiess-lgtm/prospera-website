@@ -62,7 +62,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Service Areas</p>
-                <p className="text-sm text-[#2D4A5E] leading-relaxed">London, Ontario<br />St. Thomas, Ontario<br />Sarnia, Ontario</p>
+                <p className="text-sm text-[#2D4A5E] leading-relaxed">London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Portals</p>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                       <option value="">Select city...</option>
                       <option>London, ON</option>
                       <option>St. Thomas, ON</option>
-                      <option>Sarnia, ON</option>
+                      <option>Strathroy, ON</option>
                       <option>Other</option>
                     </select>
                   </div>

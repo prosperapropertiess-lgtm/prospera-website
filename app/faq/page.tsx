@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
-  description: "Answers to the most common questions from landlords and tenants in London, St. Thomas, and Sarnia, Ontario.",
+  description: "Answers to the most common questions from landlords and tenants in London, St. Thomas, and Strathroy, Ontario.",
 };
 
 export default function FAQPage() {
@@ -21,7 +21,7 @@ export default function FAQPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
-            Answers to the most common questions from landlords and tenants across London, St. Thomas, and Sarnia.
+            Answers to the most common questions from landlords and tenants across London, St. Thomas, and Strathroy.
           </p>
         </FadeIn>
       </section>

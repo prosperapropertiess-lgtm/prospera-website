@@ -142,7 +142,7 @@ export default function Footer() {
                 className="text-sm footer-link"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               >
-                London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Sarnia
+                London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Strathroy
               </li>
             </ul>
           </div>

@@ -15,7 +15,7 @@ const ESTIMATES: Record<string, Record<number, { low: number; high: number }>> =
     3: { low: 1800, high: 2100 },
     4: { low: 2200, high: 2700 },
   },
-  Sarnia: {
+  Strathroy: {
     1: { low: 950, high: 1250 },
     2: { low: 1250, high: 1600 },
     3: { low: 1600, high: 1950 },
@@ -76,7 +76,7 @@ export default function RentEstimator() {
             <option value="">Select city</option>
             <option value="London">London, ON</option>
             <option value="St. Thomas">St. Thomas, ON</option>
-            <option value="Sarnia">Sarnia, ON</option>
+            <option value="Strathroy">Strathroy, ON</option>
           </select>
 
           <select

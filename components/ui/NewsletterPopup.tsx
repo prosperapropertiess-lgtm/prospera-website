@@ -189,7 +189,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                         <option value="">Preferred city (optional)</option>
                         <option value="London">London</option>
                         <option value="St. Thomas">St. Thomas</option>
-                        <option value="Sarnia">Sarnia</option>
+                        <option value="Strathroy">Strathroy</option>
                       </select>
                     )}
 

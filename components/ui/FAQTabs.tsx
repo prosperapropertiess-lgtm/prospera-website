@@ -11,7 +11,7 @@ const landlordFaqs = [
   { q: "How do you screen tenants?", a: "We run full credit checks, criminal background checks, employment verification, income verification (2.5–3x monthly rent minimum), and we call previous landlords directly. We document everything and keep records for your protection." },
   { q: "What happens if a tenant doesn't pay rent?", a: "We follow up on day 1. If the issue isn't resolved quickly, we serve the proper N4 notice, file with the Landlord and Tenant Board, and guide you through the process. We stay with you from first missed payment to resolution." },
   { q: "Can I still be involved in decisions about my property?", a: "Yes. We handle the daily management so you don't have to — but you're always consulted on larger maintenance decisions, rent increases, tenant applications, and lease changes. It's still your property." },
-  { q: "What areas do you serve?", a: "We currently manage properties in London, St. Thomas, and Sarnia, Ontario. If your property is in a nearby area, reach out and we can discuss." },
+  { q: "What areas do you serve?", a: "We currently manage properties in London, St. Thomas, and Strathroy, Ontario. If your property is in a nearby area, reach out and we can discuss." },
   { q: "How quickly can you find a tenant?", a: "Typically 2–4 weeks for a well-priced property. We'll give you an honest rental estimate and timeline before we start. We don't rush placements — quality over speed." },
   { q: "What does the tenant placement process involve?", a: "We photograph the unit professionally, write compelling listing copy, post on all major platforms, collect and screen applications, conduct viewings, check references, and prepare the lease." },
   { q: "Do you mark up maintenance costs?", a: "No. We coordinate with our trusted contractor network and you pay the contractor's invoice directly — no management markup. We earn only our management fee." },
@@ -31,7 +31,7 @@ const tenantFaqs = [
 ];
 
 const generalFaqs = [
-  { q: "Who is Prospera Properties?", a: "Prospera Properties is a property management company founded by Ebin Jaison, serving landlords and tenants in London, St. Thomas, and Sarnia, Ontario. You always deal directly with Ebin." },
+  { q: "Who is Prospera Properties?", a: "Prospera Properties is a property management company founded by Ebin Jaison, serving landlords and tenants in London, St. Thomas, and Strathroy, Ontario. You always deal directly with Ebin." },
   { q: "What makes you different from other property managers?", a: "At Prospera, Ebin manages relationships personally. We're transparent about fees, we don't markup maintenance, and we treat tenants with respect — which results in better long-term tenants for landlords." },
   { q: "What tools do you use to manage properties?", a: "We use Buildium for tenant and owner portals, rent collection, and maintenance tracking. It gives both landlords and tenants a professional, reliable experience." },
   { q: "How do I contact you?", a: "You can reach us at (519) 697-1227, submit a form on our contact page, or email us directly. We respond to all inquiries within one business day, usually faster." },
