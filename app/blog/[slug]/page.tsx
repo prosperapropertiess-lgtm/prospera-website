@@ -3,6 +3,7 @@ import Link from "next/link";
 import { marked } from "marked";
 import { getAllPosts, getPost } from "@/lib/blog";
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/JsonLd";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -37,8 +38,29 @@ export default async function BlogPostPage({ params }: Props) {
 
   const htmlContent = await marked(post.content);
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "Ebin Jaison",
+      jobTitle: "Founder, Prospera Properties",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Prospera Properties",
+      url: "https://www.prosperaproperties.co",
+    },
+    url: `https://www.prosperaproperties.co/blog/${slug}`,
+    mainEntityOfPage: `https://www.prosperaproperties.co/blog/${slug}`,
+  };
+
   return (
     <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+      <JsonLd data={schema} />
       {/* Hero */}
       <section className="pt-32 pb-12 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-3xl mx-auto">
