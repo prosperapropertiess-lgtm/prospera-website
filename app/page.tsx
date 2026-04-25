@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -344,6 +344,15 @@ const testimonials = [
 
 function Testimonials() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setCurrent((c) => (c + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [paused]);
 
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
@@ -368,7 +377,11 @@ function Testimonials() {
           </h2>
         </FadeIn>
 
-        <div className="relative min-h-[200px]">
+        <div
+          className="relative min-h-[200px]"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
