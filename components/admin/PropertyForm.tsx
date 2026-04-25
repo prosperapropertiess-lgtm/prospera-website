@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const CITIES = ["London", "St. Thomas", "Sarnia"];
+const CITIES = ["London", "St. Thomas", "Strathroy"];
 const UTILITY_OPTIONS = ["Heat", "Water", "Hydro", "Internet"];
 
 interface PropertyFormData {

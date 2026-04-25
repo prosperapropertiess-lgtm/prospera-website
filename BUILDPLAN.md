@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Company:** Prospera Properties — property management company operating in London, St. Thomas, and Sarnia, Ontario, Canada.
+**Company:** Prospera Properties — property management company operating in London, St. Thomas, and Strathroy, Ontario, Canada.
 
 **Founder:** Ebin (sole operator, hands-on, personal brand is a core differentiator)
 
@@ -91,7 +91,7 @@ The site should feel warm, welcoming, and premium — like walking into a well-d
 1. **Hero**
    - Full-screen background (professional property photo or video loop of London, ON)
    - Headline: "Property Management That Actually Cares."
-   - Subtitle: "Serving landlords and tenants across London, St. Thomas, and Sarnia, Ontario."
+   - Subtitle: "Serving landlords and tenants across London, St. Thomas, and Strathroy, Ontario."
    - Two CTA buttons: "I'm a Landlord" → /landlords | "I'm a Tenant" → /tenants
    - Scroll-down indicator (animated chevron)
 
@@ -191,7 +191,7 @@ The site should feel warm, welcoming, and premium — like walking into a well-d
 
 1. **Hero**
    - Headline: "Find a Home You'll Actually Love"
-   - Subtitle: "Quality rentals in London, St. Thomas, and Sarnia. Professionally managed, well-maintained."
+   - Subtitle: "Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained."
    - CTA: "Browse Available Rentals" → /listings
 
 2. **What you get as a Prospera tenant (3-4 feature cards)**
@@ -231,7 +231,7 @@ The site should feel warm, welcoming, and premium — like walking into a well-d
 #### Listings Grid Page (/listings)
 
 **Layout:**
-- Hero banner at top: "Find Your Next Home in London, St. Thomas & Sarnia" with subtle background image
+- Hero banner at top: "Find Your Next Home in London, St. Thomas & Strathroy" with subtle background image
 - **Filter bar** (sticky on scroll): city dropdown, bedrooms, bathrooms, price range slider, pet-friendly toggle
 - **Sort options:** price low-high, price high-low, newest first
 - **Property cards in responsive grid** (3 columns desktop, 2 tablet, 1 mobile)
@@ -330,7 +330,7 @@ The site should feel warm, welcoming, and premium — like walking into a well-d
 | title | text | Listing title ("Bright 3-Bed Near Western University") |
 | slug | text | URL slug (auto-generated from title) |
 | address | text | Full street address |
-| city | text | London / St. Thomas / Sarnia |
+| city | text | London / St. Thomas / Strathroy |
 | neighborhood | text | Neighborhood name |
 | price | integer | Monthly rent in dollars |
 | bedrooms | integer | Number of bedrooms |
@@ -493,7 +493,7 @@ Reference: belonghome.com/homes for the listings grid aesthetic. Make it warmer 
 
 ---
 
-### PAGE 8: City Landing Pages (/areas/london, /areas/st-thomas, /areas/sarnia)
+### PAGE 8: City Landing Pages (/areas/london, /areas/st-thomas, /areas/strathroy)
 
 **Purpose:** Local SEO. Target "property management [city]" keywords.
 
@@ -642,7 +642,7 @@ Reference: belonghome.com/homes for the listings grid aesthetic. Make it warmer 
 | title | text | Listing title |
 | slug | text | URL slug (auto-generated) |
 | address | text | Full address |
-| city | text | London / St. Thomas / Sarnia |
+| city | text | London / St. Thomas / Strathroy |
 | price | integer | Monthly rent |
 | bedrooms | integer | Number of bedrooms |
 | bathrooms | decimal | Number of bathrooms |
@@ -709,7 +709,7 @@ Build a beautiful "coming soon" landing page for Prospera Properties.
 - Cormorant Garamond headline, DM Sans body text
 - Prospera Properties logo centered at top
 - Headline: "Something Beautiful Is Coming"
-- Subtitle: "Prospera Properties is launching a brand new experience for landlords and tenants in London, St. Thomas, and Sarnia, Ontario."
+- Subtitle: "Prospera Properties is launching a brand new experience for landlords and tenants in London, St. Thomas, and Strathroy, Ontario."
 - Email capture form: "Be the first to know when we launch" — name + email → Supabase
 - Phone number: (519) 697-1227
 - Social links (Facebook, YouTube)
@@ -774,7 +774,7 @@ Deploy to Vercel, connect to prosperaproperties.co domain.
 ### Phase 4: Blog & SEO (Week 4)
 - [ ] Build /blog listing page
 - [ ] Build /blog/[slug] post pages with markdown rendering
-- [ ] Build city landing pages (/areas/london, /areas/st-thomas, /areas/sarnia)
+- [ ] Build city landing pages (/areas/london, /areas/st-thomas, /areas/strathroy)
 - [ ] Build /faq page
 - [ ] Set up sitemap.xml and robots.txt
 - [ ] Add meta tags, Open Graph, JSON-LD schema markup
@@ -864,7 +864,7 @@ prospera-website/
 │   │   │   └── page.tsx
 │   │   ├── st-thomas/
 │   │   │   └── page.tsx
-│   │   └── sarnia/
+│   │   └── strathroy/
 │   │       └── page.tsx
 │   └── faq/
 │       └── page.tsx          # FAQ page

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Property Management for Landlords",
-  description: "Prospera Properties manages your London, St. Thomas, or Sarnia rental — tenant screening, rent collection, maintenance, and more. Transparent fees, no markups.",
+  description: "Prospera Properties manages your London, St. Thomas, or Strathroy rental — tenant screening, rent collection, maintenance, and more. Transparent fees, no markups.",
 };
 
 const painPoints = [
@@ -43,7 +43,7 @@ const faqs = [
   { q: "How do you screen tenants?", a: "We run full credit checks, criminal background checks, income verification (looking for 2.5–3x rent), and contact previous landlords directly. We take this seriously." },
   { q: "What happens if a tenant doesn't pay?", a: "We follow up immediately — day 1 of late payment. We handle the full N4 notice process and guide you through next steps if needed. We're in your corner." },
   { q: "Can I still be involved in major decisions?", a: "Absolutely. We handle the day-to-day so you don't have to, but you're always consulted on larger maintenance items, rent increases, and lease changes." },
-  { q: "What areas do you cover?", a: "We currently manage properties in London, St. Thomas, and Sarnia, Ontario. Reach out if your property is nearby — we may be able to help." },
+  { q: "What areas do you cover?", a: "We currently manage properties in London, St. Thomas, and Strathroy, Ontario. Reach out if your property is nearby — we may be able to help." },
   { q: "How quickly can you find a tenant?", a: "Typically 2–4 weeks for a well-priced property. We'll give you an honest timeline and a clear market analysis before we start." },
 ];
 

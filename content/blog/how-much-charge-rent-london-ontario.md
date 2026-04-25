@@ -1,6 +1,6 @@
 ---
 title: "How Much Can You Charge for Rent in London, Ontario?"
-excerpt: "Current market rents by unit type across London, St. Thomas, and Sarnia — and how to price your property for fast, quality tenants."
+excerpt: "Current market rents by unit type across London, St. Thomas, and Strathroy — and how to price your property for fast, quality tenants."
 date: "2026-04-10"
 category: "Market Updates"
 readTime: "6 min read"
@@ -45,11 +45,11 @@ St. Thomas is emerging as a serious rental market. The Amazon fulfillment centre
 
 **Why St. Thomas is worth watching:** Lower purchase prices relative to London means better cap rates for investors. Tenant demand is outpacing new supply right now.
 
-## Sarnia — Stable and Reliable
+## Strathroy — Stable and Reliable
 
-Sarnia's rental market is driven by petrochemical industry workers, St. Clair College students, and retirees. Turnover tends to be lower here — quality tenants often stay for years.
+Strathroy's rental market is driven by petrochemical industry workers, St. Clair College students, and retirees. Turnover tends to be lower here — quality tenants often stay for years.
 
-### Average Rents (Sarnia, ON — Q1 2026)
+### Average Rents (Strathroy, ON — Q1 2026)
 
 | Unit Type | Average Rent |
 |-----------|-------------|

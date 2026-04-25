@@ -9,38 +9,38 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getNeighbourhoodsByCity("sarnia").map((n) => ({ neighbourhood: n.slug }));
+  return getNeighbourhoodsByCity("strathroy").map((n) => ({ neighbourhood: n.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { neighbourhood } = await params;
-  const n = getNeighbourhood("sarnia", neighbourhood);
+  const n = getNeighbourhood("strathroy", neighbourhood);
   if (!n) return {};
   return {
-    title: `Property Management in ${n.name}, Sarnia Ontario`,
-    description: `Professional property management in ${n.name}, Sarnia ON. ${n.description} Contact Prospera Properties for a free quote.`,
+    title: `Property Management in ${n.name}, Strathroy Ontario`,
+    description: `Professional property management in ${n.name}, Strathroy ON. ${n.description} Contact Prospera Properties for a free quote.`,
   };
 }
 
-export default async function SarniaNeighbourhoodPage({ params }: Props) {
+export default async function StrathroyNeighbourhoodPage({ params }: Props) {
   const { neighbourhood } = await params;
-  const n = getNeighbourhood("sarnia", neighbourhood);
+  const n = getNeighbourhood("strathroy", neighbourhood);
   if (!n) notFound();
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Prospera Properties",
-    description: `Property management in ${n.name}, Sarnia, Ontario`,
-    url: `https://www.prosperaproperties.co/areas/sarnia/${n.slug}`,
+    description: `Property management in ${n.name}, Strathroy, Ontario`,
+    url: `https://www.prosperaproperties.co/areas/strathroy/${n.slug}`,
     telephone: "+15196971227",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Sarnia",
+      addressLocality: "Strathroy",
       addressRegion: "Ontario",
       addressCountry: "CA",
     },
-    areaServed: { "@type": "Place", name: `${n.name}, Sarnia, Ontario` },
+    areaServed: { "@type": "Place", name: `${n.name}, Strathroy, Ontario` },
   };
 
   return (
@@ -50,7 +50,7 @@ export default async function SarniaNeighbourhoodPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
         <p className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
-          <Link href="/areas/sarnia" className="hover:underline" style={{ color: "#7B1C1C" }}>Sarnia</Link>
+          <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#7B1C1C" }}>Strathroy</Link>
           {" → "}
           <span>{n.name}</span>
         </p>
@@ -60,7 +60,7 @@ export default async function SarniaNeighbourhoodPage({ params }: Props) {
       <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-3xl mx-auto">
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
-            Sarnia, Ontario · {n.name}
+            Strathroy, Ontario · {n.name}
           </p>
           <h1 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in {n.name}
@@ -154,7 +154,7 @@ export default async function SarniaNeighbourhoodPage({ params }: Props) {
           Own a Rental in {n.name}?
         </h2>
         <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
-          We manage properties across {n.name} and all of Sarnia. Free consultation, no pressure.
+          We manage properties across {n.name} and all of Strathroy. Free consultation, no pressure.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/contact" className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80" style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>

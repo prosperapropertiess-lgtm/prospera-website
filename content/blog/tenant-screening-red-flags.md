@@ -9,7 +9,7 @@ featuredImage: "/images/blog/tenant-screening.jpg"
 
 A bad tenant can cost you $15,000, six months of legal headaches, and a property that needs serious repairs. The good news? Most bad tenants announce themselves during the application process — if you know what to watch for.
 
-After years of managing properties in London, St. Thomas, and Sarnia, here are the five red flags we never ignore.
+After years of managing properties in London, St. Thomas, and Strathroy, here are the five red flags we never ignore.
 
 ## 1. Urgency Without Explanation
 

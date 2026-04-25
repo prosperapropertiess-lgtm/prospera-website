@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Ebin & Our Story",
-  description: "Meet Ebin Jaison — founder of Prospera Properties. A hands-on property manager serving landlords and tenants across London, St. Thomas, and Sarnia, Ontario.",
+  description: "Meet Ebin Jaison — founder of Prospera Properties. A hands-on property manager serving landlords and tenants across London, St. Thomas, and Strathroy, Ontario.",
 };
 
 const values = [
@@ -48,7 +48,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-sm text-[#2D4A5E] leading-relaxed">
                 <p>
-                  I started Prospera Properties because I saw a gap — landlords in London, St. Thomas, and Sarnia deserved a property management company that actually showed up. One that was transparent, responsive, and treated their investment like it mattered.
+                  I started Prospera Properties because I saw a gap — landlords in London, St. Thomas, and Strathroy deserved a property management company that actually showed up. One that was transparent, responsive, and treated their investment like it mattered.
                 </p>
                 <p>
                   Most property management companies are large, impersonal, and slow. I built Prospera to be the opposite. When you work with us, you&apos;re not a file number. You get direct access to me and a team that cares about your property as much as you do.
@@ -91,7 +91,7 @@ export default function AboutPage() {
         <FadeIn>
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4">Where We Operate</p>
           <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light mb-8">
-            London · St. Thomas · Sarnia
+            London · St. Thomas · Strathroy
           </h2>
           <p className="text-white/70 text-sm max-w-lg mx-auto mb-10">
             We manage properties across Southwestern Ontario. If your property is in or near these cities, we&apos;d love to connect.

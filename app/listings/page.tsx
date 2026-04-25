@@ -23,7 +23,7 @@ interface Property {
   images: string[] | null;
 }
 
-const CITIES = ["All Cities", "London", "St. Thomas", "Sarnia"];
+const CITIES = ["All Cities", "London", "St. Thomas", "Strathroy"];
 const BEDS = ["Any", "1", "2", "3+"];
 
 const placeholderImages = [
@@ -74,7 +74,7 @@ export default function ListingsPage() {
             Find Your Next Home.
           </h1>
           <p className="text-white/70 text-sm max-w-md mx-auto">
-            Quality rentals across London, St. Thomas, and Sarnia — professionally managed.
+            Quality rentals across London, St. Thomas, and Strathroy — professionally managed.
           </p>
         </FadeIn>
       </section>

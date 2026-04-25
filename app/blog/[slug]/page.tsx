@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: Props) {
             Need Help With Your Property?
           </h2>
           <p className="text-sm mb-8" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
-            We manage rentals across London, St. Thomas, and Sarnia. Get a free, no-obligation quote.
+            We manage rentals across London, St. Thomas, and Strathroy. Get a free, no-obligation quote.
           </p>
           <Link
             href="/contact"

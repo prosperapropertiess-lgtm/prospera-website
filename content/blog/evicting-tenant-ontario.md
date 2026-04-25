@@ -67,7 +67,7 @@ If the notice period passes without resolution, you file an application with the
 
 Filing is done online through the LTB's e-File portal. The current fee is around $201 for most applications. Keep a copy of everything you submit.
 
-The LTB will then schedule a hearing. Depending on the region and current backlog, this can take anywhere from 6 weeks to 4+ months. London and Sarnia generally see shorter timelines than the GTA, but expect at least 6–10 weeks.
+The LTB will then schedule a hearing. Depending on the region and current backlog, this can take anywhere from 6 weeks to 4+ months. London and Strathroy generally see shorter timelines than the GTA, but expect at least 6–10 weeks.
 
 ## Step 4: The LTB Hearing
 

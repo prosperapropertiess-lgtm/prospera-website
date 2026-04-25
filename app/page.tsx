@@ -42,7 +42,7 @@ function Hero() {
               fontFamily: "var(--font-dm-sans)",
             }}
           >
-            London · St. Thomas · Sarnia
+            London · St. Thomas · Strathroy
           </span>
         </motion.div>
 
@@ -65,7 +65,7 @@ function Hero() {
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
           style={{ color: "rgba(250,248,245,0.80)", fontFamily: "var(--font-dm-sans)" }}
         >
-          Serving landlords and tenants across London, St. Thomas, and Sarnia, Ontario —
+          Serving landlords and tenants across London, St. Thomas, and Strathroy, Ontario —
           with transparency, responsiveness, and genuine care.
         </motion.p>
 
@@ -231,7 +231,7 @@ function TwoColumnSplit() {
               className="text-sm leading-relaxed mb-6 max-w-sm"
               style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
             >
-              Browse quality rentals in London, St. Thomas, and Sarnia — professionally managed, well-maintained.
+              Browse quality rentals in London, St. Thomas, and Strathroy — professionally managed, well-maintained.
             </p>
             <Link
               href="/tenants"
@@ -338,7 +338,7 @@ const testimonials = [
   {
     quote: "As a tenant, I've dealt with unresponsive landlords my whole life. Prospera is different — professional, respectful, and they actually maintain the property. I renewed immediately.",
     author: "Ebin M.",
-    role: "Tenant in Sarnia, ON",
+    role: "Tenant in Strathroy, ON",
   },
 ];
 

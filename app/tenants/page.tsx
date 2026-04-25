@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rentals for Tenants",
-  description: "Find quality rental homes in London, St. Thomas, and Sarnia, Ontario. Professionally managed by Prospera Properties — well-maintained, responsive, and fair.",
+  description: "Find quality rental homes in London, St. Thomas, and Strathroy, Ontario. Professionally managed by Prospera Properties — well-maintained, responsive, and fair.",
 };
 
 const features = [
@@ -17,7 +17,7 @@ const features = [
 ];
 
 const steps = [
-  { n: "01", title: "Browse Listings", desc: "Explore available homes across London, St. Thomas, and Sarnia. Photos, pricing, and details — all online." },
+  { n: "01", title: "Browse Listings", desc: "Explore available homes across London, St. Thomas, and Strathroy. Photos, pricing, and details — all online." },
   { n: "02", title: "Apply Online", desc: "Submit your application through our secure tenant portal. We aim to respond within 2 business days." },
   { n: "03", title: "Move In & Enjoy", desc: "Once approved, we handle the lease, walkthrough, and keys. Your move is our priority." },
 ];
@@ -45,7 +45,7 @@ export default function TenantsPage() {
               Find a Home<br />You&apos;ll Actually Love.
             </h1>
             <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
-              Quality rentals in London, St. Thomas, and Sarnia. Professionally managed, well-maintained, and with a team that actually responds.
+              Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
             </p>
             <Link href="/listings" className="inline-block px-8 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
               Browse Available Rentals

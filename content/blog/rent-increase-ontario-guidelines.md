@@ -119,7 +119,7 @@ If a tenant challenges your rent increase at the LTB and your paperwork has erro
 
 ## Managing Rent Increases Across Multiple Units
 
-If you own a handful of properties in London, St. Thomas, or Sarnia, tracking 90-day windows across multiple tenancies quickly becomes a spreadsheet problem. It's easy to miss a window, especially when other landlord tasks are competing for your attention.
+If you own a handful of properties in London, St. Thomas, or Strathroy, tracking 90-day windows across multiple tenancies quickly becomes a spreadsheet problem. It's easy to miss a window, especially when other landlord tasks are competing for your attention.
 
 This is one of the day-to-day management tasks where working with Prospera Properties pays for itself — we track renewal and increase timelines for all managed units, prepare and serve N1 notices on time, and ensure increases are calculated correctly. It's a small thing until you miss the window and have to wait another year.
 
