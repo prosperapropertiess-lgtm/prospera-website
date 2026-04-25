@@ -471,6 +471,7 @@ const latestPosts = [
     date: "2026-04-15",
     category: "Landlord Tips",
     readTime: "8 min read",
+    image: "https://picsum.photos/seed/blog-rta/800/440",
   },
   {
     slug: "tenant-screening-red-flags",
@@ -479,6 +480,7 @@ const latestPosts = [
     date: "2026-04-05",
     category: "Landlord Tips",
     readTime: "7 min read",
+    image: "https://picsum.photos/seed/blog-screening/800/440",
   },
   {
     slug: "property-management-fees-ontario",
@@ -487,6 +489,7 @@ const latestPosts = [
     date: "2026-03-28",
     category: "Landlord Tips",
     readTime: "6 min read",
+    image: "https://picsum.photos/seed/blog-fees/800/440",
   },
 ];
 
@@ -528,11 +531,17 @@ function BlogPreview() {
                 className="group flex flex-col h-full bg-white border hover:shadow-md transition-shadow"
                 style={{ borderColor: "#E8E4DF" }}
               >
-                <div
-                  className="h-44 flex items-center justify-center text-4xl"
-                  style={{ backgroundColor: "#F5F0EB" }}
-                >
-                  📰
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: "cover" }}
+                    className="transition-transform duration-500 group-hover:scale-105"
+                    unoptimized
+                  />
+                  <div className="absolute inset-0 bg-[#0A1628]/20 group-hover:bg-[#0A1628]/10 transition-colors duration-300" />
                 </div>
                 <div className="flex flex-col flex-1 p-6">
                   <div className="flex items-center gap-3 mb-3">
