@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -282,14 +282,13 @@ function FeatureCards() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {features.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.08}>
-              <div
-                className="bg-white p-8 border h-full"
+              <motion.div
+                className="bg-white p-8 border h-full cursor-default"
                 style={{ borderColor: "#E8E4DF" }}
+                whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.07)" }}
+                transition={{ duration: 0.2 }}
               >
-                <span
-                  className="block text-2xl mb-5"
-                  style={{ color: "#7B1C1C" }}
-                >
+                <span className="block text-2xl mb-5" style={{ color: "#7B1C1C" }}>
                   {f.icon}
                 </span>
                 <h3
@@ -304,7 +303,7 @@ function FeatureCards() {
                 >
                   {f.desc}
                 </p>
-              </div>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
@@ -440,7 +439,7 @@ function FounderSnippet() {
             <div className="w-48 h-48 shrink-0 relative overflow-hidden rounded-full">
               <Image
                 src="/ebin-candid.jpg"
-                alt="Ebin Jaison — Founder, Prospera Properties"
+                alt="Ebin Jaison — Owner, Prospera Properties"
                 fill
                 sizes="192px"
                 style={{ objectFit: "cover", objectPosition: "center top" }}
@@ -452,7 +451,7 @@ function FounderSnippet() {
                 className="text-xs font-semibold uppercase tracking-widest mb-5"
                 style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
               >
-                The Founder
+                The Owner
               </p>
               <blockquote
                 className="text-3xl sm:text-4xl font-light leading-tight mb-6"
@@ -468,7 +467,7 @@ function FounderSnippet() {
                   className="text-sm"
                   style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
                 >
-                  Ebin Jaison, Founder
+                  Ebin Jaison, Owner
                 </p>
               </div>
               <Link
@@ -766,15 +765,75 @@ function CTABanner() {
           straightforward conversation about what your property could look like
           with the right management.
         </p>
-        <Link
-          href="/contact"
-          className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80"
-          style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+        <motion.div
+          animate={{
+            boxShadow: [
+              "0 0 0 0 rgba(123,28,28,0)",
+              "0 0 0 10px rgba(123,28,28,0.15)",
+              "0 0 0 0 rgba(123,28,28,0)",
+            ],
+          }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+          className="inline-block"
         >
-          Get a Free Quote
-        </Link>
+          <Link
+            href="/contact"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Get a Free Quote
+          </Link>
+        </motion.div>
       </FadeIn>
     </section>
+  );
+}
+
+// ── Sticky CTA ────────────────────────────────────────────────────────────────
+
+function StickyCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4"
+          style={{
+            backgroundColor: "#0D1B2A",
+            borderTop: "1px solid rgba(250,248,245,0.08)",
+          }}
+        >
+          <p
+            className="text-sm hidden sm:block"
+            style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Own a rental in Southwestern Ontario?
+          </p>
+          <Link
+            href="/contact"
+            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0"
+            style={{
+              backgroundColor: "#7B1C1C",
+              color: "#FAF8F5",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            Get a Free Quote →
+          </Link>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -793,6 +852,7 @@ export default function HomePage() {
       <Testimonials />
       <TenantBar />
       <CTABanner />
+      <StickyCTA />
     </>
   );
 }
