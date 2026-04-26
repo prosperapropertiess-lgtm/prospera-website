@@ -11,17 +11,25 @@ import CounterAnimation from "@/components/animations/CounterAnimation";
 
 function Hero() {
   return (
-    <section
-      className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden"
-      style={{ backgroundColor: "#0D1B2A" }}
-    >
-      {/* Subtle burgundy glow top-right */}
+    <section className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
+      {/* Background photo */}
+      <Image
+        src="https://picsum.photos/seed/prospera-hero/1920/1080"
+        alt="Professionally managed rental property"
+        fill
+        priority
+        className="object-cover object-center"
+        unoptimized
+      />
+      {/* Dark navy overlay */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom, rgba(10,22,40,0.62) 0%, rgba(10,22,40,0.50) 60%, rgba(10,22,40,0.70) 100%)" }}
+      />
+      {/* Subtle burgundy glow */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 75% 15%, rgba(123,28,28,0.15) 0%, transparent 55%)",
-        }}
+        style={{ background: "radial-gradient(ellipse at 70% 10%, rgba(123,28,28,0.18) 0%, transparent 55%)" }}
       />
 
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -34,12 +42,12 @@ function Hero() {
           <span
             className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2"
             style={{
-              color: "#7B1C1C",
+              color: "rgba(250,248,245,0.75)",
               fontFamily: "var(--font-dm-sans)",
-              border: "1px solid rgba(123,28,28,0.35)",
+              border: "1px solid rgba(250,248,245,0.25)",
             }}
           >
-            London · St. Thomas · Strathroy
+            London · St. Thomas · Strathroy, Ontario
           </span>
         </motion.div>
 
@@ -47,12 +55,12 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.08] mb-7"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
-          Built for landlords
+          Property Management
           <br />
-          <em style={{ color: "#C4B08A" }}>with 1 to 5 doors.</em>
+          <em style={{ color: "#C4B08A" }}>That Actually Cares.</em>
         </motion.h1>
 
         <motion.p
@@ -60,11 +68,11 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "rgba(250,248,245,0.72)", fontFamily: "var(--font-dm-sans)" }}
         >
-          You bought the rental. We take it from there — tenants, rent,
-          maintenance, all of it. No call centers. No ticket numbers. Just
-          someone who actually picks up the phone.
+          Full-service property management for landlords and tenants across
+          London, St. Thomas, and Strathroy — no call centers, no ticket numbers,
+          just someone who actually picks up the phone.
         </motion.p>
 
         <motion.div
@@ -73,27 +81,27 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.55 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#how-it-works"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
+          <Link
+            href="/landlords"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-85 rounded-lg w-full sm:w-auto"
             style={{
               backgroundColor: "#7B1C1C",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
-            See How It Works
-          </a>
+            I&apos;m a Landlord
+          </Link>
           <Link
-            href="/contact"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5 rounded-lg"
+            href="/tenants"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/10 rounded-lg w-full sm:w-auto"
             style={{
-              borderColor: "rgba(250,248,245,0.25)",
+              borderColor: "rgba(250,248,245,0.35)",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
-            Get a Free Quote
+            I&apos;m a Tenant
           </Link>
         </motion.div>
       </div>
@@ -114,7 +122,7 @@ function Hero() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="rgba(250,248,245,0.35)"
+            stroke="rgba(250,248,245,0.45)"
             strokeWidth="1.5"
           >
             <polyline points="6 9 12 15 18 9" />
@@ -156,6 +164,104 @@ function StatsBar() {
             </div>
           </FadeIn>
         ))}
+      </div>
+    </section>
+  );
+}
+
+// ── Two-Column Split (Belong-style) ──────────────────────────────────────────
+
+function TwoColumnSplit() {
+  return (
+    <section className="py-0 overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[580px]">
+        {/* Landlord side */}
+        <div className="relative flex items-end overflow-hidden min-h-[360px] md:min-h-0">
+          <Image
+            src="https://picsum.photos/seed/landlord-split/900/700"
+            alt="Property management for landlords"
+            fill
+            className="object-cover object-center"
+            unoptimized
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.82) 0%, rgba(10,22,40,0.30) 55%, transparent 100%)" }}
+          />
+          <FadeIn direction="left" className="relative z-10 p-8 sm:p-12 w-full">
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
+            >
+              For Landlords
+            </p>
+            <h2
+              className="text-3xl sm:text-4xl font-light leading-tight mb-4"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            >
+              Own rental property?
+              <br />
+              <em>We handle everything.</em>
+            </h2>
+            <p
+              className="text-sm leading-relaxed mb-7 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Tenant screening, rent collection, maintenance coordination — full management so your property runs itself.
+            </p>
+            <Link
+              href="/landlords"
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
+              style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Learn More →
+            </Link>
+          </FadeIn>
+        </div>
+
+        {/* Tenant side */}
+        <div className="relative flex items-end overflow-hidden min-h-[360px] md:min-h-0">
+          <Image
+            src="https://picsum.photos/seed/tenant-split/900/700"
+            alt="Find your next rental home"
+            fill
+            className="object-cover object-center"
+            unoptimized
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(45,74,94,0.85) 0%, rgba(45,74,94,0.30) 55%, transparent 100%)" }}
+          />
+          <FadeIn direction="right" className="relative z-10 p-8 sm:p-12 w-full">
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-3"
+              style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
+            >
+              For Tenants
+            </p>
+            <h2
+              className="text-3xl sm:text-4xl font-light leading-tight mb-4"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            >
+              Looking for a home?
+              <br />
+              <em>Find your next rental.</em>
+            </h2>
+            <p
+              className="text-sm leading-relaxed mb-7 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Quality homes in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
+            </p>
+            <Link
+              href="/listings"
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/10 rounded-lg"
+              style={{ borderColor: "rgba(250,248,245,0.35)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Browse Listings →
+            </Link>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
@@ -844,6 +950,7 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsBar />
+      <TwoColumnSplit />
       <PainPoints />
       <FeatureCards />
       <HowItWorks />
