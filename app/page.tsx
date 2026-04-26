@@ -75,7 +75,7 @@ function Hero() {
         >
           <a
             href="#how-it-works"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
             style={{
               backgroundColor: "#7B1C1C",
               color: "#FAF8F5",
@@ -86,7 +86,7 @@ function Hero() {
           </a>
           <Link
             href="/contact"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5 rounded-lg"
             style={{
               borderColor: "rgba(250,248,245,0.25)",
               color: "#FAF8F5",
@@ -206,7 +206,7 @@ function PainPoints() {
           {pains.map((pain, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div
-                className="p-6 border flex gap-4"
+                className="p-6 border flex gap-4 rounded-xl"
                 style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
               >
                 <div
@@ -283,7 +283,7 @@ function FeatureCards() {
           {features.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.08}>
               <motion.div
-                className="bg-white p-8 border h-full cursor-default"
+                className="bg-white p-8 border h-full cursor-default rounded-xl"
                 style={{ borderColor: "#E8E4DF" }}
                 whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.07)" }}
                 transition={{ duration: 0.2 }}
@@ -380,7 +380,7 @@ function HowItWorks() {
                   />
                 )}
                 <div
-                  className="bg-white border p-7 h-full relative z-10"
+                  className="bg-white border p-7 h-full relative z-10 rounded-xl"
                   style={{ borderColor: "#E8E4DF" }}
                 >
                   <div className="flex items-start gap-4 mb-5">
@@ -520,7 +520,7 @@ function CaseStudy() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FadeIn delay={0.1}>
             <div
-              className="p-8 border"
+              className="p-8 border rounded-xl"
               style={{ backgroundColor: "#FFF8F8", borderColor: "rgba(123,28,28,0.15)" }}
             >
               <p
@@ -548,7 +548,7 @@ function CaseStudy() {
 
           <FadeIn delay={0.2}>
             <div
-              className="p-8 border"
+              className="p-8 border rounded-xl"
               style={{ backgroundColor: "#F5FBF5", borderColor: "rgba(40,100,60,0.15)" }}
             >
               <p
@@ -669,7 +669,7 @@ function Testimonials() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={prev}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
             aria-label="Previous"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -694,7 +694,7 @@ function Testimonials() {
 
           <button
             onClick={next}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
             aria-label="Next"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -729,7 +729,7 @@ function TenantBar() {
         </div>
         <Link
           href="/listings"
-          className="shrink-0 px-8 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5"
+          className="shrink-0 px-8 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5 rounded-lg"
           style={{
             borderColor: "rgba(250,248,245,0.25)",
             color: "#FAF8F5",
@@ -778,7 +778,7 @@ function CTABanner() {
         >
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
             style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
@@ -822,7 +822,7 @@ function StickyCTA() {
           </p>
           <Link
             href="/contact"
-            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0"
+            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded-lg"
             style={{
               backgroundColor: "#7B1C1C",
               color: "#FAF8F5",

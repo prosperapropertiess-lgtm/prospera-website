@@ -66,7 +66,7 @@ const milestones = [
 
 function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
   return (
-    <div className="p-5 border" style={{ backgroundColor: "#FFFDFB", borderColor: "#E8E4DF" }}>
+    <div className="p-5 border rounded-xl" style={{ backgroundColor: "#FFFDFB", borderColor: "#E8E4DF" }}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         <span
           className="text-xs font-semibold uppercase tracking-widest"

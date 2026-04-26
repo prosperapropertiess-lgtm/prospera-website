@@ -129,14 +129,14 @@ export default function LandlordsPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#pricing"
-              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
               style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               See Pricing
             </a>
             <a
               href="#rent-estimator"
-              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-white/5"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-white/5 rounded-lg"
               style={{ borderColor: "rgba(250,248,245,0.25)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Get a Free Rent Estimate
@@ -168,7 +168,7 @@ export default function LandlordsPage() {
             {painPoints.map((p, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div
-                  className="bg-white border p-7"
+                  className="bg-white border p-7 rounded-xl"
                   style={{ borderColor: "#E8E4DF" }}
                 >
                   <span
@@ -282,7 +282,7 @@ export default function LandlordsPage() {
             {/* Basic */}
             <FadeIn delay={0.08}>
               <div
-                className="bg-white border p-8 h-full flex flex-col"
+                className="bg-white border p-8 h-full flex flex-col rounded-xl"
                 style={{ borderColor: "#E8E4DF" }}
               >
                 <p
@@ -333,7 +333,7 @@ export default function LandlordsPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-gray-50"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-gray-50 rounded-lg"
                   style={{ borderColor: "#E8E4DF", color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Get Started
@@ -344,7 +344,7 @@ export default function LandlordsPage() {
             {/* Standard — most popular */}
             <FadeIn delay={0.12}>
               <div
-                className="border p-8 h-full flex flex-col relative"
+                className="border p-8 h-full flex flex-col relative rounded-xl"
                 style={{ backgroundColor: "#0D1B2A", borderColor: "#0D1B2A" }}
               >
                 <div
@@ -400,7 +400,7 @@ export default function LandlordsPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
                   style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Get Started
@@ -411,7 +411,7 @@ export default function LandlordsPage() {
             {/* Gold — best value */}
             <FadeIn delay={0.16}>
               <div
-                className="bg-white border p-8 h-full flex flex-col relative"
+                className="bg-white border p-8 h-full flex flex-col relative rounded-xl"
                 style={{ borderColor: "#C4B08A" }}
               >
                 <div
@@ -473,7 +473,7 @@ export default function LandlordsPage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-80"
+                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-80 rounded-lg"
                   style={{ borderColor: "#C4B08A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(196,176,138,0.08)" }}
                 >
                   Get Started
@@ -485,7 +485,7 @@ export default function LandlordsPage() {
           {/* Pricing reassurance */}
           <FadeIn delay={0.2}>
             <div
-              className="mt-8 p-6 text-center border"
+              className="mt-8 p-6 text-center border rounded-xl"
               style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
             >
               <p
@@ -539,7 +539,7 @@ export default function LandlordsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
             style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote

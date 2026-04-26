@@ -42,14 +42,14 @@ export default function FAQPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
+                className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
                 style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Contact Us
               </Link>
               <a
                 href="tel:+15196971227"
-                className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
+                className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
                 style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
               >
                 (519) 697-1227

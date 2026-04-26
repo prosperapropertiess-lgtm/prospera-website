@@ -174,7 +174,7 @@ export default function AboutPage() {
                 ].map((trade) => (
                   <div
                     key={trade}
-                    className="bg-white border p-4 text-sm font-medium"
+                    className="bg-white border p-4 text-sm font-medium rounded-lg"
                     style={{
                       borderColor: "#E8E4DF",
                       color: "#0D1B2A",
@@ -273,7 +273,7 @@ export default function AboutPage() {
             {whySmall.map((item, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div
-                  className="bg-white border p-7 h-full"
+                  className="bg-white border p-7 h-full rounded-xl"
                   style={{ borderColor: "#E8E4DF" }}
                 >
                   <div className="w-6 h-0.5 mb-5" style={{ backgroundColor: "#7B1C1C" }} />
@@ -316,7 +316,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
             style={{
               backgroundColor: "#7B1C1C",
               color: "#FAF8F5",

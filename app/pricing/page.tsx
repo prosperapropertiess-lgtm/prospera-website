@@ -101,7 +101,7 @@ export default function PricingPage() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan, i) => (
             <FadeIn key={plan.name} delay={i * 0.1}>
-              <div className={`relative p-8 h-full flex flex-col border ${plan.highlight ? "bg-[#0D1B2A] border-[#0D1B2A] text-white" : "bg-white border-[#E8E4DF] text-[#0D1B2A]"}`}>
+              <div className={`relative p-8 h-full flex flex-col border rounded-xl ${plan.highlight ? "bg-[#0D1B2A] border-[#0D1B2A] text-white" : "bg-white border-[#E8E4DF] text-[#0D1B2A]"}`}>
                 {plan.badge && (
                   <div
                     className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
@@ -180,7 +180,7 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className="block text-center py-3.5 text-xs font-semibold uppercase tracking-widest transition-all hover:opacity-80"
+                  className="block text-center py-3.5 text-xs font-semibold uppercase tracking-widest transition-all hover:opacity-80 rounded-lg"
                   style={{
                     backgroundColor: plan.highlight ? "#7B1C1C" : "transparent",
                     color: plan.highlight ? "#FAF8F5" : "#0D1B2A",
@@ -197,7 +197,7 @@ export default function PricingPage() {
 
         {/* Reassurance bar */}
         <FadeIn delay={0.3}>
-          <div className="max-w-5xl mx-auto mt-6 p-5 text-center border border-[#E8E4DF] bg-white">
+          <div className="max-w-5xl mx-auto mt-6 p-5 text-center border border-[#E8E4DF] bg-white rounded-xl">
             <p className="text-xs text-[#7A7A7A]" style={{ fontFamily: "var(--font-dm-sans)" }}>
               All plans include:{" "}
               <strong className="text-[#0D1B2A]">zero maintenance markup</strong> ·{" "}
