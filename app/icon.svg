@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="5" fill="#FAF8F5"/>
+
+  <!-- Crown (navy) -->
+  <!-- Three points -->
+  <polygon points="5,14 5,9 8.5,12 11.5,7 16,10 20.5,7 23.5,12 27,9 27,14" fill="#0A1628"/>
+  <!-- Crown base bar -->
+  <rect x="5" y="13" width="22" height="3" rx="0.5" fill="#0A1628"/>
+
+  <!-- House (burgundy) -->
+  <!-- Roof -->
+  <polygon points="9,24 16,18 23,24" fill="#7B1C1C"/>
+  <!-- Walls -->
+  <rect x="10.5" y="23" width="11" height="8" fill="#7B1C1C"/>
+  <!-- Door -->
+  <rect x="14" y="27" width="4" height="4" fill="#FAF8F5"/>
+  <!-- Window left -->
+  <rect x="11.5" y="24.5" width="2.5" height="2.5" fill="#FAF8F5" opacity="0.6"/>
+  <!-- Window right -->
+  <rect x="18" y="24.5" width="2.5" height="2.5" fill="#FAF8F5" opacity="0.6"/>
+</svg>
