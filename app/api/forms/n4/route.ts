@@ -8,24 +8,24 @@ import path from "path";
 // Adjust these if text lands off-target after testing.
 
 const PAGE1 = {
-  tenantName:      { x: 46,  y: 634 },
-  landlordName:    { x: 314, y: 634 },
-  address:         { x: 46,  y: 574 },
-  amountOwing:     { x: 347, y: 456 },
-  terminationDate: { x: 224, y: 410 },
+  tenantName:      { x: 30,  y: 680 },  // below "To:" label (y=705), above "Address" label (y=651)
+  landlordName:    { x: 314, y: 680 },  // same row, right column
+  address:         { x: 30,  y: 622 },  // below "Address of the Rental Unit:" label (y=651)
+  amountOwing:     { x: 376, y: 507 },  // right of "$" sign (x=368, y=506) in amount boxes
+  terminationDate: { x: 176, y: 442 },  // in dd/mm/yyyy boxes (slashes at y=440-441)
 };
 
 const PAGE2 = {
   rows: [
-    { fromX: 46, toX: 159, chargedX: 292, paidX: 393, owingX: 487, y: 410 },
-    { fromX: 46, toX: 159, chargedX: 292, paidX: 393, owingX: 487, y: 383 },
-    { fromX: 46, toX: 159, chargedX: 292, paidX: 393, owingX: 487, y: 356 },
+    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 463 },  // row 1 (slashes at y=463)
+    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 439 },  // row 2
+    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 413 },  // row 3
   ],
-  totalOwing:    { x: 487, y: 329 },
-  firstName:     { x: 50,  y: 261 },
-  lastName:      { x: 50,  y: 232 },
-  phone:         { x: 61,  y: 199 },
-  signatureDate: { x: 355, y: 162 },
+  totalOwing:    { x: 490, y: 390 },  // before decimal "•" at x=548, y=388
+  firstName:     { x: 50,  y: 322 },  // below "First Name" label (y=336)
+  lastName:      { x: 50,  y: 289 },  // below "Last Name" label (y=301)
+  phone:         { x: 38,  y: 248 },  // in phone number brackets (y=248)
+  signatureDate: { x: 355, y: 202 },  // right of "Date (dd/mm/yyyy)" label (x=281, y=216)
 };
 
 // ── Route handler ──────────────────────────────────────────────────────────────
