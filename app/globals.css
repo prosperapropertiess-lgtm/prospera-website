@@ -29,7 +29,7 @@ body {
 /* Mobile text scale — 20% larger base font size on small screens */
 @media (max-width: 767px) {
   html {
-    font-size: 144%;
+    font-size: 115%;
   }
 }
 
