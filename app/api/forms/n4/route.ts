@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import { readFile } from "fs/promises";
-import path from "path";
 
 // ── Coordinate map ─────────────────────────────────────────────────────────────
 // All y values are measured from the BOTTOM of the page (pdf-lib convention).
@@ -50,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Save the lead
     if (email) {
       try {
-        await fetch(`${req.nextUrl.origin}/api/subscribe`, {
+        await fetch(new URL("/api/subscribe", req.nextUrl.origin).toString(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -64,9 +62,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Load the PDF from the filesystem
-    const pdfPath = path.join(process.cwd(), "public/forms/N4.pdf");
-    const pdfBytes = await readFile(pdfPath);
+    // Fetch the PDF from the public static URL (works on Vercel serverless)
+    const pdfUrl = `${req.nextUrl.origin}/forms/N4.pdf`;
+    const pdfRes = await fetch(pdfUrl);
+    if (!pdfRes.ok) throw new Error(`Failed to fetch PDF: ${pdfRes.status}`);
+    const pdfBytes = await pdfRes.arrayBuffer();
     const pdfDoc = await PDFDocument.load(pdfBytes);
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
