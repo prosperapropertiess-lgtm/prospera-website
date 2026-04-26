@@ -43,24 +43,49 @@ export async function POST(req: NextRequest) {
       landlordPhone,
       signatureDate,
       email,
+      wantsHelp,
     } = body;
 
-    // Save the lead
+    // Save the lead + optional hot lead alert — non-blocking
+    const origin = req.nextUrl.origin;
+    const leadPromises: Promise<unknown>[] = [];
+
     if (email) {
-      try {
-        await fetch(new URL("/api/subscribe", req.nextUrl.origin).toString(), {
+      leadPromises.push(
+        fetch(new URL("/api/subscribe", origin).toString(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email,
-            type: "landlord",
-            source: "n4_generator",
-          }),
-        });
-      } catch {
-        // Non-blocking — don't fail PDF gen if email capture fails
-      }
+          body: JSON.stringify({ email, type: "landlord", source: "n4_generator" }),
+        }).catch(() => {})
+      );
     }
+
+    // 🔥 Hot lead alert
+    if (wantsHelp && process.env.RESEND_API_KEY) {
+      const { Resend } = await import("resend");
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      leadPromises.push(
+        resend.emails.send({
+          from: "Prospera Tools <hello@prosperaproperties.co>",
+          to: "prosperapropertiess@gmail.com",
+          subject: `🔥 HOT LEAD — N4: ${rentalAddress}`,
+          html: `
+            <h2 style="color:#7B1C1C">🔥 Hot Lead — Wants Help with N4</h2>
+            <p><strong>Email:</strong> ${email || "not provided"}</p>
+            <p><strong>Landlord:</strong> ${landlordFirstName} ${landlordLastName}</p>
+            <p><strong>Phone:</strong> ${landlordPhone || "not provided"}</p>
+            <p><strong>Property:</strong> ${rentalAddress}</p>
+            <p><strong>Tenant(s):</strong> ${tenantNames}</p>
+            <p><strong>Amount Owing:</strong> $${amountOwing}</p>
+            <p><strong>Termination Date:</strong> ${terminationDate}</p>
+            <hr/>
+            <p style="color:#888;font-size:12px">Generated via the N4 Form Builder on prosperaproperties.co</p>
+          `,
+        }).catch(() => {})
+      );
+    }
+
+    await Promise.all(leadPromises);
 
     // Fetch the PDF from the public static URL (works on Vercel serverless)
     const pdfUrl = `${req.nextUrl.origin}/forms/N4.pdf`;

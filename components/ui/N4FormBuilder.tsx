@@ -51,6 +51,7 @@ export default function N4FormBuilder() {
 
   // Email capture
   const [email, setEmail] = useState("");
+  const [wantsHelp, setWantsHelp] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState("");
 
@@ -108,6 +109,7 @@ export default function N4FormBuilder() {
           landlordPhone,
           signatureDate: formatDate(signatureDate || noticeDate),
           email,
+          wantsHelp,
         }),
       });
 
@@ -464,11 +466,36 @@ export default function N4FormBuilder() {
                 Your N4 is ready.
               </h3>
               <p
-                className="text-sm mb-8 leading-relaxed"
+                className="text-sm mb-6 leading-relaxed"
                 style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
               >
                 Enter your email to download. We&apos;ll occasionally send you useful landlord tips — no spam, unsubscribe anytime.
               </p>
+
+              {/* Hot lead checkbox */}
+              <label
+                className="flex items-start gap-3 p-4 rounded-xl border cursor-pointer mb-6 transition-colors"
+                style={{
+                  borderColor: wantsHelp ? "#7B1C1C" : "#E8E4DF",
+                  backgroundColor: wantsHelp ? "rgba(123,28,28,0.04)" : "#FAF8F5",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={wantsHelp}
+                  onChange={(e) => setWantsHelp(e.target.checked)}
+                  className="mt-0.5 shrink-0 accent-[#7B1C1C]"
+                />
+                <div>
+                  <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+                    I&apos;d like Prospera to handle this for me
+                  </p>
+                  <p className="text-xs mt-0.5" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    Ebin will reach out within 24 hours — free consultation, no pressure.
+                  </p>
+                </div>
+              </label>
+
               <form onSubmit={handleGenerate} className="space-y-3">
                 <input
                   required
