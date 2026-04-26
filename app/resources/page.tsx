@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import ResourcesGrid from "@/components/ui/ResourcesGrid";
+import N4FormBuilder from "@/components/ui/N4FormBuilder";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,6 +25,26 @@ export default function ResourcesPage() {
             Every form, template, and guide you need — no government website digging required. Download anything free.
           </p>
         </FadeIn>
+      </section>
+
+      {/* N4 Form Builder — featured tool */}
+      <section className="py-16 px-6" style={{ backgroundColor: "#FAF8F5" }}>
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <div className="flex items-center gap-3 mb-6">
+              <span
+                className="text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              >
+                New Tool
+              </span>
+              <p className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+                Most landlords need this first
+              </p>
+            </div>
+            <N4FormBuilder />
+          </FadeIn>
+        </div>
       </section>
 
       {/* Category legend */}
