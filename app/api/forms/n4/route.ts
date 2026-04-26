@@ -3,30 +3,32 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { readFile } from "fs/promises";
 import path from "path";
 
-// ── Coordinate map ─────────────────────────────────────────────────────────────
-// All y values are measured from the BOTTOM of the page (pdf-lib convention).
-// Adjust these if text lands off-target after testing.
+// Positions extracted directly from the PDF's AcroForm widget rectangles.
+// x, y = bottom-left of the field box. Text is drawn at x+2, y+5 (small inset).
+const COORDS = {
+  // Page 1 (PDF page index 1)
+  tenantName:      { page: 1, x: 30,  y: 672 },  // box: x=28 y=665 h=37
+  landlordName:    { page: 1, x: 310, y: 672 },  // box: x=308 y=665 h=37
+  address:         { page: 1, x: 30,  y: 618 },  // box: x=28 y=611 h=37
+  amountOwing:     { page: 1, x: 379, y: 510 },  // box: x=377 y=505 h=20
+  terminationDate: { page: 1, x: 183, y: 444 },  // box: x=181 y=439 h=19
 
-const PAGE1 = {
-  tenantName:      { x: 30,  y: 680 },  // below "To:" label (y=705), above "Address" label (y=651)
-  landlordName:    { x: 314, y: 680 },  // same row, right column
-  address:         { x: 30,  y: 622 },  // below "Address of the Rental Unit:" label (y=651)
-  amountOwing:     { x: 376, y: 507 },  // right of "$" sign (x=368, y=506) in amount boxes
-  terminationDate: { x: 176, y: 442 },  // in dd/mm/yyyy boxes (slashes at y=440-441)
-};
-
-const PAGE2 = {
+  // Page 2 (PDF page index 2) — rent arrears table
   rows: [
-    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 463 },  // row 1 (slashes at y=463)
-    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 439 },  // row 2
-    { fromX: 46, toX: 163, chargedX: 253, paidX: 366, owingX: 490, y: 413 },  // row 3
+    { page: 2, fromX: 30,  toX: 138, chargedX: 246, paidX: 354, owingX: 462, y: 467 }, // row 1: y=462 h=20
+    { page: 2, fromX: 30,  toX: 138, chargedX: 246, paidX: 354, owingX: 462, y: 442 }, // row 2: y=437 h=20
+    { page: 2, fromX: 30,  toX: 138, chargedX: 246, paidX: 354, owingX: 462, y: 417 }, // row 3: y=412 h=20
   ],
-  totalOwing:    { x: 490, y: 390 },  // before decimal "•" at x=548, y=388
-  firstName:     { x: 50,  y: 322 },  // below "First Name" label (y=336)
-  lastName:      { x: 50,  y: 289 },  // below "Last Name" label (y=301)
-  phone:         { x: 38,  y: 248 },  // in phone number brackets (y=248)
-  signatureDate: { x: 355, y: 202 },  // right of "Date (dd/mm/yyyy)" label (x=281, y=216)
+
+  totalOwing:    { page: 2, x: 450, y: 392 },  // box: x=448 y=387 h=20
+  firstName:     { page: 2, x: 27,  y: 322 },  // box: x=25 y=317 h=20
+  lastName:      { page: 2, x: 27,  y: 286 },  // box: x=25 y=281 h=21
+  phone:         { page: 2, x: 27,  y: 250 },  // box: x=25 y=245 h=20
+  signatureDate: { page: 2, x: 284, y: 193 },  // box: x=282 y=188 h=20
 };
+
+const BLACK = rgb(0, 0, 0);
+const SIZE  = 10;
 
 // ── Route handler ──────────────────────────────────────────────────────────────
 
@@ -89,59 +91,53 @@ export async function POST(req: NextRequest) {
 
     await Promise.all(leadPromises);
 
-    // Read PDF directly from filesystem — bypasses middleware/coming-soon redirect
-    // Use pre-cleaned version (original is encrypted, pdf-lib can't write to encrypted PDFs)
+    // Load PDF
     const pdfPath = path.join(process.cwd(), "public", "forms", "N4-clean.pdf");
     const pdfBytes = await readFile(pdfPath);
     const pdfDoc = await PDFDocument.load(pdfBytes);
-
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const SIZE = 10;
 
-    const draw = (
-      page: ReturnType<typeof pdfDoc.getPage>,
-      text: string,
-      x: number,
-      y: number,
-      size = SIZE
-    ) => {
+    const pages = pdfDoc.getPages();
+
+    const draw = (pageIdx: number, text: string, x: number, y: number, size = SIZE) => {
       if (!text) return;
-      page.drawText(String(text), { x, y, size, font, color: rgb(0, 0, 0) });
+      pages[pageIdx].drawText(String(text), { x, y, size, font, color: BLACK });
     };
 
-    // ── Page 1 of form (PDF index 1 — skip the checklist at index 0) ──────────
-    const p1 = pdfDoc.getPage(1);
-    draw(p1, tenantNames, PAGE1.tenantName.x, PAGE1.tenantName.y);
-    draw(p1, landlordName, PAGE1.landlordName.x, PAGE1.landlordName.y);
-    draw(p1, rentalAddress, PAGE1.address.x, PAGE1.address.y);
-    draw(p1, String(amountOwing), PAGE1.amountOwing.x, PAGE1.amountOwing.y, 11);
-    draw(p1, terminationDate, PAGE1.terminationDate.x, PAGE1.terminationDate.y);
+    // ── Page 1 ─────────────────────────────────────────────────────────────────
+    draw(COORDS.tenantName.page,      tenantNames,        COORDS.tenantName.x,      COORDS.tenantName.y);
+    draw(COORDS.landlordName.page,    landlordName,       COORDS.landlordName.x,    COORDS.landlordName.y);
+    draw(COORDS.address.page,         rentalAddress,      COORDS.address.x,         COORDS.address.y);
+    draw(COORDS.amountOwing.page,     String(amountOwing),COORDS.amountOwing.x,     COORDS.amountOwing.y);
+    draw(COORDS.terminationDate.page, terminationDate,    COORDS.terminationDate.x, COORDS.terminationDate.y);
 
-    // ── Page 2 of form (PDF index 2) ──────────────────────────────────────────
-    const p2 = pdfDoc.getPage(2);
-
+    // ── Rent period rows ───────────────────────────────────────────────────────
     let total = 0;
-    (rentPeriods as Array<{
-      from: string; to: string; charged: string; paid: string;
-    }>).slice(0, 3).forEach((period, i) => {
-      const row = PAGE2.rows[i];
-      const charged = parseFloat(period.charged || "0");
-      const paid = parseFloat(period.paid || "0");
-      const owing = charged - paid;
-      total += owing;
+    (rentPeriods as Array<{ from: string; to: string; charged: string; paid: string }>)
+      .slice(0, 3)
+      .forEach((period, i) => {
+        const row = COORDS.rows[i];
+        const charged = parseFloat(period.charged || "0");
+        const paid    = parseFloat(period.paid    || "0");
+        const owing   = charged - paid;
+        total += owing;
 
-      draw(p2, period.from, row.fromX, row.y);
-      draw(p2, period.to, row.toX, row.y);
-      if (period.charged) draw(p2, charged.toFixed(2), row.chargedX, row.y);
-      if (period.paid)    draw(p2, paid.toFixed(2),    row.paidX,    row.y);
-      if (owing > 0)      draw(p2, owing.toFixed(2),   row.owingX,   row.y);
-    });
+        draw(row.page, period.from, row.fromX,    row.y);
+        draw(row.page, period.to,   row.toX,      row.y);
+        if (period.charged) draw(row.page, charged.toFixed(2), row.chargedX, row.y);
+        if (period.paid)    draw(row.page, paid.toFixed(2),    row.paidX,    row.y);
+        if (owing > 0)      draw(row.page, owing.toFixed(2),   row.owingX,   row.y);
+      });
 
-    draw(p2, total.toFixed(2), PAGE2.totalOwing.x, PAGE2.totalOwing.y, 11);
-    draw(p2, landlordFirstName, PAGE2.firstName.x, PAGE2.firstName.y);
-    draw(p2, landlordLastName,  PAGE2.lastName.x,  PAGE2.lastName.y);
-    draw(p2, landlordPhone,     PAGE2.phone.x,     PAGE2.phone.y);
-    draw(p2, signatureDate,     PAGE2.signatureDate.x, PAGE2.signatureDate.y);
+    // ── Signature page ─────────────────────────────────────────────────────────
+    draw(COORDS.totalOwing.page,    total.toFixed(2), COORDS.totalOwing.x,    COORDS.totalOwing.y);
+    draw(COORDS.firstName.page,     landlordFirstName,COORDS.firstName.x,     COORDS.firstName.y);
+    draw(COORDS.lastName.page,      landlordLastName, COORDS.lastName.x,      COORDS.lastName.y);
+    draw(COORDS.phone.page,         landlordPhone,    COORDS.phone.x,         COORDS.phone.y);
+    draw(COORDS.signatureDate.page, signatureDate,    COORDS.signatureDate.x, COORDS.signatureDate.y);
+
+    // Remove interactive form fields so the output is a clean flat PDF
+    pdfDoc.getForm().flatten();
 
     const filledPdfBytes = await pdfDoc.save();
 

@@ -10,7 +10,7 @@
 
 **Reference site:** [belonghome.com](https://belonghome.com) — take heavy inspiration from their layout, structure, animations, and UX patterns. Adapt for a Canadian single-operator property management company.
 
-**Design direction:** Visually stunning, fast, modern. Smooth scroll animations, micro-interactions, parallax effects. Navy and gold brand palette (Prospera's established identity). Think luxury real estate meets modern tech startup. NOT a WordPress site. This should feel like a funded startup's website even though it's bootstrapped.
+**Design direction:** Visually stunning, fast, modern. Smooth scroll animations, micro-interactions, parallax effects. Navy and gold brand palette (Prospera's established identity). Think luxury real estate meets modern tech startup. This should feel like a funded startup's website even though it's bootstrapped.
 
 ---
 
@@ -729,7 +729,6 @@ Deploy to Vercel, connect to prosperaproperties.co domain.
 - [ ] Deploy coming soon page on prosperaproperties.co within 24 hours
 - [ ] Verify domain ownership in Google Search Console
 - [ ] Submit sitemap once the full site launches
-- [ ] Set up 301 redirects from old WordPress URLs to new Next.js URLs (if any old blog posts were indexed)
 - [ ] Update Google Business Profile link once new site is live
 - [ ] Claim your Yelp listing and update it
 
