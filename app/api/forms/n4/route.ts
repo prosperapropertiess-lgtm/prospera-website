@@ -90,7 +90,8 @@ export async function POST(req: NextRequest) {
     await Promise.all(leadPromises);
 
     // Read PDF directly from filesystem — bypasses middleware/coming-soon redirect
-    const pdfPath = path.join(process.cwd(), "public", "forms", "N4.pdf");
+    // Use pre-cleaned version (original is encrypted, pdf-lib can't write to encrypted PDFs)
+    const pdfPath = path.join(process.cwd(), "public", "forms", "N4-clean.pdf");
     const pdfBytes = await readFile(pdfPath);
     const pdfDoc = await PDFDocument.load(pdfBytes);
 
