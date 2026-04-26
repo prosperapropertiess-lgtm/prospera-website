@@ -69,7 +69,7 @@ export default function ListingsPage() {
       {/* Hero */}
       <section className="pt-32 pb-14 px-6 bg-[#0A1628] text-white text-center">
         <FadeIn>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-4">Available Now</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[#7B1C1C] mb-4">Available Now</p>
           <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light mb-4">
             Find Your Next Home.
           </h1>
@@ -188,7 +188,7 @@ export default function ListingsPage() {
                           Available
                         </span>
                         {p.utilities_included && (
-                          <span className="bg-[#C5A55A] text-white text-xs px-2.5 py-1 rounded-full font-medium">
+                          <span className="bg-[#2D4A5E] text-white text-xs px-2.5 py-1 rounded-full font-medium">
                             Utilities Incl.
                           </span>
                         )}

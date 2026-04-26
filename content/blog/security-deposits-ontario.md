@@ -128,4 +128,4 @@ If a tenant leaves and the unit has significant damage beyond normal wear and te
 
 Ontario's rental deposit rules are counterintuitive if you're used to other markets — and mistakes can cost you money or LTB penalties. When in doubt, stick to what's explicitly permitted: one month's rent deposit and a key deposit at actual cost.
 
-If you want help setting up your rental correctly from day one — leases, deposits, condition reports, and tenant communication — Prospera Properties works with landlords across London, St. Thomas, and Strathroy to make sure the paperwork is airtight from the start. [Get in touch with our team](/contact) if you have questions.
+If you want help setting up your rental correctly from day one — leases, deposits, condition reports, and tenant communication — Prospera Properties works with landlords across London, St. Thomas, and Sarnia to make sure the paperwork is airtight from the start. [Get in touch with our team](/contact) if you have questions.

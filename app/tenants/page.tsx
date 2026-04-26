@@ -40,7 +40,7 @@ export default function TenantsPage() {
         <div className="absolute inset-0 bg-[#2D4A5E]/65" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white">
           <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-5">For Tenants</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#7B1C1C] mb-5">For Tenants</p>
             <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light leading-tight mb-6">
               Find a Home<br />You&apos;ll Actually Love.
             </h1>

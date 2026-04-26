@@ -39,7 +39,7 @@ body {
   font-family: var(--font-cormorant);
   font-size: 1.75rem;
   font-weight: 500;
-  color: #0D1B2A;
+  color: #0A1628;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   line-height: 1.3;
@@ -48,7 +48,7 @@ body {
   font-family: var(--font-cormorant);
   font-size: 1.4rem;
   font-weight: 500;
-  color: #0D1B2A;
+  color: #0A1628;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
@@ -76,8 +76,8 @@ body {
   font-style: italic;
 }
 .prose-content table { width: 100%; border-collapse: collapse; margin: 1.75rem 0; font-size: 0.9rem; }
-.prose-content th { background-color: #0D1B2A; color: #FAF8F5; padding: 0.75rem 1rem; text-align: left; font-weight: 500; }
+.prose-content th { background-color: #0A1628; color: #FAF8F5; padding: 0.75rem 1rem; text-align: left; font-weight: 500; }
 .prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #E8E4DF; color: #2C2C2C; }
 .prose-content tr:nth-child(even) td { background-color: #F5F0EB; }
-.prose-content strong { font-weight: 600; color: #0D1B2A; }
+.prose-content strong { font-weight: 600; color: #0A1628; }
 .prose-content code { background-color: #F0EDE8; padding: 0.1em 0.4em; font-size: 0.875em; }

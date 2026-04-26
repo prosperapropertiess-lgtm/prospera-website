@@ -28,7 +28,7 @@ If you took out a loan to purchase or improve the rental property, the interest 
 
 ### Property Taxes
 
-Your annual municipal property tax bill is fully deductible. In London, St. Thomas, and Strathroy, property taxes are due in installments — deduct what you actually paid in the tax year.
+Your annual municipal property tax bill is fully deductible. In London, St. Thomas, and Sarnia, property taxes are due in installments — deduct what you actually paid in the tax year.
 
 ### Insurance Premiums
 

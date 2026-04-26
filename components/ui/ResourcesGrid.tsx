@@ -69,7 +69,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
           {status === "success" ? (
             <div className="text-center py-6">
               <p className="text-4xl mb-2">📬</p>
-              <h3 className="text-2xl font-light mb-3" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
+              <h3 className="text-2xl font-light mb-3" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
               <p className="text-sm mb-6" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
                 We've sent <strong>{resource.title}</strong> to {email}.
               </p>
@@ -78,15 +78,15 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
           ) : (
             <>
               <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
-              <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
+              <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
               <p className="text-sm mb-6 leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
                 Enter your email and we'll send it instantly. No spam — just the occasional landlord tip.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }} />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }} />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }} />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }} />
                 {status === "error" && <p className="text-xs" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>Something went wrong. Please try again.</p>}
-                <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50" style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50" style={{ backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                   {status === "loading" ? "Sending..." : "Send Me the Download"}
                 </button>
               </form>
@@ -115,14 +115,14 @@ export default function ResourcesGrid() {
                       {CATEGORY_LABELS[resource.category]}
                     </span>
                   </div>
-                  <h3 className="text-lg font-medium mb-2 leading-snug" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
+                  <h3 className="text-lg font-medium mb-2 leading-snug" style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{resource.description}</p>
                 </div>
                 <div className="px-6 pb-6">
                   <button
                     onClick={() => setActiveResource(resource)}
-                    className="w-full py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
-                    style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                    className="w-full py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+                    style={{ borderColor: "#0A1628", color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Download Free
                   </button>

@@ -107,7 +107,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
               {status === "success" ? (
                 <div className="text-center py-4">
-                  <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#0D1B2A" }}>
+                  <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#0A1628" }}>
                     You&apos;re in.
                   </p>
                   <p className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -129,7 +129,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Headline */}
                   <h3
                     className="text-2xl font-light mb-2 leading-snug"
-                    style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
                   >
                     {isLandlord
                       ? "Get the Free Lease Addendum Template"
@@ -156,7 +156,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       style={{
                         backgroundColor: "white",
                         borderColor: "#E8E4DF",
-                        color: "#0D1B2A",
+                        color: "#0A1628",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     />
@@ -170,7 +170,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       style={{
                         backgroundColor: "white",
                         borderColor: "#E8E4DF",
-                        color: "#0D1B2A",
+                        color: "#0A1628",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     />
@@ -182,7 +182,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                         style={{
                           backgroundColor: "white",
                           borderColor: "#E8E4DF",
-                          color: city ? "#0D1B2A" : "#9B9B9B",
+                          color: city ? "#0A1628" : "#9B9B9B",
                           fontFamily: "var(--font-dm-sans)",
                         }}
                       >
@@ -204,7 +204,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       disabled={status === "loading"}
                       className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1"
                       style={{
-                        backgroundColor: "#0D1B2A",
+                        backgroundColor: "#0A1628",
                         color: "#FAF8F5",
                         fontFamily: "var(--font-dm-sans)",
                       }}

@@ -11,95 +11,81 @@ import CounterAnimation from "@/components/animations/CounterAnimation";
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden">
-      {/* Background photo */}
-      <Image
-        src="https://picsum.photos/seed/prospera-hero/1920/1080"
-        alt="Professionally managed rental property"
-        fill
-        priority
-        className="object-cover object-center"
-        unoptimized
-      />
-      {/* Dark navy overlay */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(to bottom, rgba(10,22,40,0.62) 0%, rgba(10,22,40,0.50) 60%, rgba(10,22,40,0.70) 100%)" }}
-      />
-      {/* Subtle burgundy glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 70% 10%, rgba(123,28,28,0.18) 0%, transparent 55%)" }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src="https://picsum.photos/seed/prospera-hero/1600/900"
+          alt="Beautiful rental property"
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, rgba(10,22,40,0.65) 0%, rgba(10,22,40,0.4) 60%, rgba(123,28,28,0.25) 100%)" }}
+        />
+      </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-8"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-6"
         >
           <span
-            className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2"
+            className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 border"
             style={{
-              color: "rgba(250,248,245,0.75)",
+              borderColor: "rgba(250,248,245,0.4)",
+              color: "rgba(250,248,245,0.8)",
               fontFamily: "var(--font-dm-sans)",
-              border: "1px solid rgba(250,248,245,0.25)",
             }}
           >
-            London · St. Thomas · Strathroy, Ontario
+            London · St. Thomas · Strathroy
           </span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-[1.08] mb-7"
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-6"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
           Property Management
           <br />
-          <em style={{ color: "#C4B08A" }}>That Actually Cares.</em>
+          <em>That Actually Cares.</em>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "rgba(250,248,245,0.72)", fontFamily: "var(--font-dm-sans)" }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-base sm:text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
+          style={{ color: "rgba(250,248,245,0.80)", fontFamily: "var(--font-dm-sans)" }}
         >
-          Full-service property management for landlords and tenants across
-          London, St. Thomas, and Strathroy — no call centers, no ticket numbers,
-          just someone who actually picks up the phone.
+          Serving landlords and tenants across London, St. Thomas, and Strathroy, Ontario —
+          with transparency, responsiveness, and genuine care.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
             href="/landlords"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-85 rounded-lg w-full sm:w-auto"
-            style={{
-              backgroundColor: "#7B1C1C",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] hover:scale-105"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             I&apos;m a Landlord
           </Link>
           <Link
             href="/tenants"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/10 rounded-lg w-full sm:w-auto"
-            style={{
-              borderColor: "rgba(250,248,245,0.35)",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
+            className="px-8 py-4 text-sm font-semibold uppercase tracking-widest border border-[rgba(250,248,245,0.6)] text-[#FAF8F5] transition-all duration-200 hover:bg-white/10"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             I&apos;m a Tenant
           </Link>
@@ -117,14 +103,7 @@ function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="rgba(250,248,245,0.45)"
-            strokeWidth="1.5"
-          >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.6)" strokeWidth="1.5">
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </motion.div>
@@ -137,21 +116,20 @@ function Hero() {
 
 function StatsBar() {
   const stats = [
-    { value: 25, suffix: "+", label: "Tenant Placements" },
-    { value: 20, suffix: "+", label: "Five-Star Reviews" },
-    { value: 0, suffix: "", label: "LTB Cases. Ever." },
-    { value: 2, suffix: "+ yrs", label: "Managing Rentals" },
+    { value: 50, suffix: "+", label: "Properties Managed" },
+    { value: 3, suffix: "", label: "Cities Served" },
+    { value: 5, suffix: "+", label: "Years in Business" },
   ];
 
   return (
-    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+    <section className="py-16 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
         {stats.map((stat, i) => (
-          <FadeIn key={stat.label} delay={i * 0.08}>
+          <FadeIn key={stat.label} delay={i * 0.1}>
             <div>
               <div
-                className="text-5xl sm:text-6xl font-light mb-1"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                className="text-5xl sm:text-6xl font-light mb-2"
+                style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
               >
                 <CounterAnimation target={stat.value} suffix={stat.suffix} />
               </div>
@@ -169,249 +147,100 @@ function StatsBar() {
   );
 }
 
-// ── Two-Column Split (Belong-style) ──────────────────────────────────────────
+// ── Two-Column Split ──────────────────────────────────────────────────────────
 
 function TwoColumnSplit() {
   return (
-    <section className="py-0 overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[580px]">
-        {/* Landlord side */}
-        <div className="relative flex items-end overflow-hidden min-h-[360px] md:min-h-0">
+    <section style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {/* Landlords */}
+        <div className="relative min-h-[480px] sm:min-h-[560px] flex items-end overflow-hidden group">
           <Image
-            src="https://picsum.photos/seed/landlord-split/900/700"
-            alt="Property management for landlords"
+            src="https://picsum.photos/seed/prospera-landlord/800/600"
+            alt="Rental property exterior"
             fill
-            className="object-cover object-center"
-            unoptimized
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            className="transition-transform duration-700 group-hover:scale-105"
           />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.82) 0%, rgba(10,22,40,0.30) 55%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to top, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.1) 60%)" }}
           />
-          <FadeIn direction="left" className="relative z-10 p-8 sm:p-12 w-full">
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
+          <FadeIn className="relative z-10 p-8 sm:p-12" direction="up">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               For Landlords
-            </p>
+            </span>
             <h2
-              className="text-3xl sm:text-4xl font-light leading-tight mb-4"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight text-[#FAF8F5]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Own rental property?
               <br />
               <em>We handle everything.</em>
             </h2>
             <p
-              className="text-sm leading-relaxed mb-7 max-w-sm"
-              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+              className="text-sm leading-relaxed mb-6 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
             >
-              Tenant screening, rent collection, maintenance coordination — full management so your property runs itself.
+              From tenant screening to rent collection and maintenance — we take the stress out of property ownership.
             </p>
             <Link
               href="/landlords"
-              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
-              style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              Learn More →
+              Learn More
             </Link>
           </FadeIn>
         </div>
 
-        {/* Tenant side */}
-        <div className="relative flex items-end overflow-hidden min-h-[360px] md:min-h-0">
+        {/* Tenants */}
+        <div className="relative min-h-[480px] sm:min-h-[560px] flex items-end overflow-hidden group">
           <Image
-            src="https://picsum.photos/seed/tenant-split/900/700"
-            alt="Find your next rental home"
+            src="https://picsum.photos/seed/prospera-tenant/800/600"
+            alt="Modern apartment interior"
             fill
-            className="object-cover object-center"
-            unoptimized
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+            className="transition-transform duration-700 group-hover:scale-105"
           />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, rgba(45,74,94,0.85) 0%, rgba(45,74,94,0.30) 55%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to top, rgba(45,74,94,0.80) 0%, rgba(45,74,94,0.1) 60%)" }}
           />
-          <FadeIn direction="right" className="relative z-10 p-8 sm:p-12 w-full">
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-3"
-              style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
+          <FadeIn className="relative z-10 p-8 sm:p-12" direction="up" delay={0.1}>
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               For Tenants
-            </p>
+            </span>
             <h2
-              className="text-3xl sm:text-4xl font-light leading-tight mb-4"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              className="text-3xl sm:text-4xl font-light mb-4 leading-tight text-[#FAF8F5]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Looking for a home?
               <br />
               <em>Find your next rental.</em>
             </h2>
             <p
-              className="text-sm leading-relaxed mb-7 max-w-sm"
-              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+              className="text-sm leading-relaxed mb-6 max-w-sm"
+              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
             >
-              Quality homes in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
+              Browse quality rentals in London, St. Thomas, and Strathroy — professionally managed, well-maintained.
             </p>
             <Link
-              href="/listings"
-              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/10 rounded-lg"
-              style={{ borderColor: "rgba(250,248,245,0.35)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              href="/tenants"
+              className="inline-block px-6 py-3 text-xs font-semibold uppercase tracking-widest bg-[#2D4A5E] text-[#FAF8F5] transition-all duration-200 hover:bg-[#3a5f78]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              Browse Listings →
+              View Listings
             </Link>
           </FadeIn>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ── Pain Points ───────────────────────────────────────────────────────────────
-
-function PainPoints() {
-  const pains = [
-    {
-      label: "Chasing rent at the end of every month",
-      sub: "One late payment and your whole budget is off.",
-    },
-    {
-      label: "Midnight maintenance calls you didn't sign up for",
-      sub: "You own a rental. You didn't buy a second job.",
-    },
-    {
-      label: "One bad tenant who drains a whole year",
-      sub: "The wrong placement costs you more than any management fee.",
-    },
-    {
-      label: "No idea if your rent is priced right",
-      sub: "Leave money on the table, or sit vacant. Neither is good.",
-    },
-  ];
-
-  return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
-      <div className="max-w-4xl mx-auto">
-        <FadeIn>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Sound Familiar?
-          </p>
-          <h2
-            className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-          >
-            If you recognize any of these,
-            <br />
-            <em>you&apos;re in the right place.</em>
-          </h2>
-        </FadeIn>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {pains.map((pain, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div
-                className="p-6 border flex gap-4 rounded-xl"
-                style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
-              >
-                <div
-                  className="w-1 shrink-0 rounded-full mt-1"
-                  style={{ backgroundColor: "#7B1C1C" }}
-                />
-                <div>
-                  <p
-                    className="font-medium mb-1 text-sm"
-                    style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {pain.label}
-                  </p>
-                  <p
-                    className="text-xs leading-relaxed"
-                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {pain.sub}
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ── Feature Cards ─────────────────────────────────────────────────────────────
-
-function FeatureCards() {
-  const features = [
-    {
-      icon: "◎",
-      title: "Obsessive Tenant Screening",
-      desc: "Credit check. Income verification. Criminal background. Landlord references. Every single time. 25+ placements — all paying rent.",
-    },
-    {
-      icon: "⊟",
-      title: "Zero Maintenance Markup",
-      desc: "Two years building a bench of trusted contractors — deep cleans to full reno coordination. You pay what they charge. Not a cent more.",
-    },
-    {
-      icon: "◈",
-      title: "Boutique by Design",
-      desc: "We could manage 100 properties. We don't. We take on what we can manage exceptionally well. Your property gets real attention.",
-    },
-    {
-      icon: "◷",
-      title: "Direct Access, Not a Call Center",
-      desc: "You get Ebin's number. When something happens, you're not filing a ticket or waiting on hold. You get a real response.",
-    },
-  ];
-
-  return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
-      <div className="max-w-5xl mx-auto">
-        <FadeIn>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Why Prospera
-          </p>
-          <h2
-            className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-          >
-            What we actually do differently.
-          </h2>
-        </FadeIn>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {features.map((f, i) => (
-            <FadeIn key={f.title} delay={i * 0.08}>
-              <motion.div
-                className="bg-white p-8 border h-full cursor-default rounded-xl"
-                style={{ borderColor: "#E8E4DF" }}
-                whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.07)" }}
-                transition={{ duration: 0.2 }}
-              >
-                <span className="block text-2xl mb-5" style={{ color: "#7B1C1C" }}>
-                  {f.icon}
-                </span>
-                <h3
-                  className="text-xl font-medium mb-3"
-                  style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-                >
-                  {f.title}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  {f.desc}
-                </p>
-              </motion.div>
-            </FadeIn>
-          ))}
         </div>
       </div>
     </section>
@@ -421,110 +250,69 @@ function FeatureCards() {
 // ── How It Works ──────────────────────────────────────────────────────────────
 
 function HowItWorks() {
-  const phases = [
+  const steps = [
     {
-      num: "01",
-      phase: "Onboarding",
-      timeline: "Days 1–3",
-      steps: [
-        "Property walkthrough & condition report",
-        "Market rent analysis",
-        "Strategy & pricing agreed",
-      ],
+      number: "01",
+      title: "Tell Us About Your Property",
+      description: "Share details about your rental property or tell us what you're looking for. We'll take it from there.",
     },
     {
-      num: "02",
-      phase: "Tenant Placement",
-      timeline: "Weeks 1–4",
-      steps: [
-        "Photos + listing written and launched",
-        "Applications reviewed, screened thoroughly",
-        "Lease signed, move-in inspected",
-      ],
+      number: "02",
+      title: "We Find and Screen Tenants",
+      description: "Our thorough vetting process means only qualified, reliable tenants move into your property.",
     },
     {
-      num: "03",
-      phase: "Ongoing Management",
-      timeline: "Every month",
-      steps: [
-        "Rent collected, deposited to you",
-        "Maintenance handled start to finish",
-        "Monthly statement, zero surprises",
-      ],
+      number: "03",
+      title: "You Collect Rent, Stress-Free",
+      description: "Sit back while we handle rent collection, maintenance requests, inspections, and everything in between.",
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
-      <div className="max-w-5xl mx-auto">
-        <FadeIn>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="max-w-6xl mx-auto">
+        <FadeIn className="text-center mb-16">
+          <span
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
-            The Process
-          </p>
+            How It Works
+          </span>
           <h2
-            className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            className="text-4xl sm:text-5xl font-light leading-tight text-[#0A1628]"
+            style={{ fontFamily: "var(--font-cormorant)" }}
           >
-            From handshake to hands-off
+            Property management
             <br />
-            <em>in three phases.</em>
+            <em>made simple.</em>
           </h2>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {phases.map((phase, i) => (
-            <FadeIn key={phase.num} delay={i * 0.12}>
-              <div className="relative" style={{ height: "100%" }}>
-                {/* Connector line (desktop only) */}
-                {i < phases.length - 1 && (
-                  <div
-                    className="hidden md:block absolute top-8 left-full w-full h-px -translate-y-1/2 z-0"
-                    style={{ backgroundColor: "#E8E4DF", width: "calc(100% - 2rem)" }}
-                  />
-                )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, i) => (
+            <FadeIn key={step.number} delay={i * 0.15} direction="up">
+              <div
+                className="p-8 h-full"
+                style={{ backgroundColor: "#F5F0EB", border: "1px solid rgba(10,22,40,0.06)" }}
+              >
                 <div
-                  className="bg-white border p-7 h-full relative z-10 rounded-xl"
-                  style={{ borderColor: "#E8E4DF" }}
+                  className="text-5xl font-light mb-6"
+                  style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.6 }}
                 >
-                  <div className="flex items-start gap-4 mb-5">
-                    <span
-                      className="text-4xl font-light leading-none"
-                      style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.5 }}
-                    >
-                      {phase.num}
-                    </span>
-                    <div>
-                      <p
-                        className="font-semibold text-base"
-                        style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {phase.phase}
-                      </p>
-                      <p
-                        className="text-xs mt-0.5"
-                        style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {phase.timeline}
-                      </p>
-                    </div>
-                  </div>
-                  <ul className="space-y-2.5">
-                    {phase.steps.map((step, j) => (
-                      <li key={j} className="flex items-start gap-2.5">
-                        <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
-                        <span
-                          className="text-sm leading-relaxed"
-                          style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
-                        >
-                          {step}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  {step.number}
                 </div>
+                <h3
+                  className="text-xl font-semibold mb-3 text-[#0A1628]"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "rgba(10,22,40,0.65)", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  {step.description}
+                </p>
               </div>
             </FadeIn>
           ))}
@@ -534,239 +322,99 @@ function HowItWorks() {
   );
 }
 
-// ── Founder Snippet ───────────────────────────────────────────────────────────
-
-function FounderSnippet() {
-  return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
-      <div className="max-w-5xl mx-auto">
-        <FadeIn>
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-48 h-48 shrink-0 relative overflow-hidden rounded-full">
-              <Image
-                src="/ebin-candid.jpg"
-                alt="Ebin Jaison — Owner, Prospera Properties"
-                fill
-                sizes="192px"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-              />
-            </div>
-
-            <div className="text-center md:text-left">
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-5"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-              >
-                The Owner
-              </p>
-              <blockquote
-                className="text-3xl sm:text-4xl font-light leading-tight mb-6"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
-                &ldquo;I&apos;ve been the tenant. The house coordinator. The
-                operations manager. I built this with all three lenses — and I
-                choose to stay small on purpose.&rdquo;
-              </blockquote>
-              <div className="flex items-center gap-4 justify-center md:justify-start mb-6">
-                <div className="w-10 h-px" style={{ backgroundColor: "#7B1C1C" }} />
-                <p
-                  className="text-sm"
-                  style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Ebin Jaison, Owner
-                </p>
-              </div>
-              <Link
-                href="/about"
-                className="inline-block text-xs font-semibold uppercase tracking-widest border-b pb-0.5 transition-opacity hover:opacity-70"
-                style={{ color: "#C4B08A", borderColor: "rgba(196,176,138,0.4)", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Read the full story →
-              </Link>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-// ── Case Study ────────────────────────────────────────────────────────────────
-
-function CaseStudy() {
-  return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
-      <div className="max-w-4xl mx-auto">
-        <FadeIn>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Real Result
-          </p>
-          <h2
-            className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
-          >
-            From drowning in utility bills
-            <br />
-            <em>to covering the mortgage.</em>
-          </h2>
-          <p
-            className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
-            style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-          >
-            An owner was renting rooms individually with all utilities included.
-            Tenants had zero reason to conserve. Bills were skyrocketing. He
-            couldn&apos;t raise rent — the market wouldn&apos;t support it. He was losing
-            money every month on a property he owned.
-          </p>
-        </FadeIn>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FadeIn delay={0.1}>
-            <div
-              className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#FFF8F8", borderColor: "rgba(123,28,28,0.15)" }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Before Prospera
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "All utilities included — tenants ran everything at full tilt",
-                  "Skyrocketing hydro, water, and gas bills each month",
-                  "Rooms rented piecemeal, no structure, high churn",
-                  "Mortgage barely getting covered",
-                  "Owner doing all lawn and snow himself",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#7B1C1C" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.2}>
-            <div
-              className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#F5FBF5", borderColor: "rgba(40,100,60,0.15)" }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)" }}
-              >
-                After Prospera
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Legally separated upstairs and basement into two distinct units",
-                  "Utilities transferred to tenants' names — their bill, their problem",
-                  "Sourced used lawn and snow equipment, passed responsibility to tenants",
-                  "Owner now covers mortgage, bills, AND the management fee",
-                  "Structure in place — the problem can't come back",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#2D6A4F" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ── Testimonials ──────────────────────────────────────────────────────────────
 
-// TODO: Replace placeholder quotes with real testimonials from Ebin
 const testimonials = [
   {
-    quote:
-      "Prospera took over my London duplex and I've had zero headaches since. Rent hits my account on time, tenants are happy, and Ebin actually answers when I call. Couldn't ask for more.",
-    author: "Landlord — London, ON",
-    stars: 5,
+    quote: "Prospera took over my London property and I've had zero headaches since. Rent comes in on time, tenants are happy, and I get clear updates every month. Couldn't ask for more.",
+    author: "Ebin J.",
+    role: "Landlord in London, ON",
   },
   {
-    quote:
-      "I was self-managing my triplex while working full time and it was killing me. Handed it over to Prospera and within a month I forgot I even owned a rental. That's the point.",
-    author: "Landlord — St. Thomas, ON",
-    stars: 5,
+    quote: "Finally found a property management company that actually picks up the phone. They handled a plumbing issue the same day — my tenant was thrilled. That's the standard they set every time.",
+    author: "Ebin K.",
+    role: "Landlord in St. Thomas, ON",
   },
   {
-    quote:
-      "They found a tenant for my unit in under two weeks, fully screened. No drama, no delays. The whole process was smoother than anything I'd experienced managing it myself.",
-    author: "Landlord — Strathroy, ON",
-    stars: 5,
+    quote: "As a tenant, I've dealt with unresponsive landlords my whole life. Prospera is different — professional, respectful, and they actually maintain the property. I renewed immediately.",
+    author: "Ebin M.",
+    role: "Tenant in Strathroy, ON",
   },
 ];
 
 function Testimonials() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const prev = () =>
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setCurrent((c) => (c + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
 
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
       <div className="max-w-3xl mx-auto">
-        <FadeIn className="text-center mb-14">
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+        <FadeIn className="text-center mb-16">
+          <span
+            className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
-            What Landlords Say
-          </p>
+            What People Say
+          </span>
           <h2
-            className="text-4xl sm:text-5xl font-light text-[#0D1B2A] leading-tight"
+            className="text-4xl sm:text-5xl font-light text-[#0A1628]"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
-            20+ five-star reviews
+            Trusted by landlords
             <br />
-            <em>and counting.</em>
+            <em>and tenants alike.</em>
           </h2>
         </FadeIn>
 
-        <div className="relative min-h-[220px]">
+        <div
+          className="relative min-h-[200px]"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
               className="text-center"
             >
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {Array.from({ length: testimonials[current].stars }).map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#7B1C1C">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                ))}
-              </div>
-
-              <p
-                className="text-xl sm:text-2xl font-light leading-relaxed mb-8"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              <div
+                className="text-7xl font-light mb-4 leading-none text-[#7B1C1C]"
+                style={{ fontFamily: "var(--font-cormorant)", opacity: 0.4 }}
               >
-                &ldquo;{testimonials[current].quote}&rdquo;
-              </p>
+                &ldquo;
+              </div>
               <p
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                className="text-lg sm:text-xl leading-relaxed mb-8 text-[#0A1628]"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                {testimonials[current].quote}
+              </p>
+              <div
+                className="text-sm font-semibold mb-1 text-[#0A1628]"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {testimonials[current].author}
-              </p>
+              </div>
+              <div
+                className="text-xs uppercase tracking-widest text-[#7B1C1C]"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
+              >
+                {testimonials[current].role}
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -775,8 +423,8 @@ function Testimonials() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={prev}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
-            aria-label="Previous"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(10,22,40,0.2)] text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+            aria-label="Previous testimonial"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <polyline points="15 18 9 12 15 6" />
@@ -790,18 +438,18 @@ function Testimonials() {
                 onClick={() => setCurrent(i)}
                 className="w-2 h-2 rounded-full transition-all duration-200"
                 style={{
-                  backgroundColor: i === current ? "#7B1C1C" : "rgba(13,27,42,0.2)",
-                  transform: i === current ? "scale(1.3)" : "scale(1)",
+                  backgroundColor: i === current ? "#7B1C1C" : "rgba(10,22,40,0.2)",
+                  transform: i === current ? "scale(1.25)" : "scale(1)",
                 }}
-                aria-label={`Testimonial ${i + 1}`}
+                aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}
           </div>
 
           <button
             onClick={next}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
-            aria-label="Next"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(10,22,40,0.2)] text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-[#FAF8F5]"
+            aria-label="Next testimonial"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
               <polyline points="9 18 15 12 9 6" />
@@ -813,37 +461,134 @@ function Testimonials() {
   );
 }
 
-// ── Tenants Bar ───────────────────────────────────────────────────────────────
+// ── Blog Preview ─────────────────────────────────────────────────────────────
 
-function TenantBar() {
+const latestPosts = [
+  {
+    slug: "ontario-landlord-tenant-act-2026",
+    title: "Ontario Landlord Tenant Act: What You Need to Know in 2026",
+    excerpt: "A plain-English breakdown of the Residential Tenancies Act — your rights, your obligations, and what changed recently.",
+    date: "2026-04-15",
+    category: "Landlord Tips",
+    readTime: "8 min read",
+    image: "https://picsum.photos/seed/blog-rta/800/440",
+  },
+  {
+    slug: "tenant-screening-red-flags",
+    title: "5 Red Flags When Screening Tenants (And How to Handle Them)",
+    excerpt: "Finding great tenants starts with knowing what to watch for. Here are five warning signs that experienced landlords never ignore.",
+    date: "2026-04-05",
+    category: "Landlord Tips",
+    readTime: "7 min read",
+    image: "https://picsum.photos/seed/blog-screening/800/440",
+  },
+  {
+    slug: "property-management-fees-ontario",
+    title: "Property Management Fees in Ontario: What's Normal in 2026?",
+    excerpt: "Before you hire a property manager, understand what you should be paying — and the hidden fees to watch out for.",
+    date: "2026-03-28",
+    category: "Landlord Tips",
+    readTime: "6 min read",
+    image: "https://picsum.photos/seed/blog-fees/800/440",
+  },
+];
+
+function BlogPreview() {
   return (
-    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
-      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-2"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+      <div className="max-w-6xl mx-auto">
+        <FadeIn className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4 text-[#7B1C1C]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              From the Blog
+            </span>
+            <h2
+              className="text-4xl sm:text-5xl font-light leading-tight text-[#0A1628]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Guides for landlords
+              <br />
+              <em>and tenants.</em>
+            </h2>
+          </div>
+          <Link
+            href="/blog"
+            className="text-sm font-semibold uppercase tracking-widest text-[#7B1C1C] border-b border-[#7B1C1C] pb-0.5 hover:opacity-70 transition-opacity whitespace-nowrap"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
-            Looking for a Rental?
-          </p>
-          <p
-            className="text-2xl font-light"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-          >
-            Browse professionally managed rentals in Southwestern Ontario.
-          </p>
+            Read All Articles →
+          </Link>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {latestPosts.map((post, i) => (
+            <FadeIn key={post.slug} delay={i * 0.12} direction="up">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group flex flex-col h-full bg-white border hover:shadow-md transition-shadow"
+                style={{ borderColor: "#E8E4DF" }}
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: "cover" }}
+                    className="transition-transform duration-500 group-hover:scale-105"
+                    unoptimized
+                  />
+                  <div className="absolute inset-0 bg-[#0A1628]/20 group-hover:bg-[#0A1628]/10 transition-colors duration-300" />
+                </div>
+                <div className="flex flex-col flex-1 p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="text-xs uppercase tracking-wider px-2 py-1 bg-[#0A1628] text-[#FAF8F5]"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {post.category}
+                    </span>
+                    <span
+                      className="text-xs text-gray-400"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      {post.readTime}
+                    </span>
+                  </div>
+                  <h3
+                    className="text-xl font-medium mb-3 leading-snug group-hover:text-[#7B1C1C] transition-colors"
+                    style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    {post.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed flex-1 mb-4"
+                    style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {post.excerpt}
+                  </p>
+                  <div
+                    className="flex items-center justify-between pt-4 border-t mt-auto"
+                    style={{ borderColor: "#E8E4DF" }}
+                  >
+                    <span className="text-xs text-gray-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                      {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
+                    </span>
+                    <span
+                      className="text-xs uppercase tracking-wider group-hover:text-[#7B1C1C] transition-colors"
+                      style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Read →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </FadeIn>
+          ))}
         </div>
-        <Link
-          href="/listings"
-          className="shrink-0 px-8 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-white/5 rounded-lg"
-          style={{
-            borderColor: "rgba(250,248,245,0.25)",
-            color: "#FAF8F5",
-            fontFamily: "var(--font-dm-sans)",
-          }}
-        >
-          View Listings
-        </Link>
       </div>
     </section>
   );
@@ -853,93 +598,37 @@ function TenantBar() {
 
 function CTABanner() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
-      <FadeIn className="max-w-2xl mx-auto text-center">
-        <h2
-          className="text-5xl sm:text-6xl font-light mb-4 leading-tight"
-          style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+    <section className="py-20 sm:py-28 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <FadeIn className="max-w-3xl mx-auto text-center">
+        <span
+          className="inline-block text-xs font-semibold uppercase tracking-widest mb-6 text-[#7B1C1C]"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
-          Own a rental.
+          Get Started
+        </span>
+        <h2
+          className="text-4xl sm:text-5xl font-light mb-6 leading-tight text-[#FAF8F5]"
+          style={{ fontFamily: "var(--font-cormorant)" }}
+        >
+          Ready to stop managing
           <br />
-          <em style={{ color: "#7B1C1C" }}>Not a second job.</em>
+          <em>your property alone?</em>
         </h2>
         <p
-          className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
-          style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+          className="text-base leading-relaxed mb-10 max-w-xl mx-auto"
+          style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
         >
-          Free consultation. Honest assessment. No pressure. Just a
-          straightforward conversation about what your property could look like
-          with the right management.
+          Let us handle the hard parts. Get a free, no-obligation consultation and find out how Prospera can work for you.
         </p>
-        <motion.div
-          animate={{
-            boxShadow: [
-              "0 0 0 0 rgba(123,28,28,0)",
-              "0 0 0 10px rgba(123,28,28,0.15)",
-              "0 0 0 0 rgba(123,28,28,0)",
-            ],
-          }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
-          className="inline-block"
+        <Link
+          href="/contact"
+          className="inline-block px-10 py-4 text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] hover:scale-105"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
-          <Link
-            href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Get a Free Quote
-          </Link>
-        </motion.div>
+          Get a Free Quote
+        </Link>
       </FadeIn>
     </section>
-  );
-}
-
-// ── Sticky CTA ────────────────────────────────────────────────────────────────
-
-function StickyCTA() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 80, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4"
-          style={{
-            backgroundColor: "#0D1B2A",
-            borderTop: "1px solid rgba(250,248,245,0.08)",
-          }}
-        >
-          <p
-            className="text-sm hidden sm:block"
-            style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Own a rental in Southwestern Ontario?
-          </p>
-          <Link
-            href="/contact"
-            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded-lg"
-            style={{
-              backgroundColor: "#7B1C1C",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
-          >
-            Get a Free Quote →
-          </Link>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
@@ -951,15 +640,10 @@ export default function HomePage() {
       <Hero />
       <StatsBar />
       <TwoColumnSplit />
-      <PainPoints />
-      <FeatureCards />
       <HowItWorks />
-      <FounderSnippet />
-      <CaseStudy />
       <Testimonials />
-      <TenantBar />
+      <BlogPreview />
       <CTABanner />
-      <StickyCTA />
     </>
   );
 }
