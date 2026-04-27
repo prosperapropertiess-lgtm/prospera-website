@@ -34,7 +34,7 @@ export default function ParticleCanvas() {
     }
 
     function init() {
-      resize(canvas.offsetWidth, canvas.offsetHeight);
+      resize(canvas!.offsetWidth, canvas!.offsetHeight);
       particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
