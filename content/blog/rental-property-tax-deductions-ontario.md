@@ -5,7 +5,7 @@ slug: "rental-property-tax-deductions-ontario"
 excerpt: "Most Ontario landlords miss deductions they're legally entitled to. Here's a practical breakdown of what you can write off against your rental income."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "/images/blog/tax-deductions-landlord.jpg"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Rental income is taxable in Canada — but so is the cost of earning it. The CRA allows landlords to deduct reasonable expenses incurred to earn rental income, and many landlords leave real money on the table by not tracking these properly.

@@ -4,7 +4,7 @@ excerpt: "A step-by-step guide to late rent — from the first missed payment to
 date: "2026-03-20"
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "/images/blog/late-rent.jpg"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Late rent is the most common landlord complaint — and it's one of the most stressful. Here's exactly how to handle it, step by step, within Ontario's legal framework.

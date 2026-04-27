@@ -5,6 +5,7 @@ slug: "tenant-damages-property-ontario"
 excerpt: "Discovering damage after a tenant leaves — or worse, while they're still there — is every landlord's nightmare. Here's the legal process for getting compensated in Ontario."
 category: "Landlord Tips"
 readTime: "8 min read"
+featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You do your move-out inspection and find holes in the walls, a destroyed carpet, a broken window, and a kitchen that looks like it survived a small disaster. Or maybe a tenant is still living there and you've discovered significant damage during a routine visit. Either way, you need to know what your options are — and what the process looks like under Ontario law.

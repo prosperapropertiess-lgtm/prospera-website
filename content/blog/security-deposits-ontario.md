@@ -5,7 +5,7 @@ slug: "security-deposits-ontario"
 excerpt: "Ontario has some of the strictest rules on deposits in Canada. Many landlords don't realize what's actually allowed — and the rules might surprise you."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "/images/blog/security-deposits.jpg"
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you've ever been a landlord in another province or country, Ontario's deposit rules will likely catch you off guard. The province has strict and specific rules about what landlords can and cannot collect upfront — and the penalties for getting it wrong can be steep.

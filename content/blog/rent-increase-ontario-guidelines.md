@@ -5,7 +5,7 @@ slug: "rent-increase-ontario-guidelines"
 excerpt: "Ontario's rent increase rules are strict and procedurally specific. Get the timing, form, and amount wrong and your increase won't hold up."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "/images/blog/rent-increase.jpg"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Increasing rent in Ontario isn't as simple as sending your tenant a note that rent is going up next month. The *Residential Tenancies Act* sets out specific rules about how much you can increase, when, and how much notice you need to give. Miss any of these steps and the increase is unenforceable.

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 
@@ -66,23 +67,35 @@ export default function BlogPage() {
                 className="group flex flex-col bg-white border hover:shadow-lg transition-shadow"
                 style={{ borderColor: "#E8E4DF" }}
               >
-                {/* Image placeholder */}
-                <div
-                  className="h-48 w-full flex items-center justify-center"
-                  style={{ backgroundColor: "#E8E4DF" }}
-                >
-                  <span className="text-3xl">📰</span>
-                </div>
-
-                <div className="flex flex-col flex-1 p-6">
-                  {/* Category + read time */}
-                  <div className="flex items-center gap-3 mb-3">
+                {/* Thumbnail */}
+                <div className="relative h-52 w-full overflow-hidden bg-[#E8E4DF]">
+                  {post.featuredImage ? (
+                    <Image
+                      src={post.featuredImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: "#0D1B2A" }}>
+                      <span className="text-4xl font-light" style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)" }}>P</span>
+                    </div>
+                  )}
+                  {/* Category badge over image */}
+                  <div className="absolute top-3 left-3">
                     <span
                       className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#0D1B2A] text-[#FAF8F5]"}`}
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {post.category}
                     </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col flex-1 p-6">
+                  {/* Read time */}
+                  <div className="flex items-center gap-3 mb-3">
                     <span className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
                       {post.readTime}
                     </span>

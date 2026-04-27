@@ -4,7 +4,7 @@ excerpt: "A plain-English breakdown of the Residential Tenancies Act — your ri
 date: "2026-04-15"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "/images/blog/landlord-tenant-act.jpg"
+featuredImage: "https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own rental property in Ontario, the *Residential Tenancies Act, 2006* (RTA) governs almost every aspect of your landlord-tenant relationship. And in 2026, a few things are worth revisiting — especially around rent increases, eviction timelines, and the N12 notice rules.

@@ -4,7 +4,7 @@ excerpt: "Finding great tenants starts with knowing what to watch for. Here are 
 date: "2026-04-05"
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "/images/blog/tenant-screening.jpg"
+featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A bad tenant can cost you $15,000, six months of legal headaches, and a property that needs serious repairs. The good news? Most bad tenants announce themselves during the application process — if you know what to watch for.

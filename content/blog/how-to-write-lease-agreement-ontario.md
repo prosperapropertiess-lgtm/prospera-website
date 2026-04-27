@@ -5,6 +5,7 @@ slug: "how-to-write-lease-agreement-ontario"
 excerpt: "Ontario's standard lease is mandatory for most rentals — but knowing what you can and can't add to it is just as important as filling it out correctly."
 category: "Landlord Tips"
 readTime: "8 min read"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you're renting out a residential property in Ontario, there's a good chance you're required to use the **Ontario Standard Lease** — a government-issued template that became mandatory for most new residential tenancies in 2018. Understanding how it works, what you can customize, and what you absolutely cannot do will save you a lot of trouble down the road.

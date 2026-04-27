@@ -4,7 +4,7 @@ excerpt: "Before you hire a property manager, understand what you should be payi
 date: "2026-03-28"
 category: "Landlord Tips"
 readTime: "6 min read"
-featuredImage: "/images/blog/property-management-fees.jpg"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Hiring a property manager should make your life easier and your investment more profitable. But the fee structure varies enormously — and some companies bury costs in places you won't find until you're already locked in.

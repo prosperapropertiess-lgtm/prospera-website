@@ -5,6 +5,7 @@ slug: "first-time-landlord-tips-london-ontario"
 excerpt: "Renting out your first property in London, St. Thomas, or Sarnia? Here's what experienced landlords wish they'd known before their first tenant moved in."
 category: "Landlord Tips"
 readTime: "10 min read"
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Becoming a landlord for the first time is exciting — and a little overwhelming. You've got a property, you've found (or are looking for) a tenant, and suddenly you're realizing there's a lot more to this than collecting rent. The good news: most of what trips up new landlords is avoidable with a bit of preparation. Here's what you actually need to know before you get started in London, St. Thomas, or Sarnia.

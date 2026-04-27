@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { marked } from "marked";
 import { getAllPosts, getPost } from "@/lib/blog";
 import type { Metadata } from "next";
@@ -99,6 +100,21 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
         </div>
       </section>
+
+      {/* Hero image */}
+      {post.featuredImage && (
+        <div className="relative w-full h-72 md:h-96 overflow-hidden">
+          <Image
+            src={post.featuredImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(250,248,245,0.4) 100%)" }} />
+        </div>
+      )}
 
       {/* Author bar */}
       <section className="border-b px-6 py-4" style={{ borderColor: "#E8E4DF" }}>

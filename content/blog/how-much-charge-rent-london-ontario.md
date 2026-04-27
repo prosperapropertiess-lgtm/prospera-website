@@ -4,7 +4,7 @@ excerpt: "Current market rents by unit type across London, St. Thomas, and Strat
 date: "2026-04-10"
 category: "Market Updates"
 readTime: "6 min read"
-featuredImage: "/images/blog/london-ontario-rent.jpg"
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Pricing your rental correctly is one of the most important decisions you'll make as a landlord. Too high and your unit sits vacant — costing you far more than the extra $100/month you were holding out for. Too low and you leave money on the table every single month for years.
