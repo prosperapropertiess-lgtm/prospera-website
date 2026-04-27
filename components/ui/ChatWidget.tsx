@@ -15,7 +15,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm the Prospera assistant. Ask me anything about renting, property management, or how we can help. 👋",
+      content: "Hi! I'm Laura, the Prospera assistant. Ask me anything about renting, property management, or how we can help. 👋",
     },
   ]);
   const [input, setInput] = useState("");
@@ -142,7 +142,7 @@ export default function ChatWidget() {
             <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#0A1628" }}>
               <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Prospera Assistant</p>
+                <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
                 <p className="text-xs flex items-center gap-1.5" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
                   Online now
