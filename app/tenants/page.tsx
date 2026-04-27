@@ -36,7 +36,7 @@ export default function TenantsPage() {
     <>
       {/* Hero */}
       <section className="relative h-[85vh] flex items-center overflow-hidden">
-        <Image src="https://picsum.photos/seed/tenant-hero/1600/900" alt="Find a home" fill className="object-cover" priority unoptimized />
+        <Image src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1600&h=900&fit=crop&auto=format&q=80" alt="Find a home" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-[#2D4A5E]/65" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white">
           <FadeIn>

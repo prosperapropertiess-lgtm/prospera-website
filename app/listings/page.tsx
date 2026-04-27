@@ -41,6 +41,7 @@ function getImage(p: Property, i: number) {
 export default function ListingsPage() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [city, setCity] = useState("All Cities");
   const [beds, setBeds] = useState("Any");
   const [maxPrice, setMaxPrice] = useState(5000);
@@ -49,15 +50,22 @@ export default function ListingsPage() {
   useEffect(() => {
     async function load() {
       setLoading(true);
-      let query = supabase.from("properties").select("*").eq("available", true).order("created_at", { ascending: false });
-      if (city !== "All Cities") query = query.eq("city", city);
-      if (petFriendly) query = query.eq("pet_friendly", true);
-      if (beds === "3+") query = query.gte("bedrooms", 3);
-      else if (beds !== "Any") query = query.eq("bedrooms", parseInt(beds));
-      query = query.lte("price", maxPrice);
-      const { data } = await query;
-      setProperties(data || []);
-      setLoading(false);
+      setError(false);
+      try {
+        let query = supabase.from("properties").select("*").eq("available", true).order("created_at", { ascending: false });
+        if (city !== "All Cities") query = query.eq("city", city);
+        if (petFriendly) query = query.eq("pet_friendly", true);
+        if (beds === "3+") query = query.gte("bedrooms", 3);
+        else if (beds !== "Any") query = query.eq("bedrooms", parseInt(beds));
+        query = query.lte("price", maxPrice);
+        const { data } = await query;
+        setProperties(data || []);
+      } catch {
+        setError(true);
+        setProperties([]);
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, [city, beds, maxPrice, petFriendly]);
@@ -162,12 +170,13 @@ export default function ListingsPage() {
                 </div>
               ))}
             </div>
-          ) : filtered.length === 0 ? (
+          ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
-              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#0A1628] mb-3">No properties match your filters.</p>
-              <p className="text-sm text-[#2D4A5E] mb-6">Try adjusting your search or check back soon — new listings are added regularly.</p>
-              <button onClick={() => { setCity("All Cities"); setBeds("Any"); setMaxPrice(5000); setPetFriendly(false); }}
-                className="text-sm text-[#7B1C1C] underline">Clear all filters</button>
+              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#0A1628] mb-3">No listings available right now.</p>
+              <p className="text-sm text-[#2D4A5E] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <Link href="/contact" className="inline-block px-8 py-3 bg-[#7B1C1C] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
+                Contact Us
+              </Link>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
