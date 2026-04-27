@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import PopupController from "@/components/ui/PopupController";
-import ChatWidget from "@/components/ui/ChatWidget";
+import SiteShell from "@/components/layout/SiteShell";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-cormorant",
@@ -53,11 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${jakartaBody.variable} h-full`}>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <PopupController />
-        <ChatWidget />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
