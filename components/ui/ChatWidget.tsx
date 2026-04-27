@@ -106,17 +106,17 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen((o) => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-        style={{ backgroundColor: "#0A1628" }}
+        style={{ backgroundColor: "#C5A55A" }}
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
           {open ? (
             <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="20" height="20" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <svg width="20" height="20" fill="none" stroke="#0A1628" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </motion.span>
           ) : (
             <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="22" height="22" fill="none" stroke="#FAF8F5" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              <svg width="22" height="22" fill="none" stroke="#0A1628" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </motion.span>
           )}
         </AnimatePresence>
