@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { resourceDownloadEmail } from "@/lib/emails";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,14 +21,14 @@ export async function POST(req: NextRequest) {
       { email, resource_id: resourceId, resource_title: resourceTitle },
     ]).select();
 
-    // Send download email if Resend configured
+    // Send download email
     const resendKey = process.env.RESEND_API_KEY;
     if (resendKey && resourceId) {
       try {
         const { Resend } = await import("resend");
         const resend = new Resend(resendKey);
 
-        // Fetch the resource file URL from Supabase
+        // Fetch the file URL from Supabase
         const { data: resource } = await supabase
           .from("resources")
           .select("file_url, title")
@@ -35,11 +36,18 @@ export async function POST(req: NextRequest) {
           .single();
 
         if (resource?.file_url) {
+          const { subject, html } = resourceDownloadEmail(
+            name,
+            resourceId,
+            resource.title || resourceTitle,
+            resource.file_url
+          );
+
           await resend.emails.send({
-            from: "Prospera Properties <hello@prosperaproperties.co>",
+            from: "Ebin at Prospera <hello@prosperaproperties.co>",
             to: email,
-            subject: `Your download: ${resource.title}`,
-            html: `<p>Hi ${name || "there"},</p><p>Here's your download: <a href="${resource.file_url}">${resource.title}</a></p><p>If you have any questions about your rental property, feel free to <a href="https://www.prosperaproperties.co/contact">reach out anytime</a>.</p><p>— Ebin, Prospera Properties</p>`,
+            subject,
+            html,
           });
         }
       } catch {
