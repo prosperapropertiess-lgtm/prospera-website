@@ -159,11 +159,11 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:prosperapropertiess@gmail.com"
+                  href="mailto:hello@prosperaproperties.co"
                   className="text-sm footer-link"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
-                  prosperapropertiess@gmail.com
+                  hello@prosperaproperties.co
                 </a>
               </li>
               <li className="text-sm footer-link" style={{ fontFamily: "var(--font-dm-sans)" }}>
