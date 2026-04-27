@@ -17,11 +17,17 @@ const landlordLinks = [
   { label: "Free Resources", href: "/resources" },
 ];
 
+const areaLinks = [
+  { label: "London, Ontario", href: "/areas/london" },
+  { label: "St. Thomas, Ontario", href: "/areas/st-thomas" },
+  { label: "Strathroy, Ontario", href: "/areas/strathroy" },
+];
+
 export default function Footer() {
   return (
     <footer style={{ backgroundColor: "#0A1628", color: "#FAF8F5" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Column 1: Logo + tagline */}
           <div className="lg:col-span-1">
             <div className="mb-4">
@@ -110,7 +116,30 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Column 4: Service Areas */}
+          <div>
+            <h3
+              className="text-xs font-semibold uppercase tracking-widest mb-5"
+              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Service Areas
+            </h3>
+            <ul className="space-y-3">
+              {areaLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm footer-link"
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5: Contact */}
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
@@ -137,11 +166,12 @@ export default function Footer() {
                   prosperapropertiess@gmail.com
                 </a>
               </li>
-              <li
-                className="text-sm footer-link"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-              >
-                London &nbsp;·&nbsp; St. Thomas &nbsp;·&nbsp; Strathroy
+              <li className="text-sm footer-link" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                <Link href="/areas/london" className="footer-link">London</Link>
+                {" · "}
+                <Link href="/areas/st-thomas" className="footer-link">St. Thomas</Link>
+                {" · "}
+                <Link href="/areas/strathroy" className="footer-link">Strathroy</Link>
               </li>
             </ul>
           </div>
