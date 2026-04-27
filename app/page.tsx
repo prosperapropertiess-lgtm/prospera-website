@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
+import ParticleCanvas from "@/components/animations/ParticleCanvas";
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
@@ -15,16 +16,20 @@ function Hero() {
       className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden"
       style={{ backgroundColor: "#0D1B2A" }}
     >
+      {/* Particle animation */}
+      <ParticleCanvas />
+
       {/* Subtle burgundy glow top-right */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "radial-gradient(ellipse at 75% 15%, rgba(123,28,28,0.15) 0%, transparent 55%)",
+          zIndex: 2,
         }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative max-w-5xl mx-auto" style={{ zIndex: 3 }}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
