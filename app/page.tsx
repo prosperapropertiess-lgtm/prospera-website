@@ -39,9 +39,9 @@ function Hero() {
           <span
             className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2"
             style={{
-              color: "#7B1C1C",
+              color: "#C5A55A",
               fontFamily: "var(--font-dm-sans)",
-              border: "1px solid rgba(123,28,28,0.35)",
+              border: "1px solid rgba(197,165,90,0.45)",
             }}
           >
             London · St. Thomas · Strathroy

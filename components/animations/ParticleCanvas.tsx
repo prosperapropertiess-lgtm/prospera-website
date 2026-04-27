@@ -27,14 +27,14 @@ export default function ParticleCanvas() {
     let w = 0;
     let h = 0;
 
-    function resize() {
+    function resize(width?: number, height?: number) {
       if (!canvas) return;
-      w = canvas.width = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
+      w = canvas.width = width ?? canvas.offsetWidth;
+      h = canvas.height = height ?? canvas.offsetHeight;
     }
 
     function init() {
-      resize();
+      resize(canvas.offsetWidth, canvas.offsetHeight);
       particles = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -89,7 +89,10 @@ export default function ParticleCanvas() {
     init();
     draw();
 
-    const ro = new ResizeObserver(resize);
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) resize(entry.contentRect.width, entry.contentRect.height);
+    });
     ro.observe(canvas);
 
     return () => {

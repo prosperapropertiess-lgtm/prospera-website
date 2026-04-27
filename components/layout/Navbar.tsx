@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
@@ -51,6 +50,7 @@ export default function Navbar() {
               width={120}
               height={60}
               priority
+              sizes="120px"
               style={{
                 height: "60px",
                 width: "auto",
@@ -129,62 +129,52 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 bg-[#FAF8F5]"
-          >
-            <nav className="flex flex-col gap-6 flex-1">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.25 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="text-2xl font-light block py-1 text-[#0A1628]"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
+      {/* Mobile menu — CSS transition, no framer-motion */}
+      <div
+        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 bg-[#FAF8F5] lg:hidden transition-all duration-300"
+        style={{
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+          transform: menuOpen ? "translateY(0)" : "translateY(-12px)",
+        }}
+      >
+        <nav className="flex flex-col gap-6 flex-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-2xl font-light block py-1 text-[#0A1628]"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-            <div className="flex flex-col gap-3 mt-8">
-              <a
-                href={BUILDIUM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#0A1628] text-[#0A1628] rounded-lg"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-                onClick={() => setMenuOpen(false)}
-              >
-                Landlord Login
-              </a>
-              <a
-                href={BUILDIUM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] rounded-lg"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-                onClick={() => setMenuOpen(false)}
-              >
-                Tenant Login
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="flex flex-col gap-3 mt-8">
+          <a
+            href={BUILDIUM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#0A1628] text-[#0A1628] rounded-lg"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Landlord Login
+          </a>
+          <a
+            href={BUILDIUM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] rounded-lg"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Tenant Login
+          </a>
+        </div>
+      </div>
     </>
   );
 }

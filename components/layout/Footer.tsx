@@ -36,6 +36,7 @@ export default function Footer() {
                 alt="Prospera Properties"
                 width={120}
                 height={60}
+                sizes="120px"
                 style={{ height: "60px", width: "auto", filter: "brightness(0) invert(1)" }}
               />
             </div>
