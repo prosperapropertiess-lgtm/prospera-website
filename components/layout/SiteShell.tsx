@@ -1,10 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import PopupController from "@/components/ui/PopupController";
-import ChatWidget from "@/components/ui/ChatWidget";
+
+const PopupController = dynamic(() => import("@/components/ui/PopupController"), { ssr: false });
+const ChatWidget = dynamic(() => import("@/components/ui/ChatWidget"), { ssr: false });
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

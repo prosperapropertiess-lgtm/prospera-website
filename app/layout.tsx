@@ -4,15 +4,10 @@ import "./globals.css";
 import SiteShell from "@/components/layout/SiteShell";
 
 const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-cormorant",
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const jakartaBody = Plus_Jakarta_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +43,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${jakartaBody.variable} h-full`}>
+    <html lang="en" className={`${jakarta.variable} h-full`}>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
+        <link rel="dns-prefetch" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
+      </head>
       <body className="min-h-full flex flex-col">
         <SiteShell>{children}</SiteShell>
       </body>
