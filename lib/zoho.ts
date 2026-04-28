@@ -1,7 +1,7 @@
 const ZOHO_API = "https://www.zohoapis.ca/crm/v2";
 const TOKEN_URL = "https://accounts.zohocloud.ca/oauth/v2/token";
 
-async function getAccessToken(): Promise<string> {
+export async function getAccessToken(): Promise<string> {
   const res = await fetch(
     `${TOKEN_URL}?grant_type=refresh_token&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&refresh_token=${process.env.ZOHO_REFRESH_TOKEN}`,
     { method: "POST" }

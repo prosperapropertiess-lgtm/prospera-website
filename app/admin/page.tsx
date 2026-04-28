@@ -58,6 +58,9 @@ export default function AdminDashboard() {
       <div className="bg-[#0A1628] text-white px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera Admin</span>
+          <Link href="/admin/dashboard" className="text-xs text-white/50 hover:text-white/80 transition-colors">
+            Dashboard
+          </Link>
           <Link href="/" target="_blank" className="text-xs text-white/50 hover:text-white/80 transition-colors">
             ↗ View site
           </Link>
