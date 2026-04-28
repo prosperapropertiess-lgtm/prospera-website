@@ -11,16 +11,16 @@ const METHODS = ["text", "call", "email", "in-person"];
 
 function StatCard({ label, value, sub, accent }: { label: string; value: string | number; sub?: string; accent?: boolean }) {
   return (
-    <div className="bg-white border border-gray-100 rounded-xl p-5">
-      <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">{label}</p>
-      <p className={`text-3xl font-light ${accent ? "text-[#7B1C1C]" : "text-[#0A1628]"}`}>{value}</p>
-      {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+    <div className="bg-[#111827] border border-white/5 rounded-xl p-5">
+      <p className="text-xs text-white/30 uppercase tracking-widest mb-1">{label}</p>
+      <p className={`text-3xl font-light ${accent ? "text-[#C5A55A]" : "text-white"}`}>{value}</p>
+      {sub && <p className="text-xs text-white/25 mt-1">{sub}</p>}
     </div>
   );
 }
 
 function Skeleton() {
-  return <div className="bg-gray-100 animate-pulse rounded-xl h-24" />;
+  return <div className="bg-white/5 animate-pulse rounded-xl h-24" />;
 }
 
 export default function DashboardPage() {
@@ -30,7 +30,6 @@ export default function DashboardPage() {
   const [outreach, setOutreach] = useState<OutreachEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Modal state
   const [modal, setModal] = useState(false);
   const [form, setForm] = useState({ contact_name: "", method: "text", notes: "" });
   const [saving, setSaving] = useState(false);
@@ -73,7 +72,6 @@ export default function DashboardPage() {
     setSaving(false);
   }
 
-  // Weekly counts
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const outreachThisWeek = outreach.filter((o) => new Date(o.created_at) > weekAgo).length;
   const conversionRate = zoho && zoho.totalContacts > 0
@@ -81,23 +79,23 @@ export default function DashboardPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5]">
+    <div className="min-h-screen bg-[#0D1117]">
       {/* Top bar */}
-      <div className="bg-[#0A1628] text-white px-6 py-4 flex items-center justify-between">
+      <div className="bg-[#0A0F1A] border-b border-white/5 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera</span>
-          <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">← Properties</Link>
-          <Link href="/" target="_blank" className="text-xs text-white/50 hover:text-white/80 transition-colors">↗ View site</Link>
+          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light text-white">Prospera</span>
+          <Link href="/admin" className="text-xs text-white/30 hover:text-white/60 transition-colors">← Properties</Link>
+          <Link href="/" target="_blank" className="text-xs text-white/30 hover:text-white/60 transition-colors">↗ View site</Link>
         </div>
-        <button onClick={handleLogout} className="text-xs text-white/60 hover:text-white transition-colors">Sign out</button>
+        <button onClick={handleLogout} className="text-xs text-white/30 hover:text-white/60 transition-colors">Sign out</button>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-8">
-        <h1 className="font-[family-name:var(--font-cormorant)] text-3xl font-light text-[#0A1628] mb-8">Business Dashboard</h1>
+        <h1 className="font-[family-name:var(--font-cormorant)] text-3xl font-light text-white mb-8">Business Dashboard</h1>
 
         {/* Pipeline */}
         <div className="mb-8">
-          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">Pipeline — Zoho CRM</p>
+          <p className="text-xs text-white/25 uppercase tracking-widest mb-3">Pipeline — Zoho CRM</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {loading ? (
               <>{[...Array(4)].map((_, i) => <Skeleton key={i} />)}</>
@@ -115,10 +113,10 @@ export default function DashboardPage() {
         {/* Outreach */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs text-gray-400 uppercase tracking-widest">Outreach</p>
+            <p className="text-xs text-white/25 uppercase tracking-widest">Outreach</p>
             <button
               onClick={() => setModal(true)}
-              className="text-xs bg-[#0A1628] text-white px-4 py-2 rounded hover:bg-[#7B1C1C] transition-colors"
+              className="text-xs bg-white/10 text-white/70 px-4 py-2 rounded hover:bg-white/15 transition-colors"
             >
               + Log Outreach
             </button>
@@ -128,32 +126,32 @@ export default function DashboardPage() {
             <StatCard label="Total" value={outreach.length} sub="All time" />
           </div>
           {outreach.length > 0 && (
-            <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+            <div className="bg-[#111827] border border-white/5 rounded-xl overflow-hidden">
               {outreach.slice(0, 5).map((entry, i) => (
-                <div key={entry.id} className={`px-5 py-3 flex items-center justify-between ${i !== 0 ? "border-t border-gray-50" : ""}`}>
+                <div key={entry.id} className={`px-5 py-3 flex items-center justify-between ${i !== 0 ? "border-t border-white/5" : ""}`}>
                   <div>
-                    <p className="text-sm font-medium text-[#0A1628]">{entry.contact_name}</p>
-                    {entry.notes && <p className="text-xs text-gray-400 mt-0.5">{entry.notes}</p>}
+                    <p className="text-sm font-medium text-white/80">{entry.contact_name}</p>
+                    {entry.notes && <p className="text-xs text-white/30 mt-0.5">{entry.notes}</p>}
                   </div>
                   <div className="text-right">
-                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{entry.method}</span>
-                    <p className="text-xs text-gray-300 mt-1">{new Date(entry.created_at).toLocaleDateString()}</p>
+                    <span className="text-xs bg-white/10 text-white/40 px-2 py-0.5 rounded">{entry.method}</span>
+                    <p className="text-xs text-white/20 mt-1">{new Date(entry.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>
               ))}
             </div>
           )}
           {outreach.length === 0 && !loading && (
-            <p className="text-sm text-gray-400 text-center py-6">No outreaches logged yet. Hit the button above to start.</p>
+            <p className="text-sm text-white/25 text-center py-6">No outreaches logged yet.</p>
           )}
         </div>
 
         {/* Meta Ads */}
         <div className="mb-8">
-          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">
+          <p className="text-xs text-white/25 uppercase tracking-widest mb-3">
             Meta Ads — Today
             {meta && !meta.connected && (
-              <span className="ml-2 text-amber-500 normal-case">· Not connected</span>
+              <span className="ml-2 text-amber-500/60 normal-case">· Not connected</span>
             )}
           </p>
           <div className="grid grid-cols-3 gap-3">
@@ -167,14 +165,11 @@ export default function DashboardPage() {
               </>
             )}
           </div>
-          {meta && !meta.connected && (
-            <p className="text-xs text-gray-400 mt-2">Add META_ACCESS_TOKEN and META_AD_ACCOUNT_ID to Vercel env vars to connect.</p>
-          )}
         </div>
 
         {/* Weekly Snapshot */}
         <div>
-          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">Weekly Snapshot</p>
+          <p className="text-xs text-white/25 uppercase tracking-widest mb-3">Weekly Snapshot</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {loading ? (
               <>{[...Array(3)].map((_, i) => <Skeleton key={i} />)}</>
@@ -191,28 +186,28 @@ export default function DashboardPage() {
 
       {/* Log Outreach Modal */}
       {modal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl">
-            <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#0A1628] mb-4">Log Outreach</h2>
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
+          <div className="bg-[#111827] border border-white/10 rounded-xl p-6 w-full max-w-md shadow-2xl">
+            <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-white mb-4">Log Outreach</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-widest mb-1">Name *</label>
+                <label className="block text-xs text-white/30 uppercase tracking-widest mb-1">Name *</label>
                 <input
                   type="text"
                   value={form.contact_name}
                   onChange={(e) => setForm((f) => ({ ...f, contact_name: e.target.value }))}
                   placeholder="e.g. John Smith"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#0A1628]"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30"
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-widest mb-1">Method</label>
+                <label className="block text-xs text-white/30 uppercase tracking-widest mb-1">Method</label>
                 <div className="flex gap-2 flex-wrap">
                   {METHODS.map((m) => (
                     <button
                       key={m}
                       onClick={() => setForm((f) => ({ ...f, method: m }))}
-                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-[#0A1628] text-white border-[#0A1628]" : "border-gray-200 text-gray-500 hover:border-gray-400"}`}
+                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-white text-[#0D1117] border-white" : "border-white/10 text-white/40 hover:border-white/30"}`}
                     >
                       {m}
                     </button>
@@ -220,27 +215,27 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-widest mb-1">Notes</label>
+                <label className="block text-xs text-white/30 uppercase tracking-widest mb-1">Notes</label>
                 <textarea
                   value={form.notes}
                   onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                   placeholder="How did it go?"
                   rows={2}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#0A1628] resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/30 resize-none"
                 />
               </div>
             </div>
             <div className="flex gap-3 mt-5">
               <button
                 onClick={() => setModal(false)}
-                className="flex-1 border border-gray-200 text-gray-500 py-2 rounded-lg text-sm hover:bg-gray-50"
+                className="flex-1 border border-white/10 text-white/40 py-2 rounded-lg text-sm hover:bg-white/5"
               >
                 Cancel
               </button>
               <button
                 onClick={logOutreach}
                 disabled={saving || !form.contact_name.trim()}
-                className="flex-1 bg-[#0A1628] text-white py-2 rounded-lg text-sm hover:bg-[#7B1C1C] transition-colors disabled:opacity-50"
+                className="flex-1 bg-white text-[#0D1117] py-2 rounded-lg text-sm font-medium hover:bg-white/90 transition-colors disabled:opacity-30"
               >
                 {saving ? "Saving..." : "Log it"}
               </button>
