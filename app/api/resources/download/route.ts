@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { resourceDownloadEmail } from "@/lib/emails";
+import { upsertZohoContact } from "@/lib/zoho";
 
 export async function POST(req: NextRequest) {
   try {
@@ -53,6 +54,19 @@ export async function POST(req: NextRequest) {
       } catch {
         // Don't block on email failure
       }
+    }
+
+    // Add to Zoho CRM
+    try {
+      await upsertZohoContact({
+        email,
+        name,
+        type: "landlord",
+        source: "resources_page",
+        note: `Downloaded: ${resourceTitle}`,
+      });
+    } catch {
+      // Don't block on CRM failure
     }
 
     return NextResponse.json({ success: true });
