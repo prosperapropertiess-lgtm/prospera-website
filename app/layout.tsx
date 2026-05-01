@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteShell from "@/components/layout/SiteShell";
+import JsonLd from "@/components/seo/JsonLd";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -49,6 +50,40 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
         <link rel="dns-prefetch" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "@id": "https://www.prosperaproperties.co",
+          "name": "Prospera Properties",
+          "description": "Professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
+          "url": "https://www.prosperaproperties.co",
+          "telephone": "+15196971227",
+          "email": "hello@prosperaproperties.co",
+          "logo": "https://www.prosperaproperties.co/logo.png",
+          "image": "https://www.prosperaproperties.co/logo.png",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "ON",
+            "addressCountry": "CA"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 42.9849,
+            "longitude": -81.2453
+          },
+          "areaServed": [
+            { "@type": "City", "name": "London", "sameAs": "https://en.wikipedia.org/wiki/London,_Ontario" },
+            { "@type": "City", "name": "St. Thomas", "sameAs": "https://en.wikipedia.org/wiki/St._Thomas,_Ontario" },
+            { "@type": "City", "name": "Strathroy", "sameAs": "https://en.wikipedia.org/wiki/Strathroy-Caradoc" }
+          ],
+          "serviceType": "Property Management",
+          "sameAs": [
+            "https://www.facebook.com/prosperaproperties",
+            "https://www.youtube.com/@prosperaproperties"
+          ]
+        }} />
       </head>
       <body className="min-h-full flex flex-col">
         <SiteShell>{children}</SiteShell>
