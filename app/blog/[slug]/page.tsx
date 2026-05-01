@@ -5,6 +5,8 @@ import { marked } from "marked";
 import { getAllPosts, getPost } from "@/lib/blog";
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
+import BlogSubscribeForm from "@/components/blog/BlogSubscribeForm";
+import ShareButtons from "@/components/blog/ShareButtons";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,7 +23,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, type: "article" },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `https://www.prosperaproperties.co/blog/${slug}`,
+      siteName: "Prospera Properties",
+      images: post.featuredImage ? [{ url: post.featuredImage }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.featuredImage ? [post.featuredImage] : [],
+    },
   };
 }
 
@@ -32,12 +47,24 @@ const categoryColors: Record<string, string> = {
   "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
 };
 
+function splitAtMidpoint(html: string): [string, string] {
+  const parts = html.split("</p>");
+  if (parts.length < 4) return [html, ""];
+  const mid = Math.floor(parts.length / 2);
+  return [
+    parts.slice(0, mid).join("</p>") + "</p>",
+    parts.slice(mid).join("</p>"),
+  ];
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
 
   const htmlContent = await marked(post.content);
+  const [firstHalf, secondHalf] = splitAtMidpoint(htmlContent);
+  const postUrl = `https://www.prosperaproperties.co/blog/${slug}`;
 
   const schema = {
     "@context": "https://schema.org",
@@ -45,6 +72,7 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    image: post.featuredImage ?? undefined,
     author: {
       "@type": "Person",
       name: "Ebin Jaison",
@@ -55,13 +83,14 @@ export default async function BlogPostPage({ params }: Props) {
       name: "Prospera Properties",
       url: "https://www.prosperaproperties.co",
     },
-    url: `https://www.prosperaproperties.co/blog/${slug}`,
-    mainEntityOfPage: `https://www.prosperaproperties.co/blog/${slug}`,
+    url: postUrl,
+    mainEntityOfPage: postUrl,
   };
 
   return (
     <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
       <JsonLd data={schema} />
+
       {/* Hero */}
       <section className="pt-32 pb-12 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-3xl mx-auto">
@@ -116,38 +145,59 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       )}
 
-      {/* Author bar */}
+      {/* Author + share bar */}
       <section className="border-b px-6 py-4" style={{ borderColor: "#E8E4DF" }}>
-        <div className="max-w-3xl mx-auto flex items-center gap-3">
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
-            style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-          >
-            E
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
+              style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              E
+            </div>
+            <div>
+              <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+                Ebin Jaison
+              </p>
+              <p className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                Founder, Prospera Properties
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
-              Ebin Jaison
-            </p>
-            <p className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
-              Founder, Prospera Properties
-            </p>
-          </div>
+          <ShareButtons url={postUrl} title={post.title} />
         </div>
       </section>
 
-      {/* Content */}
+      {/* Content — split with mid-post subscribe form */}
       <article className="max-w-3xl mx-auto px-6 py-16">
         <div
           className="prose-content"
           style={{ fontFamily: "var(--font-dm-sans)", color: "#2C2C2C" }}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          dangerouslySetInnerHTML={{ __html: firstHalf }}
         />
+
+        {secondHalf && <BlogSubscribeForm midPost />}
+
+        {secondHalf && (
+          <div
+            className="prose-content"
+            style={{ fontFamily: "var(--font-dm-sans)", color: "#2C2C2C" }}
+            dangerouslySetInnerHTML={{ __html: secondHalf }}
+          />
+        )}
+
+        {/* Share again at end of article */}
+        <div className="mt-12 pt-8 border-t" style={{ borderColor: "#E8E4DF" }}>
+          <ShareButtons url={postUrl} title={post.title} />
+        </div>
       </article>
 
+      {/* End-of-post subscribe form */}
+      <BlogSubscribeForm />
+
       {/* Bottom CTA */}
-      <section className="border-t mx-6 py-16 max-w-3xl mx-auto" style={{ borderColor: "#E8E4DF" }}>
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      <section className="px-6 py-16" style={{ borderColor: "#E8E4DF" }}>
+        <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Property?
           </h2>
