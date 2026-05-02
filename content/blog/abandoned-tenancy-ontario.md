@@ -99,4 +99,21 @@ Abandoned tenancy situations can be genuinely confusing, especially when belongi
 
 This is where working with a property manager like Prospera Properties pays off. We handle the documentation, the LTB filings, and the communication so that the process moves as quickly as the law allows — without putting you at legal risk.
 
+## Frequently Asked Questions
+
+### How long should I wait before treating a tenancy as abandoned in Ontario?
+There's no fixed waiting period under the Residential Tenancies Act — abandonment is determined by the totality of evidence, not a specific number of days. Most landlords document at least two to three weeks of non-payment, no contact, and no signs of occupancy before filing an abandonment application with the LTB.
+
+### Can I change the locks if I'm certain my tenant has abandoned the unit?
+No. Changing the locks without an LTB order is considered an illegal lockout under the RTA, regardless of how clear the abandonment seems. You must either obtain a termination order through the LTB or wait until the tenancy ends through the proper legal process before re-entering and re-keying the unit.
+
+### What do I do with a tenant's belongings left behind after abandonment?
+Do not dispose of them. Ontario law requires you to store the belongings and make reasonable efforts to return them to the tenant. Once the LTB issues a termination order, you have more flexibility — but you should document everything thoroughly and consult a property manager or lawyer before discarding anything of apparent value.
+
+### Which LTB application should I file for an abandoned tenancy?
+You have two common routes: an L2 application citing abandonment, or an N4/L1 for non-payment of rent (which is almost always present in abandonment situations). Many landlords find the L1 route simpler because the non-payment process is well-established; if the tenant truly abandoned the unit, they typically won't appear at the hearing.
+
+### Can I recover unpaid rent from a tenant who abandoned the unit?
+Yes. An LTB order can include rent arrears, and you can also file the order with Small Claims Court to pursue enforcement. However, collecting from a tenant who has disappeared can be practically difficult — wage garnishment and bank account garnishment are possible but require the tenant's information.
+
 If you're dealing with a situation like this right now, [get in touch with us](/contact). We serve landlords in London, St. Thomas, and Sarnia, and we're happy to walk you through your options.

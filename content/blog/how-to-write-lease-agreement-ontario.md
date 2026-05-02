@@ -95,6 +95,23 @@ Once the lease is signed:
 
 That move-in condition report is something many landlords skip — and deeply regret when a tenant moves out and disputes what was pre-existing damage.
 
+## Frequently Asked Questions
+
+### Is the Ontario Standard Lease mandatory for all residential rentals?
+It applies to most private residential tenancies in Ontario, including single-family homes, condos, apartments, and basement units. It does not apply to social housing, care homes, most student residences operated by educational institutions, or sites in a mobile home park. If you're required to use it and don't, a tenant can withhold one month's rent if you fail to provide the lease within 21 days of their written request.
+
+### Can a landlord add a no-pets clause to an Ontario lease?
+A blanket no-pets clause is void under the Residential Tenancies Act — you cannot evict a tenant solely for having a pet. The exception is condo buildings where the condo corporation's rules prohibit pets; those rules flow through to tenants. You can still pursue remedies if a pet causes damage or disturbs other tenants.
+
+### Can a landlord charge late fees for overdue rent in Ontario?
+No. Ontario's Standard Lease does not allow landlords to charge penalties for late rent, and such clauses are unenforceable under the RTA. The legal remedy for non-payment is the N4 notice and LTB process, not fees.
+
+### What additional terms can a landlord legally include in an Ontario lease?
+Enforceable additional terms include: no smoking on the property, tenant responsibility for lawn care or snow removal, requirements to notify the landlord before extended absences, and specific pet expectations beyond the void no-pet clause. Terms that contradict the RTA — like allowing entry without notice or requiring professional carpet cleaning at move-out regardless of condition — are void.
+
+### What happens if a landlord doesn't provide a signed copy of the lease to the tenant?
+You are required to give the tenant a copy of the signed lease within 21 days. If you fail to do so after the tenant makes a written request, they can legally withhold one month's rent until the lease is provided. You must also provide the government's "Information for New Tenants" document at lease signing.
+
 ## Getting It Right
 
 Filling out a Standard Lease sounds straightforward, but the additional terms section, utility arrangements, and rent structures can create real problems if done carelessly. At Prospera Properties, we handle lease preparation for all our managed units — making sure everything is accurate, legally sound, and documented properly from day one.

@@ -116,4 +116,21 @@ Tax season surprises are usually bad surprises. The landlords who do best are th
 
 Whether you manage your own properties or work with a management company, keeping clear financial records is a basic habit that pays off every April. If bookkeeping isn't your thing, it's worth knowing that good property management includes financial reporting — Prospera Properties provides monthly income and expense statements that make tax prep significantly easier for our clients.
 
+## Frequently Asked Questions
+
+### What rental expenses can an Ontario landlord deduct on their tax return?
+Common deductible expenses include: mortgage interest (not principal), property taxes, landlord insurance premiums, repairs and maintenance, property management fees, advertising costs, professional fees (legal and accounting), utilities paid by the landlord, and mileage for property-related travel. All expenses must be documented with receipts and reasonably incurred to earn rental income.
+
+### Can an Ontario landlord deduct the full mortgage payment as a rental expense?
+No. Only the interest portion of your mortgage payment is deductible — not the principal repayment. Your lender provides an annual mortgage interest statement. If you used a portion of refinancing proceeds for personal purposes, only the interest attributable to the rental property portion is deductible.
+
+### What is the difference between a deductible repair and a capital improvement for tax purposes?
+A repair restores something to its previous condition and is deductible in the year it's paid — for example, patching a roof, repairing a leaky pipe, or repainting. A capital improvement adds value or significantly extends the useful life of the property — such as a full roof replacement, major electrical upgrade, or new addition. Capital improvements must be added to the property's adjusted cost base or depreciated using CCA, not deducted immediately.
+
+### Can Ontario landlords deduct property management fees?
+Yes. Property management fees — including monthly management fees, tenant placement fees, and lease renewal fees paid to a property management company — are deductible as expenses incurred to earn rental income. Keep invoices or statements from your property manager for CRA documentation purposes.
+
+### How long should Ontario landlords keep receipts and tax records for rental properties?
+Keep all rental income and expense records for at least six years from the end of the tax year they relate to, as the CRA can audit that far back for most situations. For capital improvements that affect your property's adjusted cost base, keep records until the property is sold and any resulting capital gains are reported.
+
 When in doubt, always consult a qualified accountant who has experience with rental properties in Ontario. The rules are detailed and the stakes are worth getting right.

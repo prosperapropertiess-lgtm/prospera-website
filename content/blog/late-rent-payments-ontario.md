@@ -96,6 +96,23 @@ Get it in writing: the catch-up schedule, what happens if they miss a payment, a
 
 This process is stressful, time-consuming, and full of procedural requirements. One mistake — a wrong date, accepting the wrong payment — can cost you months.
 
+## Frequently Asked Questions
+
+### When can a landlord serve an N4 notice for late rent in Ontario?
+You can serve an N4 as early as day one of non-payment — there is no mandatory grace period under the Residential Tenancies Act. Many landlords informally wait a few days before taking formal action, but legally the clock starts on the day rent is due. The notice gives the tenant 14 days to pay in full or vacate.
+
+### What happens if a tenant pays rent in full after receiving an N4 notice?
+If the tenant pays everything owed in full within the 14-day period, the N4 is automatically voided and the tenancy continues. You cannot proceed to file an L1 application if full payment has been made. This is why it's critical not to accept partial payments — even $1 of a partial payment voids the notice and forces you to start over.
+
+### Can a landlord charge a late fee for overdue rent in Ontario?
+No. Ontario's Residential Tenancies Act does not permit late fees or rent payment penalties of any kind. Any clause in a lease attempting to charge a late fee is void and unenforceable. The legal remedy for persistent late payment is an N8 notice (persistent late payment) filed after the pattern has been established.
+
+### How long does an L1 hearing take to be scheduled after filing?
+In most Ontario regions, L1 hearings are scheduled within 4–8 weeks of filing, though backlogs mean timelines can vary. London and Southwestern Ontario typically see shorter wait times than the GTA. Filing promptly after the 14-day N4 period expires — rather than waiting to see if the tenant pays — ensures you're as early in the queue as possible.
+
+### Should a landlord offer a repayment plan to a tenant in arrears?
+It depends on the situation. A tenant with a solid track record who hit a genuine temporary hardship is often a good candidate for a written repayment plan — it avoids the cost and delay of an LTB hearing for both parties. Any plan should be in writing, specify the catch-up schedule, and state that failure to follow the plan allows you to refile. Without documentation, a verbal agreement is nearly impossible to enforce.
+
 Prospera Properties handles the entire process: we monitor rent daily, follow up on day 1, serve notices correctly, file L1 applications when needed, and coordinate with lawyers for LTB hearings if it gets that far.
 
 If you're dealing with a late-paying tenant right now and want advice, [reach out to us directly](/contact). We're always happy to give you honest guidance, even if you're not currently a client.

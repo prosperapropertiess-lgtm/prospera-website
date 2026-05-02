@@ -82,4 +82,21 @@ Get quotes from at least two or three brokers who specialize in rental property.
 
 If you own a duplex, triplex, or larger building, the insurance structure is different again. You'll typically want a commercial rental property policy rather than a residential landlord policy — the underwriting criteria are different. This is another reason to use a broker who deals with investment properties regularly rather than a generalist personal lines insurer.
 
+## Frequently Asked Questions
+
+### Does regular home insurance cover a rental property in Ontario?
+Standard home insurance policies are written for owner-occupied properties and typically do not cover rental units. If your insurer discovers you've been renting without disclosure, they can deny a claim. You need either a dedicated landlord insurance policy or a rental unit endorsement added to your existing policy — talk to your broker before you rent out any unit.
+
+### What liability coverage amount should an Ontario landlord carry?
+A minimum of $1–2 million in liability coverage is standard, with $2 million strongly recommended for rental properties. Liability coverage protects you if a tenant, visitor, or passerby is injured on your property and sues. Slip-and-fall claims are particularly relevant in Southwestern Ontario during icy winter conditions.
+
+### What is loss of rental income coverage and why does it matter?
+Loss of rental income coverage replaces your rental income if the property becomes uninhabitable due to a covered loss — like a fire or major water damage — while repairs are underway. In Ontario, significant repairs can take months, and carrying a mortgage on a vacant property without this coverage can be a serious financial hit. Confirm whether this is included in your policy and what the coverage limit is.
+
+### Can an Ontario landlord require tenants to have renter's insurance?
+No. The Residential Tenancies Act does not permit landlords to make tenant insurance a condition of tenancy. However, you can strongly encourage it in the lease. Tenants with renter's insurance can cover their own temporary accommodation if the unit becomes uninhabitable, and they carry their own liability coverage — which reduces your risk exposure if the tenant causes an insured loss.
+
+### Is sewer backup coverage worth adding to a landlord insurance policy in Ontario?
+Yes, particularly for properties with basements in older areas of London, St. Thomas, or Sarnia where combined sewer systems are common. Overland flooding and sewer backup often require separate add-ons to a standard policy. The additional premium is modest compared to the cost of a basement sewer backup claim.
+
 Getting insurance right is one of those foundational tasks that's easy to put off and painful to learn about after a loss. It's also one of the things we make sure is sorted for every property in our portfolio — because the financial exposure from an uninsured loss can be catastrophic.

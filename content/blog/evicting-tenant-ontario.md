@@ -116,4 +116,24 @@ Roughly 3–5 months from first missed rent to vacant unit. For other eviction t
 
 The LTB process has a lot of moving parts, and a procedural error at any stage can cost you months of additional time and lost rent. Many London and St. Thomas landlords — especially those managing a handful of properties — find that having someone handle this process for them is well worth the cost.
 
+## Frequently Asked Questions
+
+### How long does it take to evict a tenant in Ontario for non-payment of rent?
+A straightforward non-payment eviction typically takes 3–5 months from the first missed rent to a vacant unit. The N4 notice period is 14 days, LTB hearings are usually scheduled 6–10 weeks after filing, and if the tenant doesn't leave voluntarily after an eviction order, Sheriff enforcement can add several more weeks.
+
+### What form do I use to evict a tenant for non-payment of rent?
+Start with an N4 (Notice to End a Tenancy Early for Non-payment of Rent), which gives the tenant 14 days to pay in full. If they don't pay or vacate within that period, file an L1 application with the Landlord and Tenant Board. Using the wrong form or entering incorrect dates or amounts can result in dismissal.
+
+### Can I accept partial rent after serving an N4 notice?
+No. If you accept even a partial payment after serving the N4, the notice is automatically voided and you must start the process over. Only accept payment in full during the 14-day period if you intend to let the tenant stay.
+
+### Can a landlord evict a tenant in Ontario without going through the LTB?
+No. Every eviction in Ontario must go through the Landlord and Tenant Board. You cannot change the locks, remove belongings, shut off utilities, or otherwise force a tenant out — even with a valid reason. Doing so is an illegal lockout under the RTA and can result in penalties against you.
+
+### What happens if a tenant doesn't leave after an LTB eviction order?
+You cannot remove them yourself. You must file the eviction order with the Court Enforcement Office (Sheriff's office) and pay the enforcement fee. The Sheriff will then schedule and carry out the physical eviction. Wait times for Sheriff enforcement vary by region but can add several weeks to the overall timeline.
+
+### Can a tenant stop an eviction at the LTB hearing?
+Yes. For non-payment evictions, a tenant can pay all rent owed at or before the hearing to void the eviction order — this is sometimes called "paying into the board." The LTB may also issue a conditional order giving the tenant a final opportunity to pay on a specific schedule, with eviction triggered automatically if they default.
+
 Prospera Properties manages the eviction process from end to end for our clients: serving notices correctly, preparing documentation, filing with the LTB, and representing your interests at hearings. If you're heading into a difficult situation with a tenant, [reach out to us](/contact) — even a quick conversation can save you costly mistakes.

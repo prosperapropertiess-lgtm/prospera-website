@@ -79,4 +79,21 @@ Sometimes a landlord repeatedly enters without notice, or a tenant believes they
 
 If you're managing multiple properties, it can be easy to lose track of what notices you've sent and when — this is one area where systematic record-keeping really matters. At Prospera Properties, we manage all entry coordination and documentation centrally, so nothing slips through the cracks and every visit is properly logged.
 
+## Frequently Asked Questions
+
+### How much notice does an Ontario landlord need to give before entering a rental unit?
+In most situations, you must give at least 24 hours written notice before entering. The notice must state the reason for entry, the date, and a time between 8:00 a.m. and 8:00 p.m. A text message or email qualifies as written notice. Simply showing up — even for something that seems minor — is a violation of the tenant's right to quiet enjoyment.
+
+### Can a landlord enter a rental unit without notice for an emergency?
+Yes. If there is a fire, flood, gas leak, or another urgent situation that threatens the property or the tenant's safety, you can enter immediately without notice. Courts and the LTB interpret "emergency" narrowly — a dripping tap or a burned-out light bulb does not qualify.
+
+### What can a landlord do if a tenant refuses a properly noticed entry?
+If you've given proper 24-hour written notice and the tenant refuses, your main options are to reschedule or serve an N5 notice for substantially interfering with your lawful right of entry. The tenant then has 7 days to correct the behaviour. Most refusals are resolved by rescheduling — formal notices are rarely necessary if the landlord has followed the rules.
+
+### How often can a landlord inspect a rental unit in Ontario?
+You can conduct a general inspection once per year with 24-hour written notice. You can enter more frequently for specific, legitimate reasons — a scheduled repair, showing the unit to prospective tenants, or following up on a specific maintenance issue. Entering more than once per year just to "check on things" without cause is not permitted.
+
+### Can a landlord change the locks on a rental unit in Ontario?
+You can change the locks, but you must provide the tenant with a copy of the new key at the same time. You cannot lock a tenant out — even temporarily. If a tenant changes the locks without permission, they must give you a copy of the new key. An illegal lockout entitles the tenant to an urgent LTB order for re-entry.
+
 The rules around entry aren't complicated, but they do require consistency. Follow them, document them, and most of the time, you'll never think about them again.

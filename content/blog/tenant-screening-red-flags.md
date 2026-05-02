@@ -72,6 +72,23 @@ At Prospera Properties, every applicant goes through:
 
 We document everything and keep records in case of future disputes.
 
+## Frequently Asked Questions
+
+### What income standard should Ontario landlords use when screening tenants?
+A common benchmark is that a tenant's gross monthly income should be at least 2.5–3x the monthly rent. For a $1,800/month unit, that's approximately $4,500–$5,400/month in gross income. For self-employed applicants or those with variable income, ask for two years of tax returns or Notices of Assessment to establish a reliable income picture.
+
+### Can an Ontario landlord refuse to rent to someone because of a low credit score?
+You can consider credit history as part of your screening, but you cannot refuse based on protected grounds under the Ontario Human Rights Code. A credit score below 620 is a relevant factor — but context matters. An applicant who can explain a low score (medical debt, past hardship) and demonstrate recovery is different from someone with an unexplained pattern of unpaid accounts. Document your reasons if you decline an applicant.
+
+### What questions should a landlord ask when calling a previous landlord as a reference?
+Ask: Did they pay rent on time? Did they give proper notice when leaving? Would you rent to them again? Did they leave the unit in good condition? That last question is the most revealing — a hesitant "yes" is often a no. Call references directly rather than accepting written letters, and verify the phone number independently to confirm you're reaching an actual previous landlord.
+
+### Can a landlord run a credit check on a rental applicant in Ontario?
+Yes, with the applicant's written consent. Under Ontario's privacy legislation, you need written permission before pulling a credit report. Include a credit check consent form as part of your rental application. Reputable screening services like Equifax or TransUnion provide landlord-specific products for this purpose.
+
+### Is it legal in Ontario to ask a rental applicant about their immigration status or citizenship?
+No. Under the Ontario Human Rights Code, citizenship and immigration status are protected grounds. You cannot ask about these during the screening process or use them as a basis for refusing to rent. You may ask for government-issued ID to verify identity, but must treat all applicants equally regardless of their citizenship or immigration status.
+
 ## The Bottom Line
 
 The time you spend screening is directly proportional to the time you don't spend filing LTB applications. A thorough 2-hour screening process protects you from a potential 6-month nightmare.

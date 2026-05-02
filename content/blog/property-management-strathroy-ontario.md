@@ -86,6 +86,23 @@ At Prospera Properties, we manage residential rentals across London, St. Thomas,
 
 Whether you're a first-time landlord with a single rental home or a small investor with a growing portfolio, we'll take the day-to-day off your plate while keeping you informed about what matters.
 
+## Frequently Asked Questions
+
+### What drives rental demand in Strathroy, Ontario?
+Rental demand in Strathroy comes from several sources: tenants priced out of the London market, local light manufacturing and agricultural workers, residents who commute to London or Sarnia via Highway 402, and families and retirees attracted to small-town lifestyle and affordability. The result is relatively low vacancy rates and tenants who tend to stay longer than in larger urban markets.
+
+### How do Strathroy rents compare to London, Ontario?
+Strathroy rents are noticeably lower than London — typically 20–30% less for comparable unit types. A two-bedroom in Strathroy averages around $1,400/month compared to $1,900 in London. Purchase prices are also lower, which often means better cash flow and higher yields relative to acquisition costs for investors willing to look beyond the larger city.
+
+### Is professional property management available for Strathroy rentals?
+Yes, though not all property management companies actively serve smaller Middlesex County communities. When evaluating options, confirm the company has current, hands-on experience in Strathroy — including tenant showings, local trades coordination, and familiarity with the specific rental market. Companies with a London-only focus may not have the local presence needed to manage effectively.
+
+### What maintenance challenges do Strathroy landlords face?
+A large portion of Strathroy's rental housing stock was built from the 1950s through 1980s, meaning aging furnaces, older plumbing systems, and roofs that need attention are common. Finding reliable tradespeople in a smaller community can also be challenging without established relationships. Staying ahead of maintenance rather than reacting to emergencies is especially important with older properties.
+
+### Does Ontario's landlord-tenant law apply differently in Strathroy than in larger cities?
+No. Ontario's Residential Tenancies Act applies uniformly across the province, including Strathroy. Rent increases, entry rules, eviction procedures, and LTB processes are all the same. The practical difference is that LTB hearings for Strathroy properties are typically handled through the Southwestern Ontario office, and local trades and services operate on smaller-market timelines.
+
 ## Ready to Talk?
 
 If you own a rental property in Strathroy and want to find out what professional management would cost — or whether it makes sense for your situation — we're happy to talk it through.

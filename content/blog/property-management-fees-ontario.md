@@ -94,4 +94,21 @@ We believe in transparent, simple pricing with nothing hidden:
 - **Setup fee:** None
 - **Photos and listing:** Included
 
+## Frequently Asked Questions
+
+### What is a typical property management fee in Ontario in 2026?
+Most residential property managers in Ontario charge a monthly management fee of 8–15% of collected rent. For a $1,900/month unit, that's roughly $150–$285/month. Fees vary based on property type, services included, and local market rates. Always ask for a complete breakdown — monthly fees are just one component of the total cost.
+
+### What is a tenant placement fee and how much should it cost?
+A tenant placement fee (also called a leasing fee) is charged when a new tenant is secured. The Ontario range is typically 50–100% of one month's rent. This is often the largest single fee a landlord pays. Ask whether a guarantee period applies — some companies re-place tenants at no extra cost if the tenant leaves within 60–90 days.
+
+### Do property managers in Ontario charge a maintenance markup?
+Some do. Markups of 10–20% on contractor invoices are common, which creates a financial incentive for property managers to approve more (or more expensive) repairs. Ask any prospective property manager directly whether they mark up maintenance costs, and look for companies that pass through contractor invoices at cost.
+
+### What fees should an Ontario landlord watch out for when hiring a property manager?
+Watch for lease renewal fees ($150–$500 to keep an existing tenant), setup or onboarding fees ($200–$500), professional photo fees charged separately, eviction coordination fees ($500–$1,000+), and early termination fees if you want to end the management agreement. These items are often buried in the contract.
+
+### Is it worth hiring a property manager in London or Southwestern Ontario?
+For landlords managing multiple properties, living out of town, or uncomfortable with the LTB process, professional management typically pays for itself. A single missed maintenance issue, a bad tenant, or an improperly served notice can easily cost more than a full year of management fees. The value is greatest when problems are prevented — not just resolved.
+
 [See our full pricing breakdown](/pricing) or [get in touch](/contact) for a quote on your specific property.

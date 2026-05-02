@@ -99,3 +99,20 @@ Ignoring maintenance complaints doesn't make them go away — it tends to make t
 Shared responsibility situations — where both the landlord's deferred maintenance and the tenant's behavior contributed to a problem — are genuinely complicated. So are situations involving condominiums, where the condo corporation's responsibilities can overlap with yours as a unit owner/landlord.
 
 This is where having an experienced property manager like Prospera Properties makes a real difference. We track maintenance requests, coordinate repairs, document everything, and know how to handle the difficult conversations when something goes wrong. Staying on top of maintenance isn't just about being a good landlord — it protects the value of your property and keeps you out of the LTB.
+
+## Frequently Asked Questions
+
+### What is a landlord legally required to maintain in an Ontario rental unit?
+Under Section 20 of the Residential Tenancies Act, landlords must maintain the rental unit in a good state of repair and fit for habitation. This includes the structure (roof, walls, foundation), plumbing, heating, electrical systems, appliances provided by the landlord, common areas, and pest control. The obligation exists regardless of what the lease says and cannot be waived.
+
+### What is the minimum heating temperature a landlord must provide in Ontario?
+Most Ontario municipalities require landlords to maintain a minimum indoor temperature of 20°C in rental units during the heating season. In London, the requirement runs from September 1 to June 1. Heating failures must be addressed urgently — within 24 hours if the temperature falls below 10°C, and within a reasonable time for less severe situations.
+
+### Is a landlord responsible for pest control if the tenant caused the infestation?
+Generally yes. Even if a tenant's behaviour contributed to the problem, the landlord is still responsible for arranging professional extermination. You may be able to recover costs from the tenant afterward through the LTB, but you cannot refuse to treat an infestation as leverage. Delayed response gives the tenant grounds for a T6 maintenance complaint and possible rent abatement.
+
+### What counts as normal wear and tear versus tenant damage in Ontario?
+Normal wear and tear includes minor scuffs on walls, small nail holes, slight carpet wear from foot traffic, and faded paint over time. Damage beyond normal use — large holes in drywall, burned carpets, broken fixtures, deep scratches in flooring — is the tenant's responsibility. The distinction is based on what a reasonable person would expect from regular occupancy over time.
+
+### What can a tenant do if a landlord refuses to make repairs in Ontario?
+Tenants have several options: file a T6 application with the LTB (which can result in a repair order and rent abatement), contact municipal bylaw enforcement for property standards violations, or apply for a rent reduction if a service they were paying for is no longer being provided. Ignoring a maintenance complaint rarely ends well for landlords.

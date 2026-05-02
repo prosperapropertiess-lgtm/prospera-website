@@ -73,6 +73,23 @@ Worth knowing: if guests at an unauthorized short-term rental damage your proper
 
 Short-term rentals are a permanent feature of the market now, and the legal and regulatory environment is still evolving. Some landlords in London and southwestern Ontario actively allow and even advertise short-term rental potential — but that requires the right property type, the right insurance, and compliance with municipal licensing.
 
+## Frequently Asked Questions
+
+### Can an Ontario tenant list my rental on Airbnb without my permission?
+No. Under the Residential Tenancies Act, subletting requires the landlord's written consent. Listing a rental on Airbnb without asking constitutes unauthorized subletting, which is a breach of the tenancy. You can address it by serving an N5 notice and, if the behaviour continues, filing an L2 application with the LTB.
+
+### Can I prohibit short-term rentals in my lease?
+Yes. You can include a clause explicitly prohibiting listings on Airbnb, VRBO, and similar platforms without your written consent. While this clause doesn't give you more rights than the RTA already provides, it removes any ambiguity and strengthens your position if the matter goes to an LTB hearing.
+
+### Does the City of London require short-term rental operators to be licensed?
+Yes. London has introduced a short-term rental licensing framework that requires operators to register with the city. The rules primarily target principal-residence rentals, and operating without a licence can expose the operator to municipal enforcement. An unauthorized Airbnb by your tenant could also implicate you as the property owner.
+
+### What should I do first if I discover my tenant is running an Airbnb?
+Screenshot the listing, note the URL and any reviews, then contact the tenant in writing requesting they take it down immediately. If they comply, no formal action is necessary. If they don't, serve an N5 notice — the tenant then has 7 days to correct the behaviour. Persistent non-compliance allows you to file an L2 application with the LTB.
+
+### Does an unauthorized Airbnb affect my landlord insurance?
+Yes. If guests at an unauthorized short-term rental damage your property or are injured on it, your landlord insurance policy may deny the claim. Short-term rental activity represents a different risk profile than a long-term tenancy, and insurers typically require disclosure of any short-term rental use to maintain coverage.
+
 For landlords who want standard long-term tenancies, the combination of a clear lease clause, proactive communication with tenants, and quick action if issues arise is the right approach. At Prospera Properties, we monitor this kind of activity as part of routine property management — because catching it early is far easier than dealing with it after months of unauthorized use.
 
 If you're not sure whether your lease adequately addresses short-term rentals, it's worth reviewing it before the issue comes up.

@@ -111,4 +111,21 @@ A few tips:
 
 For small landlords with a single rental property, the time and cost of an AGI application may outweigh the benefit unless the capital expenditure was very significant. For multi-unit buildings where costs are spread across many tenants, the math usually makes more sense.
 
+## Frequently Asked Questions
+
+### What qualifies as a capital expenditure for an AGI application in Ontario?
+A capital expenditure is a major improvement or replacement that extends the useful life of the building — such as a new roof, boiler, furnace, full plumbing overhaul, or building-wide window replacement. Routine repairs and maintenance like patching walls, painting, or fixing a faucet do not qualify. The LTB scrutinizes the capital vs. maintenance distinction carefully.
+
+### How much can a landlord increase rent above the guideline with an approved AGI?
+The increase amount depends on the cost of the capital expenditure, the number of units in the building, and the amortization period assigned by the LTB (typically 5–15 years depending on the improvement). A new roof on a 10-unit building might yield an additional 3–5% increase per unit per year over the amortization period, applied on top of the regular guideline.
+
+### How long does the AGI process take in Ontario?
+From filing to a written order, the process typically takes 12–18 months given current LTB backlogs. The filing-to-hearing timeline alone is commonly 6–12 months. Because increases can sometimes be made retroactive to the filing date, landlords often continue collecting the standard guideline increase while the application is pending.
+
+### Do tenants have the right to challenge an AGI application?
+Yes. Tenants are notified of the application and have the right to attend the hearing, present evidence, and challenge whether claimed expenses were genuinely capital (rather than deferred maintenance). If the LTB finds that work was done primarily to catch up on neglected maintenance, they may reduce or deny the AGI.
+
+### Can a landlord apply for an AGI on a unit first occupied after November 15, 2018?
+No. Units first occupied for residential purposes after that date are exempt from rent control, so there is no guideline to exceed and no need for an AGI. Landlords with these units can raise rent at any amount when a tenancy turns over — though the 90-day written notice requirement and the 12-month rule still apply once a tenancy is established.
+
 If you're managing multiple properties in the London, St. Thomas, or Sarnia area and you're unsure whether an AGI application is right for your situation, a property manager like Prospera Properties can help you assess whether your recent capital work qualifies and whether the process is worth pursuing. [Get in touch with us](/contact) if you'd like to talk through your options.

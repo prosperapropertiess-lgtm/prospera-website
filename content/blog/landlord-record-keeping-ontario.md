@@ -153,3 +153,20 @@ Good record-keeping is boring. It's also one of the most important things you ca
 At Prospera Properties, record-keeping is built into how we manage every property — every maintenance request is logged, every payment is tracked, every notice is documented with proof of service. It's part of how we protect our clients if something ever goes sideways.
 
 If you're a self-managing landlord in London, St. Thomas, or Sarnia and you're not sure your records would hold up at the LTB, it's worth taking an afternoon to organize what you have. And if you'd rather hand that responsibility to someone else entirely, [we're here](/contact).
+
+## Frequently Asked Questions
+
+### How long should an Ontario landlord keep a signed lease after the tenancy ends?
+Keep a signed lease for at least three years after the tenancy ends. This covers the limitation period for most LTB and civil claims a former tenant might bring. If the tenancy involved any unresolved LTB proceedings, keep records until those are fully resolved.
+
+### Do Ontario landlords have to give tenants rent receipts?
+Yes. Under the Residential Tenancies Act, landlords must provide a written rent receipt within 21 days if a tenant requests one. It's best practice to issue receipts monthly regardless of request — this creates a clear payment record and helps avoid disputes about whether rent was received.
+
+### How long should a landlord keep rent payment records in Ontario?
+Keep rent payment records for at least seven years. This aligns with the CRA's audit window for rental income and covers the limitation periods for potential LTB claims. If you ever need to support an above-guideline rent increase application or respond to a rent arrears dispute, a complete payment history is essential.
+
+### What records should a landlord keep after serving an N4 or N5 notice?
+Keep a copy of the completed notice, proof of how and when it was served (a note of delivery method, ideally signed by a witness), and any follow-up correspondence. These records matter enormously if the matter goes to an LTB hearing — an adjudicator will want to see that the notice was properly completed and actually delivered to the tenant.
+
+### What's the best way for a small landlord to organize rental records?
+A simple digital folder system works well for most small landlords. Create one folder per property, with subfolders for the lease, applications, inspection reports, rent records, maintenance logs, notices, and communications. Scan physical documents with your phone and back everything up to cloud storage. Consistency matters more than the specific system.

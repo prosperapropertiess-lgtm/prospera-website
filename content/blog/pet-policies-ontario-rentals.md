@@ -76,6 +76,23 @@ That said, some property types (hardwood throughout, shared buildings, carpeted 
 
 At Prospera Properties, we handle these conversations during the application process — screening for pet history, setting clear expectations with tenants, and documenting unit condition thoroughly so that if damage does occur, you're protected. The law may limit what you can prohibit, but it doesn't limit how well-prepared you can be.
 
+## Frequently Asked Questions
+
+### Are no-pet clauses enforceable in Ontario leases?
+No. Section 14 of the Residential Tenancies Act voids any lease provision that prohibits the presence of animals. The one significant exception is condominiums — if the condo corporation's rules prohibit pets, those rules flow through to tenants and are enforceable. For non-condo rentals in London, St. Thomas, or Sarnia, a no-pets clause does not hold up.
+
+### Can an Ontario landlord evict a tenant for having a pet?
+Not for simply having the pet. However, you can evict for damage or disturbance caused by the pet. If a pet causes significant property damage or interferes with other tenants' quiet enjoyment, you can serve an N5 notice. Document the damage or disturbance carefully — photographs, written complaints, maintenance records — before escalating to the LTB.
+
+### Can a landlord collect a pet deposit in Ontario?
+No. The only deposits permitted under the RTA are last month's rent (up to one month's rent) and a key deposit at actual replacement cost. Collecting any additional amount as a "pet deposit" or "damage deposit" is illegal, and a tenant can apply to the LTB for a refund plus interest.
+
+### What should a landlord do if a tenant's pet is causing damage?
+Document everything immediately: photographs of the damage with dates, repair estimates, and written communication with the tenant noting the issue. If the damage is significant and the tenant doesn't address it, serve an N5 notice. A thorough move-in inspection report is essential — without a documented baseline, it's difficult to prove that damage occurred during the tenancy rather than before it.
+
+### Can a landlord refuse to rent to someone with a pet?
+While you cannot enforce a no-pet clause after the tenancy begins, you technically can decline an applicant during the selection process. However, the pool of no-pet applicants is significantly smaller, and many experienced landlords find it more practical to allow pets with clear expectations, a thorough move-in inspection, and a well-documented pet addendum outlining the tenant's responsibilities.
+
 ## The Bottom Line
 
 - No-pet clauses in Ontario leases are void (with condo exceptions)

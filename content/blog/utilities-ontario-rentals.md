@@ -78,4 +78,21 @@ A property manager like Prospera Properties can help you model utility costs bas
 - **Know who to call for emergencies** — keep the contact number for the local gas company and hydro provider in your records; tenants may not know who to call if there's an outage or gas smell
 - **Inform tenants about utility providers upfront** — if they need to set up their own accounts, give them the provider name and a timeline; delays in account setup can create billing confusion
 
+## Frequently Asked Questions
+
+### Who is responsible for heat in an Ontario rental — landlord or tenant?
+Regardless of who pays the utility bills, Ontario law requires landlords to maintain a minimum indoor temperature of 20°C from September 1 to June 15. Even if the lease says the tenant pays gas, you're still legally responsible if the unit falls below that temperature. This is why many landlords in smaller markets like Sarnia and St. Thomas include heat in the rent, especially in older buildings with unpredictable heating costs.
+
+### Can a landlord switch from utilities-included to tenant-pays-utilities mid-tenancy?
+Not without proper process. If you want to convert an existing tenant from included hydro to sub-metered electricity, the RTA has specific requirements — including a reduction in rent by the amount previously attributable to electricity. Attempting to shift utility costs to a tenant without following this process can expose you to LTB applications and orders to repay any amounts improperly charged.
+
+### How should utility responsibilities be documented in an Ontario lease?
+Ontario's Standard Lease form includes a dedicated section for utilities — specifying which are included in rent and which the tenant pays. Fill this out clearly and completely. Ambiguity about who pays heat, hydro, or water is one of the most common sources of landlord-tenant disputes. "Tenant pays hydro" should also include account setup instructions and the name of the local utility provider.
+
+### Can a landlord in London or Sarnia put water bills in a tenant's name?
+In most Ontario municipalities, water and sewer charges are billed by the municipality to the property owner — there is typically no mechanism to transfer the account to a tenant. Water is therefore almost always a landlord expense, factored into the rent. Tenants can significantly affect your water bill, so low-flow fixtures and annual plumbing inspections are practical cost-management tools.
+
+### What is sub-metering and can a landlord require it in Ontario?
+Sub-metering is a system where a licensed company installs individual electricity meters per unit, allowing tenants to pay for their own consumption directly. Ontario law permits sub-metering for new tenancies, but switching an existing tenant from included hydro to sub-metered requires a rent reduction equal to the amount previously attributable to electricity, following a specific regulatory process. Don't implement sub-metering without proper documentation and tenant notification.
+
 Getting your utility structure right at the start of a tenancy saves a lot of confusion — and potential disputes — down the road.

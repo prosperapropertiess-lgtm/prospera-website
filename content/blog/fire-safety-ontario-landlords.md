@@ -103,6 +103,23 @@ Fire inspectors can and do conduct inspections of rental properties — particul
 
 ## Getting It Right From the Start
 
+## Frequently Asked Questions
+
+### How many smoke alarms does an Ontario landlord need to install?
+Ontario's Fire Code requires at least one working smoke alarm on every storey of the unit and outside every sleeping area. If tenants typically sleep with their bedroom doors closed, a smoke alarm inside each sleeping room is also required. There is no exemption for older buildings — the requirement applies to all residential rental properties.
+
+### When did Ontario require landlords to install carbon monoxide detectors?
+Since April 15, 2015, Ontario landlords have been required to install a CO detector adjacent to every sleeping area in any unit that contains a fuel-burning appliance (gas furnace, gas stove, gas fireplace, oil furnace), any type of fireplace, or an attached or built-in garage.
+
+### How often should a landlord replace smoke alarms in a rental property?
+Most smoke alarms have a lifespan of 8–10 years. The manufacture date is printed on the back of the unit. Landlords are responsible for replacing alarms that have reached end of life, have been activated in a fire, or are otherwise not functioning. Tenants are responsible for replacing batteries in battery-operated units and for not disabling alarms.
+
+### What are the fines for Ontario Fire Code violations in rental properties?
+Under the Fire Protection and Prevention Act, individuals can be fined up to $50,000 for Ontario Fire Code violations. More serious consequences can include orders to vacate the unit and potential civil liability if a tenant is harmed due to non-compliant equipment. Fire inspectors can conduct inspections of rental properties — especially following a complaint or incident.
+
+### Can a landlord be held liable if a tenant removes a smoke alarm?
+Liability depends on the circumstances. If a tenant disables a smoke alarm, the tenant bears responsibility for that action — but a landlord who fails to document alarm condition at inspections, or who is aware of tampering and doesn't address it, may still face scrutiny. Documenting smoke alarm status at each new tenancy and during annual inspections is essential protection.
+
 If you've recently acquired a rental property or are setting one up for the first time, a property management company like Prospera Properties can do a comprehensive safety walkthrough before your first tenant moves in. Getting the fundamentals right — including fire safety — protects your tenants and protects you.
 
 It's one of those areas where the cost of doing it correctly is trivial compared to the cost of getting it wrong.

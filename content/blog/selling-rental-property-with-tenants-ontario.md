@@ -77,4 +77,21 @@ The deposit also accumulates interest: you must pay the tenant interest on the L
 
 **Get legal advice.** Real estate transactions involving tenants can get complicated quickly. A real estate lawyer familiar with Ontario landlord-tenant law is worth the cost.
 
+## Frequently Asked Questions
+
+### Does selling a rental property end a tenant's lease in Ontario?
+No. Selling the property does not terminate the tenancy. The new owner steps into the seller's role as landlord and is bound by the same lease and the same Residential Tenancies Act obligations. A buyer who wants vacant possession must either negotiate a voluntary departure with the tenant (N11) or serve a valid N12 notice for personal use — they cannot simply demand the tenant leave because the property was sold.
+
+### Can a landlord use an N12 notice to end a tenancy when selling in Ontario?
+Yes, but only if the buyer or a close family member genuinely intends to occupy the unit for at least one year. Requirements include 60 days' notice ending on the last day of a rental period and payment of one month's rent as compensation before the termination date. Bad-faith N12s — served when the buyer has no real intention to occupy — can result in significant LTB penalties.
+
+### What happens to the last month's rent deposit when a tenanted property is sold?
+The LMR deposit obligation transfers to the buyer at closing. In the Agreement of Purchase and Sale, the deposit amount is typically credited to the buyer so they receive the funds they're now responsible for. Sellers should also account for any unpaid interest accrued on the deposit and ensure the adjustment is handled correctly by their real estate lawyer.
+
+### Can a tenant refuse showings during the sale of a rental property in Ontario?
+No. If you give proper 24-hour written notice stating the reason, date, and time (between 8 a.m. and 8 p.m.), the tenant must allow entry for showings. Outright refusal after proper notice is grounds for an N5 notice. In practice, tenants who are treated with respect and given reasonable notice almost always cooperate — communication goes a long way during the sales process.
+
+### Should a landlord tell tenants the property is being sold?
+Yes, and ideally before the For Sale sign goes up. An early, honest conversation about your plans, the timeline, and what it means for the tenant builds goodwill and reduces friction during showings. Tenants who feel informed and respected are far more likely to cooperate than those who find out from a sign on the lawn.
+
 For landlords who manage multiple properties, keeping track of these rules across different tenancies and transactions is one of the areas where professional property management pays off. Teams like Prospera Properties handle the documentation, communication with tenants, and coordination with legal and real estate professionals — so the sale goes smoothly for everyone involved.

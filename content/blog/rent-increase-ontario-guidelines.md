@@ -121,6 +121,23 @@ If a tenant challenges your rent increase at the LTB and your paperwork has erro
 
 If you own a handful of properties in London, St. Thomas, or Strathroy, tracking 90-day windows across multiple tenancies quickly becomes a spreadsheet problem. It's easy to miss a window, especially when other landlord tasks are competing for your attention.
 
+## Frequently Asked Questions
+
+### How much can a landlord raise rent in Ontario in 2026?
+For units subject to rent control (first occupied before November 15, 2018), the maximum increase is the annual Rent Increase Guideline, which is 2.5% in 2026. Units first occupied after November 15, 2018 are exempt from the guideline cap and can be raised by any amount — though the 90-day notice and 12-month rules still apply.
+
+### How much notice does an Ontario landlord need to give before a rent increase?
+At least 90 days written notice is required using the LTB's N1 form, regardless of rent control status. The notice must state the new rent amount in dollars (not just the percentage), the effective date, and must be served by an approved method. Email is only valid if the tenant has agreed to it in writing beforehand.
+
+### Can a landlord raise rent twice in one year in Ontario?
+No. At least 12 months must pass between rent increases — measured from the start of the tenancy or the date of the last increase, whichever is more recent. A second increase within 12 months is void, and any amounts collected above the previous rent during that period must be refunded.
+
+### What happens if a landlord gives less than 90 days' notice for a rent increase?
+The increase is unenforceable for the period that was short-noticed. If you gave only 60 days' notice, the increase simply doesn't take effect until 90 days have passed from a valid re-service of the N1. The safest approach is to build in extra buffer — serve the N1 at least 100–110 days before the intended effective date.
+
+### Can a landlord raise rent above the guideline for a rent-controlled unit?
+Only with LTB approval through an Above-Guideline Increase (AGI) application. AGIs are available for significant capital expenditures, extraordinary increases in municipal taxes or utilities, and added security services. The process involves filing an L5 application, attending a hearing, and demonstrating eligible costs with invoices and documentation. Timelines are typically 12–18 months.
+
 This is one of the day-to-day management tasks where working with Prospera Properties pays for itself — we track renewal and increase timelines for all managed units, prepare and serve N1 notices on time, and ensure increases are calculated correctly. It's a small thing until you miss the window and have to wait another year.
 
 For questions about your specific situation, [get in touch with us](/contact) — we're happy to help you think through the timing.

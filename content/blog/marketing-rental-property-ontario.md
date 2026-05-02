@@ -87,4 +87,21 @@ In London's current rental market, a well-priced and well-marketed unit typicall
 
 Filling vacancies sounds simple, but it's genuinely time-consuming — especially if you're managing the property yourself and working a full-time job. A team like Prospera Properties handles the entire process: photography, listing, pre-screening, showings, applications, and reference checks. For many landlords, the peace of mind is worth more than the fee.
 
+## Frequently Asked Questions
+
+### Where should I list my rental property in London or St. Thomas?
+The most effective platforms in Southwestern Ontario are Kijiji, Facebook Marketplace, and local Facebook rental groups. Zumper and PadMapper reach younger renters and those relocating from larger cities. For student rentals near Western University or Fanshawe College in London, posting on the institution's housing board can also generate quality inquiries.
+
+### How many photos should I include in a rental listing?
+Aim for 8–15 photos at minimum. Listings with fewer than 6 photos see significantly fewer inquiries — renters skip them. Shoot during the day with all lights on, remove personal items, take wide-angle shots from room corners, and capture key features like updated kitchens, in-suite laundry, and outdoor space. Good photos make more difference than almost any other marketing investment.
+
+### What questions can an Ontario landlord legally ask during a rental showing?
+You can ask practical questions about the tenancy: how many people would be living in the unit, whether they have pets, their move-in timeline, and their employment situation. You cannot ask about or discriminate based on protected grounds under the Ontario Human Rights Code — including race, religion, family status, disability, or source of income (such as receiving social assistance).
+
+### How long should it take to rent a unit in London, Ontario?
+A well-priced and well-marketed unit in London's current rental market typically rents within 1–3 weeks. In St. Thomas and Strathroy, 2–4 weeks is typical. If you're not receiving inquiries within 5–7 days of listing, the issue is usually price, photos, or your choice of listing platform — rather than underlying demand.
+
+### Should I schedule individual showings or group showings for my rental?
+Group showings work well when you have strong interest — they create social proof and reduce the back-and-forth of individual bookings. For less competitive units or quieter markets like Strathroy, individual showings may be more practical. Either way, have application forms ready to hand out immediately after the showing while interest is fresh.
+
 Whether you do it yourself or work with a property manager, the goal is the same: find a tenant who pays on time, respects the property, and wants to stay. A good marketing process is where that relationship begins.

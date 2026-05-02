@@ -87,6 +87,23 @@ If it sits vacant for 6 weeks, you've lost $2,850 in rental income. That pays fo
 
 **Our general rule:** Price to rent within 2–3 weeks. A well-priced, well-presented unit consistently beats an overpriced one.
 
+## Frequently Asked Questions
+
+### What is the average rent for a 2-bedroom apartment in London, Ontario in 2026?
+The average rent for a two-bedroom unit in London in Q1 2026 is approximately $1,900/month, with a range from around $1,650 at the low end to $2,300 for premium units. Location, laundry, parking, and the condition of the unit all influence where your property falls within that range.
+
+### How does St. Thomas compare to London for rental prices?
+St. Thomas rents are generally 15–20% below London prices. A two-bedroom in St. Thomas averages around $1,550/month compared to $1,900 in London. Purchase prices are also lower, which often translates into better cap rates for investors — and demand has been growing steadily as new employment comes to the area.
+
+### What amenities add the most value to a rental listing in Southwestern Ontario?
+In-unit laundry adds approximately $75–$150/month in perceived value and is one of the most requested features. Dedicated parking, private outdoor space, and a recently renovated kitchen or bathroom also increase achievable rent. Air conditioning has become increasingly expected for summer-season rentals.
+
+### How quickly should a well-priced rental unit get inquiries in London or Strathroy?
+A well-priced, well-photographed unit in London should receive inquiries within the first few days and rent within 2–3 weeks. In Strathroy, 2–4 weeks is typical. If you're not getting inquiries within 5–7 days of listing in London, the issue is usually price, photos, or the platform you're using.
+
+### Is it better to price slightly below or above market when listing a rental?
+Pricing at or slightly below market almost always produces a better financial outcome than holding out for a premium. A well-priced unit that rents in two weeks leaves you ahead of a slightly higher-priced unit that sits vacant for six weeks — the vacancy loss takes years of the rental premium to recover.
+
 ## Want a Free Rental Estimate?
 
 We pull real-time comparables from active listings and recent leases in our database. [Get a free estimate](/contact) for your property — no strings attached.

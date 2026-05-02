@@ -88,6 +88,23 @@ If you're managing multiple units in London, Sarnia, or St. Thomas, keeping on t
 
 At Prospera Properties, complaint handling is part of the routine. Tenants have a clear channel to report issues, we follow up with documentation, and we know when a situation warrants a formal notice versus a friendly conversation. Disputes that are handled early rarely make it to the LTB.
 
+## Frequently Asked Questions
+
+### Does an Ontario landlord have a legal obligation to address noise complaints?
+Yes. Under the Residential Tenancies Act, landlords must ensure that tenants can reasonably enjoy their unit — which includes taking action when one tenant's conduct substantially interferes with another's quiet enjoyment. Ignoring repeated, documented noise complaints can result in the affected tenant filing a T2 application against you at the LTB.
+
+### What is an N5 notice and when should a landlord use it for noise?
+An N5 (Notice to End a Tenancy for Interfering with Others' Enjoyment) is served when informal efforts have failed and the noise continues. The first N5 gives the tenant 7 days to stop the behaviour; if they comply and don't repeat the behaviour within 6 months, the notice is voided. A second N5 within 6 months has no correction period, and you can file an L2 application with the LTB.
+
+### What noise bylaws apply to rental properties in London and Sarnia?
+London, Sarnia, and St. Thomas all have municipal noise bylaws that generally prohibit unreasonable noise between 11 p.m. and 7 a.m. For noise originating on public property or from a neighbouring property outside your building, direct tenants to contact municipal bylaw enforcement directly rather than treating it as your landlord obligation.
+
+### Can a landlord be held responsible for a tenant's noisy dog?
+A barking dog is both a noise issue and a pet conduct issue under the RTA. If the noise substantially interferes with other tenants' enjoyment, you can serve an N5. Documentation from multiple tenants strengthens your case. The same process applies — informal contact first, then N5 if the behaviour continues.
+
+### How should a landlord document noise complaints from tenants?
+Ask the complaining tenant to keep a written log with dates, times, duration, and a brief description of each incident. Save copies of all written communications with both the complaining tenant and the noisy tenant. Note dates and key points from any phone conversations. This documentation is what an LTB adjudicator will want to see if the matter escalates to a hearing.
+
 ## Quick Reference
 
 - Ontario landlords have a legal obligation to address noise that interferes with other tenants' quiet enjoyment

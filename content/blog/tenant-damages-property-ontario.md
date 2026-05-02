@@ -94,3 +94,20 @@ This is frustrating. Many landlords write off modest damage amounts because the 
 The best protection remains upfront prevention: good screening, good documentation at move-in, and regular communication throughout the tenancy. When problems are caught early, they're usually easier and cheaper to resolve.
 
 If you're currently dealing with a damage situation and aren't sure how to proceed, Prospera Properties can walk you through your options. We've handled everything from minor move-out disputes to serious damage cases at the LTB, and we're happy to offer honest advice on the best path forward.
+
+## Frequently Asked Questions
+
+### Can an Ontario landlord deduct damage costs from the last month's rent deposit?
+No. The last month's rent deposit in Ontario can only be applied to the last month of rent — it is not a damage fund. If a tenant causes damage, you must apply the deposit to last month's rent and then pursue the damage amount separately through the LTB or Small Claims Court.
+
+### What is the deadline for filing a damage claim against a former tenant in Ontario?
+You have up to one year after the tenancy ends to file a claim at the LTB for damage. Small Claims Court has its own limitation period, which is generally two years. Filing promptly — while evidence is fresh, witnesses are available, and the tenant's contact information is still valid — is strongly recommended.
+
+### What documentation does a landlord need to prove tenant damage at the LTB?
+The most important evidence is a signed move-in inspection report with timestamped photos showing the unit's condition before the tenancy, paired with move-out photos showing the damage. You also need written repair estimates or invoices from contractors, and any written communication with the tenant about the damage. Without a documented baseline from move-in, it's very difficult to prove that damage occurred during the tenancy.
+
+### How do I serve an N5 notice if I discover damage while the tenant is still living in the unit?
+Complete the N5 form from the LTB website, specifying the damage clearly and the estimated cost to repair it. Serve it to the tenant by hand, in their mailbox, under the door, or by courier. The first N5 gives the tenant 7 days to repair the damage or compensate you; if they do, the notice is voided. A second N5 within 6 months is not voidable, and you can proceed directly to an L2 application.
+
+### What can a landlord realistically expect when pursuing a damage claim against a former tenant?
+The legal process can establish a judgment, but collecting from a tenant who is unwilling or unable to pay can be practically challenging. Small Claims Court judgments allow for wage garnishment and bank account garnishment, but enforcement takes time and requires finding the tenant's current employer and banking information. Many landlords write off smaller damage amounts because the cost of collection exceeds the amount owed.

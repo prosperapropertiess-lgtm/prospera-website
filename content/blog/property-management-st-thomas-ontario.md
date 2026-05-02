@@ -85,6 +85,23 @@ At Prospera Properties, we manage residential rentals across London, St. Thomas,
 
 Whether you own a single rental home or a small portfolio of units, we can take the day-to-day off your plate while keeping you informed about what matters.
 
+## Frequently Asked Questions
+
+### Why is St. Thomas becoming attractive for rental property investors?
+St. Thomas has seen significant economic investment, including Amazon's large fulfillment centre in Elgin County that created thousands of jobs and drew workers from across the region. Combined with housing prices still well below neighbouring London, strong rental demand, and rising rents, St. Thomas offers better cap rates for investors than many comparably sized Ontario cities right now.
+
+### What types of rental properties are most common in St. Thomas?
+The St. Thomas rental market is dominated by single-family homes, duplexes, and small multi-unit buildings. Newer high-rise apartments are rare. Much of the housing stock dates from the 1960s through 1990s, which means maintenance demands can be higher than with newer builds — a factor to budget for when calculating returns.
+
+### Does Ontario rent control apply to rental properties in St. Thomas?
+Yes. All Ontario residential tenancies fall under the Residential Tenancies Act. Rent control applies to units first occupied before November 15, 2018, with the 2026 guideline set at 2.5%. Newer units are exempt from the guideline cap, but the 90-day written notice requirement and the 12-month rule between increases still apply.
+
+### How do I find a good property manager in St. Thomas, Ontario?
+Look for a manager with direct experience in the St. Thomas and Elgin County market — not just London-focused companies with nominal regional coverage. Ask about their local trades network, how they handle LTB filings, and whether they can provide references from St. Thomas landlord clients. Local knowledge matters for tenant sourcing, pricing, and maintenance response times.
+
+### What are the biggest challenges for landlords new to St. Thomas?
+Maintaining older housing stock is the most common challenge — furnaces, roofing, plumbing, and electrical systems need regular attention in homes built decades ago. Finding reliable local tradespeople on short notice can also be difficult without existing relationships. Landlords who stay ahead of maintenance and have a vetted trades network attract and retain better tenants.
+
 ## Get Started
 
 If you own a rental property in St. Thomas and want to find out what professional management would cost — or whether it makes sense for your situation — we're happy to talk it through.

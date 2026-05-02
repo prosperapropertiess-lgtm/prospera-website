@@ -71,6 +71,23 @@ You cannot enter a tenant's unit without proper notice — even if you own the b
 
 **Exceptions:** Emergency situations (fire, burst pipe, risk to safety) allow entry without notice.
 
+## Frequently Asked Questions
+
+### Does Ontario's rent control apply to all rental units in 2026?
+No. Rent control only applies to units first occupied for residential purposes before November 15, 2018. Units built or first rented after that date are exempt — landlords can set rent at whatever the market supports when a new tenant moves in. Once a tenancy is established, the 90-day notice and 12-month rules still apply regardless of rent control status.
+
+### What is the 2026 rent increase guideline in Ontario?
+The 2026 rent increase guideline is 2.5%. Landlords must serve an N1 notice at least 90 days before the increase takes effect. The guideline applies to rent-controlled units; for post-2018 units, landlords can set any increase but must still follow the notice requirements.
+
+### Can a landlord evict a tenant for personal use in Ontario?
+Yes, using an N12 notice, but the requirements are strict. The person who will occupy the unit (you, your spouse, a parent, or a child) must genuinely intend to live there for at least one year. You must give 60 days' notice ending on the last day of a rental period and pay the tenant one month's rent as compensation. Bad-faith N12s are taken seriously by the LTB and can result in significant penalties.
+
+### What are a landlord's obligations for repairs under Ontario's RTA?
+Landlords must maintain the unit in a good state of repair and comply with health, safety, and housing standards — even if the tenant knew about problems before signing the lease. Tenants can file a T6 maintenance complaint with the LTB if repairs aren't made, potentially resulting in rent abatements, repair orders, or fines.
+
+### What notice is required before an Ontario landlord can enter a rental unit?
+Generally 24 hours written notice stating the reason, date, and time (between 8 a.m. and 8 p.m.) is required for inspections, repairs, or showings. The exceptions are genuine emergencies — fire, burst pipe, or a safety risk — where entry without notice is permitted.
+
 ## What Prospera Does for You
 
 Managing all of this correctly is genuinely complicated. We stay current on every RTA change, serve all notices correctly and on time, and maintain detailed records so you're protected if anything ever goes to the LTB.

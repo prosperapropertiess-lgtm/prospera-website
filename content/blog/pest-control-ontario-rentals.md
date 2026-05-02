@@ -93,3 +93,20 @@ Bedbug and rodent treatments can run from a few hundred to several thousand doll
 Prospera Properties includes pest prevention in our regular property inspections, and we coordinate professional treatment whenever needed — so landlords don't have to manage exterminators and tenant communication on their own. It's one of those issues that's much easier to handle when you have a system.
 
 No landlord wants to deal with pests. But handling them quickly, professionally, and with proper documentation is what separates a manageable problem from an LTB hearing.
+
+## Frequently Asked Questions
+
+### Who is responsible for pest control in an Ontario rental — landlord or tenant?
+Pest control is generally the landlord's responsibility under Ontario's Residential Tenancies Act and municipal property standards bylaws. Even if a tenant's behaviour contributed to the infestation, you must still arrange and pay for professional treatment. You may be able to seek cost recovery from the tenant afterward through the LTB, but you cannot withhold treatment as leverage.
+
+### Is a landlord required to disclose a bedbug infestation to a new tenant in Ontario?
+Yes. Ontario landlords are required to disclose a current bedbug infestation to prospective tenants before signing a lease. There is no requirement to disclose a past infestation that has been fully resolved, though being transparent about what happened and how it was treated builds trust and can prevent disputes later.
+
+### How quickly must a landlord respond to a pest complaint in Ontario?
+While the RTA doesn't specify exact timelines, the LTB considers promptness carefully. Acknowledge the report in writing within 24 hours, arrange a professional inspection promptly, and book treatment quickly. Delays give the tenant grounds to file a T6 maintenance complaint and potentially receive a rent abatement for the period the problem was unaddressed.
+
+### Can a landlord charge a tenant for pest control costs in Ontario?
+You can seek compensation from the tenant through the LTB if their negligence directly caused the infestation — for example, if documented evidence shows their food storage habits attracted rodents. However, you must fix the problem first and then pursue recovery afterward. The LTB will weigh the evidence carefully; proving tenant-caused infestations can be difficult without thorough documentation.
+
+### What are the most common pests in rental properties in London and Southwestern Ontario?
+Mice are the most common issue in Southwestern Ontario, particularly in older housing stock during fall and winter. Bedbugs occur across all property types and require immediate professional treatment when confirmed. Cockroaches are less common than in larger cities but do occur in older apartment buildings. Each pest requires a different treatment approach from a licensed exterminator.

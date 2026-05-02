@@ -95,6 +95,23 @@ At **Prospera Properties**, we manage residential rentals in London and across s
 
 If you're thinking about bringing on a property manager for your London rental, the best first step is a conversation. Understand what's included, ask about their LTB experience, and get a clear breakdown of fees before signing anything.
 
+## Frequently Asked Questions
+
+### How much does property management cost in London, Ontario?
+Most residential property managers in London charge a monthly fee of 8–12% of collected rent, plus a tenant placement fee of 50–100% of one month's rent when a new tenant is found. Additional fees for lease renewals, maintenance coordination, and eviction handling vary by company. Always request a complete fee schedule before signing a management agreement.
+
+### What should I look for when hiring a property manager in London, Ontario?
+Look for a locally based manager with demonstrated knowledge of London's neighbourhoods, Ontario landlord-tenant law, and the LTB process. Ask specifically how they handle non-paying tenants from start to finish, what their tenant screening process includes, and whether they have references from current landlord clients you can speak with.
+
+### Does a London property manager handle LTB hearings on my behalf?
+Many full-service property managers in London will prepare and serve LTB notices, file applications, and attend hearings. Confirm this is included before you sign — some companies hand off LTB matters to paralegals and charge extra. Having a manager who handles the LTB process in-house is particularly valuable given the procedural complexity and current hearing timelines.
+
+### Is professional property management worth it for a single rental property in London?
+It depends on your circumstances. If you live near the property, have time to manage it, and are comfortable with Ontario landlord-tenant law, self-management can work. If you work full-time, live out of town, or own a student rental near Western or Fanshawe that turns over annually, the time savings and risk reduction from professional management typically justify the fee.
+
+### What are London's rental licensing requirements for landlords?
+The City of London has introduced rental licensing requirements for certain property types. Landlords in affected categories must comply with licensing, inspection, and documentation requirements. A local property manager with current knowledge of these bylaws can help ensure your property stays compliant as requirements evolve.
+
 Whether you're a first-time landlord renting out one property or an experienced investor managing a portfolio, professional property management in London, Ontario can reduce your stress and protect your investment.
 
 **Ready to talk?** [Contact Prospera Properties](/contact) to get a free consultation on managing your London, Ontario rental. You can also visit our [Landlords page](/landlords) to learn more about how we work.

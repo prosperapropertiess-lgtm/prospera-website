@@ -77,6 +77,23 @@ Note that Ontario does not allow security deposits for damage (only last month's
 
 If you manage multiple properties, keeping track of inspection reports and photos for each unit gets complicated fast. Property management software can help, or you can use a consistent folder structure per property and per tenancy.
 
+## Frequently Asked Questions
+
+### Is an Ontario landlord legally required to do a move-in inspection?
+The Residential Tenancies Act requires landlords to offer a written inspection at the start and end of each tenancy. While you cannot force a tenant to participate, you should always complete one and invite the tenant in writing. A signed move-in inspection report is your primary protection if a tenant later claims that damage was pre-existing.
+
+### What should a landlord document during a move-in inspection?
+Go room by room and note the condition of walls, ceilings, floors, doors, windows, kitchen appliances, bathroom fixtures, and any outdoor areas. Take timestamped photos from multiple angles — at least one wide shot and one close-up of any existing damage or wear. Have the tenant sign the written report confirming the documented condition.
+
+### What is the difference between normal wear and tear and damage in Ontario?
+Normal wear and tear is the expected deterioration from regular occupancy — minor scuffs on walls, small nail holes, carpet worn from foot traffic, faded paint. Damage is anything beyond that: large holes in drywall, burned or heavily stained carpet, broken fixtures, or unauthorized modifications. Only damage beyond normal wear and tear can be claimed against a tenant.
+
+### Can an Ontario landlord keep the last month's rent deposit to cover damages?
+No. The last month's rent deposit can only be applied to the final month of rent — it is not a damage fund. If a tenant causes damage beyond normal wear and tear, you must pursue the cost separately through the LTB's Small Claims process or Ontario Small Claims Court, supported by your inspection documentation and repair estimates.
+
+### How should a landlord store move-in inspection photos?
+Store photos in a permanent location such as a cloud folder (Google Drive, Dropbox) where they won't be lost if you get a new phone. Email them to yourself as a backup. Organize by property and tenancy date. If a dispute goes to the LTB years later, you'll need to access them quickly — a disorganized photo library is nearly as bad as having no photos.
+
 This is one area where working with a professional property manager like Prospera Properties pays off — we build inspections into every tenancy transition, maintain organized records, and handle the documentation in a way that holds up if a dispute reaches the LTB.
 
 A few hours of careful documentation at the start of a tenancy is cheap insurance. Don't skip it.

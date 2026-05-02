@@ -109,4 +109,21 @@ Southwestern Ontario winters vary. London tends to get more consistent snowfall;
 
 If you have properties across multiple cities, tailor your snow removal setup to each location. What's sufficient in St. Thomas may not cut it in Sarnia in February.
 
+## Frequently Asked Questions
+
+### What is the minimum heating temperature an Ontario landlord must maintain?
+Ontario's provincial maintenance standards require landlords to maintain a minimum indoor temperature of 20°C (68°F) in all rental units from September 1 to June 15. The obligation applies to bedrooms, living areas, kitchens, and bathrooms, as well as common areas. This requirement exists regardless of who pays the heating bills.
+
+### How quickly must an Ontario landlord fix a heating failure?
+If the temperature falls below 10°C, the provincial standard calls for repair within 24 hours. For less severe drops, response within a reasonable time is required — but LTB adjudicators have found that multi-day failures in cold weather are rarely acceptable if the landlord wasn't actively working to fix the problem. Having an HVAC contractor with 24/7 emergency service on call before winter arrives is essential.
+
+### Who is responsible for snow removal at a rental property in Ontario?
+For multi-unit buildings, snow removal from common walkways, driveways, and parking areas is almost always the landlord's responsibility. For single-family rentals, a clear lease clause can make the tenant responsible — and this is generally enforceable in Ontario. If the lease doesn't address it, the obligation defaults to the landlord. Check your lease before the first snowfall.
+
+### Are landlords responsible for frozen pipes in a rental property?
+Yes. Preventing and repairing frozen pipes is a landlord maintenance obligation. Prevention includes insulating pipes in unheated spaces, maintaining heat in vacant units during winter, and communicating with tenants about leaving cabinet doors open during extreme cold. If a pipe bursts, respond immediately — shut off water, call a licensed plumber, and document the situation with photos before repairs begin.
+
+### Does a landlord need to check carbon monoxide detectors specifically in winter?
+It's good practice. Ontario law requires CO detectors near sleeping areas in units with fuel-burning appliances, and winter is when furnaces run continuously — increasing the risk of CO exposure if the system is faulty. Test CO detectors each fall along with smoke alarms, document the results, and replace any units that are over 10 years old or non-functional.
+
 Prospera Properties manages winter maintenance across all three markets — from seasonal contractor scheduling to 24/7 tenant communication for heating emergencies. If you'd rather not be on call in the middle of a cold snap, [we can help](/contact).

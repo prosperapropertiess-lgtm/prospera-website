@@ -126,6 +126,23 @@ If a tenant leaves and the unit has significant damage beyond normal wear and te
 
 ## Getting It Right From the Start
 
+## Frequently Asked Questions
+
+### Can a landlord collect a damage deposit in Ontario?
+No. Ontario's Residential Tenancies Act does not permit damage deposits, cleaning deposits, pet deposits, or any additional upfront money beyond last month's rent and a key deposit at actual replacement cost. If you collect a prohibited deposit, the tenant can apply to the LTB for a full refund plus interest.
+
+### What is a last month's rent deposit and how does it work in Ontario?
+A last month's rent (LMR) deposit is collected at the start of a tenancy and held until the tenant moves out, when it is applied to the final month of rent. It is not a damage fund — it can only be used for last month's rent. You can collect a maximum of one month's rent, and only at the time the tenancy begins.
+
+### Does an Ontario landlord have to pay interest on the last month's rent deposit?
+Yes. Landlords must pay annual interest on the LMR deposit at the same rate as the provincial rent increase guideline for that year. In practice, most landlords allow the deposit to grow slightly each year rather than writing a separate cheque. If you've held a deposit for several years without adjusting for interest, you may owe the tenant money when the tenancy ends.
+
+### What happens if a tenant damages the unit but the deposit can't cover it?
+Because the LMR deposit must be applied to last month's rent — not damage costs — you must pursue damage claims separately. You can apply to the LTB or file in Small Claims Court (for claims up to $35,000) after the tenancy ends. Your move-in and move-out inspection reports, photos, and repair invoices are your primary evidence. You have up to one year after the tenancy ends to file a damage claim at the LTB.
+
+### Can a landlord in Ontario require post-dated cheques from a tenant?
+You can request post-dated cheques, but you cannot make them a mandatory condition of tenancy. A tenant cannot be required to provide post-dated cheques, and insisting on them as a condition of signing the lease could be challenged. Many landlords and tenants prefer e-transfer arrangements, which are generally acceptable and create a clear payment record.
+
 Ontario's rental deposit rules are counterintuitive if you're used to other markets — and mistakes can cost you money or LTB penalties. When in doubt, stick to what's explicitly permitted: one month's rent deposit and a key deposit at actual cost.
 
 If you want help setting up your rental correctly from day one — leases, deposits, condition reports, and tenant communication — Prospera Properties works with landlords across London, St. Thomas, and Strathroy to make sure the paperwork is airtight from the start. [Get in touch with our team](/contact) if you have questions.

@@ -54,4 +54,21 @@ A local property manager handles tenant screening, lease execution, rent collect
 - **Document everything.** Take photos at move-in and move-out. Keep records of every maintenance request and repair. This protects you if a dispute ends up at the LTB.
 - **Respond quickly.** In a small city, a landlord's reputation for responsiveness is a genuine competitive advantage when attracting quality tenants.
 
+## Frequently Asked Questions
+
+### Who is the typical rental tenant in Sarnia, Ontario?
+Sarnia's tenant base is heavily influenced by the Chemical Valley petrochemical and manufacturing sector, including skilled tradespeople, engineers, and plant workers who often relocate from elsewhere in Ontario. Lambton College also generates seasonal student demand, particularly for fall semester accommodations. These segments tend to be stable, well-employed, and willing to pay for well-maintained properties.
+
+### Does Ontario's rent control apply to rental properties in Sarnia?
+Yes. Ontario's Residential Tenancies Act applies throughout the province, including Sarnia. Rent control applies to units first occupied before November 15, 2018 — the 2026 guideline is 2.5%. Units first occupied after that date are exempt from the guideline cap. All tenancies, regardless of rent control status, require 90 days' written notice of any rent increase using the N1 form.
+
+### What is the LTB process for a Sarnia landlord with a non-paying tenant?
+The process is the same as anywhere in Ontario: serve an N4 notice (14 days to pay or vacate), then file an L1 application with the LTB if the tenant doesn't comply. Sarnia cases are handled by the LTB's Southwestern Ontario office. Given current backlogs, filing promptly after the notice period expires — rather than waiting — is the best way to minimize delays.
+
+### Are there property management companies that serve Sarnia specifically?
+Yes. Some property management companies based in London and Southwestern Ontario actively manage properties in Sarnia and are familiar with local market conditions, the Lambton College rental cycle, and local trades networks. When evaluating options, confirm they have active experience in Sarnia rather than just regional coverage on paper.
+
+### How do I price my rental in Sarnia compared to London?
+Sarnia rents are generally lower than London, reflecting the smaller market and lower acquisition costs. A one-bedroom in Sarnia typically rents in the range of $1,100–$1,300/month depending on the unit and location. Do your own comparables check on Kijiji and Facebook Marketplace using recent listings — the market shifts, and pricing based on what you paid years ago is a common mistake.
+
 Sarnia is a solid market for residential landlords who manage their properties well. The tenant pool is often overlooked by investors chasing bigger-city numbers, but that means less competition and better margins for those who show up and do the work properly.

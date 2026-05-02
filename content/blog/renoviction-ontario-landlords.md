@@ -77,6 +77,23 @@ If you're a small-scale landlord considering a major renovation to a rental unit
 
 At Prospera Properties, we help landlords in the London, St. Thomas, and Sarnia area think through the timing and requirements before taking any formal steps. If the renovation is legitimate and the process is followed correctly, the law fully supports it. The risk comes from cutting corners or using the process for a purpose it wasn't designed for.
 
+## Frequently Asked Questions
+
+### What qualifies as a legitimate renovation that allows a landlord to evict a tenant in Ontario?
+The renovation must require a building permit and must genuinely necessitate that the unit be vacant — meaning the work is so extensive it cannot be safely done with a tenant in place. Cosmetic work like painting, replacing appliances, updating fixtures, or redoing flooring does not meet this standard. Structural changes, full electrical or plumbing overhauls, and complete gut renovations typically qualify.
+
+### How much notice must a landlord give for a renovation-based eviction?
+The N13 notice requires a minimum of 120 days' notice, ending on the last day of a rental period. The notice must be accompanied by proof that a building permit has been obtained (or that an application is in progress with reasonable grounds it will be granted). The 120-day period does not start until the notice is properly served.
+
+### Does a tenant have the right to return to their unit after an Ontario renovation eviction?
+Yes. When you serve an N13, the tenant has a right of first refusal to move back into the renovated unit at their previous rent (plus any lawful increases that would have applied). The tenant must inform you in writing before vacating that they want to return and provide a mailing address. You must then notify them when the unit is ready, and they have 90 days to move back in.
+
+### How much compensation does a landlord owe a tenant who vacates for renovations?
+You must pay the tenant three months' rent as compensation before the termination date. This is not optional. If you instead provide the tenant with comparable alternative accommodation during the renovation, different rules apply — typically covering the cost of temporary housing rather than the three-month payment.
+
+### What happens if a landlord serves an N13 but the renovations don't proceed?
+If a tenant vacates and the claimed renovations don't happen as described — or the work was far less extensive than claimed — the tenant can file an application alleging bad faith eviction. The LTB takes these cases seriously. Remedies can include up to 12 months of rent difference, moving cost reimbursement, and other compensation. A clear paper trail of permits, contractor agreements, and a realistic scope of work is your protection.
+
 ## Key Points
 
 - Renovation-based eviction requires work that needs a building permit and genuinely requires vacant possession

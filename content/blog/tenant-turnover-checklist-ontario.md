@@ -95,6 +95,23 @@ Rushing a turnover to avoid even a week of vacancy often means starting a new te
 
 At Prospera Properties, we coordinate the full turnover process: move-out inspection, cleaning crews, trades for repairs, and re-listing — so vacancy periods are as short as possible without cutting corners. For landlords managing the process themselves, having a reliable roster of local cleaners and tradespeople on call makes the whole thing faster and less stressful.
 
+## Frequently Asked Questions
+
+### How long should a landlord budget for tenant turnover between tenancies in Ontario?
+For most units in London, St. Thomas, or Sarnia, budget a minimum of 5–10 days for cleaning and basic repairs. Units requiring painting, carpet replacement, or more significant maintenance work realistically need two weeks or more. Rushing a turnover to save a few days of vacancy often creates persistent small issues that affect the incoming tenant's first impression.
+
+### Can an Ontario landlord charge a departing tenant for professional cleaning?
+Only if the unit is left in a condition that exceeds normal wear and tear. Standard cleaning after a normal tenancy is a landlord operating cost. If a tenant leaves excessive filth — grease buildup in the kitchen, heavily soiled bathrooms, carpet requiring professional cleaning due to pet urine — those costs can be pursued as damage claims through the LTB or Small Claims Court, supported by your move-out inspection photos.
+
+### What should a landlord check during a turnover maintenance inspection?
+Test all smoke detectors and carbon monoxide detectors (replace any that are over 10 years old or non-functional), replace the furnace filter, test all appliances, check plumbing under sinks for leaks, test all locks and window latches, run all faucets and flush toilets, and inspect for signs of moisture or mould. Also check electrical outlets and smoke alarm placement against Ontario Fire Code requirements.
+
+### Is there a specific time limit to complete a move-out inspection in Ontario?
+Ontario's RTA doesn't specify a hard deadline, but the inspection should be done as close to the tenant's last day as possible — ideally with the tenant present. Doing it promptly ensures you're documenting the unit's condition before any post-departure changes and gives the tenant the opportunity to walk through and acknowledge the final state.
+
+### Does a landlord have to offer the outgoing tenant a copy of the move-out inspection report?
+Yes. Under the RTA, landlords must provide the tenant with a written copy of the move-out inspection report after it is completed. If the tenant chooses not to participate in the inspection after being offered the opportunity in writing, note that in your records and proceed with the inspection on your own.
+
 ## The Short Version
 
 - Do a move-out inspection with photos, compared against the move-in inspection

@@ -83,6 +83,23 @@ This is one reason why acting early is so important: the moment a tenant misses 
 
 LTB hearings in Southwestern Ontario are primarily heard virtually, though in-person locations exist in London. Whether you're managing a property in London's Old East Village, a house in St. Thomas, or a unit in Sarnia, the process is the same — but the practical experience of navigating it matters.
 
+## Frequently Asked Questions
+
+### How do I file an application with the Ontario Landlord and Tenant Board?
+Most LTB applications are filed online through the Tribunals Ontario Portal. Create an account, complete the applicable form (L1 for non-payment, L2 for other eviction reasons), upload supporting evidence such as the signed lease and served notices, and pay the filing fee (currently around $201 for most applications). You'll receive hearing information by email.
+
+### How long does it take to get an LTB hearing in Ontario?
+Timelines vary significantly by application type and regional backlog. L1 (non-payment) applications are generally scheduled within a few weeks to two months. More complex L2 matters can take longer. LTB backlogs have been a persistent challenge in recent years, which is why filing as soon as the notice period expires — rather than waiting — is important.
+
+### Can a landlord represent themselves at an LTB hearing?
+Yes. Landlords commonly represent themselves at LTB hearings, particularly for straightforward L1 non-payment matters. Come prepared with your signed lease, all notices with proof of service, rent payment records, and a clear summary of what you're requesting. For complex cases involving damage claims, multiple issues, or contested facts, a paralegal who specializes in landlord-tenant matters may be worthwhile.
+
+### What happens if a tenant doesn't pay after an LTB money order?
+An LTB money order can be filed with Small Claims Court and enforced like a civil judgment. Enforcement mechanisms include wage garnishment and bank account garnishment, though collecting on judgments from tenants who are unwilling or unable to pay can be challenging in practice. Having the order is the necessary first step to any enforcement action.
+
+### Do LTB hearings in Ontario happen in person or online?
+The majority of LTB hearings are now conducted virtually via video conference since the LTB moved to an online model in 2021. In-person hearing locations exist in some areas, including London. Hearings are typically grouped with other cases on the same docket, so you may wait before your matter is called.
+
 This is one area where working with a professional property manager like Prospera Properties adds real value. We know the process, the paperwork, the timelines, and how to build a case that holds up. We also handle the ongoing documentation — signed leases, served notices, payment records — that you'll need if a matter ever reaches a hearing.
 
 The LTB is not something most landlords deal with often. But when you do need it, knowing how it works — and having your records in order — makes all the difference.

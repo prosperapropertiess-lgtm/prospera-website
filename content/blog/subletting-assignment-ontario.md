@@ -60,6 +60,23 @@ Sublet and assignment requests tend to come up most with students (relocating be
 
 Understanding the process in advance — rather than scrambling when a request arrives — keeps you from making a decision under pressure. This is also an area where property managers like Prospera Properties can help: screening proposed occupants, responding within the legal timeframe, and making sure any resulting agreement is documented properly.
 
+## Frequently Asked Questions
+
+### What is the difference between subletting and assignment in Ontario?
+Subletting is temporary — the original tenant moves out for a period, lets someone else occupy the unit, and intends to return before the lease ends. The original tenant remains legally responsible throughout. Assignment is permanent — the original tenant transfers the lease entirely to a new person, who becomes your tenant going forward.
+
+### Does an Ontario tenant need the landlord's permission to sublet?
+Yes. Both subletting and assignment require the landlord's written consent under the Residential Tenancies Act. The tenant must make the request in writing, and the landlord has 7 days to respond. Failing to respond within 7 days is deemed consent — so don't let a request sit unanswered.
+
+### Can a landlord refuse a sublet or assignment request in Ontario?
+You can refuse a specific subtenant or assignee for legitimate reasons — poor credit, income that doesn't meet your criteria, or a history of non-payment. You cannot refuse simply to get the unit back or select someone yourself from scratch. If you refuse without good reason, the tenant can apply to the LTB, which can authorize the sublet or assignment without your consent.
+
+### What happens if a landlord refuses an assignment request?
+For assignments, you can refuse and instead allow the tenant to terminate the tenancy early by giving 30 days' notice. This can work well for both parties — the tenant exits cleanly, and you can select a new tenant from scratch. This option only applies to assignments, not sublets.
+
+### What can a landlord do if a tenant sublets without permission?
+If a tenant sublets without your consent, you can serve an N5 notice (unauthorized subletting). The tenant then has 7 days to correct the situation — typically by ending the unauthorized sublet. If the behaviour doesn't stop, you can file an L2 application with the LTB. Act promptly; allowing an unauthorized sublet to continue without response can weaken your legal position.
+
 ## Key Takeaways
 
 - Subletting = temporary; original tenant stays legally responsible. Assignment = permanent transfer of the tenancy.
