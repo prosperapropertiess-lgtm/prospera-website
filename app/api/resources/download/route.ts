@@ -22,6 +22,12 @@ export async function POST(req: NextRequest) {
       { email, resource_id: resourceId, resource_title: resourceTitle },
     ]).select();
 
+    // Static map of resourceId → public PDF URL (for resources that have actual files)
+    const FILE_URLS: Record<string, string> = {
+      "eviction-notices": "https://www.prosperaproperties.co/forms/N4-clean.pdf",
+      "ontario-standard-lease": "https://www.ontario.ca/laws/statute/06r17",
+    };
+
     // Send download email
     const resendKey = process.env.RESEND_API_KEY;
     if (resendKey && resourceId) {
@@ -29,28 +35,15 @@ export async function POST(req: NextRequest) {
         const { Resend } = await import("resend");
         const resend = new Resend(resendKey);
 
-        // Fetch the file URL from Supabase
-        const { data: resource } = await supabase
-          .from("resources")
-          .select("file_url, title")
-          .eq("id", resourceId)
-          .single();
+        const fileUrl = FILE_URLS[resourceId] || null;
+        const { subject, html } = resourceDownloadEmail(name, resourceId, resourceTitle, fileUrl);
 
-        if (resource?.file_url) {
-          const { subject, html } = resourceDownloadEmail(
-            name,
-            resourceId,
-            resource.title || resourceTitle,
-            resource.file_url
-          );
-
-          await resend.emails.send({
-            from: "Ebin at Prospera <hello@prosperaproperties.co>",
-            to: email,
-            subject,
-            html,
-          });
-        }
+        await resend.emails.send({
+          from: "Ebin at Prospera <hello@prosperaproperties.co>",
+          to: email,
+          subject,
+          html,
+        });
       } catch {
         // Don't block on email failure
       }

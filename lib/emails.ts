@@ -172,6 +172,42 @@ export function tenantWelcomeEmail(name: string, city?: string): string {
   return wrapper(content);
 }
 
+// ─── CONTACT CONFIRMATION ────────────────────────────────────
+
+export function contactConfirmationEmail(name: string, type?: string): string {
+  const isLandlord = type === "landlord";
+  const isTenant = type === "tenant";
+
+  const content = bodyText(`
+    <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
+
+    <p style="margin:0 0 16px;">Got your message — thanks for reaching out.</p>
+
+    <p style="margin:0 0 16px;">I'll personally be in touch within one business day. If it's urgent, call me directly at <a href="tel:+15196971227" style="color:#7B1C1C;">(519) 697-1227</a>.</p>
+
+    ${divider()}
+
+    ${isLandlord ? `
+    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">While you wait</p>
+    <p style="margin:12px 0 16px;">Take a look at our free landlord resources — lease templates, screening checklists, eviction guides:</p>
+    ${btn("Browse Free Resources", `${BASE_URL}/resources`)}
+    ` : isTenant ? `
+    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Browse our listings</p>
+    <p style="margin:12px 0 16px;">Check out what's currently available — we add new properties regularly:</p>
+    ${btn("View Available Rentals", `${BASE_URL}/listings`)}
+    ` : `
+    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Learn more</p>
+    <p style="margin:12px 0 16px;">Find out how Prospera Properties works for landlords and tenants in London, St. Thomas, and Strathroy:</p>
+    ${btn("About Prospera Properties", `${BASE_URL}/about`)}
+    `}
+
+    ${divider()}
+
+    <p style="margin:0;">— Ebin<br/><span style="font-size:13px;color:#9B9B9B;">Founder, Prospera Properties</span></p>
+  `);
+  return wrapper(content);
+}
+
 // ─── RESOURCE DOWNLOAD EMAILS ────────────────────────────────
 
 interface ResourceGuide {
@@ -330,7 +366,7 @@ export function resourceDownloadEmail(
   name: string,
   resourceId: string,
   resourceTitle: string,
-  fileUrl: string
+  fileUrl: string | null
 ): { subject: string; html: string } {
   const guide = resourceGuides[resourceId];
 
@@ -339,7 +375,7 @@ export function resourceDownloadEmail(
     const html = wrapper(bodyText(`
       <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
       <p style="margin:0 0 16px;">Here's your download: <strong>${resourceTitle}</strong></p>
-      ${btn("Download Now", fileUrl)}
+      ${fileUrl ? btn("Download Now", fileUrl) : ""}
       ${divider()}
       <p style="margin:0;">Questions? Just reply to this email.<br/>— Ebin, Prospera Properties</p>
     `));
@@ -367,7 +403,7 @@ export function resourceDownloadEmail(
 
     <p style="margin:16px 0 24px;font-size:14px;color:#5A5A5A;">${guide.intro}</p>
 
-    ${btn("Download: " + resourceTitle, fileUrl)}
+    ${fileUrl ? btn("Download: " + resourceTitle, fileUrl) : ""}
 
     ${divider()}
 

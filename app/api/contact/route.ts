@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { contactConfirmationEmail } from "@/lib/emails";
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,11 +37,11 @@ export async function POST(req: NextRequest) {
 
         // Confirmation to the person who submitted
         await resend.emails.send({
-          from: "Prospera Properties <hello@prosperaproperties.co>",
+          from: "Ebin at Prospera <hello@prosperaproperties.co>",
           replyTo: "prosperapropertiess@gmail.com",
           to: email,
           subject: "We received your message — Prospera Properties",
-          html: `<p>Hi ${name},</p><p>Thanks for reaching out. We've received your message and will be in touch within one business day.</p><p>In the meantime, feel free to call us at <a href="tel:+15196971227">(519) 697-1227</a>.</p><p>— Ebin, Prospera Properties</p>`,
+          html: contactConfirmationEmail(name, type),
         });
 
         // Notification to Ebin
