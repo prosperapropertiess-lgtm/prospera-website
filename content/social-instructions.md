@@ -12,6 +12,8 @@ Then read `content/social-posted.md` to see which slugs have already been posted
 
 Only process posts that are NOT in `social-posted.md`.
 
+Pick the **single most recent unposted post** (latest date in frontmatter). Post only 1 per run.
+
 ---
 
 ## STEP 2 — Read each new post
