@@ -41,15 +41,16 @@ Keep it under 400 words total. Do NOT use corporate language. Do NOT say "Exciti
 
 ---
 
-## STEP 4 — Post to Facebook
+## STEP 4 — Submit draft for approval (do NOT post directly)
 
-For each new post, make this API call:
+For the post, call the draft endpoint:
 
 ```bash
-curl -s -X POST https://www.prosperaproperties.co/api/social/post \
+curl -s -X POST https://www.prosperaproperties.co/api/social/draft \
   -H "Content-Type: application/json" \
   -H "x-notify-secret: pp-notify-secret-2026" \
   -d '{
+    "slug": "SLUG",
     "message": "YOUR_CAPTION_HERE",
     "imageUrl": "FEATURED_IMAGE_URL",
     "link": "https://www.prosperaproperties.co/blog/SLUG"
@@ -57,22 +58,23 @@ curl -s -X POST https://www.prosperaproperties.co/api/social/post \
 ```
 
 Replace:
-- `YOUR_CAPTION_HERE` with the caption (must be valid JSON — escape any quotes)
-- `FEATURED_IMAGE_URL` with the `featuredImage` from frontmatter
 - `SLUG` with the post slug
+- `YOUR_CAPTION_HERE` with the caption (valid JSON — escape any double quotes with \")
+- `FEATURED_IMAGE_URL` with the `featuredImage` from frontmatter
 
-If the response contains `"success": true`, the post went through.
-If it fails, log the error and continue to the next post — don't stop.
+If the response contains `"success": true`, the draft was saved and an email was sent for approval.
+
+Do NOT call `/api/social/post` directly. Always go through `/api/social/draft`.
 
 ---
 
 ## STEP 5 — Update the posted log
 
-After successfully posting each slug, add it to `content/social-posted.md` on a new line.
+After submitting the draft, add the slug to `content/social-posted.md` on a new line so it won't be drafted again next run.
 
 Format:
 ```
-[slug] posted [YYYY-MM-DD]
+[slug] drafted [YYYY-MM-DD]
 ```
 
 ---
@@ -83,12 +85,12 @@ Format:
 git config user.email "agent@prosperaproperties.co"
 git config user.name "Prospera Social Agent"
 git add content/social-posted.md
-git commit -m "Social Agent: posted [N] Facebook post(s)"
+git commit -m "Social Agent: drafted post for [slug]"
 git push origin main
 ```
 
-If there were no new posts to publish, still commit the social-posted.md file if it was just created, otherwise skip the commit.
+If there were no new posts, skip the commit.
 
 ---
 
-Do not ask questions. Find new posts, write real captions, post to Facebook, update the log, push.
+Do not ask questions. Find the most recent unposted blog post, write a real caption, submit as draft, update the log, push.
