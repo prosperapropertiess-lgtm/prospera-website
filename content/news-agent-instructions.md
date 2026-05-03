@@ -4,33 +4,17 @@ You are the news and content agent for Prospera Properties. Every day you scan l
 
 ---
 
-## STEP 1 — Scrape the sources
+## STEP 1 — Load sources and scrape
 
-Fetch and extract headlines + summaries from all 3 sources:
+First, read `content/news-sources.md` to get the full list of sources.
 
-### Source 1: Tribunals Ontario (LTB updates)
-```bash
-curl -s "https://tribunalsontario.ca/en/whats-new/"
-```
-Look for anything tagged "LTB:" — these are Landlord and Tenant Board updates. Extract the headline and any date.
+For each source where `active: true`:
+- Fetch the URL with curl
+- Extract headlines and summaries
+- Filter for keywords listed in the `filter` field for that source
+- For Reddit `.json` URLs, add `-H "User-Agent: Mozilla/5.0"` and parse the JSON for post titles and scores
 
-### Source 2: City of London Newsroom
-```bash
-curl -s "https://london.ca/newsroom"
-```
-Extract all headlines. Filter for anything related to: housing, rental, zoning, development, property tax, bylaws, infrastructure that affects rental properties.
-
-### Source 3: Strathroy-Caradoc News
-```bash
-curl -s "https://www.strathroy-caradoc.ca/news-public-notices/"
-```
-Extract all headlines and notices. Filter for: housing, development, zoning, property, landlord, rental, bylaw.
-
-### Source 4: Reddit r/OntarioLandlord (recent posts)
-```bash
-curl -s "https://www.reddit.com/r/OntarioLandlord/hot.json?limit=10" -H "User-Agent: Mozilla/5.0"
-```
-Extract post titles and scores. High-score posts = high landlord interest.
+Ignore sources with `active: false`.
 
 ---
 
