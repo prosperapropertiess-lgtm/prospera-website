@@ -199,7 +199,6 @@ export default function PricingPage() {
                     "21-Day Guarantee (or we manage free)",
                     "Pre-vacancy marketing — we start before tenant leaves",
                     "Quarterly property inspections",
-                    "Direct line to Ebin",
                     "Annual landlord strategy call",
                   ].map((f, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
