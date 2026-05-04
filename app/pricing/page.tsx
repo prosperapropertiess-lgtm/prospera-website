@@ -19,34 +19,48 @@ const faqs = [
   },
   {
     q: "What's the 21-Day Guarantee?",
-    a: "On our Passive plan, if we don't place a qualified, screened tenant within 21 days of your unit being available — we manage your property free until we do. No asterisks, no excuses.",
+    a: "On our Passive plan, if we don't place a qualified, screened tenant within 21 days of your unit being available — your first month of management is free. No asterisks, no excuses. We put money on it.",
   },
   {
     q: "What does 'zero maintenance markup' mean?",
-    a: "When repairs are needed, you pay the contractor directly at their actual rate. We never add a percentage on top. Most property managers charge 10–20% on every repair. We charge zero.",
+    a: "When repairs are needed, you pay the contractor directly at their actual rate. We never add a percentage on top. Most property managers quietly charge 10–20% on every repair — that's $100 extra on a $500 job. We charge zero. Ever.",
   },
   {
     q: "Do you charge while the property is vacant?",
-    a: "No. We don't get paid when your property isn't earning. That keeps us motivated to fill vacancies fast.",
+    a: "No. We don't get paid when your property isn't earning. Most managers charge 50% of rent just to sit on a vacant unit. We charge nothing — which is exactly why we fill vacancies fast.",
   },
   {
     q: "What's included in tenant placement?",
-    a: "Professional photos, listing on all major platforms, tenant screening (credit check, income verification, reference calls), lease preparation, and move-in coordination. Everything.",
+    a: "Professional photos, listing on all major platforms, full tenant screening (credit check, income verification, reference calls), lease preparation, and move-in coordination. A standalone placement service charges $500–$1,000 for this. It's included.",
+  },
+  {
+    q: "Why only 3 new properties per month?",
+    a: "We cap intake to protect quality. Every landlord gets Ebin's personal attention — not a call centre. When we take on too many at once, service slips. We'd rather grow slower and do it right.",
   },
   {
     q: "Can I switch plans later?",
-    a: "Yes. You can upgrade or downgrade at your next renewal period. Most landlords start on Managed and move to Passive after their first vacancy — once they see the math.",
+    a: "Yes. You can upgrade or downgrade at your next renewal. Most landlords start on Managed and move to Passive after their first vacancy — once they run the numbers and see Passive actually costs less.",
   },
 ];
 
 const comparison = [
-  { item: "Maintenance markup", us: "0% — always", them: "10–20%" },
+  { item: "Maintenance markup", us: "0% — always", them: "10–20% per job" },
   { item: "Setup fee", us: "None", them: "$200–$500" },
   { item: "Vacancy fee", us: "None", them: "50% of rent" },
   { item: "Lease renewal fee", us: "Free", them: "$150–$300" },
   { item: "Photography & listing", us: "Included", them: "$200–$500" },
   { item: "Early termination fee", us: "None", them: "1–2 months rent" },
   { item: "Inspection reports", us: "Included", them: "$100–$200 each" },
+];
+
+const valueStack = [
+  { item: "Tenant screening & placement", value: "$500" },
+  { item: "Professional photography & listing", value: "$300" },
+  { item: "Lease preparation & review", value: "$200" },
+  { item: "Maintenance coordination (monthly)", value: "$150/mo" },
+  { item: "Move-in / move-out inspection", value: "$150" },
+  { item: "Monthly financial statements", value: "$75/mo" },
+  { item: "Rent collection & disbursement", value: "$100/mo" },
 ];
 
 export default function PricingPage() {
@@ -56,27 +70,54 @@ export default function PricingPage() {
       <section className="pt-32 pb-16 px-6 bg-[#FAF8F5] text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
-            Simple, Transparent Pricing
+            We only take 3 new properties per month
           </p>
           <h1
             className="text-5xl md:text-6xl font-light text-[#0A1628] mb-5 leading-tight"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
-            Your Property. Fully Managed.
-            <br />No Surprises. Ever.
+            Stop Losing Money on Your
+            <br />Rental Property.
           </h1>
           <p className="text-base text-[#5A5A5A] max-w-xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-            No hidden fees. No maintenance markups. No contracts that trap you.
-            Just results — or we work for free until we deliver them.
+            Every vacant month costs you $2,000+. Every maintenance markup costs you hundreds more.
+            Every hour you spend managing is an hour you don&apos;t get back.
+            We fix all three — starting at 8%.
           </p>
         </FadeIn>
+      </section>
+
+      {/* Value Stack */}
+      <section className="pb-16 px-6 bg-[#FAF8F5]">
+        <div className="max-w-2xl mx-auto">
+          <FadeIn>
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What You&apos;re Actually Getting</p>
+            <h2 className="text-3xl font-light text-[#0A1628] text-center mb-10" style={{ fontFamily: "var(--font-cormorant)" }}>
+              Everything included. Nothing hidden.
+            </h2>
+            <div className="bg-white border border-[#E8E4DF] rounded-2xl overflow-hidden">
+              {valueStack.map((row, i) => (
+                <div key={i} className={`flex items-center justify-between px-6 py-4 ${i < valueStack.length - 1 ? "border-b border-[#E8E4DF]" : ""}`}>
+                  <p className="text-sm text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
+                  <p className="text-sm font-semibold text-[#9B9B9B] line-through" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
+                </div>
+              ))}
+              <div className="flex items-center justify-between px-6 py-5 bg-[#0A1628]">
+                <p className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>Total standalone value</p>
+                <p className="text-sm font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>$1,150+ / month</p>
+              </div>
+              <div className="flex items-center justify-between px-6 py-5 bg-[#C5A55A]">
+                <p className="text-sm font-semibold text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>Your cost with Prospera (on $2,000 rent)</p>
+                <p className="text-xl font-bold text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
       {/* Plans */}
       <section className="pb-24 px-6 bg-[#FAF8F5]">
         <div className="max-w-5xl mx-auto">
-
-          {/* Tier grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
             {/* MANAGED */}
@@ -89,10 +130,10 @@ export default function PricingPage() {
                     <p className="text-sm text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
                   <p className="text-sm text-[#9B9B9B] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Placement fee: 1 month&apos;s rent
+                    + 1 month&apos;s rent (placement)
                   </p>
                   <p className="text-sm text-[#5A5A5A] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Your property is handled. Every call, every repair, every tenant interaction — taken care of.
+                    Everything handled. You collect rent and do nothing else.
                   </p>
                 </div>
 
@@ -101,10 +142,11 @@ export default function PricingPage() {
                     "Full tenant screening & placement",
                     "Rent collection & disbursement",
                     "Maintenance coordination",
-                    "0% markup on all repairs",
+                    "0% markup on all repairs — always",
                     "Lease management & renewals",
                     "Move-in / move-out inspection",
                     "Monthly financial statements",
+                    "No vacancy fee. Ever.",
                   ].map((f, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
@@ -137,17 +179,17 @@ export default function PricingPage() {
                     <p className="text-sm text-white/40 mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
                   <p className="text-sm text-white/40 mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Placement fee: 75% of one month&apos;s rent
+                    + 75% of one month&apos;s rent (placement)
                   </p>
                   <p className="text-sm text-white/60 mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Your property is working for you. Proactive management that keeps your investment performing.
+                    Your property works harder for you. Proactive rent optimization keeps your income growing.
                   </p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1" style={{ fontFamily: "var(--font-jakarta)" }}>
                   {[
                     "Everything in Managed",
-                    "Reduced placement fee (save 25%)",
+                    "25% lower placement fee (save $500 avg)",
                     "Semi-annual property inspections",
                     "Proactive rent increase advisory",
                     "Market rent review every 6 months",
@@ -185,21 +227,22 @@ export default function PricingPage() {
                     <p className="text-sm text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
                   <p className="text-sm font-semibold text-green-700 mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Placement fee: FREE — every single time
+                    Placement: FREE every single time ($2,000 value)
                   </p>
                   <p className="text-sm text-[#5A5A5A] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    Your property runs itself. True passive income — backed by our 21-Day Guarantee.
+                    True passive income. We guarantee a tenant in 21 days — or your first month is free.
                   </p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1" style={{ fontFamily: "var(--font-jakarta)" }}>
                   {[
                     "Everything in Optimized",
-                    "FREE tenant placement — always",
-                    "21-Day Guarantee (or we manage free)",
-                    "Pre-vacancy marketing — we start before tenant leaves",
+                    "FREE placement — saves $2,000 every vacancy",
+                    "21-Day Guarantee — or first month free",
+                    "Pre-vacancy marketing before tenant leaves",
                     "Quarterly property inspections",
                     "Annual landlord strategy call",
+                    "Zero risk. Zero vacancy fees. Zero markup.",
                   ].map((f, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
@@ -240,10 +283,13 @@ export default function PricingPage() {
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The Passive Guarantee</p>
           <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-6 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>
             Qualified tenant in 21 days.
-            <br />Or we manage free until we deliver.
+            <br />Or your first month is free.
           </h2>
-          <p className="text-white/60 text-base max-w-lg mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
-            On our Passive plan, if we don&apos;t place a fully screened, qualified tenant within 21 days of your unit being available — we manage your property at no charge until we do. No asterisks. No excuses.
+          <p className="text-white/60 text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+            On our Passive plan, if we don&apos;t place a fully screened, qualified tenant within 21 days of your unit being available — your first month of management is on us.
+          </p>
+          <p className="text-white/40 text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
+            No asterisks. No fine print. We put our money where our mouth is because we know we&apos;ll deliver.
           </p>
           <Link
             href="/contact"
@@ -260,17 +306,17 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Run the Numbers</p>
-            <h2 className="text-4xl font-light text-[#0A1628] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
-              Why Passive pays for itself.
+            <h2 className="text-4xl font-light text-[#0A1628] mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+              Passive actually costs less.
             </h2>
             <p className="text-[#5A5A5A] text-base mb-16 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-              On a $2,000/month rental, the difference between Managed and Passive is $140/month. Free placement alone saves you $2,000+ every vacancy. One tenant turnover and the upgrade has already paid for itself — for over a year.
+              On a $2,000/month rental, the difference between Managed and Passive is $140/month.
+              Free placement saves you $2,000 every vacancy. Do the math — Passive wins after one turnover.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.1}>
             <div className="grid grid-cols-3 gap-px bg-[#E8E4DF] rounded-2xl overflow-hidden border border-[#E8E4DF]">
-              {/* Header */}
               <div className="bg-[#FAF8F5] px-6 py-4 text-left">
                 <p className="text-xs uppercase tracking-widest text-[#9B9B9B]" style={{ fontFamily: "var(--font-jakarta)" }}>On $2,000/mo rent</p>
               </div>
@@ -282,10 +328,10 @@ export default function PricingPage() {
               </div>
 
               {[
-                { label: "Monthly fee", managed: "$160", passive: "$300" },
-                { label: "Placement fee", managed: "$2,000", passive: "Free" },
-                { label: "Break-even point", managed: "—", passive: "14 months" },
-                { label: "Year 1 (1 vacancy)", managed: "$3,920", passive: "$3,600" },
+                { label: "Monthly management fee", managed: "$160", passive: "$300" },
+                { label: "Placement fee (per vacancy)", managed: "$2,000", passive: "Free" },
+                { label: "Year 1 total (1 vacancy)", managed: "$3,920", passive: "$3,600" },
+                { label: "You save", managed: "—", passive: "$320 in year 1" },
               ].map((row, i) => (
                 <>
                   <div key={`label-${i}`} className="bg-white px-6 py-4 text-left">
@@ -295,7 +341,7 @@ export default function PricingPage() {
                     <p className="text-sm text-[#5A5A5A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
                   </div>
                   <div key={`passive-${i}`} className="bg-[#0A1628]/5 px-6 py-4 text-center">
-                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "Year 1 (1 vacancy)" ? "text-green-700" : "text-[#0A1628]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
+                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-green-700" : "text-[#0A1628]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
                   </div>
                 </>
               ))}
@@ -304,22 +350,70 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Comparison Table */}
+      {/* What it costs to do nothing */}
       <section className="py-24 px-6 bg-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <FadeIn>
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The Real Cost of Self-Managing</p>
+            <h2 className="text-4xl font-light text-[#0A1628] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
+              Every month you wait costs more than you think.
+            </h2>
+            <p className="text-[#5A5A5A] text-base mb-14 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+              Most landlords underestimate what self-managing actually costs them.
+              It&apos;s not just time — it&apos;s the markups you&apos;re paying, the rent you&apos;re leaving on the table,
+              and the vacancy days that quietly bleed your returns.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              {[
+                {
+                  label: "The Vacancy Drain",
+                  amount: "$2,000+",
+                  detail: "Every month your unit sits empty. Our average vacancy is under 18 days.",
+                },
+                {
+                  label: "The Markup Tax",
+                  amount: "$50–200",
+                  detail: "Extra per repair when your PM charges 10–20% on every contractor invoice. We charge zero.",
+                },
+                {
+                  label: "Your Time",
+                  amount: "8 hrs/mo",
+                  detail: "Average hours a landlord spends managing one property. What's your hour worth?",
+                },
+              ].map((item, i) => (
+                <div key={i} className="bg-[#FAF8F5] border border-[#E8E4DF] rounded-2xl p-6">
+                  <p className="text-xs uppercase tracking-widest text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
+                  <p className="text-4xl font-light text-[#0A1628] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
+                  <p className="text-sm text-[#5A5A5A] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="py-24 px-6 bg-[#FAF8F5]">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What Sets Us Apart</p>
-            <h2 className="text-4xl font-light text-[#0A1628] text-center mb-14" style={{ fontFamily: "var(--font-cormorant)" }}>
-              What&apos;s always included — at no extra charge.
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What Others Charge</p>
+            <h2 className="text-4xl font-light text-[#0A1628] text-center mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+              Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
+            <p className="text-[#5A5A5A] text-sm text-center mb-14" style={{ fontFamily: "var(--font-jakarta)" }}>
+              Every one of these is $0 with Prospera.
+            </p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="overflow-hidden rounded-2xl border border-[#E8E4DF]">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#FAF8F5] border-b border-[#E8E4DF]">
-                    <th className="text-left px-6 py-4 text-[#0A1628] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Fee</th>
-                    <th className="text-center px-6 py-4 text-[#C5A55A] font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
+                  <tr className="bg-white border-b border-[#E8E4DF]">
+                    <th className="text-left px-6 py-4 text-[#0A1628] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
+                    <th className="text-center px-6 py-4 text-green-700 font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
                     <th className="text-center px-6 py-4 text-[#9B9B9B] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
                   </tr>
                 </thead>
@@ -339,7 +433,7 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-[#FAF8F5]">
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Common Questions</p>
@@ -352,19 +446,22 @@ export default function PricingPage() {
       {/* CTA */}
       <section className="py-24 px-6 bg-[#0A1628] text-center">
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Ready to hand it over?</p>
+          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+            Only 3 spots available this month
+          </p>
           <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-5" style={{ fontFamily: "var(--font-cormorant)" }}>
-            Let&apos;s talk about your property.
+            Ready to stop managing
+            <br />and start earning?
           </h2>
           <p className="text-white/60 text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-            Free consultation. No pressure. Just an honest conversation about what your property needs and what it could earn.
+            Free 15-minute call. No pressure. Just an honest conversation about your property and what it could be earning.
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 bg-[#C5A55A] text-[#0A1628] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
             style={{ fontFamily: "var(--font-jakarta)" }}
           >
-            Get a Free Quote
+            Book Your Free Call
           </Link>
         </FadeIn>
       </section>
