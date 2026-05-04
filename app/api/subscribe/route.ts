@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 import { landlordWelcomeEmail, tenantWelcomeEmail } from "@/lib/emails";
 import { upsertZohoContact } from "@/lib/zoho";
 
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    const { error } = await supabase.from("subscribers").upsert(
+    const { error } = await supabaseAdmin.from("subscribers").upsert(
       [{
         email,
         name: name || null,
