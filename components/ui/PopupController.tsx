@@ -20,6 +20,6 @@ export default function PopupController() {
     return <NewsletterPopup variant="landlord" delayMs={30000} />;
   }
 
-  // Homepage — show landlord popup after 45s
-  return <NewsletterPopup variant="landlord" delayMs={45000} />;
+  // Homepage — show landlord popup after 7s (running paid traffic)
+  return <NewsletterPopup variant="landlord" delayMs={7000} />;
 }

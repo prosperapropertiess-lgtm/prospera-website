@@ -85,11 +85,11 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            initial={{ opacity: 0, y: 32, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed z-[100] inset-x-4 bottom-4 md:inset-auto md:bottom-8 md:right-8 md:w-[420px] shadow-2xl"
+            className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[460px] shadow-2xl"
             style={{ backgroundColor: "#FAF8F5" }}
           >
             {/* Top accent bar */}
