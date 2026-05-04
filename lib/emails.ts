@@ -100,43 +100,23 @@ export function landlordWelcomeEmail(name: string): string {
   const PDF_URL = `${BASE_URL}/lease-addendum.pdf`;
 
   const content = bodyText(`
-    <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
+    <p style="margin:0 0 24px;font-size:16px;color:#2C2C2C;">Hey ${name || "there"},</p>
 
-    <p style="margin:0 0 16px;">Your free Lease Protection Addendum is ready — download it below.</p>
+    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open.</p>
 
-    <p style="margin:0 0 8px;font-size:11px;color:#C5A55A;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Free Download</p>
-    <p style="margin:0 0 4px;font-size:20px;font-weight:300;color:#0A1628;">Prospera Lease Protection Addendum</p>
-    <p style="margin:8px 0 20px;font-size:14px;color:#5A5A5A;">This addendum plugs the gaps in Ontario's standard lease — utilities, maintenance, subletting, parking, and more. Attach it to every lease you sign.</p>
-
-    ${btn("Download Your Free Addendum", PDF_URL)}
+    ${btn("Download the Addendum (PDF)", PDF_URL)}
 
     ${divider()}
 
-    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">What's inside</p>
+    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">I'm Ebin. I run Prospera Properties — property management in London, St. Thomas, and Strathroy.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin:12px 0 20px;">
-      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Utilities — who pays what, in writing</td></tr>
-      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Tenant maintenance obligations</td></tr>
-      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Subletting and Airbnb restrictions</td></tr>
-      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Parking and storage specifics</td></tr>
-      <tr><td style="padding:8px 0;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Pet policy and additional terms</td></tr>
-    </table>
-
-    ${tipBox("How to use it", "Sign the addendum at the same time as the standard Ontario lease — never after. Make sure it's referenced in the main lease and both parties keep a signed copy.")}
-
-    ${divider()}
-
-    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">What we do for landlords</p>
-
-    <p style="margin:12px 0 16px;font-size:14px;color:#2C2C2C;">We take the whole thing off your plate — tenant screening, rent collection, maintenance, lease renewals, legal notices. Everything. And we never mark up repairs.</p>
+    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">If you ever want someone to take your rental off your hands — tenant screening, rent collection, maintenance, all of it — that's what we do.</p>
 
     ${btn("See How It Works", `${BASE_URL}/landlords`)}
 
     ${divider()}
 
-    <p style="margin:0 0 8px;font-size:14px;color:#2C2C2C;">I'm Ebin — I run Prospera myself. Reply to this email anytime, I read every one.</p>
-
-    <p style="margin:0;">— Ebin<br/><span style="font-size:13px;color:#9B9B9B;">Founder, Prospera Properties · (519) 697-1227</span></p>
+    <p style="margin:0;font-size:15px;color:#2C2C2C;">Reply to this email anytime. I read every one.<br/><br/>— Ebin<br/><span style="color:#9B9B9B;">(519) 697-1227</span></p>
   `);
   return wrapper(content);
 }
