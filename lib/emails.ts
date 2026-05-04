@@ -97,42 +97,46 @@ function tipBox(title: string, body: string): string {
 // ─── LANDLORD WELCOME ────────────────────────────────────────
 
 export function landlordWelcomeEmail(name: string): string {
+  const PDF_URL = `${BASE_URL}/lease-addendum.pdf`;
+
   const content = bodyText(`
     <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
 
-    <p style="margin:0 0 16px;">Glad you're here. Seriously.</p>
+    <p style="margin:0 0 16px;">Your free Lease Protection Addendum is ready — download it below.</p>
 
-    <p style="margin:0 0 16px;">Most landlords come to us after something went wrong — a bad tenant, a missed rent payment, or just the slow realization that managing a property is basically a second job nobody signed up for.</p>
+    <p style="margin:0 0 8px;font-size:11px;color:#C5A55A;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Free Download</p>
+    <p style="margin:0 0 4px;font-size:20px;font-weight:300;color:#0A1628;">Prospera Lease Protection Addendum</p>
+    <p style="margin:8px 0 20px;font-size:14px;color:#5A5A5A;">This addendum plugs the gaps in Ontario's standard lease — utilities, maintenance, subletting, parking, and more. Attach it to every lease you sign.</p>
 
-    <p style="margin:0 0 16px;">We built Prospera for exactly that moment.</p>
-
-    ${divider()}
-
-    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">What we actually do for you</p>
-
-    <p style="margin:12px 0 8px;">We take the whole thing off your plate. Not just rent collection — the tenant screening, the 2am maintenance calls, the lease renewals, the legal notices. Everything.</p>
-
-    <p style="margin:0 0 16px;">And here's the part people don't expect — we don't mark up maintenance. You pay what the contractor charges. That's it.</p>
-
-    ${tipBox("Zero markup. Ever.", "We've spent two years building a network of trusted contractors across London, St. Thomas, and Strathroy. You get their rate — not their rate plus our cut.")}
+    ${btn("Download Your Free Addendum", PDF_URL)}
 
     ${divider()}
 
-    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Here's what to do next</p>
+    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">What's inside</p>
 
-    <p style="margin:12px 0 16px;">If you've got a property you want us to look after, start here — it's free and there's zero obligation:</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:12px 0 20px;">
+      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Utilities — who pays what, in writing</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Tenant maintenance obligations</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Subletting and Airbnb restrictions</td></tr>
+      <tr><td style="padding:8px 0;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Parking and storage specifics</td></tr>
+      <tr><td style="padding:8px 0;font-size:14px;color:#2C2C2C;line-height:1.6;">✓ &nbsp;Pet policy and additional terms</td></tr>
+    </table>
 
-    ${btn("Get a Free Quote", `${BASE_URL}/contact`)}
-
-    <p style="margin:24px 0 16px;">Or if you're just browsing, check out our free landlord resources — lease templates, eviction guides, inspection checklists, all of it:</p>
-
-    ${btn("Browse Free Resources", `${BASE_URL}/resources`)}
+    ${tipBox("How to use it", "Sign the addendum at the same time as the standard Ontario lease — never after. Make sure it's referenced in the main lease and both parties keep a signed copy.")}
 
     ${divider()}
 
-    <p style="margin:0 0 8px;">One last thing — I'm Ebin, and I actually run this company myself. If you have a question, you can reply to this email. I read every one.</p>
+    <p style="margin:0 0 8px;font-size:13px;color:#7B1C1C;letter-spacing:2px;text-transform:uppercase;font-weight:600;">What we do for landlords</p>
 
-    <p style="margin:0;">— Ebin<br/><span style="font-size:13px;color:#9B9B9B;">Founder, Prospera Properties</span></p>
+    <p style="margin:12px 0 16px;font-size:14px;color:#2C2C2C;">We take the whole thing off your plate — tenant screening, rent collection, maintenance, lease renewals, legal notices. Everything. And we never mark up repairs.</p>
+
+    ${btn("See How It Works", `${BASE_URL}/landlords`)}
+
+    ${divider()}
+
+    <p style="margin:0 0 8px;font-size:14px;color:#2C2C2C;">I'm Ebin — I run Prospera myself. Reply to this email anytime, I read every one.</p>
+
+    <p style="margin:0;">— Ebin<br/><span style="font-size:13px;color:#9B9B9B;">Founder, Prospera Properties · (519) 697-1227</span></p>
   `);
   return wrapper(content);
 }
