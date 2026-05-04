@@ -48,8 +48,8 @@ export async function POST(req: NextRequest) {
             ? landlordWelcomeEmail(name)
             : tenantWelcomeEmail(name, preferred_city),
         });
-      } catch {
-        // Don't block on email failure
+      } catch (emailErr) {
+        console.error("Resend error:", emailErr);
       }
     }
 
