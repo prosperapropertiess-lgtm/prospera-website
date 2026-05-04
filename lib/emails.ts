@@ -11,27 +11,25 @@ function wrapper(content: string): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prospera Properties</title>
+  <style>
+    @media only screen and (max-width: 620px) {
+      .email-body { padding: 28px 24px !important; }
+      .email-header { padding: 24px !important; }
+      .email-footer { padding: 24px !important; }
+    }
+  </style>
 </head>
-<body style="margin:0;padding:0;background-color:#F5F0EB;font-family:Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#F5F0EB;padding:40px 0;">
+<body style="margin:0;padding:0;background-color:#F5F0EB;font-family:Georgia,serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#F5F0EB;padding:24px 0;">
     <tr>
-      <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#FAF8F5;">
+      <td align="center" style="padding:0 16px;">
+        <table cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#FAF8F5;">
 
           <!-- Header -->
           <tr>
-            <td style="background-color:#0A1628;padding:32px 40px;">
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td>
-                    <p style="margin:0;font-size:22px;font-weight:300;color:#FAF8F5;letter-spacing:1px;">Prospera Properties</p>
-                    <p style="margin:4px 0 0;font-size:11px;color:rgba(250,248,245,0.5);letter-spacing:2px;text-transform:uppercase;">London · St. Thomas · Strathroy</p>
-                  </td>
-                  <td align="right">
-                    <p style="margin:0;font-size:11px;color:#C5A55A;letter-spacing:2px;text-transform:uppercase;">Ontario, Canada</p>
-                  </td>
-                </tr>
-              </table>
+            <td class="email-header" style="background-color:#0A1628;padding:28px 40px;">
+              <p style="margin:0;font-size:20px;font-weight:300;color:#FAF8F5;letter-spacing:1px;">Prospera Properties</p>
+              <p style="margin:6px 0 0;font-size:13px;color:#C5A55A;letter-spacing:1px;">London · St. Thomas · Strathroy</p>
             </td>
           </tr>
 
@@ -40,16 +38,16 @@ function wrapper(content: string): string {
 
           <!-- Body -->
           <tr>
-            <td style="padding:40px;">
+            <td class="email-body" style="padding:40px;">
               ${content}
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td style="background-color:#0A1628;padding:28px 40px;">
-              <p style="margin:0 0 8px;font-size:12px;color:rgba(250,248,245,0.5);">Prospera Properties · (519) 697-1227 · <a href="mailto:hello@prosperaproperties.co" style="color:#C5A55A;text-decoration:none;">hello@prosperaproperties.co</a></p>
-              <p style="margin:0;font-size:11px;color:rgba(250,248,245,0.3);">London, St. Thomas &amp; Strathroy, Ontario · <a href="${BASE_URL}" style="color:rgba(250,248,245,0.4);text-decoration:none;">prosperaproperties.co</a></p>
+            <td class="email-footer" style="background-color:#0A1628;padding:24px 40px;">
+              <p style="margin:0 0 6px;font-size:14px;color:rgba(250,248,245,0.6);">Prospera Properties · <a href="mailto:hello@prosperaproperties.co" style="color:#C5A55A;text-decoration:none;">hello@prosperaproperties.co</a></p>
+              <p style="margin:0;font-size:13px;color:rgba(250,248,245,0.35);"><a href="${BASE_URL}" style="color:rgba(250,248,245,0.35);text-decoration:none;">prosperaproperties.co</a></p>
             </td>
           </tr>
 
@@ -100,23 +98,39 @@ export function landlordWelcomeEmail(name: string): string {
   const PDF_URL = `${BASE_URL}/lease-addendum.pdf`;
 
   const content = bodyText(`
-    <p style="margin:0 0 24px;font-size:16px;color:#2C2C2C;">Hey ${name || "there"},</p>
+    <p style="margin:0 0 28px;font-size:18px;color:#2C2C2C;line-height:1.5;">Hey ${name || "there"},</p>
 
-    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open.</p>
+    <p style="margin:0 0 28px;font-size:18px;color:#2C2C2C;line-height:1.7;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open.</p>
 
-    ${btn("Download the Addendum (PDF)", PDF_URL)}
+    <table cellpadding="0" cellspacing="0" style="margin:0 0 36px;">
+      <tr>
+        <td style="background-color:#0A1628;padding:18px 36px;border-radius:2px;">
+          <a href="${PDF_URL}" style="color:#FAF8F5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:0.5px;">Download the Addendum (PDF) →</a>
+        </td>
+      </tr>
+    </table>
 
-    ${divider()}
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 36px;">
+      <tr><td style="height:1px;background-color:#E8E4DF;"></td></tr>
+    </table>
 
-    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">I'm Ebin. I run Prospera Properties — property management in London, St. Thomas, and Strathroy.</p>
+    <p style="margin:0 0 24px;font-size:18px;color:#2C2C2C;line-height:1.7;">I'm Ebin. I run Prospera Properties — full property management across London, St. Thomas, and Strathroy.</p>
 
-    <p style="margin:0 0 16px;font-size:16px;color:#2C2C2C;line-height:1.7;">If you ever want someone to take your rental off your hands — tenant screening, rent collection, maintenance, all of it — that's what we do.</p>
+    <p style="margin:0 0 32px;font-size:18px;color:#2C2C2C;line-height:1.7;">If you ever want someone to handle your rental — screening, rent, maintenance, all of it — that's what we do.</p>
 
-    ${btn("See How It Works", `${BASE_URL}/landlords`)}
+    <table cellpadding="0" cellspacing="0" style="margin:0 0 36px;">
+      <tr>
+        <td style="background-color:#C5A55A;padding:18px 36px;border-radius:2px;">
+          <a href="${BASE_URL}/landlords" style="color:#0A1628;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:0.5px;">See How It Works →</a>
+        </td>
+      </tr>
+    </table>
 
-    ${divider()}
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;">
+      <tr><td style="height:1px;background-color:#E8E4DF;"></td></tr>
+    </table>
 
-    <p style="margin:0;font-size:15px;color:#2C2C2C;">Reply to this email anytime. I read every one.<br/><br/>— Ebin<br/><span style="color:#9B9B9B;">(519) 697-1227</span></p>
+    <p style="margin:0;font-size:17px;color:#2C2C2C;line-height:1.7;">Reply to this email anytime — I read every one.<br/><br/>— Ebin<br/><span style="color:#9B9B9B;font-size:15px;">(519) 697-1227</span></p>
   `);
   return wrapper(content);
 }
