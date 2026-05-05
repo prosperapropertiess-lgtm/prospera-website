@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Review {
@@ -213,40 +213,9 @@ function Carousel({ data }: { data: ReviewsData }) {
 }
 
 export default function GoogleReviews() {
-  const [data, setData] = useState<ReviewsData | null>(null);
-  const [tried, setTried] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/google-reviews")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.reviews?.length) setData(d);
-      })
-      .catch(() => {})
-      .finally(() => setTried(true));
-  }, []);
-
-  // Show loading briefly, then fall back to static
-  if (!tried) {
-    return (
-      <div className="text-center py-12">
-        <div className="flex justify-center gap-2">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="w-2 h-2 rounded-full bg-[#C5A55A] animate-bounce"
-              style={{ animationDelay: `${i * 0.15}s` }}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  // Live data if available, otherwise static real reviews
   return (
     <Carousel
-      data={data || { reviews: STATIC_REVIEWS, rating: 5.0, total: 20 }}
+      data={{ reviews: STATIC_REVIEWS, rating: 5.0, total: 20 }}
     />
   );
 }
