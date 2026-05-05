@@ -18,12 +18,12 @@ const faqs = [
     a: "On a $2,000/month rental: Managed (8%) is $160/month. Passive (15%) is $300/month. The difference is $140/month — but free placement alone saves you $2,000+ every vacancy. One tenant turnover and Passive pays for itself for over a year.",
   },
   {
-    q: "What's the 21-Day Guarantee?",
-    a: "On our Passive plan, if we don't place a qualified, screened tenant within 21 days of your unit being available — your first month of management is free. No asterisks, no excuses. We put money on it.",
+    q: "What's the 90-Day Happiness Guarantee?",
+    a: "Simple — if you're not completely happy with how we manage your property in the first 90 days, walk away. No cancellation fees, no questions asked. We're that confident in what we do.",
   },
   {
-    q: "What does 'zero maintenance markup' mean?",
-    a: "When repairs are needed, you pay the contractor directly at their actual rate. We never add a percentage on top. Most property managers quietly charge 10–20% on every repair — that's $100 extra on a $500 job. We charge zero. Ever.",
+    q: "What does the 8% maintenance markup mean?",
+    a: "We coordinate all repairs and charge a small 8% coordination fee on contractor invoices. That's it — no inflated quotes, no mystery markups. Most property managers charge 10–20%. We keep it honest.",
   },
   {
     q: "Do you charge while the property is vacant?",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "What's included in tenant placement?",
-    a: "Professional photos, listing on all major platforms, full tenant screening (credit check, income verification, reference calls), lease preparation, and move-in coordination. A standalone placement service charges $500–$1,000 for this. It's included.",
+    a: "Professional photos, listing on all major platforms, full tenant screening (credit check, income verification, reference calls), lease preparation, and move-in coordination. All included in your plan.",
   },
   {
     q: "Why only 3 new properties per month?",
@@ -44,7 +44,7 @@ const faqs = [
 ];
 
 const comparison = [
-  { item: "Maintenance markup", us: "0% — always", them: "10–20% per job" },
+  { item: "Maintenance markup", us: "8% — transparent", them: "10–20% per job" },
   { item: "Setup fee", us: "None", them: "$200–$500" },
   { item: "Vacancy fee", us: "None", them: "50% of rent" },
   { item: "Lease renewal fee", us: "Free", them: "$150–$300" },
@@ -58,7 +58,7 @@ const valueStack = [
   { item: "Professional photography & listing", value: "$200–$500", note: "one-time per vacancy" },
   { item: "Lease preparation & review", value: "$200–$400", note: "one-time per lease" },
   { item: "Move-in / move-out inspection", value: "$100–$200", note: "one-time per tenant" },
-  { item: "Maintenance coordination", value: "10–20% markup", note: "on every repair — forever" },
+  { item: "Maintenance coordination", value: "10–20% markup", note: "what others charge on every repair" },
   { item: "Chasing late rent", value: "Hours of your time", note: "every single month" },
   { item: "2am emergency calls", value: "Your sleep", note: "priceless" },
 ];
@@ -145,7 +145,7 @@ export default function PricingPage() {
                     "Full tenant screening & placement",
                     "Rent collection & disbursement",
                     "Maintenance coordination",
-                    "0% markup on all repairs — always",
+                    "8% maintenance markup — transparent, no surprises",
                     "Lease management & renewals",
                     "Move-in / move-out inspection",
                     "Monthly financial statements",
@@ -241,11 +241,11 @@ export default function PricingPage() {
                   {[
                     "Everything in Optimized",
                     "FREE placement — saves $2,000 every vacancy",
-                    "21-Day Guarantee — or first month free",
+                    "90-Day Happiness Guarantee — walk away if not satisfied",
                     "Pre-vacancy marketing before tenant leaves",
                     "Quarterly property inspections",
                     "Annual landlord strategy call",
-                    "Zero risk. Zero vacancy fees. Zero markup.",
+                    "Zero risk. Zero vacancy fees. Zero lock-in.",
                   ].map((f, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
@@ -270,7 +270,7 @@ export default function PricingPage() {
             <div className="p-5 text-center border border-[#E8E4DF] bg-white rounded-2xl">
               <p className="text-sm text-[#7A7A7A]" style={{ fontFamily: "var(--font-jakarta)" }}>
                 All plans include:{" "}
-                <strong className="text-[#0A1628]">zero maintenance markup</strong> ·{" "}
+                <strong className="text-[#0A1628]">8% maintenance markup</strong> ·{" "}
                 <strong className="text-[#0A1628]">no setup fee</strong> ·{" "}
                 <strong className="text-[#0A1628]">no vacancy fee</strong> ·{" "}
                 <strong className="text-[#0A1628]">free lease renewal</strong>
@@ -283,23 +283,23 @@ export default function PricingPage() {
       {/* 21-Day Guarantee */}
       <section className="py-24 px-6 bg-[#0A1628] text-center">
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The Passive Guarantee</p>
+          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The 90-Day Happiness Guarantee</p>
           <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-6 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>
-            Qualified tenant in 21 days.
-            <br />Or your first month is free.
+            Not happy in 90 days?
+            <br />Walk away. No fees. No questions.
           </h2>
           <p className="text-white/60 text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
-            On our Passive plan, if we don&apos;t place a fully screened, qualified tenant within 21 days of your unit being available — your first month of management is on us.
+            If we don&apos;t deliver in your first 90 days — you cancel, we part ways, and you owe us nothing. No cancellation fees, no penalty, no awkward conversation.
           </p>
           <p className="text-white/40 text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
-            No asterisks. No fine print. We put our money where our mouth is because we know we&apos;ll deliver.
+            We offer this because we&apos;re confident we&apos;ll earn your trust long before 90 days is up.
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 bg-[#C5A55A] text-[#0A1628] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
             style={{ fontFamily: "var(--font-jakarta)" }}
           >
-            Claim the Guarantee
+            Start Risk-Free
           </Link>
         </FadeIn>
       </section>
