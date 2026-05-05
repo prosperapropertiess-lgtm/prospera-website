@@ -11,7 +11,7 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-gray-200">
+    <div className="divide-y divide-[#1E3050]">
       {items.map((item, i) => (
         <div key={i} className="py-5">
           <button

@@ -65,7 +65,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
       >
         <div className="h-1 w-full" style={{ backgroundColor: "#C5A55A" }} />
         <div className="p-8">
-          <button onClick={onClose} className="absolute top-4 right-5 text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+          <button onClick={onClose} className="absolute top-4 right-5 text-[#8098B4] hover:text-[#FAF8F5] text-xl leading-none">×</button>
           {status === "success" ? (
             <div className="text-center py-6">
               <p className="text-4xl mb-2">📬</p>

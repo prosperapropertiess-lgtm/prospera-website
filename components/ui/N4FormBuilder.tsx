@@ -579,7 +579,7 @@ export default function N4FormBuilder() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => { setStep("form"); }}
-                  className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:bg-gray-50"
+                  className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:bg-[#1E3050]"
                   style={{ borderColor: "#1E3050", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fill Another N4

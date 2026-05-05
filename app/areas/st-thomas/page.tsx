@@ -33,7 +33,7 @@ export default function StThomasPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in St. Thomas, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas is one of Ontario's most exciting rental markets right now. We're on the ground helping landlords capitalize on it.
           </p>
           <Link
@@ -160,7 +160,7 @@ export default function StThomasPage() {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in St. Thomas?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             We're actively growing our St. Thomas portfolio. Get a free rental estimate and management proposal.
           </p>
           <Link

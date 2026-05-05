@@ -135,7 +135,7 @@ export default function ResourcesPage() {
                 ))}
               </div>
               <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(45,106,79,0.2)", backgroundColor: "#0a1a0f" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   Now
                 </p>
                 {[
@@ -147,7 +147,7 @@ export default function ResourcesPage() {
                   "Sign it and serve it. Done.",
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#2D6A4F" }}>✓</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
                     <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}

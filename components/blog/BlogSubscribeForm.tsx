@@ -86,7 +86,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
             <p className="text-3xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               You&apos;re subscribed.
             </p>
-            <p className="text-sm" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               Practical landlord tips from Prospera Properties, straight to your inbox.
             </p>
           </>
@@ -98,7 +98,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
             <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Stay ahead as an Ontario landlord.
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-8" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               New posts on Ontario law, eviction process, tenant screening, and more — no spam, unsubscribe anytime.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">

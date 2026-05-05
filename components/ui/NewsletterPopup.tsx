@@ -110,7 +110,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
               {/* Close */}
               <button
                 onClick={dismiss}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors text-lg leading-none"
+                className="absolute top-4 right-4 text-[#8098B4] hover:text-[#FAF8F5] transition-colors text-lg leading-none"
                 aria-label="Close"
               >
                 ×

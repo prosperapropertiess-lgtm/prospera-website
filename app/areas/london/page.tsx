@@ -47,7 +47,7 @@ export default function LondonPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in London, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             Hands-on management for London landlords — from tenant screening to rent collection to 24/7 maintenance. We handle everything so you don't have to.
           </p>
           <Link
@@ -182,7 +182,7 @@ export default function LondonPage() {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in London, Ontario?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             Let's talk about your property. Free consultation, honest assessment, no pressure.
           </p>
           <Link

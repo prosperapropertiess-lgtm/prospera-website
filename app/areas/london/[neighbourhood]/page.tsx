@@ -65,7 +65,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in {n.name}
           </h1>
-          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             {n.description}
           </p>
           <Link
@@ -153,7 +153,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           Own a Rental in {n.name}?
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
           We manage properties across {n.name} and all of London. Free consultation, no pressure.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -103,11 +103,11 @@ export default function ListingsPage() {
             ))}
           </div>
 
-          <div className="w-px h-6 bg-gray-200 hidden md:block" />
+          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
 
           {/* Bedrooms */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Beds:</span>
+            <span className="text-xs text-[#8098B4]">Beds:</span>
             {BEDS.map((b) => (
               <button
                 key={b}
@@ -119,11 +119,11 @@ export default function ListingsPage() {
             ))}
           </div>
 
-          <div className="w-px h-6 bg-gray-200 hidden md:block" />
+          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
 
           {/* Max Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-gray-400 whitespace-nowrap">Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs text-[#8098B4] whitespace-nowrap">Max: ${maxPrice.toLocaleString()}/mo</span>
             <input
               type="range"
               min={800}
@@ -135,7 +135,7 @@ export default function ListingsPage() {
             />
           </div>
 
-          <div className="w-px h-6 bg-gray-200 hidden md:block" />
+          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
 
           {/* Pet Friendly */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -148,7 +148,7 @@ export default function ListingsPage() {
             <span className="text-xs text-[#B0B8C4]">Pet Friendly</span>
           </label>
 
-          <div className="ml-auto text-xs text-gray-400">
+          <div className="ml-auto text-xs text-[#8098B4]">
             {loading ? "Loading..." : `${filtered.length} ${filtered.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
@@ -161,11 +161,11 @@ export default function ListingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="bg-[#112035] rounded-xl overflow-hidden shadow-sm animate-pulse">
-                  <div className="h-56 bg-gray-200" />
+                  <div className="h-56 bg-[#1E3050]" />
                   <div className="p-6 space-y-3">
-                    <div className="h-4 bg-gray-200 rounded w-3/4" />
-                    <div className="h-3 bg-gray-200 rounded w-1/2" />
-                    <div className="h-3 bg-gray-200 rounded w-1/3" />
+                    <div className="h-4 bg-[#1E3050] rounded w-3/4" />
+                    <div className="h-3 bg-[#1E3050] rounded w-1/2" />
+                    <div className="h-3 bg-[#1E3050] rounded w-1/3" />
                   </div>
                 </div>
               ))}
@@ -217,7 +217,7 @@ export default function ListingsPage() {
                       <p className="text-xs text-[#B0B8C4] mb-3">{p.address}, {p.city}</p>
 
                       {/* Specs */}
-                      <div className="flex gap-4 text-xs text-gray-500 mb-4">
+                      <div className="flex gap-4 text-xs text-[#8098B4] mb-4">
                         <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
                         <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
                         {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
@@ -228,7 +228,7 @@ export default function ListingsPage() {
 
                       <div className="flex items-center justify-between">
                         <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5]">
-                          ${p.price.toLocaleString()}<span className="text-sm text-gray-400 font-sans">/mo</span>
+                          ${p.price.toLocaleString()}<span className="text-sm text-[#8098B4] font-sans">/mo</span>
                         </p>
                         <Link
                           href={`/listings/${p.id}`}

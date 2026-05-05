@@ -142,7 +142,7 @@ export default function BlogPage() {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Get New Articles in Your Inbox
           </h2>
-          <p className="text-sm mb-8" style={{ color: "#A0A0A0", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             Ontario landlord tips, market updates, and legal guides — straight to your inbox, no spam.
           </p>
           <form className="flex gap-3 max-w-md mx-auto">
