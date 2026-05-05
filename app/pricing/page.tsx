@@ -135,7 +135,7 @@ export default function PricingPage() {
                   <p className="text-sm text-[#9B9B9B] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
                     + 1 month&apos;s rent (placement)
                   </p>
-                  <p className="text-sm text-[#5A5A5A] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  <p className="text-base text-[#2C2C2C] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
                     Everything handled. You collect rent and do nothing else.
                   </p>
                 </div>
@@ -151,7 +151,7 @@ export default function PricingPage() {
                     "Monthly financial statements",
                     "No vacancy fee. Ever.",
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
+                    <li key={i} className="flex items-start gap-3 text-base text-[#2C2C2C]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
                       {f}
                     </li>
@@ -179,12 +179,12 @@ export default function PricingPage() {
                   <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>Optimized</p>
                   <div className="flex items-end gap-2 mb-1">
                     <p className="text-6xl font-light text-[#FAF8F5]" style={{ fontFamily: "var(--font-cormorant)" }}>12%</p>
-                    <p className="text-sm text-white/40 mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
+                    <p className="text-sm text-[#FAF8F5] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
-                  <p className="text-sm text-white/40 mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  <p className="text-sm text-[#FAF8F5] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
                     + 75% of one month&apos;s rent (placement)
                   </p>
-                  <p className="text-sm text-white/60 mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  <p className="text-base text-[#E8E4DF] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
                     Your property works harder for you. Proactive rent optimization keeps your income growing.
                   </p>
                 </div>
@@ -199,7 +199,7 @@ export default function PricingPage() {
                     "Priority 24-hour response",
                     "Tenant renewal negotiation",
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                    <li key={i} className="flex items-start gap-3 text-base text-[#FAF8F5]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
                       {f}
                     </li>
@@ -229,11 +229,11 @@ export default function PricingPage() {
                     <p className="text-6xl font-light text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>15%</p>
                     <p className="text-sm text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
-                  <p className="text-sm font-semibold text-green-700 mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  <p className="text-sm font-semibold text-[#C5A55A] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
                     Placement: FREE every single time ($2,000 value)
                   </p>
-                  <p className="text-sm text-[#5A5A5A] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    True passive income. We guarantee a tenant in 21 days — or your first month is free.
+                  <p className="text-base text-[#2C2C2C] mt-4 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+                    True passive income — backed by our 90-Day Happiness Guarantee. Not happy? Walk away free.
                   </p>
                 </div>
 
@@ -241,13 +241,13 @@ export default function PricingPage() {
                   {[
                     "Everything in Optimized",
                     "FREE placement — saves $2,000 every vacancy",
-                    "90-Day Happiness Guarantee — walk away if not satisfied",
+                    "90-Day Happiness Guarantee — no questions asked",
                     "Pre-vacancy marketing before tenant leaves",
                     "Quarterly property inspections",
                     "Annual landlord strategy call",
                     "Zero risk. Zero vacancy fees. Zero lock-in.",
                   ].map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-[#5A5A5A]">
+                    <li key={i} className="flex items-start gap-3 text-base text-[#2C2C2C]">
                       <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
                       {f}
                     </li>
@@ -288,10 +288,10 @@ export default function PricingPage() {
             Not happy in 90 days?
             <br />Walk away. No fees. No questions.
           </h2>
-          <p className="text-white/60 text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-[#E8E4DF] text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
             If we don&apos;t deliver in your first 90 days — you cancel, we part ways, and you owe us nothing. No cancellation fees, no penalty, no awkward conversation.
           </p>
-          <p className="text-white/40 text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-[#FAF8F5] text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
             We offer this because we&apos;re confident we&apos;ll earn your trust long before 90 days is up.
           </p>
           <Link
@@ -344,7 +344,7 @@ export default function PricingPage() {
                     <p className="text-sm text-[#5A5A5A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
                   </div>
                   <div key={`passive-${i}`} className="bg-[#0A1628]/5 px-6 py-4 text-center">
-                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-green-700" : "text-[#0A1628]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
+                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-[#C5A55A]" : "text-[#0A1628]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
                   </div>
                 </>
               ))}
@@ -379,7 +379,7 @@ export default function PricingPage() {
                 {
                   label: "The Markup Tax",
                   amount: "$50–200",
-                  detail: "Extra per repair when your PM charges 10–20% on every contractor invoice. We charge zero.",
+                  detail: "Extra per repair when your PM charges 10–20% on every contractor invoice. We charge a flat 8%.",
                 },
                 {
                   label: "Your Time",
@@ -390,7 +390,7 @@ export default function PricingPage() {
                 <div key={i} className="bg-[#FAF8F5] border border-[#E8E4DF] rounded-2xl p-6">
                   <p className="text-xs uppercase tracking-widest text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
                   <p className="text-4xl font-light text-[#0A1628] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
-                  <p className="text-sm text-[#5A5A5A] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
+                  <p className="text-base text-[#2C2C2C] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -416,7 +416,7 @@ export default function PricingPage() {
                 <thead>
                   <tr className="bg-white border-b border-[#E8E4DF]">
                     <th className="text-left px-6 py-4 text-[#0A1628] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
-                    <th className="text-center px-6 py-4 text-green-700 font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
+                    <th className="text-center px-6 py-4 text-[#C5A55A] font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
                     <th className="text-center px-6 py-4 text-[#9B9B9B] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
                   </tr>
                 </thead>
@@ -424,7 +424,7 @@ export default function PricingPage() {
                   {comparison.map((row, i) => (
                     <tr key={i} className="hover:bg-[#FAF8F5] transition-colors">
                       <td className="px-6 py-4 text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</td>
-                      <td className="px-6 py-4 text-center font-semibold text-green-700" style={{ fontFamily: "var(--font-jakarta)" }}>{row.us}</td>
+                      <td className="px-6 py-4 text-center font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.us}</td>
                       <td className="px-6 py-4 text-center text-[#9B9B9B]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.them}</td>
                     </tr>
                   ))}
@@ -456,7 +456,7 @@ export default function PricingPage() {
             Ready to stop managing
             <br />and start earning?
           </h2>
-          <p className="text-white/60 text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-[#E8E4DF] text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
             Free 15-minute call. No pressure. Just an honest conversation about your property and what it could be earning.
           </p>
           <Link
