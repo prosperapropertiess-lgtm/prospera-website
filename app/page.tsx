@@ -715,7 +715,7 @@ function StickyCTA() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4"
+          className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4 pr-20 sm:pr-8"
           style={{
             backgroundColor: "#060E1C",
             borderTop: "1px solid rgba(250,248,245,0.08)",
@@ -723,7 +723,7 @@ function StickyCTA() {
         >
           <p
             className="text-xs sm:text-sm"
-            style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             <span className="sm:hidden">Free landlord quote</span>
             <span className="hidden sm:inline">Own a rental in Southwestern Ontario?</span>
