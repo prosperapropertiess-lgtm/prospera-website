@@ -18,21 +18,32 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
-    // Don't show if already dismissed this session
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
-    const timer = setTimeout(() => setVisible(true), delayMs);
+    const show = () => {
+      if (!sessionStorage.getItem(STORAGE_KEY)) setVisible(true);
+    };
+
+    // Timer fallback — 15 seconds
+    const timer = setTimeout(show, delayMs);
+
+    // Scroll trigger — fires at 50% page depth
+    const onScroll = () => {
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      if (scrolled / total >= 0.5) show();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // Exit-intent on desktop
     const onMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !sessionStorage.getItem(STORAGE_KEY)) {
-        setVisible(true);
-      }
+      if (e.clientY <= 0) show();
     };
     document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, [delayMs]);
