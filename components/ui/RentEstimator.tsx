@@ -53,15 +53,15 @@ export default function RentEstimator() {
   }
 
   return (
-    <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#F5F0EB" }}>
+    <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#0D1B2A" }}>
       <div className="max-w-2xl mx-auto">
         <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
-        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           What Could Your Property Rent For?
         </h2>
-        <p className="text-sm mb-8" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
           Get an instant estimate based on current market rents in your city.
         </p>
 
@@ -71,7 +71,7 @@ export default function RentEstimator() {
             value={city}
             onChange={(e) => { setCity(e.target.value); setResult(null); }}
             className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: city ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: city ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Select city</option>
             <option value="London">London, ON</option>
@@ -83,7 +83,7 @@ export default function RentEstimator() {
             value={beds}
             onChange={(e) => { setBeds(e.target.value ? Number(e.target.value) : ""); setResult(null); }}
             className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-            style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: beds !== "" ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: beds !== "" ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Bedrooms</option>
             <option value="1">1 Bedroom</option>
@@ -104,14 +104,14 @@ export default function RentEstimator() {
 
         {/* Result */}
         {result && (
-          <div className="border bg-white p-6 mt-2 rounded-xl" style={{ borderColor: "#E8E4DF" }}>
+          <div className="border bg-[#112035] p-6 mt-2 rounded-xl" style={{ borderColor: "#1E3050" }}>
             <div className="flex items-baseline gap-3 mb-3">
-              <p className="text-5xl font-light" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-5xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 ${result.low.toLocaleString()} – ${result.high.toLocaleString()}
               </p>
-              <span className="text-sm" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>/month</span>
+              <span className="text-sm" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
-            <p className="text-xs mb-6" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mb-6" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               Estimated range for a {beds}-bedroom in {city} based on Q1 2026 market data. Actual rent depends on unit condition, inclusions, and location within the city.
             </p>
 
@@ -121,7 +121,7 @@ export default function RentEstimator() {
               </p>
             ) : (
               <form onSubmit={captureEmail}>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                   Want a detailed breakdown for your specific property?
                 </p>
                 <div className="flex gap-3">
@@ -132,7 +132,7 @@ export default function RentEstimator() {
                     placeholder="Your email address"
                     required
                     className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-                    style={{ borderColor: "#E8E4DF", backgroundColor: "#FAF8F5", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ borderColor: "#1E3050", backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                   />
                   <button
                     type="submit"

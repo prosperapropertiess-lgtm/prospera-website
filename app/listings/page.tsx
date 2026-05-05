@@ -88,7 +88,7 @@ export default function ListingsPage() {
       </section>
 
       {/* Filter Bar */}
-      <div className="sticky top-20 z-40 bg-white border-b border-gray-100 shadow-sm">
+      <div className="sticky top-20 z-40 bg-[#112035] border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
           {/* City */}
           <div className="flex gap-2 flex-wrap">
@@ -96,7 +96,7 @@ export default function ListingsPage() {
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#1A1A1A]"}`}
+                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#FAF8F5]"}`}
               >
                 {c}
               </button>
@@ -155,12 +155,12 @@ export default function ListingsPage() {
       </div>
 
       {/* Listings Grid */}
-      <section className="py-16 px-6 bg-[#FAF8F5] min-h-[60vh]">
+      <section className="py-16 px-6 bg-[#0A1628] min-h-[60vh]">
         <div className="max-w-6xl mx-auto">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse">
+                <div key={i} className="bg-[#112035] rounded-xl overflow-hidden shadow-sm animate-pulse">
                   <div className="h-56 bg-gray-200" />
                   <div className="p-6 space-y-3">
                     <div className="h-4 bg-gray-200 rounded w-3/4" />
@@ -172,7 +172,7 @@ export default function ListingsPage() {
             </div>
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
-              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#1A1A1A] mb-3">No listings available right now.</p>
+              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">No listings available right now.</p>
               <p className="text-sm text-[#2D4A5E] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
               <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
                 Contact Us
@@ -182,7 +182,7 @@ export default function ListingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((p, i) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
-                  <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow">
+                  <div className="bg-[#112035] rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow">
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <Image
@@ -204,7 +204,7 @@ export default function ListingsPage() {
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">
-                          <span className="bg-white/90 text-[#2D4A5E] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
+                          <span className="bg-[#112035]/90 text-[#2D4A5E] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
                         </div>
                       )}
                     </div>
@@ -212,7 +212,7 @@ export default function ListingsPage() {
                     {/* Details */}
                     <div className="p-6">
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#1A1A1A] leading-tight">{p.title}</h3>
+                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] leading-tight">{p.title}</h3>
                       </div>
                       <p className="text-xs text-[#2D4A5E] mb-3">{p.address}, {p.city}</p>
 
@@ -227,7 +227,7 @@ export default function ListingsPage() {
                       <p className="text-xs text-[#2D4A5E] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
 
                       <div className="flex items-center justify-between">
-                        <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#1A1A1A]">
+                        <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5]">
                           ${p.price.toLocaleString()}<span className="text-sm text-gray-400 font-sans">/mo</span>
                         </p>
                         <Link
@@ -247,9 +247,9 @@ export default function ListingsPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 px-6 bg-white text-center border-t border-gray-100">
+      <section className="py-16 px-6 bg-[#112035] text-center border-t border-gray-100">
         <FadeIn>
-          <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#1A1A1A] mb-3">
+          <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">
             Don&apos;t see what you&apos;re looking for?
           </p>
           <p className="text-sm text-[#2D4A5E] mb-6">

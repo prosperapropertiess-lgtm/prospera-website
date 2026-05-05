@@ -139,7 +139,7 @@ export default function ChatWidget() {
             style={{ maxHeight: "70vh", backgroundColor: "#FFFDFB", border: "1px solid #E8E4DF" }}
           >
             {/* Header */}
-            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#1A1A1A" }}>
+            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#060E1C" }}>
               <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
@@ -170,10 +170,10 @@ export default function ChatWidget() {
 
               {loading && (
                 <div className="flex justify-start">
-                  <div className="px-4 py-3 rounded-2xl" style={{ backgroundColor: "#F5F0EB", borderRadius: "1rem 1rem 1rem 0.25rem" }}>
+                  <div className="px-4 py-3 rounded-2xl" style={{ backgroundColor: "#0D1B2A", borderRadius: "1rem 1rem 1rem 0.25rem" }}>
                     <div className="flex gap-1">
                       {[0, 1, 2].map((i) => (
-                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1A1A1A", opacity: 0.4 }}
+                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#060E1C", opacity: 0.4 }}
                           animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }} />
                       ))}
                     </div>
@@ -183,19 +183,19 @@ export default function ChatWidget() {
 
               {/* Lead capture form */}
               {showLeadForm && !leadSubmitted && (
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4" style={{ backgroundColor: "#F5F0EB", border: "1px solid #E8E4DF" }}>
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4" style={{ backgroundColor: "#0D1B2A", border: "1px solid #E8E4DF" }}>
                   <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                     Want Ebin to follow up?
                   </p>
                   <form onSubmit={submitLead} className="space-y-2">
-                    <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="w-full px-3 py-2 text-sm rounded-lg border bg-white" style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }} />
-                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border bg-white" style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }} />
-                    <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border bg-white" style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }} />
+                    <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
+                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
+                    <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
                     <div className="flex gap-2">
                       <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
-                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                         Skip
                       </button>
                     </div>
@@ -207,7 +207,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input */}
-            <div className="px-4 py-3 border-t" style={{ borderColor: "#E8E4DF" }}>
+            <div className="px-4 py-3 border-t" style={{ borderColor: "#1E3050" }}>
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -216,14 +216,14 @@ export default function ChatWidget() {
                   onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && send()}
                   placeholder="Ask anything..."
                   className="flex-1 px-4 py-2.5 text-sm rounded-xl border focus:outline-none"
-                  style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)", backgroundColor: "#FAF8F5" }}
+                  style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)", backgroundColor: "#0A1628" }}
                   disabled={loading}
                 />
                 <button
                   onClick={send}
                   disabled={loading || !input.trim()}
                   className="w-10 h-10 rounded-xl flex items-center justify-center transition-opacity disabled:opacity-40"
-                  style={{ backgroundColor: "#1A1A1A" }}
+                  style={{ backgroundColor: "#060E1C" }}
                 >
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                 </button>

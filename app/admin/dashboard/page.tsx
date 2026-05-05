@@ -11,7 +11,7 @@ const METHODS = ["text", "call", "email", "in-person"];
 
 function StatCard({ label, value, sub, accent }: { label: string; value: string | number; sub?: string; accent?: boolean }) {
   return (
-    <div className="bg-white border border-gray-100 rounded-xl p-5">
+    <div className="bg-[#112035] border border-gray-100 rounded-xl p-5">
       <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">{label}</p>
       <p className={`text-3xl font-light ${accent ? "text-[#C5A55A]" : "text-black"}`}>{value}</p>
       {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
@@ -79,7 +79,7 @@ export default function DashboardPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5]">
+    <div className="min-h-screen bg-[#0A1628]">
       {/* Top bar */}
       <div className="bg-[#8B1A1A] text-white px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -126,7 +126,7 @@ export default function DashboardPage() {
             <StatCard label="Total" value={outreach.length} sub="All time" />
           </div>
           {outreach.length > 0 && (
-            <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+            <div className="bg-[#112035] border border-gray-100 rounded-xl overflow-hidden">
               {outreach.slice(0, 5).map((entry, i) => (
                 <div key={entry.id} className={`px-5 py-3 flex items-center justify-between ${i !== 0 ? "border-t border-gray-50" : ""}`}>
                   <div>
@@ -187,7 +187,7 @@ export default function DashboardPage() {
       {/* Log Outreach Modal */}
       {modal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl">
+          <div className="bg-[#112035] rounded-xl p-6 w-full max-w-md shadow-xl">
             <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-white mb-4">Log Outreach</h2>
             <div className="space-y-4">
               <div>
@@ -207,7 +207,7 @@ export default function DashboardPage() {
                     <button
                       key={m}
                       onClick={() => setForm((f) => ({ ...f, method: m }))}
-                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-white text-[#0D1117] border-white" : "border-gray-200 text-gray-500 hover:border-gray-400"}`}
+                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-[#112035] text-[#0D1117] border-white" : "border-gray-200 text-gray-500 hover:border-gray-400"}`}
                     >
                       {m}
                     </button>

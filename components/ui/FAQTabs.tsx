@@ -50,7 +50,7 @@ export default function FAQTabs() {
   return (
     <>
       {/* Tabs */}
-      <div className="border-b sticky top-[64px] z-10 px-6" style={{ backgroundColor: "#FAF8F5", borderColor: "#E8E4DF" }}>
+      <div className="border-b sticky top-[64px] z-10 px-6" style={{ backgroundColor: "#0A1628", borderColor: "#1E3050" }}>
         <div className="max-w-3xl mx-auto flex">
           {TABS.map((tab) => (
             <button

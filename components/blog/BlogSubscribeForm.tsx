@@ -26,10 +26,10 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
     return (
       <div
         className="my-12 px-8 py-8 border-l-4"
-        style={{ backgroundColor: "#F5F0EB", borderColor: "#C5A55A" }}
+        style={{ backgroundColor: "#0D1B2A", borderColor: "#C5A55A" }}
       >
         {status === "done" ? (
-          <p className="text-sm font-medium" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             You&apos;re in. We&apos;ll send practical landlord tips straight to your inbox.
           </p>
         ) : (
@@ -37,7 +37,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
             <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
               Landlord Insights
             </p>
-            <p className="text-lg font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-lg font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Get practical tips for Ontario landlords — delivered free.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
@@ -47,7 +47,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="flex-1 px-4 py-2.5 text-sm border focus:outline-none"
-                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "white", color: "#1A1A1A" }}
+                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "#112035", color: "#FAF8F5" }}
               />
               <input
                 type="email"
@@ -56,7 +56,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="flex-1 px-4 py-2.5 text-sm border focus:outline-none"
-                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "white", color: "#1A1A1A" }}
+                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "#112035", color: "#FAF8F5" }}
               />
               <button
                 type="submit"
@@ -79,7 +79,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
   }
 
   return (
-    <section className="py-16 px-6" style={{ backgroundColor: "#1A1A1A" }}>
+    <section className="py-16 px-6" style={{ backgroundColor: "#060E1C" }}>
       <div className="max-w-2xl mx-auto text-center">
         {status === "done" ? (
           <>

@@ -66,7 +66,7 @@ const milestones = [
 
 function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
   return (
-    <div className="p-5 border rounded-xl" style={{ backgroundColor: "#FFFDFB", borderColor: "#E8E4DF" }}>
+    <div className="p-5 border rounded-xl" style={{ backgroundColor: "#FFFDFB", borderColor: "#1E3050" }}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         <span
           className="text-xs font-semibold uppercase tracking-widest"
@@ -83,13 +83,13 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
       </div>
       <h3
         className="text-lg font-medium mb-2"
-        style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+        style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
       >
         {milestone.title}
       </h3>
       <p
         className="text-sm leading-relaxed"
-        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
       >
         {milestone.desc}
       </p>
@@ -194,7 +194,7 @@ function MilestoneNode({
             className="w-12 h-12 flex items-center justify-center border-2 text-lg"
             style={{
               borderColor: "#C5A55A",
-              backgroundColor: "#FAF8F5",
+              backgroundColor: "#0A1628",
               color: "#C5A55A",
             }}
           >
@@ -225,7 +225,7 @@ function MilestoneNode({
           className="w-10 h-10 flex items-center justify-center border-2 text-sm shrink-0 mt-1"
           style={{
             borderColor: "#C5A55A",
-            backgroundColor: "#FAF8F5",
+            backgroundColor: "#0A1628",
             color: "#C5A55A",
           }}
         >

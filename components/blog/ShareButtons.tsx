@@ -61,7 +61,7 @@ export default function ShareButtons({ url, title }: Props) {
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs uppercase tracking-widest mr-1" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+      <span className="text-xs uppercase tracking-widest mr-1" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
         Share
       </span>
       {shares.map((s) => (
@@ -72,7 +72,7 @@ export default function ShareButtons({ url, title }: Props) {
           rel="noopener noreferrer"
           aria-label={`Share on ${s.label}`}
           className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
-          style={{ borderColor: "#D4CFC9", color: "#5A5A5A" }}
+          style={{ borderColor: "#D4CFC9", color: "#8899AA" }}
         >
           {s.icon}
         </a>

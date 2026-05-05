@@ -44,12 +44,12 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
       <JsonLd data={schema} />
 
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
-        <p className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
           <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#C5A55A" }}>Strathroy</Link>
           {" → "}
           <span>{n.name}</span>
@@ -57,7 +57,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
       </div>
 
       {/* Hero */}
-      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <div className="max-w-3xl mx-auto">
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy, Ontario · {n.name}
@@ -79,29 +79,29 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* Rent ranges */}
-      <section className="py-14 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-14 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-light mb-10" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-3xl font-light mb-10" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Current Rental Rates in {n.name}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {n.avgRent.studio && (
-              <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
+              <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
+                <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
               </div>
             )}
-            <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
+            <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
+              <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
             </div>
-            <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
+            <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
+              <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
             </div>
             {n.avgRent.threeBed && (
-              <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
+              <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
+                <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
               </div>
             )}
@@ -113,33 +113,33 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl font-light mb-5" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               About {n.name}
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#2C2C2C", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
-            <p className="text-sm" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
+            <p className="text-sm" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
           </div>
           <div>
-            <h3 className="text-xl font-light mb-5" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Why Landlords Choose {n.name}
             </h3>
             <ul className="space-y-3 mb-8">
               {n.highlights.map((h) => (
-                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#2C2C2C", fontFamily: "var(--font-dm-sans)" }}>
+                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
                   <span style={{ color: "#C5A55A" }}>✓</span>
                   {h}
                 </li>
               ))}
             </ul>
-            <h3 className="text-xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Nearby Amenities
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#E8E4DF", color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}
@@ -149,7 +149,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           Own a Rental in {n.name}?
         </h2>

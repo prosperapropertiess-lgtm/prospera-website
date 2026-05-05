@@ -53,7 +53,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5]">
+    <div className="min-h-screen bg-[#0A1628]">
       {/* Top bar */}
       <div className="bg-[#8B1A1A] text-white px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-3xl text-[#1A1A1A] font-light">Properties</h1>
+            <h1 className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] font-light">Properties</h1>
             <p className="text-sm text-[#2D4A5E] mt-1">
               {loading ? "Loading..." : `${properties.length} total`}
             </p>
@@ -94,19 +94,19 @@ export default function AdminDashboard() {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-16 bg-white rounded animate-pulse" />
+              <div key={i} className="h-16 bg-[#112035] rounded animate-pulse" />
             ))}
           </div>
         ) : properties.length === 0 ? (
-          <div className="text-center py-24 bg-white rounded-xl border border-gray-100">
-            <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#1A1A1A] mb-3">No properties yet</p>
+          <div className="text-center py-24 bg-[#112035] rounded-xl border border-gray-100">
+            <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5] mb-3">No properties yet</p>
             <p className="text-sm text-[#2D4A5E] mb-6">Add your first property to get started.</p>
             <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 bg-[#8B1A1A] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors">
               Add Property
             </Link>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+          <div className="bg-[#112035] rounded-xl border border-gray-100 overflow-hidden">
             {/* Desktop table */}
             <table className="w-full hidden md:table">
               <thead>
@@ -122,7 +122,7 @@ export default function AdminDashboard() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {properties.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#FAF8F5] transition-colors group">
+                  <tr key={p.id} className="hover:bg-[#0A1628] transition-colors group">
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -132,11 +132,11 @@ export default function AdminDashboard() {
                       )}
                     </td>
                     <td className="px-4 py-4">
-                      <p className="text-sm font-medium text-[#1A1A1A]">{p.title}</p>
+                      <p className="text-sm font-medium text-[#FAF8F5]">{p.title}</p>
                       <p className="text-xs text-gray-400">{p.address}</p>
                     </td>
                     <td className="px-4 py-4 text-sm text-[#2D4A5E]">{p.city}</td>
-                    <td className="px-4 py-4 text-sm text-[#1A1A1A]">${p.price.toLocaleString()}/mo</td>
+                    <td className="px-4 py-4 text-sm text-[#FAF8F5]">${p.price.toLocaleString()}/mo</td>
                     <td className="px-4 py-4 text-sm text-[#2D4A5E]">{p.bedrooms} bed</td>
                     <td className="px-4 py-4">
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
@@ -145,7 +145,7 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
-                        <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#2D4A5E] hover:text-[#1A1A1A] transition-colors">
+                        <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#2D4A5E] hover:text-[#FAF8F5] transition-colors">
                           Edit
                         </Link>
                         <button
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
                     <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-300 flex-shrink-0">🏠</div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-[#1A1A1A] truncate">{p.title}</p>
+                    <p className="text-sm font-medium text-[#FAF8F5] truncate">{p.title}</p>
                     <p className="text-xs text-gray-400">{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
                     <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                       {p.available ? "Available" : "Unavailable"}

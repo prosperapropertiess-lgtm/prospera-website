@@ -61,7 +61,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
         exit={{ opacity: 0, scale: 0.96, y: 10 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[480px] shadow-2xl"
-        style={{ backgroundColor: "#FAF8F5" }}
+        style={{ backgroundColor: "#0A1628" }}
       >
         <div className="h-1 w-full" style={{ backgroundColor: "#C5A55A" }} />
         <div className="p-8">
@@ -69,8 +69,8 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
           {status === "success" ? (
             <div className="text-center py-6">
               <p className="text-4xl mb-2">📬</p>
-              <h3 className="text-2xl font-light mb-3" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
-              <p className="text-sm mb-6" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+              <h3 className="text-2xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
+              <p className="text-sm mb-6" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                 We've sent <strong>{resource.title}</strong> to {email}.
               </p>
               <button onClick={onClose} className="text-xs uppercase tracking-widest underline" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Close</button>
@@ -78,13 +78,13 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
           ) : (
             <>
               <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
-              <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
-              <p className="text-sm mb-6 leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+              <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
+              <p className="text-sm mb-6 leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                 Enter your email and we'll send it instantly. No spam — just the occasional landlord tip.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }} />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#E8E4DF", backgroundColor: "white", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }} />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }} />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border" style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }} />
                 {status === "error" && <p className="text-xs" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Something went wrong. Please try again.</p>}
                 <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50" style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                   {status === "loading" ? "Sending..." : "Send Me the Download"}
@@ -107,22 +107,22 @@ export default function ResourcesGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {RESOURCES.map((resource, i) => (
             <FadeIn key={resource.id} delay={i * 0.05}>
-              <div className="bg-white border flex flex-col h-full" style={{ borderColor: "#E8E4DF" }}>
+              <div className="bg-[#112035] border flex flex-col h-full" style={{ borderColor: "#1E3050" }}>
                 <div className="p-6 flex-1">
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <span className="text-3xl">{resource.icon}</span>
-                    <span className="text-xs uppercase tracking-wider px-2 py-1 shrink-0" style={{ backgroundColor: "#F5F0EB", color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="text-xs uppercase tracking-wider px-2 py-1 shrink-0" style={{ backgroundColor: "#0D1B2A", color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                       {CATEGORY_LABELS[resource.category]}
                     </span>
                   </div>
-                  <h3 className="text-lg font-medium mb-2 leading-snug" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{resource.description}</p>
+                  <h3 className="text-lg font-medium mb-2 leading-snug" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{resource.description}</p>
                 </div>
                 <div className="px-6 pb-6">
                   <button
                     onClick={() => setActiveResource(resource)}
-                    className="w-full py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5]"
-                    style={{ borderColor: "#1A1A1A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                    className="w-full py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5]"
+                    style={{ borderColor: "#1A1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Download Free
                   </button>

@@ -61,10 +61,10 @@ const situations = [
 
 export default function ResourcesPage() {
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
 
       {/* ── Hero ── */}
-      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
@@ -112,7 +112,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Before/After context strip ── */}
-      <section className="py-14 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-14 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -130,7 +130,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
-                    <p className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -148,7 +148,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#2D6A4F" }}>✓</span>
-                    <p className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -158,7 +158,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Which form do I need? ── */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#FAF8F5" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#0A1628" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p
@@ -169,7 +169,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Which form do I actually need?
             </h2>
@@ -186,7 +186,7 @@ export default function ResourcesPage() {
               <FadeIn key={s.formName} delay={i * 0.07}>
                 <div
                   className="rounded-xl border overflow-hidden"
-                  style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
+                  style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
                 >
                   <div className="p-6 md:p-8">
                     <div className="flex flex-col md:flex-row md:items-start gap-5">
@@ -197,7 +197,7 @@ export default function ResourcesPage() {
                           <div>
                             <p
                               className="font-semibold text-base leading-tight"
-                              style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                              style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                             >
                               {s.situation}
                             </p>
@@ -211,7 +211,7 @@ export default function ResourcesPage() {
                         </div>
                         <p
                           className="text-sm leading-relaxed mb-3"
-                          style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {s.plain}
                         </p>
@@ -244,7 +244,7 @@ export default function ResourcesPage() {
                           <div
                             className="text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border"
                             style={{
-                              borderColor: "#E8E4DF",
+                              borderColor: "#1E3050",
                               color: "#BBBBBB",
                               fontFamily: "var(--font-dm-sans)",
                             }}
@@ -258,8 +258,8 @@ export default function ResourcesPage() {
                           rel="noopener noreferrer"
                           className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:bg-[#F5F0EB]"
                           style={{
-                            borderColor: "#E8E4DF",
-                            color: "#5A5A5A",
+                            borderColor: "#1E3050",
+                            color: "#8899AA",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >
@@ -276,7 +276,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── N4 Form Builder ── */}
-      <section id="n4-builder" className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section id="n4-builder" className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p
@@ -287,7 +287,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl font-light text-center mb-10 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               N4 Form Builder
             </h2>
@@ -308,7 +308,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl font-light text-center mb-12 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Templates, guides &amp; checklists.
             </h2>
@@ -318,7 +318,7 @@ export default function ResourcesPage() {
       <ResourcesGrid />
 
       {/* ── CTA ── */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2
             className="text-4xl font-light mb-4 leading-tight"

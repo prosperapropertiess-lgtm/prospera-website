@@ -99,9 +99,9 @@ const faqs = [
 
 export default function LandlordsPage() {
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }}>
+    <div style={{ backgroundColor: "#0A1628" }}>
       {/* Hero */}
-      <section className="pt-36 pb-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="pt-36 pb-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
@@ -136,7 +136,7 @@ export default function LandlordsPage() {
             </a>
             <a
               href="#rent-estimator"
-              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-white/5 rounded-lg"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-[#112035]/5 rounded-lg"
               style={{ borderColor: "rgba(250,248,245,0.25)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Get a Free Rent Estimate
@@ -157,7 +157,7 @@ export default function LandlordsPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Small landlords face problems
               <br />
@@ -168,8 +168,8 @@ export default function LandlordsPage() {
             {painPoints.map((p, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div
-                  className="bg-white border p-7 rounded-xl"
-                  style={{ borderColor: "#E8E4DF" }}
+                  className="bg-[#112035] border p-7 rounded-xl"
+                  style={{ borderColor: "#1E3050" }}
                 >
                   <span
                     className="block text-2xl mb-4"
@@ -179,7 +179,7 @@ export default function LandlordsPage() {
                   </span>
                   <h3
                     className="font-semibold text-base mb-2"
-                    style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {p.label}
                   </h3>
@@ -197,7 +197,7 @@ export default function LandlordsPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p
@@ -208,7 +208,7 @@ export default function LandlordsPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               From first call to
               <br />
@@ -228,13 +228,13 @@ export default function LandlordsPage() {
                   <div>
                     <h3
                       className="text-xl font-medium mb-2"
-                      style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                     >
                       {step.title}
                     </h3>
                     <p
                       className="text-sm leading-relaxed"
-                      style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                     >
                       {step.desc}
                     </p>
@@ -252,7 +252,7 @@ export default function LandlordsPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+      <section id="pricing" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p
@@ -263,7 +263,7 @@ export default function LandlordsPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Simple plans.
               <br />
@@ -282,8 +282,8 @@ export default function LandlordsPage() {
             {/* Basic */}
             <FadeIn delay={0.08}>
               <div
-                className="bg-white border p-8 h-full flex flex-col rounded-xl"
-                style={{ borderColor: "#E8E4DF" }}
+                className="bg-[#112035] border p-8 h-full flex flex-col rounded-xl"
+                style={{ borderColor: "#1E3050" }}
               >
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
@@ -294,7 +294,7 @@ export default function LandlordsPage() {
                 <div className="mb-1">
                   <span
                     className="text-5xl font-light"
-                    style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                   >
                     10%
                   </span>
@@ -324,7 +324,7 @@ export default function LandlordsPage() {
                       <span className="text-xs mt-0.5 shrink-0" style={{ color: "#7A7A7A" }}>✓</span>
                       <span
                         className="text-sm"
-                        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                       >
                         {item}
                       </span>
@@ -334,7 +334,7 @@ export default function LandlordsPage() {
                 <Link
                   href="/contact"
                   className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-gray-50 rounded-lg"
-                  style={{ borderColor: "#E8E4DF", color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ borderColor: "#1E3050", color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Get Started
                 </Link>
@@ -345,7 +345,7 @@ export default function LandlordsPage() {
             <FadeIn delay={0.12}>
               <div
                 className="border p-8 h-full flex flex-col relative rounded-xl"
-                style={{ backgroundColor: "#1A1A1A", borderColor: "#1A1A1A" }}
+                style={{ backgroundColor: "#060E1C", borderColor: "#1A1A1A" }}
               >
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
@@ -411,12 +411,12 @@ export default function LandlordsPage() {
             {/* Gold — best value */}
             <FadeIn delay={0.16}>
               <div
-                className="bg-white border p-8 h-full flex flex-col relative rounded-xl"
+                className="bg-[#112035] border p-8 h-full flex flex-col relative rounded-xl"
                 style={{ borderColor: "#C4B08A" }}
               >
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ backgroundColor: "#C4B08A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#C4B08A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Best Value
                 </div>
@@ -429,7 +429,7 @@ export default function LandlordsPage() {
                 <div className="mb-1">
                   <span
                     className="text-5xl font-light"
-                    style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                   >
                     15%
                   </span>
@@ -464,7 +464,7 @@ export default function LandlordsPage() {
                       <span className="text-xs mt-0.5 shrink-0" style={{ color: "#C4B08A" }}>✓</span>
                       <span
                         className="text-sm"
-                        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                       >
                         {item}
                       </span>
@@ -474,7 +474,7 @@ export default function LandlordsPage() {
                 <Link
                   href="/contact"
                   className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-80 rounded-lg"
-                  style={{ borderColor: "#C4B08A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(196,176,138,0.08)" }}
+                  style={{ borderColor: "#C4B08A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(196,176,138,0.08)" }}
                 >
                   Get Started
                 </Link>
@@ -486,13 +486,13 @@ export default function LandlordsPage() {
           <FadeIn delay={0.2}>
             <div
               className="mt-8 p-6 text-center border rounded-xl"
-              style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
+              style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
             >
               <p
                 className="text-sm leading-relaxed"
-                style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
               >
-                All plans include: <strong style={{ color: "#1A1A1A" }}>zero maintenance markup</strong> · <strong style={{ color: "#1A1A1A" }}>no setup fee</strong> · <strong style={{ color: "#1A1A1A" }}>no vacancy fee</strong> · <strong style={{ color: "#1A1A1A" }}>free lease renewal</strong>
+                All plans include: <strong style={{ color: "#FAF8F5" }}>zero maintenance markup</strong> · <strong style={{ color: "#FAF8F5" }}>no setup fee</strong> · <strong style={{ color: "#FAF8F5" }}>no vacancy fee</strong> · <strong style={{ color: "#FAF8F5" }}>free lease renewal</strong>
               </p>
             </div>
           </FadeIn>
@@ -500,7 +500,7 @@ export default function LandlordsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p
@@ -511,7 +511,7 @@ export default function LandlordsPage() {
             </p>
             <h2
               className="text-4xl font-light text-center mb-14 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Straight answers.
             </h2>
@@ -521,7 +521,7 @@ export default function LandlordsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2
             className="text-4xl sm:text-5xl font-light mb-5 leading-tight"

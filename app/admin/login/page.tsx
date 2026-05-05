@@ -29,7 +29,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-[#060E1C] flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-3">Prospera Properties</p>
@@ -38,7 +38,7 @@ export default function AdminLogin() {
           </h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl space-y-5">
+        <form onSubmit={handleSubmit} className="bg-[#112035] p-8 rounded-xl space-y-5">
           <div>
             <label className="block text-xs uppercase tracking-widest text-[#2D4A5E] mb-2">
               Password
@@ -49,7 +49,7 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               autoFocus
               required
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#1A1A1A] outline-none focus:border-[#1A1A1A] transition-colors"
+              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
               placeholder="Enter admin password"
             />
           </div>

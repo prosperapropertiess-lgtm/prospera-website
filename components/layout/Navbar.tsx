@@ -37,8 +37,9 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "#FAF8F5" : "transparent",
-          boxShadow: scrolled ? "0 1px 20px rgba(10,22,40,0.08)" : "none",
+          backgroundColor: scrolled ? "rgba(6,14,28,0.97)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          boxShadow: scrolled ? "0 1px 0 rgba(30,48,80,0.6)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
@@ -54,8 +55,7 @@ export default function Navbar() {
               style={{
                 height: "60px",
                 width: "auto",
-                filter: scrolled ? "none" : "brightness(0) invert(1)",
-                mixBlendMode: scrolled ? "multiply" : "normal",
+                filter: "brightness(0) invert(1)",
                 transition: "filter 0.3s",
               }}
             />
@@ -69,7 +69,7 @@ export default function Navbar() {
                 href={link.href}
                 className="text-sm font-medium tracking-wide transition-colors duration-200"
                 style={{
-                  color: scrolled ? "#1A1A1A" : "#FAF8F5",
+                  color: "#FAF8F5",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -86,8 +86,8 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 rounded-lg"
               style={{
-                border: `1px solid ${scrolled ? "#1A1A1A" : "rgba(250,248,245,0.5)"}`,
-                color: scrolled ? "#1A1A1A" : "#FAF8F5",
+                border: "1px solid rgba(250,248,245,0.25)",
+                color: "#FAF8F5",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -119,7 +119,7 @@ export default function Navbar() {
                 key={i}
                 className="block w-6 h-px transition-all duration-300 origin-center"
                 style={{
-                  backgroundColor: scrolled || menuOpen ? "#1A1A1A" : "#FAF8F5",
+                  backgroundColor: "#FAF8F5",
                   transform,
                   opacity: i === 1 && menuOpen ? 0 : 1,
                 }}
@@ -131,7 +131,7 @@ export default function Navbar() {
 
       {/* Mobile menu — CSS transition, no framer-motion */}
       <div
-        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 bg-[#FAF8F5] lg:hidden transition-all duration-300"
+        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 bg-[#0A1628] lg:hidden transition-all duration-300"
         style={{
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "auto" : "none",
@@ -143,7 +143,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-2xl font-light block py-1 text-[#1A1A1A]"
+              className="text-2xl font-light block py-1 text-[#FAF8F5]"
               style={{ fontFamily: "var(--font-cormorant)" }}
               onClick={() => setMenuOpen(false)}
             >
@@ -157,7 +157,7 @@ export default function Navbar() {
             href={BUILDIUM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#1A1A1A] text-[#1A1A1A] rounded-lg"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#1E3050] text-[#FAF8F5] rounded-lg"
             style={{ fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >

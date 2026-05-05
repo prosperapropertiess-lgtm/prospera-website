@@ -41,7 +41,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
   const gallery = getGallery(property);
 
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
       {/* Back link */}
       <div className="pt-28 pb-4 px-6 max-w-5xl mx-auto">
         <Link
@@ -105,7 +105,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
         <div className="lg:col-span-2">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+              <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 {property.title}
               </h1>
               <p className="text-sm" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -113,46 +113,46 @@ export default function PropertyDetailClient({ property }: { property: Property 
               </p>
             </div>
             <div className="shrink-0">
-              <p className="text-4xl font-light" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-4xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 ${property.price.toLocaleString()}
-                <span className="text-base" style={{ color: "#9B9B9B" }}>/mo</span>
+                <span className="text-base" style={{ color: "#5A7090" }}>/mo</span>
               </p>
             </div>
           </div>
 
           {/* Key stats */}
-          <div className="flex flex-wrap gap-6 py-6 border-y mb-8" style={{ borderColor: "#E8E4DF" }}>
+          <div className="flex flex-wrap gap-6 py-6 border-y mb-8" style={{ borderColor: "#1E3050" }}>
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#1A1A1A" }}>{property.bedrooms}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>{property.bedrooms}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Bedrooms</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#1A1A1A" }}>{property.bathrooms}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>{property.bathrooms}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Bathrooms</p>
             </div>
             {property.sqft && (
               <div className="text-center">
-                <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#1A1A1A" }}>{property.sqft.toLocaleString()}</p>
+                <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>{property.sqft.toLocaleString()}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Sq Ft</p>
               </div>
             )}
             <div className="text-center">
-              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#1A1A1A" }}>{property.city}</p>
+              <p className="text-2xl font-light" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>{property.city}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>City</p>
             </div>
           </div>
 
           {/* Description */}
           <div className="mb-10">
-            <h2 className="text-2xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>About This Home</h2>
-            <p className="text-sm leading-relaxed" style={{ color: "#2C2C2C", fontFamily: "var(--font-dm-sans)" }}>
+            <h2 className="text-2xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>About This Home</h2>
+            <p className="text-sm leading-relaxed" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
               {property.description}
             </p>
           </div>
 
           {/* Features */}
           <div className="mb-10">
-            <h2 className="text-2xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>Property Features</h2>
+            <h2 className="text-2xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>Property Features</h2>
             <div className="grid grid-cols-2 gap-3">
               {[
                 { label: "Pet Friendly", value: property.pet_friendly ? "Yes" : "No" },
@@ -166,11 +166,11 @@ export default function PropertyDetailClient({ property }: { property: Property 
                 { label: "Managed By", value: "Prospera Properties" },
                 { label: "City", value: property.city },
               ].map((f) => (
-                <div key={f.label} className="flex items-center gap-3 p-4 bg-white border" style={{ borderColor: "#E8E4DF" }}>
+                <div key={f.label} className="flex items-center gap-3 p-4 bg-[#112035] border" style={{ borderColor: "#1E3050" }}>
                   <span className="text-sm" style={{ color: "#C5A55A" }}>✓</span>
                   <div>
-                    <p className="text-xs uppercase tracking-wider" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>{f.label}</p>
-                    <p className="text-sm font-medium" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>{f.value}</p>
+                    <p className="text-xs uppercase tracking-wider" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>{f.label}</p>
+                    <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{f.value}</p>
                   </div>
                 </div>
               ))}
@@ -178,9 +178,9 @@ export default function PropertyDetailClient({ property }: { property: Property 
           </div>
 
           {/* Commute calculator */}
-          <div className="mb-10 p-6 border" style={{ borderColor: "#E8E4DF", backgroundColor: "#F5F0EB" }}>
-            <h2 className="text-2xl font-light mb-2" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>Commute Calculator</h2>
-            <p className="text-sm mb-5" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+          <div className="mb-10 p-6 border" style={{ borderColor: "#1E3050", backgroundColor: "#0D1B2A" }}>
+            <h2 className="text-2xl font-light mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>Commute Calculator</h2>
+            <p className="text-sm mb-5" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               How far is this from your workplace, school, or anywhere else?
             </p>
             <div className="flex gap-3">
@@ -190,7 +190,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
                 onChange={(e) => setCommuteAddress(e.target.value)}
                 placeholder="Enter an address or place"
                 className="flex-1 px-4 py-3 text-sm outline-none border"
-                style={{ borderColor: "#E8E4DF", backgroundColor: "white", fontFamily: "var(--font-dm-sans)", color: "#1A1A1A" }}
+                style={{ borderColor: "#1E3050", backgroundColor: "#112035", fontFamily: "var(--font-dm-sans)", color: "#FAF8F5" }}
               />
               <button
                 onClick={() => {
@@ -209,7 +209,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
             {commuteResult && (
               <p className="text-xs mt-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>{commuteResult}</p>
             )}
-            <p className="text-xs mt-3" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mt-3" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
               Opens Google Maps with driving, transit, and walking directions.
             </p>
           </div>
@@ -218,11 +218,11 @@ export default function PropertyDetailClient({ property }: { property: Property 
         {/* Right: sticky CTA card */}
         <div className="lg:col-span-1">
           <div className="sticky top-28">
-            <div className="border p-6" style={{ borderColor: "#E8E4DF", backgroundColor: "white" }}>
-              <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#1A1A1A" }}>
-                ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#9B9B9B" }}>/mo</span>
+            <div className="border p-6" style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}>
+              <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>
+                ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#5A7090" }}>/mo</span>
               </p>
-              <p className="text-xs mb-6" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mb-6" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                 {property.bedrooms} bed · {property.bathrooms} bath{property.sqft ? ` · ${property.sqft.toLocaleString()} sqft` : ""}
               </p>
 
@@ -240,14 +240,14 @@ export default function PropertyDetailClient({ property }: { property: Property 
 
               <Link
                 href={`/contact?property=${encodeURIComponent(property.title)}`}
-                className="block w-full py-3 text-xs uppercase tracking-widest text-center border transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5]"
-                style={{ borderColor: "#1A1A1A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                className="block w-full py-3 text-xs uppercase tracking-widest text-center border transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5]"
+                style={{ borderColor: "#1A1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Schedule a Viewing
               </Link>
 
-              <div className="mt-6 pt-6 border-t space-y-2" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>At a Glance</p>
+              <div className="mt-6 pt-6 border-t space-y-2" style={{ borderColor: "#1E3050" }}>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>At a Glance</p>
                 {[
                   ["Location", `${property.city}, ON`],
                   ["Bedrooms", String(property.bedrooms)],
@@ -257,14 +257,14 @@ export default function PropertyDetailClient({ property }: { property: Property 
                   ["Utilities", property.utilities_included ? (property.utilities_list?.join(", ") || "Included") : "Not included"],
                 ].map(([label, val]) => (
                   <div key={label} className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    <span style={{ color: "#9B9B9B" }}>{label}</span>
-                    <span style={{ color: "#1A1A1A" }}>{val}</span>
+                    <span style={{ color: "#5A7090" }}>{label}</span>
+                    <span style={{ color: "#FAF8F5" }}>{val}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 pt-6 border-t text-center" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-xs mb-1" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>Questions?</p>
+              <div className="mt-6 pt-6 border-t text-center" style={{ borderColor: "#1E3050" }}>
+                <p className="text-xs mb-1" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>Questions?</p>
                 <a href="tel:+15196971227" className="text-sm font-medium" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   (519) 697-1227
                 </a>

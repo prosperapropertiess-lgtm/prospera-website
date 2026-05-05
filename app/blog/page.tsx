@@ -21,14 +21,14 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="pt-32 pb-16 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Insights & Resources
           </p>
-          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+          <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             The Prospera Blog
           </h1>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
@@ -38,13 +38,13 @@ export default function BlogPage() {
       </section>
 
       {/* Category pills */}
-      <section className="border-b sticky top-[64px] z-10 px-6 py-4" style={{ backgroundColor: "#FAF8F5", borderColor: "#E8E4DF" }}>
+      <section className="border-b sticky top-[64px] z-10 px-6 py-4" style={{ backgroundColor: "#0A1628", borderColor: "#1E3050" }}>
         <div className="max-w-6xl mx-auto flex gap-2 flex-wrap">
           {CATEGORIES.map((cat) => (
             <span
               key={cat}
-              className="px-4 py-1.5 text-xs uppercase tracking-wider border cursor-pointer hover:bg-[#1A1A1A] hover:text-[#FAF8F5] transition-colors"
-              style={{ borderColor: "#1A1A1A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+              className="px-4 py-1.5 text-xs uppercase tracking-wider border cursor-pointer hover:bg-[#060E1C] hover:text-[#FAF8F5] transition-colors"
+              style={{ borderColor: "#1A1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               {cat}
             </span>
@@ -64,8 +64,8 @@ export default function BlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col bg-white border hover:shadow-lg transition-shadow"
-                style={{ borderColor: "#E8E4DF" }}
+                className="group flex flex-col bg-[#112035] border hover:shadow-lg transition-shadow"
+                style={{ borderColor: "#1E3050" }}
               >
                 {/* Thumbnail */}
                 <div className="relative h-52 w-full overflow-hidden bg-[#E8E4DF]">
@@ -78,7 +78,7 @@ export default function BlogPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: "#1A1A1A" }}>
+                    <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: "#060E1C" }}>
                       <span className="text-4xl font-light" style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)" }}>P</span>
                     </div>
                   )}
@@ -96,7 +96,7 @@ export default function BlogPage() {
                 <div className="flex flex-col flex-1 p-6">
                   {/* Read time */}
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       {post.readTime}
                     </span>
                   </div>
@@ -104,7 +104,7 @@ export default function BlogPage() {
                   {/* Title */}
                   <h2
                     className="text-xl font-medium mb-3 group-hover:text-[#C5A55A] transition-colors leading-snug"
-                    style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                   >
                     {post.title}
                   </h2>
@@ -112,19 +112,19 @@ export default function BlogPage() {
                   {/* Excerpt */}
                   <p
                     className="text-sm leading-relaxed flex-1 mb-4"
-                    style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {post.excerpt}
                   </p>
 
                   {/* Date + read link */}
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t" style={{ borderColor: "#E8E4DF" }}>
-                    <span className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t" style={{ borderColor: "#1E3050" }}>
+                    <span className="text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
                     </span>
                     <span
                       className="text-xs uppercase tracking-wider group-hover:text-[#C5A55A] transition-colors"
-                      style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Read →
                     </span>
@@ -137,7 +137,7 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#060E1C" }}>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Get New Articles in Your Inbox

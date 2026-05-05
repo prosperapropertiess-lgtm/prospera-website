@@ -35,12 +35,12 @@ const whySmall = [
 
 export default function AboutPage() {
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }}>
+    <div style={{ backgroundColor: "#0A1628" }}>
 
       {/* ── HERO ── */}
       <section
         className="relative min-h-screen flex items-center overflow-hidden"
-        style={{ backgroundColor: "#FAF8F5" }}
+        style={{ backgroundColor: "#0A1628" }}
       >
         {/* Glow orbs */}
         <div className="absolute inset-0 pointer-events-none">
@@ -102,14 +102,14 @@ export default function AboutPage() {
                 <div
                   className="absolute -bottom-4 -right-4 md:-right-8 rounded-2xl px-5 py-4 shadow-xl border"
                   style={{
-                    backgroundColor: "rgba(255,255,255,0.92)",
+                    backgroundColor: "rgba(10,22,40,0.92)",
                     backdropFilter: "blur(12px)",
-                    borderColor: "#E8E4DF",
+                    borderColor: "#1E3050",
                   }}
                 >
                   <p
                     className="text-[10px] uppercase tracking-widest mb-2"
-                    style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Track Record
                   </p>
@@ -123,13 +123,13 @@ export default function AboutPage() {
                     <div>
                       <p
                         className="text-xs font-medium leading-tight"
-                        style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                       >
                         Tenants placed
                       </p>
                       <p
                         className="text-xs leading-tight"
-                        style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
                       >
                         0 LTB cases
                       </p>
@@ -154,13 +154,13 @@ export default function AboutPage() {
                 <div className="mb-8 leading-none" style={{ fontFamily: "var(--font-cormorant)" }}>
                   <p
                     className="text-7xl sm:text-8xl lg:text-9xl font-light"
-                    style={{ color: "#1A1A1A" }}
+                    style={{ color: "#FAF8F5" }}
                   >
                     hi,
                   </p>
                   <p
                     className="text-6xl sm:text-7xl lg:text-8xl font-light"
-                    style={{ color: "#1A1A1A" }}
+                    style={{ color: "#FAF8F5" }}
                   >
                     I&apos;m
                   </p>
@@ -175,7 +175,7 @@ export default function AboutPage() {
                 {/* Subtext */}
                 <p
                   className="text-base leading-relaxed mb-10 max-w-sm"
-                  style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                 >
                   I built Prospera to be the property manager I wish had existed —
                   hands-on, reachable, and actually invested in your property.
@@ -201,21 +201,21 @@ export default function AboutPage() {
       </section>
 
       {/* ── Numbers bar ── */}
-      <section className="py-14 px-5 sm:px-8 border-t border-b" style={{ borderColor: "#E8E4DF", backgroundColor: "#F5F0EB" }}>
+      <section className="py-14 px-5 sm:px-8 border-t border-b" style={{ borderColor: "#1E3050", backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {numbers.map((n, i) => (
             <FadeIn key={n.label} delay={i * 0.1} direction="up">
               <div>
                 <p
                   className="text-5xl font-light mb-1"
-                  style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                 >
                   <CounterAnimation target={n.target} suffix={n.suffix} duration={1.8} />
                 </p>
                 <div className="w-6 h-px mx-auto mb-2" style={{ backgroundColor: "#C5A55A" }} />
                 <p
                   className="text-[10px] font-semibold uppercase tracking-widest"
-                  style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {n.label}
                 </p>
@@ -232,7 +232,7 @@ export default function AboutPage() {
             <div className="w-px h-12 mx-auto mb-10" style={{ backgroundColor: "#C5A55A" }} />
             <p
               className="text-3xl sm:text-4xl md:text-5xl font-light italic leading-tight mb-8"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               &ldquo;I&apos;ve been the tenant, the house coordinator,
               and the operations manager — I saw exactly what was broken.
@@ -242,7 +242,7 @@ export default function AboutPage() {
               <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
               <p
                 className="text-xs uppercase tracking-widest"
-                style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
               >
                 Ebin Jaison — Founder
               </p>
@@ -253,7 +253,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Timeline ── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p
@@ -264,7 +264,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               The winding road
               <br />
@@ -306,7 +306,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light mb-8 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Yes, I&apos;m new.
               <br />
@@ -314,7 +314,7 @@ export default function AboutPage() {
             </h2>
             <div
               className="space-y-5 text-base leading-relaxed"
-              style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
             >
               <p>
                 The companies that have been around 20 years are managing 300+ properties.
@@ -336,7 +336,7 @@ export default function AboutPage() {
               <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
               <p
                 className="text-sm font-medium"
-                style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Ebin Jaison — Owner, Prospera Properties
               </p>
@@ -346,7 +346,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Contractor network ── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
             <FadeIn direction="left">
@@ -359,7 +359,7 @@ export default function AboutPage() {
                 </p>
                 <h2
                   className="text-4xl sm:text-5xl font-light mb-6 leading-tight"
-                  style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                 >
                   Two years finding people
                   <br />
@@ -367,7 +367,7 @@ export default function AboutPage() {
                 </h2>
                 <p
                   className="text-base leading-relaxed mb-4"
-                  style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Every contractor on my list has been tested on a real job — deep cleans,
                   plumbing, full renovation coordination. None of them are marked up beyond
@@ -375,7 +375,7 @@ export default function AboutPage() {
                 </p>
                 <p
                   className="text-base leading-relaxed"
-                  style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                 >
                   When a furnace goes at 11pm, there&apos;s already a plan. That&apos;s what two
                   years of building looks like.
@@ -397,8 +397,8 @@ export default function AboutPage() {
                 ].map((trade) => (
                   <div
                     key={trade}
-                    className="bg-white border rounded-xl p-4 text-sm font-medium"
-                    style={{ borderColor: "#E8E4DF", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                    className="bg-[#112035] border rounded-xl p-4 text-sm font-medium"
+                    style={{ borderColor: "#1E3050", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                   >
                     <span className="text-xs mr-2" style={{ color: "#C5A55A" }}>✓</span>
                     {trade}
@@ -422,7 +422,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               My goal is to be the property manager
               <br />
@@ -433,19 +433,19 @@ export default function AboutPage() {
             {whySmall.map((item, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div
-                  className="bg-white border rounded-2xl p-8 h-full"
-                  style={{ borderColor: "#E8E4DF" }}
+                  className="bg-[#112035] border rounded-2xl p-8 h-full"
+                  style={{ borderColor: "#1E3050" }}
                 >
                   <div className="w-8 h-0.5 mb-6" style={{ backgroundColor: "#C5A55A" }} />
                   <h3
                     className="text-xl font-medium mb-4 leading-snug"
-                    style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                   >
                     {item.title}
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {item.desc}
                   </p>
@@ -459,7 +459,7 @@ export default function AboutPage() {
       {/* ── CTA ── */}
       <section
         className="relative py-28 px-5 sm:px-8 text-center overflow-hidden"
-        style={{ backgroundColor: "#1A1A1A" }}
+        style={{ backgroundColor: "#060E1C" }}
       >
         {/* Subtle glow on dark */}
         <div
@@ -495,7 +495,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-3 px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
               style={{
                 backgroundColor: "#C5A55A",
-                color: "#1A1A1A",
+                color: "#FAF8F5",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >

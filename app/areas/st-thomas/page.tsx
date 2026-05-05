@@ -23,9 +23,9 @@ const highlights = [
 
 export default function StThomasPage() {
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
       {/* Hero */}
-      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas, Ontario
@@ -47,11 +47,11 @@ export default function StThomasPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-12 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-3xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 {s.value}
               </p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
@@ -66,22 +66,22 @@ export default function StThomasPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Why St. Thomas Is Worth Your Attention
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               This isn't just a bedroom community anymore. St. Thomas is developing its own economic identity.
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {highlights.map((h, i) => (
               <FadeIn key={h.title} delay={i * 0.08}>
-                <div className="bg-white border p-6" style={{ borderColor: "#E8E4DF" }}>
+                <div className="bg-[#112035] border p-6" style={{ borderColor: "#1E3050" }}>
                   <span className="text-2xl mb-3 block">{h.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                     {h.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                     {h.desc}
                   </p>
                 </div>
@@ -92,10 +92,10 @@ export default function StThomasPage() {
       </section>
 
       {/* Rent table */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               St. Thomas Rental Market — 2026
             </h2>
           </FadeIn>
@@ -115,8 +115,8 @@ export default function StThomasPage() {
                     { type: "3 Bedroom", avg: "$1,950" },
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
-                      <td className="p-4 font-medium" style={{ color: "#1A1A1A" }}>{row.type}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#1A1A1A" }}>{row.avg}</td>
+                      <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -130,10 +130,10 @@ export default function StThomasPage() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               What's Included in Our Management
             </h2>
-            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               One simple fee covers everything — no hidden charges, no per-repair markups.
             </p>
           </FadeIn>
@@ -144,9 +144,9 @@ export default function StThomasPage() {
               "Rent increase notices", "Renewal coordination", "LTB support if needed",
             ].map((item, i) => (
               <FadeIn key={item} delay={i * 0.05}>
-                <div className="flex items-center gap-3 bg-white border p-4" style={{ borderColor: "#E8E4DF" }}>
+                <div className="flex items-center gap-3 bg-[#112035] border p-4" style={{ borderColor: "#1E3050" }}>
                   <span style={{ color: "#C5A55A" }}>✓</span>
-                  <span className="text-sm" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                  <span className="text-sm" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                 </div>
               </FadeIn>
             ))}
@@ -155,7 +155,7 @@ export default function StThomasPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in St. Thomas?

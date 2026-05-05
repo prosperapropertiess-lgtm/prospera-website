@@ -34,11 +34,11 @@ const services = [
 
 export default function LondonPage() {
   return (
-    <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
       {/* Hero */}
       <section
         className="pt-36 pb-24 px-6 text-center"
-        style={{ backgroundColor: "#1A1A1A" }}
+        style={{ backgroundColor: "#060E1C" }}
       >
         <FadeIn>
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
@@ -61,11 +61,11 @@ export default function LondonPage() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-12 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-3xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 {s.value}
               </p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
@@ -80,22 +80,22 @@ export default function LondonPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for London Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate, everything included. No hidden fees, no maintenance markups, no surprises.
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {services.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.08}>
-                <div className="bg-white border p-6" style={{ borderColor: "#E8E4DF" }}>
+                <div className="bg-[#112035] border p-6" style={{ borderColor: "#1E3050" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                     {s.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                     {s.desc}
                   </p>
                 </div>
@@ -106,26 +106,26 @@ export default function LondonPage() {
       </section>
 
       {/* Neighbourhoods */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               We Know London's Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
               Pricing, tenant profiles, and vacancy patterns differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {neighbourhoods.map((n, i) => (
               <FadeIn key={n.name} delay={i * 0.06}>
-                <div className="bg-white border p-5 flex gap-4" style={{ borderColor: "#E8E4DF" }}>
+                <div className="bg-[#112035] border p-5 flex gap-4" style={{ borderColor: "#1E3050" }}>
                   <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
                   <div>
-                    <h3 className="font-medium mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>
+                    <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                       {n.name}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                       {n.desc}
                     </p>
                   </div>
@@ -140,7 +140,7 @@ export default function LondonPage() {
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               London Rental Market — 2026 Snapshot
             </h2>
           </FadeIn>
@@ -163,10 +163,10 @@ export default function LondonPage() {
                     { type: "3 Bedroom", low: "$2,100", avg: "$2,450", high: "$2,950" },
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
-                      <td className="p-4 font-medium" style={{ color: "#1A1A1A" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#1A1A1A" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.high}</td>
+                      <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
+                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.low}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
+                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -177,7 +177,7 @@ export default function LondonPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in London, Ontario?

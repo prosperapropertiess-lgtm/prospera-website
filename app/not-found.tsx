@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center px-6 text-center"
-      style={{ backgroundColor: "#FAF8F5" }}
+      style={{ backgroundColor: "#0A1628" }}
     >
       <p
         className="text-8xl font-light mb-6"
@@ -21,13 +21,13 @@ export default function NotFound() {
 
       <h1
         className="text-4xl md:text-5xl font-light mb-4"
-        style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+        style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
       >
         Page Not Found
       </h1>
       <p
         className="text-base mb-10 max-w-md leading-relaxed"
-        style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
       >
         The page you're looking for doesn't exist or may have moved. Let's get you back on track.
       </p>
@@ -42,8 +42,8 @@ export default function NotFound() {
         </Link>
         <Link
           href="/listings"
-          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5]"
-          style={{ borderColor: "#1A1A1A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5]"
+          style={{ borderColor: "#1A1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
         >
           Browse Listings
         </Link>

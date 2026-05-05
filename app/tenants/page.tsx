@@ -55,21 +55,21 @@ export default function TenantsPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 px-6 bg-[#FAF8F5]">
+      <section className="py-24 px-6 bg-[#0A1628]">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">What You Get</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-14">
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-14">
               Renting with Prospera is different.
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((f, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 flex gap-5">
+                <div className="bg-[#112035] rounded-xl p-8 shadow-sm border border-gray-100 flex gap-5">
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
-                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#1A1A1A] mb-2">{f.title}</h3>
+                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] mb-2">{f.title}</h3>
                     <p className="text-sm text-[#2D4A5E] leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
@@ -80,18 +80,18 @@ export default function TenantsPage() {
       </section>
 
       {/* How Renting Works */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-[#112035]">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">The Process</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-16">How Renting Works</h2>
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-16">How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.15}>
                 <div className="text-center">
                   <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#C5A55A]/20 mb-4">{step.n}</p>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#1A1A1A] mb-3">{step.title}</h3>
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#FAF8F5] mb-3">{step.title}</h3>
                   <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeIn>
@@ -108,11 +108,11 @@ export default function TenantsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-[#FAF8F5]">
+      <section className="py-24 px-6 bg-[#0A1628]">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">Common Questions</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-14">FAQ for Tenants</h2>
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-14">FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
@@ -127,7 +127,7 @@ export default function TenantsPage() {
           <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 bg-white text-[#2D4A5E] font-medium rounded hover:bg-[#FAF8F5] transition-colors text-sm uppercase tracking-wide">
+          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#2D4A5E] font-medium rounded hover:bg-[#0A1628] transition-colors text-sm uppercase tracking-wide">
             Browse Listings
           </Link>
         </FadeIn>

@@ -13,7 +13,7 @@ interface RentPeriod {
 const emptyPeriod = (): RentPeriod => ({ from: "", to: "", charged: "", paid: "" });
 
 const inputClass =
-  "w-full px-4 py-3 text-sm border border-[#E8E4DF] rounded-lg bg-white text-[#1A1A1A] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
+  "w-full px-4 py-3 text-sm border border-[#1E3050] rounded-lg bg-[#112035] text-[#FAF8F5] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
 
 const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#5A5A5A]";
 
@@ -133,10 +133,10 @@ export default function N4FormBuilder() {
   return (
     <div
       className="rounded-2xl border overflow-hidden"
-      style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFDFB" }}
+      style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
     >
       {/* Header */}
-      <div className="px-8 py-6 border-b" style={{ borderColor: "#E8E4DF", backgroundColor: "#F5F0EB" }}>
+      <div className="px-8 py-6 border-b" style={{ borderColor: "#1E3050", backgroundColor: "#0D1B2A" }}>
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 flex items-center justify-center rounded-xl text-lg font-bold shrink-0"
@@ -153,7 +153,7 @@ export default function N4FormBuilder() {
             </p>
             <h2
               className="text-2xl font-light leading-tight"
-              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Notice of Non-Payment of Rent
             </h2>
@@ -161,7 +161,7 @@ export default function N4FormBuilder() {
         </div>
         <p
           className="mt-3 text-sm leading-relaxed"
-          style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
         >
           Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly — no PDF editor needed.
         </p>
@@ -181,7 +181,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Parties & Property
                 </p>
@@ -195,7 +195,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="e.g. John Smith, Jane Smith"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       List all tenants in possession of the unit
                     </p>
                   </div>
@@ -218,7 +218,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="e.g. Unit 2, 123 Main Street, London, ON N6A 1A1"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       Include unit number and postal code
                     </p>
                   </div>
@@ -229,7 +229,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Dates
                 </p>
@@ -243,7 +243,7 @@ export default function N4FormBuilder() {
                       onChange={(e) => handleNoticeDateChange(e.target.value)}
                       className={inputClass}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       Must be the day after rent was due
                     </p>
                   </div>
@@ -256,7 +256,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="DD/MM/YYYY — auto-filled (14 days)"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       Auto-set to 14 days. Adjust if adding mail delivery days.
                     </p>
                   </div>
@@ -267,18 +267,18 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Rent Periods (what is owed)
                 </p>
 
                 <div className="space-y-4">
                   {rentPeriods.map((period, i) => (
-                    <div key={i} className="p-5 border rounded-xl" style={{ borderColor: "#E8E4DF", backgroundColor: "#FAF8F5" }}>
+                    <div key={i} className="p-5 border rounded-xl" style={{ borderColor: "#1E3050", backgroundColor: "#0A1628" }}>
                       <div className="flex items-center justify-between mb-4">
                         <p
                           className="text-xs font-semibold uppercase tracking-wider"
-                          style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           Period {i + 1}
                         </p>
@@ -359,7 +359,7 @@ export default function N4FormBuilder() {
                 {totalOwing > 0 && (
                   <div
                     className="mt-5 p-4 rounded-xl flex items-center justify-between"
-                    style={{ backgroundColor: "#1A1A1A" }}
+                    style={{ backgroundColor: "#060E1C" }}
                   >
                     <p
                       className="text-sm font-medium"
@@ -381,7 +381,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Landlord Signature Information
                 </p>
@@ -425,7 +425,7 @@ export default function N4FormBuilder() {
                       onChange={(e) => setSignatureDate(e.target.value)}
                       className={inputClass}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                       Defaults to notice date if left blank
                     </p>
                   </div>
@@ -455,19 +455,19 @@ export default function N4FormBuilder() {
             <div className="max-w-md mx-auto text-center">
               <div
                 className="w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6 text-2xl"
-                style={{ backgroundColor: "#F5F0EB" }}
+                style={{ backgroundColor: "#0D1B2A" }}
               >
                 📄
               </div>
               <h3
                 className="text-3xl font-light mb-3"
-                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
               >
                 Your N4 is ready.
               </h3>
               <p
                 className="text-sm mb-6 leading-relaxed"
-                style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
               >
                 Enter your email to download. We&apos;ll occasionally send you useful landlord tips — no spam, unsubscribe anytime.
               </p>
@@ -487,10 +487,10 @@ export default function N4FormBuilder() {
                   className="mt-0.5 shrink-0 accent-[#C5A55A]"
                 />
                 <div>
-                  <p className="text-sm font-medium" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                     I&apos;d like Prospera to handle this for me
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs mt-0.5" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
                     Ebin will reach out within 24 hours — free consultation, no pressure.
                   </p>
                 </div>
@@ -522,7 +522,7 @@ export default function N4FormBuilder() {
                   type="button"
                   onClick={() => setStep("form")}
                   className="text-xs transition-opacity hover:opacity-70"
-                  style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
                 >
                   ← Go back and edit
                 </button>
@@ -542,25 +542,25 @@ export default function N4FormBuilder() {
             <div className="max-w-md mx-auto text-center">
               <div
                 className="w-16 h-16 flex items-center justify-center rounded-full mx-auto mb-6 text-2xl"
-                style={{ backgroundColor: "#F5F0EB" }}
+                style={{ backgroundColor: "#0D1B2A" }}
               >
                 ✓
               </div>
               <h3
                 className="text-3xl font-light mb-3"
-                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
               >
                 Downloaded.
               </h3>
               <p
                 className="text-sm mb-8 leading-relaxed"
-                style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
               >
                 Sign it, then serve it to your tenant in person or by mail. Remember to remove the checklist page before serving.
               </p>
               <div
                 className="p-5 rounded-xl text-left mb-6 space-y-2"
-                style={{ backgroundColor: "#F5F0EB" }}
+                style={{ backgroundColor: "#0D1B2A" }}
               >
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   Before you serve it
@@ -571,7 +571,7 @@ export default function N4FormBuilder() {
                   "Give a copy to every tenant named",
                   "Keep a copy for your records",
                 ].map((tip) => (
-                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
+                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                     <span style={{ color: "#C5A55A" }}>✓</span> {tip}
                   </p>
                 ))}
@@ -580,7 +580,7 @@ export default function N4FormBuilder() {
                 <button
                   onClick={() => { setStep("form"); }}
                   className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:bg-gray-50"
-                  style={{ borderColor: "#E8E4DF", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ borderColor: "#1E3050", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fill Another N4
                 </button>
@@ -598,7 +598,7 @@ export default function N4FormBuilder() {
       </AnimatePresence>
 
       {/* Disclaimer */}
-      <div className="px-8 py-4 border-t" style={{ borderColor: "#E8E4DF" }}>
+      <div className="px-8 py-4 border-t" style={{ borderColor: "#1E3050" }}>
         <p className="text-xs" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
           This tool generates the official Ontario LTB N4 form. Always verify dates and amounts before serving. Prospera Properties is not a law firm. For complex situations, consult a paralegal or lawyer.
         </p>
