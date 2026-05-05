@@ -25,7 +25,7 @@ const areaLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5" }}>
+    <footer style={{ backgroundColor: "#060E1C", color: "#FAF8F5" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Column 1: Logo + tagline */}
