@@ -75,7 +75,7 @@ export default function ListingsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-14 px-6 bg-[#8B1A1A] text-white text-center">
+      <section className="pt-32 pb-14 px-6 bg-[#060E1C] text-[#FAF8F5] text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-4">Available Now</p>
           <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light mb-4">
