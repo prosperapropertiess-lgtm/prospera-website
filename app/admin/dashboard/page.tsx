@@ -11,7 +11,7 @@ const METHODS = ["text", "call", "email", "in-person"];
 
 function StatCard({ label, value, sub, accent }: { label: string; value: string | number; sub?: string; accent?: boolean }) {
   return (
-    <div className="bg-[#112035] border border-gray-100 rounded-xl p-5">
+    <div className="bg-[#112035] border border-[#1E3050] rounded-xl p-5">
       <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">{label}</p>
       <p className={`text-3xl font-light ${accent ? "text-[#C5A55A]" : "text-black"}`}>{value}</p>
       {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
@@ -126,7 +126,7 @@ export default function DashboardPage() {
             <StatCard label="Total" value={outreach.length} sub="All time" />
           </div>
           {outreach.length > 0 && (
-            <div className="bg-[#112035] border border-gray-100 rounded-xl overflow-hidden">
+            <div className="bg-[#112035] border border-[#1E3050] rounded-xl overflow-hidden">
               {outreach.slice(0, 5).map((entry, i) => (
                 <div key={entry.id} className={`px-5 py-3 flex items-center justify-between ${i !== 0 ? "border-t border-gray-50" : ""}`}>
                   <div>
@@ -197,7 +197,7 @@ export default function DashboardPage() {
                   value={form.contact_name}
                   onChange={(e) => setForm((f) => ({ ...f, contact_name: e.target.value }))}
                   placeholder="e.g. John Smith"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A]"
+                  className="w-full border border-[#1E3050] rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A]"
                 />
               </div>
               <div>
@@ -207,7 +207,7 @@ export default function DashboardPage() {
                     <button
                       key={m}
                       onClick={() => setForm((f) => ({ ...f, method: m }))}
-                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-[#112035] text-[#0D1117] border-white" : "border-gray-200 text-gray-500 hover:border-gray-400"}`}
+                      className={`text-xs px-3 py-1.5 rounded border transition-colors ${form.method === m ? "bg-[#112035] text-[#0D1117] border-white" : "border-[#1E3050] text-gray-500 hover:border-gray-400"}`}
                     >
                       {m}
                     </button>
@@ -221,14 +221,14 @@ export default function DashboardPage() {
                   onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                   placeholder="How did it go?"
                   rows={2}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A] resize-none"
+                  className="w-full border border-[#1E3050] rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A] resize-none"
                 />
               </div>
             </div>
             <div className="flex gap-3 mt-5">
               <button
                 onClick={() => setModal(false)}
-                className="flex-1 border border-gray-200 text-gray-500 py-2 rounded-lg text-sm hover:bg-gray-50"
+                className="flex-1 border border-[#1E3050] text-gray-500 py-2 rounded-lg text-sm hover:bg-gray-50"
               >
                 Cancel
               </button>

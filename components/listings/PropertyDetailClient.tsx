@@ -108,7 +108,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
               <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 {property.title}
               </h1>
-              <p className="text-sm" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                 {property.address}, {property.city}, ON
               </p>
             </div>

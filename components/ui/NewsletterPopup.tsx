@@ -204,7 +204,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       disabled={status === "loading"}
                       className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1"
                       style={{
-                        backgroundColor: "#060E1C",
+                        backgroundColor: "#C5A55A",
                         color: "#FAF8F5",
                         fontFamily: "var(--font-dm-sans)",
                       }}

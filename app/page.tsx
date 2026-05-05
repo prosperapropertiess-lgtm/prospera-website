@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import ParticleCanvas from "@/components/animations/ParticleCanvas";
+import GoogleReviews from "@/components/ui/GoogleReviews";
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
@@ -586,35 +587,7 @@ function CaseStudy() {
 
 // ── Testimonials ──────────────────────────────────────────────────────────────
 
-// TODO: Replace placeholder quotes with real testimonials from Ebin
-const testimonials = [
-  {
-    quote:
-      "Prospera took over my London duplex and I've had zero headaches since. Rent hits my account on time, tenants are happy, and Ebin actually answers when I call. Couldn't ask for more.",
-    author: "Landlord — London, ON",
-    stars: 5,
-  },
-  {
-    quote:
-      "I was self-managing my triplex while working full time and it was killing me. Handed it over to Prospera and within a month I forgot I even owned a rental. That's the point.",
-    author: "Landlord — St. Thomas, ON",
-    stars: 5,
-  },
-  {
-    quote:
-      "They found a tenant for my unit in under two weeks, fully screened. No drama, no delays. The whole process was smoother than anything I'd experienced managing it myself.",
-    author: "Landlord — Strathroy, ON",
-    stars: 5,
-  },
-];
-
 function Testimonials() {
-  const [current, setCurrent] = useState(0);
-
-  const prev = () =>
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length);
-
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
       <div className="max-w-3xl mx-auto">
@@ -629,84 +602,12 @@ function Testimonials() {
             className="text-4xl sm:text-5xl font-light text-[#FAF8F5] leading-tight"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
-            20+ five-star reviews
+            Real reviews.
             <br />
-            <em>and counting.</em>
+            <em>Real landlords.</em>
           </h2>
         </FadeIn>
-
-        <div className="relative min-h-[220px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
-              className="text-center"
-            >
-              {/* Stars */}
-              <div className="flex justify-center gap-1 mb-6">
-                {Array.from({ length: testimonials[current].stars }).map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#C5A55A">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                ))}
-              </div>
-
-              <p
-                className="text-xl sm:text-2xl font-light leading-relaxed mb-8"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
-                &ldquo;{testimonials[current].quote}&rdquo;
-              </p>
-              <p
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-              >
-                {testimonials[current].author}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-6 mt-10">
-          <button
-            onClick={prev}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#FAF8F5] transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5] rounded-lg"
-            aria-label="Previous"
-          >
-            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
-          <div className="flex gap-2">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className="w-2 h-2 rounded-full transition-all duration-200"
-                style={{
-                  backgroundColor: i === current ? "#C5A55A" : "rgba(13,27,42,0.2)",
-                  transform: i === current ? "scale(1.3)" : "scale(1)",
-                }}
-                aria-label={`Testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={next}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#FAF8F5] transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5] rounded-lg"
-            aria-label="Next"
-          >
-            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-        </div>
+        <GoogleReviews />
       </div>
     </section>
   );

@@ -148,7 +148,7 @@ export default function PropertyForm({ initial }: Props) {
       <form onSubmit={handleSubmit} className="max-w-3xl mx-auto px-6 py-10 space-y-8">
 
         {/* Basic Info */}
-        <section className="bg-[#112035] rounded-xl border border-gray-100 p-6 space-y-5">
+        <section className="bg-[#112035] rounded-xl border border-[#1E3050] p-6 space-y-5">
           <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#FAF8F5]">Basic Info</h2>
 
           <Field label="Property Title" required>
@@ -158,7 +158,7 @@ export default function PropertyForm({ initial }: Props) {
               onChange={(e) => set("title", e.target.value)}
               required
               placeholder="e.g. Charming 2BR in Old South"
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+              className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
             />
           </Field>
 
@@ -169,7 +169,7 @@ export default function PropertyForm({ initial }: Props) {
               onChange={(e) => set("address", e.target.value)}
               required
               placeholder="e.g. 123 Main St"
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+              className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
             />
           </Field>
 
@@ -177,7 +177,7 @@ export default function PropertyForm({ initial }: Props) {
             <select
               value={form.city}
               onChange={(e) => set("city", e.target.value)}
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors bg-[#112035]"
+              className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors bg-[#112035]"
             >
               {CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -191,13 +191,13 @@ export default function PropertyForm({ initial }: Props) {
               required
               min={0}
               placeholder="1800"
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+              className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
             />
           </Field>
         </section>
 
         {/* Size */}
-        <section className="bg-[#112035] rounded-xl border border-gray-100 p-6 space-y-5">
+        <section className="bg-[#112035] rounded-xl border border-[#1E3050] p-6 space-y-5">
           <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#FAF8F5]">Size & Specs</h2>
 
           <div className="grid grid-cols-3 gap-4">
@@ -209,7 +209,7 @@ export default function PropertyForm({ initial }: Props) {
                 required
                 min={0}
                 placeholder="2"
-                className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+                className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
               />
             </Field>
             <Field label="Bathrooms" required>
@@ -221,7 +221,7 @@ export default function PropertyForm({ initial }: Props) {
                 min={0}
                 step={0.5}
                 placeholder="1"
-                className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+                className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
               />
             </Field>
             <Field label="Sq Ft (optional)">
@@ -231,26 +231,26 @@ export default function PropertyForm({ initial }: Props) {
                 onChange={(e) => set("sqft", e.target.value === "" ? "" : Number(e.target.value))}
                 min={0}
                 placeholder="900"
-                className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
+                className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors"
               />
             </Field>
           </div>
         </section>
 
         {/* Description */}
-        <section className="bg-[#112035] rounded-xl border border-gray-100 p-6 space-y-5">
+        <section className="bg-[#112035] rounded-xl border border-[#1E3050] p-6 space-y-5">
           <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#FAF8F5]">Description</h2>
           <textarea
             value={form.description}
             onChange={(e) => set("description", e.target.value)}
             rows={5}
             placeholder="Describe the property — neighbourhood, finishes, highlights..."
-            className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors resize-none"
+            className="w-full px-4 py-3 border border-[#1E3050] rounded text-sm text-[#FAF8F5] outline-none focus:border-[#1A1A1A] transition-colors resize-none"
           />
         </section>
 
         {/* Features */}
-        <section className="bg-[#112035] rounded-xl border border-gray-100 p-6 space-y-5">
+        <section className="bg-[#112035] rounded-xl border border-[#1E3050] p-6 space-y-5">
           <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#FAF8F5]">Features</h2>
 
           <div className="space-y-4">
@@ -290,7 +290,7 @@ export default function PropertyForm({ initial }: Props) {
                         onChange={() => toggleUtility(u)}
                         className="accent-[#C5A55A] w-4 h-4"
                       />
-                      <span className="text-sm text-[#2D4A5E]">{u}</span>
+                      <span className="text-sm text-[#8899AA]">{u}</span>
                     </label>
                   ))}
                 </div>
@@ -300,7 +300,7 @@ export default function PropertyForm({ initial }: Props) {
         </section>
 
         {/* Photos */}
-        <section className="bg-[#112035] rounded-xl border border-gray-100 p-6 space-y-5">
+        <section className="bg-[#112035] rounded-xl border border-[#1E3050] p-6 space-y-5">
           <div className="flex items-center justify-between">
             <h2 className="font-[family-name:var(--font-cormorant)] text-xl text-[#FAF8F5]">Photos</h2>
             <span className="text-xs text-gray-400">{form.images.length} / 8</span>
@@ -346,7 +346,7 @@ export default function PropertyForm({ initial }: Props) {
               />
               <label
                 htmlFor="photo-upload"
-                className={`flex items-center justify-center w-full py-8 border-2 border-dashed border-gray-200 rounded-lg cursor-pointer hover:border-[#FAF8F5] transition-colors text-sm text-gray-400 ${uploadingIdx !== null ? "opacity-50 pointer-events-none" : ""}`}
+                className={`flex items-center justify-center w-full py-8 border-2 border-dashed border-[#1E3050] rounded-lg cursor-pointer hover:border-[#FAF8F5] transition-colors text-sm text-gray-400 ${uploadingIdx !== null ? "opacity-50 pointer-events-none" : ""}`}
               >
                 {uploadingIdx !== null ? `Uploading photo ${uploadingIdx + 1}...` : `Click to upload photos (up to ${8 - form.images.length} more)`}
               </label>
@@ -369,7 +369,7 @@ export default function PropertyForm({ initial }: Props) {
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="px-8 py-3 border border-gray-200 text-sm text-[#2D4A5E] rounded hover:border-[#FAF8F5] transition-colors"
+            className="px-8 py-3 border border-[#1E3050] text-sm text-[#8899AA] rounded hover:border-[#FAF8F5] transition-colors"
           >
             Cancel
           </button>
@@ -382,7 +382,7 @@ export default function PropertyForm({ initial }: Props) {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest text-[#2D4A5E] mb-2">
+      <label className="block text-xs uppercase tracking-widest text-[#8899AA] mb-2">
         {label}{required && <span className="text-[#C5A55A] ml-0.5">*</span>}
       </label>
       {children}

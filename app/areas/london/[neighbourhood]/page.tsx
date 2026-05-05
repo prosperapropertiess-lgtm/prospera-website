@@ -139,7 +139,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}

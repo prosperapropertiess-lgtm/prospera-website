@@ -12,7 +12,7 @@ export default function ComingSoonPage() {
       </p>
 
       <a
-        href="mailto:prosperapropertiess@gmail.com"
+        href="mailto:hello@prosperaproperties.co"
         className="text-xs uppercase tracking-widest text-[#C5A55A] border border-[#C5A55A]/40 px-8 py-3 hover:bg-[#C5A55A]/10 transition-colors"
       >
         Get in touch early

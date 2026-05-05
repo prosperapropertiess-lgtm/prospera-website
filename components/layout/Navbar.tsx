@@ -97,7 +97,7 @@ export default function Navbar() {
               href={BUILDIUM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] rounded-lg"
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] transition-all duration-200 hover:opacity-80 rounded-lg"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Tenant Login

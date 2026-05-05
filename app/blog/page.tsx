@@ -31,7 +31,7 @@ export default function BlogPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             The Prospera Blog
           </h1>
-          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
             Practical guides for Ontario landlords and tenants — from the Residential Tenancies Act to current market rents.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function BlogPage() {
       {/* Post grid */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         {posts.length === 0 ? (
-          <p className="text-center" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-center" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
             No posts yet. Check back soon.
           </p>
         ) : (

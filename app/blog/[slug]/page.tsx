@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
 
-          <p className="text-lg leading-relaxed" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
             {post.excerpt}
           </p>
         </div>

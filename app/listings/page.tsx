@@ -88,7 +88,7 @@ export default function ListingsPage() {
       </section>
 
       {/* Filter Bar */}
-      <div className="sticky top-20 z-40 bg-[#112035] border-b border-gray-100 shadow-sm">
+      <div className="sticky top-20 z-40 bg-[#112035] border-b border-[#1E3050] shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
           {/* City */}
           <div className="flex gap-2 flex-wrap">
@@ -96,7 +96,7 @@ export default function ListingsPage() {
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#FAF8F5]"}`}
+                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-[#1E3050] text-[#8899AA] hover:border-[#FAF8F5]"}`}
               >
                 {c}
               </button>
@@ -112,7 +112,7 @@ export default function ListingsPage() {
               <button
                 key={b}
                 onClick={() => setBeds(b)}
-                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#C5A55A]"}`}
+                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-[#1E3050] text-[#8899AA] hover:border-[#C5A55A]"}`}
               >
                 {b}
               </button>
@@ -145,7 +145,7 @@ export default function ListingsPage() {
               onChange={(e) => setPetFriendly(e.target.checked)}
               className="accent-[#C5A55A]"
             />
-            <span className="text-xs text-[#2D4A5E]">Pet Friendly</span>
+            <span className="text-xs text-[#8899AA]">Pet Friendly</span>
           </label>
 
           <div className="ml-auto text-xs text-gray-400">
@@ -173,8 +173,8 @@ export default function ListingsPage() {
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
               <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">No listings available right now.</p>
-              <p className="text-sm text-[#2D4A5E] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
-              <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
+              <p className="text-sm text-[#8899AA] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:opacity-80 transition-colors">
                 Contact Us
               </Link>
             </div>
@@ -182,7 +182,7 @@ export default function ListingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((p, i) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
-                  <div className="bg-[#112035] rounded-xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-md transition-shadow">
+                  <div className="bg-[#112035] rounded-xl overflow-hidden shadow-sm border border-[#1E3050] group hover:shadow-md transition-shadow">
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <Image
@@ -204,7 +204,7 @@ export default function ListingsPage() {
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">
-                          <span className="bg-[#112035]/90 text-[#2D4A5E] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
+                          <span className="bg-[#112035]/90 text-[#8899AA] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
                         </div>
                       )}
                     </div>
@@ -214,7 +214,7 @@ export default function ListingsPage() {
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] leading-tight">{p.title}</h3>
                       </div>
-                      <p className="text-xs text-[#2D4A5E] mb-3">{p.address}, {p.city}</p>
+                      <p className="text-xs text-[#8899AA] mb-3">{p.address}, {p.city}</p>
 
                       {/* Specs */}
                       <div className="flex gap-4 text-xs text-gray-500 mb-4">
@@ -224,7 +224,7 @@ export default function ListingsPage() {
                         {p.parking && <span>🚗 Parking</span>}
                       </div>
 
-                      <p className="text-xs text-[#2D4A5E] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
+                      <p className="text-xs text-[#8899AA] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
 
                       <div className="flex items-center justify-between">
                         <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5]">
@@ -247,15 +247,15 @@ export default function ListingsPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 px-6 bg-[#112035] text-center border-t border-gray-100">
+      <section className="py-16 px-6 bg-[#112035] text-center border-t border-[#1E3050]">
         <FadeIn>
           <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">
             Don&apos;t see what you&apos;re looking for?
           </p>
-          <p className="text-sm text-[#2D4A5E] mb-6">
+          <p className="text-sm text-[#8899AA] mb-6">
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm font-medium rounded hover:bg-[#9B2E2E] transition-colors">
+          <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm font-medium rounded hover:opacity-80 transition-colors">
             Contact Us
           </Link>
         </FadeIn>

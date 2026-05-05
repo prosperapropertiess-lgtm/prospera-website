@@ -20,7 +20,7 @@ export default function FAQPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Frequently Asked Questions
           </h1>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: "#2D4A5E", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
             Answers to the most common questions from landlords and tenants across London, St. Thomas, and Strathroy.
           </p>
         </FadeIn>

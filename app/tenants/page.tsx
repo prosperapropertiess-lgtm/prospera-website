@@ -47,7 +47,7 @@ export default function TenantsPage() {
             <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
               Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
             </p>
-            <Link href="/listings" className="inline-block px-8 py-4 bg-[#C5A55A] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+            <Link href="/listings" className="inline-block px-8 py-4 bg-[#C5A55A] text-white font-medium rounded hover:opacity-80 transition-colors text-sm uppercase tracking-wide">
               Browse Available Rentals
             </Link>
           </FadeIn>
@@ -66,11 +66,11 @@ export default function TenantsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((f, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-[#112035] rounded-xl p-8 shadow-sm border border-gray-100 flex gap-5">
+                <div className="bg-[#112035] rounded-xl p-8 shadow-sm border border-[#1E3050] flex gap-5">
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
                     <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] mb-2">{f.title}</h3>
-                    <p className="text-sm text-[#2D4A5E] leading-relaxed">{f.desc}</p>
+                    <p className="text-sm text-[#8899AA] leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -92,14 +92,14 @@ export default function TenantsPage() {
                 <div className="text-center">
                   <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#FAF8F5]/40 mb-4">{step.n}</p>
                   <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#FAF8F5] mb-3">{step.title}</h3>
-                  <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
+                  <p className="text-sm text-[#8899AA] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
           <FadeIn delay={0.3}>
             <div className="text-center mt-14">
-              <Link href="/listings" className="inline-block px-10 py-4 bg-[#C5A55A] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+              <Link href="/listings" className="inline-block px-10 py-4 bg-[#C5A55A] text-white font-medium rounded hover:opacity-80 transition-colors text-sm uppercase tracking-wide">
                 See Available Homes
               </Link>
             </div>
@@ -127,7 +127,7 @@ export default function TenantsPage() {
           <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#2D4A5E] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
+          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#8899AA] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
             Browse Listings
           </Link>
         </FadeIn>
