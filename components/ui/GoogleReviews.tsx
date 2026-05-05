@@ -170,7 +170,8 @@ function Carousel({ data }: { data: ReviewsData }) {
           </svg>
         </button>
 
-        <div className="flex gap-2">
+        {/* Dots on sm+, counter on mobile */}
+        <div className="hidden sm:flex gap-2">
           {reviews.map((_, i) => (
             <button
               key={i}
@@ -184,6 +185,12 @@ function Carousel({ data }: { data: ReviewsData }) {
             />
           ))}
         </div>
+        <p
+          className="sm:hidden text-xs tabular-nums"
+          style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
+        >
+          {current + 1} / {reviews.length}
+        </p>
 
         <button
           onClick={next}

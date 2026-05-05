@@ -119,13 +119,15 @@ export default function PricingPage() {
       </section>
 
       {/* Plans */}
-      <section className="pb-24 px-6 bg-[#0A1628]">
+      <section className="pb-24 bg-[#0A1628]">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {/* Mobile: horizontal scroll. Desktop: 3-col grid */}
+          <div className="flex md:grid md:grid-cols-3 gap-6 mb-8 overflow-x-auto md:overflow-visible px-6 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 md:pb-0">
+
 
             {/* MANAGED */}
             <FadeIn delay={0}>
-              <div className="relative bg-[#112035] border border-[#1E3050] rounded-2xl p-8 flex flex-col h-full">
+              <div className="relative bg-[#112035] border border-[#1E3050] rounded-2xl p-8 flex flex-col h-full min-w-[80vw] md:min-w-0 snap-center">
                 <div className="mb-8">
                   <p className="text-xs uppercase tracking-widest text-[#5A7090] mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>Managed</p>
                   <div className="flex items-end gap-2 mb-1">
@@ -170,7 +172,7 @@ export default function PricingPage() {
 
             {/* OPTIMIZED */}
             <FadeIn delay={0.1}>
-              <div className="relative bg-[#060E1C] rounded-2xl p-8 flex flex-col h-full">
+              <div className="relative bg-[#060E1C] rounded-2xl p-8 flex flex-col h-full min-w-[80vw] md:min-w-0 snap-center">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[#C5A55A] rounded-full">
                   <p className="text-xs font-semibold uppercase tracking-widest text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>Most Popular</p>
                 </div>
@@ -218,7 +220,7 @@ export default function PricingPage() {
 
             {/* PASSIVE */}
             <FadeIn delay={0.2}>
-              <div className="relative bg-[#112035] border-2 border-[#C5A55A] rounded-2xl p-8 flex flex-col h-full">
+              <div className="relative bg-[#112035] border-2 border-[#C5A55A] rounded-2xl p-8 flex flex-col h-full min-w-[80vw] md:min-w-0 snap-center">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[#060E1C] rounded-full">
                   <p className="text-xs font-semibold uppercase tracking-widest text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Best Value</p>
                 </div>

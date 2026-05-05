@@ -153,19 +153,19 @@ export default function AboutPage() {
                 {/* Giant editorial headline */}
                 <div className="mb-8 leading-none" style={{ fontFamily: "var(--font-cormorant)" }}>
                   <p
-                    className="text-7xl sm:text-8xl lg:text-9xl font-light"
+                    className="text-5xl sm:text-7xl lg:text-9xl font-light"
                     style={{ color: "#FAF8F5" }}
                   >
                     hi,
                   </p>
                   <p
-                    className="text-6xl sm:text-7xl lg:text-8xl font-light"
+                    className="text-4xl sm:text-6xl lg:text-8xl font-light"
                     style={{ color: "#FAF8F5" }}
                   >
                     I&apos;m
                   </p>
                   <p
-                    className="text-8xl sm:text-9xl lg:text-[10rem] font-light italic"
+                    className="text-6xl sm:text-8xl lg:text-[10rem] font-light italic"
                     style={{ color: "#8B1A1A" }}
                   >
                     Ebin

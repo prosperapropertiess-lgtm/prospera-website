@@ -143,12 +143,12 @@ function StatsBar() {
 
   return (
     <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
         {stats.map((stat, i) => (
           <FadeIn key={stat.label} delay={i * 0.08}>
             <div>
               <div
-                className="text-5xl sm:text-6xl font-light mb-1"
+                className="text-4xl sm:text-5xl md:text-6xl font-light mb-1"
                 style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
               >
                 <CounterAnimation target={stat.value} suffix={stat.suffix} />
@@ -721,10 +721,11 @@ function StickyCTA() {
           }}
         >
           <p
-            className="text-sm hidden sm:block"
+            className="text-xs sm:text-sm"
             style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
           >
-            Own a rental in Southwestern Ontario?
+            <span className="sm:hidden">Free landlord quote</span>
+            <span className="hidden sm:inline">Own a rental in Southwestern Ontario?</span>
           </p>
           <Link
             href="/contact"
