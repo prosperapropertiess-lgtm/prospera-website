@@ -3,6 +3,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
 import BlogNudge from "@/components/ui/BlogNudge";
+import PricingCards from "@/components/ui/PricingCards";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -253,17 +254,17 @@ export default function LandlordsPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <section id="pricing" className="py-24" style={{ backgroundColor: "#0A1628" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p
-              className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+              className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8"
               style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Transparent Pricing
             </p>
             <h2
-              className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
+              className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight px-5 sm:px-8"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Simple plans.
@@ -271,229 +272,19 @@ export default function LandlordsPage() {
               <em>No hidden fees. Ever.</em>
             </h2>
             <p
-              className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
-              style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+              className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8"
+              style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
             >
-              Zero maintenance markup on all plans. Zero setup fee. Lease renewal always free.
-              The only number you pay is the one listed below.
+              Zero setup fee. Lease renewal always free. The only number you pay is the one listed below.
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {/* Basic */}
-            <FadeIn delay={0.08}>
-              <div
-                className="bg-[#112035] border p-8 h-full flex flex-col rounded-xl"
-                style={{ borderColor: "#1E3050" }}
-              >
-                <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Basic
-                </p>
-                <div className="mb-1">
-                  <span
-                    className="text-5xl font-light"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                  >
-                    10%
-                  </span>
-                  <span
-                    className="text-sm ml-1"
-                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    /mo
-                  </span>
-                </div>
-                <p
-                  className="text-xs mb-7"
-                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  + 1 full month&apos;s rent (placement)
-                </p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {[
-                    "Tenant screening & placement",
-                    "Rent collection",
-                    "Maintenance coordination",
-                    "Monthly statements",
-                    "Lease management",
-                    "Move-in / move-out inspection",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#7A7A7A" }}>✓</span>
-                      <span
-                        className="text-sm"
-                        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:bg-gray-50 rounded-lg"
-                  style={{ borderColor: "#1E3050", color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Get Started
-                </Link>
-              </div>
-            </FadeIn>
+          <PricingCards />
 
-            {/* Standard — most popular */}
-            <FadeIn delay={0.12}>
-              <div
-                className="border p-8 h-full flex flex-col relative rounded-xl"
-                style={{ backgroundColor: "#060E1C", borderColor: "#1A1A1A" }}
-              >
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Most Popular
-                </div>
-                <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Standard
-                </p>
-                <div className="mb-1">
-                  <span
-                    className="text-5xl font-light"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                  >
-                    12%
-                  </span>
-                  <span
-                    className="text-sm ml-1"
-                    style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    /mo
-                  </span>
-                </div>
-                <p
-                  className="text-xs mb-7"
-                  style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  + 50% of one month&apos;s rent (placement)
-                </p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {[
-                    "Everything in Basic",
-                    "Priority response time",
-                    "Semi-annual property inspection",
-                    "Rent increase advisory",
-                    "Market rent review included",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#C5A55A" }}>✓</span>
-                      <span
-                        className="text-sm"
-                        style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Get Started
-                </Link>
-              </div>
-            </FadeIn>
-
-            {/* Gold — best value */}
-            <FadeIn delay={0.16}>
-              <div
-                className="bg-[#112035] border p-8 h-full flex flex-col relative rounded-xl"
-                style={{ borderColor: "#C4B08A" }}
-              >
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ backgroundColor: "#C4B08A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Best Value
-                </div>
-                <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#C4B08A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Gold
-                </p>
-                <div className="mb-1">
-                  <span
-                    className="text-5xl font-light"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                  >
-                    15%
-                  </span>
-                  <span
-                    className="text-sm ml-1"
-                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    /mo
-                  </span>
-                </div>
-                <p
-                  className="text-xs mb-2"
-                  style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}
-                >
-                  Tenant placement FREE
-                </p>
-                <p
-                  className="text-xs mb-7"
-                  style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  At $1,500/mo rent, placement saves you $1,500+
-                </p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {[
-                    "Everything in Standard",
-                    "Free tenant placement (every time)",
-                    "Quarterly property inspection",
-                    "Annual investment review",
-                    "Direct line to Ebin",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#C4B08A" }}>✓</span>
-                      <span
-                        className="text-sm"
-                        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  className="block text-center py-3 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-80 rounded-lg"
-                  style={{ borderColor: "#C4B08A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(196,176,138,0.08)" }}
-                >
-                  Get Started
-                </Link>
-              </div>
-            </FadeIn>
-          </div>
-
-          {/* Pricing reassurance */}
           <FadeIn delay={0.2}>
-            <div
-              className="mt-8 p-6 text-center border rounded-xl"
-              style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
-            >
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
-              >
-                All plans include: <strong style={{ color: "#FAF8F5" }}>zero maintenance markup</strong> · <strong style={{ color: "#FAF8F5" }}>no setup fee</strong> · <strong style={{ color: "#FAF8F5" }}>no vacancy fee</strong> · <strong style={{ color: "#FAF8F5" }}>free lease renewal</strong>
+            <div className="mx-5 sm:mx-8 mt-2 p-6 text-center border rounded-xl" style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                All plans include: <strong style={{ color: "#FAF8F5" }}>8% maintenance markup</strong> · <strong style={{ color: "#FAF8F5" }}>no setup fee</strong> · <strong style={{ color: "#FAF8F5" }}>no vacancy fee</strong> · <strong style={{ color: "#FAF8F5" }}>free lease renewal</strong>
               </p>
             </div>
           </FadeIn>
