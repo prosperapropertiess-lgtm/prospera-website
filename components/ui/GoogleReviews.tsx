@@ -32,6 +32,42 @@ const STATIC_REVIEWS: Review[] = [
     time: "5 weeks ago",
   },
   {
+    author: "Ryan",
+    rating: 5,
+    text: "Really smooth renting experience. The team was helpful and responsive — highly recommend!",
+    time: "15 weeks ago",
+  },
+  {
+    author: "Nahala Naushad",
+    rating: 5,
+    text: "I found my new home near my workplace with the help of Prospera Properties, and it was a great experience. Ebin was very friendly, responsive, and always available to answer my questions. The house he showed me was exactly what I was looking for. Highly recommend.",
+    time: "17 weeks ago",
+  },
+  {
+    author: "Anna Shaji",
+    rating: 5,
+    text: "It was confusing to find a bachelor's as a new Western student. Prospera helped narrow things down and made the process easier. Communication was clear and everything went smoothly.",
+    time: "18 weeks ago",
+  },
+  {
+    author: "Bibin Sebastian",
+    rating: 5,
+    text: "Ebin's communication was consistently prompt, clear, and proactive, keeping us informed at every stage. We particularly valued his honest advice and genuine commitment to finding the perfect place. I would recommend his services without hesitation to anyone seeking a professional and results-driven person.",
+    time: "18 weeks ago",
+  },
+  {
+    author: "Aarsha Jerome",
+    rating: 5,
+    text: "Prospera Properties did a great job helping me find a private room. The process was smooth, professional, and stress-free. Communication was clear, and everything matched what was advertised. I would definitely recommend Prospera Properties to anyone looking for a rental.",
+    time: "19 weeks ago",
+  },
+  {
+    author: "Aadhil T Mujeeb",
+    rating: 5,
+    text: "Overall a great experience. Super easy to deal with and quick to respond whenever I needed something.",
+    time: "19 weeks ago",
+  },
+  {
     author: "Christaline",
     rating: 5,
     text: "Honestly had a good experience. Any time I reached out, they got back to me quick.",
