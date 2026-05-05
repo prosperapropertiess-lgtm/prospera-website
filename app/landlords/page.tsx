@@ -2,6 +2,7 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -545,6 +546,24 @@ export default function LandlordsPage() {
             Get a Free Quote
           </Link>
         </FadeIn>
+      </section>
+
+      {/* Blog nudges */}
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto space-y-4">
+          <BlogNudge
+            hook="What happens if your tenant just stops paying rent?"
+            title="How to Evict a Tenant in Ontario: The Full Process"
+            excerpt="Ontario's eviction process is slow and procedurally strict. One wrong move can set you back months."
+            slug="evicting-tenant-ontario"
+          />
+          <BlogNudge
+            hook="Could you spot a bad tenant before they move in?"
+            title="5 Red Flags When Screening Tenants"
+            excerpt="Finding great tenants starts with knowing what to watch for. Here are five warning signs experienced landlords never ignore."
+            slug="tenant-screening-red-flags"
+          />
+        </div>
       </section>
     </div>
   );

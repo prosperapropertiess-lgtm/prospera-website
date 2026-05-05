@@ -3,6 +3,7 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import MilestoneTimeline from "@/components/about/MilestoneTimeline";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -503,6 +504,19 @@ export default function AboutPage() {
               <span className="text-base leading-none">→</span>
             </Link>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Blog nudge */}
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#060E1C" }}>
+        <div className="max-w-3xl mx-auto">
+          <BlogNudge
+            hook="How do you actually pick the right property manager?"
+            title="How to Find the Best Property Management Company in London, Ontario"
+            excerpt="The best property management company combines local market knowledge, Ontario landlord-tenant law expertise, and transparent fees."
+            slug="best-property-management-company-london-ontario"
+            label="Read before you decide"
+          />
         </div>
       </section>
     </div>

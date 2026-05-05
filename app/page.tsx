@@ -8,6 +8,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import ParticleCanvas from "@/components/animations/ParticleCanvas";
 import GoogleReviews from "@/components/ui/GoogleReviews";
+import BlogNudge from "@/components/ui/BlogNudge";
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
@@ -758,6 +759,24 @@ export default function HomePage() {
       <CaseStudy />
       <Testimonials />
       <TenantBar />
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto space-y-4">
+          <BlogNudge
+            hook="One bad tenant can cost you an entire year's profit."
+            title="5 Red Flags When Screening Tenants"
+            excerpt="Finding great tenants starts with knowing what to watch for. Here are five warning signs experienced landlords never ignore."
+            slug="tenant-screening-red-flags"
+            label="Protect your investment"
+          />
+          <BlogNudge
+            hook="Do you know what you can legally charge in London right now?"
+            title="How Much Can You Charge for Rent in London, Ontario?"
+            excerpt="Current market rents by unit type across London, St. Thomas, and Strathroy — and how to price your property for fast, quality tenants."
+            slug="how-much-charge-rent-london-ontario"
+            label="Protect your investment"
+          />
+        </div>
+      </section>
       <CTABanner />
       <StickyCTA />
     </>

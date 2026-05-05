@@ -2,6 +2,7 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import PricingCards from "@/components/ui/PricingCards";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -326,6 +327,26 @@ export default function PricingPage() {
             Book Your Free Call
           </Link>
         </FadeIn>
+      </section>
+
+      {/* Blog nudges */}
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto space-y-4">
+          <BlogNudge
+            hook="Is what you're paying actually normal?"
+            title="Property Management Fees in Ontario: What's Normal in 2026?"
+            excerpt="Before you hire a property manager, understand what you should be paying — and the hidden fees to watch out for."
+            slug="property-management-fees-ontario"
+            label="Do the math"
+          />
+          <BlogNudge
+            hook="Are you leaving money on the table at tax time?"
+            title="Rental Property Tax Deductions for Ontario Landlords"
+            excerpt="Most Ontario landlords miss deductions they're legally entitled to. Here's a practical breakdown of what you can write off."
+            slug="rental-property-tax-deductions-ontario"
+            label="Do the math"
+          />
+        </div>
       </section>
     </>
   );

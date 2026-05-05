@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -115,6 +116,26 @@ export default function TenantsPage() {
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-14">FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
+        </div>
+      </section>
+
+      {/* Blog nudges */}
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto space-y-4">
+          <BlogNudge
+            hook="Who actually pays for utilities in your rental?"
+            title="Utilities in Ontario Rentals: Who Pays What?"
+            excerpt="Electricity, heat, water — here's how utility responsibilities work in Ontario leases and what the law says about each."
+            slug="utilities-ontario-rentals"
+            label="Know your rights"
+          />
+          <BlogNudge
+            hook="Can your landlord just walk into your home?"
+            title="Landlord Entry Rights in Ontario: When Can You Enter Your Own Rental?"
+            excerpt="Ontario landlords have strict rules about entering rental properties — and breaking them can backfire badly."
+            slug="landlord-entry-rights-ontario"
+            label="Know your rights"
+          />
         </div>
       </section>
 
