@@ -90,7 +90,7 @@ export default function TenantsPage() {
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.15}>
                 <div className="text-center">
-                  <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#C5A55A]/20 mb-4">{step.n}</p>
+                  <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#FAF8F5]/40 mb-4">{step.n}</p>
                   <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#FAF8F5] mb-3">{step.title}</h3>
                   <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
                 </div>

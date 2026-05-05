@@ -391,7 +391,7 @@ function HowItWorks() {
                   <div className="flex items-start gap-4 mb-5">
                     <span
                       className="text-4xl font-light leading-none"
-                      style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)", opacity: 0.5 }}
+                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
                     >
                       {phase.num}
                     </span>

@@ -221,7 +221,7 @@ export default function LandlordsPage() {
                 <div className="flex gap-6">
                   <p
                     className="text-5xl font-light leading-none flex-shrink-0"
-                    style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)", opacity: 0.25 }}
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", opacity: 0.35 }}
                   >
                     {step.n}
                   </p>
