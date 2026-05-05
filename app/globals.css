@@ -26,10 +26,10 @@ body {
   font-family: var(--font-dm-sans), sans-serif;
 }
 
-/* Mobile text scale — 20% larger base font size on small screens */
+/* Mobile text scale */
 @media (max-width: 767px) {
   html {
-    font-size: 115%;
+    font-size: 100%;
   }
 }
 
