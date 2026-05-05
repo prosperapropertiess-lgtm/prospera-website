@@ -54,13 +54,13 @@ const comparison = [
 ];
 
 const valueStack = [
-  { item: "Tenant screening & placement", value: "$500" },
-  { item: "Professional photography & listing", value: "$300" },
-  { item: "Lease preparation & review", value: "$200" },
-  { item: "Maintenance coordination (monthly)", value: "$150/mo" },
-  { item: "Move-in / move-out inspection", value: "$150" },
-  { item: "Monthly financial statements", value: "$75/mo" },
-  { item: "Rent collection & disbursement", value: "$100/mo" },
+  { item: "Tenant placement (standalone cost)", value: "1 month's rent", note: "one-time per vacancy" },
+  { item: "Professional photography & listing", value: "$200–$500", note: "one-time per vacancy" },
+  { item: "Lease preparation & review", value: "$200–$400", note: "one-time per lease" },
+  { item: "Move-in / move-out inspection", value: "$100–$200", note: "one-time per tenant" },
+  { item: "Maintenance coordination", value: "10–20% markup", note: "on every repair — forever" },
+  { item: "Chasing late rent", value: "Hours of your time", note: "every single month" },
+  { item: "2am emergency calls", value: "Your sleep", note: "priceless" },
 ];
 
 export default function PricingPage() {
@@ -97,17 +97,20 @@ export default function PricingPage() {
             </h2>
             <div className="bg-white border border-[#E8E4DF] rounded-2xl overflow-hidden">
               {valueStack.map((row, i) => (
-                <div key={i} className={`flex items-center justify-between px-6 py-4 ${i < valueStack.length - 1 ? "border-b border-[#E8E4DF]" : ""}`}>
-                  <p className="text-sm text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
-                  <p className="text-sm font-semibold text-[#9B9B9B] line-through" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
+                <div key={i} className={`flex items-center justify-between px-6 py-4 gap-4 ${i < valueStack.length - 1 ? "border-b border-[#E8E4DF]" : ""}`}>
+                  <div>
+                    <p className="text-sm text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
+                    <p className="text-xs text-[#9B9B9B] mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>{row.note}</p>
+                  </div>
+                  <p className="text-sm font-semibold text-[#C5A55A] whitespace-nowrap" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
                 </div>
               ))}
               <div className="flex items-center justify-between px-6 py-5 bg-[#0A1628]">
-                <p className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>Total standalone value</p>
-                <p className="text-sm font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>$1,150+ / month</p>
+                <p className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>With Prospera — all of this goes away</p>
+                <p className="text-sm font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Starting at 8%</p>
               </div>
               <div className="flex items-center justify-between px-6 py-5 bg-[#C5A55A]">
-                <p className="text-sm font-semibold text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>Your cost with Prospera (on $2,000 rent)</p>
+                <p className="text-sm font-semibold text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
                 <p className="text-xl font-bold text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
               </div>
             </div>
