@@ -26,7 +26,7 @@ export default function ContactPage() {
     }
   }
 
-  const inputClass = "w-full px-4 py-3 text-sm border border-gray-200 rounded bg-white text-[#0A1628] focus:outline-none focus:border-[#C5A55A] transition-colors";
+  const inputClass = "w-full px-4 py-3 text-sm border border-gray-200 rounded bg-white text-[#1A1A1A] focus:outline-none focus:border-[#C5A55A] transition-colors";
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function ContactPage() {
       <section className="pt-32 pb-20 px-6 bg-[#FAF8F5] text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4">Reach Out</p>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light text-[#0A1628] mb-5">
+          <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light text-[#1A1A1A] mb-5">
             Let&apos;s Talk.
           </h1>
           <p className="text-sm text-[#2D4A5E] max-w-md mx-auto leading-relaxed">
@@ -50,7 +50,7 @@ export default function ContactPage() {
             <div className="space-y-10">
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3">Phone</p>
-                <a href="tel:5196971227" className="font-[family-name:var(--font-cormorant)] text-2xl text-[#0A1628] hover:text-[#C5A55A] transition-colors">
+                <a href="tel:5196971227" className="font-[family-name:var(--font-cormorant)] text-2xl text-[#1A1A1A] hover:text-[#C5A55A] transition-colors">
                   (519) 697-1227
                 </a>
               </div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
           <FadeIn delay={0.1} className="md:col-span-2">
             {status === "success" ? (
               <div className="bg-[#FAF8F5] rounded-xl p-12 text-center border border-gray-100">
-                <p className="font-[family-name:var(--font-cormorant)] text-4xl text-[#0A1628] mb-3">Message Received.</p>
+                <p className="font-[family-name:var(--font-cormorant)] text-4xl text-[#1A1A1A] mb-3">Message Received.</p>
                 <p className="text-sm text-[#2D4A5E]">We&apos;ll be in touch within 1 business day.</p>
               </div>
             ) : (

@@ -29,7 +29,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1628] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-3">Prospera Properties</p>
@@ -49,7 +49,7 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               autoFocus
               required
-              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#0A1628] outline-none focus:border-[#0A1628] transition-colors"
+              className="w-full px-4 py-3 border border-gray-200 rounded text-sm text-[#1A1A1A] outline-none focus:border-[#1A1A1A] transition-colors"
               placeholder="Enter admin password"
             />
           </div>
@@ -61,7 +61,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors disabled:opacity-50"
+            className="w-full py-3 bg-[#8B1A1A] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const categoryColors: Record<string, string> = {
-  "Landlord Tips": "bg-[#0D1B2A] text-[#FAF8F5]",
+  "Landlord Tips": "bg-[#8B1A1A] text-[#FAF8F5]",
   "Tenant Resources": "bg-[#2D4A5E] text-[#FAF8F5]",
   "Market Updates": "bg-[#C5A55A] text-[#FAF8F5]",
   "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div className="flex items-center gap-3 mb-6">
             <span
-              className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#0D1B2A] text-[#FAF8F5]"}`}
+              className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#8B1A1A] text-[#FAF8F5]"}`}
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {post.category}
@@ -119,7 +119,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           <h1
             className="text-4xl md:text-5xl font-light leading-tight mb-6"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
           >
             {post.title}
           </h1>
@@ -151,12 +151,12 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="flex items-center gap-3">
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
-              style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               E
             </div>
             <div>
-              <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm font-medium" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>
                 Ebin Jaison
               </p>
               <p className="text-xs" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
@@ -198,7 +198,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Bottom CTA */}
       <section className="px-6 py-16" style={{ borderColor: "#E8E4DF" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-3xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Property?
           </h2>
           <p className="text-sm mb-8" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: Props) {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -228,7 +228,7 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
   return (
     <section className="py-16 px-6" style={{ backgroundColor: "#F5F0EB" }}>
       <div className="max-w-6xl mx-auto">
-        <h3 className="text-2xl font-light mb-10 text-center" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+        <h3 className="text-2xl font-light mb-10 text-center" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
           More Articles
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -247,7 +247,7 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
               </span>
               <h4
                 className="text-lg font-medium mt-2 mb-2 group-hover:text-[#C5A55A] transition-colors leading-snug"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 {post.title}
               </h4>

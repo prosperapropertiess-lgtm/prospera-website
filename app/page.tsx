@@ -14,7 +14,7 @@ function Hero() {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden"
-      style={{ backgroundColor: "#0D1B2A" }}
+      style={{ backgroundColor: "#1A1A1A" }}
     >
       {/* Particle animation */}
       <ParticleCanvas />
@@ -148,7 +148,7 @@ function StatsBar() {
             <div>
               <div
                 className="text-5xl sm:text-6xl font-light mb-1"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 <CounterAnimation target={stat.value} suffix={stat.suffix} />
               </div>
@@ -200,7 +200,7 @@ function PainPoints() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
           >
             If you recognize any of these,
             <br />
@@ -221,7 +221,7 @@ function PainPoints() {
                 <div>
                   <p
                     className="font-medium mb-1 text-sm"
-                    style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {pain.label}
                   </p>
@@ -279,7 +279,7 @@ function FeatureCards() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
           >
             What we actually do differently.
           </h2>
@@ -298,7 +298,7 @@ function FeatureCards() {
                 </span>
                 <h3
                   className="text-xl font-medium mb-3"
-                  style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                  style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
                 >
                   {f.title}
                 </h3>
@@ -365,7 +365,7 @@ function HowItWorks() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
           >
             From handshake to hands-off
             <br />
@@ -398,7 +398,7 @@ function HowItWorks() {
                     <div>
                       <p
                         className="font-semibold text-base"
-                        style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
                       >
                         {phase.phase}
                       </p>
@@ -437,7 +437,7 @@ function HowItWorks() {
 
 function FounderSnippet() {
   return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#1A1A1A" }}>
       <div className="max-w-5xl mx-auto">
         <FadeIn>
           <div className="flex flex-col md:flex-row items-center gap-12">
@@ -505,7 +505,7 @@ function CaseStudy() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-            style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
           >
             From drowning in utility bills
             <br />
@@ -626,7 +626,7 @@ function Testimonials() {
             What Landlords Say
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-light text-[#0D1B2A] leading-tight"
+            className="text-4xl sm:text-5xl font-light text-[#1A1A1A] leading-tight"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
             20+ five-star reviews
@@ -656,7 +656,7 @@ function Testimonials() {
 
               <p
                 className="text-xl sm:text-2xl font-light leading-relaxed mb-8"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 &ldquo;{testimonials[current].quote}&rdquo;
               </p>
@@ -674,7 +674,7 @@ function Testimonials() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={prev}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5] rounded-lg"
             aria-label="Previous"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -699,7 +699,7 @@ function Testimonials() {
 
           <button
             onClick={next}
-            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#0D1B2A] transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5] rounded-lg"
+            className="w-10 h-10 flex items-center justify-center border border-[rgba(13,27,42,0.2)] text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5] rounded-lg"
             aria-label="Next"
           >
             <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -716,7 +716,7 @@ function Testimonials() {
 
 function TenantBar() {
   return (
-    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#1A1A1A" }}>
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
           <p
@@ -756,7 +756,7 @@ function CTABanner() {
       <FadeIn className="max-w-2xl mx-auto text-center">
         <h2
           className="text-5xl sm:text-6xl font-light mb-4 leading-tight"
-          style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+          style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
         >
           Own a rental.
           <br />
@@ -815,7 +815,7 @@ function StickyCTA() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4"
           style={{
-            backgroundColor: "#0D1B2A",
+            backgroundColor: "#1A1A1A",
             borderTop: "1px solid rgba(250,248,245,0.08)",
           }}
         >

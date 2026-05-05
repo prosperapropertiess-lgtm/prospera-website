@@ -64,7 +64,7 @@ export default function ResourcesPage() {
     <div style={{ backgroundColor: "#FAF8F5" }} className="min-h-screen">
 
       {/* ── Hero ── */}
-      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
@@ -169,7 +169,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               Which form do I actually need?
             </h2>
@@ -197,7 +197,7 @@ export default function ResourcesPage() {
                           <div>
                             <p
                               className="font-semibold text-base leading-tight"
-                              style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                              style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
                             >
                               {s.situation}
                             </p>
@@ -287,7 +287,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl font-light text-center mb-10 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               N4 Form Builder
             </h2>
@@ -308,7 +308,7 @@ export default function ResourcesPage() {
             </p>
             <h2
               className="text-4xl font-light text-center mb-12 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               Templates, guides &amp; checklists.
             </h2>
@@ -318,7 +318,7 @@ export default function ResourcesPage() {
       <ResourcesGrid />
 
       {/* ── CTA ── */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <FadeIn>
           <h2
             className="text-4xl font-light mb-4 leading-tight"

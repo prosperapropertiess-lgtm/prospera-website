@@ -21,7 +21,7 @@ export default function NotFound() {
 
       <h1
         className="text-4xl md:text-5xl font-light mb-4"
-        style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+        style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
       >
         Page Not Found
       </h1>
@@ -36,14 +36,14 @@ export default function NotFound() {
         <Link
           href="/"
           className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-          style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
         >
           Back to Home
         </Link>
         <Link
           href="/listings"
-          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#0D1B2A] hover:text-[#FAF8F5]"
-          style={{ borderColor: "#0D1B2A", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#1A1A1A] hover:text-[#FAF8F5]"
+          style={{ borderColor: "#1A1A1A", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
         >
           Browse Listings
         </Link>

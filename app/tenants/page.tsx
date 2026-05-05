@@ -59,7 +59,7 @@ export default function TenantsPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">What You Get</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-14">
               Renting with Prospera is different.
             </h2>
           </FadeIn>
@@ -69,7 +69,7 @@ export default function TenantsPage() {
                 <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 flex gap-5">
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
-                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#0A1628] mb-2">{f.title}</h3>
+                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#1A1A1A] mb-2">{f.title}</h3>
                     <p className="text-sm text-[#2D4A5E] leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
@@ -84,14 +84,14 @@ export default function TenantsPage() {
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">The Process</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-16">How Renting Works</h2>
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-16">How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.15}>
                 <div className="text-center">
                   <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#C5A55A]/20 mb-4">{step.n}</p>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#0A1628] mb-3">{step.title}</h3>
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#1A1A1A] mb-3">{step.title}</h3>
                   <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeIn>
@@ -112,7 +112,7 @@ export default function TenantsPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">Common Questions</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">FAQ for Tenants</h2>
+            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#1A1A1A] text-center mb-14">FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>

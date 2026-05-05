@@ -1,6 +1,6 @@
 export default function ComingSoonPage() {
   return (
-    <div className="min-h-screen bg-[#0A1628] flex flex-col items-center justify-center px-6 text-center">
+    <div className="min-h-screen bg-[#1A1A1A] flex flex-col items-center justify-center px-6 text-center">
       <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-6">London · St. Thomas · Strathroy</p>
 
       <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-7xl font-light text-white mb-6 leading-tight">

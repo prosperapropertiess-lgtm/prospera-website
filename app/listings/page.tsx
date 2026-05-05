@@ -75,7 +75,7 @@ export default function ListingsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-14 px-6 bg-[#0A1628] text-white text-center">
+      <section className="pt-32 pb-14 px-6 bg-[#8B1A1A] text-white text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-4">Available Now</p>
           <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light mb-4">
@@ -96,7 +96,7 @@ export default function ListingsPage() {
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#0A1628] text-white border-[#0A1628]" : "border-gray-200 text-[#2D4A5E] hover:border-[#0A1628]"}`}
+                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#1A1A1A]"}`}
               >
                 {c}
               </button>
@@ -172,7 +172,7 @@ export default function ListingsPage() {
             </div>
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
-              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#0A1628] mb-3">No listings available right now.</p>
+              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#1A1A1A] mb-3">No listings available right now.</p>
               <p className="text-sm text-[#2D4A5E] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
               <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
                 Contact Us
@@ -212,7 +212,7 @@ export default function ListingsPage() {
                     {/* Details */}
                     <div className="p-6">
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#0A1628] leading-tight">{p.title}</h3>
+                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#1A1A1A] leading-tight">{p.title}</h3>
                       </div>
                       <p className="text-xs text-[#2D4A5E] mb-3">{p.address}, {p.city}</p>
 
@@ -227,12 +227,12 @@ export default function ListingsPage() {
                       <p className="text-xs text-[#2D4A5E] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
 
                       <div className="flex items-center justify-between">
-                        <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#0A1628]">
+                        <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#1A1A1A]">
                           ${p.price.toLocaleString()}<span className="text-sm text-gray-400 font-sans">/mo</span>
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
-                          className="px-4 py-2 bg-[#0A1628] text-white text-xs rounded hover:bg-[#C5A55A] transition-colors"
+                          className="px-4 py-2 bg-[#8B1A1A] text-white text-xs rounded hover:bg-[#C5A55A] transition-colors"
                         >
                           View Details
                         </Link>
@@ -249,7 +249,7 @@ export default function ListingsPage() {
       {/* Bottom CTA */}
       <section className="py-16 px-6 bg-white text-center border-t border-gray-100">
         <FadeIn>
-          <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#0A1628] mb-3">
+          <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#1A1A1A] mb-3">
             Don&apos;t see what you&apos;re looking for?
           </p>
           <p className="text-sm text-[#2D4A5E] mb-6">

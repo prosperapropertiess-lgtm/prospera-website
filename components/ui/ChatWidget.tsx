@@ -112,11 +112,11 @@ export default function ChatWidget() {
         <AnimatePresence mode="wait">
           {open ? (
             <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="20" height="20" fill="none" stroke="#0A1628" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <svg width="20" height="20" fill="none" stroke="#1A1A1A" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </motion.span>
           ) : (
             <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="22" height="22" fill="none" stroke="#0A1628" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              <svg width="22" height="22" fill="none" stroke="#1A1A1A" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </motion.span>
           )}
         </AnimatePresence>
@@ -139,7 +139,7 @@ export default function ChatWidget() {
             style={{ maxHeight: "70vh", backgroundColor: "#FFFDFB", border: "1px solid #E8E4DF" }}
           >
             {/* Header */}
-            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#0A1628" }}>
+            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#1A1A1A" }}>
               <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
@@ -157,8 +157,8 @@ export default function ChatWidget() {
                   <div
                     className="max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed"
                     style={{
-                      backgroundColor: msg.role === "user" ? "#0A1628" : "#F5F0EB",
-                      color: msg.role === "user" ? "#FAF8F5" : "#0A1628",
+                      backgroundColor: msg.role === "user" ? "#1A1A1A" : "#F5F0EB",
+                      color: msg.role === "user" ? "#FAF8F5" : "#1A1A1A",
                       fontFamily: "var(--font-dm-sans)",
                       borderRadius: msg.role === "user" ? "1rem 1rem 0.25rem 1rem" : "1rem 1rem 1rem 0.25rem",
                     }}
@@ -173,7 +173,7 @@ export default function ChatWidget() {
                   <div className="px-4 py-3 rounded-2xl" style={{ backgroundColor: "#F5F0EB", borderRadius: "1rem 1rem 1rem 0.25rem" }}>
                     <div className="flex gap-1">
                       {[0, 1, 2].map((i) => (
-                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#0A1628", opacity: 0.4 }}
+                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1A1A1A", opacity: 0.4 }}
                           animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }} />
                       ))}
                     </div>
@@ -192,7 +192,7 @@ export default function ChatWidget() {
                     <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border bg-white" style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }} />
                     <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border bg-white" style={{ borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }} />
                     <div className="flex gap-2">
-                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
                       <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
@@ -223,7 +223,7 @@ export default function ChatWidget() {
                   onClick={send}
                   disabled={loading || !input.trim()}
                   className="w-10 h-10 rounded-xl flex items-center justify-center transition-opacity disabled:opacity-40"
-                  style={{ backgroundColor: "#0A1628" }}
+                  style={{ backgroundColor: "#1A1A1A" }}
                 >
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                 </button>

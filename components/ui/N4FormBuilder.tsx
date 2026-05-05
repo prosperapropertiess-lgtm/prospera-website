@@ -13,7 +13,7 @@ interface RentPeriod {
 const emptyPeriod = (): RentPeriod => ({ from: "", to: "", charged: "", paid: "" });
 
 const inputClass =
-  "w-full px-4 py-3 text-sm border border-[#E8E4DF] rounded-lg bg-white text-[#0D1B2A] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
+  "w-full px-4 py-3 text-sm border border-[#E8E4DF] rounded-lg bg-white text-[#1A1A1A] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
 
 const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#5A5A5A]";
 
@@ -153,7 +153,7 @@ export default function N4FormBuilder() {
             </p>
             <h2
               className="text-2xl font-light leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               Notice of Non-Payment of Rent
             </h2>
@@ -278,7 +278,7 @@ export default function N4FormBuilder() {
                       <div className="flex items-center justify-between mb-4">
                         <p
                           className="text-xs font-semibold uppercase tracking-wider"
-                          style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
                         >
                           Period {i + 1}
                         </p>
@@ -359,7 +359,7 @@ export default function N4FormBuilder() {
                 {totalOwing > 0 && (
                   <div
                     className="mt-5 p-4 rounded-xl flex items-center justify-between"
-                    style={{ backgroundColor: "#0D1B2A" }}
+                    style={{ backgroundColor: "#1A1A1A" }}
                   >
                     <p
                       className="text-sm font-medium"
@@ -461,7 +461,7 @@ export default function N4FormBuilder() {
               </div>
               <h3
                 className="text-3xl font-light mb-3"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 Your N4 is ready.
               </h3>
@@ -487,7 +487,7 @@ export default function N4FormBuilder() {
                   className="mt-0.5 shrink-0 accent-[#C5A55A]"
                 />
                 <div>
-                  <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm font-medium" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>
                     I&apos;d like Prospera to handle this for me
                   </p>
                   <p className="text-xs mt-0.5" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>
@@ -548,7 +548,7 @@ export default function N4FormBuilder() {
               </div>
               <h3
                 className="text-3xl font-light mb-3"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 Downloaded.
               </h3>
@@ -580,7 +580,7 @@ export default function N4FormBuilder() {
                 <button
                   onClick={() => { setStep("form"); }}
                   className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:bg-gray-50"
-                  style={{ borderColor: "#E8E4DF", color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ borderColor: "#E8E4DF", color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fill Another N4
                 </button>

@@ -52,7 +52,7 @@ export default function StroathroyPage() {
       <JsonLd data={schema} />
 
       {/* Hero */}
-      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <FadeIn>
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy, Ontario
@@ -78,7 +78,7 @@ export default function StroathroyPage() {
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
+              <p className="text-3xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
@@ -89,7 +89,7 @@ export default function StroathroyPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
             <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -101,7 +101,7 @@ export default function StroathroyPage() {
               <FadeIn key={s.title} delay={i * 0.08}>
                 <div className="bg-white border p-6" style={{ borderColor: "#E8E4DF" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
                 </div>
               </FadeIn>
@@ -114,7 +114,7 @@ export default function StroathroyPage() {
       <section className="py-20 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
             <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
@@ -127,7 +127,7 @@ export default function StroathroyPage() {
                 <div className="bg-white border p-5 flex gap-4" style={{ borderColor: "#E8E4DF" }}>
                   <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
                   <div>
-                    <h3 className="font-medium mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
+                    <h3 className="font-medium mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function StroathroyPage() {
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               Strathroy Rental Market — 2026 Snapshot
             </h2>
           </FadeIn>
@@ -149,7 +149,7 @@ export default function StroathroyPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 <thead>
-                  <tr style={{ backgroundColor: "#0D1B2A", color: "#FAF8F5" }}>
+                  <tr style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5" }}>
                     <th className="text-left p-4">Unit Type</th>
                     <th className="p-4 text-right">Low</th>
                     <th className="p-4 text-right">Average</th>
@@ -164,9 +164,9 @@ export default function StroathroyPage() {
                     { type: "3 Bedroom", low: "$1,550", avg: "$1,750", high: "$2,050" },
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
-                      <td className="p-4 font-medium" style={{ color: "#0D1B2A" }}>{row.type}</td>
+                      <td className="p-4 font-medium" style={{ color: "#1A1A1A" }}>{row.type}</td>
                       <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#0D1B2A" }}>{row.avg}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#1A1A1A" }}>{row.avg}</td>
                       <td className="p-4 text-right" style={{ color: "#5A5A5A" }}>{row.high}</td>
                     </tr>
                   ))}
@@ -178,7 +178,7 @@ export default function StroathroyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in Strathroy?

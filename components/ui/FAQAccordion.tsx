@@ -18,7 +18,7 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
             className="flex w-full items-center justify-between text-left gap-4"
             onClick={() => setOpen(open === i ? null : i)}
           >
-            <span className="text-[#0A1628] font-medium text-sm md:text-base">{item.q}</span>
+            <span className="text-[#1A1A1A] font-medium text-sm md:text-base">{item.q}</span>
             <span className={`text-[#C5A55A] text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`}>+</span>
           </button>
           <AnimatePresence initial={false}>

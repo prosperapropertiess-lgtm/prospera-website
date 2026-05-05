@@ -69,7 +69,7 @@ export default function Navbar() {
                 href={link.href}
                 className="text-sm font-medium tracking-wide transition-colors duration-200"
                 style={{
-                  color: scrolled ? "#0A1628" : "#FAF8F5",
+                  color: scrolled ? "#1A1A1A" : "#FAF8F5",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -86,8 +86,8 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 rounded-lg"
               style={{
-                border: `1px solid ${scrolled ? "#0A1628" : "rgba(250,248,245,0.5)"}`,
-                color: scrolled ? "#0A1628" : "#FAF8F5",
+                border: `1px solid ${scrolled ? "#1A1A1A" : "rgba(250,248,245,0.5)"}`,
+                color: scrolled ? "#1A1A1A" : "#FAF8F5",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -119,7 +119,7 @@ export default function Navbar() {
                 key={i}
                 className="block w-6 h-px transition-all duration-300 origin-center"
                 style={{
-                  backgroundColor: scrolled || menuOpen ? "#0A1628" : "#FAF8F5",
+                  backgroundColor: scrolled || menuOpen ? "#1A1A1A" : "#FAF8F5",
                   transform,
                   opacity: i === 1 && menuOpen ? 0 : 1,
                 }}
@@ -143,7 +143,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-2xl font-light block py-1 text-[#0A1628]"
+              className="text-2xl font-light block py-1 text-[#1A1A1A]"
               style={{ fontFamily: "var(--font-cormorant)" }}
               onClick={() => setMenuOpen(false)}
             >
@@ -157,7 +157,7 @@ export default function Navbar() {
             href={BUILDIUM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#0A1628] text-[#0A1628] rounded-lg"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#1A1A1A] text-[#1A1A1A] rounded-lg"
             style={{ fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >

@@ -81,7 +81,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F5]">
       {/* Top bar */}
-      <div className="bg-[#0A1628] text-white px-6 py-4 flex items-center justify-between">
+      <div className="bg-[#8B1A1A] text-white px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera</span>
           <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">← Properties</Link>
@@ -116,7 +116,7 @@ export default function DashboardPage() {
             <p className="text-xs text-gray-400 uppercase tracking-widest">Outreach</p>
             <button
               onClick={() => setModal(true)}
-              className="text-xs bg-[#0A1628] text-white px-4 py-2 rounded hover:bg-[#C5A55A] transition-colors"
+              className="text-xs bg-[#8B1A1A] text-white px-4 py-2 rounded hover:bg-[#C5A55A] transition-colors"
             >
               + Log Outreach
             </button>
@@ -197,7 +197,7 @@ export default function DashboardPage() {
                   value={form.contact_name}
                   onChange={(e) => setForm((f) => ({ ...f, contact_name: e.target.value }))}
                   placeholder="e.g. John Smith"
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#0A1628]"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A]"
                 />
               </div>
               <div>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
                   onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                   placeholder="How did it go?"
                   rows={2}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#0A1628] resize-none"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-black focus:outline-none focus:border-[#1A1A1A] resize-none"
                 />
               </div>
             </div>
@@ -235,7 +235,7 @@ export default function DashboardPage() {
               <button
                 onClick={logOutreach}
                 disabled={saving || !form.contact_name.trim()}
-                className="flex-1 bg-[#0A1628] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#C5A55A] transition-colors disabled:opacity-30"
+                className="flex-1 bg-[#8B1A1A] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#C5A55A] transition-colors disabled:opacity-30"
               >
                 {saving ? "Saving..." : "Log it"}
               </button>

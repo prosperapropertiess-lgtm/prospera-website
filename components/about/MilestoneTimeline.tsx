@@ -83,7 +83,7 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
       </div>
       <h3
         className="text-lg font-medium mb-2"
-        style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+        style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
       >
         {milestone.title}
       </h3>

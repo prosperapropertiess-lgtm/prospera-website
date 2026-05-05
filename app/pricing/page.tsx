@@ -73,7 +73,7 @@ export default function PricingPage() {
             We only take 3 new properties per month
           </p>
           <h1
-            className="text-5xl md:text-6xl font-light text-[#0A1628] mb-5 leading-tight"
+            className="text-5xl md:text-6xl font-light text-[#1A1A1A] mb-5 leading-tight"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
             Stop Losing Money on Your
@@ -92,26 +92,26 @@ export default function PricingPage() {
         <div className="max-w-2xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What You&apos;re Actually Getting</p>
-            <h2 className="text-3xl font-light text-[#0A1628] text-center mb-10" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-[#1A1A1A] text-center mb-10" style={{ fontFamily: "var(--font-cormorant)" }}>
               Everything included. Nothing hidden.
             </h2>
             <div className="bg-white border border-[#E8E4DF] rounded-2xl overflow-hidden">
               {valueStack.map((row, i) => (
                 <div key={i} className={`flex items-center justify-between px-6 py-4 gap-4 ${i < valueStack.length - 1 ? "border-b border-[#E8E4DF]" : ""}`}>
                   <div>
-                    <p className="text-sm text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
+                    <p className="text-sm text-[#1A1A1A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
                     <p className="text-xs text-[#9B9B9B] mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>{row.note}</p>
                   </div>
                   <p className="text-sm font-semibold text-[#C5A55A] whitespace-nowrap" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
                 </div>
               ))}
-              <div className="flex items-center justify-between px-6 py-5 bg-[#0A1628]">
+              <div className="flex items-center justify-between px-6 py-5 bg-[#1A1A1A]">
                 <p className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>With Prospera — all of this goes away</p>
                 <p className="text-sm font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Starting at 8%</p>
               </div>
               <div className="flex items-center justify-between px-6 py-5 bg-[#C5A55A]">
-                <p className="text-sm font-semibold text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
-                <p className="text-xl font-bold text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
+                <p className="text-sm font-semibold text-[#1A1A1A]" style={{ fontFamily: "var(--font-jakarta)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
+                <p className="text-xl font-bold text-[#1A1A1A]" style={{ fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
               </div>
             </div>
           </FadeIn>
@@ -129,7 +129,7 @@ export default function PricingPage() {
                 <div className="mb-8">
                   <p className="text-xs uppercase tracking-widest text-[#9B9B9B] mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>Managed</p>
                   <div className="flex items-end gap-2 mb-1">
-                    <p className="text-6xl font-light text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>8%</p>
+                    <p className="text-6xl font-light text-[#1A1A1A]" style={{ fontFamily: "var(--font-cormorant)" }}>8%</p>
                     <p className="text-sm text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
                   <p className="text-sm text-[#9B9B9B] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
@@ -160,7 +160,7 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest border border-[#E8E4DF] text-[#0A1628] rounded-xl hover:border-[#0A1628] transition-colors"
+                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest border border-[#E8E4DF] text-[#1A1A1A] rounded-xl hover:border-[#1A1A1A] transition-colors"
                   style={{ fontFamily: "var(--font-jakarta)" }}
                 >
                   Get Started
@@ -170,9 +170,9 @@ export default function PricingPage() {
 
             {/* OPTIMIZED */}
             <FadeIn delay={0.1}>
-              <div className="relative bg-[#0A1628] rounded-2xl p-8 flex flex-col h-full">
+              <div className="relative bg-[#1A1A1A] rounded-2xl p-8 flex flex-col h-full">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[#C5A55A] rounded-full">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>Most Popular</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-[#1A1A1A]" style={{ fontFamily: "var(--font-jakarta)" }}>Most Popular</p>
                 </div>
 
                 <div className="mb-8">
@@ -208,7 +208,7 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#0A1628] rounded-xl hover:opacity-90 transition-opacity"
+                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#1A1A1A] rounded-xl hover:opacity-90 transition-opacity"
                   style={{ fontFamily: "var(--font-jakarta)" }}
                 >
                   Get Started
@@ -218,15 +218,15 @@ export default function PricingPage() {
 
             {/* PASSIVE */}
             <FadeIn delay={0.2}>
-              <div className="relative bg-white border-2 border-[#0A1628] rounded-2xl p-8 flex flex-col h-full">
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[#0A1628] rounded-full">
+              <div className="relative bg-white border-2 border-[#1A1A1A] rounded-2xl p-8 flex flex-col h-full">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[#1A1A1A] rounded-full">
                   <p className="text-xs font-semibold uppercase tracking-widest text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Best Value</p>
                 </div>
 
                 <div className="mb-8">
                   <p className="text-xs uppercase tracking-widest text-[#9B9B9B] mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>Passive</p>
                   <div className="flex items-end gap-2 mb-1">
-                    <p className="text-6xl font-light text-[#0A1628]" style={{ fontFamily: "var(--font-cormorant)" }}>15%</p>
+                    <p className="text-6xl font-light text-[#1A1A1A]" style={{ fontFamily: "var(--font-cormorant)" }}>15%</p>
                     <p className="text-sm text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>/ month</p>
                   </div>
                   <p className="text-sm font-semibold text-[#C5A55A] mb-1" style={{ fontFamily: "var(--font-jakarta)" }}>
@@ -256,7 +256,7 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest bg-[#0A1628] text-[#FAF8F5] rounded-xl hover:opacity-90 transition-opacity"
+                  className="block text-center py-4 text-xs font-semibold uppercase tracking-widest bg-[#8B1A1A] text-[#FAF8F5] rounded-xl hover:opacity-90 transition-opacity"
                   style={{ fontFamily: "var(--font-jakarta)" }}
                 >
                   Get Started
@@ -270,10 +270,10 @@ export default function PricingPage() {
             <div className="p-5 text-center border border-[#E8E4DF] bg-white rounded-2xl">
               <p className="text-sm text-[#7A7A7A]" style={{ fontFamily: "var(--font-jakarta)" }}>
                 All plans include:{" "}
-                <strong className="text-[#0A1628]">8% maintenance markup</strong> ·{" "}
-                <strong className="text-[#0A1628]">no setup fee</strong> ·{" "}
-                <strong className="text-[#0A1628]">no vacancy fee</strong> ·{" "}
-                <strong className="text-[#0A1628]">free lease renewal</strong>
+                <strong className="text-[#1A1A1A]">8% maintenance markup</strong> ·{" "}
+                <strong className="text-[#1A1A1A]">no setup fee</strong> ·{" "}
+                <strong className="text-[#1A1A1A]">no vacancy fee</strong> ·{" "}
+                <strong className="text-[#1A1A1A]">free lease renewal</strong>
               </p>
             </div>
           </FadeIn>
@@ -281,7 +281,7 @@ export default function PricingPage() {
       </section>
 
       {/* 21-Day Guarantee */}
-      <section className="py-24 px-6 bg-[#0A1628] text-center">
+      <section className="py-24 px-6 bg-[#1A1A1A] text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The 90-Day Happiness Guarantee</p>
           <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-6 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>
@@ -296,7 +296,7 @@ export default function PricingPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#0A1628] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
+            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#1A1A1A] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
             style={{ fontFamily: "var(--font-jakarta)" }}
           >
             Start Risk-Free
@@ -309,7 +309,7 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Run the Numbers</p>
-            <h2 className="text-4xl font-light text-[#0A1628] mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-4xl font-light text-[#1A1A1A] mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
               Passive actually costs less.
             </h2>
             <p className="text-[#5A5A5A] text-base mb-16 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
@@ -326,7 +326,7 @@ export default function PricingPage() {
               <div className="bg-[#FAF8F5] px-6 py-4 text-center">
                 <p className="text-xs uppercase tracking-widest text-[#9B9B9B]" style={{ fontFamily: "var(--font-jakarta)" }}>Managed 8%</p>
               </div>
-              <div className="bg-[#0A1628] px-6 py-4 text-center">
+              <div className="bg-[#1A1A1A] px-6 py-4 text-center">
                 <p className="text-xs uppercase tracking-widest text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Passive 15%</p>
               </div>
 
@@ -338,13 +338,13 @@ export default function PricingPage() {
               ].map((row, i) => (
                 <>
                   <div key={`label-${i}`} className="bg-white px-6 py-4 text-left">
-                    <p className="text-sm text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.label}</p>
+                    <p className="text-sm text-[#1A1A1A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.label}</p>
                   </div>
                   <div key={`managed-${i}`} className="bg-white px-6 py-4 text-center">
                     <p className="text-sm text-[#5A5A5A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
                   </div>
-                  <div key={`passive-${i}`} className="bg-[#0A1628]/5 px-6 py-4 text-center">
-                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-[#C5A55A]" : "text-[#0A1628]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
+                  <div key={`passive-${i}`} className="bg-[#1A1A1A]/5 px-6 py-4 text-center">
+                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-[#C5A55A]" : "text-[#1A1A1A]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
                   </div>
                 </>
               ))}
@@ -358,7 +358,7 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The Real Cost of Self-Managing</p>
-            <h2 className="text-4xl font-light text-[#0A1628] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-4xl font-light text-[#1A1A1A] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
               Every month you wait costs more than you think.
             </h2>
             <p className="text-[#5A5A5A] text-base mb-14 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
@@ -389,7 +389,7 @@ export default function PricingPage() {
               ].map((item, i) => (
                 <div key={i} className="bg-[#FAF8F5] border border-[#E8E4DF] rounded-2xl p-6">
                   <p className="text-xs uppercase tracking-widest text-[#9B9B9B] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
-                  <p className="text-4xl font-light text-[#0A1628] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
+                  <p className="text-4xl font-light text-[#1A1A1A] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
                   <p className="text-base text-[#2C2C2C] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
                 </div>
               ))}
@@ -403,7 +403,7 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What Others Charge</p>
-            <h2 className="text-4xl font-light text-[#0A1628] text-center mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-4xl font-light text-[#1A1A1A] text-center mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
             <p className="text-[#5A5A5A] text-sm text-center mb-14" style={{ fontFamily: "var(--font-jakarta)" }}>
@@ -415,7 +415,7 @@ export default function PricingPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-white border-b border-[#E8E4DF]">
-                    <th className="text-left px-6 py-4 text-[#0A1628] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
+                    <th className="text-left px-6 py-4 text-[#1A1A1A] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
                     <th className="text-center px-6 py-4 text-[#C5A55A] font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
                     <th className="text-center px-6 py-4 text-[#9B9B9B] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
                   </tr>
@@ -423,7 +423,7 @@ export default function PricingPage() {
                 <tbody className="divide-y divide-[#E8E4DF]">
                   {comparison.map((row, i) => (
                     <tr key={i} className="hover:bg-[#FAF8F5] transition-colors">
-                      <td className="px-6 py-4 text-[#0A1628]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</td>
+                      <td className="px-6 py-4 text-[#1A1A1A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</td>
                       <td className="px-6 py-4 text-center font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.us}</td>
                       <td className="px-6 py-4 text-center text-[#9B9B9B]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.them}</td>
                     </tr>
@@ -440,14 +440,14 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Common Questions</p>
-            <h2 className="text-4xl font-light text-[#0A1628] text-center mb-14" style={{ fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
+            <h2 className="text-4xl font-light text-[#1A1A1A] text-center mb-14" style={{ fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-[#0A1628] text-center">
+      <section className="py-24 px-6 bg-[#1A1A1A] text-center">
         <FadeIn>
           <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
             Only 3 spots available this month
@@ -461,7 +461,7 @@ export default function PricingPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#0A1628] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
+            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#1A1A1A] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
             style={{ fontFamily: "var(--font-jakarta)" }}
           >
             Book Your Free Call

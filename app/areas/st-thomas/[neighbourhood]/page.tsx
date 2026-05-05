@@ -57,7 +57,7 @@ export default async function StThomasNeighbourhoodPage({ params }: Props) {
       </div>
 
       {/* Hero */}
-      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <div className="max-w-3xl mx-auto">
           <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas, Ontario · {n.name}
@@ -81,27 +81,27 @@ export default async function StThomasNeighbourhoodPage({ params }: Props) {
       {/* Rent ranges */}
       <section className="py-14 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-light mb-10" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-3xl font-light mb-10" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
             Current Rental Rates in {n.name}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {n.avgRent.studio && (
               <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
+                <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
               </div>
             )}
             <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
+              <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
             </div>
             <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
+              <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
               <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
             </div>
             {n.avgRent.threeBed && (
               <div className="bg-white border p-5" style={{ borderColor: "#E8E4DF" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
+                <p className="text-2xl font-light mb-1" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
                 <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
               </div>
             )}
@@ -113,17 +113,17 @@ export default async function StThomasNeighbourhoodPage({ params }: Props) {
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl font-light mb-5" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light mb-5" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               About {n.name}
             </h2>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#2C2C2C", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
-            <p className="text-sm" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
+            <p className="text-sm" style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
           </div>
           <div>
-            <h3 className="text-xl font-light mb-5" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-5" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               Why Landlords Choose {n.name}
             </h3>
             <ul className="space-y-3 mb-8">
@@ -134,7 +134,7 @@ export default async function StThomasNeighbourhoodPage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="text-xl font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-4" style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}>
               Nearby Amenities
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ export default async function StThomasNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1A1A1A" }}>
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           Own a Rental in {n.name}?
         </h2>

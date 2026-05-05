@@ -38,7 +38,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section
         className="relative pt-36 pb-20 px-5 sm:px-8 text-center overflow-hidden"
-        style={{ backgroundColor: "#0D1B2A" }}
+        style={{ backgroundColor: "#1A1A1A" }}
       >
         <div className="absolute inset-0 pointer-events-none">
           <Image
@@ -85,7 +85,7 @@ export default function AboutPage() {
             <div key={n.label}>
               <p
                 className="text-4xl font-light mb-1"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
               >
                 {n.value}
               </p>
@@ -112,7 +112,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               The winding road
               <br />
@@ -138,7 +138,7 @@ export default function AboutPage() {
                 </p>
                 <h2
                   className="text-4xl font-light mb-6 leading-tight"
-                  style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                  style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
                 >
                   Two years finding people
                   <br />
@@ -177,7 +177,7 @@ export default function AboutPage() {
                     className="bg-white border p-4 text-sm font-medium rounded-lg"
                     style={{
                       borderColor: "#E8E4DF",
-                      color: "#0D1B2A",
+                      color: "#1A1A1A",
                       fontFamily: "var(--font-dm-sans)",
                     }}
                   >
@@ -217,7 +217,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl font-light mb-6 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               Yes, I&apos;m new.
               <br />
@@ -247,7 +247,7 @@ export default function AboutPage() {
               <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
               <p
                 className="text-sm font-medium"
-                style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#1A1A1A", fontFamily: "var(--font-dm-sans)" }}
               >
                 Ebin Jaison — Owner, Prospera Properties
               </p>
@@ -262,7 +262,7 @@ export default function AboutPage() {
           <FadeIn>
             <h2
               className="text-4xl font-light text-center mb-14 leading-tight"
-              style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
             >
               My goal is to be the property manager
               <br />
@@ -279,7 +279,7 @@ export default function AboutPage() {
                   <div className="w-6 h-0.5 mb-5" style={{ backgroundColor: "#C5A55A" }} />
                   <h3
                     className="text-lg font-medium mb-3"
-                    style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#1A1A1A", fontFamily: "var(--font-cormorant)" }}
                   >
                     {item.title}
                   </h3>
@@ -299,7 +299,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section
         className="py-24 px-5 sm:px-8 text-center"
-        style={{ backgroundColor: "#0D1B2A" }}
+        style={{ backgroundColor: "#1A1A1A" }}
       >
         <FadeIn>
           <h2
