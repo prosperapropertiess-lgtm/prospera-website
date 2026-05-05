@@ -66,7 +66,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
         >
           You bought the rental. We take it from there — tenants, rent,
           maintenance, all of it. No call centers. No ticket numbers. Just
@@ -305,7 +305,7 @@ function FeatureCards() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {f.desc}
                 </p>
@@ -417,7 +417,7 @@ function HowItWorks() {
                         <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
                         <span
                           className="text-sm leading-relaxed"
-                          style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {step}
                         </span>
@@ -452,7 +452,7 @@ function FounderSnippet() {
           </blockquote>
           <p
             className="text-sm mb-6"
-            style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
           >
             — Ebin Jaison, Owner
           </p>
@@ -523,7 +523,7 @@ function CaseStudy() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#8B1A1A" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -551,7 +551,7 @@ function CaseStudy() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>

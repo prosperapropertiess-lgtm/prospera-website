@@ -117,7 +117,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#8098B4] hover:text-[#C5A55A] transition-colors underline"
+          className="text-xs text-[#9BAEC2] hover:text-[#C5A55A] transition-colors underline"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {data.total}+ Google reviews
@@ -149,7 +149,7 @@ function Carousel({ data }: { data: ReviewsData }) {
               {review.author}
             </p>
             <p
-              className="text-xs text-[#8098B4] mt-1"
+              className="text-xs text-[#9BAEC2] mt-1"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {review.time} · Google
@@ -187,7 +187,7 @@ function Carousel({ data }: { data: ReviewsData }) {
         </div>
         <p
           className="sm:hidden text-xs tabular-nums"
-          style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
         >
           {current + 1} / {reviews.length}
         </p>
@@ -209,7 +209,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#8098B4] hover:text-[#C5A55A] transition-colors"
+          className="text-xs text-[#9BAEC2] hover:text-[#C5A55A] transition-colors"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           See all reviews on Google →

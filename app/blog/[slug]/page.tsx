@@ -109,10 +109,10 @@ export default async function BlogPostPage({ params }: Props) {
             >
               {post.category}
             </span>
-            <span className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
               {post.readTime}
             </span>
-            <span className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
               {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
             </span>
           </div>
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
 
-          <p className="text-lg leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             {post.excerpt}
           </p>
         </div>
@@ -159,7 +159,7 @@ export default async function BlogPostPage({ params }: Props) {
               <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 Ebin Jaison
               </p>
-              <p className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
                 Founder, Prospera Properties
               </p>
             </div>
@@ -201,7 +201,7 @@ export default async function BlogPostPage({ params }: Props) {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Property?
           </h2>
-          <p className="text-sm mb-8" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             We manage rentals across London, St. Thomas, and Strathroy. Get a free, no-obligation quote.
           </p>
           <Link
@@ -251,7 +251,7 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
               >
                 {post.title}
               </h4>
-              <p className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
                 {post.readTime} · {new Date(post.date).toLocaleDateString("en-CA", { month: "long", year: "numeric" })}
               </p>
             </Link>

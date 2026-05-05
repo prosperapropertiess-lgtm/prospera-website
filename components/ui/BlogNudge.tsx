@@ -44,7 +44,7 @@ export default function BlogNudge({
             {hook}
           </p>
           <p
-            className="text-xs text-[#8098B4] leading-relaxed line-clamp-2"
+            className="text-xs text-[#9BAEC2] leading-relaxed line-clamp-2"
             style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {excerpt}
@@ -52,7 +52,7 @@ export default function BlogNudge({
         </div>
         <div
           className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#C5A55A]"
-          style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
         >
           Read more
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" className="transition-transform group-hover:translate-x-1">

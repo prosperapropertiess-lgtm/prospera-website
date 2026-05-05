@@ -110,7 +110,7 @@ export default function AboutPage() {
                 >
                   <p
                     className="text-[10px] uppercase tracking-widest mb-2"
-                    style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Track Record
                   </p>
@@ -130,7 +130,7 @@ export default function AboutPage() {
                       </p>
                       <p
                         className="text-xs leading-tight"
-                        style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
                       >
                         0 LTB cases
                       </p>
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 {/* Subtext */}
                 <p
                   className="text-base leading-relaxed mb-10 max-w-sm"
-                  style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   I built Prospera to be the property manager I wish had existed —
                   hands-on, reachable, and actually invested in your property.
@@ -216,7 +216,7 @@ export default function AboutPage() {
                 <div className="w-6 h-px mx-auto mb-2" style={{ backgroundColor: "#C5A55A" }} />
                 <p
                   className="text-[10px] font-semibold uppercase tracking-widest"
-                  style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {n.label}
                 </p>
@@ -243,7 +243,7 @@ export default function AboutPage() {
               <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
               <p
                 className="text-xs uppercase tracking-widest"
-                style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
               >
                 Ebin Jaison — Founder
               </p>
@@ -315,7 +315,7 @@ export default function AboutPage() {
             </h2>
             <div
               className="space-y-5 text-base leading-relaxed"
-              style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
             >
               <p>
                 The companies that have been around 20 years are managing 300+ properties.
@@ -368,7 +368,7 @@ export default function AboutPage() {
                 </h2>
                 <p
                   className="text-base leading-relaxed mb-4"
-                  style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Every contractor on my list has been tested on a real job — deep cleans,
                   plumbing, full renovation coordination. None of them are marked up beyond
@@ -376,7 +376,7 @@ export default function AboutPage() {
                 </p>
                 <p
                   className="text-base leading-relaxed"
-                  style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   When a furnace goes at 11pm, there&apos;s already a plan. That&apos;s what two
                   years of building looks like.
@@ -446,7 +446,7 @@ export default function AboutPage() {
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {item.desc}
                   </p>
@@ -487,7 +487,7 @@ export default function AboutPage() {
             </h2>
             <p
               className="text-sm mb-10 max-w-md mx-auto leading-relaxed"
-              style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#B8C4CE", fontFamily: "var(--font-dm-sans)" }}
             >
               Free consultation. No pitch. Just an honest conversation about your property.
             </p>

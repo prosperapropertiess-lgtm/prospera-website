@@ -82,7 +82,7 @@ export default function ResourcesPage() {
           </h1>
           <p
             className="text-base max-w-xl mx-auto leading-relaxed mb-10"
-            style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
           >
             Every Ontario LTB form you&apos;ll ever need — explained in plain English,
             pre-filled in under 2 minutes, ready to serve. Free. No account. No PDF editor.
@@ -130,7 +130,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
-                    <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -148,7 +148,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
-                    <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -211,7 +211,7 @@ export default function ResourcesPage() {
                         </div>
                         <p
                           className="text-sm leading-relaxed mb-3"
-                          style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {s.plain}
                         </p>
@@ -241,16 +241,17 @@ export default function ResourcesPage() {
                             Fill {s.formName} Now →
                           </a>
                         ) : (
-                          <div
-                            className="text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border"
+                          <a
+                            href="/contact"
+                            className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
                             style={{
                               borderColor: "#1E3050",
-                              color: "#BBBBBB",
+                              color: "#9BAEC2",
                               fontFamily: "var(--font-dm-sans)",
                             }}
                           >
-                            Builder Coming Soon
-                          </div>
+                            Get Filing Help →
+                          </a>
                         )}
                         <a
                           href={`/forms/${s.formName}.pdf`}
@@ -259,7 +260,7 @@ export default function ResourcesPage() {
                           className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:bg-[#F5F0EB]"
                           style={{
                             borderColor: "#1E3050",
-                            color: "#B0B8C4",
+                            color: "#C0CAD4",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >
@@ -328,7 +329,7 @@ export default function ResourcesPage() {
           </h2>
           <p
             className="text-sm mb-8 max-w-md mx-auto"
-            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
           >
             That&apos;s what Prospera is for. We handle the forms, the notices, the follow-up, everything.
             Free consultation — no pressure.

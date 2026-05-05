@@ -71,7 +71,7 @@ export default function TenantsPage() {
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
                     <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] mb-2">{f.title}</h3>
-                    <p className="text-sm text-[#B0B8C4] leading-relaxed">{f.desc}</p>
+                    <p className="text-sm text-[#C0CAD4] leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -93,7 +93,7 @@ export default function TenantsPage() {
                 <div className="text-center">
                   <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#FAF8F5]/40 mb-4">{step.n}</p>
                   <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#FAF8F5] mb-3">{step.title}</h3>
-                  <p className="text-sm text-[#B0B8C4] leading-relaxed">{step.desc}</p>
+                  <p className="text-sm text-[#C0CAD4] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -148,7 +148,7 @@ export default function TenantsPage() {
           <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#B0B8C4] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
+          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#C0CAD4] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
             Browse Listings
           </Link>
         </FadeIn>

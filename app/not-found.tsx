@@ -27,7 +27,7 @@ export default function NotFound() {
       </h1>
       <p
         className="text-base mb-10 max-w-md leading-relaxed"
-        style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
       >
         The page you're looking for doesn't exist or may have moved. Let's get you back on track.
       </p>
@@ -43,7 +43,7 @@ export default function NotFound() {
         <Link
           href="/listings"
           className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#060E1C] hover:text-[#FAF8F5]"
-          style={{ borderColor: "#1A1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          style={{ borderColor: "#1E3050", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
         >
           Browse Listings
         </Link>

@@ -49,7 +49,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
 
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
-        <p className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
           <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#C5A55A" }}>Strathroy</Link>
           {" → "}
           <span>{n.name}</span>
@@ -65,7 +65,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in {n.name}
           </h1>
-          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             {n.description}
           </p>
           <Link
@@ -119,7 +119,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
             <p className="text-sm" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
           </div>
           <div>
@@ -139,7 +139,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}
@@ -153,7 +153,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           Own a Rental in {n.name}?
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
           We manage properties across {n.name} and all of Strathroy. Free consultation, no pressure.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

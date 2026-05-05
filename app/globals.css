@@ -34,7 +34,7 @@ body {
 }
 
 .footer-link {
-  color: rgba(250, 248, 245, 0.65);
+  color: rgba(250, 248, 245, 0.75);
   transition: color 0.2s;
 }
 .footer-link:hover {
@@ -63,7 +63,7 @@ body {
   font-size: 1rem;
   line-height: 1.85;
   margin-bottom: 1.25rem;
-  color: #B0B8C4;
+  color: #C0CAD4;
 }
 .prose-content ul, .prose-content ol {
   padding-left: 1.5rem;
@@ -72,19 +72,19 @@ body {
 .prose-content li {
   line-height: 1.8;
   margin-bottom: 0.4rem;
-  color: #B0B8C4;
+  color: #C0CAD4;
 }
 .prose-content a { color: #C5A55A; text-decoration: underline; }
 .prose-content blockquote {
   border-left: 3px solid #8B1A1A;
   padding-left: 1.25rem;
   margin: 1.75rem 0;
-  color: #B0B8C4;
+  color: #C0CAD4;
   font-style: italic;
 }
 .prose-content table { width: 100%; border-collapse: collapse; margin: 1.75rem 0; font-size: 0.9rem; }
 .prose-content th { background-color: #060E1C; color: #FAF8F5; padding: 0.75rem 1rem; text-align: left; font-weight: 500; }
-.prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #1E3050; color: #B0B8C4; }
+.prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #1E3050; color: #C0CAD4; }
 .prose-content tr:nth-child(even) td { background-color: #0D1B2A; }
 .prose-content strong { font-weight: 600; color: #FAF8F5; }
 .prose-content code { background-color: #112035; color: #C5A55A; padding: 0.1em 0.4em; font-size: 0.875em; }

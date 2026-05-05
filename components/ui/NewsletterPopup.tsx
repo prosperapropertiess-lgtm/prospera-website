@@ -110,7 +110,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
               {/* Close */}
               <button
                 onClick={dismiss}
-                className="absolute top-4 right-4 text-[#8098B4] hover:text-[#FAF8F5] transition-colors text-lg leading-none"
+                className="absolute top-4 right-4 text-[#9BAEC2] hover:text-[#FAF8F5] transition-colors text-lg leading-none"
                 aria-label="Close"
               >
                 ×
@@ -121,7 +121,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>
                     You&apos;re in.
                   </p>
-                  <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                     {isLandlord
                       ? "We'll be in touch with tips and market updates."
                       : "We'll notify you when new listings match your search."}
@@ -150,7 +150,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Subtext */}
                   <p
                     className="text-sm mb-6 leading-relaxed"
-                    style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {isLandlord
                       ? "Our custom lease addendum protects you beyond the Ontario standard lease. Free download — plus occasional market updates."
@@ -230,7 +230,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
                   <p
                     className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                    style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
                     onClick={dismiss}
                   >
                     No thanks

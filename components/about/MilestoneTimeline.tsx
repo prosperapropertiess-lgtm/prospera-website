@@ -89,7 +89,7 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
       </h3>
       <p
         className="text-sm leading-relaxed"
-        style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
       >
         {milestone.desc}
       </p>

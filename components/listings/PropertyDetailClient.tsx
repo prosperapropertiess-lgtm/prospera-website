@@ -108,14 +108,14 @@ export default function PropertyDetailClient({ property }: { property: Property 
               <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 {property.title}
               </h1>
-              <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                 {property.address}, {property.city}, ON
               </p>
             </div>
             <div className="shrink-0">
               <p className="text-4xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 ${property.price.toLocaleString()}
-                <span className="text-base" style={{ color: "#8098B4" }}>/mo</span>
+                <span className="text-base" style={{ color: "#9BAEC2" }}>/mo</span>
               </p>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
                 <div key={f.label} className="flex items-center gap-3 p-4 bg-[#112035] border" style={{ borderColor: "#1E3050" }}>
                   <span className="text-sm" style={{ color: "#C5A55A" }}>✓</span>
                   <div>
-                    <p className="text-xs uppercase tracking-wider" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>{f.label}</p>
+                    <p className="text-xs uppercase tracking-wider" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>{f.label}</p>
                     <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{f.value}</p>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
           {/* Commute calculator */}
           <div className="mb-10 p-6 border" style={{ borderColor: "#1E3050", backgroundColor: "#0D1B2A" }}>
             <h2 className="text-2xl font-light mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>Commute Calculator</h2>
-            <p className="text-sm mb-5" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-5" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               How far is this from your workplace, school, or anywhere else?
             </p>
             <div className="flex gap-3">
@@ -209,7 +209,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
             {commuteResult && (
               <p className="text-xs mt-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>{commuteResult}</p>
             )}
-            <p className="text-xs mt-3" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mt-3" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
               Opens Google Maps with driving, transit, and walking directions.
             </p>
           </div>
@@ -220,9 +220,9 @@ export default function PropertyDetailClient({ property }: { property: Property 
           <div className="sticky top-28">
             <div className="border p-6" style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}>
               <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>
-                ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#8098B4" }}>/mo</span>
+                ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#9BAEC2" }}>/mo</span>
               </p>
-              <p className="text-xs mb-6" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mb-6" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                 {property.bedrooms} bed · {property.bathrooms} bath{property.sqft ? ` · ${property.sqft.toLocaleString()} sqft` : ""}
               </p>
 
@@ -247,7 +247,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
               </Link>
 
               <div className="mt-6 pt-6 border-t space-y-2" style={{ borderColor: "#1E3050" }}>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>At a Glance</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>At a Glance</p>
                 {[
                   ["Location", `${property.city}, ON`],
                   ["Bedrooms", String(property.bedrooms)],
@@ -257,14 +257,14 @@ export default function PropertyDetailClient({ property }: { property: Property 
                   ["Utilities", property.utilities_included ? (property.utilities_list?.join(", ") || "Included") : "Not included"],
                 ].map(([label, val]) => (
                   <div key={label} className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    <span style={{ color: "#8098B4" }}>{label}</span>
+                    <span style={{ color: "#9BAEC2" }}>{label}</span>
                     <span style={{ color: "#FAF8F5" }}>{val}</span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-6 pt-6 border-t text-center" style={{ borderColor: "#1E3050" }}>
-                <p className="text-xs mb-1" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>Questions?</p>
+                <p className="text-xs mb-1" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>Questions?</p>
                 <a href="tel:+15196971227" className="text-sm font-medium" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   (519) 697-1227
                 </a>

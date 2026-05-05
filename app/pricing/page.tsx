@@ -81,7 +81,7 @@ export default function PricingPage() {
             Stop Losing Money on Your
             <br />Rental Property.
           </h1>
-          <p className="text-base text-[#B0B8C4] max-w-xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-base text-[#C0CAD4] max-w-xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
             Every vacant month costs you $2,000+. Every maintenance markup costs you hundreds more.
             Every hour you spend managing is an hour you don&apos;t get back.
             We fix all three — starting at 8%.
@@ -102,7 +102,7 @@ export default function PricingPage() {
                 <div key={i} className={`flex items-center justify-between px-6 py-4 gap-4 ${i < valueStack.length - 1 ? "border-b border-[#1E3050]" : ""}`}>
                   <div>
                     <p className="text-sm text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
-                    <p className="text-xs text-[#8098B4] mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>{row.note}</p>
+                    <p className="text-xs text-[#9BAEC2] mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>{row.note}</p>
                   </div>
                   <p className="text-sm font-semibold text-[#C5A55A] whitespace-nowrap" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
                 </div>
@@ -128,7 +128,7 @@ export default function PricingPage() {
           {/* Reassurance bar */}
           <FadeIn delay={0.3}>
             <div className="p-5 text-center border border-[#1E3050] bg-[#112035] rounded-2xl">
-              <p className="text-sm text-[#B0B8C4]" style={{ fontFamily: "var(--font-jakarta)" }}>
+              <p className="text-sm text-[#C0CAD4]" style={{ fontFamily: "var(--font-jakarta)" }}>
                 All plans include:{" "}
                 <strong className="text-[#FAF8F5]">8% maintenance markup</strong> ·{" "}
                 <strong className="text-[#FAF8F5]">no setup fee</strong> ·{" "}
@@ -172,7 +172,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light text-[#FAF8F5] mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
               Passive actually costs less.
             </h2>
-            <p className="text-[#B0B8C4] text-base mb-16 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-[#C0CAD4] text-base mb-16 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
               On a $2,000/month rental, the difference between Managed and Passive is $140/month.
               Free placement saves you $2,000 every vacancy. Do the math — Passive wins after one turnover.
             </p>
@@ -181,10 +181,10 @@ export default function PricingPage() {
           <FadeIn delay={0.1}>
             <div className="grid grid-cols-3 gap-px bg-[#1E3050] rounded-2xl overflow-hidden border border-[#1E3050]">
               <div className="bg-[#0A1628] px-6 py-4 text-left">
-                <p className="text-xs uppercase tracking-widest text-[#8098B4]" style={{ fontFamily: "var(--font-jakarta)" }}>On $2,000/mo rent</p>
+                <p className="text-xs uppercase tracking-widest text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>On $2,000/mo rent</p>
               </div>
               <div className="bg-[#0A1628] px-6 py-4 text-center">
-                <p className="text-xs uppercase tracking-widest text-[#8098B4]" style={{ fontFamily: "var(--font-jakarta)" }}>Managed 8%</p>
+                <p className="text-xs uppercase tracking-widest text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>Managed 8%</p>
               </div>
               <div className="bg-[#060E1C] px-6 py-4 text-center">
                 <p className="text-xs uppercase tracking-widest text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Passive 15%</p>
@@ -201,7 +201,7 @@ export default function PricingPage() {
                     <p className="text-sm text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.label}</p>
                   </div>
                   <div key={`managed-${i}`} className="bg-[#112035] px-6 py-4 text-center">
-                    <p className="text-sm text-[#B0B8C4]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
+                    <p className="text-sm text-[#C0CAD4]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
                   </div>
                   <div key={`passive-${i}`} className="bg-[#FAF8F5]/8 px-6 py-4 text-center">
                     <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-[#C5A55A]" : "text-[#FAF8F5]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
@@ -221,7 +221,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light text-[#FAF8F5] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
               Every month you wait costs more than you think.
             </h2>
-            <p className="text-[#B0B8C4] text-base mb-14 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-[#C0CAD4] text-base mb-14 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
               Most landlords underestimate what self-managing actually costs them.
               It&apos;s not just time — it&apos;s the markups you&apos;re paying, the rent you&apos;re leaving on the table,
               and the vacancy days that quietly bleed your returns.
@@ -248,9 +248,9 @@ export default function PricingPage() {
                 },
               ].map((item, i) => (
                 <div key={i} className="bg-[#0A1628] border border-[#1E3050] rounded-2xl p-6">
-                  <p className="text-xs uppercase tracking-widest text-[#8098B4] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
+                  <p className="text-xs uppercase tracking-widest text-[#9BAEC2] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
                   <p className="text-4xl font-light text-[#FAF8F5] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
-                  <p className="text-base text-[#B0B8C4] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
+                  <p className="text-base text-[#C0CAD4] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -266,7 +266,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light text-[#FAF8F5] text-center mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
-            <p className="text-[#B0B8C4] text-sm text-center mb-14" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-[#C0CAD4] text-sm text-center mb-14" style={{ fontFamily: "var(--font-jakarta)" }}>
               Every one of these is $0 with Prospera.
             </p>
           </FadeIn>
@@ -277,7 +277,7 @@ export default function PricingPage() {
                   <tr className="bg-[#112035] border-b border-[#1E3050]">
                     <th className="text-left px-6 py-4 text-[#FAF8F5] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
                     <th className="text-center px-6 py-4 text-[#C5A55A] font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
-                    <th className="text-center px-6 py-4 text-[#8098B4] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
+                    <th className="text-center px-6 py-4 text-[#9BAEC2] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#1E3050]">
@@ -285,7 +285,7 @@ export default function PricingPage() {
                     <tr key={i} className="hover:bg-[#0D1B2A] transition-colors">
                       <td className="px-6 py-4 text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</td>
                       <td className="px-6 py-4 text-center font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.us}</td>
-                      <td className="px-6 py-4 text-center text-[#8098B4]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.them}</td>
+                      <td className="px-6 py-4 text-center text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.them}</td>
                     </tr>
                   ))}
                 </tbody>

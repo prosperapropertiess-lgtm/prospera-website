@@ -96,7 +96,7 @@ export default function ListingsPage() {
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-[#1E3050] text-[#B0B8C4] hover:border-[#FAF8F5]"}`}
+                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-[#1E3050] text-[#C0CAD4] hover:border-[#FAF8F5]"}`}
               >
                 {c}
               </button>
@@ -107,12 +107,12 @@ export default function ListingsPage() {
 
           {/* Bedrooms */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-[#8098B4]">Beds:</span>
+            <span className="text-xs text-[#9BAEC2]">Beds:</span>
             {BEDS.map((b) => (
               <button
                 key={b}
                 onClick={() => setBeds(b)}
-                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-[#1E3050] text-[#B0B8C4] hover:border-[#C5A55A]"}`}
+                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-[#1E3050] text-[#C0CAD4] hover:border-[#C5A55A]"}`}
               >
                 {b}
               </button>
@@ -123,7 +123,7 @@ export default function ListingsPage() {
 
           {/* Max Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-[#8098B4] whitespace-nowrap">Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs text-[#9BAEC2] whitespace-nowrap">Max: ${maxPrice.toLocaleString()}/mo</span>
             <input
               type="range"
               min={800}
@@ -145,10 +145,10 @@ export default function ListingsPage() {
               onChange={(e) => setPetFriendly(e.target.checked)}
               className="accent-[#C5A55A]"
             />
-            <span className="text-xs text-[#B0B8C4]">Pet Friendly</span>
+            <span className="text-xs text-[#C0CAD4]">Pet Friendly</span>
           </label>
 
-          <div className="ml-auto text-xs text-[#8098B4]">
+          <div className="ml-auto text-xs text-[#9BAEC2]">
             {loading ? "Loading..." : `${filtered.length} ${filtered.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function ListingsPage() {
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
               <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">No listings available right now.</p>
-              <p className="text-sm text-[#B0B8C4] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <p className="text-sm text-[#C0CAD4] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
               <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:opacity-80 transition-colors">
                 Contact Us
               </Link>
@@ -204,7 +204,7 @@ export default function ListingsPage() {
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">
-                          <span className="bg-[#112035]/90 text-[#B0B8C4] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
+                          <span className="bg-[#112035]/90 text-[#C0CAD4] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
                         </div>
                       )}
                     </div>
@@ -214,21 +214,21 @@ export default function ListingsPage() {
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] leading-tight">{p.title}</h3>
                       </div>
-                      <p className="text-xs text-[#B0B8C4] mb-3">{p.address}, {p.city}</p>
+                      <p className="text-xs text-[#C0CAD4] mb-3">{p.address}, {p.city}</p>
 
                       {/* Specs */}
-                      <div className="flex gap-4 text-xs text-[#8098B4] mb-4">
+                      <div className="flex gap-4 text-xs text-[#9BAEC2] mb-4">
                         <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
                         <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
                         {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
                         {p.parking && <span>🚗 Parking</span>}
                       </div>
 
-                      <p className="text-xs text-[#B0B8C4] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
+                      <p className="text-xs text-[#C0CAD4] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
 
                       <div className="flex items-center justify-between">
                         <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5]">
-                          ${p.price.toLocaleString()}<span className="text-sm text-[#8098B4] font-sans">/mo</span>
+                          ${p.price.toLocaleString()}<span className="text-sm text-[#9BAEC2] font-sans">/mo</span>
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
@@ -252,7 +252,7 @@ export default function ListingsPage() {
           <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">
             Don&apos;t see what you&apos;re looking for?
           </p>
-          <p className="text-sm text-[#B0B8C4] mb-6">
+          <p className="text-sm text-[#C0CAD4] mb-6">
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
           <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm font-medium rounded hover:opacity-80 transition-colors">

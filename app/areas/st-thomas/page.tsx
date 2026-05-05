@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export default function StThomasPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in St. Thomas, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas is one of Ontario's most exciting rental markets right now. We're on the ground helping landlords capitalize on it.
           </p>
           <Link
@@ -69,7 +70,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Why St. Thomas Is Worth Your Attention
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               This isn't just a bedroom community anymore. St. Thomas is developing its own economic identity.
             </p>
           </FadeIn>
@@ -81,7 +82,7 @@ export default function StThomasPage() {
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                     {h.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                     {h.desc}
                   </p>
                 </div>
@@ -114,9 +115,9 @@ export default function StThomasPage() {
                     { type: "2 Bedroom", avg: "$1,550" },
                     { type: "3 Bedroom", avg: "$1,950" },
                   ].map((row, i) => (
-                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
+                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#112035" : "#0D1B2A" }}>
                       <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#C5A55A" }}>{row.avg}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -133,7 +134,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               What's Included in Our Management
             </h2>
-            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               One simple fee covers everything — no hidden charges, no per-repair markups.
             </p>
           </FadeIn>
@@ -154,13 +155,33 @@ export default function StThomasPage() {
         </div>
       </section>
 
+      {/* Blog nudge */}
+      <section className="py-10 px-6" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+          <BlogNudge
+            hook="St. Thomas rents are rising fast. Are you keeping up?"
+            title="How Much to Charge for Rent in London, Ontario"
+            excerpt="Market data across Southwest Ontario — see how St. Thomas stacks up and where your rent should be in 2026."
+            slug="how-much-charge-rent-london-ontario"
+            label="Market Data"
+          />
+          <BlogNudge
+            hook="First rental property? Here's what most landlords wish they knew."
+            title="First-Time Landlord Tips in London, Ontario"
+            excerpt="The 10 things experienced landlords do differently — from screening tenants to setting rent to handling maintenance calls."
+            slug="first-time-landlord-tips-london-ontario"
+            label="For New Landlords"
+          />
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in St. Thomas?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             We're actively growing our St. Thomas portfolio. Get a free rental estimate and management proposal.
           </p>
           <Link

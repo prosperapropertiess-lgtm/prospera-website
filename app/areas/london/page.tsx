@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -47,7 +48,7 @@ export default function LondonPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in London, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Hands-on management for London landlords — from tenant screening to rent collection to 24/7 maintenance. We handle everything so you don't have to.
           </p>
           <Link
@@ -83,7 +84,7 @@ export default function LondonPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for London Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate, everything included. No hidden fees, no maintenance markups, no surprises.
             </p>
           </FadeIn>
@@ -95,7 +96,7 @@ export default function LondonPage() {
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                     {s.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                     {s.desc}
                   </p>
                 </div>
@@ -112,7 +113,7 @@ export default function LondonPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               We Know London's Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               Pricing, tenant profiles, and vacancy patterns differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -125,7 +126,7 @@ export default function LondonPage() {
                     <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                       {n.name}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                       {n.desc}
                     </p>
                   </div>
@@ -162,11 +163,11 @@ export default function LondonPage() {
                     { type: "2 Bedroom", low: "$1,650", avg: "$1,900", high: "$2,300" },
                     { type: "3 Bedroom", low: "$2,100", avg: "$2,450", high: "$2,950" },
                   ].map((row, i) => (
-                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
+                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#112035" : "#0D1B2A" }}>
                       <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.high}</td>
+                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.low}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#C5A55A" }}>{row.avg}</td>
+                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -176,13 +177,33 @@ export default function LondonPage() {
         </div>
       </section>
 
+      {/* Blog nudge */}
+      <section className="py-10 px-6" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+          <BlogNudge
+            hook="Wondering what London landlords are actually charging?"
+            title="How Much to Charge for Rent in London, Ontario"
+            excerpt="A data-driven look at 2026 rent prices by neighbourhood, unit type, and what the market will actually bear."
+            slug="how-much-charge-rent-london-ontario"
+            label="London Market"
+          />
+          <BlogNudge
+            hook="The best property managers don't advertise. Here's how to find one."
+            title="Best Property Management Companies in London, Ontario"
+            excerpt="What to look for, what questions to ask, and the red flags most landlords miss when choosing a manager."
+            slug="best-property-management-company-london-ontario"
+            label="For Landlords"
+          />
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in London, Ontario?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Let's talk about your property. Free consultation, honest assessment, no pressure.
           </p>
           <Link

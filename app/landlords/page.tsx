@@ -121,7 +121,7 @@ export default function LandlordsPage() {
           </h1>
           <p
             className="text-base max-w-xl mx-auto mb-10 leading-relaxed"
-            style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
           >
             You don&apos;t need a corporate property management company built for
             500-unit portfolios. You need someone who actually picks up the phone,
@@ -236,7 +236,7 @@ export default function LandlordsPage() {
                     </h3>
                     <p
                       className="text-sm leading-relaxed"
-                      style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                     >
                       {step.desc}
                     </p>
@@ -273,7 +273,7 @@ export default function LandlordsPage() {
             </h2>
             <p
               className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8"
-              style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
             >
               Zero setup fee. Lease renewal always free. The only number you pay is the one listed below.
             </p>
@@ -283,7 +283,7 @@ export default function LandlordsPage() {
 
           <FadeIn delay={0.2}>
             <div className="mx-5 sm:mx-8 mt-2 p-6 text-center border rounded-xl" style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}>
-              <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
                 All plans include: <strong style={{ color: "#FAF8F5" }}>8% maintenance markup</strong> · <strong style={{ color: "#FAF8F5" }}>no setup fee</strong> · <strong style={{ color: "#FAF8F5" }}>no vacancy fee</strong> · <strong style={{ color: "#FAF8F5" }}>free lease renewal</strong>
               </p>
             </div>
@@ -325,7 +325,7 @@ export default function LandlordsPage() {
           </h2>
           <p
             className="text-sm mb-8 max-w-md mx-auto"
-            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
           >
             Free consultation. Honest assessment. No pressure.
           </p>

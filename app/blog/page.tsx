@@ -31,7 +31,7 @@ export default function BlogPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             The Prospera Blog
           </h1>
-          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Practical guides for Ontario landlords and tenants — from the Residential Tenancies Act to current market rents.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function BlogPage() {
       {/* Post grid */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         {posts.length === 0 ? (
-          <p className="text-center" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-center" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             No posts yet. Check back soon.
           </p>
         ) : (
@@ -96,7 +96,7 @@ export default function BlogPage() {
                 <div className="flex flex-col flex-1 p-6">
                   {/* Read time */}
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
                       {post.readTime}
                     </span>
                   </div>
@@ -112,14 +112,14 @@ export default function BlogPage() {
                   {/* Excerpt */}
                   <p
                     className="text-sm leading-relaxed flex-1 mb-4"
-                    style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {post.excerpt}
                   </p>
 
                   {/* Date + read link */}
                   <div className="flex items-center justify-between mt-auto pt-4 border-t" style={{ borderColor: "#1E3050" }}>
-                    <span className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
                       {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
                     </span>
                     <span
@@ -142,7 +142,7 @@ export default function BlogPage() {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Get New Articles in Your Inbox
           </h2>
-          <p className="text-sm mb-8" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Ontario landlord tips, market updates, and legal guides — straight to your inbox, no spam.
           </p>
           <form className="flex gap-3 max-w-md mx-auto">

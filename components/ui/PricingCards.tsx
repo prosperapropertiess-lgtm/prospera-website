@@ -25,7 +25,7 @@ const plans = [
     ],
     bg: "#112035",
     border: "1px solid #1E3050",
-    textColor: "#B0B8C4",
+    textColor: "#C0CAD4",
     priceColor: "#FAF8F5",
     ctaBg: "transparent",
     ctaBorder: "1px solid #1E3050",
@@ -82,7 +82,7 @@ const plans = [
     ],
     bg: "#112035",
     border: "2px solid #C5A55A",
-    textColor: "#B0B8C4",
+    textColor: "#C0CAD4",
     priceColor: "#FAF8F5",
     ctaBg: "#8B1A1A",
     ctaBorder: "none",
@@ -112,7 +112,7 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
       )}
 
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: plan.key === "optimized" ? "#C5A55A" : "#8098B4", fontFamily: "var(--font-jakarta)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: plan.key === "optimized" ? "#C5A55A" : "#9BAEC2", fontFamily: "var(--font-jakarta)" }}>
           {plan.label}
         </p>
         <div className="flex items-end gap-2 mb-1">
@@ -178,7 +178,7 @@ export default function PricingCards() {
               className="flex-1 py-3 text-xs uppercase tracking-widest transition-colors font-semibold"
               style={{
                 backgroundColor: active === i ? "#C5A55A" : "#112035",
-                color: active === i ? "#FAF8F5" : "#8098B4",
+                color: active === i ? "#FAF8F5" : "#9BAEC2",
                 fontFamily: "var(--font-jakarta)",
               }}
             >

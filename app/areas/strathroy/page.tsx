@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
+import BlogNudge from "@/components/ui/BlogNudge";
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 
@@ -60,7 +61,7 @@ export default function StroathroyPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in Strathroy, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy offers what London can&apos;t — affordability, stability, and strong cash flow. We handle the day-to-day so you don&apos;t have to.
           </p>
           <Link
@@ -92,7 +93,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate. Everything included. No hidden fees, no maintenance markups.
             </p>
           </FadeIn>
@@ -102,7 +103,7 @@ export default function StroathroyPage() {
                 <div className="bg-[#112035] border p-6" style={{ borderColor: "#1E3050" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -117,7 +118,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
               Pricing and tenant profiles differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -128,7 +129,7 @@ export default function StroathroyPage() {
                   <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -163,11 +164,11 @@ export default function StroathroyPage() {
                     { type: "2 Bedroom", low: "$1,250", avg: "$1,425", high: "$1,650" },
                     { type: "3 Bedroom", low: "$1,550", avg: "$1,750", high: "$2,050" },
                   ].map((row, i) => (
-                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
+                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#112035" : "#0D1B2A" }}>
                       <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.high}</td>
+                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.low}</td>
+                      <td className="p-4 text-right font-medium" style={{ color: "#C5A55A" }}>{row.avg}</td>
+                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -177,13 +178,33 @@ export default function StroathroyPage() {
         </div>
       </section>
 
+      {/* Blog nudge */}
+      <section className="py-10 px-6" style={{ backgroundColor: "#0A1628" }}>
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+          <BlogNudge
+            hook="Small town, big landlord mistakes. Here's how to avoid them."
+            title="First-Time Landlord Tips in London, Ontario"
+            excerpt="The same principles apply in Strathroy — but with a tighter tenant pool, getting screening right is even more important."
+            slug="first-time-landlord-tips-london-ontario"
+            label="Landlord Guide"
+          />
+          <BlogNudge
+            hook="Know your legal obligations before your tenant does."
+            title="Landlord Maintenance Responsibilities in Ontario"
+            excerpt="What you're legally required to fix, how fast, and what happens if you don't. Applies to every rental in Ontario."
+            slug="landlord-maintenance-responsibilities-ontario"
+            label="Ontario Law"
+          />
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in Strathroy?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
             Let&apos;s talk about your property. Free consultation, honest assessment, no pressure.
           </p>
           <Link
