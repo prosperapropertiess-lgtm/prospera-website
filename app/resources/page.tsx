@@ -68,7 +68,7 @@ export default function ResourcesPage() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             Free for Ontario Landlords
           </p>
@@ -117,7 +117,7 @@ export default function ResourcesPage() {
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(123,28,28,0.2)", backgroundColor: "#FFF8F8" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   Before This Tool
                 </p>
                 {[
@@ -129,7 +129,7 @@ export default function ResourcesPage() {
                   "Or call a paralegal for $150–200",
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#7B1C1C" }}>✕</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
                     <p className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
@@ -163,7 +163,7 @@ export default function ResourcesPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Plain English Guide
             </p>
@@ -203,7 +203,7 @@ export default function ResourcesPage() {
                             </p>
                             <span
                               className="text-xs font-bold uppercase tracking-wider"
-                              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                             >
                               → Form {s.formName}
                             </span>
@@ -233,7 +233,7 @@ export default function ResourcesPage() {
                             href="#n4-builder"
                             className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
                             style={{
-                              backgroundColor: "#7B1C1C",
+                              backgroundColor: "#C5A55A",
                               color: "#FAF8F5",
                               fontFamily: "var(--font-dm-sans)",
                             }}
@@ -281,7 +281,7 @@ export default function ResourcesPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-3"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Live Tool
             </p>
@@ -302,7 +302,7 @@ export default function ResourcesPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-3 mt-12"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               More Free Resources
             </p>
@@ -336,7 +336,7 @@ export default function ResourcesPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Talk to Ebin →
           </Link>

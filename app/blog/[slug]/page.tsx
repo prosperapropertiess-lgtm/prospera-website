@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const categoryColors: Record<string, string> = {
   "Landlord Tips": "bg-[#0D1B2A] text-[#FAF8F5]",
   "Tenant Resources": "bg-[#2D4A5E] text-[#FAF8F5]",
-  "Market Updates": "bg-[#7B1C1C] text-[#FAF8F5]",
+  "Market Updates": "bg-[#C5A55A] text-[#FAF8F5]",
   "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
 };
 
@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: Props) {
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest mb-8 hover:opacity-70 transition-opacity"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Back to Blog
           </Link>
@@ -241,12 +241,12 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
             >
               <span
                 className="text-xs uppercase tracking-wider"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 {post.category}
               </span>
               <h4
-                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#7B1C1C] transition-colors leading-snug"
+                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#C5A55A] transition-colors leading-snug"
                 style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
               >
                 {post.title}

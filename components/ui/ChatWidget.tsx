@@ -140,7 +140,7 @@ export default function ChatWidget() {
           >
             {/* Header */}
             <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#0A1628" }}>
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
                 <p className="text-xs flex items-center gap-1.5" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
@@ -184,7 +184,7 @@ export default function ChatWidget() {
               {/* Lead capture form */}
               {showLeadForm && !leadSubmitted && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4" style={{ backgroundColor: "#F5F0EB", border: "1px solid #E8E4DF" }}>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                     Want Ebin to follow up?
                   </p>
                   <form onSubmit={submitLead} className="space-y-2">

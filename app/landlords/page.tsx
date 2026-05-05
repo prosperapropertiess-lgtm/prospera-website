@@ -105,7 +105,7 @@ export default function LandlordsPage() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             For Landlords
           </p>
@@ -130,7 +130,7 @@ export default function LandlordsPage() {
             <a
               href="#pricing"
               className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-              style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               See Pricing
             </a>
@@ -151,7 +151,7 @@ export default function LandlordsPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               The Real Problems
             </p>
@@ -173,7 +173,7 @@ export default function LandlordsPage() {
                 >
                   <span
                     className="block text-2xl mb-4"
-                    style={{ color: "#7B1C1C" }}
+                    style={{ color: "#C5A55A" }}
                   >
                     {p.icon}
                   </span>
@@ -202,7 +202,7 @@ export default function LandlordsPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               The Process
             </p>
@@ -221,7 +221,7 @@ export default function LandlordsPage() {
                 <div className="flex gap-6">
                   <p
                     className="text-5xl font-light leading-none flex-shrink-0"
-                    style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.25 }}
+                    style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)", opacity: 0.25 }}
                   >
                     {step.n}
                   </p>
@@ -257,7 +257,7 @@ export default function LandlordsPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Transparent Pricing
             </p>
@@ -349,13 +349,13 @@ export default function LandlordsPage() {
               >
                 <div
                   className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Most Popular
                 </div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Standard
                 </p>
@@ -388,7 +388,7 @@ export default function LandlordsPage() {
                     "Market rent review included",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#7B1C1C" }}>✓</span>
+                      <span className="text-xs mt-0.5 shrink-0" style={{ color: "#C5A55A" }}>✓</span>
                       <span
                         className="text-sm"
                         style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
@@ -401,7 +401,7 @@ export default function LandlordsPage() {
                 <Link
                   href="/contact"
                   className="block text-center py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Get Started
                 </Link>
@@ -505,7 +505,7 @@ export default function LandlordsPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Common Questions
             </p>
@@ -540,7 +540,7 @@ export default function LandlordsPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

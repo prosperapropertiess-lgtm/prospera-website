@@ -55,13 +55,13 @@ export default function AdminLogin() {
           </div>
 
           {error && (
-            <p className="text-xs text-[#7B1C1C]">{error}</p>
+            <p className="text-xs text-[#C5A55A]">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#7B1C1C] transition-colors disabled:opacity-50"
+            className="w-full py-3 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

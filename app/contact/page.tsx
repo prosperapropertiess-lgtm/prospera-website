@@ -26,14 +26,14 @@ export default function ContactPage() {
     }
   }
 
-  const inputClass = "w-full px-4 py-3 text-sm border border-gray-200 rounded bg-white text-[#0A1628] focus:outline-none focus:border-[#7B1C1C] transition-colors";
+  const inputClass = "w-full px-4 py-3 text-sm border border-gray-200 rounded bg-white text-[#0A1628] focus:outline-none focus:border-[#C5A55A] transition-colors";
 
   return (
     <>
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 bg-[#FAF8F5] text-center">
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-4">Reach Out</p>
+          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4">Reach Out</p>
           <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light text-[#0A1628] mb-5">
             Let&apos;s Talk.
           </h1>
@@ -49,26 +49,26 @@ export default function ContactPage() {
           <FadeIn>
             <div className="space-y-10">
               <div>
-                <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Phone</p>
-                <a href="tel:5196971227" className="font-[family-name:var(--font-cormorant)] text-2xl text-[#0A1628] hover:text-[#7B1C1C] transition-colors">
+                <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3">Phone</p>
+                <a href="tel:5196971227" className="font-[family-name:var(--font-cormorant)] text-2xl text-[#0A1628] hover:text-[#C5A55A] transition-colors">
                   (519) 697-1227
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Email</p>
-                <a href="mailto:prosperapropertiess@gmail.com" className="text-sm text-[#2D4A5E] hover:text-[#7B1C1C] transition-colors break-all">
+                <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3">Email</p>
+                <a href="mailto:prosperapropertiess@gmail.com" className="text-sm text-[#2D4A5E] hover:text-[#C5A55A] transition-colors break-all">
                   prosperapropertiess@gmail.com
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Service Areas</p>
+                <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3">Service Areas</p>
                 <p className="text-sm text-[#2D4A5E] leading-relaxed">London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-[#7B1C1C] mb-3">Portals</p>
+                <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-3">Portals</p>
                 <div className="space-y-2">
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-[#2D4A5E] hover:text-[#7B1C1C] transition-colors">Landlord Portal →</a>
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-[#2D4A5E] hover:text-[#7B1C1C] transition-colors">Tenant Portal →</a>
+                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-[#2D4A5E] hover:text-[#C5A55A] transition-colors">Landlord Portal →</a>
+                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-[#2D4A5E] hover:text-[#C5A55A] transition-colors">Tenant Portal →</a>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function ContactPage() {
                       key={t}
                       type="button"
                       onClick={() => setForm({ ...form, type: t })}
-                      className={`flex-1 py-2.5 text-xs uppercase tracking-wide rounded border transition-colors ${form.type === t ? "bg-[#7B1C1C] text-white border-[#7B1C1C]" : "border-gray-200 text-[#2D4A5E] hover:border-[#7B1C1C]"}`}
+                      className={`flex-1 py-2.5 text-xs uppercase tracking-wide rounded border transition-colors ${form.type === t ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#C5A55A]"}`}
                     >
                       {t === "landlord" ? "I'm a Landlord" : t === "tenant" ? "I'm a Tenant" : "Other"}
                     </button>
@@ -127,12 +127,12 @@ export default function ContactPage() {
                   <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className={inputClass} placeholder="Tell us about your property or what you're looking for..." />
                 </div>
 
-                {status === "error" && <p className="text-sm text-[#7B1C1C]">Something went wrong. Please try again or call us directly.</p>}
+                {status === "error" && <p className="text-sm text-[#C5A55A]">Something went wrong. Please try again or call us directly.</p>}
 
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full py-4 bg-[#7B1C1C] text-white text-sm uppercase tracking-wide rounded hover:bg-[#9B2E2E] transition-colors disabled:opacity-50"
+                  className="w-full py-4 bg-[#C5A55A] text-white text-sm uppercase tracking-wide rounded hover:bg-[#9B2E2E] transition-colors disabled:opacity-50"
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </button>

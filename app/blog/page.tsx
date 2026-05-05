@@ -13,7 +13,7 @@ const CATEGORIES = ["All", "Landlord Tips", "Tenant Resources", "Market Updates"
 const categoryColors: Record<string, string> = {
   "Landlord Tips": "bg-[#0D1B2A] text-[#FAF8F5]",
   "Tenant Resources": "bg-[#2D4A5E] text-[#FAF8F5]",
-  "Market Updates": "bg-[#7B1C1C] text-[#FAF8F5]",
+  "Market Updates": "bg-[#C5A55A] text-[#FAF8F5]",
   "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
 };
 
@@ -25,7 +25,7 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="pt-32 pb-16 px-6" style={{ backgroundColor: "#F5F0EB" }}>
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Insights & Resources
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
@@ -103,7 +103,7 @@ export default function BlogPage() {
 
                   {/* Title */}
                   <h2
-                    className="text-xl font-medium mb-3 group-hover:text-[#7B1C1C] transition-colors leading-snug"
+                    className="text-xl font-medium mb-3 group-hover:text-[#C5A55A] transition-colors leading-snug"
                     style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
                   >
                     {post.title}
@@ -123,7 +123,7 @@ export default function BlogPage() {
                       {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
                     </span>
                     <span
-                      className="text-xs uppercase tracking-wider group-hover:text-[#7B1C1C] transition-colors"
+                      className="text-xs uppercase tracking-wider group-hover:text-[#C5A55A] transition-colors"
                       style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Read →
@@ -155,7 +155,7 @@ export default function BlogPage() {
             <button
               type="submit"
               className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Subscribe
             </button>

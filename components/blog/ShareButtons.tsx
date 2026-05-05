@@ -71,7 +71,7 @@ export default function ShareButtons({ url, title }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Share on ${s.label}`}
-          className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#7B1C1C] hover:text-[#7B1C1C]"
+          className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
           style={{ borderColor: "#D4CFC9", color: "#5A5A5A" }}
         >
           {s.icon}
@@ -80,8 +80,8 @@ export default function ShareButtons({ url, title }: Props) {
       <button
         onClick={copyLink}
         aria-label="Copy link"
-        className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#7B1C1C] hover:text-[#7B1C1C]"
-        style={{ borderColor: "#D4CFC9", color: copied ? "#7B1C1C" : "#5A5A5A" }}
+        className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
+        style={{ borderColor: "#D4CFC9", color: copied ? "#C5A55A" : "#5A5A5A" }}
       >
         {copied ? (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

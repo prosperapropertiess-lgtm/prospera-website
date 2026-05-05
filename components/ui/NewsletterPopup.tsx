@@ -93,7 +93,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
             style={{ backgroundColor: "#FAF8F5" }}
           >
             {/* Top accent bar */}
-            <div className="h-1 w-full" style={{ backgroundColor: "#7B1C1C" }} />
+            <div className="h-1 w-full" style={{ backgroundColor: "#C5A55A" }} />
 
             <div className="p-8">
               {/* Close */}
@@ -121,7 +121,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Offer label */}
                   <p
                     className="text-xs uppercase tracking-widest mb-3"
-                    style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {isLandlord ? "Free for Ontario Landlords" : "New Listing Alerts"}
                   </p>
@@ -194,7 +194,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                     )}
 
                     {status === "error" && (
-                      <p className="text-xs" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+                      <p className="text-xs" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                         Something went wrong. Please try again.
                       </p>
                     )}

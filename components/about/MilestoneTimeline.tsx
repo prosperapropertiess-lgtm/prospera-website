@@ -70,7 +70,7 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         <span
           className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
         >
           {milestone.era}
         </span>
@@ -121,7 +121,7 @@ function PathSegment({ index }: { index: number }) {
         >
           <motion.path
             d={dDesktop}
-            stroke="#7B1C1C"
+            stroke="#C5A55A"
             strokeWidth="1.5"
             strokeDasharray="3 9"
             strokeLinecap="round"
@@ -139,7 +139,7 @@ function PathSegment({ index }: { index: number }) {
           <svg width="2" height="48">
             <motion.path
               d="M 1 0 L 1 48"
-              stroke="#7B1C1C"
+              stroke="#C5A55A"
               strokeWidth="1.5"
               strokeDasharray="2 7"
               strokeLinecap="round"
@@ -193,9 +193,9 @@ function MilestoneNode({
             transition={{ duration: 0.4, delay: 0.12, type: "spring", stiffness: 200 }}
             className="w-12 h-12 flex items-center justify-center border-2 text-lg"
             style={{
-              borderColor: "#7B1C1C",
+              borderColor: "#C5A55A",
               backgroundColor: "#FAF8F5",
-              color: "#7B1C1C",
+              color: "#C5A55A",
             }}
           >
             {milestone.icon}
@@ -224,9 +224,9 @@ function MilestoneNode({
           transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
           className="w-10 h-10 flex items-center justify-center border-2 text-sm shrink-0 mt-1"
           style={{
-            borderColor: "#7B1C1C",
+            borderColor: "#C5A55A",
             backgroundColor: "#FAF8F5",
-            color: "#7B1C1C",
+            color: "#C5A55A",
           }}
         >
           {milestone.icon}

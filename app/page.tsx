@@ -82,7 +82,7 @@ function Hero() {
             href="#how-it-works"
             className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
             style={{
-              backgroundColor: "#7B1C1C",
+              backgroundColor: "#C5A55A",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -154,7 +154,7 @@ function StatsBar() {
               </div>
               <div
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 {stat.label}
               </div>
@@ -194,7 +194,7 @@ function PainPoints() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             Sound Familiar?
           </p>
@@ -216,7 +216,7 @@ function PainPoints() {
               >
                 <div
                   className="w-1 shrink-0 rounded-full mt-1"
-                  style={{ backgroundColor: "#7B1C1C" }}
+                  style={{ backgroundColor: "#C5A55A" }}
                 />
                 <div>
                   <p
@@ -273,7 +273,7 @@ function FeatureCards() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             Why Prospera
           </p>
@@ -293,7 +293,7 @@ function FeatureCards() {
                 whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.07)" }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="block text-2xl mb-5" style={{ color: "#7B1C1C" }}>
+                <span className="block text-2xl mb-5" style={{ color: "#C5A55A" }}>
                   {f.icon}
                 </span>
                 <h3
@@ -359,7 +359,7 @@ function HowItWorks() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             The Process
           </p>
@@ -391,7 +391,7 @@ function HowItWorks() {
                   <div className="flex items-start gap-4 mb-5">
                     <span
                       className="text-4xl font-light leading-none"
-                      style={{ color: "#7B1C1C", fontFamily: "var(--font-cormorant)", opacity: 0.5 }}
+                      style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)", opacity: 0.5 }}
                     >
                       {phase.num}
                     </span>
@@ -404,7 +404,7 @@ function HowItWorks() {
                       </p>
                       <p
                         className="text-xs mt-0.5"
-                        style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                       >
                         {phase.timeline}
                       </p>
@@ -413,7 +413,7 @@ function HowItWorks() {
                   <ul className="space-y-2.5">
                     {phase.steps.map((step, j) => (
                       <li key={j} className="flex items-start gap-2.5">
-                        <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
+                        <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
                         <span
                           className="text-sm leading-relaxed"
                           style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}
@@ -454,7 +454,7 @@ function FounderSnippet() {
             <div className="text-center md:text-left">
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-5"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 The Owner
               </p>
@@ -467,7 +467,7 @@ function FounderSnippet() {
                 choose to stay small on purpose.&rdquo;
               </blockquote>
               <div className="flex items-center gap-4 justify-center md:justify-start mb-6">
-                <div className="w-10 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+                <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
                 <p
                   className="text-sm"
                   style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
@@ -499,7 +499,7 @@ function CaseStudy() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             Real Result
           </p>
@@ -530,7 +530,7 @@ function CaseStudy() {
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 Before Prospera
               </p>
@@ -543,7 +543,7 @@ function CaseStudy() {
                   "Owner doing all lawn and snow himself",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#7B1C1C" }}>✕</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
                     <span className="text-sm" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
@@ -621,7 +621,7 @@ function Testimonials() {
         <FadeIn className="text-center mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             What Landlords Say
           </p>
@@ -648,7 +648,7 @@ function Testimonials() {
               {/* Stars */}
               <div className="flex justify-center gap-1 mb-6">
                 {Array.from({ length: testimonials[current].stars }).map((_, i) => (
-                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#7B1C1C">
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#C5A55A">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                 ))}
@@ -662,7 +662,7 @@ function Testimonials() {
               </p>
               <p
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 {testimonials[current].author}
               </p>
@@ -689,7 +689,7 @@ function Testimonials() {
                 onClick={() => setCurrent(i)}
                 className="w-2 h-2 rounded-full transition-all duration-200"
                 style={{
-                  backgroundColor: i === current ? "#7B1C1C" : "rgba(13,27,42,0.2)",
+                  backgroundColor: i === current ? "#C5A55A" : "rgba(13,27,42,0.2)",
                   transform: i === current ? "scale(1.3)" : "scale(1)",
                 }}
                 aria-label={`Testimonial ${i + 1}`}
@@ -721,7 +721,7 @@ function TenantBar() {
         <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-2"
-            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
           >
             Looking for a Rental?
           </p>
@@ -760,7 +760,7 @@ function CTABanner() {
         >
           Own a rental.
           <br />
-          <em style={{ color: "#7B1C1C" }}>Not a second job.</em>
+          <em style={{ color: "#C5A55A" }}>Not a second job.</em>
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
@@ -784,7 +784,7 @@ function CTABanner() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -829,7 +829,7 @@ function StickyCTA() {
             href="/contact"
             className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded-lg"
             style={{
-              backgroundColor: "#7B1C1C",
+              backgroundColor: "#C5A55A",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}

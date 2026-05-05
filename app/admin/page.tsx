@@ -84,7 +84,7 @@ export default function AdminDashboard() {
           </div>
           <Link
             href="/admin/properties/new"
-            className="px-5 py-2.5 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#7B1C1C] transition-colors"
+            className="px-5 py-2.5 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors"
           >
             + Add Property
           </Link>
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
           <div className="text-center py-24 bg-white rounded-xl border border-gray-100">
             <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#0A1628] mb-3">No properties yet</p>
             <p className="text-sm text-[#2D4A5E] mb-6">Add your first property to get started.</p>
-            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#7B1C1C] transition-colors">
+            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors">
               Add Property
             </Link>
           </div>

@@ -26,7 +26,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
     return (
       <div
         className="my-12 px-8 py-8 border-l-4"
-        style={{ backgroundColor: "#F5F0EB", borderColor: "#7B1C1C" }}
+        style={{ backgroundColor: "#F5F0EB", borderColor: "#C5A55A" }}
       >
         {status === "done" ? (
           <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
@@ -34,7 +34,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
           </p>
         ) : (
           <>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
               Landlord Insights
             </p>
             <p className="text-lg font-light mb-4" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>
@@ -68,7 +68,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
               </button>
             </form>
             {status === "error" && (
-              <p className="text-xs mt-2" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mt-2" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                 Something went wrong. Try again.
               </p>
             )}
@@ -123,7 +123,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 type="submit"
                 disabled={status === "loading"}
                 className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 whitespace-nowrap"
-                style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 {status === "loading" ? "..." : "Subscribe Free"}
               </button>

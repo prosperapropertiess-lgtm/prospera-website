@@ -112,7 +112,7 @@ export default function ListingsPage() {
               <button
                 key={b}
                 onClick={() => setBeds(b)}
-                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#7B1C1C] text-white border-[#7B1C1C]" : "border-gray-200 text-[#2D4A5E] hover:border-[#7B1C1C]"}`}
+                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-gray-200 text-[#2D4A5E] hover:border-[#C5A55A]"}`}
               >
                 {b}
               </button>
@@ -131,7 +131,7 @@ export default function ListingsPage() {
               step={50}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-28 accent-[#7B1C1C]"
+              className="w-28 accent-[#C5A55A]"
             />
           </div>
 
@@ -143,7 +143,7 @@ export default function ListingsPage() {
               type="checkbox"
               checked={petFriendly}
               onChange={(e) => setPetFriendly(e.target.checked)}
-              className="accent-[#7B1C1C]"
+              className="accent-[#C5A55A]"
             />
             <span className="text-xs text-[#2D4A5E]">Pet Friendly</span>
           </label>
@@ -174,7 +174,7 @@ export default function ListingsPage() {
             <div className="text-center py-24">
               <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#0A1628] mb-3">No listings available right now.</p>
               <p className="text-sm text-[#2D4A5E] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
-              <Link href="/contact" className="inline-block px-8 py-3 bg-[#7B1C1C] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
+              <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:bg-[#9B2E2E] transition-colors">
                 Contact Us
               </Link>
             </div>
@@ -193,7 +193,7 @@ export default function ListingsPage() {
                         unoptimized
                       />
                       <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                        <span className="bg-[#7B1C1C] text-white text-xs px-2.5 py-1 rounded-full font-medium">
+                        <span className="bg-[#C5A55A] text-white text-xs px-2.5 py-1 rounded-full font-medium">
                           Available
                         </span>
                         {p.utilities_included && (
@@ -232,7 +232,7 @@ export default function ListingsPage() {
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
-                          className="px-4 py-2 bg-[#0A1628] text-white text-xs rounded hover:bg-[#7B1C1C] transition-colors"
+                          className="px-4 py-2 bg-[#0A1628] text-white text-xs rounded hover:bg-[#C5A55A] transition-colors"
                         >
                           View Details
                         </Link>
@@ -255,7 +255,7 @@ export default function ListingsPage() {
           <p className="text-sm text-[#2D4A5E] mb-6">
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 bg-[#7B1C1C] text-white text-sm font-medium rounded hover:bg-[#9B2E2E] transition-colors">
+          <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm font-medium rounded hover:bg-[#9B2E2E] transition-colors">
             Contact Us
           </Link>
         </FadeIn>

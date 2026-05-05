@@ -47,7 +47,7 @@ export default function TenantsPage() {
             <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
               Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
             </p>
-            <Link href="/listings" className="inline-block px-8 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+            <Link href="/listings" className="inline-block px-8 py-4 bg-[#C5A55A] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
               Browse Available Rentals
             </Link>
           </FadeIn>
@@ -58,7 +58,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6 bg-[#FAF8F5]">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">What You Get</p>
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">What You Get</p>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">
               Renting with Prospera is different.
             </h2>
@@ -83,14 +83,14 @@ export default function TenantsPage() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">The Process</p>
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">The Process</p>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-16">How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.15}>
                 <div className="text-center">
-                  <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#7B1C1C]/20 mb-4">{step.n}</p>
+                  <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#C5A55A]/20 mb-4">{step.n}</p>
                   <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#0A1628] mb-3">{step.title}</h3>
                   <p className="text-sm text-[#2D4A5E] leading-relaxed">{step.desc}</p>
                 </div>
@@ -99,7 +99,7 @@ export default function TenantsPage() {
           </div>
           <FadeIn delay={0.3}>
             <div className="text-center mt-14">
-              <Link href="/listings" className="inline-block px-10 py-4 bg-[#7B1C1C] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
+              <Link href="/listings" className="inline-block px-10 py-4 bg-[#C5A55A] text-white font-medium rounded hover:bg-[#9B2E2E] transition-colors text-sm uppercase tracking-wide">
                 See Available Homes
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6 bg-[#FAF8F5]">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#7B1C1C] text-center mb-4">Common Questions</p>
+            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">Common Questions</p>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#0A1628] text-center mb-14">FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />

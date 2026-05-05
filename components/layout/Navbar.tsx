@@ -97,7 +97,7 @@ export default function Navbar() {
               href={BUILDIUM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] rounded-lg"
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] transition-all duration-200 hover:bg-[#9B2E2E] rounded-lg"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Tenant Login
@@ -167,7 +167,7 @@ export default function Navbar() {
             href={BUILDIUM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest bg-[#7B1C1C] text-[#FAF8F5] rounded-lg"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] rounded-lg"
             style={{ fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >

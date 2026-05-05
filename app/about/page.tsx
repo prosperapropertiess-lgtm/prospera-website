@@ -54,7 +54,7 @@ export default function AboutPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               The Owner
             </p>
@@ -91,7 +91,7 @@ export default function AboutPage() {
               </p>
               <p
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 {n.label}
               </p>
@@ -106,7 +106,7 @@ export default function AboutPage() {
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               The Journey
             </p>
@@ -132,7 +132,7 @@ export default function AboutPage() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-4"
-                  style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Still Growing
                 </p>
@@ -181,7 +181,7 @@ export default function AboutPage() {
                       fontFamily: "var(--font-dm-sans)",
                     }}
                   >
-                    <span className="text-xs mr-2" style={{ color: "#7B1C1C" }}>
+                    <span className="text-xs mr-2" style={{ color: "#C5A55A" }}>
                       ✓
                     </span>
                     {trade}
@@ -211,7 +211,7 @@ export default function AboutPage() {
           <FadeIn delay={0.12}>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Where I&apos;m At
             </p>
@@ -244,7 +244,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="mt-8 flex items-center gap-4">
-              <div className="w-10 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+              <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
               <p
                 className="text-sm font-medium"
                 style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}
@@ -276,7 +276,7 @@ export default function AboutPage() {
                   className="bg-white border p-7 h-full rounded-xl"
                   style={{ borderColor: "#E8E4DF" }}
                 >
-                  <div className="w-6 h-0.5 mb-5" style={{ backgroundColor: "#7B1C1C" }} />
+                  <div className="w-6 h-0.5 mb-5" style={{ backgroundColor: "#C5A55A" }} />
                   <h3
                     className="text-lg font-medium mb-3"
                     style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}
@@ -318,7 +318,7 @@ export default function AboutPage() {
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
             style={{
-              backgroundColor: "#7B1C1C",
+              backgroundColor: "#C5A55A",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}

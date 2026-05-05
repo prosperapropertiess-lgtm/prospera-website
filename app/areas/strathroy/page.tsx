@@ -54,7 +54,7 @@ export default function StroathroyPage() {
       {/* Hero */}
       <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#0D1B2A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy, Ontario
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
@@ -66,7 +66,7 @@ export default function StroathroyPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Estimate
           </Link>
@@ -79,7 +79,7 @@ export default function StroathroyPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -125,7 +125,7 @@ export default function StroathroyPage() {
             {neighbourhoods.map((n, i) => (
               <FadeIn key={n.name} delay={i * 0.06}>
                 <div className="bg-white border p-5 flex gap-4" style={{ borderColor: "#E8E4DF" }}>
-                  <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#7B1C1C" }} />
+                  <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
@@ -189,7 +189,7 @@ export default function StroathroyPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

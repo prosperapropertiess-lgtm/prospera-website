@@ -14,7 +14,7 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="pt-32 pb-16 px-6 text-center" style={{ backgroundColor: "#F5F0EB" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
             Questions & Answers
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#0D1B2A", fontFamily: "var(--font-cormorant)" }}>

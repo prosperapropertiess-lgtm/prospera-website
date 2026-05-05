@@ -288,7 +288,7 @@ export default function PropertyForm({ initial }: Props) {
                         type="checkbox"
                         checked={form.utilities_list.includes(u)}
                         onChange={() => toggleUtility(u)}
-                        className="accent-[#7B1C1C] w-4 h-4"
+                        className="accent-[#C5A55A] w-4 h-4"
                       />
                       <span className="text-sm text-[#2D4A5E]">{u}</span>
                     </label>
@@ -355,14 +355,14 @@ export default function PropertyForm({ initial }: Props) {
         </section>
 
         {error && (
-          <p className="text-sm text-[#7B1C1C] bg-red-50 px-4 py-3 rounded">{error}</p>
+          <p className="text-sm text-[#C5A55A] bg-red-50 px-4 py-3 rounded">{error}</p>
         )}
 
         <div className="flex gap-4 pb-10">
           <button
             type="submit"
             disabled={saving}
-            className="px-8 py-3 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#7B1C1C] transition-colors disabled:opacity-50 flex-1 md:flex-none"
+            className="px-8 py-3 bg-[#0A1628] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors disabled:opacity-50 flex-1 md:flex-none"
           >
             {saving ? "Saving..." : isEdit ? "Save Changes" : "Add Property"}
           </button>
@@ -383,7 +383,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
   return (
     <div>
       <label className="block text-xs uppercase tracking-widest text-[#2D4A5E] mb-2">
-        {label}{required && <span className="text-[#7B1C1C] ml-0.5">*</span>}
+        {label}{required && <span className="text-[#C5A55A] ml-0.5">*</span>}
       </label>
       {children}
     </div>

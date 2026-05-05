@@ -13,7 +13,7 @@ interface RentPeriod {
 const emptyPeriod = (): RentPeriod => ({ from: "", to: "", charged: "", paid: "" });
 
 const inputClass =
-  "w-full px-4 py-3 text-sm border border-[#E8E4DF] rounded-lg bg-white text-[#0D1B2A] focus:outline-none focus:border-[#7B1C1C] transition-colors placeholder:text-[#BBBBBB]";
+  "w-full px-4 py-3 text-sm border border-[#E8E4DF] rounded-lg bg-white text-[#0D1B2A] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
 
 const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#5A5A5A]";
 
@@ -140,14 +140,14 @@ export default function N4FormBuilder() {
         <div className="flex items-center gap-4">
           <div
             className="w-12 h-12 flex items-center justify-center rounded-xl text-lg font-bold shrink-0"
-            style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
           >
             N4
           </div>
           <div>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-0.5"
-              style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
             >
               Free LTB Form Generator
             </p>
@@ -181,7 +181,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#7B1C1C", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Parties & Property
                 </p>
@@ -229,7 +229,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#7B1C1C", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Dates
                 </p>
@@ -267,7 +267,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#7B1C1C", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Rent Periods (what is owed)
                 </p>
@@ -287,7 +287,7 @@ export default function N4FormBuilder() {
                             type="button"
                             onClick={() => removePeriod(i)}
                             className="text-xs"
-                            style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                           >
                             Remove
                           </button>
@@ -349,7 +349,7 @@ export default function N4FormBuilder() {
                     type="button"
                     onClick={addPeriod}
                     className="mt-3 text-xs font-semibold uppercase tracking-wider transition-opacity hover:opacity-70"
-                    style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
                   >
                     + Add Another Period
                   </button>
@@ -381,7 +381,7 @@ export default function N4FormBuilder() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-5 pb-2 border-b"
-                  style={{ color: "#7B1C1C", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#C5A55A", borderColor: "#E8E4DF", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Landlord Signature Information
                 </p>
@@ -435,7 +435,7 @@ export default function N4FormBuilder() {
               <button
                 type="submit"
                 className="w-full py-4 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 Generate My N4 →
               </button>
@@ -476,7 +476,7 @@ export default function N4FormBuilder() {
               <label
                 className="flex items-start gap-3 p-4 rounded-xl border cursor-pointer mb-6 transition-colors"
                 style={{
-                  borderColor: wantsHelp ? "#7B1C1C" : "#E8E4DF",
+                  borderColor: wantsHelp ? "#C5A55A" : "#E8E4DF",
                   backgroundColor: wantsHelp ? "rgba(123,28,28,0.04)" : "#FAF8F5",
                 }}
               >
@@ -484,7 +484,7 @@ export default function N4FormBuilder() {
                   type="checkbox"
                   checked={wantsHelp}
                   onChange={(e) => setWantsHelp(e.target.checked)}
-                  className="mt-0.5 shrink-0 accent-[#7B1C1C]"
+                  className="mt-0.5 shrink-0 accent-[#C5A55A]"
                 />
                 <div>
                   <p className="text-sm font-medium" style={{ color: "#0D1B2A", fontFamily: "var(--font-dm-sans)" }}>
@@ -506,7 +506,7 @@ export default function N4FormBuilder() {
                   className={inputClass + " text-center"}
                 />
                 {error && (
-                  <p className="text-xs" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                     {error}
                   </p>
                 )}
@@ -514,7 +514,7 @@ export default function N4FormBuilder() {
                   type="submit"
                   disabled={generating}
                   className="w-full py-4 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80 disabled:opacity-50"
-                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {generating ? "Generating..." : "Download My N4"}
                 </button>
@@ -562,7 +562,7 @@ export default function N4FormBuilder() {
                 className="p-5 rounded-xl text-left mb-6 space-y-2"
                 style={{ backgroundColor: "#F5F0EB" }}
               >
-                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   Before you serve it
                 </p>
                 {[
@@ -572,7 +572,7 @@ export default function N4FormBuilder() {
                   "Keep a copy for your records",
                 ].map((tip) => (
                   <p key={tip} className="text-sm flex gap-2" style={{ color: "#5A5A5A", fontFamily: "var(--font-dm-sans)" }}>
-                    <span style={{ color: "#7B1C1C" }}>✓</span> {tip}
+                    <span style={{ color: "#C5A55A" }}>✓</span> {tip}
                   </p>
                 ))}
               </div>
@@ -587,7 +587,7 @@ export default function N4FormBuilder() {
                 <a
                   href="/contact"
                   className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg text-center transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: "#7B1C1C", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Need Help Serving It?
                 </a>

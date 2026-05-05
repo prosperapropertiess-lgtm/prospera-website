@@ -13,7 +13,7 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string 
   return (
     <div className="bg-white border border-gray-100 rounded-xl p-5">
       <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">{label}</p>
-      <p className={`text-3xl font-light ${accent ? "text-[#7B1C1C]" : "text-black"}`}>{value}</p>
+      <p className={`text-3xl font-light ${accent ? "text-[#C5A55A]" : "text-black"}`}>{value}</p>
       {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
     </div>
   );
@@ -116,7 +116,7 @@ export default function DashboardPage() {
             <p className="text-xs text-gray-400 uppercase tracking-widest">Outreach</p>
             <button
               onClick={() => setModal(true)}
-              className="text-xs bg-[#0A1628] text-white px-4 py-2 rounded hover:bg-[#7B1C1C] transition-colors"
+              className="text-xs bg-[#0A1628] text-white px-4 py-2 rounded hover:bg-[#C5A55A] transition-colors"
             >
               + Log Outreach
             </button>
@@ -235,7 +235,7 @@ export default function DashboardPage() {
               <button
                 onClick={logOutreach}
                 disabled={saving || !form.contact_name.trim()}
-                className="flex-1 bg-[#0A1628] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#7B1C1C] transition-colors disabled:opacity-30"
+                className="flex-1 bg-[#0A1628] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#C5A55A] transition-colors disabled:opacity-30"
               >
                 {saving ? "Saving..." : "Log it"}
               </button>

@@ -14,9 +14,9 @@ export default function NotFound() {
       </p>
 
       <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-px" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#7B1C1C" }} />
-        <div className="w-12 h-px" style={{ backgroundColor: "#7B1C1C" }} />
+        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
+        <div className="w-12 h-px" style={{ backgroundColor: "#C5A55A" }} />
       </div>
 
       <h1
@@ -49,8 +49,8 @@ export default function NotFound() {
         </Link>
         <Link
           href="/contact"
-          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#7B1C1C] hover:text-[#FAF8F5] hover:border-[#7B1C1C]"
-          style={{ borderColor: "#7B1C1C", color: "#7B1C1C", fontFamily: "var(--font-dm-sans)" }}
+          className="px-8 py-3 text-xs uppercase tracking-widest border transition-colors hover:bg-[#C5A55A] hover:text-[#FAF8F5] hover:border-[#C5A55A]"
+          style={{ borderColor: "#C5A55A", color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
         >
           Contact Us
         </Link>

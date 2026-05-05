@@ -59,8 +59,8 @@ export default function FAQTabs() {
               className="px-6 py-4 text-xs uppercase tracking-widest border-b-2 transition-colors"
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                borderColor: activeTab === tab ? "#7B1C1C" : "transparent",
-                color: activeTab === tab ? "#7B1C1C" : "#5A5A5A",
+                borderColor: activeTab === tab ? "#C5A55A" : "transparent",
+                color: activeTab === tab ? "#C5A55A" : "#5A5A5A",
               }}
             >
               {tab}
