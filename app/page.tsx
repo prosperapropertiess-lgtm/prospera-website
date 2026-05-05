@@ -212,7 +212,7 @@ function PainPoints() {
             <FadeIn key={i} delay={i * 0.08}>
               <div
                 className="p-6 border flex gap-4 rounded-xl"
-                style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
+                style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
               >
                 <div
                   className="w-1 shrink-0 rounded-full mt-1"
@@ -526,7 +526,7 @@ function CaseStudy() {
           <FadeIn delay={0.1}>
             <div
               className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#FFF8F8", borderColor: "rgba(123,28,28,0.15)" }}
+              style={{ backgroundColor: "#1a0a0a", borderColor: "rgba(123,28,28,0.15)" }}
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
@@ -554,7 +554,7 @@ function CaseStudy() {
           <FadeIn delay={0.2}>
             <div
               className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#F5FBF5", borderColor: "rgba(40,100,60,0.15)" }}
+              style={{ backgroundColor: "#0a1a0f", borderColor: "rgba(40,100,60,0.15)" }}
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"

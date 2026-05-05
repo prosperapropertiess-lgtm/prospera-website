@@ -136,7 +136,7 @@ export default function ChatWidget() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-            style={{ maxHeight: "70vh", backgroundColor: "#FFFDFB", border: "1px solid #E8E4DF" }}
+            style={{ maxHeight: "70vh", backgroundColor: "#112035", border: "1px solid #E8E4DF" }}
           >
             {/* Header */}
             <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#060E1C" }}>

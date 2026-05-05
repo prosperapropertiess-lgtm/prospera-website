@@ -486,7 +486,7 @@ export default function LandlordsPage() {
           <FadeIn delay={0.2}>
             <div
               className="mt-8 p-6 text-center border rounded-xl"
-              style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
+              style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
             >
               <p
                 className="text-sm leading-relaxed"

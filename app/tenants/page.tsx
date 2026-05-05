@@ -127,7 +127,7 @@ export default function TenantsPage() {
           <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#2D4A5E] font-medium rounded hover:bg-[#0A1628] transition-colors text-sm uppercase tracking-wide">
+          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#2D4A5E] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
             Browse Listings
           </Link>
         </FadeIn>

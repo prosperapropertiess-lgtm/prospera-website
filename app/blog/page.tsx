@@ -68,7 +68,7 @@ export default function BlogPage() {
                 style={{ borderColor: "#1E3050" }}
               >
                 {/* Thumbnail */}
-                <div className="relative h-52 w-full overflow-hidden bg-[#E8E4DF]">
+                <div className="relative h-52 w-full overflow-hidden bg-[#1E3050]">
                   {post.featuredImage ? (
                     <Image
                       src={post.featuredImage}

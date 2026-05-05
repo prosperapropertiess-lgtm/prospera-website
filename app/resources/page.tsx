@@ -116,7 +116,7 @@ export default function ResourcesPage() {
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(123,28,28,0.2)", backgroundColor: "#FFF8F8" }}>
+              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(123,28,28,0.2)", backgroundColor: "#1a0a0a" }}>
                 <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
                   Before This Tool
                 </p>
@@ -134,7 +134,7 @@ export default function ResourcesPage() {
                   </div>
                 ))}
               </div>
-              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(45,106,79,0.2)", backgroundColor: "#F5FBF5" }}>
+              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(45,106,79,0.2)", backgroundColor: "#0a1a0f" }}>
                 <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)" }}>
                   Now
                 </p>
@@ -186,7 +186,7 @@ export default function ResourcesPage() {
               <FadeIn key={s.formName} delay={i * 0.07}>
                 <div
                   className="rounded-xl border overflow-hidden"
-                  style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
+                  style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
                 >
                   <div className="p-6 md:p-8">
                     <div className="flex flex-col md:flex-row md:items-start gap-5">

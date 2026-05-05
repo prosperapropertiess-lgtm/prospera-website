@@ -122,7 +122,7 @@ export default function AdminDashboard() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {properties.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#0A1628] transition-colors group">
+                  <tr key={p.id} className="hover:bg-[#0D1B2A] transition-colors group">
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
                         // eslint-disable-next-line @next/next/no-img-element

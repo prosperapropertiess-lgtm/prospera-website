@@ -15,7 +15,7 @@ const emptyPeriod = (): RentPeriod => ({ from: "", to: "", charged: "", paid: ""
 const inputClass =
   "w-full px-4 py-3 text-sm border border-[#1E3050] rounded-lg bg-[#112035] text-[#FAF8F5] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
 
-const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#5A5A5A]";
+const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#8899AA]";
 
 // Auto-calculate termination date (14 days from notice date, month/year tenants)
 function calcTerminationDate(noticeDate: string): string {
@@ -133,7 +133,7 @@ export default function N4FormBuilder() {
   return (
     <div
       className="rounded-2xl border overflow-hidden"
-      style={{ borderColor: "#1E3050", backgroundColor: "#FFFDFB" }}
+      style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
     >
       {/* Header */}
       <div className="px-8 py-6 border-b" style={{ borderColor: "#1E3050", backgroundColor: "#0D1B2A" }}>
