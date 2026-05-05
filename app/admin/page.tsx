@@ -78,7 +78,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] font-light">Properties</h1>
-            <p className="text-sm text-[#8899AA] mt-1">
+            <p className="text-sm text-[#B0B8C4] mt-1">
               {loading ? "Loading..." : `${properties.length} total`}
             </p>
           </div>
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
         ) : properties.length === 0 ? (
           <div className="text-center py-24 bg-[#112035] rounded-xl border border-[#1E3050]">
             <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5] mb-3">No properties yet</p>
-            <p className="text-sm text-[#8899AA] mb-6">Add your first property to get started.</p>
+            <p className="text-sm text-[#B0B8C4] mb-6">Add your first property to get started.</p>
             <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 bg-[#8B1A1A] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors">
               Add Property
             </Link>
@@ -135,9 +135,9 @@ export default function AdminDashboard() {
                       <p className="text-sm font-medium text-[#FAF8F5]">{p.title}</p>
                       <p className="text-xs text-gray-400">{p.address}</p>
                     </td>
-                    <td className="px-4 py-4 text-sm text-[#8899AA]">{p.city}</td>
+                    <td className="px-4 py-4 text-sm text-[#B0B8C4]">{p.city}</td>
                     <td className="px-4 py-4 text-sm text-[#FAF8F5]">${p.price.toLocaleString()}/mo</td>
-                    <td className="px-4 py-4 text-sm text-[#8899AA]">{p.bedrooms} bed</td>
+                    <td className="px-4 py-4 text-sm text-[#B0B8C4]">{p.bedrooms} bed</td>
                     <td className="px-4 py-4">
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                         {p.available ? "Available" : "Unavailable"}
@@ -145,7 +145,7 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
-                        <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#8899AA] hover:text-[#FAF8F5] transition-colors">
+                        <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#B0B8C4] hover:text-[#FAF8F5] transition-colors">
                           Edit
                         </Link>
                         <button
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
                       {p.available ? "Available" : "Unavailable"}
                     </span>
                     <div className="flex gap-4 mt-2">
-                      <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#8899AA] underline">Edit</Link>
+                      <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#B0B8C4] underline">Edit</Link>
                       <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs text-red-400 underline">
                         {deleting === p.id ? "Deleting..." : "Delete"}
                       </button>

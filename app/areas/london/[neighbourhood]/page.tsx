@@ -49,7 +49,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
 
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
-        <p className="text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
           <Link href="/areas/london" className="hover:underline" style={{ color: "#C5A55A" }}>London</Link>
           {" → "}
           <span>{n.name}</span>
@@ -119,7 +119,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
             <p className="text-sm" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
           </div>
           <div>
@@ -139,7 +139,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}

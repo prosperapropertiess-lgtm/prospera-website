@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
@@ -191,22 +190,22 @@ function PainPoints() {
   ];
 
   return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
       <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B1A1A", fontFamily: "var(--font-dm-sans)" }}
           >
             Sound Familiar?
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
           >
             If you recognize any of these,
             <br />
-            <em>you&apos;re in the right place.</em>
+            <em style={{ color: "#8B1A1A" }}>you&apos;re in the right place.</em>
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -214,7 +213,7 @@ function PainPoints() {
             <FadeIn key={i} delay={i * 0.08}>
               <div
                 className="p-6 border flex gap-4 rounded-xl"
-                style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
+                style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFFFF" }}
               >
                 <div
                   className="w-1 shrink-0 rounded-full mt-1"
@@ -223,13 +222,13 @@ function PainPoints() {
                 <div>
                   <p
                     className="font-medium mb-1 text-sm"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {pain.label}
                   </p>
                   <p
                     className="text-xs leading-relaxed"
-                    style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#5A6A7A", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {pain.sub}
                   </p>
@@ -306,7 +305,7 @@ function FeatureCards() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {f.desc}
                 </p>
@@ -418,7 +417,7 @@ function HowItWorks() {
                         <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
                         <span
                           className="text-sm leading-relaxed"
-                          style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {step}
                         </span>
@@ -439,53 +438,31 @@ function HowItWorks() {
 
 function FounderSnippet() {
   return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#060E1C" }}>
-      <div className="max-w-5xl mx-auto">
+    <section className="py-16 px-5 sm:px-8" style={{ backgroundColor: "#060E1C" }}>
+      <div className="max-w-3xl mx-auto text-center">
         <FadeIn>
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-48 h-48 shrink-0 relative overflow-hidden rounded-full">
-              <Image
-                src="/ebin-candid.jpg"
-                alt="Ebin Jaison — Owner, Prospera Properties"
-                fill
-                sizes="192px"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-              />
-            </div>
-
-            <div className="text-center md:text-left">
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-5"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-              >
-                The Owner
-              </p>
-              <blockquote
-                className="text-3xl sm:text-4xl font-light leading-tight mb-6"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
-                &ldquo;I&apos;ve been the tenant. The house coordinator. The
-                operations manager. I built this with all three lenses — and I
-                choose to stay small on purpose.&rdquo;
-              </blockquote>
-              <div className="flex items-center gap-4 justify-center md:justify-start mb-6">
-                <div className="w-10 h-px" style={{ backgroundColor: "#C5A55A" }} />
-                <p
-                  className="text-sm"
-                  style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Ebin Jaison, Owner
-                </p>
-              </div>
-              <Link
-                href="/about"
-                className="inline-block text-xs font-semibold uppercase tracking-widest border-b pb-0.5 transition-opacity hover:opacity-70"
-                style={{ color: "#C4B08A", borderColor: "rgba(196,176,138,0.4)", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Read the full story →
-              </Link>
-            </div>
-          </div>
+          <div className="w-10 h-px mx-auto mb-8" style={{ backgroundColor: "#C5A55A" }} />
+          <blockquote
+            className="text-3xl sm:text-4xl font-light leading-tight mb-6"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          >
+            &ldquo;I&apos;ve been the tenant. The house coordinator. The operations
+            manager. I built this with all three lenses — and I choose to stay
+            small on purpose.&rdquo;
+          </blockquote>
+          <p
+            className="text-sm mb-6"
+            style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
+          >
+            — Ebin Jaison, Owner
+          </p>
+          <Link
+            href="/about"
+            className="inline-block text-xs font-semibold uppercase tracking-widest border-b pb-0.5 transition-opacity hover:opacity-70"
+            style={{ color: "#C5A55A", borderColor: "rgba(197,165,90,0.4)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Read the full story →
+          </Link>
         </FadeIn>
       </div>
     </section>
@@ -515,7 +492,7 @@ function CaseStudy() {
           </h2>
           <p
             className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
-            style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
           >
             An owner was renting rooms individually with all utilities included.
             Tenants had zero reason to conserve. Bills were skyrocketing. He
@@ -528,7 +505,7 @@ function CaseStudy() {
           <FadeIn delay={0.1}>
             <div
               className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#1a0a0a", borderColor: "rgba(123,28,28,0.15)" }}
+              style={{ backgroundColor: "#112035", borderColor: "rgba(139,26,26,0.3)" }}
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
@@ -545,8 +522,8 @@ function CaseStudy() {
                   "Owner doing all lawn and snow himself",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#8B1A1A" }}>✕</span>
+                    <span className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -556,11 +533,11 @@ function CaseStudy() {
           <FadeIn delay={0.2}>
             <div
               className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#0a1a0f", borderColor: "rgba(40,100,60,0.15)" }}
+              style={{ backgroundColor: "#112035", borderColor: "rgba(197,165,90,0.3)" }}
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#2D6A4F", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
               >
                 After Prospera
               </p>
@@ -573,8 +550,8 @@ function CaseStudy() {
                   "Structure in place — the problem can't come back",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#2D6A4F" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
+                    <span className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -666,7 +643,7 @@ function CTABanner() {
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
-          style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
         >
           Free consultation. Honest assessment. No pressure. Just a
           straightforward conversation about what your property could look like

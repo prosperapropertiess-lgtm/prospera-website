@@ -27,7 +27,7 @@ export default function NotFound() {
       </h1>
       <p
         className="text-base mb-10 max-w-md leading-relaxed"
-        style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
       >
         The page you're looking for doesn't exist or may have moved. Let's get you back on track.
       </p>

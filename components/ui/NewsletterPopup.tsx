@@ -121,7 +121,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>
                     You&apos;re in.
                   </p>
-                  <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
                     {isLandlord
                       ? "We'll be in touch with tips and market updates."
                       : "We'll notify you when new listings match your search."}
@@ -150,7 +150,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Subtext */}
                   <p
                     className="text-sm mb-6 leading-relaxed"
-                    style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {isLandlord
                       ? "Our custom lease addendum protects you beyond the Ontario standard lease. Free download — plus occasional market updates."
@@ -230,7 +230,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
                   <p
                     className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                    style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
                     onClick={dismiss}
                   >
                     No thanks

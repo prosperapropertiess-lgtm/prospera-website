@@ -166,7 +166,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-[#5A7090] hover:text-[#FAF8F5] transition-colors"
+                className="text-sm text-[#8098B4] hover:text-[#FAF8F5] transition-colors"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
                 onClick={() => setMenuOpen(false)}
               >

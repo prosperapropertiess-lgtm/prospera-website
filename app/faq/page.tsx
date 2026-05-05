@@ -20,7 +20,7 @@ export default function FAQPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Frequently Asked Questions
           </h1>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
             Answers to the most common questions from landlords and tenants across London, St. Thomas, and Strathroy.
           </p>
         </FadeIn>
@@ -36,7 +36,7 @@ export default function FAQPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Still Have Questions?
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-8" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               Reach out directly — we answer every inquiry personally, usually within a few hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

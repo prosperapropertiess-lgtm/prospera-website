@@ -83,7 +83,7 @@ export default function LondonPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for London Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate, everything included. No hidden fees, no maintenance markups, no surprises.
             </p>
           </FadeIn>
@@ -95,7 +95,7 @@ export default function LondonPage() {
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                     {s.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
                     {s.desc}
                   </p>
                 </div>
@@ -112,7 +112,7 @@ export default function LondonPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               We Know London's Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               Pricing, tenant profiles, and vacancy patterns differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -125,7 +125,7 @@ export default function LondonPage() {
                     <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                       {n.name}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
                       {n.desc}
                     </p>
                   </div>
@@ -164,9 +164,9 @@ export default function LondonPage() {
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
                       <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.low}</td>
+                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.low}</td>
                       <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.high}</td>
+                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>

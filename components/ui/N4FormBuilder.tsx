@@ -15,7 +15,7 @@ const emptyPeriod = (): RentPeriod => ({ from: "", to: "", charged: "", paid: ""
 const inputClass =
   "w-full px-4 py-3 text-sm border border-[#1E3050] rounded-lg bg-[#112035] text-[#FAF8F5] focus:outline-none focus:border-[#C5A55A] transition-colors placeholder:text-[#BBBBBB]";
 
-const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#8899AA]";
+const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5 text-[#B0B8C4]";
 
 // Auto-calculate termination date (14 days from notice date, month/year tenants)
 function calcTerminationDate(noticeDate: string): string {
@@ -161,7 +161,7 @@ export default function N4FormBuilder() {
         </div>
         <p
           className="mt-3 text-sm leading-relaxed"
-          style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
         >
           Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly — no PDF editor needed.
         </p>
@@ -195,7 +195,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="e.g. John Smith, Jane Smith"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                       List all tenants in possession of the unit
                     </p>
                   </div>
@@ -218,7 +218,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="e.g. Unit 2, 123 Main Street, London, ON N6A 1A1"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                       Include unit number and postal code
                     </p>
                   </div>
@@ -243,7 +243,7 @@ export default function N4FormBuilder() {
                       onChange={(e) => handleNoticeDateChange(e.target.value)}
                       className={inputClass}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                       Must be the day after rent was due
                     </p>
                   </div>
@@ -256,7 +256,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       placeholder="DD/MM/YYYY — auto-filled (14 days)"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                       Auto-set to 14 days. Adjust if adding mail delivery days.
                     </p>
                   </div>
@@ -425,7 +425,7 @@ export default function N4FormBuilder() {
                       onChange={(e) => setSignatureDate(e.target.value)}
                       className={inputClass}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                       Defaults to notice date if left blank
                     </p>
                   </div>
@@ -467,7 +467,7 @@ export default function N4FormBuilder() {
               </h3>
               <p
                 className="text-sm mb-6 leading-relaxed"
-                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
               >
                 Enter your email to download. We&apos;ll occasionally send you useful landlord tips — no spam, unsubscribe anytime.
               </p>
@@ -490,7 +490,7 @@ export default function N4FormBuilder() {
                   <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                     I&apos;d like Prospera to handle this for me
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs mt-0.5" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                     Ebin will reach out within 24 hours — free consultation, no pressure.
                   </p>
                 </div>
@@ -522,7 +522,7 @@ export default function N4FormBuilder() {
                   type="button"
                   onClick={() => setStep("form")}
                   className="text-xs transition-opacity hover:opacity-70"
-                  style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}
                 >
                   ← Go back and edit
                 </button>
@@ -554,7 +554,7 @@ export default function N4FormBuilder() {
               </h3>
               <p
                 className="text-sm mb-8 leading-relaxed"
-                style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
               >
                 Sign it, then serve it to your tenant in person or by mail. Remember to remove the checklist page before serving.
               </p>
@@ -571,7 +571,7 @@ export default function N4FormBuilder() {
                   "Give a copy to every tenant named",
                   "Keep a copy for your records",
                 ].map((tip) => (
-                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
                     <span style={{ color: "#C5A55A" }}>✓</span> {tip}
                   </p>
                 ))}

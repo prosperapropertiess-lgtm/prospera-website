@@ -195,7 +195,7 @@ export default function ChatWidget() {
                       <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
-                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#5A7090", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#8098B4", fontFamily: "var(--font-dm-sans)" }}>
                         Skip
                       </button>
                     </div>

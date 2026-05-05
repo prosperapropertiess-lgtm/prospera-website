@@ -130,7 +130,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
-                    <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -148,7 +148,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#2D6A4F" }}>✓</span>
-                    <p className="text-sm" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -175,7 +175,7 @@ export default function ResourcesPage() {
             </h2>
             <p
               className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
-              style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
             >
               Pick your situation. We&apos;ll tell you exactly which form, what it does, and when to use it.
             </p>
@@ -211,7 +211,7 @@ export default function ResourcesPage() {
                         </div>
                         <p
                           className="text-sm leading-relaxed mb-3"
-                          style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {s.plain}
                         </p>
@@ -219,7 +219,7 @@ export default function ResourcesPage() {
                           <span className="text-xs shrink-0 mt-0.5" style={{ color: "#C4B08A" }}>⚠</span>
                           <p
                             className="text-xs leading-relaxed"
-                            style={{ color: "#7A7A7A", fontFamily: "var(--font-dm-sans)" }}
+                            style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
                           >
                             {s.when}
                           </p>
@@ -259,7 +259,7 @@ export default function ResourcesPage() {
                           className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:bg-[#F5F0EB]"
                           style={{
                             borderColor: "#1E3050",
-                            color: "#8899AA",
+                            color: "#B0B8C4",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >

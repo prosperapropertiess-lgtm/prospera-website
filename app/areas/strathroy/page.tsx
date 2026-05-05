@@ -92,7 +92,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate. Everything included. No hidden fees, no maintenance markups.
             </p>
           </FadeIn>
@@ -102,7 +102,7 @@ export default function StroathroyPage() {
                 <div className="bg-[#112035] border p-6" style={{ borderColor: "#1E3050" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -117,7 +117,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>
               Pricing and tenant profiles differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -128,7 +128,7 @@ export default function StroathroyPage() {
                   <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#8899AA", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#B0B8C4", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -165,9 +165,9 @@ export default function StroathroyPage() {
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FAF8F5" : "#F5F0EB" }}>
                       <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.low}</td>
+                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.low}</td>
                       <td className="p-4 text-right font-medium" style={{ color: "#FAF8F5" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#8899AA" }}>{row.high}</td>
+                      <td className="p-4 text-right" style={{ color: "#B0B8C4" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>
