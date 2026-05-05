@@ -27,11 +27,20 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://www.prosperaproperties.co",
     siteName: "Prospera Properties",
+    images: [
+      {
+        url: "https://www.prosperaproperties.co/ebin-founder.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ebin Jaison — Prospera Properties",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Prospera Properties",
     description: "Property management in London, St. Thomas & Strathroy, Ontario.",
+    images: ["https://www.prosperaproperties.co/ebin-founder.jpg"],
   },
   robots: {
     index: true,
@@ -80,6 +89,13 @@ export default function RootLayout({
             { "@type": "City", "name": "Strathroy", "sameAs": "https://en.wikipedia.org/wiki/Strathroy-Caradoc" }
           ],
           "serviceType": "Property Management",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "20",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
           "sameAs": [
             "https://www.facebook.com/prosperaproperties",
             "https://www.youtube.com/@prosperaproperties"
