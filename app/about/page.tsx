@@ -116,7 +116,7 @@ export default function AboutPage() {
                   <div className="flex items-center gap-3">
                     <p
                       className="text-4xl font-light leading-none"
-                      style={{ color: "#8B1A1A", fontFamily: "var(--font-cormorant)" }}
+                      style={{ color: "#C5A55A", fontFamily: "var(--font-cormorant)" }}
                     >
                       25+
                     </p>

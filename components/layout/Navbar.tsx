@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
@@ -10,9 +11,12 @@ const navLinks = [
   { label: "Listings", href: "/listings" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
-  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+];
+
+const mobileSecondaryLinks = [
+  { label: "Resources", href: "/resources" },
 ];
 
 const BUILDIUM_URL = "https://prosperaproperties.buildiumapp.com";
@@ -20,6 +24,7 @@ const BUILDIUM_URL = "https://prosperaproperties.buildiumapp.com";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -138,18 +143,37 @@ export default function Navbar() {
           transform: menuOpen ? "translateY(0)" : "translateY(-12px)",
         }}
       >
-        <nav className="flex flex-col gap-6 flex-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-2xl font-light block py-1 text-[#FAF8F5]"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="flex flex-col gap-5 flex-1">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-2xl font-light block py-1 transition-colors"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  color: isActive ? "#C5A55A" : "#FAF8F5",
+                }}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <div className="border-t border-[#1E3050] pt-4 flex gap-6">
+            {mobileSecondaryLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-[#5A7090] hover:text-[#FAF8F5] transition-colors"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </nav>
 
         <div className="flex flex-col gap-3 mt-8">
