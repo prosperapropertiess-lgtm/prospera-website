@@ -25,3 +25,15 @@ The math can actually be meaningful — a $50,000 capital project spread across 
 
 Who's successfully gotten one approved, and what was the hardest part of the process?
 ---
+
+## 2026-05-06
+Quick question for the group — are you paying interest on your tenant's last month's rent deposit?
+
+Under the RTA, landlords are required to pay interest on last month's rent every year, at the annual guideline rate. Most landlords I talk to have never done this — or didn't even know it was required.
+
+Also worth flagging: in Ontario, the only deposit you can legally collect is last month's rent. No damage deposit, no pet deposit, no key deposit. If you collected any of those at move-in, you technically owe them back.
+
+This comes up constantly at the LTB and catches landlords off guard — especially because it's money they collected years ago and long forgot about.
+
+Has this ever come up in a dispute with a tenant? Curious how others handle the annual interest piece.
+---
