@@ -73,13 +73,15 @@ Prospera Properties is being built into a full property management platform that
 ## Performance Notes
 - Homepage uses Framer Motion particle animation — watch bundle size
 - Blog posts are statically generated — good for performance
-- No image optimization issues found yet
+- app/listings/page.tsx is a use-client component querying Supabase directly from the browser, exposing the anon key in the client bundle — should be refactored to a server component
+- app/admin/page.tsx uses raw img tags (lines 129, 171) instead of next/image, missing optimization
+- No Suspense boundaries found anywhere in the app — async pages would benefit from Suspense for better loading UX
 - Supabase queries are direct from client on admin pages — consider moving to server actions for security
 
 ---
 
 ## Last IT Agent Run
-Never — first run pending (Wednesday)
+2026-05-06
 
 ## This Week's Proposal
-Pending
+Maintenance Request Portal — MVP
