@@ -189,8 +189,8 @@ function PainPoints() {
             Sound Familiar?
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-semibold text-center mb-14 leading-tight"
-            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+            className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             If you own a rental,<br />you&apos;ve felt at least one of these.
           </h2>
@@ -254,8 +254,8 @@ function FeatureCards() {
             Why Prospera
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-semibold text-center mb-14 leading-tight"
-            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+            className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             What we actually do differently.
           </h2>
@@ -273,8 +273,8 @@ function FeatureCards() {
                   {f.num}
                 </span>
                 <h3
-                  className="text-lg font-semibold mb-3"
-                  style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+                  className="text-lg font-light mb-3"
+                  style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
                 >
                   {f.title}
                 </h3>
@@ -340,8 +340,8 @@ function HowItWorks() {
             The Process
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-semibold text-center mb-16 leading-tight"
-            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+            className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             From handshake to hands-off<br />in three phases.
           </h2>
@@ -435,8 +435,8 @@ function CaseStudy() {
             Real Result
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-semibold text-center mb-4 leading-tight"
-            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+            className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             From drowning in utility bills<br />to covering the mortgage.
           </h2>
@@ -515,8 +515,8 @@ function Testimonials() {
             What Landlords Say
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-semibold leading-tight"
-            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+            className="text-4xl sm:text-5xl font-light leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             Real reviews. Real landlords.
           </h2>
@@ -564,8 +564,8 @@ function CTABanner() {
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <FadeIn className="max-w-2xl mx-auto text-center">
         <h2
-          className="text-5xl sm:text-6xl font-semibold mb-4 leading-tight"
-          style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+          className="text-5xl sm:text-6xl font-light mb-4 leading-tight"
+          style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
         >
           Own a rental.<br />Not a second job.
         </h2>
