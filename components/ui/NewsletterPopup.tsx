@@ -126,112 +126,166 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                 </div>
               ) : (
                 <>
-                  {/* Offer label */}
-                  <p
-                    className="text-xs uppercase tracking-widest mb-3"
-                    style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {isLandlord ? "Free for Ontario Landlords" : "New Listing Alerts"}
-                  </p>
-
-                  {/* Headline */}
-                  <h3
-                    className="text-2xl font-light mb-2 leading-snug"
-                    style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
-                  >
-                    {isLandlord
-                      ? "Get the Free Lease Addendum Template"
-                      : "Be First to See New Rentals"}
-                  </h3>
-
-                  {/* Subtext */}
-                  <p
-                    className="text-sm mb-6 leading-relaxed"
-                    style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {isLandlord
-                      ? "Our custom lease addendum protects you beyond the Ontario standard lease. Free download — plus occasional market updates."
-                      : "New listings go fast. Get notified by email the moment one hits your city."}
-                  </p>
-
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Your first name"
-                      className="px-4 py-3 text-sm outline-none border rounded"
-                      style={{
-                        backgroundColor: "#F7F5F2",
-                        borderColor: "#D8D2C8",
-                        color: "#222222",
-                        fontFamily: "var(--font-dm-sans)",
-                      }}
-                    />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Email address"
-                      required
-                      className="px-4 py-3 text-sm outline-none border rounded"
-                      style={{
-                        backgroundColor: "#F7F5F2",
-                        borderColor: "#D8D2C8",
-                        color: "#222222",
-                        fontFamily: "var(--font-dm-sans)",
-                      }}
-                    />
-                    {!isLandlord && (
-                      <select
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="px-4 py-3 text-sm outline-none border rounded"
-                        style={{
-                          backgroundColor: "#F7F5F2",
-                          borderColor: "#D8D2C8",
-                          color: city ? "#222222" : "#999999",
-                          fontFamily: "var(--font-dm-sans)",
-                        }}
+                  {isLandlord ? (
+                    <>
+                      {/* Offer label */}
+                      <p
+                        className="text-xs uppercase tracking-widest mb-3"
+                        style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
                       >
-                        <option value="">Preferred city (optional)</option>
-                        <option value="London">London</option>
-                        <option value="St. Thomas">St. Thomas</option>
-                        <option value="Strathroy">Strathroy</option>
-                      </select>
-                    )}
-
-                    {status === "error" && (
-                      <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
-                        Something went wrong. Please try again.
+                        Free — Ontario Landlords
                       </p>
-                    )}
 
-                    <button
-                      type="submit"
-                      disabled={status === "loading"}
-                      className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
-                      style={{
-                        backgroundColor: "#6A2E35",
-                        color: "#FAF8F5",
-                        fontFamily: "var(--font-dm-sans)",
-                      }}
-                    >
-                      {status === "loading"
-                        ? "..."
-                        : isLandlord
-                        ? "Send Me the Template"
-                        : "Get Notified"}
-                    </button>
-                  </form>
+                      {/* Headline */}
+                      <h3
+                        className="text-2xl font-light mb-2 leading-snug"
+                        style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+                      >
+                        Ontario&apos;s standard lease has gaps. This fills them.
+                      </h3>
 
-                  <p
-                    className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                    style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
-                    onClick={dismiss}
-                  >
-                    No thanks
-                  </p>
+                      {/* What it covers */}
+                      <p
+                        className="text-xs uppercase tracking-widest mb-2 mt-4"
+                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        The addendum covers
+                      </p>
+                      <ul className="mb-5 space-y-1.5">
+                        {[
+                          "Who pays which utilities — no more \"we never agreed to that\"",
+                          "Subletting & Airbnb rules, done properly",
+                          "Parking, storage, and maintenance obligations in writing",
+                        ].map((item) => (
+                          <li key={item} className="flex items-start gap-2">
+                            <span style={{ color: "#6A2E35", marginTop: 2, flexShrink: 0 }}>—</span>
+                            <span className="text-sm leading-snug" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                              {item}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="First name"
+                          className="px-4 py-3 text-sm outline-none border rounded"
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
+                        />
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Email address"
+                          required
+                          className="px-4 py-3 text-sm outline-none border rounded"
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
+                        />
+                        {status === "error" && (
+                          <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                            Something went wrong. Please try again.
+                          </p>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={status === "loading"}
+                          className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
+                          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                        >
+                          {status === "loading" ? "..." : "Email Me the Addendum →"}
+                        </button>
+                      </form>
+
+                      <p
+                        className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
+                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        onClick={dismiss}
+                      >
+                        My lease is already airtight
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      {/* Offer label */}
+                      <p
+                        className="text-xs uppercase tracking-widest mb-3"
+                        style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        New Listing Alerts
+                      </p>
+
+                      {/* Headline */}
+                      <h3
+                        className="text-2xl font-light mb-2 leading-snug"
+                        style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+                      >
+                        Be First to See New Rentals
+                      </h3>
+
+                      {/* Subtext */}
+                      <p
+                        className="text-sm mb-6 leading-relaxed"
+                        style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        New listings go fast. Get notified by email the moment one hits your city.
+                      </p>
+
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="First name"
+                          className="px-4 py-3 text-sm outline-none border rounded"
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
+                        />
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Email address"
+                          required
+                          className="px-4 py-3 text-sm outline-none border rounded"
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
+                        />
+                        <select
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          className="px-4 py-3 text-sm outline-none border rounded"
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: city ? "#222222" : "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        >
+                          <option value="">Preferred city (optional)</option>
+                          <option value="London">London</option>
+                          <option value="St. Thomas">St. Thomas</option>
+                          <option value="Strathroy">Strathroy</option>
+                        </select>
+                        {status === "error" && (
+                          <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                            Something went wrong. Please try again.
+                          </p>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={status === "loading"}
+                          className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
+                          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                        >
+                          {status === "loading" ? "..." : "Get Notified"}
+                        </button>
+                      </form>
+
+                      <p
+                        className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
+                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        onClick={dismiss}
+                      >
+                        No thanks
+                      </p>
+                    </>
+                  )}
                 </>
               )}
             </div>
