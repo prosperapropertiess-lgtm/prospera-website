@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import SiteShell from "@/components/layout/SiteShell";
 import JsonLd from "@/components/seo/JsonLd";
 
-const poppins = Poppins({
+const outfit = Outfit({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -61,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable} h-full`}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} h-full`}>
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
