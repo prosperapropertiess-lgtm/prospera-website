@@ -37,3 +37,13 @@ This comes up constantly at the LTB and catches landlords off guard — especial
 
 Has this ever come up in a dispute with a tenant? Curious how others handle the annual interest piece.
 ---
+
+## 2026-05-07
+What do you actually look for when screening tenants?
+
+In Ontario you're pretty limited on what you can legally collect or ask — no damage deposits, nothing tied to protected grounds under the Human Rights Code. But within those limits, there's a big difference between landlords who end up at the LTB constantly and ones who almost never do.
+
+The things that actually seem to predict a good tenant: income-to-rent ratio (rent under 40% of gross monthly income), calling the second-last landlord instead of just the most recent one, and paying attention to how they talk about past landlords. Someone who blames every previous landlord for everything is showing you exactly how disputes will go with you.
+
+What's your most reliable screening signal? Curious what others are doing.
+---
