@@ -93,7 +93,7 @@ export default function PricingPage() {
       <section className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
         <div className="max-w-2xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What You&apos;re Actually Getting</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>What You&apos;re Actually Getting</p>
             <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Everything included. Nothing hidden.
             </h2>
@@ -104,12 +104,12 @@ export default function PricingPage() {
                     <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</p>
                     <p className="text-xs mt-0.5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.note}</p>
                   </div>
-                  <p className="text-sm font-semibold whitespace-nowrap" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{row.value}</p>
+                  <p className="text-sm font-semibold whitespace-nowrap" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{row.value}</p>
                 </div>
               ))}
               <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
                 <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>With Prospera — all of this goes away</p>
-                <p className="text-sm font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Starting at 8%</p>
+                <p className="text-sm font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Starting at 8%</p>
               </div>
               <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#1F2F3A" }}>
                 <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
@@ -124,7 +124,7 @@ export default function PricingPage() {
       <section className="py-20" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Choose Your Plan</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Choose Your Plan</p>
             <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Simple, transparent pricing.</h2>
           </FadeIn>
           <PricingCards />
@@ -161,7 +161,7 @@ export default function PricingPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Start Risk-Free
           </Link>
@@ -172,7 +172,7 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Run the Numbers</p>
+            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Run the Numbers</p>
             <h2 className="text-4xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Passive actually costs less.
             </h2>
@@ -209,7 +209,7 @@ export default function PricingPage() {
                       <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.managed}</p>
                     </div>
                     <div key={`passive-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                      <p className="text-sm font-semibold" style={{ color: row.passive === "Free" || row.label === "You save" ? "#6A2E35" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{row.passive}</p>
+                      <p className="text-sm font-semibold" style={{ color: row.passive === "Free" || row.label === "You save" ? "#8B2030" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{row.passive}</p>
                     </div>
                   </>
                 ))}
@@ -223,7 +223,7 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>The Real Cost of Self-Managing</p>
+            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>The Real Cost of Self-Managing</p>
             <h2 className="text-4xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Every month you wait costs more than you think.
             </h2>
@@ -254,7 +254,7 @@ export default function PricingPage() {
                 },
               ].map((item, i) => (
                 <div key={i} className="bg-white border rounded-xl p-6" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
-                  <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{item.label}</p>
+                  <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{item.label}</p>
                   <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
                   <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</p>
                 </div>
@@ -268,7 +268,7 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What Others Charge</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>What Others Charge</p>
             <h2 className="text-4xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
@@ -282,7 +282,7 @@ export default function PricingPage() {
                 <thead>
                   <tr style={{ backgroundColor: "#1F2F3A" }}>
                     <th className="text-left px-6 py-4 font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Hidden Fee</th>
-                    <th className="text-center px-6 py-4 font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Prospera</th>
+                    <th className="text-center px-6 py-4 font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Prospera</th>
                     <th className="text-center px-6 py-4 font-medium" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>Typical PM</th>
                   </tr>
                 </thead>
@@ -290,7 +290,7 @@ export default function PricingPage() {
                   {comparison.map((row, i) => (
                     <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
                       <td className="px-6 py-4" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</td>
-                      <td className="px-6 py-4 text-center font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{row.us}</td>
+                      <td className="px-6 py-4 text-center font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{row.us}</td>
                       <td className="px-6 py-4 text-center" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.them}</td>
                     </tr>
                   ))}
@@ -305,7 +305,7 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
             <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
@@ -328,7 +328,7 @@ export default function PricingPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Book Your Free Call
           </Link>

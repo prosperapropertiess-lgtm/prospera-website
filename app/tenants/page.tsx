@@ -48,7 +48,7 @@ export default function TenantsPage() {
             <p className="text-lg mb-10 max-w-2xl leading-relaxed" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
               Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
             </p>
-            <Link href="/listings" className="inline-block px-8 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+            <Link href="/listings" className="inline-block px-8 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Browse Available Rentals
             </Link>
           </FadeIn>
@@ -59,7 +59,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What You Get</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>What You Get</p>
             <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Renting with Prospera is different.
             </h2>
@@ -84,7 +84,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>The Process</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>The Process</p>
             <h2 className="text-4xl font-light text-center mb-16" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -112,7 +112,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
             <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
@@ -148,7 +148,7 @@ export default function TenantsPage() {
           <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+          <Link href="/listings" className="inline-block px-10 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             Browse Listings
           </Link>
         </FadeIn>

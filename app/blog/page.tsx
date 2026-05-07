@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const CATEGORIES = ["All", "Landlord Tips", "Tenant Resources", "Market Updates", "Ontario Law"];
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  "Landlord Tips":      { bg: "#6A2E35", text: "#FAF8F5" },
+  "Landlord Tips":      { bg: "#8B2030", text: "#FAF8F5" },
   "Tenant Resources":  { bg: "#1F2F3A", text: "#FAF8F5" },
   "Market Updates":    { bg: "#D8D2C8", text: "#222222" },
   "Ontario Law":       { bg: "#333333", text: "#FAF8F5" },
@@ -61,7 +61,7 @@ export default function BlogPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => {
-              const cat = categoryColors[post.category] ?? { bg: "#6A2E35", text: "#FAF8F5" };
+              const cat = categoryColors[post.category] ?? { bg: "#8B2030", text: "#FAF8F5" };
               return (
                 <Link
                   key={post.slug}
@@ -81,7 +81,7 @@ export default function BlogPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: "#F7F5F2" }}>
-                        <span className="text-4xl font-light" style={{ color: "#6A2E35", fontFamily: "var(--font-cormorant)" }}>P</span>
+                        <span className="text-4xl font-light" style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}>P</span>
                       </div>
                     )}
                     {/* Category badge over image */}
@@ -105,7 +105,7 @@ export default function BlogPage() {
 
                     {/* Title */}
                     <h2
-                      className="text-xl font-medium mb-3 leading-snug transition-colors group-hover:text-[#6A2E35]"
+                      className="text-xl font-medium mb-3 leading-snug transition-colors group-hover:text-[#8B2030]"
                       style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
                     >
                       {post.title}
@@ -125,7 +125,7 @@ export default function BlogPage() {
                         {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
                       </span>
                       <span
-                        className="text-xs uppercase tracking-wider transition-colors group-hover:text-[#6A2E35]"
+                        className="text-xs uppercase tracking-wider transition-colors group-hover:text-[#8B2030]"
                         style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
                       >
                         Read →
@@ -158,7 +158,7 @@ export default function BlogPage() {
             <button
               type="submit"
               className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Subscribe
             </button>

@@ -80,7 +80,7 @@ export default function AboutPage() {
                   <div className="flex items-center gap-3">
                     <p
                       className="text-4xl font-light leading-none"
-                      style={{ color: "#6A2E35", fontFamily: "var(--font-cormorant)" }}
+                      style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}
                     >
                       25+
                     </p>
@@ -128,7 +128,7 @@ export default function AboutPage() {
                   </p>
                   <p
                     className="text-6xl sm:text-8xl lg:text-[10rem] font-light italic"
-                    style={{ color: "#6A2E35" }}
+                    style={{ color: "#8B2030" }}
                   >
                     Ebin
                   </p>
@@ -146,7 +146,7 @@ export default function AboutPage() {
                   href="/contact"
                   className="inline-flex items-center gap-3 px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
                   style={{
-                    backgroundColor: "#6A2E35",
+                    backgroundColor: "#8B2030",
                     color: "#FAF8F5",
                     fontFamily: "var(--font-dm-sans)",
                   }}
@@ -172,10 +172,10 @@ export default function AboutPage() {
                 >
                   <CounterAnimation target={n.target} suffix={n.suffix} duration={1.8} />
                 </p>
-                <div className="w-6 h-px mx-auto mb-2" style={{ backgroundColor: "#6A2E35" }} />
+                <div className="w-6 h-px mx-auto mb-2" style={{ backgroundColor: "#8B2030" }} />
                 <p
                   className="text-[10px] font-semibold uppercase tracking-widest"
-                  style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {n.label}
                 </p>
@@ -218,7 +218,7 @@ export default function AboutPage() {
           <FadeIn>
             <p
               className="text-[11px] font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               The Journey
             </p>
@@ -255,7 +255,7 @@ export default function AboutPage() {
           <FadeIn delay={0.1} direction="right">
             <p
               className="text-[11px] font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               Where I&apos;m At
             </p>
@@ -308,7 +308,7 @@ export default function AboutPage() {
               <div>
                 <p
                   className="text-[11px] font-semibold uppercase tracking-widest mb-4"
-                  style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Still Growing
                 </p>
@@ -355,7 +355,7 @@ export default function AboutPage() {
                     className="bg-white border rounded-xl p-4 text-sm font-medium"
                     style={{ borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
                   >
-                    <span className="text-xs mr-2" style={{ color: "#6A2E35" }}>✓</span>
+                    <span className="text-xs mr-2" style={{ color: "#8B2030" }}>✓</span>
                     {trade}
                   </div>
                 ))}
@@ -371,7 +371,7 @@ export default function AboutPage() {
           <FadeIn>
             <p
               className="text-[11px] font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               The Difference
             </p>
@@ -391,7 +391,7 @@ export default function AboutPage() {
                   className="bg-white border rounded-2xl p-8 h-full"
                   style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
                 >
-                  <div className="w-8 h-0.5 mb-6" style={{ backgroundColor: "#6A2E35" }} />
+                  <div className="w-8 h-0.5 mb-6" style={{ backgroundColor: "#8B2030" }} />
                   <h3
                     className="text-xl font-medium mb-4 leading-snug"
                     style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
@@ -438,7 +438,7 @@ export default function AboutPage() {
             href="/contact"
             className="inline-flex items-center gap-3 px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
             style={{
-              backgroundColor: "#6A2E35",
+              backgroundColor: "#8B2030",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}

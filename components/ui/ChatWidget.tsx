@@ -103,7 +103,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen((o) => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-        style={{ backgroundColor: "#6A2E35" }}
+        style={{ backgroundColor: "#8B2030" }}
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
@@ -137,7 +137,7 @@ export default function ChatWidget() {
           >
             {/* Header */}
             <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#1F2F3A" }}>
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
                 <p className="text-xs flex items-center gap-1.5" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
@@ -182,7 +182,7 @@ export default function ChatWidget() {
               {/* Lead capture form */}
               {showLeadForm && !leadSubmitted && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4 bg-white border" style={{ borderColor: "#D8D2C8" }}>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                     Want Ebin to follow up?
                   </p>
                   <form onSubmit={submitLead} className="space-y-2">
@@ -190,7 +190,7 @@ export default function ChatWidget() {
                     <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                     <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                     <div className="flex gap-2">
-                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
                       <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
@@ -221,7 +221,7 @@ export default function ChatWidget() {
                   onClick={send}
                   disabled={loading || !input.trim()}
                   className="w-10 h-10 rounded-xl flex items-center justify-center transition-opacity disabled:opacity-40"
-                  style={{ backgroundColor: "#6A2E35" }}
+                  style={{ backgroundColor: "#8B2030" }}
                 >
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                 </button>

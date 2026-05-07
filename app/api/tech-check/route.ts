@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
           <div style="background:#1F2F3A;padding:28px 32px;">
-            <p style="color:#6A2E35;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
+            <p style="color:#8B2030;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
             <h1 style="color:#FAF8F5;font-size:22px;font-weight:300;margin:0;">Feature shipped ✓</h1>
           </div>
           <div style="padding:32px;">

@@ -41,9 +41,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const categoryColors: Record<string, string> = {
-  "Landlord Tips": "bg-[#6A2E35] text-[#FAF8F5]",
+  "Landlord Tips": "bg-[#8B2030] text-[#FAF8F5]",
   "Tenant Resources": "bg-[#1F2F3A] text-[#FAF8F5]",
-  "Market Updates": "bg-[#6A2E35] text-[#FAF8F5]",
+  "Market Updates": "bg-[#8B2030] text-[#FAF8F5]",
   "Ontario Law": "bg-[#555555] text-[#FAF8F5]",
 };
 
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div className="flex items-center gap-3 mb-6">
             <span
-              className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${categoryColors[post.category] ?? "bg-[#6A2E35] text-[#FAF8F5]"}`}
+              className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${categoryColors[post.category] ?? "bg-[#8B2030] text-[#FAF8F5]"}`}
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {post.category}
@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="flex items-center gap-3">
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
-              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               E
             </div>
@@ -206,7 +206,7 @@ export default async function BlogPostPage({ params }: Props) {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -240,12 +240,12 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
             >
               <span
                 className="text-xs uppercase tracking-wider"
-                style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
               >
                 {post.category}
               </span>
               <h4
-                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#6A2E35] transition-colors leading-snug"
+                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#8B2030] transition-colors leading-snug"
                 style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
               >
                 {post.title}

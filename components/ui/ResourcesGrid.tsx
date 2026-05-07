@@ -63,7 +63,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
         className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[480px] shadow-2xl rounded-xl overflow-hidden"
         style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
       >
-        <div className="h-1 w-full" style={{ backgroundColor: "#6A2E35" }} />
+        <div className="h-1 w-full" style={{ backgroundColor: "#8B2030" }} />
         <div className="p-8">
           <button onClick={onClose} className="absolute top-4 right-5 text-[#999999] hover:text-[#222222] text-xl leading-none">×</button>
           {status === "success" ? (
@@ -73,11 +73,11 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
               <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                 We&apos;ve sent <strong>{resource.title}</strong> to {email}.
               </p>
-              <button onClick={onClose} className="text-xs uppercase tracking-widest underline" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Close</button>
+              <button onClick={onClose} className="text-xs uppercase tracking-widest underline" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Close</button>
             </div>
           ) : (
             <>
-              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
+              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
               <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
               <p className="text-sm mb-6 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                 Enter your email and we&apos;ll send it instantly. No spam — just the occasional landlord tip.
@@ -85,8 +85,8 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
-                {status === "error" && <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Something went wrong. Please try again.</p>}
-                <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50 rounded" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                {status === "error" && <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Something went wrong. Please try again.</p>}
+                <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50 rounded" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                   {status === "loading" ? "Sending..." : "Send Me the Download"}
                 </button>
               </form>
@@ -111,7 +111,7 @@ export default function ResourcesGrid() {
                 <div className="p-6 flex-1">
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <span className="text-3xl">{resource.icon}</span>
-                    <span className="text-xs uppercase tracking-wider px-2 py-1 shrink-0 rounded" style={{ backgroundColor: "#F7F5F2", color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="text-xs uppercase tracking-wider px-2 py-1 shrink-0 rounded" style={{ backgroundColor: "#F7F5F2", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                       {CATEGORY_LABELS[resource.category]}
                     </span>
                   </div>

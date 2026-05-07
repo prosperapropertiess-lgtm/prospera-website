@@ -85,7 +85,7 @@ export default function AdminDashboard() {
           <Link
             href="/admin/properties/new"
             className="px-5 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#6A2E35" }}
+            style={{ backgroundColor: "#8B2030" }}
           >
             + Add Property
           </Link>
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
           <div className="text-center py-24 bg-white rounded-xl border" style={{ borderColor: "#D8D2C8" }}>
             <p className="font-[family-name:var(--font-cormorant)] text-2xl mb-3" style={{ color: "#1F2F3A" }}>No properties yet</p>
             <p className="text-sm mb-6" style={{ color: "#444444" }}>Add your first property to get started.</p>
-            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: "#6A2E35" }}>
+            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: "#8B2030" }}>
               Add Property
             </Link>
           </div>

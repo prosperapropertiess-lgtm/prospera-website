@@ -135,7 +135,7 @@ export default function RentAnalysisPage() {
         </p>
         <Link
           href="/#rent-estimator"
-          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", padding: "12px 28px", textDecoration: "none", borderRadius: 4 }}
+          style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", padding: "12px 28px", textDecoration: "none", borderRadius: 4 }}
         >
           Get a New Link
         </Link>
@@ -147,7 +147,7 @@ export default function RentAnalysisPage() {
   if (submitted) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center" style={{ backgroundColor: "#F7F5F2" }}>
-        <p style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>
+        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>
           Analysis Submitted
         </p>
         <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, marginBottom: 16, maxWidth: 480 }}>
@@ -158,7 +158,7 @@ export default function RentAnalysisPage() {
         </p>
         <Link
           href="/"
-          style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none" }}
+          style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none" }}
         >
           Back to Prospera Properties →
         </Link>
@@ -201,9 +201,9 @@ export default function RentAnalysisPage() {
             padding: "8px 16px",
             fontSize: 13,
             fontFamily: "var(--font-dm-sans)",
-            border: `1px solid ${form[field as keyof typeof form] === opt.value ? "#6A2E35" : "#D8D2C8"}`,
-            backgroundColor: form[field as keyof typeof form] === opt.value ? "rgba(106,46,53,0.08)" : "transparent",
-            color: form[field as keyof typeof form] === opt.value ? "#6A2E35" : "#444444",
+            border: `1px solid ${form[field as keyof typeof form] === opt.value ? "#8B2030" : "#D8D2C8"}`,
+            backgroundColor: form[field as keyof typeof form] === opt.value ? "rgba(139,32,48,0.08)" : "transparent",
+            color: form[field as keyof typeof form] === opt.value ? "#8B2030" : "#444444",
             cursor: "pointer",
             borderRadius: 4,
           }}
@@ -221,13 +221,13 @@ export default function RentAnalysisPage() {
         <p style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", fontSize: 22, fontWeight: 300, margin: 0 }}>
           Prospera Properties
         </p>
-        <p style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "4px 0 0" }}>
+        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "4px 0 0" }}>
           London · St. Thomas · Strathroy
         </p>
       </div>
 
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "48px 24px 80px" }}>
-        <p style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
+        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
           Free Rent Analysis
         </p>
         <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, marginBottom: 8, lineHeight: 1.2 }}>
@@ -361,7 +361,7 @@ export default function RentAnalysisPage() {
               id="monthly_optin"
               checked={form.monthly_optin === "true"}
               onChange={(e) => set("monthly_optin", e.target.checked ? "true" : "false")}
-              style={{ marginTop: 3, accentColor: "#6A2E35" }}
+              style={{ marginTop: 3, accentColor: "#8B2030" }}
             />
             <label htmlFor="monthly_optin" style={{ ...labelStyle, marginBottom: 0, textTransform: "none", letterSpacing: 0, fontSize: 13, color: "#333333", cursor: "pointer" }}>
               Send me monthly market updates — how rents are moving in my city, once a month. Unsubscribe anytime.
@@ -369,14 +369,14 @@ export default function RentAnalysisPage() {
           </div>
 
           {error && (
-            <p style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)", fontSize: 13 }}>{error}</p>
+            <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 13 }}>{error}</p>
           )}
 
           <button
             type="submit"
             disabled={submitting}
             style={{
-              backgroundColor: "#6A2E35",
+              backgroundColor: "#8B2030",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
               fontSize: 12,

@@ -51,7 +51,7 @@ export default function LondonPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Estimate
           </Link>
@@ -64,7 +64,7 @@ export default function LondonPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -110,7 +110,7 @@ export default function LondonPage() {
             {neighbourhoods.map((n, i) => (
               <FadeIn key={n.name} delay={i * 0.06}>
                 <div className="bg-[#F7F5F2] border p-5 flex gap-4 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
-                  <div className="w-1 shrink-0 mt-1 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
+                  <div className="w-1 shrink-0 mt-1 rounded-full" style={{ backgroundColor: "#8B2030" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
@@ -151,7 +151,7 @@ export default function LondonPage() {
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
                       <td className="p-4 font-medium" style={{ color: "#222222" }}>{row.type}</td>
                       <td className="p-4 text-right" style={{ color: "#999999" }}>{row.low}</td>
-                      <td className="p-4 text-right font-semibold" style={{ color: "#6A2E35" }}>{row.avg}</td>
+                      <td className="p-4 text-right font-semibold" style={{ color: "#8B2030" }}>{row.avg}</td>
                       <td className="p-4 text-right" style={{ color: "#999999" }}>{row.high}</td>
                     </tr>
                   ))}
@@ -194,7 +194,7 @@ export default function LondonPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

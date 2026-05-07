@@ -32,7 +32,7 @@ export default function AdminLogin() {
     <div className="min-h-screen flex items-center justify-center px-6" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
-          <p className="text-xs uppercase tracking-[0.3em] mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties</p>
+          <p className="text-xs uppercase tracking-[0.3em] mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties</p>
           <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light" style={{ color: "#1F2F3A" }}>
             Admin Panel
           </h1>
@@ -56,14 +56,14 @@ export default function AdminLogin() {
           </div>
 
           {error && (
-            <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{error}</p>
+            <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
             className="w-full py-3 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80 disabled:opacity-50"
-            style={{ backgroundColor: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

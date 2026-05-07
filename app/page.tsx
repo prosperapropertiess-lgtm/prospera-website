@@ -22,7 +22,7 @@ function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 75% 15%, rgba(106,46,53,0.2) 0%, transparent 55%)",
+          background: "radial-gradient(ellipse at 75% 15%, rgba(139,32,48,0.2) 0%, transparent 55%)",
           zIndex: 2,
         }}
       />
@@ -80,7 +80,7 @@ function Hero() {
             href="#how-it-works"
             className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
             style={{
-              backgroundColor: "#6A2E35",
+              backgroundColor: "#8B2030",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -144,7 +144,7 @@ function StatsBar() {
               </div>
               <div
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
               >
                 {stat.label}
               </div>
@@ -184,7 +184,7 @@ function PainPoints() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             Sound Familiar?
           </p>
@@ -194,7 +194,7 @@ function PainPoints() {
           >
             If you recognize any of these,
             <br />
-            <em style={{ color: "#6A2E35" }}>you&apos;re in the right place.</em>
+            <em style={{ color: "#8B2030" }}>you&apos;re in the right place.</em>
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -202,7 +202,7 @@ function PainPoints() {
             <FadeIn key={i} delay={i * 0.08}>
               <div
                 className="p-7 border rounded-xl"
-                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #6A2E35", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #8B2030", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
               >
                 <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.label}
@@ -251,7 +251,7 @@ function FeatureCards() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             Why Prospera
           </p>
@@ -271,7 +271,7 @@ function FeatureCards() {
                 whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="block text-2xl mb-5" style={{ color: "#6A2E35" }}>
+                <span className="block text-2xl mb-5" style={{ color: "#8B2030" }}>
                   {f.icon}
                 </span>
                 <h3
@@ -337,7 +337,7 @@ function HowItWorks() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             The Process
           </p>
@@ -369,7 +369,7 @@ function HowItWorks() {
                     <p className="font-semibold text-base" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                       {phase.phase}
                     </p>
-                    <p className="text-xs mt-0.5" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-xs mt-0.5" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                       {phase.timeline}
                     </p>
                   </div>
@@ -377,7 +377,7 @@ function HowItWorks() {
                 <ul className="space-y-2.5">
                   {phase.steps.map((step, j) => (
                     <li key={j} className="flex items-start gap-2.5">
-                      <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
+                      <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#8B2030" }} />
                       <span className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                         {step}
                       </span>
@@ -434,7 +434,7 @@ function CaseStudy() {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             Real Result
           </p>
@@ -482,7 +482,7 @@ function CaseStudy() {
 
           <FadeIn delay={0.2}>
             <div className="p-8 border rounded-xl" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                 After Prospera
               </p>
               <ul className="space-y-4">
@@ -494,7 +494,7 @@ function CaseStudy() {
                   "Structure in place — the problem can't come back",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#6A2E35" }}>✓</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#8B2030" }}>✓</span>
                     <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
@@ -516,7 +516,7 @@ function Testimonials() {
         <FadeIn className="text-center mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             What Landlords Say
           </p>
@@ -577,7 +577,7 @@ function CTABanner() {
         >
           Own a rental.
           <br />
-          <em style={{ color: "#6A2E35" }}>Not a second job.</em>
+          <em style={{ color: "#8B2030" }}>Not a second job.</em>
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
@@ -590,9 +590,9 @@ function CTABanner() {
         <motion.div
           animate={{
             boxShadow: [
-              "0 0 0 0 rgba(106,46,53,0)",
-              "0 0 0 10px rgba(106,46,53,0.12)",
-              "0 0 0 0 rgba(106,46,53,0)",
+              "0 0 0 0 rgba(139,32,48,0)",
+              "0 0 0 10px rgba(139,32,48,0.12)",
+              "0 0 0 0 rgba(139,32,48,0)",
             ],
           }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
@@ -601,7 +601,7 @@ function CTABanner() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -643,7 +643,7 @@ function StickyCTA() {
           <Link
             href="/contact"
             className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote →
           </Link>

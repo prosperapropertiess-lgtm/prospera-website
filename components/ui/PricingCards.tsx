@@ -75,14 +75,14 @@ const plans = [
 
 function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolean }) {
   const bg = plan.dark ? "#1F2F3A" : "#FFFFFF";
-  const border = plan.accentBorder ? "2px solid #6A2E35" : plan.dark ? "none" : "1px solid #D8D2C8";
+  const border = plan.accentBorder ? "2px solid #8B2030" : plan.dark ? "none" : "1px solid #D8D2C8";
   const headingColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
   const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#333333";
-  const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#6A2E35";
-  const checkColor = plan.dark ? "#FAF8F5" : "#6A2E35";
+  const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#8B2030";
+  const checkColor = plan.dark ? "#FAF8F5" : "#8B2030";
   const priceColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
-  const placementColor = plan.placementHighlight ? "#6A2E35" : bodyColor;
-  const ctaBg = plan.dark ? "#6A2E35" : plan.accentBorder ? "#6A2E35" : "transparent";
+  const placementColor = plan.placementHighlight ? "#8B2030" : bodyColor;
+  const ctaBg = plan.dark ? "#8B2030" : plan.accentBorder ? "#8B2030" : "transparent";
   const ctaBorder = plan.dark ? "none" : plan.accentBorder ? "none" : "1px solid #D8D2C8";
   const ctaText = plan.dark || plan.accentBorder ? "#FAF8F5" : "#222222";
 
@@ -94,7 +94,7 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
       {plan.badge && (
         <div
           className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full"
-          style={{ backgroundColor: plan.dark ? "#6A2E35" : "#1F2F3A" }}
+          style={{ backgroundColor: plan.dark ? "#8B2030" : "#1F2F3A" }}
         >
           <p
             className="text-xs font-semibold uppercase tracking-widest"

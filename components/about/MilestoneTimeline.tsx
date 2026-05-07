@@ -68,7 +68,7 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         <span
           className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
         >
           {milestone.era}
         </span>
@@ -185,9 +185,9 @@ function MilestoneNode({
             transition={{ duration: 0.4, delay: 0.12, type: "spring", stiffness: 200 }}
             className="w-12 h-12 flex items-center justify-center border-2 text-lg"
             style={{
-              borderColor: "#6A2E35",
+              borderColor: "#8B2030",
               backgroundColor: "#FFFFFF",
-              color: "#6A2E35",
+              color: "#8B2030",
             }}
           >
             {milestone.icon}
@@ -216,9 +216,9 @@ function MilestoneNode({
           transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
           className="w-10 h-10 flex items-center justify-center border-2 text-sm shrink-0 mt-1"
           style={{
-            borderColor: "#6A2E35",
+            borderColor: "#8B2030",
             backgroundColor: "#FFFFFF",
-            color: "#6A2E35",
+            color: "#8B2030",
           }}
         >
           {milestone.icon}

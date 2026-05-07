@@ -26,7 +26,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
     return (
       <div
         className="my-12 px-8 py-8 border-l-4 rounded-r-xl"
-        style={{ backgroundColor: "#F7F5F2", borderColor: "#6A2E35" }}
+        style={{ backgroundColor: "#F7F5F2", borderColor: "#8B2030" }}
       >
         {status === "done" ? (
           <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
@@ -34,7 +34,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
           </p>
         ) : (
           <>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               Landlord Insights
             </p>
             <p className="text-lg font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -62,13 +62,13 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 type="submit"
                 disabled={status === "loading"}
                 className="px-6 py-2.5 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 rounded"
-                style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 {status === "loading" ? "..." : "Subscribe"}
               </button>
             </form>
             {status === "error" && (
-              <p className="text-xs mt-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mt-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                 Something went wrong. Try again.
               </p>
             )}
@@ -123,7 +123,7 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 type="submit"
                 disabled={status === "loading"}
                 className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 whitespace-nowrap rounded"
-                style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 {status === "loading" ? "..." : "Subscribe Free"}
               </button>

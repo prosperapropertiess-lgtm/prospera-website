@@ -13,7 +13,7 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string 
   return (
     <div className="bg-white border rounded-xl p-5" style={{ borderColor: "#D8D2C8" }}>
       <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{label}</p>
-      <p className="text-3xl font-light" style={{ color: accent ? "#6A2E35" : "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{value}</p>
+      <p className="text-3xl font-light" style={{ color: accent ? "#8B2030" : "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{value}</p>
       {sub && <p className="text-xs mt-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{sub}</p>}
     </div>
   );
@@ -117,7 +117,7 @@ export default function DashboardPage() {
             <button
               onClick={() => setModal(true)}
               className="text-xs text-white px-4 py-2 rounded transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "#6A2E35" }}
+              style={{ backgroundColor: "#8B2030" }}
             >
               + Log Outreach
             </button>
@@ -245,7 +245,7 @@ export default function DashboardPage() {
                 onClick={logOutreach}
                 disabled={saving || !form.contact_name.trim()}
                 className="flex-1 text-white py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-80 disabled:opacity-30"
-                style={{ backgroundColor: "#6A2E35" }}
+                style={{ backgroundColor: "#8B2030" }}
               >
                 {saving ? "Saving..." : "Log it"}
               </button>

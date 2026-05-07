@@ -50,7 +50,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
         <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-          <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#6A2E35" }}>Strathroy</Link>
+          <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#8B2030" }}>Strathroy</Link>
           {" → "}
           <span style={{ color: "#444444" }}>{n.name}</span>
         </p>
@@ -71,7 +71,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -88,21 +88,21 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             {n.avgRent.studio && (
               <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
                 <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
               </div>
             )}
             <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
               <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
             </div>
             <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
               <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
             </div>
             {n.avgRent.threeBed && (
               <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
                 <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
               </div>
             )}
           </div>
@@ -129,7 +129,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             <ul className="space-y-3 mb-8">
               {n.highlights.map((h) => (
                 <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                  <span style={{ color: "#6A2E35" }}>✓</span>
+                  <span style={{ color: "#8B2030" }}>✓</span>
                   {h}
                 </li>
               ))}
@@ -157,7 +157,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
           We manage properties across {n.name} and all of Strathroy. Free consultation, no pressure.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contact" className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+          <Link href="/contact" className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             Get a Free Quote
           </Link>
           <Link href="/listings" className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-opacity hover:opacity-80 rounded" style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>

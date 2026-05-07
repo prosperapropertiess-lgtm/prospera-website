@@ -30,7 +30,7 @@ export default function BlogNudge({
         <div className="flex-1">
           <p
             className="text-[10px] uppercase tracking-widest mb-2"
-            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             {label}
           </p>
@@ -48,7 +48,7 @@ export default function BlogNudge({
           </p>
         </div>
         <div
-          className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#6A2E35]"
+          className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#8B2030]"
           style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
         >
           Read more

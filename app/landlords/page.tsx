@@ -122,7 +122,7 @@ export default function LandlordsPage() {
             <a
               href="#pricing"
               className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               See Pricing
             </a>
@@ -141,7 +141,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               The Real Problems
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -154,7 +154,7 @@ export default function LandlordsPage() {
             {painPoints.map((p, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div className="bg-[#F7F5F2] border p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
-                  <span className="block text-2xl mb-4" style={{ color: "#6A2E35" }}>{p.icon}</span>
+                  <span className="block text-2xl mb-4" style={{ color: "#8B2030" }}>{p.icon}</span>
                   <h3 className="font-semibold text-base mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{p.label}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{p.desc}</p>
                 </div>
@@ -168,7 +168,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               The Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -208,7 +208,7 @@ export default function LandlordsPage() {
       <section id="pricing" className="py-24" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               Transparent Pricing
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight px-5 sm:px-8" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -237,7 +237,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               Common Questions
             </p>
             <h2 className="text-4xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -262,7 +262,7 @@ export default function LandlordsPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

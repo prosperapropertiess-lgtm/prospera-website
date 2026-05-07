@@ -14,9 +14,9 @@ export default function NotFound() {
       </p>
 
       <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-px" style={{ backgroundColor: "#6A2E35" }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
-        <div className="w-12 h-px" style={{ backgroundColor: "#6A2E35" }} />
+        <div className="w-12 h-px" style={{ backgroundColor: "#8B2030" }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#8B2030" }} />
+        <div className="w-12 h-px" style={{ backgroundColor: "#8B2030" }} />
       </div>
 
       <h1
@@ -36,7 +36,7 @@ export default function NotFound() {
         <Link
           href="/"
           className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
         >
           Back to Home
         </Link>
@@ -49,8 +49,8 @@ export default function NotFound() {
         </Link>
         <Link
           href="/contact"
-          className="px-8 py-3 text-xs uppercase tracking-widest border rounded transition-colors hover:border-[#6A2E35] hover:text-[#6A2E35]"
-          style={{ borderColor: "#6A2E35", color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+          className="px-8 py-3 text-xs uppercase tracking-widest border rounded transition-colors hover:border-[#8B2030] hover:text-[#8B2030]"
+          style={{ borderColor: "#8B2030", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
         >
           Contact Us
         </Link>

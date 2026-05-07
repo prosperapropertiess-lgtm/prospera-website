@@ -120,8 +120,8 @@ export default function ListingsPage() {
                 onClick={() => setBeds(b)}
                 className="px-3 py-1.5 text-xs rounded border transition-colors"
                 style={{
-                  backgroundColor: beds === b ? "#6A2E35" : "transparent",
-                  borderColor: beds === b ? "#6A2E35" : "#D8D2C8",
+                  backgroundColor: beds === b ? "#8B2030" : "transparent",
+                  borderColor: beds === b ? "#8B2030" : "#D8D2C8",
                   color: beds === b ? "#FAF8F5" : "#444444",
                   fontFamily: "var(--font-dm-sans)",
                 }}
@@ -143,7 +143,7 @@ export default function ListingsPage() {
               step={50}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-28 accent-[#6A2E35]"
+              className="w-28 accent-[#8B2030]"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function ListingsPage() {
               type="checkbox"
               checked={petFriendly}
               onChange={(e) => setPetFriendly(e.target.checked)}
-              className="accent-[#6A2E35]"
+              className="accent-[#8B2030]"
             />
             <span className="text-xs" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
           </label>
@@ -186,7 +186,7 @@ export default function ListingsPage() {
             <div className="text-center py-24">
               <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
               <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
-              <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+              <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 Contact Us
               </Link>
             </div>
@@ -205,11 +205,11 @@ export default function ListingsPage() {
                         unoptimized
                       />
                       <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                        <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#6A2E35" }}>
+                        <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#8B2030" }}>
                           Available
                         </span>
                         {p.utilities_included && (
-                          <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#6A2E35" }}>
+                          <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#8B2030" }}>
                             Utilities Incl.
                           </span>
                         )}
@@ -268,7 +268,7 @@ export default function ListingsPage() {
           <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+          <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             Contact Us
           </Link>
         </FadeIn>

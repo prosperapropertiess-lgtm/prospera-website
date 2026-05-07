@@ -101,7 +101,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
             {/* Top accent bar */}
-            <div className="h-1 w-full" style={{ backgroundColor: "#6A2E35" }} />
+            <div className="h-1 w-full" style={{ backgroundColor: "#8B2030" }} />
 
             <div className="p-8">
               {/* Close */}
@@ -131,7 +131,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       {/* Offer label */}
                       <p
                         className="text-xs uppercase tracking-widest mb-3"
-                        style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
                       >
                         Free — Ontario Landlords
                       </p>
@@ -158,7 +158,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           "Parking, storage, and maintenance obligations in writing",
                         ].map((item) => (
                           <li key={item} className="flex items-start gap-2">
-                            <span style={{ color: "#6A2E35", marginTop: 2, flexShrink: 0 }}>—</span>
+                            <span style={{ color: "#8B2030", marginTop: 2, flexShrink: 0 }}>—</span>
                             <span className="text-sm leading-snug" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                               {item}
                             </span>
@@ -185,7 +185,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
                         />
                         {status === "error" && (
-                          <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                          <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                             Something went wrong. Please try again.
                           </p>
                         )}
@@ -193,7 +193,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           type="submit"
                           disabled={status === "loading"}
                           className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
-                          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {status === "loading" ? "..." : "Email Me the Addendum →"}
                         </button>
@@ -212,7 +212,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       {/* Offer label */}
                       <p
                         className="text-xs uppercase tracking-widest mb-3"
-                        style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
                       >
                         New Listing Alerts
                       </p>
@@ -263,7 +263,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           <option value="Strathroy">Strathroy</option>
                         </select>
                         {status === "error" && (
-                          <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                          <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                             Something went wrong. Please try again.
                           </p>
                         )}
@@ -271,7 +271,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           type="submit"
                           disabled={status === "loading"}
                           className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
-                          style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {status === "loading" ? "..." : "Get Notified"}
                         </button>

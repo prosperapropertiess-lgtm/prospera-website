@@ -290,7 +290,7 @@ export default function PropertyForm({ initial }: Props) {
                         type="checkbox"
                         checked={form.utilities_list.includes(u)}
                         onChange={() => toggleUtility(u)}
-                        className="accent-[#6A2E35] w-4 h-4"
+                        className="accent-[#8B2030] w-4 h-4"
                       />
                       <span className="text-sm" style={{ color: "#333333" }}>{u}</span>
                     </label>
@@ -357,7 +357,7 @@ export default function PropertyForm({ initial }: Props) {
         </section>
 
         {error && (
-          <p className="text-sm bg-red-50 px-4 py-3 rounded" style={{ color: "#6A2E35" }}>{error}</p>
+          <p className="text-sm bg-red-50 px-4 py-3 rounded" style={{ color: "#8B2030" }}>{error}</p>
         )}
 
         <div className="flex gap-4 pb-10">
@@ -365,7 +365,7 @@ export default function PropertyForm({ initial }: Props) {
             type="submit"
             disabled={saving}
             className="px-8 py-3 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80 disabled:opacity-50 flex-1 md:flex-none"
-            style={{ backgroundColor: "#6A2E35" }}
+            style={{ backgroundColor: "#8B2030" }}
           >
             {saving ? "Saving..." : isEdit ? "Save Changes" : "Add Property"}
           </button>
@@ -387,7 +387,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
   return (
     <div>
       <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#444444" }}>
-        {label}{required && <span className="ml-0.5" style={{ color: "#6A2E35" }}>*</span>}
+        {label}{required && <span className="ml-0.5" style={{ color: "#8B2030" }}>*</span>}
       </label>
       {children}
     </div>
@@ -400,7 +400,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
       <span className="text-sm" style={{ color: "#222222" }}>{label}</span>
       <div
         onClick={() => onChange(!checked)}
-        className={`relative w-12 h-6 rounded-full transition-colors ${checked ? "bg-[#6A2E35]" : "bg-[#D8D2C8]"}`}
+        className={`relative w-12 h-6 rounded-full transition-colors ${checked ? "bg-[#8B2030]" : "bg-[#D8D2C8]"}`}
       >
         <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${checked ? "translate-x-6" : "translate-x-0"}`} />
       </div>

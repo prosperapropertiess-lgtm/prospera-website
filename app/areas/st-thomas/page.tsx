@@ -40,7 +40,7 @@ export default function StThomasPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Estimate
           </Link>
@@ -53,7 +53,7 @@ export default function StThomasPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -109,7 +109,7 @@ export default function StThomasPage() {
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
                       <td className="p-4 font-medium" style={{ color: "#222222" }}>{row.type}</td>
-                      <td className="p-4 text-right font-semibold" style={{ color: "#6A2E35" }}>{row.avg}</td>
+                      <td className="p-4 text-right font-semibold" style={{ color: "#8B2030" }}>{row.avg}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -138,7 +138,7 @@ export default function StThomasPage() {
             ].map((item, i) => (
               <FadeIn key={item} delay={i * 0.05}>
                 <div className="flex items-center gap-3 bg-white border p-4 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
-                  <span style={{ color: "#6A2E35" }}>✓</span>
+                  <span style={{ color: "#8B2030" }}>✓</span>
                   <span className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                 </div>
               </FadeIn>
@@ -179,7 +179,7 @@ export default function StThomasPage() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

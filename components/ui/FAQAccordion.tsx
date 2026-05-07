@@ -19,7 +19,7 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
             onClick={() => setOpen(open === i ? null : i)}
           >
             <span className="font-medium text-sm md:text-base" style={{ color: "#222222" }}>{item.q}</span>
-            <span className={`text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`} style={{ color: "#6A2E35" }}>+</span>
+            <span className={`text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`} style={{ color: "#8B2030" }}>+</span>
           </button>
           <AnimatePresence initial={false}>
             {open === i && (

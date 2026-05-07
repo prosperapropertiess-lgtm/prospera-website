@@ -104,7 +104,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
-              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Tenant Login
             </a>
@@ -194,7 +194,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >
             Tenant Login

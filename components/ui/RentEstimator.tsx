@@ -62,7 +62,7 @@ export default function RentEstimator() {
   return (
     <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8", borderBottom: "1px solid #D8D2C8" }}>
       <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
         <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -103,7 +103,7 @@ export default function RentEstimator() {
             onClick={estimate}
             disabled={!city || beds === ""}
             className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-40 rounded"
-            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Estimate
           </button>
@@ -123,7 +123,7 @@ export default function RentEstimator() {
             </p>
 
             {emailSubmitted ? (
-              <p className="text-sm" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
                 ✓ Check your inbox — we sent you a personalized analysis link.
               </p>
             ) : (

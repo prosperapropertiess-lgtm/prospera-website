@@ -91,7 +91,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               Quick Links
             </h3>
@@ -114,7 +114,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               For Landlords
             </h3>
@@ -137,7 +137,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               Service Areas
             </h3>
@@ -160,7 +160,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               Contact
             </h3>
