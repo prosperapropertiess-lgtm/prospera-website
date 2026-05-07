@@ -29,26 +29,34 @@ export default function BlogNudge({
       >
         <div className="flex-1">
           <p
-            className="text-[10px] uppercase tracking-widest mb-2"
+            className="text-[10px] uppercase tracking-widest mb-2 font-semibold"
             style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             {label}
           </p>
+          {/* Title — bold and prominent */}
           <p
-            className="text-lg sm:text-xl font-light italic mb-1 leading-snug"
-            style={{ color: "#222222", fontFamily: "var(--font-cormorant)" }}
+            className="text-base sm:text-lg font-bold mb-1 leading-snug"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+          >
+            {title}
+          </p>
+          {/* Hook — lighter, supporting line */}
+          <p
+            className="text-sm font-normal mb-1.5 leading-snug"
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
           >
             {hook}
           </p>
           <p
-            className="text-xs leading-relaxed line-clamp-2"
+            className="text-sm leading-relaxed line-clamp-2"
             style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
           >
             {excerpt}
           </p>
         </div>
         <div
-          className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#8B2030]"
+          className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#8B2030] font-semibold"
           style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
         >
           Read more
