@@ -201,18 +201,15 @@ function PainPoints() {
           {pains.map((pain, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div
-                className="p-7 border flex gap-4 rounded-xl"
-                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                className="p-7 border rounded-xl"
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #6A2E35", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
               >
-                <div className="w-1 shrink-0 rounded-full mt-1" style={{ backgroundColor: "#6A2E35" }} />
-                <div>
-                  <p className="font-medium mb-1 text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
-                    {pain.label}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-                    {pain.sub}
-                  </p>
-                </div>
+                <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  {pain.label}
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                  {pain.sub}
+                </p>
               </div>
             </FadeIn>
           ))}
