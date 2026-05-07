@@ -97,7 +97,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[460px] shadow-2xl rounded-xl overflow-hidden max-h-[92vh] flex flex-col"
+            className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:top-1/2 md:w-[480px] shadow-2xl rounded-xl overflow-hidden max-h-[92vh] flex flex-col"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
             {/* Top accent bar */}
