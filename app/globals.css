@@ -4,10 +4,10 @@
   --warm-bg:   #F7F5F2;
   --white:     #FFFFFF;
   --navy:      #1F2F3A;
-  --burgundy:  #6A2E35;
+  --burgundy:  #8B2030;
   --neutral:   #D8D2C8;
   --text:      #222222;
-  --muted:     #666666;
+  --muted:     #444444;
 }
 
 @theme inline {
@@ -25,9 +25,13 @@ body {
   font-family: var(--font-dm-sans), -apple-system, sans-serif;
 }
 
-/* Mobile text scale */
+/* Mobile text scale — bump base size so text isn't tiny */
 @media (max-width: 767px) {
-  html { font-size: 100%; }
+  html { font-size: 107%; }
+  /* Reduce extreme letter-spacing on labels at small sizes */
+  .tracking-widest { letter-spacing: 0.06em; }
+  /* Looser line height for body text on narrow screens */
+  body { line-height: 1.75; }
 }
 
 .footer-link {
@@ -71,12 +75,12 @@ body {
   margin-bottom: 0.4rem;
   color: #444444;
 }
-.prose-content a { color: #6A2E35; text-decoration: underline; }
+.prose-content a { color: #8B2030; text-decoration: underline; }
 .prose-content blockquote {
-  border-left: 3px solid #6A2E35;
+  border-left: 3px solid #8B2030;
   padding-left: 1.25rem;
   margin: 1.75rem 0;
-  color: #555555;
+  color: #333333;
   font-style: italic;
 }
 .prose-content table { width: 100%; border-collapse: collapse; margin: 1.75rem 0; font-size: 0.9rem; }
@@ -84,4 +88,4 @@ body {
 .prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #D8D2C8; color: #444444; }
 .prose-content tr:nth-child(even) td { background-color: #F7F5F2; }
 .prose-content strong { font-weight: 600; color: #222222; }
-.prose-content code { background-color: #F0EDE8; color: #6A2E35; padding: 0.1em 0.4em; font-size: 0.875em; }
+.prose-content code { background-color: #F0EDE8; color: #8B2030; padding: 0.1em 0.4em; font-size: 0.875em; }
