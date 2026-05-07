@@ -49,25 +49,25 @@ const schema = {
 
 export default function StroathroyPage() {
   return (
-    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#F7F5F2" }}>
       <JsonLd data={schema} />
 
       {/* Hero */}
-      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy, Ontario
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in Strathroy, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy offers what London can&apos;t — affordability, stability, and strong cash flow. We handle the day-to-day so you don&apos;t have to.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Estimate
           </Link>
@@ -75,35 +75,35 @@ export default function StroathroyPage() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-12 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-3xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Services */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate. Everything included. No hidden fees, no maintenance markups.
             </p>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {services.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.08}>
-                <div className="bg-[#112035] border p-6" style={{ borderColor: "#1E3050" }}>
+                <div className="bg-white border p-6 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -112,24 +112,24 @@ export default function StroathroyPage() {
       </section>
 
       {/* Neighbourhoods */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Pricing and tenant profiles differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {neighbourhoods.map((n, i) => (
               <FadeIn key={n.name} delay={i * 0.06}>
-                <div className="bg-[#112035] border p-5 flex gap-4" style={{ borderColor: "#1E3050" }}>
-                  <div className="w-1 shrink-0 mt-1" style={{ backgroundColor: "#C5A55A" }} />
+                <div className="bg-[#F7F5F2] border p-5 flex gap-4 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
+                  <div className="w-1 shrink-0 mt-1 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
                   <div>
-                    <h3 className="font-medium mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
+                    <h3 className="font-medium mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -139,18 +139,18 @@ export default function StroathroyPage() {
       </section>
 
       {/* Market snapshot */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Strathroy Rental Market — 2026 Snapshot
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-xl border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
               <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 <thead>
-                  <tr style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5" }}>
+                  <tr style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5" }}>
                     <th className="text-left p-4">Unit Type</th>
                     <th className="p-4 text-right">Low</th>
                     <th className="p-4 text-right">Average</th>
@@ -164,11 +164,11 @@ export default function StroathroyPage() {
                     { type: "2 Bedroom", low: "$1,250", avg: "$1,425", high: "$1,650" },
                     { type: "3 Bedroom", low: "$1,550", avg: "$1,750", high: "$2,050" },
                   ].map((row, i) => (
-                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#112035" : "#0D1B2A" }}>
-                      <td className="p-4 font-medium" style={{ color: "#FAF8F5" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.low}</td>
-                      <td className="p-4 text-right font-medium" style={{ color: "#C5A55A" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#9BAEC2" }}>{row.high}</td>
+                    <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
+                      <td className="p-4 font-medium" style={{ color: "#222222" }}>{row.type}</td>
+                      <td className="p-4 text-right" style={{ color: "#999999" }}>{row.low}</td>
+                      <td className="p-4 text-right font-semibold" style={{ color: "#6A2E35" }}>{row.avg}</td>
+                      <td className="p-4 text-right" style={{ color: "#999999" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -179,7 +179,7 @@ export default function StroathroyPage() {
       </section>
 
       {/* Blog nudge */}
-      <section className="py-10 px-6" style={{ backgroundColor: "#0A1628" }}>
+      <section className="py-10 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
           <BlogNudge
             hook="Small town, big landlord mistakes. Here's how to avoid them."
@@ -199,18 +199,18 @@ export default function StroathroyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Own a Rental in Strathroy?
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
             Let&apos;s talk about your property. Free consultation, honest assessment, no pressure.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>

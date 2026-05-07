@@ -111,9 +111,9 @@ function html(title: string, body: string, slug: string): string {
     <style>
       body { font-family: sans-serif; background: #FAF8F5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
       .card { background: white; border: 1px solid #E8E4DF; padding: 48px; max-width: 480px; text-align: center; }
-      h1 { color: #0D1B2A; font-weight: 300; font-size: 28px; margin: 0 0 12px; }
+      h1 { color: #1F2F3A; font-weight: 300; font-size: 28px; margin: 0 0 12px; }
       p { color: #5A5A5A; font-size: 14px; margin: 0 0 24px; line-height: 1.6; }
-      a { display: inline-block; padding: 12px 28px; background: #0D1B2A; color: #FAF8F5; text-decoration: none; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+      a { display: inline-block; padding: 12px 28px; background: #1F2F3A; color: #FAF8F5; text-decoration: none; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
     </style>
   </head>
   <body>

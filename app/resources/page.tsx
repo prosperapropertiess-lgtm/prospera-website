@@ -61,14 +61,14 @@ const situations = [
 
 export default function ResourcesPage() {
   return (
-    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
 
       {/* ── Hero ── */}
-      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
           >
             Free for Ontario Landlords
           </p>
@@ -78,11 +78,11 @@ export default function ResourcesPage() {
           >
             Stop digging through
             <br />
-            <em style={{ color: "#C4B08A" }}>government websites.</em>
+            <em>government websites.</em>
           </h1>
           <p
             className="text-base max-w-xl mx-auto leading-relaxed mb-10"
-            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
           >
             Every Ontario LTB form you&apos;ll ever need — explained in plain English,
             pre-filled in under 2 minutes, ready to serve. Free. No account. No PDF editor.
@@ -98,7 +98,7 @@ export default function ResourcesPage() {
               "Sign it, serve it, done — no paralegal required",
             ].map((point) => (
               <div key={point} className="flex items-start gap-3">
-                <span className="mt-0.5 shrink-0 text-sm" style={{ color: "#C4B08A" }}>✓</span>
+                <span className="mt-0.5 shrink-0 text-sm" style={{ color: "#6A2E35" }}>✓</span>
                 <p
                   className="text-sm"
                   style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
@@ -112,12 +112,12 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Before/After context strip ── */}
-      <section className="py-14 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-14 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(123,28,28,0.2)", backgroundColor: "#1a0a0a" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+              <div className="p-7 rounded-xl border" style={{ borderColor: "#F0C4C4", backgroundColor: "#FDF9F9" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
                   Before This Tool
                 </p>
                 {[
@@ -129,13 +129,13 @@ export default function ResourcesPage() {
                   "Or call a paralegal for $150–200",
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✕</span>
-                    <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#6A2E35" }}>✕</span>
+                    <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
-              <div className="p-7 rounded-xl border" style={{ borderColor: "rgba(45,106,79,0.2)", backgroundColor: "#0a1a0f" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+              <div className="p-7 rounded-xl border" style={{ borderColor: "#C8DDD5", backgroundColor: "#F5FAF8" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#2A6049", fontFamily: "var(--font-dm-sans)" }}>
                   Now
                 </p>
                 {[
@@ -147,8 +147,8 @@ export default function ResourcesPage() {
                   "Sign it and serve it. Done.",
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
-                    <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#2A6049" }}>✓</span>
+                    <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -158,24 +158,24 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Which form do I need? ── */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#0A1628" }}>
+      <section className="py-20 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               Plain English Guide
             </p>
             <h2
               className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
             >
               Which form do I actually need?
             </h2>
             <p
               className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
-              style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               Pick your situation. We&apos;ll tell you exactly which form, what it does, and when to use it.
             </p>
@@ -186,7 +186,7 @@ export default function ResourcesPage() {
               <FadeIn key={s.formName} delay={i * 0.07}>
                 <div
                   className="rounded-xl border overflow-hidden"
-                  style={{ borderColor: "#1E3050", backgroundColor: "#112035" }}
+                  style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
                 >
                   <div className="p-6 md:p-8">
                     <div className="flex flex-col md:flex-row md:items-start gap-5">
@@ -197,13 +197,13 @@ export default function ResourcesPage() {
                           <div>
                             <p
                               className="font-semibold text-base leading-tight"
-                              style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                              style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
                             >
                               {s.situation}
                             </p>
                             <span
                               className="text-xs font-bold uppercase tracking-wider"
-                              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+                              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
                             >
                               → Form {s.formName}
                             </span>
@@ -211,15 +211,15 @@ export default function ResourcesPage() {
                         </div>
                         <p
                           className="text-sm leading-relaxed mb-3"
-                          style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {s.plain}
                         </p>
                         <div className="flex items-start gap-2">
-                          <span className="text-xs shrink-0 mt-0.5" style={{ color: "#C4B08A" }}>⚠</span>
+                          <span className="text-xs shrink-0 mt-0.5" style={{ color: "#999999" }}>⚠</span>
                           <p
                             className="text-xs leading-relaxed"
-                            style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
+                            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
                           >
                             {s.when}
                           </p>
@@ -233,7 +233,7 @@ export default function ResourcesPage() {
                             href="#n4-builder"
                             className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
                             style={{
-                              backgroundColor: "#C5A55A",
+                              backgroundColor: "#6A2E35",
                               color: "#FAF8F5",
                               fontFamily: "var(--font-dm-sans)",
                             }}
@@ -243,10 +243,10 @@ export default function ResourcesPage() {
                         ) : (
                           <a
                             href="/contact"
-                            className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
+                            className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
                             style={{
-                              borderColor: "#1E3050",
-                              color: "#9BAEC2",
+                              borderColor: "#D8D2C8",
+                              color: "#666666",
                               fontFamily: "var(--font-dm-sans)",
                             }}
                           >
@@ -257,10 +257,10 @@ export default function ResourcesPage() {
                           href={`/forms/${s.formName}.pdf`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:bg-[#F5F0EB]"
+                          className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A]"
                           style={{
-                            borderColor: "#1E3050",
-                            color: "#C0CAD4",
+                            borderColor: "#D8D2C8",
+                            color: "#666666",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >
@@ -277,18 +277,18 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── N4 Form Builder ── */}
-      <section id="n4-builder" className="py-20 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section id="n4-builder" className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #D8D2C8" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-3"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               Live Tool
             </p>
             <h2
               className="text-4xl font-light text-center mb-10 leading-tight"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
             >
               N4 Form Builder
             </h2>
@@ -298,18 +298,18 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Other downloads ── */}
-      <section className="py-4 px-6">
+      <section className="py-4 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <p
               className="text-xs font-semibold uppercase tracking-widest text-center mb-3 mt-12"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               More Free Resources
             </p>
             <h2
               className="text-4xl font-light text-center mb-12 leading-tight"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
             >
               Templates, guides &amp; checklists.
             </h2>
@@ -319,7 +319,7 @@ export default function ResourcesPage() {
       <ResourcesGrid />
 
       {/* ── CTA ── */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
           <h2
             className="text-4xl font-light mb-4 leading-tight"
@@ -329,7 +329,7 @@ export default function ResourcesPage() {
           </h2>
           <p
             className="text-sm mb-8 max-w-md mx-auto"
-            style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
           >
             That&apos;s what Prospera is for. We handle the forms, the notices, the follow-up, everything.
             Free consultation — no pressure.
@@ -337,7 +337,7 @@ export default function ResourcesPage() {
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Talk to Ebin →
           </Link>

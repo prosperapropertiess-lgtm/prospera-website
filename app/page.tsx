@@ -15,17 +15,14 @@ function Hero() {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden"
-      style={{ backgroundColor: "#060E1C" }}
+      style={{ backgroundColor: "#1F2F3A" }}
     >
-      {/* Particle animation */}
       <ParticleCanvas />
 
-      {/* Subtle burgundy glow top-right */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse at 75% 15%, rgba(123,28,28,0.15) 0%, transparent 55%)",
+          background: "radial-gradient(ellipse at 75% 15%, rgba(106,46,53,0.2) 0%, transparent 55%)",
           zIndex: 2,
         }}
       />
@@ -40,9 +37,9 @@ function Hero() {
           <span
             className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2"
             style={{
-              color: "#C5A55A",
+              color: "rgba(250,248,245,0.7)",
               fontFamily: "var(--font-dm-sans)",
-              border: "1px solid rgba(197,165,90,0.45)",
+              border: "1px solid rgba(250,248,245,0.2)",
             }}
           >
             London · St. Thomas · Strathroy
@@ -58,7 +55,7 @@ function Hero() {
         >
           Built for landlords
           <br />
-          <em style={{ color: "#C4B08A" }}>with 1 to 5 doors.</em>
+          <em style={{ color: "rgba(250,248,245,0.65)" }}>with 1 to 5 doors.</em>
         </motion.h1>
 
         <motion.p
@@ -66,7 +63,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "#C2CCD6", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
         >
           You bought the rental. We take it from there — tenants, rent,
           maintenance, all of it. No call centers. No ticket numbers. Just
@@ -81,9 +78,9 @@ function Hero() {
         >
           <a
             href="#how-it-works"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded-lg"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
             style={{
-              backgroundColor: "#C5A55A",
+              backgroundColor: "#6A2E35",
               color: "#FAF8F5",
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -92,10 +89,10 @@ function Hero() {
           </a>
           <Link
             href="/contact"
-            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-[#112035]/5 rounded-lg"
+            className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 rounded"
             style={{
               borderColor: "rgba(250,248,245,0.25)",
-              color: "#FAF8F5",
+              color: "rgba(250,248,245,0.85)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -104,7 +101,6 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll chevron */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -115,14 +111,7 @@ function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="rgba(250,248,245,0.35)"
-            strokeWidth="1.5"
-          >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </motion.div>
@@ -142,20 +131,20 @@ function StatsBar() {
   ];
 
   return (
-    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}>
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
         {stats.map((stat, i) => (
           <FadeIn key={stat.label} delay={i * 0.08}>
             <div>
               <div
                 className="text-4xl sm:text-5xl md:text-6xl font-light mb-1"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
               >
                 <CounterAnimation target={stat.value} suffix={stat.suffix} />
               </div>
               <div
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
               >
                 {stat.label}
               </div>
@@ -190,46 +179,37 @@ function PainPoints() {
   ];
 
   return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#FAF8F5" }}>
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#8B1A1A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
           >
             Sound Familiar?
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#0A1628", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             If you recognize any of these,
             <br />
-            <em style={{ color: "#8B1A1A" }}>you&apos;re in the right place.</em>
+            <em style={{ color: "#6A2E35" }}>you&apos;re in the right place.</em>
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pains.map((pain, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div
-                className="p-6 border flex gap-4 rounded-xl"
-                style={{ borderColor: "#E8E4DF", backgroundColor: "#FFFFFF" }}
+                className="p-7 border flex gap-4 rounded-xl"
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
               >
-                <div
-                  className="w-1 shrink-0 rounded-full mt-1"
-                  style={{ backgroundColor: "#C5A55A" }}
-                />
+                <div className="w-1 shrink-0 rounded-full mt-1" style={{ backgroundColor: "#6A2E35" }} />
                 <div>
-                  <p
-                    className="font-medium mb-1 text-sm"
-                    style={{ color: "#0A1628", fontFamily: "var(--font-dm-sans)" }}
-                  >
+                  <p className="font-medium mb-1 text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                     {pain.label}
                   </p>
-                  <p
-                    className="text-xs leading-relaxed"
-                    style={{ color: "#5A6A7A", fontFamily: "var(--font-dm-sans)" }}
-                  >
+                  <p className="text-xs leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                     {pain.sub}
                   </p>
                 </div>
@@ -269,18 +249,18 @@ function FeatureCards() {
   ];
 
   return (
-    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
           >
             Why Prospera
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             What we actually do differently.
           </h2>
@@ -289,23 +269,23 @@ function FeatureCards() {
           {features.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.08}>
               <motion.div
-                className="bg-[#112035] p-8 border h-full cursor-default rounded-xl"
-                style={{ borderColor: "#1E3050" }}
-                whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.07)" }}
+                className="bg-white p-8 border h-full cursor-default rounded-xl"
+                style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+                whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="block text-2xl mb-5" style={{ color: "#C5A55A" }}>
+                <span className="block text-2xl mb-5" style={{ color: "#6A2E35" }}>
                   {f.icon}
                 </span>
                 <h3
                   className="text-xl font-medium mb-3"
-                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                  style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
                 >
                   {f.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {f.desc}
                 </p>
@@ -355,18 +335,18 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+    <section id="how-it-works" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
           >
             The Process
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             From handshake to hands-off
             <br />
@@ -377,54 +357,36 @@ function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {phases.map((phase, i) => (
             <FadeIn key={phase.num} delay={i * 0.12}>
-              <div className="relative" style={{ height: "100%" }}>
-                {/* Connector line (desktop only) */}
-                {i < phases.length - 1 && (
-                  <div
-                    className="hidden md:block absolute top-8 left-full w-full h-px -translate-y-1/2 z-0"
-                    style={{ backgroundColor: "#E8E4DF", width: "calc(100% - 2rem)" }}
-                  />
-                )}
-                <div
-                  className="bg-[#112035] border p-7 h-full relative z-10 rounded-xl"
-                  style={{ borderColor: "#1E3050" }}
-                >
-                  <div className="flex items-start gap-4 mb-5">
-                    <span
-                      className="text-4xl font-light leading-none"
-                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                    >
-                      {phase.num}
-                    </span>
-                    <div>
-                      <p
-                        className="font-semibold text-base"
-                        style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {phase.phase}
-                      </p>
-                      <p
-                        className="text-xs mt-0.5"
-                        style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {phase.timeline}
-                      </p>
-                    </div>
+              <div
+                className="border p-8 rounded-xl"
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+              >
+                <div className="flex items-start gap-4 mb-5">
+                  <span
+                    className="text-4xl font-light leading-none"
+                    style={{ color: "#D8D2C8", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    {phase.num}
+                  </span>
+                  <div>
+                    <p className="font-semibold text-base" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                      {phase.phase}
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                      {phase.timeline}
+                    </p>
                   </div>
-                  <ul className="space-y-2.5">
-                    {phase.steps.map((step, j) => (
-                      <li key={j} className="flex items-start gap-2.5">
-                        <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: "#C5A55A" }} />
-                        <span
-                          className="text-sm leading-relaxed"
-                          style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
-                        >
-                          {step}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
+                <ul className="space-y-2.5">
+                  {phase.steps.map((step, j) => (
+                    <li key={j} className="flex items-start gap-2.5">
+                      <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
+                      <span className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </FadeIn>
           ))}
@@ -438,10 +400,10 @@ function HowItWorks() {
 
 function FounderSnippet() {
   return (
-    <section className="py-16 px-5 sm:px-8" style={{ backgroundColor: "#060E1C" }}>
+    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-3xl mx-auto text-center">
         <FadeIn>
-          <div className="w-10 h-px mx-auto mb-8" style={{ backgroundColor: "#C5A55A" }} />
+          <div className="w-10 h-px mx-auto mb-8" style={{ backgroundColor: "rgba(250,248,245,0.3)" }} />
           <blockquote
             className="text-3xl sm:text-4xl font-light leading-tight mb-6"
             style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
@@ -450,16 +412,13 @@ function FounderSnippet() {
             manager. I built this with all three lenses — and I choose to stay
             small on purpose.&rdquo;
           </blockquote>
-          <p
-            className="text-sm mb-6"
-            style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
-          >
+          <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
             — Ebin Jaison, Owner
           </p>
           <Link
             href="/about"
             className="inline-block text-xs font-semibold uppercase tracking-widest border-b pb-0.5 transition-opacity hover:opacity-70"
-            style={{ color: "#C5A55A", borderColor: "rgba(197,165,90,0.4)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.7)", borderColor: "rgba(250,248,245,0.3)", fontFamily: "var(--font-dm-sans)" }}
           >
             Read the full story →
           </Link>
@@ -473,18 +432,18 @@ function FounderSnippet() {
 
 function CaseStudy() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
           >
             Real Result
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             From drowning in utility bills
             <br />
@@ -492,7 +451,7 @@ function CaseStudy() {
           </h2>
           <p
             className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
-            style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
             An owner was renting rooms individually with all utilities included.
             Tenants had zero reason to conserve. Bills were skyrocketing. He
@@ -503,14 +462,8 @@ function CaseStudy() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FadeIn delay={0.1}>
-            <div
-              className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#112035", borderColor: "rgba(139,26,26,0.3)" }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-              >
+            <div className="p-8 border rounded-xl" style={{ backgroundColor: "#FDF9F9", borderColor: "#E8CECE", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                 Before Prospera
               </p>
               <ul className="space-y-4">
@@ -522,8 +475,8 @@ function CaseStudy() {
                   "Owner doing all lawn and snow himself",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#8B1A1A" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C09090" }}>✕</span>
+                    <span className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -531,14 +484,8 @@ function CaseStudy() {
           </FadeIn>
 
           <FadeIn delay={0.2}>
-            <div
-              className="p-8 border rounded-xl"
-              style={{ backgroundColor: "#112035", borderColor: "rgba(197,165,90,0.3)" }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-              >
+            <div className="p-8 border rounded-xl" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
                 After Prospera
               </p>
               <ul className="space-y-4">
@@ -550,8 +497,8 @@ function CaseStudy() {
                   "Structure in place — the problem can't come back",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C5A55A" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-xs mt-1" style={{ color: "#6A2E35" }}>✓</span>
+                    <span className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -567,18 +514,18 @@ function CaseStudy() {
 
 function Testimonials() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-3xl mx-auto">
         <FadeIn className="text-center mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
           >
             What Landlords Say
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-light text-[#FAF8F5] leading-tight"
-            style={{ fontFamily: "var(--font-cormorant)" }}
+            className="text-4xl sm:text-5xl font-light leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
             Real reviews.
             <br />
@@ -595,28 +542,22 @@ function Testimonials() {
 
 function TenantBar() {
   return (
-    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#060E1C" }}>
+    <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-2"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
-          >
+          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
             Looking for a Rental?
           </p>
-          <p
-            className="text-2xl font-light"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-          >
+          <p className="text-2xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Browse professionally managed rentals in Southwestern Ontario.
           </p>
         </div>
         <Link
           href="/listings"
-          className="shrink-0 px-8 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 hover:bg-[#112035]/5 rounded-lg"
+          className="shrink-0 px-8 py-3 text-xs font-semibold uppercase tracking-widest border transition-all duration-200 rounded"
           style={{
             borderColor: "rgba(250,248,245,0.25)",
-            color: "#FAF8F5",
+            color: "rgba(250,248,245,0.85)",
             fontFamily: "var(--font-dm-sans)",
           }}
         >
@@ -631,19 +572,19 @@ function TenantBar() {
 
 function CTABanner() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <FadeIn className="max-w-2xl mx-auto text-center">
         <h2
           className="text-5xl sm:text-6xl font-light mb-4 leading-tight"
-          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
         >
           Own a rental.
           <br />
-          <em style={{ color: "#C5A55A" }}>Not a second job.</em>
+          <em style={{ color: "#6A2E35" }}>Not a second job.</em>
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
-          style={{ color: "#9AA3AE", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
         >
           Free consultation. Honest assessment. No pressure. Just a
           straightforward conversation about what your property could look like
@@ -652,18 +593,18 @@ function CTABanner() {
         <motion.div
           animate={{
             boxShadow: [
-              "0 0 0 0 rgba(123,28,28,0)",
-              "0 0 0 10px rgba(123,28,28,0.15)",
-              "0 0 0 0 rgba(123,28,28,0)",
+              "0 0 0 0 rgba(106,46,53,0)",
+              "0 0 0 10px rgba(106,46,53,0.12)",
+              "0 0 0 0 rgba(106,46,53,0)",
             ],
           }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
-          className="inline-block"
+          className="inline-block rounded"
         >
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -694,25 +635,18 @@ function StickyCTA() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4 pr-20 sm:pr-8"
           style={{
-            backgroundColor: "#060E1C",
+            backgroundColor: "#1F2F3A",
             borderTop: "1px solid rgba(250,248,245,0.08)",
           }}
         >
-          <p
-            className="text-xs sm:text-sm"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-          >
+          <p className="text-xs sm:text-sm" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             <span className="sm:hidden">Free landlord quote</span>
             <span className="hidden sm:inline">Own a rental in Southwestern Ontario?</span>
           </p>
           <Link
             href="/contact"
-            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded-lg"
-            style={{
-              backgroundColor: "#C5A55A",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
+            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote →
           </Link>
@@ -736,7 +670,7 @@ export default function HomePage() {
       <CaseStudy />
       <Testimonials />
       <TenantBar />
-      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto space-y-4">
           <BlogNudge
             hook="One bad tenant can cost you an entire year's profit."

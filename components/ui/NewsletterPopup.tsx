@@ -24,10 +24,8 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
       if (!sessionStorage.getItem(STORAGE_KEY)) setVisible(true);
     };
 
-    // Timer fallback — 15 seconds
     const timer = setTimeout(show, delayMs);
 
-    // Scroll trigger — fires at 50% page depth
     const onScroll = () => {
       const scrolled = window.scrollY + window.innerHeight;
       const total = document.documentElement.scrollHeight;
@@ -35,7 +33,6 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Exit-intent on desktop
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) show();
     };
@@ -100,17 +97,17 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[460px] shadow-2xl"
-            style={{ backgroundColor: "#0A1628" }}
+            className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[460px] shadow-2xl rounded-xl overflow-hidden"
+            style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
             {/* Top accent bar */}
-            <div className="h-1 w-full" style={{ backgroundColor: "#C5A55A" }} />
+            <div className="h-1 w-full" style={{ backgroundColor: "#6A2E35" }} />
 
             <div className="p-8">
               {/* Close */}
               <button
                 onClick={dismiss}
-                className="absolute top-4 right-4 text-[#9BAEC2] hover:text-[#FAF8F5] transition-colors text-lg leading-none"
+                className="absolute top-4 right-4 text-[#999999] hover:text-[#222222] transition-colors text-xl leading-none"
                 aria-label="Close"
               >
                 ×
@@ -118,10 +115,10 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
               {status === "success" ? (
                 <div className="text-center py-4">
-                  <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#FAF8F5" }}>
+                  <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#1F2F3A" }}>
                     You&apos;re in.
                   </p>
-                  <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                     {isLandlord
                       ? "We'll be in touch with tips and market updates."
                       : "We'll notify you when new listings match your search."}
@@ -132,7 +129,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Offer label */}
                   <p
                     className="text-xs uppercase tracking-widest mb-3"
-                    style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {isLandlord ? "Free for Ontario Landlords" : "New Listing Alerts"}
                   </p>
@@ -140,7 +137,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Headline */}
                   <h3
                     className="text-2xl font-light mb-2 leading-snug"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                    style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
                   >
                     {isLandlord
                       ? "Get the Free Lease Addendum Template"
@@ -150,7 +147,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   {/* Subtext */}
                   <p
                     className="text-sm mb-6 leading-relaxed"
-                    style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {isLandlord
                       ? "Our custom lease addendum protects you beyond the Ontario standard lease. Free download — plus occasional market updates."
@@ -163,11 +160,11 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Your first name"
-                      className="px-4 py-3 text-sm outline-none border"
+                      className="px-4 py-3 text-sm outline-none border rounded"
                       style={{
-                        backgroundColor: "#112035",
-                        borderColor: "#1E3050",
-                        color: "#FAF8F5",
+                        backgroundColor: "#F7F5F2",
+                        borderColor: "#D8D2C8",
+                        color: "#222222",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     />
@@ -177,11 +174,11 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Email address"
                       required
-                      className="px-4 py-3 text-sm outline-none border"
+                      className="px-4 py-3 text-sm outline-none border rounded"
                       style={{
-                        backgroundColor: "#112035",
-                        borderColor: "#1E3050",
-                        color: "#FAF8F5",
+                        backgroundColor: "#F7F5F2",
+                        borderColor: "#D8D2C8",
+                        color: "#222222",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     />
@@ -189,11 +186,11 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       <select
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        className="px-4 py-3 text-sm outline-none border"
+                        className="px-4 py-3 text-sm outline-none border rounded"
                         style={{
-                          backgroundColor: "#112035",
-                          borderColor: "#1E3050",
-                          color: city ? "#1A1A1A" : "#9B9B9B",
+                          backgroundColor: "#F7F5F2",
+                          borderColor: "#D8D2C8",
+                          color: city ? "#222222" : "#999999",
                           fontFamily: "var(--font-dm-sans)",
                         }}
                       >
@@ -205,7 +202,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                     )}
 
                     {status === "error" && (
-                      <p className="text-xs" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+                      <p className="text-xs" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
                         Something went wrong. Please try again.
                       </p>
                     )}
@@ -213,9 +210,9 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1"
+                      className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
                       style={{
-                        backgroundColor: "#C5A55A",
+                        backgroundColor: "#6A2E35",
                         color: "#FAF8F5",
                         fontFamily: "var(--font-dm-sans)",
                       }}
@@ -230,7 +227,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
                   <p
                     className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                    style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
                     onClick={dismiss}
                   >
                     No thanks

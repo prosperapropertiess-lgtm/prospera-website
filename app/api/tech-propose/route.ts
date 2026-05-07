@@ -44,18 +44,18 @@ export async function POST(req: NextRequest) {
     const denyUrl = `${base}/api/tech-decision?id=${data.id}&action=deny&token=${process.env.SEO_NOTIFY_SECRET}`;
 
     const stepsList = (steps as string[]).map((s: string, i: number) =>
-      `<tr><td style="padding:6px 0;border-bottom:1px solid #F0EBE5;font-size:13px;color:#2C2C2C;"><strong style="color:#0D1B2A;">${i + 1}.</strong> ${s}</td></tr>`
+      `<tr><td style="padding:6px 0;border-bottom:1px solid #F0EBE5;font-size:13px;color:#2C2C2C;"><strong style="color:#1F2F3A;">${i + 1}.</strong> ${s}</td></tr>`
     ).join("");
 
     const html = `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#2C2C2C;">
-        <div style="background:#0D1B2A;padding:28px 32px;">
-          <p style="color:#C5A55A;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
+        <div style="background:#1F2F3A;padding:28px 32px;">
+          <p style="color:#6A2E35;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
           <h1 style="color:#FAF8F5;font-size:22px;font-weight:300;margin:0;">Weekly Feature Proposal</h1>
         </div>
 
         <div style="padding:32px;">
-          <h2 style="font-size:20px;color:#0D1B2A;font-weight:500;margin:0 0 4px;">${title}</h2>
+          <h2 style="font-size:20px;color:#1F2F3A;font-weight:500;margin:0 0 4px;">${title}</h2>
           <p style="font-size:12px;color:#9B9B9B;margin:0 0 24px;">For: ${target_users} &nbsp;·&nbsp; Effort: ${effort}</p>
 
           <h3 style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#7B1C1C;margin:0 0 8px;">What it does</h3>
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
           ` : ""}
 
           <div style="border-top:1px solid #E8E4DF;padding-top:24px;display:flex;gap:12px;">
-            <a href="${approveUrl}" style="display:inline-block;padding:14px 32px;background:#0D1B2A;color:#FAF8F5;text-decoration:none;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-right:12px;">
+            <a href="${approveUrl}" style="display:inline-block;padding:14px 32px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-right:12px;">
               ✓ Approve — Build it
             </a>
             <a href="${denyUrl}" style="display:inline-block;padding:14px 32px;background:#F5F0EB;color:#7B1C1C;text-decoration:none;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #7B1C1C;">

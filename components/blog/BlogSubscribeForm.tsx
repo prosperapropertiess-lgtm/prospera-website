@@ -25,19 +25,19 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
   if (midPost) {
     return (
       <div
-        className="my-12 px-8 py-8 border-l-4"
-        style={{ backgroundColor: "#0D1B2A", borderColor: "#C5A55A" }}
+        className="my-12 px-8 py-8 border-l-4 rounded-r-xl"
+        style={{ backgroundColor: "#F7F5F2", borderColor: "#6A2E35" }}
       >
         {status === "done" ? (
-          <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
             You&apos;re in. We&apos;ll send practical landlord tips straight to your inbox.
           </p>
         ) : (
           <>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
               Landlord Insights
             </p>
-            <p className="text-lg font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-lg font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Get practical tips for Ontario landlords — delivered free.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
@@ -46,8 +46,8 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="flex-1 px-4 py-2.5 text-sm border focus:outline-none"
-                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "#112035", color: "#FAF8F5" }}
+                className="flex-1 px-4 py-2.5 text-sm border focus:outline-none rounded"
+                style={{ borderColor: "#D8D2C8", fontFamily: "var(--font-dm-sans)", backgroundColor: "#FFFFFF", color: "#222222" }}
               />
               <input
                 type="email"
@@ -55,20 +55,20 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 px-4 py-2.5 text-sm border focus:outline-none"
-                style={{ borderColor: "#D4CFC9", fontFamily: "var(--font-dm-sans)", backgroundColor: "#112035", color: "#FAF8F5" }}
+                className="flex-1 px-4 py-2.5 text-sm border focus:outline-none rounded"
+                style={{ borderColor: "#D8D2C8", fontFamily: "var(--font-dm-sans)", backgroundColor: "#FFFFFF", color: "#222222" }}
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="px-6 py-2.5 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50"
-                style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                className="px-6 py-2.5 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 rounded"
+                style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 {status === "loading" ? "..." : "Subscribe"}
               </button>
             </form>
             {status === "error" && (
-              <p className="text-xs mt-2" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mt-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
                 Something went wrong. Try again.
               </p>
             )}
@@ -79,26 +79,26 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
   }
 
   return (
-    <section className="py-16 px-6" style={{ backgroundColor: "#060E1C" }}>
+    <section className="py-16 px-6" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-2xl mx-auto text-center">
         {status === "done" ? (
           <>
             <p className="text-3xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               You&apos;re subscribed.
             </p>
-            <p className="text-sm" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
               Practical landlord tips from Prospera Properties, straight to your inbox.
             </p>
           </>
         ) : (
           <>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
               Free Landlord Newsletter
             </p>
             <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Stay ahead as an Ontario landlord.
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
               New posts on Ontario law, eviction process, tenant screening, and more — no spam, unsubscribe anytime.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
@@ -107,8 +107,8 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="flex-1 px-4 py-3 text-sm focus:outline-none"
-                style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                className="flex-1 px-4 py-3 text-sm focus:outline-none rounded"
+                style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               />
               <input
                 type="email"
@@ -116,14 +116,14 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 px-4 py-3 text-sm focus:outline-none"
-                style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                className="flex-1 px-4 py-3 text-sm focus:outline-none rounded"
+                style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 whitespace-nowrap"
-                style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 whitespace-nowrap rounded"
+                style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
                 {status === "loading" ? "..." : "Subscribe Free"}
               </button>

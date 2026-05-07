@@ -70,15 +70,15 @@ export async function POST(req: NextRequest) {
       subject: `[IT Agent] Feature shipped — ${summary.title}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
-          <div style="background:#0D1B2A;padding:28px 32px;">
-            <p style="color:#C5A55A;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
+          <div style="background:#1F2F3A;padding:28px 32px;">
+            <p style="color:#6A2E35;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera IT Agent</p>
             <h1 style="color:#FAF8F5;font-size:22px;font-weight:300;margin:0;">Feature shipped ✓</h1>
           </div>
           <div style="padding:32px;">
-            <h2 style="font-size:18px;color:#0D1B2A;font-weight:500;margin:0 0 16px;">${summary.title}</h2>
+            <h2 style="font-size:18px;color:#1F2F3A;font-weight:500;margin:0 0 16px;">${summary.title}</h2>
             <p style="font-size:14px;color:#2C2C2C;line-height:1.6;margin:0 0 24px;">${summary.what_was_done}</p>
             ${summary.files_changed ? `<p style="font-size:12px;color:#9B9B9B;margin:0 0 24px;">Files changed: ${summary.files_changed}</p>` : ""}
-            <a href="https://www.prosperaproperties.co" style="display:inline-block;padding:12px 28px;background:#0D1B2A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">View site</a>
+            <a href="https://www.prosperaproperties.co" style="display:inline-block;padding:12px 28px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">View site</a>
             <p style="font-size:11px;color:#B0B0B0;margin-top:24px;">Prospera Properties · IT Agent</p>
           </div>
         </div>

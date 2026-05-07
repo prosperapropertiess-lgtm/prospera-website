@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
         (p) =>
           `<tr>
             <td style="padding:10px 0;border-bottom:1px solid #E8E4DF;">
-              <a href="https://www.prosperaproperties.co/blog/${p.slug}" style="color:#0D1B2A;font-weight:500;text-decoration:none;">${p.title}</a>
+              <a href="https://www.prosperaproperties.co/blog/${p.slug}" style="color:#1F2F3A;font-weight:500;text-decoration:none;">${p.title}</a>
               <span style="display:block;font-size:11px;color:#9B9B9B;margin-top:2px;">${p.category} · prosperaproperties.co/blog/${p.slug}</span>
             </td>
           </tr>`
@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
 
     const html = `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#2C2C2C;">
-        <div style="background:#0D1B2A;padding:28px 32px;">
-          <p style="color:#C5A55A;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera SEO Agent</p>
+        <div style="background:#1F2F3A;padding:28px 32px;">
+          <p style="color:#6A2E35;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera SEO Agent</p>
           <h1 style="color:#FAF8F5;font-size:22px;font-weight:300;margin:0;">New posts published</h1>
         </div>
         <div style="padding:32px;">
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
             ${postRows}
           </table>
           <div style="margin-top:28px;padding-top:20px;border-top:1px solid #E8E4DF;">
-            <a href="https://www.prosperaproperties.co/blog" style="display:inline-block;padding:10px 24px;background:#0D1B2A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">View Blog</a>
+            <a href="https://www.prosperaproperties.co/blog" style="display:inline-block;padding:10px 24px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">View Blog</a>
           </div>
           <p style="font-size:11px;color:#B0B0B0;margin-top:24px;">Prospera Properties · London, St. Thomas & Strathroy, Ontario</p>
         </div>

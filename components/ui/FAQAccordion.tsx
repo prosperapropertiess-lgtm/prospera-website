@@ -11,15 +11,15 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-[#1E3050]">
+    <div className="divide-y" style={{ borderColor: "#D8D2C8" }}>
       {items.map((item, i) => (
         <div key={i} className="py-5">
           <button
             className="flex w-full items-center justify-between text-left gap-4"
             onClick={() => setOpen(open === i ? null : i)}
           >
-            <span className="text-[#FAF8F5] font-medium text-sm md:text-base">{item.q}</span>
-            <span className={`text-[#C5A55A] text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`}>+</span>
+            <span className="font-medium text-sm md:text-base" style={{ color: "#222222" }}>{item.q}</span>
+            <span className={`text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`} style={{ color: "#6A2E35" }}>+</span>
           </button>
           <AnimatePresence initial={false}>
             {open === i && (
@@ -30,7 +30,7 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
                 transition={{ duration: 0.25 }}
                 className="overflow-hidden"
               >
-                <p className="pt-4 text-sm text-[#C0CAD4] leading-relaxed">{item.a}</p>
+                <p className="pt-4 text-sm leading-relaxed" style={{ color: "#555555" }}>{item.a}</p>
               </motion.div>
             )}
           </AnimatePresence>

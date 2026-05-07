@@ -53,7 +53,6 @@ export default function ChatWidget() {
     setInput("");
     setLoading(true);
 
-    // Check if user typed contact info inline
     const emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w+/);
     const phoneMatch = text.match(/[\d\s\-().+]{10,}/);
     if (emailMatch && !email) setEmail(emailMatch[0]);
@@ -73,7 +72,6 @@ export default function ChatWidget() {
       const data = await res.json();
       setMessages((prev) => [...prev, { role: "assistant", content: data.message || "Sorry, something went wrong. Please try again." }]);
 
-      // Show lead form if bot mentions contact info
       if (LEAD_KEYWORDS.test(data.message || "") && !leadSubmitted) {
         setShowLeadForm(true);
       }
@@ -88,7 +86,6 @@ export default function ChatWidget() {
     e.preventDefault();
     setLeadSubmitted(true);
     setShowLeadForm(false);
-    // Send to API with current conversation
     await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -106,24 +103,24 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen((o) => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-        style={{ backgroundColor: "#C5A55A" }}
+        style={{ backgroundColor: "#6A2E35" }}
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
           {open ? (
             <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="20" height="20" fill="none" stroke="#1A1A1A" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <svg width="20" height="20" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </motion.span>
           ) : (
             <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <svg width="22" height="22" fill="none" stroke="#1A1A1A" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              <svg width="22" height="22" fill="none" stroke="#FAF8F5" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </motion.span>
           )}
         </AnimatePresence>
 
         {/* Unread dot */}
         {!open && (
-          <span className="absolute top-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={{ backgroundColor: "#C5A55A" }} />
+          <span className="absolute top-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={{ backgroundColor: "#1F2F3A" }} />
         )}
       </button>
 
@@ -136,11 +133,11 @@ export default function ChatWidget() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-            style={{ maxHeight: "70vh", backgroundColor: "#112035", border: "1px solid #E8E4DF" }}
+            style={{ maxHeight: "70vh", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
             {/* Header */}
-            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#060E1C" }}>
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
+            <div className="px-5 py-4 flex items-center gap-3" style={{ backgroundColor: "#1F2F3A" }}>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>P</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Laura — Prospera Assistant</p>
                 <p className="text-xs flex items-center gap-1.5" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
@@ -151,16 +148,17 @@ export default function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ minHeight: 0 }}>
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ minHeight: 0, backgroundColor: "#F7F5F2" }}>
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
                     className="max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed"
                     style={{
-                      backgroundColor: msg.role === "user" ? "#1A1A1A" : "#F5F0EB",
-                      color: msg.role === "user" ? "#FAF8F5" : "#1A1A1A",
+                      backgroundColor: msg.role === "user" ? "#1F2F3A" : "#FFFFFF",
+                      color: msg.role === "user" ? "#FAF8F5" : "#222222",
                       fontFamily: "var(--font-dm-sans)",
                       borderRadius: msg.role === "user" ? "1rem 1rem 0.25rem 1rem" : "1rem 1rem 1rem 0.25rem",
+                      border: msg.role === "assistant" ? "1px solid #D8D2C8" : "none",
                     }}
                   >
                     {msg.content}
@@ -170,10 +168,10 @@ export default function ChatWidget() {
 
               {loading && (
                 <div className="flex justify-start">
-                  <div className="px-4 py-3 rounded-2xl" style={{ backgroundColor: "#0D1B2A", borderRadius: "1rem 1rem 1rem 0.25rem" }}>
+                  <div className="px-4 py-3 rounded-2xl bg-white border" style={{ borderRadius: "1rem 1rem 1rem 0.25rem", borderColor: "#D8D2C8" }}>
                     <div className="flex gap-1">
                       {[0, 1, 2].map((i) => (
-                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#060E1C", opacity: 0.4 }}
+                        <motion.span key={i} className="w-1.5 h-1.5 rounded-full bg-[#D8D2C8]"
                           animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }} />
                       ))}
                     </div>
@@ -183,19 +181,19 @@ export default function ChatWidget() {
 
               {/* Lead capture form */}
               {showLeadForm && !leadSubmitted && (
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4" style={{ backgroundColor: "#0D1B2A", border: "1px solid #E8E4DF" }}>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl p-4 bg-white border" style={{ borderColor: "#D8D2C8" }}>
+                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
                     Want Ebin to follow up?
                   </p>
                   <form onSubmit={submitLead} className="space-y-2">
-                    <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
-                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
-                    <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border bg-[#112035]" style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)" }} />
+                    <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
+                    <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
+                    <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                     <div className="flex gap-2">
-                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
-                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                         Skip
                       </button>
                     </div>
@@ -207,7 +205,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input */}
-            <div className="px-4 py-3 border-t" style={{ borderColor: "#1E3050" }}>
+            <div className="px-4 py-3 border-t bg-white" style={{ borderColor: "#D8D2C8" }}>
               <div className="flex gap-2">
                 <input
                   ref={inputRef}
@@ -216,19 +214,19 @@ export default function ChatWidget() {
                   onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && send()}
                   placeholder="Ask anything..."
                   className="flex-1 px-4 py-2.5 text-sm rounded-xl border focus:outline-none"
-                  style={{ borderColor: "#1E3050", fontFamily: "var(--font-dm-sans)", backgroundColor: "#0A1628" }}
+                  style={{ borderColor: "#D8D2C8", fontFamily: "var(--font-dm-sans)", backgroundColor: "#F7F5F2", color: "#222222" }}
                   disabled={loading}
                 />
                 <button
                   onClick={send}
                   disabled={loading || !input.trim()}
                   className="w-10 h-10 rounded-xl flex items-center justify-center transition-opacity disabled:opacity-40"
-                  style={{ backgroundColor: "#060E1C" }}
+                  style={{ backgroundColor: "#6A2E35" }}
                 >
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                 </button>
               </div>
-              <p className="text-center text-xs mt-2" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-center text-xs mt-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                 Powered by Prospera Properties · (519) 697-1227
               </p>
             </div>

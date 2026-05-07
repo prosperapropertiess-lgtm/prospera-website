@@ -23,20 +23,14 @@ const plans = [
       "Monthly financial statements",
       "No vacancy fee. Ever.",
     ],
-    bg: "#112035",
-    border: "1px solid #1E3050",
-    textColor: "#C0CAD4",
-    priceColor: "#FAF8F5",
-    ctaBg: "transparent",
-    ctaBorder: "1px solid #1E3050",
-    ctaText: "#FAF8F5",
-    ctaHover: "hover:border-[#FAF8F5]",
+    dark: false,
+    featured: false,
+    accentBorder: false,
   },
   {
     key: "optimized",
     label: "Optimized",
     badge: "Most Popular",
-    badgeBg: "#C5A55A",
     price: "12%",
     priceSub: "/ month",
     placementNote: "+ 75% of one month's rent (placement)",
@@ -51,21 +45,14 @@ const plans = [
       "Priority 24-hour response",
       "Tenant renewal negotiation",
     ],
-    bg: "#060E1C",
-    border: "none",
-    textColor: "#FAF8F5",
-    priceColor: "#FAF8F5",
-    ctaBg: "#C5A55A",
-    ctaBorder: "none",
-    ctaText: "#FAF8F5",
-    ctaHover: "hover:opacity-90",
+    dark: true,
+    featured: true,
+    accentBorder: false,
   },
   {
     key: "passive",
     label: "Passive",
     badge: "Best Value",
-    badgeBg: "#060E1C",
-    badgeText: "#C5A55A",
     price: "15%",
     priceSub: "/ month",
     placementNote: "Placement: FREE every single time ($2,000 value)",
@@ -80,31 +67,38 @@ const plans = [
       "Annual landlord strategy call",
       "Zero risk. Zero vacancy fees. Zero lock-in.",
     ],
-    bg: "#112035",
-    border: "2px solid #C5A55A",
-    textColor: "#C0CAD4",
-    priceColor: "#FAF8F5",
-    ctaBg: "#8B1A1A",
-    ctaBorder: "none",
-    ctaText: "#FAF8F5",
-    ctaHover: "hover:opacity-90",
+    dark: false,
+    featured: false,
+    accentBorder: true,
   },
 ];
 
 function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolean }) {
+  const bg = plan.dark ? "#1F2F3A" : "#FFFFFF";
+  const border = plan.accentBorder ? "2px solid #6A2E35" : plan.dark ? "none" : "1px solid #D8D2C8";
+  const headingColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
+  const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#555555";
+  const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#6A2E35";
+  const checkColor = plan.dark ? "#FAF8F5" : "#6A2E35";
+  const priceColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
+  const placementColor = plan.placementHighlight ? "#6A2E35" : bodyColor;
+  const ctaBg = plan.dark ? "#6A2E35" : plan.accentBorder ? "#6A2E35" : "transparent";
+  const ctaBorder = plan.dark ? "none" : plan.accentBorder ? "none" : "1px solid #D8D2C8";
+  const ctaText = plan.dark || plan.accentBorder ? "#FAF8F5" : "#222222";
+
   return (
     <div
       className={`relative rounded-2xl p-8 flex flex-col ${full ? "h-full" : ""}`}
-      style={{ backgroundColor: plan.bg, border: plan.border }}
+      style={{ backgroundColor: bg, border, boxShadow: plan.featured ? "0 8px 32px rgba(0,0,0,0.18)" : "0 2px 8px rgba(0,0,0,0.05)" }}
     >
       {plan.badge && (
         <div
           className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full"
-          style={{ backgroundColor: plan.badgeBg }}
+          style={{ backgroundColor: plan.dark ? "#6A2E35" : "#1F2F3A" }}
         >
           <p
             className="text-xs font-semibold uppercase tracking-widest"
-            style={{ color: plan.badgeText ?? "#FAF8F5", fontFamily: "var(--font-jakarta)" }}
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             {plan.badge}
           </p>
@@ -112,36 +106,36 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
       )}
 
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: plan.key === "optimized" ? "#C5A55A" : "#9BAEC2", fontFamily: "var(--font-jakarta)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: labelColor, fontFamily: "var(--font-dm-sans)" }}>
           {plan.label}
         </p>
         <div className="flex items-end gap-2 mb-1">
-          <p className="text-6xl font-light" style={{ color: plan.priceColor, fontFamily: "var(--font-cormorant)" }}>
+          <p className="text-6xl font-light" style={{ color: priceColor, fontFamily: "var(--font-cormorant)" }}>
             {plan.price}
           </p>
-          <p className="text-sm mb-2" style={{ color: plan.textColor, fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-sm mb-2" style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}>
             {plan.priceSub}
           </p>
         </div>
         <p
           className="text-sm mb-1"
           style={{
-            color: plan.placementHighlight ? "#C5A55A" : plan.textColor,
+            color: placementColor,
             fontWeight: plan.placementHighlight ? 600 : 400,
-            fontFamily: "var(--font-jakarta)",
+            fontFamily: "var(--font-dm-sans)",
           }}
         >
           {plan.placementNote}
         </p>
-        <p className="text-base mt-4 leading-relaxed" style={{ color: plan.textColor, fontFamily: "var(--font-jakarta)" }}>
+        <p className="text-base mt-4 leading-relaxed" style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}>
           {plan.description}
         </p>
       </div>
 
-      <ul className="space-y-3 mb-8 flex-1" style={{ fontFamily: "var(--font-jakarta)" }}>
+      <ul className="space-y-3 mb-8 flex-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-3 text-base" style={{ color: plan.textColor }}>
-            <span className="text-[#C5A55A] mt-0.5 flex-shrink-0">✓</span>
+          <li key={i} className="flex items-start gap-3 text-sm" style={{ color: bodyColor }}>
+            <span className="mt-0.5 flex-shrink-0" style={{ color: checkColor }}>✓</span>
             {f}
           </li>
         ))}
@@ -149,12 +143,12 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
 
       <Link
         href="/contact"
-        className={`block text-center py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-all ${plan.ctaHover}`}
+        className="block text-center py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
         style={{
-          backgroundColor: plan.ctaBg,
-          border: plan.ctaBorder,
-          color: plan.ctaText,
-          fontFamily: "var(--font-jakarta)",
+          backgroundColor: ctaBg,
+          border: ctaBorder,
+          color: ctaText,
+          fontFamily: "var(--font-dm-sans)",
         }}
       >
         Get Started
@@ -164,22 +158,22 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
 }
 
 export default function PricingCards() {
-  const [active, setActive] = useState(1); // default to Optimized
+  const [active, setActive] = useState(1);
 
   return (
     <>
       {/* Mobile: tab switcher */}
       <div className="md:hidden px-6 mb-6">
-        <div className="flex rounded-xl overflow-hidden border border-[#1E3050]">
+        <div className="flex rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8" }}>
           {plans.map((plan, i) => (
             <button
               key={plan.key}
               onClick={() => setActive(i)}
               className="flex-1 py-3 text-xs uppercase tracking-widest transition-colors font-semibold"
               style={{
-                backgroundColor: active === i ? "#C5A55A" : "#112035",
-                color: active === i ? "#FAF8F5" : "#9BAEC2",
-                fontFamily: "var(--font-jakarta)",
+                backgroundColor: active === i ? "#1F2F3A" : "#FFFFFF",
+                color: active === i ? "#FAF8F5" : "#666666",
+                fontFamily: "var(--font-dm-sans)",
               }}
             >
               {plan.label}

@@ -73,22 +73,22 @@ export default function ListingsPage() {
   const filtered = properties;
 
   return (
-    <>
+    <div style={{ backgroundColor: "#F7F5F2" }}>
       {/* Hero */}
-      <section className="pt-32 pb-14 px-6 bg-[#060E1C] text-[#FAF8F5] text-center">
+      <section className="pt-32 pb-14 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-4">Available Now</p>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light mb-4">
+          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>Available Now</p>
+          <h1 className="text-5xl md:text-6xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Find Your Next Home.
           </h1>
-          <p className="text-white/70 text-sm max-w-md mx-auto">
+          <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Quality rentals across London, St. Thomas, and Strathroy — professionally managed.
           </p>
         </FadeIn>
       </section>
 
       {/* Filter Bar */}
-      <div className="sticky top-20 z-40 bg-[#112035] border-b border-[#1E3050] shadow-sm">
+      <div className="sticky top-[64px] z-40 border-b shadow-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
           {/* City */}
           <div className="flex gap-2 flex-wrap">
@@ -96,34 +96,46 @@ export default function ListingsPage() {
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`px-4 py-2 text-xs rounded-full border transition-colors ${city === c ? "bg-[#8B1A1A] text-white border-[#1A1A1A]" : "border-[#1E3050] text-[#C0CAD4] hover:border-[#FAF8F5]"}`}
+                className="px-4 py-2 text-xs rounded-full border transition-colors"
+                style={{
+                  backgroundColor: city === c ? "#1F2F3A" : "transparent",
+                  borderColor: city === c ? "#1F2F3A" : "#D8D2C8",
+                  color: city === c ? "#FAF8F5" : "#666666",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
               >
                 {c}
               </button>
             ))}
           </div>
 
-          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
+          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
 
           {/* Bedrooms */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-[#9BAEC2]">Beds:</span>
+            <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Beds:</span>
             {BEDS.map((b) => (
               <button
                 key={b}
                 onClick={() => setBeds(b)}
-                className={`px-3 py-1.5 text-xs rounded border transition-colors ${beds === b ? "bg-[#C5A55A] text-white border-[#C5A55A]" : "border-[#1E3050] text-[#C0CAD4] hover:border-[#C5A55A]"}`}
+                className="px-3 py-1.5 text-xs rounded border transition-colors"
+                style={{
+                  backgroundColor: beds === b ? "#6A2E35" : "transparent",
+                  borderColor: beds === b ? "#6A2E35" : "#D8D2C8",
+                  color: beds === b ? "#FAF8F5" : "#666666",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
               >
                 {b}
               </button>
             ))}
           </div>
 
-          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
+          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
 
           {/* Max Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-[#9BAEC2] whitespace-nowrap">Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs whitespace-nowrap" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
             <input
               type="range"
               min={800}
@@ -131,11 +143,11 @@ export default function ListingsPage() {
               step={50}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-28 accent-[#C5A55A]"
+              className="w-28 accent-[#6A2E35]"
             />
           </div>
 
-          <div className="w-px h-6 bg-[#1E3050] hidden md:block" />
+          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
 
           {/* Pet Friendly */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -143,38 +155,38 @@ export default function ListingsPage() {
               type="checkbox"
               checked={petFriendly}
               onChange={(e) => setPetFriendly(e.target.checked)}
-              className="accent-[#C5A55A]"
+              className="accent-[#6A2E35]"
             />
-            <span className="text-xs text-[#C0CAD4]">Pet Friendly</span>
+            <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
           </label>
 
-          <div className="ml-auto text-xs text-[#9BAEC2]">
+          <div className="ml-auto text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
             {loading ? "Loading..." : `${filtered.length} ${filtered.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
       </div>
 
       {/* Listings Grid */}
-      <section className="py-16 px-6 bg-[#0A1628] min-h-[60vh]">
+      <section className="py-16 px-6 min-h-[60vh]" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-6xl mx-auto">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-[#112035] rounded-xl overflow-hidden shadow-sm animate-pulse">
-                  <div className="h-56 bg-[#1E3050]" />
+                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse" style={{ border: "1px solid #D8D2C8" }}>
+                  <div className="h-56" style={{ backgroundColor: "#E8E3DC" }} />
                   <div className="p-6 space-y-3">
-                    <div className="h-4 bg-[#1E3050] rounded w-3/4" />
-                    <div className="h-3 bg-[#1E3050] rounded w-1/2" />
-                    <div className="h-3 bg-[#1E3050] rounded w-1/3" />
+                    <div className="h-4 rounded w-3/4" style={{ backgroundColor: "#E8E3DC" }} />
+                    <div className="h-3 rounded w-1/2" style={{ backgroundColor: "#E8E3DC" }} />
+                    <div className="h-3 rounded w-1/3" style={{ backgroundColor: "#E8E3DC" }} />
                   </div>
                 </div>
               ))}
             </div>
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
-              <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">No listings available right now.</p>
-              <p className="text-sm text-[#C0CAD4] mb-6">We&apos;re working on new properties — check back soon or send us your requirements.</p>
-              <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm rounded hover:opacity-80 transition-colors">
+              <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
+              <p className="text-sm mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 Contact Us
               </Link>
             </div>
@@ -182,7 +194,7 @@ export default function ListingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((p, i) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
-                  <div className="bg-[#112035] rounded-xl overflow-hidden shadow-sm border border-[#1E3050] group hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-xl overflow-hidden group hover:shadow-md transition-shadow" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                     {/* Image */}
                     <div className="relative h-56 overflow-hidden">
                       <Image
@@ -193,18 +205,18 @@ export default function ListingsPage() {
                         unoptimized
                       />
                       <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                        <span className="bg-[#C5A55A] text-white text-xs px-2.5 py-1 rounded-full font-medium">
+                        <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#6A2E35" }}>
                           Available
                         </span>
                         {p.utilities_included && (
-                          <span className="bg-[#C5A55A] text-white text-xs px-2.5 py-1 rounded-full font-medium">
+                          <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#6A2E35" }}>
                             Utilities Incl.
                           </span>
                         )}
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">
-                          <span className="bg-[#112035]/90 text-[#C0CAD4] text-xs px-2 py-1 rounded-full">🐾 Pet OK</span>
+                          <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#555555" }}>🐾 Pet OK</span>
                         </div>
                       )}
                     </div>
@@ -212,27 +224,28 @@ export default function ListingsPage() {
                     {/* Details */}
                     <div className="p-6">
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] leading-tight">{p.title}</h3>
+                        <h3 className="text-xl font-medium leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{p.title}</h3>
                       </div>
-                      <p className="text-xs text-[#C0CAD4] mb-3">{p.address}, {p.city}</p>
+                      <p className="text-xs mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{p.address}, {p.city}</p>
 
                       {/* Specs */}
-                      <div className="flex gap-4 text-xs text-[#9BAEC2] mb-4">
+                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                         <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
                         <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
                         {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
                         {p.parking && <span>🚗 Parking</span>}
                       </div>
 
-                      <p className="text-xs text-[#C0CAD4] leading-relaxed mb-5 line-clamp-2">{p.description}</p>
+                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
 
                       <div className="flex items-center justify-between">
-                        <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5]">
-                          ${p.price.toLocaleString()}<span className="text-sm text-[#9BAEC2] font-sans">/mo</span>
+                        <p className="text-2xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+                          ${p.price.toLocaleString()}<span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/mo</span>
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
-                          className="px-4 py-2 bg-[#8B1A1A] text-white text-xs rounded hover:bg-[#C5A55A] transition-colors"
+                          className="px-4 py-2 text-xs rounded transition-opacity hover:opacity-80"
+                          style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           View Details
                         </Link>
@@ -247,19 +260,19 @@ export default function ListingsPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 px-6 bg-[#112035] text-center border-t border-[#1E3050]">
+      <section className="py-16 px-6 text-center border-t" style={{ backgroundColor: "#1F2F3A", borderColor: "#D8D2C8" }}>
         <FadeIn>
-          <p className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] mb-3">
+          <p className="text-3xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Don&apos;t see what you&apos;re looking for?
           </p>
-          <p className="text-sm text-[#C0CAD4] mb-6">
+          <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 bg-[#C5A55A] text-white text-sm font-medium rounded hover:opacity-80 transition-colors">
+          <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             Contact Us
           </Link>
         </FadeIn>
       </section>
-    </>
+    </div>
   );
 }

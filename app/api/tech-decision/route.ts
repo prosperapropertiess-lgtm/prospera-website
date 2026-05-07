@@ -47,9 +47,9 @@ export async function GET(req: NextRequest) {
           body { font-family: sans-serif; background: #FAF8F5; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
           .card { background: white; border: 1px solid #E8E4DF; padding: 48px; max-width: 480px; text-align: center; }
           .icon { font-size: 48px; margin-bottom: 16px; }
-          h1 { color: #0D1B2A; font-weight: 300; font-size: 28px; margin: 0 0 8px; }
+          h1 { color: #1F2F3A; font-weight: 300; font-size: 28px; margin: 0 0 8px; }
           p { color: #5A5A5A; font-size: 14px; margin: 0 0 24px; line-height: 1.6; }
-          .feature { font-weight: 500; color: #0D1B2A; }
+          .feature { font-weight: 500; color: #1F2F3A; }
           a { color: #7B1C1C; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         </style>
       </head>

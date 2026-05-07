@@ -44,34 +44,34 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
       <JsonLd data={schema} />
 
       {/* Breadcrumb */}
       <div className="pt-28 pb-2 px-6 max-w-5xl mx-auto">
-        <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
-          <Link href="/areas/london" className="hover:underline" style={{ color: "#C5A55A" }}>London</Link>
+        <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+          <Link href="/areas/london" className="hover:underline" style={{ color: "#6A2E35" }}>London</Link>
           {" → "}
-          <span>{n.name}</span>
+          <span style={{ color: "#666666" }}>{n.name}</span>
         </p>
       </div>
 
       {/* Hero */}
-      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="pt-8 pb-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-3xl mx-auto">
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
             London, Ontario · {n.name}
           </p>
           <h1 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in {n.name}
           </h1>
-          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base mb-10 max-w-xl mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             {n.description}
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -79,30 +79,30 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* Rent ranges */}
-      <section className="py-14 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="py-14 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-light mb-10" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-3xl font-light mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             Current Rental Rates in {n.name}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {n.avgRent.studio && (
-              <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
+              <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
+                <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
               </div>
             )}
-            <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
+            <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
+              <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
             </div>
-            <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
-              <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
+            <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
+              <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
             </div>
             {n.avgRent.threeBed && (
-              <div className="bg-[#112035] border p-5" style={{ borderColor: "#1E3050" }}>
-                <p className="text-2xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
+              <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
+                <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
               </div>
             )}
           </div>
@@ -110,36 +110,36 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* About + highlights */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h2 className="text-3xl font-light mb-5" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               About {n.name}
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
-            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
-            <p className="text-sm" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
+            <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
+            <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{n.tenantProfile}</p>
           </div>
           <div>
-            <h3 className="text-xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-5" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Why Landlords Choose {n.name}
             </h3>
             <ul className="space-y-3 mb-8">
               {n.highlights.map((h) => (
-                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#D4DDE8", fontFamily: "var(--font-dm-sans)" }}>
-                  <span style={{ color: "#C5A55A" }}>✓</span>
+                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                  <span style={{ color: "#6A2E35" }}>✓</span>
                   {h}
                 </li>
               ))}
             </ul>
-            <h3 className="text-xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+            <h3 className="text-xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Nearby Amenities
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border" style={{ borderColor: "#1E3050", color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border rounded" style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}
@@ -149,25 +149,25 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#060E1C" }}>
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           Own a Rental in {n.name}?
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
           We manage properties across {n.name} and all of London. Free consultation, no pressure.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
           <Link
             href="/listings"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-opacity hover:opacity-80"
-            style={{ borderColor: "#FAF8F5", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-opacity hover:opacity-80 rounded"
+            style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             View Available Rentals
           </Link>

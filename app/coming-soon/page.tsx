@@ -1,7 +1,7 @@
 export default function ComingSoonPage() {
   return (
-    <div className="min-h-screen bg-[#060E1C] flex flex-col items-center justify-center px-6 text-center">
-      <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-6">London · St. Thomas · Strathroy</p>
+    <div className="min-h-screen bg-[#1F2F3A] flex flex-col items-center justify-center px-6 text-center">
+      <p className="text-xs uppercase tracking-[0.3em] text-[#6A2E35] mb-6">London · St. Thomas · Strathroy</p>
 
       <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-7xl font-light text-white mb-6 leading-tight">
         Something Better<br />Is Coming.
@@ -13,7 +13,7 @@ export default function ComingSoonPage() {
 
       <a
         href="mailto:hello@prosperaproperties.co"
-        className="text-xs uppercase tracking-widest text-[#C5A55A] border border-[#C5A55A]/40 px-8 py-3 hover:bg-[#C5A55A]/10 transition-colors"
+        className="text-xs uppercase tracking-widest text-[#6A2E35] border border-[#6A2E35]/40 px-8 py-3 hover:bg-[#6A2E35]/10 transition-colors rounded"
       >
         Get in touch early
       </a>

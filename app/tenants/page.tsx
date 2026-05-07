@@ -34,21 +34,21 @@ const faqs = [
 
 export default function TenantsPage() {
   return (
-    <>
+    <div style={{ backgroundColor: "#F7F5F2" }}>
       {/* Hero */}
       <section className="relative h-[85vh] flex items-center overflow-hidden">
         <Image src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1600&h=900&fit=crop&auto=format&q=80" alt="Find a home" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-[#2D4A5E]/65" />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(31,47,58,0.65)" }} />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white">
           <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A55A] mb-5">For Tenants</p>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl font-light leading-tight mb-6">
+            <p className="text-xs uppercase tracking-[0.3em] mb-5" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>For Tenants</p>
+            <h1 className="text-5xl md:text-6xl font-light leading-tight mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
               Find a Home<br />You&apos;ll Actually Love.
             </h1>
-            <p className="text-lg text-white/80 mb-10 max-w-2xl leading-relaxed">
+            <p className="text-lg mb-10 max-w-2xl leading-relaxed" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
               Quality rentals in London, St. Thomas, and Strathroy. Professionally managed, well-maintained, and with a team that actually responds.
             </p>
-            <Link href="/listings" className="inline-block px-8 py-4 bg-[#C5A55A] text-white font-medium rounded hover:opacity-80 transition-colors text-sm uppercase tracking-wide">
+            <Link href="/listings" className="inline-block px-8 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Browse Available Rentals
             </Link>
           </FadeIn>
@@ -56,22 +56,22 @@ export default function TenantsPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 px-6 bg-[#0A1628]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">What You Get</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-14">
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What You Get</p>
+            <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Renting with Prospera is different.
             </h2>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((f, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-[#112035] rounded-xl p-8 shadow-sm border border-[#1E3050] flex gap-5">
+                <div className="bg-white rounded-xl p-8 border flex gap-5" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
-                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-medium text-[#FAF8F5] mb-2">{f.title}</h3>
-                    <p className="text-sm text-[#C0CAD4] leading-relaxed">{f.desc}</p>
+                    <h3 className="text-xl font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{f.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{f.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -81,26 +81,26 @@ export default function TenantsPage() {
       </section>
 
       {/* How Renting Works */}
-      <section className="py-24 px-6 bg-[#112035]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">The Process</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-16">How Renting Works</h2>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>The Process</p>
+            <h2 className="text-4xl font-light text-center mb-16" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {steps.map((step, i) => (
               <FadeIn key={step.n} delay={i * 0.15}>
                 <div className="text-center">
-                  <p className="font-[family-name:var(--font-cormorant)] text-6xl font-light text-[#FAF8F5]/40 mb-4">{step.n}</p>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-2xl font-medium text-[#FAF8F5] mb-3">{step.title}</h3>
-                  <p className="text-sm text-[#C0CAD4] leading-relaxed">{step.desc}</p>
+                  <p className="text-6xl font-light mb-4" style={{ color: "rgba(31,47,58,0.15)", fontFamily: "var(--font-cormorant)" }}>{step.n}</p>
+                  <h3 className="text-2xl font-medium mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
           <FadeIn delay={0.3}>
             <div className="text-center mt-14">
-              <Link href="/listings" className="inline-block px-10 py-4 bg-[#C5A55A] text-white font-medium rounded hover:opacity-80 transition-colors text-sm uppercase tracking-wide">
+              <Link href="/listings" className="inline-block px-10 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 See Available Homes
               </Link>
             </div>
@@ -109,18 +109,18 @@ export default function TenantsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-[#0A1628]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4">Common Questions</p>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-4xl font-light text-[#FAF8F5] text-center mb-14">FAQ for Tenants</h2>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
+            <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
       </section>
 
       {/* Blog nudges */}
-      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto space-y-4">
           <BlogNudge
             hook="Who actually pays for utilities in your rental?"
@@ -140,19 +140,19 @@ export default function TenantsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#2D4A5E] py-20 px-6 text-center text-white">
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light mb-5">
+          <h2 className="text-4xl md:text-5xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Ready to find your next home?
           </h2>
-          <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
+          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Browse our available rentals and apply online. We&apos;ll be in touch within 2 business days.
           </p>
-          <Link href="/listings" className="inline-block px-10 py-4 bg-[#112035] text-[#C0CAD4] font-medium rounded hover:bg-[#0D1B2A] transition-colors text-sm uppercase tracking-wide">
+          <Link href="/listings" className="inline-block px-10 py-4 text-sm uppercase tracking-wide rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
             Browse Listings
           </Link>
         </FadeIn>
       </section>
-    </>
+    </div>
   );
 }

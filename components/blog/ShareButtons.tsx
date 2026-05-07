@@ -61,7 +61,7 @@ export default function ShareButtons({ url, title }: Props) {
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs uppercase tracking-widest mr-1" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+      <span className="text-xs uppercase tracking-widest mr-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
         Share
       </span>
       {shares.map((s) => (
@@ -71,8 +71,8 @@ export default function ShareButtons({ url, title }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Share on ${s.label}`}
-          className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
-          style={{ borderColor: "#D4CFC9", color: "#C0CAD4" }}
+          className="flex items-center justify-center w-8 h-8 border rounded transition-colors hover:border-[#6A2E35] hover:text-[#6A2E35]"
+          style={{ borderColor: "#D8D2C8", color: "#666666" }}
         >
           {s.icon}
         </a>
@@ -80,8 +80,8 @@ export default function ShareButtons({ url, title }: Props) {
       <button
         onClick={copyLink}
         aria-label="Copy link"
-        className="flex items-center justify-center w-8 h-8 border transition-colors hover:border-[#C5A55A] hover:text-[#C5A55A]"
-        style={{ borderColor: "#D4CFC9", color: copied ? "#C5A55A" : "#5A5A5A" }}
+        className="flex items-center justify-center w-8 h-8 border rounded transition-colors hover:border-[#6A2E35] hover:text-[#6A2E35]"
+        style={{ borderColor: "#D8D2C8", color: copied ? "#6A2E35" : "#666666" }}
       >
         {copied ? (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

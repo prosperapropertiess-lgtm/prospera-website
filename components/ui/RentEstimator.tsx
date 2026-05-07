@@ -43,25 +43,32 @@ export default function RentEstimator() {
     e.preventDefault();
     if (!email) return;
     setEmailStatus("loading");
-    await fetch("/api/subscribe", {
+    await fetch("/api/rent/request-analysis", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, type: "landlord", preferred_city: city, source: "rent_estimator" }),
+      body: JSON.stringify({ email, city, bedrooms: beds }),
     });
     setEmailStatus("done");
     setEmailSubmitted(true);
   }
 
+  const selectStyle: React.CSSProperties = {
+    borderColor: "#D8D2C8",
+    backgroundColor: "#FFFFFF",
+    color: "#222222",
+    fontFamily: "var(--font-dm-sans)",
+  };
+
   return (
-    <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#0D1B2A" }}>
+    <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8", borderBottom: "1px solid #D8D2C8" }}>
       <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
-        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+        <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
           What Could Your Property Rent For?
         </h2>
-        <p className="text-sm mb-8" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           Get an instant estimate based on current market rents in your city.
         </p>
 
@@ -70,8 +77,8 @@ export default function RentEstimator() {
           <select
             value={city}
             onChange={(e) => { setCity(e.target.value); setResult(null); }}
-            className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-            style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: city ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            className="flex-1 px-4 py-3 text-sm outline-none border rounded"
+            style={selectStyle}
           >
             <option value="">Select city</option>
             <option value="London">London, ON</option>
@@ -82,8 +89,8 @@ export default function RentEstimator() {
           <select
             value={beds}
             onChange={(e) => { setBeds(e.target.value ? Number(e.target.value) : ""); setResult(null); }}
-            className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-            style={{ borderColor: "#1E3050", backgroundColor: "#112035", color: beds !== "" ? "#1A1A1A" : "#9B9B9B", fontFamily: "var(--font-dm-sans)" }}
+            className="flex-1 px-4 py-3 text-sm outline-none border rounded"
+            style={selectStyle}
           >
             <option value="">Bedrooms</option>
             <option value="1">1 Bedroom</option>
@@ -95,8 +102,8 @@ export default function RentEstimator() {
           <button
             onClick={estimate}
             disabled={!city || beds === ""}
-            className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-40 rounded-lg"
-            style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-40 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Estimate
           </button>
@@ -104,24 +111,24 @@ export default function RentEstimator() {
 
         {/* Result */}
         {result && (
-          <div className="border bg-[#112035] p-6 mt-2 rounded-xl" style={{ borderColor: "#1E3050" }}>
+          <div className="border bg-white p-6 mt-2 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
             <div className="flex items-baseline gap-3 mb-3">
-              <p className="text-5xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+              <p className="text-5xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                 ${result.low.toLocaleString()} – ${result.high.toLocaleString()}
               </p>
-              <span className="text-sm" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>/month</span>
+              <span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
-            <p className="text-xs mb-6" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Estimated range for a {beds}-bedroom in {city} based on Q1 2026 market data. Actual rent depends on unit condition, inclusions, and location within the city.
             </p>
 
             {emailSubmitted ? (
-              <p className="text-sm" style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}>
-                ✓ We'll send you a detailed analysis and keep you updated on {city} market trends.
+              <p className="text-sm" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>
+                ✓ Check your inbox — we sent you a personalized analysis link.
               </p>
             ) : (
               <form onSubmit={captureEmail}>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                   Want a detailed breakdown for your specific property?
                 </p>
                 <div className="flex gap-3">
@@ -131,14 +138,14 @@ export default function RentEstimator() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email address"
                     required
-                    className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
-                    style={{ borderColor: "#1E3050", backgroundColor: "#0A1628", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                    className="flex-1 px-4 py-3 text-sm outline-none border rounded"
+                    style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
                   />
                   <button
                     type="submit"
                     disabled={emailStatus === "loading"}
-                    className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 rounded-lg"
-                    style={{ backgroundColor: "#C5A55A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                    className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 rounded"
+                    style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {emailStatus === "loading" ? "..." : "Get Analysis"}
                   </button>

@@ -25,7 +25,7 @@ const areaLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#060E1C", color: "#FAF8F5" }}>
+    <footer style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Column 1: Logo + tagline */}
@@ -91,7 +91,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               Quick Links
             </h3>
@@ -114,7 +114,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               For Landlords
             </h3>
@@ -137,7 +137,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               Service Areas
             </h3>
@@ -160,7 +160,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
             >
               Contact
             </h3>

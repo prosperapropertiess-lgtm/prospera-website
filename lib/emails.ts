@@ -27,14 +27,14 @@ function wrapper(content: string): string {
 
           <!-- Header -->
           <tr>
-            <td class="email-header" style="background-color:#0A1628;padding:28px 40px;">
+            <td class="email-header" style="background-color:#1F2F3A;padding:28px 40px;">
               <p style="margin:0;font-size:20px;font-weight:300;color:#FAF8F5;letter-spacing:1px;">Prospera Properties</p>
-              <p style="margin:6px 0 0;font-size:13px;color:#C5A55A;letter-spacing:1px;">London · St. Thomas · Strathroy</p>
+              <p style="margin:6px 0 0;font-size:13px;color:#6A2E35;letter-spacing:1px;">London · St. Thomas · Strathroy</p>
             </td>
           </tr>
 
           <!-- Gold bar -->
-          <tr><td style="height:3px;background-color:#C5A55A;"></td></tr>
+          <tr><td style="height:3px;background-color:#6A2E35;"></td></tr>
 
           <!-- Body -->
           <tr>
@@ -45,8 +45,8 @@ function wrapper(content: string): string {
 
           <!-- Footer -->
           <tr>
-            <td class="email-footer" style="background-color:#0A1628;padding:24px 40px;">
-              <p style="margin:0 0 6px;font-size:14px;color:rgba(250,248,245,0.6);">Prospera Properties · <a href="mailto:hello@prosperaproperties.co" style="color:#C5A55A;text-decoration:none;">hello@prosperaproperties.co</a></p>
+            <td class="email-footer" style="background-color:#1F2F3A;padding:24px 40px;">
+              <p style="margin:0 0 6px;font-size:14px;color:rgba(250,248,245,0.6);">Prospera Properties · <a href="mailto:hello@prosperaproperties.co" style="color:#6A2E35;text-decoration:none;">hello@prosperaproperties.co</a></p>
               <p style="margin:0;font-size:13px;color:rgba(250,248,245,0.35);"><a href="${BASE_URL}" style="color:rgba(250,248,245,0.35);text-decoration:none;">prosperaproperties.co</a></p>
             </td>
           </tr>
@@ -68,7 +68,7 @@ function bodyText(html: string): string {
 function btn(text: string, url: string): string {
   return `<table cellpadding="0" cellspacing="0" style="margin:28px 0 0;">
     <tr>
-      <td style="background-color:#0A1628;padding:14px 28px;">
+      <td style="background-color:#1F2F3A;padding:14px 28px;">
         <a href="${url}" style="color:#FAF8F5;text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${text}</a>
       </td>
     </tr>
@@ -84,8 +84,8 @@ function divider(): string {
 function tipBox(title: string, body: string): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;">
     <tr>
-      <td style="background-color:#F5F0EB;border-left:3px solid #C5A55A;padding:16px 20px;">
-        <p style="margin:0 0 6px;font-size:11px;color:#C5A55A;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${title}</p>
+      <td style="background-color:#F5F0EB;border-left:3px solid #6A2E35;padding:16px 20px;">
+        <p style="margin:0 0 6px;font-size:11px;color:#6A2E35;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${title}</p>
         <p style="margin:0;font-size:14px;color:#2C2C2C;line-height:1.6;">${body}</p>
       </td>
     </tr>
@@ -104,7 +104,7 @@ export function landlordWelcomeEmail(name: string): string {
 
     <table cellpadding="0" cellspacing="0" style="margin:0 0 36px;">
       <tr>
-        <td style="background-color:#0A1628;padding:18px 36px;border-radius:2px;">
+        <td style="background-color:#1F2F3A;padding:18px 36px;border-radius:2px;">
           <a href="${PDF_URL}" style="color:#FAF8F5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:0.5px;">Download the Addendum (PDF) →</a>
         </td>
       </tr>
@@ -120,8 +120,8 @@ export function landlordWelcomeEmail(name: string): string {
 
     <table cellpadding="0" cellspacing="0" style="margin:0 0 36px;">
       <tr>
-        <td style="background-color:#C5A55A;padding:18px 36px;border-radius:2px;">
-          <a href="${BASE_URL}/landlords" style="color:#0A1628;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:0.5px;">See How It Works →</a>
+        <td style="background-color:#6A2E35;padding:18px 36px;border-radius:2px;">
+          <a href="${BASE_URL}/landlords" style="color:#FAF8F5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:0.5px;">See How It Works →</a>
         </td>
       </tr>
     </table>
@@ -202,6 +202,171 @@ export function contactConfirmationEmail(name: string, type?: string): string {
     ${divider()}
 
     <p style="margin:0;">— Ebin<br/><span style="font-size:13px;color:#9B9B9B;">Founder, Prospera Properties</span></p>
+  `);
+  return wrapper(content);
+}
+
+// ─── RENT ANALYSIS — LINK EMAIL ─────────────────────────────
+
+export function rentAnalysisLinkEmail({
+  name,
+  token,
+  city,
+  bedrooms,
+}: {
+  name?: string | null;
+  token: string;
+  city?: string | null;
+  bedrooms?: number | null;
+}): string {
+  const link = `${BASE_URL}/rent-analysis/${token}`;
+  const bedsLabel = bedrooms ? `${bedrooms}-bedroom ` : "";
+  const cityLabel = city ? ` in ${city}` : "";
+
+  const content = bodyText(`
+    <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
+
+    <p style="margin:0 0 16px;">Your personalized rent analysis link is ready. Fill out the short form and we'll send back a detailed report on your ${bedsLabel}rental${cityLabel} — including where your rent sits relative to the current market.</p>
+
+    <table cellpadding="0" cellspacing="0" style="margin:28px 0;">
+      <tr>
+        <td style="background-color:#6A2E35;padding:18px 36px;border-radius:2px;">
+          <a href="${link}" style="color:#FAF8F5;text-decoration:none;font-size:15px;font-weight:600;letter-spacing:0.5px;">Get Your Rent Analysis →</a>
+        </td>
+      </tr>
+    </table>
+
+    ${tipBox("Note", "This link is personal to you and expires in 7 days. The form takes about 2 minutes to fill out.")}
+
+    ${divider()}
+
+    <p style="margin:0 0 16px;">Once you submit, Claude (our AI analyst) will review your property details and market data — then send you back a written analysis within minutes.</p>
+
+    <p style="margin:0;">Questions? Just reply to this email.<br/>— Ebin, Prospera Properties<br/><span style="font-size:13px;color:#9B9B9B;">(519) 697-1227</span></p>
+  `);
+  return wrapper(content);
+}
+
+// ─── RENT ANALYSIS — REPORT EMAIL ───────────────────────────
+
+export function rentAnalysisReportEmail({
+  name,
+  city,
+  bedrooms,
+  unitType,
+  rentAmount,
+  claudeAnalysis,
+}: {
+  name?: string | null;
+  city: string;
+  bedrooms?: number | null;
+  unitType?: string | null;
+  rentAmount: number;
+  claudeAnalysis: string;
+}): string {
+  const bedsLabel = bedrooms ? `${bedrooms} bed` : "rental";
+  const typeLabel = unitType || "unit";
+
+  const content = bodyText(`
+    <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
+
+    <p style="margin:0 0 20px;">Here's the rent analysis for your property in ${city}. We've looked at your unit's details alongside current market data across Southwest Ontario.</p>
+
+    <!-- Property summary card -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;background-color:#F5F0EB;border-left:3px solid #6A2E35;">
+      <tr>
+        <td style="padding:16px 20px;">
+          <p style="margin:0 0 6px;font-size:11px;color:#6A2E35;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Property</p>
+          <p style="margin:0;font-size:15px;color:#2C2C2C;">${bedsLabel} ${typeLabel} · ${city} · $${rentAmount.toLocaleString()}/mo</p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Analysis -->
+    <p style="margin:0 0 12px;font-size:11px;color:#6A2E35;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Analysis</p>
+    <p style="margin:0 0 24px;font-size:15px;line-height:1.75;color:#2C2C2C;white-space:pre-line;">${claudeAnalysis.replace(/\n\n/g, "</p><p style=\"margin:0 0 16px;font-size:15px;line-height:1.75;color:#2C2C2C;\">")}</p>
+
+    ${divider()}
+
+    <p style="margin:0 0 16px;font-size:14px;color:#2C2C2C;">You're now on our monthly market update list — you'll get a short email once a month showing how rents are moving in ${city}. You can unsubscribe anytime by replying "unsubscribe".</p>
+
+    <p style="margin:0 0 16px;font-size:14px;color:#2C2C2C;">Want someone to handle the whole thing — screening, rent, maintenance — so you never have to think about it? That's what we do.</p>
+
+    ${btn("See How Prospera Works", `${BASE_URL}/landlords`)}
+
+    ${divider()}
+
+    <p style="margin:0;font-size:13px;color:#9B9B9B;">— Ebin Jaison<br/>Founder, Prospera Properties<br/>(519) 697-1227</p>
+  `);
+  return wrapper(content);
+}
+
+// ─── MONTHLY RENT TRENDS EMAIL ───────────────────────────────
+
+export function monthlyRentTrendsEmail({
+  name,
+  city,
+  data,
+  month,
+}: {
+  name?: string | null;
+  city: string;
+  data: Array<{
+    bedrooms: number;
+    median_rent: number | null;
+    trend_direction: string | null;
+    market_narrative: string | null;
+  }>;
+  month: string; // e.g. "May 2026"
+}): string {
+  const citySlug = city.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "");
+  const cityPageUrl = `${BASE_URL}/areas/${citySlug}`;
+
+  const trendLabel = (t: string | null) => {
+    if (t === "up") return "↑ Rising";
+    if (t === "down") return "↓ Falling";
+    if (t === "flat") return "→ Stable";
+    return "—";
+  };
+
+  const rowsHtml = data
+    .map(
+      (row) => `
+    <tr>
+      <td style="padding:14px 16px;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;font-weight:500;">${row.bedrooms} Bedroom</td>
+      <td style="padding:14px 16px;border-bottom:1px solid #E8E4DF;font-size:16px;color:#1F2F3A;font-weight:600;text-align:right;">${row.median_rent ? `$${row.median_rent.toLocaleString()}/mo` : "—"}</td>
+      <td style="padding:14px 16px;border-bottom:1px solid #E8E4DF;font-size:13px;color:#6A2E35;text-align:right;">${trendLabel(row.trend_direction)}</td>
+    </tr>
+    ${row.market_narrative ? `<tr><td colspan="3" style="padding:4px 16px 14px;border-bottom:1px solid #E8E4DF;font-size:13px;color:#5A5A5A;line-height:1.6;">${row.market_narrative}</td></tr>` : ""}
+  `
+    )
+    .join("");
+
+  const content = bodyText(`
+    <p style="margin:0 0 6px;font-size:11px;color:#6A2E35;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${city} Rental Market</p>
+    <p style="margin:0 0 20px;font-size:22px;font-weight:300;color:#1F2F3A;">${month} Update</p>
+
+    <p style="margin:0 0 20px;font-size:14px;color:#2C2C2C;">Hey ${name || "there"}, here's how rents are moving in ${city} this month.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;border:1px solid #E8E4DF;">
+      <thead>
+        <tr style="background-color:#1F2F3A;">
+          <th style="padding:12px 16px;text-align:left;font-size:11px;letter-spacing:1px;color:#6A2E35;font-weight:600;text-transform:uppercase;">Unit</th>
+          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:#6A2E35;font-weight:600;text-transform:uppercase;">Median Rent</th>
+          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:#6A2E35;font-weight:600;text-transform:uppercase;">Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>
+
+    ${btn("See Full Market Data", cityPageUrl)}
+
+    ${divider()}
+
+    <p style="margin:0 0 8px;font-size:13px;color:#9B9B9B;">Data from landlord-reported rents and Prospera's market research across ${city}.</p>
+    <p style="margin:0;font-size:13px;color:#9B9B9B;">To unsubscribe from these monthly updates, reply with "unsubscribe".</p>
   `);
   return wrapper(content);
 }
@@ -385,7 +550,7 @@ export function resourceDownloadEmail(
       <td style="padding:10px 0;border-bottom:1px solid #E8E4DF;">
         <table cellpadding="0" cellspacing="0" width="100%">
           <tr>
-            <td width="28" valign="top" style="font-size:12px;color:#C5A55A;font-weight:700;padding-top:1px;">${i + 1}.</td>
+            <td width="28" valign="top" style="font-size:12px;color:#6A2E35;font-weight:700;padding-top:1px;">${i + 1}.</td>
             <td style="font-size:14px;color:#2C2C2C;line-height:1.6;">${s}</td>
           </tr>
         </table>
@@ -396,8 +561,8 @@ export function resourceDownloadEmail(
   const content = bodyText(`
     <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
 
-    <p style="margin:0 0 8px;font-size:11px;color:#C5A55A;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Download Is Ready</p>
-    <p style="margin:0 0 4px;font-size:22px;font-weight:300;color:#0A1628;">${guide.headline}</p>
+    <p style="margin:0 0 8px;font-size:11px;color:#6A2E35;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Download Is Ready</p>
+    <p style="margin:0 0 4px;font-size:22px;font-weight:300;color:#1F2F3A;">${guide.headline}</p>
 
     <p style="margin:16px 0 24px;font-size:14px;color:#5A5A5A;">${guide.intro}</p>
 

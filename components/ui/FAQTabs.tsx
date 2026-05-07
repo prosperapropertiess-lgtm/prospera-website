@@ -50,7 +50,7 @@ export default function FAQTabs() {
   return (
     <>
       {/* Tabs */}
-      <div className="border-b sticky top-[64px] z-10 px-6" style={{ backgroundColor: "#0A1628", borderColor: "#1E3050" }}>
+      <div className="border-b sticky top-[64px] z-10 px-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
         <div className="max-w-3xl mx-auto flex">
           {TABS.map((tab) => (
             <button
@@ -59,8 +59,8 @@ export default function FAQTabs() {
               className="px-6 py-4 text-xs uppercase tracking-widest border-b-2 transition-colors"
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                borderColor: activeTab === tab ? "#C5A55A" : "transparent",
-                color: activeTab === tab ? "#C5A55A" : "#5A5A5A",
+                borderColor: activeTab === tab ? "#6A2E35" : "transparent",
+                color: activeTab === tab ? "#6A2E35" : "#999999",
               }}
             >
               {tab}
@@ -70,7 +70,7 @@ export default function FAQTabs() {
       </div>
 
       {/* FAQ content */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FAQAccordion items={faqMap[activeTab]} />
         </div>

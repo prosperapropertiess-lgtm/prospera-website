@@ -67,21 +67,21 @@ const valueStack = [
 
 export default function PricingPage() {
   return (
-    <>
+    <div style={{ backgroundColor: "#F7F5F2" }}>
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6 bg-[#0A1628] text-center">
+      <section className="pt-32 pb-16 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
             We only take 3 new properties per month
           </p>
           <h1
-            className="text-5xl md:text-6xl font-light text-[#FAF8F5] mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-cormorant)" }}
+            className="text-5xl md:text-6xl font-light mb-5 leading-tight"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
           >
             Stop Losing Money on Your
             <br />Rental Property.
           </h1>
-          <p className="text-base text-[#C0CAD4] max-w-xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Every vacant month costs you $2,000+. Every maintenance markup costs you hundreds more.
             Every hour you spend managing is an hour you don&apos;t get back.
             We fix all three — starting at 8%.
@@ -90,30 +90,30 @@ export default function PricingPage() {
       </section>
 
       {/* Value Stack */}
-      <section className="pb-16 px-6 bg-[#0A1628]">
+      <section className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
         <div className="max-w-2xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What You&apos;re Actually Getting</p>
-            <h2 className="text-3xl font-light text-[#FAF8F5] text-center mb-10" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What You&apos;re Actually Getting</p>
+            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Everything included. Nothing hidden.
             </h2>
-            <div className="bg-[#112035] border border-[#1E3050] rounded-2xl overflow-hidden">
+            <div className="rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
               {valueStack.map((row, i) => (
-                <div key={i} className={`flex items-center justify-between px-6 py-4 gap-4 ${i < valueStack.length - 1 ? "border-b border-[#1E3050]" : ""}`}>
+                <div key={i} className="flex items-center justify-between px-6 py-4 gap-4" style={{ borderBottom: i < valueStack.length - 1 ? "1px solid #D8D2C8" : "none", backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
                   <div>
-                    <p className="text-sm text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</p>
-                    <p className="text-xs text-[#9BAEC2] mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>{row.note}</p>
+                    <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.note}</p>
                   </div>
-                  <p className="text-sm font-semibold text-[#C5A55A] whitespace-nowrap" style={{ fontFamily: "var(--font-jakarta)" }}>{row.value}</p>
+                  <p className="text-sm font-semibold whitespace-nowrap" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{row.value}</p>
                 </div>
               ))}
-              <div className="flex items-center justify-between px-6 py-5 bg-[#060E1C]">
-                <p className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>With Prospera — all of this goes away</p>
-                <p className="text-sm font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Starting at 8%</p>
+              <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
+                <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>With Prospera — all of this goes away</p>
+                <p className="text-sm font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Starting at 8%</p>
               </div>
-              <div className="flex items-center justify-between px-6 py-5 bg-[#C5A55A]">
-                <p className="text-sm font-semibold text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
-                <p className="text-xl font-bold text-[#FAF8F5]" style={{ fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
+              <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#1F2F3A" }}>
+                <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
+                <p className="text-xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
               </div>
             </div>
           </FadeIn>
@@ -121,43 +121,47 @@ export default function PricingPage() {
       </section>
 
       {/* Plans */}
-      <section className="pb-24 bg-[#0A1628]">
+      <section className="py-20" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <p className="text-xs uppercase tracking-widest text-center mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Choose Your Plan</p>
+            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Simple, transparent pricing.</h2>
+          </FadeIn>
           <PricingCards />
 
           {/* Reassurance bar */}
           <FadeIn delay={0.3}>
-            <div className="p-5 text-center border border-[#1E3050] bg-[#112035] rounded-2xl">
-              <p className="text-sm text-[#C0CAD4]" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <div className="mx-6 p-5 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}>
+              <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
                 All plans include:{" "}
-                <strong className="text-[#FAF8F5]">8% maintenance markup</strong> ·{" "}
-                <strong className="text-[#FAF8F5]">no setup fee</strong> ·{" "}
-                <strong className="text-[#FAF8F5]">no vacancy fee</strong> ·{" "}
-                <strong className="text-[#FAF8F5]">free lease renewal</strong>
+                <strong style={{ color: "#222222" }}>8% maintenance markup</strong> ·{" "}
+                <strong style={{ color: "#222222" }}>no setup fee</strong> ·{" "}
+                <strong style={{ color: "#222222" }}>no vacancy fee</strong> ·{" "}
+                <strong style={{ color: "#222222" }}>free lease renewal</strong>
               </p>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* 21-Day Guarantee */}
-      <section className="py-24 px-6 bg-[#060E1C] text-center">
+      {/* 90-Day Guarantee */}
+      <section className="py-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The 90-Day Happiness Guarantee</p>
-          <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-6 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>The 90-Day Happiness Guarantee</p>
+          <h2 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Not happy in 90 days?
             <br />Walk away. No fees. No questions.
           </h2>
-          <p className="text-[#E8E4DF] text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             If we don&apos;t deliver in your first 90 days — you cancel, we part ways, and you owe us nothing. No cancellation fees, no penalty, no awkward conversation.
           </p>
-          <p className="text-[#FAF8F5] text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
             We offer this because we&apos;re confident we&apos;ll earn your trust long before 90 days is up.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#FAF8F5] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
-            style={{ fontFamily: "var(--font-jakarta)" }}
+            className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Start Risk-Free
           </Link>
@@ -165,63 +169,65 @@ export default function PricingPage() {
       </section>
 
       {/* The Math */}
-      <section className="py-24 px-6 bg-[#0A1628]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Run the Numbers</p>
-            <h2 className="text-4xl font-light text-[#FAF8F5] mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Run the Numbers</p>
+            <h2 className="text-4xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Passive actually costs less.
             </h2>
-            <p className="text-[#C0CAD4] text-base mb-16 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-base mb-16 leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               On a $2,000/month rental, the difference between Managed and Passive is $140/month.
               Free placement saves you $2,000 every vacancy. Do the math — Passive wins after one turnover.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <div className="grid grid-cols-3 gap-px bg-[#1E3050] rounded-2xl overflow-hidden border border-[#1E3050]">
-              <div className="bg-[#0A1628] px-6 py-4 text-left">
-                <p className="text-xs uppercase tracking-widest text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>On $2,000/mo rent</p>
-              </div>
-              <div className="bg-[#0A1628] px-6 py-4 text-center">
-                <p className="text-xs uppercase tracking-widest text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>Managed 8%</p>
-              </div>
-              <div className="bg-[#060E1C] px-6 py-4 text-center">
-                <p className="text-xs uppercase tracking-widest text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>Passive 15%</p>
-              </div>
+            <div className="rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+              <div className="grid grid-cols-3">
+                <div className="px-6 py-4 text-left" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}>
+                  <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>On $2,000/mo rent</p>
+                </div>
+                <div className="px-6 py-4 text-center" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
+                  <p className="text-xs uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Managed 8%</p>
+                </div>
+                <div className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid #D8D2C8" }}>
+                  <p className="text-xs uppercase tracking-widest" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Passive 15%</p>
+                </div>
 
-              {[
-                { label: "Monthly management fee", managed: "$160", passive: "$300" },
-                { label: "Placement fee (per vacancy)", managed: "$2,000", passive: "Free" },
-                { label: "Year 1 total (1 vacancy)", managed: "$3,920", passive: "$3,600" },
-                { label: "You save", managed: "—", passive: "$320 in year 1" },
-              ].map((row, i) => (
-                <>
-                  <div key={`label-${i}`} className="bg-[#112035] px-6 py-4 text-left">
-                    <p className="text-sm text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.label}</p>
-                  </div>
-                  <div key={`managed-${i}`} className="bg-[#112035] px-6 py-4 text-center">
-                    <p className="text-sm text-[#C0CAD4]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.managed}</p>
-                  </div>
-                  <div key={`passive-${i}`} className="bg-[#FAF8F5]/8 px-6 py-4 text-center">
-                    <p className={`text-sm font-semibold ${row.passive === "Free" || row.label === "You save" ? "text-[#C5A55A]" : "text-[#FAF8F5]"}`} style={{ fontFamily: "var(--font-jakarta)" }}>{row.passive}</p>
-                  </div>
-                </>
-              ))}
+                {[
+                  { label: "Monthly management fee", managed: "$160", passive: "$300" },
+                  { label: "Placement fee (per vacancy)", managed: "$2,000", passive: "Free" },
+                  { label: "Year 1 total (1 vacancy)", managed: "$3,920", passive: "$3,600" },
+                  { label: "You save", managed: "—", passive: "$320 in year 1" },
+                ].map((row, i) => (
+                  <>
+                    <div key={`label-${i}`} className="px-6 py-4 text-left" style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
+                      <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.label}</p>
+                    </div>
+                    <div key={`managed-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
+                      <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{row.managed}</p>
+                    </div>
+                    <div key={`passive-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                      <p className="text-sm font-semibold" style={{ color: row.passive === "Free" || row.label === "You save" ? "#6A2E35" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{row.passive}</p>
+                    </div>
+                  </>
+                ))}
+              </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* What it costs to do nothing */}
-      <section className="py-24 px-6 bg-[#112035]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>The Real Cost of Self-Managing</p>
-            <h2 className="text-4xl font-light text-[#FAF8F5] mb-6" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>The Real Cost of Self-Managing</p>
+            <h2 className="text-4xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Every month you wait costs more than you think.
             </h2>
-            <p className="text-[#C0CAD4] text-base mb-14 leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-base mb-14 leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Most landlords underestimate what self-managing actually costs them.
               It&apos;s not just time — it&apos;s the markups you&apos;re paying, the rent you&apos;re leaving on the table,
               and the vacancy days that quietly bleed your returns.
@@ -247,10 +253,10 @@ export default function PricingPage() {
                   detail: "Average hours a landlord spends managing one property. What's your hour worth?",
                 },
               ].map((item, i) => (
-                <div key={i} className="bg-[#0A1628] border border-[#1E3050] rounded-2xl p-6">
-                  <p className="text-xs uppercase tracking-widest text-[#9BAEC2] mb-2" style={{ fontFamily: "var(--font-jakarta)" }}>{item.label}</p>
-                  <p className="text-4xl font-light text-[#FAF8F5] mb-3" style={{ fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
-                  <p className="text-base text-[#C0CAD4] leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>{item.detail}</p>
+                <div key={i} className="bg-white border rounded-xl p-6" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+                  <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{item.label}</p>
+                  <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -259,33 +265,33 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-24 px-6 bg-[#0A1628]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>What Others Charge</p>
-            <h2 className="text-4xl font-light text-[#FAF8F5] text-center mb-4" style={{ fontFamily: "var(--font-cormorant)" }}>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>What Others Charge</p>
+            <h2 className="text-4xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
-            <p className="text-[#C0CAD4] text-sm text-center mb-14" style={{ fontFamily: "var(--font-jakarta)" }}>
+            <p className="text-sm text-center mb-14" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Every one of these is $0 with Prospera.
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="overflow-hidden rounded-2xl border border-[#1E3050]">
+            <div className="overflow-hidden rounded-xl border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#112035] border-b border-[#1E3050]">
-                    <th className="text-left px-6 py-4 text-[#FAF8F5] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Hidden Fee</th>
-                    <th className="text-center px-6 py-4 text-[#C5A55A] font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>Prospera</th>
-                    <th className="text-center px-6 py-4 text-[#9BAEC2] font-medium" style={{ fontFamily: "var(--font-jakarta)" }}>Typical PM</th>
+                  <tr style={{ backgroundColor: "#1F2F3A" }}>
+                    <th className="text-left px-6 py-4 font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Hidden Fee</th>
+                    <th className="text-center px-6 py-4 font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Prospera</th>
+                    <th className="text-center px-6 py-4 font-medium" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>Typical PM</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1E3050]">
+                <tbody>
                   {comparison.map((row, i) => (
-                    <tr key={i} className="hover:bg-[#0D1B2A] transition-colors">
-                      <td className="px-6 py-4 text-[#FAF8F5]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.item}</td>
-                      <td className="px-6 py-4 text-center font-semibold text-[#C5A55A]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.us}</td>
-                      <td className="px-6 py-4 text-center text-[#9BAEC2]" style={{ fontFamily: "var(--font-jakarta)" }}>{row.them}</td>
+                    <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
+                      <td className="px-6 py-4" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</td>
+                      <td className="px-6 py-4 text-center font-semibold" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{row.us}</td>
+                      <td className="px-6 py-4 text-center" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.them}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -296,33 +302,33 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-[#112035]">
+      <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-[#C5A55A] text-center mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>Common Questions</p>
-            <h2 className="text-4xl font-light text-[#FAF8F5] text-center mb-14" style={{ fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
+            <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-[#060E1C] text-center">
+      <section className="py-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest text-[#C5A55A] mb-4" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
             Only 3 spots available this month
           </p>
-          <h2 className="text-4xl md:text-5xl font-light text-[#FAF8F5] mb-5" style={{ fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-4xl md:text-5xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Ready to stop managing
             <br />and start earning?
           </h2>
-          <p className="text-[#E8E4DF] text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ fontFamily: "var(--font-jakarta)" }}>
+          <p className="text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             Free 15-minute call. No pressure. Just an honest conversation about your property and what it could be earning.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 bg-[#C5A55A] text-[#FAF8F5] font-semibold rounded-xl hover:opacity-90 transition-opacity text-sm uppercase tracking-widest"
-            style={{ fontFamily: "var(--font-jakarta)" }}
+            className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Book Your Free Call
           </Link>
@@ -330,7 +336,7 @@ export default function PricingPage() {
       </section>
 
       {/* Blog nudges */}
-      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#0A1628" }}>
+      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto space-y-4">
           <BlogNudge
             hook="Is what you're paying actually normal?"
@@ -348,6 +354,6 @@ export default function PricingPage() {
           />
         </div>
       </section>
-    </>
+    </div>
   );
 }

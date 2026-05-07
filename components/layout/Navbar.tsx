@@ -42,9 +42,8 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "rgba(6,14,28,0.97)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          boxShadow: scrolled ? "0 1px 0 rgba(30,48,80,0.6)" : "none",
+          backgroundColor: "#1F2F3A",
+          boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.12)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
@@ -61,26 +60,28 @@ export default function Navbar() {
                 height: "60px",
                 width: "auto",
                 filter: "brightness(0) invert(1)",
-                transition: "filter 0.3s",
               }}
             />
           </Link>
 
           {/* Desktop nav links */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium tracking-wide transition-colors duration-200"
-                style={{
-                  color: "#FAF8F5",
-                  fontFamily: "var(--font-dm-sans)",
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium tracking-wide transition-colors duration-200 hover:text-white"
+                  style={{
+                    color: isActive ? "#FFFFFF" : "rgba(250,248,245,0.75)",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop login buttons */}
@@ -89,10 +90,10 @@ export default function Navbar() {
               href={BUILDIUM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 rounded-lg"
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 rounded"
               style={{
                 border: "1px solid rgba(250,248,245,0.25)",
-                color: "#FAF8F5",
+                color: "rgba(250,248,245,0.8)",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -102,8 +103,8 @@ export default function Navbar() {
               href={BUILDIUM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] transition-all duration-200 hover:opacity-80 rounded-lg"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
+              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Tenant Login
             </a>
@@ -134,10 +135,11 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile menu — CSS transition, no framer-motion */}
+      {/* Mobile menu */}
       <div
-        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 bg-[#0A1628] lg:hidden transition-all duration-300"
+        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 lg:hidden transition-all duration-300"
         style={{
+          backgroundColor: "#1F2F3A",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "auto" : "none",
           transform: menuOpen ? "translateY(0)" : "translateY(-12px)",
@@ -153,7 +155,7 @@ export default function Navbar() {
                 className="text-2xl font-light block py-1 transition-colors"
                 style={{
                   fontFamily: "var(--font-cormorant)",
-                  color: isActive ? "#C5A55A" : "#FAF8F5",
+                  color: isActive ? "#FAF8F5" : "rgba(250,248,245,0.7)",
                 }}
                 onClick={() => setMenuOpen(false)}
               >
@@ -161,13 +163,13 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <div className="border-t border-[#1E3050] pt-4 flex gap-6">
+          <div className="border-t pt-4 flex gap-6" style={{ borderColor: "rgba(250,248,245,0.12)" }}>
             {mobileSecondaryLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-[#9BAEC2] hover:text-[#FAF8F5] transition-colors"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
+                className="text-sm transition-colors"
+                style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -181,8 +183,8 @@ export default function Navbar() {
             href={BUILDIUM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest border border-[#1E3050] text-[#FAF8F5] rounded-lg"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
+            style={{ border: "1px solid rgba(250,248,245,0.2)", color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >
             Landlord Login
@@ -191,8 +193,8 @@ export default function Navbar() {
             href={BUILDIUM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest bg-[#C5A55A] text-[#FAF8F5] rounded-lg"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >
             Tenant Login

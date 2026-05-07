@@ -62,34 +62,32 @@ const milestones = [
   },
 ];
 
-// ── Card ──────────────────────────────────────────────────────────────────────
-
 function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
   return (
-    <div className="p-5 border rounded-xl" style={{ backgroundColor: "#112035", borderColor: "#1E3050" }}>
+    <div className="p-5 border rounded-xl" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         <span
           className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
         >
           {milestone.era}
         </span>
         <span
           className="text-xs"
-          style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
         >
           {milestone.location}
         </span>
       </div>
       <h3
         className="text-lg font-medium mb-2"
-        style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+        style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
       >
         {milestone.title}
       </h3>
       <p
         className="text-sm leading-relaxed"
-        style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
       >
         {milestone.desc}
       </p>
@@ -97,14 +95,10 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
   );
 }
 
-// ── Winding path connector ─────────────────────────────────────────────────────
-
 function PathSegment({ index }: { index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.7 });
 
-  // Alternating S-curves between the center dots on desktop
-  // Odd connectors curve one way, even curve the other → winding road effect
   const dDesktop =
     index % 2 === 0
       ? "M 50 0 C 18 22, 82 58, 50 80"
@@ -121,7 +115,7 @@ function PathSegment({ index }: { index: number }) {
         >
           <motion.path
             d={dDesktop}
-            stroke="#C5A55A"
+            stroke="#D8D2C8"
             strokeWidth="1.5"
             strokeDasharray="3 9"
             strokeLinecap="round"
@@ -139,7 +133,7 @@ function PathSegment({ index }: { index: number }) {
           <svg width="2" height="48">
             <motion.path
               d="M 1 0 L 1 48"
-              stroke="#C5A55A"
+              stroke="#D8D2C8"
               strokeWidth="1.5"
               strokeDasharray="2 7"
               strokeLinecap="round"
@@ -155,8 +149,6 @@ function PathSegment({ index }: { index: number }) {
   );
 }
 
-// ── Milestone node ─────────────────────────────────────────────────────────────
-
 function MilestoneNode({
   milestone,
   index,
@@ -166,7 +158,7 @@ function MilestoneNode({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.25 });
-  const isRight = index % 2 === 0; // even → card on right side
+  const isRight = index % 2 === 0;
 
   return (
     <div ref={ref}>
@@ -193,9 +185,9 @@ function MilestoneNode({
             transition={{ duration: 0.4, delay: 0.12, type: "spring", stiffness: 200 }}
             className="w-12 h-12 flex items-center justify-center border-2 text-lg"
             style={{
-              borderColor: "#C5A55A",
-              backgroundColor: "#0A1628",
-              color: "#C5A55A",
+              borderColor: "#6A2E35",
+              backgroundColor: "#FFFFFF",
+              color: "#6A2E35",
             }}
           >
             {milestone.icon}
@@ -224,9 +216,9 @@ function MilestoneNode({
           transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
           className="w-10 h-10 flex items-center justify-center border-2 text-sm shrink-0 mt-1"
           style={{
-            borderColor: "#C5A55A",
-            backgroundColor: "#0A1628",
-            color: "#C5A55A",
+            borderColor: "#6A2E35",
+            backgroundColor: "#FFFFFF",
+            color: "#6A2E35",
           }}
         >
           {milestone.icon}
@@ -243,8 +235,6 @@ function MilestoneNode({
     </div>
   );
 }
-
-// ── Export ─────────────────────────────────────────────────────────────────────
 
 export default function MilestoneTimeline() {
   return (

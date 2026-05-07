@@ -41,10 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const categoryColors: Record<string, string> = {
-  "Landlord Tips": "bg-[#8B1A1A] text-[#FAF8F5]",
-  "Tenant Resources": "bg-[#2D4A5E] text-[#FAF8F5]",
-  "Market Updates": "bg-[#C5A55A] text-[#FAF8F5]",
-  "Ontario Law": "bg-[#4A4A4A] text-[#FAF8F5]",
+  "Landlord Tips": "bg-[#6A2E35] text-[#FAF8F5]",
+  "Tenant Resources": "bg-[#1F2F3A] text-[#FAF8F5]",
+  "Market Updates": "bg-[#6A2E35] text-[#FAF8F5]",
+  "Ontario Law": "bg-[#555555] text-[#FAF8F5]",
 };
 
 function splitAtMidpoint(html: string): [string, string] {
@@ -88,31 +88,31 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#0A1628" }} className="min-h-screen">
+    <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
       <JsonLd data={schema} />
 
       {/* Hero */}
-      <section className="pt-32 pb-12 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+      <section className="pt-32 pb-12 px-6" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-3xl mx-auto">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest mb-8 hover:opacity-70 transition-opacity"
-            style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Back to Blog
           </Link>
 
           <div className="flex items-center gap-3 mb-6">
             <span
-              className={`text-xs uppercase tracking-wider px-2 py-1 ${categoryColors[post.category] ?? "bg-[#8B1A1A] text-[#FAF8F5]"}`}
+              className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${categoryColors[post.category] ?? "bg-[#6A2E35] text-[#FAF8F5]"}`}
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {post.category}
             </span>
-            <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
               {post.readTime}
             </span>
-            <span className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
               {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
             </span>
           </div>
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
 
-          <p className="text-lg leading-relaxed" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
             {post.excerpt}
           </p>
         </div>
@@ -141,25 +141,24 @@ export default async function BlogPostPage({ params }: Props) {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(250,248,245,0.4) 100%)" }} />
         </div>
       )}
 
       {/* Author + share bar */}
-      <section className="border-b px-6 py-4" style={{ borderColor: "#1E3050" }}>
+      <section className="border-b px-6 py-4" style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
-              style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               E
             </div>
             <div>
-              <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm font-medium" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                 Ebin Jaison
               </p>
-              <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                 Founder, Prospera Properties
               </p>
             </div>
@@ -169,10 +168,10 @@ export default async function BlogPostPage({ params }: Props) {
       </section>
 
       {/* Content — split with mid-post subscribe form */}
-      <article className="max-w-3xl mx-auto px-6 py-16">
+      <article className="max-w-3xl mx-auto px-6 py-16" style={{ backgroundColor: "#F7F5F2" }}>
         <div
           className="prose-content"
-          style={{ fontFamily: "var(--font-dm-sans)", color: "#D4DDE8" }}
+          style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
           dangerouslySetInnerHTML={{ __html: firstHalf }}
         />
 
@@ -181,13 +180,13 @@ export default async function BlogPostPage({ params }: Props) {
         {secondHalf && (
           <div
             className="prose-content"
-            style={{ fontFamily: "var(--font-dm-sans)", color: "#D4DDE8" }}
+            style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
             dangerouslySetInnerHTML={{ __html: secondHalf }}
           />
         )}
 
         {/* Share again at end of article */}
-        <div className="mt-12 pt-8 border-t" style={{ borderColor: "#1E3050" }}>
+        <div className="mt-12 pt-8 border-t" style={{ borderColor: "#D8D2C8" }}>
           <ShareButtons url={postUrl} title={post.title} />
         </div>
       </article>
@@ -196,18 +195,18 @@ export default async function BlogPostPage({ params }: Props) {
       <BlogSubscribeForm />
 
       {/* Bottom CTA */}
-      <section className="px-6 py-16" style={{ borderColor: "#1E3050" }}>
+      <section className="px-6 py-16" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Property?
           </h2>
-          <p className="text-sm mb-8" style={{ color: "#C0CAD4", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
             We manage rentals across London, St. Thomas, and Strathroy. Get a free, no-obligation quote.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#8B1A1A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
@@ -226,9 +225,9 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
   if (related.length === 0) return null;
 
   return (
-    <section className="py-16 px-6" style={{ backgroundColor: "#0D1B2A" }}>
+    <section className="py-16 px-6" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto">
-        <h3 className="text-2xl font-light mb-10 text-center" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+        <h3 className="text-2xl font-light mb-10 text-center" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
           More Articles
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -236,22 +235,22 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group bg-[#112035] border p-6 hover:shadow-md transition-shadow"
-              style={{ borderColor: "#1E3050" }}
+              className="group bg-white border rounded-xl p-6 hover:shadow-md transition-shadow"
+              style={{ borderColor: "#D8D2C8" }}
             >
               <span
                 className="text-xs uppercase tracking-wider"
-                style={{ color: "#C5A55A", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}
               >
                 {post.category}
               </span>
               <h4
-                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#C5A55A] transition-colors leading-snug"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                className="text-lg font-medium mt-2 mb-2 group-hover:text-[#6A2E35] transition-colors leading-snug"
+                style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
               >
                 {post.title}
               </h4>
-              <p className="text-xs" style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                 {post.readTime} · {new Date(post.date).toLocaleDateString("en-CA", { month: "long", year: "numeric" })}
               </p>
             </Link>

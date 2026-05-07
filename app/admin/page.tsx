@@ -53,9 +53,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1628]">
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
       {/* Top bar */}
-      <div className="bg-[#8B1A1A] text-white px-6 py-4 flex items-center justify-between">
+      <div className="text-white px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="flex items-center gap-4">
           <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera Admin</span>
           <Link href="/admin/dashboard" className="text-xs text-white/50 hover:text-white/80 transition-colors">
@@ -77,14 +77,15 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-3xl text-[#FAF8F5] font-light">Properties</h1>
-            <p className="text-sm text-[#B0B8C4] mt-1">
+            <h1 className="font-[family-name:var(--font-cormorant)] text-3xl font-light" style={{ color: "#1F2F3A" }}>Properties</h1>
+            <p className="text-sm mt-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               {loading ? "Loading..." : `${properties.length} total`}
             </p>
           </div>
           <Link
             href="/admin/properties/new"
-            className="px-5 py-2.5 bg-[#8B1A1A] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors"
+            className="px-5 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "#6A2E35" }}
           >
             + Add Property
           </Link>
@@ -94,50 +95,50 @@ export default function AdminDashboard() {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-16 bg-[#112035] rounded animate-pulse" />
+              <div key={i} className="h-16 rounded animate-pulse" style={{ backgroundColor: "#D8D2C8" }} />
             ))}
           </div>
         ) : properties.length === 0 ? (
-          <div className="text-center py-24 bg-[#112035] rounded-xl border border-[#1E3050]">
-            <p className="font-[family-name:var(--font-cormorant)] text-2xl text-[#FAF8F5] mb-3">No properties yet</p>
-            <p className="text-sm text-[#B0B8C4] mb-6">Add your first property to get started.</p>
-            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 bg-[#8B1A1A] text-white text-xs uppercase tracking-widest rounded hover:bg-[#C5A55A] transition-colors">
+          <div className="text-center py-24 bg-white rounded-xl border" style={{ borderColor: "#D8D2C8" }}>
+            <p className="font-[family-name:var(--font-cormorant)] text-2xl mb-3" style={{ color: "#1F2F3A" }}>No properties yet</p>
+            <p className="text-sm mb-6" style={{ color: "#666666" }}>Add your first property to get started.</p>
+            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: "#6A2E35" }}>
               Add Property
             </Link>
           </div>
         ) : (
-          <div className="bg-[#112035] rounded-xl border border-[#1E3050] overflow-hidden">
+          <div className="bg-white rounded-xl border overflow-hidden" style={{ borderColor: "#D8D2C8" }}>
             {/* Desktop table */}
             <table className="w-full hidden md:table">
               <thead>
-                <tr className="border-b border-[#1E3050]">
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-6 py-4 font-normal w-8"></th>
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-4 py-4 font-normal">Property</th>
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-4 py-4 font-normal">City</th>
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-4 py-4 font-normal">Price</th>
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-4 py-4 font-normal">Beds</th>
-                  <th className="text-left text-xs uppercase tracking-widest text-gray-400 px-4 py-4 font-normal">Status</th>
+                <tr className="border-b" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2" }}>
+                  <th className="text-left text-xs uppercase tracking-widest px-6 py-4 font-normal w-8" style={{ color: "#999999" }}></th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Property</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>City</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Price</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Beds</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Status</th>
                   <th className="px-4 py-4 w-32"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y" style={{ borderColor: "#F7F5F2" }}>
                 {properties.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#0D1B2A] transition-colors group">
+                  <tr key={p.id} className="hover:bg-[#F7F5F2] transition-colors">
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={p.images[0]} alt="" className="w-10 h-10 object-cover rounded" />
                       ) : (
-                        <div className="w-10 h-10 bg-gray-100 rounded flex items-center justify-center text-gray-300 text-lg">🏠</div>
+                        <div className="w-10 h-10 rounded flex items-center justify-center text-lg" style={{ backgroundColor: "#F7F5F2" }}>🏠</div>
                       )}
                     </td>
                     <td className="px-4 py-4">
-                      <p className="text-sm font-medium text-[#FAF8F5]">{p.title}</p>
-                      <p className="text-xs text-gray-400">{p.address}</p>
+                      <p className="text-sm font-medium" style={{ color: "#1F2F3A" }}>{p.title}</p>
+                      <p className="text-xs" style={{ color: "#999999" }}>{p.address}</p>
                     </td>
-                    <td className="px-4 py-4 text-sm text-[#B0B8C4]">{p.city}</td>
-                    <td className="px-4 py-4 text-sm text-[#FAF8F5]">${p.price.toLocaleString()}/mo</td>
-                    <td className="px-4 py-4 text-sm text-[#B0B8C4]">{p.bedrooms} bed</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: "#666666" }}>{p.city}</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: "#222222" }}>${p.price.toLocaleString()}/mo</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: "#666666" }}>{p.bedrooms} bed</td>
                     <td className="px-4 py-4">
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                         {p.available ? "Available" : "Unavailable"}
@@ -145,7 +146,7 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
-                        <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#B0B8C4] hover:text-[#FAF8F5] transition-colors">
+                        <Link href={`/admin/properties/${p.id}`} className="text-xs transition-colors hover:text-[#1F2F3A]" style={{ color: "#999999" }}>
                           Edit
                         </Link>
                         <button
@@ -163,23 +164,23 @@ export default function AdminDashboard() {
             </table>
 
             {/* Mobile cards */}
-            <div className="md:hidden divide-y divide-gray-50">
+            <div className="md:hidden divide-y" style={{ borderColor: "#D8D2C8" }}>
               {properties.map((p) => (
                 <div key={p.id} className="p-5 flex gap-4">
                   {p.images?.[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={p.images[0]} alt="" className="w-16 h-16 object-cover rounded flex-shrink-0" />
                   ) : (
-                    <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-300 flex-shrink-0">🏠</div>
+                    <div className="w-16 h-16 rounded flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F7F5F2" }}>🏠</div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-[#FAF8F5] truncate">{p.title}</p>
-                    <p className="text-xs text-gray-400">{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
+                    <p className="text-sm font-medium truncate" style={{ color: "#1F2F3A" }}>{p.title}</p>
+                    <p className="text-xs" style={{ color: "#999999" }}>{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
                     <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                       {p.available ? "Available" : "Unavailable"}
                     </span>
                     <div className="flex gap-4 mt-2">
-                      <Link href={`/admin/properties/${p.id}`} className="text-xs text-[#B0B8C4] underline">Edit</Link>
+                      <Link href={`/admin/properties/${p.id}`} className="text-xs underline" style={{ color: "#999999" }}>Edit</Link>
                       <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs text-red-400 underline">
                         {deleting === p.id ? "Deleting..." : "Delete"}
                       </button>

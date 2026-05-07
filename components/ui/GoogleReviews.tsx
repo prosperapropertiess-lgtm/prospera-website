@@ -85,7 +85,7 @@ function Stars({ count }: { count: number }) {
   return (
     <div className="flex justify-center gap-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={i < count ? "#C5A55A" : "rgba(197,165,90,0.2)"}>
+        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={i < count ? "#6A2E35" : "rgba(106,46,53,0.2)"}>
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ))}
@@ -117,7 +117,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#9BAEC2] hover:text-[#C5A55A] transition-colors underline"
+          className="text-xs text-[#9BAEC2] hover:text-[#6A2E35] transition-colors underline"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {data.total}+ Google reviews
@@ -143,7 +143,7 @@ function Carousel({ data }: { data: ReviewsData }) {
               &ldquo;{review.text}&rdquo;
             </p>
             <p
-              className="text-xs uppercase tracking-widest text-[#C5A55A]"
+              className="text-xs uppercase tracking-widest text-[#6A2E35]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {review.author}
@@ -162,7 +162,7 @@ function Carousel({ data }: { data: ReviewsData }) {
       <div className="flex items-center justify-center gap-6 mt-10">
         <button
           onClick={prev}
-          className="w-10 h-10 flex items-center justify-center border border-[#1E3050] text-[#FAF8F5] hover:border-[#C5A55A] transition-colors rounded-lg"
+          className="w-10 h-10 flex items-center justify-center border border-white/20 text-[#FAF8F5] hover:border-[#6A2E35] transition-colors rounded-lg"
           aria-label="Previous"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@ function Carousel({ data }: { data: ReviewsData }) {
               onClick={() => setCurrent(i)}
               className="w-2 h-2 rounded-full transition-all duration-200"
               style={{
-                backgroundColor: i === current ? "#C5A55A" : "rgba(197,165,90,0.25)",
+                backgroundColor: i === current ? "#6A2E35" : "rgba(106,46,53,0.2)",
                 transform: i === current ? "scale(1.3)" : "scale(1)",
               }}
               aria-label={`Review ${i + 1}`}
@@ -194,7 +194,7 @@ function Carousel({ data }: { data: ReviewsData }) {
 
         <button
           onClick={next}
-          className="w-10 h-10 flex items-center justify-center border border-[#1E3050] text-[#FAF8F5] hover:border-[#C5A55A] transition-colors rounded-lg"
+          className="w-10 h-10 flex items-center justify-center border border-white/20 text-[#FAF8F5] hover:border-[#6A2E35] transition-colors rounded-lg"
           aria-label="Next"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#9BAEC2] hover:text-[#C5A55A] transition-colors"
+          className="text-xs text-[#9BAEC2] hover:text-[#6A2E35] transition-colors"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           See all reviews on Google →
