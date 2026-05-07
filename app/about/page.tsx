@@ -93,7 +93,7 @@ export default function AboutPage() {
                       </p>
                       <p
                         className="text-xs leading-tight"
-                        style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
                       >
                         0 LTB cases
                       </p>
@@ -269,7 +269,7 @@ export default function AboutPage() {
             </h2>
             <div
               className="space-y-5 text-base leading-relaxed"
-              style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
             >
               <p>
                 The companies that have been around 20 years are managing 300+ properties.
@@ -322,7 +322,7 @@ export default function AboutPage() {
                 </h2>
                 <p
                   className="text-base leading-relaxed mb-4"
-                  style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Every contractor on my list has been tested on a real job — deep cleans,
                   plumbing, full renovation coordination. None of them are marked up beyond
@@ -330,7 +330,7 @@ export default function AboutPage() {
                 </p>
                 <p
                   className="text-base leading-relaxed"
-                  style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   When a furnace goes at 11pm, there&apos;s already a plan. That&apos;s what two
                   years of building looks like.
@@ -400,7 +400,7 @@ export default function AboutPage() {
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                   >
                     {item.desc}
                   </p>

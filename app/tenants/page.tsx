@@ -71,7 +71,7 @@ export default function TenantsPage() {
                   <div className="text-3xl flex-shrink-0">{f.icon}</div>
                   <div>
                     <h3 className="text-xl font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{f.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{f.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{f.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -93,7 +93,7 @@ export default function TenantsPage() {
                 <div className="text-center">
                   <p className="text-6xl font-light mb-4" style={{ color: "rgba(31,47,58,0.15)", fontFamily: "var(--font-cormorant)" }}>{step.n}</p>
                   <h3 className="text-2xl font-medium mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{step.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{step.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{step.desc}</p>
                 </div>
               </FadeIn>
             ))}

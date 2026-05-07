@@ -78,7 +78,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="font-[family-name:var(--font-cormorant)] text-3xl font-light" style={{ color: "#1F2F3A" }}>Properties</h1>
-            <p className="text-sm mt-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mt-1" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               {loading ? "Loading..." : `${properties.length} total`}
             </p>
           </div>
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
         ) : properties.length === 0 ? (
           <div className="text-center py-24 bg-white rounded-xl border" style={{ borderColor: "#D8D2C8" }}>
             <p className="font-[family-name:var(--font-cormorant)] text-2xl mb-3" style={{ color: "#1F2F3A" }}>No properties yet</p>
-            <p className="text-sm mb-6" style={{ color: "#666666" }}>Add your first property to get started.</p>
+            <p className="text-sm mb-6" style={{ color: "#444444" }}>Add your first property to get started.</p>
             <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: "#6A2E35" }}>
               Add Property
             </Link>
@@ -136,9 +136,9 @@ export default function AdminDashboard() {
                       <p className="text-sm font-medium" style={{ color: "#1F2F3A" }}>{p.title}</p>
                       <p className="text-xs" style={{ color: "#999999" }}>{p.address}</p>
                     </td>
-                    <td className="px-4 py-4 text-sm" style={{ color: "#666666" }}>{p.city}</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: "#444444" }}>{p.city}</td>
                     <td className="px-4 py-4 text-sm" style={{ color: "#222222" }}>${p.price.toLocaleString()}/mo</td>
-                    <td className="px-4 py-4 text-sm" style={{ color: "#666666" }}>{p.bedrooms} bed</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: "#444444" }}>{p.bedrooms} bed</td>
                     <td className="px-4 py-4">
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
                         {p.available ? "Available" : "Unavailable"}

@@ -14,7 +14,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   "Landlord Tips":      { bg: "#6A2E35", text: "#FAF8F5" },
   "Tenant Resources":  { bg: "#1F2F3A", text: "#FAF8F5" },
   "Market Updates":    { bg: "#D8D2C8", text: "#222222" },
-  "Ontario Law":       { bg: "#555555", text: "#FAF8F5" },
+  "Ontario Law":       { bg: "#333333", text: "#FAF8F5" },
 };
 
 export default function BlogPage() {
@@ -44,7 +44,7 @@ export default function BlogPage() {
             <span
               key={cat}
               className="px-4 py-1.5 text-xs uppercase tracking-wider border rounded cursor-pointer transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-              style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+              style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}
             >
               {cat}
             </span>
@@ -55,7 +55,7 @@ export default function BlogPage() {
       {/* Post grid */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         {posts.length === 0 ? (
-          <p className="text-center" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-center" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
             No posts yet. Check back soon.
           </p>
         ) : (
@@ -114,7 +114,7 @@ export default function BlogPage() {
                     {/* Excerpt */}
                     <p
                       className="text-sm leading-relaxed flex-1 mb-4"
-                      style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
                     >
                       {post.excerpt}
                     </p>

@@ -52,7 +52,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
         <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
           <Link href="/areas/strathroy" className="hover:underline" style={{ color: "#6A2E35" }}>Strathroy</Link>
           {" → "}
-          <span style={{ color: "#666666" }}>{n.name}</span>
+          <span style={{ color: "#444444" }}>{n.name}</span>
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             <h2 className="text-3xl font-light mb-5" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               About {n.name}
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               {n.longDescription}
             </p>
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Typical Tenant</p>
@@ -128,7 +128,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             </h3>
             <ul className="space-y-3 mb-8">
               {n.highlights.map((h) => (
-                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                <li key={h} className="flex items-center gap-3 text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                   <span style={{ color: "#6A2E35" }}>✓</span>
                   {h}
                 </li>
@@ -139,7 +139,7 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             </h3>
             <div className="flex flex-wrap gap-2">
               {n.nearbyAmenities.map((a) => (
-                <span key={a} className="text-xs px-3 py-1.5 border rounded" style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                <span key={a} className="text-xs px-3 py-1.5 border rounded" style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                   {a}
                 </span>
               ))}

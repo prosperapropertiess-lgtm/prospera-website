@@ -93,7 +93,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate. Everything included. No hidden fees, no maintenance markups.
             </p>
           </FadeIn>
@@ -103,7 +103,7 @@ export default function StroathroyPage() {
                 <div className="bg-white border p-6 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                   <span className="text-2xl mb-3 block">{s.icon}</span>
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{s.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -118,7 +118,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Pricing and tenant profiles differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -129,7 +129,7 @@ export default function StroathroyPage() {
                   <div className="w-1 shrink-0 mt-1 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
               </FadeIn>

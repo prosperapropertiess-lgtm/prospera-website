@@ -66,7 +66,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Why St. Thomas Is Worth Your Attention
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               This isn&apos;t just a bedroom community anymore. St. Thomas is developing its own economic identity.
             </p>
           </FadeIn>
@@ -76,7 +76,7 @@ export default function StThomasPage() {
                 <div className="bg-white border p-6 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                   <span className="text-2xl mb-3 block">{h.icon}</span>
                   <h3 className="text-lg font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{h.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{h.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{h.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -126,7 +126,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               What&apos;s Included in Our Management
             </h2>
-            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               One simple fee covers everything — no hidden charges, no per-repair markups.
             </p>
           </FadeIn>

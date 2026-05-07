@@ -42,7 +42,7 @@ export default function BlogNudge({
           </p>
           <p
             className="text-xs leading-relaxed line-clamp-2"
-            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
           >
             {excerpt}
           </p>

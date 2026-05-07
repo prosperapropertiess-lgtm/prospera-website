@@ -130,7 +130,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#6A2E35" }}>✕</span>
-                    <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -148,7 +148,7 @@ export default function ResourcesPage() {
                 ].map((s) => (
                   <div key={s} className="flex items-start gap-2.5 mb-2.5">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#2A6049" }}>✓</span>
-                    <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
+                    <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{s}</p>
                   </div>
                 ))}
               </div>
@@ -175,7 +175,7 @@ export default function ResourcesPage() {
             </h2>
             <p
               className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
-              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
             >
               Pick your situation. We&apos;ll tell you exactly which form, what it does, and when to use it.
             </p>
@@ -211,7 +211,7 @@ export default function ResourcesPage() {
                         </div>
                         <p
                           className="text-sm leading-relaxed mb-3"
-                          style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {s.plain}
                         </p>
@@ -246,7 +246,7 @@ export default function ResourcesPage() {
                             className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
                             style={{
                               borderColor: "#D8D2C8",
-                              color: "#666666",
+                              color: "#444444",
                               fontFamily: "var(--font-dm-sans)",
                             }}
                           >
@@ -260,7 +260,7 @@ export default function ResourcesPage() {
                           className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A]"
                           style={{
                             borderColor: "#D8D2C8",
-                            color: "#666666",
+                            color: "#444444",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >

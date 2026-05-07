@@ -135,7 +135,7 @@ export default function DashboardPage() {
                     {entry.notes && <p className="text-xs mt-0.5" style={{ color: "#999999" }}>{entry.notes}</p>}
                   </div>
                   <div className="text-right">
-                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: "#F7F5F2", color: "#666666" }}>{entry.method}</span>
+                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: "#F7F5F2", color: "#444444" }}>{entry.method}</span>
                     <p className="text-xs mt-1" style={{ color: "#999999" }}>{new Date(entry.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export default function DashboardPage() {
             <h2 className="font-[family-name:var(--font-cormorant)] text-xl mb-4" style={{ color: "#1F2F3A" }}>Log Outreach</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#666666" }}>Name *</label>
+                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#444444" }}>Name *</label>
                 <input
                   type="text"
                   value={form.contact_name}
@@ -203,7 +203,7 @@ export default function DashboardPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#666666" }}>Method</label>
+                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#444444" }}>Method</label>
                 <div className="flex gap-2 flex-wrap">
                   {METHODS.map((m) => (
                     <button
@@ -212,7 +212,7 @@ export default function DashboardPage() {
                       className="text-xs px-3 py-1.5 rounded border transition-colors"
                       style={{
                         backgroundColor: form.method === m ? "#1F2F3A" : "transparent",
-                        color: form.method === m ? "#FAF8F5" : "#666666",
+                        color: form.method === m ? "#FAF8F5" : "#444444",
                         borderColor: form.method === m ? "#1F2F3A" : "#D8D2C8",
                       }}
                     >
@@ -222,7 +222,7 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#666666" }}>Notes</label>
+                <label className="block text-xs uppercase tracking-widest mb-1" style={{ color: "#444444" }}>Notes</label>
                 <textarea
                   value={form.notes}
                   onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
@@ -237,7 +237,7 @@ export default function DashboardPage() {
               <button
                 onClick={() => setModal(false)}
                 className="flex-1 border py-2 rounded-lg text-sm transition-colors hover:bg-[#F7F5F2]"
-                style={{ borderColor: "#D8D2C8", color: "#666666" }}
+                style={{ borderColor: "#D8D2C8", color: "#444444" }}
               >
                 Cancel
               </button>

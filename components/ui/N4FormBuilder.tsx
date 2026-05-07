@@ -22,7 +22,7 @@ const inputStyle = {
 };
 
 const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5";
-const labelStyle = { color: "#666666", fontFamily: "var(--font-dm-sans)" };
+const labelStyle = { color: "#444444", fontFamily: "var(--font-dm-sans)" };
 
 // Auto-calculate termination date (14 days from notice date, month/year tenants)
 function calcTerminationDate(noticeDate: string): string {
@@ -165,7 +165,7 @@ export default function N4FormBuilder() {
         </div>
         <p
           className="mt-3 text-sm leading-relaxed"
-          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
         >
           Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly — no PDF editor needed.
         </p>
@@ -484,7 +484,7 @@ export default function N4FormBuilder() {
               </h3>
               <p
                 className="text-sm mb-6 leading-relaxed"
-                style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
               >
                 Enter your email to download. We&apos;ll occasionally send you useful landlord tips — no spam, unsubscribe anytime.
               </p>
@@ -507,7 +507,7 @@ export default function N4FormBuilder() {
                   <p className="text-sm font-medium text-left" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                     I&apos;d like Prospera to handle this for me
                   </p>
-                  <p className="text-xs mt-0.5 text-left" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs mt-0.5 text-left" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                     Ebin will reach out within 24 hours — free consultation, no pressure.
                   </p>
                 </div>
@@ -540,7 +540,7 @@ export default function N4FormBuilder() {
                   type="button"
                   onClick={() => setStep("form")}
                   className="text-xs transition-opacity hover:opacity-70"
-                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
                 >
                   ← Go back and edit
                 </button>
@@ -572,7 +572,7 @@ export default function N4FormBuilder() {
               </h3>
               <p
                 className="text-sm mb-8 leading-relaxed"
-                style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
               >
                 Sign it, then serve it to your tenant in person or by mail. Remember to remove the checklist page before serving.
               </p>
@@ -589,7 +589,7 @@ export default function N4FormBuilder() {
                   "Give a copy to every tenant named",
                   "Keep a copy for your records",
                 ].map((tip) => (
-                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                  <p key={tip} className="text-sm flex gap-2" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                     <span style={{ color: "#6A2E35" }}>✓</span> {tip}
                   </p>
                 ))}
@@ -598,7 +598,7 @@ export default function N4FormBuilder() {
                 <button
                   onClick={() => { setStep("form"); }}
                   className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-                  style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fill Another N4
                 </button>

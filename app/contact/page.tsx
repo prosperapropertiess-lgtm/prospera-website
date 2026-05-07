@@ -63,19 +63,19 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Email</p>
-                <a href="mailto:hello@prosperaproperties.co" className="text-sm transition-colors hover:opacity-80 break-all" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                <a href="mailto:hello@prosperaproperties.co" className="text-sm transition-colors hover:opacity-80 break-all" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                   hello@prosperaproperties.co
                 </a>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>Portals</p>
                 <div className="space-y-2">
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>Landlord Portal →</a>
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>Tenant Portal →</a>
+                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Landlord Portal →</a>
+                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Tenant Portal →</a>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Message Received.</p>
-                <p className="text-sm mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>We&apos;ll be in touch within 1 business day.</p>
+                <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>We&apos;ll be in touch within 1 business day.</p>
                 <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>In the meantime, feel free to call us at <a href="tel:+15196971227" className="hover:opacity-80" style={{ color: "#6A2E35" }}>(519) 697-1227</a></p>
               </div>
             ) : (
@@ -107,7 +107,7 @@ export default function ContactPage() {
                       style={{
                         backgroundColor: form.type === t ? "#1F2F3A" : "transparent",
                         borderColor: form.type === t ? "#1F2F3A" : "#D8D2C8",
-                        color: form.type === t ? "#FAF8F5" : "#666666",
+                        color: form.type === t ? "#FAF8F5" : "#444444",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     >
@@ -118,19 +118,19 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Full Name *</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Full Name *</label>
                     <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inputClass} style={inputStyle} placeholder="Your full name" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Email *</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Email *</label>
                     <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputClass} style={inputStyle} placeholder="your@email.com" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Phone</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Phone</label>
                     <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputClass} style={inputStyle} placeholder="(519) 000-0000" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>City</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>City</label>
                     <select value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} className={inputClass} style={inputStyle}>
                       <option value="">Select city...</option>
                       <option>London, ON</option>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs mb-1.5 block" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Message *</label>
+                  <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Message *</label>
                   <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className={inputClass} style={inputStyle} placeholder="Tell us about your property or what you're looking for..." />
                 </div>
 

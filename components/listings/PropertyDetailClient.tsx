@@ -108,7 +108,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
               <h1 className="text-4xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                 {property.title}
               </h1>
-              <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                 {property.address}, {property.city}, ON
               </p>
             </div>
@@ -145,7 +145,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
           {/* Description */}
           <div className="mb-10">
             <h2 className="text-2xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>About This Home</h2>
-            <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               {property.description}
             </p>
           </div>
@@ -180,7 +180,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
           {/* Commute calculator */}
           <div className="mb-10 p-6 border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}>
             <h2 className="text-2xl font-light mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Commute Calculator</h2>
-            <p className="text-sm mb-5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-5" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               How far is this from your workplace, school, or anywhere else?
             </p>
             <div className="flex gap-3">
@@ -222,7 +222,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
               <p className="text-3xl font-light mb-1" style={{ fontFamily: "var(--font-cormorant)", color: "#1F2F3A" }}>
                 ${property.price.toLocaleString()}<span className="text-sm" style={{ color: "#999999" }}>/mo</span>
               </p>
-              <p className="text-xs mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                 {property.bedrooms} bed · {property.bathrooms} bath{property.sqft ? ` · ${property.sqft.toLocaleString()} sqft` : ""}
               </p>
 
@@ -241,7 +241,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
               <Link
                 href={`/contact?property=${encodeURIComponent(property.title)}`}
                 className="block w-full py-3 text-xs uppercase tracking-widest text-center border rounded transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-                style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}
               >
                 Schedule a Viewing
               </Link>

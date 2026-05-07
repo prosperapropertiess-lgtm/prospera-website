@@ -36,7 +36,7 @@ export default function FAQPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Still Have Questions?
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Reach out directly — we answer every inquiry personally, usually within a few hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

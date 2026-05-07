@@ -292,7 +292,7 @@ export default function PropertyForm({ initial }: Props) {
                         onChange={() => toggleUtility(u)}
                         className="accent-[#6A2E35] w-4 h-4"
                       />
-                      <span className="text-sm" style={{ color: "#555555" }}>{u}</span>
+                      <span className="text-sm" style={{ color: "#333333" }}>{u}</span>
                     </label>
                   ))}
                 </div>
@@ -373,7 +373,7 @@ export default function PropertyForm({ initial }: Props) {
             type="button"
             onClick={() => router.push("/admin")}
             className="px-8 py-3 border text-sm rounded transition-colors hover:border-[#1F2F3A]"
-            style={{ borderColor: "#D8D2C8", color: "#666666" }}
+            style={{ borderColor: "#D8D2C8", color: "#444444" }}
           >
             Cancel
           </button>
@@ -386,7 +386,7 @@ export default function PropertyForm({ initial }: Props) {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#666666" }}>
+      <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#444444" }}>
         {label}{required && <span className="ml-0.5" style={{ color: "#6A2E35" }}>*</span>}
       </label>
       {children}

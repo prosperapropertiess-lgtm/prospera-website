@@ -68,7 +68,7 @@ export default function RentEstimator() {
         <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
           What Could Your Property Rent For?
         </h2>
-        <p className="text-sm mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
           Get an instant estimate based on current market rents in your city.
         </p>
 
@@ -118,7 +118,7 @@ export default function RentEstimator() {
               </p>
               <span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
-            <p className="text-xs mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Estimated range for a {beds}-bedroom in {city} based on Q1 2026 market data. Actual rent depends on unit condition, inclusions, and location within the city.
             </p>
 

@@ -132,7 +132,7 @@ export default function PricingPage() {
           {/* Reassurance bar */}
           <FadeIn delay={0.3}>
             <div className="mx-6 p-5 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}>
-              <p className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 All plans include:{" "}
                 <strong style={{ color: "#222222" }}>8% maintenance markup</strong> ·{" "}
                 <strong style={{ color: "#222222" }}>no setup fee</strong> ·{" "}
@@ -176,7 +176,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Passive actually costs less.
             </h2>
-            <p className="text-base mb-16 leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-base mb-16 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               On a $2,000/month rental, the difference between Managed and Passive is $140/month.
               Free placement saves you $2,000 every vacancy. Do the math — Passive wins after one turnover.
             </p>
@@ -189,7 +189,7 @@ export default function PricingPage() {
                   <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>On $2,000/mo rent</p>
                 </div>
                 <div className="px-6 py-4 text-center" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
-                  <p className="text-xs uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Managed 8%</p>
+                  <p className="text-xs uppercase tracking-widest" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Managed 8%</p>
                 </div>
                 <div className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid #D8D2C8" }}>
                   <p className="text-xs uppercase tracking-widest" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Passive 15%</p>
@@ -206,7 +206,7 @@ export default function PricingPage() {
                       <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.label}</p>
                     </div>
                     <div key={`managed-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
-                      <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{row.managed}</p>
+                      <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.managed}</p>
                     </div>
                     <div key={`passive-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
                       <p className="text-sm font-semibold" style={{ color: row.passive === "Free" || row.label === "You save" ? "#6A2E35" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{row.passive}</p>
@@ -227,7 +227,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Every month you wait costs more than you think.
             </h2>
-            <p className="text-base mb-14 leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-base mb-14 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Most landlords underestimate what self-managing actually costs them.
               It&apos;s not just time — it&apos;s the markups you&apos;re paying, the rent you&apos;re leaving on the table,
               and the vacancy days that quietly bleed your returns.
@@ -256,7 +256,7 @@ export default function PricingPage() {
                 <div key={i} className="bg-white border rounded-xl p-6" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                   <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#6A2E35", fontFamily: "var(--font-dm-sans)" }}>{item.label}</p>
                   <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -272,7 +272,7 @@ export default function PricingPage() {
             <h2 className="text-4xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
-            <p className="text-sm text-center mb-14" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm text-center mb-14" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Every one of these is $0 with Prospera.
             </p>
           </FadeIn>

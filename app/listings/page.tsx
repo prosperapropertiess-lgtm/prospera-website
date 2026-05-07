@@ -100,7 +100,7 @@ export default function ListingsPage() {
                 style={{
                   backgroundColor: city === c ? "#1F2F3A" : "transparent",
                   borderColor: city === c ? "#1F2F3A" : "#D8D2C8",
-                  color: city === c ? "#FAF8F5" : "#666666",
+                  color: city === c ? "#FAF8F5" : "#444444",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -122,7 +122,7 @@ export default function ListingsPage() {
                 style={{
                   backgroundColor: beds === b ? "#6A2E35" : "transparent",
                   borderColor: beds === b ? "#6A2E35" : "#D8D2C8",
-                  color: beds === b ? "#FAF8F5" : "#666666",
+                  color: beds === b ? "#FAF8F5" : "#444444",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -135,7 +135,7 @@ export default function ListingsPage() {
 
           {/* Max Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs whitespace-nowrap" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs whitespace-nowrap" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
             <input
               type="range"
               min={800}
@@ -157,7 +157,7 @@ export default function ListingsPage() {
               onChange={(e) => setPetFriendly(e.target.checked)}
               className="accent-[#6A2E35]"
             />
-            <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
+            <span className="text-xs" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
           </label>
 
           <div className="ml-auto text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
@@ -185,7 +185,7 @@ export default function ListingsPage() {
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
               <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
-              <p className="text-sm mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
               <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#6A2E35", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 Contact Us
               </Link>
@@ -216,7 +216,7 @@ export default function ListingsPage() {
                       </div>
                       {p.pet_friendly && (
                         <div className="absolute top-3 right-3">
-                          <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#555555" }}>🐾 Pet OK</span>
+                          <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#333333" }}>🐾 Pet OK</span>
                         </div>
                       )}
                     </div>
@@ -229,14 +229,14 @@ export default function ListingsPage() {
                       <p className="text-xs mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{p.address}, {p.city}</p>
 
                       {/* Specs */}
-                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                         <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
                         <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
                         {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
                         {p.parking && <span>🚗 Parking</span>}
                       </div>
 
-                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
+                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
 
                       <div className="flex items-center justify-between">
                         <p className="text-2xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>

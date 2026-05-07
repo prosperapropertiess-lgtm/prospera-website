@@ -118,7 +118,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#1F2F3A" }}>
                     You&apos;re in.
                   </p>
-                  <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                     {isLandlord
                       ? "We'll be in touch with tips and market updates."
                       : "We'll notify you when new listings match your search."}
@@ -228,7 +228,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       {/* Subtext */}
                       <p
                         className="text-sm mb-6 leading-relaxed"
-                        style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                       >
                         New listings go fast. Get notified by email the moment one hits your city.
                       </p>

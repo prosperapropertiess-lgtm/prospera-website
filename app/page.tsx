@@ -209,7 +209,7 @@ function PainPoints() {
                   <p className="font-medium mb-1 text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                     {pain.label}
                   </p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                     {pain.sub}
                   </p>
                 </div>
@@ -285,7 +285,7 @@ function FeatureCards() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {f.desc}
                 </p>
@@ -381,7 +381,7 @@ function HowItWorks() {
                   {phase.steps.map((step, j) => (
                     <li key={j} className="flex items-start gap-2.5">
                       <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#6A2E35" }} />
-                      <span className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                      <span className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                         {step}
                       </span>
                     </li>
@@ -451,7 +451,7 @@ function CaseStudy() {
           </h2>
           <p
             className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
-            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
           >
             An owner was renting rooms individually with all utilities included.
             Tenants had zero reason to conserve. Bills were skyrocketing. He
@@ -476,7 +476,7 @@ function CaseStudy() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#C09090" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -498,7 +498,7 @@ function CaseStudy() {
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="shrink-0 text-xs mt-1" style={{ color: "#6A2E35" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -584,7 +584,7 @@ function CTABanner() {
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
-          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
         >
           Free consultation. Honest assessment. No pressure. Just a
           straightforward conversation about what your property could look like

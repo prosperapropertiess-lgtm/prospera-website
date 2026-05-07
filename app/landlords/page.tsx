@@ -156,7 +156,7 @@ export default function LandlordsPage() {
                 <div className="bg-[#F7F5F2] border p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
                   <span className="block text-2xl mb-4" style={{ color: "#6A2E35" }}>{p.icon}</span>
                   <h3 className="font-semibold text-base mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{p.label}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{p.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{p.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -188,7 +188,7 @@ export default function LandlordsPage() {
                     <h3 className="text-xl font-medium mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                       {step.desc}
                     </p>
                   </div>
@@ -216,7 +216,7 @@ export default function LandlordsPage() {
               <br />
               <em>No hidden fees. Ever.</em>
             </h2>
-            <p className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Zero setup fee. Lease renewal always free. The only number you pay is the one listed below.
             </p>
           </FadeIn>
@@ -225,7 +225,7 @@ export default function LandlordsPage() {
 
           <FadeIn delay={0.2}>
             <div className="mx-5 sm:mx-8 mt-4 p-6 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2" }}>
-              <p className="text-sm leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 All plans include: <strong style={{ color: "#222222" }}>8% maintenance markup</strong> · <strong style={{ color: "#222222" }}>no setup fee</strong> · <strong style={{ color: "#222222" }}>no vacancy fee</strong> · <strong style={{ color: "#222222" }}>free lease renewal</strong>
               </p>
             </div>

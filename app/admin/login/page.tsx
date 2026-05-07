@@ -40,7 +40,7 @@ export default function AdminLogin() {
 
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl border space-y-5" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
           <div>
-            <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
               Password
             </label>
             <input

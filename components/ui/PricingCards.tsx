@@ -77,7 +77,7 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
   const bg = plan.dark ? "#1F2F3A" : "#FFFFFF";
   const border = plan.accentBorder ? "2px solid #6A2E35" : plan.dark ? "none" : "1px solid #D8D2C8";
   const headingColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
-  const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#555555";
+  const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#333333";
   const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#6A2E35";
   const checkColor = plan.dark ? "#FAF8F5" : "#6A2E35";
   const priceColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
@@ -172,7 +172,7 @@ export default function PricingCards() {
               className="flex-1 py-3 text-xs uppercase tracking-widest transition-colors font-semibold"
               style={{
                 backgroundColor: active === i ? "#1F2F3A" : "#FFFFFF",
-                color: active === i ? "#FAF8F5" : "#666666",
+                color: active === i ? "#FAF8F5" : "#444444",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >

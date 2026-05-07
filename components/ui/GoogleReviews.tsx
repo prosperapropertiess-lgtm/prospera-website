@@ -108,7 +108,7 @@ function Carousel({ data }: { data: ReviewsData }) {
       <div className="flex items-center justify-center gap-3 mb-12">
         <Stars count={5} />
         <span
-          className="text-2xl font-light text-[#FAF8F5]"
+          className="text-2xl font-light text-[#1F2F3A]"
           style={{ fontFamily: "var(--font-cormorant)" }}
         >
           {data.rating.toFixed(1)}
@@ -117,7 +117,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#9BAEC2] hover:text-[#6A2E35] transition-colors underline"
+          className="text-xs text-[#999999] hover:text-[#6A2E35] transition-colors underline"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {data.total}+ Google reviews
@@ -137,7 +137,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           >
             <Stars count={review.rating} />
             <p
-              className="text-xl sm:text-2xl font-light leading-relaxed my-6 text-[#FAF8F5]"
+              className="text-xl sm:text-2xl font-light leading-relaxed my-6 text-[#1F2F3A]"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               &ldquo;{review.text}&rdquo;
@@ -149,7 +149,7 @@ function Carousel({ data }: { data: ReviewsData }) {
               {review.author}
             </p>
             <p
-              className="text-xs text-[#9BAEC2] mt-1"
+              className="text-xs text-[#888888] mt-1"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {review.time} · Google
@@ -162,7 +162,7 @@ function Carousel({ data }: { data: ReviewsData }) {
       <div className="flex items-center justify-center gap-6 mt-10">
         <button
           onClick={prev}
-          className="w-10 h-10 flex items-center justify-center border border-white/20 text-[#FAF8F5] hover:border-[#6A2E35] transition-colors rounded-lg"
+          className="w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] hover:border-[#6A2E35] transition-colors rounded-lg"
           aria-label="Previous"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -187,14 +187,14 @@ function Carousel({ data }: { data: ReviewsData }) {
         </div>
         <p
           className="sm:hidden text-xs tabular-nums"
-          style={{ color: "#9BAEC2", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}
         >
           {current + 1} / {reviews.length}
         </p>
 
         <button
           onClick={next}
-          className="w-10 h-10 flex items-center justify-center border border-white/20 text-[#FAF8F5] hover:border-[#6A2E35] transition-colors rounded-lg"
+          className="w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] hover:border-[#6A2E35] transition-colors rounded-lg"
           aria-label="Next"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#9BAEC2] hover:text-[#6A2E35] transition-colors"
+          className="text-xs text-[#888888] hover:text-[#6A2E35] transition-colors"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           See all reviews on Google →
