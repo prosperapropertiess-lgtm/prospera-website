@@ -9,14 +9,17 @@ interface Particle {
   vy: number;
 }
 
-const PARTICLE_COUNT = 55;
-const MAX_DIST = 140;
+const PARTICLE_COUNT = 35;
+const MAX_DIST = 120;
 const SPEED = 0.35;
 
 export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Skip on mobile — saves ~2s main-thread work, directly improves LCP/TBT
+    if (window.innerWidth < 768) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");

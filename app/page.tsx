@@ -47,9 +47,9 @@ function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 1, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
