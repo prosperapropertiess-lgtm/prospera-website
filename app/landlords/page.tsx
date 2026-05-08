@@ -141,7 +141,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               The Real Problems
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -168,7 +168,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               The Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -208,7 +208,7 @@ export default function LandlordsPage() {
       <section id="pricing" className="py-24" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               Transparent Pricing
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight px-5 sm:px-8" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -237,7 +237,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               Common Questions
             </p>
             <h2 className="text-4xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>

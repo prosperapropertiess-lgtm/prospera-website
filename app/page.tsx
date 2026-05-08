@@ -476,7 +476,7 @@ function CaseStudy() {
 
           <FadeIn delay={0.2}>
             <div className="p-8 border rounded-xl" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                 After Prospera
               </p>
               <ul className="space-y-4">

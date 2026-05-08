@@ -147,7 +147,7 @@ export default function RentAnalysisPage() {
   if (submitted) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center" style={{ backgroundColor: "#F7F5F2" }}>
-        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>
+        <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 16 }}>
           Analysis Submitted
         </p>
         <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, marginBottom: 16, maxWidth: 480 }}>
@@ -158,7 +158,7 @@ export default function RentAnalysisPage() {
         </p>
         <Link
           href="/"
-          style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none" }}
+          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none" }}
         >
           Back to Prospera Properties →
         </Link>
@@ -221,13 +221,13 @@ export default function RentAnalysisPage() {
         <p style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", fontSize: 22, fontWeight: 300, margin: 0 }}>
           Prospera Properties
         </p>
-        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "4px 0 0" }}>
+        <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "4px 0 0" }}>
           London · St. Thomas · Strathroy
         </p>
       </div>
 
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "48px 24px 80px" }}>
-        <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
+        <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
           Free Rent Analysis
         </p>
         <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, marginBottom: 8, lineHeight: 1.2 }}>

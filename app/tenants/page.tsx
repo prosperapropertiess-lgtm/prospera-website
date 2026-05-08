@@ -59,7 +59,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>What You Get</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>What You Get</p>
             <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Renting with Prospera is different.
             </h2>
@@ -84,7 +84,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>The Process</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>The Process</p>
             <h2 className="text-4xl font-light text-center mb-16" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How Renting Works</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -112,7 +112,7 @@ export default function TenantsPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
             <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>FAQ for Tenants</h2>
           </FadeIn>
           <FAQAccordion items={faqs} />

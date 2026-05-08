@@ -117,7 +117,7 @@ export default function ResourcesPage() {
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-7 rounded-xl border" style={{ borderColor: "#F0C4C4", backgroundColor: "#FDF9F9" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
                   Before This Tool
                 </p>
                 {[

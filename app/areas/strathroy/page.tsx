@@ -80,7 +80,7 @@ export default function StroathroyPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>

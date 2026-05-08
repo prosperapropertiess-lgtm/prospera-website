@@ -88,21 +88,21 @@ export default async function StrathroyNeighbourhoodPage({ params }: Props) {
             {n.avgRent.studio && (
               <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
                 <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.studio}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Studio /mo</p>
               </div>
             )}
             <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
               <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.oneBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>1 Bed /mo</p>
             </div>
             <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
               <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.twoBed}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>2 Bed /mo</p>
             </div>
             {n.avgRent.threeBed && (
               <div className="bg-[#F7F5F2] border p-5 rounded-xl" style={{ borderColor: "#D8D2C8" }}>
                 <p className="text-2xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{n.avgRent.threeBed}</p>
-                <p className="text-xs uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>3 Bed /mo</p>
               </div>
             )}
           </div>

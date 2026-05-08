@@ -56,23 +56,23 @@ export default function ContactPage() {
           <FadeIn>
             <div className="space-y-10">
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Phone</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Phone</p>
                 <a href="tel:5196971227" className="text-2xl font-light transition-colors hover:opacity-80" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                   (519) 697-1227
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Email</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Email</p>
                 <a href="mailto:hello@prosperaproperties.co" className="text-sm transition-colors hover:opacity-80 break-all" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                   hello@prosperaproperties.co
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
                 <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Portals</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Portals</p>
                 <div className="space-y-2">
                   <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Landlord Portal →</a>
                   <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Tenant Portal →</a>
