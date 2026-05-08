@@ -198,9 +198,11 @@ function PainPoints() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pains.map((pain, i) => (
             <FadeIn key={i} delay={i * 0.08}>
-              <div
+              <motion.div
                 className="p-7 border rounded-xl"
                 style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #8B2030", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
               >
                 <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.label}
@@ -208,7 +210,7 @@ function PainPoints() {
                 <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.sub}
                 </p>
-              </div>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
@@ -267,6 +269,7 @@ function FeatureCards() {
                 className="bg-white p-8 border h-full cursor-default rounded-xl"
                 style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
                 whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
+                whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
               >
                 <span className="block text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#D8D2C8", fontFamily: "var(--font-dm-sans)" }}>

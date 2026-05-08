@@ -7,6 +7,8 @@ import Footer from "@/components/layout/Footer";
 
 const PopupController = dynamic(() => import("@/components/ui/PopupController"), { ssr: false });
 const ChatWidget = dynamic(() => import("@/components/ui/ChatWidget"), { ssr: false });
+const ScrollProgress = dynamic(() => import("@/components/ui/ScrollProgress"), { ssr: false });
+const StickyBottomCTA = dynamic(() => import("@/components/ui/StickyBottomCTA"), { ssr: false });
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -14,11 +16,13 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <ScrollProgress />
       {!isAdmin && <Navbar />}
       <main className="flex-1">{children}</main>
       {!isAdmin && <Footer />}
       {!isAdmin && <PopupController />}
       {!isAdmin && <ChatWidget />}
+      {!isAdmin && <StickyBottomCTA />}
     </>
   );
 }

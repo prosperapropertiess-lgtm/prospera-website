@@ -102,6 +102,12 @@ function Carousel({ data }: { data: ReviewsData }) {
 
   const review = reviews[current];
 
+  function handleDragEnd(_: unknown, info: { offset: { x: number }; velocity: { x: number } }) {
+    const swipe = info.offset.x + info.velocity.x * 0.3;
+    if (swipe < -40) next();
+    else if (swipe > 40) prev();
+  }
+
   return (
     <div>
       {/* Aggregate score */}
@@ -124,16 +130,20 @@ function Carousel({ data }: { data: ReviewsData }) {
         </a>
       </div>
 
-      {/* Review card */}
-      <div className="relative min-h-[200px]">
+      {/* Swipeable review card */}
+      <div className="relative min-h-[200px] overflow-hidden touch-pan-y">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.3 }}
-            className="text-center"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.15}
+            onDragEnd={handleDragEnd}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="text-center cursor-grab active:cursor-grabbing select-none"
           >
             <Stars count={review.rating} />
             <p
@@ -143,8 +153,8 @@ function Carousel({ data }: { data: ReviewsData }) {
               &ldquo;{review.text}&rdquo;
             </p>
             <p
-              className="text-xs uppercase tracking-widest text-[#8B2030]"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
+              className="text-xs uppercase tracking-widest"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
             >
               {review.author}
             </p>
@@ -158,8 +168,13 @@ function Carousel({ data }: { data: ReviewsData }) {
         </AnimatePresence>
       </div>
 
+      {/* Swipe hint — mobile only, fades after first swipe */}
+      <p className="sm:hidden text-center text-xs mt-4" style={{ color: "#D8D2C8", fontFamily: "var(--font-dm-sans)" }}>
+        ← swipe to browse →
+      </p>
+
       {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mt-10">
+      <div className="flex items-center justify-center gap-6 mt-6">
         <button
           onClick={prev}
           className="w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] hover:border-[#8B2030] transition-colors rounded-lg"
@@ -170,8 +185,8 @@ function Carousel({ data }: { data: ReviewsData }) {
           </svg>
         </button>
 
-        {/* Dots on sm+, counter on mobile */}
-        <div className="hidden sm:flex gap-2">
+        {/* Dots */}
+        <div className="flex gap-2">
           {reviews.map((_, i) => (
             <button
               key={i}
@@ -185,12 +200,6 @@ function Carousel({ data }: { data: ReviewsData }) {
             />
           ))}
         </div>
-        <p
-          className="sm:hidden text-xs tabular-nums"
-          style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}
-        >
-          {current + 1} / {reviews.length}
-        </p>
 
         <button
           onClick={next}
