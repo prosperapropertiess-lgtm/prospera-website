@@ -8,6 +8,7 @@ export interface RentToken {
   token: string;
   email: string;
   name: string | null;
+  phone: string | null;
   city: string | null;
   bedrooms: number | null;
   created_at: string;
@@ -17,20 +18,50 @@ export interface RentToken {
 
 export interface RentSubmission {
   city: string;
+  city_zone?: string | null;
   address?: string | null;
-  unit_type?: string | null;
+  property_type?: string | null;
   bedrooms?: number | null;
   bathrooms?: number | null;
+  half_bathrooms?: number | null;
   sqft?: number | null;
   floor?: number | null;
-  parking?: boolean | null;
+  building_era?: string | null;
+  units_in_building?: number | null;
+  separate_entrance?: boolean | null;
+  garage?: string | null;
+  parking_spots?: number | null;
+  visitor_parking?: boolean | null;
+  backyard?: boolean | null;
+  balcony?: boolean | null;
+  lawn_care?: string | null;
+  furnished?: string | null;
+  heat_type?: string | null;
+  ac_type?: string | null;
+  appliance_fridge?: boolean | null;
+  appliance_stove?: boolean | null;
+  appliance_dishwasher?: boolean | null;
+  appliance_washer?: boolean | null;
+  appliance_dryer?: boolean | null;
   laundry?: string | null;
-  utilities_included?: boolean | null;
+  utilities_included?: string | null;
   pet_friendly?: boolean | null;
+  amenities?: string | null;
+  condo_fees_included?: boolean | null;
+  newly_renovated?: boolean | null;
+  upkeep_rating?: number | null;
   rent_amount: number;
   is_asking_rent?: boolean;
+  previous_rent?: number | null;
   is_occupied?: boolean | null;
   last_rent_increase?: string | null;
+  neighbouring_rent?: number | null;
+  lease_preference?: string | null;
+  available_date?: string | null;
+  transit_distance_min?: number | null;
+  landlord_style?: string | null;
+  special_features?: string | null;
+  remarks?: string | null;
 }
 
 export interface MarketData {
@@ -56,51 +87,74 @@ export async function validateRentToken(token: string): Promise<RentToken | null
   return data as RentToken;
 }
 
+function yn(val: boolean | null | undefined): string {
+  if (val === true) return "yes";
+  if (val === false) return "no";
+  return "not specified";
+}
+
 export async function generatePropertyAnalysis(
   submission: RentSubmission,
   marketData: MarketData | null
 ): Promise<string> {
   const bedsLabel = submission.bedrooms ? `${submission.bedrooms}-bedroom` : "rental";
-  const unitTypeLabel = submission.unit_type || "unit";
 
-  const marketContext =
-    marketData && marketData.median_rent
-      ? `Market data for ${marketData.city}, ${bedsLabel} units (${marketData.submission_count} reports, last 90 days):
+  const appliances = [
+    submission.appliance_fridge && "fridge",
+    submission.appliance_stove && "stove",
+    submission.appliance_dishwasher && "dishwasher",
+    submission.appliance_washer && "washer",
+    submission.appliance_dryer && "dryer",
+  ].filter(Boolean).join(", ") || "not specified";
+
+  const marketContext = marketData?.median_rent
+    ? `Market data for ${marketData.city}, ${bedsLabel} units (${marketData.submission_count} reports, last 90 days):
 - 25th percentile: $${marketData.p25_rent}/mo
 - Median: $${marketData.median_rent}/mo
 - 75th percentile: $${marketData.p75_rent}/mo
 - Trend: ${marketData.trend_direction || "insufficient data"}`
-      : `No aggregated market data yet for this city/bedroom combination — use your general knowledge of Ontario rental markets in London, St. Thomas, and Strathroy.`;
+    : `No aggregated market data yet — use your knowledge of Ontario rental markets in London, St. Thomas, and Strathroy.`;
 
-  const prompt = `You are a rental market expert in Ontario, Canada. A landlord has submitted details about their property for a rent analysis. Write a personalized 3–4 paragraph analysis in plain prose (no bullet points, no markdown, no headers). Be specific with dollar amounts. Be direct and actionable.
+  const prompt = `You are a rental market expert in Ontario, Canada. A landlord submitted detailed property information for a rent analysis. Write a personalized 3–4 paragraph analysis in plain prose. No bullet points, no markdown, no headers. Be specific with dollar amounts. Be direct and actionable.
 
-Property details:
-- City: ${submission.city}
-- Unit type: ${unitTypeLabel}
-- Bedrooms: ${submission.bedrooms ?? "not specified"}
-- Bathrooms: ${submission.bathrooms ?? "not specified"}
-- Square footage: ${submission.sqft ?? "not specified"}
-- Floor: ${submission.floor ?? "not specified"}
-- Parking: ${submission.parking ? "yes" : submission.parking === false ? "no" : "not specified"}
-- Laundry: ${submission.laundry ?? "not specified"}
-- Utilities included: ${submission.utilities_included ? "yes" : submission.utilities_included === false ? "no" : "not specified"}
-- Pet friendly: ${submission.pet_friendly ? "yes" : submission.pet_friendly === false ? "no" : "not specified"}
-- ${submission.is_asking_rent ? "Asking rent" : "Current tenant rent"}: $${submission.rent_amount}/mo
-- Currently occupied: ${submission.is_occupied ? "yes" : submission.is_occupied === false ? "no" : "not specified"}
+PROPERTY DETAILS:
+Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
+Type: ${submission.property_type || "not specified"} | ${bedsLabel} | ${submission.bathrooms ?? "?"}bd + ${submission.half_bathrooms ?? 0} half bath
+Sqft: ${submission.sqft ?? "not specified"} | Floor: ${submission.floor ?? "n/a"} | Built: ${submission.building_era?.replace(/_/g, " ") ?? "not specified"}
+Units in building: ${submission.units_in_building ?? "not specified"} | Separate entrance: ${yn(submission.separate_entrance)}
+
+Parking: ${submission.garage !== "none" ? `${submission.garage?.replace("_", " ")} garage` : "no garage"}, ${submission.parking_spots ?? 0} spot(s), visitor parking: ${yn(submission.visitor_parking)}
+Outdoor: backyard ${yn(submission.backyard)}, balcony ${yn(submission.balcony)}, lawn care: ${submission.lawn_care?.replace("_", " ") ?? "not specified"}
+
+Furnished: ${submission.furnished?.replace("_", " ") ?? "unfurnished"} | Heat: ${submission.heat_type ?? "not specified"} | AC: ${submission.ac_type?.replace("_", " ") ?? "not specified"}
+Appliances included: ${appliances}
+Laundry: ${submission.laundry ?? "not specified"} | Utilities: ${submission.utilities_included ?? "not specified"}
+Pets: ${yn(submission.pet_friendly)} | Amenities: ${submission.amenities || "none listed"} | Condo fees included: ${yn(submission.condo_fees_included)}
+
+Condition: renovated ${yn(submission.newly_renovated)}, upkeep ${submission.upkeep_rating ? `${submission.upkeep_rating}/10` : "not rated"}
+Transit: ${submission.transit_distance_min ? `${submission.transit_distance_min} min walk to bus` : "not specified"}
+Lease preference: ${submission.lease_preference?.replace("_", " ") ?? "not specified"} | Available: ${submission.available_date ?? "not specified"}
+
+Rent: $${submission.rent_amount}/mo (${submission.is_asking_rent ? "asking" : "current tenant"})
+${submission.previous_rent ? `Previously rented: $${submission.previous_rent}/mo` : ""}
+${submission.neighbouring_rent ? `Neighbouring unit: $${submission.neighbouring_rent}/mo` : ""}
+Landlord style: ${submission.landlord_style?.replace("_", " ") ?? "not specified"}
+${submission.special_features ? `Special features: ${submission.special_features}` : ""}
+${submission.remarks ? `Remarks: ${submission.remarks}` : ""}
 
 ${marketContext}
 
 In your analysis:
-1. Tell them where their rent sits relative to the market (above/below/at market rate)
-2. Give them a specific recommended rent range for their unit given its features
-3. Mention 1–2 features of their unit that most impact their rent potential (positively or negatively)
-4. One actionable next step
+1. Where does their rent sit vs the market — are they underpriced, overpriced, or at market?
+2. Give a specific recommended rent range for their exact unit given all its features
+3. The 2–3 features that most impact their rent potential (up or down)
+4. One concrete next step they should take
 
-Write as if you're Ebin, a local property manager who knows Southwest Ontario well. Warm but direct. Sign off with "— Ebin, Prospera Properties".`;
+Write as Ebin, a local property manager who knows Southwest Ontario well. Warm but direct. Sign off with "— Ebin, Prospera Properties".`;
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 900,
+    max_tokens: 1000,
     messages: [{ role: "user", content: prompt }],
   });
 
@@ -108,7 +162,6 @@ Write as if you're Ebin, a local property manager who knows Southwest Ontario we
 }
 
 export async function computeMarketEstimates(): Promise<{ updated: number; skipped: number }> {
-  // Call the RPC function defined in Supabase
   const { data: rows, error } = await supabaseAdmin.rpc("compute_rent_percentiles");
 
   if (error) {
@@ -147,7 +200,8 @@ Describe where the market sits and one actionable takeaway for a landlord pricin
       {
         city: row.city,
         bedrooms: row.bedrooms,
-        unit_type: null,
+        property_type: null,
+        city_zone: null,
         computed_at: new Date().toISOString(),
         submission_count: Number(row.submission_count),
         p25_rent: row.p25,
@@ -157,7 +211,7 @@ Describe where the market sits and one actionable takeaway for a landlord pricin
         trend_direction: "insufficient_data",
         is_published: true,
       },
-      { onConflict: "city,bedrooms,unit_type" }
+      { onConflict: "city,bedrooms,property_type,city_zone" }
     );
   }
 

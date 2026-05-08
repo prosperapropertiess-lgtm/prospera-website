@@ -8,60 +8,70 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { token, monthlyOptin, ...formData } = body;
 
-    if (!token) {
-      return NextResponse.json({ error: "Token required" }, { status: 400 });
-    }
+    if (!token) return NextResponse.json({ error: "Token required" }, { status: 400 });
 
-    // Validate token
     const tokenRow = await validateRentToken(token);
-    if (!tokenRow) {
-      return NextResponse.json({ error: "Invalid or expired link" }, { status: 410 });
-    }
+    if (!tokenRow) return NextResponse.json({ error: "Invalid or expired link" }, { status: 410 });
 
-    // Build submission object
     const submission: RentSubmission = {
       city: formData.city || tokenRow.city || "Unknown",
+      city_zone: formData.city_zone || null,
       address: formData.address || null,
-      unit_type: formData.unit_type || null,
-      bedrooms: formData.bedrooms ? Number(formData.bedrooms) : tokenRow.bedrooms,
-      bathrooms: formData.bathrooms ? Number(formData.bathrooms) : null,
+      property_type: formData.property_type || null,
+      bedrooms: formData.bedrooms != null ? Number(formData.bedrooms) : tokenRow.bedrooms,
+      bathrooms: formData.bathrooms != null ? Number(formData.bathrooms) : null,
+      half_bathrooms: formData.half_bathrooms != null ? Number(formData.half_bathrooms) : 0,
       sqft: formData.sqft ? Number(formData.sqft) : null,
       floor: formData.floor ? Number(formData.floor) : null,
-      parking: formData.parking ?? null,
+      building_era: formData.building_era || null,
+      units_in_building: formData.units_in_building ? Number(formData.units_in_building) : null,
+      separate_entrance: formData.separate_entrance ?? null,
+      garage: formData.garage || "none",
+      parking_spots: formData.parking_spots != null ? Number(formData.parking_spots) : 0,
+      visitor_parking: formData.visitor_parking ?? null,
+      backyard: formData.backyard ?? null,
+      balcony: formData.balcony ?? null,
+      lawn_care: formData.lawn_care || null,
+      furnished: formData.furnished || "unfurnished",
+      heat_type: formData.heat_type || null,
+      ac_type: formData.ac_type || null,
+      appliance_fridge: formData.appliance_fridge ?? false,
+      appliance_stove: formData.appliance_stove ?? false,
+      appliance_dishwasher: formData.appliance_dishwasher ?? false,
+      appliance_washer: formData.appliance_washer ?? false,
+      appliance_dryer: formData.appliance_dryer ?? false,
       laundry: formData.laundry || null,
-      utilities_included: formData.utilities_included ?? null,
+      utilities_included: formData.utilities_included || "none",
       pet_friendly: formData.pet_friendly ?? null,
+      amenities: formData.amenities || null,
+      condo_fees_included: formData.condo_fees_included ?? null,
+      newly_renovated: formData.newly_renovated ?? null,
+      upkeep_rating: formData.upkeep_rating ? Number(formData.upkeep_rating) : null,
+      transit_distance_min: formData.transit_distance_min ? Number(formData.transit_distance_min) : null,
       rent_amount: Number(formData.rent_amount),
       is_asking_rent: formData.is_asking_rent ?? true,
+      previous_rent: formData.previous_rent ? Number(formData.previous_rent) : null,
       is_occupied: formData.is_occupied ?? null,
       last_rent_increase: formData.last_rent_increase || null,
+      neighbouring_rent: formData.neighbouring_rent ? Number(formData.neighbouring_rent) : null,
+      lease_preference: formData.lease_preference || null,
+      available_date: formData.available_date || null,
+      landlord_style: formData.landlord_style || null,
+      special_features: formData.special_features || null,
+      remarks: formData.remarks || null,
     };
 
     if (!submission.rent_amount || isNaN(submission.rent_amount)) {
       return NextResponse.json({ error: "Valid rent amount required" }, { status: 400 });
     }
 
-    // Insert submission row
+    // Insert submission
     const { data: submissionRow, error: subErr } = await supabaseAdmin
       .from("rent_submissions")
       .insert([{
         token,
         submission_type: "initial_analysis",
-        city: submission.city,
-        address: submission.address,
-        unit_type: submission.unit_type,
-        bedrooms: submission.bedrooms,
-        bathrooms: submission.bathrooms,
-        sqft: submission.sqft,
-        floor: submission.floor,
-        parking: submission.parking,
-        laundry: submission.laundry,
-        utilities_included: submission.utilities_included,
-        pet_friendly: submission.pet_friendly,
-        rent_amount: submission.rent_amount,
-        is_asking_rent: submission.is_asking_rent,
-        is_occupied: submission.is_occupied,
-        last_rent_increase: submission.last_rent_increase,
+        ...submission,
       }])
       .select("id")
       .single();
@@ -71,13 +81,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to save submission" }, { status: 500 });
     }
 
-    // Stamp token as used
+    // Stamp token used
     await supabaseAdmin
       .from("rent_analysis_tokens")
       .update({ used_at: new Date().toISOString() })
       .eq("token", token);
 
-    // Handle monthly optin
+    // Monthly optin
     if (monthlyOptin) {
       await supabaseAdmin
         .from("subscribers")
@@ -85,7 +95,7 @@ export async function POST(req: NextRequest) {
         .eq("email", tokenRow.email);
     }
 
-    // Fetch market data for this city+bedrooms (may be null early on)
+    // Market data lookup
     const { data: marketData } = await supabaseAdmin
       .from("rent_market_data")
       .select("*")
@@ -94,22 +104,19 @@ export async function POST(req: NextRequest) {
       .eq("is_published", true)
       .maybeSingle();
 
-    // Generate Claude analysis (non-blocking for response, but we await it for the email)
+    // Claude analysis
     let claudeAnalysis = "";
     try {
       claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
     } catch (err) {
       console.error("Claude analysis error:", err);
-      claudeAnalysis = "We were unable to generate an analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
+      claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
     }
 
     // Update submission with analysis
     await supabaseAdmin
       .from("rent_submissions")
-      .update({
-        claude_analysis: claudeAnalysis,
-        analysis_generated_at: new Date().toISOString(),
-      })
+      .update({ claude_analysis: claudeAnalysis, analysis_generated_at: new Date().toISOString() })
       .eq("id", submissionRow.id);
 
     // Send report email
@@ -126,7 +133,7 @@ export async function POST(req: NextRequest) {
           name: tokenRow.name,
           city: submission.city,
           bedrooms: submission.bedrooms,
-          unitType: submission.unit_type,
+          unitType: submission.property_type,
           rentAmount: submission.rent_amount,
           claudeAnalysis,
         }),

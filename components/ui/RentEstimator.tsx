@@ -23,62 +23,112 @@ const ESTIMATES: Record<string, Record<number, { low: number; high: number }>> =
   },
 };
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderColor: "#D8D2C8",
+  backgroundColor: "#FFFFFF",
+  color: "#222222",
+  fontFamily: "var(--font-dm-sans)",
+  padding: "11px 14px",
+  fontSize: 14,
+  border: "1px solid #D8D2C8",
+  borderRadius: 4,
+  outline: "none",
+  boxSizing: "border-box",
+};
+
 export default function RentEstimator() {
   const [city, setCity] = useState("");
   const [beds, setBeds] = useState<number | "">("");
-  const [email, setEmail] = useState("");
   const [result, setResult] = useState<{ low: number; high: number } | null>(null);
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [emailStatus, setEmailStatus] = useState<"idle" | "loading" | "done">("idle");
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "done">("idle");
+
+  const [lead, setLead] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    owner_role: "",
+    properties_owned: "",
+    management_status: "",
+    best_time_to_call: "",
+  });
+
+  function setLeadField(field: string, value: string) {
+    setLead((l) => ({ ...l, [field]: value }));
+  }
 
   function estimate() {
     if (!city || !beds) return;
-    const cityData = ESTIMATES[city];
-    if (!cityData) return;
-    const range = cityData[beds as number] || cityData[4];
-    setResult(range);
+    const range = ESTIMATES[city]?.[beds as number] ?? ESTIMATES[city]?.[4];
+    if (range) setResult(range);
   }
 
-  async function captureEmail(e: React.FormEvent) {
+  async function handleLeadSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email) return;
-    setEmailStatus("loading");
+    if (!lead.email || !lead.name) return;
+    setSubmitStatus("loading");
+
     await fetch("/api/rent/request-analysis", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, city, bedrooms: beds }),
+      body: JSON.stringify({
+        ...lead,
+        properties_owned: lead.properties_owned ? Number(lead.properties_owned) : null,
+        city,
+        bedrooms: beds || null,
+        estimated_rent_low: result?.low ?? null,
+        estimated_rent_high: result?.high ?? null,
+      }),
     });
-    setEmailStatus("done");
-    setEmailSubmitted(true);
+
+    setSubmitStatus("done");
   }
 
-  const selectStyle: React.CSSProperties = {
-    borderColor: "#D8D2C8",
-    backgroundColor: "#FFFFFF",
-    color: "#222222",
-    fontFamily: "var(--font-dm-sans)",
-  };
+  const spread = result ? result.high - result.low : 0;
+
+  const toggleBtn = (field: string, value: string, label: string) => (
+    <button
+      key={value}
+      type="button"
+      onClick={() => setLeadField(field, lead[field as keyof typeof lead] === value ? "" : value)}
+      style={{
+        padding: "8px 14px",
+        fontSize: 13,
+        fontFamily: "var(--font-dm-sans)",
+        border: `1px solid ${lead[field as keyof typeof lead] === value ? "#8B2030" : "#D8D2C8"}`,
+        backgroundColor: lead[field as keyof typeof lead] === value ? "rgba(139,32,48,0.07)" : "transparent",
+        color: lead[field as keyof typeof lead] === value ? "#8B2030" : "#444444",
+        cursor: "pointer",
+        borderRadius: 4,
+        transition: "all 0.15s",
+      }}
+    >
+      {label}
+    </button>
+  );
 
   return (
-    <div id="rent-estimator" className="p-8 md:p-12" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8", borderBottom: "1px solid #D8D2C8" }}>
+    <div id="rent-estimator" className="px-5 sm:px-8 py-16" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8", borderBottom: "1px solid #D8D2C8" }}>
       <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
         <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-          What Could Your Property Rent For?
+          What could your property rent for?
         </h2>
         <p className="text-sm mb-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
           Get an instant estimate based on current market rents in your city.
         </p>
 
-        {/* Inputs */}
+        {/* Step 1 — Quick estimate */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <select
             value={city}
-            onChange={(e) => { setCity(e.target.value); setResult(null); }}
+            onChange={(e) => { setCity(e.target.value); setResult(null); setShowLeadForm(false); }}
             className="flex-1 px-4 py-3 text-sm outline-none border rounded"
-            style={selectStyle}
+            style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Select city</option>
             <option value="London">London, ON</option>
@@ -88,9 +138,9 @@ export default function RentEstimator() {
 
           <select
             value={beds}
-            onChange={(e) => { setBeds(e.target.value ? Number(e.target.value) : ""); setResult(null); }}
+            onChange={(e) => { setBeds(e.target.value ? Number(e.target.value) : ""); setResult(null); setShowLeadForm(false); }}
             className="flex-1 px-4 py-3 text-sm outline-none border rounded"
-            style={selectStyle}
+            style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
           >
             <option value="">Bedrooms</option>
             <option value="1">1 Bedroom</option>
@@ -109,49 +159,148 @@ export default function RentEstimator() {
           </button>
         </div>
 
-        {/* Result */}
-        {result && (
-          <div className="border bg-white p-6 mt-2 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-            <div className="flex items-baseline gap-3 mb-3">
+        {/* Step 2 — Result + hook */}
+        {result && !showLeadForm && submitStatus !== "done" && (
+          <div className="border bg-white p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+            <div className="flex items-baseline gap-3 mb-2">
               <p className="text-5xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                 ${result.low.toLocaleString()} – ${result.high.toLocaleString()}
               </p>
               <span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
-            <p className="text-xs mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-              Estimated range for a {beds}-bedroom in {city} based on Q1 2026 market data. Actual rent depends on unit condition, inclusions, and location within the city.
+            <p className="text-xs mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              City-wide average for {beds}-bed units in {city} — Q1 2026
             </p>
 
-            {emailSubmitted ? (
-              <p className="text-sm" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-                ✓ Check your inbox — we sent you a personalized analysis link.
+            <div className="border-t pt-5" style={{ borderColor: "#F0EDE8" }}>
+              <p className="text-base mb-2 font-light leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 22 }}>
+                That ${spread.toLocaleString()}/month spread is ${(spread * 12).toLocaleString()}/year.
               </p>
-            ) : (
-              <form onSubmit={captureEmail}>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-                  Want a detailed breakdown for your specific property?
-                </p>
-                <div className="flex gap-3">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email address"
-                    required
-                    className="flex-1 px-4 py-3 text-sm outline-none border rounded"
-                    style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={emailStatus === "loading"}
-                    className="px-6 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 rounded"
-                    style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {emailStatus === "loading" ? "..." : "Get Analysis"}
-                  </button>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                This range doesn&apos;t account for your city zone, garage, finishes, inclusions, transit access, or 15 other factors that actually move rent. Your unit could sit at either end — or outside it entirely. A precise number takes 3 minutes.
+              </p>
+              <button
+                onClick={() => setShowLeadForm(true)}
+                className="w-full py-4 text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Get My Precise Estimate — Free →
+              </button>
+              <p className="text-xs text-center mt-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                Personalized analysis emailed within the hour. No obligation.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Step 3 — Lead capture form */}
+        {showLeadForm && submitStatus !== "done" && (
+          <div className="border bg-white p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              Step 2 of 2
+            </p>
+            <p className="text-xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+              Tell us where to send your analysis
+            </p>
+            <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              We&apos;ll email you a secure link to fill out the full property details. Takes 3 minutes.
+            </p>
+
+            <form onSubmit={handleLeadSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Name *</label>
+                  <input type="text" required value={lead.name} onChange={(e) => setLeadField("name", e.target.value)} placeholder="First name" style={inputStyle} />
                 </div>
-              </form>
-            )}
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Email *</label>
+                  <input type="email" required value={lead.email} onChange={(e) => setLeadField("email", e.target.value)} placeholder="your@email.com" style={inputStyle} />
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Phone</label>
+                  <input type="tel" value={lead.phone} onChange={(e) => setLeadField("phone", e.target.value)} placeholder="(519) 000-0000" style={inputStyle} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Best time to call</label>
+                  <select value={lead.best_time_to_call} onChange={(e) => setLeadField("best_time_to_call", e.target.value)} style={inputStyle}>
+                    <option value="">Select</option>
+                    <option value="morning">Morning (8–12)</option>
+                    <option value="afternoon">Afternoon (12–5)</option>
+                    <option value="evening">Evening (5–8)</option>
+                    <option value="anytime">Anytime</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Property address</label>
+                <input type="text" value={lead.address} onChange={(e) => setLeadField("address", e.target.value)} placeholder="123 Main St (optional)" style={inputStyle} />
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>I am a</label>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {toggleBtn("owner_role", "landlord", "Landlord")}
+                  {toggleBtn("owner_role", "realtor", "Realtor")}
+                  {toggleBtn("owner_role", "property_manager", "Property Manager")}
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Properties owned / managed</label>
+                  <select value={lead.properties_owned} onChange={(e) => setLeadField("properties_owned", e.target.value)} style={inputStyle}>
+                    <option value="">Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3–5</option>
+                    <option value="6">6–10</option>
+                    <option value="11">11+</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>Currently</label>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {toggleBtn("management_status", "self_managing", "Self-managing")}
+                    {toggleBtn("management_status", "using_pm", "Using a PM")}
+                    {toggleBtn("management_status", "first_time", "First rental")}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitStatus === "loading"}
+                className="w-full py-4 text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80 disabled:opacity-50 mt-1"
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              >
+                {submitStatus === "loading" ? "Sending..." : "Send Me the Analysis Link →"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowLeadForm(false)}
+                className="text-xs text-center transition-opacity hover:opacity-60"
+                style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", background: "none", border: "none", cursor: "pointer" }}
+              >
+                ← Back to estimate
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* Done state */}
+        {submitStatus === "done" && (
+          <div className="border bg-white p-7 rounded-xl text-center" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+            <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+              Check your inbox.
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              We sent you a secure link to complete your property details. The full analysis will be emailed back within the hour.
+            </p>
           </div>
         )}
       </div>
