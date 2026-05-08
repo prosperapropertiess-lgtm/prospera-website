@@ -47,3 +47,13 @@ The things that actually seem to predict a good tenant: income-to-rent ratio (re
 
 What's your most reliable screening signal? Curious what others are doing.
 ---
+
+## 2026-05-08
+Quick question for the group — how detailed is your move-in inspection report?
+
+The number one reason landlords lose damage claims at the LTB isn't that the damage isn't real. It's that they can't prove the condition of the unit before the tenant moved in.
+
+The LTB separates normal wear and tear (nail holes, faded carpet, wall scuffs) — which you absorb — from actual damage (holes in drywall, stained floors, broken fixtures), which you can claim. But without a signed inspection report plus dated photos from move-in and move-out, your claim is your word against theirs. And adjudicators default to the tenant.
+
+Does your current lease package include a proper move-in inspection checklist? Would be curious what others are using.
+---
