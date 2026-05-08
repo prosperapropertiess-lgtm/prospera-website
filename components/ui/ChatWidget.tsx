@@ -102,7 +102,7 @@ export default function ChatWidget() {
       {/* Floating bubble */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+        className="fixed bottom-28 right-5 md:bottom-6 md:right-6 z-[85] w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
         style={{ backgroundColor: "#8B2030" }}
         aria-label="Open chat"
       >
@@ -132,7 +132,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-44 right-5 md:bottom-24 md:right-6 z-[85] w-[calc(100vw-2.5rem)] sm:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: "70vh", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
             {/* Header */}
