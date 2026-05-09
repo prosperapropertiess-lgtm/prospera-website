@@ -73,6 +73,10 @@ export async function POST(req: NextRequest) {
 
     const raw: ScrapedListing[] = Array.isArray(body.listings) ? body.listings : [];
 
+    console.log(`[ingest-scraped] body keys: ${Object.keys(body).join(", ")}`);
+    console.log(`[ingest-scraped] listings type: ${typeof body.listings}, is array: ${Array.isArray(body.listings)}, length: ${raw.length}`);
+    if (raw.length > 0) console.log(`[ingest-scraped] first listing sample: ${JSON.stringify(raw[0])}`);
+
     if (raw.length === 0) {
       return NextResponse.json({ success: true, inserted: 0, skipped: 0, reason: "empty" });
     }
@@ -80,6 +84,7 @@ export async function POST(req: NextRequest) {
     // Clean and validate
     const cleaned = raw.map(clean).filter(Boolean) as ReturnType<typeof clean>[];
     const skipped = raw.length - cleaned.length;
+    console.log(`[ingest-scraped] cleaned: ${cleaned.length}, skipped (invalid): ${skipped}`);
 
     if (cleaned.length === 0) {
       return NextResponse.json({ success: true, inserted: 0, skipped, reason: "all_invalid" });
