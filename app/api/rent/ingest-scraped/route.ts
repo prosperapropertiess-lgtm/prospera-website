@@ -7,6 +7,22 @@ const VALID_PROPERTY_TYPES = ["house", "apartment", "condo", "basement"];
 const VALID_LAUNDRY = ["in_unit", "shared", "none"];
 const VALID_FURNISHED = ["unfurnished", "semi_furnished", "fully_furnished"];
 const VALID_GARAGES = ["attached", "detached", "none"];
+const VALID_UTILITIES = ["none", "water", "hydro", "water_hydro", "water_hydro_gas", "all"];
+
+function normalizeUtilities(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const v = raw.toLowerCase().replace(/\s/g, "");
+  if (VALID_UTILITIES.includes(v)) return v;
+  const hasHeat = v.includes("heat") || v.includes("gas");
+  const hasHydro = v.includes("hydro") || v.includes("electric");
+  const hasWater = v.includes("water");
+  if (v.includes("all") || v.includes("everything")) return "all";
+  if (hasHeat && hasHydro && hasWater) return "water_hydro_gas";
+  if (hasHydro && hasWater) return "water_hydro";
+  if (hasHydro) return "hydro";
+  if (hasWater) return "water";
+  return null;
+}
 
 interface ScrapedListing {
   city: string;
@@ -50,7 +66,7 @@ function clean(listing: ScrapedListing) {
     is_asking_rent: true, // scraped listings are always asking rent
     garage: VALID_GARAGES.includes(listing.garage ?? "") ? listing.garage : "none",
     parking_spots: listing.parking_spots != null ? Number(listing.parking_spots) : 0,
-    utilities_included: listing.utilities_included ?? null,
+    utilities_included: normalizeUtilities(listing.utilities_included),
     pet_friendly: listing.pet_friendly ?? null,
     laundry: VALID_LAUNDRY.includes(listing.laundry ?? "") ? listing.laundry : null,
     furnished: VALID_FURNISHED.includes(listing.furnished ?? "")
