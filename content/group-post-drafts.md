@@ -57,3 +57,17 @@ The LTB separates normal wear and tear (nail holes, faded carpet, wall scuffs) �
 
 Does your current lease package include a proper move-in inspection checklist? Would be curious what others are using.
 ---
+
+## 2026-05-09
+Has anyone run into trouble after filing an N12?
+
+When you file an N12 for owner's own use, two things catch landlords off guard: you owe your tenant one month's rent in compensation, and it has to be paid before the termination date — not after they leave. Miss that, and the tenant has grounds to stay.
+
+The other one: whoever moves in has to actually live there for 12+ months. If they move out early, the tenant can file a T5 bad-faith eviction claim and seek up to 12 months of rent back. The LTB has been taking these seriously.
+
+Same rules apply when you're selling — the purchaser has to genuinely intend to live there. Buying to flip or re-rent doesn't qualify.
+
+Anyone dealt with a bad-faith allegation after an N12? Curious what the process looked like.
+
+#OntarioLandlord #LondonOntario #N12 #LandlordTips
+---
