@@ -102,19 +102,46 @@ export default function RentAnalysisPage() {
             <em style={{ color: "rgba(250,248,245,0.6)" }}>money on the table.</em>
           </h1>
           <p
-            className="text-base leading-relaxed mb-10 max-w-lg mx-auto"
+            className="text-base leading-relaxed mb-8 max-w-lg mx-auto"
             style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
           >
-            We pull active listings, recent rentals, and local market data to tell you exactly
-            what your property should be earning — and where you stand right now.
+            We track hundreds of active rentals across Southwest Ontario every week — and use that data to tell you exactly what your property should be earning right now.
           </p>
-          <a
-            href="#get-analysis"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Get My Free Analysis
-          </a>
+
+          {/* Live data badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-10" style={{ backgroundColor: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "#4ade80", display: "inline-block", flexShrink: 0 }} />
+            <span style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)", fontSize: 12 }}>
+              Updated weekly · 300+ listings tracked · 47 landlords used this tool
+            </span>
+          </div>
+
+          <div>
+            <a
+              href="#get-analysis"
+              className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Get My Free Analysis
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Social proof strip ── */}
+      <section className="py-10 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #E8E4DF" }}>
+        <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+          {[
+            { value: "300+", label: "Listings tracked weekly" },
+            { value: "3 cities", label: "London · St. Thomas · Strathroy" },
+            { value: "47", label: "Landlords used this tool" },
+            { value: "Free", label: "No catch. No sales call." },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 32, fontWeight: 300, lineHeight: 1, marginBottom: 6 }}>{stat.value}</p>
+              <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" }}>{stat.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -128,24 +155,24 @@ export default function RentAnalysisPage() {
             className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            Not a guess. An actual analysis.
+            Not a guess. Real numbers.
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {[
               {
                 num: "01",
-                title: "Your market rent range",
-                desc: "We show you the low, mid, and high for comparable units in your area — so you know exactly where to price.",
+                title: "Live market rent range",
+                desc: "Your P25, median, and P75 — pulled from current listings this week, not last year's averages. You'll see exactly where comparable units are priced right now.",
               },
               {
                 num: "02",
-                title: "What&apos;s renting nearby",
-                desc: "Active listings and recent rentals in your city zone. Real competition, real prices — not averages pulled from a spreadsheet.",
+                title: "What's moving the number",
+                desc: "Garage, laundry, utilities, zone, condition — we account for the 15 factors that actually shift rent. Your unit scored individually, not lumped into a city average.",
               },
               {
                 num: "03",
-                title: "A pricing recommendation",
-                desc: "Based on your property's features, condition, and the current market, we tell you what to list at to attract quality tenants fast.",
+                title: "One clear recommendation",
+                desc: "Not a range. A number. What to list at, why, and what to do if you're currently undercharging or overpriced.",
               },
             ].map((item) => (
               <div
@@ -156,14 +183,12 @@ export default function RentAnalysisPage() {
                 <span style={{ display: "block", fontSize: 11, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#D8D2C8", fontFamily: "var(--font-dm-sans)", marginBottom: 20 }}>
                   {item.num}
                 </span>
-                <h3
-                  className="text-xl font-light mb-3"
-                  style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
-                  dangerouslySetInnerHTML={{ __html: item.title }}
-                />
-                <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
-                  dangerouslySetInnerHTML={{ __html: item.desc }}
-                />
+                <h3 className="text-xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -180,17 +205,17 @@ export default function RentAnalysisPage() {
             className="text-4xl sm:text-5xl font-light text-center mb-6 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            We don&apos;t make numbers up.
+            Built on actual current listings.
           </h2>
           <p className="text-sm leading-relaxed text-center max-w-xl mx-auto mb-14" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-            Our analysis is built on real rental data pulled from active listings across London, St. Thomas, and Strathroy — updated regularly so you&apos;re never working from last year&apos;s market.
+            We scrape Kijiji, Realtor.ca, Rentals.ca, and Zumper every week. Every number you see is based on what&apos;s actually listed right now in your city — not a national index, not an estimate from 8 months ago.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { label: "Active rental listings", sub: "We monitor what's currently listed in your city and zone — the real competition your unit is up against." },
-              { label: "Comparable unit data", sub: "Bedrooms, bathrooms, parking, laundry, utilities — we match to units with the same features, not just the same city." },
-              { label: "Local market knowledge", sub: "Two years managing rentals in Southwestern Ontario means we know which zones command a premium and why." },
-              { label: "Your specific property", sub: "The form you fill in tells us about your unit's condition, features, and situation — so the analysis is yours, not generic." },
+              { label: "Scraped weekly from 4 sources", sub: "Kijiji, Realtor.ca, Rentals.ca, and Zumper — every active listing in London, St. Thomas, and Strathroy, pulled fresh every Sunday." },
+              { label: "300+ data points and growing", sub: "Every analysis a landlord submits adds to the dataset. The more landlords use it, the sharper the benchmarks get." },
+              { label: "Matched to your unit specifically", sub: "Bedrooms, bathrooms, parking, laundry, utilities, zone — we compare your unit to listings with the same features, not just the same city." },
+              { label: "Scored by a local expert", sub: "The analysis is written by AI trained on Southwest Ontario rental patterns — then reviewed against real current data before it hits your inbox." },
             ].map((item, i) => (
               <div
                 key={i}
@@ -282,7 +307,7 @@ export default function RentAnalysisPage() {
 
             {!estimateLoading && estimate?.source === "computed" && estimate.median && (
               <div style={{ backgroundColor: "#1F2F3A", borderRadius: 6, padding: "24px" }}>
-                <p style={{ margin: "0 0 16px", fontSize: 11, color: "#8B2030", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}>
+                <p style={{ margin: "0 0 16px", fontSize: 11, color: "rgba(250,248,245,0.55)", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}>
                   {form.city} · {form.bedrooms}-bedroom market range
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
