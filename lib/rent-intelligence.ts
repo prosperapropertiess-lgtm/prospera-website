@@ -115,28 +115,54 @@ export async function generatePropertyAnalysis(
 - Trend: ${marketData.trend_direction || "insufficient data"}`
     : `No aggregated market data yet — use your knowledge of Ontario rental markets in London, St. Thomas, and Strathroy.`;
 
-  const prompt = `You are Ebin. You have been managing rentals in Southwest Ontario for 20 years. You know London, St. Thomas, and Strathroy street by street. You have seen landlords leave thousands on the table because they guessed their rent. You have also seen landlords price themselves out and sit vacant for months. You know the difference.
+  const prompt = `You have 20 years of hands-on experience managing rentals in Southwest Ontario. You have seen every type of landlord, every type of tenant, and every type of property. You know what actually moves rent — not theory, real numbers from real units in London, St. Thomas, and Strathroy.
 
-A landlord just filled out a form asking what their property is worth. Write them a short, honest email. Talk to them like a real person. Use simple words — if a 10 year old would not understand it, rewrite it. No bullet points. No headers. No lists. Just talk to them. Three short paragraphs. Each one is 3 to 4 sentences. Be specific with money — say $1,650 not "competitive pricing". Tell them the truth. Make them feel like they finally understand their own property. Sign off as: — Ebin, Prospera Properties
+A landlord just sent you their property details. Write them a personal analysis. You are writing an email directly to them.
 
-Here is their property:
-Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` (${submission.address})` : ""}
-Type: ${submission.property_type || "not specified"}, ${bedsLabel}, ${submission.bathrooms ?? "?"}bd + ${submission.half_bathrooms ?? 0} half bath
-Size: ${submission.sqft ? `${submission.sqft} sqft` : "size not given"} | Floor: ${submission.floor ?? "not given"} | Era: ${submission.building_era?.replace(/_/g, " ") ?? "not given"}
-Building: ${submission.units_in_building ?? "?"} units | Separate entrance: ${yn(submission.separate_entrance)}
+RULES — follow every single one:
+- Write like you are texting a friend who owns a rental. Simple words. Short sentences. Grade 5 reading level. No exceptions.
+- Never use these words: leverage, optimize, robust, comprehensive, furthermore, utilize, in conclusion, it is worth noting, landlord-tenant dynamics, actionable insights.
+- No bullet points. No headers. No markdown. Just paragraphs.
+- Be specific. Use real dollar numbers. Do not say "higher rent" — say "$150 more per month".
+- Tell them the truth even if it's uncomfortable. If they are undercharging, say it clearly. If they are overcharging, say that too.
+- Make them feel smart after reading this. They should think "I get it now."
+- Keep it to 3 short paragraphs. Each paragraph is 3–4 sentences max.
+- Sign off with: — Ebin, Prospera Properties
+
+PARAGRAPH 1 — The honest read on their rent:
+Tell them where their rent sits right now. Is it too low, too high, or about right for their area? Give them a specific number range you think this unit is worth. Compare it to what you know about the market.
+
+PARAGRAPH 2 — What's actually moving the number:
+Pick the 2–3 things about their specific property that push rent up or down the most. Be honest about both the good and the bad. Things like: no parking kills rent in some areas, in-unit laundry is worth $100–150/mo, a basement without a separate entrance is a harder rent, etc.
+
+PARAGRAPH 3 — One thing they should do next:
+Give them one clear action. Not vague advice. Something they can do this week. If they are leaving money on the table, tell them how to fix it. If they are overpriced, tell them what to drop to and why.
+
+PROPERTY DETAILS:
+Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
+Type: ${submission.property_type || "not specified"} | ${bedsLabel} | ${submission.bathrooms ?? "?"}bd + ${submission.half_bathrooms ?? 0} half bath
+Sqft: ${submission.sqft ?? "not specified"} | Floor: ${submission.floor ?? "n/a"} | Built: ${submission.building_era?.replace(/_/g, " ") ?? "not specified"}
+Units in building: ${submission.units_in_building ?? "not specified"} | Separate entrance: ${yn(submission.separate_entrance)}
+
 Parking: ${submission.garage !== "none" ? `${submission.garage?.replace("_", " ")} garage` : "no garage"}, ${submission.parking_spots ?? 0} spot(s), visitor parking: ${yn(submission.visitor_parking)}
-Outdoor: backyard ${yn(submission.backyard)}, balcony ${yn(submission.balcony)}, lawn care: ${submission.lawn_care?.replace("_", " ") ?? "not given"}
-Furnished: ${submission.furnished?.replace("_", " ") ?? "unfurnished"} | Heat: ${submission.heat_type ?? "not given"} | AC: ${submission.ac_type?.replace("_", " ") ?? "not given"}
-Appliances: ${appliances}
-Laundry: ${submission.laundry ?? "not given"} | Utilities: ${submission.utilities_included ?? "not given"} | Pets: ${yn(submission.pet_friendly)}
-Amenities: ${submission.amenities || "none"} | Condo fees included: ${yn(submission.condo_fees_included)}
-Condition: newly renovated ${yn(submission.newly_renovated)}, upkeep ${submission.upkeep_rating ? `${submission.upkeep_rating}/10` : "not rated"}
-Transit: ${submission.transit_distance_min ? `${submission.transit_distance_min} min walk to transit` : "not given"}
-Asking $${submission.rent_amount}/mo (${submission.is_asking_rent ? "this is their asking price" : "this is what a current tenant pays"})
-${submission.previous_rent ? `Was rented before at $${submission.previous_rent}/mo` : ""}
-${submission.neighbouring_rent ? `Neighbour unit rents for $${submission.neighbouring_rent}/mo` : ""}
-${submission.special_features ? `They mentioned: ${submission.special_features}` : ""}
-${submission.remarks ? `Their notes: ${submission.remarks}` : ""}
+Outdoor: backyard ${yn(submission.backyard)}, balcony ${yn(submission.balcony)}, lawn care: ${submission.lawn_care?.replace("_", " ") ?? "not specified"}
+
+Furnished: ${submission.furnished?.replace("_", " ") ?? "unfurnished"} | Heat: ${submission.heat_type ?? "not specified"} | AC: ${submission.ac_type?.replace("_", " ") ?? "not specified"}
+Appliances included: ${appliances}
+Laundry: ${submission.laundry ?? "not specified"} | Utilities: ${submission.utilities_included ?? "not specified"}
+Pets: ${yn(submission.pet_friendly)} | Amenities: ${submission.amenities || "none listed"} | Condo fees included: ${yn(submission.condo_fees_included)}
+
+Condition: renovated ${yn(submission.newly_renovated)}, upkeep ${submission.upkeep_rating ? `${submission.upkeep_rating}/10` : "not rated"}
+Transit: ${submission.transit_distance_min ? `${submission.transit_distance_min} min walk to bus` : "not specified"}
+Lease preference: ${submission.lease_preference?.replace("_", " ") ?? "not specified"} | Available: ${submission.available_date ?? "not specified"}
+
+Rent: $${submission.rent_amount}/mo (${submission.is_asking_rent ? "asking" : "current tenant rent"})
+${submission.previous_rent ? `Previously rented at: $${submission.previous_rent}/mo` : ""}
+${submission.neighbouring_rent ? `Neighbouring unit renting for: $${submission.neighbouring_rent}/mo` : ""}
+Landlord style: ${submission.landlord_style?.replace("_", " ") ?? "not specified"}
+${submission.special_features ? `Special features: ${submission.special_features}` : ""}
+${submission.remarks ? `Landlord notes: ${submission.remarks}` : ""}
+
 ${marketContext}`;
 
   const response = await anthropic.messages.create({
