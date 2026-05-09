@@ -147,6 +147,7 @@ export async function POST(req: NextRequest) {
               unitType: submission.property_type,
               rentAmount: submission.rent_amount,
               claudeAnalysis,
+              marketData: marketData ?? null,
             }),
           });
 

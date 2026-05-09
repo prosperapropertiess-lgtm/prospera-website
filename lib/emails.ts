@@ -256,6 +256,7 @@ export function rentAnalysisReportEmail({
   unitType,
   rentAmount,
   claudeAnalysis,
+  marketData,
 }: {
   name?: string | null;
   city: string;
@@ -263,32 +264,87 @@ export function rentAnalysisReportEmail({
   unitType?: string | null;
   rentAmount: number;
   claudeAnalysis: string;
+  marketData?: { p25_rent: number | null; median_rent: number | null; p75_rent: number | null; submission_count: number } | null;
 }): string {
   const bedsLabel = bedrooms ? `${bedrooms} bed` : "rental";
   const typeLabel = unitType || "unit";
+  const yearlyRent = rentAmount * 12;
+
+  // Market range block — only shown if we have data
+  const marketBlock = marketData?.median_rent ? (() => {
+    const p25 = marketData.p25_rent ? `$${Math.round(marketData.p25_rent).toLocaleString()}` : "—";
+    const median = `$${Math.round(marketData.median_rent).toLocaleString()}`;
+    const p75 = marketData.p75_rent ? `$${Math.round(marketData.p75_rent).toLocaleString()}` : "—";
+    const count = marketData.submission_count;
+
+    // Position label
+    let positionLabel = "";
+    if (marketData.p25_rent && rentAmount < marketData.p25_rent) positionLabel = "Below market — room to increase";
+    else if (marketData.p75_rent && rentAmount > marketData.p75_rent) positionLabel = "Above market — price carefully";
+    else if (marketData.median_rent && rentAmount < marketData.median_rent) positionLabel = "Below median — consider a small increase";
+    else positionLabel = "At or above median — well positioned";
+
+    return `
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;">
+      <tr>
+        <td style="background-color:#1F2F3A;padding:20px 24px;">
+          <p style="margin:0 0 14px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${city} Market — ${bedsLabel} units (${count} data points)</p>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td align="center" style="padding:0 8px 0 0;">
+                <p style="margin:0 0 4px;font-size:11px;color:rgba(250,248,245,0.45);text-transform:uppercase;letter-spacing:1px;">Low end</p>
+                <p style="margin:0;font-size:22px;font-weight:300;color:#FAF8F5;">${p25}</p>
+              </td>
+              <td align="center" style="padding:0 8px;border-left:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
+                <p style="margin:0 0 4px;font-size:11px;color:rgba(250,248,245,0.45);text-transform:uppercase;letter-spacing:1px;">Median</p>
+                <p style="margin:0;font-size:22px;font-weight:600;color:#FAF8F5;">${median}</p>
+              </td>
+              <td align="center" style="padding:0 0 0 8px;">
+                <p style="margin:0 0 4px;font-size:11px;color:rgba(250,248,245,0.45);text-transform:uppercase;letter-spacing:1px;">High end</p>
+                <p style="margin:0;font-size:22px;font-weight:300;color:#FAF8F5;">${p75}</p>
+              </td>
+            </tr>
+          </table>
+          <p style="margin:14px 0 0;font-size:12px;color:#8B2030;font-weight:600;">${positionLabel}</p>
+        </td>
+      </tr>
+    </table>`;
+  })() : "";
 
   const content = bodyText(`
     <p style="margin:0 0 20px;">Hey ${name || "there"},</p>
 
-    <p style="margin:0 0 20px;">Here's the rent analysis for your property in ${city}. We've looked at your unit's details alongside current market data across Southwest Ontario.</p>
+    <p style="margin:0 0 24px;">Here's the rent analysis for your property in ${city}.</p>
 
-    <!-- Property summary card -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;background-color:#F5F0EB;border-left:3px solid #8B2030;">
+    <!-- Property summary -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;">
       <tr>
-        <td style="padding:16px 20px;">
+        <td style="background-color:#F5F0EB;border-left:3px solid #8B2030;padding:16px 20px;">
           <p style="margin:0 0 6px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Your Property</p>
-          <p style="margin:0;font-size:15px;color:#2C2C2C;">${bedsLabel} ${typeLabel} · ${city} · $${rentAmount.toLocaleString()}/mo</p>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <p style="margin:0;font-size:15px;color:#2C2C2C;">${bedsLabel} ${typeLabel} · ${city} · <strong>$${rentAmount.toLocaleString()}/mo</strong></p>
+              </td>
+              <td align="right">
+                <p style="margin:0;font-size:13px;color:#666666;">$${yearlyRent.toLocaleString()}/yr</p>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
     </table>
 
+    <!-- Market benchmarks -->
+    ${marketBlock}
+
     <!-- Analysis -->
     <p style="margin:0 0 12px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Analysis</p>
-    <p style="margin:0 0 24px;font-size:15px;line-height:1.75;color:#2C2C2C;white-space:pre-line;">${claudeAnalysis.replace(/\n\n/g, "</p><p style=\"margin:0 0 16px;font-size:15px;line-height:1.75;color:#2C2C2C;\">")}</p>
+    <p style="margin:0 0 24px;font-size:15px;line-height:1.75;color:#2C2C2C;">${claudeAnalysis.replace(/\n\n/g, "</p><p style=\"margin:0 0 16px;font-size:15px;line-height:1.75;color:#2C2C2C;\">")}</p>
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:14px;color:#2C2C2C;">You're now on our monthly market update list — you'll get a short email once a month showing how rents are moving in ${city}. You can unsubscribe anytime by replying "unsubscribe".</p>
+    <p style="margin:0 0 16px;font-size:14px;color:#2C2C2C;">You're now on our monthly market update list — you'll get a short email once a month showing how rents are moving in ${city}. Reply "unsubscribe" anytime.</p>
 
     <p style="margin:0 0 16px;font-size:14px;color:#2C2C2C;">Want someone to handle the whole thing — screening, rent, maintenance — so you never have to think about it? That's what we do.</p>
 
