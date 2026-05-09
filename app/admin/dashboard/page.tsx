@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 interface ZohoStats { totalContacts: number; closedWon: number; inPipeline: number; }
 interface MetaStats { connected: boolean; spend: number; impressions: number; reach: number; }
 interface OutreachEntry { id: string; contact_name: string; method: string; notes: string | null; created_at: string; }
+interface MarketRow { city: string; bedrooms: number; median_rent: number | null; p25_rent: number | null; p75_rent: number | null; submission_count: number; computed_at: string; trend_direction: string | null; }
+interface CityStats { total: number; week: number; manual: number; landlord: number; }
+interface IntelStats { cities: Record<string, CityStats>; market_data: MarketRow[]; last_refresh: string | null; }
 
 const METHODS = ["text", "call", "email", "in-person"];
 
@@ -28,6 +31,8 @@ export default function DashboardPage() {
   const [zoho, setZoho] = useState<ZohoStats | null>(null);
   const [meta, setMeta] = useState<MetaStats | null>(null);
   const [outreach, setOutreach] = useState<OutreachEntry[]>([]);
+  const [intel, setIntel] = useState<IntelStats | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [modal, setModal] = useState(false);
@@ -36,14 +41,16 @@ export default function DashboardPage() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [z, m, o] = await Promise.all([
+    const [z, m, o, i] = await Promise.all([
       fetch("/api/admin/dashboard/zoho").then((r) => r.json()).catch(() => null),
       fetch("/api/admin/dashboard/meta").then((r) => r.json()).catch(() => null),
       fetch("/api/admin/dashboard/outreach").then((r) => r.json()).catch(() => []),
+      fetch("/api/admin/rent-intelligence/stats").then((r) => r.json()).catch(() => null),
     ]);
     setZoho(z);
     setMeta(m);
     setOutreach(Array.isArray(o) ? o : []);
+    setIntel(i);
     setLoading(false);
   }, []);
 
@@ -70,6 +77,16 @@ export default function DashboardPage() {
       setModal(false);
     }
     setSaving(false);
+  }
+
+  async function handleRefreshIntel() {
+    setRefreshing(true);
+    const res = await fetch("/api/admin/rent-intelligence/refresh", { method: "POST" });
+    if (res.ok) {
+      const updated = await fetch("/api/admin/rent-intelligence/stats").then((r) => r.json()).catch(() => null);
+      setIntel(updated);
+    }
+    setRefreshing(false);
   }
 
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -166,6 +183,77 @@ export default function DashboardPage() {
               </>
             )}
           </div>
+        </div>
+
+        {/* Rent Intelligence */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Rent Intelligence</p>
+              {intel?.last_refresh && (
+                <p className="text-xs mt-0.5" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
+                  Last computed: {new Date(intel.last_refresh).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}
+                </p>
+              )}
+            </div>
+            <button
+              onClick={handleRefreshIntel}
+              disabled={refreshing}
+              className="text-xs px-4 py-2 rounded border transition-colors disabled:opacity-40"
+              style={{ borderColor: "#D8D2C8", color: "#444444", backgroundColor: "white", fontFamily: "var(--font-dm-sans)" }}
+            >
+              {refreshing ? "Refreshing..." : "↻ Refresh now"}
+            </button>
+          </div>
+
+          {/* Submission counts by city */}
+          {loading ? (
+            <div className="grid grid-cols-3 gap-3 mb-4">{[...Array(3)].map((_, i) => <Skeleton key={i} />)}</div>
+          ) : intel?.cities ? (
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {Object.entries(intel.cities).map(([city, stats]) => (
+                <div key={city} className="bg-white border rounded-xl p-5" style={{ borderColor: "#D8D2C8" }}>
+                  <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{city}</p>
+                  <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{stats.total}</p>
+                  <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    +{stats.week} this week · {stats.landlord} from landlords
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {/* Market data table */}
+          {intel?.market_data && intel.market_data.length > 0 ? (
+            <div className="bg-white border rounded-xl overflow-hidden" style={{ borderColor: "#D8D2C8" }}>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ backgroundColor: "#1F2F3A" }}>
+                    {["City", "Beds", "P25", "Median", "P75", "Count", "Trend"].map((h) => (
+                      <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-widest font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {intel.market_data.map((row, i) => (
+                    <tr key={`${row.city}-${row.bedrooms}`} style={{ borderTop: i > 0 ? "1px solid #E8E4DF" : undefined }}>
+                      <td className="px-4 py-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{row.city}</td>
+                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.bedrooms}bd</td>
+                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.p25_rent ? `$${row.p25_rent.toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3 font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{row.median_rent ? `$${row.median_rent.toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.p75_rent ? `$${row.p75_rent.toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.submission_count}</td>
+                      <td className="px-4 py-3" style={{ color: row.trend_direction === "up" ? "#16a34a" : row.trend_direction === "down" ? "#dc2626" : "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                        {row.trend_direction === "up" ? "↑ Rising" : row.trend_direction === "down" ? "↓ Falling" : row.trend_direction === "flat" ? "→ Flat" : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : !loading ? (
+            <p className="text-sm text-center py-6" style={{ color: "#999999" }}>No market data yet — run a scrape to populate.</p>
+          ) : null}
         </div>
 
         {/* Weekly Snapshot */}
