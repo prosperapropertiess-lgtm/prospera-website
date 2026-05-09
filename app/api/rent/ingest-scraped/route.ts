@@ -6,7 +6,7 @@ const VALID_CITIES = ["London", "St. Thomas", "Strathroy"];
 const VALID_PROPERTY_TYPES = ["house", "apartment", "condo", "basement"];
 const VALID_LAUNDRY = ["in_unit", "shared", "none"];
 const VALID_FURNISHED = ["unfurnished", "semi_furnished", "fully_furnished"];
-const VALID_GARAGES = ["attached", "detached", "none"];
+const VALID_GARAGES = ["none", "single", "double", "attached", "detached", "attached_single", "attached_double"];
 const VALID_UTILITIES = ["none", "water", "hydro", "water_hydro", "water_hydro_gas", "all"];
 
 const VALID_ZONES = ["north", "north_east", "north_west", "south", "south_east", "south_west", "east", "west", "downtown", "central"];
@@ -144,15 +144,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, inserted: 0, skipped: skipped + duplicates, reason: "all_duplicates" });
     }
 
-    // Insert in batches of 100
+    // Insert row-by-row so one bad field never blocks the whole batch
     let inserted = 0;
-    for (let i = 0; i < toInsert.length; i += 100) {
-      const batch = toInsert.slice(i, i + 100);
-      const { error } = await supabaseAdmin.from("rent_submissions").insert(batch);
+    let rowErrors = 0;
+    for (const row of toInsert) {
+      const { error } = await supabaseAdmin.from("rent_submissions").insert(row);
       if (error) {
-        console.error("[ingest-scraped] Insert error:", error);
+        console.error(`[ingest-scraped] Row error (${row?.city} ${row?.bedrooms}bd $${row?.rent_amount}): ${error.message}`);
+        rowErrors++;
       } else {
-        inserted += batch.length;
+        inserted++;
       }
     }
 
