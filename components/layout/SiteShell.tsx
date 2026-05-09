@@ -9,6 +9,7 @@ const PopupController = dynamic(() => import("@/components/ui/PopupController"),
 const ChatWidget = dynamic(() => import("@/components/ui/ChatWidget"), { ssr: false });
 const ScrollProgress = dynamic(() => import("@/components/ui/ScrollProgress"), { ssr: false });
 const StickyBottomCTA = dynamic(() => import("@/components/ui/StickyBottomCTA"), { ssr: false });
+const RentActivityToast = dynamic(() => import("@/components/ui/RentActivityToast"), { ssr: false });
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       {!isAdmin && <PopupController />}
       {!isAdmin && <ChatWidget />}
       {!isAdmin && <StickyBottomCTA />}
+      {!isAdmin && <RentActivityToast />}
     </>
   );
 }
