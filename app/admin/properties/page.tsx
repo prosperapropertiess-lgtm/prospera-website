@@ -3,6 +3,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+const BG = "#0B1219";
+const NAV = "#070D13";
+const SURFACE = "#111C27";
+const SURFACE_HI = "#172234";
+const BORDER = "rgba(255,255,255,0.08)";
+const BORDER_HI = "rgba(255,255,255,0.14)";
+const TEXT = "#EDE9E3";
+const TEXT_SEC = "rgba(237,233,227,0.5)";
+const TEXT_MUT = "rgba(237,233,227,0.28)";
+const ACCENT = "#C4374A";
+
 interface Property {
   id: string;
   title: string;
@@ -41,11 +52,8 @@ export default function PropertiesPage() {
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     setDeleting(id);
     const res = await fetch(`/api/admin/properties/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      setProperties((prev) => prev.filter((p) => p.id !== id));
-    } else {
-      alert("Failed to delete. Try again.");
-    }
+    if (res.ok) setProperties((prev) => prev.filter((p) => p.id !== id));
+    else alert("Failed to delete. Try again.");
     setDeleting(null);
   }
 
@@ -56,97 +64,98 @@ export default function PropertiesPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
-      <div className="text-white px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A" }}>
-        <div className="flex items-center gap-4">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera</span>
-          <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">← Home</Link>
-          <Link href="/" target="_blank" className="text-xs text-white/50 hover:text-white/80 transition-colors">↗ View site</Link>
+    <div className="min-h-screen" style={{ backgroundColor: BG }}>
+      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+        <div className="flex items-center gap-5">
+          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
+          <Link href="/admin" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>← Home</Link>
+          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>↗ View site</Link>
         </div>
-        <button onClick={handleLogout} className="text-xs text-white/60 hover:text-white transition-colors">Sign out</button>
+        <button onClick={handleLogout} className="text-xs" style={{ color: TEXT_SEC }}>Sign out</button>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-3xl font-light" style={{ color: "#1F2F3A" }}>Properties</h1>
-            <p className="text-sm mt-1" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-              {loading ? "Loading..." : `${properties.length} total`}
+            <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light" style={{ color: TEXT }}>Properties</h1>
+            <p className="text-sm mt-1" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
+              {loading ? "Loading..." : `${properties.length} listing${properties.length !== 1 ? "s" : ""}`}
             </p>
           </div>
           <Link
             href="/admin/properties/new"
             className="px-5 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#8B2030" }}
+            style={{ backgroundColor: ACCENT }}
           >
             + Add Property
           </Link>
         </div>
 
         {loading ? (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-16 rounded animate-pulse" style={{ backgroundColor: "#D8D2C8" }} />
+              <div key={i} className="h-16 rounded-xl animate-pulse" style={{ backgroundColor: SURFACE }} />
             ))}
           </div>
         ) : properties.length === 0 ? (
-          <div className="text-center py-24 bg-white rounded-xl border" style={{ borderColor: "#D8D2C8" }}>
-            <p className="font-[family-name:var(--font-cormorant)] text-2xl mb-3" style={{ color: "#1F2F3A" }}>No properties yet</p>
-            <p className="text-sm mb-6" style={{ color: "#444444" }}>Add your first property to get started.</p>
-            <Link
-              href="/admin/properties/new"
-              className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "#8B2030" }}
-            >
+          <div className="rounded-xl border p-20 text-center" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+            <p className="font-[family-name:var(--font-cormorant)] text-3xl mb-3" style={{ color: TEXT }}>No properties yet</p>
+            <p className="text-sm mb-6" style={{ color: TEXT_SEC }}>Add your first property to get started.</p>
+            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: ACCENT }}>
               Add Property
             </Link>
           </div>
         ) : (
-          <div className="bg-white rounded-xl border overflow-hidden" style={{ borderColor: "#D8D2C8" }}>
+          <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
             <table className="w-full hidden md:table">
               <thead>
-                <tr className="border-b" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2" }}>
-                  <th className="text-left text-xs uppercase tracking-widest px-6 py-4 font-normal w-8" style={{ color: "#999999" }}></th>
-                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Property</th>
-                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>City</th>
-                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Price</th>
-                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Beds</th>
-                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: "#999999" }}>Status</th>
-                  <th className="px-4 py-4 w-32"></th>
+                <tr style={{ borderBottom: `1px solid ${BORDER}`, backgroundColor: NAV }}>
+                  <th className="text-left text-xs uppercase tracking-widest px-6 py-4 font-normal w-14" style={{ color: TEXT_MUT }}></th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Property</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>City</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Price</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Beds</th>
+                  <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Status</th>
+                  <th className="px-4 py-4 w-28"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y" style={{ borderColor: "#F7F5F2" }}>
-                {properties.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#F7F5F2] transition-colors">
+              <tbody>
+                {properties.map((p, i) => (
+                  <tr key={p.id} style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.images[0]} alt="" className="w-10 h-10 object-cover rounded" />
+                        <img src={p.images[0]} alt="" className="w-10 h-10 object-cover rounded-lg" />
                       ) : (
-                        <div className="w-10 h-10 rounded flex items-center justify-center text-lg" style={{ backgroundColor: "#F7F5F2" }}>🏠</div>
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-base" style={{ backgroundColor: SURFACE_HI }}>🏠</div>
                       )}
                     </td>
                     <td className="px-4 py-4">
-                      <p className="text-sm font-medium" style={{ color: "#1F2F3A" }}>{p.title}</p>
-                      <p className="text-xs" style={{ color: "#999999" }}>{p.address}</p>
+                      <p className="text-sm font-medium" style={{ color: TEXT }}>{p.title}</p>
+                      <p className="text-xs mt-0.5" style={{ color: TEXT_MUT }}>{p.address}</p>
                     </td>
-                    <td className="px-4 py-4 text-sm" style={{ color: "#444444" }}>{p.city}</td>
-                    <td className="px-4 py-4 text-sm" style={{ color: "#222222" }}>${p.price.toLocaleString()}/mo</td>
-                    <td className="px-4 py-4 text-sm" style={{ color: "#444444" }}>{p.bedrooms} bed</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: TEXT_SEC }}>{p.city}</td>
+                    <td className="px-4 py-4 text-sm font-medium" style={{ color: TEXT }}>${p.price.toLocaleString()}/mo</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: TEXT_SEC }}>{p.bedrooms} bed</td>
                     <td className="px-4 py-4">
-                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                      <span
+                        className="text-xs px-2.5 py-1 rounded-full font-medium"
+                        style={{
+                          backgroundColor: p.available ? "rgba(34,197,94,0.12)" : "rgba(255,255,255,0.06)",
+                          color: p.available ? "#4ade80" : TEXT_MUT,
+                        }}
+                      >
                         {p.available ? "Available" : "Unavailable"}
                       </span>
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
-                        <Link href={`/admin/properties/${p.id}`} className="text-xs transition-colors hover:text-[#1F2F3A]" style={{ color: "#999999" }}>
-                          Edit
-                        </Link>
+                        <Link href={`/admin/properties/${p.id}`} className="text-xs transition-colors" style={{ color: TEXT_MUT }}>Edit</Link>
                         <button
                           onClick={() => handleDelete(p.id, p.title)}
                           disabled={deleting === p.id}
-                          className="text-xs text-red-400 hover:text-red-600 transition-colors disabled:opacity-50"
+                          className="text-xs transition-colors disabled:opacity-40"
+                          style={{ color: "#f87171" }}
                         >
                           {deleting === p.id ? "..." : "Delete"}
                         </button>
@@ -157,24 +166,24 @@ export default function PropertiesPage() {
               </tbody>
             </table>
 
-            <div className="md:hidden divide-y" style={{ borderColor: "#D8D2C8" }}>
+            <div className="md:hidden divide-y" style={{ borderColor: BORDER }}>
               {properties.map((p) => (
                 <div key={p.id} className="p-5 flex gap-4">
                   {p.images?.[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.images[0]} alt="" className="w-16 h-16 object-cover rounded flex-shrink-0" />
+                    <img src={p.images[0]} alt="" className="w-16 h-16 object-cover rounded-lg flex-shrink-0" />
                   ) : (
-                    <div className="w-16 h-16 rounded flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F7F5F2" }}>🏠</div>
+                    <div className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: SURFACE_HI }}>🏠</div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate" style={{ color: "#1F2F3A" }}>{p.title}</p>
-                    <p className="text-xs" style={{ color: "#999999" }}>{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
-                    <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full ${p.available ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                    <p className="text-sm font-medium truncate" style={{ color: TEXT }}>{p.title}</p>
+                    <p className="text-xs mt-0.5" style={{ color: TEXT_SEC }}>{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
+                    <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: p.available ? "rgba(34,197,94,0.12)" : "rgba(255,255,255,0.06)", color: p.available ? "#4ade80" : TEXT_MUT }}>
                       {p.available ? "Available" : "Unavailable"}
                     </span>
                     <div className="flex gap-4 mt-2">
-                      <Link href={`/admin/properties/${p.id}`} className="text-xs underline" style={{ color: "#999999" }}>Edit</Link>
-                      <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs text-red-400 underline">
+                      <Link href={`/admin/properties/${p.id}`} className="text-xs underline" style={{ color: TEXT_MUT }}>Edit</Link>
+                      <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs underline" style={{ color: "#f87171" }}>
                         {deleting === p.id ? "Deleting..." : "Delete"}
                       </button>
                     </div>

@@ -3,46 +3,24 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-interface CityStats {
-  total: number;
-  week: number;
-  scraped: number;
-  landlord: number;
-  manual: number;
-}
+const BG = "#0B1219";
+const NAV = "#070D13";
+const SURFACE = "#111C27";
+const SURFACE_HI = "#172234";
+const BORDER = "rgba(255,255,255,0.08)";
+const TEXT = "#EDE9E3";
+const TEXT_SEC = "rgba(237,233,227,0.5)";
+const TEXT_MUT = "rgba(237,233,227,0.28)";
+const ACCENT = "#C4374A";
 
-interface MarketRow {
-  city: string;
-  bedrooms: number;
-  median_rent: number | null;
-  p25_rent: number | null;
-  p75_rent: number | null;
-  submission_count: number;
-  computed_at: string;
-  trend_direction: string | null;
-}
-
-interface AnalysisRequest {
-  city: string;
-  bedrooms: number;
-  created_at: string;
-  used: boolean;
-}
-
-interface TrendPoint {
-  label: string;
-  count: number;
-}
-
+interface CityStats { total: number; week: number; scraped: number; landlord: number; manual: number; }
+interface MarketRow { city: string; bedrooms: number; median_rent: number | null; p25_rent: number | null; p75_rent: number | null; submission_count: number; computed_at: string; trend_direction: string | null; }
+interface AnalysisRequest { city: string; bedrooms: number; created_at: string; used: boolean; }
+interface TrendPoint { label: string; count: number; }
 interface IntelData {
-  totalSubmissions: number;
-  scrapedTotal: number;
-  landlordTotal: number;
-  scrapedThisWeek: number;
-  landlordThisWeek: number;
-  analysisTotal: number;
-  analysisThisWeek: number;
-  analysisUsed: number;
+  totalSubmissions: number; scrapedTotal: number; landlordTotal: number;
+  scrapedThisWeek: number; landlordThisWeek: number;
+  analysisTotal: number; analysisThisWeek: number; analysisUsed: number;
   recentAnalysisRequests: AnalysisRequest[];
   cities: Record<string, CityStats>;
   market_data: MarketRow[];
@@ -50,43 +28,18 @@ interface IntelData {
   scrapeTrend: TrendPoint[];
 }
 
-function StatCard({
-  label,
-  value,
-  sub,
-  accent,
-  change,
-}: {
-  label: string;
-  value: string | number;
-  sub?: string;
-  accent?: boolean;
-  change?: string;
-}) {
+function StatCard({ label, value, sub, accent }: { label: string; value: string | number; sub?: string; accent?: boolean }) {
   return (
-    <div className="bg-white border rounded-xl p-5" style={{ borderColor: "#D8D2C8" }}>
-      <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-        {label}
-      </p>
-      <p className="text-3xl font-light" style={{ color: accent ? "#8B2030" : "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-        {value}
-      </p>
-      {sub && (
-        <p className="text-xs mt-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-          {sub}
-        </p>
-      )}
-      {change && (
-        <p className="text-xs mt-1 font-medium" style={{ color: "#16a34a", fontFamily: "var(--font-dm-sans)" }}>
-          {change}
-        </p>
-      )}
+    <div className="rounded-xl p-5" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
+      <p className="text-xs uppercase tracking-widest mb-1" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{label}</p>
+      <p className="text-3xl font-light" style={{ color: accent ? ACCENT : TEXT, fontFamily: "var(--font-cormorant)" }}>{value}</p>
+      {sub && <p className="text-xs mt-1" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{sub}</p>}
     </div>
   );
 }
 
 function Skeleton({ height = "h-24" }: { height?: string }) {
-  return <div className={`animate-pulse rounded-xl ${height}`} style={{ backgroundColor: "#D8D2C8" }} />;
+  return <div className={`animate-pulse rounded-xl ${height}`} style={{ backgroundColor: SURFACE }} />;
 }
 
 function SparkBar({ data, max }: { data: TrendPoint[]; max: number }) {
@@ -96,21 +49,18 @@ function SparkBar({ data, max }: { data: TrendPoint[]; max: number }) {
         const pct = max > 0 ? (pt.count / max) * 100 : 0;
         const isLast = i === data.length - 1;
         return (
-          <div key={i} className="flex-1 flex flex-col items-center gap-1" title={`${pt.label}: ${pt.count}`}>
-            <div
-              className="w-full rounded-sm transition-all"
-              style={{
-                height: `${Math.max(pct, 4)}%`,
-                backgroundColor: isLast ? "#8B2030" : "#D8D2C8",
-                minHeight: "2px",
-              }}
-            />
+          <div key={i} className="flex-1 flex flex-col items-center" title={`${pt.label}: ${pt.count}`}>
+            <div className="w-full rounded-sm transition-all" style={{ height: `${Math.max(pct, 4)}%`, backgroundColor: isLast ? ACCENT : "rgba(255,255,255,0.12)", minHeight: "2px" }} />
           </div>
         );
       })}
     </div>
   );
 }
+
+const sectionLabel = (text: string) => (
+  <p className="text-xs uppercase tracking-widest mb-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{text}</p>
+);
 
 export default function IntelligencePage() {
   const router = useRouter();
@@ -136,273 +86,161 @@ export default function IntelligencePage() {
   async function handleRecompute() {
     setRefreshing(true);
     const res = await fetch("/api/admin/rent-intelligence/refresh", { method: "POST" });
-    if (res.ok) {
-      await load();
-    }
+    if (res.ok) await load();
     setRefreshing(false);
   }
 
   const trendMax = data?.scrapeTrend ? Math.max(...data.scrapeTrend.map((t) => t.count), 1) : 1;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
-      {/* Top bar */}
-      <div className="text-white px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A" }}>
-        <div className="flex items-center gap-4">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera</span>
-          <Link href="/admin/dashboard" className="text-xs text-white/50 hover:text-white/80 transition-colors">
-            ← Dashboard
-          </Link>
-          <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">
-            Properties
-          </Link>
-          <Link href="/" target="_blank" className="text-xs text-white/50 hover:text-white/80 transition-colors">
-            ↗ View site
-          </Link>
+    <div className="min-h-screen" style={{ backgroundColor: BG }}>
+      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+        <div className="flex items-center gap-5">
+          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
+          <Link href="/admin" className="text-xs" style={{ color: TEXT_SEC }}>← Home</Link>
+          <Link href="/admin/dashboard" className="text-xs" style={{ color: TEXT_SEC }}>Dashboard</Link>
+          <Link href="/" target="_blank" className="text-xs" style={{ color: TEXT_SEC }}>↗ View site</Link>
         </div>
-        <button onClick={handleLogout} className="text-xs text-white/60 hover:text-white transition-colors">
-          Sign out
-        </button>
+        <button onClick={handleLogout} className="text-xs" style={{ color: TEXT_SEC }}>Sign out</button>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-8">
+      <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="flex items-start justify-between mb-10">
           <div>
-            <h1
-              className="font-[family-name:var(--font-cormorant)] text-4xl font-light"
-              style={{ color: "#1F2F3A" }}
-            >
-              Prospera Intelligence
-            </h1>
-            <p className="text-sm mt-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-              Weekly market data, scraping results, and landlord activity
-            </p>
+            <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light" style={{ color: TEXT }}>Prospera Intelligence</h1>
+            <p className="text-sm mt-1" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>Weekly market data, scraping results, and landlord activity</p>
           </div>
           <div className="flex items-center gap-3">
-            <button
-              onClick={load}
-              disabled={loading}
-              className="text-xs px-4 py-2 rounded border transition-colors disabled:opacity-40"
-              style={{ borderColor: "#D8D2C8", color: "#444444", backgroundColor: "white", fontFamily: "var(--font-dm-sans)" }}
-            >
+            <button onClick={load} disabled={loading} className="text-xs px-4 py-2 rounded border transition-colors disabled:opacity-40" style={{ borderColor: BORDER, color: TEXT_SEC, backgroundColor: SURFACE_HI }}>
               ↺ Reload
             </button>
-            <button
-              onClick={handleRecompute}
-              disabled={refreshing}
-              className="text-xs px-4 py-2 rounded text-white transition-opacity hover:opacity-80 disabled:opacity-40"
-              style={{ backgroundColor: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-            >
+            <button onClick={handleRecompute} disabled={refreshing} className="text-xs px-4 py-2 rounded text-white transition-opacity hover:opacity-80 disabled:opacity-40" style={{ backgroundColor: ACCENT }}>
               {refreshing ? "Computing..." : "Recompute market data"}
             </button>
           </div>
         </div>
 
         {/* This Week */}
-        <section className="mb-8">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            This Week
-          </p>
+        <section className="mb-10">
+          {sectionLabel("This Week")}
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[...Array(4)].map((_, i) => <Skeleton key={i} />)}
-            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{[...Array(4)].map((_, i) => <Skeleton key={i} />)}</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <StatCard
-                label="Landlord enquiries"
-                value={data?.analysisThisWeek ?? 0}
-                sub="Analysis requests this week"
-                accent
-              />
-              <StatCard
-                label="Scrape ingest"
-                value={data?.scrapedThisWeek ?? 0}
-                sub="New scraped listings"
-              />
-              <StatCard
-                label="Landlord submissions"
-                value={data?.landlordThisWeek ?? 0}
-                sub="From landlords directly"
-              />
+              <StatCard label="Landlord enquiries" value={data?.analysisThisWeek ?? 0} sub="Analysis requests" accent />
+              <StatCard label="Scrape ingest" value={data?.scrapedThisWeek ?? 0} sub="New scraped listings" />
+              <StatCard label="Landlord submissions" value={data?.landlordThisWeek ?? 0} sub="Direct" />
               <StatCard
                 label="Last computed"
-                value={
-                  data?.last_refresh
-                    ? new Date(data.last_refresh).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
-                    : "Never"
-                }
-                sub={
-                  data?.last_refresh
-                    ? new Date(data.last_refresh).toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit" })
-                    : "Run recompute"
-                }
+                value={data?.last_refresh ? new Date(data.last_refresh).toLocaleDateString("en-CA", { month: "short", day: "numeric" }) : "Never"}
+                sub={data?.last_refresh ? new Date(data.last_refresh).toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit" }) : "Run recompute"}
               />
             </div>
           )}
         </section>
 
         {/* Scrape trend */}
-        <section className="mb-8">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            Scrape Volume — Past 8 Weeks
-          </p>
-          <div className="bg-white border rounded-xl p-5" style={{ borderColor: "#D8D2C8" }}>
-            {loading ? (
-              <Skeleton height="h-16" />
-            ) : data?.scrapeTrend && data.scrapeTrend.length > 0 ? (
+        <section className="mb-10">
+          {sectionLabel("Scrape Volume — Past 8 Weeks")}
+          <div className="rounded-xl border p-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+            {loading ? <Skeleton height="h-16" /> : data?.scrapeTrend && data.scrapeTrend.length > 0 ? (
               <>
                 <SparkBar data={data.scrapeTrend} max={trendMax} />
                 <div className="flex justify-between mt-2">
                   {data.scrapeTrend.map((pt, i) => (
-                    <span key={i} className="text-xs" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
+                    <span key={i} className="text-xs" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
                       {i === 0 || i === data.scrapeTrend.length - 1 ? pt.label : ""}
                     </span>
                   ))}
                 </div>
-                <p className="text-xs mt-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-                  {data.scrapeTrend[data.scrapeTrend.length - 1]?.count ?? 0} listings added this week ·{" "}
-                  {data.scrapedTotal.toLocaleString()} total scraped all-time
+                <p className="text-xs mt-3" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
+                  {data.scrapeTrend[data.scrapeTrend.length - 1]?.count ?? 0} this week · {data.scrapedTotal.toLocaleString()} all-time
                 </p>
               </>
             ) : (
-              <p className="text-sm text-center py-4" style={{ color: "#999999" }}>No scrape data yet.</p>
+              <p className="text-sm text-center py-4" style={{ color: TEXT_MUT }}>No scrape data yet.</p>
             )}
           </div>
         </section>
 
-        {/* Data totals */}
-        <section className="mb-8">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            All-Time Data
-          </p>
+        {/* All-time + city breakdown */}
+        <section className="mb-10">
+          {sectionLabel("All-Time Data")}
           {loading ? (
             <div className="grid grid-cols-3 gap-3">{[...Array(3)].map((_, i) => <Skeleton key={i} />)}</div>
           ) : (
             <div className="grid grid-cols-3 gap-3">
-              <StatCard label="Total rent data points" value={(data?.totalSubmissions ?? 0).toLocaleString()} sub="Across all sources" />
+              <StatCard label="Total data points" value={(data?.totalSubmissions ?? 0).toLocaleString()} sub="Across all sources" />
               <StatCard label="Scraped" value={(data?.scrapedTotal ?? 0).toLocaleString()} sub="From web scraping" />
               <StatCard label="Landlord submitted" value={(data?.landlordTotal ?? 0).toLocaleString()} sub="Direct submissions" />
             </div>
           )}
         </section>
 
-        {/* Per-city breakdown */}
-        <section className="mb-8">
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            Data by City
-          </p>
+        {/* Per-city */}
+        <section className="mb-10">
+          {sectionLabel("Data by City")}
           {loading ? (
             <div className="grid grid-cols-3 gap-3">{[...Array(3)].map((_, i) => <Skeleton key={i} />)}</div>
           ) : data?.cities && Object.keys(data.cities).length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {Object.entries(data.cities).map(([city, stats]) => (
-                <div key={city} className="bg-white border rounded-xl p-5" style={{ borderColor: "#D8D2C8" }}>
-                  <p
-                    className="text-xs uppercase tracking-widest mb-2"
-                    style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {city}
-                  </p>
-                  <p className="text-3xl font-light mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-                    {stats.total.toLocaleString()}
-                  </p>
-                  <div className="space-y-1">
+                <div key={city} className="rounded-xl border p-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+                  <p className="text-xs uppercase tracking-widest mb-2" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{city}</p>
+                  <p className="text-3xl font-light mb-3" style={{ color: TEXT, fontFamily: "var(--font-cormorant)" }}>{stats.total.toLocaleString()}</p>
+                  <div className="space-y-1.5">
                     <div className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                      <span style={{ color: "#999999" }}>This week</span>
-                      <span style={{ color: "#444444" }}>+{stats.week}</span>
+                      <span style={{ color: TEXT_MUT }}>This week</span>
+                      <span style={{ color: TEXT_SEC }}>+{stats.week}</span>
                     </div>
                     <div className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                      <span style={{ color: "#999999" }}>Scraped</span>
-                      <span style={{ color: "#444444" }}>{stats.scraped.toLocaleString()}</span>
+                      <span style={{ color: TEXT_MUT }}>Scraped</span>
+                      <span style={{ color: TEXT_SEC }}>{stats.scraped.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                      <span style={{ color: "#999999" }}>Landlord submitted</span>
-                      <span style={{ color: "#8B2030", fontWeight: 500 }}>{stats.landlord}</span>
+                      <span style={{ color: TEXT_MUT }}>Landlord submitted</span>
+                      <span style={{ color: ACCENT, fontWeight: 500 }}>{stats.landlord}</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-center py-6" style={{ color: "#999999" }}>No submissions yet.</p>
+            <p className="text-sm text-center py-6" style={{ color: TEXT_MUT }}>No submissions yet.</p>
           )}
         </section>
 
-        {/* Market data table */}
-        <section className="mb-8">
+        {/* Market benchmarks */}
+        <section className="mb-10">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-              Market Benchmarks
-            </p>
+            {sectionLabel("Market Benchmarks")}
             {data?.last_refresh && (
-              <p className="text-xs" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs -mt-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
                 Computed {new Date(data.last_refresh).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}
               </p>
             )}
           </div>
-          {loading ? (
-            <Skeleton height="h-48" />
-          ) : data?.market_data && data.market_data.length > 0 ? (
-            <div className="bg-white border rounded-xl overflow-hidden" style={{ borderColor: "#D8D2C8" }}>
+          {loading ? <Skeleton height="h-64" /> : data?.market_data && data.market_data.length > 0 ? (
+            <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ backgroundColor: "#1F2F3A" }}>
+                  <tr style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
                     {["City", "Beds", "P25", "Median", "P75", "Samples", "Trend"].map((h) => (
-                      <th
-                        key={h}
-                        className="px-4 py-3 text-left text-xs uppercase tracking-widest font-semibold"
-                        style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {h}
-                      </th>
+                      <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {data.market_data.map((row, i) => (
-                    <tr
-                      key={`${row.city}-${row.bedrooms}`}
-                      style={{ borderTop: i > 0 ? "1px solid #E8E4DF" : undefined }}
-                    >
-                      <td className="px-4 py-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.city}
-                      </td>
-                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.bedrooms}bd
-                      </td>
-                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.p25_rent ? `$${row.p25_rent.toLocaleString()}` : "—"}
-                      </td>
-                      <td className="px-4 py-3 font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.median_rent ? `$${row.median_rent.toLocaleString()}` : "—"}
-                      </td>
-                      <td className="px-4 py-3" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.p75_rent ? `$${row.p75_rent.toLocaleString()}` : "—"}
-                      </td>
-                      <td className="px-4 py-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-                        {row.submission_count}
-                      </td>
-                      <td
-                        className="px-4 py-3 font-medium"
-                        style={{
-                          color:
-                            row.trend_direction === "up"
-                              ? "#16a34a"
-                              : row.trend_direction === "down"
-                              ? "#dc2626"
-                              : "#999999",
-                          fontFamily: "var(--font-dm-sans)",
-                        }}
-                      >
-                        {row.trend_direction === "up"
-                          ? "↑ Rising"
-                          : row.trend_direction === "down"
-                          ? "↓ Falling"
-                          : row.trend_direction === "flat"
-                          ? "→ Flat"
-                          : "—"}
+                    <tr key={`${row.city}-${row.bedrooms}`} style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
+                      <td className="px-4 py-3" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{row.city}</td>
+                      <td className="px-4 py-3" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{row.bedrooms}bd</td>
+                      <td className="px-4 py-3" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{row.p25_rent ? `$${Math.round(row.p25_rent).toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3 font-semibold" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{row.median_rent ? `$${Math.round(row.median_rent).toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{row.p75_rent ? `$${Math.round(row.p75_rent).toLocaleString()}` : "—"}</td>
+                      <td className="px-4 py-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{row.submission_count}</td>
+                      <td className="px-4 py-3 font-medium" style={{ color: row.trend_direction === "up" ? "#4ade80" : row.trend_direction === "down" ? "#f87171" : TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
+                        {row.trend_direction === "up" ? "↑ Rising" : row.trend_direction === "down" ? "↓ Falling" : row.trend_direction === "flat" ? "→ Flat" : "Baseline"}
                       </td>
                     </tr>
                   ))}
@@ -410,77 +248,47 @@ export default function IntelligencePage() {
               </table>
             </div>
           ) : (
-            <div className="bg-white border rounded-xl p-8 text-center" style={{ borderColor: "#D8D2C8" }}>
-              <p className="text-sm mb-3" style={{ color: "#999999" }}>
-                No market benchmarks computed yet.
-              </p>
-              <button
-                onClick={handleRecompute}
-                disabled={refreshing}
-                className="text-xs px-4 py-2 rounded text-white transition-opacity hover:opacity-80 disabled:opacity-40"
-                style={{ backgroundColor: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-              >
+            <div className="rounded-xl border p-10 text-center" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+              <p className="text-sm mb-4" style={{ color: TEXT_SEC }}>No market benchmarks computed yet.</p>
+              <button onClick={handleRecompute} disabled={refreshing} className="text-xs px-4 py-2 rounded text-white transition-opacity hover:opacity-80 disabled:opacity-40" style={{ backgroundColor: ACCENT }}>
                 {refreshing ? "Computing..." : "Compute now"}
               </button>
             </div>
           )}
         </section>
 
-        {/* Recent analysis requests */}
-        <section className="mb-8">
+        {/* Recent landlord enquiries */}
+        <section className="mb-10">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-              Recent Landlord Enquiries
-            </p>
-            <div className="flex gap-4 text-xs" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
+            {sectionLabel("Recent Landlord Enquiries")}
+            <div className="flex gap-4 text-xs -mt-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
               <span>{data?.analysisThisWeek ?? 0} this week</span>
               <span>{data?.analysisTotal ?? 0} total</span>
               <span>{data?.analysisUsed ?? 0} opened</span>
             </div>
           </div>
-          {loading ? (
-            <Skeleton height="h-40" />
-          ) : data?.recentAnalysisRequests && data.recentAnalysisRequests.length > 0 ? (
-            <div className="bg-white border rounded-xl overflow-hidden" style={{ borderColor: "#D8D2C8" }}>
+          {loading ? <Skeleton height="h-40" /> : data?.recentAnalysisRequests && data.recentAnalysisRequests.length > 0 ? (
+            <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
               {data.recentAnalysisRequests.map((req, i) => (
-                <div
-                  key={i}
-                  className="px-5 py-3 flex items-center justify-between"
-                  style={{ borderTop: i > 0 ? "1px solid #E8E4DF" : undefined }}
-                >
+                <div key={i} className="px-5 py-3 flex items-center justify-between" style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
                   <div className="flex items-center gap-3">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: req.used ? "#16a34a" : "#D8D2C8" }}
-                    />
-                    <div>
-                      <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
-                        {req.city} · {req.bedrooms}bd
-                      </p>
-                    </div>
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: req.used ? "#4ade80" : "rgba(255,255,255,0.15)" }} />
+                    <p className="text-sm" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{req.city} · {req.bedrooms}bd</p>
                   </div>
-                  <div className="flex items-center gap-3 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-                    <span
-                      className="px-2 py-0.5 rounded"
-                      style={{
-                        backgroundColor: req.used ? "#f0fdf4" : "#F7F5F2",
-                        color: req.used ? "#16a34a" : "#999999",
-                      }}
-                    >
+                  <div className="flex items-center gap-3 text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="px-2 py-0.5 rounded" style={{ backgroundColor: req.used ? "rgba(74,222,128,0.12)" : SURFACE_HI, color: req.used ? "#4ade80" : TEXT_MUT }}>
                       {req.used ? "Opened" : "Sent"}
                     </span>
-                    <span>{new Date(req.created_at).toLocaleDateString("en-CA", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+                    <span style={{ color: TEXT_MUT }}>{new Date(req.created_at).toLocaleDateString("en-CA", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="bg-white border rounded-xl p-6 text-center" style={{ borderColor: "#D8D2C8" }}>
-              <p className="text-sm" style={{ color: "#999999" }}>
+            <div className="rounded-xl border p-6 text-center" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+              <p className="text-sm" style={{ color: TEXT_MUT }}>
                 No analysis requests yet. Share the{" "}
-                <Link href="/rent-analysis" target="_blank" className="underline" style={{ color: "#8B2030" }}>
-                  rent analysis page
-                </Link>{" "}
+                <Link href="/rent-analysis" target="_blank" className="underline" style={{ color: ACCENT }}>rent analysis page</Link>{" "}
                 with landlords.
               </p>
             </div>
@@ -489,50 +297,15 @@ export default function IntelligencePage() {
 
         {/* Data health */}
         <section>
-          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            Data Health
-          </p>
+          {sectionLabel("Data Health")}
           {loading ? (
-            <div className="grid grid-cols-2 gap-3">{[...Array(2)].map((_, i) => <Skeleton key={i} />)}</div>
+            <div className="grid grid-cols-2 gap-3">{[...Array(4)].map((_, i) => <Skeleton key={i} />)}</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <StatCard
-                label="Scraped coverage"
-                value={
-                  data?.totalSubmissions
-                    ? `${Math.round(((data.scrapedTotal ?? 0) / data.totalSubmissions) * 100)}%`
-                    : "—"
-                }
-                sub="Of all data points"
-              />
-              <StatCard
-                label="Landlord share"
-                value={
-                  data?.totalSubmissions
-                    ? `${Math.round(((data.landlordTotal ?? 0) / data.totalSubmissions) * 100)}%`
-                    : "—"
-                }
-                sub="First-party data"
-                accent={
-                  data?.totalSubmissions
-                    ? (data.landlordTotal ?? 0) / data.totalSubmissions > 0.1
-                    : false
-                }
-              />
-              <StatCard
-                label="Market segments"
-                value={data?.market_data?.length ?? 0}
-                sub="City × bedroom combos"
-              />
-              <StatCard
-                label="Enquiry conversion"
-                value={
-                  data?.analysisTotal
-                    ? `${Math.round(((data.analysisUsed ?? 0) / data.analysisTotal) * 100)}%`
-                    : "—"
-                }
-                sub="Opened their report"
-              />
+              <StatCard label="Scraped coverage" value={data?.totalSubmissions ? `${Math.round(((data.scrapedTotal ?? 0) / data.totalSubmissions) * 100)}%` : "—"} sub="Of all data points" />
+              <StatCard label="Landlord share" value={data?.totalSubmissions ? `${Math.round(((data.landlordTotal ?? 0) / data.totalSubmissions) * 100)}%` : "—"} sub="First-party data" accent={data?.totalSubmissions ? (data.landlordTotal ?? 0) / data.totalSubmissions > 0.1 : false} />
+              <StatCard label="Market segments" value={data?.market_data?.length ?? 0} sub="City × bedroom combos" />
+              <StatCard label="Enquiry conversion" value={data?.analysisTotal ? `${Math.round(((data.analysisUsed ?? 0) / data.analysisTotal) * 100)}%` : "—"} sub="Opened their report" />
             </div>
           )}
         </section>
