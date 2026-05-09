@@ -69,7 +69,7 @@ export async function GET() {
     if (!cities[row.city]) cities[row.city] = { total: 0, week: 0, scraped: 0, landlord: 0, manual: 0 };
     cities[row.city].total++;
     if (row.submission_type === "scraped") cities[row.city].scraped++;
-    else if (row.submission_type === "landlord") cities[row.city].landlord++;
+    else if (isLandlord(row.submission_type)) cities[row.city].landlord++;
     else cities[row.city].manual++;
   }
   for (const row of submissionsWeek ?? []) {
@@ -77,11 +77,13 @@ export async function GET() {
     cities[row.city].week++;
   }
 
+  const isLandlord = (type: string) => type === "landlord" || type === "initial_analysis";
+
   const totalSubmissions = (submissionsAll ?? []).length;
   const scrapedTotal = (submissionsAll ?? []).filter((r) => r.submission_type === "scraped").length;
-  const landlordTotal = (submissionsAll ?? []).filter((r) => r.submission_type === "landlord").length;
+  const landlordTotal = (submissionsAll ?? []).filter((r) => isLandlord(r.submission_type)).length;
   const scrapedThisWeek = (submissionsWeek ?? []).filter((r) => r.submission_type === "scraped").length;
-  const landlordThisWeek = (submissionsWeek ?? []).filter((r) => r.submission_type === "landlord").length;
+  const landlordThisWeek = (submissionsWeek ?? []).filter((r) => isLandlord(r.submission_type)).length;
 
   // --- Analysis request stats ---
   const analysisTotal = (analysisTokens ?? []).length;
