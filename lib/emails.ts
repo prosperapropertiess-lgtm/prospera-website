@@ -371,6 +371,125 @@ export function monthlyRentTrendsEmail({
   return wrapper(content);
 }
 
+// ─── INTERNAL — RENT SUBMISSION NOTIFICATION ─────────────────
+
+export function rentSubmissionNotificationEmail({
+  submissionId,
+  landlordName,
+  landlordEmail,
+  landlordPhone,
+  submission,
+  claudeAnalysis,
+}: {
+  submissionId: string;
+  landlordName: string | null;
+  landlordEmail: string;
+  landlordPhone: string | null;
+  submission: Record<string, unknown>;
+  claudeAnalysis: string;
+}): string {
+  const s = submission;
+
+  function row(label: string, value: unknown): string {
+    if (value === null || value === undefined || value === "" || value === "not specified") return "";
+    return `<tr>
+      <td style="padding:6px 12px 6px 0;font-size:13px;color:#999999;white-space:nowrap;vertical-align:top;">${label}</td>
+      <td style="padding:6px 0;font-size:13px;color:#1F2F3A;font-weight:500;">${String(value)}</td>
+    </tr>`;
+  }
+
+  function section(title: string, rows: string): string {
+    const content = rows.replace(/\n/g, "").trim();
+    if (!content) return "";
+    return `
+      <p style="margin:20px 0 8px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${title}</p>
+      <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:4px;">${content}</table>
+    `;
+  }
+
+  const appliances = [
+    s.appliance_fridge && "Fridge",
+    s.appliance_stove && "Stove",
+    s.appliance_dishwasher && "Dishwasher",
+    s.appliance_washer && "Washer",
+    s.appliance_dryer && "Dryer",
+  ].filter(Boolean).join(", ") || "None";
+
+  const content = `
+    <p style="margin:0 0 4px;font-size:22px;font-weight:300;color:#1F2F3A;">New Rent Analysis Submission</p>
+    <p style="margin:0 0 24px;font-size:13px;color:#999999;">Submission ID: ${submissionId}</p>
+
+    ${section("Landlord", `
+      ${row("Name", landlordName || "Not given")}
+      ${row("Email", landlordEmail)}
+      ${row("Phone", landlordPhone || "Not given")}
+    `)}
+
+    ${section("Property", `
+      ${row("City", `${s.city}${s.city_zone ? ` — ${String(s.city_zone).replace(/_/g, " ")}` : ""}`)}
+      ${row("Address", s.address)}
+      ${row("Type", s.property_type)}
+      ${row("Bedrooms", s.bedrooms)}
+      ${row("Bathrooms", `${s.bathrooms ?? "?"}bd + ${s.half_bathrooms ?? 0} half`)}
+      ${row("Sqft", s.sqft ? `${s.sqft} sqft` : null)}
+      ${row("Floor", s.floor)}
+      ${row("Era", s.building_era)}
+      ${row("Units in building", s.units_in_building)}
+      ${row("Separate entrance", s.separate_entrance === true ? "Yes" : s.separate_entrance === false ? "No" : null)}
+    `)}
+
+    ${section("Parking & Outdoor", `
+      ${row("Garage", s.garage !== "none" ? String(s.garage).replace(/_/g, " ") : "None")}
+      ${row("Parking spots", s.parking_spots)}
+      ${row("Visitor parking", s.visitor_parking === true ? "Yes" : s.visitor_parking === false ? "No" : null)}
+      ${row("Backyard", s.backyard === true ? "Yes" : s.backyard === false ? "No" : null)}
+      ${row("Balcony", s.balcony === true ? "Yes" : s.balcony === false ? "No" : null)}
+      ${row("Lawn care", s.lawn_care ? String(s.lawn_care).replace(/_/g, " ") : null)}
+    `)}
+
+    ${section("Interior", `
+      ${row("Furnished", s.furnished ? String(s.furnished).replace(/_/g, " ") : null)}
+      ${row("Heat", s.heat_type)}
+      ${row("AC", s.ac_type ? String(s.ac_type).replace(/_/g, " ") : null)}
+      ${row("Appliances", appliances)}
+      ${row("Laundry", s.laundry)}
+      ${row("Utilities included", s.utilities_included)}
+      ${row("Pets", s.pet_friendly === true ? "Yes" : s.pet_friendly === false ? "No" : null)}
+      ${row("Amenities", s.amenities)}
+      ${row("Condo fees incl.", s.condo_fees_included === true ? "Yes" : s.condo_fees_included === false ? "No" : null)}
+    `)}
+
+    ${section("Condition & Access", `
+      ${row("Newly renovated", s.newly_renovated === true ? "Yes" : s.newly_renovated === false ? "No" : null)}
+      ${row("Upkeep rating", s.upkeep_rating ? `${s.upkeep_rating}/10` : null)}
+      ${row("Transit", s.transit_distance_min ? `${s.transit_distance_min} min walk` : null)}
+    `)}
+
+    ${section("Rent Details", `
+      ${row("Rent amount", `$${Number(s.rent_amount).toLocaleString()}/mo (${s.is_asking_rent ? "asking" : "current tenant"})`)}
+      ${row("Previous rent", s.previous_rent ? `$${Number(s.previous_rent).toLocaleString()}/mo` : null)}
+      ${row("Is occupied", s.is_occupied === true ? "Yes" : s.is_occupied === false ? "No" : null)}
+      ${row("Last increase", s.last_rent_increase)}
+      ${row("Neighbouring rent", s.neighbouring_rent ? `$${Number(s.neighbouring_rent).toLocaleString()}/mo` : null)}
+      ${row("Lease preference", s.lease_preference ? String(s.lease_preference).replace(/_/g, " ") : null)}
+      ${row("Available date", s.available_date)}
+    `)}
+
+    ${section("Context", `
+      ${row("Landlord style", s.landlord_style ? String(s.landlord_style).replace(/_/g, " ") : null)}
+      ${row("Special features", s.special_features)}
+      ${row("Remarks", s.remarks)}
+    `)}
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 8px;"><tr><td style="height:1px;background-color:#E8E4DF;"></td></tr></table>
+
+    <p style="margin:20px 0 8px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">Analysis Sent to Landlord</p>
+    <p style="margin:0;font-size:14px;line-height:1.75;color:#2C2C2C;white-space:pre-line;">${claudeAnalysis}</p>
+  `;
+
+  return wrapper(content);
+}
+
 // ─── RESOURCE DOWNLOAD EMAILS ────────────────────────────────
 
 interface ResourceGuide {

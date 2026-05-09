@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
 import { validateRentToken, generatePropertyAnalysis, RentSubmission } from "@/lib/rent-intelligence";
-import { rentAnalysisReportEmail } from "@/lib/emails";
+import { rentAnalysisReportEmail, rentSubmissionNotificationEmail } from "@/lib/emails";
 
 export async function POST(req: NextRequest) {
   try {
@@ -152,7 +152,6 @@ export async function POST(req: NextRequest) {
 
           if (emailErr) {
             console.error("[rent-analysis] Resend failed for submission", submissionId, emailErr);
-            // Mark email as failed so admin can see it
             await supabaseAdmin
               .from("rent_submissions")
               .update({ email_error: JSON.stringify(emailErr) })
@@ -163,6 +162,21 @@ export async function POST(req: NextRequest) {
               .update({ email_sent_at: new Date().toISOString() })
               .eq("id", submissionId);
           }
+
+          // Notify Ebin — full property details + analysis
+          await resend.emails.send({
+            from: "Laura at Prospera <hello@prosperaproperties.co>",
+            to: "prosperapropertiess@gmail.com",
+            subject: `New rent analysis — ${name || "landlord"} · ${submission.city}`,
+            html: rentSubmissionNotificationEmail({
+              submissionId,
+              landlordName: name,
+              landlordEmail: emailAddress,
+              landlordPhone: tokenRow.phone,
+              submission: submission as unknown as Record<string, unknown>,
+              claudeAnalysis,
+            }),
+          });
         } catch (err) {
           console.error("[rent-analysis] Background processing failed for submission", submissionId, err);
         }
