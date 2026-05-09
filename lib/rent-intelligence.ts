@@ -226,23 +226,31 @@ Data: ${row.submission_count} reports from the last 90 days. Low end $${row.p25}
       skipped++;
     }
 
-    await supabaseAdmin.from("rent_market_data").upsert(
-      {
-        city: row.city,
-        bedrooms: row.bedrooms,
-        property_type: null,
-        city_zone: null,
-        computed_at: new Date().toISOString(),
-        submission_count: Number(row.submission_count),
-        p25_rent: row.p25,
-        median_rent: row.median,
-        p75_rent: row.p75,
-        market_narrative: narrative,
-        trend_direction: "insufficient_data",
-        is_published: true,
-      },
-      { onConflict: "city,bedrooms,property_type,city_zone" }
-    );
+    // Delete first — NULL columns in the conflict key (property_type, city_zone)
+    // are treated as distinct by Postgres, so upsert stacks duplicates instead
+    // of updating. Delete-then-insert is the safe pattern here.
+    await supabaseAdmin
+      .from("rent_market_data")
+      .delete()
+      .eq("city", row.city)
+      .eq("bedrooms", row.bedrooms)
+      .is("property_type", null)
+      .is("city_zone", null);
+
+    await supabaseAdmin.from("rent_market_data").insert({
+      city: row.city,
+      bedrooms: row.bedrooms,
+      property_type: null,
+      city_zone: null,
+      computed_at: new Date().toISOString(),
+      submission_count: Number(row.submission_count),
+      p25_rent: row.p25,
+      median_rent: row.median,
+      p75_rent: row.p75,
+      market_narrative: narrative,
+      trend_direction: "insufficient_data",
+      is_published: true,
+    });
   }
 
   return { updated, skipped };
