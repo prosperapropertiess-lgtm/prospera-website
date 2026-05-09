@@ -14,7 +14,7 @@ interface MarketEstimate {
 }
 
 export default function RentAnalysisPage() {
-  const [form, setForm] = useState({ name: "", email: "", city: "", bedrooms: "" });
+  const [form, setForm] = useState({ name: "", email: "", city: "", bedrooms: "", role: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -51,6 +51,7 @@ export default function RentAnalysisPage() {
         email: form.email,
         city: form.city,
         bedrooms: form.bedrooms ? Number(form.bedrooms) : null,
+        submitter_role: form.role || null,
       }),
     });
     if (res.ok) {
@@ -335,7 +336,41 @@ export default function RentAnalysisPage() {
               </div>
             )}
 
-            {/* Step 2 — Name + Email */}
+            {/* Role */}
+            <div>
+              <label style={{ display: "block", fontSize: 13, color: "#555555", fontWeight: 600, marginBottom: 10, fontFamily: "var(--font-dm-sans)" }}>
+                What best describes you?
+              </label>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                {[
+                  { value: "landlord", label: "Landlord" },
+                  { value: "property_manager", label: "Property Manager" },
+                  { value: "realtor", label: "Realtor" },
+                  { value: "other", label: "Other" },
+                ].map((opt) => {
+                  const selected = form.role === opt.value;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => set("role", selected ? "" : opt.value)}
+                      style={{
+                        padding: "13px 10px", fontSize: 15, minHeight: 50,
+                        fontFamily: "var(--font-dm-sans)",
+                        border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
+                        backgroundColor: selected ? "#8B2030" : "#FFFFFF",
+                        color: selected ? "#FAF8F5" : "#444444",
+                        cursor: "pointer", borderRadius: 8,
+                        fontWeight: selected ? 600 : 400,
+                        touchAction: "manipulation",
+                      }}
+                    >{opt.label}</button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Name + Email */}
             <div>
               <label style={{ display: "block", fontSize: 13, color: "#555555", fontWeight: 600, marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>
                 Your name *

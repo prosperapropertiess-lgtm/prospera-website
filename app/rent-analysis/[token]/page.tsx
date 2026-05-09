@@ -52,6 +52,7 @@ export default function RentAnalysisForm() {
   const [currentStep, setCurrentStep] = useState(1);
 
   const [form, setForm] = useState({
+    submitter_role: "",
     city: "", city_zone: "", address: "",
     property_type: "", bedrooms: "", bathrooms: "", half_bathrooms: "0",
     sqft: "", floor: "", building_era: "", units_in_building: "", separate_entrance: "",
@@ -84,6 +85,7 @@ export default function RentAnalysisForm() {
             ...f,
             city: data.city || "",
             bedrooms: data.bedrooms ? String(data.bedrooms) : "",
+            submitter_role: data.submitter_role || "",
           }));
         }
       })
@@ -245,6 +247,7 @@ export default function RentAnalysisForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token,
+        submitter_role: form.submitter_role || null,
         city: form.city,
         city_zone: form.city_zone || null,
         address: form.address || null,
@@ -400,6 +403,37 @@ export default function RentAnalysisForm() {
                 <p style={{ color: "#777777", fontFamily: "var(--font-dm-sans)", fontSize: 15, margin: 0, lineHeight: 1.6 }}>
                   Start with the basics. You can always skip anything you&apos;re not sure about.
                 </p>
+              </div>
+
+              <div>
+                <label style={lbl}>What best describes you?</label>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  {[
+                    { value: "landlord", label: "Landlord" },
+                    { value: "property_manager", label: "Property Manager" },
+                    { value: "realtor", label: "Realtor" },
+                    { value: "other", label: "Other" },
+                  ].map((opt) => {
+                    const selected = form.submitter_role === opt.value;
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => set("submitter_role", selected ? "" : opt.value)}
+                        style={{
+                          padding: "13px 10px", fontSize: 15, minHeight: 50,
+                          fontFamily: "var(--font-dm-sans)",
+                          border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
+                          backgroundColor: selected ? "#8B2030" : "#FFFFFF",
+                          color: selected ? "#FAF8F5" : "#444444",
+                          cursor: "pointer", borderRadius: 8,
+                          fontWeight: selected ? 600 : 400,
+                          touchAction: "manipulation",
+                        }}
+                      >{opt.label}</button>
+                    );
+                  })}
+                </div>
               </div>
 
               <div>

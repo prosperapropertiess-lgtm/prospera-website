@@ -7,7 +7,7 @@ import { rentAnalysisReportEmail, rentSubmissionNotificationEmail } from "@/lib/
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { token, monthlyOptin, ...formData } = body;
+    const { token, monthlyOptin, submitter_role, ...formData } = body;
 
     if (!token) return NextResponse.json({ error: "Token required" }, { status: 400 });
 
@@ -72,6 +72,7 @@ export async function POST(req: NextRequest) {
       .insert([{
         token,
         submission_type: "initial_analysis",
+        submitter_role: submitter_role || null,
         ...submission,
       }])
       .select("id")

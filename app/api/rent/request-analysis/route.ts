@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {
       name, email, phone, address,
-      owner_role, properties_owned, management_status, best_time_to_call,
+      owner_role, submitter_role, properties_owned, management_status, best_time_to_call,
       city, bedrooms,
       estimated_rent_low, estimated_rent_high,
     } = body;
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     // Create token
     const { data: tokenRow, error: tokenErr } = await supabaseAdmin
       .from("rent_analysis_tokens")
-      .insert([{ email, name: name || null, phone: phone || null, city: city || null, bedrooms: bedrooms || null }])
+      .insert([{ email, name: name || null, phone: phone || null, city: city || null, bedrooms: bedrooms || null, submitter_role: submitter_role || owner_role || null }])
       .select("token")
       .single();
 

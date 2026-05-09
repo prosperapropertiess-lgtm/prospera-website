@@ -20,5 +20,6 @@ export async function GET(req: NextRequest) {
     name: tokenRow.name,
     city: tokenRow.city,
     bedrooms: tokenRow.bedrooms,
+    submitter_role: (tokenRow as Record<string, unknown>).submitter_role ?? null,
   });
 }
