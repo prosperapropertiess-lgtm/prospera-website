@@ -64,6 +64,8 @@ export async function GET() {
   ]);
 
   // --- Submission stats ---
+  const isLandlord = (type: string) => type === "landlord" || type === "initial_analysis";
+
   const cities: Record<string, { total: number; week: number; scraped: number; landlord: number; manual: number }> = {};
   for (const row of submissionsAll ?? []) {
     if (!cities[row.city]) cities[row.city] = { total: 0, week: 0, scraped: 0, landlord: 0, manual: 0 };
@@ -76,8 +78,6 @@ export async function GET() {
     if (!cities[row.city]) cities[row.city] = { total: 0, week: 0, scraped: 0, landlord: 0, manual: 0 };
     cities[row.city].week++;
   }
-
-  const isLandlord = (type: string) => type === "landlord" || type === "initial_analysis";
 
   const totalSubmissions = (submissionsAll ?? []).length;
   const scrapedTotal = (submissionsAll ?? []).filter((r) => r.submission_type === "scraped").length;
