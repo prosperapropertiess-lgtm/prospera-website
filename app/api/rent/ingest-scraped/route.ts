@@ -9,6 +9,21 @@ const VALID_FURNISHED = ["unfurnished", "semi_furnished", "fully_furnished"];
 const VALID_GARAGES = ["attached", "detached", "none"];
 const VALID_UTILITIES = ["none", "water", "hydro", "water_hydro", "water_hydro_gas", "all"];
 
+const VALID_ZONES = ["north", "north_east", "north_west", "south", "south_east", "south_west", "east", "west", "downtown", "central"];
+
+function normalizeZone(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const v = raw.toLowerCase().replace(/[\s-]/g, "_");
+  if (VALID_ZONES.includes(v)) return v;
+  // handle compressed forms like "northeast" → "north_east"
+  const expanded = v
+    .replace(/northeast/, "north_east")
+    .replace(/northwest/, "north_west")
+    .replace(/southeast/, "south_east")
+    .replace(/southwest/, "south_west");
+  return VALID_ZONES.includes(expanded) ? expanded : null;
+}
+
 function normalizeUtilities(raw: string | null | undefined): string | null {
   if (!raw) return null;
   const v = raw.toLowerCase().replace(/\s/g, "");
@@ -55,7 +70,7 @@ function clean(listing: ScrapedListing) {
   return {
     submission_type: "scraped" as const,
     city,
-    city_zone: listing.city_zone ?? null,
+    city_zone: normalizeZone(listing.city_zone),
     property_type: VALID_PROPERTY_TYPES.includes(listing.property_type ?? "")
       ? listing.property_type
       : null,
