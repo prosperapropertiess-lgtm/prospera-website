@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
 
     // Email notification
     const resendKey = process.env.RESEND_API_KEY;
-    if (resendKey && inserted > 0) {
+    if (resendKey && inserted >= 5) {
       const cities: Record<string, number> = {};
       for (const r of toInsert) {
         if (r) cities[r.city] = (cities[r.city] ?? 0) + 1;
