@@ -490,6 +490,60 @@ export function rentSubmissionNotificationEmail({
   return wrapper(content);
 }
 
+// ─── INTERNAL — SCRAPE INGEST NOTIFICATION ───────────────────
+
+export function scrapeIngestNotificationEmail({
+  inserted,
+  skipped,
+  cities,
+  source,
+  scrapedAt,
+}: {
+  inserted: number;
+  skipped: number;
+  cities: Record<string, number>;
+  source: string;
+  scrapedAt: string;
+}): string {
+  const cityRows = Object.entries(cities)
+    .map(([city, count]) => `
+      <tr>
+        <td style="padding:8px 12px;border-bottom:1px solid #E8E4DF;font-size:14px;color:#2C2C2C;">${city}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #E8E4DF;font-size:14px;color:#1F2F3A;font-weight:600;text-align:right;">${count} listings</td>
+      </tr>
+    `)
+    .join("");
+
+  const content = `
+    <p style="margin:0 0 4px;font-size:22px;font-weight:300;color:#1F2F3A;">Scrape Complete</p>
+    <p style="margin:0 0 24px;font-size:13px;color:#999999;">${new Date(scrapedAt).toLocaleString("en-CA", { dateStyle: "full", timeStyle: "short" })} · Source: ${source}</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;background-color:#F5F0EB;border-left:3px solid #8B2030;">
+      <tr>
+        <td style="padding:16px 20px;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="font-size:13px;color:#999999;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Inserted</td>
+              <td style="font-size:13px;color:#999999;text-transform:uppercase;letter-spacing:2px;font-weight:600;text-align:right;">Skipped</td>
+            </tr>
+            <tr>
+              <td style="font-size:32px;font-weight:300;color:#1F2F3A;padding-top:4px;">${inserted}</td>
+              <td style="font-size:32px;font-weight:300;color:#999999;padding-top:4px;text-align:right;">${skipped}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 8px;font-size:11px;color:#8B2030;letter-spacing:2px;text-transform:uppercase;font-weight:600;">By City</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;border:1px solid #E8E4DF;">
+      <tbody>${cityRows}</tbody>
+    </table>
+  `;
+
+  return wrapper(content);
+}
+
 // ─── RESOURCE DOWNLOAD EMAILS ────────────────────────────────
 
 interface ResourceGuide {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { scrapeIngestNotificationEmail } from "@/lib/emails";
 
 const VALID_CITIES = ["London", "St. Thomas", "Strathroy"];
 const VALID_PROPERTY_TYPES = ["house", "apartment", "condo", "basement"];
@@ -120,6 +121,35 @@ export async function POST(req: NextRequest) {
     }
 
     console.log(`[ingest-scraped] inserted: ${inserted}, skipped: ${skipped}, duplicates: ${duplicates}`);
+
+    // Email notification
+    const resendKey = process.env.RESEND_API_KEY;
+    if (resendKey && inserted > 0) {
+      const cities: Record<string, number> = {};
+      for (const r of toInsert) {
+        if (r) cities[r.city] = (cities[r.city] ?? 0) + 1;
+      }
+      const source = raw[0]?.source ?? "unknown";
+      try {
+        const { Resend } = await import("resend");
+        const resend = new Resend(resendKey);
+        await resend.emails.send({
+          from: "Prospera Intelligence <hello@prosperaproperties.co>",
+          to: "prosperapropertiess@gmail.com",
+          subject: `Scrape complete — ${inserted} new listings ingested`,
+          html: scrapeIngestNotificationEmail({
+            inserted,
+            skipped: skipped + duplicates,
+            cities,
+            source,
+            scrapedAt: new Date().toISOString(),
+          }),
+        });
+      } catch (err) {
+        console.error("[ingest-scraped] Notification email failed:", err);
+      }
+    }
+
     return NextResponse.json({ success: true, inserted, skipped: skipped + duplicates });
   } catch (err) {
     console.error("[ingest-scraped] Error:", err);
