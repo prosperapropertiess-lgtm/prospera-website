@@ -377,10 +377,12 @@ export default function RentAnalysisPage() {
                     <option value="era_2015_plus">2015+</option>
                   </select>
                 </div>
-                <div>
-                  <label style={lStyle}>Separate entrance?</label>
-                  {toggle("separate_entrance", [{ value: "true", label: "Yes" }, { value: "false", label: "No" }])}
-                </div>
+                {form.property_type === "basement" && (
+                  <div>
+                    <label style={lStyle}>Separate entrance?</label>
+                    {toggle("separate_entrance", [{ value: "true", label: "Yes" }, { value: "false", label: "No" }])}
+                  </div>
+                )}
               </div>
             </div>
           </div>
