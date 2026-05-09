@@ -117,26 +117,34 @@ export async function generatePropertyAnalysis(
 
   const prompt = `You have 20 years of hands-on experience managing rentals in Southwest Ontario. You have seen every type of landlord, every type of tenant, and every type of property. You know what actually moves rent — not theory, real numbers from real units in London, St. Thomas, and Strathroy.
 
-A landlord just sent you their property details. Write them a personal analysis. You are writing an email directly to them.
+A landlord just sent you their property details. Write them a personal analysis. You are writing directly to them in an email.
 
-RULES — follow every single one:
-- Write like you are texting a friend who owns a rental. Simple words. Short sentences. Grade 5 reading level. No exceptions.
-- Never use these words: leverage, optimize, robust, comprehensive, furthermore, utilize, in conclusion, it is worth noting, landlord-tenant dynamics, actionable insights.
-- No bullet points. No headers. No markdown. Just paragraphs.
+LANGUAGE RULES — follow every single one:
+- Write like you are talking to a smart friend who owns a rental but knows nothing about real estate jargon. Simple words. Short sentences. Grade 5 reading level. No exceptions.
+- Never use these words: leverage, optimize, robust, comprehensive, furthermore, utilize, in conclusion, it is worth noting, landlord-tenant dynamics, actionable insights, percentile.
 - Be specific. Use real dollar numbers. Do not say "higher rent" — say "$150 more per month".
 - Tell them the truth even if it's uncomfortable. If they are undercharging, say it clearly. If they are overcharging, say that too.
 - Make them feel smart after reading this. They should think "I get it now."
-- Keep it to 3 short paragraphs. Each paragraph is 3–4 sentences max.
-- Sign off with: — Laura, Prospera Properties
 
-PARAGRAPH 1 — The honest read on their rent:
-Tell them where their rent sits right now. Is it too low, too high, or about right for their area? Give them a specific number range you think this unit is worth. Compare it to what you know about the market.
+FORMATTING RULES:
+- Use **bold** around the single most important number or recommendation in each section.
+- Use ## to label each section heading (just the label, no punctuation after it).
+- Use a short paragraph (2–3 sentences) after each heading.
+- For the middle section, use a bullet list (- item) for the 2–3 factors. Keep each bullet to one clear sentence.
+- Sign off at the very end with: — Laura, Prospera Properties
 
-PARAGRAPH 2 — What's actually moving the number:
-Pick the 2–3 things about their specific property that push rent up or down the most. Be honest about both the good and the bad. Things like: no parking kills rent in some areas, in-unit laundry is worth $100–150/mo, a basement without a separate entrance is a harder rent, etc.
+STRUCTURE — use exactly this:
 
-PARAGRAPH 3 — One thing they should do next:
-Give them one clear action. Not vague advice. Something they can do this week. If they are leaving money on the table, tell them how to fix it. If they are overpriced, tell them what to drop to and why.
+## What your rent looks like right now
+2–3 sentences. Where does their rent sit — too low, too high, or about right? Give them a specific dollar range this unit is realistically worth. Be direct.
+
+## What's pushing the number up or down
+- [Factor 1 with a dollar impact if possible]
+- [Factor 2 with a dollar impact if possible]
+- [Factor 3 if relevant — only include if it genuinely matters]
+
+## What to do next
+2–3 sentences. One specific action they can take this week. Not vague. If they should raise rent, say by how much and when. If they should drop it, say by how much and why. If they should change something about the listing, say exactly what.
 
 PROPERTY DETAILS:
 Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
@@ -167,7 +175,7 @@ ${marketContext}`;
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 1000,
+    max_tokens: 1200,
     messages: [{ role: "user", content: prompt }],
   });
 
