@@ -11,6 +11,7 @@ export interface RentToken {
   phone: string | null;
   city: string | null;
   bedrooms: number | null;
+  submitter_role: string | null;
   created_at: string;
   used_at: string | null;
   expires_at: string;
