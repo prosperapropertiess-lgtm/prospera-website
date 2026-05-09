@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-const ESTIMATES: Record<string, Record<number, { low: number; high: number }>> = {
+// Fallback static estimates if live data isn't available yet
+const FALLBACK: Record<string, Record<number, { low: number; high: number }>> = {
   London: {
     1: { low: 1350, high: 1800 },
     2: { low: 1650, high: 2300 },
@@ -40,7 +41,8 @@ const inputStyle: React.CSSProperties = {
 export default function RentEstimator() {
   const [city, setCity] = useState("");
   const [beds, setBeds] = useState<number | "">("");
-  const [result, setResult] = useState<{ low: number; high: number } | null>(null);
+  const [result, setResult] = useState<{ low: number; high: number; live: boolean; count?: number } | null>(null);
+  const [estimating, setEstimating] = useState(false);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "done">("idle");
 
@@ -59,10 +61,24 @@ export default function RentEstimator() {
     setLead((l) => ({ ...l, [field]: value }));
   }
 
-  function estimate() {
+  async function estimate() {
     if (!city || !beds) return;
-    const range = ESTIMATES[city]?.[beds as number] ?? ESTIMATES[city]?.[4];
-    if (range) setResult(range);
+    setEstimating(true);
+    try {
+      const res = await fetch(`/api/rent/market-estimate?city=${encodeURIComponent(city)}&bedrooms=${beds}`);
+      const data = await res.json();
+      if (data.source === "computed" && data.p25 && data.p75) {
+        setResult({ low: Math.round(data.p25), high: Math.round(data.p75), live: true, count: data.submission_count });
+      } else {
+        // Fall back to static
+        const fallback = FALLBACK[city]?.[beds as number] ?? FALLBACK[city]?.[4];
+        if (fallback) setResult({ ...fallback, live: false });
+      }
+    } catch {
+      const fallback = FALLBACK[city]?.[beds as number] ?? FALLBACK[city]?.[4];
+      if (fallback) setResult({ ...fallback, live: false });
+    }
+    setEstimating(false);
   }
 
   async function handleLeadSubmit(e: React.FormEvent) {
@@ -151,11 +167,11 @@ export default function RentEstimator() {
 
           <button
             onClick={estimate}
-            disabled={!city || beds === ""}
+            disabled={!city || beds === "" || estimating}
             className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-40 rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Estimate
+            {estimating ? "..." : "Estimate"}
           </button>
         </div>
 
@@ -169,7 +185,9 @@ export default function RentEstimator() {
               <span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
             <p className="text-xs mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-              City-wide average for {beds}-bed units in {city} — Q1 2026
+              {result?.live
+                ? `Based on ${result.count} active listings · ${beds}-bed units in ${city}`
+                : `City-wide estimate for ${beds}-bed units in ${city}`}
             </p>
 
             <div className="border-t pt-5" style={{ borderColor: "#F0EDE8" }}>
