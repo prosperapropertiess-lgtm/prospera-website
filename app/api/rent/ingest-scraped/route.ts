@@ -144,16 +144,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, inserted: 0, skipped: skipped + duplicates, reason: "all_duplicates" });
     }
 
-    // Insert row-by-row so one bad field never blocks the whole batch
+    // Insert in batches of 100
     let inserted = 0;
-    let rowErrors = 0;
-    for (const row of toInsert) {
-      const { error } = await supabaseAdmin.from("rent_submissions").insert(row);
+    for (let i = 0; i < toInsert.length; i += 100) {
+      const batch = toInsert.slice(i, i + 100);
+      const { error } = await supabaseAdmin.from("rent_submissions").insert(batch);
       if (error) {
-        console.error(`[ingest-scraped] Row error (${row?.city} ${row?.bedrooms}bd $${row?.rent_amount}): ${error.message}`);
-        rowErrors++;
+        console.error("[ingest-scraped] Batch insert error:", error.message);
       } else {
-        inserted++;
+        inserted += batch.length;
       }
     }
 
