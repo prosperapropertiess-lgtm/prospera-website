@@ -95,50 +95,58 @@ export async function POST(req: NextRequest) {
         .eq("email", tokenRow.email);
     }
 
-    // Market data lookup
-    const { data: marketData } = await supabaseAdmin
-      .from("rent_market_data")
-      .select("*")
-      .eq("city", submission.city)
-      .eq("bedrooms", submission.bedrooms ?? 0)
-      .eq("is_published", true)
-      .maybeSingle();
+    // Return immediately — analysis + email happens in background
+    const submissionId = submissionRow.id;
+    const emailAddress = tokenRow.email;
+    const name = tokenRow.name;
 
-    // Claude analysis
-    let claudeAnalysis = "";
-    try {
-      claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
-    } catch (err) {
-      console.error("Claude analysis error:", err);
-      claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
-    }
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
+      try {
+        const { data: marketData } = await supabaseAdmin
+          .from("rent_market_data")
+          .select("*")
+          .eq("city", submission.city)
+          .eq("bedrooms", submission.bedrooms ?? 0)
+          .eq("is_published", true)
+          .maybeSingle();
 
-    // Update submission with analysis
-    await supabaseAdmin
-      .from("rent_submissions")
-      .update({ claude_analysis: claudeAnalysis, analysis_generated_at: new Date().toISOString() })
-      .eq("id", submissionRow.id);
+        let claudeAnalysis = "";
+        try {
+          claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
+        } catch (err) {
+          console.error("Claude analysis error:", err);
+          claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
+        }
 
-    // Send report email
-    const resendKey = process.env.RESEND_API_KEY;
-    if (resendKey) {
-      const { Resend } = await import("resend");
-      const resend = new Resend(resendKey);
-      await resend.emails.send({
-        from: "Ebin at Prospera <hello@prosperaproperties.co>",
-        replyTo: "prosperapropertiess@gmail.com",
-        to: tokenRow.email,
-        subject: `Your rent analysis — ${submission.city} property`,
-        html: rentAnalysisReportEmail({
-          name: tokenRow.name,
-          city: submission.city,
-          bedrooms: submission.bedrooms,
-          unitType: submission.property_type,
-          rentAmount: submission.rent_amount,
-          claudeAnalysis,
-        }),
-      });
-    }
+        await supabaseAdmin
+          .from("rent_submissions")
+          .update({ claude_analysis: claudeAnalysis, analysis_generated_at: new Date().toISOString() })
+          .eq("id", submissionId);
+
+        const resendKey = process.env.RESEND_API_KEY;
+        if (resendKey) {
+          const { Resend } = await import("resend");
+          const resend = new Resend(resendKey);
+          await resend.emails.send({
+            from: "Ebin at Prospera <hello@prosperaproperties.co>",
+            replyTo: "prosperapropertiess@gmail.com",
+            to: emailAddress,
+            subject: `Your rent analysis — ${submission.city} property`,
+            html: rentAnalysisReportEmail({
+              name,
+              city: submission.city,
+              bedrooms: submission.bedrooms,
+              unitType: submission.property_type,
+              rentAmount: submission.rent_amount,
+              claudeAnalysis,
+            }),
+          });
+        }
+      } catch (err) {
+        console.error("Background analysis error:", err);
+      }
+    })();
 
     return NextResponse.json({ success: true });
   } catch (err) {
