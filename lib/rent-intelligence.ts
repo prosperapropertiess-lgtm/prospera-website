@@ -127,7 +127,7 @@ RULES — follow every single one:
 - Tell them the truth even if it's uncomfortable. If they are undercharging, say it clearly. If they are overcharging, say that too.
 - Make them feel smart after reading this. They should think "I get it now."
 - Keep it to 3 short paragraphs. Each paragraph is 3–4 sentences max.
-- Sign off with: — Ebin, Prospera Properties
+- Sign off with: — Laura, Prospera Properties
 
 PARAGRAPH 1 — The honest read on their rent:
 Tell them where their rent sits right now. Is it too low, too high, or about right for their area? Give them a specific number range you think this unit is worth. Compare it to what you know about the market.

@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
           const { Resend } = await import("resend");
           const resend = new Resend(resendKey);
           const { error: emailErr } = await resend.emails.send({
-            from: "Ebin at Prospera <hello@prosperaproperties.co>",
+            from: "Laura at Prospera <hello@prosperaproperties.co>",
             replyTo: "prosperapropertiess@gmail.com",
             to: emailAddress,
             subject: `Your rent analysis — ${submission.city} property`,

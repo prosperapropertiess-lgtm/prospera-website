@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       const { Resend } = await import("resend");
       const resend = new Resend(resendKey);
       await resend.emails.send({
-        from: "Ebin at Prospera <hello@prosperaproperties.co>",
+        from: "Laura at Prospera <hello@prosperaproperties.co>",
         to: email,
         subject: "Your Prospera rent analysis link is ready",
         html: rentAnalysisLinkEmail({ name, token: tokenRow.token, city, bedrooms }),

@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
 
         try {
           const { error } = await resend.emails.send({
-            from: "Ebin at Prospera <hello@prosperaproperties.co>",
+            from: "Laura at Prospera <hello@prosperaproperties.co>",
             to: sub.email,
             subject: `${city} rental market — ${month}`,
             html: monthlyRentTrendsEmail({ name: sub.name, city, data: cityData, month }),
