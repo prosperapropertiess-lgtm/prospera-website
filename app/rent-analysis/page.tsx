@@ -1,15 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const CITIES = ["London", "St. Thomas", "Strathroy"];
+
+interface MarketEstimate {
+  source: "computed" | "static";
+  p25?: number;
+  median?: number;
+  p75?: number;
+  submission_count?: number;
+}
 
 export default function RentAnalysisPage() {
   const [form, setForm] = useState({ name: "", email: "", city: "", bedrooms: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [estimate, setEstimate] = useState<MarketEstimate | null>(null);
+  const [estimateLoading, setEstimateLoading] = useState(false);
+
+  // Fetch market range whenever city + bedrooms are both selected
+  useEffect(() => {
+    if (!form.city || !form.bedrooms) { setEstimate(null); return; }
+    setEstimateLoading(true);
+    fetch(`/api/rent/market-estimate?city=${encodeURIComponent(form.city)}&bedrooms=${form.bedrooms}`)
+      .then((r) => r.json())
+      .then((data) => setEstimate(data))
+      .catch(() => setEstimate(null))
+      .finally(() => setEstimateLoading(false));
+  }, [form.city, form.bedrooms]);
 
   function set(field: string, value: string) {
     setForm((f) => ({ ...f, [field]: value }));
@@ -220,32 +241,8 @@ export default function RentAnalysisPage() {
           </p>
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <div>
-              <label style={{ display: "block", fontSize: 11, color: "#444444", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, fontFamily: "var(--font-dm-sans)" }}>
-                Your name *
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => set("name", e.target.value)}
-                placeholder="e.g. Sarah"
-                required
-                style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: "#222222", padding: "12px 14px", fontSize: 14, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 4, boxSizing: "border-box" }}
-              />
-            </div>
-            <div>
-              <label style={{ display: "block", fontSize: 11, color: "#444444", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, fontFamily: "var(--font-dm-sans)" }}>
-                Email address *
-              </label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => set("email", e.target.value)}
-                placeholder="you@email.com"
-                required
-                style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: "#222222", padding: "12px 14px", fontSize: 14, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 4, boxSizing: "border-box" }}
-              />
-            </div>
+
+            {/* Step 1 — City + Bedrooms */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div>
                 <label style={{ display: "block", fontSize: 11, color: "#444444", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, fontFamily: "var(--font-dm-sans)" }}>
@@ -276,6 +273,72 @@ export default function RentAnalysisPage() {
               </div>
             </div>
 
+            {/* Market range teaser — shows as soon as city + bedrooms are picked */}
+            {estimateLoading && (
+              <div style={{ backgroundColor: "#1F2F3A", borderRadius: 6, padding: "20px 24px", textAlign: "center" }}>
+                <p style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)", fontSize: 13, margin: 0 }}>Pulling market data...</p>
+              </div>
+            )}
+
+            {!estimateLoading && estimate?.source === "computed" && estimate.median && (
+              <div style={{ backgroundColor: "#1F2F3A", borderRadius: 6, padding: "24px" }}>
+                <p style={{ margin: "0 0 16px", fontSize: 11, color: "#8B2030", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}>
+                  {form.city} · {form.bedrooms}-bedroom market range
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
+                  {[
+                    { label: "Low end", value: estimate.p25 ? `$${Math.round(estimate.p25).toLocaleString()}` : "—" },
+                    { label: "Median", value: `$${Math.round(estimate.median).toLocaleString()}`, highlight: true },
+                    { label: "High end", value: estimate.p75 ? `$${Math.round(estimate.p75).toLocaleString()}` : "—" },
+                  ].map((col) => (
+                    <div key={col.label} style={{ textAlign: "center" }}>
+                      <p style={{ margin: "0 0 6px", fontSize: 10, color: "rgba(250,248,245,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "var(--font-dm-sans)" }}>{col.label}</p>
+                      <p style={{ margin: 0, fontSize: col.highlight ? 28 : 22, fontWeight: col.highlight ? 600 : 300, color: "#FAF8F5", fontFamily: "var(--font-cormorant)", lineHeight: 1 }}>{col.value}</p>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+                  Based on {estimate.submission_count} data points. <strong style={{ color: "#FAF8F5" }}>Where does your specific unit fall?</strong> Fill in your details below for a personalized analysis.
+                </p>
+              </div>
+            )}
+
+            {!estimateLoading && form.city && form.bedrooms && estimate?.source === "static" && (
+              <div style={{ backgroundColor: "#F5F0EB", borderLeft: "3px solid #8B2030", borderRadius: 4, padding: "14px 18px" }}>
+                <p style={{ margin: 0, fontSize: 13, color: "#444444", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+                  We don't have enough data for that segment yet — your analysis will draw on our market knowledge directly.
+                </p>
+              </div>
+            )}
+
+            {/* Step 2 — Name + Email (always visible but stands out after seeing the range) */}
+            <div>
+              <label style={{ display: "block", fontSize: 11, color: "#444444", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, fontFamily: "var(--font-dm-sans)" }}>
+                Your name *
+              </label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => set("name", e.target.value)}
+                placeholder="e.g. Sarah"
+                required
+                style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: "#222222", padding: "12px 14px", fontSize: 14, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 4, boxSizing: "border-box" }}
+              />
+            </div>
+            <div>
+              <label style={{ display: "block", fontSize: 11, color: "#444444", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, fontFamily: "var(--font-dm-sans)" }}>
+                Email address *
+              </label>
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => set("email", e.target.value)}
+                placeholder="you@email.com"
+                required
+                style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: "#222222", padding: "12px 14px", fontSize: 14, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 4, boxSizing: "border-box" }}
+              />
+            </div>
+
             {error && (
               <p style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontSize: 13 }}>{error}</p>
             )}
@@ -285,7 +348,7 @@ export default function RentAnalysisPage() {
               disabled={submitting}
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", padding: "16px 32px", border: "none", cursor: submitting ? "not-allowed" : "pointer", opacity: submitting ? 0.6 : 1, borderRadius: 4, marginTop: 4 }}
             >
-              {submitting ? "Sending..." : "Send My Analysis Link →"}
+              {submitting ? "Sending..." : "Get My Personalized Analysis →"}
             </button>
             <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 12, textAlign: "center" }}>
               Free. No sales call. No obligation. Just your number.
