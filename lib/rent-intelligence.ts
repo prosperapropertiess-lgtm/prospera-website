@@ -115,7 +115,28 @@ export async function generatePropertyAnalysis(
 - Trend: ${marketData.trend_direction || "insufficient data"}`
     : `No aggregated market data yet — use your knowledge of Ontario rental markets in London, St. Thomas, and Strathroy.`;
 
-  const prompt = `You are a rental market expert in Ontario, Canada. A landlord submitted detailed property information for a rent analysis. Write a personalized 3–4 paragraph analysis in plain prose. No bullet points, no markdown, no headers. Be specific with dollar amounts. Be direct and actionable.
+  const prompt = `You have 20 years of hands-on experience managing rentals in Southwest Ontario. You have seen every type of landlord, every type of tenant, and every type of property. You know what actually moves rent — not theory, real numbers from real units in London, St. Thomas, and Strathroy.
+
+A landlord just sent you their property details. Write them a personal analysis. You are writing an email directly to them.
+
+RULES — follow every single one:
+- Write like you are texting a friend who owns a rental. Simple words. Short sentences. Grade 5 reading level. No exceptions.
+- Never use these words: leverage, optimize, robust, comprehensive, furthermore, utilize, in conclusion, it is worth noting, landlord-tenant dynamics, actionable insights.
+- No bullet points. No headers. No markdown. Just paragraphs.
+- Be specific. Use real dollar numbers. Do not say "higher rent" — say "$150 more per month".
+- Tell them the truth even if it's uncomfortable. If they are undercharging, say it clearly. If they are overcharging, say that too.
+- Make them feel smart after reading this. They should think "I get it now."
+- Keep it to 3 short paragraphs. Each paragraph is 3–4 sentences max.
+- Sign off with: — Ebin, Prospera Properties
+
+PARAGRAPH 1 — The honest read on their rent:
+Tell them where their rent sits right now. Is it too low, too high, or about right for their area? Give them a specific number range you think this unit is worth. Compare it to what you know about the market.
+
+PARAGRAPH 2 — What's actually moving the number:
+Pick the 2–3 things about their specific property that push rent up or down the most. Be honest about both the good and the bad. Things like: no parking kills rent in some areas, in-unit laundry is worth $100–150/mo, a basement without a separate entrance is a harder rent, etc.
+
+PARAGRAPH 3 — One thing they should do next:
+Give them one clear action. Not vague advice. Something they can do this week. If they are leaving money on the table, tell them how to fix it. If they are overpriced, tell them what to drop to and why.
 
 PROPERTY DETAILS:
 Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
@@ -135,22 +156,14 @@ Condition: renovated ${yn(submission.newly_renovated)}, upkeep ${submission.upke
 Transit: ${submission.transit_distance_min ? `${submission.transit_distance_min} min walk to bus` : "not specified"}
 Lease preference: ${submission.lease_preference?.replace("_", " ") ?? "not specified"} | Available: ${submission.available_date ?? "not specified"}
 
-Rent: $${submission.rent_amount}/mo (${submission.is_asking_rent ? "asking" : "current tenant"})
-${submission.previous_rent ? `Previously rented: $${submission.previous_rent}/mo` : ""}
-${submission.neighbouring_rent ? `Neighbouring unit: $${submission.neighbouring_rent}/mo` : ""}
+Rent: $${submission.rent_amount}/mo (${submission.is_asking_rent ? "asking" : "current tenant rent"})
+${submission.previous_rent ? `Previously rented at: $${submission.previous_rent}/mo` : ""}
+${submission.neighbouring_rent ? `Neighbouring unit renting for: $${submission.neighbouring_rent}/mo` : ""}
 Landlord style: ${submission.landlord_style?.replace("_", " ") ?? "not specified"}
 ${submission.special_features ? `Special features: ${submission.special_features}` : ""}
-${submission.remarks ? `Remarks: ${submission.remarks}` : ""}
+${submission.remarks ? `Landlord notes: ${submission.remarks}` : ""}
 
-${marketContext}
-
-In your analysis:
-1. Where does their rent sit vs the market — are they underpriced, overpriced, or at market?
-2. Give a specific recommended rent range for their exact unit given all its features
-3. The 2–3 features that most impact their rent potential (up or down)
-4. One concrete next step they should take
-
-Write as Ebin, a local property manager who knows Southwest Ontario well. Warm but direct. Sign off with "— Ebin, Prospera Properties".`;
+${marketContext}`;
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
@@ -175,12 +188,9 @@ export async function computeMarketEstimates(): Promise<{ updated: number; skipp
   let skipped = 0;
 
   for (const row of rows) {
-    const prompt = `You are a rental market analyst. Write exactly 2 sentences for Ontario landlords. Plain prose, no markdown, no bullet points. Be specific with dollar amounts.
+    const prompt = `You know ${row.city} rental market cold. Write exactly 2 sentences for a landlord who owns a ${row.bedrooms}-bedroom unit there. Simple words, grade 5 reading level, no jargon. Real dollar numbers only — no vague language. First sentence: where the market sits right now. Second sentence: one thing they should do with that information.
 
-${row.city}, ${row.bedrooms}-bedroom units — ${row.submission_count} reports (last 90 days)
-25th pct: $${row.p25}/mo | Median: $${row.median}/mo | 75th pct: $${row.p75}/mo
-
-Describe where the market sits and one actionable takeaway for a landlord pricing their unit.`;
+Data: ${row.submission_count} reports from the last 90 days. Low end $${row.p25}/mo, middle $${row.median}/mo, high end $${row.p75}/mo.`;
 
     let narrative = "";
     try {
