@@ -88,7 +88,7 @@ function Hero() {
             See How It Works
           </a>
           <Link
-            href="/contact"
+            href="/rent-analysis"
             className="text-xs font-medium uppercase tracking-widest transition-opacity hover:opacity-60 border-b pb-px"
             style={{
               color: "rgba(250,248,245,0.55)",
@@ -96,7 +96,7 @@ function Hero() {
               fontFamily: "var(--font-dm-sans)",
             }}
           >
-            or get a free quote →
+            or get a free rental analysis →
           </Link>
         </motion.div>
       </div>
@@ -592,11 +592,11 @@ function CTABanner() {
           className="inline-block rounded"
         >
           <Link
-            href="/contact"
+            href="/rent-analysis"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Get a Free Quote
+            Get a Free Rental Analysis
           </Link>
         </motion.div>
       </FadeIn>
@@ -634,11 +634,11 @@ function StickyCTA() {
             <span className="hidden sm:inline">Own a rental in Southwestern Ontario?</span>
           </p>
           <Link
-            href="/contact"
+            href="/rent-analysis"
             className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Get a Free Quote →
+            Get a Free Rental Analysis →
           </Link>
         </motion.div>
       )}
