@@ -74,10 +74,10 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          className="flex flex-col items-center justify-center gap-3"
         >
-          <a
-            href="#how-it-works"
+          <Link
+            href="/rent-analysis"
             className="px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
             style={{
               backgroundColor: "#8B2030",
@@ -85,19 +85,14 @@ function Hero() {
               fontFamily: "var(--font-dm-sans)",
             }}
           >
-            See How It Works
-          </a>
-          <Link
-            href="/rent-analysis"
-            className="text-xs font-medium uppercase tracking-widest transition-opacity hover:opacity-60 border-b pb-px"
-            style={{
-              color: "rgba(250,248,245,0.55)",
-              borderColor: "rgba(250,248,245,0.2)",
-              fontFamily: "var(--font-dm-sans)",
-            }}
-          >
-            or get a free rental analysis →
+            Get a Free Rental Analysis
           </Link>
+          <span
+            className="text-xs"
+            style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Find out what your property should be earning
+          </span>
         </motion.div>
       </div>
 
