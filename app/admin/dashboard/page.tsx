@@ -101,7 +101,8 @@ export default function DashboardPage() {
       <div className="text-white px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="flex items-center gap-4">
           <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light">Prospera</span>
-          <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">← Properties</Link>
+          <Link href="/admin" className="text-xs text-white/50 hover:text-white/80 transition-colors">← Home</Link>
+          <Link href="/admin/intelligence" className="text-xs text-white/50 hover:text-white/80 transition-colors">Intelligence</Link>
           <Link href="/" target="_blank" className="text-xs text-white/50 hover:text-white/80 transition-colors">↗ View site</Link>
         </div>
         <button onClick={handleLogout} className="text-xs text-white/60 hover:text-white transition-colors">Sign out</button>
