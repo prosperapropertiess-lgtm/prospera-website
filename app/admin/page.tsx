@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -26,8 +27,16 @@ const cards = [
   },
 ];
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning.";
+  if (hour < 17) return "Good afternoon.";
+  return "Good evening.";
+}
+
 export default function AdminHome() {
   const router = useRouter();
+  const greeting = useMemo(() => getGreeting(), []);
 
   async function handleLogout() {
     await fetch("/api/admin/login", { method: "DELETE" });
@@ -55,7 +64,7 @@ export default function AdminHome() {
             className="font-[family-name:var(--font-cormorant)] text-5xl font-light mb-3"
             style={{ color: "#1F2F3A" }}
           >
-            Good morning.
+            {greeting}
           </h1>
           <p className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
             What would you like to work on?
