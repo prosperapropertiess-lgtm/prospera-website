@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
 import { validateRentToken, generatePropertyAnalysis, RentSubmission } from "@/lib/rent-intelligence";
 import { rentAnalysisReportEmail } from "@/lib/emails";
@@ -95,40 +96,46 @@ export async function POST(req: NextRequest) {
         .eq("email", tokenRow.email);
     }
 
-    // Return immediately — analysis + email happens in background
+    // Return immediately — analysis + email happens in background via waitUntil
+    // waitUntil tells Vercel to keep the function alive until the promise resolves,
+    // even after the response has been sent to the client.
     const submissionId = submissionRow.id;
     const emailAddress = tokenRow.email;
     const name = tokenRow.name;
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    (async () => {
-      try {
-        const { data: marketData } = await supabaseAdmin
-          .from("rent_market_data")
-          .select("*")
-          .eq("city", submission.city)
-          .eq("bedrooms", submission.bedrooms ?? 0)
-          .eq("is_published", true)
-          .maybeSingle();
-
-        let claudeAnalysis = "";
+    waitUntil(
+      (async () => {
         try {
-          claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
-        } catch (err) {
-          console.error("Claude analysis error:", err);
-          claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
-        }
+          const { data: marketData } = await supabaseAdmin
+            .from("rent_market_data")
+            .select("*")
+            .eq("city", submission.city)
+            .eq("bedrooms", submission.bedrooms ?? 0)
+            .eq("is_published", true)
+            .maybeSingle();
 
-        await supabaseAdmin
-          .from("rent_submissions")
-          .update({ claude_analysis: claudeAnalysis, analysis_generated_at: new Date().toISOString() })
-          .eq("id", submissionId);
+          let claudeAnalysis = "";
+          try {
+            claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
+          } catch (err) {
+            console.error("[rent-analysis] Claude analysis failed:", err);
+            claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
+          }
 
-        const resendKey = process.env.RESEND_API_KEY;
-        if (resendKey) {
+          await supabaseAdmin
+            .from("rent_submissions")
+            .update({ claude_analysis: claudeAnalysis, analysis_generated_at: new Date().toISOString() })
+            .eq("id", submissionId);
+
+          const resendKey = process.env.RESEND_API_KEY;
+          if (!resendKey) {
+            console.error("[rent-analysis] RESEND_API_KEY not set — email not sent for submission", submissionId);
+            return;
+          }
+
           const { Resend } = await import("resend");
           const resend = new Resend(resendKey);
-          await resend.emails.send({
+          const { error: emailErr } = await resend.emails.send({
             from: "Ebin at Prospera <hello@prosperaproperties.co>",
             replyTo: "prosperapropertiess@gmail.com",
             to: emailAddress,
@@ -142,11 +149,25 @@ export async function POST(req: NextRequest) {
               claudeAnalysis,
             }),
           });
+
+          if (emailErr) {
+            console.error("[rent-analysis] Resend failed for submission", submissionId, emailErr);
+            // Mark email as failed so admin can see it
+            await supabaseAdmin
+              .from("rent_submissions")
+              .update({ email_error: JSON.stringify(emailErr) })
+              .eq("id", submissionId);
+          } else {
+            await supabaseAdmin
+              .from("rent_submissions")
+              .update({ email_sent_at: new Date().toISOString() })
+              .eq("id", submissionId);
+          }
+        } catch (err) {
+          console.error("[rent-analysis] Background processing failed for submission", submissionId, err);
         }
-      } catch (err) {
-        console.error("Background analysis error:", err);
-      }
-    })();
+      })()
+    );
 
     return NextResponse.json({ success: true });
   } catch (err) {

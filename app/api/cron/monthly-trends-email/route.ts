@@ -50,25 +50,46 @@ export async function GET(req: NextRequest) {
     byCity[row.city].push(row);
   }
 
+  // Send in batches of 50 to avoid function timeout on large lists
+  const BATCH_SIZE = 50;
   let sent = 0;
-  for (const sub of subscribers) {
-    const city = sub.preferred_city || "London";
-    const cityData = byCity[city];
-    if (!cityData || cityData.length === 0) continue;
+  let failed = 0;
 
-    try {
-      await resend.emails.send({
-        from: "Ebin at Prospera <hello@prosperaproperties.co>",
-        to: sub.email,
-        subject: `${city} rental market — ${month}`,
-        html: monthlyRentTrendsEmail({ name: sub.name, city, data: cityData, month }),
-      });
-      sent++;
-    } catch (err) {
-      console.error(`Failed to send trends email to ${sub.email}:`, err);
+  for (let i = 0; i < subscribers.length; i += BATCH_SIZE) {
+    const batch = subscribers.slice(i, i + BATCH_SIZE);
+
+    await Promise.allSettled(
+      batch.map(async (sub) => {
+        const city = sub.preferred_city || "London";
+        const cityData = byCity[city];
+        if (!cityData || cityData.length === 0) return;
+
+        try {
+          const { error } = await resend.emails.send({
+            from: "Ebin at Prospera <hello@prosperaproperties.co>",
+            to: sub.email,
+            subject: `${city} rental market — ${month}`,
+            html: monthlyRentTrendsEmail({ name: sub.name, city, data: cityData, month }),
+          });
+          if (error) {
+            console.error(`[monthly-trends] Resend error for ${sub.email}:`, error);
+            failed++;
+          } else {
+            sent++;
+          }
+        } catch (err) {
+          console.error(`[monthly-trends] Failed to send to ${sub.email}:`, err);
+          failed++;
+        }
+      })
+    );
+
+    // Small pause between batches to respect Resend rate limits
+    if (i + BATCH_SIZE < subscribers.length) {
+      await new Promise((r) => setTimeout(r, 500));
     }
   }
 
-  console.log(`Monthly trends: sent ${sent} emails.`);
-  return NextResponse.json({ success: true, sent });
+  console.log(`[monthly-trends] Done — sent: ${sent}, failed: ${failed}, total: ${subscribers.length}`);
+  return NextResponse.json({ success: true, sent, failed, total: subscribers.length });
 }
