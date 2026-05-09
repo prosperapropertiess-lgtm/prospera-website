@@ -113,7 +113,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Clean and validate
-    const cleaned = raw.map(clean).filter(Boolean) as ReturnType<typeof clean>[];
+    type CleanedRow = NonNullable<ReturnType<typeof clean>>;
+    const cleaned = raw.map(clean).filter((r): r is CleanedRow => r !== null);
     const skipped = raw.length - cleaned.length;
     console.log(`[ingest-scraped] cleaned: ${cleaned.length}, skipped (invalid): ${skipped}`);
 
@@ -134,8 +135,8 @@ export async function POST(req: NextRequest) {
       )
     );
 
-    const toInsert = cleaned.filter(
-      (r) => r && !seen.has(`${r.city}|${r.bedrooms}|${r.rent_amount}|${r.source_note}`)
+    const toInsert: CleanedRow[] = cleaned.filter(
+      (r) => !seen.has(`${r.city}|${r.bedrooms}|${r.rent_amount}|${r.source_note}`)
     );
 
     const duplicates = cleaned.length - toInsert.length;
