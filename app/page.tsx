@@ -231,7 +231,7 @@ function FeatureCards() {
     {
       num: "03",
       title: "Boutique by Design",
-      desc: "We could manage 100 properties. We don't. We take on what we can manage exceptionally well. Your property gets real attention.",
+      desc: "We keep our portfolio small on purpose. Every landlord we work with gets direct access, fast responses, and someone who actually knows their property.",
     },
     {
       num: "04",

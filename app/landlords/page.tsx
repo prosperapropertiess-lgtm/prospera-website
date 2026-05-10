@@ -226,7 +226,7 @@ export default function LandlordsPage() {
           <FadeIn delay={0.2}>
             <div className="mx-5 sm:mx-8 mt-4 p-6 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2" }}>
               <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                All plans include: <strong style={{ color: "#222222" }}>8% maintenance markup</strong> · <strong style={{ color: "#222222" }}>no setup fee</strong> · <strong style={{ color: "#222222" }}>no vacancy fee</strong> · <strong style={{ color: "#222222" }}>free lease renewal</strong>
+                All plans include: <strong style={{ color: "#222222" }}>no maintenance markup</strong> · <strong style={{ color: "#222222" }}>no setup fee</strong> · <strong style={{ color: "#222222" }}>no vacancy fee</strong> · <strong style={{ color: "#222222" }}>free lease renewal</strong>
               </p>
             </div>
           </FadeIn>
