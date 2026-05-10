@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const supabase = getAdminClient();
 
-  const { data, error } = await supabase.from("properties").insert([body]).select().single();
+  const { data, error } = await supabase.from("properties").insert([{ ...body, is_managed: true }]).select().single();
   if (error) {
     console.error("Insert error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
