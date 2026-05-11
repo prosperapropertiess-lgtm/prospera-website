@@ -71,3 +71,15 @@ Anyone dealt with a bad-faith allegation after an N12? Curious what the process 
 
 #OntarioLandlord #LondonOntario #N12 #LandlordTips
 ---
+
+## 2026-05-11
+Quick reminder for Ontario landlords — the 24-hour entry notice isn't optional, and "I'll stop by tomorrow" isn't enough.
+
+Under the RTA, your written notice needs three things: the specific date, a time window between 8 a.m. and 8 p.m., and the reason for entry. A text or email counts as written — but if any of those three pieces are missing, your tenant can legally refuse access. Enter anyway and they've got grounds for an A2 application against you.
+
+The exceptions are narrower than most people think: genuine emergency, or the tenant consenting at the time. That's basically it.
+
+Anyone had a tenant refuse access after proper notice? What did you do — and how did it play out?
+
+#OntarioLandlord #LandlordTips #LondonOntario
+---
