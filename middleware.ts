@@ -33,6 +33,20 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // ── Agent auth guard ──────────────────────────────────────────────────────
+  // Cookie presence only — full token validation happens inside each route
+  if (
+    pathname.startsWith("/agents") &&
+    !pathname.startsWith("/agents/login")
+  ) {
+    const agentSession = req.cookies.get("agent_session")?.value;
+    if (!agentSession) {
+      const loginUrl = req.nextUrl.clone();
+      loginUrl.pathname = "/agents/login";
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
   return NextResponse.next();
 }
 

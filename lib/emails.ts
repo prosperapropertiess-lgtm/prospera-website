@@ -835,3 +835,194 @@ export function resourceDownloadEmail(
 
   return { subject: guide.subject, html };
 }
+
+// ─────────────────────────────────────────────────────────────
+// APPLICATION SYSTEM EMAILS
+// ─────────────────────────────────────────────────────────────
+
+// New property notification → sent to all active agents
+export function newPropertyAgentEmail({
+  agentName,
+  propertyAddress,
+  propertyCity,
+  bedrooms,
+  bathrooms,
+  price,
+  propertyId,
+  agentId,
+}: {
+  agentName: string | null;
+  propertyAddress: string;
+  propertyCity: string;
+  bedrooms: number;
+  bathrooms: number;
+  price: number;
+  propertyId: string;
+  agentId: string;
+}): string {
+  const applyLink = `${BASE_URL}/apply/${agentId}/${propertyId}`;
+  const dashboardLink = `${BASE_URL}/agents/dashboard`;
+
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">New property just listed</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hey ${agentName || "there"} — a new property is available. Get your application link and start marketing it.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
+      <tr><td style="padding:24px;">
+        <p style="margin:0 0 4px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};text-transform:uppercase;letter-spacing:0.08em;">Property</p>
+        <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:${TEXT};font-family:${FONT_SANS};">${propertyAddress}, ${propertyCity}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">
+          <strong>$${price.toLocaleString()}/mo</strong> &nbsp;·&nbsp; ${bedrooms} bed &nbsp;·&nbsp; ${bathrooms} bath
+        </p>
+      </td></tr>
+    </table>
+
+    ${cta("Open Agent Dashboard", dashboardLink)}
+
+    <p style="margin:24px 0 0;font-size:13px;color:${MUTED};font-family:${FONT_SANS};text-align:center;">Your unique application link: <a href="${applyLink}" style="color:${CRIMSON};">${applyLink}</a></p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Application received → sent to agent when tenant submits
+export function applicationReceivedAgentEmail({
+  agentName,
+  tenantName,
+  tenantEmail,
+  tenantPhone,
+  propertyAddress,
+  applicationId,
+}: {
+  agentName: string | null;
+  tenantName: string;
+  tenantEmail: string;
+  tenantPhone: string;
+  propertyAddress: string;
+  applicationId: string;
+}): string {
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">New application received</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hey ${agentName || "there"} — a tenant just submitted an application for one of your properties.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
+      <tr><td style="padding:24px;">
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Applicant:</strong> ${tenantName}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Email:</strong> ${tenantEmail}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Phone:</strong> ${tenantPhone}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Property:</strong> ${propertyAddress}</p>
+      </td></tr>
+    </table>
+
+    <p style="margin:0 0 24px;font-size:14px;color:${MUTED};font-family:${FONT_SANS};">Documents are being processed. You'll hear from Ebin once the screening report is ready. Application ID: <code>${applicationId}</code></p>
+
+    ${cta("View Your Dashboard", `${BASE_URL}/agents/dashboard`)}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Application review notification → sent to Ebin when AI report is ready
+export function applicationEbinReviewEmail({
+  tenantName,
+  propertyAddress,
+  agentName,
+  aiScore,
+  applicationId,
+}: {
+  tenantName: string;
+  propertyAddress: string;
+  agentName: string;
+  aiScore: number;
+  applicationId: string;
+}): string {
+  const scoreColor = aiScore >= 7 ? "#0D6E5A" : aiScore >= 5 ? "#B45309" : "#B91C1C";
+
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Application ready for review</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">A screening report has been generated. Your decision is needed.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
+      <tr><td style="padding:24px;">
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Applicant:</strong> ${tenantName}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Property:</strong> ${propertyAddress}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Referred by:</strong> ${agentName}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>AI Score:</strong> <span style="color:${scoreColor};font-weight:700;">${aiScore}/10</span></p>
+      </td></tr>
+    </table>
+
+    ${cta("Review Application", `${BASE_URL}/admin/applications/${applicationId}`)}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Approval → sent to tenant
+export function applicationApprovedTenantEmail({
+  tenantName,
+  propertyAddress,
+}: {
+  tenantName: string;
+  propertyAddress: string;
+}): string {
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Your application has been approved</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">We're pleased to let you know that your application for <strong>${propertyAddress}</strong> has been approved.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Someone from our team will be in touch shortly with next steps — lease signing, move-in details, and first/last month's rent collection.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">If you have any questions in the meantime, just reply to this email.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Rejection → sent to tenant
+export function applicationRejectedTenantEmail({
+  tenantName,
+  propertyAddress,
+}: {
+  tenantName: string;
+  propertyAddress: string;
+}): string {
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Application update</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Thank you for applying for <strong>${propertyAddress}</strong>. After reviewing your application, we are not able to move forward at this time.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">We appreciate your interest in Prospera Properties and wish you all the best in your search.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Follow-up → agent clicks button, sent to tenant on behalf of Prospera
+export function agentFollowUpEmail({
+  tenantName,
+  propertyAddress,
+  agentName,
+}: {
+  tenantName: string;
+  propertyAddress: string;
+  agentName: string;
+}): string {
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Following up on your application</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Just checking in on your application for <strong>${propertyAddress}</strong>. We've received everything and your file is currently under review.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">You'll hear from us as soon as a decision has been made. If you have any questions in the meantime, feel free to reply to this email.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">— ${agentName}, Prospera Properties</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
