@@ -12,7 +12,18 @@ export async function POST(req: NextRequest) {
     if (!token) return NextResponse.json({ error: "Token required" }, { status: 400 });
 
     const tokenRow = await validateRentToken(token);
-    if (!tokenRow) return NextResponse.json({ error: "Invalid or expired link" }, { status: 410 });
+    if (!tokenRow) {
+      // Check if it was already used — give a cleaner error
+      const { data: usedToken } = await supabaseAdmin
+        .from("rent_analysis_tokens")
+        .select("used_at")
+        .eq("token", token)
+        .maybeSingle();
+      if (usedToken?.used_at) {
+        return NextResponse.json({ error: "This link has already been used. Check your email for your analysis." }, { status: 409 });
+      }
+      return NextResponse.json({ error: "Invalid or expired link" }, { status: 410 });
+    }
 
     const submission: RentSubmission = {
       city: formData.city || tokenRow.city || "Unknown",

@@ -76,14 +76,18 @@ export interface MarketData {
   trend_direction: string | null;
 }
 
-export async function validateRentToken(token: string): Promise<RentToken | null> {
-  const { data, error } = await supabaseAdmin
+export async function validateRentToken(token: string, allowUsed = false): Promise<RentToken | null> {
+  let query = supabaseAdmin
     .from("rent_analysis_tokens")
     .select("*")
     .eq("token", token)
-    .gt("expires_at", new Date().toISOString())
-    .maybeSingle();
+    .gt("expires_at", new Date().toISOString());
 
+  if (!allowUsed) {
+    query = query.is("used_at", null);
+  }
+
+  const { data, error } = await query.maybeSingle();
   if (error || !data) return null;
   return data as RentToken;
 }
@@ -92,6 +96,16 @@ function yn(val: boolean | null | undefined): string {
   if (val === true) return "yes";
   if (val === false) return "no";
   return "not specified";
+}
+
+// Strip characters that could manipulate the prompt
+function sanitize(val: string | null | undefined): string | null {
+  if (!val) return null;
+  return val
+    .replace(/[<>]/g, "")
+    .replace(/\bignore\b.*\binstructions?\b/gi, "")
+    .slice(0, 500)
+    .trim() || null;
 }
 
 export async function generatePropertyAnalysis(
@@ -159,39 +173,41 @@ One clear action. Not vague. Not "consider raising your rent." Tell them exactly
 End with a short, punchy insight that feels like a secret — something most landlords don't know that directly applies to their situation. This is the section that makes them feel like they got the inside scoop. Keep it to 2–3 sentences. Example: "Most landlords think adding a dishwasher is a big deal. In this market, tenants care way more about laundry access. If you only have budget for one upgrade, go laundry every time."
 
 PROPERTY DETAILS:
-Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace("_", " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
+Location: ${submission.city}${submission.city_zone ? `, ${submission.city_zone.replace(/_/g, " ")} area` : ""}${submission.address ? ` — ${submission.address}` : ""}
 Type: ${submission.property_type || "not specified"} | ${bedsLabel} | ${submission.bathrooms ?? "?"}bd + ${submission.half_bathrooms ?? 0} half bath
 Sqft: ${submission.sqft ?? "not specified"} | Floor: ${submission.floor ?? "n/a"} | Built: ${submission.building_era?.replace(/_/g, " ") ?? "not specified"}
 Units in building: ${submission.units_in_building ?? "not specified"} | Separate entrance: ${yn(submission.separate_entrance)}
 
-Parking: ${submission.garage !== "none" ? `${submission.garage?.replace("_", " ")} garage` : "no garage"}, ${submission.parking_spots ?? 0} spot(s), visitor parking: ${yn(submission.visitor_parking)}
-Outdoor: backyard ${yn(submission.backyard)}, balcony ${yn(submission.balcony)}, lawn care: ${submission.lawn_care?.replace("_", " ") ?? "not specified"}
+Parking: ${submission.garage !== "none" ? `${submission.garage?.replace(/_/g, " ")} garage` : "no garage"}, ${submission.parking_spots ?? 0} spot(s), visitor parking: ${yn(submission.visitor_parking)}
+Outdoor: backyard ${yn(submission.backyard)}, balcony ${yn(submission.balcony)}, lawn care: ${submission.lawn_care?.replace(/_/g, " ") ?? "not specified"}
 
-Furnished: ${submission.furnished?.replace("_", " ") ?? "unfurnished"} | Heat: ${submission.heat_type ?? "not specified"} | AC: ${submission.ac_type?.replace("_", " ") ?? "not specified"}
+Furnished: ${submission.furnished?.replace(/_/g, " ") ?? "unfurnished"} | Heat: ${submission.heat_type ?? "not specified"} | AC: ${submission.ac_type?.replace(/_/g, " ") ?? "not specified"}
 Appliances included: ${appliances}
 Laundry: ${submission.laundry ?? "not specified"} | Utilities: ${submission.utilities_included ?? "not specified"}
 Pets: ${yn(submission.pet_friendly)} | Amenities: ${submission.amenities || "none listed"} | Condo fees included: ${yn(submission.condo_fees_included)}
 
 Condition: renovated ${yn(submission.newly_renovated)}, upkeep ${submission.upkeep_rating ? `${submission.upkeep_rating}/10` : "not rated"}
 Transit: ${submission.transit_distance_min ? `${submission.transit_distance_min} min walk to bus` : "not specified"}
-Lease preference: ${submission.lease_preference?.replace("_", " ") ?? "not specified"} | Available: ${submission.available_date ?? "not specified"}
+Lease preference: ${submission.lease_preference?.replace(/_/g, " ") ?? "not specified"} | Available: ${submission.available_date ?? "not specified"}
 
 Rent: $${submission.rent_amount}/mo (${submission.is_asking_rent ? "asking" : "current tenant rent"})
 ${submission.previous_rent ? `Previously rented at: $${submission.previous_rent}/mo` : ""}
 ${submission.neighbouring_rent ? `Neighbouring unit renting for: $${submission.neighbouring_rent}/mo` : ""}
-Landlord style: ${submission.landlord_style?.replace("_", " ") ?? "not specified"}
-${submission.special_features ? `Special features: ${submission.special_features}` : ""}
-${submission.remarks ? `Landlord notes: ${submission.remarks}` : ""}
+Landlord style: ${submission.landlord_style?.replace(/_/g, " ") ?? "not specified"}
+${sanitize(submission.special_features) ? `Special features: ${sanitize(submission.special_features)}` : ""}
+${sanitize(submission.remarks) ? `Landlord notes: ${sanitize(submission.remarks)}` : ""}
 
 ${marketContext}`;
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 2000,
+    max_tokens: 3000,
     messages: [{ role: "user", content: prompt }],
   });
 
-  return response.content[0].type === "text" ? response.content[0].text : "";
+  const text = response.content[0].type === "text" ? response.content[0].text.trim() : "";
+  if (!text) throw new Error("Claude returned empty analysis");
+  return text;
 }
 
 export async function computeMarketEstimates(): Promise<{ updated: number; skipped: number }> {
@@ -248,7 +264,7 @@ Data: ${row.submission_count} reports from the last 90 days. Low end $${row.p25}
       median_rent: row.median,
       p75_rent: row.p75,
       market_narrative: narrative,
-      trend_direction: "insufficient_data",
+      trend_direction: row.submission_count >= 10 ? "stable" : "insufficient_data",
       is_published: true,
     });
   }

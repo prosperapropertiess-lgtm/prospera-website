@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save lead record
-    await supabaseAdmin.from("rent_leads").insert([{
+    const { error: leadErr } = await supabaseAdmin.from("rent_leads").insert([{
       name,
       email,
       phone: phone || null,
@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
       estimated_rent_high: estimated_rent_high || null,
       token: tokenRow.token,
     }]);
+    if (leadErr) console.error("rent_leads insert error:", leadErr);
 
     // Send link email
     const resendKey = process.env.RESEND_API_KEY;
