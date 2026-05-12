@@ -253,6 +253,27 @@ export default function DashboardPage() {
           ) : null}
         </div>
 
+        {/* Leasing */}
+        <div className="mb-10">
+          {sectionLabel("Leasing")}
+          <div className="grid grid-cols-2 gap-3">
+            <Link href="/admin/applications" style={{ textDecoration: "none" }}>
+              <div className="rounded-xl border p-5 hover:opacity-80 transition-opacity cursor-pointer" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+                <p className="text-xs uppercase tracking-widest mb-2" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Applications</p>
+                <p className="text-3xl font-light mb-1" style={{ color: TEXT, fontFamily: "var(--font-cormorant)" }}>Review</p>
+                <p className="text-xs" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>View, approve, or reject tenant applications</p>
+              </div>
+            </Link>
+            <Link href="/admin/agents" style={{ textDecoration: "none" }}>
+              <div className="rounded-xl border p-5 hover:opacity-80 transition-opacity cursor-pointer" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+                <p className="text-xs uppercase tracking-widest mb-2" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Agents</p>
+                <p className="text-3xl font-light mb-1" style={{ color: TEXT, fontFamily: "var(--font-cormorant)" }}>Manage</p>
+                <p className="text-xs" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>Add agents, activate or deactivate access</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+
         {/* Weekly Snapshot */}
         <div>
           {sectionLabel("Weekly Snapshot")}
