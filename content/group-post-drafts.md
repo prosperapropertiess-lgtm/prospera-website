@@ -83,3 +83,15 @@ Anyone had a tenant refuse access after proper notice? What did you do — and h
 
 #OntarioLandlord #LandlordTips #LondonOntario
 ---
+
+## 2026-05-12
+Has anyone successfully used an N8 for a persistently late tenant?
+
+My tenant pays every month — but usually 2-3 weeks after the 1st. I've been letting it go for about eight months because at least the money eventually shows up. Found out recently there's an actual form for this: the N8 for persistent late payment.
+
+Looks like I need to document the pattern, serve the N8 with a termination date at the end of the rental period, then file an L2 with the LTB. The $201 filing fee seems worth it if it actually works.
+
+Has a Member at the LTB ever actually granted termination for this, or do they typically just give a conditional order? Would love to hear from anyone who's been through it in London or Ontario.
+
+#OntarioLandlord #LandlordTips #LondonOntario
+---
