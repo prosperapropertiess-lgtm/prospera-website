@@ -30,6 +30,18 @@ const cards = [
     description: "Weekly market benchmarks, scraping results, and landlord enquiries",
     cta: "View intelligence",
   },
+  {
+    href: "/admin/applications",
+    label: "Applications",
+    description: "Review tenant applications, AI scores, and approve or reject",
+    cta: "Review applications",
+  },
+  {
+    href: "/admin/agents",
+    label: "Agents",
+    description: "Add leasing agents, manage access, and track their activity",
+    cta: "Manage agents",
+  },
 ];
 
 function getGreeting() {
