@@ -9,6 +9,8 @@ interface Agent {
   email: string;
   is_active: boolean;
   created_at: string;
+  total_applications: number;
+  approved_applications: number;
 }
 
 export default function AdminAgentsPage() {
@@ -25,7 +27,12 @@ export default function AdminAgentsPage() {
   function loadAgents() {
     fetch("/api/admin/agents")
       .then((r) => r.json())
-      .then((data) => { setAgents(Array.isArray(data) ? data : []); setLoading(false); })
+      .then((data) => {
+        const agents = Array.isArray(data) ? data : [];
+        agents.sort((a, b) => b.total_applications - a.total_applications);
+        setAgents(agents);
+        setLoading(false);
+      })
       .catch(() => setLoading(false));
   }
 
@@ -188,7 +195,7 @@ export default function AdminAgentsPage() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
             <thead>
               <tr style={{ borderBottom: "1px solid #E2E8F0", backgroundColor: "#F8FAFC" }}>
-                {["Name", "Email", "Status", "Added", ""].map((h) => (
+                {["Name", "Email", "Applications", "Approved", "Status", "Added", ""].map((h) => (
                   <th key={h} style={{ padding: "10px 16px", textAlign: "left", color: "#64748B", fontWeight: 600, fontSize: 12 }}>{h}</th>
                 ))}
               </tr>
@@ -198,6 +205,8 @@ export default function AdminAgentsPage() {
                 <tr key={agent.id} style={{ borderBottom: "1px solid #F1F5F9" }}>
                   <td style={{ padding: "13px 16px", fontWeight: 600, color: "#1F2F3A" }}>{agent.name}</td>
                   <td style={{ padding: "13px 16px", color: "#475569" }}>{agent.email}</td>
+                  <td style={{ padding: "13px 16px", color: "#1F2F3A", fontWeight: 600 }}>{agent.total_applications}</td>
+                  <td style={{ padding: "13px 16px", color: agent.approved_applications > 0 ? "#065F46" : "#94A3B8", fontWeight: 600 }}>{agent.approved_applications}</td>
                   <td style={{ padding: "13px 16px" }}>
                     <span style={{
                       padding: "3px 10px",

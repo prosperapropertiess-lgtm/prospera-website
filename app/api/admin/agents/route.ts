@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data, error } = await supabaseAdmin
+  const { data: agents, error } = await supabaseAdmin
     .from("agents")
     .select("id, name, email, is_active, created_at")
     .order("created_at", { ascending: false });
@@ -20,7 +20,25 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Failed to load agents" }, { status: 500 });
   }
 
-  return NextResponse.json(data);
+  // Attach application stats per agent
+  const { data: appStats } = await supabaseAdmin
+    .from("applications")
+    .select("agent_id, status");
+
+  const statsMap: Record<string, { total: number; approved: number }> = {};
+  for (const row of appStats ?? []) {
+    if (!statsMap[row.agent_id]) statsMap[row.agent_id] = { total: 0, approved: 0 };
+    statsMap[row.agent_id].total++;
+    if (row.status === "approved") statsMap[row.agent_id].approved++;
+  }
+
+  const result = (agents ?? []).map((a) => ({
+    ...a,
+    total_applications: statsMap[a.id]?.total ?? 0,
+    approved_applications: statsMap[a.id]?.approved ?? 0,
+  }));
+
+  return NextResponse.json(result);
 }
 
 export async function POST(req: NextRequest) {

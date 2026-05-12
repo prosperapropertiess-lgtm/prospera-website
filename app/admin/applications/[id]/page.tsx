@@ -49,6 +49,7 @@ interface Application {
   status: string;
   ai_score: number | null;
   ai_report: string | null;
+  admin_notes: string | null;
   created_at: string;
   properties: { address: string; city: string; price: number } | null;
   agents: { name: string; email: string } | null;
@@ -91,11 +92,14 @@ export default function ApplicationDetailPage() {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<"approve" | "reject" | null>(null);
   const [error, setError] = useState("");
+  const [notes, setNotes] = useState("");
+  const [notesSaving, setNotesSaving] = useState(false);
+  const [notesSaved, setNotesSaved] = useState(false);
 
   useEffect(() => {
     fetch(`/api/admin/applications/${id}`)
       .then((r) => r.json())
-      .then((data) => { setApp(data); setLoading(false); })
+      .then((data) => { setApp(data); setNotes(data.admin_notes ?? ""); setLoading(false); })
       .catch(() => setLoading(false));
   }, [id]);
 
@@ -115,6 +119,22 @@ export default function ApplicationDetailPage() {
       setError("Request failed");
     } finally {
       setActionLoading(null);
+    }
+  }
+
+  async function saveNotes() {
+    setNotesSaving(true);
+    setNotesSaved(false);
+    try {
+      await fetch(`/api/admin/applications/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ admin_notes: notes }),
+      });
+      setNotesSaved(true);
+      setTimeout(() => setNotesSaved(false), 2000);
+    } finally {
+      setNotesSaving(false);
     }
   }
 
@@ -326,10 +346,52 @@ export default function ApplicationDetailPage() {
           borderRadius: 10,
           fontSize: 13,
           color: "#1E40AF",
+          marginBottom: 16,
         }}>
           Documents are being processed. The AI report will appear here once complete.
         </div>
       )}
+
+      {/* Admin Notes */}
+      <Section title="Your Notes">
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Add private notes about this application — only visible to you."
+          rows={4}
+          style={{
+            width: "100%",
+            padding: "10px 12px",
+            border: "1px solid #E2E8F0",
+            borderRadius: 8,
+            fontSize: 13,
+            color: "#1F2F3A",
+            fontFamily: FONT,
+            resize: "vertical",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+        <button
+          onClick={saveNotes}
+          disabled={notesSaving}
+          style={{
+            marginTop: 10,
+            padding: "8px 18px",
+            backgroundColor: notesSaved ? "#D1FAE5" : "#1F2F3A",
+            color: notesSaved ? "#065F46" : "#FFFFFF",
+            border: "none",
+            borderRadius: 6,
+            fontSize: 12,
+            fontWeight: 600,
+            cursor: notesSaving ? "not-allowed" : "pointer",
+            fontFamily: FONT,
+            transition: "all 0.15s",
+          }}
+        >
+          {notesSaving ? "Saving..." : notesSaved ? "✓ Saved" : "Save Notes"}
+        </button>
+      </Section>
     </div>
   );
 }

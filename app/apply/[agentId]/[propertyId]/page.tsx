@@ -100,7 +100,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
       });
       const json = await res.json();
       if (!res.ok) { setStepError(json.error ?? "Submission failed."); setSubmitting(false); return; }
-      router.push(`/apply/${agentId}/${propertyId}/submitted`);
+      router.push(`/apply/${agentId}/${propertyId}/submitted${json.application_id ? `?id=${json.application_id}` : ""}`);
     } catch {
       setStepError("Something went wrong. Please try again.");
       setSubmitting(false);

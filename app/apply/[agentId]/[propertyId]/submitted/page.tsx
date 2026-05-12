@@ -1,4 +1,11 @@
-export default function SubmittedPage() {
+export default async function SubmittedPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ id?: string }>;
+}) {
+  const { id } = await searchParams;
+  const statusUrl = id ? `/apply/status/${id}` : null;
+
   return (
     <div style={{
       minHeight: "100vh",
@@ -34,56 +41,43 @@ export default function SubmittedPage() {
           ✓
         </div>
 
-        {/* Heading */}
-        <h1 style={{
-          margin: "0 0 12px",
-          fontSize: 26,
-          fontWeight: 700,
-          color: "#1F2F3A",
-          lineHeight: 1.25,
-        }}>
+        <h1 style={{ margin: "0 0 12px", fontSize: 26, fontWeight: 700, color: "#1F2F3A", lineHeight: 1.25 }}>
           Application Received
         </h1>
 
-        <p style={{
-          margin: "0 0 32px",
-          fontSize: 15,
-          color: "#475569",
-          lineHeight: 1.6,
-        }}>
-          Thanks for applying. We&apos;ll review your application and get back to you by email within 2–3 business days.
+        <p style={{ margin: "0 0 28px", fontSize: 15, color: "#475569", lineHeight: 1.6 }}>
+          Thanks for applying. We&apos;ll review your application and get back to you within 2–3 business days.
         </p>
 
-        {/* Divider */}
-        <div style={{
-          borderTop: "1px solid #E2E8F0",
-          paddingTop: 28,
-          marginTop: 8,
-        }}>
-          <p style={{
-            margin: 0,
-            fontSize: 13,
-            color: "#94A3B8",
-          }}>
+        {statusUrl && (
+          <a
+            href={statusUrl}
+            style={{
+              display: "inline-block",
+              padding: "12px 24px",
+              backgroundColor: "#1F2F3A",
+              color: "#FFFFFF",
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              textDecoration: "none",
+              marginBottom: 28,
+            }}
+          >
+            Track your application →
+          </a>
+        )}
+
+        <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 24 }}>
+          <p style={{ margin: 0, fontSize: 13, color: "#94A3B8" }}>
             Questions? Email us at{" "}
-            <a
-              href="mailto:hello@prosperaproperties.co"
-              style={{ color: "#8B2030", textDecoration: "none" }}
-            >
+            <a href="mailto:hello@prosperaproperties.co" style={{ color: "#8B2030", textDecoration: "none" }}>
               hello@prosperaproperties.co
             </a>
           </p>
         </div>
 
-        {/* Branding */}
-        <p style={{
-          margin: "24px 0 0",
-          fontSize: 12,
-          color: "#CBD5E1",
-          letterSpacing: "0.05em",
-          textTransform: "uppercase",
-          fontWeight: 600,
-        }}>
+        <p style={{ margin: "20px 0 0", fontSize: 12, color: "#CBD5E1", letterSpacing: "0.05em", textTransform: "uppercase", fontWeight: 600 }}>
           Prospera Properties
         </p>
       </div>

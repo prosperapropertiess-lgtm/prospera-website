@@ -150,6 +150,7 @@ export default function PropertiesPage() {
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
+                        <Link href={`/admin/properties/${p.id}/applicants`} className="text-xs transition-colors" style={{ color: TEXT_MUT }}>Applicants</Link>
                         <Link href={`/admin/properties/${p.id}`} className="text-xs transition-colors" style={{ color: TEXT_MUT }}>Edit</Link>
                         <button
                           onClick={() => handleDelete(p.id, p.title)}

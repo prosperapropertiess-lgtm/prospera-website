@@ -69,3 +69,32 @@ export async function GET(
 
   return NextResponse.json({ ...application, documents: docsWithUrls });
 }
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  if (!isAuthenticated(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  let body: { admin_notes: string };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const { error } = await supabaseAdmin
+    .from("applications")
+    .update({ admin_notes: body.admin_notes ?? null, updated_at: new Date().toISOString() })
+    .eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: "Failed to save notes" }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}

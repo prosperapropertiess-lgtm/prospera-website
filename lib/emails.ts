@@ -1004,6 +1004,39 @@ export function applicationRejectedTenantEmail({
   `);
 }
 
+// Application status update → sent to agent when Ebin approves or rejects
+export function applicationStatusAgentEmail({
+  agentName,
+  tenantName,
+  propertyAddress,
+  status,
+  applicationId,
+}: {
+  agentName: string;
+  tenantName: string;
+  propertyAddress: string;
+  status: "approved" | "rejected";
+  applicationId: string;
+}): string {
+  const approved = status === "approved";
+  const heading = approved ? "Application approved" : "Application not approved";
+  const body = approved
+    ? `Good news — <strong>${tenantName}</strong>'s application for <strong>${propertyAddress}</strong> has been approved. The tenant has been notified and next steps are in motion.`
+    : `<strong>${tenantName}</strong>'s application for <strong>${propertyAddress}</strong> was not approved at this time. The tenant has been notified.`;
+
+  return wrapper(`
+    ${divider()}
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">${heading}</h2>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hi ${agentName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">${body}</p>
+
+    ${cta("View Application", `${BASE_URL}/admin/applications/${applicationId}`)}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
 // Follow-up → agent clicks button, sent to tenant on behalf of Prospera
 export function agentFollowUpEmail({
   tenantName,
