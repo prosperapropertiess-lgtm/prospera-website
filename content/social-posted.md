@@ -4,3 +4,4 @@ tenant-screening-red-flags drafted 2026-05-05
 evicting-tenant-ontario drafted 2026-05-08
 tenant-damages-property-ontario drafted 2026-05-09
 ontario-landlord-tenant-act-2026 drafted 2026-05-11
+ontario-standard-lease-2026 drafted 2026-05-13
