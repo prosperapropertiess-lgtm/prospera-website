@@ -95,3 +95,15 @@ Has a Member at the LTB ever actually granted termination for this, or do they t
 
 #OntarioLandlord #LandlordTips #LondonOntario
 ---
+
+## 2026-05-13
+Quick question for the group — has anyone dealt with a tenant who voided their N5 and then went right back to the same behaviour?
+
+The N5 voiding period trips up a lot of landlords. First N5: your tenant has 7 days to fix the problem. If they do, you can't file an L2. Second N5 within 6 months: non-voidable — file immediately.
+
+The part people miss is documentation. You need evidence before you serve — not after. Photos, dates, written complaints from other tenants in the building. The LTB will ask for it at the hearing, and without it you're just telling a story.
+
+Anyone dealt with a chronic interference or damage situation where the tenant kept voiding and you had to go back to square one?
+
+#OntarioLandlord #LondonOntario #LandlordTips #LTB
+---
