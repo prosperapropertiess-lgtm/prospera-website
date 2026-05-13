@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
-import { applicationReceivedAgentEmail } from "@/lib/emails";
+import { applicationReceivedAgentEmail, applicationEbinReviewEmail } from "@/lib/emails";
+import { processAndScoreApplication } from "@/lib/application-ai";
 
 interface DocEntry {
   doc_type: string;
@@ -27,7 +29,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name, email, and phone are required" }, { status: 400 });
     }
 
-    // Validate agent exists and is active
+    // Validate agent
     const { data: agent } = await supabaseAdmin
       .from("agents")
       .select("id, name, email, is_active")
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     if (!agent) return NextResponse.json({ error: "Invalid application link" }, { status: 400 });
 
-    // Validate property exists and is available
+    // Validate property
     const { data: property } = await supabaseAdmin
       .from("properties")
       .select("id, address, city, price")
@@ -81,8 +83,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to save application" }, { status: 500 });
     }
 
-    // Move documents from temp/ to applications/{id}/ and insert document rows
+    // Move documents from temp/ → applications/{id}/ and insert document rows
     const docEntries: DocEntry[] = Array.isArray(documents) ? documents : [];
+    const movedDocs: { doc_type: string; storage_path: string }[] = [];
+
     for (const doc of docEntries) {
       if (!doc.storage_path || !doc.doc_type) continue;
 
@@ -102,53 +106,17 @@ export async function POST(req: NextRequest) {
         doc_type: doc.doc_type,
         storage_path: finalPath,
       }]);
+
+      movedDocs.push({ doc_type: doc.doc_type, storage_path: finalPath });
     }
 
-    // Update status to processing and record webhook sent time
+    // Mark as processing
     await supabaseAdmin
       .from("applications")
-      .update({ status: "processing", ocr_webhook_sent_at: new Date().toISOString() })
+      .update({ status: "processing" })
       .eq("id", application.id);
 
-    // Fire OpenClaw webhook (if configured)
-    const openclawEndpoint = process.env.OPENCLAW_ENDPOINT;
-    const openclawSecret = process.env.OPENCLAW_SECRET;
-
-    if (openclawEndpoint && openclawSecret) {
-      // Generate 24-hour signed URLs for each document
-      const signedDocs = await Promise.all(
-        docEntries.map(async (doc) => {
-          const path = doc.storage_path.startsWith("temp/")
-            ? doc.storage_path.replace(/^temp\//, `applications/${application.id}/`)
-            : doc.storage_path;
-
-          const { data } = await supabaseAdmin.storage
-            .from("applications")
-            .createSignedUrl(path, 24 * 60 * 60); // 24 hours
-
-          return { type: doc.doc_type, url: data?.signedUrl ?? "" };
-        })
-      );
-
-      fetch(openclawEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Webhook-Secret": openclawSecret,
-        },
-        body: JSON.stringify({
-          application_id: application.id,
-          webhook_url: `${process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.prosperaproperties.co"}/api/applications/ocr-complete`,
-          webhook_secret: process.env.OPENCLAW_WEBHOOK_SECRET,
-          documents: signedDocs.filter((d) => d.url),
-          monthly_rent: Number(property.price),
-        }),
-      }).catch((err) => console.error("[applications/submit] OpenClaw webhook failed:", err));
-    } else {
-      console.warn("[applications/submit] OPENCLAW_ENDPOINT not set — skipping OCR");
-    }
-
-    // Notify agent via email
+    // Email agent immediately (non-blocking)
     const resendKey = process.env.RESEND_API_KEY;
     if (resendKey) {
       const { Resend } = await import("resend");
@@ -165,8 +133,53 @@ export async function POST(req: NextRequest) {
           propertyAddress: `${property.address}, ${property.city}`,
           applicationId: application.id,
         }),
-      }).catch((err: unknown) => console.error("[applications/submit] Agent email failed:", err));
+      }).catch((err: unknown) => console.error("[submit] Agent email failed:", err));
     }
+
+    // Process documents + generate AI report in background
+    waitUntil(
+      (async () => {
+        await processAndScoreApplication(
+          application.id,
+          movedDocs,
+          {
+            tenant_name: tenant_name.trim(),
+            tenant_email: tenant_email.toLowerCase().trim(),
+            monthly_rent: Number(property.price),
+            monthly_income: monthly_income ? Number(monthly_income) : null,
+            employer_name: employer_name || null,
+            employer_position: employer_position || null,
+            employment_type: employment_type || null,
+            employment_start: employment_start || null,
+            current_address: current_address || null,
+          }
+        );
+
+        // After processing — fetch final score and email Ebin
+        const { data: finalApp } = await supabaseAdmin
+          .from("applications")
+          .select("ai_score, ai_report")
+          .eq("id", application.id)
+          .maybeSingle();
+
+        if (resendKey && finalApp?.ai_score != null) {
+          const { Resend } = await import("resend");
+          const resend = new Resend(resendKey);
+          resend.emails.send({
+            from: "Prospera Properties <hello@prosperaproperties.co>",
+            to: "prosperapropertiess@gmail.com",
+            subject: `Application ready for review — ${tenant_name} (Score: ${finalApp.ai_score}/10)`,
+            html: applicationEbinReviewEmail({
+              tenantName: tenant_name,
+              propertyAddress: `${property.address}, ${property.city}`,
+              agentName: agent.name,
+              aiScore: finalApp.ai_score,
+              applicationId: application.id,
+            }),
+          }).catch((err: unknown) => console.error("[submit] Ebin review email failed:", err));
+        }
+      })()
+    );
 
     return NextResponse.json({ success: true, application_id: application.id });
   } catch (err) {
