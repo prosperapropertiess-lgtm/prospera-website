@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { rentAnalysisLinkEmail } from "@/lib/emails";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // 5 requests per IP per hour — rent analysis triggers Claude Sonnet
+    const ip = getClientIp(req);
+    const limit = rateLimit(`rent-request:${ip}`, 5, 60 * 60 * 1000);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const {
       name, email, phone, address,

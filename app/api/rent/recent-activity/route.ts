@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
-export const revalidate = 300; // cache for 5 minutes
+export const dynamic = "force-dynamic";
 
 const FIRST_NAMES = [
   "James", "Sarah", "Mike", "Karen", "David", "Linda", "Chris", "Michelle",

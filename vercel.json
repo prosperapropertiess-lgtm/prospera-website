@@ -3,6 +3,9 @@
     { "path": "/api/cron/nightly-intelligence", "schedule": "0 6 * * *" },
     { "path": "/api/cron/monthly-trends-email", "schedule": "0 14 1 * *" },
     { "path": "/api/cron/health", "schedule": "0 8 * * 1" },
-    { "path": "/api/cron/followup", "schedule": "0 */6 * * *" }
+    { "path": "/api/cron/followup", "schedule": "0 */6 * * *" },
+    { "path": "/api/cron/cto-weekly", "schedule": "0 14 * * 1" },
+    { "path": "/api/cron/cto-status", "schedule": "0 22 * * 5" },
+    { "path": "/api/cron/seo-writer", "schedule": "0 12 * * 1,3,5" }
   ]
 }

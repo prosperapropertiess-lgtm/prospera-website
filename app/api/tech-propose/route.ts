@@ -39,9 +39,13 @@ export async function POST(req: NextRequest) {
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
+    // Generate a single-use approval token scoped to this record only
+    const approvalToken = crypto.randomUUID();
+    await supabase.from("tech_proposals").update({ approval_token: approvalToken }).eq("id", data.id);
+
     const base = "https://www.prosperaproperties.co";
-    const approveUrl = `${base}/api/tech-decision?id=${data.id}&action=approve&token=${process.env.SEO_NOTIFY_SECRET}`;
-    const denyUrl = `${base}/api/tech-decision?id=${data.id}&action=deny&token=${process.env.SEO_NOTIFY_SECRET}`;
+    const approveUrl = `${base}/api/tech-decision?id=${data.id}&action=approve&token=${approvalToken}`;
+    const denyUrl = `${base}/api/tech-decision?id=${data.id}&action=deny&token=${approvalToken}`;
 
     const stepsList = (steps as string[]).map((s: string, i: number) =>
       `<tr><td style="padding:6px 0;border-bottom:1px solid #F0EBE5;font-size:13px;color:#2C2C2C;"><strong style="color:#1F2F3A;">${i + 1}.</strong> ${s}</td></tr>`

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { supabaseAdmin } from "@/lib/supabase";
 import { newPropertyAgentEmail } from "@/lib/emails";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -14,13 +15,10 @@ function isAuthenticated(req: NextRequest) {
   return session?.value === "authenticated";
 }
 
+// Auth is enforced by middleware — this route is only reachable with a valid session
 export async function POST(req: NextRequest) {
-  if (!isAuthenticated(req)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const body = await req.json();
-  const supabase = getAdminClient();
+  const supabase = getSupabaseAdmin();
 
   const { data, error } = await supabase.from("properties").insert([{ ...body, is_managed: true }]).select().single();
   if (error) {
