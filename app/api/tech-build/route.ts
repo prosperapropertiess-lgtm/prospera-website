@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const PLATFORM_CONTEXT = `
-PLATFORM: Prospera Properties website — Next.js 16 App Router, Tailwind CSS v4, Framer Motion, Supabase, Resend, Anthropic Claude API, Vercel.
+PLATFORM: Prospera — a proptech company being built in Ontario. Not just a property management website. The operating system for independent landlords. Every feature should feel like it came from a funded startup, not a local business with a website.
 Working directory: /Users/jaizonebin/prospera-website
 
 FILE STRUCTURE:
@@ -104,12 +104,14 @@ ${proposal.performance_notes ? `PERFORMANCE NOTES: ${proposal.performance_notes}
 Write a single, complete Claude Code prompt that Ebin can copy and paste directly into Claude Code CLI to implement this feature. The prompt must:
 1. Start with: "Build the following feature for the Prospera Properties website at /Users/jaizonebin/prospera-website"
 2. Include all design system rules relevant to this feature
-3. Specify exact file paths to create or modify
-4. Include any Supabase table changes needed (as SQL or schema description)
-5. Be specific enough that Claude Code can implement it without asking questions
-6. End with: "Follow CLAUDE.md rules. Maintain the existing code style. Run 'npm run build' to verify before marking complete."
+3. State the zero-to-one goal — what new capability does this unlock?
+4. Specify exact file paths to create or modify
+5. Include any Supabase table changes needed (as SQL CREATE TABLE or ALTER TABLE statements)
+6. If the feature collects data: specify what to log, what indexes to add, and how it feeds back into future intelligence — this platform compounds with data
+7. Be specific enough that Claude Code can implement without asking questions
+8. End with: "Follow CLAUDE.md rules. Maintain existing code style. Run 'npm run build' to verify before marking complete."
 
-Write ONLY the prompt — no preamble, no explanation outside the prompt.`,
+Build for 10,000 landlords, not 10 — schema and data model should scale. Write ONLY the prompt.`,
         },
       ],
     });
