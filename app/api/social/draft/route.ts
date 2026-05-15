@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to save draft" }, { status: 500 });
   }
 
-  const approveUrl = `${BASE_URL}/api/social/approve?id=${data.id}&token=${process.env.SEO_NOTIFY_SECRET}`;
+  const approveUrl = `${BASE_URL}/api/social/approve?id=${data.id}&amp;token=${process.env.SEO_NOTIFY_SECRET}`;
   const token = process.env.SEO_NOTIFY_SECRET;
 
   // Email preview to Ebin
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
               <p style="font-size:11px;color:#9B9B9B;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Draft Caption</p>
               <div style="background:white;border:1px solid #E8E4DF;padding:20px;margin-bottom:24px;white-space:pre-wrap;font-size:14px;color:#2C2C2C;line-height:1.7;">${message.replace(/\n/g, "<br/>")}</div>
               <a href="${approveUrl}" style="display:inline-block;padding:14px 32px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-right:12px;">Post it →</a>
-              <a href="${BASE_URL}/api/social/approve?id=${data.id}&token=${token}&action=skip" style="display:inline-block;padding:14px 24px;border:1px solid #E8E4DF;color:#9B9B9B;text-decoration:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;">Skip</a>
+              <a href="${BASE_URL}/api/social/approve?id=${data.id}&amp;token=${token}&amp;action=skip" style="display:inline-block;padding:14px 24px;border:1px solid #E8E4DF;color:#9B9B9B;text-decoration:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;">Skip</a>
               <p style="margin-top:24px;font-size:12px;color:#9B9B9B;">Post will go to: <a href="${link || BASE_URL}" style="color:#7B1C1C;">${link || BASE_URL}</a></p>
             </div>
           </div>

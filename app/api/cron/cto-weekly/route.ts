@@ -227,8 +227,9 @@ Respond ONLY with valid JSON — no preamble, no explanation:
 
     // ── Email proposal to Ebin ────────────────────────────────────────────
     const base = "https://www.prosperaproperties.co";
-    const approveUrl = `${base}/api/tech-decision?id=${data.id}&action=approve&token=${approvalToken}`;
-    const denyUrl = `${base}/api/tech-decision?id=${data.id}&action=deny&token=${approvalToken}`;
+    // Use &amp; in HTML href — bare & gets parsed as HTML entity start by email clients
+    const approveUrl = `${base}/api/tech-decision?id=${data.id}&amp;action=approve&amp;token=${approvalToken}`;
+    const denyUrl = `${base}/api/tech-decision?id=${data.id}&amp;action=deny&amp;token=${approvalToken}`;
 
     const stepsList = (proposal.steps as string[])
       .map((s: string, i: number) => `

@@ -44,8 +44,8 @@ export async function POST(req: NextRequest) {
     await supabase.from("tech_proposals").update({ approval_token: approvalToken }).eq("id", data.id);
 
     const base = "https://www.prosperaproperties.co";
-    const approveUrl = `${base}/api/tech-decision?id=${data.id}&action=approve&token=${approvalToken}`;
-    const denyUrl = `${base}/api/tech-decision?id=${data.id}&action=deny&token=${approvalToken}`;
+    const approveUrl = `${base}/api/tech-decision?id=${data.id}&amp;action=approve&amp;token=${approvalToken}`;
+    const denyUrl = `${base}/api/tech-decision?id=${data.id}&amp;action=deny&amp;token=${approvalToken}`;
 
     const stepsList = (steps as string[]).map((s: string, i: number) =>
       `<tr><td style="padding:6px 0;border-bottom:1px solid #F0EBE5;font-size:13px;color:#2C2C2C;"><strong style="color:#1F2F3A;">${i + 1}.</strong> ${s}</td></tr>`
