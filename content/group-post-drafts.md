@@ -107,3 +107,20 @@ Anyone dealt with a chronic interference or damage situation where the tenant ke
 
 #OntarioLandlord #LondonOntario #LandlordTips #LTB
 ---
+
+## 2026-05-15
+Quick question for the group — are you serving your N1 notices correctly?
+
+A lot of landlords know you need written notice before a rent increase, but the details trip people up:
+
+- 90 days minimum — not 60, not 30, not "a couple months"
+- You have to use the actual N1 form, not a letter or a text
+- Only one increase per 12-month period (not per calendar year)
+- Units built before November 15, 2018 are capped at the annual guideline — no exceptions
+
+Get the notice period or form wrong and the increase is void. Your tenant can legally refuse and claim back anything they've already paid at the higher rate.
+
+Has anyone had a tenant challenge a rent increase because of a notice error? Curious what happened at the LTB — and whether the adjudicator gave any wiggle room.
+
+#OntarioLandlord #LondonOntario #RentIncrease #LandlordTips
+---

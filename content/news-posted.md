@@ -7,3 +7,4 @@ news-2026-05-09 N12 notices — what Ontario landlords must know before filing f
 news-2026-05-11 Landlord entry rules — the 24-hour notice requirement and what it must include 2026-05-11
 news-2026-05-12 N8 notices — persistent late payment and what Ontario landlords need to know 2026-05-12
 news-2026-05-13 N5 notices — the voiding period and what Ontario landlords must know before filing an L2 2026-05-13
+news-2026-05-15 N1 notices and rent increase rules — what Ontario landlords get wrong 2026-05-15
