@@ -124,3 +124,17 @@ Has anyone had a tenant challenge a rent increase because of a notice error? Cur
 
 #OntarioLandlord #LondonOntario #RentIncrease #LandlordTips
 ---
+
+## 2026-05-16
+Quick question for the group — are there clauses in your lease that might actually be void under the RTA?
+
+"No pets," late fees, damage deposits — three of the most common things Ontario landlords put in leases that either don't hold up or are outright illegal.
+
+The RTA overrides your lease automatically. So if you're charging late fees, holding a damage deposit, or planning to act on a "no pets" clause — you could be building your case on something that collapses in a hearing.
+
+The tools that actually work: N4 for rent arrears, N5 for damage and interference, N8 for persistent late payment. Use the right forms and the RTA is firmly on your side.
+
+What clauses have you had challenged at the LTB — or wish you'd known were unenforceable before signing?
+
+#OntarioLandlord #LondonOntario #LandlordTips #LeaseAgreement
+---
