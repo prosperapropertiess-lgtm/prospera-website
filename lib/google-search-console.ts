@@ -103,7 +103,10 @@ export async function querySearchAnalytics(params: {
   dimensionFilterGroups?: object[];
 }): Promise<{ rows: GSCRow[]; responseAggregationType?: string } | null> {
   const token = await getGSCToken();
-  if (!token) return null;
+  if (!token) {
+    console.error("[gsc] No token — credentials missing or JWT sign failed");
+    return null;
+  }
 
   const { siteUrl, ...body } = params;
   const encoded = encodeURIComponent(siteUrl);
@@ -120,7 +123,8 @@ export async function querySearchAnalytics(params: {
     });
 
     if (!res.ok) {
-      console.error("[gsc] Search Analytics API error:", await res.text());
+      const errText = await res.text();
+      console.error(`[gsc] Search Analytics API error ${res.status}:`, errText);
       return null;
     }
 
@@ -133,4 +137,14 @@ export async function querySearchAnalytics(params: {
     console.error("[gsc] Request error:", err);
     return null;
   }
+}
+
+export function getServiceAccountEmail(): string | null {
+  const json = process.env.GSC_SERVICE_ACCOUNT_JSON;
+  if (json) {
+    try {
+      return (JSON.parse(json).client_email as string) ?? null;
+    } catch { return null; }
+  }
+  return process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ?? null;
 }

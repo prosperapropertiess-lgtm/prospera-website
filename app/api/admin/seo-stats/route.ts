@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { querySearchAnalytics } from "@/lib/google-search-console";
+import { querySearchAnalytics, getServiceAccountEmail } from "@/lib/google-search-console";
 
 const SITE_URL = "https://www.prosperaproperties.co/";
 const BLOG_PREFIX = "https://www.prosperaproperties.co/blog/";
@@ -51,7 +51,14 @@ export async function GET() {
   ]);
 
   if (!summaryResult && !pagesResult && !queriesResult) {
-    return NextResponse.json({ error: "GSC not configured" }, { status: 500 });
+    const email = getServiceAccountEmail();
+    return NextResponse.json({
+      error: "GSC not configured",
+      serviceAccountEmail: email,
+      hint: email
+        ? `Add ${email} as an Owner in Google Search Console → Settings → Users and permissions`
+        : "GSC_SERVICE_ACCOUNT_JSON env var is missing or invalid",
+    }, { status: 500 });
   }
 
   const summaryRow = summaryResult?.rows?.[0];
