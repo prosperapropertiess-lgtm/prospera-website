@@ -103,3 +103,103 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - added: 2026-05-09
 
 ---
+
+## London & St. Thomas Association of Realtors (LSTAR)
+- url: https://www.lstar.ca/
+- type: association
+- why: The official local real estate board for London and St. Thomas — Prospera's exact core markets; a vendor resource listing or market commentary contribution positions the company alongside trusted real estate professionals in both cities.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## Canadian Mortgage Trends
+- url: https://www.canadianmortgagetrends.com/
+- type: blog
+- why: Canada's most-read mortgage industry blog, followed by brokers and investors who become landlords; a pitch on London/SW Ontario rental yield data or property management ROI would fit their investment content stream.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## REIN Canada (Real Estate Investment Network)
+- url: https://www.rein.ca/
+- type: association
+- why: Canada's largest real estate investment education community; REIN members actively seek property managers in markets like London and St. Thomas, making a member resource page mention or guest article a direct lead-generation opportunity.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## London Inc. Magazine
+- url: https://www.londonincmagazine.ca/
+- type: media
+- why: London Ontario's dedicated business magazine covering local companies, real estate, and entrepreneurship — a natural outlet for a company spotlight or a contributed piece on the SW Ontario rental market outlook.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## Rental Housing Business Magazine
+- url: https://www.rentalhousingbusiness.ca/
+- type: media
+- why: Ontario's dedicated rental housing trade publication read by landlords and operators province-wide; a contributed article on managing rentals in secondary markets like Strathroy and St. Thomas would be directly on-topic for their readership.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## St. Thomas Times-Journal
+- url: https://www.stthomastimesjournal.com/
+- type: media
+- why: The primary newspaper serving Elgin County and St. Thomas, one of Prospera's three core markets; local business features and real estate coverage offer earned-media backlink opportunities from a hyper-local publication.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## Better Dwelling
+- url: https://betterdwelling.com/
+- type: blog
+- why: High-traffic Canadian housing data and analysis blog cited by national media; a London/SW Ontario market data contribution or an expert quote in their regional coverage could earn a citation backlink.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## WOWA Canada
+- url: https://wowa.ca/
+- type: blog
+- why: Popular Canadian mortgage and real estate resource site with province-by-province rental and buying guides; Prospera could contribute landlord cost benchmarks or be cited in an Ontario property management guide page.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## London Chamber of Commerce
+- url: https://www.londonchamber.com/
+- type: association
+- why: London's main business membership association featuring local company directories and editorial spotlights; chamber membership earns a directory backlink and opens co-branded content and event partnership opportunities.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
+
+## Ontario Real Estate Association (OREA)
+- url: https://www.orea.com/
+- type: association
+- why: Provincial real estate industry body that publishes Realtor education resources and market research; a guest contribution on how professional property management supports investor clients aligns with OREA's educational mandate.
+- researched: false
+- drafted: false
+- added: 2026-05-16
+
+---
