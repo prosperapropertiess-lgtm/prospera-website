@@ -42,6 +42,12 @@ const cards = [
     description: "Add leasing agents, manage access, and track their activity",
     cta: "Manage agents",
   },
+  {
+    href: "/admin/seo",
+    label: "SEO",
+    description: "Track search impressions, rankings, and top queries from Google Search Console",
+    cta: "View SEO stats",
+  },
 ];
 
 function getGreeting() {
