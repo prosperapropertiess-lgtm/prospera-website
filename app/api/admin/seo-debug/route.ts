@@ -1,6 +1,48 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getGSCToken, getServiceAccountEmail } from "@/lib/google-search-console";
+import crypto from "node:crypto";
+
+async function tryGetToken(scope: string): Promise<{ ok: boolean; token?: string; error?: string }> {
+  const json = process.env.GSC_SERVICE_ACCOUNT_JSON;
+  if (!json) return { ok: false, error: "GSC_SERVICE_ACCOUNT_JSON not set" };
+
+  let email: string;
+  let key: string;
+  try {
+    const parsed = JSON.parse(json);
+    email = parsed.client_email;
+    key   = (parsed.private_key as string).replace(/\\n/g, "\n");
+  } catch (e) {
+    return { ok: false, error: `JSON parse failed: ${e}` };
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const header  = Buffer.from(JSON.stringify({ alg: "RS256", typ: "JWT" })).toString("base64url");
+  const payload = Buffer.from(JSON.stringify({
+    iss: email, scope, aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600, iat: now,
+  })).toString("base64url");
+
+  let sig: string;
+  try {
+    const sign = crypto.createSign("RSA-SHA256");
+    sign.update(`${header}.${payload}`);
+    sig = sign.sign(key, "base64url");
+  } catch (e) {
+    return { ok: false, error: `JWT sign failed: ${e}` };
+  }
+
+  const jwt = `${header}.${payload}.${sig}`;
+
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: jwt }),
+  });
+  const body = await res.json();
+  if (res.ok) return { ok: true, token: body.access_token?.substring(0, 20) + "..." };
+  return { ok: false, error: JSON.stringify(body) };
+}
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -9,80 +51,10 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const email = getServiceAccountEmail();
+  const [indexing, webmasters] = await Promise.all([
+    tryGetToken("https://www.googleapis.com/auth/indexing"),
+    tryGetToken("https://www.googleapis.com/auth/webmasters.readonly"),
+  ]);
 
-  // Manually attempt the token exchange to capture the raw error
-  let tokenError = "unknown";
-  let token: string | null = null;
-  try {
-    const json = process.env.GSC_SERVICE_ACCOUNT_JSON;
-    if (!json) {
-      tokenError = "GSC_SERVICE_ACCOUNT_JSON is not set";
-    } else {
-      const creds = JSON.parse(json);
-      const serviceEmail = creds.client_email as string;
-      const rawKey = (creds.private_key as string).replace(/\\n/g, "\n");
-      const crypto = await import("node:crypto");
-      const now = Math.floor(Date.now() / 1000);
-      const header  = Buffer.from(JSON.stringify({ alg: "RS256", typ: "JWT" })).toString("base64url");
-      const payload = Buffer.from(JSON.stringify({
-        iss: serviceEmail, scope: "https://www.googleapis.com/auth/webmasters.readonly",
-        aud: "https://oauth2.googleapis.com/token", exp: now + 3600, iat: now,
-      })).toString("base64url");
-      const sign = crypto.createSign("RSA-SHA256");
-      sign.update(`${header}.${payload}`);
-      const sig = sign.sign(rawKey, "base64url");
-      const jwt = `${header}.${payload}.${sig}`;
-      const res = await fetch("https://oauth2.googleapis.com/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: jwt }),
-      });
-      const body = await res.json();
-      if (res.ok) { token = body.access_token; }
-      else { tokenError = JSON.stringify(body); }
-    }
-  } catch (e) { tokenError = String(e); }
-
-  if (!token) {
-    return NextResponse.json({ step: "token", ok: false, email, tokenError });
-  }
-
-  // Try listing sites to see what properties the service account can access
-  const sitesRes = await fetch("https://www.googleapis.com/webmasters/v3/sites", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const sitesBody = await sitesRes.text();
-
-  // Try URL-prefix property
-  const urlPrefixRes = await fetch(
-    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent("https://www.prosperaproperties.co/")}/searchAnalytics/query`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ startDate: "2026-04-01", endDate: "2026-05-16", dimensions: [] }),
-    }
-  );
-  const urlPrefixBody = await urlPrefixRes.text();
-
-  // Try domain property
-  const domainRes = await fetch(
-    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent("sc-domain:prosperaproperties.co")}/searchAnalytics/query`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ startDate: "2026-04-01", endDate: "2026-05-16", dimensions: [] }),
-    }
-  );
-  const domainBody = await domainRes.text();
-
-  return NextResponse.json({
-    step: "api",
-    ok: urlPrefixRes.ok || domainRes.ok,
-    email,
-    tokenObtained: true,
-    sites: { status: sitesRes.status, body: JSON.parse(sitesBody) },
-    urlPrefix: { status: urlPrefixRes.status, body: JSON.parse(urlPrefixBody) },
-    domain: { status: domainRes.status, body: JSON.parse(domainBody) },
-  });
+  return NextResponse.json({ indexing, webmasters });
 }
