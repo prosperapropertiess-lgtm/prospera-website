@@ -1,10 +1,11 @@
 /**
  * Google Search Console API — query search analytics.
- * Reuses the same JWT auth pattern as google-indexing.ts.
+ * Supports OAuth2 refresh token (primary) and service account JWT (fallback).
  * Credentials from GSC_SERVICE_ACCOUNT_JSON or GOOGLE_SERVICE_ACCOUNT_EMAIL + GOOGLE_PRIVATE_KEY.
  */
 
 import crypto from "node:crypto";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 export interface GSCRow {
   keys: string[];
@@ -94,6 +95,56 @@ export async function getGSCToken(): Promise<string | null> {
   }
 }
 
+export async function getGSCTokenViaOAuth(): Promise<string | null> {
+  const db = getSupabaseAdmin();
+  const { data, error } = await db
+    .from("settings")
+    .select("value")
+    .eq("key", "gsc_refresh_token")
+    .single();
+
+  if (error || !data?.value) return null;
+  const refreshToken = data.value as string;
+
+  try {
+    const res = await fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        client_id: process.env.GOOGLE_OAUTH_CLIENT_ID ?? "",
+        client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET ?? "",
+        refresh_token: refreshToken,
+        grant_type: "refresh_token",
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("[gsc] OAuth token refresh failed:", await res.text());
+      return null;
+    }
+
+    const json = await res.json();
+    return (json.access_token as string) ?? null;
+  } catch (err) {
+    console.error("[gsc] OAuth token refresh error:", err);
+    return null;
+  }
+}
+
+export async function isGSCConnected(): Promise<boolean> {
+  try {
+    const db = getSupabaseAdmin();
+    const { data, error } = await db
+      .from("settings")
+      .select("key")
+      .eq("key", "gsc_refresh_token")
+      .single();
+    return !error && data !== null;
+  } catch {
+    return false;
+  }
+}
+
 export async function querySearchAnalytics(params: {
   siteUrl: string;
   startDate: string;
@@ -102,9 +153,9 @@ export async function querySearchAnalytics(params: {
   rowLimit?: number;
   dimensionFilterGroups?: object[];
 }): Promise<{ rows: GSCRow[]; responseAggregationType?: string } | null> {
-  const token = await getGSCToken();
+  const token = await getGSCTokenViaOAuth() ?? await getGSCToken();
   if (!token) {
-    console.error("[gsc] No token — credentials missing or JWT sign failed");
+    console.error("[gsc] No token — OAuth refresh token missing and JWT sign failed");
     return null;
   }
 

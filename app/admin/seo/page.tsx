@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const BG = "#0B1219";
 const NAV = "#070D13";
@@ -83,17 +83,66 @@ function fmt(n: number, decimals = 1) {
   return n.toFixed(decimals);
 }
 
+function ConnectCard() {
+  return (
+    <div className="flex items-center justify-center" style={{ minHeight: "60vh" }}>
+      <div
+        className="rounded-2xl p-10 text-center max-w-md w-full"
+        style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}
+      >
+        <p
+          className="text-xs uppercase tracking-widest mb-6"
+          style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}
+        >
+          Google Search Console
+        </p>
+        <p
+          className="text-base leading-relaxed mb-8"
+          style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}
+        >
+          Connect your Google account to pull live impressions, rankings, and top
+          queries directly from Search Console.
+        </p>
+        <a
+          href="/api/admin/seo/authorize"
+          className="inline-block px-7 py-3 rounded-lg text-sm font-semibold tracking-wide transition-opacity hover:opacity-85"
+          style={{
+            backgroundColor: ACCENT,
+            color: "#ffffff",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
+          Connect Google Search Console &rarr;
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function SEOPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const justConnected = searchParams.get("connected") === "1";
+  const hasError = searchParams.get("error") === "1";
+
+  const [connected, setConnected] = useState<boolean | null>(null);
   const [data, setData] = useState<SEOData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    fetch("/api/admin/seo/status")
+      .then((r) => r.json())
+      .then((d) => setConnected(d.connected === true))
+      .catch(() => setConnected(false));
+  }, []);
+
+  useEffect(() => {
+    if (connected !== true) return;
     fetch("/api/admin/seo-stats")
       .then((r) => r.json())
       .then((d) => { setData(d); setLoading(false); })
       .catch(() => { setData({ error: "fetch failed" } as SEOData); setLoading(false); });
-  }, []);
+  }, [connected]);
 
   async function handleLogout() {
     await fetch("/api/admin/login", { method: "DELETE" });
@@ -102,6 +151,11 @@ export default function SEOPage() {
   }
 
   const s = data?.summary;
+  const statusText = connected === null
+    ? "Checking connection..."
+    : connected
+    ? "Google Search Console · Connected"
+    : "Google Search Console · Not connected";
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
@@ -109,8 +163,8 @@ export default function SEOPage() {
       <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
         <div className="flex items-center gap-5">
           <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/admin" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>← Home</Link>
-          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>↗ View site</Link>
+          <Link href="/admin" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>&#8592; Home</Link>
+          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>&#8599; View site</Link>
         </div>
         <button onClick={handleLogout} className="text-xs transition-colors" style={{ color: TEXT_SEC }}>Sign out</button>
       </div>
@@ -122,140 +176,166 @@ export default function SEOPage() {
             SEO Performance
           </h1>
           <p className="text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
-            Last 28 days · Google Search Console
+            {statusText}
           </p>
         </div>
 
-        {/* Error state */}
-        {!loading && data?.error && (
-          <div className="rounded-xl p-6 mb-8" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
-            <p className="text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
-              Could not load GSC data. Make sure the service account is added as an owner in Google Search Console.
-            </p>
+        {/* Success banner */}
+        {justConnected && (
+          <div className="rounded-xl px-6 py-4 mb-8 flex items-center gap-3" style={{ backgroundColor: "#0f2a1a", border: "1px solid rgba(74,222,128,0.2)" }}>
+            <span style={{ color: "#4ade80", fontFamily: "var(--font-dm-sans)", fontSize: "0.875rem" }}>
+              Google Search Console connected. Stats are loading below.
+            </span>
           </div>
         )}
 
-        {/* Stat cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {loading ? (
-            [...Array(4)].map((_, i) => <Skeleton key={i} />)
-          ) : !data?.error && s ? (
-            <>
-              <StatCard
-                label="Total Clicks"
-                value={s.clicks.toLocaleString()}
-                sub={<Delta current={s.clicks} prev={s.prevClicks} />}
-              />
-              <StatCard
-                label="Total Impressions"
-                value={s.impressions.toLocaleString()}
-                sub={<Delta current={s.impressions} prev={s.prevImpressions} />}
-              />
-              <StatCard
-                label="Avg Position"
-                value={`#${fmt(s.position)}`}
-                accent={s.position > 0 && s.position < 20}
-                sub="lower is better"
-              />
-              <StatCard
-                label="Avg CTR"
-                value={`${fmt(s.ctr * 100)}%`}
-              />
-            </>
-          ) : null}
-        </div>
+        {/* Error banner */}
+        {hasError && (
+          <div className="rounded-xl px-6 py-4 mb-8" style={{ backgroundColor: "#1f0b0e", border: `1px solid rgba(196,55,74,0.3)` }}>
+            <span style={{ color: ACCENT, fontFamily: "var(--font-dm-sans)", fontSize: "0.875rem" }}>
+              Google authorisation failed — please try again.
+            </span>
+          </div>
+        )}
 
-        {/* Top Pages table */}
-        {!data?.error && (
-          <div className="mb-10">
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
-              TOP PAGES — LAST 28 DAYS
-            </p>
-            {loading ? <TableSkeleton /> : (
-              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
-                {data?.pages && data.pages.length > 0 ? (
-                  <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    <thead>
-                      <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
-                        {["Page", "Impressions", "Clicks", "Position", "CTR"].map((h) => (
-                          <th key={h} className="text-left px-5 py-3 text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT }}>{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.pages.map((row, i) => (
-                        <tr
-                          key={row.page}
-                          style={{ borderBottom: i < data.pages.length - 1 ? `1px solid ${BORDER}` : undefined }}
-                        >
-                          <td className="px-5 py-3">
-                            <Link
-                              href={`/blog/${row.slug}`}
-                              target="_blank"
-                              className="underline underline-offset-2 transition-colors"
-                              style={{ color: TEXT }}
+        {/* Not connected — show connect card */}
+        {connected === false && !justConnected && <ConnectCard />}
+
+        {/* Connected — show stats */}
+        {(connected === true || justConnected) && (
+          <>
+            {/* Error state */}
+            {!loading && data?.error && (
+              <div className="rounded-xl p-6 mb-8" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
+                <p className="text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
+                  Could not load GSC data. Make sure your Google account is an owner in Search Console.
+                </p>
+              </div>
+            )}
+
+            {/* Stat cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+              {loading ? (
+                [...Array(4)].map((_, i) => <Skeleton key={i} />)
+              ) : !data?.error && s ? (
+                <>
+                  <StatCard
+                    label="Total Clicks"
+                    value={s.clicks.toLocaleString()}
+                    sub={<Delta current={s.clicks} prev={s.prevClicks} />}
+                  />
+                  <StatCard
+                    label="Total Impressions"
+                    value={s.impressions.toLocaleString()}
+                    sub={<Delta current={s.impressions} prev={s.prevImpressions} />}
+                  />
+                  <StatCard
+                    label="Avg Position"
+                    value={`#${fmt(s.position)}`}
+                    accent={s.position > 0 && s.position < 20}
+                    sub="lower is better"
+                  />
+                  <StatCard
+                    label="Avg CTR"
+                    value={`${fmt(s.ctr * 100)}%`}
+                  />
+                </>
+              ) : null}
+            </div>
+
+            {/* Top Pages table */}
+            {!data?.error && (
+              <div className="mb-10">
+                <p className="text-xs uppercase tracking-widest mb-4" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
+                  TOP PAGES — LAST 28 DAYS
+                </p>
+                {loading ? <TableSkeleton /> : (
+                  <div className="rounded-xl overflow-hidden" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
+                    {data?.pages && data.pages.length > 0 ? (
+                      <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                        <thead>
+                          <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
+                            {["Page", "Impressions", "Clicks", "Position", "CTR"].map((h) => (
+                              <th key={h} className="text-left px-5 py-3 text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT }}>{h}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.pages.map((row, i) => (
+                            <tr
+                              key={row.page}
+                              style={{ borderBottom: i < data.pages.length - 1 ? `1px solid ${BORDER}` : undefined }}
                             >
-                              {row.slug || row.page}
-                            </Link>
-                          </td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.impressions.toLocaleString()}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.clicks.toLocaleString()}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>#{fmt(row.position)}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{fmt(row.ctr * 100)}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="px-5 py-6 text-sm" style={{ color: TEXT_SEC }}>
-                    Pages indexed but not yet ranking — check back in 2–4 weeks.
-                  </p>
+                              <td className="px-5 py-3">
+                                <Link
+                                  href={`/blog/${row.slug}`}
+                                  target="_blank"
+                                  className="underline underline-offset-2 transition-colors"
+                                  style={{ color: TEXT }}
+                                >
+                                  {row.slug || row.page}
+                                </Link>
+                              </td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.impressions.toLocaleString()}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.clicks.toLocaleString()}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>#{fmt(row.position)}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{fmt(row.ctr * 100)}%</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <p className="px-5 py-6 text-sm" style={{ color: TEXT_SEC }}>
+                        Pages indexed but not yet ranking — check back in 2-4 weeks.
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
             )}
-          </div>
-        )}
 
-        {/* Top Queries table */}
-        {!data?.error && (
-          <div>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
-              TOP QUERIES
-            </p>
-            {loading ? <TableSkeleton /> : (
-              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
-                {data?.queries && data.queries.length > 0 ? (
-                  <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    <thead>
-                      <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
-                        {["Query", "Impressions", "Clicks", "Position", "CTR"].map((h) => (
-                          <th key={h} className="text-left px-5 py-3 text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT }}>{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.queries.map((row, i) => (
-                        <tr
-                          key={row.query}
-                          style={{ borderBottom: i < data.queries.length - 1 ? `1px solid ${BORDER}` : undefined }}
-                        >
-                          <td className="px-5 py-3" style={{ color: TEXT }}>{row.query}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.impressions.toLocaleString()}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.clicks.toLocaleString()}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>#{fmt(row.position)}</td>
-                          <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{fmt(row.ctr * 100)}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p className="px-5 py-6 text-sm" style={{ color: TEXT_SEC }}>
-                    No query data yet — check back once the site has search impressions.
-                  </p>
+            {/* Top Queries table */}
+            {!data?.error && (
+              <div>
+                <p className="text-xs uppercase tracking-widest mb-4" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>
+                  TOP QUERIES
+                </p>
+                {loading ? <TableSkeleton /> : (
+                  <div className="rounded-xl overflow-hidden" style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}` }}>
+                    {data?.queries && data.queries.length > 0 ? (
+                      <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                        <thead>
+                          <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
+                            {["Query", "Impressions", "Clicks", "Position", "CTR"].map((h) => (
+                              <th key={h} className="text-left px-5 py-3 text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT }}>{h}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.queries.map((row, i) => (
+                            <tr
+                              key={row.query}
+                              style={{ borderBottom: i < data.queries.length - 1 ? `1px solid ${BORDER}` : undefined }}
+                            >
+                              <td className="px-5 py-3" style={{ color: TEXT }}>{row.query}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.impressions.toLocaleString()}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{row.clicks.toLocaleString()}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>#{fmt(row.position)}</td>
+                              <td className="px-5 py-3" style={{ color: TEXT_SEC }}>{fmt(row.ctr * 100)}%</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <p className="px-5 py-6 text-sm" style={{ color: TEXT_SEC }}>
+                        No query data yet — check back once the site has search impressions.
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>
