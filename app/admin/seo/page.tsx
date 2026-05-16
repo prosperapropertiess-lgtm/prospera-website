@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -119,7 +119,8 @@ function ConnectCard() {
   );
 }
 
-export default function SEOPage() {
+function SEOPageInner() {
+  // useSearchParams is safe here — wrapped in Suspense by the default export
   const router = useRouter();
   const searchParams = useSearchParams();
   const justConnected = searchParams.get("connected") === "1";
@@ -339,5 +340,13 @@ export default function SEOPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SEOPage() {
+  return (
+    <Suspense fallback={null}>
+      <SEOPageInner />
+    </Suspense>
   );
 }
