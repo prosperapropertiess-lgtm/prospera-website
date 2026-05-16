@@ -34,8 +34,12 @@ export async function GET() {
 
   const { current, previous } = getPeriods();
 
+  // Try both URL formats — GSC properties can be domain or URL-prefix type
+  const SITE_URL_DOMAIN = "sc-domain:prosperaproperties.co";
+
   const [summaryResult, pagesResult, queriesResult, prevSummaryResult] = await Promise.all([
-    querySearchAnalytics({ siteUrl: SITE_URL, startDate: current.start, endDate: current.end, dimensions: [] }),
+    querySearchAnalytics({ siteUrl: SITE_URL, startDate: current.start, endDate: current.end, dimensions: [] })
+      .then(r => r ?? querySearchAnalytics({ siteUrl: SITE_URL_DOMAIN, startDate: current.start, endDate: current.end, dimensions: [] })),
     querySearchAnalytics({
       siteUrl: SITE_URL,
       startDate: current.start,
