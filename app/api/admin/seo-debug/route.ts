@@ -56,5 +56,38 @@ export async function GET() {
     tryGetToken("https://www.googleapis.com/auth/webmasters.readonly"),
   ]);
 
-  return NextResponse.json({ indexing, webmasters });
+  // Test the actual Search Console API call
+  let gscApiResult = null;
+  if (webmasters.ok && webmasters.token) {
+    const fullToken = webmasters.token; // truncated in display only
+    // Re-get the real token
+    const { getGSCToken } = await import("@/lib/google-search-console");
+    const realToken = await getGSCToken();
+    if (realToken) {
+      const urlRes = await fetch(
+        `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent("https://www.prosperaproperties.co/")}/searchAnalytics/query`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${realToken}` },
+          body: JSON.stringify({ startDate: "2026-04-01", endDate: "2026-05-16", dimensions: [] }),
+        }
+      );
+      const urlBody = await urlRes.text();
+      const domainRes = await fetch(
+        `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent("sc-domain:prosperaproperties.co")}/searchAnalytics/query`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${realToken}` },
+          body: JSON.stringify({ startDate: "2026-04-01", endDate: "2026-05-16", dimensions: [] }),
+        }
+      );
+      const domainBody = await domainRes.text();
+      gscApiResult = {
+        urlPrefix: { status: urlRes.status, body: urlBody },
+        domain: { status: domainRes.status, body: domainBody },
+      };
+    }
+  }
+
+  return NextResponse.json({ indexing, webmasters, gscApiResult });
 }
