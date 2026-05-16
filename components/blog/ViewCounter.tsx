@@ -5,14 +5,29 @@ export default function ViewCounter({ slug }: { slug: string }) {
   const [views, setViews] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("/api/blog/view", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug }),
-    })
-      .then((r) => r.json())
-      .then((d) => setViews(d.views ?? null))
-      .catch(() => {});
+    const key = `viewed:${slug}`;
+    const alreadySeen = localStorage.getItem(key);
+
+    if (alreadySeen) {
+      // Already counted — just fetch the current count
+      fetch(`/api/blog/view?slug=${encodeURIComponent(slug)}`)
+        .then((r) => r.json())
+        .then((d) => setViews(d.views ?? null))
+        .catch(() => {});
+    } else {
+      // First visit — increment and mark as seen
+      fetch("/api/blog/view", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug }),
+      })
+        .then((r) => r.json())
+        .then((d) => {
+          setViews(d.views ?? null);
+          localStorage.setItem(key, "1");
+        })
+        .catch(() => {});
+    }
   }, [slug]);
 
   if (views === null) return null;
