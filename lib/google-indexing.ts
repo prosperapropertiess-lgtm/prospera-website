@@ -1,23 +1,40 @@
 /**
  * Google Indexing API — submit a URL for immediate crawling.
- * Uses a service account JWT to authenticate (no OAuth flow needed).
- *
- * Required env vars:
- *   GOOGLE_SERVICE_ACCOUNT_EMAIL  — e.g. seo-agent@your-project.iam.gserviceaccount.com
- *   GOOGLE_PRIVATE_KEY            — the private key from the JSON key file (\\n escaped)
+ * Reads credentials from GSC_SERVICE_ACCOUNT_JSON (full JSON key file),
+ * falling back to GOOGLE_SERVICE_ACCOUNT_EMAIL + GOOGLE_PRIVATE_KEY.
  */
 
 import crypto from "node:crypto";
 
-async function getAccessToken(): Promise<string | null> {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+function getCredentials(): { email: string; key: string } | null {
+  // Prefer the full JSON key (already set up in Vercel as GSC_SERVICE_ACCOUNT_JSON)
+  const json = process.env.GSC_SERVICE_ACCOUNT_JSON;
+  if (json) {
+    try {
+      const parsed = JSON.parse(json);
+      const email = parsed.client_email as string;
+      const key   = (parsed.private_key as string).replace(/\\n/g, "\n");
+      if (email && key) return { email, key };
+    } catch {
+      console.error("[google-indexing] Failed to parse GSC_SERVICE_ACCOUNT_JSON");
+    }
+  }
+
+  // Fall back to separate env vars
+  const email  = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
   const rawKey = process.env.GOOGLE_PRIVATE_KEY;
+  if (email && rawKey) {
+    return { email, key: rawKey.replace(/\\n/g, "\n") };
+  }
 
-  if (!email || !rawKey) return null;
+  return null;
+}
 
-  // Vercel stores the key with literal \n — restore real newlines
-  const key = rawKey.replace(/\\n/g, "\n");
+async function getAccessToken(): Promise<string | null> {
+  const creds = getCredentials();
+  if (!creds) return null;
 
+  const { email, key } = creds;
   const now = Math.floor(Date.now() / 1000);
 
   const header  = Buffer.from(JSON.stringify({ alg: "RS256", typ: "JWT" })).toString("base64url");
@@ -68,7 +85,10 @@ async function getAccessToken(): Promise<string | null> {
 
 export async function submitUrlToGoogle(url: string): Promise<boolean> {
   const token = await getAccessToken();
-  if (!token) return false;
+  if (!token) {
+    console.warn("[google-indexing] No credentials found — skipping");
+    return false;
+  }
 
   try {
     const res = await fetch("https://indexing.googleapis.com/v3/urlNotifications:publish", {
@@ -85,9 +105,10 @@ export async function submitUrlToGoogle(url: string): Promise<boolean> {
       return false;
     }
 
+    console.log("[google-indexing] Submitted:", url);
     return true;
   } catch (err) {
-    console.error("[google-indexing] Indexing request error:", err);
+    console.error("[google-indexing] Request error:", err);
     return false;
   }
 }
