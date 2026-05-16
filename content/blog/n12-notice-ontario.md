@@ -1,159 +1,177 @@
 ---
-title: "N12 Notice Ontario: Complete Guide to Personal-Use Evictions"
-date: "2026-05-06"
+title: "N12 Notice Ontario: How to Use the Own Use Eviction Form Legally"
+date: "2026-05-16"
 slug: "n12-notice-ontario"
-excerpt: "The N12 lets Ontario landlords end a tenancy for personal use, but the rules are strict — and getting it wrong can cost you up to 12 months' rent in bad-faith penalties. Here's exactly how to do it right."
+excerpt: "The N12 lets Ontario landlords evict a tenant for own use — but the rules are strict. Here's exactly how to do it right."
 category: "Ontario Law"
 readTime: "9 min read"
 featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-The N12 — officially the *Notice to End the Tenancy: Landlord, Purchaser or Family Member Requires the Unit* — is one of the most powerful tools an Ontario landlord has. It allows you to end a tenancy so that you, a close family member, or a purchaser can move into the unit. But it's also one of the most scrutinized forms at the Landlord and Tenant Board, and the rules tightened significantly under Bill 60 in November 2025.
+The N12 Notice to Terminate a Tenancy at End of the Term is one of the most powerful tools available to Ontario landlords — and one of the most dangerous to get wrong. It allows you to end a tenancy so that you, a family member, or a buyer can move into the unit. But the Residential Tenancies Act (RTA) sets very specific rules around who qualifies, how much notice you must give, what compensation you owe, and what happens if you change your mind.
 
-If you own a rental property in London, St. Thomas, Strathroy, or elsewhere in Ontario and need to reclaim your unit for personal use, this guide covers everything you need to know to do it legally and successfully.
+Tenants know their rights. The Landlord and Tenant Board (LTB) scrutinizes N12 applications closely because bad-faith "own use" evictions are one of the most litigated issues in Ontario landlord-tenant law. If your N12 doesn't meet every requirement, the LTB will dismiss it — and if the board finds you acted in bad faith, you can face significant financial penalties.
 
-## What Is the N12 and When Can You Use It?
-
-The N12 is authorized under **Section 48 of the *Residential Tenancies Act, 2006*** (RTA). It allows a landlord to end a tenancy when the unit is genuinely needed for the landlord, the landlord's spouse, a child, parent, or a caregiver to the landlord or their spouse.
-
-A **purchaser** can also require an N12 if they are buying the property and intend to occupy it personally — but it is the landlord (seller) who must serve the notice on the purchaser's behalf.
-
-The N12 cannot be used for:
-- Renovating or making repairs to the unit (that's an N13)
-- Selling the property without a genuine intention to move in
-- Forcing out a tenant you simply no longer want
-
-That last point matters enormously. The LTB scrutinizes N12 applications carefully, and if it determines your claim of personal use was pretextual, you face serious consequences — more on that below.
-
-## Who Qualifies as a "Family Member" for N12 Purposes?
-
-Under Section 48 of the RTA, the people whose occupancy justifies an N12 are:
-- The landlord themselves
-- The landlord's spouse (including common-law spouse)
-- A child of the landlord or the landlord's spouse
-- A parent of the landlord or the landlord's spouse
-- A caregiver for the landlord, the landlord's spouse, a child, or a parent
-
-Adult siblings, cousins, and extended family do not qualify. If the person moving in doesn't fit one of the categories above, the N12 is the wrong form — and an LTB adjudicator will dismiss your application.
-
-## The 60-Day Notice Requirement
-
-The N12 requires a minimum of **60 days' notice** to the tenant. The termination date on the notice must also be the **last day of a rental period** — for a monthly tenancy, that's the last day of the month.
-
-This means timing is important. If you serve the N12 on May 6 and your rental period runs from the 1st to the last of the month, the earliest valid termination date is July 31 (that's 60+ days, landing on the last day of the rental period). A date of July 15 would be invalid even if it's more than 60 days away.
-
-## Compensation: The 60-Day vs. 120-Day Rule (Bill 60 Update)
-
-This is where things changed significantly under **Bill 60 (the Fighting Delays, Building Faster Act)**, which came into force in November 2025.
-
-**Old rule (before Bill 60):** All landlords serving an N12 were required to pay the tenant **one month's compensation** equal to one month's rent before or on the termination date.
-
-**New rule (after Bill 60):** Landlords who give **120 or more days' notice** are **exempt from paying compensation**. Landlords who give fewer than 120 days' notice must still pay one month's rent in compensation.
-
-In practice:
-- **60–119 days' notice** → you must pay one month's compensation
-- **120+ days' notice** → compensation is waived
-
-Compensation must be paid on or before the termination date on the notice. If you're paying, you can give it directly to the tenant by cheque, e-transfer, or cash — whatever is documented. You can also offer to waive the last month's rent deposit, which counts as compensation.
-
-Failing to pay required compensation doesn't just weaken your LTB application — it can result in your L2 application being dismissed outright.
-
-For a fuller look at how Bill 60 changed Ontario landlord-tenant law, see our [complete Bill 60 guide](/blog/bill-60-ontario-landlords).
-
-## How to Fill Out the N12 Form
-
-The N12 is available through the **Tribunals Ontario portal**. Here's what you'll complete:
-
-**Part 1 — Parties and unit:** Full legal names of all tenants on the lease, the rental unit address, and your name and contact information.
-
-**Part 2 — Reason for notice:** Check the applicable box — landlord's own use, a listed family member, or a purchaser. You must name the person who will be moving in.
-
-**Part 3 — Termination date:** The date the tenancy will end. Must be at least 60 days away and fall on the last day of a rental period.
-
-**Part 4 — Compensation declaration:** Indicate whether you're paying compensation (required if notice is less than 120 days) or whether you're claiming the 120-day exemption.
-
-**Part 5 — Signature:** Sign and date the form. If Prospera Properties manages your property, we sign as your authorized agent.
-
-Double-check every field before serving. A wrong date, missing name, or incorrect compensation section can void the entire notice.
-
-## How to Serve the N12
-
-Service rules for the N12 are the same as other LTB notices. You can serve it:
-
-- **In person** — hand it directly to the tenant
-- **By mail** — add 5 days to the calculation (mail is deemed served on the 5th day)
-- **By courier or email** — if the tenant has agreed in writing to accept notices electronically
-
-Keep proof of service. If the tenant disputes the notice at the LTB, you'll need to show when and how it was served. A signed acknowledgement, delivery receipt, or email thread are all useful.
-
-## If the Tenant Doesn't Leave: Filing an L2 Application
-
-The N12 on its own does not legally end the tenancy. If the tenant remains in the unit after the termination date, you must file an **L2 Application** (Application to End a Tenancy and Evict a Tenant) at the Landlord and Tenant Board.
-
-You can file the L2:
-- On or after the termination date on the N12
-- Up to 30 days after the termination date (don't delay)
-
-The L2 filing fee is $201. After filing, the LTB will schedule a hearing — currently averaging **6 to 9 months** for N12-related L2 matters, given the ongoing backlog.
-
-At the hearing, you'll need to demonstrate:
-1. The N12 was properly served with the correct termination date
-2. Compensation was paid (or that you qualify for the 120-day exemption)
-3. The person moving in genuinely intends to occupy the unit
-
-For a broader look at how LTB hearings work, see our [Landlord and Tenant Board guide](/blog/landlord-tenant-board-ontario-guide).
-
-## The Good-Faith Requirement — and the T5 Consequences
-
-Every N12 must be issued in **good faith**. This means the person named in the notice must genuinely intend to occupy the unit for a reasonable period of time. The LTB can (and does) dismiss N12 applications where the landlord's stated reason appears pretextual.
-
-More significantly, if a landlord issues an N12 in bad faith — for example, the named family member never moves in, or the unit is re-rented within a year at a higher rent — the tenant can file a **T5 Application (Tenant's Application — Landlord Gave a Notice of Termination in Bad Faith)**.
-
-A successful T5 application can result in the landlord being ordered to pay the tenant:
-- Up to **12 months' rent** as a general penalty
-- Moving expenses
-- The difference between the old rent and what the tenant now pays elsewhere
-
-This is a real financial risk. If you're genuinely using the unit for personal occupancy, document everything — keep photos of the person moving in, utility transfer records, and any other evidence of actual occupancy.
-
-## New LTB Disclosure Requirement (Bill 60)
-
-Under Bill 60, landlords must now disclose at any LTB hearing the **number of N12 notices they have served in the past two years** across all their properties. This was introduced to identify serial bad-faith evictions.
-
-If you've issued multiple N12 notices in a short period and none of the named family members appear to have actually moved in, expect adjudicators to ask hard questions. The new disclosure rule is worth knowing about before you file — it affects how the LTB evaluates your credibility as a landlord.
-
-## What Happens After the Unit Is Vacated
-
-Once the tenant vacates, the person named in the N12 must actually move in. Ontario law does not require them to stay forever, but they should occupy the unit as their primary residence for a reasonable period.
-
-If you need to re-rent the unit within a year of the N12 termination, be cautious. The LTB has found bad faith where landlords re-rented at significantly higher rents shortly after an N12 eviction, even when the family member did initially move in.
-
-For the full eviction process from notice to LTB order, see our [step-by-step eviction guide](/blog/evicting-tenant-ontario).
-
-## Frequently Asked Questions
-
-### Can I use the N12 to move a tenant out so I can sell my property?
-
-Not unless the purchaser will personally occupy the unit. If you're selling to an investor who plans to keep renting, the N12 does not apply. Only a purchaser who genuinely intends to live in the unit — and who the selling landlord believes will follow through — qualifies. An N12 issued simply to clear the unit for sale, where no one intends to live there, is bad faith.
-
-### Do I always have to pay one month's compensation when serving an N12?
-
-Under Bill 60 (effective November 2025), compensation is only required if you give fewer than 120 days' notice. If your N12 gives the tenant 120 days or more before the termination date, the compensation requirement is waived. For notices with 60–119 days, one month's rent in compensation is still mandatory.
-
-### What if the tenant agrees to leave early?
-
-A mutual agreement to terminate the tenancy (N11 form) can be used if both parties agree on an earlier end date. This is often cleaner — no LTB hearing required, and both parties sign the form. The N12 route is for situations where the tenant won't leave voluntarily.
-
-### Can my tenant fight the N12?
-
-Yes. A tenant can dispute the N12 at the LTB hearing by arguing the notice was served in bad faith, improperly filled out, incorrectly served, or that compensation wasn't paid. Tenants can also raise issues about the nature of the unit (e.g., claiming they're not covered by the RTA). This is why getting the notice right from the start matters so much.
-
-### How long does an N12 eviction take from start to finish?
-
-From the time you serve the N12 to receiving an LTB eviction order, expect **8 to 12 months** in most cases — 60 days of notice, then a waiting period to file the L2, then 6 to 9 months for the LTB to schedule and hold the hearing. If the matter is contested, add more time. An uncontested agreement at the hearing can speed things up, but don't count on it.
+This guide covers everything you need to know about the N12: when you can use it, who it covers, what you must do, and how to protect yourself if a tenant fights it.
 
 ---
 
-The N12 is a legitimate tool when used correctly, but it's one of the more legally complex notices in Ontario's landlord-tenant system — especially with Bill 60's recent changes to compensation rules and the new disclosure requirements. If you're considering serving an N12 and want professional guidance through the process, the team at **Prospera Properties** manages this from notice preparation through LTB representation.
+## What Is the N12 Notice?
 
-Reach out through our [contact page](/contact) or visit our [landlord services page](/landlords) to learn how we support property owners in London, St. Thomas, and Strathroy.
+The N12 is a Form from the LTB that landlords use to terminate a tenancy for one of three reasons:
+
+1. **Landlord's own use** — You intend to move into the unit yourself.
+2. **Family member's use** — A qualifying family member will move in.
+3. **Purchaser's own use** — The person buying your property intends to live in it.
+
+The legal basis is Section 48 of the Residential Tenancies Act. The key word throughout the act is *genuine* — the person named on the N12 must genuinely intend to occupy the unit as their principal residence. Not temporarily. Not speculatively. Actually move in and live there.
+
+This is where many landlords get into trouble. If you serve an N12 but later rent the unit to someone else, or renovate and sell rather than move in, the former tenant can file a T5 application claiming bad faith. The penalties can include up to 12 months' rent paid to the former tenant.
+
+---
+
+## Who Qualifies as a "Family Member" Under the RTA?
+
+Under Section 48(1), the qualifying family members you can serve an N12 for are:
+
+- The landlord's spouse
+- A child or parent of the landlord or the landlord's spouse
+- The spouse of a child or parent of the landlord
+
+That's it. Siblings, cousins, aunts, uncles, grandparents, friends — none of these qualify for an N12 under Section 48. If your brother needs the unit, you cannot use the N12.
+
+If you're a corporate landlord — a numbered company, for example — you generally cannot use the N12 for own use, because a corporation cannot personally occupy a unit. The LTB has consistently ruled against corporations attempting N12 evictions on this basis.
+
+---
+
+## What Notice Period Is Required?
+
+You must give the tenant **at least 60 days' notice**, and the termination date must be the **last day of a rental period**.
+
+For a monthly tenancy running from the 1st to the last day of the month, that means if you serve the N12 on May 16, the earliest valid termination date is July 31 — because you need 60 days and the date must land at the end of a rental period.
+
+Count carefully. Serving on May 16 and putting June 30 as the termination date is a fatal error. The LTB will dismiss the application.
+
+For fixed-term leases, the termination date cannot be earlier than the end of the fixed term. You can serve the N12 during the fixed term, but the termination date must fall on or after the lease expiry date.
+
+---
+
+## Compensation Is Not Optional
+
+This is the requirement that surprises many landlords: **you must pay the tenant one month's rent in compensation** before or on the termination date.
+
+This is a mandatory requirement under Section 48.1 of the RTA. It's not a courtesy — it's a legal obligation. If you don't pay it, the tenant can void the N12 entirely by staying and continuing to pay rent, and your LTB application will fail.
+
+You can fulfill this requirement by:
+- Writing the tenant a cheque for one month's rent
+- Offering them a rent-free month (the last month before they vacate)
+- E-transferring the amount with written confirmation
+
+Document this payment. Keep the record. If this goes to a hearing, you'll need to prove you paid.
+
+Note: the compensation is in addition to any last month's rent deposit the tenant already has on file. The deposit covers their last month. The compensation is a separate payment required by law.
+
+---
+
+## How to Serve the N12 Properly
+
+Serving the form incorrectly is another common way landlords sink their own applications. Under the RTA, acceptable methods of service include:
+
+- **Hand delivery** to the tenant (or an adult in the unit)
+- **Mail** — but if you mail it, add five days to the notice period
+- **Email** — only if the tenant has agreed in writing to receive notices by email
+- **Courier** — same-day or next-day, with proper documentation
+
+Do not slide the N12 under the door and call it served. Do not text it. Do not assume verbal notice is enough. Use a method you can prove, and keep a record of the date and how it was delivered.
+
+If you're mailing the notice, remember: the five-day rule means the clock doesn't start until five days after the postmark. Factor this into your calculation of the 60-day minimum.
+
+---
+
+## The Declaration Requirement
+
+Before you can file an L2 application with the LTB (which is the application you file after serving the N12 to actually get the eviction order), you need more than just the N12.
+
+You must also obtain a **sworn declaration** from the person who intends to move in. This is a statement signed under oath confirming the genuine intention to occupy the unit as a principal residence. The LTB requires this at the time of filing.
+
+If you're using the N12 for a purchaser's own use (Section 49), the declaration must come from the buyer, and the agreement of purchase and sale must already be in place. You cannot serve an N12 on behalf of a speculative buyer who hasn't committed to the purchase.
+
+---
+
+## What Happens If the Tenant Refuses to Leave?
+
+Many tenants served with an N12 will push back. This is their right. Receiving an N12 does not mean the tenant must leave by the termination date — it means the landlord has started a process.
+
+If the tenant does not vacate, you must file an **L2 application** with the LTB within 30 days after the termination date on the N12. If you miss that 30-day window, the N12 is void and you have to start over.
+
+After you file the L2, the LTB will schedule a hearing. At the hearing, both you and the tenant will present your cases. The member will assess whether your N12 meets all legal requirements and whether your stated intention is genuine.
+
+Common defenses tenants raise at N12 hearings:
+- The landlord doesn't actually intend to move in (bad faith)
+- The compensation wasn't paid
+- The notice period or termination date is wrong
+- The named family member doesn't qualify under the RTA
+
+This is why documentation matters. Bring your declaration, proof of compensation payment, lease agreement, and anything that demonstrates the genuine intention to occupy — utility transfer requests, school enrollment if children are involved, change of address confirmations, and so on.
+
+For a detailed breakdown of what to expect at a hearing, see our guide to [navigating the Landlord and Tenant Board](/blog/landlord-tenant-board-ontario-guide).
+
+---
+
+## What Is a T5 Application and Why Does It Matter?
+
+If you serve an N12 and the tenant vacates, but then you don't actually move in or let the qualifying person move in, the former tenant has the right to file a **T5 – Tenant's Application for Compensation for Landlord's Own Use**.
+
+The RTA presumes bad faith if:
+- Within one year of the tenant leaving, the unit is re-rented to someone else
+- The person who was supposed to move in never does
+- You sell the property rather than use it
+
+If the LTB finds bad faith, penalties can include:
+- Up to **12 months' rent** payable to the former tenant
+- Return of the one month's compensation already paid
+- Other costs awarded by the board
+
+This is not a theoretical risk. The LTB issues T5 decisions regularly. If you serve an N12 without a firm, genuine intention to follow through, you are exposing yourself to significant financial liability.
+
+---
+
+## Practical Checklist Before You Serve an N12
+
+Before you do anything, work through this list:
+
+1. **Confirm the occupant qualifies** — Is it you, your spouse, your child, your parent, or your spouse's child/parent? If not, the N12 doesn't apply.
+2. **Confirm genuine intention** — Will the named person actually move in and live there as their principal residence? If there's any uncertainty, do not serve the N12.
+3. **Calculate your dates** — Minimum 60 days, must end on the last day of a rental period. If it's a fixed-term lease, the termination date cannot be before the lease ends.
+4. **Prepare the sworn declaration** — Have the person who will occupy the unit sign this before you file.
+5. **Plan the compensation payment** — One month's rent, paid on or before the termination date. Decide in advance how you'll pay it and how you'll document it.
+6. **Choose your service method** — Use a method you can prove. Add five days if mailing.
+7. **Keep copies of everything** — The signed N12, the declaration, proof of service, proof of compensation payment.
+
+---
+
+## The N12 vs. Other Eviction Notices
+
+The N12 is commonly confused with other LTB forms. Quick distinctions:
+
+- **[N4 notice](/blog/n4-notice-ontario)** — For non-payment of rent. Completely different process, different grounds.
+- **[N5 notice](/blog/n5-notice-ontario)** — For tenant behaviour issues (damage, interference, etc.).
+- **N13** — For demolition, conversion to non-residential use, or major renovations requiring vacant possession. Different from own use.
+
+If you're not sure which notice applies to your situation, that's a sign to get advice before serving anything.
+
+---
+
+## Key Takeaways
+
+- The N12 is for genuine own use by the landlord, a qualifying family member, or a purchaser — not a workaround to remove a tenant you want gone for other reasons.
+- You must give at least 60 days' notice ending on the last day of a rental period.
+- One month's rent compensation is mandatory and must be paid before or on the termination date.
+- You need a sworn declaration from the person intending to occupy before filing the L2 application with the LTB.
+- If the tenant doesn't leave, file the L2 within 30 days of the termination date or lose your right to proceed.
+- If you don't follow through and actually move in, the former tenant can sue you under a T5 application for up to 12 months' rent.
+- Document everything. The LTB takes bad-faith N12 claims seriously.
+
+The own use eviction process is one of the most scrutinized areas of Ontario landlord-tenant law. Getting the steps right from the beginning is far easier than defending a bad-faith claim after the fact.
+
+If you own rental property in London, St. Thomas, or Strathroy and want someone else to handle the forms, the timelines, and the LTB process, Prospera Properties manages properties across all three areas. We deal with this so landlords don't have to.
