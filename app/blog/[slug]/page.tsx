@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import BlogSubscribeForm from "@/components/blog/BlogSubscribeForm";
 import ShareButtons from "@/components/blog/ShareButtons";
+import ViewCounter from "@/components/blog/ViewCounter";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -115,6 +116,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span className="text-xs" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
               {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
             </span>
+            <ViewCounter slug={slug} />
           </div>
 
           <h1
