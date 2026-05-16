@@ -154,6 +154,16 @@ Pick the highest-priority missing keyword and write the blog post. Follow the ou
     return NextResponse.json({ error: "GitHub push failed", detail: pushResult.error }, { status: 500 });
   }
 
+  // ── Trigger Vercel rebuild so the post goes live ─────────────────────────
+  try {
+    await fetch("https://api.vercel.com/v1/integrations/deploy/prj_BepoLv37pz2jz2RiQDryRAyyJcmS/0PL9bLgRJf", {
+      method: "POST",
+    });
+    console.log("[seo-writer] Vercel rebuild triggered");
+  } catch (err) {
+    console.error("[seo-writer] Vercel deploy hook failed:", err);
+  }
+
   // ── Tell Google to index it immediately ──────────────────────────────────
   const postUrl = `https://www.prosperaproperties.co/blog/${slug}`;
   const indexed = await submitUrlToGoogle(postUrl);
