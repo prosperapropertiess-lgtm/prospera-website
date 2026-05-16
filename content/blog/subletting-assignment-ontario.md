@@ -5,7 +5,7 @@ slug: "subletting-assignment-ontario"
 excerpt: "Your tenant wants to sublet or transfer their lease — what are your rights? Ontario law gives landlords meaningful input, but the rules are specific."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 It's more common than you might think: a tenant reaches out to say they want to move out early and asks if someone else can take over the unit. Sometimes they say "sublet," sometimes "transfer the lease." The distinction matters — legally and practically — and your rights in each case are different.

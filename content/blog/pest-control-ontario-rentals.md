@@ -5,7 +5,7 @@ slug: "pest-control-ontario-rentals"
 excerpt: "Bedbugs, mice, cockroaches — Ontario law is clear about who must deal with infestations. Here's what landlords need to know and how to handle it properly."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A tenant calls to say there are mice in the kitchen. Or bedbugs. Or cockroaches. Your stomach drops — not just because of the cost, but because you're not sure whose problem this is and how bad it might get.

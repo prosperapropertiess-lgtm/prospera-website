@@ -5,7 +5,7 @@ slug: "n4-notice-ontario"
 excerpt: "The N4 is the mandatory first step in Ontario's eviction process for non-payment of rent — but getting the amount, dates, and service method right is critical. One mistake can void the notice and force you to start over."
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N4 Notice to End a Tenancy Early for Non-payment of Rent is the official Ontario LTB form that landlords must serve when a tenant fails to pay rent. It is the mandatory first step in the eviction process for non-payment — you cannot file at the Landlord and Tenant Board without it — and getting it wrong, even by a small amount, voids the notice and forces you to start over from scratch.

@@ -5,7 +5,7 @@ slug: "bill-60-ontario-landlords"
 excerpt: "Ontario's Bill 60 (Fighting Delays, Building Faster Act) passed in November 2025 and changed the rules for landlords in a big way — shorter N4 timelines, fixed-term lease changes, and more. Here's what you need to know."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Bill 60 Ontario: What Every Landlord Needs to Know (2026)

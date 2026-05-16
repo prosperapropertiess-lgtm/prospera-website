@@ -5,7 +5,7 @@ slug: "above-guideline-rent-increase-ontario"
 excerpt: "Ontario's rent increase guideline caps what you can charge — but landlords who've made significant capital improvements may qualify for more. Here's how AGIs work."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Ontario landlords who own older buildings know the problem: costs keep climbing — new roof, new boiler, upgraded electrical — but the annual rent increase guideline only allows a small percentage bump. If you've invested significantly in your property, the regular guideline may not come close to covering your increased costs.

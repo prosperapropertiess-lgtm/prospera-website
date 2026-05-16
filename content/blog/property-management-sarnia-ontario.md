@@ -3,6 +3,7 @@ title: "Property Management in Sarnia, Ontario: What Local Landlords Need to Kno
 date: "2026-04-29"
 slug: "property-management-sarnia-ontario"
 excerpt: "Sarnia's rental market has its own rhythms — from petrochemical industry demand to seasonal fluctuations. Here's what landlords in Sarnia need to know about managing rental property effectively."
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in Sarnia, Ontario: What Local Landlords Need to Know
