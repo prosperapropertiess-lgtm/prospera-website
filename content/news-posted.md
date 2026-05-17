@@ -9,3 +9,4 @@ news-2026-05-12 N8 notices — persistent late payment and what Ontario landlord
 news-2026-05-13 N5 notices — the voiding period and what Ontario landlords must know before filing an L2 2026-05-13
 news-2026-05-15 N1 notices and rent increase rules — what Ontario landlords get wrong 2026-05-15
 news-2026-05-16 Illegal lease clauses — what Ontario landlords think is enforceable (and isn't) 2026-05-16
+news-2026-05-17 Fixed-term leases and automatic month-to-month renewal — what Ontario landlords get wrong 2026-05-17

@@ -138,3 +138,15 @@ What clauses have you had challenged at the LTB — or wish you'd known were une
 
 #OntarioLandlord #LondonOntario #LandlordTips #LeaseAgreement
 ---
+
+## 2026-05-17
+Heads up for anyone who's sent a "non-renewal" letter expecting their tenant to leave at the end of the fixed term — in Ontario, that letter has no legal effect.
+
+Fixed-term leases automatically convert to month-to-month when they expire. Your tenant has the right to stay until you have a valid legal ground for eviction: owner's own use (N12), renovation (N13), or a breach they've committed (N4, N5, N8). The LTB won't hear an eviction based on "the lease expired."
+
+One upside most landlords miss: you're not locked into another fixed term, and your annual rent increase notice doesn't require a new lease.
+
+Has anyone had a tenant stay past their lease end date — or sent a non-renewal letter not realizing it was unenforceable? What happened?
+
+#OntarioLandlord #LandlordTips #LondonOntario
+---
