@@ -9,7 +9,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: Province-wide Ontario resource for small landlords covering rights, responsibilities, and tenancy law — a natural fit for a "local property management experts" resource mention or guest contribution on how professional management reduces LTB risk.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://landlordselfhelp.com/contact/
 - site_focus: A non-profit Ontario organization providing free self-help legal resources for landlords navigating the Landlord and Tenant Board (LTB). The site offers forms, procedural guides, hearing prep checklists, and rights summaries. Content is practical and procedure-focused — helping small landlords represent themselves without legal counsel.
@@ -24,7 +24,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: All-volunteer landlord community with province-wide reach; Prospera could be listed as a trusted local management partner or contribute an article on SW Ontario rental market conditions.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://ontariolandlords.org/contact/
 - site_focus: A volunteer-run online community and association for Ontario's independent landlords. The site features active forums where landlords share experiences with problem tenants, LTB outcomes, and provincial rental law changes. Community-driven content covers tenant screening, lease clauses, rent increases, and damage disputes.
@@ -39,7 +39,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: Largest Ontario rental-housing trade association — membership or a sponsored resource post would earn a high-authority .org backlink from an industry body directly relevant to Prospera's market.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: info@frpo.org
 - site_focus: Ontario's largest rental housing trade association, representing over 2,200 member companies that own and operate residential rental housing across the province. FRPO advocates on policy at Queen's Park, provides member education, publishes market research, and operates the Certified Rental Building (CRB) program for building standards.
@@ -54,7 +54,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Ontario Landlord & Tenant Board focused law blog; Prospera could be cited as a case study or resource on how professional property managers help landlords navigate the LTB process.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://www.greeneconomylaw.com/contact
 - site_focus: A legal blog by a Toronto-based law firm covering Ontario Landlord and Tenant Board (LTB) proceedings from the landlord perspective. Posts break down hearing procedures, eviction timelines, application types (N4, N5, N12), and recent LTB decisions. Written for landlords who want to understand their legal rights without paying hourly legal fees for every question.
@@ -69,7 +69,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canadian landlord-tenant resource blog covering screening, evictions, and rental best practices — Prospera could contribute a guest post on managing multi-unit rentals in SW Ontario.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://frontlobby.com/contact/
 - site_focus: FrontLobby is a Canadian fintech company helping landlords report tenant rent payments to credit bureaus, building tenant credit history while giving landlords a screening and compliance tool. Their blog covers tenant screening, eviction procedures, rent reporting, and rental best practices for Canadian landlords — high-quality, SEO-optimized content aimed at independent and professional landlords alike.
@@ -84,7 +84,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: London Ontario-focused real estate brokerage with active market update blog; a cross-referral arrangement makes sense — their buyer clients become landlords who need management, and vice versa.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://elevatelondon.ca/contact/
 - site_focus: A residential real estate brokerage operating in London, Ontario, publishing regular market updates, buyer guides, neighbourhood profiles, and investment property content. Their blog targets London-area buyers, sellers, and investors with local market data and practical real estate advice.
@@ -99,7 +99,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Dedicated London Ontario real estate insider blog for investors and first-time buyers — an ideal venue for a guest post on what landlords should look for in a property management company in London.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://londonontariorealestateblog.com/contact/
 - site_focus: An independent blog covering the London Ontario real estate market with neighbourhood analyses, market commentary, investment property tips, and buyer/seller guidance. Content is written for both local buyers and out-of-town investors looking to enter the London market. Focused on practical, locally-informed real estate advice.
@@ -114,7 +114,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: 24-year veteran investor-focused London Ontario brokerage with rental property content; a resource link or co-authored article on London rental ROI would serve both audiences.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://enveloperealestate.com/contact/
 - site_focus: A London Ontario real estate brokerage with over two decades of experience, specializing in investment properties and rental portfolio acquisitions. They publish content on rental property ROI, London market data, and investment strategies for both local and out-of-town buyers. Their audience skews investor-heavy — people who already own or are actively building a rental portfolio.
@@ -129,7 +129,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: London-based mortgage broker whose clients buy investment properties in the same markets Prospera manages — a mutual referral resource page or blog mention is a natural fit.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://boniferromortgages.ca/contact/
 - site_focus: A London Ontario mortgage brokerage specializing in residential and investment property financing. Mike Boniferro helps clients finance home purchases and investment property acquisitions across the London area. Blog and resource content targets buyers navigating mortgage pre-approval, renewal, and investment property financing.
@@ -144,7 +144,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: London Ontario mortgage broker specializing in investment property financing — prospective landlord clients overlap directly with Prospera's target market, making a referral page link mutually beneficial.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-09
 - contact_email: https://imortgagebroker.ca/contact/
 - site_focus: Adriaan Driessen is a London Ontario mortgage broker focused on investment property and residential mortgage financing. The site targets buyers and investors in the London/SW Ontario market with mortgage product comparisons, rate information, and investment property financing guides.
@@ -159,7 +159,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: The official local real estate board for London and St. Thomas — Prospera's exact core markets; a vendor resource listing or market commentary contribution positions the company alongside trusted real estate professionals in both cities.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: info@lstar.ca
 - site_focus: LSTAR is the professional real estate association representing realtors in London, St. Thomas, and the surrounding Elgin County region. The association provides MLS listing access, market statistics, member education, and compliance resources. They publish monthly and quarterly market reports covering London and St. Thomas residential and investment property sales data.
@@ -174,7 +174,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canada's most-read mortgage industry blog, followed by brokers and investors who become landlords; a pitch on London/SW Ontario rental yield data or property management ROI would fit their investment content stream.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://www.canadianmortgagetrends.com/contact/
 - site_focus: Canada's leading mortgage industry publication, founded by mortgage expert Rob McLister. Covers rate changes, lending policy, real estate investment trends, and mortgage product analysis. Read primarily by mortgage professionals and sophisticated real estate investors. Editorial content is data-driven and nationally scoped, with frequent regional breakdowns.
@@ -189,7 +189,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: Canada's largest real estate investment education community; REIN members actively seek property managers in markets like London and St. Thomas, making a member resource page mention or guest article a direct lead-generation opportunity.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: info@rein.ca
 - site_focus: Canada's largest real estate investment education and networking community, founded by Don R. Campbell and now led by CEO Patrick Francey. REIN provides market research reports, investor education events, member networking, and a vetted vendor directory. Their members are active buy-and-hold investors across Canada who rely on REIN's market scoring to decide where to invest next.
@@ -204,7 +204,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: media
 - why: London Ontario's dedicated business magazine covering local companies, real estate, and entrepreneurship — a natural outlet for a company spotlight or a contributed piece on the SW Ontario rental market outlook.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://www.londonincmagazine.ca/contact/
 - site_focus: London Inc. is London Ontario's dedicated business magazine, covering local entrepreneurs, company profiles, commercial real estate, economic development, and the London business community broadly. Both print and digital. Features "40 Under 40" lists, company spotlights, and contributed expert columns. Read by London's business community including investors, developers, and professionals.
@@ -219,7 +219,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: media
 - why: Ontario's dedicated rental housing trade publication read by landlords and operators province-wide; a contributed article on managing rentals in secondary markets like Strathroy and St. Thomas would be directly on-topic for their readership.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://www.rentalhousingbusiness.ca/contact/
 - site_focus: Ontario's trade magazine for rental housing providers, published by Humber Publishing. Covers property management operations, landlord-tenant law updates, building maintenance, investment trends, and provincial policy changes. Read by professional property managers, building owners, and FRPO members across Ontario. Editorial content mixes industry news with operational best practices.
@@ -234,7 +234,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: media
 - why: The primary newspaper serving Elgin County and St. Thomas, one of Prospera's three core markets; local business features and real estate coverage offer earned-media backlink opportunities from a hyper-local publication.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://www.stthomastimesjournal.com/contact/
 - site_focus: The St. Thomas Times-Journal is the daily newspaper of record for St. Thomas and Elgin County, owned by Postmedia. Covers local news, business, real estate, and community affairs. Their business section regularly features local company profiles, real estate market updates, and economic development stories — particularly relevant now given St. Thomas's major industrial expansions (Volkswagen EV battery plant, Amazon).
@@ -249,7 +249,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: High-traffic Canadian housing data and analysis blog cited by national media; a London/SW Ontario market data contribution or an expert quote in their regional coverage could earn a citation backlink.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://betterdwelling.com/contact/
 - site_focus: Better Dwelling is Canada's most widely cited independent housing data and analysis publication, founded by Daniel Wong. It publishes deep dives into housing prices, rental data, mortgage trends, and policy analysis — often taking a data-critical view of Canadian housing market dynamics. Cited regularly by CBC, Globe and Mail, and national outlets. Audience is sophisticated: investors, policy observers, journalists, and housing-aware Canadians.
@@ -264,7 +264,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Popular Canadian mortgage and real estate resource site with province-by-province rental and buying guides; Prospera could contribute landlord cost benchmarks or be cited in an Ontario property management guide page.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://wowa.ca/contact/
 - site_focus: WOWA (short for "Worth Our Weight in Advice") is a Canadian real estate and mortgage resource site featuring calculators, buying guides, rental market data, and province-by-province property management and landlord guides. Heavy SEO focus; their Ontario property management guide and London real estate market pages rank well in Google for high-intent search terms.
@@ -279,7 +279,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: London's main business membership association featuring local company directories and editorial spotlights; chamber membership earns a directory backlink and opens co-branded content and event partnership opportunities.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: info@londonchamber.com
 - site_focus: The London Chamber of Commerce is London Ontario's primary business membership association, serving over 1,000 member businesses. Provides a public business directory, events, networking, advocacy, and editorial spotlights through their magazine and digital channels. Membership includes a directory listing, event access, and co-branding opportunities. The Chamber is broadly trusted and well-indexed by local search engines.
@@ -294,7 +294,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: Provincial real estate industry body that publishes Realtor education resources and market research; a guest contribution on how professional property management supports investor clients aligns with OREA's educational mandate.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-16
 - contact_email: https://www.orea.com/Contact-Us
 - site_focus: OREA is the provincial association representing over 80,000 Ontario real estate professionals. Publishes Realtor education content, market research, legislative advocacy, and professional development resources. Their editorial content targets realtors — both in terms of professional skills and serving investor clients. OREA's website carries significant domain authority as Ontario's official real estate industry body.
