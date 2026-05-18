@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-05-16 (full audit — 46 posts confirmed across all sessions)
+2026-05-18
 
-## Posts Written: 46 total
+## Posts Written: 47 total
 
 ### MONEY keywords (7)
 - property-management-london-ontario ✅
@@ -44,7 +44,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 **Still missing:**
 - n13-notice-ontario (demolition/conversion eviction — completes N-form series)
 
-### LONG-TAIL keywords (23)
+### LONG-TAIL keywords (24)
 - first-time-landlord-tips-london-ontario ✅
 - tenant-screening-red-flags ✅
 - rental-property-tax-deductions-ontario ✅
@@ -68,9 +68,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 - ontario-standard-lease-2026 ✅
 - tenant-credit-check-ontario-landlords ✅
 - bill-60-ontario-landlords ✅
+- lease-renewal-ontario-landlord-guide ✅
 
 **Still missing:**
-- lease-renewal-ontario-landlord-guide ← HIGH PRIORITY
 - capital-gains-rental-property-ontario ← HIGH PRIORITY
 - small-landlord-property-management-london-ontario
 - what-can-landlord-deduct-from-last-month-rent-ontario
@@ -86,14 +86,14 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ## Recommended Next Posts
 
 **Immediate:**
-1. lease-renewal-ontario-landlord-guide (LONG-TAIL — HIGH PRIORITY)
-2. capital-gains-rental-property-ontario (LONG-TAIL — HIGH PRIORITY)
-3. n13-notice-ontario (PAIN — completes N-form series)
+1. capital-gains-rental-property-ontario (LONG-TAIL — HIGH PRIORITY)
+2. n13-notice-ontario (PAIN — completes N-form series)
+3. what-can-landlord-deduct-from-last-month-rent-ontario
 
 **Following:**
-1. what-can-landlord-deduct-from-last-month-rent-ontario
-2. property-manager-london-ontario-cost
-3. residential-property-management-london-ontario
+1. property-manager-london-ontario-cost
+2. residential-property-management-london-ontario
+3. small-landlord-property-management-london-ontario
 
 ---
 
@@ -113,3 +113,6 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 - LocalBusiness schema added 2026-05-01
 - SEO writer cron runs Mon/Wed/Fri 8am EST via Vercel — fully autonomous
 - Google Indexing API integrated — new posts pinged to Google on publish
+
+## Session Notes
+- 2026-05-18: Published lease-renewal-ontario-landlord-guide — LONG-TAIL HIGH PRIORITY. Covers automatic conversion to month-to-month, fixed-term renewal options, rent increase rules at renewal, tenant notice requirements, and common landlord mistakes. Internal links to ontario-standard-lease-2026, how-long-does-eviction-take-ontario, and rent-increase-ontario-guidelines.
