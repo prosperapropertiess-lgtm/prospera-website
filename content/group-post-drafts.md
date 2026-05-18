@@ -139,6 +139,21 @@ What clauses have you had challenged at the LTB — or wish you'd known were une
 #OntarioLandlord #LondonOntario #LandlordTips #LeaseAgreement
 ---
 
+## 2026-05-18
+Quick question for the group -- does requiring a co-signer actually protect you?
+
+A landlord I know recently had a tenant stop paying rent three months in. Their first move was to call the co-signer. The problem: the LTB has no jurisdiction over co-signers. The landlord still had to file an N4 and then an L1 against the actual tenant -- the co-signer dispute became a separate Small Claims matter entirely.
+
+The lesson most landlords learn the hard way: a co-signer adds accountability, but it doesn't change your LTB process at all. You still need to screen the actual tenant as if no co-signer exists. You still file the same notices if rent stops.
+
+A written guarantor agreement does give you a Small Claims path -- but only if it's properly drafted and you're ready to run two separate proceedings at once.
+
+Has anyone here pursued a co-signer through Small Claims after going through the LTB? How did it go?
+
+#OntarioLandlord #LondonOntario #LandlordTips #TenantScreening
+
+---
+
 ## 2026-05-17
 Heads up for anyone who's sent a "non-renewal" letter expecting their tenant to leave at the end of the fixed term — in Ontario, that letter has no legal effect.
 

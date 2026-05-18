@@ -10,3 +10,4 @@ news-2026-05-13 N5 notices — the voiding period and what Ontario landlords mus
 news-2026-05-15 N1 notices and rent increase rules — what Ontario landlords get wrong 2026-05-15
 news-2026-05-16 Illegal lease clauses — what Ontario landlords think is enforceable (and isn't) 2026-05-16
 news-2026-05-17 Fixed-term leases and automatic month-to-month renewal — what Ontario landlords get wrong 2026-05-17
+news-2026-05-18 Co-signers and guarantors — what they actually mean at the LTB 2026-05-18
