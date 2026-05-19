@@ -165,3 +165,19 @@ Has anyone had a tenant stay past their lease end date — or sent a non-renewal
 
 #OntarioLandlord #LandlordTips #LondonOntario
 ---
+
+## 2026-05-19
+Is anyone else seeing more T6 maintenance applications lately?
+
+A few London landlords I've spoken to recently were caught off guard — their tenant filed a T6 with the LTB claiming poor maintenance and asking for retroactive rent abatement going back close to a year.
+
+Under the RTA, landlords must keep units in good repair regardless of what the lease says. The LTB can award abatements for periods before the application was even filed.
+
+What tends to hurt landlords in hearings: no paper trail. Verbal maintenance requests, slow responses, no follow-up documentation.
+
+The fix is straightforward — respond in writing, keep a maintenance log, do annual inspections.
+
+Anyone dealt with a T6 filing in Ontario? Did the LTB grant an abatement, and how far back did they go?
+
+#OntarioLandlord #LondonOntario #LandlordTips #LTB
+---
