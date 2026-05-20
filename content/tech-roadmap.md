@@ -77,11 +77,14 @@ Prospera Properties is being built into a full property management platform that
 - app/admin/page.tsx uses raw img tags (lines 129, 171) instead of next/image, missing optimization
 - No Suspense boundaries found anywhere in the app — async pages would benefit from Suspense for better loading UX
 - Supabase queries are direct from client on admin pages — consider moving to server actions for security
+- **[2026-05-20]** app/page.tsx is a 678-line use-client component — the entire homepage renders client-side including Framer Motion, inflating the JS bundle significantly
+- **[2026-05-20]** Only the google-reviews API route sets a revalidate cache; all other API routes hit upstream services on every request with no caching
+- **[2026-05-20]** app/admin/properties/page.tsx uses raw img tags (lines 128 and 175) instead of next/image, missing automatic optimization and lazy loading
 
 ---
 
 ## Last IT Agent Run
-2026-05-06
+2026-05-20
 
 ## This Week's Proposal
-Maintenance Request Portal — MVP
+Tenant Dashboard — MVP
