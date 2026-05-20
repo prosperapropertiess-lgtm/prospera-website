@@ -12,3 +12,4 @@ news-2026-05-16 Illegal lease clauses — what Ontario landlords think is enforc
 news-2026-05-17 Fixed-term leases and automatic month-to-month renewal — what Ontario landlords get wrong 2026-05-17
 news-2026-05-18 Co-signers and guarantors — what they actually mean at the LTB 2026-05-18
 news-2026-05-19 T6 maintenance applications — what landlords must know about the good-repair standard 2026-05-19
+news-2026-05-20 Subletting and assignment — what Ontario landlords can and cannot refuse when a tenant asks to transfer a lease 2026-05-20

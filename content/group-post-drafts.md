@@ -181,3 +181,17 @@ Anyone dealt with a T6 filing in Ontario? Did the LTB grant an abatement, and ho
 
 #OntarioLandlord #LondonOntario #LandlordTips #LTB
 ---
+
+## 2026-05-20
+Quick one for the group — do you know what happens if you refuse a tenant's request to assign their unit without a valid reason?
+
+Under s. 95 of the RTA, an unreasonable refusal to consent to assignment gives the tenant the right to terminate the tenancy early with just 30 days' notice. Most landlords I talk to don't know this exists.
+
+Assignment = new tenant takes over the lease completely. Subletting = original tenant stays responsible but someone else lives there. The rules are different for each.
+
+You CAN refuse — but you need a real reason. Creditworthiness, rental history, ability to pay. "I don't know them" won't hold up.
+
+Has anyone dealt with an assignment request in London or Ontario? How did you handle it?
+
+#OntarioLandlord #LondonOntario #LandlordTips
+---
