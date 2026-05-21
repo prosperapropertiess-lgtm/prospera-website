@@ -195,3 +195,15 @@ Has anyone dealt with an assignment request in London or Ontario? How did you ha
 
 #OntarioLandlord #LondonOntario #LandlordTips
 ---
+
+## 2026-05-21
+Quick one for the group — has anyone been through the L1 process after an N4 recently?
+
+Once your N4 termination date passes and rent still isn't paid, you have to file an L1 with the LTB ($201 fee) to get an actual eviction order. Most first-time cases don't end in immediate eviction — adjudicators typically issue a conditional order giving the tenant one last shot to pay.
+
+A couple things that catch people out: utilities and NSF fees can't be in your N4 arrears amount, and the tenant can literally pay everything at the hearing and walk. You also can't file too early — the L1 can't go in until the N4 termination date has actually passed.
+
+Anyone dealt with this in London or Ontario recently? How long was the wait for a hearing and what was the outcome?
+
+#OntarioLandlord #LandlordTips #LondonOntario #LTB
+---

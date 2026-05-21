@@ -13,3 +13,4 @@ news-2026-05-17 Fixed-term leases and automatic month-to-month renewal — what 
 news-2026-05-18 Co-signers and guarantors — what they actually mean at the LTB 2026-05-18
 news-2026-05-19 T6 maintenance applications — what landlords must know about the good-repair standard 2026-05-19
 news-2026-05-20 Subletting and assignment — what Ontario landlords can and cannot refuse when a tenant asks to transfer a lease 2026-05-20
+news-2026-05-21 L1 applications — what Ontario landlords must do after a tenant doesn't pay following an N4 2026-05-21
