@@ -12,3 +12,4 @@ n5-notice-ontario drafted 2026-05-17
 l1-application-ltb-ontario drafted 2026-05-18
 lease-renewal-ontario-landlord-guide drafted 2026-05-19
 enforcing-eviction-order-ontario-sheriff drafted 2026-05-21
+rent-increase-ontario-guidelines drafted 2026-05-22
