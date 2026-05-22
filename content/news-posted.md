@@ -14,3 +14,4 @@ news-2026-05-18 Co-signers and guarantors — what they actually mean at the LTB
 news-2026-05-19 T6 maintenance applications — what landlords must know about the good-repair standard 2026-05-19
 news-2026-05-20 Subletting and assignment — what Ontario landlords can and cannot refuse when a tenant asks to transfer a lease 2026-05-20
 news-2026-05-21 L1 applications — what Ontario landlords must do after a tenant doesn't pay following an N4 2026-05-21
+news-2026-05-22 Abandoned units — why changing the locks is an illegal lockout in Ontario and what to do instead 2026-05-22

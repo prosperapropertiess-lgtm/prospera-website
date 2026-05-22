@@ -207,3 +207,15 @@ Anyone dealt with this in London or Ontario recently? How long was the wait for 
 
 #OntarioLandlord #LandlordTips #LondonOntario #LTB
 ---
+
+## 2026-05-22
+Quick question for the group — what do you do when a tenant stops responding and the unit looks abandoned?
+
+A lot of landlords assume they can just change the locks. In Ontario, that's an illegal lockout even if the unit appears empty — and the LTB takes T2 applications seriously. We've seen London landlords get hit with damages awards for doing exactly this.
+
+The process: document every contact attempt with dates, serve an N4 if rent is owing and follow through with an L1, or apply to the LTB directly for termination by abandonment. The tenant's belongings can't be tossed until the tenancy is legally ended and you've taken reasonable steps to notify them.
+
+Anyone dealt with this in London or Ontario recently? How long did it take and did the tenant ever resurface?
+
+#OntarioLandlord #LondonOntario #LandlordTips #LTB
+---
