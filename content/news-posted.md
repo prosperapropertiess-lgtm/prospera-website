@@ -15,3 +15,4 @@ news-2026-05-19 T6 maintenance applications — what landlords must know about t
 news-2026-05-20 Subletting and assignment — what Ontario landlords can and cannot refuse when a tenant asks to transfer a lease 2026-05-20
 news-2026-05-21 L1 applications — what Ontario landlords must do after a tenant doesn't pay following an N4 2026-05-21
 news-2026-05-22 Abandoned units — why changing the locks is an illegal lockout in Ontario and what to do instead 2026-05-22
+news-2026-05-23 Partial rent payments — how accepting them can undermine your N4 and what Ontario landlords should do instead 2026-05-23

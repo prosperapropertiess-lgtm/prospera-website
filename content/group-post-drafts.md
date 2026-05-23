@@ -219,3 +219,15 @@ Anyone dealt with this in London or Ontario recently? How long did it take and d
 
 #OntarioLandlord #LondonOntario #LandlordTips #LTB
 ---
+
+## 2026-05-23
+Quick question for the group — has anyone had an N4 or L1 dismissed because they accepted partial rent payments in between?
+
+Under the RTA, accepting partial payment after an N4 is served can create complications with your arrears calculation. A lot of landlords accept $500 here, $300 there, because it feels like progress — but it can undermine the paperwork you've already filed and send you back to square one.
+
+The thing that actually works: a signed written repayment agreement, in plain language, spelling out the schedule and what happens if they miss a payment. Not a text message. Not a verbal understanding.
+
+Has anyone dealt with a tenant who made partial payments and then stopped? Did the LTB take your repayment history into account when making their order?
+
+#OntarioLandlord #LondonOntario #LandlordTips #RentArrears
+---
