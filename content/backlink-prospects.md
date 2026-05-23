@@ -303,3 +303,103 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: High-authority but formal — editorial pitches need to be genuinely educational and realtor-centric. The content must help realtors serve clients better, not market Prospera's services. A soft sell with strong educational value is the right approach. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
+
+## TenantPay Blog
+- url: https://www.tenantpay.com/blogs
+- type: blog
+- why: Canadian rent-payment platform with an active landlord-facing blog covering Ontario tenant law, eviction tips, and rental management — a resource mention or guest post on "why professional property management beats DIY rent collection" would fit naturally.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Canadian Real Estate Magazine
+- url: https://www.canadianrealestatemagazine.ca
+- type: media
+- why: National trade magazine that publishes expert-contributed pieces on Ontario landlord challenges (tenant screening, LTB, managing difficult tenants) — strong candidate for a bylined article positioning Prospera as a southwestern Ontario authority.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## 105.7 Strathroy Today
+- url: https://www.strathroytoday.ca
+- type: media
+- why: Local radio station's news site covering Strathroy real estate market updates monthly and running a "Your Money, Your Community" local business feature — ideal earned media placement in one of Prospera's three core markets.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Dan Balch Mortgage — Learning Center
+- url: https://danbalch.com/learning-center/
+- type: mortgage
+- why: 21-year London mortgage broker with a Learning Center and blog serving London, St. Thomas, and Woodstock — the exact same geography as Prospera, making a reciprocal resource link or joint content piece a natural fit for investor clients.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Serena Holmes — Inspired to Invest
+- url: https://serenaholmesrealtor.com/real-estate-investing/
+- type: blog
+- why: Ontario real estate investing blog and podcast that explicitly calls London "a hidden gem" for investors — a guest post or podcast appearance on property management in southwestern Ontario would reach exactly the right investor audience.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## PHBDeals — London Ontario Investment Blog
+- url: https://phbdeals.ca/blog/
+- type: blog
+- why: London Ontario real estate wholesaler serving the same Southwestern Ontario markets as Prospera (London, St. Thomas, Strathroy) with a blog targeting buy-and-hold investors — a natural referral partner and resource link from their investor content.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## 705 Insurance — Ontario Landlord Blog
+- url: https://www.705insurance.ca/post/10-essential-hacks-every-ontario-landlord-should-know
+- type: blog
+- why: Ontario insurance broker with landlord-specific blog content covering rental property management tips — a complementary service provider whose readers are active Ontario landlords, ideal for a resource mention on professional property management.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Austin D. Titus — London Ontario Realtor Blog
+- url: https://austindtitus.ca
+- type: blog
+- why: London Ontario Century 21 realtor (North Elm Realty) with a blog and first-time buyer guide serving London — an investor-friendly local realtor whose clients frequently need property management after purchase, making a referral link mutually beneficial.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Sean Prosser — London Ontario Mortgage Blog
+- url: https://www.seanprosser.com/blog/
+- type: mortgage
+- why: London Ontario mortgage broker blog covering investment financing, credit scores, and mortgage renewal for local buyers — his investor clients are exactly the audience Prospera serves once they own rental property.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
+
+## Niagara Homes Real Estate Blog
+- url: https://www.niagarahomes.com/blog/
+- type: blog
+- why: Ontario real estate brokerage blog that publishes detailed guides on Ontario landlord law changes (Bill 60, LTB reforms) — a well-indexed content site where a guest post on professional property management in southwestern Ontario would rank well.
+- researched: false
+- drafted: false
+- added: 2026-05-23
+
+---
