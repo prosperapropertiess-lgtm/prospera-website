@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* ── Sparkles / gradient theme tokens (pricing-section-4) ──────────────────── */
+@theme inline {
+  --color-sparkles-color: var(--sparkles-color);
+  --color-gradient-color: var(--gradient-color);
+}
+
+:root {
+  --gradient-color: #8350e8;
+  --sparkles-color: #8350e8;
+}
+
+.dark {
+  --gradient-color: #8350e8;
+  --sparkles-color: #ffffff;
+}
+
 :root {
   --warm-bg:   #F7F5F2;
   --white:     #FFFFFF;
@@ -8,6 +24,11 @@
   --neutral:   #D8D2C8;
   --text:      #222222;
   --muted:     #444444;
+
+  /* Custom easing curves — stronger than CSS built-ins */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @theme inline {
@@ -34,12 +55,86 @@ body {
   body { line-height: 1.75; }
 }
 
+/* ── Button press feedback ─────────────────────────────────────────────────── */
+/* All primary anchor/button CTAs get tactile press response */
+.btn-primary {
+  transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { opacity: 0.82; }
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Ghost/secondary buttons */
+.btn-ghost {
+  transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost:hover { opacity: 0.72; }
+}
+.btn-ghost:active { transform: scale(0.97); }
+
+/* ── Chat bubble ───────────────────────────────────────────────────────────── */
+.chat-bubble {
+  transition: transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .chat-bubble:hover { transform: scale(1.06); }
+}
+.chat-bubble:active { transform: scale(0.93); }
+
+/* ── Card interactions — CSS hover/active (GPU, not JS thread) ─────────────── */
+.feature-card {
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+  }
+}
+.feature-card:active { transform: scale(0.98); }
+
+.pain-card {
+  transition: transform 150ms var(--ease-out);
+}
+.pain-card:active { transform: scale(0.97); }
+
+/* ── Input focus rings ──────────────────────────────────────────────────────── */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #1F2F3A !important;
+  box-shadow: 0 0 0 2px rgba(31,47,58,0.12);
+  transition: border-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Review carousel nav buttons ──────────────────────────────────────────── */
+.review-nav-btn {
+  transition: border-color 150ms var(--ease-out), transform 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .review-nav-btn:hover { border-color: #8B2030 !important; }
+}
+.review-nav-btn:active { transform: scale(0.93); }
+
 .footer-link {
   color: rgba(250, 248, 245, 0.75);
-  transition: color 0.2s;
+  transition: color 0.18s var(--ease-out);
 }
-.footer-link:hover {
-  color: #FAF8F5;
+@media (hover: hover) and (pointer: fine) {
+  .footer-link:hover { color: #FAF8F5; }
 }
 
 /* Blog prose styles */

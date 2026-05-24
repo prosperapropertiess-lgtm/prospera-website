@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import NumberFlow from "@number-flow/react";
 
 const plans = [
   {
     key: "managed",
     label: "Managed",
     badge: null,
-    price: "8%",
+    priceNum: 8,
+    priceSuffix: "%",
     priceSub: "/ month",
     placementNote: "+ 1 month's rent (placement)",
     placementHighlight: false,
@@ -31,11 +34,13 @@ const plans = [
     key: "optimized",
     label: "Optimized",
     badge: "Most Popular",
-    price: "12%",
+    priceNum: 12,
+    priceSuffix: "%",
     priceSub: "/ month",
     placementNote: "+ 75% of one month's rent (placement)",
     placementHighlight: false,
-    description: "Your property works harder for you. Proactive rent optimization keeps your income growing.",
+    description:
+      "Your property works harder for you. Proactive rent optimization keeps your income growing.",
     features: [
       "Everything in Managed",
       "25% lower placement fee (save $500 avg)",
@@ -53,11 +58,13 @@ const plans = [
     key: "passive",
     label: "Passive",
     badge: "Best Value",
-    price: "15%",
+    priceNum: 15,
+    priceSuffix: "%",
     priceSub: "/ month",
     placementNote: "Placement: FREE every single time ($2,000 value)",
     placementHighlight: true,
-    description: "True passive income — backed by our 90-Day Happiness Guarantee. Not happy? Walk away free.",
+    description:
+      "True passive income — backed by our 90-Day Happiness Guarantee. Not happy? Walk away free.",
     features: [
       "Everything in Optimized",
       "FREE placement — saves $2,000 every vacancy",
@@ -73,23 +80,59 @@ const plans = [
   },
 ];
 
-function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolean }) {
+function PlanCard({
+  plan,
+  full = false,
+  index = 0,
+}: {
+  plan: (typeof plans)[0];
+  full?: boolean;
+  index?: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
+
   const bg = plan.dark ? "#1F2F3A" : "#FFFFFF";
-  const border = plan.accentBorder ? "2px solid #8B2030" : plan.dark ? "none" : "1px solid #D8D2C8";
+  const border = plan.accentBorder
+    ? "2px solid #8B2030"
+    : plan.dark
+      ? "none"
+      : "1px solid #D8D2C8";
   const headingColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
   const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#333333";
   const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#8B2030";
   const checkColor = plan.dark ? "#FAF8F5" : "#8B2030";
   const priceColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
   const placementColor = plan.placementHighlight ? "#8B2030" : bodyColor;
-  const ctaBg = plan.dark ? "#8B2030" : plan.accentBorder ? "#8B2030" : "transparent";
-  const ctaBorder = plan.dark ? "none" : plan.accentBorder ? "none" : "1px solid #D8D2C8";
+  const ctaBg =
+    plan.dark
+      ? "#8B2030"
+      : plan.accentBorder
+        ? "#8B2030"
+        : "transparent";
+  const ctaBorder =
+    plan.dark || plan.accentBorder ? "none" : "1px solid #D8D2C8";
   const ctaText = plan.dark || plan.accentBorder ? "#FAF8F5" : "#222222";
 
   return (
-    <div
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 28 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.12,
+        ease: [0.23, 1, 0.32, 1],
+      }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={`relative rounded-2xl p-8 flex flex-col ${full ? "h-full" : ""}`}
-      style={{ backgroundColor: bg, border, boxShadow: plan.featured ? "0 8px 32px rgba(0,0,0,0.18)" : "0 2px 8px rgba(0,0,0,0.05)" }}
+      style={{
+        backgroundColor: bg,
+        border,
+        boxShadow: plan.featured
+          ? "0 8px 40px rgba(31,47,58,0.22)"
+          : "0 2px 8px rgba(0,0,0,0.05)",
+      }}
     >
       {plan.badge && (
         <div
@@ -106,17 +149,36 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
       )}
 
       <div className="mb-8">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: labelColor, fontFamily: "var(--font-dm-sans)" }}>
+        <p
+          className="text-xs uppercase tracking-widest mb-3"
+          style={{ color: labelColor, fontFamily: "var(--font-dm-sans)" }}
+        >
           {plan.label}
         </p>
+
+        {/* Animated price */}
         <div className="flex items-end gap-2 mb-1">
-          <p className="text-6xl font-light" style={{ color: priceColor, fontFamily: "var(--font-cormorant)" }}>
-            {plan.price}
+          <p
+            className="text-6xl font-light leading-none"
+            style={{ color: priceColor, fontFamily: "var(--font-cormorant)" }}
+          >
+            <NumberFlow
+              value={isInView ? plan.priceNum : 0}
+              suffix={plan.priceSuffix}
+              trend={1}
+              transformTiming={{ duration: 700, easing: "ease-out" }}
+              spinTiming={{ duration: 700, easing: "ease-out" }}
+              opacityTiming={{ duration: 350, easing: "ease-out" }}
+            />
           </p>
-          <p className="text-sm mb-2" style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}>
+          <p
+            className="text-sm mb-2"
+            style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}
+          >
             {plan.priceSub}
           </p>
         </div>
+
         <p
           className="text-sm mb-1"
           style={{
@@ -127,15 +189,30 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
         >
           {plan.placementNote}
         </p>
-        <p className="text-base mt-4 leading-relaxed" style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}>
+        <p
+          className="text-base mt-4 leading-relaxed"
+          style={{ color: bodyColor, fontFamily: "var(--font-dm-sans)" }}
+        >
           {plan.description}
         </p>
       </div>
 
-      <ul className="space-y-3 mb-8 flex-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
+      <ul
+        className="space-y-3 mb-8 flex-1"
+        style={{ fontFamily: "var(--font-dm-sans)" }}
+      >
         {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm" style={{ color: bodyColor }}>
-            <span className="mt-0.5 flex-shrink-0" style={{ color: checkColor }}>✓</span>
+          <li
+            key={i}
+            className="flex items-start gap-3 text-sm"
+            style={{ color: bodyColor }}
+          >
+            <span
+              className="mt-0.5 flex-shrink-0"
+              style={{ color: checkColor }}
+            >
+              ✓
+            </span>
             {f}
           </li>
         ))}
@@ -153,7 +230,7 @@ function PlanCard({ plan, full = false }: { plan: typeof plans[0]; full?: boolea
       >
         Get Started
       </Link>
-    </div>
+    </motion.div>
   );
 }
 
@@ -164,7 +241,10 @@ export default function PricingCards() {
     <>
       {/* Mobile: tab switcher */}
       <div className="md:hidden px-6 mb-6">
-        <div className="flex rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8" }}>
+        <div
+          className="flex rounded-xl overflow-hidden border"
+          style={{ borderColor: "#D8D2C8" }}
+        >
           {plans.map((plan, i) => (
             <button
               key={plan.key}
@@ -181,14 +261,14 @@ export default function PricingCards() {
           ))}
         </div>
         <div className="mt-4">
-          <PlanCard plan={plans[active]} />
+          <PlanCard plan={plans[active]} index={0} />
         </div>
       </div>
 
       {/* Desktop: 3-col grid */}
       <div className="hidden md:grid md:grid-cols-3 gap-6 mb-8 px-6">
-        {plans.map((plan) => (
-          <PlanCard key={plan.key} plan={plan} full />
+        {plans.map((plan, i) => (
+          <PlanCard key={plan.key} plan={plan} full index={i} />
         ))}
       </div>
     </>

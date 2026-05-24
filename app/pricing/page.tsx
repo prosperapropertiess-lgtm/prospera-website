@@ -3,11 +3,14 @@ import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import PricingCards from "@/components/ui/PricingCards";
 import BlogNudge from "@/components/ui/BlogNudge";
+import AnimatedPricingNumbers from "@/components/ui/AnimatedPricingNumbers";
 import type { Metadata } from "next";
+import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Transparent property management pricing with no hidden fees. See how Prospera Properties compares to typical Ontario property managers.",
+  description:
+    "Transparent property management pricing with no hidden fees. See how Prospera Properties compares to typical Ontario property managers.",
 };
 
 const faqs = [
@@ -69,51 +72,187 @@ export default function PricingPage() {
   return (
     <div style={{ backgroundColor: "#F7F5F2" }}>
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
-        <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
-            We only take 3 new properties per month
-          </p>
-          <h1
-            className="text-5xl md:text-6xl font-light mb-5 leading-tight"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+      <section
+        className="pt-32 pb-20 px-6 text-center"
+        style={{ backgroundColor: "#1F2F3A" }}
+      >
+        <p
+          className="text-xs uppercase tracking-widest mb-6"
+          style={{
+            color: "rgba(250,248,245,0.55)",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
+          We only take 3 new properties per month
+        </p>
+
+        <h1
+          className="text-5xl md:text-6xl font-light mb-5 leading-tight"
+          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+        >
+          <VerticalCutReveal
+            splitBy="words"
+            staggerDuration={0.1}
+            staggerFrom="first"
+            reverse={true}
+            containerClassName="justify-center flex-wrap"
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 38,
+              delay: 0.1,
+            }}
           >
             Stop Losing Money on Your
-            <br />Rental Property.
-          </h1>
-          <p className="text-base max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
-            Every vacant month costs you $2,000+. Every maintenance markup costs you hundreds more.
-            Every hour you spend managing is an hour you don&apos;t get back.
-            We fix all three — starting at 8%.
+          </VerticalCutReveal>
+          <br />
+          <VerticalCutReveal
+            splitBy="words"
+            staggerDuration={0.1}
+            staggerFrom="first"
+            reverse={true}
+            containerClassName="justify-center flex-wrap"
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 38,
+              delay: 0.45,
+            }}
+          >
+            Rental Property.
+          </VerticalCutReveal>
+        </h1>
+
+        <FadeIn delay={0.55}>
+          <p
+            className="text-base max-w-xl mx-auto leading-relaxed"
+            style={{
+              color: "rgba(250,248,245,0.65)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            Every vacant month costs you $2,000+. Every maintenance markup costs
+            you hundreds more. Every hour you spend managing is an hour you
+            don&apos;t get back. We fix all three — starting at 8%.
           </p>
         </FadeIn>
       </section>
 
       {/* Value Stack */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}>
+      <section
+        className="py-20 px-6"
+        style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #D8D2C8" }}
+      >
         <div className="max-w-2xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>What You&apos;re Actually Getting</p>
-            <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+            <p
+              className="text-xs uppercase tracking-widest text-center mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              What You&apos;re Actually Getting
+            </p>
+            <h2
+              className="text-3xl font-light text-center mb-10"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
               Everything included. Nothing hidden.
             </h2>
-            <div className="rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+            <div
+              className="rounded-xl overflow-hidden border"
+              style={{
+                borderColor: "#D8D2C8",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+              }}
+            >
               {valueStack.map((row, i) => (
-                <div key={i} className="flex items-center justify-between px-6 py-4 gap-4" style={{ borderBottom: i < valueStack.length - 1 ? "1px solid #D8D2C8" : "none", backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
+                <div
+                  key={i}
+                  className="flex items-center justify-between px-6 py-4 gap-4"
+                  style={{
+                    borderBottom:
+                      i < valueStack.length - 1 ? "1px solid #D8D2C8" : "none",
+                    backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2",
+                  }}
+                >
                   <div>
-                    <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.note}</p>
+                    <p
+                      className="text-sm"
+                      style={{
+                        color: "#222222",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      {row.item}
+                    </p>
+                    <p
+                      className="text-xs mt-0.5"
+                      style={{
+                        color: "#999999",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      {row.note}
+                    </p>
                   </div>
-                  <p className="text-sm font-semibold whitespace-nowrap" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{row.value}</p>
+                  <p
+                    className="text-sm font-semibold whitespace-nowrap"
+                    style={{
+                      color: "#8B2030",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
+                    {row.value}
+                  </p>
                 </div>
               ))}
-              <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
-                <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>With Prospera — all of this goes away</p>
-                <p className="text-sm font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Starting at 8%</p>
+              <div
+                className="flex items-center justify-between px-6 py-5"
+                style={{
+                  backgroundColor: "#F7F5F2",
+                  borderTop: "1px solid #D8D2C8",
+                }}
+              >
+                <p
+                  className="text-sm font-medium"
+                  style={{
+                    color: "#1F2F3A",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
+                >
+                  With Prospera — all of this goes away
+                </p>
+                <p
+                  className="text-sm font-semibold"
+                  style={{
+                    color: "#8B2030",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
+                >
+                  Starting at 8%
+                </p>
               </div>
-              <div className="flex items-center justify-between px-6 py-5" style={{ backgroundColor: "#1F2F3A" }}>
-                <p className="text-sm font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>On a $2,000/month rental — that&apos;s $160/month</p>
-                <p className="text-xl font-light" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>$160 / month</p>
+              <div
+                className="flex items-center justify-between px-6 py-5"
+                style={{ backgroundColor: "#1F2F3A" }}
+              >
+                <p
+                  className="text-sm font-medium"
+                  style={{
+                    color: "#FAF8F5",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
+                >
+                  On a $2,000/month rental — that&apos;s $160/month
+                </p>
+                <p
+                  className="text-xl font-light"
+                  style={{
+                    color: "#FAF8F5",
+                    fontFamily: "var(--font-cormorant)",
+                  }}
+                >
+                  $160 / month
+                </p>
               </div>
             </div>
           </FadeIn>
@@ -124,17 +263,39 @@ export default function PricingPage() {
       <section className="py-20" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Choose Your Plan</p>
-            <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Simple, transparent pricing.</h2>
+            <p
+              className="text-xs uppercase tracking-widest text-center mb-3"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Choose Your Plan
+            </p>
+            <h2
+              className="text-3xl font-light text-center mb-12"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
+              Simple, transparent pricing.
+            </h2>
           </FadeIn>
           <PricingCards />
 
           {/* Reassurance bar */}
           <FadeIn delay={0.3}>
-            <div className="mx-6 p-5 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}>
-              <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+            <div
+              className="mx-6 p-5 text-center border rounded-xl"
+              style={{ borderColor: "#D8D2C8", backgroundColor: "#FFFFFF" }}
+            >
+              <p
+                className="text-sm"
+                style={{
+                  color: "#333333",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
                 All plans include:{" "}
-                <strong style={{ color: "#222222" }}>8% maintenance markup</strong> ·{" "}
+                <strong style={{ color: "#222222" }}>
+                  8% maintenance markup
+                </strong>{" "}
+                ·{" "}
                 <strong style={{ color: "#222222" }}>no setup fee</strong> ·{" "}
                 <strong style={{ color: "#222222" }}>no vacancy fee</strong> ·{" "}
                 <strong style={{ color: "#222222" }}>free lease renewal</strong>
@@ -145,23 +306,85 @@ export default function PricingPage() {
       </section>
 
       {/* 90-Day Guarantee */}
-      <section className="py-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
+      <section
+        className="py-24 px-6 text-center"
+        style={{ backgroundColor: "#1F2F3A" }}
+      >
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>The 90-Day Happiness Guarantee</p>
-          <h2 className="text-4xl md:text-5xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
-            Not happy in 90 days?
-            <br />Walk away. No fees. No questions.
-          </h2>
-          <p className="text-base max-w-lg mx-auto leading-relaxed mb-4" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
-            If we don&apos;t deliver in your first 90 days — you cancel, we part ways, and you owe us nothing. No cancellation fees, no penalty, no awkward conversation.
+          <p
+            className="text-xs uppercase tracking-widest mb-4"
+            style={{
+              color: "rgba(250,248,245,0.55)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            The 90-Day Happiness Guarantee
           </p>
-          <p className="text-sm max-w-md mx-auto leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-            We offer this because we&apos;re confident we&apos;ll earn your trust long before 90 days is up.
+          <h2
+            className="text-4xl md:text-5xl font-light mb-6 leading-tight"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          >
+            <VerticalCutReveal
+              splitBy="words"
+              staggerDuration={0.09}
+              staggerFrom="first"
+              reverse={true}
+              containerClassName="justify-center flex-wrap"
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 36,
+                delay: 0.05,
+              }}
+            >
+              Not happy in 90 days?
+            </VerticalCutReveal>
+            <br />
+            <VerticalCutReveal
+              splitBy="words"
+              staggerDuration={0.09}
+              staggerFrom="first"
+              reverse={true}
+              containerClassName="justify-center flex-wrap"
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 36,
+                delay: 0.3,
+              }}
+            >
+              Walk away. No fees. No questions.
+            </VerticalCutReveal>
+          </h2>
+          <p
+            className="text-base max-w-lg mx-auto leading-relaxed mb-4"
+            style={{
+              color: "rgba(250,248,245,0.65)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            If we don&apos;t deliver in your first 90 days — you cancel, we
+            part ways, and you owe us nothing. No cancellation fees, no penalty,
+            no awkward conversation.
+          </p>
+          <p
+            className="text-sm max-w-md mx-auto leading-relaxed mb-10"
+            style={{
+              color: "rgba(250,248,245,0.5)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            We offer this because we&apos;re confident we&apos;ll earn your
+            trust long before 90 days is up.
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
-            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{
+              backgroundColor: "#8B2030",
+              color: "#FAF8F5",
+              fontFamily: "var(--font-dm-sans)",
+            }}
           >
             Start Risk-Free
           </Link>
@@ -172,50 +395,30 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Run the Numbers</p>
-            <h2 className="text-4xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+            <p
+              className="text-xs uppercase tracking-widest mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Run the Numbers
+            </p>
+            <h2
+              className="text-4xl font-light mb-4"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
               Passive actually costs less.
             </h2>
-            <p className="text-base mb-16 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-              On a $2,000/month rental, the difference between Managed and Passive is $140/month.
-              Free placement saves you $2,000 every vacancy. Do the math — Passive wins after one turnover.
+            <p
+              className="text-base mb-16 leading-relaxed"
+              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+            >
+              On a $2,000/month rental, the difference between Managed and
+              Passive is $140/month. Free placement saves you $2,000 every
+              vacancy. Do the math — Passive wins after one turnover.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.1}>
-            <div className="rounded-xl overflow-hidden border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
-              <div className="grid grid-cols-3">
-                <div className="px-6 py-4 text-left" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}>
-                  <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>On $2,000/mo rent</p>
-                </div>
-                <div className="px-6 py-4 text-center" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
-                  <p className="text-xs uppercase tracking-widest" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Managed 8%</p>
-                </div>
-                <div className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid #D8D2C8" }}>
-                  <p className="text-xs uppercase tracking-widest" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Passive 15%</p>
-                </div>
-
-                {[
-                  { label: "Monthly management fee", managed: "$160", passive: "$300" },
-                  { label: "Placement fee (per vacancy)", managed: "$2,000", passive: "Free" },
-                  { label: "Year 1 total (1 vacancy)", managed: "$3,920", passive: "$3,600" },
-                  { label: "You save", managed: "—", passive: "$320 in year 1" },
-                ].map((row, i) => (
-                  <>
-                    <div key={`label-${i}`} className="px-6 py-4 text-left" style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
-                      <p className="text-sm" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.label}</p>
-                    </div>
-                    <div key={`managed-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}>
-                      <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{row.managed}</p>
-                    </div>
-                    <div key={`passive-${i}`} className="px-6 py-4 text-center" style={{ backgroundColor: "#1F2F3A", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                      <p className="text-sm font-semibold" style={{ color: row.passive === "Free" || row.label === "You save" ? "#8B2030" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{row.passive}</p>
-                    </div>
-                  </>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
+          {/* Animated comparison table */}
+          <AnimatedPricingNumbers />
         </div>
       </section>
 
@@ -223,44 +426,92 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>The Real Cost of Self-Managing</p>
-            <h2 className="text-4xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+            <p
+              className="text-xs uppercase tracking-widest mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              The Real Cost of Self-Managing
+            </p>
+            <h2
+              className="text-4xl font-light mb-6"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
               Every month you wait costs more than you think.
             </h2>
-            <p className="text-base mb-14 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
-              Most landlords underestimate what self-managing actually costs them.
-              It&apos;s not just time — it&apos;s the markups you&apos;re paying, the rent you&apos;re leaving on the table,
-              and the vacancy days that quietly bleed your returns.
+            <p
+              className="text-base mb-14 leading-relaxed"
+              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Most landlords underestimate what self-managing actually costs
+              them. It&apos;s not just time — it&apos;s the markups you&apos;re
+              paying, the rent you&apos;re leaving on the table, and the vacancy
+              days that quietly bleed your returns.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.1}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              {[
-                {
-                  label: "The Vacancy Drain",
-                  amount: "$2,000+",
-                  detail: "Every month your unit sits empty. Our average vacancy is under 18 days.",
-                },
-                {
-                  label: "The Markup Tax",
-                  amount: "$50–200",
-                  detail: "Extra per repair when your PM charges 10–20% on every contractor invoice. We charge a flat 8%.",
-                },
-                {
-                  label: "Your Time",
-                  amount: "8 hrs/mo",
-                  detail: "Average hours a landlord spends managing one property. What's your hour worth?",
-                },
-              ].map((item, i) => (
-                <div key={i} className="bg-white border rounded-xl p-6" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
-                  <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{item.label}</p>
-                  <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{item.amount}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            {[
+              {
+                label: "The Vacancy Drain",
+                amount: "$2,000+",
+                detail:
+                  "Every month your unit sits empty. Our average vacancy is under 18 days.",
+                delay: 0,
+              },
+              {
+                label: "The Markup Tax",
+                amount: "$50–200",
+                detail:
+                  "Extra per repair when your PM charges 10–20% on every contractor invoice. We charge a flat 8%.",
+                delay: 0.1,
+              },
+              {
+                label: "Your Time",
+                amount: "8 hrs/mo",
+                detail:
+                  "Average hours a landlord spends managing one property. What's your hour worth?",
+                delay: 0.2,
+              },
+            ].map((item, i) => (
+              <FadeIn key={i} delay={item.delay}>
+                <div
+                  className="bg-white border rounded-xl p-6"
+                  style={{
+                    borderColor: "#D8D2C8",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <p
+                    className="text-xs uppercase tracking-widest mb-2"
+                    style={{
+                      color: "#999999",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
+                    {item.label}
+                  </p>
+                  <p
+                    className="text-4xl font-light mb-3"
+                    style={{
+                      color: "#1F2F3A",
+                      fontFamily: "var(--font-cormorant)",
+                    }}
+                  >
+                    {item.amount}
+                  </p>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{
+                      color: "#333333",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
+                    {item.detail}
+                  </p>
                 </div>
-              ))}
-            </div>
-          </FadeIn>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -268,30 +519,102 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>What Others Charge</p>
-            <h2 className="text-4xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+            <p
+              className="text-xs uppercase tracking-widest text-center mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              What Others Charge
+            </p>
+            <h2
+              className="text-4xl font-light text-center mb-4"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
               Fees that most landlords don&apos;t know they&apos;re paying.
             </h2>
-            <p className="text-sm text-center mb-14" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p
+              className="text-sm text-center mb-14"
+              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+            >
               Every one of these is $0 with Prospera.
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="overflow-hidden rounded-xl border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+            <div
+              className="overflow-hidden rounded-xl border"
+              style={{
+                borderColor: "#D8D2C8",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+              }}
+            >
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ backgroundColor: "#1F2F3A" }}>
-                    <th className="text-left px-6 py-4 font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Hidden Fee</th>
-                    <th className="text-center px-6 py-4 font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Prospera</th>
-                    <th className="text-center px-6 py-4 font-medium" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>Typical PM</th>
+                    <th
+                      className="text-left px-6 py-4 font-medium"
+                      style={{
+                        color: "#FAF8F5",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      Hidden Fee
+                    </th>
+                    <th
+                      className="text-center px-6 py-4 font-semibold"
+                      style={{
+                        color: "#8B2030",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      Prospera
+                    </th>
+                    <th
+                      className="text-center px-6 py-4 font-medium"
+                      style={{
+                        color: "rgba(250,248,245,0.6)",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      Typical PM
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {comparison.map((row, i) => (
-                    <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
-                      <td className="px-6 py-4" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>{row.item}</td>
-                      <td className="px-6 py-4 text-center font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{row.us}</td>
-                      <td className="px-6 py-4 text-center" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{row.them}</td>
+                    <tr
+                      key={i}
+                      style={{
+                        backgroundColor:
+                          i % 2 === 0 ? "#FFFFFF" : "#F7F5F2",
+                        borderTop: "1px solid #D8D2C8",
+                      }}
+                    >
+                      <td
+                        className="px-6 py-4"
+                        style={{
+                          color: "#222222",
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
+                        {row.item}
+                      </td>
+                      <td
+                        className="px-6 py-4 text-center font-semibold"
+                        style={{
+                          color: "#8B2030",
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
+                        {row.us}
+                      </td>
+                      <td
+                        className="px-6 py-4 text-center"
+                        style={{
+                          color: "#999999",
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
+                        {row.them}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -305,30 +628,64 @@ export default function PricingPage() {
       <section className="py-24 px-6" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Common Questions</p>
-            <h2 className="text-4xl font-light text-center mb-14" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Pricing FAQ</h2>
+            <p
+              className="text-xs uppercase tracking-widest text-center mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Common Questions
+            </p>
+            <h2
+              className="text-4xl font-light text-center mb-14"
+              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+            >
+              Pricing FAQ
+            </h2>
           </FadeIn>
           <FAQAccordion items={faqs} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
+      <section
+        className="py-24 px-6 text-center"
+        style={{ backgroundColor: "#1F2F3A" }}
+      >
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+          <p
+            className="text-xs uppercase tracking-widest mb-4"
+            style={{
+              color: "rgba(250,248,245,0.55)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
             Only 3 spots available this month
           </p>
-          <h2 className="text-4xl md:text-5xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+          <h2
+            className="text-4xl md:text-5xl font-light mb-5"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+          >
             Ready to stop managing
-            <br />and start earning?
+            <br />
+            and start earning?
           </h2>
-          <p className="text-base mb-10 max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
-            Free 15-minute call. No pressure. Just an honest conversation about your property and what it could be earning.
+          <p
+            className="text-base mb-10 max-w-md mx-auto leading-relaxed"
+            style={{
+              color: "rgba(250,248,245,0.65)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            Free 15-minute call. No pressure. Just an honest conversation about
+            your property and what it could be earning.
           </p>
           <Link
             href="/contact"
             className="inline-block px-10 py-4 text-sm uppercase tracking-widest rounded-xl hover:opacity-80 transition-opacity"
-            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            style={{
+              backgroundColor: "#8B2030",
+              color: "#FAF8F5",
+              fontFamily: "var(--font-dm-sans)",
+            }}
           >
             Book Your Free Call
           </Link>
@@ -336,7 +693,10 @@ export default function PricingPage() {
       </section>
 
       {/* Blog nudges */}
-      <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+      <section
+        className="py-12 px-5 sm:px-8"
+        style={{ backgroundColor: "#FFFFFF" }}
+      >
         <div className="max-w-3xl mx-auto space-y-4">
           <BlogNudge
             hook="Is what you're paying actually normal?"
