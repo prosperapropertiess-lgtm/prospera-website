@@ -134,53 +134,56 @@ const comparisons = [
 
 function PainCard({ moment, index }: { moment: typeof painMoments[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.23, 1, 0.32, 1] }}
-      className="relative border-b last:border-b-0 group"
-      style={{ borderColor: "rgba(250,248,245,0.06)" }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.23, 1, 0.32, 1] }}
     >
-      <div className="px-5 sm:px-10 py-10 sm:py-12 flex flex-col sm:flex-row gap-6 sm:gap-12 items-start">
-        {/* Number */}
+      <motion.div
+        whileHover={{ y: -2 }}
+        transition={{ duration: 0.2 }}
+        className="relative h-full rounded-2xl p-7 flex flex-col gap-4 overflow-hidden"
+        style={{
+          backgroundColor: "#FFFFFF",
+          border: "1px solid #E8E2DA",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+          borderLeft: moment.weight === "high" ? "3px solid #8B2030" : "1px solid #E8E2DA",
+        }}
+      >
+        {/* Large background number */}
         <span
-          className="text-5xl sm:text-6xl font-light leading-none flex-shrink-0 transition-colors duration-300"
-          style={{
-            color: moment.weight === "high" ? "rgba(139,32,48,0.35)" : "rgba(250,248,245,0.08)",
-            fontFamily: "var(--font-cormorant)",
-          }}
+          className="absolute top-4 right-5 text-7xl font-bold leading-none select-none pointer-events-none"
+          style={{ color: "rgba(31,47,58,0.04)", fontFamily: "var(--font-dm-sans)" }}
         >
           {moment.num}
         </span>
 
-        {/* Content */}
-        <div className="flex-1">
-          <h3
-            className="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 leading-snug group-hover:text-white transition-colors duration-300"
-            style={{ color: "rgba(250,248,245,0.9)", fontFamily: "var(--font-dm-sans)" }}
-          >
-            {moment.headline}
-          </h3>
-          <p
-            className="text-sm sm:text-base leading-relaxed"
-            style={{ color: "rgba(250,248,245,0.42)", fontFamily: "var(--font-dm-sans)" }}
-          >
-            {moment.sub}
-          </p>
-        </div>
+        {/* Small number label */}
+        <span
+          className="text-xs font-semibold uppercase tracking-widest"
+          style={{ color: moment.weight === "high" ? "#8B2030" : "#C5BEB4", fontFamily: "var(--font-dm-sans)" }}
+        >
+          {moment.num}
+        </span>
 
-        {/* High weight indicator */}
-        {moment.weight === "high" && (
-          <div
-            className="flex-shrink-0 mt-1 hidden sm:block w-1.5 h-1.5 rounded-full self-start mt-3"
-            style={{ backgroundColor: "#8B2030" }}
-          />
-        )}
-      </div>
+        <h3
+          className="text-lg sm:text-xl font-bold leading-snug"
+          style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+        >
+          {moment.headline}
+        </h3>
+
+        <p
+          className="text-sm leading-relaxed"
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+        >
+          {moment.sub}
+        </p>
+      </motion.div>
     </motion.div>
   );
 }
@@ -359,32 +362,31 @@ export default function PlatformPage() {
       </section>
 
       {/* ── Pain — "Count how many of these you've lived." ────────────────────── */}
-      <section style={{ backgroundColor: "#0D1820" }}>
-        {/* Header */}
-        <div className="px-5 sm:px-10 py-16 border-b" style={{ borderColor: "rgba(250,248,245,0.06)" }}>
-          <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.3)", fontFamily: "var(--font-dm-sans)" }}>
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
+        <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               Be honest
             </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              How many of these<br />hit home?
+            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+              How many of these hit home?
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-base text-center mb-14 leading-relaxed max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               If you manage 1–5 properties in Ontario, at least 5 of these are your Tuesday.
             </p>
+          </FadeIn>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {painMoments.map((moment, i) => (
+              <PainCard key={i} moment={moment} index={i} />
+            ))}
           </div>
-        </div>
 
-        {/* Pain cards */}
-        {painMoments.map((moment, i) => (
-          <PainCard key={i} moment={moment} index={i} />
-        ))}
-
-        {/* Closer */}
-        <div className="px-5 sm:px-10 py-14 border-t" style={{ borderColor: "rgba(250,248,245,0.06)" }}>
-          <p className="text-2xl sm:text-3xl font-light italic" style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}>
-            That&apos;s exactly why this exists.
-          </p>
+          <FadeIn delay={0.5}>
+            <p className="text-center mt-12 text-2xl sm:text-3xl font-light italic" style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}>
+              That&apos;s exactly why this exists.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
