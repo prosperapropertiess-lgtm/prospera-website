@@ -171,15 +171,15 @@ function PainCard({ moment, index }: { moment: typeof painMoments[0]; index: num
         </span>
 
         <h3
-          className="text-lg sm:text-xl font-bold leading-snug"
-          style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+          className="text-2xl sm:text-3xl font-light leading-snug"
+          style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
         >
           {moment.headline}
         </h3>
 
         <p
           className="text-sm leading-relaxed"
-          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#777777", fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}
         >
           {moment.sub}
         </p>
@@ -368,7 +368,7 @@ export default function PlatformPage() {
             <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
               Be honest
             </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+            <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               How many of these hit home?
             </h2>
             <p className="text-base text-center mb-14 leading-relaxed max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
