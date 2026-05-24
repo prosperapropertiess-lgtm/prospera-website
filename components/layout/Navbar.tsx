@@ -10,6 +10,7 @@ const navLinks = [
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
   { label: "Pricing", href: "/pricing" },
+  { label: "The App", href: "/platform", highlight: true },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -18,8 +19,6 @@ const navLinks = [
 const mobileSecondaryLinks = [
   { label: "Resources", href: "/resources" },
 ];
-
-const BUILDIUM_URL = "https://prosperaproperties.buildiumapp.com";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,10 +39,11 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
           backgroundColor: "#1F2F3A",
           boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.12)" : "none",
+          transition: "box-shadow 250ms cubic-bezier(0.23,1,0.32,1)",
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
@@ -74,7 +74,11 @@ export default function Navbar() {
                   href={link.href}
                   className="text-sm font-medium tracking-wide transition-colors duration-200 hover:text-white"
                   style={{
-                    color: isActive ? "#FFFFFF" : "rgba(250,248,245,0.75)",
+                    color: link.highlight
+                      ? "#8B2030"
+                      : isActive
+                        ? "#FFFFFF"
+                        : "rgba(250,248,245,0.75)",
                     fontFamily: "var(--font-dm-sans)",
                   }}
                 >
@@ -84,30 +88,15 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop login buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={BUILDIUM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 rounded"
-              style={{
-                border: "1px solid rgba(250,248,245,0.25)",
-                color: "rgba(250,248,245,0.8)",
-                fontFamily: "var(--font-dm-sans)",
-              }}
-            >
-              Landlord Login
-            </a>
-            <a
-              href={BUILDIUM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
+          {/* Contact CTA */}
+          <div className="hidden lg:flex items-center">
+            <Link
+              href="/contact"
+              className="btn-primary px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              Tenant Login
-            </a>
+              Get a Free Quote
+            </Link>
           </div>
 
           {/* Hamburger */}
@@ -137,7 +126,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 lg:hidden transition-all duration-300"
+        className="fixed inset-0 z-40 flex flex-col pt-24 px-8 pb-8 lg:hidden"
         style={{
           backgroundColor: "#1F2F3A",
           opacity: menuOpen ? 1 : 0,
@@ -179,26 +168,14 @@ export default function Navbar() {
         </nav>
 
         <div className="flex flex-col gap-3 mt-8">
-          <a
-            href={BUILDIUM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
-            style={{ border: "1px solid rgba(250,248,245,0.2)", color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
-            onClick={() => setMenuOpen(false)}
-          >
-            Landlord Login
-          </a>
-          <a
-            href={BUILDIUM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
+          <Link
+            href="/contact"
+            className="btn-primary w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             onClick={() => setMenuOpen(false)}
           >
-            Tenant Login
-          </a>
+            Get a Free Quote
+          </Link>
         </div>
       </div>
     </>
