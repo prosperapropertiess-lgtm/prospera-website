@@ -266,7 +266,7 @@ export default function PlatformPage() {
               containerClassName="flex-wrap"
               transition={{ type: "spring", stiffness: 240, damping: 34, delay: 0.1 }}
             >
-              You Bought a Rental.
+              You Bought Passive Income.
             </VerticalCutReveal>
             <br />
             <span style={{ color: "rgba(250,248,245,0.38)" }}>

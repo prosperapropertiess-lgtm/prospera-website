@@ -541,8 +541,8 @@ function PlatformTeaser() {
               Introducing · Prospera Platform
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              Own rentals.<br />
-              <span style={{ color: "rgba(250,248,245,0.3)" }}>Don&apos;t manage them.</span>
+              You bought passive income.<br />
+              <span style={{ color: "rgba(250,248,245,0.3)" }}>Not a second job.</span>
             </h2>
             <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
               We&apos;re building the app that Ontario landlords with 1–5 properties have
