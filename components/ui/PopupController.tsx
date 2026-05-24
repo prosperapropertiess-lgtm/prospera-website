@@ -5,7 +5,7 @@ import NewsletterPopup from "./NewsletterPopup";
 
 const TENANT_PATHS = ["/listings", "/tenants"];
 const LANDLORD_PATHS = ["/landlords", "/pricing", "/about", "/areas", "/blog"];
-const EXCLUDED_PATHS = ["/contact", "/api", "/rent-analysis", "/admin"];
+const EXCLUDED_PATHS = ["/contact", "/api", "/rent-analysis", "/admin", "/newsletter", "/platform"];
 
 export default function PopupController() {
   const pathname = usePathname();
