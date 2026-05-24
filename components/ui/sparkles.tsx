@@ -1,101 +1,82 @@
 "use client";
 
-import { useCallback, useId } from "react";
-import { Particles, ParticlesProvider } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
-import type { Engine } from "@tsparticles/engine";
+// Sparkles component — lightweight canvas implementation (no @tsparticles dependency)
+import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface SparklesProps {
   className?: string;
-  size?: number;
-  minSize?: number | null;
   density?: number;
   speed?: number;
-  minSpeed?: number | null;
-  opacity?: number;
-  opacitySpeed?: number;
-  minOpacity?: number | null;
   color?: string;
-  background?: string;
   direction?: string;
-  options?: Record<string, unknown>;
+  size?: number;
+  opacity?: number;
+  [key: string]: unknown;
 }
 
-function SparklesInner({
+export function Sparkles({
   className,
-  size = 1,
-  minSize = null,
   density = 800,
   speed = 1,
-  minSpeed = null,
-  opacity = 1,
-  opacitySpeed = 3,
-  minOpacity = null,
   color = "#FFFFFF",
-  background = "transparent",
-  options = {},
+  size = 1,
+  opacity = 1,
 }: SparklesProps) {
-  const id = useId();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const defaultOptions = {
-    background: {
-      color: { value: background },
-    },
-    fullScreen: {
-      enable: false,
-      zIndex: 1,
-    },
-    fpsLimit: 120,
-    particles: {
-      color: { value: color },
-      move: {
-        enable: true,
-        direction: "none",
-        speed: {
-          min: minSpeed ?? speed / 10,
-          max: speed,
-        },
-        straight: false,
-      },
-      number: { value: density },
-      opacity: {
-        value: {
-          min: minOpacity ?? opacity / 10,
-          max: opacity,
-        },
-        animation: {
-          enable: true,
-          sync: false,
-          speed: opacitySpeed,
-        },
-      },
-      size: {
-        value: {
-          min: minSize ?? size / 2.5,
-          max: size,
-        },
-      },
-    },
-    detectRetina: true,
-  };
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const count = Math.floor(density / 10);
+    const particles: { x: number; y: number; a: number; da: number; r: number }[] = [];
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        a: Math.random(),
+        da: (Math.random() * 0.02 + 0.005) * speed,
+        r: Math.random() * size + 0.5,
+      });
+    }
+
+    let raf: number;
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.a += p.da;
+        if (p.a > 1 || p.a < 0) p.da *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = p.a * opacity;
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, [color, density, opacity, size, speed]);
 
   return (
-    <Particles
-      id={id}
-      options={{ ...defaultOptions, ...options } as Parameters<typeof Particles>[0]["options"]}
-      className={className}
+    <canvas
+      ref={canvasRef}
+      className={cn("absolute inset-0 w-full h-full", className)}
     />
-  );
-}
-
-export function Sparkles(props: SparklesProps) {
-  const init = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
-  }, []);
-
-  return (
-    <ParticlesProvider init={init}>
-      <SparklesInner {...props} />
-    </ParticlesProvider>
   );
 }
