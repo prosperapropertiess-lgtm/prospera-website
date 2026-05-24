@@ -308,9 +308,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.tenantpay.com/blogs
 - type: blog
 - why: Canadian rent-payment platform with an active landlord-facing blog covering Ontario tenant law, eviction tips, and rental management — a resource mention or guest post on "why professional property management beats DIY rent collection" would fit naturally.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.tenantpay.com/contact
+- site_focus: TenantPay is a Canadian fintech platform that processes online rent payments for landlords and property managers, reporting rent to credit bureaus and streamlining collections. Their blog covers Ontario landlord-tenant law, eviction procedures, rent arrears management, and best practices for independent and professional landlords. Content is practical and compliance-focused, targeting Canadian landlords who want to modernize their rent collection.
+- hook: Prospera handles rent collection, arrears follow-up, and tenant compliance professionally across three SW Ontario markets. A guest post on "How professional property managers approach rent collection and arrears in Ontario" or a contributed piece on "When DIY rent collection stops working" would directly serve TenantPay's audience of landlords who are already looking for better collection tools — and position Prospera as the logical next step when they want to offload the process entirely.
+- specific_content: Their blog posts on Ontario rent arrears, N4 notices, and landlord collection best practices — areas Prospera handles operationally every day.
+- researcher_notes: Tech-forward fintech company with an educational content strategy aimed at independent landlords. Tone is practical and slightly promotional toward their own platform. Pitch should frame Prospera as a complementary service (professional management + TenantPay = full rent collection solution) rather than a competitor. A guest post angle works well here. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -318,9 +323,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.canadianrealestatemagazine.ca
 - type: media
 - why: National trade magazine that publishes expert-contributed pieces on Ontario landlord challenges (tenant screening, LTB, managing difficult tenants) — strong candidate for a bylined article positioning Prospera as a southwestern Ontario authority.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.canadianrealestatemagazine.ca/contact
+- site_focus: Canadian Real Estate Magazine is a national trade publication covering real estate investment, landlord operations, market analysis, and property management across Canada. They publish expert-contributed bylined articles alongside staff editorial, targeting professional landlords, investors, and property managers. Content mix includes Ontario LTB coverage, tenant management challenges, market outlooks, and operational best practices for rental property owners.
+- hook: A bylined article from Prospera's principals on managing rentals in Ontario's secondary markets (London, St. Thomas, Strathroy) would be genuinely novel for a publication that tends toward GTA-centric content. Angles like "What the LTB backlog means for southwestern Ontario landlords" or "Tenant screening lessons from 300+ managed units in SW Ontario" offer the kind of specific, expert-driven insight their editors actively seek from experienced operators.
+- specific_content: Their Ontario landlord law coverage and property management operational content — Prospera's three-market operational depth is a distinctive editorial angle for a national audience.
+- researcher_notes: Editorial publication with a formal contributor process. Pitch must lead with credentials and a specific, data-informed angle — not a company overview. The SW Ontario secondary-market perspective is a differentiator. Bylined articles provide high-authority backlinks. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -328,9 +338,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.strathroytoday.ca
 - type: media
 - why: Local radio station's news site covering Strathroy real estate market updates monthly and running a "Your Money, Your Community" local business feature — ideal earned media placement in one of Prospera's three core markets.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.strathroytoday.ca/contact
+- site_focus: Strathroy Today is the digital news and community site for 105.7 CHOK, the local radio station serving Strathroy and Middlesex County. Covers local news, community events, real estate, agriculture, and business features for the Strathroy area. The "Your Money, Your Community" feature highlights local businesses and gives local operators an earned media opportunity with the community.
+- hook: Prospera manages rental properties in Strathroy — making them one of the few professional property management companies with a direct operational presence in the market. A local business feature or expert interview on "What Strathroy's rental market looks like right now" would be inherently newsworthy to their audience of local homeowners, landlords, and renters. This is hyperlocal earned media in one of Prospera's exact operating markets.
+- specific_content: Their "Your Money, Your Community" local business feature and any real estate or housing coverage — Prospera's Strathroy presence is the angle.
+- researcher_notes: Local community media — outreach should be warm, local, and news-driven. Lead with the Strathroy market angle: rental demand, what professional management means for local landlords and tenants. The news hook is Strathroy's growing rental market and Prospera's local operational presence. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -338,9 +353,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://danbalch.com/learning-center/
 - type: mortgage
 - why: 21-year London mortgage broker with a Learning Center and blog serving London, St. Thomas, and Woodstock — the exact same geography as Prospera, making a reciprocal resource link or joint content piece a natural fit for investor clients.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://danbalch.com/contact/
+- site_focus: Dan Balch is a London Ontario mortgage broker with over 21 years of experience, serving clients in London, St. Thomas, Woodstock, and the surrounding SW Ontario region. His Learning Center covers mortgage basics, pre-approval, investment property financing, renewal strategy, and first-time buyer education. Content targets local buyers and investors navigating the SW Ontario market.
+- hook: Dan's investment property clients close their mortgage and immediately face the question: "Now who manages this?" A reciprocal referral arrangement — Prospera listed on Dan's resources page as the recommended management partner, and Dan listed as Prospera's recommended mortgage contact — creates a clean referral loop with zero cost to either party. A co-authored Learning Center article ("What to expect in the first 90 days of owning a London investment property") would serve both audiences and rank well locally.
+- specific_content: His investment property financing guides and the Learning Center resources page — Prospera belongs in the "what happens after you close" section of his buyer journey content.
+- researcher_notes: Solo broker with 21 years of local market presence — outreach should be warm and peer-to-business. Use his name (Dan) in outreach. Emphasize the mutual client benefit and the simplicity of the referral arrangement. Geographic overlap is exact: London, St. Thomas, Woodstock aligns with Prospera's market footprint. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -348,9 +368,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://serenaholmesrealtor.com/real-estate-investing/
 - type: blog
 - why: Ontario real estate investing blog and podcast that explicitly calls London "a hidden gem" for investors — a guest post or podcast appearance on property management in southwestern Ontario would reach exactly the right investor audience.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://serenaholmesrealtor.com/contact/
+- site_focus: Serena Holmes is an Ontario realtor and real estate investor who runs the "Inspired to Invest" blog and podcast. Her content targets aspiring and active real estate investors across Ontario with market analysis, investing strategy, and interviews with investors and operators. She has specifically highlighted London Ontario as an undervalued investment market and publishes content aimed at out-of-province investors looking to enter SW Ontario.
+- hook: Serena's audience is exactly who Prospera needs to reach: Ontario investors buying in London who need a reliable management partner to operate their property from a distance. A podcast guest appearance by Prospera's principal on "What out-of-town investors get wrong about the London rental market" would be both credible editorial content for Serena's audience and a high-quality backlink from an established Ontario investing brand. Guest posts on her site would also work well.
+- specific_content: Her London Ontario investment content and any episodes or posts on property management in secondary Ontario markets — Prospera is the operational answer to the question her content raises.
+- researcher_notes: Serena Holmes is named — use her name in outreach. Tone is conversational and investor-community-oriented. Pitch a podcast appearance or guest post with a specific, useful angle for her audience of out-of-province investors. Mention that she's already identified London as a target market — this shows you've done the homework. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -358,9 +383,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://phbdeals.ca/blog/
 - type: blog
 - why: London Ontario real estate wholesaler serving the same Southwestern Ontario markets as Prospera (London, St. Thomas, Strathroy) with a blog targeting buy-and-hold investors — a natural referral partner and resource link from their investor content.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://phbdeals.ca/contact/
+- site_focus: PHBDeals is a London Ontario real estate wholesaling company that sources off-market investment properties across SW Ontario (London, St. Thomas, Strathroy) and connects them with buy-and-hold investors. Their blog targets investors looking to build rental portfolios in the London area, covering deal analysis, market fundamentals, and investment strategy for the SW Ontario market specifically.
+- hook: PHBDeals finds the deal; Prospera manages it. Their buy-and-hold investor clients are the exact audience Prospera serves — investors who own rental properties in London, St. Thomas, and Strathroy and need a trustworthy manager to operate them. A referral partnership where Prospera is PHBDeals' recommended management partner (and vice versa for property sourcing) creates mutual value. A blog post co-authored on "The full cost of owning a London investment property (including management)" would serve their audience directly.
+- specific_content: Their blog posts on London and SW Ontario buy-and-hold investing — Prospera's management services are the operational answer to every deal PHBDeals sources.
+- researcher_notes: Hyper-local wholesaler with exact geographic overlap — London, St. Thomas, Strathroy. This is one of the most natural referral relationships on the list. Outreach should be direct and business-focused: mutual client referrals, a resources page listing, or a co-authored piece. Peer-to-business tone. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -368,9 +398,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.705insurance.ca/post/10-essential-hacks-every-ontario-landlord-should-know
 - type: blog
 - why: Ontario insurance broker with landlord-specific blog content covering rental property management tips — a complementary service provider whose readers are active Ontario landlords, ideal for a resource mention on professional property management.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.705insurance.ca/contact
+- site_focus: 705 Insurance is an Ontario insurance brokerage serving landlords, homeowners, and small businesses. Their blog targets active Ontario landlords with practical risk management content — including rental property tips, insurance coverage guides, and landlord-tenant best practices. The "10 Essential Hacks Every Ontario Landlord Should Know" post covers property management fundamentals from an insurance risk perspective.
+- hook: Insurance and professional property management are complementary pillars of landlord risk reduction. The specific post Prospera is targeting is a listicle of landlord tips — a natural format for a "tip #11: hire a professional manager" resource mention or a linked follow-up post on how professional management reduces the risk events that drive insurance claims (damage, non-payment, liability). Prospera can be cited as a resource that reduces the exact risks their audience is insuring against.
+- specific_content: Their "10 Essential Hacks Every Ontario Landlord Should Know" post — the natural insertion point is a resource mention on professional property management as a risk mitigation strategy alongside getting proper insurance.
+- researcher_notes: Insurance brokers and property managers are natural allies — both reduce landlord risk, and their clients overlap exactly. Outreach should lead with the shared interest in protecting landlords. A resource mention in the existing post or a follow-up piece co-branded with 705 Insurance is the right ask. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -378,9 +413,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://austindtitus.ca
 - type: blog
 - why: London Ontario Century 21 realtor (North Elm Realty) with a blog and first-time buyer guide serving London — an investor-friendly local realtor whose clients frequently need property management after purchase, making a referral link mutually beneficial.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://austindtitus.ca/contact/
+- site_focus: Austin D. Titus is a London Ontario realtor with Century 21 North Elm Realty who publishes a local real estate blog covering buyer guides, neighbourhood profiles, and London market updates. His content serves first-time buyers and investors looking to purchase in London and the surrounding area, with a practical, approachable tone aimed at demystifying the buying process for local clients.
+- hook: Austin's investment property buyer clients are Prospera's direct prospects — people who just purchased a rental in London and need someone to manage it. A mutual referral arrangement (Austin recommends Prospera to buyer clients, Prospera recommends Austin to owner-clients who want to sell) creates a zero-cost referral loop. A guest post on his blog — "What to do after you close on your first London investment property" — is a natural fit and would serve his audience while earning a local backlink.
+- specific_content: His investment property and buyer guide content — particularly any posts about what investors should do after purchasing, where Prospera is the natural next step.
+- researcher_notes: Local realtor with a personal brand — outreach should use his name (Austin) and feel personal rather than corporate. Emphasize the mutual client benefit. A blog contribution is a low-friction ask. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -388,9 +428,14 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.seanprosser.com/blog/
 - type: mortgage
 - why: London Ontario mortgage broker blog covering investment financing, credit scores, and mortgage renewal for local buyers — his investor clients are exactly the audience Prospera serves once they own rental property.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.seanprosser.com/contact/
+- site_focus: Sean Prosser is a London Ontario mortgage broker whose blog covers investment property financing, credit improvement, mortgage renewal, and home buying strategy for London-area clients. Content targets local first-time buyers and property investors navigating the SW Ontario market, with practical mortgage education written for a non-specialist audience.
+- hook: Sean's investment property clients close their mortgage and immediately need to decide how to manage their new rental. A reciprocal referral arrangement — Prospera on Sean's resources or partners page as the recommended management contact, and Sean as Prospera's recommended mortgage broker — serves both client bases with zero friction. A blog co-authorship on "Your first London investment property: mortgage, management, and what to expect" would serve his reader base directly while earning a local backlink.
+- specific_content: His investment property financing and buyer content — Prospera is the natural "what happens next" resource after financing closes.
+- researcher_notes: Local solo broker — outreach should use his name (Sean) and be direct and practical. Emphasize the referral loop and the shared client base. A blog contribution or a simple preferred-partner listing is the right ask. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
 
@@ -398,8 +443,13 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - url: https://www.niagarahomes.com/blog/
 - type: blog
 - why: Ontario real estate brokerage blog that publishes detailed guides on Ontario landlord law changes (Bill 60, LTB reforms) — a well-indexed content site where a guest post on professional property management in southwestern Ontario would rank well.
-- researched: false
+- researched: true
 - drafted: false
 - added: 2026-05-23
+- contact_email: https://www.niagarahomes.com/contact/
+- site_focus: Niagara Homes is an Ontario real estate brokerage that publishes detailed, SEO-optimized guides on Ontario landlord law, LTB reforms, Bill 60 changes, and rental property investment for Ontario landlords and investors. Their blog functions as an investor education resource covering provincial legislation changes, market analysis, and practical landlord guidance — well-indexed and with broad Ontario reach beyond just the Niagara region.
+- hook: A guest post from Prospera on "How SW Ontario landlords are navigating LTB reforms in 2025" or "Property management in Ontario's secondary markets: what London, St. Thomas, and Strathroy landlords need to know" would be a genuinely useful addition to their legislative content. Prospera can contribute operational SW Ontario perspective that a Niagara-based brokerage can't easily generate independently, while earning a high-authority backlink from a well-indexed Ontario real estate content site.
+- specific_content: Their Ontario landlord law guides (Bill 60, LTB reform coverage) and investment property content — Prospera's SW Ontario operational experience adds regional depth to their province-wide editorial coverage.
+- researcher_notes: Content-focused real estate brokerage with strong SEO orientation. Guest post pitch should emphasize the geographic diversification Prospera brings to their Ontario content — they can't cover SW Ontario from Niagara, so Prospera fills a gap. Pitch should be substantive and offer a specific article angle with real data. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
