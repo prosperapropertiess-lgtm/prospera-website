@@ -10,7 +10,6 @@ const navLinks = [
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
   { label: "Pricing", href: "/pricing" },
-  { label: "The App", href: "/platform", highlight: true },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -74,11 +73,9 @@ export default function Navbar() {
                   href={link.href}
                   className="text-sm font-medium tracking-wide transition-colors duration-200 hover:text-white"
                   style={{
-                    color: link.highlight
-                      ? "#8B2030"
-                      : isActive
-                        ? "#FFFFFF"
-                        : "rgba(250,248,245,0.75)",
+                    color: isActive
+                      ? "#FFFFFF"
+                      : "rgba(250,248,245,0.75)",
                     fontFamily: "var(--font-dm-sans)",
                   }}
                 >
@@ -88,8 +85,19 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Contact CTA */}
-          <div className="hidden lg:flex items-center">
+          {/* CTAs */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/platform"
+              className="relative flex items-center gap-2 px-4 py-2 rounded text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"
+              style={{ backgroundColor: "rgba(139,32,48,0.12)", border: "1px solid rgba(139,32,48,0.3)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full animate-pulse"
+                style={{ backgroundColor: "#8B2030" }}
+              />
+              The App
+            </Link>
             <Link
               href="/contact"
               className="btn-primary px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded"
@@ -168,6 +176,15 @@ export default function Navbar() {
         </nav>
 
         <div className="flex flex-col gap-3 mt-8">
+          <Link
+            href="/platform"
+            className="w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded flex items-center justify-center gap-2"
+            style={{ backgroundColor: "rgba(139,32,48,0.12)", border: "1px solid rgba(139,32,48,0.3)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#8B2030" }} />
+            Join the Waitlist — The App
+          </Link>
           <Link
             href="/contact"
             className="btn-primary w-full py-3 text-center text-sm font-semibold uppercase tracking-widest rounded"

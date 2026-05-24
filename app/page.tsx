@@ -47,9 +47,9 @@ function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 1, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+          transition={{ duration: 0.55, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
           className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
@@ -59,9 +59,9 @@ function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.38, ease: [0.23, 1, 0.32, 1] }}
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
           style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
         >
@@ -73,12 +73,12 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
+          transition={{ duration: 0.5, delay: 0.52, ease: [0.23, 1, 0.32, 1] }}
           className="flex flex-col items-center justify-center gap-3"
         >
           <Link
             href="/rent-analysis"
-            className="px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-80 rounded"
+            className="btn-primary px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded"
             style={{
               backgroundColor: "#8B2030",
               color: "#FAF8F5",
@@ -193,11 +193,9 @@ function PainPoints() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pains.map((pain, i) => (
             <FadeIn key={i} delay={i * 0.08}>
-              <motion.div
-                className="p-7 border rounded-xl"
+              <div
+                className="pain-card p-7 border rounded-xl"
                 style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #8B2030", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.15 }}
               >
                 <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.label}
@@ -205,7 +203,7 @@ function PainPoints() {
                 <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.sub}
                 </p>
-              </motion.div>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -260,12 +258,9 @@ function FeatureCards() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {features.map((f, i) => (
             <FadeIn key={f.title} delay={i * 0.08}>
-              <motion.div
-                className="bg-white p-8 border h-full cursor-default rounded-xl"
+              <div
+                className="feature-card bg-white p-8 border h-full cursor-default rounded-xl"
                 style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-                whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2 }}
               >
                 <span className="block text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#D8D2C8", fontFamily: "var(--font-dm-sans)" }}>
                   {f.num}
@@ -282,7 +277,7 @@ function FeatureCards() {
                 >
                   {f.desc}
                 </p>
-              </motion.div>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -525,6 +520,88 @@ function Testimonials() {
   );
 }
 
+// ── Platform Teaser ───────────────────────────────────────────────────────────
+
+function PlatformTeaser() {
+  const items = [
+    "Rent collected automatically — no texts, no chasing",
+    "N4 forms generated the moment rent is missed",
+    "AI-triaged maintenance without the 11pm calls",
+    "Every dollar tracked. Tax time handled.",
+    "Tenant portal so they stop texting your personal number",
+  ];
+
+  return (
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1820" }}>
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-14 lg:gap-20 items-start">
+          {/* Left */}
+          <div className="flex-1">
+            <p className="text-xs uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
+              Introducing · Prospera Platform
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+              Own rentals.<br />
+              <span style={{ color: "rgba(250,248,245,0.3)" }}>Don&apos;t manage them.</span>
+            </h2>
+            <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
+              We&apos;re building the app that Ontario landlords with 1–5 properties have
+              been waiting for. Rent, maintenance, legal notices, finances — automated.
+              Built by Ebin, who&apos;s been managing properties in London, Ontario since 2021.
+            </p>
+
+            <div className="flex flex-wrap gap-3 mb-10">
+              <span
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
+                style={{ backgroundColor: "rgba(139,32,48,0.2)", border: "1px solid rgba(139,32,48,0.35)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              >
+                90 days free for early members
+              </span>
+              <span
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
+                style={{ backgroundColor: "rgba(250,248,245,0.06)", border: "1px solid rgba(250,248,245,0.12)", color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Then a fraction of a PM fee
+              </span>
+            </div>
+
+            <Link
+              href="/platform"
+              className="inline-block px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Join the Waitlist — 90 Days Free →
+            </Link>
+          </div>
+
+          {/* Right — feature list */}
+          <div className="flex-shrink-0 w-full lg:w-80">
+            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(250,248,245,0.08)" }}>
+              <div className="px-6 py-4 border-b" style={{ backgroundColor: "rgba(139,32,48,0.15)", borderColor: "rgba(250,248,245,0.08)" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
+                  What it does
+                </p>
+              </div>
+              {items.map((item, i) => (
+                <div
+                  key={i}
+                  className="px-6 py-4 flex items-start gap-3 border-b last:border-b-0"
+                  style={{ backgroundColor: "rgba(250,248,245,0.03)", borderColor: "rgba(250,248,245,0.06)" }}
+                >
+                  <span className="text-xs mt-0.5 flex-shrink-0" style={{ color: "#8B2030" }}>✓</span>
+                  <p className="text-sm leading-snug" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Tenants Bar ───────────────────────────────────────────────────────────────
 
 function TenantBar() {
@@ -588,7 +665,7 @@ function CTABanner() {
         >
           <Link
             href="/rent-analysis"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Rental Analysis
@@ -630,7 +707,7 @@ function StickyCTA() {
           </p>
           <Link
             href="/rent-analysis"
-            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 shrink-0 rounded"
+            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest shrink-0 rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Rental Analysis →
@@ -654,6 +731,7 @@ export default function HomePage() {
       <FounderSnippet />
       <CaseStudy />
       <Testimonials />
+      <PlatformTeaser />
       <TenantBar />
       <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto space-y-4">
