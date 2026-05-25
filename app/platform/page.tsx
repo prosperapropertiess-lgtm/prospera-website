@@ -122,7 +122,7 @@ function PainCard({ moment, index }: { moment: typeof painMoments[0]; index: num
   const inView = useInView(ref, { once: true, margin: "-40px" });
   return (
     <motion.div ref={ref} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.45, delay: index * 0.05 }}>
-      <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="relative h-full rounded-2xl p-7 flex flex-col gap-4 overflow-hidden" style={{ backgroundColor: "#FFFFFF", border: "1px solid #E8E2DA", boxShadow: "0 2px 12px rgba(0,0,0,0.05)", borderLeft: moment.weight === "high" ? "3px solid #8B2030" : "1px solid #E8E2DA" }}>
+      <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="relative h-full rounded-2xl p-7 flex flex-col gap-4 overflow-hidden" style={{ backgroundColor: moment.weight === "high" ? "rgba(139,32,48,0.03)" : "#FFFFFF", border: "1px solid", borderColor: moment.weight === "high" ? "rgba(139,32,48,0.14)" : "#E8E2DA", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
         <span className="absolute top-4 right-5 text-7xl font-bold leading-none select-none pointer-events-none" style={{ color: "rgba(31,47,58,0.04)", fontFamily: "var(--font-dm-sans)" }}>{moment.num}</span>
         <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: moment.weight === "high" ? "#8B2030" : "#C5BEB4", fontFamily: "var(--font-dm-sans)" }}>{moment.num}</span>
         <h3 className="text-2xl sm:text-3xl font-light leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{moment.headline}</h3>
@@ -177,12 +177,7 @@ export default function PlatformPage() {
             {/* Static line */}
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight" style={{ color: "#FAF8F5" }}>
               You Bought{" "}
-              <span style={{
-                background: "linear-gradient(135deg, #C0392B 0%, #8B2030 60%, #C0392B 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
+              <span style={{ color: "#8B2030" }}>
                 Passive Income.
               </span>
             </h1>
@@ -277,30 +272,28 @@ export default function PlatformPage() {
         </div>
       </section>
 
-      {/* ── Stats ─────────────────────────────────────────────────────────────── */}
-      <section className="py-14 px-5 sm:px-8 border-b" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { big: "8+", label: "Hours saved per property, per month" },
-            { big: "2 min", label: "To set up your first property" },
-            { big: "90", label: "Day money-back guarantee" },
-            { big: "0", label: "Contracts. Cancel anytime." },
-          ].map((s, i) => (
-            <FadeIn key={i} delay={i * 0.07}>
-              <div>
-                <p className="text-4xl sm:text-5xl font-bold mb-2 leading-none" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{s.big}</p>
-                <p className="text-xs leading-snug" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+      {/* ── Fact strip ────────────────────────────────────────────────────────── */}
+      <section className="border-b" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
+        <FadeIn>
+          <div className="max-w-5xl mx-auto px-5 sm:px-8 py-8 flex flex-wrap gap-x-10 gap-y-3 items-center">
+            {[
+              "Saves landlords 8+ hours a month",
+              "First property live in under 2 minutes",
+              "90-day money-back guarantee",
+              "No contracts. Ever.",
+            ].map((fact, i) => (
+              <p key={i} className="text-sm font-medium" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                <span className="font-bold mr-2" style={{ color: "#1F2F3A" }}>·</span>{fact}
+              </p>
+            ))}
+          </div>
+        </FadeIn>
       </section>
 
       {/* ── Pain ──────────────────────────────────────────────────────────────── */}
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Be honest</p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How many of these hit home?</h2>
             <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>If you manage 1–5 properties in Ontario, at least 5 of these are your Tuesday.</p>
           </FadeIn>
@@ -478,7 +471,6 @@ export default function PlatformPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Our commitment to you</p>
             <h2 className="text-4xl sm:text-5xl font-bold text-center mb-5 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Zero risk. Literally.</h2>
             <p className="text-base text-center mb-14 max-w-xl mx-auto leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               We&apos;re so confident this will change how you manage your properties that we back it with a guarantee most software companies would never offer.
@@ -488,25 +480,25 @@ export default function PlatformPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
+                num: "01",
                 title: "90-Day Money-Back",
                 body: "Try it for 90 days. If it hasn't saved you at least 8 hours a month — we refund everything. No forms. No questions. Done.",
-                icon: "↩",
                 highlight: true,
               },
               {
+                num: "02",
                 title: "No Contracts. Ever.",
                 body: "Month to month. Always. We don't believe in trapping landlords. If you leave, you leave. We'd rather earn your loyalty.",
-                icon: "✗",
               },
               {
+                num: "03",
                 title: "Cancel Anytime",
                 body: "One click. No phone calls, no cancellation fees, no 30-day notice periods. Leave whenever you want. We hope you don't.",
-                icon: "◎",
               },
               {
+                num: "04",
                 title: "Your Data, Always",
                 body: "If we ever shut down, you get 6 months notice and a full export of every record, document, and transaction. Your data belongs to you.",
-                icon: "⬇",
               },
             ].map((g, i) => (
               <FadeIn key={i} delay={i * 0.07}>
@@ -518,7 +510,7 @@ export default function PlatformPage() {
                     boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
                   }}
                 >
-                  <span className="text-2xl" style={{ color: g.highlight ? "#8B2030" : "#D8D2C8" }}>{g.icon}</span>
+                  <span className="text-xs font-semibold tracking-widest" style={{ color: g.highlight ? "rgba(250,248,245,0.3)" : "#C5BEB4", fontFamily: "var(--font-dm-sans)" }}>{g.num}</span>
                   <h3 className="text-lg font-bold leading-snug" style={{ color: g.highlight ? "#FAF8F5" : "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{g.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: g.highlight ? "rgba(250,248,245,0.6)" : "#666666", fontFamily: "var(--font-dm-sans)" }}>{g.body}</p>
                 </div>
@@ -600,7 +592,6 @@ export default function PlatformPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>The Prospera Difference</p>
             <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Use the app. Or hand it all to us.</h2>
             <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>We&apos;re the only option in Ontario that gives you both — and lets you switch between them anytime.</p>
           </FadeIn>
