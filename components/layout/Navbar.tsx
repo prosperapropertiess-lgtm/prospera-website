@@ -11,12 +11,11 @@ import {
   Users,
   LayoutList,
   Tag,
+  BookOpen,
+  Info,
   Mail,
   Zap,
-  Menu,
-  X,
 } from "lucide-react";
-import { GooeyFilter } from "@/components/ui/gooey-filter";
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
@@ -29,20 +28,20 @@ const navLinks = [
 ];
 
 const mobileNavItems = [
-  { icon: Home,       label: "Home",       href: "/"           },
-  { icon: Building2,  label: "Landlords",  href: "/landlords"  },
-  { icon: Users,      label: "Tenants",    href: "/tenants"    },
-  { icon: LayoutList, label: "Listings",   href: "/listings"   },
-  { icon: Tag,        label: "Pricing",    href: "/pricing"    },
-  { icon: Mail,       label: "Contact",    href: "/contact"    },
-  { icon: Zap,        label: "The App",    href: "/platform",  accent: true },
+  { icon: Home,       label: "Home",         href: "/"          },
+  { icon: Building2,  label: "For Landlords", href: "/landlords" },
+  { icon: Users,      label: "For Tenants",   href: "/tenants"   },
+  { icon: LayoutList, label: "Listings",      href: "/listings"  },
+  { icon: Tag,        label: "Pricing",       href: "/pricing"   },
+  { icon: BookOpen,   label: "Blog",          href: "/blog"      },
+  { icon: Info,       label: "About",         href: "/about"     },
+  { icon: Mail,       label: "Contact",       href: "/contact"   },
+  { icon: Zap,        label: "The App",       href: "/platform", accent: true },
 ];
 
-const ITEM_STEP = 64; // px between each item (upward cascade)
-
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,18 +50,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // lock body scroll when gooey menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // close on route change
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   return (
     <>
-      {/* ── Desktop + shared header bar ────────────────────────────────────── */}
+      {/* ── Header ─────────────────────────────────────────────────────────────── */}
       <header
         className="fixed top-0 left-0 right-0 z-50"
         style={{
@@ -72,8 +69,9 @@ export default function Navbar() {
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
+
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0 relative z-50" onClick={() => setMenuOpen(false)}>
             <Image
               src="/logo.png"
               alt="Prospera Properties"
@@ -117,145 +115,134 @@ export default function Navbar() {
             </Link>
             <Link
               href="/contact"
-              className="btn-primary px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded"
+              className="px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               Get a Free Quote
             </Link>
           </div>
 
-          {/* Mobile: no hamburger — gooey FAB is fixed at bottom-right */}
-          <div className="lg:hidden" />
+          {/* Hamburger — 3 white stripes */}
+          <button
+            className="lg:hidden relative z-50 flex flex-col justify-center items-center gap-[5px] w-10 h-10"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            <span
+              className="block w-6 h-[2px] origin-center transition-all duration-300"
+              style={{
+                backgroundColor: "#FAF8F5",
+                transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
+              }}
+            />
+            <span
+              className="block w-6 h-[2px] transition-all duration-300"
+              style={{
+                backgroundColor: "#FAF8F5",
+                opacity: menuOpen ? 0 : 1,
+                transform: menuOpen ? "scaleX(0)" : "none",
+              }}
+            />
+            <span
+              className="block w-6 h-[2px] origin-center transition-all duration-300"
+              style={{
+                backgroundColor: "#FAF8F5",
+                transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+              }}
+            />
+          </button>
         </div>
       </header>
 
-      {/* ── Gooey mobile menu (fixed, outside header so items can overflow) ── */}
-      <GooeyFilter id="nav-goo" strength={5} />
-
-      {/* Backdrop */}
+      {/* ── Mobile overlay ─────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 lg:hidden"
-            style={{ backgroundColor: "rgba(8,12,18,0.55)", backdropFilter: "blur(2px)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setMenuOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+            className="fixed inset-0 z-40 lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
+            style={{ backgroundColor: "#1F2F3A" }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+          >
+            {/* Nav items */}
+            <nav className="flex flex-col flex-1">
+              {mobileNavItems.map((item, i) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-4 py-4 border-b transition-opacity hover:opacity-70"
+                      style={{
+                        borderColor: "rgba(250,248,245,0.08)",
+                        opacity: isActive ? 1 : 0.85,
+                      }}
+                    >
+                      <span
+                        className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                          backgroundColor: item.accent
+                            ? "#8B2030"
+                            : isActive
+                              ? "rgba(250,248,245,0.12)"
+                              : "rgba(250,248,245,0.06)",
+                        }}
+                      >
+                        <Icon
+                          className="w-4 h-4"
+                          style={{ color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.7)" }}
+                        />
+                      </span>
+                      <span
+                        className="text-xl font-light"
+                        style={{
+                          fontFamily: "var(--font-cormorant)",
+                          color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.8)",
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                      {item.accent && (
+                        <span
+                          className="ml-auto text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                          style={{ backgroundColor: "rgba(139,32,48,0.2)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
+                        >
+                          Waitlist
+                        </span>
+                      )}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </nav>
 
-      {/* Gooey FAB — bottom-right, items cascade upward */}
-      <div className="fixed z-50 lg:hidden" style={{ bottom: 28, right: 20 }}>
-
-        {/* Text labels — outside filter, anchored from bottom, fan upward */}
-        <AnimatePresence>
-          {menuOpen && mobileNavItems.map((item, index) => (
+            {/* Bottom CTA */}
             <motion.div
-              key={`label-${item.href}`}
-              className="absolute flex items-center justify-end"
-              style={{ bottom: (index + 1) * ITEM_STEP - 8, right: 64 }}
-              initial={{ opacity: 0, x: 6 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 6 }}
-              transition={{ delay: index * 0.04 + 0.08, duration: 0.18 }}
+              className="mt-8"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.38, duration: 0.3 }}
             >
               <Link
-                href={item.href}
+                href="/contact"
                 onClick={() => setMenuOpen(false)}
-                className="text-xs font-semibold whitespace-nowrap px-3 py-1.5 rounded-full"
-                style={{
-                  backgroundColor: item.accent ? "rgba(139,32,48,0.12)" : "rgba(31,47,58,0.9)",
-                  color: item.accent ? "#8B2030" : "rgba(250,248,245,0.85)",
-                  border: item.accent ? "1px solid rgba(139,32,48,0.3)" : "1px solid rgba(250,248,245,0.08)",
-                  fontFamily: "var(--font-dm-sans)",
-                  backdropFilter: "blur(8px)",
-                }}
+                className="block w-full py-4 text-center text-sm font-semibold uppercase tracking-widest rounded"
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                {item.label}
+                Get a Free Quote
               </Link>
             </motion.div>
-          ))}
-        </AnimatePresence>
-
-        {/* Gooey blob layer — icons rendered directly, no inner AnimatePresence
-            (inner opacity/blur animations fight the feColorMatrix alpha threshold
-            and cause icons to snap invisible mid-animation) */}
-        <div style={{ filter: "url(#nav-goo)" }}>
-          {/* Nav item circles */}
-          <AnimatePresence>
-            {menuOpen && mobileNavItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.label}
-                  className="absolute w-14 h-14 rounded-full flex items-center justify-center"
-                  style={{
-                    backgroundColor: item.accent ? "#8B2030" : "#1F2F3A",
-                  }}
-                  initial={{ y: 0 }}
-                  animate={{ y: -((index + 1) * ITEM_STEP) }}
-                  exit={{
-                    y: 0,
-                    transition: {
-                      delay: (mobileNavItems.length - 1 - index) * 0.04,
-                      duration: 0.35,
-                      type: "spring",
-                      bounce: 0,
-                    },
-                  }}
-                  transition={{ delay: index * 0.05, duration: 0.4, type: "spring", bounce: 0 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="w-full h-full flex items-center justify-center"
-                    aria-label={item.label}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: "#FAF8F5" }} />
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-
-          {/* Main trigger button */}
-          <motion.button
-            className="relative w-14 h-14 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: "#8B2030" }}
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle navigation"
-            whileTap={{ scale: 0.93 }}
-            transition={{ duration: 0.15 }}
-          >
-            <AnimatePresence mode="wait">
-              {menuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -45 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 45 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <X className="w-5 h-5" style={{ color: "#FAF8F5" }} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 45 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -45 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Menu className="w-5 h-5" style={{ color: "#FAF8F5" }} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
