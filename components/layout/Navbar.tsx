@@ -159,7 +159,7 @@ export default function Navbar() {
         {menuOpen && (
           <motion.div
             className="fixed inset-0 z-40 lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
-            style={{ backgroundColor: "#1F2F3A" }}
+            style={{ backgroundColor: "rgba(15,22,30,0.82)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
