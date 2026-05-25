@@ -187,17 +187,18 @@ export default function PlatformPage() {
               </span>
             </h1>
 
-            {/* Cycling line — sibling div, matches h1 font size exactly */}
+            {/* Cycling line — one size down from h1, emotional sub-punch */}
             <CyclingTypewriter
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mt-0"
+              className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight mt-3"
+              color="rgba(250,248,245,0.38)"
               phrases={[
-                "Not a Second Job.",
-                "Not chasing rent every month.",
-                "Not calling contractors at 2am.",
-                "Not filling N4s every weekend.",
-                "Not yelling at spreadsheets.",
-                "Not stressing over lost receipts.",
-                "Not keeping track of everything.",
+                "Not another landlord buried in admin.",
+                "Not a 2am call from a burst pipe.",
+                "Not another bounced cheque and no recourse.",
+                "Not a weekend lost to filing N4s.",
+                "Not another tenant \"I'll pay you Friday.\"",
+                "Not spreadsheets, sticky notes, and prayer.",
+                "Not the stress that made you question this.",
               ]}
             />
           </motion.div>
