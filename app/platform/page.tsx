@@ -8,6 +8,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -297,10 +298,20 @@ export default function PlatformPage() {
               </h1>
 
               <FadeIn delay={0.85}>
-                <p className="text-base sm:text-lg leading-relaxed mb-8 max-w-lg" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
-                  Rent, maintenance, N4s, tenant portal, and financials — all automated.
-                  Built by an Ontario landlord for landlords with 1 to 5 properties.
+                <p className="text-sm mb-2 max-w-lg" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
+                  Imagine waking up to this instead:
                 </p>
+                <TypewriterEffectSmooth
+                  className="justify-start my-0 mb-6"
+                  words={[
+                    { text: "Rent", className: "text-white" },
+                    { text: "collected.", className: "text-white" },
+                    { text: "No", className: "text-white" },
+                    { text: "texts", className: "text-white" },
+                    { text: "needed.", className: "text-white" },
+                  ]}
+                  cursorClassName="bg-red-800"
+                />
 
                 {/* Trust pills */}
                 <div className="flex flex-wrap gap-2 mb-8">
