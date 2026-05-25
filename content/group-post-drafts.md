@@ -231,3 +231,20 @@ Has anyone dealt with a tenant who made partial payments and then stopped? Did t
 
 #OntarioLandlord #LondonOntario #LandlordTips #RentArrears
 ---
+
+## 2026-05-25
+Quick question for Ontario landlords — did you know there's a one-year deadline to file a damage claim at the LTB after a tenant moves out?
+
+Most landlords don't. And the ones who do file often lose not because the damage wasn't real — but because they can't prove it.
+
+What the LTB actually needs:
+- A signed move-in inspection report with dated photos (your baseline — without it you can't prove damage wasn't pre-existing)
+- Paid invoices from contractors, not ballpark estimates
+- Clear dated photos from move-out, organized by room
+
+Also worth knowing: if the tenancy has already ended, the right form is an L10, not an L2. Getting the form wrong delays your hearing.
+
+Has anyone here gone through a damage claim at the LTB? What documentation made the difference?
+
+#OntarioLandlord #LondonOntario #LandlordTips #PropertyManagement
+---
