@@ -7,7 +7,7 @@ import { useRef } from "react";
 import FadeIn from "@/components/animations/FadeIn";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
-import { TypewriterEffectSmooth, CyclingTypewriter } from "@/components/ui/typewriter-effect";
+import { CyclingTypewriter } from "@/components/ui/typewriter-effect";
 
 // ── Phone frame wrapper ───────────────────────────────────────────────────────
 
@@ -166,15 +166,30 @@ export default function PlatformPage() {
             <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}>Prospera Platform · Waitlist Open</span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.2, ease: [0.23, 1, 0.32, 1] }} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.0] tracking-tight mb-6 max-w-4xl" style={{ fontFamily: "var(--font-dm-sans)", color: "#FAF8F5" }}>
-            You Bought{" "}
-            <span style={{ background: "linear-gradient(135deg, #C0392B 0%, #8B2030 50%, #C0392B 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              Passive Income.
-            </span>
-            <br />
+          {/* Headline block — h1 + cycling line as siblings, same font scale */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="mb-8 max-w-4xl"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+          >
+            {/* Static line */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight" style={{ color: "#FAF8F5" }}>
+              You Bought{" "}
+              <span style={{
+                background: "linear-gradient(135deg, #C0392B 0%, #8B2030 60%, #C0392B 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+                Passive Income.
+              </span>
+            </h1>
+
+            {/* Cycling line — sibling div, matches h1 font size exactly */}
             <CyclingTypewriter
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mt-0"
               phrases={[
                 "Not a Second Job.",
                 "Not chasing rent every month.",
@@ -185,31 +200,18 @@ export default function PlatformPage() {
                 "Not keeping track of everything.",
               ]}
             />
-          </motion.h1>
-
-          {/* Typewriter */}
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.38 }} className="mb-8">
-            <TypewriterEffectSmooth
-              className="justify-center my-0"
-              words={[
-                { text: "Rent", className: "font-semibold" },
-                { text: "collected.", className: "font-semibold" },
-                { text: "N4s", className: "font-semibold" },
-                { text: "filed.", className: "font-semibold" },
-                { text: "Maintenance", className: "font-semibold" },
-                { text: "handled.", className: "font-semibold" },
-                { text: "You", className: "font-semibold" },
-                { text: "didn't", className: "font-semibold" },
-                { text: "lift", className: "font-semibold" },
-                { text: "a", className: "font-semibold" },
-                { text: "finger.", className: "font-semibold" },
-              ]}
-              cursorClassName="bg-red-900"
-            />
-            <p className="text-sm mt-2" style={{ color: "rgba(250,248,245,0.3)", fontFamily: "var(--font-dm-sans)" }}>
-              Built for Ontario landlords with 1 to 5 properties.
-            </p>
           </motion.div>
+
+          {/* Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.42 }}
+            className="text-base sm:text-lg mb-8 max-w-lg"
+            style={{ color: "rgba(250,248,245,0.42)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}
+          >
+            Built for Ontario landlords with 1 to 5 properties. All the automation, none of the overhead.
+          </motion.p>
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.52 }} className="w-full max-w-md mb-5">

@@ -9,18 +9,11 @@ export const TypewriterEffect = ({
   className,
   cursorClassName,
 }: {
-  words: {
-    text: string;
-    className?: string;
-  }[];
+  words: { text: string; className?: string }[];
   className?: string;
   cursorClassName?: string;
 }) => {
-  const wordsArray = words.map((word) => ({
-    ...word,
-    text: word.text.split(""),
-  }));
-
+  const wordsArray = words.map((word) => ({ ...word, text: word.text.split("") }));
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
 
@@ -34,28 +27,20 @@ export const TypewriterEffect = ({
     }
   }, [isInView, animate]);
 
-  const renderWords = () => (
-    <motion.div ref={scope} className="inline">
-      {wordsArray.map((word, idx) => (
-        <div key={`word-${idx}`} className="inline-block">
-          {word.text.map((char, index) => (
-            <motion.span
-              initial={{}}
-              key={`char-${index}`}
-              className={cn("opacity-0 hidden", word.className)}
-            >
-              {char}
-            </motion.span>
-          ))}
-          &nbsp;
-        </div>
-      ))}
-    </motion.div>
-  );
-
   return (
     <div className={cn("text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center", className)}>
-      {renderWords()}
+      <motion.div ref={scope} className="inline">
+        {wordsArray.map((word, idx) => (
+          <div key={`word-${idx}`} className="inline-block">
+            {word.text.map((char, index) => (
+              <motion.span key={`char-${index}`} className={cn("opacity-0 hidden", word.className)}>
+                {char}
+              </motion.span>
+            ))}
+            &nbsp;
+          </div>
+        ))}
+      </motion.div>
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -67,74 +52,16 @@ export const TypewriterEffect = ({
   );
 };
 
-// Cycling typewriter — rotates through phrases continuously
-export const CyclingTypewriter = ({
-  phrases,
-  className,
-}: {
-  phrases: string[];
-  className?: string;
-}) => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    // Hold each phrase: type duration (~2s) + read time (2s) = 4.5s total
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % phrases.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [phrases.length]);
-
-  return (
-    <div className={cn("overflow-hidden", className)} style={{ height: "1.2em" }}>
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-          className="block"
-          style={{ color: "rgba(250,248,245,0.28)", fontFamily: "var(--font-dm-sans)" }}
-        >
-          {phrases[index]}
-        </motion.span>
-      </AnimatePresence>
-    </div>
-  );
-};
-
 export const TypewriterEffectSmooth = ({
   words,
   className,
   cursorClassName,
 }: {
-  words: {
-    text: string;
-    className?: string;
-  }[];
+  words: { text: string; className?: string }[];
   className?: string;
   cursorClassName?: string;
 }) => {
-  const wordsArray = words.map((word) => ({
-    ...word,
-    text: word.text.split(""),
-  }));
-
-  const renderWords = () => (
-    <div>
-      {wordsArray.map((word, idx) => (
-        <div key={`word-${idx}`} className="inline-block">
-          {word.text.map((char, index) => (
-            <span key={`char-${index}`} className={cn(word.className)}>
-              {char}
-            </span>
-          ))}
-          &nbsp;
-        </div>
-      ))}
-    </div>
-  );
+  const wordsArray = words.map((word) => ({ ...word, text: word.text.split("") }));
 
   return (
     <div className={cn("flex space-x-1 my-6", className)}>
@@ -145,7 +72,14 @@ export const TypewriterEffectSmooth = ({
         transition={{ duration: 2, ease: "linear", delay: 1 }}
       >
         <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl whitespace-nowrap" style={{ color: "rgba(250,248,245,0.82)", fontFamily: "var(--font-dm-sans)" }}>
-          {renderWords()}
+          {wordsArray.map((word, idx) => (
+            <div key={`word-${idx}`} className="inline-block">
+              {word.text.map((char, index) => (
+                <span key={`char-${index}`} className={cn(word.className)}>{char}</span>
+              ))}
+              &nbsp;
+            </div>
+          ))}
         </div>
       </motion.div>
       <motion.span
@@ -155,6 +89,55 @@ export const TypewriterEffectSmooth = ({
         className={cn("block rounded-sm w-[4px] h-4 sm:h-6 xl:h-12", cursorClassName)}
         style={{ backgroundColor: "#8B2030" }}
       />
+    </div>
+  );
+};
+
+/**
+ * CyclingTypewriter — slot-machine style phrase rotator.
+ * Designed to sit OUTSIDE an <h1> as a sibling block element,
+ * matched to the same font size via className.
+ */
+export const CyclingTypewriter = ({
+  phrases,
+  className,
+  color = "rgba(250,248,245,0.28)",
+}: {
+  phrases: string[];
+  className?: string;
+  color?: string;
+}) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setIndex((i) => (i + 1) % phrases.length);
+    }, 3800);
+    return () => clearInterval(t);
+  }, [phrases.length]);
+
+  return (
+    // overflow-hidden clips the sliding animation; height = 1 line at current font size
+    <div
+      className={cn("relative overflow-hidden", className)}
+      style={{ height: "1.05em", lineHeight: "1.05" }}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={index}
+          className="absolute inset-0 block"
+          style={{ color, fontFamily: "var(--font-dm-sans)" }}
+          initial={{ y: "110%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-55%", opacity: 0 }}
+          transition={{
+            y: { duration: 0.55, ease: [0.23, 1, 0.32, 1] },
+            opacity: { duration: 0.25, ease: "easeInOut" },
+          }}
+        >
+          {phrases[index]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 };
