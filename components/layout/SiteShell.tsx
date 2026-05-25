@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
@@ -14,6 +15,32 @@ const RentActivityToast = dynamic(() => import("@/components/ui/RentActivityToas
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
+
+  useEffect(() => {
+    let lenis: import("@studio-freight/lenis").default | null = null;
+    let raf: number;
+
+    import("@studio-freight/lenis").then(({ default: Lenis }) => {
+      lenis = new Lenis({
+        duration: 1.4,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo ease-out
+        orientation: "vertical",
+        smoothWheel: true,
+        touchMultiplier: 1.5,
+      });
+
+      function tick(time: number) {
+        lenis!.raf(time);
+        raf = requestAnimationFrame(tick);
+      }
+      raf = requestAnimationFrame(tick);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis?.destroy();
+    };
+  }, []);
 
   return (
     <>
