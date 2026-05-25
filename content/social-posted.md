@@ -14,3 +14,4 @@ lease-renewal-ontario-landlord-guide drafted 2026-05-19
 enforcing-eviction-order-ontario-sheriff drafted 2026-05-21
 rent-increase-ontario-guidelines drafted 2026-05-22
 how-long-does-eviction-take-ontario drafted 2026-05-23
+tenant-credit-check-ontario-landlords drafted 2026-05-25
