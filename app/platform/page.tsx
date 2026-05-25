@@ -5,10 +5,8 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import FadeIn from "@/components/animations/FadeIn";
-import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -230,267 +228,231 @@ export default function PlatformPage() {
     <div style={{ backgroundColor: "#F7F5F2" }}>
 
       {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden" style={{ backgroundColor: "#0A1018" }}>
-        <ShaderBackground className="absolute inset-0 w-full h-full object-cover opacity-40" />
-
-        {/* Overlays */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(8,13,20,0.97) 0%, rgba(8,13,20,0.75) 55%, rgba(8,13,20,0.2) 100%)" }} />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(139,32,48,0.12) 0%, transparent 60%)" }} />
-        {/* Bottom fade into stats section */}
-        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to bottom, transparent, #0A1018)" }} />
-
-        {/* ── Main grid ── */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-28 pb-20">
-          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-10">
-
-            {/* Left — copy + form */}
-            <div className="flex-1 min-w-0">
-              {/* Badge */}
-              <FadeIn>
-                <div className="inline-flex items-center gap-2.5 mb-8 px-3.5 py-1.5 rounded-full" style={{ backgroundColor: "rgba(250,248,245,0.06)", border: "1px solid rgba(250,248,245,0.1)" }}>
-                  <motion.span
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ repeat: Infinity, duration: 1.8 }}
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: "#8B2030" }}
-                  />
-                  <span className="text-xs tracking-widest" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-                    Prospera Platform · Waitlist open
-                  </span>
-                </div>
-              </FadeIn>
-
-              {/* Headline */}
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                <VerticalCutReveal
-                  splitBy="words"
-                  staggerDuration={0.07}
-                  staggerFrom="first"
-                  reverse={true}
-                  containerClassName="flex-wrap"
-                  transition={{ type: "spring", stiffness: 240, damping: 34, delay: 0.15 }}
-                >
-                  You Bought
-                </VerticalCutReveal>{" "}
-                <VerticalCutReveal
-                  splitBy="words"
-                  staggerDuration={0.07}
-                  staggerFrom="first"
-                  reverse={true}
-                  containerClassName="inline-flex flex-wrap"
-                  transition={{ type: "spring", stiffness: 240, damping: 34, delay: 0.28 }}
-                >
-                  <span style={{ color: "#8B2030" }}>Passive Income.</span>
-                </VerticalCutReveal>
-                <br />
-                <span style={{ color: "rgba(250,248,245,0.3)" }}>
-                  <VerticalCutReveal
-                    splitBy="words"
-                    staggerDuration={0.07}
-                    staggerFrom="first"
-                    reverse={true}
-                    containerClassName="flex-wrap"
-                    transition={{ type: "spring", stiffness: 240, damping: 34, delay: 0.52 }}
-                  >
-                    Not a Second Job.
-                  </VerticalCutReveal>
-                </span>
-              </h1>
-
-              <FadeIn delay={0.85}>
-                <p className="text-sm mb-2 max-w-lg" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
-                  Imagine waking up to this instead:
-                </p>
-                <TypewriterEffectSmooth
-                  className="justify-start my-0 mb-6"
-                  words={[
-                    { text: "Rent", className: "text-white" },
-                    { text: "collected.", className: "text-white" },
-                    { text: "No", className: "text-white" },
-                    { text: "texts", className: "text-white" },
-                    { text: "needed.", className: "text-white" },
-                  ]}
-                  cursorClassName="bg-red-800"
-                />
-
-                {/* Trust pills */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {[
-                    { text: "90 days free", accent: true },
-                    { text: "No credit card" },
-                    { text: "We won't cancel your access" },
-                  ].map((pill, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                      style={{
-                        backgroundColor: pill.accent ? "rgba(139,32,48,0.2)" : "rgba(250,248,245,0.06)",
-                        border: pill.accent ? "1px solid rgba(139,32,48,0.4)" : "1px solid rgba(250,248,245,0.1)",
-                        color: pill.accent ? "#FAF8F5" : "rgba(250,248,245,0.55)",
-                        fontFamily: "var(--font-dm-sans)",
-                      }}
-                    >
-                      {pill.accent && <span style={{ color: "#8B2030" }}>✓</span>}
-                      {pill.text}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="max-w-md">
-                  <WaitlistForm layout="stack" dark source="platform_hero" />
-                </div>
-              </FadeIn>
-            </div>
-
-            {/* Right — Phone mockup */}
-            <FadeIn delay={0.4} className="flex-shrink-0 relative hidden lg:flex items-center justify-center">
-              {/* Glow behind phone */}
-              <div
-                className="absolute rounded-full blur-3xl"
-                style={{ width: 320, height: 320, backgroundColor: "rgba(139,32,48,0.12)", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
-              />
-
-              {/* Floating card — top left */}
-              <motion.div
-                initial={{ opacity: 0, x: -20, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute -left-14 top-16 z-20 rounded-2xl px-4 py-3 flex items-center gap-3"
-                style={{ backgroundColor: "#FFFFFF", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", minWidth: 180 }}
-              >
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(34,197,94,0.12)" }}>
-                  <span className="text-sm">✓</span>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold" style={{ color: "#111", fontFamily: "var(--font-dm-sans)" }}>Rent received</p>
-                  <p className="text-xs" style={{ color: "#999", fontFamily: "var(--font-dm-sans)" }}>$2,800 · Unit 1</p>
-                </div>
-              </motion.div>
-
-              {/* Floating card — bottom right */}
-              <motion.div
-                initial={{ opacity: 0, x: 20, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.5 }}
-                className="absolute -right-14 bottom-20 z-20 rounded-2xl px-4 py-3"
-                style={{ backgroundColor: "#1F2F3A", boxShadow: "0 8px 32px rgba(0,0,0,0.3)", minWidth: 190 }}
-              >
-                <p className="text-xs font-semibold mb-0.5" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>N4 auto-generated</p>
-                <p className="text-xs" style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}>Unit 2 · 2 days overdue</p>
-              </motion.div>
-
-              {/* Floating card — right middle */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.8, duration: 0.5 }}
-                className="absolute -right-10 top-32 z-20 rounded-2xl px-4 py-3 flex items-center gap-2.5"
-                style={{ backgroundColor: "#0D1820", border: "1px solid rgba(250,248,245,0.08)", boxShadow: "0 8px 32px rgba(0,0,0,0.3)", minWidth: 170 }}
-              >
-                <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#8B2030" }} />
-                <div>
-                  <p className="text-xs font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Maintenance triaged</p>
-                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>AI · Low urgency</p>
-                </div>
-              </motion.div>
-
-              {/* Phone shell */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-                className="relative z-10"
-                style={{ width: 260 }}
-              >
-                {/* Phone frame */}
-                <div
-                  className="relative rounded-[40px] overflow-hidden"
-                  style={{
-                    background: "#0D1820",
-                    border: "1.5px solid rgba(250,248,245,0.12)",
-                    boxShadow: "0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04) inset",
-                    height: 540,
-                  }}
-                >
-                  {/* Dynamic island */}
-                  <div className="flex justify-center pt-4 pb-2">
-                    <div className="w-24 h-7 rounded-full" style={{ backgroundColor: "#000" }} />
-                  </div>
-
-                  {/* App UI */}
-                  <div className="px-5 pt-2 pb-6 flex flex-col gap-4 h-full">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>Good morning</p>
-                        <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Ebin ✦</p>
-                      </div>
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: "#8B2030" }}>
-                        <span className="text-xs font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>EJ</span>
-                      </div>
-                    </div>
-
-                    {/* Status card */}
-                    <div className="rounded-2xl p-4" style={{ background: "linear-gradient(135deg, #8B2030 0%, #6a1824 100%)" }}>
-                      <p className="text-xs mb-1" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>This month</p>
-                      <p className="text-2xl font-bold mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>$8,400</p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>3 properties · All collected</span>
-                        <span className="text-xs" style={{ color: "rgba(250,248,245,0.5)" }}>✓</span>
-                      </div>
-                    </div>
-
-                    {/* Property rows */}
-                    {[
-                      { addr: "236 Highbury Ave", status: "Paid", amount: "$2,400", ok: true },
-                      { addr: "550 Second St", status: "Paid", amount: "$2,800", ok: true },
-                      { addr: "31 Jena Cres", status: "Paid", amount: "$1,399", ok: true },
-                    ].map((p, i) => (
-                      <div key={i} className="flex items-center justify-between py-2 border-b" style={{ borderColor: "rgba(250,248,245,0.06)" }}>
-                        <div>
-                          <p className="text-xs font-medium" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{p.addr}</p>
-                          <div className="flex items-center gap-1.5 mt-0.5">
-                            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: p.ok ? "#22c55e" : "#8B2030" }} />
-                            <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>{p.status}</p>
-                          </div>
-                        </div>
-                        <p className="text-sm font-semibold" style={{ color: p.ok ? "#FAF8F5" : "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{p.amount}</p>
-                      </div>
-                    ))}
-
-                    {/* Bottom nav bar */}
-                    <div className="mt-auto flex items-center justify-around pt-3 border-t" style={{ borderColor: "rgba(250,248,245,0.06)" }}>
-                      {[
-                        { icon: "⌂", label: "Home", active: true },
-                        { icon: "◫", label: "Properties" },
-                        { icon: "◎", label: "Finances" },
-                        { icon: "⚙", label: "Settings" },
-                      ].map((tab, i) => (
-                        <div key={i} className="flex flex-col items-center gap-1">
-                          <span className="text-sm" style={{ color: tab.active ? "#8B2030" : "rgba(250,248,245,0.25)" }}>{tab.icon}</span>
-                          <span className="text-xs" style={{ color: tab.active ? "#8B2030" : "rgba(250,248,245,0.25)", fontFamily: "var(--font-dm-sans)", fontSize: "9px" }}>{tab.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Phone reflection */}
-                <div
-                  className="absolute -bottom-6 left-4 right-4 h-6 rounded-full blur-xl"
-                  style={{ backgroundColor: "rgba(139,32,48,0.25)" }}
-                />
-              </motion.div>
-            </FadeIn>
-          </div>
+      <section className="relative overflow-hidden" style={{ backgroundColor: "#080C12", minHeight: "100svh" }}>
+        {/* Shader — very subtle, background texture */}
+        <div className="absolute inset-0" style={{ opacity: 0.18 }}>
+          <ShaderBackground className="w-full h-full object-cover" />
         </div>
 
-        {/* Scroll hint */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-          <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.2)" strokeWidth="1.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
+        {/* Radial glow — top centre */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,32,48,0.28) 0%, transparent 70%)" }} />
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, #080C12)" }} />
+
+        {/* ── Content ── */}
+        <div className="relative z-10 flex flex-col items-center text-center px-5 sm:px-8 pt-36 pb-16">
+
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
+            style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}
+          >
+            <motion.span
+              animate={{ opacity: [1, 0.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ backgroundColor: "#8B2030" }}
+            />
+            <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}>
+              Prospera Platform · Waitlist Open
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.0] tracking-tight mb-6 max-w-4xl"
+            style={{ fontFamily: "var(--font-dm-sans)", color: "#FAF8F5" }}
+          >
+            You Bought{" "}
+            <span style={{
+              background: "linear-gradient(135deg, #C0392B 0%, #8B2030 50%, #C0392B 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+              Passive Income.
+            </span>
+            <br />
+            <span style={{ color: "rgba(250,248,245,0.22)" }}>Not a Second Job.</span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.38, ease: [0.23, 1, 0.32, 1] }}
+            className="text-base sm:text-lg leading-relaxed mb-8 max-w-xl"
+            style={{ color: "rgba(250,248,245,0.48)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Rent collected. N4s automated. Maintenance handled. Finances tracked.
+            All on your phone — built for Ontario landlords with 1 to 5 properties.
+          </motion.p>
+
+          {/* CTA form */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.52 }}
+            className="w-full max-w-md mb-5"
+          >
+            <WaitlistForm layout="stack" dark source="platform_hero" />
+          </motion.div>
+
+          {/* Trust row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.72 }}
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-16"
+          >
+            {[
+              "✓  90 days free for early members",
+              "✓  No credit card required",
+              "✓  We won't cancel your access",
+            ].map((t, i) => (
+              <span key={i} className="text-xs" style={{ color: "rgba(250,248,245,0.3)", fontFamily: "var(--font-dm-sans)" }}>{t}</span>
+            ))}
+          </motion.div>
+
+          {/* ── Phone mockup ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 48 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            className="relative inline-flex items-start justify-center"
+          >
+            {/* Glow blob */}
+            <div className="absolute pointer-events-none" style={{ width: 500, height: 300, bottom: -60, left: "50%", transform: "translateX(-50%)", background: "radial-gradient(ellipse, rgba(139,32,48,0.22) 0%, transparent 70%)", filter: "blur(30px)" }} />
+
+            {/* Floating chip — left */}
+            <motion.div
+              initial={{ opacity: 0, x: -16, y: 8 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ delay: 1.3, duration: 0.5, ease: "easeOut" }}
+              className="absolute -left-4 sm:-left-14 top-20 z-20 rounded-2xl px-3.5 py-2.5 flex items-center gap-3 shadow-2xl"
+              style={{ backgroundColor: "#FFFFFF", minWidth: 168 }}
+            >
+              <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-sm" style={{ backgroundColor: "#DCFCE7" }}>✓</div>
+              <div>
+                <p className="text-xs font-semibold leading-tight" style={{ color: "#111", fontFamily: "var(--font-dm-sans)" }}>Rent received</p>
+                <p className="text-xs leading-tight mt-0.5" style={{ color: "#888", fontFamily: "var(--font-dm-sans)" }}>$2,800 · 550 Second St</p>
+              </div>
+            </motion.div>
+
+            {/* Floating chip — right top */}
+            <motion.div
+              initial={{ opacity: 0, x: 16, y: 8 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ delay: 1.6, duration: 0.5, ease: "easeOut" }}
+              className="absolute -right-4 sm:-right-16 top-28 z-20 rounded-2xl px-3.5 py-2.5 shadow-2xl"
+              style={{ backgroundColor: "#1F2F3A", minWidth: 172, border: "1px solid rgba(250,248,245,0.08)" }}
+            >
+              <p className="text-xs font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>N4 auto-generated</p>
+              <p className="text-xs mt-0.5" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>Unit 2 · 2 days late</p>
+            </motion.div>
+
+            {/* Floating chip — right bottom */}
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.9, duration: 0.5, ease: "easeOut" }}
+              className="absolute -right-4 sm:-right-12 bottom-32 z-20 rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 shadow-2xl"
+              style={{ backgroundColor: "#0D1820", border: "1px solid rgba(250,248,245,0.07)", minWidth: 172 }}
+            >
+              <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#8B2030" }} />
+              <div>
+                <p className="text-xs font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Maintenance triaged</p>
+                <p className="text-xs mt-0.5" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>AI · Low urgency</p>
+              </div>
+            </motion.div>
+
+            {/* Phone */}
+            <div
+              className="relative rounded-[44px] overflow-hidden"
+              style={{
+                width: 280,
+                height: 580,
+                background: "linear-gradient(160deg, #111820 0%, #0A0F16 100%)",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 0 0 1px rgba(255,255,255,0.04) inset, 0 60px 120px rgba(0,0,0,0.7)",
+              }}
+            >
+              {/* Dynamic island */}
+              <div className="flex justify-center pt-5 pb-3">
+                <div className="w-28 h-7 rounded-full" style={{ backgroundColor: "#000" }} />
+              </div>
+
+              {/* App screen */}
+              <div className="px-5 flex flex-col gap-3" style={{ height: "calc(100% - 56px)" }}>
+
+                {/* App header */}
+                <div className="flex items-center justify-between pt-1">
+                  <div>
+                    <p className="text-xs" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>Good morning</p>
+                    <p className="text-sm font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Ebin</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #8B2030, #6a1824)" }}>
+                    <span className="text-xs font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>EJ</span>
+                  </div>
+                </div>
+
+                {/* Revenue card */}
+                <div className="rounded-2xl p-4 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #8B2030 0%, #5a1220 100%)" }}>
+                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full" style={{ background: "rgba(255,255,255,0.05)", transform: "translate(30%, -30%)" }} />
+                  <p className="text-xs mb-2" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>May 2026</p>
+                  <p className="text-3xl font-bold mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>$8,599</p>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#4ade80" }} />
+                    <p className="text-xs" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>3 of 3 rents collected</p>
+                  </div>
+                </div>
+
+                {/* Section label */}
+                <p className="text-xs font-semibold uppercase tracking-widest mt-1" style={{ color: "rgba(250,248,245,0.25)", fontFamily: "var(--font-dm-sans)" }}>Properties</p>
+
+                {/* Property rows */}
+                {[
+                  { addr: "236 Highbury Ave", rent: "$2,400", paid: true },
+                  { addr: "550 Second St", rent: "$2,800", paid: true },
+                  { addr: "31 Jena Cres", rent: "$1,399", paid: true },
+                ].map((p, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between px-3 py-2.5 rounded-xl"
+                    style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.05)" }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: p.paid ? "#4ade80" : "#8B2030" }} />
+                      <p className="text-xs font-medium" style={{ color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}>{p.addr}</p>
+                    </div>
+                    <p className="text-xs font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{p.rent}</p>
+                  </div>
+                ))}
+
+                {/* Bottom nav */}
+                <div className="mt-auto pb-4 flex items-center justify-around border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
+                  {[
+                    { label: "Home", active: true },
+                    { label: "Rent" },
+                    { label: "Docs" },
+                    { label: "More" },
+                  ].map((tab, i) => (
+                    <div key={i} className="flex flex-col items-center gap-1">
+                      <div className="w-1 h-1 rounded-full" style={{ backgroundColor: tab.active ? "#8B2030" : "transparent" }} />
+                      <p style={{ fontSize: 9, color: tab.active ? "#8B2030" : "rgba(250,248,245,0.2)", fontFamily: "var(--font-dm-sans)", fontWeight: tab.active ? 600 : 400 }}>
+                        {tab.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
