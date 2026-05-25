@@ -7,6 +7,7 @@ import { useRef } from "react";
 import FadeIn from "@/components/animations/FadeIn";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -282,17 +283,34 @@ export default function PlatformPage() {
             <span style={{ color: "rgba(250,248,245,0.22)" }}>Not a Second Job.</span>
           </motion.h1>
 
-          {/* Subtext */}
-          <motion.p
+          {/* Typewriter subtext */}
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.38, ease: [0.23, 1, 0.32, 1] }}
-            className="text-base sm:text-lg leading-relaxed mb-8 max-w-xl"
-            style={{ color: "rgba(250,248,245,0.48)", fontFamily: "var(--font-dm-sans)" }}
+            className="mb-8"
           >
-            Rent collected. N4s automated. Maintenance handled. Finances tracked.
-            All on your phone — built for Ontario landlords with 1 to 5 properties.
-          </motion.p>
+            <TypewriterEffectSmooth
+              className="justify-center my-0"
+              words={[
+                { text: "Rent", className: "font-semibold" },
+                { text: "collected.", className: "font-semibold" },
+                { text: "N4s", className: "font-semibold" },
+                { text: "filed.", className: "font-semibold" },
+                { text: "Maintenance", className: "font-semibold" },
+                { text: "handled.", className: "font-semibold" },
+                { text: "You", className: "font-semibold" },
+                { text: "didn't", className: "font-semibold" },
+                { text: "lift", className: "font-semibold" },
+                { text: "a", className: "font-semibold" },
+                { text: "finger.", className: "font-semibold" },
+              ]}
+              cursorClassName="bg-red-900"
+            />
+            <p className="text-sm mt-3" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
+              Built for Ontario landlords with 1 to 5 properties.
+            </p>
+          </motion.div>
 
           {/* CTA form */}
           <motion.div

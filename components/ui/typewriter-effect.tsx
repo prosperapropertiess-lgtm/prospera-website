@@ -107,7 +107,7 @@ export const TypewriterEffectSmooth = ({
         whileInView={{ width: "fit-content" }}
         transition={{ duration: 2, ease: "linear", delay: 1 }}
       >
-        <div className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
+        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl whitespace-nowrap" style={{ color: "rgba(250,248,245,0.82)", fontFamily: "var(--font-dm-sans)" }}>
           {renderWords()}
         </div>
       </motion.div>
