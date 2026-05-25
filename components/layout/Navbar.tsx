@@ -38,7 +38,7 @@ const mobileNavItems = [
   { icon: Zap,        label: "The App",    href: "/platform",  accent: true },
 ];
 
-const ITEM_STEP = 62; // px between each item
+const ITEM_STEP = 64; // px between each item (upward cascade)
 
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
@@ -124,8 +124,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile: placeholder so header stays same height — gooey button is fixed separately */}
-          <div className="lg:hidden w-10 h-10" />
+          {/* Mobile: no hamburger — gooey FAB is fixed at bottom-right */}
+          <div className="lg:hidden" />
         </div>
       </header>
 
@@ -147,16 +147,16 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Gooey menu — anchored top-right */}
-      <div className="fixed z-50 lg:hidden" style={{ top: 20, right: 20 }}>
+      {/* Gooey FAB — bottom-right, items cascade upward */}
+      <div className="fixed z-50 lg:hidden" style={{ bottom: 28, right: 20 }}>
 
-        {/* Text labels — rendered outside the filter so they stay sharp */}
+        {/* Text labels — outside filter, anchored from bottom, fan upward */}
         <AnimatePresence>
           {menuOpen && mobileNavItems.map((item, index) => (
             <motion.div
               key={`label-${item.href}`}
               className="absolute flex items-center justify-end"
-              style={{ top: (index + 1) * ITEM_STEP + 10, right: 60 }}
+              style={{ bottom: (index + 1) * ITEM_STEP - 8, right: 64 }}
               initial={{ opacity: 0, x: 6 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 6 }}
@@ -196,7 +196,7 @@ export default function Navbar() {
                     backgroundColor: item.accent ? "#8B2030" : "#1F2F3A",
                   }}
                   initial={{ y: 0 }}
-                  animate={{ y: (index + 1) * ITEM_STEP }}
+                  animate={{ y: -((index + 1) * ITEM_STEP) }}
                   exit={{
                     y: 0,
                     transition: {
