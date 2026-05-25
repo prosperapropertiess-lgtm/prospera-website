@@ -339,12 +339,18 @@ export default function PlatformPage() {
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How many of these hit home?</h2>
             <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>If you manage 1–5 properties in Ontario, at least 5 of these are your Tuesday.</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {painMoments.map((m, i) => (
-              <div key={i} className={m.weight === "high" ? "sm:col-span-2" : "sm:col-span-1"}>
-                <PainCard moment={m} index={i} fullWidth={m.weight === "high"} />
-              </div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {painMoments.map((m, i) => {
+              const pairIndex = Math.floor(i / 2);
+              const posInPair = i % 2;
+              // Even pairs: wide first, narrow second. Odd pairs: narrow first, wide second.
+              const isWide = pairIndex % 2 === 0 ? posInPair === 0 : posInPair === 1;
+              return (
+                <div key={i} className={isWide ? "lg:col-span-2" : "lg:col-span-1"}>
+                  <PainCard moment={m} index={i} fullWidth={isWide} />
+                </div>
+              );
+            })}
           </div>
           <FadeIn delay={0.5}>
             <p className="text-center mt-12 text-2xl sm:text-3xl font-light italic" style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}>
