@@ -614,8 +614,8 @@ export default function PlatformPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>The honest comparison</p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-5 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>We&apos;re not a property manager.<br className="hidden sm:block" /> We&apos;re redefining what one looks like.</h2>
-            <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Traditional PM companies charge 10–15% and take over. Big software costs $200/month and was built for their team, not yours.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-5 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Built for landlords who don&apos;t want to hand over 10% to a PM company.</h2>
+            <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Maybe you don&apos;t need full-service management. Maybe you just need the right tools — and to keep what&apos;s yours.</p>
           </FadeIn>
           <div className="overflow-hidden rounded-2xl border" style={{ borderColor: "#D8D2C8", boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
             <div className="grid grid-cols-4 border-b" style={{ borderColor: "#D8D2C8" }}>
