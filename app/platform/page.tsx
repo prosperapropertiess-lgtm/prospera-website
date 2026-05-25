@@ -47,6 +47,50 @@ function PhoneFrame({ src, alt, tall }: { src: string; alt: string; tall?: boole
   );
 }
 
+// ── FeatureRow ────────────────────────────────────────────────────────────────
+
+function FeatureRow({
+  eyebrow, headline, body, bullets, screen, alt, flip, tall,
+}: {
+  eyebrow: string; headline: string; body: string; bullets?: string[];
+  screen: string; alt: string; flip?: boolean; tall?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <div ref={ref} className={`flex flex-col ${flip ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-12 lg:gap-20`}>
+      <motion.div
+        className="flex-1 min-w-0"
+        initial={{ opacity: 0, x: flip ? 24 : -24 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: TEXT_3, fontFamily: "var(--font-dm-sans)" }}>{eyebrow}</p>
+        <h3 className="text-3xl sm:text-4xl font-light leading-snug mb-4" style={{ color: TEXT_1, fontFamily: "var(--font-cormorant)" }}>{headline}</h3>
+        <p className="text-base leading-relaxed mb-6" style={{ color: TEXT_2, fontFamily: "var(--font-dm-sans)" }}>{body}</p>
+        {bullets && (
+          <ul className="space-y-2.5">
+            {bullets.map((b, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+                <span className="flex-shrink-0 mt-0.5 font-bold" style={{ color: ACCENT }}>✓</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+        )}
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.32, 0.72, 0, 1] }}
+        className="flex-shrink-0"
+      >
+        <PhoneFrame src={screen} alt={alt} tall={tall} />
+      </motion.div>
+    </div>
+  );
+}
+
 // ── Pain data ─────────────────────────────────────────────────────────────────
 
 const painMoments = [
@@ -533,83 +577,83 @@ export default function PlatformPage() {
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-
-            {/* Cell 1 — Dashboard (wide) */}
-            <FadeIn className="lg:col-span-2 md:col-span-2">
-              <BentoCard
-                eyebrow="Dashboard"
-                headline="Wake up to this every morning."
-                body="Every property, every payment, every open issue — one scroll. No calls, no spreadsheets, no surprises."
-                bullets={[
+          <div className="flex flex-col gap-28">
+            {[
+              {
+                flip: false,
+                eyebrow: "Dashboard",
+                headline: "Wake up to this every morning.",
+                body: "Every property, every payment, every open issue — one scroll. No calls, no spreadsheets, no surprises. Just a clean summary of your portfolio waiting for you.",
+                bullets: [
                   "Rent collected vs. expected — at a glance",
                   "All open maintenance, ranked by urgency",
                   "Recent activity log so nothing slips through",
-                ]}
-                screen="/app-screens/landlord_dashboard_1.png"
-                alt="Prospera landlord dashboard"
-              />
-            </FadeIn>
-
-            {/* Cell 2 — Invisible Automations */}
-            <FadeIn delay={0.07} className="lg:col-span-1">
-              <BentoCard
-                eyebrow="Automations"
-                headline="This is what happened while you watched Netflix."
-                body="Triaged a faucet. Cleared a payment. Auto-filed an N4. You did nothing."
-                bullets={[
-                  "Maintenance auto-triaged, contractor notified",
+                ],
+                screen: "/app-screens/landlord_dashboard_1.png",
+                alt: "Prospera landlord dashboard",
+                tall: true,
+              },
+              {
+                flip: true,
+                eyebrow: "Invisible Automations",
+                headline: "This is what happened while you watched Netflix.",
+                body: "The app triaged a leaky faucet, cleared a rent payment, proposed a lease increase, and auto-filed an N4 for an overdue unit. You did nothing. You were notified about everything.",
+                bullets: [
+                  "Maintenance auto-triaged, contractor auto-notified",
+                  "Rent cleared — receipt sent to tenant automatically",
                   "N4 generated the moment rent is overdue",
-                ]}
-                screen="/app-screens/invisible_automations_log_1.png"
-                alt="Invisible automations log"
-              />
-            </FadeIn>
-
-            {/* Cell 3 — Maintenance */}
-            <FadeIn delay={0.1} className="lg:col-span-1">
-              <BentoCard
-                eyebrow="Maintenance"
-                headline="Tenant texts at 11pm. You sleep."
-                bullets={[
+                  "Lease renewal proposed with market data attached",
+                ],
+                screen: "/app-screens/invisible_automations_log_1.png",
+                alt: "Invisible automations log",
+                tall: true,
+              },
+              {
+                flip: false,
+                eyebrow: "Maintenance",
+                headline: "Tenant texts at 11pm. You sleep.",
+                body: "Your tenant submits a request with photos. AI immediately identifies the issue, determines urgency, and drafts a message to your contractor. You wake up to a resolved work order.",
+                bullets: [
                   "AI identifies issue from tenant photos",
+                  "Urgency classified — urgent, moderate, low",
                   "Contractor message drafted and sent in one tap",
-                ]}
-                screen="/app-screens/maintenance_request_1.png"
-                alt="AI maintenance triage"
-              />
-            </FadeIn>
-
-            {/* Cell 4 — Smart Lease Renewal (wide) */}
-            <FadeIn delay={0.13} className="lg:col-span-2 md:col-span-2">
-              <BentoCard
-                eyebrow="Lease Renewals"
-                headline="The market moved. Your rent should too."
-                body="Market data attached. N1 auto-generated. Done in 3 minutes."
-                bullets={[
-                  "Real-time comparable rent analysis by neighbourhood",
+                  "Full work order timeline tracked in-app",
+                ],
+                screen: "/app-screens/maintenance_request_1.png",
+                alt: "AI maintenance triage",
+                tall: true,
+              },
+              {
+                flip: true,
+                eyebrow: "Lease Renewals",
+                headline: "The market moved. Your rent should too.",
+                body: "When a lease approaches expiry, the app pulls comparable rents in your area and suggests a target rate. You approve, and the legally compliant N1 is auto-generated and sent. Done in 3 minutes.",
+                bullets: [
+                  "Real-time market rent analysis by neighbourhood",
+                  "AI suggests target rate with comparable data",
                   "N1 notice auto-generated and sent to tenant",
-                ]}
-                screen="/app-screens/smart_lease_renewal_1.png"
-                alt="Smart lease renewal"
-              />
-            </FadeIn>
-
-            {/* Cell 5 — Financials */}
-            <FadeIn delay={0.16} className="lg:col-span-1">
-              <BentoCard
-                eyebrow="Financials"
-                headline="Finally know if you're actually making money."
-                bullets={[
-                  "Income vs. expense by property and month",
+                ],
+                screen: "/app-screens/smart_lease_renewal_1.png",
+                alt: "Smart lease renewal",
+                tall: true,
+              },
+              {
+                flip: false,
+                eyebrow: "Financials",
+                headline: "Finally know if you're actually making money.",
+                body: "Net profit YTD, gross income, total expenses — by property, by month, by category. Real-time. Export to CSV for your accountant. Never be blindsided by tax season again.",
+                bullets: [
+                  "Income vs. expense tracking, real-time",
+                  "Breakdown by property and category",
                   "One-click CSV export for your accountant",
-                ]}
-                screen="/app-screens/financials_dashboard_1.png"
-                alt="Financial dashboard"
-              />
-            </FadeIn>
-
-          </div>
+                ],
+                screen: "/app-screens/financials_dashboard_1.png",
+                alt: "Financial dashboard",
+                tall: true,
+              },
+            ].map((feature, i) => (
+              <FeatureRow key={i} {...feature} />
+            ))}</div>
         </div>
       </section>
 
