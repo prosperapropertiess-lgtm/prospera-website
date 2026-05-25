@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, stagger, useAnimate, useInView } from "framer-motion";
-import { useEffect } from "react";
+import { motion, stagger, useAnimate, useInView, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export const TypewriterEffect = ({
   words,
@@ -63,6 +63,43 @@ export const TypewriterEffect = ({
         className={cn("inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10", cursorClassName)}
         style={{ backgroundColor: "#8B2030" }}
       />
+    </div>
+  );
+};
+
+// Cycling typewriter — rotates through phrases continuously
+export const CyclingTypewriter = ({
+  phrases,
+  className,
+}: {
+  phrases: string[];
+  className?: string;
+}) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    // Hold each phrase: type duration (~2s) + read time (2s) = 4.5s total
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % phrases.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [phrases.length]);
+
+  return (
+    <div className={cn("overflow-hidden", className)} style={{ height: "1.2em" }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          className="block"
+          style={{ color: "rgba(250,248,245,0.28)", fontFamily: "var(--font-dm-sans)" }}
+        >
+          {phrases[index]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 };

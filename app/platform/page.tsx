@@ -7,7 +7,7 @@ import { useRef } from "react";
 import FadeIn from "@/components/animations/FadeIn";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { TypewriterEffectSmooth, CyclingTypewriter } from "@/components/ui/typewriter-effect";
 
 // ── Phone frame wrapper ───────────────────────────────────────────────────────
 
@@ -173,7 +173,18 @@ export default function PlatformPage() {
               Passive Income.
             </span>
             <br />
-            <span style={{ color: "rgba(250,248,245,0.22)" }}>Not a Second Job.</span>
+            <CyclingTypewriter
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
+              phrases={[
+                "Not a Second Job.",
+                "Not chasing rent every month.",
+                "Not calling contractors at 2am.",
+                "Not filling N4s every weekend.",
+                "Not yelling at spreadsheets.",
+                "Not stressing over lost receipts.",
+                "Not keeping track of everything.",
+              ]}
+            />
           </motion.h1>
 
           {/* Typewriter */}
