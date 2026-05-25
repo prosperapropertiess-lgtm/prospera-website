@@ -121,7 +121,7 @@ const painMoments = [
   { num: "03", headline: "A property manager quoted you 12–15%.", sub: "That's $336–$420 a month. On a property that's barely breaking even.", weight: "medium" },
   { num: "04", headline: "Googling 'N4 form Ontario' at 11pm.", sub: "You're not even sure you filled it out right. And even less sure what happens next.", weight: "medium" },
   { num: "05", headline: "Your phone vibrates at 11:42pm.", sub: "Hot water heater. Making a noise. It's your tenant. You're the helpdesk now.", weight: "high" },
-  { num: "06", headline: "You tried Buildium once.", sub: "$200/month. 40 features built for someone with 200 units. You closed the tab.", weight: "medium" },
+  { num: "06", headline: "You tried the big PM software once.", sub: "$200/month. 40 features built for someone with 200 units. You closed the tab.", weight: "medium" },
   { num: "07", headline: "Tax time. Where are the receipts?", sub: "Gmail. Notes. A spreadsheet you stopped updating in February. Good luck.", weight: "medium" },
   { num: "08", headline: "You have 2 properties. Every tool was built for 20.", sub: "There is nothing on the market made for the landlord trying to build quiet wealth.", weight: "high" },
 ];
