@@ -14,17 +14,26 @@ import { CyclingTypewriter } from "@/components/ui/typewriter-effect";
 function PhoneFrame({ src, alt, tall }: { src: string; alt: string; tall?: boolean }) {
   return (
     <div className="relative flex-shrink-0" style={{ width: 260, height: tall ? 560 : 480 }}>
-      {/* Glow */}
-      <div className="absolute inset-0 rounded-[40px] blur-2xl scale-90" style={{ backgroundColor: "rgba(139,32,48,0.12)" }} />
-      {/* Frame */}
+      {/* Ambient glow */}
+      <div className="absolute inset-0 rounded-[44px] blur-3xl scale-90 pointer-events-none" style={{ backgroundColor: "rgba(139,32,48,0.14)" }} />
+      {/* Outer shell */}
       <div
-        className="relative w-full h-full rounded-[40px] overflow-hidden"
+        className="relative w-full h-full rounded-[44px] p-[3px]"
         style={{
-          border: "2px solid rgba(31,47,58,0.15)",
-          boxShadow: "0 32px 64px rgba(0,0,0,0.18), 0 0 0 1px rgba(255,255,255,0.06) inset",
+          background: "rgba(255,255,255,0.07)",
+          border: "1px solid rgba(255,255,255,0.09)",
         }}
       >
-        <Image src={src} alt={alt} fill className="object-cover object-top" sizes="260px" />
+        {/* Inner core */}
+        <div
+          className="relative w-full h-full rounded-[41px] overflow-hidden"
+          style={{
+            boxShadow: "inset 0 1px 1px rgba(255,255,255,0.12), 0 32px 64px rgba(0,0,0,0.22)",
+            background: "#080C12",
+          }}
+        >
+          <Image src={src} alt={alt} fill className="object-cover object-top" sizes="260px" />
+        </div>
       </div>
     </div>
   );
@@ -63,7 +72,7 @@ function FeatureRow({
         className="flex-1 min-w-0"
         initial={{ opacity: 0, x: flip ? 24 : -24 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
       >
         <div className="flex items-center gap-3 mb-4">
           {tag && (
@@ -95,7 +104,7 @@ function FeatureRow({
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.32, 0.72, 0, 1] }}
         className="flex-shrink-0"
       >
         <PhoneFrame src={screen} alt={alt} tall={tall} />
@@ -117,16 +126,33 @@ const painMoments = [
   { num: "08", headline: "You have 2 properties. Every tool was built for 20.", sub: "There is nothing on the market made for the landlord trying to build quiet wealth.", weight: "high" },
 ];
 
-function PainCard({ moment, index }: { moment: typeof painMoments[0]; index: number }) {
+function PainCard({ moment, index, fullWidth }: { moment: typeof painMoments[0]; index: number; fullWidth?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.45, delay: index * 0.05 }}>
-      <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="relative h-full rounded-2xl p-7 flex flex-col gap-4 overflow-hidden" style={{ backgroundColor: moment.weight === "high" ? "rgba(139,32,48,0.03)" : "#FFFFFF", border: "1px solid", borderColor: moment.weight === "high" ? "rgba(139,32,48,0.14)" : "#E8E2DA", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+    <motion.div ref={ref} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: index * 0.05, ease: [0.32, 0.72, 0, 1] }}>
+      <motion.div
+        whileHover={{ y: -2 }}
+        transition={{ duration: 0.2 }}
+        className={`relative h-full rounded-2xl overflow-hidden ${fullWidth ? "flex flex-col sm:flex-row items-start gap-8 sm:gap-16 p-8" : "flex flex-col gap-4 p-7"}`}
+        style={{
+          backgroundColor: moment.weight === "high" ? "rgba(139,32,48,0.03)" : "#FFFFFF",
+          border: "1px solid",
+          borderColor: moment.weight === "high" ? "rgba(139,32,48,0.14)" : "#E8E2DA",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+        }}
+      >
         <span className="absolute top-4 right-5 text-7xl font-bold leading-none select-none pointer-events-none" style={{ color: "rgba(31,47,58,0.04)", fontFamily: "var(--font-dm-sans)" }}>{moment.num}</span>
-        <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: moment.weight === "high" ? "#8B2030" : "#C5BEB4", fontFamily: "var(--font-dm-sans)" }}>{moment.num}</span>
-        <h3 className="text-2xl sm:text-3xl font-light leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{moment.headline}</h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#777777", fontFamily: "var(--font-dm-sans)" }}>{moment.sub}</p>
+        <div className={fullWidth ? "flex-1 min-w-0" : "flex flex-col gap-4"}>
+          <span className="text-xs font-semibold uppercase tracking-widest block mb-3" style={{ color: moment.weight === "high" ? "#8B2030" : "#C5BEB4", fontFamily: "var(--font-dm-sans)" }}>{moment.num}</span>
+          <h3 className={`font-light leading-snug ${fullWidth ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"}`} style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{moment.headline}</h3>
+          {!fullWidth && <p className="text-sm leading-relaxed" style={{ color: "#777777", fontFamily: "var(--font-dm-sans)" }}>{moment.sub}</p>}
+        </div>
+        {fullWidth && (
+          <div className="flex-1 min-w-0 flex items-end">
+            <p className="text-base leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{moment.sub}</p>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );
@@ -250,8 +276,24 @@ export default function PlatformPage() {
             </motion.div>
 
             {/* Real screenshot in phone */}
-            <div className="relative rounded-[44px] overflow-hidden" style={{ width: 280, height: 580, border: "1.5px solid rgba(255,255,255,0.1)", boxShadow: "0 0 0 1px rgba(255,255,255,0.04) inset, 0 60px 120px rgba(0,0,0,0.7)" }}>
-              <Image src="/app-screens/landlord_dashboard_1.png" alt="Prospera landlord dashboard" fill className="object-cover object-top" sizes="280px" />
+            {/* Outer shell */}
+            <div
+              className="relative rounded-[48px] p-[3px]"
+              style={{
+                width: 286,
+                height: 586,
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 60px 120px rgba(0,0,0,0.7)",
+              }}
+            >
+              {/* Inner core */}
+              <div
+                className="relative w-full h-full rounded-[45px] overflow-hidden"
+                style={{ boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15)", background: "#050505" }}
+              >
+                <Image src="/app-screens/landlord_dashboard_1.png" alt="Prospera landlord dashboard" fill className="object-cover object-top" sizes="280px" />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -291,14 +333,18 @@ export default function PlatformPage() {
       </section>
 
       {/* ── Pain ──────────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
+      <section className="py-32 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>How many of these hit home?</h2>
             <p className="text-base text-center mb-14 max-w-xl mx-auto" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>If you manage 1–5 properties in Ontario, at least 5 of these are your Tuesday.</p>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {painMoments.map((m, i) => <PainCard key={i} moment={m} index={i} />)}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {painMoments.map((m, i) => (
+              <div key={i} className={m.weight === "high" ? "sm:col-span-2" : "sm:col-span-1"}>
+                <PainCard moment={m} index={i} fullWidth={m.weight === "high"} />
+              </div>
+            ))}
           </div>
           <FadeIn delay={0.5}>
             <p className="text-center mt-12 text-2xl sm:text-3xl font-light italic" style={{ color: "#8B2030", fontFamily: "var(--font-cormorant)" }}>
@@ -309,7 +355,7 @@ export default function PlatformPage() {
       </section>
 
       {/* ── Product screenshots ───────────────────────────────────────────────── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+      <section className="py-32 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Inside the app</p>
@@ -468,7 +514,7 @@ export default function PlatformPage() {
       </section>
 
       {/* ── Guarantee ─────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
+      <section className="py-32 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <h2 className="text-4xl sm:text-5xl font-bold text-center mb-5 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Zero risk. Literally.</h2>
@@ -521,7 +567,7 @@ export default function PlatformPage() {
       </section>
 
       {/* ── From Ebin ─────────────────────────────────────────────────────────── */}
-      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+      <section className="py-32 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="text-xs uppercase tracking-widest mb-12" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>From the founder</p>
