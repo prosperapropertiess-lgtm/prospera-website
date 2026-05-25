@@ -38,7 +38,7 @@ const mobileNavItems = [
   { icon: Zap,        label: "The App",    href: "/platform",  accent: true },
 ];
 
-const ITEM_STEP = 56; // px between each item
+const ITEM_STEP = 62; // px between each item
 
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
@@ -156,7 +156,7 @@ export default function Navbar() {
             <motion.div
               key={`label-${item.href}`}
               className="absolute flex items-center justify-end"
-              style={{ top: (index + 1) * ITEM_STEP + 8, right: 52 }}
+              style={{ top: (index + 1) * ITEM_STEP + 10, right: 60 }}
               initial={{ opacity: 0, x: 6 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 6 }}
@@ -180,29 +180,25 @@ export default function Navbar() {
           ))}
         </AnimatePresence>
 
-        {/* Gooey blob layer */}
+        {/* Gooey blob layer — icons rendered directly, no inner AnimatePresence
+            (inner opacity/blur animations fight the feColorMatrix alpha threshold
+            and cause icons to snap invisible mid-animation) */}
         <div style={{ filter: "url(#nav-goo)" }}>
           {/* Nav item circles */}
           <AnimatePresence>
             {menuOpen && mobileNavItems.map((item, index) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <motion.div
                   key={item.label}
-                  className="absolute w-12 h-12 rounded-full"
+                  className="absolute w-14 h-14 rounded-full flex items-center justify-center"
                   style={{
-                    backgroundColor: item.accent
-                      ? "#8B2030"
-                      : isActive
-                        ? "rgba(250,248,245,0.15)"
-                        : "#1F2F3A",
+                    backgroundColor: item.accent ? "#8B2030" : "#1F2F3A",
                   }}
-                  initial={{ y: 0, opacity: 0 }}
-                  animate={{ y: (index + 1) * ITEM_STEP, opacity: 1 }}
+                  initial={{ y: 0 }}
+                  animate={{ y: (index + 1) * ITEM_STEP }}
                   exit={{
                     y: 0,
-                    opacity: 0,
                     transition: {
                       delay: (mobileNavItems.length - 1 - index) * 0.04,
                       duration: 0.35,
@@ -218,17 +214,7 @@ export default function Navbar() {
                     className="w-full h-full flex items-center justify-center"
                     aria-label={item.label}
                   >
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={item.label}
-                        initial={{ opacity: 0, filter: "blur(8px)" }}
-                        animate={{ opacity: 1, filter: "blur(0px)" }}
-                        exit={{ opacity: 0, filter: "blur(8px)" }}
-                        transition={{ delay: index * 0.04, duration: 0.18 }}
-                      >
-                        <Icon className="w-5 h-5" style={{ color: "#FAF8F5" }} />
-                      </motion.div>
-                    </AnimatePresence>
+                    <Icon className="w-5 h-5" style={{ color: "#FAF8F5" }} />
                   </Link>
                 </motion.div>
               );
@@ -237,7 +223,7 @@ export default function Navbar() {
 
           {/* Main trigger button */}
           <motion.button
-            className="relative w-12 h-12 rounded-full flex items-center justify-center"
+            className="relative w-14 h-14 rounded-full flex items-center justify-center"
             style={{ backgroundColor: "#8B2030" }}
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle navigation"
@@ -248,9 +234,9 @@ export default function Navbar() {
               {menuOpen ? (
                 <motion.div
                   key="close"
-                  initial={{ opacity: 0, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, rotate: -45 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 45 }}
                   transition={{ duration: 0.15 }}
                 >
                   <X className="w-5 h-5" style={{ color: "#FAF8F5" }} />
@@ -258,9 +244,9 @@ export default function Navbar() {
               ) : (
                 <motion.div
                   key="menu"
-                  initial={{ opacity: 0, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, rotate: 45 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: -45 }}
                   transition={{ duration: 0.15 }}
                 >
                   <Menu className="w-5 h-5" style={{ color: "#FAF8F5" }} />
