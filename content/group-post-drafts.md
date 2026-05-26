@@ -248,3 +248,15 @@ Has anyone here gone through a damage claim at the LTB? What documentation made 
 
 #OntarioLandlord #LondonOntario #LandlordTips #PropertyManagement
 ---
+
+## 2026-05-26
+Heads up for Ontario landlords — Bill 60 changed something important about L1 hearings that I don't see many people talking about.
+
+If a tenant raises maintenance issues as a defense at a rent arrears hearing, they now have to pay 50% of the alleged arrears into the LTB's trust account before those arguments even get heard. This is new in 2026. Before Bill 60, tenants could use T6-style maintenance claims as a free delay tactic to stall an eviction — no upfront cost, often months of extra time.
+
+Also worth knowing: Bill 60 cut the LTB review window from 30 days to 15 days. If you get a bad order, you've got half the time to challenge it.
+
+Is anyone in London or Ontario seeing how these changes are playing out at actual hearings?
+
+#OntarioLandlord #Bill60 #LTB #LondonOntario
+---

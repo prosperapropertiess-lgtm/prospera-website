@@ -17,3 +17,4 @@ news-2026-05-21 L1 applications — what Ontario landlords must do after a tenan
 news-2026-05-22 Abandoned units — why changing the locks is an illegal lockout in Ontario and what to do instead 2026-05-22
 news-2026-05-23 Partial rent payments — how accepting them can undermine your N4 and what Ontario landlords should do instead 2026-05-23
 news-2026-05-25 Damage claims at the LTB — the filing deadline and documentation Ontario landlords need to recover costs 2026-05-25
+news-2026-05-26 Bill 60 and the 50% arrears rule — how Ontario's new LTB hearing rules protect landlords from maintenance defense delays 2026-05-26
