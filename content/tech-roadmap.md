@@ -80,11 +80,14 @@ Prospera Properties is being built into a full property management platform that
 - **[2026-05-20]** app/page.tsx is a 678-line use-client component — the entire homepage renders client-side including Framer Motion, inflating the JS bundle significantly
 - **[2026-05-20]** Only the google-reviews API route sets a revalidate cache; all other API routes hit upstream services on every request with no caching
 - **[2026-05-20]** app/admin/properties/page.tsx uses raw img tags (lines 128 and 175) instead of next/image, missing automatic optimization and lazy loading
+- **[2026-05-27]** Both `framer-motion` and `motion` are listed as separate dependencies in package.json — these are the same package (Framer Motion v12 rebranded as `motion`), effectively doubling the animation library bundle contribution; one should be removed
+- **[2026-05-27]** app/platform/page.tsx is a 1,130-line `use client` component with no server-rendered sections; large static portions could be split into server components to reduce JS hydration cost
+- **[2026-05-27]** No loading.tsx files or Suspense boundaries exist outside admin/seo — all async routes have no skeleton or loading states, causing full-page blank delays on slower connections
 
 ---
 
 ## Last IT Agent Run
-2026-05-20
+2026-05-27
 
 ## This Week's Proposal
-Tenant Dashboard — MVP
+Maintenance Request Portal — MVP
