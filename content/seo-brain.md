@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-05-25
+2026-05-27
 
-## Posts Written: 50 total
+## Posts Written: 51 total
 
 ### MONEY keywords (7)
 - property-management-london-ontario ✅
@@ -21,7 +21,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 **Still missing:**
 - residential-property-management-london-ontario (residential vs commercial framing)
 - how-to-find-a-property-manager-ontario
-- property-manager-london-ontario-cost (standalone cost deep-dive)
+- property-manager-london-ontario-cost ✅
 
 ### PAIN keywords (17)
 - evicting-tenant-ontario ✅
@@ -87,19 +87,16 @@ _(N-form series now complete)_
 ## Recommended Next Posts
 
 **Immediate:**
-1. property-manager-london-ontario-cost (MONEY — HIGH PRIORITY)
-2. residential-property-management-london-ontario (MONEY)
-3. small-landlord-property-management-london-ontario (LONG-TAIL)
-
-**Following:**
-1. how-to-find-a-property-manager-ontario (MONEY)
+1. residential-property-management-london-ontario (MONEY — HIGH PRIORITY)
+2. small-landlord-property-management-london-ontario (LONG-TAIL)
+3. how-to-find-a-property-manager-ontario (MONEY)
 
 ---
 
 ## Do More Of
 - Process/timeline posts — strong for AI citations and rich snippets
 - City-specific posts naming London, St. Thomas, or Strathroy
-- MONEY keyword gaps — three remain, all high-value for conversion
+- MONEY keyword gaps — two remain, both high-value for conversion
 
 ## Do Less Of
 - Generic landlord tips — fully covered
@@ -119,3 +116,4 @@ _(N-form series now complete)_
 - 2026-05-20: Published capital-gains-rental-property-ontario — LONG-TAIL HIGH PRIORITY. Covers capital gains calculation, Adjusted Cost Base, 2024 inclusion rate change (50% vs 66.67% above $250K), CCA recapture, principal residence exemption (partial), selling with tenants, and tax planning strategies. Internal links to landlord-record-keeping-ontario, n12-notice-ontario, and selling-rental-property-with-tenants-ontario.
 - 2026-05-22: Published n13-notice-ontario — PAIN HIGH PRIORITY. Completes the N-form series (N4, N5, N8, N12, N13). Covers demolition/conversion/extensive repairs grounds, 120-day notice requirement, mandatory 3-month compensation, right of first refusal for renovations, step-by-step serving process, LTB hearing preparation, and common landlord mistakes. Internal links to ltb-hearing-preparation-ontario-landlords, renoviction-ontario-landlords, and n12-notice-ontario.
 - 2026-05-25: Published what-can-landlord-deduct-from-last-month-rent-ontario — LONG-TAIL HIGH PRIORITY. Covers RTA s.106 definition of LMR as rent-only deposit, interest obligation at annual guideline rate, prohibited deductions (damage/cleaning/utilities/fees), L10 application and Small Claims Court as proper damage-recovery channels, T1 application risk for illegal deductions, and end-of-tenancy process checklist. Internal links to rent-increase-ontario-guidelines, move-in-move-out-inspection-ontario, tenant-damages-property-ontario, landlord-record-keeping-ontario, and abandoned-tenancy-ontario.
+- 2026-05-27: Published property-manager-london-ontario-cost — MONEY HIGH PRIORITY. Deep-dive cost breakdown covering monthly management fees (8–12%), leasing fees (one month's rent), renewal fees, maintenance markups, vacancy fees, setup costs, and full year-one vs. year-two cost modeling. Includes comparison table and 10-question checklist for evaluating companies. Internal links to lease-renewal-ontario-landlord-guide, rental-property-tax-deductions-ontario, n4-notice-ontario, property-management-fees-ontario, and first-time-landlord-tips-london-ontario.
