@@ -260,3 +260,15 @@ Is anyone in London or Ontario seeing how these changes are playing out at actua
 
 #OntarioLandlord #Bill60 #LTB #LondonOntario
 ---
+
+## 2026-05-27
+Quick question for the group — has anyone had to use the Sheriff's office after winning an LTB eviction case?
+
+A lot of landlords don't realize the order alone doesn't get the tenant out. If they don't leave voluntarily, you have to take the certified order to the Court Enforcement Office (Sheriff's office), pay about $450–500, and wait for them to schedule a physical removal. You can't change the locks yourself — that's still an illegal lockout even with an order in hand.
+
+Had a London landlord recently wait a full month thinking the tenant would leave on their own after the order was issued. Cost them an extra month of unpaid rent.
+
+Anyone been through the enforcement process in London or Ontario? How long did the Sheriff actually take to schedule the removal?
+
+#OntarioLandlord #LondonOntario #LTB #LandlordTips
+---
