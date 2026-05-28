@@ -272,3 +272,15 @@ Anyone been through the enforcement process in London or Ontario? How long did t
 
 #OntarioLandlord #LondonOntario #LTB #LandlordTips
 ---
+
+## 2026-05-28
+Quick one for the group — do you know if your rental is exempt from Ontario's rent guideline?
+
+Units first occupied after November 15, 2018 are exempt from the annual rent increase cap. So between tenancies, you can set rent at market rate — no approval needed. The guideline is 2.5% in 2026, which on a $1,800/month unit works out to $45/month. If you're re-renting a newer unit, that difference compounds fast over multiple turnovers.
+
+The catch: once a new tenant moves in, that rent locks in. You still need a proper N1 notice for any increase during the tenancy, and it has to be served 90 days in advance on the actual form.
+
+Does anyone here own units built post-2018 in London, St. Thomas, or Strathroy? Have you found this gives you meaningful flexibility when setting rent for new tenants?
+
+#OntarioLandlord #LondonOntario #RentControl #LandlordTips
+---

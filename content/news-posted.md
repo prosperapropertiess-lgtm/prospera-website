@@ -19,3 +19,4 @@ news-2026-05-23 Partial rent payments — how accepting them can undermine your 
 news-2026-05-25 Damage claims at the LTB — the filing deadline and documentation Ontario landlords need to recover costs 2026-05-25
 news-2026-05-26 Bill 60 and the 50% arrears rule — how Ontario's new LTB hearing rules protect landlords from maintenance defense delays 2026-05-26
 news-2026-05-27 LTB enforcement orders — why winning your eviction case isn't the end and how the Sheriff process works 2026-05-27
+news-2026-05-28 Rent control exemptions — which Ontario rentals are exempt from the annual guideline and what landlords get wrong 2026-05-28
