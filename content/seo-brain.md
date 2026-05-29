@@ -5,11 +5,11 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-05-27
+2026-05-29
 
-## Posts Written: 51 total
+## Posts Written: 52 total
 
-### MONEY keywords (7)
+### MONEY keywords (8)
 - property-management-london-ontario ✅
 - property-management-fees-ontario ✅
 - how-much-charge-rent-london-ontario ✅
@@ -17,9 +17,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 - property-management-strathroy-ontario ✅
 - property-management-sarnia-ontario ✅
 - best-property-management-company-london-ontario ✅
+- residential-property-management-london-ontario ✅
 
 **Still missing:**
-- residential-property-management-london-ontario (residential vs commercial framing)
 - how-to-find-a-property-manager-ontario
 - property-manager-london-ontario-cost ✅
 
@@ -45,7 +45,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 **Still missing:**
 _(N-form series now complete)_
 
-### LONG-TAIL keywords (26)
+### LONG-TAIL keywords (27)
 - first-time-landlord-tips-london-ontario ✅
 - tenant-screening-red-flags ✅
 - rental-property-tax-deductions-ontario ✅
@@ -72,6 +72,7 @@ _(N-form series now complete)_
 - lease-renewal-ontario-landlord-guide ✅
 - capital-gains-rental-property-ontario ✅
 - what-can-landlord-deduct-from-last-month-rent-ontario ✅
+- small-landlord-property-management-london-ontario
 
 **Still missing:**
 - small-landlord-property-management-london-ontario
@@ -87,9 +88,8 @@ _(N-form series now complete)_
 ## Recommended Next Posts
 
 **Immediate:**
-1. residential-property-management-london-ontario (MONEY — HIGH PRIORITY)
+1. how-to-find-a-property-manager-ontario (MONEY — HIGH PRIORITY)
 2. small-landlord-property-management-london-ontario (LONG-TAIL)
-3. how-to-find-a-property-manager-ontario (MONEY)
 
 ---
 
@@ -117,3 +117,4 @@ _(N-form series now complete)_
 - 2026-05-22: Published n13-notice-ontario — PAIN HIGH PRIORITY. Completes the N-form series (N4, N5, N8, N12, N13). Covers demolition/conversion/extensive repairs grounds, 120-day notice requirement, mandatory 3-month compensation, right of first refusal for renovations, step-by-step serving process, LTB hearing preparation, and common landlord mistakes. Internal links to ltb-hearing-preparation-ontario-landlords, renoviction-ontario-landlords, and n12-notice-ontario.
 - 2026-05-25: Published what-can-landlord-deduct-from-last-month-rent-ontario — LONG-TAIL HIGH PRIORITY. Covers RTA s.106 definition of LMR as rent-only deposit, interest obligation at annual guideline rate, prohibited deductions (damage/cleaning/utilities/fees), L10 application and Small Claims Court as proper damage-recovery channels, T1 application risk for illegal deductions, and end-of-tenancy process checklist. Internal links to rent-increase-ontario-guidelines, move-in-move-out-inspection-ontario, tenant-damages-property-ontario, landlord-record-keeping-ontario, and abandoned-tenancy-ontario.
 - 2026-05-27: Published property-manager-london-ontario-cost — MONEY HIGH PRIORITY. Deep-dive cost breakdown covering monthly management fees (8–12%), leasing fees (one month's rent), renewal fees, maintenance markups, vacancy fees, setup costs, and full year-one vs. year-two cost modeling. Includes comparison table and 10-question checklist for evaluating companies. Internal links to lease-renewal-ontario-landlord-guide, rental-property-tax-deductions-ontario, n4-notice-ontario, property-management-fees-ontario, and first-time-landlord-tips-london-ontario.
+- 2026-05-29: Published residential-property-management-london-ontario — MONEY HIGH PRIORITY. Covers full scope of residential PM services, London market specifics (Western/Fanshawe student demand, neighbourhood pricing, LTB delays), cost of self-managing vs. professional management, what to look for in a PM (RECO registration, RTA fluency, screening process), onboarding process walkthrough, and residential vs. commercial distinction. Internal links to n4-notice-ontario, property-management-fees-ontario, tenant-screening-red-flags, and first-time-landlord-tips-london-ontario.
