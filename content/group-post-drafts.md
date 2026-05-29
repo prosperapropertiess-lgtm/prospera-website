@@ -284,3 +284,17 @@ Does anyone here own units built post-2018 in London, St. Thomas, or Strathroy? 
 
 #OntarioLandlord #LondonOntario #RentControl #LandlordTips
 ---
+
+## 2026-05-29
+Quick heads up if you're still putting "no pets" in your Ontario leases — Section 14 of the RTA voids those clauses entirely.
+
+A tenant can move in a dog and you have zero grounds to evict them just for having the animal. The only way to file an N5 is if the pet causes actual damage, persistent noise, or a documented allergy issue for another tenant in the building — the problem has to be the impact, not the presence.
+
+If your unit is in a condo, the condo corp's pet restrictions can still apply separately through the rules in your lease. That's a different legal framework.
+
+The fix: ditch the "no pets" clause and focus on thorough move-in inspections, a signed condition report, and tight damage liability language instead.
+
+Anyone dealt with a tenant who brought in a pet against a clause like this? Did you know it was void before this?
+
+#OntarioLandlord #LandlordTips #OntarioRTA
+---
