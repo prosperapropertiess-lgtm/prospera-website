@@ -453,3 +453,103 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Content-focused real estate brokerage with strong SEO orientation. Guest post pitch should emphasize the geographic diversification Prospera brings to their Ontario content — they can't cover SW Ontario from Niagara, so Prospera fills a gap. Pitch should be substantive and offer a specific article angle with real data. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
+
+## Tenon10 — Ontario Landlord Blog
+- url: https://www.tenon10.com/blog
+- type: blog
+- why: Canadian property management software platform with an active Ontario landlord blog covering LTB procedures, rent increases, and first-time landlord guides — a non-competing tech company whose readers are exactly the DIY landlords Prospera can convert to full-service management clients.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## Community Real Estate Group — London Ontario
+- url: https://www.communityrealestategroup.ca/buying/investors/
+- type: blog
+- why: London Ontario real estate brokerage led by Shawn and Angela Westerik with 30+ years of regional experience, serving London, St. Thomas, Exeter, and Thames Centre — their investor-buyer clients become landlords who need management, making a mutual referral arrangement and resource listing natural.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## Rentals.ca Blog
+- url: https://rentals.ca/blog/landlords
+- type: blog
+- why: Canada's largest rental marketplace with a high-authority Ontario landlord blog covering LTB procedures, lease agreements, rent increase guidelines, and tenant screening — a high-traffic platform where a resource mention or featured expert contribution would reach a broad national audience of active Ontario landlords.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## Association of Condominium Managers of Ontario (ACMO)
+- url: https://acmo.org/
+- type: association
+- why: Ontario's only professional industry association for condominium managers — an associate membership earns a high-authority .org directory backlink and positions Prospera alongside certified property management professionals in the province's most authoritative industry body.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## The Siemens Home Team — London & St. Thomas Realtors
+- url: https://www.thesiemenshometeam.com/Blog
+- type: blog
+- why: Local real estate team (Christine & Kurtis Siemens, The Realty Firm) serving London, St. Thomas, and Elgin/Middlesex County with an active blog — their investment buyer clients in Prospera's exact markets are prime candidates for a referral arrangement and co-authored content on "what to do after buying an investment property in St. Thomas."
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## liv.rent Blog — Ontario Landlord Resources
+- url: https://liv.rent/blog/landlords/
+- type: blog
+- why: Canadian rental platform with a well-developed Ontario landlord blog covering tenancy law, LTB, screening, and rent reporting — a technology platform (not a competitor) whose landlord-focused readership overlaps directly with Prospera's target market; a guest post or cited resource on professional management in SW Ontario would fit their editorial mix.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## The Mortgage Firm — London Ontario
+- url: https://www.themortgagefirm.ca/index.php/london-ontario-investment-property-mortgages
+- type: mortgage
+- why: London-based mortgage brokerage (204 Oxford St W, since 2013) explicitly specializing in investment property mortgages for London, St. Thomas, and SW Ontario — their investor clients are Prospera's exact prospects, and a referral partner listing or co-authored guide on "what happens after your investment property mortgage closes" would serve both audiences.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## 360Lending — Ontario Real Estate Investment Blog
+- url: https://www.360lending.ca/blog
+- type: mortgage
+- why: Award-winning Ontario mortgage brokerage with an active investment-focused blog covering BRRRR strategy, Ontario market outlooks, and private lending — their Ontario investor readership is a natural audience for Prospera's property management expertise; a guest post on SW Ontario rental yields or a cited resource in their market outlook content would earn a high-authority backlink.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## ViewHomes.ca — London & St. Thomas Market Blog
+- url: https://www.viewhomes.ca/blog/london-st-thomas-real-estate-housing-market-update/
+- type: blog
+- why: Canadian real estate portal publishing regular London and St. Thomas MLS market statistics and housing updates — a data-focused site where Prospera's rental market insights (vacancy rates, average rents, tenant demand) would complement their sales-side market data and earn a resource mention from a well-indexed local real estate platform.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
+
+## London Home Builders' Association (LHBA)
+- url: https://www.lhba.on.ca/
+- type: association
+- why: London's residential construction industry association whose builder and developer members frequently create new rental inventory — an associate membership or vendor resource listing positions Prospera as the recommended management partner for newly built rental units entering the London market.
+- researched: false
+- drafted: false
+- added: 2026-05-30
+
+---
