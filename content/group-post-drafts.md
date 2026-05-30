@@ -298,3 +298,19 @@ Anyone dealt with a tenant who brought in a pet against a clause like this? Did 
 
 #OntarioLandlord #LandlordTips #OntarioRTA
 ---
+
+## 2026-05-30
+Quick question for the group — are you using the Ontario Standard Form of Lease for every new tenancy?
+
+Since April 2018, it's been mandatory for most residential rentals in Ontario. A lot of landlords are still using old custom templates.
+
+Here's the part most people don't know: if a tenant asks for the standard form in writing and you don't provide it within 21 days, they can legally withhold one month's rent. Wait another 30 days without providing it — they get to keep that money.
+
+Custom clauses are fine, they just have to go in Section K and can't contradict the RTA.
+
+The form is free on ontario.ca. There's no good reason not to use it.
+
+Anyone in London or Ontario still running custom leases — has it ever been an issue at the LTB?
+
+#OntarioLandlord #LondonOntario #LandlordTips #LeaseAgreement
+---

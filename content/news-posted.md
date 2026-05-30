@@ -21,3 +21,4 @@ news-2026-05-26 Bill 60 and the 50% arrears rule — how Ontario's new LTB heari
 news-2026-05-27 LTB enforcement orders — why winning your eviction case isn't the end and how the Sheriff process works 2026-05-27
 news-2026-05-28 Rent control exemptions — which Ontario rentals are exempt from the annual guideline and what landlords get wrong 2026-05-28
 news-2026-05-29 "No pets" clauses — why they're void under Section 14 of the RTA and what Ontario landlords can actually do 2026-05-29
+news-2026-05-30 Ontario Standard Form of Lease — the mandatory lease landlords must use and what happens if they don't provide it 2026-05-30
