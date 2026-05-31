@@ -309,7 +309,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canadian rent-payment platform with an active landlord-facing blog covering Ontario tenant law, eviction tips, and rental management — a resource mention or guest post on "why professional property management beats DIY rent collection" would fit naturally.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.tenantpay.com/contact
 - site_focus: TenantPay is a Canadian fintech platform that processes online rent payments for landlords and property managers, reporting rent to credit bureaus and streamlining collections. Their blog covers Ontario landlord-tenant law, eviction procedures, rent arrears management, and best practices for independent and professional landlords. Content is practical and compliance-focused, targeting Canadian landlords who want to modernize their rent collection.
@@ -324,7 +324,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: media
 - why: National trade magazine that publishes expert-contributed pieces on Ontario landlord challenges (tenant screening, LTB, managing difficult tenants) — strong candidate for a bylined article positioning Prospera as a southwestern Ontario authority.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.canadianrealestatemagazine.ca/contact
 - site_focus: Canadian Real Estate Magazine is a national trade publication covering real estate investment, landlord operations, market analysis, and property management across Canada. They publish expert-contributed bylined articles alongside staff editorial, targeting professional landlords, investors, and property managers. Content mix includes Ontario LTB coverage, tenant management challenges, market outlooks, and operational best practices for rental property owners.
@@ -339,7 +339,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: media
 - why: Local radio station's news site covering Strathroy real estate market updates monthly and running a "Your Money, Your Community" local business feature — ideal earned media placement in one of Prospera's three core markets.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.strathroytoday.ca/contact
 - site_focus: Strathroy Today is the digital news and community site for 105.7 CHOK, the local radio station serving Strathroy and Middlesex County. Covers local news, community events, real estate, agriculture, and business features for the Strathroy area. The "Your Money, Your Community" feature highlights local businesses and gives local operators an earned media opportunity with the community.
@@ -354,7 +354,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: 21-year London mortgage broker with a Learning Center and blog serving London, St. Thomas, and Woodstock — the exact same geography as Prospera, making a reciprocal resource link or joint content piece a natural fit for investor clients.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://danbalch.com/contact/
 - site_focus: Dan Balch is a London Ontario mortgage broker with over 21 years of experience, serving clients in London, St. Thomas, Woodstock, and the surrounding SW Ontario region. His Learning Center covers mortgage basics, pre-approval, investment property financing, renewal strategy, and first-time buyer education. Content targets local buyers and investors navigating the SW Ontario market.
@@ -369,7 +369,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Ontario real estate investing blog and podcast that explicitly calls London "a hidden gem" for investors — a guest post or podcast appearance on property management in southwestern Ontario would reach exactly the right investor audience.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://serenaholmesrealtor.com/contact/
 - site_focus: Serena Holmes is an Ontario realtor and real estate investor who runs the "Inspired to Invest" blog and podcast. Her content targets aspiring and active real estate investors across Ontario with market analysis, investing strategy, and interviews with investors and operators. She has specifically highlighted London Ontario as an undervalued investment market and publishes content aimed at out-of-province investors looking to enter SW Ontario.
@@ -384,7 +384,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: London Ontario real estate wholesaler serving the same Southwestern Ontario markets as Prospera (London, St. Thomas, Strathroy) with a blog targeting buy-and-hold investors — a natural referral partner and resource link from their investor content.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://phbdeals.ca/contact/
 - site_focus: PHBDeals is a London Ontario real estate wholesaling company that sources off-market investment properties across SW Ontario (London, St. Thomas, Strathroy) and connects them with buy-and-hold investors. Their blog targets investors looking to build rental portfolios in the London area, covering deal analysis, market fundamentals, and investment strategy for the SW Ontario market specifically.
@@ -399,7 +399,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Ontario insurance broker with landlord-specific blog content covering rental property management tips — a complementary service provider whose readers are active Ontario landlords, ideal for a resource mention on professional property management.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.705insurance.ca/contact
 - site_focus: 705 Insurance is an Ontario insurance brokerage serving landlords, homeowners, and small businesses. Their blog targets active Ontario landlords with practical risk management content — including rental property tips, insurance coverage guides, and landlord-tenant best practices. The "10 Essential Hacks Every Ontario Landlord Should Know" post covers property management fundamentals from an insurance risk perspective.
@@ -414,7 +414,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: London Ontario Century 21 realtor (North Elm Realty) with a blog and first-time buyer guide serving London — an investor-friendly local realtor whose clients frequently need property management after purchase, making a referral link mutually beneficial.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://austindtitus.ca/contact/
 - site_focus: Austin D. Titus is a London Ontario realtor with Century 21 North Elm Realty who publishes a local real estate blog covering buyer guides, neighbourhood profiles, and London market updates. His content serves first-time buyers and investors looking to purchase in London and the surrounding area, with a practical, approachable tone aimed at demystifying the buying process for local clients.
@@ -429,7 +429,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: London Ontario mortgage broker blog covering investment financing, credit scores, and mortgage renewal for local buyers — his investor clients are exactly the audience Prospera serves once they own rental property.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.seanprosser.com/contact/
 - site_focus: Sean Prosser is a London Ontario mortgage broker whose blog covers investment property financing, credit improvement, mortgage renewal, and home buying strategy for London-area clients. Content targets local first-time buyers and property investors navigating the SW Ontario market, with practical mortgage education written for a non-specialist audience.
@@ -444,7 +444,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Ontario real estate brokerage blog that publishes detailed guides on Ontario landlord law changes (Bill 60, LTB reforms) — a well-indexed content site where a guest post on professional property management in southwestern Ontario would rank well.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-23
 - contact_email: https://www.niagarahomes.com/contact/
 - site_focus: Niagara Homes is an Ontario real estate brokerage that publishes detailed, SEO-optimized guides on Ontario landlord law, LTB reforms, Bill 60 changes, and rental property investment for Ontario landlords and investors. Their blog functions as an investor education resource covering provincial legislation changes, market analysis, and practical landlord guidance — well-indexed and with broad Ontario reach beyond just the Niagara region.
@@ -459,7 +459,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canadian property management software platform with an active Ontario landlord blog covering LTB procedures, rent increases, and first-time landlord guides — a non-competing tech company whose readers are exactly the DIY landlords Prospera can convert to full-service management clients.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.tenon10.com/contact
 - site_focus: Tenon10 is a Canadian SaaS platform helping independent landlords self-manage their rental properties online — handling rent collection, maintenance requests, lease management, and tenant communication. Their Ontario landlord blog covers LTB procedures, N4/N5 notices, rent increase guidelines, and first-time landlord best practices. Content is practical and how-to oriented, aimed at DIY landlords who want to modernize their operations without hiring a manager.
@@ -474,7 +474,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: London Ontario real estate brokerage led by Shawn and Angela Westerik with 30+ years of regional experience, serving London, St. Thomas, Exeter, and Thames Centre — their investor-buyer clients become landlords who need management, making a mutual referral arrangement and resource listing natural.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.communityrealestategroup.ca/contact
 - site_focus: Community Real Estate Group is a London Ontario brokerage run by Shawn and Angela Westerik, bringing over 30 years of combined regional experience serving London, St. Thomas, Exeter, and Thames Centre. Their investor page targets buy-and-hold property buyers with guidance on evaluating investment properties, understanding rental income potential, and navigating the local market. Content is community-rooted and relationship-oriented — they position themselves as the local experts who know these markets deeply.
@@ -489,7 +489,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canada's largest rental marketplace with a high-authority Ontario landlord blog covering LTB procedures, lease agreements, rent increase guidelines, and tenant screening — a high-traffic platform where a resource mention or featured expert contribution would reach a broad national audience of active Ontario landlords.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://rentals.ca/contact
 - site_focus: Rentals.ca is Canada's largest rental marketplace, connecting landlords and tenants with rental listings across the country. Their landlord blog is a high-authority content resource covering Ontario LTB procedures, lease agreements, rent increase guidelines, tenant screening, property maintenance, and landlord rights. Content targets both independent landlords and professional operators, with an Ontario-heavy editorial focus given the province's complex tenancy law environment.
@@ -504,7 +504,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: Ontario's only professional industry association for condominium managers — an associate membership earns a high-authority .org directory backlink and positions Prospera alongside certified property management professionals in the province's most authoritative industry body.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: info@acmo.org
 - site_focus: ACMO is Ontario's only professional association for condominium managers, offering the RCM (Registered Condominium Manager) designation and licensing support under Ontario's Condominium Management Services Act. They provide member education, professional development, industry advocacy, and a corporate member directory. While primarily serving condo managers, they offer corporate and associate membership categories that include property management companies operating in adjacent residential markets.
@@ -519,7 +519,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Local real estate team (Christine & Kurtis Siemens, The Realty Firm) serving London, St. Thomas, and Elgin/Middlesex County with an active blog — their investment buyer clients in Prospera's exact markets are prime candidates for a referral arrangement and co-authored content on "what to do after buying an investment property in St. Thomas."
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.thesiemenshometeam.com/Contact
 - site_focus: Christine and Kurtis Siemens are a real estate team with The Realty Firm covering London, St. Thomas, and Elgin/Middlesex County. Their blog serves local buyers, sellers, and investors with neighbourhood profiles, market updates, buyer guides, and investment property content specific to the London and St. Thomas area. The team operates with a personal, community-rooted brand emphasizing local market knowledge and client relationships.
@@ -534,7 +534,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canadian rental platform with a well-developed Ontario landlord blog covering tenancy law, LTB, screening, and rent reporting — a technology platform (not a competitor) whose landlord-focused readership overlaps directly with Prospera's target market; a guest post or cited resource on professional management in SW Ontario would fit their editorial mix.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://liv.rent/contact/
 - site_focus: Liv.rent is a Canadian rental platform and tenant verification service with a robust Ontario landlord blog. Their content covers Ontario tenancy law, LTB eviction procedures, lease agreements, tenant screening, credit checks, and rent reporting. The blog is SEO-optimized and produces high-quality educational content targeting Ontario landlords who want to modernize and de-risk their rental operations. Liv.rent is technology-first and not a property management company — their platform helps landlords self-manage more efficiently.
@@ -549,7 +549,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: London-based mortgage brokerage (204 Oxford St W, since 2013) explicitly specializing in investment property mortgages for London, St. Thomas, and SW Ontario — their investor clients are Prospera's exact prospects, and a referral partner listing or co-authored guide on "what happens after your investment property mortgage closes" would serve both audiences.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.themortgagefirm.ca/index.php/contact
 - site_focus: The Mortgage Firm is a London Ontario mortgage brokerage operating from 204 Oxford St W, specializing in investment property mortgages for buyers in London, St. Thomas, and the broader SW Ontario market. They help investors finance rental property acquisitions, portfolio growth, and refinancing. Their investment property mortgage page specifically targets London-area real estate investors navigating purchase financing and rental property leverage — indicating a client base that skews toward active or aspiring landlords.
@@ -564,7 +564,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: mortgage
 - why: Award-winning Ontario mortgage brokerage with an active investment-focused blog covering BRRRR strategy, Ontario market outlooks, and private lending — their Ontario investor readership is a natural audience for Prospera's property management expertise; a guest post on SW Ontario rental yields or a cited resource in their market outlook content would earn a high-authority backlink.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.360lending.ca/contact
 - site_focus: 360Lending is an award-winning Ontario mortgage brokerage with a content-rich investment-focused blog. They publish detailed guides on BRRRR strategy, Ontario real estate market outlooks, private and hard-money lending, and investment property financing. Their blog is aimed at sophisticated Ontario real estate investors who are actively building rental portfolios and looking for financing strategies to accelerate growth. Content is analytical and data-informed, targeting experienced investors rather than first-time buyers.
@@ -579,7 +579,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: blog
 - why: Canadian real estate portal publishing regular London and St. Thomas MLS market statistics and housing updates — a data-focused site where Prospera's rental market insights (vacancy rates, average rents, tenant demand) would complement their sales-side market data and earn a resource mention from a well-indexed local real estate platform.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: https://www.viewhomes.ca/contact/
 - site_focus: ViewHomes.ca is a Canadian real estate portal that publishes regular London and St. Thomas MLS market statistics, housing market updates, and area real estate data. Their London and St. Thomas market update blog covers average sales prices, days on market, inventory levels, and sales volume — data-driven content for buyers, sellers, and investors monitoring the SW Ontario market. Content is factual and statistics-focused, designed to serve active participants in the local real estate market.
@@ -594,7 +594,7 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - type: association
 - why: London's residential construction industry association whose builder and developer members frequently create new rental inventory — an associate membership or vendor resource listing positions Prospera as the recommended management partner for newly built rental units entering the London market.
 - researched: true
-- drafted: false
+- drafted: true
 - added: 2026-05-30
 - contact_email: info@lhba.on.ca
 - site_focus: The London Home Builders' Association (LHBA) is the residential construction industry association for London and the surrounding region, representing builders, developers, renovators, and associated trade and service suppliers. LHBA advocates for the local construction industry, publishes industry news, hosts annual awards (BILD London Awards), and maintains a member directory of builders and affiliated service providers. Associate membership is available for non-builder companies that serve the residential construction sector.
