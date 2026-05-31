@@ -19,3 +19,4 @@ what-can-landlord-deduct-from-last-month-rent-ontario drafted 2026-05-26
 l9-application-ontario drafted 2026-05-27
 n8-notice-ontario drafted 2026-05-29
 abandoned-tenancy-ontario drafted 2026-05-30
+ontario-rent-control-exemptions-2026 drafted 2026-05-31
