@@ -1,3 +1,14 @@
+/**
+ * SEO Growth Engine — runs Wed/Thu at noon UTC (8am EST)
+ *
+ * Each run does two things in one shot:
+ *   1. WRITE — picks the next missing keyword, runs competitor SERP analysis, publishes post
+ *   2. OPTIMIZE — picks the weakest existing post and improves it
+ *
+ * Single GitHub commit, single Vercel rebuild, one combined email.
+ * Fridays: optimization-only run handled by /api/cron/seo-optimizer
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getFileFromGitHub, pushFilesToGitHub } from "@/lib/github";
@@ -7,8 +18,9 @@ import { querySearchAnalytics } from "@/lib/google-search-console";
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const SITE_URL = "https://www.prosperaproperties.co/";
+const BLOG_PREFIX = `${SITE_URL}blog/`;
 
-// ── SEO Growth Engine system prompt ──────────────────────────────────────────
+// ── Writer system prompt ──────────────────────────────────────────────────────
 const SEO_SYSTEM = `
 You are the autonomous SEO Growth Engine for Prospera Properties — a property management company in London, St. Thomas, and Strathroy, Ontario.
 
@@ -41,6 +53,11 @@ BLOG POST REQUIREMENTS:
   - Links must feel natural and contextually relevant
   - Spread links through the post, not all clustered together
   - Use descriptive anchor text (not "click here" or "read more")
+- Include 2–3 external authority links to credible sources:
+  - Ontario government sites (ontario.ca, tribunalsontario.ca/ltb), CMHC, CREA, Statistics Canada
+  - Use format: [anchor text](https://full-url)
+  - Link to specific, relevant pages — not just homepages
+  - Spread throughout the post; they signal credibility to Google
 - End with a CTA: Prospera Properties manages rentals in London, St. Thomas, and Strathroy
 - Every H2 should be a complete thought a reader could search for
 - Use numbered lists and bullet points where they add clarity
@@ -100,6 +117,96 @@ featuredImage: "https://..."
 ===END===
 `;
 
+// ── Optimizer system prompt ───────────────────────────────────────────────────
+const OPTIMIZER_SYSTEM = `
+You are the SEO Content Optimizer for Prospera Properties — a property management company in London, St. Thomas, and Strathroy, Ontario.
+
+YOUR JOB: Take an existing blog post and make it significantly better — higher CTR, stronger topical depth, better conversion, more internal links, and optimized for featured snippets.
+
+WHAT TO IMPROVE:
+1. TITLE — rewrite for higher CTR. Use numbers, specificity, power words. Keep "Ontario" where natural. Must include primary keyword. Max 60 chars ideal.
+2. EXCERPT — rewrite for higher CTR in search results. 130–155 chars. Lead with the pain or value. Include primary keyword naturally.
+3. INTRO (first 2–3 paragraphs) — strengthen the hook. Lead with a specific pain point or surprising fact. Cut throat-clearing. Get to the value immediately.
+4. H2 HEADINGS — make every H2 more specific and search-friendly. H2s should answer real questions people search for.
+5. CONTENT DEPTH — expand any thin sections. Add specific Ontario examples, RTA references, dollar amounts, timelines, or step numbers where missing.
+6. FAQ SECTION — add a "Frequently Asked Questions" section at the END of the post body (before the CTA paragraph), with 4–6 Q&A pairs. Format:
+   ## Frequently Asked Questions
+   **Q: Question here?**
+   A: Answer here. 2–4 sentences, specific and practical.
+7. INTERNAL LINKS — add 2–3 more contextual internal links to related posts (format: [anchor text](/blog/slug)). Use slugs from the provided list. Only link to genuinely relevant posts.
+8. CTA — ensure the closing paragraph mentions Prospera Properties serves London, St. Thomas, and Strathroy.
+
+RULES:
+- Keep the slug IDENTICAL — never change it
+- Keep the date field as-is or update to today if content is significantly refreshed
+- Keep the category and featuredImage as-is unless clearly wrong
+- Preserve all existing internal links (add more, don't remove existing ones)
+- Do NOT add placeholder text or notes like "[add example here]"
+- Write in the same voice: direct, practical, expert, no fluff
+- The output must be the COMPLETE file — frontmatter + full body
+
+OUTPUT FORMAT — output EXACTLY this structure:
+
+===OPTIMIZED===
+---
+title: "..."
+date: "YYYY-MM-DD"
+slug: "..."
+excerpt: "..."
+category: "..."
+readTime: "... min read"
+featuredImage: "https://..."
+---
+
+[full optimized markdown post]
+===END===
+
+===CHANGES===
+- [bullet list of specific changes made — title rewrite, new sections added, links added, etc.]
+===END===
+`;
+
+// ── Social post system prompt ─────────────────────────────────────────────────
+const SOCIAL_SYSTEM = `
+You are the Facebook voice for Prospera Properties — a property management company run by Ebin Jaison in London, St. Thomas, and Strathroy, Ontario.
+
+Write one Facebook post inspired by the blog topic provided. The post is NOT a blog promotion. It is a standalone piece of content that makes Ontario landlords stop scrolling.
+
+AUDIENCE: Small-scale Ontario landlords (1–5 units). Stressed, time-poor, self-managing. They've dealt with late rent, LTB delays, bad tenants, 2am maintenance calls, RTA confusion.
+
+VOICE: Direct. Confident. No fluff. Like a local property manager who's seen everything and tells you the truth anyway. Never corporate. Never salesy. Dry humor is allowed sparingly.
+
+STYLE RULES:
+- Sentences are 4–10 words. Short. Punchy.
+- Every sentence gets its own line. No paragraphs.
+- No emojis in serious posts. One max in lighter posts. Never use 🏠🔑💼.
+- No exclamation marks. Ever.
+- Numbers must be specific — not "many landlords" but "63% of landlords"
+- No hashtags
+- Never mention the blog post or say "read more" or "link in bio"
+- Never start with "At Prospera" or mention Prospera in the first 80% of the post
+- Closing line is always one short, final sentence. Make it land.
+
+USE ONE OF THESE FRAMEWORKS:
+
+REFRAME — state the common belief, flip it in one sentence
+LIST DROP — rapid-fire short lines, each adds pressure, end with payoff
+DATA BOMB — open with a specific Ontario/Canadian stat, explain what it means for them
+SCENARIO WALK — put landlord in a specific stressful moment, walk through it, gut punch at the end
+TWO-TRUTH CONTRAST — two short parallel sentences, opposite truths, implicit lesson
+
+CONTENT DRAW FROM:
+- The hidden cost of self-managing (time, stress, legal risk)
+- Ontario RTA / LTB reality (eviction timelines, N4/N12/N5 notices, tribunal backlog)
+- Tenant screening mistakes
+- The math of one bad tenant vs. a PM fee
+- What landlords do wrong without knowing it
+- Rent increase rules, proper notice requirements
+- The emotional toll vs. the business reality
+
+OUTPUT: The post only. No commentary. No "Here's a post:". Just the text, ready to copy-paste.
+`;
+
 // ── Internal linking system prompt ───────────────────────────────────────────
 const LINKING_SYSTEM = `
 You are an internal linking specialist for Prospera Properties' blog.
@@ -127,8 +234,62 @@ OUTPUT FORMAT — return ONLY valid JSON, no other text:
 If no genuinely relevant opportunities exist, return an empty array: []
 `;
 
-// ── Parse main Claude output ──────────────────────────────────────────────────
-function parseOutput(raw: string): { slug: string; blog: string; brain: string } | null {
+// ── Keyword selector prompt ───────────────────────────────────────────────────
+const KEYWORD_SELECTOR_SYSTEM = `
+You are the keyword picker for Prospera Properties' SEO agent.
+
+Given the SEO brain document, pick the single highest-priority missing keyword to write next.
+
+Priority order:
+1. LONG-TAIL ← HIGH PRIORITY items first
+2. PAIN ← HIGH PRIORITY items
+3. MONEY keywords
+4. Any remaining LONG-TAIL
+5. Any remaining PAIN
+
+CRITICAL RULE: Never pick commercial intent keywords. Only informational/educational keywords belong on the blog.
+Commercial intent (these go on service pages, not blog):
+- "property management [city]"
+- "property manager [city]"
+- "rent collection services"
+- "tenant placement"
+- "Airbnb management"
+- "student rental management"
+If the top candidates look commercial, skip them and pick the next informational keyword.
+
+Return ONLY valid JSON, nothing else:
+{ "slug": "the-exact-slug", "keyword": "the target search phrase" }
+`;
+
+// ── SERP competitor analysis ──────────────────────────────────────────────────
+async function fetchSerpSnippets(keyword: string): Promise<string> {
+  const apiKey = process.env.SERPER_API_KEY;
+  if (!apiKey) return "";
+
+  try {
+    const res = await fetch("https://google.serper.dev/search", {
+      method: "POST",
+      headers: { "X-API-KEY": apiKey, "Content-Type": "application/json" },
+      body: JSON.stringify({ q: `${keyword} ontario`, gl: "ca", hl: "en", num: 5 }),
+    });
+    if (!res.ok) return "";
+
+    const data = await res.json();
+    const results = (data.organic ?? []).slice(0, 3);
+    if (!results.length) return "";
+
+    const lines = results.map((r: { title: string; link: string; snippet: string }, i: number) =>
+      `${i + 1}. "${r.title}" — ${r.link}\n   ${r.snippet}`
+    );
+
+    return `\nCOMPETITOR ANALYSIS (top 3 Google results for "${keyword} ontario"):\n${lines.join("\n")}\n\nUse this to:\n- Cover topics competitors cover (match topical depth)\n- Find angles they missed (differentiate)\n- Write at least as long, ideally more specific and actionable\n- Do NOT copy their phrasing — write fresh\n`;
+  } catch {
+    return "";
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function parseWriterOutput(raw: string): { slug: string; blog: string; brain: string } | null {
   const slugMatch  = raw.match(/===SLUG===\n([\s\S]*?)===END===/);
   const blogMatch  = raw.match(/===BLOG===\n([\s\S]*?)===END===/);
   const brainMatch = raw.match(/===BRAIN===\n([\s\S]*?)===END===/);
@@ -140,76 +301,110 @@ function parseOutput(raw: string): { slug: string; blog: string; brain: string }
   };
 }
 
-// ── Extract all published slugs from seo-brain.md ────────────────────────────
-function extractSlugs(brain: string): string[] {
-  const matches = brain.match(/- ([\w-]+) ✅/g) ?? [];
-  return matches.map((m) => m.replace("- ", "").replace(" ✅", "").trim());
+function parseOptimizerOutput(raw: string): { content: string; changes: string[] } | null {
+  const contentMatch = raw.match(/===OPTIMIZED===\n([\s\S]*?)===END===/);
+  const changesMatch = raw.match(/===CHANGES===\n([\s\S]*?)===END===/);
+  if (!contentMatch) return null;
+  const changes = changesMatch
+    ? changesMatch[1].trim().split("\n").filter((l) => l.startsWith("-")).map((l) => l.replace(/^-\s*/, ""))
+    : [];
+  return { content: contentMatch[1].trimEnd(), changes };
 }
 
-// ── Format date range helper ──────────────────────────────────────────────────
+function extractSlugs(brain: string): string[] {
+  return (brain.match(/- ([\w-]+) ✅/g) ?? [])
+    .map((m) => m.replace("- ", "").replace(" ✅", "").trim());
+}
+
 function daysAgo(n: number): string {
   const d = new Date();
   d.setDate(d.getDate() - n);
   return d.toISOString().split("T")[0];
 }
 
+// ── Main handler ──────────────────────────────────────────────────────────────
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // ── 1. Read SEO brain ─────────────────────────────────────────────────────
-  const seoBrain = await getFileFromGitHub("content/seo-brain.md");
+  const today = new Date().toISOString().split("T")[0];
+
+  // ── 1. Read SEO brain + fetch GSC data in parallel ────────────────────────
+  const [seoBrain, gscData] = await Promise.all([
+    getFileFromGitHub("content/seo-brain.md"),
+    querySearchAnalytics({
+      siteUrl: SITE_URL,
+      startDate: daysAgo(28),
+      endDate: today,
+      dimensions: ["page"],
+      rowLimit: 50,
+      dimensionFilterGroups: [{ filters: [{ dimension: "page", operator: "contains", expression: "/blog/" }] }],
+    }).catch(() => null),
+  ]);
+
   if (!seoBrain) {
-    console.error("[seo-writer] Could not read seo-brain.md");
     return NextResponse.json({ error: "Could not read seo-brain.md" }, { status: 500 });
   }
 
-  const today = new Date().toISOString().split("T")[0];
   const existingSlugs = extractSlugs(seoBrain);
 
-  // ── 2. Fetch GSC performance data (non-blocking) ──────────────────────────
+  // Build GSC context for the writer
   let gscContext = "";
-  try {
-    const [topPages, declining] = await Promise.all([
-      querySearchAnalytics({
-        siteUrl: SITE_URL,
-        startDate: daysAgo(28),
-        endDate: today,
-        dimensions: ["page"],
-        rowLimit: 10,
-        dimensionFilterGroups: [{ filters: [{ dimension: "page", operator: "contains", expression: "/blog/" }] }],
-      }),
-      querySearchAnalytics({
-        siteUrl: SITE_URL,
-        startDate: daysAgo(28),
-        endDate: today,
-        dimensions: ["page"],
-        rowLimit: 5,
-        dimensionFilterGroups: [{ filters: [{ dimension: "page", operator: "contains", expression: "/blog/" }] }],
-      }),
-    ]);
-
-    if (topPages?.rows?.length) {
-      const topList = topPages.rows
-        .sort((a, b) => b.impressions - a.impressions)
-        .slice(0, 8)
-        .map((r) => {
-          const slug = r.keys[0].replace("https://www.prosperaproperties.co/blog/", "");
-          return `  - /blog/${slug} — ${r.impressions} impressions, position #${r.position.toFixed(0)}, CTR ${(r.ctr * 100).toFixed(1)}%`;
-        })
-        .join("\n");
-
-      gscContext = `\nGSC PERFORMANCE DATA (last 28 days):\nTop performing blog posts:\n${topList}\n\nUse this to write supporting content that strengthens these clusters, or avoid cannibalizing topics already ranking well.\n`;
-    }
-  } catch (err) {
-    console.log("[seo-writer] GSC fetch skipped:", err);
+  if (gscData?.rows?.length) {
+    const topList = gscData.rows
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, 8)
+      .map((r) => {
+        const slug = r.keys[0].replace(`${SITE_URL}blog/`, "");
+        return `  - /blog/${slug} — ${r.impressions} impressions, position #${r.position.toFixed(0)}, CTR ${(r.ctr * 100).toFixed(1)}%`;
+      })
+      .join("\n");
+    gscContext = `\nGSC PERFORMANCE DATA (last 28 days):\nTop performing blog posts:\n${topList}\n\nUse this to write supporting content that strengthens these clusters, or avoid cannibalizing topics already ranking well.\n`;
   }
 
-  // ── 3. Write the post ─────────────────────────────────────────────────────
-  let raw = "";
+  // ── 2a. KEYWORD SELECTION — pick keyword before writing ──────────────────
+  console.log("[seo] Selecting keyword...");
+  let selectedSlug = "";
+  let selectedKeyword = "";
   try {
+    const kwResponse = await anthropic.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 200,
+      system: KEYWORD_SELECTOR_SYSTEM,
+      messages: [{
+        role: "user",
+        content: `Today's date: ${today}\n\nSEO Brain:\n\n${seoBrain}\n\nReturn JSON only.`,
+      }],
+    });
+    const kwRaw = kwResponse.content[0].type === "text" ? kwResponse.content[0].text.trim() : "";
+    const kwJson = kwRaw.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+    const kw = JSON.parse(kwJson);
+    selectedSlug = kw.slug ?? "";
+    selectedKeyword = kw.keyword ?? selectedSlug.replace(/-/g, " ");
+    console.log(`[seo] Keyword selected: ${selectedSlug} ("${selectedKeyword}")`);
+  } catch (err) {
+    console.error("[seo] Keyword selector error (non-fatal, falling back to full writer):", err);
+  }
+
+  // ── 2b. COMPETITOR ANALYSIS — fetch top 3 SERP results for keyword ────────
+  let competitorContext = "";
+  if (selectedKeyword) {
+    competitorContext = await fetchSerpSnippets(selectedKeyword);
+    if (competitorContext) {
+      console.log(`[seo] Competitor context fetched for: ${selectedKeyword}`);
+    }
+  }
+
+  // ── 2c. WRITER — write the full post with competitor context ─────────────
+  console.log("[seo] Starting writer...");
+  let writerRaw = "";
+  try {
+    const slugInstruction = selectedSlug
+      ? `Write the post for this keyword: "${selectedKeyword}" (slug: ${selectedSlug})\n`
+      : "Pick the highest-priority missing keyword and write the full blog post.\n";
+
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 8000,
@@ -217,47 +412,141 @@ export async function GET(req: NextRequest) {
       messages: [{
         role: "user",
         content: `Today's date: ${today}
-${gscContext}
+${gscContext}${competitorContext}
 SEO Brain document:
 
 ${seoBrain}
 
-Pick the highest-priority missing keyword and write the full blog post. Follow the output format exactly.`,
+${slugInstruction}Follow the output format exactly.`,
       }],
     });
-    raw = response.content[0].type === "text" ? response.content[0].text : "";
+    writerRaw = response.content[0].type === "text" ? response.content[0].text : "";
   } catch (err) {
-    console.error("[seo-writer] Claude write error:", err);
-    return NextResponse.json({ error: "Claude API error", detail: String(err) }, { status: 500 });
+    console.error("[seo] Writer Claude error:", err);
+    return NextResponse.json({ error: "Writer Claude API error", detail: String(err) }, { status: 500 });
   }
 
-  const parsed = parseOutput(raw);
-  if (!parsed) {
-    console.error("[seo-writer] Failed to parse Claude output:", raw.substring(0, 500));
-    return NextResponse.json({ error: "Failed to parse Claude output" }, { status: 500 });
+  const writerParsed = parseWriterOutput(writerRaw);
+  if (!writerParsed) {
+    console.error("[seo] Failed to parse writer output:", writerRaw.substring(0, 500));
+    return NextResponse.json({ error: "Failed to parse writer output" }, { status: 500 });
   }
 
-  const { slug, blog, brain } = parsed;
-  const titleMatch    = blog.match(/^title:\s*"(.+)"/m);
-  const categoryMatch = blog.match(/^category:\s*"(.+)"/m);
-  const excerptMatch  = blog.match(/^excerpt:\s*"(.+)"/m);
-  const title    = titleMatch?.[1]    ?? slug;
-  const category = categoryMatch?.[1] ?? "Landlord Tips";
-  const excerpt  = excerptMatch?.[1]  ?? "";
+  const { slug: newSlug, blog: newBlog, brain: updatedBrain } = writerParsed;
+  const titleMatch    = newBlog.match(/^title:\s*"(.+)"/m);
+  const categoryMatch = newBlog.match(/^category:\s*"(.+)"/m);
+  const excerptMatch  = newBlog.match(/^excerpt:\s*"(.+)"/m);
+  const newTitle    = titleMatch?.[1]    ?? newSlug;
+  const newCategory = categoryMatch?.[1] ?? "Landlord Tips";
+  const newExcerpt  = excerptMatch?.[1]  ?? "";
 
-  // ── 4. Internal linking engine ────────────────────────────────────────────
-  // Ask Claude which existing posts should link to the new post
+  console.log(`[seo] Writer done: ${newSlug}`);
+
+  // ── 3. OPTIMIZER — pick weakest post and improve it ───────────────────────
+  console.log("[seo] Starting optimizer...");
+
+  // Use updated brain slugs so we don't accidentally pick the brand-new post
+  const allSlugs = extractSlugs(updatedBrain);
+
+  let optimizeSlug: string | null = null;
+  let optimizeReason = "deterministic rotation (no GSC data yet)";
+
+  if (gscData?.rows && gscData.rows.length >= 3) {
+    const candidates = gscData.rows
+      .map((r) => ({
+        slug: r.keys[0].replace(BLOG_PREFIX, ""),
+        impressions: r.impressions,
+        ctr: r.ctr,
+        position: r.position,
+        score: r.impressions * (0.05 - Math.min(r.ctr, 0.05)),
+      }))
+      .filter((r) => r.impressions >= 50 && r.ctr < 0.04 && r.slug !== newSlug)
+      .sort((a, b) => b.score - a.score);
+
+    if (candidates.length > 0) {
+      optimizeSlug = candidates[0].slug;
+      optimizeReason = `${candidates[0].impressions} impressions, ${(candidates[0].ctr * 100).toFixed(1)}% CTR — title/meta opportunity`;
+    } else {
+      const lowestRanking = gscData.rows
+        .filter((r) => r.impressions >= 20 && r.keys[0].replace(BLOG_PREFIX, "") !== newSlug)
+        .sort((a, b) => b.position - a.position)[0];
+      if (lowestRanking) {
+        optimizeSlug = lowestRanking.keys[0].replace(BLOG_PREFIX, "");
+        optimizeReason = `position #${lowestRanking.position.toFixed(0)} — content depth opportunity`;
+      }
+    }
+  }
+
+  // Fallback: deterministic weekly rotation, skip the new post
+  if (!optimizeSlug) {
+    const weekNum = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+    const eligible = allSlugs.filter((s) => s !== newSlug);
+    if (eligible.length > 0) optimizeSlug = eligible[weekNum % eligible.length];
+  }
+
+  // Collect all files to push in one commit
   const filesToPush: { path: string; content: string }[] = [
-    { path: `content/blog/${slug}.md`, content: blog },
-    { path: "content/seo-brain.md",   content: brain },
+    { path: `content/blog/${newSlug}.md`, content: newBlog },
+    { path: "content/seo-brain.md", content: updatedBrain },
   ];
 
-  try {
-    const slugSample = existingSlugs
-      .filter((s) => s !== slug)
-      .slice(0, 40)
-      .join(", ");
+  let optimizedTitle = "";
+  let optimizedChanges: string[] = [];
 
+  if (optimizeSlug) {
+    const originalContent = await getFileFromGitHub(`content/blog/${optimizeSlug}.md`);
+    if (originalContent) {
+      try {
+        const optResponse = await anthropic.messages.create({
+          model: "claude-sonnet-4-6",
+          max_tokens: 10000,
+          system: OPTIMIZER_SYSTEM,
+          messages: [{
+            role: "user",
+            content: `Today's date: ${today}
+Optimization target: ${optimizeSlug}
+Reason selected: ${optimizeReason}
+
+All existing blog post slugs (for internal links):
+${allSlugs.filter((s) => s !== optimizeSlug).join(", ")}
+
+Here is the current post content to optimize:
+
+${originalContent}
+
+Optimize this post following all instructions. Output the complete improved file.`,
+          }],
+        });
+
+        const optRaw = optResponse.content[0].type === "text" ? optResponse.content[0].text : "";
+        const optimized = parseOptimizerOutput(optRaw);
+
+        if (optimized) {
+          // Safety: verify slug wasn't changed
+          const slugCheck = optimized.content.match(/^slug:\s*"(.+)"/m);
+          if (!slugCheck || slugCheck[1] === optimizeSlug) {
+            const titleM = optimized.content.match(/^title:\s*"(.+)"/m);
+            optimizedTitle = titleM?.[1] ?? optimizeSlug;
+            optimizedChanges = optimized.changes;
+            filesToPush.push({ path: `content/blog/${optimizeSlug}.md`, content: optimized.content });
+            console.log(`[seo] Optimizer done: ${optimizeSlug}`);
+          } else {
+            console.warn(`[seo] Optimizer slug mismatch — skipping (expected ${optimizeSlug}, got ${slugCheck[1]})`);
+            optimizeSlug = null;
+          }
+        }
+      } catch (err) {
+        console.error("[seo] Optimizer Claude error (non-fatal):", err);
+        optimizeSlug = null;
+      }
+    } else {
+      optimizeSlug = null;
+    }
+  }
+
+  // ── 4. Internal linking engine ────────────────────────────────────────────
+  try {
+    const slugSample = existingSlugs.filter((s) => s !== newSlug).slice(0, 40).join(", ");
     const linkResponse = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1500,
@@ -265,9 +554,9 @@ Pick the highest-priority missing keyword and write the full blog post. Follow t
       messages: [{
         role: "user",
         content: `New post just published:
-Title: "${title}"
-Slug: ${slug}
-Excerpt: ${excerpt}
+Title: "${newTitle}"
+Slug: ${newSlug}
+Excerpt: ${newExcerpt}
 
 Existing posts (slugs): ${slugSample}
 
@@ -276,79 +565,166 @@ Which 2–3 existing posts should add a contextual link to the new post? Return 
     });
 
     const linkRaw = linkResponse.content[0].type === "text" ? linkResponse.content[0].text.trim() : "[]";
-
-    // Parse JSON — strip any markdown code fences
     const jsonStr = linkRaw.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
     const suggestions: { slug: string; searchText: string; replaceText: string }[] = JSON.parse(jsonStr);
 
     if (Array.isArray(suggestions) && suggestions.length > 0) {
-      // For each suggestion: fetch the file, apply the replacement
       await Promise.all(
         suggestions.map(async (s) => {
+          // Don't overwrite a file we're already modifying
+          if (filesToPush.find((f) => f.path === `content/blog/${s.slug}.md`)) return;
           try {
             const existing = await getFileFromGitHub(`content/blog/${s.slug}.md`);
-            if (!existing) return;
-            if (!existing.includes(s.searchText)) {
-              console.warn(`[seo-writer] searchText not found in ${s.slug}`);
-              return;
-            }
-            const updated = existing.replace(s.searchText, s.replaceText);
-            filesToPush.push({ path: `content/blog/${s.slug}.md`, content: updated });
-            console.log(`[seo-writer] Internal link added to: ${s.slug}`);
+            if (!existing || !existing.includes(s.searchText)) return;
+            filesToPush.push({ path: `content/blog/${s.slug}.md`, content: existing.replace(s.searchText, s.replaceText) });
+            console.log(`[seo] Internal link added to: ${s.slug}`);
           } catch (err) {
-            console.error(`[seo-writer] Link injection failed for ${s.slug}:`, err);
+            console.error(`[seo] Link injection failed for ${s.slug}:`, err);
           }
         })
       );
     }
   } catch (err) {
-    console.error("[seo-writer] Internal linking error (non-fatal):", err);
+    console.error("[seo] Internal linking error (non-fatal):", err);
   }
 
-  // ── 5. Push everything to GitHub ─────────────────────────────────────────
-  const linkedCount = filesToPush.length - 2; // subtract new post + brain
-  const pushResult = await pushFilesToGitHub(
-    filesToPush,
-    `SEO: ${title} [SEO Agent]\n\nKeyword: ${slug}\nCategory: ${category}\nInternal links added: ${linkedCount} existing posts updated\n\nCo-Authored-By: Prospera SEO Agent <agent@prosperaproperties.co>`
-  );
+  // ── 5. Single GitHub commit for everything ────────────────────────────────
+  const linkedCount = filesToPush.length - 2 - (optimizeSlug ? 1 : 0);
+  const commitMsg = [
+    `SEO: ${newTitle} + optimize ${optimizeSlug ?? "—"} [SEO Agent]`,
+    ``,
+    `New post: ${newSlug} (${newCategory})`,
+    optimizeSlug ? `Optimized: ${optimizeSlug} — ${optimizeReason}` : "",
+    `Internal links added to ${linkedCount} existing posts`,
+    ``,
+    `Co-Authored-By: Prospera SEO Agent <agent@prosperaproperties.co>`,
+  ].filter(Boolean).join("\n");
+
+  const pushResult = await pushFilesToGitHub(filesToPush, commitMsg);
 
   if (!pushResult.success) {
-    console.error("[seo-writer] GitHub push failed:", pushResult.error);
+    console.error("[seo] GitHub push failed:", pushResult.error);
     return NextResponse.json({ error: "GitHub push failed", detail: pushResult.error }, { status: 500 });
   }
 
-  // ── 6. Trigger Vercel rebuild ─────────────────────────────────────────────
+  // ── 6. Trigger one Vercel rebuild ─────────────────────────────────────────
   try {
     await fetch("https://api.vercel.com/v1/integrations/deploy/prj_BepoLv37pz2jz2RiQDryRAyyJcmS/0PL9bLgRJf", { method: "POST" });
-    console.log("[seo-writer] Vercel rebuild triggered");
+    console.log("[seo] Vercel rebuild triggered");
   } catch (err) {
-    console.error("[seo-writer] Vercel deploy hook failed:", err);
+    console.error("[seo] Vercel deploy hook failed:", err);
   }
 
-  // ── 7. Google Indexing API ping ───────────────────────────────────────────
-  const postUrl = `https://www.prosperaproperties.co/blog/${slug}`;
-  const indexed = await submitUrlToGoogle(postUrl);
-  console.log(`[seo-writer] Google indexing: ${indexed ? "sent" : "skipped"}`);
+  // ── 7. Google Indexing pings ──────────────────────────────────────────────
+  const newPostUrl = `${SITE_URL}blog/${newSlug}`;
+  const promises: Promise<unknown>[] = [submitUrlToGoogle(newPostUrl)];
+  if (optimizeSlug) promises.push(submitUrlToGoogle(`${SITE_URL}blog/${optimizeSlug}`));
+  await Promise.all(promises);
 
-  // ── 8. Email notification ─────────────────────────────────────────────────
+  // ── 8. Combined email ─────────────────────────────────────────────────────
   const notifySecret = process.env.SEO_NOTIFY_SECRET;
   if (notifySecret) {
     try {
-      await fetch("https://www.prosperaproperties.co/api/seo-notify", {
+      // New post via seo-notify endpoint
+      await fetch(`${SITE_URL}api/seo-notify`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-notify-secret": notifySecret },
-        body: JSON.stringify({ posts: [{ title, slug, category }] }),
+        body: JSON.stringify({ posts: [{ title: newTitle, slug: newSlug, category: newCategory }] }),
       });
+
+      // Optimizer summary via Resend (appended to same email or separate)
+      if (optimizeSlug && optimizedChanges.length > 0) {
+        const changeList = optimizedChanges.map((c) => `<li style="margin-bottom:6px;font-size:13px;color:#5A5A5A;">${c}</li>`).join("");
+        const html = `
+          <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#2C2C2C;">
+            <div style="background:#1F2F3A;padding:28px 32px;">
+              <p style="color:#8B2030;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">Prospera SEO Optimizer</p>
+              <h1 style="color:#FAF8F5;font-size:22px;font-weight:300;margin:0;">Post optimized</h1>
+            </div>
+            <div style="padding:32px;">
+              <p style="color:#5A5A5A;font-size:14px;margin:0 0 6px;">Also improved this existing post:</p>
+              <p style="font-size:16px;font-weight:500;color:#1F2F3A;margin:0 0 4px;">${optimizedTitle}</p>
+              <p style="font-size:12px;color:#9B9B9B;margin:0 0 20px;">Reason: ${optimizeReason}</p>
+              <p style="font-size:13px;font-weight:500;color:#1F2F3A;margin:0 0 10px;">Changes made:</p>
+              <ul style="padding-left:20px;margin:0 0 24px;">${changeList}</ul>
+              <a href="${SITE_URL}blog/${optimizeSlug}" style="display:inline-block;padding:10px 24px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">View Post</a>
+              <p style="font-size:11px;color:#B0B0B0;margin-top:24px;">Prospera Properties · London, St. Thomas &amp; Strathroy, Ontario</p>
+            </div>
+          </div>`;
+
+        const { Resend } = await import("resend");
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        await resend.emails.send({
+          from: "Prospera SEO Agent <hello@prosperaproperties.co>",
+          to: "prosperapropertiess@gmail.com",
+          subject: `Post optimized: ${optimizedTitle} — Prospera SEO`,
+          html,
+        });
+      }
     } catch (err) {
-      console.error("[seo-writer] Email notification failed:", err);
+      console.error("[seo] Email notification failed:", err);
     }
   }
 
-  console.log(`[seo-writer] Published: ${slug} | linked: ${linkedCount} posts | ${pushResult.commitUrl}`);
+  // ── 9. Draft a Facebook post for approval ────────────────────────────────
+  const notifySecretForSocial = process.env.SEO_NOTIFY_SECRET;
+  if (notifySecretForSocial) {
+    try {
+      // Extract featured image from the new post frontmatter
+      const featuredImageMatch = newBlog.match(/^featuredImage:\s*"(.+)"/m);
+      const featuredImage = featuredImageMatch?.[1] ?? null;
+
+      // Strip frontmatter, pass first ~800 chars of body to Claude
+      const bodyOnly = newBlog.replace(/^---[\s\S]*?---\n/, "").slice(0, 800);
+
+      const socialResponse = await anthropic.messages.create({
+        model: "claude-sonnet-4-6",
+        max_tokens: 600,
+        system: SOCIAL_SYSTEM,
+        messages: [{
+          role: "user",
+          content: `Blog post topic: "${newTitle}"
+Category: ${newCategory}
+Excerpt: ${newExcerpt}
+
+Opening content:
+${bodyOnly}
+
+Write one Facebook post about this topic in the style described. Do not promote the blog post — write standalone content that stands on its own.`,
+        }],
+      });
+
+      const socialPost = socialResponse.content[0].type === "text"
+        ? socialResponse.content[0].text.trim()
+        : null;
+
+      if (socialPost) {
+        await fetch(`${SITE_URL}api/social/draft`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-notify-secret": notifySecretForSocial,
+          },
+          body: JSON.stringify({
+            slug: newSlug,
+            message: socialPost,
+            imageUrl: featuredImage,
+            link: `${SITE_URL}blog/${newSlug}`,
+          }),
+        });
+        console.log(`[seo] Social draft created for: ${newSlug}`);
+      }
+    } catch (err) {
+      console.error("[seo] Social draft failed (non-fatal):", err);
+    }
+  }
+
+  console.log(`[seo] Done | new: ${newSlug} | optimized: ${optimizeSlug ?? "—"} | links: ${linkedCount} | ${pushResult.commitUrl}`);
+
   return NextResponse.json({
     success: true,
-    slug,
-    title,
+    written: { slug: newSlug, title: newTitle, category: newCategory },
+    optimized: optimizeSlug ? { slug: optimizeSlug, title: optimizedTitle, reason: optimizeReason, changes: optimizedChanges } : null,
     internalLinksAdded: linkedCount,
     commitUrl: pushResult.commitUrl,
   });
