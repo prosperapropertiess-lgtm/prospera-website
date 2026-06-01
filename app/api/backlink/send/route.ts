@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     try {
       await resend.emails.send({
         from: "Ebin Jaison <hello@prosperaproperties.co>",
-        reply_to: "prosperapropertiess@gmail.com",
+        replyTo: "prosperapropertiess@gmail.com",
         to: email.to,
         subject: email.subject,
         text: email.body,
