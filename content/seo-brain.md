@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-05-29
+2026-06-01
 
-## Posts Written: 52 total
+## Posts Written: 53 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -20,8 +20,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 - residential-property-management-london-ontario ✅
 
 **Still missing:**
-- how-to-find-a-property-manager-ontario
-- property-manager-london-ontario-cost ✅
+_(MONEY keyword gaps now closed — how-to-find-a-property-manager-ontario and property-manager-london-ontario-cost both published)_
 
 ### PAIN keywords (17)
 - evicting-tenant-ontario ✅
@@ -43,9 +42,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 - n13-notice-ontario ✅
 
 **Still missing:**
-_(N-form series now complete)_
+_(N-form series now complete. All PAIN keywords published.)_
 
-### LONG-TAIL keywords (27)
+### LONG-TAIL keywords (28)
 - first-time-landlord-tips-london-ontario ✅
 - tenant-screening-red-flags ✅
 - rental-property-tax-deductions-ontario ✅
@@ -73,9 +72,14 @@ _(N-form series now complete)_
 - capital-gains-rental-property-ontario ✅
 - what-can-landlord-deduct-from-last-month-rent-ontario ✅
 - small-landlord-property-management-london-ontario
+- how-to-find-a-property-manager-ontario ✅
 
 **Still missing:**
 - small-landlord-property-management-london-ontario
+
+### MONEY keywords (tracked separately — now complete)
+- how-to-find-a-property-manager-ontario ✅
+- property-manager-london-ontario-cost ✅
 
 ### TENANT keywords (0)
 **Not a priority yet — different conversion intent:**
@@ -88,20 +92,28 @@ _(N-form series now complete)_
 ## Recommended Next Posts
 
 **Immediate:**
-1. how-to-find-a-property-manager-ontario (MONEY — HIGH PRIORITY)
-2. small-landlord-property-management-london-ontario (LONG-TAIL)
+1. small-landlord-property-management-london-ontario (LONG-TAIL — final remaining gap)
+
+**After that — consider new keyword expansion:**
+- landlord-responsibilities-new-tenant-ontario (topical gap — onboarding)
+- property-management-tillsonburg-ontario (geographic expansion)
+- landlord-insurance-vs-tenant-insurance-ontario (supporting cluster for rental-property-insurance-ontario)
+- how-to-increase-rent-ontario-step-by-step (supporting cluster for rent-increase-ontario-guidelines)
+- rta-section-83-ontario (supporting LTB cluster)
 
 ---
 
 ## Do More Of
 - Process/timeline posts — strong for AI citations and rich snippets
 - City-specific posts naming London, St. Thomas, or Strathroy
-- MONEY keyword gaps — two remain, both high-value for conversion
+- Supporting cluster content for top-performing posts (internal link depth)
+- New geographic expansion keywords (Tillsonburg, Woodstock, Ingersoll) once small-landlord gap is closed
 
 ## Do Less Of
 - Generic landlord tips — fully covered
-- New PAIN posts — N-form series is now complete (N4, N5, N8, N12, N13 all done)
+- New PAIN posts — N-form series is complete; all 17 PAIN keywords published
 - New LONG-TAIL posts — only one gap remains (small-landlord)
+- New MONEY posts — all gaps now closed
 
 ---
 
@@ -118,3 +130,4 @@ _(N-form series now complete)_
 - 2026-05-25: Published what-can-landlord-deduct-from-last-month-rent-ontario — LONG-TAIL HIGH PRIORITY. Covers RTA s.106 definition of LMR as rent-only deposit, interest obligation at annual guideline rate, prohibited deductions (damage/cleaning/utilities/fees), L10 application and Small Claims Court as proper damage-recovery channels, T1 application risk for illegal deductions, and end-of-tenancy process checklist. Internal links to rent-increase-ontario-guidelines, move-in-move-out-inspection-ontario, tenant-damages-property-ontario, landlord-record-keeping-ontario, and abandoned-tenancy-ontario.
 - 2026-05-27: Published property-manager-london-ontario-cost — MONEY HIGH PRIORITY. Deep-dive cost breakdown covering monthly management fees (8–12%), leasing fees (one month's rent), renewal fees, maintenance markups, vacancy fees, setup costs, and full year-one vs. year-two cost modeling. Includes comparison table and 10-question checklist for evaluating companies. Internal links to lease-renewal-ontario-landlord-guide, rental-property-tax-deductions-ontario, n4-notice-ontario, property-management-fees-ontario, and first-time-landlord-tips-london-ontario.
 - 2026-05-29: Published residential-property-management-london-ontario — MONEY HIGH PRIORITY. Covers full scope of residential PM services, London market specifics (Western/Fanshawe student demand, neighbourhood pricing, LTB delays), cost of self-managing vs. professional management, what to look for in a PM (RECO registration, RTA fluency, screening process), onboarding process walkthrough, and residential vs. commercial distinction. Internal links to n4-notice-ontario, property-management-fees-ontario, tenant-screening-red-flags, and first-time-landlord-tips-london-ontario.
+- 2026-06-01: Published how-to-find-a-property-manager-ontario — MONEY HIGH PRIORITY (final MONEY gap). Covers how to define your needs, where to find candidates, the right screening questions (RTA knowledge, LTB experience, tenant screening process), what to look for in a management agreement (fee structure, authority limits, LMR trust handling, exit clauses), how to check references, red flags to walk away from, and Ontario market-specific considerations for London, St. Thomas, and Strathroy. Internal links to property-management-fees-ontario, tenant-screening-red-flags, property-manager-london-ontario-cost, and how-long-does-eviction-take-ontario.
