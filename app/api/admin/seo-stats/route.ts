@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { querySearchAnalytics, getServiceAccountEmail } from "@/lib/google-search-console";
 
 const SITE_URL = "https://www.prosperaproperties.co/";
@@ -25,10 +25,8 @@ function getPeriods() {
   };
 }
 
-export async function GET() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get("admin_session");
-  if (!session || session.value !== "authenticated") {
+export async function GET(req: NextRequest) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -77,7 +75,9 @@ export async function GET() {
     prevImpressions: prevRow?.impressions ?? 0,
   };
 
-  const pages = (pagesResult?.rows ?? [])
+  const allPageRows = pagesResult?.rows ?? [];
+
+  const pages = allPageRows
     .sort((a, b) => b.impressions - a.impressions)
     .map((row) => ({
       page: row.keys[0],
@@ -98,10 +98,36 @@ export async function GET() {
       position: row.position,
     }));
 
+  // Opportunities: posts that need attention
+  const titleFixes = allPageRows
+    .filter((r) => r.impressions >= 50 && r.ctr < 0.03)
+    .sort((a, b) => b.impressions - a.impressions)
+    .slice(0, 8)
+    .map((r) => ({
+      slug: r.keys[0].replace(BLOG_PREFIX, ""),
+      impressions: r.impressions,
+      ctr: r.ctr,
+      position: r.position,
+      issue: "low_ctr",
+    }));
+
+  const rankFixes = allPageRows
+    .filter((r) => r.impressions >= 30 && r.position > 15)
+    .sort((a, b) => b.impressions - a.impressions)
+    .slice(0, 8)
+    .map((r) => ({
+      slug: r.keys[0].replace(BLOG_PREFIX, ""),
+      impressions: r.impressions,
+      ctr: r.ctr,
+      position: r.position,
+      issue: "low_rank",
+    }));
+
   return NextResponse.json({
     period: { start: current.start, end: current.end },
     summary,
     pages,
     queries,
+    opportunities: { titleFixes, rankFixes },
   });
 }

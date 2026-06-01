@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 const BG = "#0B1219";
 const NAV = "#070D13";
 const SURFACE = "#111C27";
-const SURFACE_HI = "#172234";
 const BORDER = "rgba(255,255,255,0.08)";
 const TEXT = "#EDE9E3";
 const TEXT_SEC = "rgba(237,233,227,0.5)";
@@ -16,6 +15,8 @@ const ACCENT = "#C4374A";
 interface Summary { clicks: number; impressions: number; ctr: number; position: number; prevClicks: number; prevImpressions: number; }
 interface PageRow { slug: string; clicks: number; impressions: number; ctr: number; position: number; }
 interface QueryRow { query: string; clicks: number; impressions: number; ctr: number; position: number; }
+interface OppRow { slug: string; impressions: number; ctr: number; position: number; issue: string; }
+interface Opportunities { titleFixes: OppRow[]; rankFixes: OppRow[]; }
 
 function Skeleton() {
   return <div className="animate-pulse rounded-xl h-24" style={{ backgroundColor: SURFACE }} />;
@@ -63,18 +64,27 @@ function SeoInner() {
   const [pages, setPages] = useState<PageRow[]>([]);
   const [queries, setQueries] = useState<QueryRow[]>([]);
   const [period, setPeriod] = useState<{ start: string; end: string } | null>(null);
+  const [opportunities, setOpportunities] = useState<Opportunities | null>(null);
+  const [organicLeads, setOrganicLeads] = useState<number | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/seo/status").then(r => r.json()).then(d => {
       const isConnected = d.connected || searchParams.get("connected") === "1";
       setConnected(isConnected);
       if (isConnected) {
-        fetch("/api/admin/seo-stats").then(r => r.json()).then(data => {
-          if (!data.error) {
-            setSummary(data.summary);
-            setPages(data.pages ?? []);
-            setQueries(data.queries ?? []);
-            setPeriod(data.period);
+        Promise.all([
+          fetch("/api/admin/seo-stats").then(r => r.json()),
+          fetch("/api/admin/leads?source=contacts&limit=200").then(r => r.json()),
+        ]).then(([seoData, leadsData]) => {
+          if (!seoData.error) {
+            setSummary(seoData.summary);
+            setPages(seoData.pages ?? []);
+            setQueries(seoData.queries ?? []);
+            setPeriod(seoData.period);
+            setOpportunities(seoData.opportunities ?? null);
+          }
+          if (!leadsData.error) {
+            setOrganicLeads(leadsData.organic ?? 0);
           }
           setLoading(false);
         });
@@ -109,15 +119,16 @@ function SeoInner() {
       </p>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-        {loading ? [...Array(4)].map((_, i) => <Skeleton key={i} />) : summary ? (
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">
+        {loading ? [...Array(5)].map((_, i) => <Skeleton key={i} />) : summary ? (
           <>
             <StatCard label="Clicks" value={fmt(summary.clicks)} delta={summary.clicks - summary.prevClicks} />
             <StatCard label="Impressions" value={fmt(summary.impressions)} delta={summary.impressions - summary.prevImpressions} />
             <StatCard label="Avg Position" value={summary.position > 0 ? fmtPos(summary.position) : "—"} accent={summary.position > 0 && summary.position < 20} sub="Lower is better" />
             <StatCard label="CTR" value={fmtPct(summary.ctr)} sub="Click-through rate" />
+            <StatCard label="Organic Leads" value={organicLeads !== null ? fmt(organicLeads) : "—"} sub="From blog / service pages" accent={organicLeads !== null && organicLeads > 0} />
           </>
-        ) : <p className="col-span-4 text-sm text-center py-6" style={{ color: TEXT_MUT }}>No data yet — check back in a few weeks.</p>}
+        ) : <p className="col-span-5 text-sm text-center py-6" style={{ color: TEXT_MUT }}>No data yet — check back in a few weeks.</p>}
       </div>
 
       {/* Top pages */}
@@ -156,7 +167,7 @@ function SeoInner() {
       {/* Top queries */}
       <p className="text-xs uppercase tracking-widest mb-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Top queries</p>
       {!loading && queries.length > 0 ? (
-        <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+        <div className="rounded-xl border overflow-hidden mb-10" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
           <table className="w-full text-sm">
             <thead>
               <tr style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
@@ -179,10 +190,77 @@ function SeoInner() {
           </table>
         </div>
       ) : !loading ? (
-        <div className="rounded-xl border p-8 text-center" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+        <div className="rounded-xl border p-8 text-center mb-10" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
           <p className="text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>No query data yet.</p>
         </div>
-      ) : <Skeleton />}
+      ) : <div className="mb-10"><Skeleton /></div>}
+
+      {/* Opportunities */}
+      {!loading && opportunities && (opportunities.titleFixes.length > 0 || opportunities.rankFixes.length > 0) && (
+        <div>
+          <p className="text-xs uppercase tracking-widest mb-3" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Action items</p>
+
+          {opportunities.titleFixes.length > 0 && (
+            <div className="rounded-xl border overflow-hidden mb-6" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+              <div className="px-4 py-3 flex items-center gap-3" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+                <span className="text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Rewrite title / meta</span>
+                <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: "rgba(196,127,23,0.15)", color: "#C47F17", fontFamily: "var(--font-dm-sans)" }}>High impressions, low CTR</span>
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
+                    {["Page", "Impressions", "CTR", "Position"].map(h => (
+                      <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {opportunities.titleFixes.map((row, i) => (
+                    <tr key={row.slug} style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
+                      <td className="px-4 py-3">
+                        <a href={`/blog/${row.slug}`} target="_blank" className="hover:underline text-xs" style={{ color: ACCENT, fontFamily: "var(--font-dm-sans)" }}>{row.slug}</a>
+                      </td>
+                      <td className="px-4 py-3 text-sm" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{fmt(row.impressions)}</td>
+                      <td className="px-4 py-3 text-sm" style={{ color: "#f87171", fontFamily: "var(--font-dm-sans)" }}>{fmtPct(row.ctr)}</td>
+                      <td className="px-4 py-3 text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{fmtPos(row.position)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {opportunities.rankFixes.length > 0 && (
+            <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+              <div className="px-4 py-3 flex items-center gap-3" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+                <span className="text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Improve content</span>
+                <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: "rgba(21,101,192,0.15)", color: "#5B9BD5", fontFamily: "var(--font-dm-sans)" }}>Getting impressions but ranking below #15</span>
+              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ borderBottom: `1px solid ${BORDER}` }}>
+                    {["Page", "Impressions", "Position", "CTR"].map(h => (
+                      <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-widest font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {opportunities.rankFixes.map((row, i) => (
+                    <tr key={row.slug} style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
+                      <td className="px-4 py-3">
+                        <a href={`/blog/${row.slug}`} target="_blank" className="hover:underline text-xs" style={{ color: ACCENT, fontFamily: "var(--font-dm-sans)" }}>{row.slug}</a>
+                      </td>
+                      <td className="px-4 py-3 text-sm" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{fmt(row.impressions)}</td>
+                      <td className="px-4 py-3 text-sm" style={{ color: "#f87171", fontFamily: "var(--font-dm-sans)" }}>{fmtPos(row.position)}</td>
+                      <td className="px-4 py-3 text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>{fmtPct(row.ctr)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
