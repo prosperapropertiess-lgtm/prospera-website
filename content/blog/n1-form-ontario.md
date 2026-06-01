@@ -5,7 +5,7 @@ slug: "n1-form-ontario"
 excerpt: "Learn how to correctly complete and serve the N1 Notice of Rent Increase in Ontario — including how to calculate the 2026 guideline amount, the 90-day notice rule, valid service methods, and what voids the increase."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1605146769289-52703bbe5b13?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # N1 Form Ontario: Step-by-Step Guide to Serving a Rent Increase Notice

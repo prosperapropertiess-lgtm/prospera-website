@@ -5,7 +5,7 @@ slug: "lease-renewal-ontario-landlord-guide"
 excerpt: "Everything Ontario landlords need to know about lease renewals — what happens when a lease ends, your options, and how to avoid costly mistakes."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When a fixed-term lease ends in Ontario, a lot of landlords assume they need to sign a new one or ask the tenant to leave. Neither assumption is correct — and acting on either of them without understanding the rules can land you in front of the Landlord and Tenant Board.

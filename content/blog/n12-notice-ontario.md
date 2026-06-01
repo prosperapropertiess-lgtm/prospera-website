@@ -5,7 +5,7 @@ slug: "n12-notice-ontario"
 excerpt: "The N12 lets Ontario landlords evict a tenant for own use — but the rules are strict. Here's exactly how to do it right."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N12 Notice to Terminate a Tenancy at End of the Term is one of the most powerful tools available to Ontario landlords — and one of the most dangerous to get wrong. It allows you to end a tenancy so that you, a family member, or a buyer can move into the unit. But the Residential Tenancies Act (RTA) sets very specific rules around who qualifies, how much notice you must give, what compensation you owe, and what happens if you change your mind.

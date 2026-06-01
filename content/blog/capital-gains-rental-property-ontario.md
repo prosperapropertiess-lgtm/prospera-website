@@ -5,7 +5,7 @@ slug: "capital-gains-rental-property-ontario"
 excerpt: "Selling a rental property in Ontario? Learn how capital gains tax works, what you can deduct, and how to reduce your tax bill legally."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Selling a rental property in Ontario is not the same as selling your home. There is no principal residence exemption to shield you. What you walk away with after the sale is very likely subject to capital gains tax — and if you haven't planned for it, the bill can be a shock.

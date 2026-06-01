@@ -5,7 +5,7 @@ slug: "l9-application-ontario"
 excerpt: "The L9 application lets Ontario landlords collect unpaid rent through an LTB order without ending the tenancy — ideal when you have a good tenant who hit a rough patch. Here's exactly how it works."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # L9 Application Ontario: Collect Rent Arrears Without Evicting Your Tenant
