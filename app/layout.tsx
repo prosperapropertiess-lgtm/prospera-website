@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import SiteShell from "@/components/layout/SiteShell";
 import JsonLd from "@/components/seo/JsonLd";
+import TrafficSourceTracker from "@/components/TrafficSourceTracker";
 
 const outfit = Outfit({
   variable: "--font-cormorant",
@@ -21,8 +22,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Prospera Properties — Property Management in London, St. Thomas & Strathroy",
-    template: "%s — Prospera Properties",
+    default: "Prospera Properties | Property Management Ontario",
+    template: "%s | Prospera Properties",
   },
   description:
     "Prospera Properties offers professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
@@ -79,8 +80,8 @@ export default function RootLayout({
           "url": "https://www.prosperaproperties.co",
           "telephone": "+15196971227",
           "email": "hello@prosperaproperties.co",
-          "logo": "https://www.prosperaproperties.co/logo.png",
-          "image": "https://www.prosperaproperties.co/logo.png",
+          "logo": { "@type": "ImageObject", "url": "https://www.prosperaproperties.co/logo.png" },
+          "image": "https://www.prosperaproperties.co/ebin-founder.jpg",
           "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
@@ -98,13 +99,12 @@ export default function RootLayout({
             { "@type": "City", "name": "St. Thomas", "sameAs": "https://en.wikipedia.org/wiki/St._Thomas,_Ontario" },
             { "@type": "City", "name": "Strathroy", "sameAs": "https://en.wikipedia.org/wiki/Strathroy-Caradoc" }
           ],
-          "serviceType": "Property Management",
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "20",
-            "bestRating": "5",
-            "worstRating": "1"
+            "ratingValue": 5.0,
+            "reviewCount": 20,
+            "bestRating": 5,
+            "worstRating": 1
           },
           "sameAs": [
             "https://www.facebook.com/prosperaproperties",
@@ -125,6 +125,7 @@ export default function RootLayout({
             gtag('config', 'AW-18098735149');
           `}
         </Script>
+        <TrafficSourceTracker />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

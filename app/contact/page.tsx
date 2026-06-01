@@ -1,10 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FadeIn from "@/components/animations/FadeIn";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", city: "", message: "", type: "landlord" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [trafficSource, setTrafficSource] = useState<string | null>(null);
+
+  useEffect(() => {
+    const src = sessionStorage.getItem("pp_traffic_source");
+    if (src) setTrafficSource(src);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -13,7 +19,7 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, traffic_source: trafficSource }),
       });
       if (res.ok) {
         setStatus("success");
@@ -70,13 +76,6 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
                 <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Portals</p>
-                <div className="space-y-2">
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Landlord Portal →</a>
-                  <a href="https://prosperaproperties.buildiumapp.com" target="_blank" rel="noopener noreferrer" className="block text-sm transition-colors hover:opacity-80" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Tenant Portal →</a>
-                </div>
               </div>
             </div>
           </FadeIn>
@@ -151,7 +150,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full py-4 text-sm uppercase tracking-wide rounded transition-opacity hover:opacity-80 disabled:opacity-50"
+                  className="w-full py-4 text-sm uppercase tracking-wide rounded disabled:opacity-50"
                   style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}

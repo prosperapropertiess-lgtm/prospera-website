@@ -4,7 +4,7 @@ import { contactConfirmationEmail } from "@/lib/emails";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone, city, message, type, property } = await req.json();
+    const { name, email, phone, city, message, type, property, traffic_source } = await req.json();
 
     if (!email || !email.includes("@") || !name || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
         message,
         type: type || "other",
         property: property || null,
-        source: "contact_form",
+        source: traffic_source ?? "direct",
       },
     ]);
 
@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
             <p><strong>Type:</strong> ${type || "Not specified"}</p>
             <p><strong>City:</strong> ${city || "Not specified"}</p>
             ${property ? `<p><strong>Property:</strong> ${property}</p>` : ""}
+            <p><strong>Traffic source:</strong> ${traffic_source ?? "direct"}</p>
             <p><strong>Message:</strong></p>
             <blockquote>${message}</blockquote>
           `,
