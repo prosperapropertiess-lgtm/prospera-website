@@ -2,6 +2,7 @@ import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 import N4FormBuilder from "@/components/ui/N4FormBuilder";
 import ResourcesGrid from "@/components/ui/ResourcesGrid";
+import WelcomeBanner from "@/components/ui/WelcomeBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -59,9 +60,17 @@ const situations = [
   },
 ];
 
-export default function ResourcesPage() {
+interface Props {
+  searchParams: Promise<{ ref?: string; welcome?: string }>;
+}
+
+export default async function ResourcesPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const showWelcome = params.ref === "lp" && params.welcome === "1";
+
   return (
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
+      {showWelcome && <WelcomeBanner />}
 
       {/* ── Hero ── */}
       <section className="pt-36 pb-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
@@ -231,7 +240,7 @@ export default function ResourcesPage() {
                         {s.hasBuilder ? (
                           <a
                             href="#n4-builder"
-                            className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
+                            className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg"
                             style={{
                               backgroundColor: "#8B2030",
                               color: "#FAF8F5",
@@ -336,7 +345,7 @@ export default function ResourcesPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-80"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-lg btn-primary"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Talk to Ebin →
