@@ -22,3 +22,4 @@ news-2026-05-27 LTB enforcement orders — why winning your eviction case isn't 
 news-2026-05-28 Rent control exemptions — which Ontario rentals are exempt from the annual guideline and what landlords get wrong 2026-05-28
 news-2026-05-29 "No pets" clauses — why they're void under Section 14 of the RTA and what Ontario landlords can actually do 2026-05-29
 news-2026-05-30 Ontario Standard Form of Lease — the mandatory lease landlords must use and what happens if they don't provide it 2026-05-30
+news-2026-06-01 Vital services cutoff — what Ontario landlords absolutely cannot do when a tenant stops paying 2026-06-01

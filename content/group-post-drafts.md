@@ -314,3 +314,15 @@ Anyone in London or Ontario still running custom leases — has it ever been an 
 
 #OntarioLandlord #LondonOntario #LandlordTips #LeaseAgreement
 ---
+
+## 2026-06-01
+Quick question for the group — has anyone ever been tempted to cut utilities or change the locks on a non-paying tenant?
+
+Under Section 21 of the RTA, cutting off heat, water, or electricity — even if utilities are in your name and the tenant owes you months of rent — is an illegal vital services cutoff. A T2 application can result in damages up to $25,000. Same story with changing the locks before the tenancy is legally ended.
+
+I know the process is slow and frustrating. But the LTB does award significant compensation in these cases, and it tends to come out of whatever arrears you were trying to collect in the first place.
+
+The only path is N4 → L1 → hearing. Has anyone dealt with a tenant who just went radio silent? How long did it actually take to resolve?
+
+#OntarioLandlord #LondonOntario #LandlordTips #RTA
+---
