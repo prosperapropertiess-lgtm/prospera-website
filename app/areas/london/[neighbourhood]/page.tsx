@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const n = getNeighbourhood("london", neighbourhood);
   if (!n) return {};
   return {
-    title: `Property Management in ${n.name}, London Ontario`,
+    title: `Property Management in ${n.name}, London ON`,
     description: `Professional property management in ${n.name}, London ON. ${n.description} Contact Prospera Properties for a free quote.`,
   };
 }
@@ -30,17 +30,28 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `https://www.prosperaproperties.co/areas/london/${n.slug}`,
     name: "Prospera Properties",
     description: `Property management in ${n.name}, London, Ontario`,
-    url: `https://www.prosperaproperties.co/areas/london/${n.slug}`,
+    url: "https://www.prosperaproperties.co",
     telephone: "+15196971227",
+    email: "hello@prosperaproperties.co",
+    priceRange: "$$",
+    image: "https://www.prosperaproperties.co/ebin-founder.jpg",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "London",
       addressLocality: "London",
-      addressRegion: "Ontario",
+      addressRegion: "ON",
       addressCountry: "CA",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 42.9849,
+      longitude: -81.2453,
+    },
     areaServed: { "@type": "Place", name: `${n.name}, London, Ontario` },
+    sameAs: ["https://www.facebook.com/profile.php?id=381380218388134"],
   };
 
   return (
@@ -70,7 +81,7 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
@@ -148,6 +159,34 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
         </div>
       </section>
 
+      {/* FAQs */}
+      {n.faqs && n.faqs.length > 0 && (
+        <section className="py-16 px-6" style={{ backgroundColor: "#FFFFFF" }}>
+          <JsonLd data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: n.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
+          }} />
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-light mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+              Common Questions About {n.name} Rentals
+            </h2>
+            <div className="space-y-8">
+              {n.faqs.map((faq) => (
+                <div key={faq.q} className="border-b pb-8" style={{ borderColor: "#D8D2C8" }}>
+                  <h3 className="text-lg font-medium mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{faq.q}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="py-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
@@ -159,14 +198,14 @@ export default async function LondonNeighbourhoodPage({ params }: Props) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote
           </Link>
           <Link
             href="/listings"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest border transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest border btn-primary rounded"
             style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             View Available Rentals
