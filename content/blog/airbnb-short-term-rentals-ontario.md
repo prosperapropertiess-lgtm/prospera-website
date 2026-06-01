@@ -13,11 +13,11 @@ This situation is more common than it used to be, and it raises real legal and p
 
 ## What the RTA Says About Subletting
 
-Under the *Residential Tenancies Act*, a tenant can sublet their unit — but only with the **landlord's written consent**. The landlord cannot unreasonably withhold that consent, but "consent" is the operative word: the tenant has to ask.
+Under the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), a tenant can sublet their unit — but only with the **landlord's written consent**. The landlord cannot unreasonably withhold that consent, but "consent" is the operative word: the tenant has to ask.
 
 Listing on Airbnb without asking is a subletting or unauthorized occupancy situation. It's a breach of the tenancy, and you can act on it.
 
-There's also a distinction between subletting and "assignment." Subletting means the original tenant temporarily vacates and brings in someone else; assignment means transferring the tenancy entirely. Short-term Airbnb use is typically treated as subletting (or as unauthorized occupancy if the stays are very brief). Either way, doing it without consent is a problem for the tenant, not a right.
+There's also a distinction between subletting and "assignment." Subletting means the original tenant temporarily vacates and brings in someone else; assignment means transferring the tenancy entirely. For a detailed look at both concepts, see our guide to [subletting and assignment in Ontario](/blog/subletting-assignment-ontario). Short-term Airbnb use is typically treated as subletting (or as unauthorized occupancy if the stays are very brief). Either way, doing it without consent is a problem for the tenant, not a right.
 
 ## What "Unreasonably Withholding Consent" Means
 
@@ -53,7 +53,7 @@ If you suspect it and can't confirm it, note any unusual patterns: frequent new 
 
 **Step 2: Contact the tenant in writing.** Let them know you're aware of the listing and that subletting without consent is a breach of the tenancy. Put it in writing (email is fine). Ask them to take the listing down immediately.
 
-**Step 3: Serve an N5 if they don't comply.** An N5 Notice to End a Tenancy can be served for unauthorized subletting or assigning of the unit. The tenant has 7 days to correct the behaviour (take down the listing, stop the activity). If they do, the notice is void. If they don't, you can file an L2 application with the LTB.
+**Step 3: Serve an N5 if they don't comply.** An [N5 notice](/blog/n5-notice-ontario) to End a Tenancy can be served for unauthorized subletting or assigning of the unit. The tenant has 7 days to correct the behaviour (take down the listing, stop the activity). If they do, the notice is void. If they don't, you can file an L2 application with the LTB.
 
 **Step 4: Consider the overall tenancy.** A tenant who immediately cooperates when confronted is a different situation than one who continues the Airbnb after the N5. Use your judgment about whether this is a relationship you want to continue.
 

@@ -7,7 +7,7 @@ readTime: "7 min read"
 featuredImage: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-A lot of landlords find out the hard way that their home insurance policy doesn't cover rental properties. A tenant floods the bathroom, a fire breaks out, someone slips on the front steps — and suddenly they're learning about policy exclusions at the worst possible moment.
+A lot of landlords find out the hard way that their home insurance policy doesn't cover rental properties. A tenant floods the bathroom, a fire breaks out, someone slips on the front steps — and suddenly they're learning about policy exclusions at the worst possible moment. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer broader context on financial planning and risk for rental property owners in Ontario.
 
 Getting the right insurance is straightforward once you understand what you're actually buying. Here's what Ontario landlords need to know.
 
@@ -33,7 +33,7 @@ This covers the physical structure — walls, roof, plumbing, electrical, built-
 ### Liability Coverage
 This is essential. If a tenant, visitor, or even a passerby is injured on your property and sues you, liability coverage pays for legal costs and any settlement. A minimum of $1–2 million in liability coverage is standard; $2 million is strongly recommended for rental properties.
 
-Slip-and-fall claims in winter are a real concern for London and southwestern Ontario landlords given the ice and snow. Make sure your liability coverage is adequate.
+Slip-and-fall claims in winter are a real concern for London and southwestern Ontario landlords given the ice and snow. Make sure your liability coverage is adequate. For more on your legal upkeep obligations, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario).
 
 ### Loss of Rental Income
 If your property becomes uninhabitable due to a covered loss (fire, major water damage) and you can't collect rent while repairs happen, this coverage replaces that lost income. This matters more than many landlords realize — repairs in Ontario can take months, and carrying a mortgage on a vacant property is a serious financial hit.
@@ -99,4 +99,4 @@ No. The Residential Tenancies Act does not permit landlords to make tenant insur
 ### Is sewer backup coverage worth adding to a landlord insurance policy in Ontario?
 Yes, particularly for properties with basements in older areas of London, St. Thomas, or Sarnia where combined sewer systems are common. Overland flooding and sewer backup often require separate add-ons to a standard policy. The additional premium is modest compared to the cost of a basement sewer backup claim.
 
-Getting insurance right is one of those foundational tasks that's easy to put off and painful to learn about after a loss. It's also one of the things we make sure is sorted for every property in our portfolio — because the financial exposure from an uninsured loss can be catastrophic.
+Getting insurance right is one of those foundational tasks that's easy to put off and painful to learn about after a loss. It's also one of the things we make sure is sorted for every property in our portfolio — because the financial exposure from an uninsured loss can be catastrophic. Proper [move-in and move-out inspections](/blog/move-in-move-out-inspection-ontario) and clear documentation of [tenant-caused damage](/blog/tenant-damages-property-ontario) are also essential for protecting your claims when issues arise.

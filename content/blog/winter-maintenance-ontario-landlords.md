@@ -14,7 +14,7 @@ Here's what you need to know heading into — or dealing with — a Canadian win
 
 ## The Heating Standard: What the Law Requires
 
-Under Ontario's *Residential Tenancies Act* and the provincial maintenance standards, landlords are required to maintain **a minimum temperature of 20°C** (68°F) in all rental units from **September 1 to June 15**.
+Under Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) and the provincial maintenance standards, landlords are required to maintain **a minimum temperature of 20°C** (68°F) in all rental units from **September 1 to June 15**.
 
 This applies to:
 - Bedrooms, living rooms, kitchens, and bathrooms
@@ -83,7 +83,7 @@ While not strictly a "heating" issue, winter is when furnaces run constantly —
 - **Working smoke alarms** on every storey and outside every sleeping area
 - **Carbon monoxide detectors** near all sleeping areas in homes with fuel-burning appliances or attached garages
 
-Test and document these every fall. It takes 15 minutes and it protects both your tenants and your liability exposure.
+Test and document these every fall. It takes 15 minutes and it protects both your tenants and your liability exposure. For a broader look at fire safety obligations, see our [fire safety guide for Ontario landlords](/blog/fire-safety-ontario-landlords).
 
 ## Emergency Protocol: Have a Plan Before You Need It
 
@@ -126,4 +126,4 @@ Yes. Preventing and repairing frozen pipes is a landlord maintenance obligation.
 ### Does a landlord need to check carbon monoxide detectors specifically in winter?
 It's good practice. Ontario law requires CO detectors near sleeping areas in units with fuel-burning appliances, and winter is when furnaces run continuously — increasing the risk of CO exposure if the system is faulty. Test CO detectors each fall along with smoke alarms, document the results, and replace any units that are over 10 years old or non-functional.
 
-Prospera Properties manages winter maintenance across all three markets — from seasonal contractor scheduling to 24/7 tenant communication for heating emergencies. If you'd rather not be on call in the middle of a cold snap, [we can help](/contact).
+Prospera Properties manages winter maintenance across all three markets — from seasonal contractor scheduling to 24/7 tenant communication for heating emergencies. If you'd rather not be on call in the middle of a cold snap, [we can help](/contact). For a full overview of your year-round maintenance obligations, see our [landlord maintenance responsibilities guide](/blog/landlord-maintenance-responsibilities-ontario), and review our [landlord record-keeping guide](/blog/landlord-record-keeping-ontario) to ensure all maintenance work is properly documented.

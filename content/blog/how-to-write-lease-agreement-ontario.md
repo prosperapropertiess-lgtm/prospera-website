@@ -25,7 +25,7 @@ If you're required to use it and you don't, the tenant can demand one from you. 
 
 ## Where to Get the Standard Lease
 
-Download it directly from the Ontario government website. It's a fillable PDF. You can also find it through the Landlord and Tenant Board (LTB). Always make sure you're using the most current version — the form does get updated.
+Download it directly from the [Ontario government's Standard Lease guide](https://www.ontario.ca/page/guide-ontarios-standard-lease). It's a fillable PDF. You can also find it through the Landlord and Tenant Board (LTB). Always make sure you're using the most current version — the form does get updated.
 
 ## Walking Through the Key Sections
 
@@ -47,7 +47,7 @@ Specify whether it's a fixed-term tenancy (e.g., one year ending on a specific d
 
 State the total monthly rent, the day it's due (typically the 1st), and what it includes. If you include utilities, specify which ones. Be precise here — vague language leads to disputes.
 
-The Standard Lease does **not** allow you to set a late fee. Ontario law does not permit landlords to charge penalties for late rent.
+The Standard Lease does **not** allow you to set a late fee. Ontario law does not permit landlords to charge penalties for late rent. Once a tenancy is established, rent can only be increased once per year — review the [rent increase rules in Ontario](/blog/rent-increase-ontario-guidelines) before negotiating any new terms.
 
 ### Section 5: Services and Utilities
 
@@ -93,7 +93,7 @@ Once the lease is signed:
 - Provide a copy of the Information for New Tenants document (required by law)
 - Document the condition of the unit before move-in (photos, written checklist)
 
-That move-in condition report is something many landlords skip — and deeply regret when a tenant moves out and disputes what was pre-existing damage.
+That move-in condition report is something many landlords skip — and deeply regret when a tenant moves out and disputes what was pre-existing damage. See our [move-in and move-out inspection guide](/blog/move-in-move-out-inspection-ontario) for a complete process.
 
 ## Frequently Asked Questions
 

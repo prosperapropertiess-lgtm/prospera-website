@@ -7,7 +7,7 @@ readTime: "7 min read"
 featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-It feels counterintuitive: you own the property, but you can't just walk in whenever you want. Ontario's *Residential Tenancies Act* gives tenants a right to "quiet enjoyment" of their home — and that means your right of entry comes with real restrictions. Getting this wrong can expose you to complaints, LTB applications, and damaged tenant relationships.
+It feels counterintuitive: you own the property, but you can't just walk in whenever you want. Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) gives tenants a right to "quiet enjoyment" of their home — and that means your right of entry comes with real restrictions. Getting this wrong can expose you to complaints, LTB applications, and damaged tenant relationships.
 
 Here's what the law actually says, and how to handle it practically.
 
@@ -51,7 +51,7 @@ If you've given proper notice and the tenant refuses to let you in, you're not p
 Your options:
 
 1. **Reschedule.** If the tenant asks for a different time, try to accommodate it. This is the easiest path.
-2. **Serve an N5.** An N5 Notice to End a Tenancy can be used if the tenant is substantially interfering with your lawful right of entry. They then have 7 days to correct the behaviour. If they do, the notice is void. If they don't, you can file an L2 application with the LTB.
+2. **Serve an N5.** An [N5 notice](/blog/n5-notice-ontario) to End a Tenancy can be used if the tenant is substantially interfering with your lawful right of entry. They then have 7 days to correct the behaviour. If they do, the notice is void. If they don't, you can file an L2 application with the LTB.
 
 This situation is rare — most tenants don't block entry when the landlord has followed the rules. But it does happen, and the N5 is your tool when it does.
 
@@ -77,7 +77,7 @@ Lock-outs are illegal. If you lock a tenant out, they can contact the LTB for an
 
 Sometimes a landlord repeatedly enters without notice, or a tenant believes they're being harassed through excessive entry requests. Both situations can end up at the LTB.
 
-If you're managing multiple properties, it can be easy to lose track of what notices you've sent and when — this is one area where systematic record-keeping really matters. At Prospera Properties, we manage all entry coordination and documentation centrally, so nothing slips through the cracks and every visit is properly logged.
+If you're managing multiple properties, it can be easy to lose track of what notices you've sent and when — this is one area where systematic record-keeping really matters. For a full system, see our [landlord maintenance responsibilities guide](/blog/landlord-maintenance-responsibilities-ontario) which covers documentation alongside your repair obligations. At Prospera Properties, we manage all entry coordination and documentation centrally, so nothing slips through the cracks and every visit is properly logged.
 
 ## Frequently Asked Questions
 

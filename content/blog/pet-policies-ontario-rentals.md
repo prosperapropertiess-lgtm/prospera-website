@@ -7,7 +7,7 @@ readTime: "8 min read"
 featuredImage: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-If you've ever written "no pets" into a lease and assumed that settled it, you're not alone — and you're also not quite right. Ontario's *Residential Tenancies Act* has a specific provision that trips up landlords who haven't read it carefully. Understanding it upfront will save you frustration and protect you from making claims you can't actually enforce.
+If you've ever written "no pets" into a lease and assumed that settled it, you're not alone — and you're also not quite right. Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) has a specific provision that trips up landlords who haven't read it carefully. Understanding it upfront will save you frustration and protect you from making claims you can't actually enforce.
 
 ## The Key Rule: No-Pet Clauses Are Void
 
@@ -42,7 +42,7 @@ The key: document everything. Photographs of damage, written complaints from nei
 
 If the pet causes damage beyond normal wear and tear, you can deduct repair costs from the last month's rent deposit (or pursue the tenant through Small Claims Court if costs exceed the deposit). 
 
-Do a thorough move-in inspection with photos, and repeat it at move-out. The contrast between the two is what establishes that the damage happened during the tenancy.
+Do a thorough [move-in and move-out inspection](/blog/move-in-move-out-inspection-ontario) with photos, and repeat it at move-out. The contrast between the two is what establishes that the damage happened during the tenancy.
 
 ### 3. Ask About Pets During Screening — and Factor It In
 
@@ -66,7 +66,7 @@ Keep it reasonable — aggressive clauses that try to end-run Section 14 won't h
 
 ## The Allergy Situation
 
-If another tenant in your building has a documented allergy, and a pet in one unit is affecting them, you have more grounds to act. The *RTA* protects tenants' right to reasonable enjoyment of their home — which includes not suffering health effects from a neighbouring unit. This is a situation where getting legal advice before serving any notice is a good idea, since the facts matter a lot.
+If another tenant in your building has a documented allergy, and a pet in one unit is affecting them, you have more grounds to act. The *RTA* protects tenants' right to reasonable enjoyment of their home — which includes not suffering health effects from a neighbouring unit. For more on the [N5 notice process](/blog/n5-notice-ontario) for damage and interference situations, see our dedicated guide. This is a situation where getting legal advice before serving any notice is a good idea, since the facts matter a lot.
 
 ## Practical Advice for London, St. Thomas, and Sarnia Landlords
 

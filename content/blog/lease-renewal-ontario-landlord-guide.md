@@ -14,7 +14,7 @@ The truth is that Ontario's lease renewal process is largely automatic, and the 
 
 ## What Actually Happens When a Lease Expires in Ontario
 
-Under the *Residential Tenancies Act* (RTA), a fixed-term tenancy does not simply end when the lease term runs out. Instead, it automatically converts to a month-to-month tenancy on the same terms as the original lease.
+Under the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) (RTA), a fixed-term tenancy does not simply end when the lease term runs out. Instead, it automatically converts to a month-to-month tenancy on the same terms as the original lease.
 
 That means if your tenant signed a one-year lease in June 2024, and that lease expires in June 2025 without either party doing anything, the tenancy continues month-to-month. The tenant keeps paying the same rent. The same rules apply. Nothing needs to be signed.
 

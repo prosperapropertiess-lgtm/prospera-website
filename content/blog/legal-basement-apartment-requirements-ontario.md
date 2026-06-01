@@ -38,7 +38,7 @@ Even where second units are permitted as of right, there may be lot coverage lim
 
 ## Step 2: Pull a Building Permit
 
-A building permit is not optional. Constructing or converting a basement into a rental unit without one is illegal under the Ontario Building Code Act, 1992.
+A building permit is not optional. Constructing or converting a basement into a rental unit without one is illegal under the [Ontario Building Code Act](https://www.ontario.ca/laws/statute/92b23).
 
 **Typical permit costs** (varies by municipality):
 - London, Ontario: Approximately $600–$1,200 for a residential addition/conversion, depending on construction value.

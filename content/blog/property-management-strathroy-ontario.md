@@ -12,7 +12,7 @@ featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200
 
 Strathroy doesn't get as much attention as London or St. Thomas, but landlords who know the market understand its appeal. The town sits at a comfortable distance from the noise and congestion of the city while still offering solid rental demand, affordable property prices, and a stable community of long-term tenants. For investors looking for steady cash flow without big-city headaches, Strathroy quietly delivers.
 
-That said, being a landlord in Strathroy — or anywhere in Ontario — comes with real responsibilities. Between Ontario's Residential Tenancies Act, Landlord and Tenant Board filings, maintenance obligations, and the ongoing work of finding and keeping good tenants, property ownership can quickly stop feeling passive. This guide covers what rental property management in Strathroy actually looks like, when it makes sense to hire a professional, and what to look for if you do.
+That said, being a landlord in Strathroy — or anywhere in Ontario — comes with real responsibilities. Between Ontario's [Residential Tenancies Act](https://www.ontario.ca/laws/statute/06r17), [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) filings, maintenance obligations, and the ongoing work of finding and keeping good tenants, property ownership can quickly stop feeling passive. This guide covers what rental property management in Strathroy actually looks like, when it makes sense to hire a professional, and what to look for if you do.
 
 ## The Strathroy Rental Market in 2026
 
@@ -68,7 +68,7 @@ But the calculus shifts when you add distance, multiple properties, or a difficu
 
 ### What Property Management Typically Costs
 
-In smaller Ontario markets like Strathroy, professional property management typically runs 8–12% of monthly rent for ongoing management, with separate fees for tenant placement (often equivalent to one month's rent or a flat fee). Some companies bundle services; others charge à la carte. Ask for a clear breakdown before signing anything, and make sure you understand what happens if a tenant needs to be replaced mid-term.
+In smaller Ontario markets like Strathroy, professional property management typically runs 8–12% of monthly rent for ongoing management, with separate fees for tenant placement. For a detailed breakdown, see our [property management fees guide](/blog/property-management-fees-ontario) (often equivalent to one month's rent or a flat fee). Some companies bundle services; others charge à la carte. Ask for a clear breakdown before signing anything, and make sure you understand what happens if a tenant needs to be replaced mid-term.
 
 ## What to Ask Before Hiring a Property Manager
 
@@ -82,7 +82,7 @@ Not all property management companies serve smaller communities like Strathroy. 
 
 ## How Prospera Properties Serves Strathroy Landlords
 
-At Prospera Properties, we manage residential rentals across London, St. Thomas, and Strathroy. We know the Middlesex County market — the neighbourhoods, the tenant expectations, the local trades network — and we handle the full scope of property management so our landlords don't have to.
+At Prospera Properties, we manage residential rentals across London, St. Thomas, and Strathroy. For guidance on finding the right manager, see our [how to find a property manager in Ontario guide](/blog/how-to-find-a-property-manager-ontario). We know the Middlesex County market — the neighbourhoods, the tenant expectations, the local trades network — and we handle the full scope of property management so our landlords don't have to.
 
 Whether you're a first-time landlord with a single rental home or a small investor with a growing portfolio, we'll take the day-to-day off your plate while keeping you informed about what matters.
 

@@ -54,7 +54,7 @@ If you don't have a certificate of service, you can still describe the service m
 
 ## Step 3: File Through the Tribunals Ontario Portal
 
-The fastest and most reliable way to file an L1 is through the **Tribunals Ontario Portal** at tribunalsontario.ca/ltb. Paper filing by mail or in-person is still available, but online filing gives you a file number the same day and reduces processing time.
+The fastest and most reliable way to file an L1 is through the **Tribunals Ontario Portal** at [tribunalsontario.ca/ltb](https://tribunalsontario.ca/ltb/). Paper filing by mail or in-person is still available, but online filing gives you a file number the same day and reduces processing time.
 
 Here's how to do it:
 

@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1
 
 The N12 Notice to Terminate a Tenancy at End of the Term is one of the most powerful tools available to Ontario landlords — and one of the most dangerous to get wrong. It allows you to end a tenancy so that you, a family member, or a buyer can move into the unit. But the Residential Tenancies Act (RTA) sets very specific rules around who qualifies, how much notice you must give, what compensation you owe, and what happens if you change your mind.
 
-Tenants know their rights. The Landlord and Tenant Board (LTB) scrutinizes N12 applications closely because bad-faith "own use" evictions are one of the most litigated issues in Ontario landlord-tenant law. If your N12 doesn't meet every requirement, the LTB will dismiss it — and if the board finds you acted in bad faith, you can face significant financial penalties.
+Tenants know their rights. The [Landlord and Tenant Board (LTB)](https://tribunalsontario.ca/ltb/) scrutinizes N12 applications closely because bad-faith "own use" evictions are one of the most litigated issues in Ontario landlord-tenant law. If your N12 doesn't meet every requirement, the LTB will dismiss it — and if the board finds you acted in bad faith, you can face significant financial penalties.
 
 This guide covers everything you need to know about the N12: when you can use it, who it covers, what you must do, and how to protect yourself if a tenant fights it.
 

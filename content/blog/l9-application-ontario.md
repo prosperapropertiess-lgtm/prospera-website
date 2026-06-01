@@ -79,7 +79,7 @@ Once the voiding period has passed without full payment, here's how to file:
 - Any written communications about the arrears (texts, emails)
 
 ### Step 2: File Through the Tribunals Ontario Portal
-Go to **tribunalsontario.ca/ltb** and log in to the online portal. Select "Landlord Applications" and then "L9 — Application to Collect Rent the Tenant Owes."
+Go to **[tribunalsontario.ca/ltb](https://tribunalsontario.ca/ltb/)** and log in to the online portal. Select "Landlord Applications" and then "L9 — Application to Collect Rent the Tenant Owes."
 
 Fill in:
 - Property address and unit

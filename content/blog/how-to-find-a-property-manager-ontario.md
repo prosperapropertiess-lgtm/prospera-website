@@ -18,7 +18,7 @@ This guide walks you through exactly how to do it.
 
 ## Why Hiring a Property Manager in Ontario Is Different From Other Provinces
 
-Ontario has some of the most tenant-friendly landlord-tenant legislation in Canada. The Residential Tenancies Act governs almost every aspect of the landlord-tenant relationship: how much you can raise rent, when and how you can enter a property, what notice forms you must use, and how evictions are processed through the Landlord and Tenant Board.
+Ontario has some of the most tenant-friendly landlord-tenant legislation in Canada. The [Residential Tenancies Act](https://www.ontario.ca/laws/statute/06r17) governs almost every aspect of the landlord-tenant relationship: how much you can raise rent, when and how you can enter a property, what notice forms you must use, and how evictions are processed through the Landlord and Tenant Board.
 
 A property manager who doesn't understand the RTA in detail isn't just unhelpful — they're a liability. Serving a legally defective notice, entering a property without proper notice, or mishandling a last month's rent deposit can expose you to T-applications from tenants and orders from the LTB that cost you thousands.
 

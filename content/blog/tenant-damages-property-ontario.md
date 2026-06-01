@@ -8,7 +8,7 @@ readTime: "8 min read"
 featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-You do your move-out inspection and find holes in the walls, a destroyed carpet, a broken window, and a kitchen that looks like it survived a small disaster. Or maybe a tenant is still living there and you've discovered significant damage during a routine visit. Either way, you need to know what your options are — and what the process looks like under Ontario law.
+You do your move-out inspection and find holes in the walls, a destroyed carpet, a broken window, and a kitchen that looks like it survived a small disaster. Or maybe a tenant is still living there and you've discovered significant damage during a routine visit. Either way, you need to know what your options are — and what the process looks like under Ontario law. The [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) is the primary forum for resolving these disputes.
 
 ## First: Understand the Distinction Between Damage and Wear and Tear
 
@@ -37,7 +37,7 @@ This documentation is the foundation of any claim you make against the tenant. W
 
 Ontario does not allow landlords to collect a traditional security deposit. The only deposit you're legally permitted to collect is a **last month's rent deposit** — which can only be applied to the last month of the tenancy, not to damages.
 
-This surprises many landlords. There is no security deposit in Ontario that you can simply keep to cover repairs.
+This surprises many landlords. There is no security deposit in Ontario that you can simply keep to cover repairs. For a full breakdown of what landlords can and cannot collect upfront, see our [guide to security deposits in Ontario](/blog/security-deposits-ontario).
 
 ### Step 2: Send a Written Demand to the Tenant
 
@@ -63,7 +63,7 @@ Filing in Small Claims Court:
 
 If you discover significant damage during a lawful entry (24 hours written notice required), you have options.
 
-**For serious or ongoing damage**, you can serve an **N5 (Notice to End a Tenancy Early for Interfering with Others, Damage or Overcrowding)**.
+**For serious or ongoing damage**, you can serve an [**N5 (Notice to End a Tenancy Early for Interfering with Others, Damage or Overcrowding)**](/blog/n5-notice-ontario).
 
 The N5 gives the tenant a chance to correct the problem. If it's their **first N5 in six months**, they have **7 days** to void it by fixing the damage or compensating you. If they fix it, the notice is void.
 
@@ -77,7 +77,7 @@ If damage is deliberate — intentional vandalism rather than negligence — you
 
 ## Practical Tips for Protecting Yourself
 
-**Do a thorough move-in inspection.** We say this constantly because it matters constantly. Signed condition reports with photos are the only thing that separates "pre-existing damage" from "damage caused by this tenant" when it comes to a dispute.
+**Do a thorough move-in inspection.** We say this constantly because it matters constantly. Signed condition reports with photos are the only thing that separates "pre-existing damage" from "damage caused by this tenant" when it comes to a dispute. Our [move-in and move-out inspection guide](/blog/move-in-move-out-inspection-ontario) covers exactly what to document.
 
 **Screen tenants carefully.** It won't prevent all damage, but tenants with a history of responsible renting and stable employment are statistically less likely to trash your property.
 

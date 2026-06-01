@@ -16,7 +16,7 @@ Here's everything you need to know.
 
 For most residential tenants, Ontario caps rent increases each year at the **Rent Increase Guideline (RIG)** — a percentage set annually by the provincial government, tied to inflation.
 
-The guideline applies to units that are **not exempt** from rent control. The 2026 guideline is **2.5%** (always verify the current year's figure at Ontario.ca — it changes annually).
+The guideline applies to units that are **not exempt** from rent control. The 2026 guideline is **2.5%** (always verify the current year's figure at the [Ontario rent increase guideline page](https://www.ontario.ca/page/rent-increase-guideline) — it changes annually).
 
 You are not required to increase rent each year, but if you do, you cannot exceed the guideline for covered units without LTB approval.
 
@@ -30,6 +30,8 @@ This is where it gets nuanced.
 **Rent control does NOT apply to:**
 - Units first occupied for residential purposes **on or after November 15, 2018**
 - New purpose-built rental buildings completed after that date
+
+For a detailed breakdown of exemptions, see our guide to [Ontario rent control exemptions](/blog/ontario-rent-control-exemptions-2026).
 
 If your unit was a new build or first rented after November 15, 2018, you can theoretically raise rent by any amount — though you still must follow the notice requirements described below. In practice, large above-guideline increases in newer units can still result in tenant turnover and vacancy costs that outweigh the gains.
 
@@ -53,7 +55,7 @@ The notice must:
 - Be in writing
 - State the new rent amount (not just the increase percentage)
 - State the date the increase takes effect
-- Use the **N1 form** (Notice of Rent Increase) available from the LTB
+- Use the [**N1 form** (Notice of Rent Increase)](/blog/n1-form-ontario) available from the LTB
 
 An email notice or a handwritten letter may not meet the legal requirements. Use the LTB's N1 form to be safe.
 
@@ -85,7 +87,7 @@ Build in buffer. Serving on time feels easy until you're distracted in March and
 
 ## Above-Guideline Increases (AGIs)
 
-For units under rent control, landlords can apply to the LTB for an **Above-Guideline Increase** in certain circumstances:
+For units under rent control, landlords can apply to the LTB for an [**Above-Guideline Increase**](/blog/above-guideline-rent-increase-ontario) in certain circumstances:
 
 - **Extraordinary operating costs:** Significant unexpected increases in property taxes, utilities, or security costs
 - **Capital expenditures:** Major renovations or repairs that improve the building (e.g. roof replacement, window replacement, boiler replacement)

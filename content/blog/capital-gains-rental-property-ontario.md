@@ -12,7 +12,7 @@ Selling a rental property in Ontario is not the same as selling your home. There
 
 This guide breaks down exactly how capital gains tax works for Ontario landlords, what counts as a deductible cost, how the 2024 inclusion rate change affects you, and what strategies are worth considering before you list.
 
-This is not tax advice — always work with a CPA who knows real estate. But this will give you the foundation you need to have that conversation intelligently.
+This is not tax advice — always work with a CPA who knows real estate. But this will give you the foundation you need to have that conversation intelligently. For rental market context, [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) provide useful data on property values across Ontario.
 
 ---
 

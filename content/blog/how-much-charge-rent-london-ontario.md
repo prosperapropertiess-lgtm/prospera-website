@@ -9,7 +9,7 @@ featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200
 
 Pricing your rental correctly is one of the most important decisions you'll make as a landlord. Too high and your unit sits vacant — costing you far more than the extra $100/month you were holding out for. Too low and you leave money on the table every single month for years.
 
-Here's a current look at what the market supports in our three service cities.
+Here's a current look at what the market supports in our three service cities. For broader Ontario rental data, [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) provide useful context on national and provincial trends.
 
 ## London, Ontario — 2026 Rental Market
 
@@ -85,7 +85,7 @@ Say you own a 2-bedroom that's worth $1,900/month. You list it at $2,100 hoping 
 
 If it sits vacant for 6 weeks, you've lost $2,850 in rental income. That pays for **28 months** of the $100 premium you were hoping for. You'd need to keep the same tenant for over two years at the higher rate just to break even.
 
-**Our general rule:** Price to rent within 2–3 weeks. A well-priced, well-presented unit consistently beats an overpriced one.
+**Our general rule:** Price to rent within 2–3 weeks. A well-priced, well-presented unit consistently beats an overpriced one. For more on attracting quality tenants, see our [marketing rental property guide](/blog/marketing-rental-property-ontario).
 
 ## Frequently Asked Questions
 
@@ -106,4 +106,4 @@ Pricing at or slightly below market almost always produces a better financial ou
 
 ## Want a Free Rental Estimate?
 
-We pull real-time comparables from active listings and recent leases in our database. [Get a free estimate](/contact) for your property — no strings attached.
+We pull real-time comparables from active listings and recent leases in our database. [Get a free estimate](/contact) for your property — no strings attached. You can also explore our [London property management services](/blog/property-management-london-ontario) for a full picture of how we help investors maximize returns.

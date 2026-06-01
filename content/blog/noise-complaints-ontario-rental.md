@@ -14,7 +14,7 @@ Noise complaints are among the most common issues landlords deal with, and also 
 
 ## Your Legal Obligation as a Landlord
 
-This surprises some landlords: under the *Residential Tenancies Act*, you have an obligation to ensure that tenants can "reasonably enjoy" their rental unit. The right to quiet enjoyment isn't just about you (the landlord) not disturbing the tenant — it also means you need to take action when one tenant's conduct is substantially interfering with another's.
+This surprises some landlords: under the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), you have an obligation to ensure that tenants can "reasonably enjoy" their rental unit. The right to quiet enjoyment isn't just about you (the landlord) not disturbing the tenant — it also means you need to take action when one tenant's conduct is substantially interfering with another's.
 
 In other words, if you ignore a documented, ongoing noise complaint, the complaining tenant can file a T2 application with the LTB against you for failing to address it.
 
@@ -43,7 +43,7 @@ Save copies of all written communication and note the date of any phone calls.
 
 ## Step 3: If It Continues — The Formal Notice
 
-If the behaviour doesn't improve after your informal contact, it's time to escalate formally. You can serve an **N5 Notice to End a Tenancy for Interfering with Others' Enjoyment**.
+If the behaviour doesn't improve after your informal contact, it's time to escalate formally. You can serve an [**N5 notice**](/blog/n5-notice-ontario) to End a Tenancy for Interfering with Others' Enjoyment.
 
 The first N5 gives the tenant **7 days to stop the behaviour**. If they comply and the issue doesn't recur within 6 months, the notice is void — you cannot proceed to an LTB hearing on that specific N5.
 
@@ -107,7 +107,7 @@ Ask the complaining tenant to keep a written log with dates, times, duration, an
 
 ## Quick Reference
 
-- Ontario landlords have a legal obligation to address noise that interferes with other tenants' quiet enjoyment
+- Ontario landlords have a legal obligation to address noise that interferes with other tenants' quiet enjoyment. For a full guide on your entry rights when investigating complaints, see [landlord entry rights in Ontario](/blog/landlord-entry-rights-ontario)
 - Start with a written, documented conversation with the noisy tenant
 - If it continues: serve a first N5, which gives 7 days to correct the behaviour
 - A second N5 (no correction period) followed by an L2 application is the path to a hearing

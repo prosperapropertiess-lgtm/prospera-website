@@ -34,7 +34,7 @@ If the unit does not have a separate meter — common in older duplexes, basemen
 - **Include hydro in rent** — simple, but you're exposed to high usage
 - **Install sub-metering** — a licensed sub-metering company installs individual meters per unit; tenants then pay the sub-metering company directly
 
-Ontario's *Residential Tenancies Act* allows sub-metering in new tenancies, but there are rules around how it's set up and disclosed. If you switch an existing tenant from included hydro to sub-metered, you must reduce the rent by the amount previously attributable to electricity — and the process has specific requirements. Don't try to do this without proper documentation.
+Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) allows sub-metering in new tenancies, but there are rules around how it's set up and disclosed. If you switch an existing tenant from included hydro to sub-metered, you must reduce the rent by the amount previously attributable to electricity — and the process has specific requirements. Don't try to do this without proper documentation.
 
 ## Heat
 
@@ -58,7 +58,7 @@ If you do offer internet as an included amenity (common in furnished units or re
 
 ## How to Document Utilities in Your Lease
 
-Ontario's standard lease form (Form No. 2229E) includes a section specifically for utilities — which are included, which the tenant pays, and the details of any sub-metering or separate billing arrangements. Fill this out clearly and completely.
+Ontario's [standard lease form](/blog/ontario-standard-lease-2026) (Form No. 2229E) includes a section specifically for utilities — which are included, which the tenant pays, and the details of any sub-metering or separate billing arrangements. Fill this out clearly and completely. Our [guide to writing a lease agreement in Ontario](/blog/how-to-write-lease-agreement-ontario) covers how to document these arrangements clearly.
 
 Ambiguity in the lease about utilities is a common source of disputes. "Heat included" should specify what type of heat. "Tenant pays hydro" should include account setup instructions.
 
@@ -95,4 +95,4 @@ In most Ontario municipalities, water and sewer charges are billed by the munici
 ### What is sub-metering and can a landlord require it in Ontario?
 Sub-metering is a system where a licensed company installs individual electricity meters per unit, allowing tenants to pay for their own consumption directly. Ontario law permits sub-metering for new tenancies, but switching an existing tenant from included hydro to sub-metered requires a rent reduction equal to the amount previously attributable to electricity, following a specific regulatory process. Don't implement sub-metering without proper documentation and tenant notification.
 
-Getting your utility structure right at the start of a tenancy saves a lot of confusion — and potential disputes — down the road.
+Getting your utility structure right at the start of a tenancy saves a lot of confusion — and potential disputes — down the road. For your broader obligations under Ontario law, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario).

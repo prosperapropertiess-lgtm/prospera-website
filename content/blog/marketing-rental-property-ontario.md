@@ -69,7 +69,7 @@ Ask a few simple questions via text or email before confirming:
 - What's your move-in timeline?
 - What is your approximate household income or employment situation?
 
-You're not conducting a full interview — you're just filtering out obvious mismatches. Under the Ontario *Human Rights Code*, you cannot discriminate based on protected grounds like source of income, family status, or disability. Stick to questions about the tenancy itself.
+You're not conducting a full interview — you're just filtering out obvious mismatches. Under the [Ontario *Human Rights Code*](https://www.ontario.ca/laws/statute/90h19), you cannot discriminate based on protected grounds like source of income, family status, or disability. Stick to questions about the tenancy itself.
 
 ## Running an Effective Showing
 
@@ -104,4 +104,4 @@ A well-priced and well-marketed unit in London's current rental market typically
 ### Should I schedule individual showings or group showings for my rental?
 Group showings work well when you have strong interest — they create social proof and reduce the back-and-forth of individual bookings. For less competitive units or quieter markets like Strathroy, individual showings may be more practical. Either way, have application forms ready to hand out immediately after the showing while interest is fresh.
 
-Whether you do it yourself or work with a property manager, the goal is the same: find a tenant who pays on time, respects the property, and wants to stay. A good marketing process is where that relationship begins.
+Whether you do it yourself or work with a property manager, the goal is the same: find a tenant who pays on time, respects the property, and wants to stay. A good marketing process is where that relationship begins. For the next step, see our guide to [tenant screening red flags](/blog/tenant-screening-red-flags) and how to evaluate applicants legally. For context on what rent to set, see [how much to charge for rent in London, Ontario](/blog/how-much-charge-rent-london-ontario).

@@ -30,7 +30,7 @@ Most late payments are genuine mistakes — automatic payment failed, banking is
 
 ## Step 2: Day 1+ — Serve an N4 Notice
 
-If you haven't been paid and you want to preserve your legal options, you can serve an **N4 (Notice to End a Tenancy Early for Non-payment of Rent)** as early as day 1.
+If you haven't been paid and you want to preserve your legal options, you can serve an [**N4 notice**](/blog/n4-notice-ontario) (Notice to End a Tenancy Early for Non-payment of Rent) as early as day 1.
 
 The N4 gives the tenant **14 days** to pay everything owed in full. If they pay in full within the 14 days, the notice is void — they can stay.
 
@@ -46,7 +46,7 @@ Fill out the N4 accurately — incorrect amounts or dates are grounds for the LT
 
 ## Step 3: Day 15+ — File an L1 Application
 
-If 14 days have passed and the tenant hasn't paid in full, you can file an **L1 (Application to Evict a Tenant for Non-payment of Rent)** with the Landlord and Tenant Board.
+If 14 days have passed and the tenant hasn't paid in full, you can file an [**L1 application**](/blog/l1-application-ltb-ontario) (Application to Evict a Tenant for Non-payment of Rent) with the [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/).
 
 The filing fee is currently **$201** for online applications.
 

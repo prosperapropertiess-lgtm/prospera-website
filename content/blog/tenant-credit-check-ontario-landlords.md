@@ -113,7 +113,7 @@ A **thin-file applicant** is someone with little or no credit history. This is c
 - Young adults with limited credit history
 - People who've previously operated on a cash-only basis
 
-Under the Human Rights Code, you cannot automatically reject an applicant solely because they have no credit file if that absence of credit history is connected to a protected characteristic (such as place of origin or receipt of social assistance). In practice, this means you need to **look at the full picture** when a credit report comes back thin.
+Under the [Human Rights Code](https://www.ontario.ca/laws/statute/90h19), you cannot automatically reject an applicant solely because they have no credit file if that absence of credit history is connected to a protected characteristic (such as place of origin or receipt of social assistance). In practice, this means you need to **look at the full picture** when a credit report comes back thin.
 
 Alternative documentation a thin-file applicant might offer: proof of income (employment letter, recent pay stubs, T4s), bank statements showing savings and consistent deposits, or a co-signor with established credit. Refusing to consider any of this and simply rejecting on "no credit score" is a defensible position only if you apply the same standard consistently to all applicants — and even then, you may face a Human Rights Tribunal inquiry if a protected-class applicant files a complaint.
 

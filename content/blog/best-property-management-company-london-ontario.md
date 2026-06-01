@@ -8,7 +8,7 @@ readTime: "9 min read"
 featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-The best property management company in London, Ontario is one that knows the local rental market deeply, stays on top of Ontario's *Residential Tenancies Act*, responds to tenants and landlords quickly, and charges fees that are fair and clearly disclosed upfront. If a company can't demonstrate all four of these things, keep looking.
+The best property management company in London, Ontario is one that knows the local rental market deeply, stays on top of Ontario's *Residential Tenancies Act*, responds to tenants and landlords quickly, and charges fees that are fair and clearly disclosed upfront. For a full breakdown of what's normal to pay, see our guide to [property management fees in Ontario](/blog/property-management-fees-ontario). If a company can't demonstrate all four of these things, keep looking.
 
 London has a large and competitive property management industry. That's good news for landlords — but it also means there's real variation in quality. Some companies manage hundreds of properties with systems that work. Others are small operations with slow response times and spotty legal knowledge. Landlords who don't know what to look for often end up switching companies after a frustrating year, having lost money on a vacancy, a mishandled eviction, or a maintenance markup they didn't see coming. Here's how to evaluate your options properly.
 
@@ -34,7 +34,7 @@ Ask specifically: "Walk me through what you do when a tenant hasn't paid rent." 
 
 ### Transparent, Written Fee Structure
 
-Property management fees in Ontario typically range from 8% to 12% of monthly rent collected. But the monthly management fee is rarely the only charge. Before you sign with any company, ask for a complete, written breakdown of all fees, including:
+Property management fees in Ontario typically range from 8% to 12% of monthly rent collected. According to [CMHC rental housing data](https://www.cmhc-schl.gc.ca/consumers/renting), well-managed properties consistently see lower vacancy rates — a direct benefit of professional management. But the monthly management fee is rarely the only charge. Before you sign with any company, ask for a complete, written breakdown of all fees, including:
 
 - **Leasing fee:** Often one month's rent, charged when a new tenant is placed
 - **Lease renewal fee:** Some companies charge $150–$300 to renew an existing lease
@@ -119,7 +119,7 @@ Not all property managers are equal — here's exactly how to evaluate them so y
 Most property management companies in London, Ontario charge between 8% and 12% of monthly rent as a monthly management fee, plus a leasing fee (often one month's rent) when they place a new tenant. Additional fees for maintenance coordination, lease renewals, and LTB filings vary by company — always get the full fee breakdown in writing.
 
 **What should I look for in a property management company in Ontario?**
-The most important qualities are local market knowledge, a thorough understanding of the *Residential Tenancies Act*, transparent and written fees, responsive communication, and a clear process for handling non-payment of rent and LTB applications. Ask for landlord references and call them before signing.
+The most important qualities are local market knowledge, a thorough understanding of the *Residential Tenancies Act*, transparent and written fees, responsive communication, and a clear process for handling non-payment of rent and LTB applications. Ask for landlord references and call them before signing. Also review our guide to [tenant screening red flags](/blog/tenant-screening-red-flags) — a good property manager will have a rigorous screening process.
 
 **Is it worth hiring a property manager for a single rental?**
 For many single-property landlords in London, St. Thomas, or Strathroy, yes — particularly if you work full-time, live away from the property, or aren't comfortable navigating Ontario's landlord-tenant laws. The cost of professional management is often offset by better tenant screening, lower vacancy rates, and avoiding costly legal mistakes.

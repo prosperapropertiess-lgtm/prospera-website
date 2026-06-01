@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200
 
 You haven't heard from your tenant in weeks. Rent hasn't been paid, the lights are off, and the neighbour says they haven't seen anyone around. Their belongings might still be inside — or the unit might be completely empty.
 
-This is an abandoned tenancy, and it's more common than most landlords expect. What you do next matters a lot. Ontario's *Residential Tenancies Act* (RTA) still protects tenants even when they've seemingly disappeared, and taking the wrong steps can expose you to serious legal liability.
+This is an abandoned tenancy, and it's more common than most landlords expect. What you do next matters a lot. Ontario's *Residential Tenancies Act* ([RTA](https://www.ontario.ca/laws/statute/06r17)) still protects tenants even when they've seemingly disappeared, and taking the wrong steps can expose you to serious legal liability.
 
 ## What Is an Abandoned Tenancy?
 
@@ -70,7 +70,7 @@ If the LTB agrees the unit was abandoned, they'll issue a termination order and 
 
 ### Option B: Treat It as Non-Payment and File L1
 
-Because rent is almost certainly overdue in an abandonment situation, you can also proceed with a standard **N4 notice** (non-payment of rent) followed by an **L1 application**. This gives the tenant a chance to respond — and if they truly have abandoned the unit, they won't show up to the hearing, and the LTB will grant the eviction order.
+Because rent is almost certainly overdue in an abandonment situation, you can also proceed with a standard [N4 notice](/blog/n4-notice-ontario) (non-payment of rent) followed by an [L1 application](/blog/l1-application-ltb-ontario). This gives the tenant a chance to respond — and if they truly have abandoned the unit, they won't show up to the hearing, and the LTB will grant the eviction order.
 
 Many landlords find this route more straightforward because the process is familiar and well-documented.
 
@@ -92,6 +92,7 @@ A few things that help regardless of location:
 - **Collect an emergency contact** during the application process and keep it on file
 - **Have a clear lease clause** referencing the RTA and your obligations if you suspect abandonment
 - **Check in regularly** — a landlord who maintains light communication is more likely to know if a tenant is struggling before they disappear
+- **Keep thorough records** — good [landlord record keeping](/blog/landlord-record-keeping-ontario) means you have the documentation you need if the case goes to the LTB
 
 ## When to Get Help
 

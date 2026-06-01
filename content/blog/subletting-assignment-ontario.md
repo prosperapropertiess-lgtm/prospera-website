@@ -12,7 +12,7 @@ It's more common than you might think: a tenant reaches out to say they want to 
 
 ## Subletting vs. Assignment: What's the Difference?
 
-These two terms are often used interchangeably, but under the *Residential Tenancies Act* they mean different things.
+These two terms are often used interchangeably, but under the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) they mean different things.
 
 **A sublet** is when the original tenant temporarily moves out, lets someone else live in the unit, and then plans to return before the lease ends. The original tenant remains on the lease and is still legally responsible for rent and the condition of the unit. The person staying there (the subtenant) has an arrangement with the original tenant, not with you.
 
@@ -46,17 +46,17 @@ This option only applies to assignments, not sublets.
 
 **3. Respond within 7 days.** Approve or decline, put it in writing, and keep a copy.
 
-**4. Put the arrangement in writing.** For a sublet, make sure the original tenant understands they remain legally responsible. A written agreement between you, the original tenant, and the subtenant that outlines responsibilities prevents confusion.
+**4. Put the arrangement in writing.** For a sublet, make sure the original tenant understands they remain legally responsible. A written agreement between you, the original tenant, and the subtenant that outlines responsibilities prevents confusion. Our [guide to writing a lease agreement in Ontario](/blog/how-to-write-lease-agreement-ontario) covers the key elements any residential agreement should include.
 
 ## What If a Tenant Sublets Without Permission?
 
-If a tenant sublets without getting your consent first, you can serve an **N5 Notice to End a Tenancy** for unauthorized subletting. The tenant then has an opportunity to remedy the situation — typically by ending the unauthorized sublet.
+If a tenant sublets without getting your consent first, you can serve an [**N5 Notice to End a Tenancy**](/blog/n5-notice-ontario) for unauthorized subletting. The tenant then has an opportunity to remedy the situation — typically by ending the unauthorized sublet.
 
 Acting promptly matters here. Letting an unauthorized sublet continue without responding can complicate your legal position if the matter later goes to the LTB.
 
 ## Practical Notes for London, St. Thomas, and Sarnia Landlords
 
-Sublet and assignment requests tend to come up most with students (relocating between academic years), tenants who've had a job change, or people who've found a better living situation. In London especially, with a significant student population near Western University and Fanshawe College, this is a scenario that comes up regularly.
+Sublet and assignment requests tend to come up most with students (relocating between academic years), tenants who've had a job change, or people who've found a better living situation. In London especially, with a significant student population near Western University and Fanshawe College, this is a scenario that comes up regularly. If a subtenant is actually running a short-term rental operation out of your unit, see our guide to [Airbnb and short-term rentals in Ontario](/blog/airbnb-short-term-rentals-ontario) for how to address that.
 
 Understanding the process in advance — rather than scrambling when a request arrives — keeps you from making a decision under pressure. This is also an area where property managers like Prospera Properties can help: screening proposed occupants, responding within the legal timeframe, and making sure any resulting agreement is documented properly.
 

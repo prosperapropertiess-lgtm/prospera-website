@@ -14,7 +14,7 @@ It sounds tedious. It is, a little. But the two or three hours you invest in a p
 
 ## Why Inspections Matter in Ontario
 
-Ontario's *Residential Tenancies Act* places significant protections on tenants, and rightfully so. But those protections include rules around what a landlord can and cannot claim after a tenancy ends. Without a clear, documented record of the property's condition at move-in, it becomes nearly impossible to prove at the Landlord and Tenant Board that damage was caused by the tenant rather than pre-existing.
+Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) places significant protections on tenants, and rightfully so. But those protections include rules around what a landlord can and cannot claim after a tenancy ends. Without a clear, documented record of the property's condition at move-in, it becomes nearly impossible to prove at the Landlord and Tenant Board that damage was caused by the tenant rather than pre-existing.
 
 The standard in Ontario is that landlords are responsible for reasonable wear and tear — meaning normal aging of carpet, minor scuffs on walls, and similar everyday deterioration are your problem, not the tenant's. But deliberate damage, excessive dirt, and damage beyond normal use is the tenant's responsibility. The only way to establish this distinction is to document the property's condition precisely at both ends of the tenancy.
 
@@ -72,7 +72,7 @@ Photograph every area again, using the same angles as your move-in photos where 
 
 If there's no damage beyond normal wear and tear, the tenancy ends cleanly. If there is damage, you may be able to pursue the tenant for the cost of repairs — but you'll need to do this through the LTB's Small Claims process, and you'll need your documentation to support your claim.
 
-Note that Ontario does not allow security deposits for damage (only last month's rent deposits), so you can't simply deduct repair costs from a deposit. You need to file a claim.
+Note that Ontario does not allow security deposits for damage (only last month's rent deposits), so you can't simply deduct repair costs from a deposit. You need to file a claim. For more on damage claims and tenant responsibility, see our [tenant damages guide](/blog/tenant-damages-property-ontario). For the rules on what can be deducted from a last month's rent deposit, see our guide on [what landlords can deduct from last month's rent](/blog/what-can-landlord-deduct-from-last-month-rent-ontario).
 
 ## Making Inspections Easier
 

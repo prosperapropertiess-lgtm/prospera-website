@@ -8,7 +8,7 @@ readTime: "8 min read"
 featuredImage: "https://images.unsplash.com/photo-1527515545081-5db817172677?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-Tenant turnover is one of the most operationally demanding parts of owning a rental property. Done poorly, you rush to fill a unit that isn't quite ready — and start a new tenancy on the wrong foot. Done well, it's a chance to get the property into genuinely good shape, protect your investment, and set up a positive relationship with the incoming tenant from day one.
+Tenant turnover is one of the most operationally demanding parts of owning a rental property. Done poorly, you rush to fill a unit that isn't quite ready — and start a new tenancy on the wrong foot. Done well, it's a chance to get the property into genuinely good shape, protect your investment, and set up a positive relationship with the incoming tenant from day one. Ontario's [Residential Tenancies Act](https://www.ontario.ca/laws/statute/06r17) sets out both landlord and tenant obligations during this process.
 
 Here's a practical walkthrough of the process, from the day your tenant moves out to the day the new one gets the keys.
 
@@ -16,7 +16,7 @@ Here's a practical walkthrough of the process, from the day your tenant moves ou
 
 The move-out inspection is your first and most important step. Do it on or as close to the move-out date as possible, ideally with the outgoing tenant present.
 
-Walk through the entire unit with the move-in inspection report (you should have completed one when the tenant first moved in — if you didn't, start doing this for every tenancy). Compare the current condition against move-in condition, accounting for **normal wear and tear**.
+Walk through the entire unit with the move-in inspection report (you should have completed one when the tenant first moved in — if you didn't, start doing this for every tenancy). Our [move-in and move-out inspection guide](/blog/move-in-move-out-inspection-ontario) covers exactly what to document and why it matters. Compare the current condition against move-in condition, accounting for **normal wear and tear**.
 
 **Normal wear and tear** includes: minor scuffs on walls, small nail holes from picture hanging, slight wear in carpet traffic areas, and faded paint over several years. These are the expected results of someone living in a home, and they cannot be charged back to the tenant.
 
@@ -33,7 +33,7 @@ Photograph everything. These photos, compared with your move-in photos, are your
 
 In Ontario, you hold a last month's rent deposit — not a damage deposit. That deposit must be applied to the tenant's last month of rent.
 
-If there's damage beyond normal wear and tear, you cannot simply keep the deposit and put it toward repairs. You apply the deposit to last month's rent and then pursue the damage amount separately — either by agreement with the outgoing tenant, through Small Claims Court, or through an LTB application.
+If there's damage beyond normal wear and tear, you cannot simply keep the deposit and put it toward repairs. You apply the deposit to last month's rent and then pursue the damage amount separately — either by agreement with the outgoing tenant, through Small Claims Court, or through an LTB application. For more on what you can and cannot collect, see our [security deposits in Ontario guide](/blog/security-deposits-ontario).
 
 This trips up a lot of landlords. The deposit is not a damage fund; it's prepaid rent.
 
@@ -119,3 +119,4 @@ Yes. Under the RTA, landlords must provide the tenant with a written copy of the
 - Deep clean the entire unit; test smoke detectors and carbon monoxide detectors; replace the furnace filter
 - Fix everything that needs fixing; consider upgrades while the unit is empty
 - Complete a move-in inspection report with the new tenant before handing over keys
+- Keep records of all work done and communications throughout the turnover — see our [landlord record-keeping guide](/blog/landlord-record-keeping-ontario) for best practices

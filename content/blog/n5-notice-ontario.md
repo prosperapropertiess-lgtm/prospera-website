@@ -8,7 +8,7 @@ readTime: "10 min read"
 featuredImage: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-The N5 Notice to End a Tenancy Early for Interfering with Others, Damage or Overcrowding is the Ontario LTB form landlords use when a tenant's behaviour is causing problems — noise complaints, property damage, harassment of neighbours, overcrowding, or similar issues. Unlike the N4 (which is for non-payment of rent), the N5 addresses conduct that violates the tenant's obligations under Ontario's *Residential Tenancies Act*.
+The N5 Notice to End a Tenancy Early for Interfering with Others, Damage or Overcrowding is the Ontario LTB form landlords use when a tenant's behaviour is causing problems — noise complaints, property damage, harassment of neighbours, overcrowding, or similar issues. Unlike the [N4](/blog/n4-notice-ontario) (which is for non-payment of rent), the N5 addresses conduct that violates the tenant's obligations under Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17).
 
 The N5 has a key feature: the first one is voidable. The tenant has 7 days to correct the problem and, if they do, the notice is void. But if the same behaviour continues and you serve a second N5 within six months, it is not voidable — you can file at the Landlord and Tenant Board immediately.
 
@@ -149,7 +149,7 @@ As long as it's within six months of the first N5, you can serve a second N5. Th
 Written complaints from other tenants or neighbours (with dates and signatures), photos or video of damage or disturbances, police or bylaw officer call records, and any correspondence with the tenant about the behaviour. The more specific and objective your evidence, the stronger your case.
 
 **Can I serve both an N4 and N5 at the same time?**
-Yes. If a tenant is both behind on rent and causing behaviour problems, you can serve both an N4 (for arrears) and an N5 (for conduct) simultaneously. You would then file both an L1 (rent arrears) and L2 (behaviour) application at the LTB, which may be heard together.
+Yes. If a tenant is both behind on rent and causing behaviour problems, you can serve both an N4 (for arrears) and an N5 (for conduct) simultaneously. For more on noise-specific situations, see our [noise complaints guide](/blog/noise-complaints-ontario-rental). For damage-related disputes, see our [tenant damages guide](/blog/tenant-damages-property-ontario). You would then file both an L1 (rent arrears) and L2 (behaviour) application at the LTB, which may be heard together.
 
 ---
 

@@ -12,7 +12,7 @@ One of the most common sources of conflict between landlords and tenants in Onta
 
 ## The Landlord's Core Obligation
 
-Under Section 20 of the *Residential Tenancies Act*, landlords are required to:
+Under Section 20 of the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), landlords are required to:
 
 > "maintain a residential complex, including the rental units in it, in a good state of repair and fit for habitation and for complying with health, safety, housing and maintenance standards."
 
@@ -35,7 +35,7 @@ In practical terms, this means you're responsible for maintaining and repairing:
 If you supply a stove, fridge, dishwasher, or washer/dryer, you're responsible for keeping them in working order. If they break through normal use, that's on you. The key phrase is "through normal use" — wear and tear over time is your problem, intentional damage is not.
 
 ### Pest Control
-If there's a mouse problem, cockroaches, or bedbugs, the landlord is generally responsible for extermination — even if a tenant's habits contributed to the problem. This is a landlord obligation under most municipal property standards bylaws as well.
+If there's a mouse problem, cockroaches, or bedbugs, the landlord is generally responsible for extermination. For more detail, see our [pest control obligations guide](/blog/pest-control-ontario-rentals) — even if a tenant's habits contributed to the problem. This is a landlord obligation under most municipal property standards bylaws as well.
 
 ### Exterior and Grounds
 Snow removal from common walkways, exterior lighting, and maintaining safe entry points are typically landlord responsibilities. Make sure your lease clearly states who handles lawn care and snow removal for houses and semi-detached units — this is one of the few areas you can shift to the tenant by agreement.
@@ -92,7 +92,7 @@ Ignoring maintenance complaints doesn't make them go away — it tends to make t
 
 **Build a trades list.** Having a reliable plumber, electrician, and HVAC tech on speed dial means faster response times and less stress when things break.
 
-**Document everything.** Keep records of all repair requests, your responses, and invoices. If a dispute ends up at the LTB, documentation is what wins cases.
+**Document everything.** Keep records of all repair requests, your responses, and invoices. If a dispute ends up at the LTB, documentation is what wins cases. See our full [landlord record keeping guide](/blog/landlord-record-keeping-ontario) for a practical system.
 
 ## When It Gets Complicated
 

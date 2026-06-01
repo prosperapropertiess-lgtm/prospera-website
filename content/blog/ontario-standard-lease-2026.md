@@ -12,7 +12,7 @@ featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1
 
 If you're renting a residential unit in London, Ontario — or anywhere in the province — you are legally required to use Ontario's Standard Lease form for most new tenancies. Signed in the wrong form, or skipped altogether, this single document can give your tenant the right to withhold a month's rent or walk away from the tenancy with 60 days' notice.
 
-The current form is **Form 2229E**, updated by the Ontario government and mandatory under the *Residential Tenancies Act* (RTA) for most private residential rentals. This guide walks through every required section, explains which optional clauses hold up, and flags the Bill 60 changes that affect how fixed-term leases now work.
+The current form is **Form 2229E**, updated by the Ontario government and mandatory under the *Residential Tenancies Act* (RTA) for most private residential rentals. You can download it and read the official instructions from the [Ontario Standard Lease guide](https://www.ontario.ca/page/guide-ontarios-standard-lease). This guide walks through every required section, explains which optional clauses hold up, and flags the Bill 60 changes that affect how fixed-term leases now work.
 
 ---
 

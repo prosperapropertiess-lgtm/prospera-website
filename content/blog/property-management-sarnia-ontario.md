@@ -34,9 +34,9 @@ In a smaller city, your reputation as a landlord travels. If you're unresponsive
 
 ## Key Ontario Rules That Apply in Sarnia
 
-Sarnia falls under Ontario's *Residential Tenancies Act*, which governs everything from rent increases to eviction procedures. A few things to keep in mind:
+Sarnia falls under Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), which governs everything from rent increases to eviction procedures. A few things to keep in mind:
 
-**Rent control:** Ontario's rent increase guideline applies to most tenancies that began before November 15, 2018. Newer tenancies are exempt from guideline limits, meaning you can set rent to market when a new tenant moves in. However, once a tenancy is established, you can only raise rent once per year and must provide 90 days' written notice using the proper N1 form.
+**Rent control:** Ontario's [rent increase guideline](/blog/rent-increase-ontario-guidelines) applies to most tenancies that began before November 15, 2018. Newer tenancies are exempt from guideline limits, meaning you can set rent to market when a new tenant moves in. However, once a tenancy is established, you can only raise rent once per year and must provide 90 days' written notice using the proper N1 form.
 
 **Entry rules:** You must give 24 hours' written notice before entering a tenant's unit for non-emergency reasons. Showing up unannounced — even for something that seems minor — is a violation of the tenant's privacy rights under the RTA.
 
@@ -46,7 +46,7 @@ Sarnia falls under Ontario's *Residential Tenancies Act*, which governs everythi
 
 Managing a rental in Sarnia yourself is absolutely doable if you live locally, have a reliable contractor network, and are comfortable with Ontario landlord-tenant law. But for landlords who own multiple units, live out of town, or simply don't want the time commitment, professional management makes a lot of sense.
 
-A local property manager handles tenant screening, lease execution, rent collection, maintenance coordination, and LTB matters — so you get the income without the operational headaches. This is exactly where a company like Prospera Properties can help: we're familiar with the Sarnia market, have established relationships with local tradespeople, and know the nuances of Ontario landlord-tenant law inside out.
+A local property manager handles tenant screening, lease execution, rent collection, maintenance coordination, and LTB matters — so you get the income without the operational headaches. For a full breakdown of what professional management costs, see our [property management fees guide](/blog/property-management-fees-ontario). If you want advice on finding the right manager, see our [how to find a property manager in Ontario](/blog/how-to-find-a-property-manager-ontario) guide. This is exactly where a company like Prospera Properties can help: we're familiar with the Sarnia market, have established relationships with local tradespeople, and know the nuances of Ontario landlord-tenant law inside out.
 
 ## Practical Tips for Sarnia Landlords
 

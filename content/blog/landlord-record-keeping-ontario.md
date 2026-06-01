@@ -14,7 +14,7 @@ Record-keeping isn't glamorous, but it's one of the highest-leverage habits a la
 
 ## Why Records Matter in Ontario
 
-Ontario's rental market is governed by the *Residential Tenancies Act*, and disputes go to the **Landlord and Tenant Board**. LTB hearings are quasi-judicial proceedings — they're formal, the tenant has a right to challenge your evidence, and adjudicators expect documentation.
+Ontario's rental market is governed by the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), and disputes go to the **Landlord and Tenant Board**. LTB hearings are quasi-judicial proceedings — they're formal, the tenant has a right to challenge your evidence, and adjudicators expect documentation.
 
 Without records:
 - You can't prove a tenant owes rent arrears beyond your memory
@@ -46,7 +46,7 @@ If anything is disputed about the terms — whether pets were allowed, what park
 
 ### 3. Move-In and Move-Out Inspection Reports
 
-Ontario's RTA requires landlords to offer a written inspection report at move-in and move-out. Use the written checklist and document every room with:
+Ontario's RTA requires landlords to offer a written inspection report at move-in and move-out. See our [move-in and move-out inspection guide](/blog/move-in-move-out-inspection-ontario) for a step-by-step process. Use the written checklist and document every room with:
 - Description of condition
 - Photos (dated)
 - Tenant signature confirming the report
@@ -99,7 +99,7 @@ If a tenant files a maintenance complaint at the LTB claiming you ignored a prob
 Every dollar you spend on your rental property should be documented with an invoice from a legitimate business. This serves two purposes:
 
 1. **Tax deductions** — repairs, maintenance, and capital expenses are deductible or depreciable. Without receipts, you can't claim them.
-2. **LTB proceedings** — if you ever apply for an above-guideline rent increase or defend a maintenance complaint, invoices prove the work was done.
+2. **LTB proceedings** — if you ever apply for an above-guideline rent increase or defend a maintenance complaint, invoices prove the work was done. See our [rental property tax deductions guide](/blog/rental-property-tax-deductions-ontario) for more on how these records feed into your tax return.
 
 Keep both a digital scan and the physical original where possible.
 

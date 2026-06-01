@@ -14,7 +14,7 @@ London, Ontario is one of the most active rental markets in the province. With a
 
 That's where professional property management comes in.
 
-Whether you own a single-family home, a duplex, or a multi-unit building, working with a local property manager can be the difference between a stress-free investment and a full-time headache. This guide breaks down what property management in London, Ontario actually involves, what it costs, and how to decide whether it's right for you.
+Whether you own a single-family home, a duplex, or a multi-unit building, working with a local property manager can be the difference between a stress-free investment and a full-time headache. For context on pricing, see our guide to [property management fees in Ontario](/blog/property-management-fees-ontario). This guide breaks down what property management in London, Ontario actually involves, what it costs, and how to decide whether it's right for you.
 
 ## What Does a Property Manager Actually Do?
 
@@ -36,11 +36,11 @@ London has some distinct characteristics that make local expertise especially va
 
 **Student rentals require specialized management.** Properties near Western University (in the Richmond Row area and Old North neighbourhoods) and Fanshawe College turn over quickly, often annually. Leases need to align with academic calendars, and damage claims are more common. A manager who understands this market knows how to price units, market them early, and screen effectively.
 
-**The LTB backlog is real.** Ontario's Landlord and Tenant Board has faced chronic delays in recent years. In London, it's not unusual for hearings to be scheduled months out. If you have a problem tenant — non-payment, damage, noise complaints — you need someone who knows the system, files paperwork correctly the first time, and doesn't miss deadlines. Mistakes at the LTB can cost you thousands.
+**The LTB backlog is real.** Ontario's [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) has faced chronic delays in recent years. In London, it's not unusual for hearings to be scheduled months out. If you have a problem tenant — non-payment, damage, noise complaints — you need someone who knows the system, files paperwork correctly the first time, and doesn't miss deadlines. Mistakes at the LTB can cost you thousands.
 
 **Bylaws and licensing requirements are growing.** The City of London has introduced rental licensing requirements for certain property types. Keeping up with these obligations — inspections, fees, documentation — takes time and local knowledge.
 
-**Vacancy rates fluctuate by neighbourhood.** Rental demand and achievable rents vary significantly between Old South, Masonville, Byron, and downtown. A property manager with local market data can help you price correctly so you don't leave money on the table or sit vacant.
+**Vacancy rates fluctuate by neighbourhood.** Rental demand and achievable rents vary significantly between Old South, Masonville, Byron, and downtown. A property manager with local market data can help you price correctly so you don't leave money on the table or sit vacant. See our [tenant screening red flags guide](/blog/tenant-screening-red-flags) for a look at how good managers evaluate applicants.
 
 ## How Much Does Property Management Cost in London, Ontario?
 

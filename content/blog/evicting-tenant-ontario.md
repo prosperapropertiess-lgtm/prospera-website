@@ -8,7 +8,7 @@ readTime: "10 min read"
 featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-Evicting a tenant in Ontario is one of the most challenging things a landlord will face. The *Residential Tenancies Act* heavily favours tenant protections — which is fine — but it means a single procedural misstep can void your notice and force you to start over from scratch.
+Evicting a tenant in Ontario is one of the most challenging things a landlord will face. The [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) heavily favours tenant protections — which is fine — but it means a single procedural misstep can void your notice and force you to start over from scratch.
 
 Here's an honest, plain-language walkthrough of how eviction works in Ontario, what each stage involves, and how to avoid the mistakes that drag the process out.
 
@@ -22,7 +22,7 @@ Every eviction must go through the LTB process — no exceptions.
 
 You can only evict for reasons recognized under the RTA. The most common are:
 
-- **Non-payment of rent** (most common — covered in our separate post on late rent)
+- **Non-payment of rent** (most common — covered in our [N4 notice guide](/blog/n4-notice-ontario))
 - **Persistent late payment of rent**
 - **Illegal activity** in the unit or building
 - **Causing damage** to the property
@@ -80,7 +80,7 @@ At the hearing, both you and the tenant present your case before an adjudicator.
 
 The tenant may raise defences — including claims about the condition of the unit. If your property has any outstanding maintenance issues, the adjudicator may consider that context. Stay on top of repairs.
 
-If the adjudicator finds in your favour, they'll issue an **Eviction Order** — typically giving the tenant 11 days to vacate voluntarily.
+If the adjudicator finds in your favour, they'll issue an **Eviction Order** — typically giving the tenant 11 days to vacate voluntarily. For more on what to expect, see our guide to [preparing for an LTB hearing](/blog/ltb-hearing-preparation-ontario-landlords).
 
 ## Step 5: Enforcement
 

@@ -67,7 +67,7 @@ Evidence quality determines whether you win or lose at the LTB. For an N8, you n
 
 ### Step 1: Download and Complete Form N8
 
-Get the current N8 form from the LTB website. Fill in the tenant's name and address, your contact information, and the termination date. Check the box for "persistently failed to pay rent on time."
+Get the current N8 form from the [LTB website](https://tribunalsontario.ca/ltb/). Fill in the tenant's name and address, your contact information, and the termination date. Check the box for "persistently failed to pay rent on time."
 
 ### Step 2: Calculate the Termination Date Correctly
 

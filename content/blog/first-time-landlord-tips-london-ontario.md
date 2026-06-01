@@ -22,7 +22,7 @@ Ontario's *Residential Tenancies Act* governs almost every aspect of the landlor
 
 - **Notice requirements** for entry (24 hours written notice for most visits)
 - **The eviction process** — you cannot simply ask someone to leave
-- **Rent increase rules** — once per year, within the annual guideline
+- **Rent increase rules** — once per year, within the [annual guideline](/blog/rent-increase-ontario-guidelines)
 - **What you can and cannot include in a lease**
 
 Ignorance of the law is not a defense at the Landlord and Tenant Board. New landlords who don't know the rules often make mistakes that cost them months of time and thousands of dollars to fix.
@@ -33,7 +33,7 @@ Even if you're only renting out one unit, act like a landlord, not a favor-doer.
 
 **Open a separate bank account** for rental income and expenses. This makes bookkeeping far easier and keeps your personal finances clean.
 
-**Keep records of everything:** signed lease, move-in inspection report, rent receipts, maintenance requests, correspondence with tenants, invoices from tradespeople. If you ever end up at the LTB, these records are the difference between winning and losing.
+**Keep records of everything:** signed lease, move-in inspection report, rent receipts, maintenance requests, correspondence with tenants, invoices from tradespeople. If you ever end up at the LTB, these records are the difference between winning and losing. See our guide on [landlord record keeping in Ontario](/blog/landlord-record-keeping-ontario) for a full system.
 
 **Issue rent receipts** — landlords in Ontario are legally required to provide a receipt within 21 days if a tenant requests one. Just get into the habit of sending them monthly.
 
@@ -47,7 +47,7 @@ What you cannot do: discriminate based on race, religion, family status, gender,
 
 ## Use the Ontario Standard Lease
 
-Since 2018, most residential landlords in Ontario are required to use the government's Standard Lease. Download the current version from the Ontario government website. Fill it out carefully, include any additional terms in the designated section (and make sure they comply with the RTA), and give the tenant a copy within 21 days.
+Since 2018, most residential landlords in Ontario are required to use the government's Standard Lease. Download the current version from the [Ontario Standard Lease guide](https://www.ontario.ca/page/guide-ontarios-standard-lease). Fill it out carefully, include any additional terms in the designated section (and make sure they comply with the RTA), and give the tenant a copy within 21 days.
 
 One section many new landlords overlook: **services and utilities**. Be explicit about what's included. If the tenant is paying hydro, make sure that's clearly stated. Ambiguity here leads to disputes.
 

@@ -16,7 +16,7 @@ An AGI is an application to the Landlord and Tenant Board to raise rent beyond t
 
 ## The Baseline: What the Guideline Covers
 
-Ontario sets a **rent increase guideline** each year, tied to inflation. For most years it sits between 2% and 3%, though it can vary. Landlords can apply this increase to any existing tenancy with 90 days written notice using an **N1 form** — no LTB approval required.
+Ontario sets a **rent increase guideline** each year, tied to inflation. For most years it sits between 2% and 3%, though it can vary — check the [current rent increase guideline](https://www.ontario.ca/page/rent-increase-guideline) at Ontario.ca. Landlords can apply this increase to any existing tenancy with 90 days written notice using an [N1 form](/blog/n1-form-ontario) — no LTB approval required.
 
 The guideline applies to most private residential tenancies. (Note: units first occupied after November 15, 2018 are exempt from rent control entirely, so AGIs aren't relevant for those.)
 
@@ -49,7 +49,7 @@ If you've added new security services to the property (like a staffed security g
 
 ## How to Apply: The L5 Application
 
-To apply for an AGI, you file an **L5 application** with the Landlord and Tenant Board.
+To apply for an AGI, you file an **L5 application** with the [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/).
 
 The application requires you to provide:
 - A detailed list of the capital expenditures or cost increases
@@ -128,4 +128,4 @@ Yes. Tenants are notified of the application and have the right to attend the he
 ### Can a landlord apply for an AGI on a unit first occupied after November 15, 2018?
 No. Units first occupied for residential purposes after that date are exempt from rent control, so there is no guideline to exceed and no need for an AGI. Landlords with these units can raise rent at any amount when a tenancy turns over — though the 90-day written notice requirement and the 12-month rule still apply once a tenancy is established.
 
-If you're managing multiple properties in the London, St. Thomas, or Sarnia area and you're unsure whether an AGI application is right for your situation, a property manager like Prospera Properties can help you assess whether your recent capital work qualifies and whether the process is worth pursuing. [Get in touch with us](/contact) if you'd like to talk through your options.
+If you're managing multiple properties in the London, St. Thomas, or Sarnia area and you're unsure whether an AGI application is right for your situation, a property manager like Prospera Properties can help you assess whether your recent capital work qualifies and whether the process is worth pursuing. For context on how the standard guideline works, see our guide to [rent increases in Ontario](/blog/rent-increase-ontario-guidelines). [Get in touch with us](/contact) if you'd like to talk through your options.

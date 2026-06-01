@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1
 
 Of all the eviction notices in Ontario's toolkit, the N13 is one of the least understood — and one of the most misused. Landlords sometimes reach for it when they want a tenant out and figure "major repairs" sounds like a reasonable excuse. That almost always ends badly.
 
-The N13 is a legitimate and necessary form when used properly. If you genuinely need to demolish a building, convert it to a non-residential use, or do extensive repairs or renovations that require the unit to be vacant, the N13 is the right tool. But the Residential Tenancies Act (RTA) sets a high bar, and the Landlord and Tenant Board (LTB) has seen every bad-faith attempt in the book.
+The N13 is a legitimate and necessary form when used properly. If you genuinely need to demolish a building, convert it to a non-residential use, or do extensive repairs or renovations that require the unit to be vacant, the N13 is the right tool. But the Residential Tenancies Act (RTA) sets a high bar, and the [Landlord and Tenant Board (LTB)](https://tribunalsontario.ca/ltb/) has seen every bad-faith attempt in the book.
 
 This guide explains exactly when the N13 applies, how to serve it correctly, what your obligations are to the tenant, and what happens if things go sideways.
 

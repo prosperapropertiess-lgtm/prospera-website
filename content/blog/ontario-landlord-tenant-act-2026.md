@@ -7,7 +7,7 @@ readTime: "8 min read"
 featuredImage: "https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-If you own rental property in Ontario, the *Residential Tenancies Act, 2006* (RTA) governs almost every aspect of your landlord-tenant relationship. And in 2026, a few things are worth revisiting — especially around rent increases, eviction timelines, and the N12 notice rules.
+If you own rental property in Ontario, the [*Residential Tenancies Act, 2006*](https://www.ontario.ca/laws/statute/06r17) (RTA) governs almost every aspect of your landlord-tenant relationship. And in 2026, a few things are worth revisiting — especially around rent increases, eviction timelines, and the N12 notice rules.
 
 ## The Basics: What the RTA Covers
 
@@ -25,7 +25,7 @@ The RTA applies to most residential rental units in Ontario — houses, apartmen
 
 Ontario's rent control applies only to units first occupied for residential purposes **before November 15, 2018**. Units built or first rented after that date have no provincial rent cap — landlords can set rent at whatever the market supports.
 
-For controlled units, the **2026 rent increase guideline is 2.5%**. You must serve tenants with a proper N1 notice at least **90 days before** the increase takes effect. Don't skip this step — it cannot be backdated.
+For controlled units, the **2026 rent increase guideline is 2.5%**. You must serve tenants with a proper [N1 notice](/blog/n1-form-ontario) at least **90 days before** the increase takes effect. Don't skip this step — it cannot be backdated.
 
 > **Quick tip:** Even for post-2018 units, document every rent increase in writing and give reasonable notice. Good communication prevents disputes.
 
@@ -40,7 +40,7 @@ For controlled units, the **2026 rent increase guideline is 2.5%**. You must ser
 
 ### The N4: Late Rent
 
-If a tenant misses rent, you can serve an N4 on day 1 of non-payment. The tenant has 14 days to pay in full or vacate. If they pay, the N4 is void. If they don't, you can file with the Landlord and Tenant Board (LTB).
+If a tenant misses rent, you can serve an [N4 notice](/blog/n4-notice-ontario) on day 1 of non-payment. The tenant has 14 days to pay in full or vacate. If they pay, the N4 is void. If they don't, you can file with the Landlord and Tenant Board (LTB).
 
 **Important:** If you accept any partial payment after serving an N4, the notice is void and you have to start over. Don't accept partial rent unless you're sure you want to void the notice.
 

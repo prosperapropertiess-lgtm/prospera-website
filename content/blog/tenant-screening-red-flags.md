@@ -64,7 +64,7 @@ Unauthorized occupants are a risk in several ways: more wear on the unit, potent
 
 At Prospera Properties, every applicant goes through:
 
-1. **Full credit check** (with applicant consent)
+1. [**Full credit check**](/blog/tenant-credit-check-ontario-landlords) (with applicant consent)
 2. **Income verification** — pay stubs, employer letter, or NOA for self-employed
 3. **Two landlord references** — we call both, every time
 4. **Employment verification** — employer name, address, and HR contact
@@ -78,7 +78,7 @@ We document everything and keep records in case of future disputes.
 A common benchmark is that a tenant's gross monthly income should be at least 2.5–3x the monthly rent. For a $1,800/month unit, that's approximately $4,500–$5,400/month in gross income. For self-employed applicants or those with variable income, ask for two years of tax returns or Notices of Assessment to establish a reliable income picture.
 
 ### Can an Ontario landlord refuse to rent to someone because of a low credit score?
-You can consider credit history as part of your screening, but you cannot refuse based on protected grounds under the Ontario Human Rights Code. A credit score below 620 is a relevant factor — but context matters. An applicant who can explain a low score (medical debt, past hardship) and demonstrate recovery is different from someone with an unexplained pattern of unpaid accounts. Document your reasons if you decline an applicant.
+You can consider credit history as part of your screening, but you cannot refuse based on protected grounds under the [Ontario Human Rights Code](https://www.ontario.ca/laws/statute/90h19). A credit score below 620 is a relevant factor — but context matters. An applicant who can explain a low score (medical debt, past hardship) and demonstrate recovery is different from someone with an unexplained pattern of unpaid accounts. Document your reasons if you decline an applicant.
 
 ### What questions should a landlord ask when calling a previous landlord as a reference?
 Ask: Did they pay rent on time? Did they give proper notice when leaving? Would you rent to them again? Did they leave the unit in good condition? That last question is the most revealing — a hesitant "yes" is often a no. Call references directly rather than accepting written letters, and verify the phone number independently to confirm you're reaching an actual previous landlord.
@@ -91,6 +91,6 @@ No. Under the Ontario Human Rights Code, citizenship and immigration status are 
 
 ## The Bottom Line
 
-The time you spend screening is directly proportional to the time you don't spend filing LTB applications. A thorough 2-hour screening process protects you from a potential 6-month nightmare.
+The time you spend screening is directly proportional to the time you don't spend filing LTB applications. A thorough 2-hour screening process protects you from a potential 6-month nightmare. Pair your screening with a [solid lease agreement](/blog/how-to-write-lease-agreement-ontario) and a thorough [move-in inspection](/blog/move-in-move-out-inspection-ontario) to protect your investment from day one.
 
 If you'd rather not manage this yourself, [we handle the entire process](/landlords) — and we stand behind our tenant selections.

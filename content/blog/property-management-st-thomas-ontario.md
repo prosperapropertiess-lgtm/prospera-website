@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1
 
 # Property Management in St. Thomas, Ontario: What Landlords Need to Know
 
-St. Thomas is quietly becoming one of Southwestern Ontario's most attractive rental markets. With Amazon's massive fulfillment centre bringing thousands of jobs to Elgin County, a growing downtown core, and housing prices still far below neighbouring London, more investors are buying rental properties here than ever before.
+St. Thomas is quietly becoming one of Southwestern Ontario's most attractive rental markets. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) provide broader context on rental trends across Ontario. With Amazon's massive fulfillment centre bringing thousands of jobs to Elgin County, a growing downtown core, and housing prices still far below neighbouring London, more investors are buying rental properties here than ever before.
 
 But owning a rental in St. Thomas isn't quite the same as owning one in a big city. Local landlords face a unique mix of opportunities and challenges — from finding reliable tenants in a rapidly shifting labour market to navigating Ontario's Residential Tenancies Act without a real estate lawyer on speed dial.
 
@@ -77,11 +77,11 @@ Not all property managers are created equal. When evaluating companies, ask thes
 
 Self-managing your St. Thomas rental can work well if you live nearby, have reliable trades contacts, and are comfortable with Ontario landlord-tenant law. But for investors who live out of the area, have multiple properties, or simply value their time, the math often favours professional management.
 
-Consider this: one bad tenant, one missed maintenance issue that becomes an insurance claim, or one improperly served LTB notice can cost thousands of dollars and months of stress. A good property manager earns their fee by keeping those problems from happening in the first place.
+Consider this: one bad tenant, one missed maintenance issue that becomes an insurance claim, or one improperly served LTB notice can cost thousands of dollars and months of stress. For more on your legal maintenance obligations, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario). For what to look for in tenant applicants, see our [tenant screening red flags guide](/blog/tenant-screening-red-flags). A good property manager earns their fee by keeping those problems from happening in the first place.
 
 ## How Prospera Properties Helps St. Thomas Landlords
 
-At Prospera Properties, we manage residential rentals across London, St. Thomas, and Strathroy. We know the St. Thomas market — the neighbourhoods, the tenant expectations, and the local trades network — and we handle the full spectrum of property management so our clients don't have to.
+At Prospera Properties, we manage residential rentals across London, St. Thomas, and Strathroy. For a full breakdown of what management costs, see our [property management fees guide](/blog/property-management-fees-ontario). We know the St. Thomas market — the neighbourhoods, the tenant expectations, and the local trades network — and we handle the full spectrum of property management so our clients don't have to.
 
 Whether you own a single rental home or a small portfolio of units, we can take the day-to-day off your plate while keeping you informed about what matters.
 

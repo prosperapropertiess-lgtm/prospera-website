@@ -136,7 +136,7 @@ When you reference a document, say clearly: *"I'm referring to Exhibit C, the re
 
 ## What Adjudicators Look For
 
-LTB adjudicators are not on your side or the tenant's side. They're applying the **Residential Tenancies Act (RTA)** to the facts in front of them. The landlords who succeed are the ones who make the adjudicator's job easy.
+LTB adjudicators are not on your side or the tenant's side. They're applying the [**Residential Tenancies Act**](https://tribunalsontario.ca/ltb/) (RTA) to the facts in front of them. The landlords who succeed are the ones who make the adjudicator's job easy.
 
 **What helps:**
 - A complete, chronological rent ledger with no gaps

@@ -7,7 +7,7 @@ readTime: "6 min read"
 featuredImage: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-Hiring a property manager should make your life easier and your investment more profitable. But the fee structure varies enormously — and some companies bury costs in places you won't find until you're already locked in.
+Hiring a property manager should make your life easier and your investment more profitable. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer context on the rental housing market across Ontario. But the fee structure varies enormously — and some companies bury costs in places you won't find until you're already locked in.
 
 Here's what you should actually be paying in Ontario in 2026.
 
@@ -111,4 +111,4 @@ Watch for lease renewal fees ($150–$500 to keep an existing tenant), setup or 
 ### Is it worth hiring a property manager in London or Southwestern Ontario?
 For landlords managing multiple properties, living out of town, or uncomfortable with the LTB process, professional management typically pays for itself. A single missed maintenance issue, a bad tenant, or an improperly served notice can easily cost more than a full year of management fees. The value is greatest when problems are prevented — not just resolved.
 
-[See our full pricing breakdown](/pricing) or [get in touch](/contact) for a quote on your specific property.
+[See our full pricing breakdown](/pricing) or [get in touch](/contact) for a quote on your specific property. You can also read our guides to [property management in London, Ontario](/blog/property-management-london-ontario) and [how to find a property manager in Ontario](/blog/how-to-find-a-property-manager-ontario) for more context on evaluating your options.

@@ -12,7 +12,7 @@ If you own rental property in Ontario long enough, you'll likely deal with the L
 
 ## What the LTB Does
 
-The Landlord and Tenant Board is an administrative tribunal that resolves disputes between landlords and tenants under Ontario's *Residential Tenancies Act*. It's not a court, but it functions similarly: both parties present evidence and arguments, a member makes a binding decision, and there are formal rules about procedure and timelines.
+The [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) is an administrative tribunal that resolves disputes between landlords and tenants under Ontario's *Residential Tenancies Act*. It's not a court, but it functions similarly: both parties present evidence and arguments, a member makes a binding decision, and there are formal rules about procedure and timelines.
 
 The LTB handles applications from both landlords and tenants. Landlords most often file to:
 - Evict a tenant for non-payment of rent (L1 application)
@@ -27,7 +27,7 @@ Tenants can file applications for maintenance failures, illegal rent increases, 
 
 This is the most common landlord application. If your tenant hasn't paid rent, the process is:
 
-1. Serve the tenant an **N4 notice** (Notice to End your Tenancy for Non-payment of Rent), which gives the tenant 14 days to pay the full amount owed or vacate
+1. Serve the tenant an [**N4 notice**](/blog/n4-notice-ontario) (Notice to End your Tenancy for Non-payment of Rent), which gives the tenant 14 days to pay the full amount owed or vacate
 2. If the tenant neither pays nor leaves after 14 days, file an L1 application with the LTB online through the Tribunals Ontario portal
 3. Pay the filing fee (currently around $201)
 4. Attend the hearing (most LTB hearings are now conducted virtually)
@@ -78,7 +78,7 @@ Winning at the LTB is step one. If the order says the tenant must pay and they d
 
 LTB timelines have been a frustration for Ontario landlords for years. Non-payment applications (L1) are generally scheduled within a few weeks to a couple of months. More complex matters can take longer.
 
-This is one reason why acting early is so important: the moment a tenant misses rent and the 14-day N4 period passes without payment, file your L1. Don't wait to see if next month improves — you can always withdraw the application if the tenant catches up.
+This is one reason why acting early is so important: the moment a tenant misses rent and the 14-day N4 period passes without payment, file your [L1 application](/blog/l1-application-ltb-ontario). Don't wait to see if next month improves — you can always withdraw the application if the tenant catches up.
 
 ## Practical Advice for London, St. Thomas, and Sarnia Landlords
 

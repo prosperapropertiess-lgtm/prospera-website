@@ -22,7 +22,7 @@ This guide covers what a proper repayment agreement looks like, how to tie it to
 
 ## Why Repayment Agreements Matter at the LTB
 
-The Landlord and Tenant Board doesn't exist solely to issue eviction orders. Adjudicators and Dispute Resolution Officers (DROs) actively expect landlords and tenants to explore resolution before a hearing proceeds to a final order.
+The [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) doesn't exist solely to issue eviction orders. Adjudicators and Dispute Resolution Officers (DROs) actively expect landlords and tenants to explore resolution before a hearing proceeds to a final order.
 
 In practice, when an L1 application (non-payment of rent) reaches the LTB, one of the first things a DRO will ask is whether the parties have attempted to work out a repayment schedule. Landlords who can show they made a reasonable good-faith effort are generally viewed more favourably. Those who skipped the conversation entirely may find the adjudicator more sympathetic to the tenant's request for more time.
 

@@ -14,7 +14,7 @@ If you genuinely need to do major work on your rental property that requires the
 
 ## When Is a Renovation-Based Eviction Legitimate?
 
-The *Residential Tenancies Act* allows a landlord to end a tenancy when they need to perform renovations or repairs that **require vacant possession** — meaning the work is so extensive that it simply cannot be done safely or practically with a tenant living in the unit.
+Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) allows a landlord to end a tenancy when they need to perform renovations or repairs that **require vacant possession** — meaning the work is so extensive that it simply cannot be done safely or practically with a tenant living in the unit.
 
 The critical qualifier: the renovations must require a **building permit** and must genuinely necessitate that the unit be empty. Repainting, replacing appliances, updating a bathroom vanity, or redoing flooring — routine work — does not meet this standard. The work must be major: structural changes, full electrical or plumbing overhauls, complete gut renovations.
 
@@ -22,7 +22,7 @@ If your renovation doesn't require a building permit and doesn't genuinely requi
 
 ## The N13 Notice
 
-To terminate a tenancy for renovation or demolition purposes, you serve an **N13 Notice to End the Tenancy**. The notice must:
+To terminate a tenancy for renovation or demolition purposes, you serve an [**N13 Notice to End the Tenancy**](/blog/n13-notice-ontario). The notice must:
 
 - State the reason (repairs, renovation, or demolition requiring vacant possession)
 - Provide at least **120 days' notice**, ending on the last day of a rental period
@@ -58,7 +58,7 @@ If the tenant agrees to temporarily relocate rather than terminate the tenancy, 
 
 If a tenant receives an N13, vacates the unit, and the renovations don't proceed as described — or happen to be much less extensive than claimed — the tenant can file an application alleging the eviction was in bad faith. The LTB treats these cases seriously.
 
-This is why documentation matters from the start: building permits, contractor agreements, architectural drawings, a realistic timeline. A clear paper trail demonstrating that the work was genuine and required the vacancy is your protection if the tenancy is ever challenged.
+This is why documentation matters from the start: building permits, contractor agreements, architectural drawings, a realistic timeline. A clear paper trail demonstrating that the work was genuine and required the vacancy is your protection if the tenancy is ever challenged. See our [landlord record-keeping guide](/blog/landlord-record-keeping-ontario) for how to organize and retain this documentation effectively.
 
 ## What the LTB Is Watching For
 
@@ -73,7 +73,7 @@ Landlords who serve N13 notices without meeting these requirements, or who proce
 
 ## Advice for London, St. Thomas, and Sarnia Landlords
 
-If you're a small-scale landlord considering a major renovation to a rental unit, getting professional guidance before serving any notice is genuinely worthwhile. The process is technical, the notice period is long, and the tenant protections are meaningful. Missteps at any point — wrong notice period, failing to pay compensation on time, ignoring a right-of-first-refusal request — can be costly.
+If you're a small-scale landlord considering a major renovation to a rental unit, getting professional guidance before serving any notice is genuinely worthwhile. For a broader overview of the eviction process in Ontario, see our guide to [evicting a tenant in Ontario](/blog/evicting-tenant-ontario). The process is technical, the notice period is long, and the tenant protections are meaningful. Missteps at any point — wrong notice period, failing to pay compensation on time, ignoring a right-of-first-refusal request — can be costly.
 
 At Prospera Properties, we help landlords in the London, St. Thomas, and Sarnia area think through the timing and requirements before taking any formal steps. If the renovation is legitimate and the process is followed correctly, the law fully supports it. The risk comes from cutting corners or using the process for a purpose it wasn't designed for.
 

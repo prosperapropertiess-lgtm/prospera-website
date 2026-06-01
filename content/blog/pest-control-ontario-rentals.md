@@ -14,7 +14,7 @@ Here's what Ontario law says, and how to handle it practically.
 
 ## The Legal Starting Point: Landlord Responsibility
 
-Under Ontario's *Residential Tenancies Act*, landlords are required to maintain rental units in a **good state of repair** and comply with health, safety, and maintenance standards. The province's property standards — enforced by municipalities — almost universally require that rental units be free of pests.
+Under Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17), landlords are required to maintain rental units in a **good state of repair** and comply with health, safety, and maintenance standards. The province's property standards — enforced by municipalities — almost universally require that rental units be free of pests.
 
 The practical implication: **pest control is generally the landlord's responsibility**, regardless of how the infestation started. If your tenant reports a pest problem, you are expected to address it promptly with a licensed pest control professional.
 
@@ -92,7 +92,7 @@ Bedbug and rodent treatments can run from a few hundred to several thousand doll
 
 Prospera Properties includes pest prevention in our regular property inspections, and we coordinate professional treatment whenever needed — so landlords don't have to manage exterminators and tenant communication on their own. It's one of those issues that's much easier to handle when you have a system.
 
-No landlord wants to deal with pests. But handling them quickly, professionally, and with proper documentation is what separates a manageable problem from an LTB hearing.
+No landlord wants to deal with pests. But handling them quickly, professionally, and with proper documentation is what separates a manageable problem from an LTB hearing. For a broader view of your maintenance obligations, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario). For keeping track of it all, see our [landlord record keeping guide](/blog/landlord-record-keeping-ontario).
 
 ## Frequently Asked Questions
 

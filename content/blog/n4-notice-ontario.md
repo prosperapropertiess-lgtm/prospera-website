@@ -19,7 +19,7 @@ The N4 is a formal legal notice under Ontario's *Residential Tenancies Act, 2006
 1. You are claiming a specific amount of unpaid rent
 2. They have 14 days to pay the full amount — or vacate the unit
 
-If the tenant pays the full amount on the N4 within 14 days, the notice is void and the tenancy continues as normal. If they don't pay and don't move out, you can file an **L1 application** (Application to Evict a Tenant for Non-payment of Rent and to Collect Rent the Tenant Owes) at the Landlord and Tenant Board.
+If the tenant pays the full amount on the N4 within 14 days, the notice is void and the tenancy continues as normal. If they don't pay and don't move out, you can file an [**L1 application**](/blog/l1-application-ltb-ontario) (Application to Evict a Tenant for Non-payment of Rent and to Collect Rent the Tenant Owes) at the Landlord and Tenant Board.
 
 The N4 does not evict anyone on its own. It is a legal prerequisite — a required step — before you can apply for an eviction order.
 
@@ -35,7 +35,7 @@ A few important qualifications:
 
 ## How to Fill Out the N4 Correctly
 
-The N4 form is available at the LTB website or through the Tribunals Ontario portal. It requires the following information:
+The N4 form is available at the [LTB website](https://tribunalsontario.ca/ltb/) or through the Tribunals Ontario portal. It requires the following information:
 
 **Section 1 — Tenant and landlord information**
 Fill in the full legal names of all tenants on the lease, the full address of the rental unit, and your name and contact information as the landlord or property manager.
@@ -110,7 +110,7 @@ Prospera Properties regularly assists landlords who come to us after a voided no
 
 If the tenant disputes the N4 at the LTB — citing an incorrect amount, wrong termination date, or improper service — the adjudicator may dismiss the application and require you to start over. That typically means another month or more before you can get a new hearing date.
 
-In a non-payment situation where a tenant owes thousands in arrears, that delay is costly. Getting the N4 right the first time is worth the extra care.
+In a non-payment situation where a tenant owes thousands in arrears, that delay is costly. Getting the N4 right the first time is worth the extra care. For context on the full process once you've served the notice, see our guide to [handling late rent payments in Ontario](/blog/late-rent-payments-ontario).
 
 ---
 

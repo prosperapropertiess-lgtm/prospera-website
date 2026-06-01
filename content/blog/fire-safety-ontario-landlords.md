@@ -14,7 +14,7 @@ Here's what you need to know.
 
 ## Smoke Alarms: What the Law Requires
 
-Under Ontario's *Fire Protection and Prevention Act* and the *Ontario Fire Code*, landlords must install working smoke alarms:
+Under Ontario's [*Fire Protection and Prevention Act*](https://www.ontario.ca/laws/statute/92b23) and the *Ontario Fire Code*, landlords must install working smoke alarms:
 
 - **On every storey** of the dwelling unit
 - **Outside every sleeping area** (typically in the hallway adjacent to bedrooms)
@@ -76,7 +76,7 @@ In London, the London Fire Department offers free fire safety inspections for re
 
 Whether you manage one property or twenty, build fire safety into your regular maintenance schedule:
 
-- **At each new tenancy:** Test all alarms, document results on the move-in inspection form, and give the tenant written confirmation that alarms are working
+- **At each new tenancy:** Test all alarms, document results on the [move-in inspection report](/blog/move-in-move-out-inspection-ontario), and give the tenant written confirmation that alarms are working
 - **Annually:** Re-test all alarms, check manufacture dates, replace any unit older than 10 years
 - **At move-out:** Test again and note any tampering or missing devices
 
@@ -120,6 +120,6 @@ Under the Fire Protection and Prevention Act, individuals can be fined up to $50
 ### Can a landlord be held liable if a tenant removes a smoke alarm?
 Liability depends on the circumstances. If a tenant disables a smoke alarm, the tenant bears responsibility for that action — but a landlord who fails to document alarm condition at inspections, or who is aware of tampering and doesn't address it, may still face scrutiny. Documenting smoke alarm status at each new tenancy and during annual inspections is essential protection.
 
-If you've recently acquired a rental property or are setting one up for the first time, a property management company like Prospera Properties can do a comprehensive safety walkthrough before your first tenant moves in. Getting the fundamentals right — including fire safety — protects your tenants and protects you.
+For more on your ongoing obligations to tenants, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario). If you've recently acquired a rental property or are setting one up for the first time, a property management company like Prospera Properties can do a comprehensive safety walkthrough before your first tenant moves in. Getting the fundamentals right — including fire safety — protects your tenants and protects you.
 
 It's one of those areas where the cost of doing it correctly is trivial compared to the cost of getting it wrong.

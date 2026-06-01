@@ -24,7 +24,7 @@ This guide breaks down how residential property management works in London, Onta
 
 The term gets used loosely, so it's worth being precise. Residential property management means overseeing residential rental units — houses, townhomes, condos, duplexes, and small multi-unit buildings — on behalf of the property owner.
 
-It is distinct from commercial property management, which deals with office buildings, retail, and industrial space. The rules, tenant relationships, and legal frameworks are entirely different. In Ontario, residential rentals fall under the **Residential Tenancies Act (RTA)**, which governs everything from how you raise rent to how you can end a tenancy.
+It is distinct from commercial property management, which deals with office buildings, retail, and industrial space. The rules, tenant relationships, and legal frameworks are entirely different. In Ontario, residential rentals fall under the [**Residential Tenancies Act (RTA)**](https://www.ontario.ca/laws/statute/06r17), which governs everything from how you raise rent to how you can end a tenancy.
 
 A full-service residential property manager typically handles:
 

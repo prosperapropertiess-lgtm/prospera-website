@@ -8,7 +8,7 @@ featuredImage: "https://images.unsplash.com/photo-1560184897-ae75f418493e?w=1200
 
 # Selling a Rental Property With Tenants in Ontario: What Tenants Need to Know
 
-Deciding to sell a rental property is a significant financial decision, and if you have tenants in the unit, the process is more complex than a typical home sale. Ontario's *Residential Tenancies Act* gives tenants substantial protections — including the right to stay in the property through a sale under many circumstances. Understanding the rules before you list saves you from costly mistakes and legal headaches.
+Deciding to sell a rental property is a significant financial decision, and if you have tenants in the unit, the process is more complex than a typical home sale. Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) gives tenants substantial protections — including the right to stay in the property through a sale under many circumstances. Understanding the rules before you list saves you from costly mistakes and legal headaches.
 
 ## The Core Rule: A Sale Does Not End a Tenancy
 
@@ -24,7 +24,7 @@ There are limited circumstances where you can lawfully end a tenancy in connecti
 
 ### N12 Notice: Purchaser's Own Use
 
-If the buyer intends to personally occupy the property — or if a close family member of the buyer will be occupying it — the seller or buyer can serve the tenant an N12 notice ("Notice to End your Tenancy Because the Landlord, a Purchaser or a Family Member Requires the Unit").
+If the buyer intends to personally occupy the property — or if a close family member of the buyer will be occupying it — the seller or buyer can serve the tenant an [N12 notice](/blog/n12-notice-ontario) ("Notice to End your Tenancy Because the Landlord, a Purchaser or a Family Member Requires the Unit").
 
 Key requirements for a valid N12:
 - **60 days' notice** minimum, and the termination date must be the last day of a rental period
@@ -76,7 +76,7 @@ The deposit also accumulates interest: you must pay the tenant interest on the L
 
 **Consider timing.** If your tenant's fixed-term lease ends within a few months, it may be worth waiting until the lease expires and the property is vacant before listing. A vacant property typically shows better and attracts a wider buyer pool.
 
-**Get legal advice.** Real estate transactions involving tenants can get complicated quickly. A real estate lawyer familiar with Ontario landlord-tenant law is worth the cost.
+**Get legal advice.** Real estate transactions involving tenants can get complicated quickly. A real estate lawyer familiar with Ontario landlord-tenant law is worth the cost. You may also want to review the [capital gains implications](/blog/capital-gains-rental-property-ontario) of selling a rental property and our [Landlord and Tenant Board guide](/blog/landlord-tenant-board-ontario-guide) if any LTB matters arise during the sale process.
 
 ## Frequently Asked Questions
 

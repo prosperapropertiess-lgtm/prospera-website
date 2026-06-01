@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=1
 
 # Bill 60 Ontario: What Every Landlord Needs to Know (2026)
 
-If you own a rental property anywhere in Ontario — London, St. Thomas, Strathroy, or elsewhere — Bill 60 is the most important piece of legislation you need to understand right now. Passed in November 2025 as the *Fighting Delays, Building Faster Act*, it introduced the most significant changes to Ontario's landlord-tenant rules in over a decade.
+If you own a rental property anywhere in Ontario — London, St. Thomas, Strathroy, or elsewhere — Bill 60 is the most important piece of legislation you need to understand right now. Passed in November 2025 as the *Fighting Delays, Building Faster Act*, it introduced the most significant changes to Ontario's [Residential Tenancies Act](https://www.ontario.ca/laws/statute/06r17) in over a decade.
 
 Many landlords are still operating under the old rules. That's a problem, because some of Bill 60's changes are things you can act on immediately — and some are traps for the unprepared. This post walks through every major change and what it means for you in practice.
 

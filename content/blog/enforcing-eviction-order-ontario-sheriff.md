@@ -22,7 +22,7 @@ This guide walks you through exactly what happens after the LTB issues your evic
 
 This surprises a lot of landlords: even with a valid LTB eviction order in hand, you are **not allowed to physically remove a tenant yourself**. You cannot change the locks. You cannot remove their belongings. You cannot shut off utilities to force them out.
 
-Under the *Residential Tenancies Act, 2006* (RTA), section 37 makes it clear that eviction orders can only be enforced by a Sheriff. If you take matters into your own hands — even the day after the order is issued — you are committing an **illegal lockout**. The tenant can immediately file a T2 application against you, and the LTB can order you to pay up to 12 months' rent as compensation, plus reinstate the tenancy.
+Under the *Residential Tenancies Act, 2006* (RTA), section 37 makes it clear that eviction orders can only be enforced by a Sheriff. You can find LTB enforcement forms and guidance on the [Landlord and Tenant Board website](https://tribunalsontario.ca/ltb/). If you take matters into your own hands — even the day after the order is issued — you are committing an **illegal lockout**. The tenant can immediately file a T2 application against you, and the LTB can order you to pay up to 12 months' rent as compensation, plus reinstate the tenancy.
 
 It doesn't matter how frustrated you are. It doesn't matter if the tenant owes thousands in arrears. The law is firm here: **only the Sheriff can enforce an eviction order.**
 

@@ -14,7 +14,7 @@ Here's everything you need to know.
 
 ## The Short Version
 
-Ontario does **not** allow traditional security deposits. Full stop. You cannot collect a damage deposit, cleaning deposit, pet deposit, or any upfront money beyond what's specifically permitted under the *Residential Tenancies Act*.
+Ontario does **not** allow traditional security deposits. Full stop. You cannot collect a damage deposit, cleaning deposit, pet deposit, or any upfront money beyond what's specifically permitted under the [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17).
 
 What you **can** collect:
 
@@ -99,7 +99,7 @@ The best protection against damage is having the right tenant in the first place
 
 ### 2. Document the Unit Before Move-In
 
-Complete a detailed written **condition inspection report** at the start of every tenancy — and have the tenant sign it. Photograph and video every room. This is your baseline for any future damage claim.
+Complete a detailed written **condition inspection report** at the start of every tenancy — and have the tenant sign it. Photograph and video every room. This is your baseline for any future damage claim. Our [move-in and move-out inspection guide](/blog/move-in-move-out-inspection-ontario) covers exactly what to document and how.
 
 ### 3. Do Move-In and Move-Out Inspections
 
@@ -111,7 +111,7 @@ If you discover damage during the tenancy, address it immediately with the tenan
 
 ### 5. File with the LTB When Needed
 
-If a tenant leaves and the unit has significant damage beyond normal wear and tear, you have **up to one year** after the tenancy ends to file a T1/L10 claim at the LTB for damage costs.
+If a tenant leaves and the unit has significant damage beyond normal wear and tear, you have **up to one year** after the tenancy ends to file a T1/L10 claim at the LTB for damage costs. See our guide on [tenant property damage in Ontario](/blog/tenant-damages-property-ontario) for how to document and pursue these claims.
 
 ## A Quick Reference Summary
 
@@ -143,6 +143,6 @@ Because the LMR deposit must be applied to last month's rent — not damage cost
 ### Can a landlord in Ontario require post-dated cheques from a tenant?
 You can request post-dated cheques, but you cannot make them a mandatory condition of tenancy. A tenant cannot be required to provide post-dated cheques, and insisting on them as a condition of signing the lease could be challenged. Many landlords and tenants prefer e-transfer arrangements, which are generally acceptable and create a clear payment record.
 
-Ontario's rental deposit rules are counterintuitive if you're used to other markets — and mistakes can cost you money or LTB penalties. When in doubt, stick to what's explicitly permitted: one month's rent deposit and a key deposit at actual cost.
+Ontario's rental deposit rules are counterintuitive if you're used to other markets — and mistakes can cost you money or LTB penalties. When in doubt, stick to what's explicitly permitted: one month's rent deposit and a key deposit at actual cost. Good [landlord record-keeping practices](/blog/landlord-record-keeping-ontario) will also protect you if deposit-related disputes ever arise.
 
 If you want help setting up your rental correctly from day one — leases, deposits, condition reports, and tenant communication — Prospera Properties works with landlords across London, St. Thomas, and Strathroy to make sure the paperwork is airtight from the start. [Get in touch with our team](/contact) if you have questions.

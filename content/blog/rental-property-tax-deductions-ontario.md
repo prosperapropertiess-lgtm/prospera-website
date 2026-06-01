@@ -14,7 +14,7 @@ This isn't tax advice — for your specific situation, talk to an accountant. Bu
 
 ## How Rental Income Is Taxed in Ontario
 
-Rental income is reported on your personal tax return (T1) using **Form T776 (Statement of Real Estate Rentals)**. Net rental income — after eligible expenses — is added to your other income and taxed at your marginal rate.
+Rental income is reported on your personal tax return (T1) using **Form T776 (Statement of Real Estate Rentals)**. Net rental income — after eligible expenses — is added to your other income and taxed at your marginal rate. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer additional context on the financial landscape for Ontario landlords.
 
 Ontario landlords pay both federal and Ontario provincial income tax on net rental income. The combined marginal rates in Ontario range from about 20% at low income to over 53% at the top bracket. That makes deductions genuinely valuable.
 
@@ -104,7 +104,7 @@ The CRA can audit rental property claims up to 4 years back (6 years for more se
 - Mileage logs
 - Communication records with tenants
 
-A simple spreadsheet or accounting app is fine for most landlords with one or two properties. If you're growing a portfolio, dedicated landlord accounting software or a bookkeeper will save you time at tax season.
+A simple spreadsheet or accounting app is fine for most landlords with one or two properties. If you're growing a portfolio, dedicated landlord accounting software or a bookkeeper will save you time at tax season. Our [landlord record-keeping guide](/blog/landlord-record-keeping-ontario) covers what to track and how to organize documentation for both tax purposes and any LTB proceedings.
 
 ## A Note on Part-Year Rentals
 
@@ -133,4 +133,4 @@ Yes. Property management fees — including monthly management fees, tenant plac
 ### How long should Ontario landlords keep receipts and tax records for rental properties?
 Keep all rental income and expense records for at least six years from the end of the tax year they relate to, as the CRA can audit that far back for most situations. For capital improvements that affect your property's adjusted cost base, keep records until the property is sold and any resulting capital gains are reported.
 
-When in doubt, always consult a qualified accountant who has experience with rental properties in Ontario. The rules are detailed and the stakes are worth getting right.
+When in doubt, always consult a qualified accountant who has experience with rental properties in Ontario. The rules are detailed and the stakes are worth getting right. You may also find our guides to [capital gains on rental property in Ontario](/blog/capital-gains-rental-property-ontario) and [rental property insurance](/blog/rental-property-insurance-ontario) useful for the full financial picture.

@@ -8,7 +8,7 @@ readTime: "9 min read"
 featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-Most landlords who contact a property management company ask the same first question: "What's this going to cost me?" It's the right question — but the answer is more nuanced than a single percentage. Property management fees in London, Ontario vary based on what's included, what's billed separately, and how each company structures its pricing.
+Most landlords who contact a property management company ask the same first question: "What's this going to cost me?" It's the right question — but the answer is more nuanced than a single percentage. Property management fees in London, Ontario vary based on what's included, what's billed separately, and how each company structures its pricing. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer useful context on the broader Ontario rental market and what landlords can expect.
 
 This guide breaks down every layer of cost you're likely to encounter, what's negotiable, what to watch out for in the fine print, and how to figure out whether hiring a property manager actually makes financial sense for your rental.
 

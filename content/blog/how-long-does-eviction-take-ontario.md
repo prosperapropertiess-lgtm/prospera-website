@@ -10,7 +10,7 @@ featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1
 
 The most common question landlords ask after a tenancy goes wrong is: *how long is this going to take?*
 
-The honest answer is longer than you want. Ontario's eviction process is deliberately designed to protect tenants from being removed quickly or without due process. That's the law. But for a landlord dealing with unpaid rent, property damage, or illegal activity, the timeline can feel brutal.
+The honest answer is longer than you want. Ontario's eviction process is deliberately designed to protect tenants from being removed quickly or without due process. That's the law. You can find current LTB filing fees and forms on the [Landlord and Tenant Board website](https://tribunalsontario.ca/ltb/). But for a landlord dealing with unpaid rent, property damage, or illegal activity, the timeline can feel brutal.
 
 This post breaks down exactly how long each stage takes, what can speed things up, what will definitely slow them down, and where most landlords lose time they didn't have to lose.
 

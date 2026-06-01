@@ -24,7 +24,7 @@ Rent control limits how much a landlord can increase rent for an **existing tena
 
 What this means in practice: if a tenant is already living in your unit, you generally cannot raise their rent by more than 2.1% in a 12-month period — unless you apply for an Above Guideline Increase (AGI) through the Landlord and Tenant Board (LTB).
 
-The guideline applies automatically. You don't need to file anything to follow it, and it applies to every rent increase except those covered by the exemption we're about to explain.
+The guideline applies automatically. You don't need to file anything to follow it, and it applies to every rent increase except those covered by the exemption we're about to explain. The current year's guideline is always published on the [Ontario rent increase guideline page](https://www.ontario.ca/page/rent-increase-guideline).
 
 ---
 
