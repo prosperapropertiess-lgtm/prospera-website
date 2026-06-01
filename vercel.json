@@ -1,6 +1,6 @@
 {
   "crons": [
-    { "path": "/api/cron/seo-writer", "schedule": "0 12 * * 3,4" },
+    { "path": "/api/cron/seo-writer", "schedule": "0 12 * * 1,2,3,4" },
     { "path": "/api/cron/seo-optimizer", "schedule": "0 12 * * 5" }
   ]
 }
