@@ -161,7 +161,7 @@ export default function LeaseAddendumLP() {
               17-Point Lease Addendum
             </h2>
             <p className="text-sm mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-              Sent to your inbox instantly. No credit card required.
+              Sent to your inbox in minutes. Free, no strings attached.
             </p>
             {form}
           </div>
@@ -271,7 +271,7 @@ export default function LeaseAddendumLP() {
               className="block text-center py-4 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-90"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              Download Free — No Credit Card Required →
+              Send Me the Free Addendum →
             </a>
           </div>
         </div>
