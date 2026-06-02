@@ -46,7 +46,7 @@ function FeaturedCard({ post }: { post: Post }) {
     >
       {/* Image — takes 3/5 cols on desktop, fixed height on mobile */}
       <div
-        className="relative md:col-span-3 h-56 md:h-full overflow-hidden"
+        className="relative md:col-span-3 h-56 md:h-80 overflow-hidden"
         style={{ backgroundColor: "#F0EDE8" }}
       >
         {post.featuredImage ? (
