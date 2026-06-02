@@ -18,6 +18,8 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isLP = pathname?.startsWith("/lp");
 
   useEffect(() => {
+    if (isLP) return;
+
     let lenis: import("@studio-freight/lenis").default | null = null;
     let raf: number;
 
@@ -41,7 +43,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       cancelAnimationFrame(raf);
       lenis?.destroy();
     };
-  }, []);
+  }, [isLP]);
 
   return (
     <>
