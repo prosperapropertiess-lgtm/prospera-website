@@ -627,23 +627,6 @@ interface ResourceGuide {
 }
 
 const resourceGuides: Record<string, ResourceGuide> = {
-  "lease-addendum": {
-    subject: "Your 17-Point Lease Addendum — attached and ready to use",
-    headline: "Attach this before your next tenant signs.",
-    intro: "The standard Ontario lease was written to be fair to both sides — which means it leaves gaps. This addendum closes them. Here's how to use it.",
-    steps: [
-      "<strong>Print or attach it as a PDF alongside the standard lease.</strong> Both you and the tenant sign both documents on the same day.",
-      "<strong>Walk through it with the tenant before signing.</strong> Don't just hand it over. Reading it together sets expectations and removes 'I didn't know' as a defence later.",
-      "<strong>Keep a signed copy — physical and digital.</strong> Scan it the day you sign. If it ever goes to the LTB, you need your copy on hand immediately.",
-      "<strong>Use it on every lease — even short-term tenancies.</strong> The addendum applies to all residential tenancies in Ontario regardless of length.",
-      "<strong>Don't modify clauses without legal review.</strong> Each clause was written to hold up under Ontario's RTA. Changes could weaken enforceability.",
-    ],
-    tip: {
-      title: "Important",
-      body: "Both parties must sign the addendum for it to be enforceable. An unsigned addendum is just a piece of paper. Make signing it part of the same session as the standard lease — never follow up later.",
-    },
-    cta: { text: "Questions about your lease or a specific tenant situation?", url: "https://www.prosperaproperties.co/contact" },
-  },
   "ontario-standard-lease": {
     subject: "Your Ontario Standard Lease — plus how to fill it out correctly",
     headline: "The Standard Lease. It's simpler than it looks.",
@@ -659,18 +642,18 @@ const resourceGuides: Record<string, ResourceGuide> = {
     cta: { text: "Get a free lease review", url: `${BASE_URL}/contact` },
   },
   "lease-addendum": {
-    subject: "Your Lease Addendum — what it covers and why it matters",
-    headline: "The standard lease has gaps. This fills them.",
-    intro: "Ontario's standard lease is a starting point — not a complete picture. Our addendum plugs the holes landlords typically get burned by.",
+    subject: "Your 17-Point Lease Addendum — attached and ready to use",
+    headline: "Attach this before your next tenant signs.",
+    intro: "The standard Ontario lease was written to be fair to both sides — which means it leaves gaps that experienced tenants know how to use. This addendum closes them. Here's how to use it properly.",
     steps: [
-      "<strong>Utilities.</strong> Makes it crystal clear who pays what. 'Tenant pays hydro' in writing is much harder to dispute than a verbal agreement.",
-      "<strong>Maintenance obligations.</strong> Tenants are responsible for minor maintenance — changing lightbulbs, keeping the unit clean. This spells it out so there's no 'I didn't know.'",
-      "<strong>Subletting and Airbnb.</strong> Ontario law actually gives tenants subletting rights — but you can set conditions. The addendum does this properly.",
-      "<strong>Parking and storage.</strong> 'One spot in the rear lot' beats 'parking included' every time. Be specific.",
-      "<strong>Attach it to the standard lease.</strong> Only works if it's signed at the same time as the main lease and referenced within it.",
+      "<strong>Attach it to the standard lease on signing day.</strong> Both you and the tenant sign both documents at the same time. Never follow up later — an unsigned addendum is just a piece of paper.",
+      "<strong>Walk through it with the tenant before they sign.</strong> Don't just hand it over. Reading it together sets expectations and removes 'I didn't know' as a defence.",
+      "<strong>Keep a signed copy — physical and digital.</strong> Scan it on signing day. If it ever goes to the LTB, you need your copy immediately.",
+      "<strong>Use it on every tenancy — even short-term.</strong> The addendum applies to all residential tenancies in Ontario regardless of length.",
+      "<strong>Don't modify clauses without legal advice.</strong> Each clause was written to hold up under Ontario's RTA. Changes could weaken enforceability.",
     ],
-    tip: { title: "Pro tip", body: "Walk through the addendum with the tenant before signing — not after. Surprises at signing kill deals and start tenancies on bad footing." },
-    cta: { text: "Have questions about your lease?", url: `${BASE_URL}/contact` },
+    tip: { title: "Important", body: "Both parties must sign the addendum for it to be enforceable. Make it part of the same signing session as the standard lease — not a separate step." },
+    cta: { text: "Questions about your lease or a tenant situation?", url: `${BASE_URL}/contact` },
   },
   "tenant-screening-checklist": {
     subject: "Your Tenant Screening Checklist — how to use it",
