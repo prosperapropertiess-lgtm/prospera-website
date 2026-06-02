@@ -107,9 +107,9 @@ export default function LeaseAddendumLP() {
       {/* ── Header ── */}
       <header style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="font-light text-2xl" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+          <span className="font-light text-2xl" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Prospera
-          </Link>
+          </span>
           <a href="tel:+15196971227" className="text-sm" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
             (519) 697-1227
           </a>
@@ -322,27 +322,6 @@ export default function LeaseAddendumLP() {
           <div className="rounded-2xl p-8 border" style={{ backgroundColor: "#FFFFFF", borderColor: "#E8E4DF", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
             {form}
           </div>
-        </div>
-      </section>
-
-      {/* ── Already ready to hire? ── */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #E8E4DF" }}>
-        <div className="max-w-md mx-auto text-center">
-          <p className="text-sm mb-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-            Already managing 1–5 units and ready to hand it off?
-          </p>
-          <a
-            href="https://calendly.com/prosperaproperties"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold underline underline-offset-4"
-            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Skip the PDF — book a free 20-minute portfolio review →
-          </a>
-          <p className="text-xs mt-3" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
-            No obligation. Ebin answers every call personally.
-          </p>
         </div>
       </section>
 
