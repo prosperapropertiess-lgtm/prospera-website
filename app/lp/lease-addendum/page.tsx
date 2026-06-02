@@ -124,7 +124,7 @@ export default function LeaseAddendumLP() {
           <div className="mb-10">
             <span
               className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
-              style={{ backgroundColor: "rgba(139,32,48,0.12)", color: "#8B2030", border: "1px solid rgba(139,32,48,0.25)", fontFamily: "var(--font-dm-sans)" }}
+              style={{ backgroundColor: "rgba(250,248,245,0.12)", color: "#FAF8F5", border: "1px solid rgba(250,248,245,0.25)", fontFamily: "var(--font-dm-sans)" }}
             >
               Free Download — Ontario Landlords
             </span>
