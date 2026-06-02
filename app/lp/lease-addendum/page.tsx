@@ -251,36 +251,26 @@ export default function LeaseAddendumLP() {
 
       {/* ── Mechanism — What's Inside ── */}
       <section className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #E8E4DF" }}>
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-center mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+        <div className="max-w-3xl mx-auto">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
             What's Inside
           </p>
-          <h2 className="text-4xl font-light text-center mb-3 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+          <h2 className="text-4xl font-light mb-10 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             What the addendum covers:
           </h2>
-          <p className="text-sm text-center mb-14" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            17 clauses. Plain language. Legally grounded in Ontario's RTA.
-          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="space-y-3 mb-10">
             {CLAUSES.map(c => (
-              <div
-                key={c.n}
-                className="rounded-xl p-5 border"
-                style={{ backgroundColor: "#F7F5F2", borderColor: "#E8E4DF" }}
-              >
-                <div className="flex items-start gap-3">
-                  <span className="text-xs font-bold shrink-0 mt-0.5" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{c.n}</span>
-                  <div>
-                    <p className="text-sm font-semibold mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{c.title}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{c.body}</p>
-                  </div>
-                </div>
-              </div>
+              <li key={c.n} className="flex items-start gap-3">
+                <span className="shrink-0 mt-1" style={{ color: "#8B2030" }}>—</span>
+                <span className="text-base" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                  <strong style={{ color: "#1F2F3A" }}>{c.title}</strong> — {c.body}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <p className="text-sm text-center mt-10" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
             Each clause is written in plain language, legally grounded in Ontario's Residential Tenancies Act, and ready to attach.
           </p>
 
