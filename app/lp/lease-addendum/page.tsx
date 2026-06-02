@@ -154,6 +154,16 @@ export default function LeaseAddendumLP() {
             className="rounded-2xl p-8"
             style={{ backgroundColor: "#FFFFFF", boxShadow: "0 12px 48px rgba(0,0,0,0.25)" }}
           >
+            {/* Ebin attribution */}
+            <div className="flex items-center gap-3 mb-5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
+                <Image src="/ebin-founder.jpg" alt="Ebin Jaison" fill className="object-cover object-top" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Ebin Jaison</p>
+                <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties, London ON</p>
+              </div>
+            </div>
             <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               Free Download
             </p>
