@@ -118,73 +118,76 @@ export default function LeaseAddendumLP() {
 
       {/* ── Hero ── */}
       <section style={{ backgroundColor: "#1F2F3A" }} className="pb-20 pt-16 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="max-w-5xl mx-auto">
 
-          {/* Left — copy */}
-          <div>
+          {/* Headline — full width, always above the fold */}
+          <div className="mb-10">
             <p className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
               Free Download — Ontario Landlords
             </p>
             <h1
-              className="text-4xl sm:text-5xl font-light leading-tight mb-6"
+              className="text-4xl sm:text-5xl font-light leading-tight mb-5"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Your Standard Ontario Lease Protects Your Tenant.{" "}
               <em style={{ color: "rgba(250,248,245,0.55)" }}>Not You.</em>
             </h1>
-            <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-base leading-relaxed max-w-2xl" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
               Download the free 17-point lease addendum used across rental properties in London, Strathroy, and St. Thomas — tested against real Ontario tenant scenarios. Attach it to any standard lease in minutes.
             </p>
-            <div className="flex flex-col gap-3 mb-8">
-              {[
-                "Closes the gaps experienced tenants exploit",
-                "Written specifically for Ontario's RTA",
-                "Attaches to any standard lease — no lawyer needed",
-              ].map(t => (
-                <div key={t} className="flex items-center gap-3">
-                  <span style={{ color: "#8B2030", fontSize: 16 }}>✓</span>
-                  <span className="text-sm" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>{t}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Document mockup */}
-            <div className="relative w-full max-w-xs mx-auto lg:mx-0 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.4)" }}>
-              <Image
-                src="/lease-addendum-mockup.png"
-                alt="17-Point Airtight Lease Addendum"
-                width={500}
-                height={500}
-                className="w-full h-auto"
-              />
-            </div>
           </div>
 
-          {/* Right — form card */}
-          <div
-            className="rounded-2xl p-8"
-            style={{ backgroundColor: "#FFFFFF", boxShadow: "0 12px 48px rgba(0,0,0,0.25)" }}
-          >
-            {/* Ebin attribution */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
-                <Image src="/ebin-founder.jpg" alt="Ebin Jaison" fill className="object-cover object-top" />
+          {/* Grid — form first on mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+            {/* Form card — order-1 on mobile so it appears before the mockup */}
+            <div
+              className="order-1 lg:order-2 rounded-2xl p-8"
+              style={{ backgroundColor: "#FFFFFF", boxShadow: "0 12px 48px rgba(0,0,0,0.25)" }}
+            >
+              {/* Ebin attribution */}
+              <div className="flex items-center gap-3 mb-5">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
+                  <Image src="/ebin-founder.jpg" alt="Ebin Jaison" fill className="object-cover object-top" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Ebin Jaison</p>
+                  <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties · London, ON</p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Ebin Jaison</p>
-                <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties, London ON</p>
+              <p className="text-sm mb-5 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                I'll send it to your inbox within 5 minutes. Built it myself after seeing what gaps in the standard lease actually cost landlords.
+              </p>
+              {form}
+            </div>
+
+            {/* Supporting copy + mockup — order-2 on mobile */}
+            <div className="order-2 lg:order-1">
+              <div className="flex flex-col gap-3 mb-8">
+                {[
+                  "Closes the gaps experienced tenants exploit",
+                  "Written specifically for Ontario's RTA",
+                  "Attaches to any standard lease — no lawyer needed",
+                ].map(t => (
+                  <div key={t} className="flex items-center gap-3">
+                    <span style={{ color: "#8B2030", fontSize: 16 }}>✓</span>
+                    <span className="text-sm" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>{t}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Document mockup — hidden on mobile, visible on desktop */}
+              <div className="hidden lg:block relative w-full max-w-xs rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.4)" }}>
+                <Image
+                  src="/lease-addendum-mockup.png"
+                  alt="17-Point Airtight Lease Addendum"
+                  width={500}
+                  height={500}
+                  className="w-full h-auto"
+                />
               </div>
             </div>
-            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-              Free Download
-            </p>
-            <h2 className="text-2xl font-light mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              17-Point Lease Addendum
-            </h2>
-            <p className="text-sm mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-              Sent to your inbox in minutes. Free, no strings attached.
-            </p>
-            {form}
+
           </div>
         </div>
       </section>
@@ -195,8 +198,8 @@ export default function LeaseAddendumLP() {
           {[
             { v: "London · Strathroy · St. Thomas", l: "Markets served" },
             { v: "5.0 ★", l: "Google rating" },
-            { v: "25+", l: "Tenant placements" },
-            { v: "0", l: "LTB cases filed" },
+            { v: "21 days", l: "Average days to fill a vacancy" },
+            { v: "Zero", l: "LTB filings — we screen before they sign" },
           ].map(t => (
             <div key={t.l} className="text-center">
               <p className="text-lg font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{t.v}</p>

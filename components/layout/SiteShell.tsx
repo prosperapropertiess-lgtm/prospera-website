@@ -15,6 +15,7 @@ const RentActivityToast = dynamic(() => import("@/components/ui/RentActivityToas
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
+  const isLP = pathname?.startsWith("/lp");
 
   useEffect(() => {
     let lenis: import("@studio-freight/lenis").default | null = null;
@@ -45,13 +46,13 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <ScrollProgress />
-      {!isAdmin && <Navbar />}
+      {!isAdmin && !isLP && <Navbar />}
       <main className="flex-1">{children}</main>
-      {!isAdmin && <Footer />}
-      {!isAdmin && <PopupController />}
-      {!isAdmin && <ChatWidget />}
-      {!isAdmin && <StickyBottomCTA />}
-      {!isAdmin && <RentActivityToast />}
+      {!isAdmin && !isLP && <Footer />}
+      {!isAdmin && !isLP && <PopupController />}
+      {!isAdmin && !isLP && <ChatWidget />}
+      {!isAdmin && !isLP && <StickyBottomCTA />}
+      {!isAdmin && !isLP && <RentActivityToast />}
     </>
   );
 }
