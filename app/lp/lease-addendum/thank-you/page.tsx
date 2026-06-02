@@ -11,10 +11,9 @@ export default function LeaseAddendumThankYou() {
         send_to: "AW-18098735149/lease_addendum_download",
       });
     }
-    // Facebook Pixel — uncomment once pixel is installed
-    // if (typeof window !== "undefined" && (window as any).fbq) {
-    //   (window as any).fbq("track", "Lead");
-    // }
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead");
+    }
   }, []);
 
   return (
