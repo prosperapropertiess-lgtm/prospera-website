@@ -122,9 +122,12 @@ export default function LeaseAddendumLP() {
 
           {/* Headline — full width, always above the fold */}
           <div className="mb-10">
-            <p className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+            <span
+              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
+              style={{ backgroundColor: "rgba(139,32,48,0.12)", color: "#8B2030", border: "1px solid rgba(139,32,48,0.25)", fontFamily: "var(--font-dm-sans)" }}
+            >
               Free Download — Ontario Landlords
-            </p>
+            </span>
             <h1
               className="text-4xl sm:text-5xl font-light leading-tight mb-5"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
@@ -274,10 +277,10 @@ export default function LeaseAddendumLP() {
             ))}
           </ul>
 
-          {/* Remaining 13 — blurred with CTA overlay */}
-          <div className="relative">
-            <ul className="space-y-3 mb-2" style={{ filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
-              {CLAUSES.slice(4).map(c => (
+          {/* Remaining — blurred with CTA overlay (render only a few rows; rest implied by "+13" text) */}
+          <div className="relative overflow-hidden" style={{ maxHeight: "260px" }}>
+            <ul className="space-y-3" style={{ filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
+              {CLAUSES.slice(4, 9).map(c => (
                 <li key={c.n} className="flex items-start gap-3">
                   <span className="shrink-0 mt-1" style={{ color: "#8B2030" }}>—</span>
                   <span className="text-base" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
@@ -289,24 +292,29 @@ export default function LeaseAddendumLP() {
 
             {/* Gradient fade + CTA overlay */}
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center"
-              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.85) 25%, #FFFFFF 50%)" }}
+              className="absolute inset-0 flex flex-col items-end justify-center pb-4"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.9) 30%, #FFFFFF 55%)" }}
             >
-              <div className="text-center px-4 mt-16">
-                <p className="text-base font-semibold mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                  + 13 more clauses inside
-                </p>
-                <p className="text-sm mb-4" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
-                  Landlord associations charge up to $249 for addendums like this. Yours is free.
-                </p>
-                <a
-                  href="#"
-                  onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className="inline-block px-8 py-3 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              <div className="w-full text-center px-4">
+                <div
+                  className="inline-block rounded-2xl px-8 py-6 border"
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E8E4DF", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
                 >
-                  Get the Full Addendum Free →
-                </a>
+                  <p className="text-base font-semibold mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                    + 13 more clauses inside
+                  </p>
+                  <p className="text-sm mb-4" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                    Landlord associations charge up to $249 for addendums like this. Yours is free.
+                  </p>
+                  <a
+                    href="#"
+                    onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="inline-block px-8 py-3 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    Get the Full Addendum Free →
+                  </a>
+                </div>
               </div>
             </div>
           </div>
