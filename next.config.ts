@@ -49,8 +49,6 @@ const nextConfig: NextConfig = {
       { source: "/property/:slug/", destination: "/listings", permanent: true },
       { source: "/for-landlords", destination: "/landlords", permanent: true },
       { source: "/for-landlords/", destination: "/landlords", permanent: true },
-      { source: "/lp/property-management", destination: "/lp/lease-addendum", permanent: false },
-      { source: "/lp/property-management/", destination: "/lp/lease-addendum", permanent: false },
     ];
   },
   async headers() {
