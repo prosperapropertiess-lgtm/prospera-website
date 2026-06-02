@@ -135,7 +135,7 @@ export default function LeaseAddendumLP() {
             <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
               Download the free 17-point lease addendum used across rental properties in London, Strathroy, and St. Thomas — tested against real Ontario tenant scenarios. Attach it to any standard lease in minutes.
             </p>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mb-8">
               {[
                 "Closes the gaps experienced tenants exploit",
                 "Written specifically for Ontario's RTA",
@@ -146,6 +146,17 @@ export default function LeaseAddendumLP() {
                   <span className="text-sm" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>{t}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Document mockup */}
+            <div className="relative w-full max-w-xs mx-auto lg:mx-0 rounded-xl overflow-hidden" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.4)" }}>
+              <Image
+                src="/lease-addendum-mockup.png"
+                alt="17-Point Airtight Lease Addendum"
+                width={500}
+                height={500}
+                className="w-full h-auto"
+              />
             </div>
           </div>
 
