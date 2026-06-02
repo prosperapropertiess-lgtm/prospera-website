@@ -262,8 +262,9 @@ export default function LeaseAddendumLP() {
             What the addendum covers:
           </h2>
 
-          <ul className="space-y-3 mb-10">
-            {CLAUSES.map(c => (
+          {/* First 4 — visible */}
+          <ul className="space-y-3 mb-2">
+            {CLAUSES.slice(0, 4).map(c => (
               <li key={c.n} className="flex items-start gap-3">
                 <span className="shrink-0 mt-1" style={{ color: "#8B2030" }}>—</span>
                 <span className="text-base" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
@@ -273,20 +274,41 @@ export default function LeaseAddendumLP() {
             ))}
           </ul>
 
-          <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            Each clause is written in plain language, legally grounded in Ontario's Residential Tenancies Act, and ready to attach.
-          </p>
+          {/* Remaining 13 — blurred with CTA overlay */}
+          <div className="relative">
+            <ul className="space-y-3 mb-2" style={{ filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
+              {CLAUSES.slice(4).map(c => (
+                <li key={c.n} className="flex items-start gap-3">
+                  <span className="shrink-0 mt-1" style={{ color: "#8B2030" }}>—</span>
+                  <span className="text-base" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                    <strong style={{ color: "#1F2F3A" }}>{c.title}</strong> — {c.body}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-          {/* Mid-page CTA */}
-          <div className="mt-10 max-w-sm mx-auto">
-            <a
-              href="#hero-form"
-              onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-              className="block text-center py-4 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            {/* Gradient fade + CTA overlay */}
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-end pb-2"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.7) 30%, #FFFFFF 70%)" }}
             >
-              Send Me the Free Addendum →
-            </a>
+              <div className="text-center px-4">
+                <p className="text-sm font-semibold mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  + 13 more clauses inside
+                </p>
+                <p className="text-xs mb-4" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
+                  Landlord associations charge up to $249 for addendums like this. Yours is free.
+                </p>
+                <a
+                  href="#"
+                  onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  className="inline-block px-8 py-3 text-sm font-semibold uppercase tracking-widest rounded-lg transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Get the Full Addendum Free →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
