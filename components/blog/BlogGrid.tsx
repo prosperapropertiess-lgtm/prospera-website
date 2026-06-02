@@ -41,13 +41,13 @@ function FeaturedCard({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group grid grid-cols-1 md:grid-cols-5 bg-white rounded-2xl overflow-hidden"
+      className="group grid grid-cols-1 md:grid-cols-5 bg-white rounded-2xl overflow-hidden md:h-80"
       style={{ border: "1px solid #E8E4DF", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}
     >
-      {/* Image — takes 3/5 cols on desktop */}
+      {/* Image — takes 3/5 cols on desktop, fixed height on mobile */}
       <div
-        className="relative md:col-span-3 overflow-hidden"
-        style={{ minHeight: 280, backgroundColor: "#F0EDE8" }}
+        className="relative md:col-span-3 h-56 md:h-full overflow-hidden"
+        style={{ backgroundColor: "#F0EDE8" }}
       >
         {post.featuredImage ? (
           <Image
