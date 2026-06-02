@@ -74,7 +74,7 @@ export default function RentActivityToast() {
             gap: 10,
           }}
         >
-          {/* Green dot */}
+          {/* Status dot — pulses twice then settles */}
           <span
             style={{
               width: 8,
@@ -83,8 +83,16 @@ export default function RentActivityToast() {
               backgroundColor: "#22C55E",
               flexShrink: 0,
               marginTop: 5,
+              animation: "toast-dot-pulse 1.8s ease-out 2 forwards",
             }}
           />
+          <style>{`
+            @keyframes toast-dot-pulse {
+              0%   { opacity: 1; transform: scale(1); }
+              50%  { opacity: 0.5; transform: scale(1.4); }
+              100% { opacity: 1; transform: scale(1); }
+            }
+          `}</style>
 
           <div style={{ flex: 1 }}>
             <p style={{

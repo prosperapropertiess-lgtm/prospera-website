@@ -34,6 +34,23 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/forms/n4": ["./public/forms/**"],
   },
+  async redirects() {
+    return [
+      // Old WordPress URLs → current pages
+      { source: "/all-listings-page", destination: "/listings", permanent: true },
+      { source: "/all-listings-page/", destination: "/listings", permanent: true },
+      { source: "/become-a-plus-tenant", destination: "/tenants", permanent: true },
+      { source: "/become-a-plus-tenant/", destination: "/tenants", permanent: true },
+      { source: "/category/blog-posts", destination: "/blog", permanent: true },
+      { source: "/category/blog-posts/", destination: "/blog", permanent: true },
+      { source: "/author/:slug", destination: "/about", permanent: true },
+      { source: "/author/:slug/", destination: "/about", permanent: true },
+      { source: "/property/:slug", destination: "/listings", permanent: true },
+      { source: "/property/:slug/", destination: "/listings", permanent: true },
+      { source: "/for-landlords", destination: "/landlords", permanent: true },
+      { source: "/for-landlords/", destination: "/landlords", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

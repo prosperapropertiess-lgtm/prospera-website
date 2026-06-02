@@ -36,7 +36,7 @@ const mobileNavItems = [
   { icon: BookOpen,   label: "Blog",          href: "/blog"      },
   { icon: Info,       label: "About",         href: "/about"     },
   { icon: Mail,       label: "Contact",       href: "/contact"   },
-  { icon: Zap,        label: "The App",       href: "/platform", accent: true },
+  { icon: Zap,        label: "App Waitlist",   href: "/platform", accent: true },
 ];
 
 export default function Navbar() {
@@ -111,7 +111,7 @@ export default function Navbar() {
               style={{ backgroundColor: "rgba(139,32,48,0.12)", border: "1px solid rgba(139,32,48,0.3)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
             >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#8B2030" }} />
-              The App
+              App Waitlist
             </Link>
             <Link
               href="/contact"

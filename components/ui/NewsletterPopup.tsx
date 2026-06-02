@@ -93,10 +93,10 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: 32, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
             className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:top-1/2 md:w-[480px] shadow-2xl rounded-xl overflow-hidden max-h-[92vh] flex flex-col"
             style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
@@ -106,9 +106,10 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
             <div className="p-6 overflow-y-auto">
               {/* Close */}
               <button
-                onClick={dismiss}
-                className="absolute top-4 right-4 text-[#999999] hover:text-[#222222] transition-colors text-xl leading-none"
+                onPointerDown={dismiss}
+                className="absolute top-2 right-2 text-[#999999] hover:text-[#222222] transition-colors text-xl leading-none p-3"
                 aria-label="Close"
+                style={{ touchAction: "manipulation" }}
               >
                 ×
               </button>
@@ -192,7 +193,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                         <button
                           type="submit"
                           disabled={status === "loading"}
-                          className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
+                          className="btn-primary py-3 text-xs uppercase tracking-widest disabled:opacity-50 mt-1 rounded"
                           style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {status === "loading" ? "..." : "Email Me the Addendum →"}
@@ -270,7 +271,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                         <button
                           type="submit"
                           disabled={status === "loading"}
-                          className="py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 disabled:opacity-50 mt-1 rounded"
+                          className="btn-primary py-3 text-xs uppercase tracking-widest disabled:opacity-50 mt-1 rounded"
                           style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           {status === "loading" ? "..." : "Get Notified"}

@@ -64,20 +64,24 @@ export default function RentEstimator() {
   async function estimate() {
     if (!city || !beds) return;
     setEstimating(true);
+
+    // Set static fallback immediately so something always shows
+    const fallback = FALLBACK[city]?.[beds as number] ?? FALLBACK[city]?.[4];
+    if (fallback) setResult({ ...fallback, live: false });
+
+    // Try to upgrade to live data
     try {
       const res = await fetch(`/api/rent/market-estimate?city=${encodeURIComponent(city)}&bedrooms=${beds}`);
-      const data = await res.json();
-      if (data.source === "computed" && data.p25 && data.p75) {
-        setResult({ low: Math.round(data.p25), high: Math.round(data.p75), live: true, count: data.submission_count });
-      } else {
-        // Fall back to static
-        const fallback = FALLBACK[city]?.[beds as number] ?? FALLBACK[city]?.[4];
-        if (fallback) setResult({ ...fallback, live: false });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.source === "computed" && data.p25 && data.p75) {
+          setResult({ low: Math.round(data.p25), high: Math.round(data.p75), live: true, count: data.submission_count });
+        }
       }
     } catch {
-      const fallback = FALLBACK[city]?.[beds as number] ?? FALLBACK[city]?.[4];
-      if (fallback) setResult({ ...fallback, live: false });
+      // Already showing fallback — nothing more to do
     }
+
     setEstimating(false);
   }
 

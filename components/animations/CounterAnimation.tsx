@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useInView } from "framer-motion";
 
 interface CounterAnimationProps {
   target: number;
@@ -18,26 +18,32 @@ export default function CounterAnimation({
   suffix = "",
   className,
 }: CounterAnimationProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v));
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, target, {
-        duration,
-        ease: "easeOut",
-      });
-      return controls.stop;
+    if (!isInView) return;
+    if (target === 0) {
+      setCount(0);
+      return;
     }
-  }, [isInView, count, target, duration]);
+    const startTime = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const elapsed = (now - startTime) / 1000;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // cubic ease-out
+      setCount(Math.round(eased * target));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [isInView, target, duration]);
 
   return (
     <span ref={ref} className={className}>
-      {prefix}
-      <motion.span>{rounded}</motion.span>
-      {suffix}
+      {prefix}{count}{suffix}
     </span>
   );
 }

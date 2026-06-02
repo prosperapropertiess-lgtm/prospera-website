@@ -1,9 +1,30 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import NumberFlow from "@number-flow/react";
+
+function AnimatedNum({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+
+  // Triggered externally via a prop change (isInView passed as value)
+  useEffect(() => {
+    if (started.current || value === 0) { setCount(value); return; }
+    started.current = true;
+    const start = performance.now();
+    const duration = 700;
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setCount(Math.round(eased * value));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [value]);
+
+  return <>{count}{suffix}</>;
+}
 
 const plans = [
   {
@@ -162,14 +183,7 @@ function PlanCard({
             className="text-6xl font-light leading-none"
             style={{ color: priceColor, fontFamily: "var(--font-cormorant)" }}
           >
-            <NumberFlow
-              value={isInView ? plan.priceNum : 0}
-              suffix={plan.priceSuffix}
-              trend={1}
-              transformTiming={{ duration: 700, easing: "ease-out" }}
-              spinTiming={{ duration: 700, easing: "ease-out" }}
-              opacityTiming={{ duration: 350, easing: "ease-out" }}
-            />
+            <AnimatedNum value={isInView ? plan.priceNum : 0} suffix={plan.priceSuffix} />
           </p>
           <p
             className="text-sm mb-2"
