@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
 
     // Static map of resourceId → public PDF URL (for resources that have actual files)
     const FILE_URLS: Record<string, string> = {
+      "lease-addendum": "https://www.prosperaproperties.co/forms/lease-addendum.pdf",
       "eviction-notices": "https://www.prosperaproperties.co/forms/N4-clean.pdf",
       "ontario-standard-lease": "https://www.ontario.ca/laws/statute/06r17",
     };
@@ -43,6 +44,18 @@ export async function POST(req: NextRequest) {
           to: email,
           subject,
           html,
+        });
+
+        // Notify Ebin
+        await resend.emails.send({
+          from: "Prospera Site <hello@prosperaproperties.co>",
+          to: "prosperapropertiess@gmail.com",
+          subject: `New lead: ${name || email} downloaded the lease addendum`,
+          html: `<p style="font-family:sans-serif;font-size:15px;color:#222;">
+            <strong>${name || "(no name)"}</strong> (${email}) just downloaded the <strong>${resourceTitle}</strong>.<br/><br/>
+            They're in your Supabase subscribers table and Zoho CRM.<br/><br/>
+            — Prospera site
+          </p>`,
         });
       } catch {
         // Don't block on email failure

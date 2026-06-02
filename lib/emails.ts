@@ -627,6 +627,23 @@ interface ResourceGuide {
 }
 
 const resourceGuides: Record<string, ResourceGuide> = {
+  "lease-addendum": {
+    subject: "Your 17-Point Lease Addendum — attached and ready to use",
+    headline: "Attach this before your next tenant signs.",
+    intro: "The standard Ontario lease was written to be fair to both sides — which means it leaves gaps. This addendum closes them. Here's how to use it.",
+    steps: [
+      "<strong>Print or attach it as a PDF alongside the standard lease.</strong> Both you and the tenant sign both documents on the same day.",
+      "<strong>Walk through it with the tenant before signing.</strong> Don't just hand it over. Reading it together sets expectations and removes 'I didn't know' as a defence later.",
+      "<strong>Keep a signed copy — physical and digital.</strong> Scan it the day you sign. If it ever goes to the LTB, you need your copy on hand immediately.",
+      "<strong>Use it on every lease — even short-term tenancies.</strong> The addendum applies to all residential tenancies in Ontario regardless of length.",
+      "<strong>Don't modify clauses without legal review.</strong> Each clause was written to hold up under Ontario's RTA. Changes could weaken enforceability.",
+    ],
+    tip: {
+      title: "Important",
+      body: "Both parties must sign the addendum for it to be enforceable. An unsigned addendum is just a piece of paper. Make signing it part of the same session as the standard lease — never follow up later.",
+    },
+    cta: { text: "Questions about your lease or a specific tenant situation?", url: "https://www.prosperaproperties.co/contact" },
+  },
   "ontario-standard-lease": {
     subject: "Your Ontario Standard Lease — plus how to fill it out correctly",
     headline: "The Standard Lease. It's simpler than it looks.",
