@@ -223,7 +223,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
         style={{ backgroundColor: "#FFFFFF", borderColor: "#E8E4DF" }}
       >
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex gap-0 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-0 overflow-x-auto scrollbar-hide" data-lenis-prevent>
             {CATEGORIES.map((cat) => {
               const isActive = active === cat;
               return (
