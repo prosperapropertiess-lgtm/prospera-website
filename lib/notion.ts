@@ -1,13 +1,11 @@
 /**
  * Notion API client for Prospera Properties
- * Pulls owner, property, rent, maintenance, and expense data
- * for the monthly owner report email.
+ * Pulls comprehensive data for the monthly owner report.
  */
 
 const NOTION_API = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
 
-// Database IDs
 export const DB = {
   owners:      "0bcd6043067b4f18b089950994a600fb",
   properties:  "19d44116874346b3981f527950b85817",
@@ -53,7 +51,7 @@ async function queryDatabase(databaseId: string, filter?: object): Promise<any[]
   return results;
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────
+// ── Property helpers ───────────────────────────────────────────────────────
 
 function prop(page: any, name: string): any {
   return page.properties?.[name];
@@ -75,19 +73,19 @@ function num(page: any, name: string): number | null {
   return prop(page, name)?.number ?? null;
 }
 
-function date(page: any, name: string): string | null {
+function dateStart(page: any, name: string): string | null {
   return prop(page, name)?.date?.start ?? null;
 }
 
 function relations(page: any, name: string): string[] {
-  return (prop(page, name)?.relation ?? []).map((r: any) => r.id);
+  return (prop(page, name)?.relation ?? []).map((r: any) => r.id.replace(/-/g, ""));
 }
 
 function pageId(page: any): string {
   return page.id.replace(/-/g, "");
 }
 
-function daysSince(dateStr: string): number {
+export function daysSince(dateStr: string): number {
   const then = new Date(dateStr);
   const now = new Date();
   return Math.floor((now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24));
@@ -100,6 +98,7 @@ export interface Owner {
   name: string;
   email: string;
   phone: string;
+  notes: string;
   propertyIds: string[];
 }
 
@@ -113,6 +112,21 @@ export interface Property {
   monthlyRent: number | null;
   bedrooms: number | null;
   bathrooms: number | null;
+  notes: string;
+}
+
+export interface Tenant {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  propertyId: string;
+  monthlyRent: number | null;
+  securityDeposit: number | null;
+  leaseStart: string | null;
+  leaseEnd: string | null;
+  status: string;
+  notes: string;
 }
 
 export interface RentEntry {
@@ -126,6 +140,7 @@ export interface RentEntry {
   amountPaid: number | null;
   datePaid: string | null;
   paymentStatus: string;
+  notes: string;
 }
 
 export interface MaintenanceItem {
@@ -152,48 +167,71 @@ export interface Expense {
   date: string | null;
 }
 
-export interface OwnerReport {
-  owner: Owner;
-  properties: Array<{
-    property: Property;
-    rent: RentEntry[];
-    maintenance: MaintenanceItem[];
-    expenses: Expense[];
-  }>;
+export interface PropertyReport {
+  property: Property;
+  tenants: Tenant[];
+  rentCurrentMonth: RentEntry[];
+  rentPreviousMonth: RentEntry[];
+  rentYTD: RentEntry[];
+  maintenanceOpen: MaintenanceItem[];
+  maintenanceCompletedRecent: MaintenanceItem[];
+  expensesCurrentMonth: Expense[];
+  expensesPreviousMonth: Expense[];
+  expensesYTD: Expense[];
+}
+
+export interface OwnerBundle {
+  owners: Owner[];                 // all co-owners (e.g. Tina AND Randy)
+  properties: PropertyReport[];    // all properties owned (grouped)
   month: string;
   year: number;
 }
 
 // ── Fetchers ───────────────────────────────────────────────────────────────
 
-export async function fetchOwners(): Promise<Owner[]> {
+export async function fetchAllOwners(): Promise<Owner[]> {
   const pages = await queryDatabase(DB.owners);
-  return pages
-    .filter(p => text(p, "Email"))
-    .map(p => ({
-      id: pageId(p),
-      name: text(p, "Owner Name"),
-      email: text(p, "Email"),
-      phone: text(p, "Phone"),
-      propertyIds: relations(p, "Properties"),
-    }));
+  return pages.map(p => ({
+    id: pageId(p),
+    name: text(p, "Owner Name"),
+    email: text(p, "Email"),
+    phone: text(p, "Phone"),
+    notes: text(p, "Notes"),
+    propertyIds: relations(p, "Properties"),
+  }));
 }
 
-export async function fetchProperties(ids?: string[]): Promise<Property[]> {
+export async function fetchAllProperties(): Promise<Property[]> {
   const pages = await queryDatabase(DB.properties);
-  return pages
-    .filter(p => !ids || ids.includes(pageId(p)))
-    .map(p => ({
-      id: pageId(p),
-      name: text(p, "Property Name"),
-      address: text(p, "Address"),
-      city: text(p, "City"),
-      type: text(p, "Type"),
-      status: text(p, "Status"),
-      monthlyRent: num(p, "Monthly Rent"),
-      bedrooms: num(p, "Bedrooms"),
-      bathrooms: num(p, "Bathrooms"),
-    }));
+  return pages.map(p => ({
+    id: pageId(p),
+    name: text(p, "Property Name"),
+    address: text(p, "Address"),
+    city: text(p, "City"),
+    type: text(p, "Type"),
+    status: text(p, "Status"),
+    monthlyRent: num(p, "Monthly Rent"),
+    bedrooms: num(p, "Bedrooms"),
+    bathrooms: num(p, "Bathrooms"),
+    notes: text(p, "Notes"),
+  }));
+}
+
+export async function fetchAllTenants(): Promise<Tenant[]> {
+  const pages = await queryDatabase(DB.tenants);
+  return pages.map(p => ({
+    id: pageId(p),
+    name: text(p, "Tenant Name"),
+    email: text(p, "Email"),
+    phone: text(p, "Phone"),
+    propertyId: relations(p, "Property")[0] ?? "",
+    monthlyRent: num(p, "Monthly Rent"),
+    securityDeposit: num(p, "Security Deposit"),
+    leaseStart: dateStart(p, "Lease Start"),
+    leaseEnd: dateStart(p, "Lease End"),
+    status: text(p, "Status"),
+    notes: text(p, "Notes"),
+  }));
 }
 
 export async function fetchRentForMonth(month: string, year: number): Promise<RentEntry[]> {
@@ -203,7 +241,6 @@ export async function fetchRentForMonth(month: string, year: number): Promise<Re
       { property: "Year", number: { equals: year } },
     ],
   });
-
   return pages.map(p => ({
     id: pageId(p),
     entry: text(p, "Entry"),
@@ -213,25 +250,42 @@ export async function fetchRentForMonth(month: string, year: number): Promise<Re
     year: num(p, "Year"),
     amountDue: num(p, "Amount Due"),
     amountPaid: num(p, "Amount Paid"),
-    datePaid: date(p, "Date Paid"),
+    datePaid: dateStart(p, "Date Paid"),
     paymentStatus: text(p, "Payment Status"),
+    notes: text(p, "Notes"),
+  }));
+}
+
+export async function fetchRentForYear(year: number): Promise<RentEntry[]> {
+  const pages = await queryDatabase(DB.rentTracker, {
+    property: "Year",
+    number: { equals: year },
+  });
+  return pages.map(p => ({
+    id: pageId(p),
+    entry: text(p, "Entry"),
+    propertyId: relations(p, "Property")[0] ?? "",
+    tenantId: relations(p, "Tenant")[0] ?? null,
+    month: text(p, "Month"),
+    year: num(p, "Year"),
+    amountDue: num(p, "Amount Due"),
+    amountPaid: num(p, "Amount Paid"),
+    datePaid: dateStart(p, "Date Paid"),
+    paymentStatus: text(p, "Payment Status"),
+    notes: text(p, "Notes"),
   }));
 }
 
 export async function fetchMaintenanceForProperties(propertyIds: string[]): Promise<MaintenanceItem[]> {
-  // Fetch all non-done maintenance items
-  const pages = await queryDatabase(DB.maintenance, {
-    property: "Status",
-    select: { does_not_equal: "Done" },
-  });
-
+  const pages = await queryDatabase(DB.maintenance);
   return pages
     .filter(p => {
-      const propIds = relations(p, "Property");
-      return propIds.some(id => propertyIds.includes(id));
+      const ids = relations(p, "Property");
+      return ids.some(id => propertyIds.includes(id));
     })
     .map(p => {
-      const dateReported = date(p, "Date Reported");
+      const dr = dateStart(p, "Date Reported");
+      const dc = dateStart(p, "Date Completed");
       return {
         id: pageId(p),
         issue: text(p, "Issue"),
@@ -240,70 +294,130 @@ export async function fetchMaintenanceForProperties(propertyIds: string[]): Prom
         priority: text(p, "Priority"),
         status: text(p, "Status"),
         reportedBy: text(p, "Reported By"),
-        dateReported,
-        dateCompleted: date(p, "Date Completed"),
+        dateReported: dr,
+        dateCompleted: dc,
         cost: num(p, "Cost"),
         notes: text(p, "Notes"),
-        daysPending: dateReported ? daysSince(dateReported) : null,
+        daysPending: dr && text(p, "Status") !== "Done" ? daysSince(dr) : null,
       };
     });
 }
 
-export async function fetchExpensesForMonth(propertyIds: string[], month: string, year: number): Promise<Expense[]> {
-  // Expenses don't have a month filter in schema — filter by date range
-  const monthIndex = new Date(`${month} 1, ${year}`).getMonth();
-  const startDate = new Date(year, monthIndex, 1).toISOString().split("T")[0];
-  const endDate = new Date(year, monthIndex + 1, 0).toISOString().split("T")[0];
-
+export async function fetchExpensesForDateRange(
+  propertyIds: string[],
+  startDate: string,
+  endDate: string
+): Promise<Expense[]> {
   const pages = await queryDatabase(DB.expenses, {
     property: "Date",
     date: { on_or_after: startDate, on_or_before: endDate },
   });
-
   return pages
     .filter(p => {
-      const propIds = relations(p, "Property");
-      return propIds.some(id => propertyIds.includes(id));
+      const ids = relations(p, "Property");
+      return ids.some(id => propertyIds.includes(id));
     })
     .map(p => ({
       id: pageId(p),
-      description: text(p, "Description") || text(p, "Name") || text(p, "Expense"),
+      description: text(p, "Description") || text(p, "Name") || text(p, "Expense") || "(no description)",
       propertyId: relations(p, "Property")[0] ?? "",
       amount: num(p, "Amount"),
       category: text(p, "Category"),
-      date: date(p, "Date"),
+      date: dateStart(p, "Date"),
     }));
 }
 
-// ── Main: build full report data for all owners ────────────────────────────
+// ── Main builder ───────────────────────────────────────────────────────────
 
-export async function buildOwnerReports(month: string, year: number): Promise<OwnerReport[]> {
-  const [owners, allProperties] = await Promise.all([
-    fetchOwners(),
-    fetchProperties(),
-  ]);
+/**
+ * Groups owners into bundles (co-owners share one bundle).
+ * Pulls all data needed for the monthly report.
+ */
+export async function buildOwnerBundles(month: string, year: number): Promise<OwnerBundle[]> {
+  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const monthIndex = MONTHS.indexOf(month);
 
-  const allPropertyIds = owners.flatMap(o => o.propertyIds);
+  // Previous month
+  const prevMonthIndex = monthIndex === 0 ? 11 : monthIndex - 1;
+  const prevYear = monthIndex === 0 ? year - 1 : year;
+  const prevMonth = MONTHS[prevMonthIndex];
 
-  const [rentEntries, maintenanceItems, expenses] = await Promise.all([
+  // Date ranges
+  const currentStart = `${year}-${String(monthIndex + 1).padStart(2, "0")}-01`;
+  const currentEnd   = new Date(year, monthIndex + 1, 0).toISOString().split("T")[0];
+  const prevStart    = `${prevYear}-${String(prevMonthIndex + 1).padStart(2, "0")}-01`;
+  const prevEnd      = new Date(prevYear, prevMonthIndex + 1, 0).toISOString().split("T")[0];
+  const ytdStart     = `${year}-01-01`;
+
+  // Fetch everything in parallel (maintenance needs property IDs, so split into two waves)
+  const [allOwners, allProperties, allTenants, rentCurrent, rentPrev, rentYTD] = await Promise.all([
+    fetchAllOwners(),
+    fetchAllProperties(),
+    fetchAllTenants(),
     fetchRentForMonth(month, year),
-    fetchMaintenanceForProperties(allPropertyIds),
-    fetchExpensesForMonth(allPropertyIds, month, year),
+    fetchRentForMonth(prevMonth, prevYear),
+    fetchRentForYear(year),
   ]);
 
-  return owners.map(owner => {
-    const ownerProperties = allProperties.filter(p => owner.propertyIds.includes(p.id));
+  const allPropertyIds = allProperties.map((p: Property) => p.id);
+  const allMaintenance = await fetchMaintenanceForProperties(allPropertyIds);
 
-    return {
-      owner,
-      month,
-      year,
-      properties: ownerProperties.map(property => ({
+  const [expensesCurrent, expensesPrev, expensesYTD] = await Promise.all([
+    fetchExpensesForDateRange(allPropertyIds, currentStart, currentEnd),
+    fetchExpensesForDateRange(allPropertyIds, prevStart, prevEnd),
+    fetchExpensesForDateRange(allPropertyIds, ytdStart, currentEnd),
+  ]);
+
+  // Group co-owners: owners who share all the same properties go in one bundle
+  const processed = new Set<string>();
+  const bundles: OwnerBundle[] = [];
+
+  for (const owner of allOwners) {
+    if (processed.has(owner.id)) continue;
+
+    // Find co-owners — others who own any of the same properties
+    const myPropSet = new Set(owner.propertyIds);
+    const coOwners = allOwners.filter(o =>
+      o.id !== owner.id && o.propertyIds.some(pid => myPropSet.has(pid))
+    );
+
+    const bundleOwners = [owner, ...coOwners];
+    bundleOwners.forEach(o => processed.add(o.id));
+
+    const allBundlePropertyIds = [...new Set(bundleOwners.flatMap(o => o.propertyIds))];
+    const bundleProperties = allProperties.filter(p => allBundlePropertyIds.includes(p.id));
+
+    const propertyReports: PropertyReport[] = bundleProperties.map(property => {
+      const pid = property.id;
+      const recentCutoff = new Date();
+      recentCutoff.setDate(recentCutoff.getDate() - 60); // last 60 days
+
+      const maintenance = allMaintenance.filter(m => m.propertyId === pid);
+      const maintenanceOpen = maintenance.filter(m => m.status !== "Done");
+      const maintenanceCompletedRecent = maintenance.filter(m =>
+        m.status === "Done" &&
+        m.dateCompleted &&
+        new Date(m.dateCompleted) >= recentCutoff
+      );
+
+      return {
         property,
-        rent: rentEntries.filter(r => r.propertyId === property.id),
-        maintenance: maintenanceItems.filter(m => m.propertyId === property.id),
-        expenses: expenses.filter(e => e.propertyId === property.id),
-      })),
-    };
-  });
+        tenants: allTenants.filter(t => t.propertyId === pid),
+        rentCurrentMonth: rentCurrent.filter(r => r.propertyId === pid),
+        rentPreviousMonth: rentPrev.filter(r => r.propertyId === pid),
+        rentYTD: rentYTD.filter(r => r.propertyId === pid),
+        maintenanceOpen,
+        maintenanceCompletedRecent,
+        expensesCurrentMonth: expensesCurrent.filter(e => e.propertyId === pid),
+        expensesPreviousMonth: expensesPrev.filter(e => e.propertyId === pid),
+        expensesYTD: expensesYTD.filter(e => e.propertyId === pid),
+      };
+    });
+
+    if (propertyReports.length > 0) {
+      bundles.push({ owners: bundleOwners, properties: propertyReports, month, year });
+    }
+  }
+
+  return bundles;
 }
