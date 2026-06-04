@@ -72,10 +72,16 @@ function wrapper(content: string): string {
   <meta name="supported-color-schemes" content="light" />
   <title>Prospera Properties</title>
   <style>
-    :root { color-scheme: light only !important; }
-    body { color-scheme: light only !important; }
+    :root { color-scheme: light only; }
+    body { color-scheme: light only; background-color: ${BG_OUTER} !important; }
     @media (prefers-color-scheme: dark) {
-      body, table, td, div, p, a { background-color: inherit !important; color: inherit !important; }
+      html, body { background-color: ${BG_OUTER} !important; }
+      .email-outer { background-color: ${BG_OUTER} !important; }
+      .email-container { background-color: #fbf9f6 !important; }
+      .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
+      .hero-heading { color: ${NAVY} !important; }
+      .body-text { color: ${TEXT} !important; }
+      .muted-text { color: ${MUTED} !important; }
     }
     @media only screen and (max-width: 620px) {
       .outer-pad { padding: 16px 8px !important; }

@@ -323,10 +323,19 @@ export function buildEmailHTML(
 <meta name="supported-color-schemes" content="light"/>
 <title>${narrative.subject}</title>
 <style>
-  :root { color-scheme: light only !important; }
-  body { color-scheme: light only !important; }
+  :root { color-scheme: light only; }
+  body { color-scheme: light only; background-color: #F7F5F2 !important; }
   @media (prefers-color-scheme: dark) {
-    body, table, td, div, p, a { background-color: inherit !important; color: inherit !important; }
+    html, body { background-color: #F7F5F2 !important; }
+    .email-wrapper { background-color: #F7F5F2 !important; }
+    .email-container { background-color: #fbf9f6 !important; }
+    .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
+    .hero-heading { color: #1F2F3A !important; }
+    .hero-text { color: #43474b !important; }
+    .hero-address { color: #8B2030 !important; }
+    .section-heading { color: #1F2F3A !important; }
+    .body-text { color: #1b1c1a !important; }
+    .muted-text { color: #43474b !important; }
   }
 </style>
 </head>
@@ -354,18 +363,18 @@ ${draftBannerHtml}
 
   <!-- Hero -->
   <div style="padding:8px 40px 40px;">
-    <div style="background:linear-gradient(135deg,#f5f3f0,#eae8e5);border-radius:24px;padding:48px 40px;text-align:center;">
-      <div style="display:inline-block;padding:4px 14px;background:#1F2F3A;color:#ffffff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:Arial,sans-serif;">Monthly Report</div>
-      <div style="font-family:Arial,sans-serif;font-size:28px;font-weight:700;color:#1F2F3A;margin:0 0 12px;">Hello ${ownerFirstNames},</div>
-      <p style="font-family:Arial,sans-serif;font-size:14px;color:#43474b;max-width:360px;margin:0 auto 20px;line-height:1.7;">${narrative.openingSentence}</p>
-      <div style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#8B2030;text-decoration:underline;text-underline-offset:4px;">${primaryAddress}</div>
+    <div class="hero-card" style="background:linear-gradient(135deg,#f5f3f0,#eae8e5);border-radius:24px;padding:48px 40px;text-align:center;">
+      <div style="display:inline-block;padding:4px 14px;background:#1F2F3A;color:#ffffff !important;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:Arial,sans-serif;">Monthly Report</div>
+      <div class="hero-heading" style="font-family:Arial,sans-serif;font-size:28px;font-weight:700;color:#1F2F3A !important;margin:0 0 12px;">Hello ${ownerFirstNames},</div>
+      <p class="hero-text" style="font-family:Arial,sans-serif;font-size:14px;color:#43474b !important;max-width:360px;margin:0 auto 20px;line-height:1.7;">${narrative.openingSentence}</p>
+      <div class="hero-address" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#8B2030 !important;text-decoration:underline;text-underline-offset:4px;">${primaryAddress}</div>
       <div style="margin-top:24px;">
         <div style="width:56px;height:56px;border-radius:99px;overflow:hidden;margin:0 auto 8px;border:3px solid #ffffff;">
           <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
             style="width:56px;height:56px;object-fit:cover;display:block;"
             onerror="this.style.display='none'" />
         </div>
-        <div style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#43474b;text-transform:uppercase;letter-spacing:0.2em;">Report by Ebin</div>
+        <div class="muted-text" style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#43474b !important;text-transform:uppercase;letter-spacing:0.2em;">Report by Ebin</div>
       </div>
     </div>
   </div>
