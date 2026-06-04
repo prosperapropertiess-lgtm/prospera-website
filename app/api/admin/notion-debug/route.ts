@@ -39,6 +39,8 @@ export async function GET(req: NextRequest) {
 
   const dbId = target === "expenses" ? DB.expenses
     : target === "rent" ? DB.rentTracker
+    : target === "properties" ? DB.properties
+    : target === "tenants" ? DB.tenants
     : target; // allow raw ID
 
   // Return schema only
