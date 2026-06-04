@@ -1,28 +1,27 @@
 // ─────────────────────────────────────────────────────────────
 // Prospera Properties — Email Templates
-// Design: Navy #1F2F3A + White. Crimson #8B2030 for CTAs only.
-// Fonts: DM Sans (body), Cormorant Garamond (headings)
+// Design: Navy #1F2F3A + Crimson #8B2030 + Warm neutrals
+// Font: Arial/Helvetica (email-safe, no external fonts)
 // ─────────────────────────────────────────────────────────────
 
 const BASE_URL = "https://www.prosperaproperties.co";
 
-// Font stacks — web fonts load in Apple Mail / iOS / Samsung Mail.
-// Outlook falls back to Arial / Georgia gracefully.
-const FONT_SANS = "'DM Sans', Arial, Helvetica, sans-serif";
-const FONT_SERIF = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
-
 // Palette
-const NAVY = "#1F2F3A";
-const WHITE = "#FFFFFF";
+const NAVY    = "#1F2F3A";
 const CRIMSON = "#8B2030";
-const TEXT = "#1E2D3D";       // near-black navy for body
-const MUTED = "#64748B";      // grey for secondary text
-const BORDER = "#E2E8F0";     // light border
-const BG_OUTER = "#EEF2F7";   // very light blue-grey wrapper
-const BG_SUBTLE = "#F8FAFC";  // subtle section bg
+const WHITE   = "#ffffff";
+const TEXT    = "#1b1c1a";
+const MUTED   = "#43474b";
+const BORDER  = "#e4e2df";
+const BG_OUTER   = "#F7F5F2";
+const BG_CARD    = "#ffffff";
+const BG_SUBTLE  = "#f5f3f0";
+const BG_HERO    = "linear-gradient(135deg,#f5f3f0,#eae8e5)";
+
+// Single font stack — no Google Fonts
+const FONT = "Arial, Helvetica, sans-serif";
 
 // ── Markdown → email HTML ────────────────────────────────────
-// Converts basic markdown from Claude's analysis to email-safe HTML.
 function md(text: string): string {
   // 1. Bold
   let out = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
@@ -34,7 +33,7 @@ function md(text: string): string {
       .split("\n")
       .filter((l) => l.trim())
       .map((l) => l.replace(/^[-•*]\s+/, "").trim())
-      .map((l) => `<li style="margin:0 0 8px;font-size:15px;line-height:1.7;color:${TEXT};font-family:${FONT_SANS};">${l}</li>`)
+      .map((l) => `<li style="margin:0 0 8px;font-size:15px;line-height:1.7;color:${TEXT};font-family:${FONT};">${l}</li>`)
       .join("");
     return `\n<ul style="margin:12px 0 20px;padding-left:22px;">${items}</ul>\n`;
   });
@@ -42,17 +41,16 @@ function md(text: string): string {
   // 3. Section headings (##)
   out = out.replace(
     /^#{1,3}\s+(.+)$/gm,
-    `<p style="margin:28px 0 8px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">$1</p>`
+    `<p style="margin:28px 0 8px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">$1</p>`
   );
 
   // 4. Paragraph breaks
-  const pStyle = `margin:0 0 16px;font-size:15px;line-height:1.8;color:${TEXT};font-family:${FONT_SANS};`;
+  const pStyle = `margin:0 0 16px;font-size:15px;line-height:1.8;color:${TEXT};font-family:${FONT};`;
   out = out
     .split(/\n{2,}/)
     .map((chunk) => {
       chunk = chunk.trim();
       if (!chunk) return "";
-      // Don't wrap things already wrapped in block tags
       if (chunk.startsWith("<ul") || chunk.startsWith("<p style=\"margin:28")) return chunk;
       return `<p style="${pStyle}">${chunk.replace(/\n/g, " ")}</p>`;
     })
@@ -64,13 +62,13 @@ function md(text: string): string {
 // ── Shared components ────────────────────────────────────────
 
 function wrapper(content: string): string {
+  const year = new Date().getFullYear();
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prospera Properties</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
   <style>
     @media only screen and (max-width: 620px) {
       .outer-pad { padding: 16px 8px !important; }
@@ -81,17 +79,25 @@ function wrapper(content: string): string {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT_SANS};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
-      <td class="outer-pad" align="center" style="padding:32px 16px;">
-        <table cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;background-color:${WHITE};border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+      <td class="outer-pad" align="center" style="padding:24px 16px;">
+        <table cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;background-color:#fbf9f6;overflow:hidden;">
 
           <!-- Header -->
           <tr>
-            <td class="header-pad" style="background-color:${NAVY};padding:28px 40px;">
-              <p style="margin:0;font-size:20px;font-weight:300;color:${WHITE};font-family:${FONT_SERIF};letter-spacing:0.5px;">Prospera Properties</p>
-              <p style="margin:5px 0 0;font-size:12px;color:rgba(255,255,255,0.45);font-family:${FONT_SANS};letter-spacing:1px;">London · St. Thomas · Strathroy</p>
+            <td class="header-pad" style="padding:28px 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td>
+                    <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="36" style="height:36px;width:auto;display:block;" onerror="this.style.display='none'" />
+                  </td>
+                  <td style="text-align:right;">
+                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:0.1em;">PROSPERA PROPERTIES</span>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
@@ -104,9 +110,15 @@ function wrapper(content: string): string {
 
           <!-- Footer -->
           <tr>
-            <td class="footer-pad" style="background-color:${NAVY};padding:24px 40px;">
-              <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.5);font-family:${FONT_SANS};">Prospera Properties &nbsp;·&nbsp; <a href="tel:+15196971227" style="color:rgba(255,255,255,0.5);text-decoration:none;">(519) 697-1227</a> &nbsp;·&nbsp; <a href="mailto:hello@prosperaproperties.co" style="color:rgba(255,255,255,0.5);text-decoration:none;">hello@prosperaproperties.co</a></p>
-              <p style="margin:0;font-size:12px;font-family:${FONT_SANS};"><a href="${BASE_URL}" style="color:rgba(255,255,255,0.3);text-decoration:none;">prosperaproperties.co</a></p>
+            <td class="footer-pad" style="padding:40px;text-align:center;border-top:1px solid ${BORDER};">
+              <div style="width:48px;height:48px;border-radius:99px;overflow:hidden;margin:0 auto 12px;border:3px solid ${WHITE};box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <img src="https://www.prosperaproperties.co/ebin-founder.jpg" alt="Ebin" width="48" height="48" style="width:48px;height:48px;object-fit:cover;display:block;" onerror="this.style.display='none'" />
+              </div>
+              <p style="margin:0 0 2px;font-family:${FONT};font-size:16px;font-weight:700;color:${NAVY};">Ebin</p>
+              <p style="margin:0 0 12px;font-family:${FONT};font-size:10px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:0.2em;">Senior Property Manager</p>
+              <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:${FONT};font-size:13px;font-weight:600;color:${CRIMSON};text-decoration:none;">prosperapropertiess@gmail.com</a></p>
+              <p style="margin:0 0 20px;font-family:${FONT};font-size:12px;color:${MUTED};">(519) 697-1227</p>
+              <p style="margin:0;font-family:${FONT};font-size:9px;color:${MUTED};text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;">© ${year} PROSPERA PROPERTIES MANAGEMENT GROUP</p>
             </td>
           </tr>
 
@@ -119,7 +131,7 @@ function wrapper(content: string): string {
 }
 
 function divider(): string {
-  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:32px 0;">
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:28px 0;">
     <tr><td style="height:1px;background-color:${BORDER};"></td></tr>
   </table>`;
 }
@@ -127,8 +139,8 @@ function divider(): string {
 function cta(text: string, url: string): string {
   return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin:28px 0;">
     <tr>
-      <td style="background-color:${CRIMSON};border-radius:6px;">
-        <a href="${url}" style="display:inline-block;padding:15px 32px;color:${WHITE};text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.5px;font-family:${FONT_SANS};">${text} →</a>
+      <td style="background-color:${CRIMSON};border-radius:10px;">
+        <a href="${url}" style="display:inline-block;padding:14px 32px;color:${WHITE};text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.5px;font-family:${FONT};">${text} →</a>
       </td>
     </tr>
   </table>`;
@@ -137,16 +149,28 @@ function cta(text: string, url: string): string {
 function noteBox(body: string, label?: string): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0;">
     <tr>
-      <td style="background-color:${BG_SUBTLE};border-left:3px solid ${NAVY};border-radius:0 6px 6px 0;padding:16px 20px;">
-        ${label ? `<p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">${label}</p>` : ""}
-        <p style="margin:0;font-size:14px;line-height:1.7;color:${TEXT};font-family:${FONT_SANS};">${body}</p>
+      <td style="background-color:${BG_SUBTLE};border-left:3px solid ${CRIMSON};border-radius:0 12px 12px 0;padding:16px 20px;">
+        ${label ? `<p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">${label}</p>` : ""}
+        <p style="margin:0;font-size:14px;line-height:1.7;color:${TEXT};font-family:${FONT};">${body}</p>
       </td>
     </tr>
   </table>`;
 }
 
 function signoff(name = "Ebin"): string {
-  return `<p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">— ${name}<br/><span style="font-size:13px;color:${MUTED};">Prospera Properties · (519) 697-1227</span></p>`;
+  return `<p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">— ${name} · Prospera Properties · (519) 697-1227</p>`;
+}
+
+function heroCard(greeting: string, subtitle: string): string {
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
+    <tr>
+      <td style="background:${BG_HERO};border-radius:20px;padding:40px;text-align:center;">
+        <div style="display:inline-block;padding:4px 14px;background:${NAVY};color:${WHITE};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:${FONT};">Prospera Properties</div>
+        <p style="margin:0 0 12px;font-family:${FONT};font-size:28px;font-weight:700;color:${NAVY};line-height:1.2;">${greeting}</p>
+        <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">${subtitle}</p>
+      </td>
+    </tr>
+  </table>`;
 }
 
 // ── LANDLORD WELCOME ─────────────────────────────────────────
@@ -155,17 +179,17 @@ export function landlordWelcomeEmail(name: string): string {
   const PDF_URL = `${BASE_URL}/lease-addendum.pdf`;
 
   return wrapper(`
-    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};line-height:1.7;">Hey ${name || "there"},</p>
+    ${heroCard(`Hey ${name || "there"},`, "Your Lease Protection Addendum is ready.")}
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open so you're covered before something goes wrong.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open so you're covered before something goes wrong.</p>
 
     ${cta("Download the Addendum (PDF)", PDF_URL)}
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">I'm Ebin. I run Prospera Properties — full property management across London, St. Thomas, and Strathroy. Tenant screening, rent collection, maintenance — the whole thing.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">I'm Ebin. I run Prospera Properties — full property management across London, St. Thomas, and Strathroy. Tenant screening, rent collection, maintenance — the whole thing.</p>
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">If you ever want someone to take it off your plate, that's what we do.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">If you ever want someone to take it off your plate, that's what we do.</p>
 
     ${cta("See How It Works", `${BASE_URL}/landlords`)}
 
@@ -179,16 +203,16 @@ export function landlordWelcomeEmail(name: string): string {
 
 export function tenantWelcomeEmail(name: string, city?: string): string {
   return wrapper(`
-    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};line-height:1.7;">Hey ${name || "there"},</p>
+    ${heroCard(`Hey ${name || "there"},`, "You're on the list.")}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">You're on the list — we'll reach out as soon as something opens up${city ? ` in ${city}` : ""}.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">You're on the list — we'll reach out as soon as something opens up${city ? ` in ${city}` : ""}.</p>
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">We're a bit different from most landlords: maintenance actually gets fixed, phones actually get answered, and our places are properly looked after before you move in.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">We're a bit different from most landlords: maintenance actually gets fixed, phones actually get answered, and our places are properly looked after before you move in.</p>
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:15px;font-weight:600;color:${TEXT};font-family:${FONT_SANS};">While you wait</p>
-    <p style="margin:0 0 20px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Check our listings page — we add new properties regularly.</p>
+    <p style="margin:0 0 16px;font-size:15px;font-weight:600;color:${TEXT};font-family:${FONT};">While you wait</p>
+    <p style="margin:0 0 20px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Check our listings page — we add new properties regularly.</p>
 
     ${cta("Browse Available Rentals", `${BASE_URL}/listings`)}
 
@@ -198,7 +222,7 @@ export function tenantWelcomeEmail(name: string, city?: string): string {
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Questions? Just reply — a real person will get back to you.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};">Questions? Just reply — a real person will get back to you.</p>
 
     ${signoff()}
   `);
@@ -211,21 +235,21 @@ export function contactConfirmationEmail(name: string, type?: string): string {
   const isTenant = type === "tenant";
 
   return wrapper(`
-    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};line-height:1.7;">Hey ${name || "there"},</p>
+    ${heroCard(`Hey ${name || "there"},`, "We got your message.")}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Got your message — I'll personally be in touch within one business day.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Got your message — I'll personally be in touch within one business day.</p>
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">If it's urgent, call me directly at <a href="tel:+15196971227" style="color:${CRIMSON};text-decoration:none;font-weight:600;">(519) 697-1227</a>.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">If it's urgent, call me directly at <a href="tel:+15196971227" style="color:${CRIMSON};text-decoration:none;font-weight:600;">(519) 697-1227</a>.</p>
 
     ${divider()}
 
     ${isLandlord
-      ? `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">While you wait, here are our free landlord resources — lease templates, screening checklists, eviction guides.</p>
+      ? `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};">While you wait, here are our free landlord resources — lease templates, screening checklists, eviction guides.</p>
          ${cta("Browse Free Resources", `${BASE_URL}/resources`)}`
       : isTenant
-      ? `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Check out what's currently available while you wait — we add new properties regularly.</p>
+      ? `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};">Check out what's currently available while you wait — we add new properties regularly.</p>
          ${cta("View Available Rentals", `${BASE_URL}/listings`)}`
-      : `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Find out how Prospera Properties works for landlords and tenants in Southwest Ontario.</p>
+      : `<p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};">Find out how Prospera Properties works for landlords and tenants in Southwest Ontario.</p>
          ${cta("About Prospera Properties", `${BASE_URL}/about`)}`
     }
 
@@ -253,9 +277,9 @@ export function rentAnalysisLinkEmail({
   const cityLabel = city ? ` in ${city}` : "";
 
   return wrapper(`
-    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};line-height:1.7;">Hey ${name || "there"},</p>
+    ${heroCard(`Hey ${name || "there"},`, "Your rent analysis link is ready.")}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Your rent analysis link is ready. Click below, fill in your ${bedsLabel}property details${cityLabel}, and we'll send back a full written report — usually within minutes.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Your rent analysis link is ready. Click below, fill in your ${bedsLabel}property details${cityLabel}, and we'll send back a full written report — usually within minutes.</p>
 
     ${cta("Start My Rent Analysis", link)}
 
@@ -263,7 +287,7 @@ export function rentAnalysisLinkEmail({
 
     ${divider()}
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">The analysis looks at what similar units are renting for right now, what features add or take away value, and gives you one clear number to work with — not a vague range.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">The analysis looks at what similar units are renting for right now, what features add or take away value, and gives you one clear number to work with — not a vague range.</p>
 
     ${signoff()}
   `);
@@ -316,25 +340,25 @@ export function rentAnalysisReportEmail({
     }
 
     return `
-      <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">What similar units rent for in ${city}</p>
+      <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">What similar units rent for in ${city}</p>
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 8px;background-color:${NAVY};border-radius:8px;overflow:hidden;">
         <tr>
           <td class="market-col" align="center" style="padding:20px 16px;border-right:1px solid rgba(255,255,255,0.1);width:33.3%;">
-            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT_SANS};">Budget end</p>
-            <p style="margin:0;font-size:24px;font-weight:300;color:${WHITE};font-family:${FONT_SERIF};">${p25}</p>
+            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT};">Budget end</p>
+            <p style="margin:0;font-size:24px;font-weight:700;color:${WHITE};font-family:${FONT};">${p25}</p>
           </td>
           <td class="market-col" align="center" style="padding:20px 16px;border-right:1px solid rgba(255,255,255,0.1);width:33.3%;">
-            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT_SANS};">Most rentals</p>
-            <p style="margin:0;font-size:28px;font-weight:600;color:${WHITE};font-family:${FONT_SERIF};">${median}</p>
+            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT};">Most rentals</p>
+            <p style="margin:0;font-size:28px;font-weight:700;color:${WHITE};font-family:${FONT};">${median}</p>
           </td>
           <td class="market-col" align="center" style="padding:20px 16px;width:33.3%;">
-            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT_SANS};">Premium end</p>
-            <p style="margin:0;font-size:24px;font-weight:300;color:${WHITE};font-family:${FONT_SERIF};">${p75}</p>
+            <p style="margin:0 0 6px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;font-family:${FONT};">Premium end</p>
+            <p style="margin:0;font-size:24px;font-weight:700;color:${WHITE};font-family:${FONT};">${p75}</p>
           </td>
         </tr>
       </table>
-      <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};">Based on ${count} real ${bedsLabel} rentals tracked in ${city}.</p>
-      <p style="margin:0 0 28px;font-size:14px;color:${positionColor};font-family:${FONT_SANS};font-weight:600;">${positionText}</p>
+      <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">Based on ${count} real ${bedsLabel} rentals tracked in ${city}.</p>
+      <p style="margin:0 0 28px;font-size:14px;color:${positionColor};font-family:${FONT};font-weight:600;">${positionText}</p>
     `;
   })() : "";
 
@@ -342,22 +366,21 @@ export function rentAnalysisReportEmail({
   const analysisHtml = md(claudeAnalysis);
 
   return wrapper(`
-    <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Your Rent Analysis</p>
-    <p style="margin:0 0 28px;font-size:28px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">Hey ${name || "there"},</p>
+    ${heroCard(`Hey ${name || "there"},`, `Your ${bedsLabel} ${typeLabel} rent analysis for ${city}`)}
 
     <!-- Property at a glance -->
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;background-color:${BG_SUBTLE};border-radius:8px;overflow:hidden;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;background-color:${BG_CARD};border:1px solid ${BORDER};border-radius:20px;overflow:hidden;">
       <tr>
-        <td style="padding:20px 24px;">
-          <p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Your property</p>
-          <p style="margin:0 0 8px;font-size:18px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">${bedsLabel} ${typeLabel} · ${city}</p>
+        <td style="padding:24px 28px;">
+          <p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Your property</p>
+          <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:${NAVY};font-family:${FONT};">${bedsLabel} ${typeLabel} · ${city}</p>
           <table cellpadding="0" cellspacing="0" role="presentation">
             <tr>
               <td style="padding-right:24px;">
-                <p style="margin:0;font-size:22px;font-weight:700;color:${NAVY};font-family:${FONT_SANS};">$${rentAmount.toLocaleString()}<span style="font-size:14px;font-weight:400;color:${MUTED};">/month</span></p>
+                <p style="margin:0;font-size:22px;font-weight:700;color:${NAVY};font-family:${FONT};">$${rentAmount.toLocaleString()}<span style="font-size:14px;font-weight:400;color:${MUTED};">/month</span></p>
               </td>
               <td>
-                <p style="margin:0;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">$${yearlyRent.toLocaleString()}/year</p>
+                <p style="margin:0;font-size:15px;color:${MUTED};font-family:${FONT};">$${yearlyRent.toLocaleString()}/year</p>
               </td>
             </tr>
           </table>
@@ -371,14 +394,14 @@ export function rentAnalysisReportEmail({
     ${divider()}
 
     <!-- Analysis -->
-    <p style="margin:0 0 20px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Full Analysis</p>
+    <p style="margin:0 0 20px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Full Analysis</p>
     ${analysisHtml}
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">You're now on our monthly market update list — one short email a month showing how rents are moving in ${city}. Reply "unsubscribe" anytime.</p>
+    <p style="margin:0 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">You're now on our monthly market update list — one short email a month showing how rents are moving in ${city}. Reply "unsubscribe" anytime.</p>
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Want someone to handle the whole thing — tenant screening, rent collection, maintenance? That's what we do.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Want someone to handle the whole thing — tenant screening, rent collection, maintenance? That's what we do.</p>
 
     ${cta("See How Prospera Works", `${BASE_URL}/landlords`)}
 
@@ -417,25 +440,24 @@ export function monthlyRentTrendsEmail({
 
   const rowsHtml = data.map((row) => `
     <tr style="background-color:${WHITE};">
-      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:15px;color:${TEXT};font-family:${FONT_SANS};font-weight:500;">${row.bedrooms} bed</td>
-      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:17px;color:${NAVY};font-family:${FONT_SANS};font-weight:700;text-align:right;">${row.median_rent ? `$${Math.round(row.median_rent).toLocaleString()}` : "—"}</td>
-      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:14px;text-align:right;font-family:${FONT_SANS};">${trendLabel(row.trend_direction)}</td>
+      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:15px;color:${TEXT};font-family:${FONT};font-weight:500;">${row.bedrooms} bed</td>
+      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:17px;color:${NAVY};font-family:${FONT};font-weight:700;text-align:right;">${row.median_rent ? `$${Math.round(row.median_rent).toLocaleString()}` : "—"}</td>
+      <td style="padding:14px 16px;border-bottom:1px solid ${BORDER};font-size:14px;text-align:right;font-family:${FONT};">${trendLabel(row.trend_direction)}</td>
     </tr>
-    ${row.market_narrative ? `<tr><td colspan="3" style="padding:4px 16px 14px;border-bottom:1px solid ${BORDER};font-size:13px;color:${MUTED};line-height:1.6;font-family:${FONT_SANS};">${row.market_narrative}</td></tr>` : ""}
+    ${row.market_narrative ? `<tr><td colspan="3" style="padding:4px 16px 14px;border-bottom:1px solid ${BORDER};font-size:13px;color:${MUTED};line-height:1.6;font-family:${FONT};">${row.market_narrative}</td></tr>` : ""}
   `).join("");
 
   return wrapper(`
-    <p style="margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">${city} Rental Market</p>
-    <p style="margin:0 0 24px;font-size:28px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">${month} Update</p>
+    ${heroCard(`${city} Market — ${month}`, "Here's how rents are moving this month.")}
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Hey ${name || "there"}, here's how rents are moving in ${city} this month.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Hey ${name || "there"}, here's how rents are moving in ${city} this month.</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;border:1px solid ${BORDER};border-radius:8px;overflow:hidden;">
       <thead>
         <tr style="background-color:${NAVY};">
-          <th style="padding:12px 16px;text-align:left;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT_SANS};">Unit size</th>
-          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT_SANS};">Most units rent for</th>
-          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT_SANS};">Trend</th>
+          <th style="padding:12px 16px;text-align:left;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT};">Unit size</th>
+          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT};">Most units rent for</th>
+          <th style="padding:12px 16px;text-align:right;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);font-weight:700;text-transform:uppercase;font-family:${FONT};">Trend</th>
         </tr>
       </thead>
       <tbody>
@@ -447,8 +469,8 @@ export function monthlyRentTrendsEmail({
 
     ${divider()}
 
-    <p style="margin:0 0 8px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};">Data from landlord-reported rents and Prospera's market tracking across ${city}.</p>
-    <p style="margin:0;font-size:13px;color:${MUTED};font-family:${FONT_SANS};">To stop receiving these, reply with "unsubscribe".</p>
+    <p style="margin:0 0 8px;font-size:13px;color:${MUTED};font-family:${FONT};">Data from landlord-reported rents and Prospera's market tracking across ${city}.</p>
+    <p style="margin:0;font-size:13px;color:${MUTED};font-family:${FONT};">To stop receiving these, reply with "unsubscribe".</p>
   `);
 }
 
@@ -474,8 +496,8 @@ export function rentSubmissionNotificationEmail({
   function row(label: string, value: unknown): string {
     if (value === null || value === undefined || value === "" || value === "not specified") return "";
     return `<tr>
-      <td style="padding:6px 16px 6px 0;font-size:13px;color:${MUTED};white-space:nowrap;vertical-align:top;font-family:${FONT_SANS};">${label}</td>
-      <td style="padding:6px 0;font-size:13px;color:${TEXT};font-weight:600;font-family:${FONT_SANS};">${String(value)}</td>
+      <td style="padding:6px 16px 6px 0;font-size:13px;color:${MUTED};white-space:nowrap;vertical-align:top;font-family:${FONT};">${label}</td>
+      <td style="padding:6px 0;font-size:13px;color:${TEXT};font-weight:600;font-family:${FONT};">${String(value)}</td>
     </tr>`;
   }
 
@@ -483,7 +505,7 @@ export function rentSubmissionNotificationEmail({
     const content = rows.replace(/\n/g, "").trim();
     if (!content) return "";
     return `
-      <p style="margin:24px 0 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">${title}</p>
+      <p style="margin:24px 0 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">${title}</p>
       <table cellpadding="0" cellspacing="0" role="presentation" style="width:100%;margin-bottom:4px;">${content}</table>
     `;
   }
@@ -497,8 +519,8 @@ export function rentSubmissionNotificationEmail({
   ].filter(Boolean).join(", ") || "None";
 
   return wrapper(`
-    <p style="margin:0 0 4px;font-size:24px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">New Rent Analysis</p>
-    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};">ID: ${submissionId}</p>
+    <p style="margin:0 0 4px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">New Rent Analysis</p>
+    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">ID: ${submissionId}</p>
 
     ${section("Landlord", `
       ${row("Name", landlordName || "Not given")}
@@ -564,8 +586,8 @@ export function rentSubmissionNotificationEmail({
 
     ${divider()}
 
-    <p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Analysis Sent to Landlord</p>
-    <p style="margin:0;font-size:14px;line-height:1.8;color:${TEXT};font-family:${FONT_SANS};white-space:pre-line;">${claudeAnalysis}</p>
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Analysis Sent to Landlord</p>
+    <p style="margin:0;font-size:14px;line-height:1.8;color:${TEXT};font-family:${FONT};white-space:pre-line;">${claudeAnalysis}</p>
   `);
 }
 
@@ -586,29 +608,29 @@ export function scrapeIngestNotificationEmail({
 }): string {
   const cityRows = Object.entries(cities).map(([city, count]) => `
     <tr>
-      <td style="padding:10px 16px;border-bottom:1px solid ${BORDER};font-size:14px;color:${TEXT};font-family:${FONT_SANS};">${city}</td>
-      <td style="padding:10px 16px;border-bottom:1px solid ${BORDER};font-size:14px;color:${NAVY};font-weight:700;text-align:right;font-family:${FONT_SANS};">${count} listings</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${BORDER};font-size:14px;color:${TEXT};font-family:${FONT};">${city}</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${BORDER};font-size:14px;color:${NAVY};font-weight:700;text-align:right;font-family:${FONT};">${count} listings</td>
     </tr>
   `).join("");
 
   return wrapper(`
-    <p style="margin:0 0 4px;font-size:24px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">Scrape Complete</p>
-    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};">${new Date(scrapedAt).toLocaleString("en-CA", { dateStyle: "full", timeStyle: "short" })} · ${source}</p>
+    <p style="margin:0 0 4px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">Scrape Complete</p>
+    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">${new Date(scrapedAt).toLocaleString("en-CA", { dateStyle: "full", timeStyle: "short" })} · ${source}</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;background-color:${BG_SUBTLE};border-radius:8px;overflow:hidden;">
       <tr>
         <td style="padding:24px;border-right:1px solid ${BORDER};text-align:center;width:50%;">
-          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Inserted</p>
-          <p style="margin:0;font-size:36px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">${inserted}</p>
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Inserted</p>
+          <p style="margin:0;font-size:36px;font-weight:700;color:${NAVY};font-family:${FONT};">${inserted}</p>
         </td>
         <td style="padding:24px;text-align:center;width:50%;">
-          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Skipped</p>
-          <p style="margin:0;font-size:36px;font-weight:300;color:${MUTED};font-family:${FONT_SERIF};">${skipped}</p>
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Skipped</p>
+          <p style="margin:0;font-size:36px;font-weight:700;color:${MUTED};font-family:${FONT};">${skipped}</p>
         </td>
       </tr>
     </table>
 
-    <p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">By City</p>
+    <p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">By City</p>
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;border:1px solid ${BORDER};border-radius:8px;overflow:hidden;">
       <tbody>${cityRows}</tbody>
     </table>
@@ -779,23 +801,23 @@ export function resourceDownloadEmail(
 
   if (!guide) {
     const html = wrapper(`
-      <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};">Hey ${name || "there"},</p>
-      <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Here's your download: <strong>${resourceTitle}</strong></p>
+      ${heroCard(`Your download is ready, ${name || "there"}.`, resourceTitle)}
+      <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Here's your download: <strong>${resourceTitle}</strong></p>
       ${fileUrl ? cta("Download Now", fileUrl) : ""}
       ${divider()}
-      <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Questions? Just reply to this email.</p>
+      <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};">Questions? Just reply to this email.</p>
       ${signoff()}
     `);
     return { subject: `Your download: ${resourceTitle}`, html };
   }
 
-  const stepsHtml = guide.steps.map((s, i) => `
+  const stepsHtml = guide.steps.map((step, i) => `
     <tr>
       <td style="padding:12px 0;border-bottom:1px solid ${BORDER};">
         <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
           <tr>
-            <td width="28" valign="top" style="font-size:13px;font-weight:700;color:${CRIMSON};padding-top:2px;font-family:${FONT_SANS};">${i + 1}.</td>
-            <td style="font-size:15px;color:${TEXT};line-height:1.7;font-family:${FONT_SANS};">${s}</td>
+            <td width="28" valign="top" style="font-size:13px;font-weight:700;color:${CRIMSON};padding-top:2px;font-family:${FONT};">${i + 1}.</td>
+            <td style="font-size:15px;color:${TEXT};line-height:1.7;font-family:${FONT};">${step}</td>
           </tr>
         </table>
       </td>
@@ -803,18 +825,15 @@ export function resourceDownloadEmail(
   `).join("");
 
   const html = wrapper(`
-    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT_SANS};">Hey ${name || "there"},</p>
+    ${heroCard(`Your download is ready, ${name || "there"}.`, guide.headline)}
 
-    <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">Your Download Is Ready</p>
-    <p style="margin:0 0 4px;font-size:26px;font-weight:300;color:${NAVY};font-family:${FONT_SERIF};">${guide.headline}</p>
-
-    <p style="margin:16px 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};line-height:1.8;">${guide.intro}</p>
+    <p style="margin:16px 0 24px;font-size:15px;color:${MUTED};font-family:${FONT};line-height:1.8;">${guide.intro}</p>
 
     ${fileUrl ? cta("Download: " + resourceTitle, fileUrl) : ""}
 
     ${divider()}
 
-    <p style="margin:0 0 16px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT_SANS};">How to use this</p>
+    <p style="margin:0 0 16px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">How to use this</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
       ${stepsHtml}
@@ -824,7 +843,7 @@ export function resourceDownloadEmail(
 
     ${divider()}
 
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};line-height:1.8;">Got a question about your specific situation? We're happy to help — just reply to this email.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Got a question about your specific situation? We're happy to help — just reply to this email.</p>
 
     ${cta(guide.cta.text, guide.cta.url)}
 
@@ -864,15 +883,15 @@ export function newPropertyAgentEmail({
   const dashboardLink = `${BASE_URL}/agents/dashboard`;
 
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">New property just listed</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hey ${agentName || "there"} — a new property is available. Get your application link and start marketing it.</p>
+    ${heroCard(`New listing — ${propertyAddress}`, `${propertyCity} · ${bedrooms} bed · $${price.toLocaleString()}/mo`)}
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
-      <tr><td style="padding:24px;">
-        <p style="margin:0 0 4px;font-size:13px;color:${MUTED};font-family:${FONT_SANS};text-transform:uppercase;letter-spacing:0.08em;">Property</p>
-        <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:${TEXT};font-family:${FONT_SANS};">${propertyAddress}, ${propertyCity}</p>
-        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT};">Hey ${agentName || "there"} — a new property is available. Get your application link and start marketing it.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_CARD};border:1px solid ${BORDER};border-radius:20px;margin:0 0 24px;">
+      <tr><td style="padding:24px 28px;">
+        <p style="margin:0 0 4px;font-size:13px;color:${MUTED};font-family:${FONT};text-transform:uppercase;letter-spacing:0.08em;">Property</p>
+        <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:${TEXT};font-family:${FONT};">${propertyAddress}, ${propertyCity}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};">
           <strong>$${price.toLocaleString()}/mo</strong> &nbsp;·&nbsp; ${bedrooms} bed &nbsp;·&nbsp; ${bathrooms} bath
         </p>
       </td></tr>
@@ -880,7 +899,7 @@ export function newPropertyAgentEmail({
 
     ${cta("Open Agent Dashboard", dashboardLink)}
 
-    <p style="margin:24px 0 0;font-size:13px;color:${MUTED};font-family:${FONT_SANS};text-align:center;">Your unique application link: <a href="${applyLink}" style="color:${CRIMSON};">${applyLink}</a></p>
+    <p style="margin:24px 0 0;font-size:13px;color:${MUTED};font-family:${FONT};text-align:center;">Your unique application link: <a href="${applyLink}" style="color:${CRIMSON};">${applyLink}</a></p>
 
     ${divider()}
     ${signoff()}
@@ -904,20 +923,20 @@ export function applicationReceivedAgentEmail({
   applicationId: string;
 }): string {
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">New application received</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hey ${agentName || "there"} — a tenant just submitted an application for one of your properties.</p>
+    ${heroCard("New application received", `${tenantName} applied for ${propertyAddress}`)}
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
-      <tr><td style="padding:24px;">
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Applicant:</strong> ${tenantName}</p>
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Email:</strong> ${tenantEmail}</p>
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Phone:</strong> ${tenantPhone}</p>
-        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Property:</strong> ${propertyAddress}</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT};">Hey ${agentName || "there"} — a tenant just submitted an application for one of your properties.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_CARD};border:1px solid ${BORDER};border-radius:20px;margin:0 0 24px;">
+      <tr><td style="padding:24px 28px;">
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Applicant:</strong> ${tenantName}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Email:</strong> ${tenantEmail}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Phone:</strong> ${tenantPhone}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Property:</strong> ${propertyAddress}</p>
       </td></tr>
     </table>
 
-    <p style="margin:0 0 24px;font-size:14px;color:${MUTED};font-family:${FONT_SANS};">Documents are being processed. You'll hear from Ebin once the screening report is ready. Application ID: <code>${applicationId}</code></p>
+    <p style="margin:0 0 24px;font-size:14px;color:${MUTED};font-family:${FONT};">Documents are being processed. You'll hear from Ebin once the screening report is ready. Application ID: <code>${applicationId}</code></p>
 
     ${cta("View Your Dashboard", `${BASE_URL}/agents/dashboard`)}
 
@@ -943,16 +962,15 @@ export function applicationEbinReviewEmail({
   const scoreColor = aiScore >= 7 ? "#0D6E5A" : aiScore >= 5 ? "#B45309" : "#B91C1C";
 
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Application ready for review</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">A screening report has been generated. Your decision is needed.</p>
+    <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">Application ready for review</p>
+    <p style="margin:0 0 28px;font-size:15px;color:${MUTED};font-family:${FONT};">A screening report has been generated. Your decision is needed.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:8px;margin:0 0 24px;">
-      <tr><td style="padding:24px;">
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Applicant:</strong> ${tenantName}</p>
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Property:</strong> ${propertyAddress}</p>
-        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>Referred by:</strong> ${agentName}</p>
-        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT_SANS};"><strong>AI Score:</strong> <span style="color:${scoreColor};font-weight:700;">${aiScore}/10</span></p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_CARD};border:1px solid ${BORDER};border-radius:20px;margin:0 0 24px;">
+      <tr><td style="padding:24px 28px;">
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Applicant:</strong> ${tenantName}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Property:</strong> ${propertyAddress}</p>
+        <p style="margin:0 0 12px;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>Referred by:</strong> ${agentName}</p>
+        <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};"><strong>AI Score:</strong> <span style="color:${scoreColor};font-weight:700;">${aiScore}/10</span></p>
       </td></tr>
     </table>
 
@@ -972,12 +990,11 @@ export function applicationApprovedTenantEmail({
   propertyAddress: string;
 }): string {
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Your application has been approved</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">We're pleased to let you know that your application for <strong>${propertyAddress}</strong> has been approved.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Someone from our team will be in touch shortly with next steps — lease signing, move-in details, and first/last month's rent collection.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">If you have any questions in the meantime, just reply to this email.</p>
+    ${heroCard(`You're approved, ${tenantName}!`, propertyAddress)}
+
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">We're pleased to let you know that your application for <strong>${propertyAddress}</strong> has been approved.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">Someone from our team will be in touch shortly with next steps — lease signing, move-in details, and first/last month's rent collection.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">If you have any questions in the meantime, just reply to this email.</p>
 
     ${divider()}
     ${signoff()}
@@ -993,11 +1010,10 @@ export function applicationRejectedTenantEmail({
   propertyAddress: string;
 }): string {
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Application update</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Thank you for applying for <strong>${propertyAddress}</strong>. After reviewing your application, we are not able to move forward at this time.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">We appreciate your interest in Prospera Properties and wish you all the best in your search.</p>
+    <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">Application update</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">Hi ${tenantName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">Thank you for applying for <strong>${propertyAddress}</strong>. After reviewing your application, we are not able to move forward at this time.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">We appreciate your interest in Prospera Properties and wish you all the best in your search.</p>
 
     ${divider()}
     ${signoff()}
@@ -1025,10 +1041,9 @@ export function applicationStatusAgentEmail({
     : `<strong>${tenantName}</strong>'s application for <strong>${propertyAddress}</strong> was not approved at this time. The tenant has been notified.`;
 
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">${heading}</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT_SANS};">Hi ${agentName},</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">${body}</p>
+    <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">${heading}</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT};">Hi ${agentName},</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">${body}</p>
 
     ${cta("View Application", `${BASE_URL}/admin/applications/${applicationId}`)}
 
@@ -1048,12 +1063,11 @@ export function agentFollowUpEmail({
   agentName: string;
 }): string {
   return wrapper(`
-    ${divider()}
-    <h2 style="margin:0 0 8px;font-size:26px;font-weight:400;color:${NAVY};font-family:${FONT_SERIF};">Following up on your application</h2>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Hi ${tenantName},</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">Just checking in on your application for <strong>${propertyAddress}</strong>. We've received everything and your file is currently under review.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">You'll hear from us as soon as a decision has been made. If you have any questions in the meantime, feel free to reply to this email.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT_SANS};">— ${agentName}, Prospera Properties</p>
+    ${heroCard(`Hi ${tenantName},`, "Following up on your application")}
+
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">Just checking in on your application for <strong>${propertyAddress}</strong>. We've received everything and your file is currently under review.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">You'll hear from us as soon as a decision has been made. If you have any questions in the meantime, feel free to reply to this email.</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">— ${agentName}, Prospera Properties</p>
 
     ${divider()}
     ${signoff()}
