@@ -18,8 +18,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Fetch first 5 rows of rent tracker — no filter, just raw data
-  const res = await fetch(`${NOTION_API}/databases/${DB.rentTracker}/query`, {
+  const target = new URL(req.url).searchParams.get("db") ?? "rent";
+  const dbId = target === "expenses" ? DB.expenses : DB.rentTracker;
+
+  // Fetch first 5 rows — no filter, just raw data
+  const res = await fetch(`${NOTION_API}/databases/${dbId}/query`, {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({ page_size: 5 }),
@@ -32,7 +35,7 @@ export async function GET(req: NextRequest) {
 
   const data = await res.json();
 
-  // Return just the property names + values of the first page
+  // Return just the property names + values
   const rows = data.results.map((page: any) => {
     const props: Record<string, any> = {};
     for (const [key, val] of Object.entries(page.properties as Record<string, any>)) {
@@ -41,5 +44,5 @@ export async function GET(req: NextRequest) {
     return { id: page.id, properties: props };
   });
 
-  return NextResponse.json({ count: rows.length, rows });
+  return NextResponse.json({ db: target, count: rows.length, rows });
 }
