@@ -18,8 +18,28 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const target = new URL(req.url).searchParams.get("db") ?? "rent";
-  const dbId = target === "expenses" ? DB.expenses : DB.rentTracker;
+  const target = new URL(req.url).searchParams.get("db") ?? "list";
+
+  // List all databases the integration can access
+  if (target === "list") {
+    const res = await fetch(`${NOTION_API}/search`, {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify({ filter: { value: "database", property: "object" }, page_size: 20 }),
+    });
+    if (!res.ok) return NextResponse.json({ error: await res.text() }, { status: 500 });
+    const data = await res.json();
+    const dbs = data.results.map((d: any) => ({
+      id: d.id,
+      title: d.title?.[0]?.plain_text ?? "(untitled)",
+      url: d.url,
+    }));
+    return NextResponse.json({ databases: dbs });
+  }
+
+  const dbId = target === "expenses" ? DB.expenses
+    : target === "rent" ? DB.rentTracker
+    : target; // allow raw ID
 
   // Fetch first 5 rows — no filter, just raw data
   const res = await fetch(`${NOTION_API}/databases/${dbId}/query`, {
@@ -35,7 +55,6 @@ export async function GET(req: NextRequest) {
 
   const data = await res.json();
 
-  // Return just the property names + values
   const rows = data.results.map((page: any) => {
     const props: Record<string, any> = {};
     for (const [key, val] of Object.entries(page.properties as Record<string, any>)) {
