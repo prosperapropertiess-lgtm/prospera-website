@@ -143,12 +143,23 @@ function StepCard({
   children?: React.ReactNode;
   isActive?: boolean;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const icon = status === "complete" ? "✓" : status === "active" ? `${num}` : "🔒";
   const iconColor = status === "complete" ? GREEN : status === "active" ? ACCENT : TEXT_MUT;
   const iconBg = status === "complete" ? `${GREEN}20` : status === "active" ? `${ACCENT}20` : "rgba(255,255,255,0.04)";
 
+  // Scroll into view when this step becomes active
+  useEffect(() => {
+    if (status === "active" && cardRef.current) {
+      setTimeout(() => {
+        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    }
+  }, [status]);
+
   return (
     <div
+      ref={cardRef}
       style={{
         backgroundColor: SURFACE,
         border: `1px solid ${isActive ? BORDER_ACT : BORDER}`,
@@ -204,6 +215,7 @@ function StepCard({
 function Step2Form({ token, onComplete }: { token: string; onComplete: () => void }) {
   const [form, setForm] = useState({ owner_name: "", owner_email: "", owner_phone: "" });
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
 
   const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
@@ -222,7 +234,8 @@ function Step2Form({ token, onComplete }: { token: string; onComplete: () => voi
     });
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Failed"); setSaving(false); return; }
-    onComplete();
+    setSaved(true);
+    setTimeout(onComplete, 400);
   }
 
   return (
@@ -244,7 +257,7 @@ function Step2Form({ token, onComplete }: { token: string; onComplete: () => voi
           opacity: saving ? 0.7 : 1, letterSpacing: "-0.01em",
         }}
       >
-        {saving ? "Saving…" : "Save Owner Info →"}
+        {saved ? "✓ Saved" : saving ? "Saving…" : "Save Owner Info →"}
       </button>
     </form>
   );
@@ -257,6 +270,7 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
     num_units: "", approx_monthly_rent: "", fee_structure: "", fee_amount: "", property_notes: "",
   });
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
 
   const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
@@ -277,7 +291,8 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
     });
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Failed"); setSaving(false); return; }
-    onComplete();
+    setSaved(true);
+    setTimeout(onComplete, 400);
   }
 
   return (
@@ -346,7 +361,7 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
           opacity: saving ? 0.7 : 1, letterSpacing: "-0.01em",
         }}
       >
-        {saving ? "Saving + Sending Email…" : "Save Property & Send Email 1 →"}
+        {saved ? "✓ Saved — Email 1 sent" : saving ? "Saving + Sending Email…" : "Save Property & Send Email 1 →"}
       </button>
     </form>
   );
