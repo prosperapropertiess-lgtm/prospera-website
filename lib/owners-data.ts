@@ -33,6 +33,7 @@ export interface MonthlySnapshot {
   rentCollected: number;
   expenses: number;
   net: number;
+  expensesByCategory: Record<string, number>; // e.g. { "Utilities": 112, "Management Fee": 248 }
 }
 
 export interface PropertyDashboard {
@@ -100,7 +101,13 @@ function buildHistory(
     const rentCollected = rentRows.reduce((s, r) => s + effectivePaid(r), 0);
     const expenses = propExpenses.reduce((s, e) => s + (e.amount ?? 0), 0);
 
-    snapshots.push({ month: m, year: y, rentDue, rentCollected, expenses, net: rentCollected - expenses });
+    const expensesByCategory: Record<string, number> = {};
+    for (const e of propExpenses) {
+      const cat = e.category || "Other";
+      expensesByCategory[cat] = (expensesByCategory[cat] ?? 0) + (e.amount ?? 0);
+    }
+
+    snapshots.push({ month: m, year: y, rentDue, rentCollected, expenses, net: rentCollected - expenses, expensesByCategory });
   }
 
   return snapshots;

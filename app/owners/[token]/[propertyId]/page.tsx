@@ -7,6 +7,7 @@ import { IncomeChart } from "@/components/owners/IncomeChart";
 import { TenantCard } from "@/components/owners/TenantCard";
 import { MaintenanceList } from "@/components/owners/MaintenanceList";
 import { FinancialTable } from "@/components/owners/FinancialTable";
+import { UtilityChart } from "@/components/owners/UtilityChart";
 import OwnerHeader from "@/components/owners/OwnerHeader";
 
 interface Props {
@@ -211,6 +212,13 @@ export default async function PropertyDetailPage({ params }: Props) {
                 6-Month Overview
               </p>
               <IncomeChart history={history} />
+            </div>
+
+            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(96,165,250,0.15)", borderRadius: "16px", padding: "20px", marginBottom: "20px" }}>
+              <p style={{ color: "rgba(96,165,250,0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                Utility Costs — 12 Months
+              </p>
+              <UtilityChart history={history} />
             </div>
 
             <div
