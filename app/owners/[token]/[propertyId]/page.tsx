@@ -69,7 +69,10 @@ export default async function PropertyDetailPage({ params }: Props) {
   const monthExpenses = expensesCurrentMonth.reduce((s, e) => s + (e.amount ?? 0), 0);
   const monthNet = monthRentCollected - monthExpenses;
   const leaseCd = leaseCountdownFull(nextLeaseExpiry);
-  const firstNames = record.owner_names.split(/[&,]/)[0].trim().split(" ")[0];
+  const firstNames = record.owner_names
+    .split(/\s*[&,]\s*/)
+    .map((n: string) => n.trim().split(" ")[0])
+    .join(" & ");
 
   return (
     <>

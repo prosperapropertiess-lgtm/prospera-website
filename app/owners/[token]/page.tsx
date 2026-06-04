@@ -38,7 +38,11 @@ export default async function OwnerOverviewPage({ params }: Props) {
     );
   }
 
-  const firstNames = record.owner_names.split(/[&,]/)[0].trim().split(" ")[0];
+  // "Randy & Tina Lahey" → "Randy & Tina"
+  const firstNames = record.owner_names
+    .split(/\s*[&,]\s*/)
+    .map((n: string) => n.trim().split(" ")[0])
+    .join(" & ");
   const multiProperty = dashboard.properties.length > 1;
 
   return (

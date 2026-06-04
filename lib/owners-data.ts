@@ -263,16 +263,24 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
 }
 
 /**
- * Cache-only loader — Notion is never hit on page load.
- * Data is refreshed exclusively by the weekly cron (Mondays 9am ET).
- * Returns the cached dashboard, or throws if cache is empty (first run).
+ * Cache-first loader.
+ * - If cache exists → serve it instantly (Notion never hit on page load)
+ * - If cache is empty (first ever visit) → hit Notion once, write cache, serve result
+ * Weekly cron keeps the cache fresh after that.
  */
 export async function getDashboard(
   token: string,
-  _notionOwnerIds: string[],
-  _ownerNames: string
+  notionOwnerIds: string[],
+  ownerNames: string
 ): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
   const cached = await getCachedDashboard(token);
-  if (!cached) throw new Error("Cache not yet populated — run the cache refresh cron first");
-  return { dashboard: cached, isStale: false };
+
+  if (cached) {
+    return { dashboard: cached, isStale: false };
+  }
+
+  // Cache empty — first run, hit Notion and populate
+  const fresh = await buildOwnerDashboard(notionOwnerIds, ownerNames);
+  cacheDashboard(token, fresh).catch(() => {});
+  return { dashboard: fresh, isStale: false };
 }
