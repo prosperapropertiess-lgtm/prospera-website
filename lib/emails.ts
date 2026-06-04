@@ -67,10 +67,12 @@ function wrapper(content: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="supported-color-schemes" content="light only" />
   <title>Prospera Properties</title>
   <style>
-    :root { color-scheme: light dark; }
-    body { background-color: ${NAVY} !important; }
+    :root { color-scheme: light only; supported-color-schemes: light only; }
+    body { background-color: ${NAVY} !important; margin: 0 !important; padding: 0 !important; }
     @media only screen and (max-width: 620px) {
       .outer-pad { padding: 16px 8px !important; }
       .body-pad   { padding: 32px 24px !important; }

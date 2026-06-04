@@ -320,10 +320,12 @@ export function buildEmailHTML(
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="supported-color-schemes" content="light only"/>
 <title>${narrative.subject}</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { background-color: #1F2F3A !important; }
+  :root { color-scheme: light only; supported-color-schemes: light only; }
+  body { background-color: #1F2F3A !important; margin: 0 !important; padding: 0 !important; }
 </style>
 </head>
 <body style="background:#1F2F3A;margin:0;padding:0;-webkit-font-smoothing:antialiased;" bgcolor="#1F2F3A">
