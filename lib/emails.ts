@@ -64,12 +64,19 @@ function md(text: string): string {
 function wrapper(content: string): string {
   const year = new Date().getFullYear();
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:light !important;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
   <title>Prospera Properties</title>
   <style>
+    :root { color-scheme: light only !important; }
+    body { color-scheme: light only !important; }
+    @media (prefers-color-scheme: dark) {
+      body, table, td, div, p, a { background-color: inherit !important; color: inherit !important; }
+    }
     @media only screen and (max-width: 620px) {
       .outer-pad { padding: 16px 8px !important; }
       .body-pad   { padding: 32px 24px !important; }
@@ -79,11 +86,11 @@ function wrapper(content: string): string {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color-scheme:light !important;" bgcolor="${BG_OUTER}">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
       <td class="outer-pad" align="center" style="padding:24px 16px;">
-        <table cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;background-color:#fbf9f6;overflow:hidden;">
+        <table cellpadding="0" cellspacing="0" role="presentation" bgcolor="#fbf9f6" style="max-width:600px;width:100%;background-color:#fbf9f6;overflow:hidden;">
 
           <!-- Header -->
           <tr>

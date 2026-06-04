@@ -315,13 +315,22 @@ export function buildEmailHTML(
   void ownerNames;
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:light !important;">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<meta name="color-scheme" content="light"/>
+<meta name="supported-color-schemes" content="light"/>
 <title>${narrative.subject}</title>
+<style>
+  :root { color-scheme: light only !important; }
+  body { color-scheme: light only !important; }
+  @media (prefers-color-scheme: dark) {
+    body, table, td, div, p, a { background-color: inherit !important; color: inherit !important; }
+  }
+</style>
 </head>
-<body style="background:#F7F5F2;margin:0;padding:0;-webkit-font-smoothing:antialiased;">
+<body style="background:#F7F5F2;margin:0;padding:0;-webkit-font-smoothing:antialiased;color-scheme:light !important;" bgcolor="#F7F5F2">
 
 ${draftBannerHtml}
 <!-- Email Container -->
