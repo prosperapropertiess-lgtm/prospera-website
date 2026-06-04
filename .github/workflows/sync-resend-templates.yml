@@ -1,0 +1,21 @@
+name: Sync Resend Templates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/emails.ts'
+      - 'lib/owner-report-email.ts'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npx tsx scripts/update-resend-templates.ts
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
