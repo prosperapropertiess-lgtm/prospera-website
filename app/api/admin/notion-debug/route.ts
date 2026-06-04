@@ -41,6 +41,15 @@ export async function GET(req: NextRequest) {
     : target === "rent" ? DB.rentTracker
     : target; // allow raw ID
 
+  // Return schema only
+  if (new URL(req.url).searchParams.get("schema") === "1") {
+    const sr = await fetch(`${NOTION_API}/databases/${dbId}`, { headers: headers() });
+    if (!sr.ok) return NextResponse.json({ error: await sr.text() }, { status: 500 });
+    const sd = await sr.json();
+    const schema = Object.entries(sd.properties as Record<string, any>).map(([name, val]) => ({ name, type: val.type }));
+    return NextResponse.json({ db: target, schema });
+  }
+
   // Fetch first 5 rows — no filter, just raw data
   const res = await fetch(`${NOTION_API}/databases/${dbId}/query`, {
     method: "POST",
