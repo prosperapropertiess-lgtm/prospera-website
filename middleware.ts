@@ -29,6 +29,13 @@ async function verifySessionToken(token: string): Promise<boolean> {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // ── www redirect — enforce canonical domain ───────────────────────────────
+  const host = req.headers.get("host") ?? "";
+  if (host === "prosperaproperties.co") {
+    const url = `https://www.prosperaproperties.co${pathname}${req.nextUrl.search}`;
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // ── Coming soon curtain ───────────────────────────────────────────────────
   const siteLive = process.env.SITE_LIVE === "true";
   const rawToken = req.cookies.get("admin_session")?.value ?? "";

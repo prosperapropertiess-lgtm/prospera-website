@@ -118,6 +118,7 @@ const mockNarrative: ClaudeNarrative = {
     ctaLabel: "Reply to Confirm Renewal",
   },
   closingNote: "As always, feel free to reply to this email or call me directly — happy to walk through anything.",
+  joke: "Why did the tenant bring a ladder to the lease signing? Because they heard the rent was going through the roof!",
 };
 
 // ── Static templates (PATCH by known ID) ──────────────────────────────────

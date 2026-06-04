@@ -15,6 +15,7 @@ const RentActivityToast = dynamic(() => import("@/components/ui/RentActivityToas
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
+  const isOwners = pathname?.startsWith("/owners");
   const isLP = pathname?.startsWith("/lp");
 
   useEffect(() => {
@@ -48,13 +49,13 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <ScrollProgress />
-      {!isAdmin && !isLP && <Navbar />}
+      {!isAdmin && !isOwners && !isLP && <Navbar />}
       <main className="flex-1">{children}</main>
-      {!isAdmin && !isLP && <Footer />}
-      {!isAdmin && !isLP && <PopupController />}
-      {!isAdmin && !isLP && <ChatWidget />}
-      {!isAdmin && !isLP && <StickyBottomCTA />}
-      {!isAdmin && !isLP && <RentActivityToast />}
+      {!isAdmin && !isOwners && !isLP && <Footer />}
+      {!isAdmin && !isOwners && !isLP && <PopupController />}
+      {!isAdmin && !isOwners && !isLP && <ChatWidget />}
+      {!isAdmin && !isOwners && !isLP && <StickyBottomCTA />}
+      {!isAdmin && !isOwners && !isLP && <RentActivityToast />}
     </>
   );
 }

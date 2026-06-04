@@ -21,8 +21,8 @@ You write narrative content for monthly property update emails from Ebin Jaison 
 
 Return ONLY valid JSON matching this exact structure (no markdown, no extra text):
 {
-  "subject": "string — e.g. 27 Horton St — May 2025 Monthly Update from Prospera Properties",
-  "openingSentence": "string — 1 warm reassuring sentence about overall property status this month",
+  "subject": "string — e.g. 27 Horton St — June 2026 Monthly Update from Prospera Properties",
+  "openingSentence": "string — 1 warm specific sentence about this month's portfolio performance",
   "lookingAhead": [
     { "title": "string", "description": "string — specific, actionable, 1-2 sentences" }
   ],
@@ -31,14 +31,16 @@ Return ONLY valid JSON matching this exact structure (no markdown, no extra text
     "body": "string — specific detail, max 2 sentences",
     "ctaLabel": "string — e.g. Reply to Confirm, Approve Renewal"
   },
-  "closingNote": "string — 1 warm sentence inviting questions"
+  "closingNote": "string — 1 warm sentence",
+  "joke": "string — one short punchy joke about landlords, tenants, or real estate. Must be original and actually funny."
 }
 
 Rules:
 - criticalAlert: include ONLY if there is a lease expiring within 90 days or urgent/critical maintenance — otherwise use JSON null (not a string)
 - lookingAhead: 2–3 items, specific to this property and month
 - Use real names and details from the data — never placeholders
-- openingSentence: upbeat and specific, not generic ("things are going well")
+- openingSentence: upbeat and specific, not generic
+- joke: keep it clean, relevant to real estate/landlords/tenants, max 2 sentences
 `.trim();
 
 // ── Data summary for Claude ────────────────────────────────────────────────
@@ -168,15 +170,18 @@ export async function GET(req: NextRequest) {
             lookingAhead: [{ title: "Review Report", description: "Please review the details below and reach out with any questions." }],
             criticalAlert: null,
             closingNote: "As always, don't hesitate to reach out.",
+            joke: "Why don't landlords ever get lost? Because they always know their way around the property!",
           };
         }
 
-        const htmlBody = buildEmailHTML(bundle, narrative, ownerNames);
+        const htmlBody = buildEmailHTML(bundle, narrative, ownerNames, false);
 
+        const ownerEmails = [...new Set(bundle.owners.map(o => o.email).filter(Boolean))];
         await resend.emails.send({
           from: "Prospera Reports <hello@prosperaproperties.co>",
-          to: "prosperapropertiess@gmail.com",
-          subject: `[DRAFT] ${narrative.subject}`,
+          to: ownerEmails,
+          cc: ["prosperapropertiess@gmail.com"],
+          subject: narrative.subject,
           html: htmlBody,
         });
 
@@ -202,7 +207,7 @@ export async function GET(req: NextRequest) {
             ytdEntries: pr.rentYTD.length,
           };
         });
-        results.push({ owners: ownerNames, status: "draft sent to Ebin", financials } as any);
+        results.push({ owners: ownerNames, status: `sent to ${ownerEmails.join(", ")}`, financials } as any);
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : String(err);
         results.push({ owners: ownerNames, status: "error", error: message });
