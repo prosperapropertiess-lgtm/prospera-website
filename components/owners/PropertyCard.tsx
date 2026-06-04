@@ -50,7 +50,8 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
       whileHover={{ y: -4, transition: { duration: 0.3 } }}
     >
@@ -164,7 +165,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
               />
               <StatChip
                 icon="trending_up"
-                label={`Net $${ytdNet.toLocaleString()} YTD`}
+                label={`$${ytdNet.toLocaleString()} in pocket`}
                 color={ytdNet >= 0 ? "rgba(134,239,172,0.9)" : "rgba(248,113,113,0.9)"}
               />
               {openIssuesCount > 0 && (
