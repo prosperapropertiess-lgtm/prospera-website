@@ -47,6 +47,7 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
             const collected = row.rentCollected;
             const collectionRate = row.rentDue > 0 ? collected / row.rentDue : 1;
             const rateColor = collectionRate >= 1 ? "#22c55e" : collectionRate >= 0.8 ? "#f59e0b" : "#ef4444";
+            const showYear = i === 0 || row.year !== history[i - 1].year;
 
             return (
               <tr
@@ -57,7 +58,7 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
                 }}
               >
                 <td style={{ padding: "11px 16px", color: isCurrent ? "white" : "rgba(255,255,255,0.55)", fontWeight: isCurrent ? 600 : 400, whiteSpace: "nowrap" }}>
-                  {MONTH_ABBR[row.month]} {row.year !== currentYear ? row.year : ""}
+                  {MONTH_ABBR[row.month]} {showYear ? <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px" }}>{row.year}</span> : ""}
                   {isCurrent && (
                     <span style={{ marginLeft: "6px", fontSize: "10px", color: "rgba(139,32,48,0.8)", fontWeight: 700 }}>
                       NOW

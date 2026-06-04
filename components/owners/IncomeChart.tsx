@@ -48,12 +48,14 @@ function CustomTooltip({ active, payload, label }: any) {
 }
 
 export function IncomeChart({ history }: Props) {
-  const data = history.slice(-6).map(s => ({
-    month: MONTH_ABBR[s.month] ?? s.month,
-    "Rent": s.rentCollected,
-    "Expenses": s.expenses,
-    "Net": s.net,
-  }));
+  const slice = history.slice(-6);
+  const data = slice.map((s, i) => {
+    const showYear = i === 0 || s.year !== slice[i - 1].year;
+    const label = showYear
+      ? `${MONTH_ABBR[s.month] ?? s.month} '${String(s.year).slice(2)}`
+      : MONTH_ABBR[s.month] ?? s.month;
+    return { month: label, "Rent": s.rentCollected, "Expenses": s.expenses, "Net": s.net };
+  });
 
   return (
     <ResponsiveContainer width="100%" height={220}>

@@ -66,16 +66,15 @@ function CustomTooltip({ active, payload, label }: any) {
 
 export function UtilityChart({ history }: Props) {
   // Extract utility cost per month
-  const data = history.map(s => {
+  const data = history.map((s, i) => {
     const utilityTotal = Object.entries(s.expensesByCategory)
       .filter(([cat]) => isUtility(cat))
       .reduce((sum, [, amount]) => sum + amount, 0);
-    return {
-      month: MONTH_ABBR[s.month] ?? s.month,
-      fullMonth: s.month,
-      year: s.year,
-      Utilities: utilityTotal,
-    };
+    const showYear = i === 0 || s.year !== history[i - 1].year;
+    const label = showYear
+      ? `${MONTH_ABBR[s.month] ?? s.month} '${String(s.year).slice(2)}`
+      : MONTH_ABBR[s.month] ?? s.month;
+    return { month: label, fullMonth: s.month, year: s.year, Utilities: utilityTotal };
   });
 
   // Compute 3-month rolling average
