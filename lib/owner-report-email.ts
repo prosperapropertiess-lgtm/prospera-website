@@ -201,8 +201,8 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td style="vertical-align:middle;">
-                <p style="font-family:${FB};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.55);margin:0 0 3px;">Year-to-Date Rent Collected</p>
-                <p style="font-family:${FH};font-size:20px;font-weight:700;color:${WHITE};margin:0;">${formatDollars(ytdRent)}</p>
+                <p style="font-family:${FB};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.55);margin:0 0 3px;">YTD Since Managed</p>
+                <p style="font-family:${FH};font-size:26px;font-weight:700;color:${WHITE};margin:0;letter-spacing:-0.01em;">${formatDollars(ytdRent)}</p>
               </td>
               <td style="text-align:right;vertical-align:middle;">
                 <span style="font-family:${FB};font-size:10px;font-weight:700;color:${WHITE};background:rgba(255,255,255,0.12);padding:4px 12px;border-radius:99px;white-space:nowrap;">Jan–${month}</span>
@@ -243,14 +243,20 @@ export function buildEmailHTML(
     ...narrative.lookingAhead.map(i => ({ title: i.title, desc: i.description })),
   ];
 
-  const actionRows = actionItems.map((item, i) => `
+  const actionRows = actionItems.slice(0, 3).map((item, i) => `
     <tr>
-      <td style="padding:${i > 0 ? "12px 0 0" : "0"};vertical-align:top;width:14px;padding-right:12px;">
-        <div style="width:6px;height:6px;border-radius:99px;background:${BURGUNDY};margin-top:6px;"></div>
-      </td>
-      <td style="padding:${i > 0 ? "12px 0 0" : "0 0 12px"};border-bottom:${i < actionItems.length - 1 ? `1px solid rgba(139,32,48,0.1)` : "none"};">
-        <p style="font-family:${FB};font-size:13px;font-weight:600;color:${NAVY};margin:0 0 2px;">${item.title}</p>
-        <p style="font-family:${FB};font-size:12px;color:${MUTED};margin:0;line-height:1.5;">${item.desc}</p>
+      <td style="padding:${i > 0 ? "14px" : "0"} 0 14px;border-bottom:${i < Math.min(actionItems.length, 3) - 1 ? `1px solid rgba(139,32,48,0.1)` : "none"};">
+        <table cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td style="vertical-align:top;width:8px;padding-right:14px;padding-top:5px;">
+              <div style="width:7px;height:7px;border-radius:99px;background:${BURGUNDY};"></div>
+            </td>
+            <td>
+              <p style="font-family:${FH};font-size:16px;font-weight:600;color:${NAVY};margin:0 0 4px;">${item.title}</p>
+              <p style="font-family:${FB};font-size:13px;color:${MUTED};margin:0;line-height:1.6;">${item.desc}</p>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>`).join("");
 
@@ -289,14 +295,15 @@ ${draftBannerHtml}
 
         <!-- ── HEADER ── -->
         <tr>
-          <td style="padding:48px 24px 28px;text-align:center;">
-            <div style="display:inline-block;background:${WHITE};border-radius:12px;padding:8px 16px;margin-bottom:14px;line-height:0;">
+          <td style="padding:40px 24px 28px;text-align:center;">
+            <div style="display:inline-block;background:${WHITE};border-radius:12px;padding:8px 16px;margin-bottom:20px;line-height:0;">
               <img alt="Prospera Properties" src="https://www.prosperaproperties.co/logo.png"
                 style="height:32px;width:auto;display:block;"
                 onerror="this.style.display='none'"/>
             </div>
-            <br/>
-            <span style="font-family:${FB};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:${BURGUNDY};">Portfolio Report</span>
+            <p style="font-family:${FB};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:${BURGUNDY};margin:0 0 10px;">Portfolio Report</p>
+            <!-- Month — prominent -->
+            <p style="font-family:${FH};font-size:42px;font-weight:700;color:${NAVY};margin:0;letter-spacing:-0.02em;line-height:1;">${month} ${year}</p>
           </td>
         </tr>
 
@@ -304,8 +311,7 @@ ${draftBannerHtml}
         <tr>
           <td style="padding:0 24px 24px;">
 
-            <h1 style="font-family:${FH};font-size:28px;font-weight:600;color:${NAVY};text-align:center;margin:0 0 6px;letter-spacing:-0.01em;">Portfolio Performance</h1>
-            <p style="font-family:${FB};font-size:14px;color:${MUTED};text-align:center;margin:0 0 24px;">${month} ${year} &bull; Prepared for ${ownerFirstNames}</p>
+            <p style="font-family:${FB};font-size:13px;color:${MUTED};text-align:center;margin:0 0 24px;">Prepared for ${ownerFirstNames} &bull; Prospera Properties</p>
 
             <!-- Dark summary card -->
             <table width="100%" cellpadding="0" cellspacing="0" style="background:${NAVY};border-radius:28px;margin-bottom:14px;">
@@ -367,7 +373,7 @@ ${draftBannerHtml}
             <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(139,32,48,0.04);border:1px solid rgba(139,32,48,0.18);border-radius:20px;">
               <tr>
                 <td style="padding:24px 28px;">
-                  <p style="font-family:${FH};font-size:18px;font-weight:500;color:${NAVY};margin:0 0 16px;">Actions Required</p>
+                  <p style="font-family:${FH};font-size:20px;font-weight:600;color:${BURGUNDY};margin:0 0 20px;">Actions Required</p>
                   <table width="100%" cellpadding="0" cellspacing="0">${actionRows}</table>
                   ${narrative.criticalAlert ? `
                   <div style="margin-top:20px;text-align:center;">

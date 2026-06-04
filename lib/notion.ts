@@ -309,8 +309,10 @@ export async function fetchExpensesForDateRange(
   endDate: string
 ): Promise<Expense[]> {
   const pages = await queryDatabase(DB.expenses, {
-    property: "Date",
-    date: { on_or_after: startDate, on_or_before: endDate },
+    and: [
+      { property: "Date", date: { on_or_after: startDate } },
+      { property: "Date", date: { on_or_before: endDate } },
+    ],
   });
   return pages
     .filter(p => {

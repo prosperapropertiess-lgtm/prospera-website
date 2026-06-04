@@ -120,12 +120,11 @@ export async function GET(req: NextRequest) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  // Report on the previous month
+  // Report on the current month
   const now = new Date();
-  const reportDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
   const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const month = MONTHS[reportDate.getMonth()];
-  const year = reportDate.getFullYear();
+  const month = MONTHS[now.getMonth()];
+  const year = now.getFullYear();
 
   const results: Array<{ owners: string; status: string; error?: string }> = [];
 
