@@ -16,6 +16,13 @@ const ACCENT     = "#8B2030";
 const GREEN      = "#22c55e";
 const AMBER      = "#f59e0b";
 
+interface ParsedLease {
+  tenants?: Array<{ name?: string; email?: string; unit?: string }>;
+  monthlyRent?: number | null;
+  leaseStart?: string | null;
+  leaseEnd?: string | null;
+}
+
 interface Session {
   token: string;
   current_step: number;
@@ -33,6 +40,7 @@ interface Session {
   property_notes: string | null;
   notion_owner_id: string | null;
   notion_property_id: string | null;
+  lease_parsed_data: ParsedLease | null;
   step2_completed_at: string | null;
   step3_completed_at: string | null;
   step4_completed_at: string | null;
@@ -529,42 +537,90 @@ export default function OnboardChecklist() {
             isActive={step === 4}
             summary={
               <div>
-                <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                  Owner form + lease parsing complete
-                </p>
+                {session.lease_parsed_data ? (
+                  <>
+                    <p style={{ margin: "0 0 4px", fontSize: 13, color: TEXT_SEC }}>
+                      {Array.isArray(session.lease_parsed_data.tenants)
+                        ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} · `
+                        : ""}
+                      {session.lease_parsed_data.monthlyRent
+                        ? `$${Number(session.lease_parsed_data.monthlyRent).toLocaleString()}/mo · `
+                        : ""}
+                      lease parsed
+                    </p>
+                    <p style={{ margin: 0, fontSize: 12, color: TEXT_MUT }}>
+                      ✓ Details form submitted · Notion tenants + rent tracker created
+                    </p>
+                  </>
+                ) : (
+                  <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
+                    Owner form + lease parsing complete
+                  </p>
+                )}
               </div>
             }
           >
             <div style={{ padding: "4px 0 8px" }}>
-              <p style={{ margin: "0 0 10px", fontSize: 14, color: TEXT_SEC, lineHeight: 1.6 }}>
-                Waiting for the owner to upload their lease and fill in the details form.
-              </p>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <a
-                  href={`/onboard/${token}/lease`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
-                    borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
-                  }}
-                >
-                  Preview lease upload page ↗
-                </a>
-                <a
-                  href={`/onboard/${token}/details`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
-                    borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
-                  }}
-                >
-                  Preview details form ↗
-                </a>
-              </div>
+              {session.lease_parsed_data ? (
+                <>
+                  {/* Lease uploaded, awaiting details form */}
+                  <div style={{
+                    display: "flex", alignItems: "center", gap: 10, marginBottom: 14,
+                    padding: "10px 14px", backgroundColor: "rgba(34,197,94,0.06)",
+                    border: "1px solid rgba(34,197,94,0.2)", borderRadius: 8,
+                  }}>
+                    <span style={{ fontSize: 13, color: GREEN }}>✓ Lease uploaded</span>
+                    <span style={{ fontSize: 12, color: TEXT_MUT }}>
+                      {Array.isArray(session.lease_parsed_data.tenants)
+                        ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} extracted`
+                        : "parsed"}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    <Link
+                      href={`/admin/onboard/${token}/review`}
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 6,
+                        backgroundColor: `${ACCENT}18`, border: `1px solid ${ACCENT}40`,
+                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: ACCENT, textDecoration: "none",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Review extracted fields →
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p style={{ margin: "0 0 10px", fontSize: 14, color: TEXT_SEC, lineHeight: 1.6 }}>
+                    Waiting for the owner to upload their lease and fill in the details form.
+                  </p>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    <a
+                      href={`/onboard/${token}/lease`}
+                      target="_blank" rel="noreferrer"
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 6,
+                        backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
+                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
+                      }}
+                    >
+                      Preview lease upload page ↗
+                    </a>
+                    <a
+                      href={`/onboard/${token}/details`}
+                      target="_blank" rel="noreferrer"
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 6,
+                        backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
+                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
+                      }}
+                    >
+                      Preview details form ↗
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
           </StepCard>
 
@@ -603,7 +659,7 @@ export default function OnboardChecklist() {
           <StepCard
             num={6} title="Keys & Access"
             status={stepStatus(6)}
-            completedAt={session.step6_data ? new Date().toISOString() : null}
+            completedAt={session.step6_data?._completed_at as string ?? null}
             isActive={step === 6}
             summary={
               <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
@@ -618,7 +674,7 @@ export default function OnboardChecklist() {
           <StepCard
             num={7} title="Photos & Inspection"
             status={stepStatus(7)}
-            completedAt={session.step7_data ? new Date().toISOString() : null}
+            completedAt={session.step8_completed_at}
             isActive={step === 7}
             summary={
               <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
@@ -636,9 +692,18 @@ export default function OnboardChecklist() {
             completedAt={session.step8_completed_at}
             isActive={step === 8}
             summary={
-              <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                Intro letters sent automatically
-              </p>
+              <div>
+                <p style={{ margin: "0 0 2px", fontSize: 13, color: TEXT_SEC }}>
+                  Intro letters sent automatically — auto-fired after Step 7
+                </p>
+                {session.lease_parsed_data?.tenants && (
+                  <p style={{ margin: 0, fontSize: 12, color: TEXT_MUT }}>
+                    {Array.isArray(session.lease_parsed_data.tenants)
+                      ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} notified`
+                      : "Tenants notified"}
+                  </p>
+                )}
+              </div>
             }
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "4px 0" }}>

@@ -2,7 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { createOwnerInNotion, createPropertyInNotion, createTenantInNotion, createRentTrackerSeries } from "@/lib/notion";
-import { onboardEmail1Welcome, onboardEmail3AgreementSigned } from "@/lib/emails";
+import {
+  onboardEmail1Welcome,
+  onboardEmail3AgreementSigned,
+  onboardEmail4KeysReceived,
+  onboardEmail5InspectionDone,
+  onboardEmail6TenantsNotified,
+  onboardEmail7FinancialSetup,
+  onboardEmail8Welcome,
+  onboardTenantIntroEmail,
+} from "@/lib/emails";
+import { updateNotionPage } from "@/lib/notion";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.prosperaproperties.co";
 
@@ -239,23 +249,96 @@ export async function POST(
   // ── Step 6: Keys & Access ─────────────────────────────────────
   if (step === 6) {
     await sb.from("onboarding_sessions").update({
-      step6_data: body,
+      step6_data: { ...body, _completed_at: new Date().toISOString() },
       current_step: 7,
     }).eq("token", token);
+
+    // Email 4 — keys received
+    if (session.owner_email) {
+      try {
+        const html = onboardEmail4KeysReceived({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          keyCount: body.num_keys ? Number(body.num_keys) : undefined,
+        });
+        await sendEmail(session.owner_email, "Keys received — your property is secure with us 🔑", html);
+      } catch (e) { console.error("Email 4 failed:", e); }
+    }
+
     return NextResponse.json({ ok: true, next_step: 7 });
   }
 
   // ── Step 7: Inspection ────────────────────────────────────────
   if (step === 7) {
+    const step8At = new Date().toISOString();
+
     await sb.from("onboarding_sessions").update({
       step7_data: body,
       current_step: 9,
-      step8_completed_at: new Date().toISOString(), // Step 8 auto-fires
+      step8_completed_at: step8At,
     }).eq("token", token);
 
-    // TODO: Step 8 auto-logic — send tenant intro letters (Phase 4)
+    // Email 5 — inspection done
+    if (session.owner_email) {
+      try {
+        const issues = body.issues ? String(body.issues).split("\n").filter(Boolean) : [];
+        const nextInspection = new Date();
+        nextInspection.setDate(nextInspection.getDate() + 90);
+        const html = onboardEmail5InspectionDone({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          condition: body.overall_condition ? String(body.overall_condition) : "Good",
+          issueCount: issues.length,
+          nextInspectionDate: nextInspection.toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }),
+        });
+        await sendEmail(
+          session.owner_email,
+          issues.length > 0
+            ? `Initial inspection done — ${issues.length} item${issues.length > 1 ? "s" : ""} noted 📋`
+            : "Initial inspection done — all clear 📋",
+          html
+        );
+      } catch (e) { console.error("Email 5 failed:", e); }
+    }
 
-    return NextResponse.json({ ok: true, next_step: 9 });
+    // ── Step 8 auto-logic: send tenant intro letters ──────────────
+    const parsedLease = session.lease_parsed_data ?? {};
+    const tenants: Array<Record<string, unknown>> = Array.isArray(parsedLease.tenants)
+      ? parsedLease.tenants
+      : [];
+
+    let tenantEmailsSent = 0;
+    for (const tenant of tenants) {
+      const tenantEmail = tenant.email ? String(tenant.email) : null;
+      if (!tenantEmail) continue;
+      try {
+        const html = onboardTenantIntroEmail({
+          tenantName: String(tenant.name || "Resident"),
+          propertyAddress: session.property_address || "your property",
+          startDate: new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }),
+        });
+        await sendEmail(
+          tenantEmail,
+          `Important: your property is now managed by Prospera Properties`,
+          html
+        );
+        tenantEmailsSent++;
+      } catch (e) { console.error(`Tenant intro email failed for ${tenantEmail}:`, e); }
+    }
+
+    // Email 6 — tenants notified (to owner)
+    if (session.owner_email) {
+      try {
+        const html = onboardEmail6TenantsNotified({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          tenantCount: tenantEmailsSent || tenants.length,
+        });
+        await sendEmail(session.owner_email, "Your tenants have been notified ✅", html);
+      } catch (e) { console.error("Email 6 failed:", e); }
+    }
+
+    return NextResponse.json({ ok: true, next_step: 9, tenants_notified: tenantEmailsSent });
   }
 
   // ── Step 9: Financial Setup ───────────────────────────────────
@@ -264,6 +347,31 @@ export async function POST(
       step9_data: body,
       current_step: 10,
     }).eq("token", token);
+
+    // Email 7 — financial setup confirmed
+    if (session.owner_email) {
+      try {
+        const feeDesc = session.fee_structure === "10% of gross"
+          ? "10% of gross rent"
+          : session.fee_amount
+          ? `$${Number(session.fee_amount).toFixed(0)}/month flat`
+          : "as agreed";
+
+        const leaseStart = session.lease_parsed_data?.leaseStart;
+        const rentDate = leaseStart
+          ? new Date(leaseStart).toLocaleDateString("en-CA", { month: "long", day: "numeric" })
+          : "the 1st of each month";
+
+        const html = onboardEmail7FinancialSetup({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          rentCollectionDate: rentDate,
+          feeDescription: feeDesc,
+        });
+        await sendEmail(session.owner_email, "Financial setup complete — here's what happens next 💰", html);
+      } catch (e) { console.error("Email 7 failed:", e); }
+    }
+
     return NextResponse.json({ ok: true, next_step: 10 });
   }
 
@@ -284,12 +392,44 @@ export async function POST(
 
     if (accessErr) console.error("owner_access insert failed:", accessErr);
 
+    const completedAt = new Date().toISOString();
+
     await sb.from("onboarding_sessions").update({
       owner_access_token: accessToken,
       current_step: 10,
       status: "complete",
-      completed_at: new Date().toISOString(),
+      completed_at: completedAt,
     }).eq("token", token);
+
+    // Mark Notion owner as Active
+    if (session.notion_owner_id) {
+      try {
+        await updateNotionPage(session.notion_owner_id, {
+          Status: { select: { name: "Active" } },
+        });
+      } catch (e) { console.error("Notion owner status update failed:", e); }
+    }
+
+    // Email 8 — welcome + dashboard link
+    if (session.owner_email) {
+      try {
+        const parsedLease = session.lease_parsed_data ?? {};
+        const tenants: Array<Record<string, unknown>> = Array.isArray(parsedLease.tenants) ? parsedLease.tenants : [];
+        const leaseStart = parsedLease.leaseStart;
+        const rentDate = leaseStart
+          ? new Date(String(leaseStart)).toLocaleDateString("en-CA", { month: "long", day: "numeric" })
+          : "the 1st";
+
+        const html = onboardEmail8Welcome({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          tenantCount: tenants.length,
+          rentCollectionDate: rentDate,
+          dashboardUrl: `${BASE_URL}/owners/${accessToken}`,
+        });
+        await sendEmail(session.owner_email, "You're officially with Prospera Properties 🎉", html);
+      } catch (e) { console.error("Email 8 failed:", e); }
+    }
 
     return NextResponse.json({ ok: true, access_token: accessToken });
   }
