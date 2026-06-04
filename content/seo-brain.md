@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-06-03
+2026-06-04
 
-## Posts Written: 54 total
+## Posts Written: 55 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -44,7 +44,7 @@ _(MONEY keyword gaps now closed — how-to-find-a-property-manager-ontario and p
 **Still missing:**
 _(N-form series now complete. All PAIN keywords published.)_
 
-### LONG-TAIL keywords (28)
+### LONG-TAIL keywords (29)
 - first-time-landlord-tips-london-ontario ✅
 - tenant-screening-red-flags ✅
 - rental-property-tax-deductions-ontario ✅
@@ -73,6 +73,7 @@ _(N-form series now complete. All PAIN keywords published.)_
 - what-can-landlord-deduct-from-last-month-rent-ontario ✅
 - small-landlord-property-management-london-ontario ✅
 - how-to-find-a-property-manager-ontario ✅
+- when-to-hire-a-property-manager-ontario ✅
 
 **Still missing:**
 _(All LONG-TAIL keywords now published — no remaining gaps.)_
@@ -106,21 +107,20 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 8. property-management-for-landlords-with-one-property-ontario (conversion intent — single-property owners)
 
 **High-conversion intent:**
-9. when-to-hire-a-property-manager-ontario (decision-stage landlords)
-10. switching-property-management-companies-ontario (landlords unhappy with current PM)
+9. switching-property-management-companies-ontario (landlords unhappy with current PM)
 
 ---
 
 ## Do More Of
 - Geographic expansion keywords (Tillsonburg, Woodstock, Ingersoll) — now that core keyword set is complete
 - Supporting cluster content deepening internal link graph
-- High-conversion decision-stage posts (when to hire, switching PMs)
+- High-conversion decision-stage posts (switching PMs next)
 - Process/timeline posts — strong for AI citations and rich snippets
 
 ## Do Less Of
 - Generic landlord tips — fully covered
 - New PAIN posts — N-form series is complete; all 17 PAIN keywords published
-- New core LONG-TAIL posts — all 28 gaps now closed
+- New core LONG-TAIL posts — all 29 gaps now closed
 - New core MONEY posts — all gaps now closed
 
 ---
@@ -140,3 +140,4 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - 2026-05-29: Published residential-property-management-london-ontario — MONEY HIGH PRIORITY. Covers full scope of residential PM services, London market specifics (Western/Fanshawe student demand, neighbourhood pricing, LTB delays), cost of self-managing vs. professional management, what to look for in a PM (RECO registration, RTA fluency, screening process), onboarding process walkthrough, and residential vs. commercial distinction. Internal links to n4-notice-ontario, property-management-fees-ontario, tenant-screening-red-flags, and first-time-landlord-tips-london-ontario.
 - 2026-06-01: Published how-to-find-a-property-manager-ontario — MONEY HIGH PRIORITY (final MONEY gap). Covers how to define your needs, where to find candidates, the right screening questions (RTA knowledge, LTB experience, tenant screening process), what to look for in a management agreement (fee structure, authority limits, LMR trust handling, exit clauses), how to check references, red flags to walk away from, and Ontario market-specific considerations for London, St. Thomas, and Strathroy. Internal links to property-management-fees-ontario, tenant-screening-red-flags, property-manager-london-ontario-cost, and how-long-does-eviction-take-ontario.
 - 2026-06-03: Published small-landlord-property-management-london-ontario — LONG-TAIL (final remaining gap — all 28 LONG-TAIL keywords now complete). Covers why small landlords face bigger challenges than large operators, full scope of self-management tasks, five most common London landlord mistakes (screening, wrong notice forms, LMR misuse, underdocumentation, mispricing), self-management vs. hiring decision framework, what to look for in a PM as a small landlord, and what good day-to-day property management looks like. Internal links to rent-increase-ontario-guidelines, tenant-screening-red-flags, what-can-landlord-deduct-from-last-month-rent-ontario, and property-manager-london-ontario-cost. External links to ontario.ca RTA, City of London landlord info page, and CMHC rental market data.
+- 2026-06-04: Published when-to-hire-a-property-manager-ontario — HIGH-CONVERSION decision-stage post (moved from Recommended Next Posts to published). Covers 10 concrete triggers for hiring a PM: distance from property, past bad tenant experience, legal confusion, time burden, portfolio scaling, rent collection problems, vacancy/marketing struggles, retirement/time constraints, active disputes, and tenant-dynamic discomfort. Differentiates from competitors by being highly specific and actionable rather than generic. Internal links to tenant-screening-red-flags, property-manager-london-ontario-cost, n4-notice-ontario, and how-to-find-a-property-manager-ontario. External links to ontario.ca RTA statute, tribunalsontario.ca/ltb statistics page, and CMHC rental market data tables.
