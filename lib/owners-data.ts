@@ -225,9 +225,6 @@ export async function buildOwnerDashboard(
 
 // ── Cache helpers ──────────────────────────────────────────────────────────
 
-// Refresh cache if older than 4 hours
-const CACHE_TTL_MS = 4 * 60 * 60 * 1000;
-
 export async function getCachedDashboard(token: string): Promise<OwnerDashboard | null> {
   try {
     const sb = getSupabaseAdmin();
@@ -259,42 +256,16 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
 }
 
 /**
- * Cache-first loader:
- * 1. Serve Supabase cache instantly if fresh (< 4 hours old)
- * 2. If stale or missing, fetch live from Notion + update cache
- * 3. If stale but Notion fails, serve stale cache anyway
+ * Cache-only loader — Notion is never hit on page load.
+ * Data is refreshed exclusively by the weekly cron (Mondays 9am ET).
+ * Returns the cached dashboard, or throws if cache is empty (first run).
  */
 export async function getDashboard(
   token: string,
-  notionOwnerIds: string[],
-  ownerNames: string
+  _notionOwnerIds: string[],
+  _ownerNames: string
 ): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
   const cached = await getCachedDashboard(token);
-
-  const cacheAge = cached?.cachedAt
-    ? Date.now() - new Date(cached.cachedAt).getTime()
-    : Infinity;
-
-  // Cache is fresh — serve immediately
-  if (cached && cacheAge < CACHE_TTL_MS) {
-    // Trigger background refresh if cache is older than 1 hour
-    if (cacheAge > 60 * 60 * 1000) {
-      buildOwnerDashboard(notionOwnerIds, ownerNames)
-        .then(fresh => cacheDashboard(token, fresh))
-        .catch(() => {});
-    }
-    return { dashboard: cached, isStale: false };
-  }
-
-  // Cache is stale or missing — fetch live
-  try {
-    const fresh = await buildOwnerDashboard(notionOwnerIds, ownerNames);
-    // Fire-and-forget cache write
-    cacheDashboard(token, fresh).catch(() => {});
-    return { dashboard: fresh, isStale: false };
-  } catch {
-    // Notion down — serve stale cache if available
-    if (cached) return { dashboard: cached, isStale: true };
-    throw new Error("No data available");
-  }
+  if (!cached) throw new Error("Cache not yet populated — run the cache refresh cron first");
+  return { dashboard: cached, isStale: false };
 }
