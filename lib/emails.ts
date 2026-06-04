@@ -1,6 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // Prospera Properties — Email Templates
-// Design: Navy #1F2F3A + Crimson #8B2030 + Warm neutrals
+// Design: Dark-first — deep navy #1F2F3A background throughout
+// White content cards float on the dark navy wrapper
 // Font: Arial/Helvetica (email-safe, no external fonts)
 // ─────────────────────────────────────────────────────────────
 
@@ -13,10 +14,8 @@ const WHITE   = "#ffffff";
 const TEXT    = "#1b1c1a";
 const MUTED   = "#43474b";
 const BORDER  = "#e4e2df";
-const BG_OUTER   = "#F7F5F2";
 const BG_CARD    = "#ffffff";
 const BG_SUBTLE  = "#f5f3f0";
-const BG_HERO    = "linear-gradient(135deg,#f5f3f0,#eae8e5)";
 
 // Single font stack — no Google Fonts
 const FONT = "Arial, Helvetica, sans-serif";
@@ -64,24 +63,14 @@ function md(text: string): string {
 function wrapper(content: string): string {
   const year = new Date().getFullYear();
   return `<!DOCTYPE html>
-<html lang="en" style="color-scheme:light !important;">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light" />
-  <meta name="supported-color-schemes" content="light" />
   <title>Prospera Properties</title>
   <style>
-    :root { color-scheme: light only; }
-    body { color-scheme: light only; background-color: ${NAVY} !important; }
-    @media (prefers-color-scheme: dark) {
-      html, body { background-color: ${NAVY} !important; }
-      .email-container { background-color: #ffffff !important; }
-      .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
-      .hero-heading { color: ${NAVY} !important; }
-      .body-text { color: ${TEXT} !important; }
-      .muted-text { color: ${MUTED} !important; }
-    }
+    :root { color-scheme: light dark; }
+    body { background-color: ${NAVY} !important; }
     @media only screen and (max-width: 620px) {
       .outer-pad { padding: 16px 8px !important; }
       .body-pad   { padding: 32px 24px !important; }
@@ -91,46 +80,55 @@ function wrapper(content: string): string {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:${NAVY};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color-scheme:light !important;" bgcolor="${NAVY}">
+<body style="margin:0;padding:0;background-color:${NAVY};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;" bgcolor="${NAVY}">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
       <td class="outer-pad" align="center" style="padding:24px 16px;background-color:${NAVY};" bgcolor="${NAVY}">
-        <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;overflow:hidden;">
+        <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" bgcolor="${NAVY}" style="max-width:600px;width:100%;background-color:${NAVY};overflow:hidden;">
 
-          <!-- Header -->
+          <!-- Header (dark navy) -->
           <tr>
-            <td class="header-pad" style="padding:28px 40px;">
+            <td class="header-pad" style="padding:28px 40px;background-color:${NAVY};" bgcolor="${NAVY}">
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
                   <td>
                     <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="36" style="height:36px;width:auto;display:block;" onerror="this.style.display='none'" />
                   </td>
                   <td style="text-align:right;">
-                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:0.1em;">PROSPERA PROPERTIES</span>
+                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">PROSPERA PROPERTIES</span>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- Body -->
+          <!-- White content card -->
           <tr>
-            <td class="body-pad" style="padding:40px;">
-              ${content}
+            <td style="padding:0 24px;">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:${WHITE};border-radius:20px;overflow:hidden;">
+                <tr>
+                  <td class="body-pad" style="padding:40px;">
+                    ${content}
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
-          <!-- Footer -->
+          <!-- Footer (dark navy) -->
           <tr>
-            <td class="footer-pad" style="padding:40px;text-align:center;border-top:1px solid ${BORDER};">
-              <div style="width:48px;height:48px;border-radius:99px;overflow:hidden;margin:0 auto 12px;border:3px solid ${WHITE};box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <td class="footer-pad" style="padding:40px;text-align:center;background-color:${NAVY};" bgcolor="${NAVY}">
+              <!-- Thin top divider -->
+              <div style="height:1px;background:rgba(255,255,255,0.08);margin:0 0 32px;"></div>
+
+              <div style="width:48px;height:48px;border-radius:99px;overflow:hidden;margin:0 auto 12px;border:2px solid rgba(255,255,255,0.2);">
                 <img src="https://www.prosperaproperties.co/ebin-founder.jpg" alt="Ebin" width="48" height="48" style="width:48px;height:48px;object-fit:cover;display:block;" onerror="this.style.display='none'" />
               </div>
-              <p style="margin:0 0 2px;font-family:${FONT};font-size:16px;font-weight:700;color:${NAVY};">Ebin</p>
-              <p style="margin:0 0 12px;font-family:${FONT};font-size:10px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:0.2em;">Senior Property Manager</p>
-              <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:${FONT};font-size:13px;font-weight:600;color:${CRIMSON};text-decoration:none;">prosperapropertiess@gmail.com</a></p>
-              <p style="margin:0 0 20px;font-family:${FONT};font-size:12px;color:${MUTED};">(519) 697-1227</p>
-              <p style="margin:0;font-family:${FONT};font-size:9px;color:${MUTED};text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;">© ${year} PROSPERA PROPERTIES MANAGEMENT GROUP</p>
+              <p style="margin:0 0 2px;font-family:${FONT};font-size:16px;font-weight:700;color:${WHITE};">Ebin</p>
+              <p style="margin:0 0 12px;font-family:${FONT};font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.2em;">Senior Property Manager</p>
+              <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:${FONT};font-size:13px;font-weight:600;color:#c97070;text-decoration:none;">prosperapropertiess@gmail.com</a></p>
+              <p style="margin:0 0 20px;font-family:${FONT};font-size:12px;color:rgba(255,255,255,0.5);">(519) 697-1227</p>
+              <p style="margin:0;font-family:${FONT};font-size:9px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.1em;">&#169; ${year} PROSPERA PROPERTIES MANAGEMENT GROUP</p>
             </td>
           </tr>
 
@@ -152,7 +150,7 @@ function cta(text: string, url: string): string {
   return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin:28px 0;">
     <tr>
       <td style="background-color:${CRIMSON};border-radius:10px;">
-        <a href="${url}" style="display:inline-block;padding:14px 32px;color:${WHITE};text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.5px;font-family:${FONT};">${text} →</a>
+        <a href="${url}" style="display:inline-block;padding:14px 32px;color:${WHITE};text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.5px;font-family:${FONT};">${text} &#8594;</a>
       </td>
     </tr>
   </table>`;
@@ -170,16 +168,17 @@ function noteBox(body: string, label?: string): string {
 }
 
 function signoff(name = "Ebin"): string {
-  return `<p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">— ${name} · Prospera Properties · (519) 697-1227</p>`;
+  return `<p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">&#8212; ${name} &middot; Prospera Properties &middot; (519) 697-1227</p>`;
 }
 
 function heroCard(greeting: string, subtitle: string): string {
-  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:-40px -40px 32px;width:calc(100% + 80px);">
     <tr>
-      <td style="background:${BG_HERO};border-radius:20px;padding:40px;text-align:center;">
-        <div style="display:inline-block;padding:4px 14px;background:${NAVY};color:${WHITE};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:${FONT};">Prospera Properties</div>
-        <p style="margin:0 0 12px;font-family:${FONT};font-size:28px;font-weight:700;color:${NAVY};line-height:1.2;">${greeting}</p>
-        <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">${subtitle}</p>
+      <td style="background:${NAVY};padding:40px 40px 32px;text-align:center;">
+        <div style="display:inline-block;padding:4px 14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:${WHITE};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:16px;font-family:${FONT};">Prospera Properties</div>
+        <p style="margin:0 0 10px;font-family:${FONT};font-size:26px;font-weight:700;color:${WHITE};line-height:1.2;">${greeting}</p>
+        <p style="margin:0;font-family:${FONT};font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;">${subtitle}</p>
+        <div style="height:1px;background:rgba(255,255,255,0.08);margin:28px 0 0;"></div>
       </td>
     </tr>
   </table>`;
@@ -385,7 +384,7 @@ export function rentAnalysisReportEmail({
       <tr>
         <td style="padding:24px 28px;">
           <p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Your property</p>
-          <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:${NAVY};font-family:${FONT};">${bedsLabel} ${typeLabel} · ${city}</p>
+          <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:${NAVY};font-family:${FONT};">${bedsLabel} ${typeLabel} &middot; ${city}</p>
           <table cellpadding="0" cellspacing="0" role="presentation">
             <tr>
               <td style="padding-right:24px;">
@@ -444,10 +443,10 @@ export function monthlyRentTrendsEmail({
   const citySlug = city.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "");
 
   const trendLabel = (t: string | null) => {
-    if (t === "up")   return `<span style="color:#0D6E5A;font-weight:600;">↑ Rising</span>`;
-    if (t === "down") return `<span style="color:${CRIMSON};font-weight:600;">↓ Falling</span>`;
-    if (t === "flat") return `<span style="color:${MUTED};">→ Stable</span>`;
-    return `<span style="color:${MUTED};">—</span>`;
+    if (t === "up")   return `<span style="color:#0D6E5A;font-weight:600;">&#8593; Rising</span>`;
+    if (t === "down") return `<span style="color:${CRIMSON};font-weight:600;">&#8595; Falling</span>`;
+    if (t === "flat") return `<span style="color:${MUTED};">&#8594; Stable</span>`;
+    return `<span style="color:${MUTED};">&#8212;</span>`;
   };
 
   const rowsHtml = data.map((row) => `
@@ -460,7 +459,7 @@ export function monthlyRentTrendsEmail({
   `).join("");
 
   return wrapper(`
-    ${heroCard(`${city} Market — ${month}`, "Here's how rents are moving this month.")}
+    ${heroCard(`${city} Market &#8212; ${month}`, "Here's how rents are moving this month.")}
 
     <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Hey ${name || "there"}, here's how rents are moving in ${city} this month.</p>
 
@@ -627,7 +626,7 @@ export function scrapeIngestNotificationEmail({
 
   return wrapper(`
     <p style="margin:0 0 4px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">Scrape Complete</p>
-    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">${new Date(scrapedAt).toLocaleString("en-CA", { dateStyle: "full", timeStyle: "short" })} · ${source}</p>
+    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">${new Date(scrapedAt).toLocaleString("en-CA", { dateStyle: "full", timeStyle: "short" })} &middot; ${source}</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;background-color:${BG_SUBTLE};border-radius:8px;overflow:hidden;">
       <tr>
@@ -895,7 +894,7 @@ export function newPropertyAgentEmail({
   const dashboardLink = `${BASE_URL}/agents/dashboard`;
 
   return wrapper(`
-    ${heroCard(`New listing — ${propertyAddress}`, `${propertyCity} · ${bedrooms} bed · $${price.toLocaleString()}/mo`)}
+    ${heroCard(`New listing &#8212; ${propertyAddress}`, `${propertyCity} &middot; ${bedrooms} bed &middot; $${price.toLocaleString()}/mo`)}
 
     <p style="margin:0 0 24px;font-size:15px;color:${MUTED};font-family:${FONT};">Hey ${agentName || "there"} — a new property is available. Get your application link and start marketing it.</p>
 
@@ -904,7 +903,7 @@ export function newPropertyAgentEmail({
         <p style="margin:0 0 4px;font-size:13px;color:${MUTED};font-family:${FONT};text-transform:uppercase;letter-spacing:0.08em;">Property</p>
         <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:${TEXT};font-family:${FONT};">${propertyAddress}, ${propertyCity}</p>
         <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};">
-          <strong>$${price.toLocaleString()}/mo</strong> &nbsp;·&nbsp; ${bedrooms} bed &nbsp;·&nbsp; ${bathrooms} bath
+          <strong>$${price.toLocaleString()}/mo</strong> &nbsp;&middot;&nbsp; ${bedrooms} bed &nbsp;&middot;&nbsp; ${bathrooms} bath
         </p>
       </td></tr>
     </table>
@@ -1079,7 +1078,7 @@ export function agentFollowUpEmail({
 
     <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">Just checking in on your application for <strong>${propertyAddress}</strong>. We've received everything and your file is currently under review.</p>
     <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">You'll hear from us as soon as a decision has been made. If you have any questions in the meantime, feel free to reply to this email.</p>
-    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">— ${agentName}, Prospera Properties</p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};">&#8212; ${agentName}, Prospera Properties</p>
 
     ${divider()}
     ${signoff()}

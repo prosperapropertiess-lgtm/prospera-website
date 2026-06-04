@@ -89,14 +89,14 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
     const leaseWarningHtml = daysToExpiry !== null && daysToExpiry <= 90 && daysToExpiry >= 0
       ? `<div style="margin-top:12px;padding:8px 14px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa;">
            <span style="font-size:11px;font-weight:700;color:#c2410c;font-family:Arial,sans-serif;">
-             ⚠️ Lease expires in ${daysToExpiry} days — ${formatDate(leaseEnd)}
+             Lease expires in ${daysToExpiry} days — ${formatDate(leaseEnd)}
            </span>
          </div>`
       : "";
     const leaseStartYear = t.leaseStart ? new Date(t.leaseStart).getFullYear() : null;
 
     return `
-      <div style="padding:24px 28px;border:1px solid #e4e2df;border-radius:20px;background:#ffffff;margin-bottom:14px;">
+      <div style="padding:24px 28px;border:1px solid rgba(0,0,0,0.06);border-radius:16px;background:#ffffff;margin:0 40px 12px;">
         <table style="width:100%;border-collapse:collapse;">
           <tr>
             <td style="vertical-align:top;">
@@ -127,7 +127,7 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
   const fallbackUnitsHtml = rentCurrentMonth.map(r => {
     const s = paymentStatusStyle(r.paymentStatus);
     return `
-      <div style="padding:24px 28px;border:1px solid #e4e2df;border-radius:20px;background:#ffffff;margin-bottom:14px;">
+      <div style="padding:24px 28px;border:1px solid rgba(0,0,0,0.06);border-radius:16px;background:#ffffff;margin:0 40px 12px;">
         <table style="width:100%;border-collapse:collapse;">
           <tr>
             <td style="font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#1F2F3A;">${r.entry}</td>
@@ -152,8 +152,8 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
 
   const unitsHtml = tenants.length > 0 ? unitCardsHtml : fallbackUnitsHtml;
   const maintenanceBadge = maintenanceOpen.length > 0
-    ? `<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 14px;display:inline-block;">
-         <span style="font-size:11px;font-weight:700;color:#c2410c;font-family:Arial,sans-serif;">
+    ? `<div style="background:rgba(139,32,48,0.2);border:1px solid rgba(139,32,48,0.4);border-radius:8px;padding:6px 14px;display:inline-block;">
+         <span style="font-size:11px;font-weight:700;color:#f87171;font-family:Arial,sans-serif;">
            ${maintenanceOpen.length} open maintenance item${maintenanceOpen.length > 1 ? "s" : ""}
          </span>
        </div>`
@@ -161,29 +161,30 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
 
   return `
     <!-- ═══ PROPERTY: ${property.address} ═══ -->
-    <!-- Property Header -->
-    <div style="padding:0 40px;margin-bottom:28px;">
-      <table style="width:100%;border-collapse:collapse;border-bottom:1px solid #e4e2df;padding-bottom:16px;">
+
+    <!-- Property Header (on dark background) -->
+    <div style="padding:28px 40px 20px;">
+      <table style="width:100%;border-collapse:collapse;">
         <tr>
-          <td style="vertical-align:bottom;padding-bottom:16px;">
-            <div style="font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:#1F2F3A;">${property.address}</div>
-            <div style="font-family:Arial,sans-serif;font-size:12px;color:#43474b;margin-top:4px;">${property.city} · ${property.type} · ${month} ${year}</div>
+          <td style="vertical-align:bottom;">
+            <div style="font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:#ffffff;">${property.address}</div>
+            <div style="font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;">${property.city} · ${property.type} · ${month} ${year}</div>
           </td>
-          <td style="vertical-align:bottom;text-align:right;padding-bottom:16px;">${maintenanceBadge}</td>
+          <td style="vertical-align:bottom;text-align:right;">${maintenanceBadge}</td>
         </tr>
       </table>
     </div>
 
-    <!-- Financial Card -->
-    <div style="padding:0 40px;margin-bottom:28px;">
-      <div style="border:1px solid #e4e2df;border-radius:24px;padding:40px;background:#ffffff;text-align:center;position:relative;">
+    <!-- Financial Card (white card floating on dark bg) -->
+    <div style="margin:0 40px 20px;">
+      <div style="border:1px solid rgba(0,0,0,0.06);border-radius:20px;padding:40px;background:#ffffff;text-align:center;">
         <!-- accent bar -->
         <div style="height:3px;width:72px;background:#8B2030;border-radius:0 0 6px 6px;margin:0 auto 28px;"></div>
 
         <p style="font-size:10px;font-weight:700;color:#43474b;text-transform:uppercase;letter-spacing:0.25em;margin:0 0 12px;font-family:Arial,sans-serif;">Net to Owner</p>
-        <div style="font-family:Arial,sans-serif;font-size:48px;font-weight:700;color:#8B2030;margin-bottom:12px;letter-spacing:-0.02em;">${formatDollars(netToOwner)}</div>
+        <div style="font-family:Arial,sans-serif;font-size:52px;font-weight:700;color:#8B2030;margin-bottom:12px;letter-spacing:-0.02em;">${formatDollars(netToOwner)}</div>
 
-        <div style="height:1px;width:100px;background:#e4e2df;margin:20px auto;"></div>
+        <div style="height:1px;background:#e4e2df;margin:20px 0;"></div>
 
         <!-- Rent / Expenses side by side -->
         <table style="width:100%;max-width:280px;margin:0 auto 28px;border-collapse:collapse;">
@@ -220,29 +221,29 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
       </div>
     </div>
 
-    <!-- YTD Bar -->
-    <div style="padding:0 40px;margin-bottom:28px;">
-      <div style="background:#1F2F3A;border-radius:14px;padding:20px 24px;">
+    <!-- YTD Bar (burgundy on dark bg) -->
+    <div style="margin:0 40px 20px;">
+      <div style="background:#8B2030;border-radius:14px;padding:18px 24px;">
         <table style="width:100%;border-collapse:collapse;">
           <tr>
             <td>
-              <p style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.2em;margin:0 0 4px;font-family:Arial,sans-serif;">Year-to-Date Rent Collected</p>
+              <p style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.2em;margin:0 0 4px;font-family:Arial,sans-serif;">Year-to-Date Rent Collected</p>
               <div style="font-family:Arial,sans-serif;font-size:22px;font-weight:700;color:#ffffff;">${formatDollars(ytdRent)}</div>
             </td>
             <td style="text-align:right;vertical-align:middle;">
-              <span style="font-size:11px;font-weight:700;color:#ffffff;background:#8B2030;padding:4px 12px;border-radius:99px;font-family:Arial,sans-serif;white-space:nowrap;">Jan–${month}</span>
+              <span style="font-size:11px;font-weight:700;color:#ffffff;background:#6b1826;padding:4px 12px;border-radius:99px;font-family:Arial,sans-serif;white-space:nowrap;">Jan–${month}</span>
             </td>
           </tr>
         </table>
       </div>
     </div>
 
-    <!-- Unit Status -->
+    <!-- Unit Status section label -->
     ${unitsHtml ? `
-    <div style="padding:0 40px;margin-bottom:40px;">
-      <div style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#1F2F3A;margin:0 0 20px;">Unit Status</div>
-      ${unitsHtml}
-    </div>` : ""}
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.5);margin:28px 0 12px;padding:0 40px;font-family:Arial,sans-serif;">Unit Status</div>
+    ${unitsHtml}
+    <div style="margin-bottom:20px;"></div>
+    ` : ""}
   `;
 }
 
@@ -265,7 +266,7 @@ export function buildEmailHTML(
     .map((pr, i) =>
       buildPropertySection(pr, month, year) +
       (i < properties.length - 1
-        ? '<div style="height:1px;background:#e4e2df;margin:20px 40px 40px;"></div>'
+        ? '<div style="height:1px;background:rgba(255,255,255,0.08);margin:20px 40px 40px;"></div>'
         : "")
     )
     .join("");
@@ -275,7 +276,7 @@ export function buildEmailHTML(
       <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
         <tr>
           <td style="width:44px;vertical-align:top;">
-            <div style="width:36px;height:36px;border-radius:10px;background:#f5f3f0;text-align:center;line-height:36px;font-size:16px;">→</div>
+            <div style="width:36px;height:36px;border-radius:10px;background:#f5f3f0;text-align:center;line-height:36px;font-size:16px;">&#8594;</div>
           </td>
           <td style="vertical-align:top;padding-left:16px;">
             <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#1F2F3A;margin-bottom:4px;">${item.title}</div>
@@ -287,11 +288,11 @@ export function buildEmailHTML(
 
   const criticalAlertHtml = narrative.criticalAlert ? `
     <!-- Critical Alert -->
-    <div style="padding:0 40px;margin-bottom:64px;">
-      <div style="background:#1F2F3A;border-radius:24px;padding:40px;text-align:center;">
+    <div style="padding:0 40px;margin-bottom:40px;">
+      <div style="background:rgba(139,32,48,0.15);border:1px solid rgba(139,32,48,0.3);border-radius:20px;padding:40px;text-align:center;">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.5);font-family:Arial,sans-serif;margin-bottom:14px;">Action Required</div>
         <div style="font-family:Arial,sans-serif;font-size:22px;font-weight:700;color:#ffffff;margin-bottom:14px;">${narrative.criticalAlert.title}</div>
-        <p style="font-family:Arial,sans-serif;font-size:13px;color:rgba(255,255,255,0.8);max-width:300px;margin:0 auto 28px;line-height:1.7;">${narrative.criticalAlert.body}</p>
+        <p style="font-family:Arial,sans-serif;font-size:13px;color:rgba(255,255,255,0.75);max-width:300px;margin:0 auto 28px;line-height:1.7;">${narrative.criticalAlert.body}</p>
         <a href="mailto:prosperapropertiess@gmail.com" style="display:inline-block;background:#8B2030;color:#ffffff;padding:14px 36px;border-radius:12px;font-family:Arial,sans-serif;font-size:14px;font-weight:700;text-decoration:none;">${narrative.criticalAlert.ctaLabel}</a>
       </div>
     </div>
@@ -306,7 +307,7 @@ export function buildEmailHTML(
 <!-- Draft Banner -->
 <div style="background:#92400e;padding:12px 24px;text-align:center;">
   <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#ffffff;margin:0;text-transform:uppercase;letter-spacing:0.1em;">
-    ⚠️ DRAFT — Review and send manually to: ${draftBannerOwners}
+    DRAFT — Review and send manually to: ${draftBannerOwners}
   </p>
 </div>
 ` : "";
@@ -315,37 +316,24 @@ export function buildEmailHTML(
   void ownerNames;
 
   return `<!DOCTYPE html>
-<html lang="en" style="color-scheme:light !important;">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-<meta name="color-scheme" content="light"/>
-<meta name="supported-color-schemes" content="light"/>
 <title>${narrative.subject}</title>
 <style>
-  :root { color-scheme: light only; }
-  body { color-scheme: light only; background-color: #1F2F3A !important; }
-  @media (prefers-color-scheme: dark) {
-    html, body { background-color: #1F2F3A !important; }
-    .email-container { background-color: #ffffff !important; }
-    .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
-    .hero-heading { color: #1F2F3A !important; }
-    .hero-text { color: #43474b !important; }
-    .hero-address { color: #8B2030 !important; }
-    .section-heading { color: #1F2F3A !important; }
-    .body-text { color: #1b1c1a !important; }
-    .muted-text { color: #43474b !important; }
-  }
+  :root { color-scheme: light dark; }
+  body { background-color: #1F2F3A !important; }
 </style>
 </head>
-<body style="background:#1F2F3A;margin:0;padding:0;-webkit-font-smoothing:antialiased;color-scheme:light !important;" bgcolor="#1F2F3A">
+<body style="background:#1F2F3A;margin:0;padding:0;-webkit-font-smoothing:antialiased;" bgcolor="#1F2F3A">
 
 ${draftBannerHtml}
 <!-- Email Container -->
-<div class="email-container" style="max-width:600px;margin:0 auto;background:#ffffff;overflow:hidden;">
+<div style="max-width:600px;margin:0 auto;background:#1F2F3A;overflow:hidden;">
 
   <!-- Header -->
-  <div style="padding:28px 40px;">
+  <div style="padding:28px 40px;background:#1F2F3A;">
     <table style="width:100%;border-collapse:collapse;">
       <tr>
         <td>
@@ -354,61 +342,67 @@ ${draftBannerHtml}
             onerror="this.style.display='none'" />
         </td>
         <td style="text-align:right;">
-          <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#43474b;text-transform:uppercase;letter-spacing:0.1em;">${month} ${year} Report</span>
+          <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">${month} ${year} Report</span>
         </td>
       </tr>
     </table>
   </div>
 
-  <!-- Hero -->
-  <div style="padding:8px 40px 40px;">
-    <div class="hero-card" style="background:linear-gradient(135deg,#f5f3f0,#eae8e5);border-radius:24px;padding:48px 40px;text-align:center;">
-      <div style="display:inline-block;padding:4px 14px;background:#1F2F3A;color:#ffffff !important;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:Arial,sans-serif;">Monthly Report</div>
-      <div class="hero-heading" style="font-family:Arial,sans-serif;font-size:28px;font-weight:700;color:#1F2F3A !important;margin:0 0 12px;">Hello ${ownerFirstNames},</div>
-      <p class="hero-text" style="font-family:Arial,sans-serif;font-size:14px;color:#43474b !important;max-width:360px;margin:0 auto 20px;line-height:1.7;">${narrative.openingSentence}</p>
-      <div class="hero-address" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#8B2030 !important;text-decoration:underline;text-underline-offset:4px;">${primaryAddress}</div>
-      <div style="margin-top:24px;">
-        <div style="width:56px;height:56px;border-radius:99px;overflow:hidden;margin:0 auto 8px;border:3px solid #ffffff;">
-          <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
-            style="width:56px;height:56px;object-fit:cover;display:block;"
-            onerror="this.style.display='none'" />
-        </div>
-        <div class="muted-text" style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#43474b !important;text-transform:uppercase;letter-spacing:0.2em;">Report by Ebin</div>
-      </div>
+  <!-- Hero (dark navy, centered text) -->
+  <div style="padding:40px 40px 48px;text-align:center;background:#1F2F3A;">
+    <!-- Monthly Report pill -->
+    <div style="display:inline-block;padding:4px 16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#ffffff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:Arial,sans-serif;">Monthly Report</div>
+
+    <div style="font-family:Arial,sans-serif;font-size:32px;font-weight:700;color:#ffffff;margin:0 0 12px;">Hello ${ownerFirstNames},</div>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.7);max-width:380px;margin:0 auto 20px;line-height:1.7;">${narrative.openingSentence}</p>
+    <div style="font-family:Arial,sans-serif;font-size:16px;font-weight:700;color:#8B2030;text-decoration:underline;text-underline-offset:4px;margin-bottom:24px;">${primaryAddress}</div>
+
+    <!-- Ebin photo + byline -->
+    <div style="width:52px;height:52px;border-radius:99px;overflow:hidden;margin:0 auto 8px;border:2px solid #ffffff;">
+      <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
+        style="width:52px;height:52px;object-fit:cover;display:block;"
+        onerror="this.style.display='none'" />
     </div>
+    <div style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.2em;">Report by Ebin</div>
+
+    <!-- Thin divider -->
+    <div style="height:1px;background:rgba(255,255,255,0.08);margin:32px 0 0;"></div>
   </div>
 
   <!-- Property Sections -->
   ${propertySectionsHtml}
 
-  <!-- Looking Ahead -->
-  <div style="padding:0 40px;margin-bottom:56px;">
-    <div style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#1F2F3A;margin:0 0 20px;">Looking Ahead</div>
-    <div style="background:#ffffff;border-radius:20px;padding:28px 32px;border:1px solid #e4e2df;">
+  <!-- Looking Ahead section label -->
+  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.5);margin:28px 0 12px;padding:0 40px;font-family:Arial,sans-serif;">Looking Ahead</div>
+
+  <!-- Looking Ahead white card -->
+  <div style="margin:0 40px 20px;">
+    <div style="background:#ffffff;border:1px solid rgba(0,0,0,0.06);border-radius:20px;padding:28px 32px;">
       ${lookingAheadHtml}
     </div>
     ${narrative.closingNote ? `
-    <p style="font-family:Arial,sans-serif;font-size:13px;color:#43474b;line-height:1.7;margin:20px 0 0;padding:0 4px;">${narrative.closingNote}</p>` : ""}
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7;margin:20px 0 0;padding:0 4px;">${narrative.closingNote}</p>` : ""}
   </div>
 
   ${criticalAlertHtml}
 
   <!-- Footer -->
-  <div style="background:#fbf9f6;padding:40px;text-align:center;border-top:1px solid #e4e2df;">
-    <div style="width:56px;height:56px;border-radius:99px;overflow:hidden;margin:0 auto 16px;border:3px solid #ffffff;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+  <div style="background:#1F2F3A;padding:40px;text-align:center;">
+    <!-- Thin top divider -->
+    <div style="height:1px;background:rgba(255,255,255,0.08);margin:0 0 32px;"></div>
+
+    <div style="width:56px;height:56px;border-radius:99px;overflow:hidden;margin:0 auto 16px;border:2px solid rgba(255,255,255,0.2);">
       <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
         style="width:56px;height:56px;object-fit:cover;display:block;"
         onerror="this.style.display='none'" />
     </div>
-    <div style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#1F2F3A;margin:0 0 4px;">Ebin</div>
-    <div style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#43474b;text-transform:uppercase;letter-spacing:0.2em;margin:0 0 16px;opacity:0.6;">Senior Property Manager</div>
-    <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#8B2030;text-decoration:none;">prosperapropertiess@gmail.com</a></p>
-    <p style="font-family:Arial,sans-serif;font-size:12px;color:#43474b;margin:0 0 24px;">(519) 697-1227</p>
-    <div style="border-top:1px solid #e4e2df;border-bottom:1px solid #e4e2df;padding:14px 0;margin:0 0 20px;">
-      <span style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#43474b;opacity:0.7;">Prospera Properties</span>
-    </div>
-    <p style="font-family:Arial,sans-serif;font-size:9px;color:#43474b;opacity:0.4;text-transform:uppercase;letter-spacing:0.1em;margin:0;">
-      © ${year} PROSPERA PROPERTIES MANAGEMENT GROUP
+    <div style="font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#ffffff;margin:0 0 4px;">Ebin</div>
+    <div style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.2em;margin:0 0 16px;">Senior Property Manager</div>
+    <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#c97070;text-decoration:none;">prosperapropertiess@gmail.com</a></p>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,0.5);margin:0 0 24px;">(519) 697-1227</p>
+    <div style="height:1px;background:rgba(255,255,255,0.08);margin:0 0 20px;"></div>
+    <p style="font-family:Arial,sans-serif;font-size:9px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.1em;margin:0;">
+      &copy; ${year} PROSPERA PROPERTIES MANAGEMENT GROUP
     </p>
   </div>
 
