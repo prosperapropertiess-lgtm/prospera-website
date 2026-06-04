@@ -140,8 +140,8 @@ export function buildPropertySection(pr: PropertyReport, month: string, year: nu
         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:4px;">
           <tr>
             <td style="vertical-align:top;">
-              <p style="font-family:${FH};font-size:20px;font-weight:500;color:${NAVY};margin:0 0 3px;">${property.address.trim()}</p>
-              <p style="font-family:${FB};font-size:12px;color:${MUTED};margin:0;">${property.type} &middot; ${property.city} &middot; ${month} ${year}</p>
+              <p style="font-family:${FH};font-size:20px;font-weight:500;color:${NAVY};margin:0 0 3px;">${(property.name || property.address).trim()}</p>
+              <p style="font-family:${FB};font-size:12px;color:${MUTED};margin:0;">${property.type}${property.city ? ` &middot; ${property.city}` : ""} &middot; ${month} ${year}</p>
             </td>
             ${maintenanceBadge ? `<td style="vertical-align:top;text-align:right;white-space:nowrap;">${maintenanceBadge}</td>` : "<td></td>"}
           </tr>
