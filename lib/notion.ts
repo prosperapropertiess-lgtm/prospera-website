@@ -423,3 +423,147 @@ export async function buildOwnerBundles(month: string, year: number): Promise<Ow
 
   return bundles;
 }
+
+// ── Write functions ────────────────────────────────────────────────────────
+// Used by the landlord onboarding pipeline.
+
+async function createPage(databaseId: string, properties: object): Promise<string> {
+  const res = await fetch(`${NOTION_API}/pages`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ parent: { database_id: databaseId }, properties }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Notion createPage failed (${databaseId}): ${err}`);
+  }
+  const data = await res.json();
+  return data.id.replace(/-/g, "");
+}
+
+export async function updateNotionPage(pageId: string, properties: object): Promise<void> {
+  const res = await fetch(`${NOTION_API}/pages/${pageId}`, {
+    method: "PATCH",
+    headers: headers(),
+    body: JSON.stringify({ properties }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Notion updatePage failed (${pageId}): ${err}`);
+  }
+}
+
+export async function createOwnerInNotion(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  notes?: string;
+}): Promise<string> {
+  return createPage(DB.owners, {
+    "Owner Name": { title: [{ text: { content: data.name } }] },
+    "Email":      { email: data.email },
+    "Phone":      { phone_number: data.phone ?? "" },
+    "Notes":      { rich_text: [{ text: { content: data.notes ?? "" } }] },
+    "Status":     { select: { name: "Onboarding In Progress" } },
+  });
+}
+
+export async function createPropertyInNotion(data: {
+  address: string;
+  city?: string;
+  type?: string;
+  units?: number;
+  monthlyRent?: number;
+  ownerId: string;
+  notes?: string;
+}): Promise<string> {
+  return createPage(DB.properties, {
+    "Property Name": { title: [{ text: { content: data.address } }] },
+    "Address":       { rich_text: [{ text: { content: data.address } }] },
+    "City":          { select: { name: data.city ?? "London" } },
+    "Type":          { select: { name: data.type ?? "Single Family" } },
+    "Monthly Rent":  { number: data.monthlyRent ?? 0 },
+    "Status":        { select: { name: "Onboarding" } },
+    "Notes":         { rich_text: [{ text: { content: data.notes ?? "" } }] },
+    "Owner":         { relation: [{ id: data.ownerId }] },
+  });
+}
+
+export async function createTenantInNotion(data: {
+  name: string;
+  email?: string;
+  phone?: string;
+  unit?: string;
+  monthlyRent?: number;
+  leaseStart?: string;
+  leaseEnd?: string;
+  securityDeposit?: number;
+  propertyId: string;
+}): Promise<string> {
+  return createPage(DB.tenants, {
+    "Tenant Name":      { title: [{ text: { content: data.name } }] },
+    "Email":            { email: data.email ?? "" },
+    "Phone":            { phone_number: data.phone ?? "" },
+    "Monthly Rent":     { number: data.monthlyRent ?? 0 },
+    "Security Deposit": { number: data.securityDeposit ?? 0 },
+    "Lease Start":      data.leaseStart ? { date: { start: data.leaseStart } } : { date: null },
+    "Lease End":        data.leaseEnd   ? { date: { start: data.leaseEnd   } } : { date: null },
+    "Status":           { select: { name: "Active" } },
+    "Notes":            { rich_text: [{ text: { content: data.unit ? `Unit: ${data.unit}` : "" } }] },
+    "Property":         { relation: [{ id: data.propertyId }] },
+  });
+}
+
+const MONTHS_LIST = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December",
+];
+
+export async function createRentTrackerEntry(data: {
+  tenantId: string;
+  propertyId: string;
+  month: string;
+  year: number;
+  amountDue: number;
+  tenantName?: string;
+}): Promise<string> {
+  const entryTitle = `${data.tenantName ?? "Tenant"} — ${data.month} ${data.year}`;
+  return createPage(DB.rentTracker, {
+    "Entry":          { title: [{ text: { content: entryTitle } }] },
+    "Month":          { select: { name: data.month } },
+    "Year":           { number: data.year },
+    "Amount Due":     { number: data.amountDue },
+    "Payment Status": { select: { name: "Unpaid" } },
+    "Property":       { relation: [{ id: data.propertyId }] },
+    "Tenant":         { relation: [{ id: data.tenantId }] },
+  });
+}
+
+/** Create rent tracker entries for a tenant from startMonth through lease end (max 24 months). */
+export async function createRentTrackerSeries(data: {
+  tenantId: string;
+  propertyId: string;
+  amountDue: number;
+  leaseStart: string;
+  leaseEnd?: string;
+  tenantName?: string;
+}): Promise<void> {
+  const start = new Date(data.leaseStart);
+  const end = data.leaseEnd ? new Date(data.leaseEnd) : new Date(start.getFullYear() + 1, start.getMonth(), 1);
+  const cap = new Date(start);
+  cap.setMonth(cap.getMonth() + 24);
+  const cutoff = end < cap ? end : cap;
+
+  const cursor = new Date(start.getFullYear(), start.getMonth(), 1);
+  while (cursor <= cutoff) {
+    await createRentTrackerEntry({
+      tenantId:   data.tenantId,
+      propertyId: data.propertyId,
+      month:      MONTHS_LIST[cursor.getMonth()],
+      year:       cursor.getFullYear(),
+      amountDue:  data.amountDue,
+      tenantName: data.tenantName,
+    });
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+}

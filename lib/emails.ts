@@ -1086,3 +1086,315 @@ export function agentFollowUpEmail({
     ${signoff()}
   `);
 }
+
+// ─────────────────────────────────────────────────────────────
+// LANDLORD ONBOARDING SEQUENCE — 8 emails + tenant intro
+// Dark-first design, progress bar in every email.
+// Short, punchy, one CTA per email.
+// ─────────────────────────────────────────────────────────────
+
+function onboardProgressBar(step: number, label: string): string {
+  const pct = Math.round((step / 10) * 100);
+  return `
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:24px 0 8px;">
+    <tr>
+      <td>
+        <div style="background:#e5e7eb;border-radius:6px;height:8px;overflow:hidden;">
+          <div style="background:${CRIMSON};border-radius:6px;height:8px;width:${pct}%;"></div>
+        </div>
+        <p style="margin:6px 0 0;font-family:${FONT};font-size:11px;color:${MUTED};letter-spacing:0.05em;">
+          <strong style="color:${CRIMSON};">${pct}% complete</strong> &nbsp;·&nbsp; ${label}
+        </p>
+      </td>
+    </tr>
+  </table>`;
+}
+
+function onboardChecklist(items: { label: string; done: boolean }[]): string {
+  const rows = items.map(item => `
+    <tr>
+      <td style="padding:6px 0;font-family:${FONT};font-size:14px;color:${item.done ? TEXT : MUTED};">
+        <span style="margin-right:10px;">${item.done ? "✅" : "⬜"}</span>${item.label}
+      </td>
+    </tr>`).join("");
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0;">${rows}</table>`;
+}
+
+// Email 1 — Welcome + Lease Upload Link
+export function onboardEmail1Welcome(data: {
+  ownerName: string;
+  propertyAddress: string;
+  leaseUploadUrl: string;
+  skipUrl: string;
+}): string {
+  return wrapper(`
+    ${heroCard(
+      `Welcome to Prospera, ${data.ownerName.split(" ")[0]}.`,
+      `Let's get ${data.propertyAddress} set up.`
+    )}
+
+    ${onboardProgressBar(2, "Owner info received")}
+
+    <p style="margin:24px 0 8px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      You're officially in our system. We're excited to manage your property and make ownership as stress-free as possible.
+    </p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      <strong>Your first step:</strong> If you have an existing lease, upload it below. We'll pull every detail automatically — tenant names, rent amounts, dates — so you don't have to type a thing. Takes 30 seconds.
+    </p>
+
+    ${cta("Upload Your Lease Agreement →", data.leaseUploadUrl)}
+
+    <p style="margin:16px 0 0;text-align:center;font-family:${FONT};font-size:13px;color:${MUTED};">
+      No lease yet? <a href="${data.skipUrl}" style="color:${CRIMSON};text-decoration:none;font-weight:600;">Skip this step →</a>
+    </p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 2 — Details Received + Agreement Link
+export function onboardEmail2DetailsReceived(data: {
+  ownerName: string;
+  propertyAddress: string;
+  tenantCount: number;
+  fieldsExtracted: number;
+  agreementUrl: string;
+}): string {
+  return wrapper(`
+    ${heroCard(
+      "Details received.",
+      `${data.propertyAddress} is taking shape.`
+    )}
+
+    ${onboardProgressBar(5, "Property details confirmed")}
+
+    ${onboardChecklist([
+      { label: `Property at ${data.propertyAddress} set up`, done: true },
+      { label: `${data.tenantCount} tenant${data.tenantCount !== 1 ? "s" : ""} added${data.fieldsExtracted > 0 ? ` (${data.fieldsExtracted} fields pulled from lease)` : ""}`, done: true },
+      { label: "Rent collection schedule created", done: true },
+      { label: "Management agreement — pending your signature", done: false },
+    ])}
+
+    <p style="margin:20px 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      One more thing: your management agreement. Straightforward — takes about 2 minutes to read and sign.
+    </p>
+
+    ${cta("Review & Sign Your Agreement →", data.agreementUrl)}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 3 — Agreement Signed + Book Meeting
+export function onboardEmail3AgreementSigned(data: {
+  ownerName: string;
+  propertyAddress: string;
+  signedAt: string;
+  calendlyUrl?: string;
+}): string {
+  const bookingLink = data.calendlyUrl
+    ?? `mailto:hello@prosperaproperties.co?subject=Key%20Handover%20%E2%80%94%20${encodeURIComponent(data.propertyAddress)}`;
+  return wrapper(`
+    ${heroCard("Agreement confirmed. ✓", "Let's meet at the property.")}
+
+    ${onboardProgressBar(5, "Management agreement signed")}
+
+    ${noteBox(`Signed by ${data.ownerName} on ${new Date(data.signedAt).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}. Saved to your file.`, "Agreement on record")}
+
+    <p style="margin:20px 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      Next step: let's meet at the property to collect the keys, do a quick walkthrough, and complete the initial inspection. Usually 30–45 minutes.
+    </p>
+
+    ${cta("Book Your Key Handover →", bookingLink)}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 4 — Keys Received
+export function onboardEmail4KeysReceived(data: {
+  ownerName: string;
+  propertyAddress: string;
+  keyCount?: number;
+}): string {
+  return wrapper(`
+    ${heroCard("Keys received. 🔑", `${data.propertyAddress} is secure with us.`)}
+
+    ${onboardProgressBar(6, "Keys & access confirmed")}
+
+    <p style="margin:24px 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      We've received ${data.keyCount ? `${data.keyCount} key${data.keyCount !== 1 ? "s" : ""}` : "the keys"} for ${data.propertyAddress}. We're storing them securely. Next up: the initial inspection — we'll send you the full report when it's done.
+    </p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 5 — Inspection Complete
+export function onboardEmail5InspectionDone(data: {
+  ownerName: string;
+  propertyAddress: string;
+  condition: string;
+  issueCount: number;
+  nextInspectionDate: string;
+}): string {
+  const hasIssues = data.issueCount > 0;
+  return wrapper(`
+    ${heroCard(
+      "Inspection complete. 📋",
+      hasIssues
+        ? `${data.issueCount} item${data.issueCount !== 1 ? "s" : ""} noted at ${data.propertyAddress}.`
+        : `${data.propertyAddress} is in great shape.`
+    )}
+
+    ${onboardProgressBar(7, "Initial inspection done")}
+
+    ${onboardChecklist([
+      { label: `Overall condition: ${data.condition}`, done: true },
+      { label: hasIssues
+          ? `${data.issueCount} issue${data.issueCount !== 1 ? "s" : ""} logged — we'll follow up with quotes`
+          : "No issues found", done: true },
+      { label: `Next inspection: ${data.nextInspectionDate}`, done: true },
+    ])}
+
+    ${hasIssues
+      ? `<p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">We'll follow up with quotes and timelines shortly.</p>`
+      : `<p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Your property is well maintained. We'll check in again on ${data.nextInspectionDate}.</p>`
+    }
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 6 — Tenants Notified
+export function onboardEmail6TenantsNotified(data: {
+  ownerName: string;
+  propertyAddress: string;
+  tenantCount: number;
+}): string {
+  return wrapper(`
+    ${heroCard("Your tenants have been notified. ✅", data.propertyAddress)}
+
+    ${onboardProgressBar(8, "Tenant notifications sent")}
+
+    <p style="margin:24px 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      All ${data.tenantCount} tenant${data.tenantCount !== 1 ? "s" : ""} at ${data.propertyAddress} received an introduction letter and their Tenant Guidebook — garbage schedule, parking, property rules, and emergency contacts.
+    </p>
+    <p style="margin:0 0 0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      One last step — confirming your financial setup and you're fully onboarded.
+    </p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 7 — Financial Setup Confirmed
+export function onboardEmail7FinancialSetup(data: {
+  ownerName: string;
+  propertyAddress: string;
+  rentCollectionDate: string;
+  feeDescription: string;
+  reportDay?: number;
+}): string {
+  const rd = data.reportDay ?? 3;
+  const suffix = rd === 1 ? "st" : rd === 2 ? "nd" : rd === 3 ? "rd" : "th";
+  return wrapper(`
+    ${heroCard("Financial setup complete. 💰", "Here's what happens next.")}
+
+    ${onboardProgressBar(9, "Financial setup confirmed")}
+
+    ${onboardChecklist([
+      { label: `Rent collection begins ${data.rentCollectionDate}`, done: true },
+      { label: `Management fee: ${data.feeDescription} — deducted monthly`, done: true },
+      { label: "Net payment arrives by the 5th of each month", done: true },
+      { label: `Monthly report arrives on the ${rd}${suffix} of each month`, done: true },
+    ])}
+
+    <p style="margin:20px 0 0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      Almost there — your personal dashboard is being prepared now.
+    </p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Email 8 — Welcome, Fully Onboarded
+export function onboardEmail8Welcome(data: {
+  ownerName: string;
+  propertyAddress: string;
+  tenantCount: number;
+  rentCollectionDate: string;
+  dashboardUrl: string;
+  checkInDate?: string;
+}): string {
+  return wrapper(`
+    ${heroCard("You're officially with Prospera. 🎉", `${data.propertyAddress} is live.`)}
+
+    ${onboardProgressBar(10, "Fully onboarded")}
+
+    ${onboardChecklist([
+      { label: `${data.propertyAddress} set up in our system`, done: true },
+      { label: `${data.tenantCount} tenant${data.tenantCount !== 1 ? "s" : ""} on file and notified`, done: true },
+      { label: "Initial inspection complete", done: true },
+      { label: `Rent collection begins ${data.rentCollectionDate}`, done: true },
+      { label: "Monthly reports arrive on the 3rd of each month", done: true },
+      { label: "Your personal dashboard is ready", done: true },
+    ])}
+
+    ${cta("Access Your Dashboard →", data.dashboardUrl)}
+
+    <p style="margin:8px 0 24px;text-align:center;font-family:${FONT};font-size:12px;color:${MUTED};">
+      Bookmark this link — it's yours forever.
+    </p>
+
+    ${data.checkInDate
+      ? noteBox(`I'll reach out on ${data.checkInDate} for our first check-in. Until then, my direct line is always open.`, "30-Day Check-In")
+      : ""}
+
+    ${divider()}
+    <p style="margin:0 0 8px;font-size:15px;color:${TEXT};font-family:${FONT};font-weight:600;">You're in good hands.</p>
+    ${signoff()}
+  `);
+}
+
+// Tenant Intro Letter
+export function onboardTenantIntroEmail(data: {
+  tenantName: string;
+  propertyAddress: string;
+  startDate: string;
+}): string {
+  return wrapper(`
+    ${heroCard(
+      `Hi ${data.tenantName.split(" ")[0]},`,
+      "Important update about your property management."
+    )}
+
+    <p style="margin:24px 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      My name is Ebin Jaison from <strong>Prospera Properties</strong>. Starting ${data.startDate}, I'll be managing <strong>${data.propertyAddress}</strong> on behalf of the property owner.
+    </p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      For maintenance requests, rent questions, or anything related to your unit — I'm your contact going forward.
+    </p>
+
+    ${noteBox("Phone/Text: (519) 697-1227<br>Email: hello@prosperaproperties.co<br>Response time: same day for urgent matters", "How to reach me")}
+
+    <p style="margin:20px 0 16px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      <strong>Rent payments:</strong> Please continue paying rent as you normally do. Any changes to payment instructions will be sent in writing with at least 60 days' notice.
+    </p>
+    <p style="margin:0 0 24px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      Attached is your Tenant Guidebook — property rules, garbage schedule, parking info, and emergency contacts.
+    </p>
+
+    ${divider()}
+    <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">Looking forward to working with you.</p>
+    <br>
+    ${signoff()}
+  `);
+}
