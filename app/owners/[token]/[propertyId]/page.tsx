@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { buildOwnerDashboard, getCachedDashboard } from "@/lib/owners-data";
+import { getDashboard } from "@/lib/owners-data";
 import { MetricCard } from "@/components/owners/MetricCard";
 import { IncomeChart } from "@/components/owners/IncomeChart";
 import { TenantCard } from "@/components/owners/TenantCard";
@@ -47,11 +47,9 @@ export default async function PropertyDetailPage({ params }: Props) {
   let dashboard;
   let isStale = false;
   try {
-    dashboard = await buildOwnerDashboard(record.notion_owner_ids, record.owner_names);
+    ({ dashboard, isStale } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
   } catch {
-    dashboard = await getCachedDashboard(token);
-    isStale = true;
-    if (!dashboard) return notFound();
+    return notFound();
   }
 
   const propertyData = dashboard.properties.find(p => p.property.id === propertyId);

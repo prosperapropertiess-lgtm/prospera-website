@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { buildOwnerDashboard, getCachedDashboard } from "@/lib/owners-data";
+import { getDashboard } from "@/lib/owners-data";
 import { PropertyCard } from "@/components/owners/PropertyCard";
 import { MetricCard } from "@/components/owners/MetricCard";
 import OwnerHeader from "@/components/owners/OwnerHeader";
@@ -24,23 +24,18 @@ export default async function OwnerOverviewPage({ params }: Props) {
 
   if (!record) return notFound();
 
-  // Try live Notion data, fall back to cache if Notion is down
   let dashboard;
   let isStale = false;
   try {
-    dashboard = await buildOwnerDashboard(record.notion_owner_ids, record.owner_names);
+    ({ dashboard, isStale } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
   } catch {
-    dashboard = await getCachedDashboard(token);
-    isStale = true;
-    if (!dashboard) {
-      return (
-        <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-outfit)" }}>
-            Unable to load data. Please try again in a moment.
-          </p>
-        </div>
-      );
-    }
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-outfit)" }}>
+          Unable to load data. Please try again in a moment.
+        </p>
+      </div>
+    );
   }
 
   const firstNames = record.owner_names.split(/[&,]/)[0].trim().split(" ")[0];

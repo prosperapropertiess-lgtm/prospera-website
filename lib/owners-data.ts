@@ -225,6 +225,9 @@ export async function buildOwnerDashboard(
 
 // ── Cache helpers ──────────────────────────────────────────────────────────
 
+// Refresh cache if older than 4 hours
+const CACHE_TTL_MS = 4 * 60 * 60 * 1000;
+
 export async function getCachedDashboard(token: string): Promise<OwnerDashboard | null> {
   try {
     const sb = getSupabaseAdmin();
@@ -252,5 +255,46 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
     });
   } catch {
     // Cache failures are non-fatal
+  }
+}
+
+/**
+ * Cache-first loader:
+ * 1. Serve Supabase cache instantly if fresh (< 4 hours old)
+ * 2. If stale or missing, fetch live from Notion + update cache
+ * 3. If stale but Notion fails, serve stale cache anyway
+ */
+export async function getDashboard(
+  token: string,
+  notionOwnerIds: string[],
+  ownerNames: string
+): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
+  const cached = await getCachedDashboard(token);
+
+  const cacheAge = cached?.cachedAt
+    ? Date.now() - new Date(cached.cachedAt).getTime()
+    : Infinity;
+
+  // Cache is fresh — serve immediately
+  if (cached && cacheAge < CACHE_TTL_MS) {
+    // Trigger background refresh if cache is older than 1 hour
+    if (cacheAge > 60 * 60 * 1000) {
+      buildOwnerDashboard(notionOwnerIds, ownerNames)
+        .then(fresh => cacheDashboard(token, fresh))
+        .catch(() => {});
+    }
+    return { dashboard: cached, isStale: false };
+  }
+
+  // Cache is stale or missing — fetch live
+  try {
+    const fresh = await buildOwnerDashboard(notionOwnerIds, ownerNames);
+    // Fire-and-forget cache write
+    cacheDashboard(token, fresh).catch(() => {});
+    return { dashboard: fresh, isStale: false };
+  } catch {
+    // Notion down — serve stale cache if available
+    if (cached) return { dashboard: cached, isStale: true };
+    throw new Error("No data available");
   }
 }
