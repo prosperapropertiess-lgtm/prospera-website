@@ -54,9 +54,13 @@ export function paymentStatusStyle(status: string): { color: string; bg: string;
 export function buildPropertySection(pr: PropertyReport, month: string, year: number): string {
   const { property, tenants, rentCurrentMonth, expensesCurrentMonth, rentYTD, maintenanceOpen } = pr;
 
-  // If amountPaid not filled but status is Paid, treat amountDue as collected
-  const effectivePaid = (r: { amountPaid: number | null; amountDue: number | null; paymentStatus: string }) =>
-    r.amountPaid ?? ((r.paymentStatus ?? "").toLowerCase().includes("paid") ? (r.amountDue ?? 0) : 0);
+  // If amountPaid not filled but status is exactly "Paid", treat amountDue as collected
+  // NOTE: must use === not .includes() — "Unpaid".includes("paid") is true
+  const effectivePaid = (r: { amountPaid: number | null; amountDue: number | null; paymentStatus: string }) => {
+    const status = (r.paymentStatus ?? "").toLowerCase().trim();
+    const isPaid = status === "paid" || status === "on time" || status === "partial";
+    return r.amountPaid ?? (isPaid ? (r.amountDue ?? 0) : 0);
+  };
 
   const totalRentCollected = rentCurrentMonth.reduce((s, r) => s + effectivePaid(r), 0);
   const totalRentDue = rentCurrentMonth.reduce((s, r) => s + (r.amountDue ?? 0), 0);
@@ -338,41 +342,49 @@ ${draftBannerHtml}
 <!-- Email Container -->
 <div style="max-width:600px;margin:0 auto;background:#1F2F3A;overflow:hidden;">
 
-  <!-- Header -->
-  <div style="padding:28px 40px;background:#1F2F3A;">
+  <!-- Header bar: logo left, date right -->
+  <div style="padding:20px 32px;background:#1F2F3A;">
     <table style="width:100%;border-collapse:collapse;">
       <tr>
-        <td>
-          <img alt="Prospera Properties" src="https://www.prosperaproperties.co/logo.png"
-            style="height:36px;width:auto;display:block;"
-            onerror="this.style.display='none'" />
+        <td style="vertical-align:middle;">
+          <!-- Logo box: white pill so logo is visible on dark bg -->
+          <div style="display:inline-block;background:#ffffff;border-radius:10px;padding:6px 14px;line-height:0;">
+            <img alt="Prospera Properties" src="https://www.prosperaproperties.co/logo.png"
+              style="height:28px;width:auto;display:block;"
+              onerror="this.style.display='none'" />
+          </div>
         </td>
-        <td style="text-align:right;">
-          <span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">${month} ${year} Report</span>
+        <td style="text-align:right;vertical-align:middle;">
+          <span style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.15em;">${month} ${year} Report</span>
         </td>
       </tr>
     </table>
   </div>
 
-  <!-- Hero (dark navy, centered text) -->
-  <div style="padding:40px 40px 48px;text-align:center;background:#1F2F3A;">
-    <!-- Monthly Report pill -->
-    <div style="display:inline-block;padding:4px 16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#ffffff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:20px;font-family:Arial,sans-serif;">Monthly Report</div>
+  <!-- Hero card: white card floating on navy -->
+  <div style="padding:0 24px 32px;">
+    <div style="background:#ffffff;border-radius:24px;padding:40px 36px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
 
-    <div style="font-family:Arial,sans-serif;font-size:32px;font-weight:700;color:#ffffff;margin:0 0 12px;">Hello ${ownerFirstNames},</div>
-    <p style="font-family:Arial,sans-serif;font-size:15px;color:rgba(255,255,255,0.7);max-width:380px;margin:0 auto 20px;line-height:1.7;">${narrative.openingSentence}</p>
-    <div style="font-family:Arial,sans-serif;font-size:16px;font-weight:700;color:#8B2030;text-decoration:underline;text-underline-offset:4px;margin-bottom:24px;">${primaryAddress}</div>
+      <!-- Monthly Report pill -->
+      <div style="display:inline-block;padding:4px 14px;background:#f5f3f0;border:1px solid #e4e2df;color:#43474b;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:24px;font-family:Arial,sans-serif;">Monthly Report</div>
 
-    <!-- Ebin photo + byline -->
-    <div style="width:52px;height:52px;border-radius:99px;overflow:hidden;margin:0 auto 8px;border:2px solid #ffffff;">
-      <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
-        style="width:52px;height:52px;object-fit:cover;display:block;"
-        onerror="this.style.display='none'" />
+      <!-- Greeting -->
+      <div style="font-family:Arial,sans-serif;font-size:30px;font-weight:700;color:#1F2F3A;margin:0 0 14px;line-height:1.2;">Hello ${ownerFirstNames},</div>
+      <p style="font-family:Arial,sans-serif;font-size:14px;color:#43474b;max-width:360px;margin:0 auto 20px;line-height:1.8;">${narrative.openingSentence}</p>
+      <div style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#8B2030;margin-bottom:28px;">${primaryAddress}</div>
+
+      <!-- Divider -->
+      <div style="height:1px;background:#f0eee9;margin:0 0 24px;"></div>
+
+      <!-- Ebin photo + byline -->
+      <div style="width:48px;height:48px;border-radius:99px;overflow:hidden;margin:0 auto 8px;border:2px solid #e4e2df;">
+        <img alt="Ebin" src="https://www.prosperaproperties.co/ebin-founder.jpg"
+          style="width:48px;height:48px;object-fit:cover;display:block;"
+          onerror="this.style.display='none'" />
+      </div>
+      <div style="font-family:Arial,sans-serif;font-size:9px;font-weight:700;color:#43474b;text-transform:uppercase;letter-spacing:0.2em;opacity:0.5;">Report by Ebin</div>
+
     </div>
-    <div style="font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.2em;">Report by Ebin</div>
-
-    <!-- Thin divider -->
-    <div style="height:1px;background:rgba(255,255,255,0.08);margin:32px 0 0;"></div>
   </div>
 
   <!-- Property Sections -->
