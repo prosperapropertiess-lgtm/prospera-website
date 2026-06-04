@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { createOwnerInNotion, createPropertyInNotion } from "@/lib/notion";
-import { onboardEmail1Welcome } from "@/lib/emails";
+import { createOwnerInNotion, createPropertyInNotion, createTenantInNotion, createRentTrackerSeries } from "@/lib/notion";
+import { onboardEmail1Welcome, onboardEmail3AgreementSigned } from "@/lib/emails";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.prosperaproperties.co";
 
@@ -141,6 +141,99 @@ export async function POST(
     }
 
     return NextResponse.json({ ok: true, next_step: 4, notion_property_id: notionPropertyId });
+  }
+
+  // ── Step 4: Owner Details Form (owner-submitted) ─────────────
+  if (step === 4) {
+    // body is the full details JSON from the owner
+    const parsedLease = session.lease_parsed_data ?? {};
+    const tenants: Array<Record<string, unknown>> = Array.isArray(parsedLease.tenants) ? parsedLease.tenants : [];
+
+    // Create Notion tenant records + rent tracker
+    for (const tenant of tenants) {
+      try {
+        const tenantId = await createTenantInNotion({
+          name: String(tenant.name || "Tenant"),
+          email: tenant.email ? String(tenant.email) : undefined,
+          phone: tenant.phone ? String(tenant.phone) : undefined,
+          unit: tenant.unit ? String(tenant.unit) : undefined,
+          monthlyRent: parsedLease.monthlyRent ? Number(parsedLease.monthlyRent) : undefined,
+          leaseStart: parsedLease.leaseStart ? String(parsedLease.leaseStart) : undefined,
+          leaseEnd: parsedLease.leaseEnd ? String(parsedLease.leaseEnd) : undefined,
+          securityDeposit: parsedLease.securityDeposit ? Number(parsedLease.securityDeposit) : undefined,
+          propertyId: session.notion_property_id || "",
+        });
+
+        if (session.notion_property_id && parsedLease.monthlyRent && parsedLease.leaseStart) {
+          await createRentTrackerSeries({
+            tenantId,
+            propertyId: session.notion_property_id,
+            amountDue: Number(parsedLease.monthlyRent),
+            leaseStart: String(parsedLease.leaseStart),
+            leaseEnd: parsedLease.leaseEnd ? String(parsedLease.leaseEnd) : undefined,
+            tenantName: String(tenant.name || "Tenant"),
+          });
+        }
+      } catch (e) {
+        console.error("Notion tenant create failed:", e);
+      }
+    }
+
+    await sb.from("onboarding_sessions").update({
+      details: body,
+      current_step: 5,
+      step4_completed_at: new Date().toISOString(),
+    }).eq("token", token);
+
+    return NextResponse.json({ ok: true, next_step: 5 });
+  }
+
+  // ── Step 5: Management Agreement (owner-submitted) ────────────
+  if (step === 5) {
+    const { signed_name, ip } = body;
+
+    const signedAt = new Date().toISOString();
+
+    await sb.from("onboarding_sessions").update({
+      agreement_signed_at: signedAt,
+      agreement_ip: ip || null,
+      agreement_name: signed_name || null,
+      current_step: 6,
+    }).eq("token", token);
+
+    // Send Email 3 to owner (agreement confirmed + book meeting)
+    if (session.owner_email) {
+      try {
+        const html = onboardEmail3AgreementSigned({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          signedAt,
+        });
+        await sendEmail(
+          session.owner_email,
+          "Agreement confirmed — let's meet at the property",
+          html
+        );
+      } catch (e) {
+        console.error("Email 3 failed:", e);
+      }
+    }
+
+    // Alert Ebin
+    const ebinEmail = process.env.EBIN_EMAIL || "prosperapropertiess@gmail.com";
+    try {
+      await sendEmail(
+        ebinEmail,
+        `${session.owner_name || "Owner"} signed the management agreement`,
+        `<p><strong>${session.owner_name}</strong> signed the management agreement for <strong>${session.property_address}</strong> at ${new Date(signedAt).toLocaleString("en-CA")}.</p>
+         <p>Their details form has been submitted. Ready for keys handover.</p>
+         <p><a href="${BASE_URL}/admin/onboard/${token}">View checklist →</a></p>`
+      );
+    } catch (e) {
+      console.error("Ebin alert failed:", e);
+    }
+
+    return NextResponse.json({ ok: true, next_step: 6 });
   }
 
   // ── Step 6: Keys & Access ─────────────────────────────────────
