@@ -55,7 +55,7 @@ export async function POST(
         const { Resend } = await import("resend");
         const resend = new Resend(resendKey);
         await resend.emails.send({
-          from: "Ebin | Prospera Properties <prosperapropertiess@gmail.com>",
+          from: "Ebin | Prospera Properties <hello@prosperaproperties.co>",
           to: session.owner_email,
           subject: "Details received — one signature and you're halfway there",
           html,

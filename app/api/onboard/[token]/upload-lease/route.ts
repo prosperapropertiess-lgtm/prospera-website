@@ -169,7 +169,7 @@ export async function POST(
       const { Resend } = await import("resend");
       const resend = new Resend(resendKey);
       await resend.emails.send({
-        from: "Prospera System <prosperapropertiess@gmail.com>",
+        from: "Ebin | Prospera Properties <hello@prosperaproperties.co>",
         to: ebinEmail,
         subject: `Lease uploaded — ${session.property_address || token} (${fieldsExtracted} fields extracted)`,
         html: `<p>Lease uploaded for <strong>${session.owner_name}</strong> at ${session.property_address}.</p>

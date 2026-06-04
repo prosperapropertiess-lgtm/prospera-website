@@ -380,7 +380,7 @@ export default function OwnerDetailsPage() {
           )}
 
           {/* Submit */}
-          <div style={{ position: "sticky", bottom: 0, padding: "16px 0 8px", backgroundColor: BG, marginTop: 28 }}>
+          <div style={{ marginTop: 28, paddingBottom: 8 }}>
             <button
               type="submit"
               disabled={saving}

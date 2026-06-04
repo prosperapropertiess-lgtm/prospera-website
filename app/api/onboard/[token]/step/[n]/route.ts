@@ -18,15 +18,19 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.prosperaproper
 
 async function sendEmail(to: string, subject: string, html: string) {
   const key = process.env.RESEND_API_KEY;
-  if (!key) return;
+  if (!key) {
+    console.error("[onboard] RESEND_API_KEY not set — email skipped:", subject);
+    return;
+  }
   const { Resend } = await import("resend");
   const resend = new Resend(key);
-  await resend.emails.send({
-    from: "Ebin | Prospera Properties <prosperapropertiess@gmail.com>",
+  const result = await resend.emails.send({
+    from: "Ebin | Prospera Properties <hello@prosperaproperties.co>",
     to,
     subject,
     html,
   });
+  console.log("[onboard] email sent:", subject, "→", to, result.data?.id ?? result.error);
 }
 
 export async function POST(
