@@ -54,11 +54,15 @@ export function paymentStatusStyle(status: string): { color: string; bg: string;
 export function buildPropertySection(pr: PropertyReport, month: string, year: number): string {
   const { property, tenants, rentCurrentMonth, expensesCurrentMonth, rentYTD, maintenanceOpen } = pr;
 
-  const totalRentCollected = rentCurrentMonth.reduce((s, r) => s + (r.amountPaid ?? 0), 0);
+  // If amountPaid not filled but status is Paid, treat amountDue as collected
+  const effectivePaid = (r: { amountPaid: number | null; amountDue: number | null; paymentStatus: string }) =>
+    r.amountPaid ?? ((r.paymentStatus ?? "").toLowerCase().includes("paid") ? (r.amountDue ?? 0) : 0);
+
+  const totalRentCollected = rentCurrentMonth.reduce((s, r) => s + effectivePaid(r), 0);
   const totalRentDue = rentCurrentMonth.reduce((s, r) => s + (r.amountDue ?? 0), 0);
   const totalExpenses = expensesCurrentMonth.reduce((s, e) => s + (e.amount ?? 0), 0);
   const netToOwner = totalRentCollected - totalExpenses;
-  const ytdRent = rentYTD.reduce((s, r) => s + (r.amountPaid ?? 0), 0);
+  const ytdRent = rentYTD.reduce((s, r) => s + effectivePaid(r), 0);
 
   // Group expenses by category
   const expenseByCategory: Record<string, number> = {};
