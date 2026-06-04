@@ -9,7 +9,7 @@ interface Props {
   params: Promise<{ token: string }>;
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export default async function OwnerOverviewPage({ params }: Props) {
   const { token } = await params;

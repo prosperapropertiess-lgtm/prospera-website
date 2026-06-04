@@ -14,7 +14,7 @@ interface Props {
   params: Promise<{ token: string; propertyId: string }>;
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });

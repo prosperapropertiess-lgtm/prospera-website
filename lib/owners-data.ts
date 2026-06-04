@@ -3,6 +3,7 @@
  * Extends the monthly report data with 12-month history.
  */
 
+import { unstable_cache } from "next/cache";
 import {
   fetchAllOwners,
   fetchAllProperties,
@@ -263,24 +264,25 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
 }
 
 /**
- * Cache-first loader.
- * - If cache exists → serve it instantly (Notion never hit on page load)
- * - If cache is empty (first ever visit) → hit Notion once, write cache, serve result
- * Weekly cron keeps the cache fresh after that.
+ * Cached loader using Next.js unstable_cache (Vercel Data Cache).
+ * - First load: fetches from Notion, result cached for 24 hours
+ * - Subsequent loads: instant, served from Vercel's edge cache
+ * - Weekly cron calls revalidateTag("owner-dashboard") to bust the cache
  */
-export async function getDashboard(
+export function getDashboard(
   token: string,
   notionOwnerIds: string[],
   ownerNames: string
 ): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
-  const cached = await getCachedDashboard(token);
-
-  if (cached) {
-    return { dashboard: cached, isStale: false };
-  }
-
-  // Cache empty — first run, hit Notion and populate
-  const fresh = await buildOwnerDashboard(notionOwnerIds, ownerNames);
-  cacheDashboard(token, fresh).catch(() => {});
-  return { dashboard: fresh, isStale: false };
+  const cached = unstable_cache(
+    async () => {
+      const dashboard = await buildOwnerDashboard(notionOwnerIds, ownerNames);
+      return { dashboard, isStale: false };
+    },
+    [`owner-dashboard-${token}`],
+    {
+      revalidate: 60 * 60 * 6, // 6 hours — auto-refreshes 4x/day
+    }
+  );
+  return cached();
 }
