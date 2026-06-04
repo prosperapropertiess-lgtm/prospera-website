@@ -181,7 +181,29 @@ export async function GET(req: NextRequest) {
           html: htmlBody,
         });
 
-        results.push({ owners: ownerNames, status: "draft sent to Ebin" });
+        // Build financial summary for debugging
+        const financials = bundle.properties.map(pr => {
+          const effectivePaid = (r: { amountPaid: number | null; amountDue: number | null; paymentStatus: string }) => {
+            const s = (r.paymentStatus ?? "").toLowerCase().trim();
+            return r.amountPaid ?? ((s === "paid" || s === "on time" || s === "partial") ? (r.amountDue ?? 0) : 0);
+          };
+          const rentCollected = pr.rentCurrentMonth.reduce((s, r) => s + effectivePaid(r), 0);
+          const rentDue = pr.rentCurrentMonth.reduce((s, r) => s + (r.amountDue ?? 0), 0);
+          const expenses = pr.expensesCurrentMonth.reduce((s, e) => s + (e.amount ?? 0), 0);
+          const ytd = pr.rentYTD.reduce((s, r) => s + effectivePaid(r), 0);
+          return {
+            property: pr.property.address,
+            rentEntries: pr.rentCurrentMonth.length,
+            rentCollected,
+            rentDue,
+            expenses,
+            expenseEntries: pr.expensesCurrentMonth.length,
+            netToOwner: rentCollected - expenses,
+            ytd,
+            ytdEntries: pr.rentYTD.length,
+          };
+        });
+        results.push({ owners: ownerNames, status: "draft sent to Ebin", financials } as any);
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : String(err);
         results.push({ owners: ownerNames, status: "error", error: message });
