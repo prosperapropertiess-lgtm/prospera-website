@@ -91,9 +91,9 @@ export default async function OwnerOverviewPage({ params }: Props) {
                 marginBottom: "40px",
               }}
             >
-              <MetricCard label="YTD Rent Collected" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
-              <MetricCard label="YTD Expenses" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
-              <MetricCard label="YTD Net to You" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
+              <MetricCard label="Collected This Year" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
+              <MetricCard label="Expenses This Year" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
+              <MetricCard label="In Your Pocket" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
               <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#fbbf24" : "#22c55e"} />
             </div>
           )}

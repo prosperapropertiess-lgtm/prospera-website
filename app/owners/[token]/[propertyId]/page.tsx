@@ -148,7 +148,7 @@ export default async function PropertyDetailPage({ params }: Props) {
               <MetricCard label={`${dashboard.currentMonth} Rent`} value={monthRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
               <MetricCard label={`${dashboard.currentMonth} Net`} value={monthNet} prefix="$" format="currency" highlight icon="trending_up" delay={80} />
               <MetricCard label="Open Maintenance" value={maintenanceOpen.length} icon="build" delay={160} colorClass={maintenanceOpen.length > 0 ? "#fbbf24" : "#22c55e"} />
-              <MetricCard label="YTD Net to You" value={ytdNet} prefix="$" format="currency" icon="account_balance" delay={240} colorClass={ytdNet >= 0 ? "#86efac" : "#ef4444"} />
+              <MetricCard label="In Your Pocket" value={ytdNet} prefix="$" format="currency" icon="account_balance" delay={240} colorClass={ytdNet >= 0 ? "#86efac" : "#ef4444"} />
             </div>
           </div>
         </div>
@@ -235,9 +235,9 @@ export default async function PropertyDetailPage({ params }: Props) {
                 gap: "20px",
               }}
             >
-              <FinStat label="YTD Rent Collected" value={fmt$(ytdRentCollected)} color="white" />
-              <FinStat label="YTD Expenses" value={fmt$(ytdExpenses)} color="rgba(255,255,255,0.5)" />
-              <FinStat label="YTD Net to You" value={fmt$(ytdNet)} color={ytdNet >= 0 ? "#86efac" : "#ef4444"} large />
+              <FinStat label="Collected This Year" value={fmt$(ytdRentCollected)} color="white" />
+              <FinStat label="Expenses This Year" value={fmt$(ytdExpenses)} color="rgba(255,255,255,0.5)" />
+              <FinStat label="In Your Pocket" value={fmt$(ytdNet)} color={ytdNet >= 0 ? "#86efac" : "#ef4444"} large />
             </div>
           </section>
 
