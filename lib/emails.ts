@@ -73,11 +73,10 @@ function wrapper(content: string): string {
   <title>Prospera Properties</title>
   <style>
     :root { color-scheme: light only; }
-    body { color-scheme: light only; background-color: ${BG_OUTER} !important; }
+    body { color-scheme: light only; background-color: ${NAVY} !important; }
     @media (prefers-color-scheme: dark) {
-      html, body { background-color: ${BG_OUTER} !important; }
-      .email-outer { background-color: ${BG_OUTER} !important; }
-      .email-container { background-color: #fbf9f6 !important; }
+      html, body { background-color: ${NAVY} !important; }
+      .email-container { background-color: #ffffff !important; }
       .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
       .hero-heading { color: ${NAVY} !important; }
       .body-text { color: ${TEXT} !important; }
@@ -92,11 +91,11 @@ function wrapper(content: string): string {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color-scheme:light !important;" bgcolor="${BG_OUTER}">
+<body style="margin:0;padding:0;background-color:${NAVY};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color-scheme:light !important;" bgcolor="${NAVY}">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
-      <td class="outer-pad" align="center" style="padding:24px 16px;">
-        <table cellpadding="0" cellspacing="0" role="presentation" bgcolor="#fbf9f6" style="max-width:600px;width:100%;background-color:#fbf9f6;overflow:hidden;">
+      <td class="outer-pad" align="center" style="padding:24px 16px;background-color:${NAVY};" bgcolor="${NAVY}">
+        <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;overflow:hidden;">
 
           <!-- Header -->
           <tr>

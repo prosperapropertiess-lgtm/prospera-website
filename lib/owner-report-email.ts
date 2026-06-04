@@ -324,11 +324,10 @@ export function buildEmailHTML(
 <title>${narrative.subject}</title>
 <style>
   :root { color-scheme: light only; }
-  body { color-scheme: light only; background-color: #F7F5F2 !important; }
+  body { color-scheme: light only; background-color: #1F2F3A !important; }
   @media (prefers-color-scheme: dark) {
-    html, body { background-color: #F7F5F2 !important; }
-    .email-wrapper { background-color: #F7F5F2 !important; }
-    .email-container { background-color: #fbf9f6 !important; }
+    html, body { background-color: #1F2F3A !important; }
+    .email-container { background-color: #ffffff !important; }
     .hero-card { background: linear-gradient(135deg,#f5f3f0,#eae8e5) !important; }
     .hero-heading { color: #1F2F3A !important; }
     .hero-text { color: #43474b !important; }
@@ -339,11 +338,11 @@ export function buildEmailHTML(
   }
 </style>
 </head>
-<body style="background:#F7F5F2;margin:0;padding:0;-webkit-font-smoothing:antialiased;color-scheme:light !important;" bgcolor="#F7F5F2">
+<body style="background:#1F2F3A;margin:0;padding:0;-webkit-font-smoothing:antialiased;color-scheme:light !important;" bgcolor="#1F2F3A">
 
 ${draftBannerHtml}
 <!-- Email Container -->
-<div style="max-width:600px;margin:0 auto;background:#fbf9f6;overflow:hidden;">
+<div class="email-container" style="max-width:600px;margin:0 auto;background:#ffffff;overflow:hidden;">
 
   <!-- Header -->
   <div style="padding:28px 40px;">
