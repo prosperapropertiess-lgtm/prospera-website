@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-05-31
+Last updated: 2026-06-07
 
 ## New Topic Opportunities
 Topics found in competitor/search results that we have no post covering. Blog agent should prioritize these above the default keyword list.
@@ -24,6 +24,30 @@ Topics found in competitor/search results that we have no post covering. Blog ag
 
 - **Complete LTB Forms Directory for Ontario Landlords**: Multiple competitors have a master "all LTB forms explained" index (foundspaces.ca, mardamanagement.com, olhgroup.ca) that serves as a high-traffic hub and earns backlinks. We have individual N-form posts but no overview index. Angle: every N-form (N1–N13) with one-line description and link to our dedicated post; every L-form (L1, L2, L9, L10) with use-case, filing fee, portal filing steps, and current processing timelines.
 
+### Added 2026-06-07
+
+- **last-month-rent-deposit-interest-ontario** | Est. difficulty: LOW | Vol: ~200/mo | The existing `security-deposits-ontario.md` covers basic LMR rules, but the specific obligation to pay annual interest on the deposit (at the guideline rate — 2.1% in 2026), how to calculate it, when the top-up is required, and what happens if you forget is not covered. Small sites (haletale.com, bonniehoy.com, royalyork) ranking — no Wikipedia or CBC. Angle: interest calculation formula, when LMR must be topped up (after AGI), how to apply the deposit at end of tenancy, and what a tenant can do if the landlord fails to pay interest.
+
+- **ontario-standard-lease-addendum-guide** | Est. difficulty: LOW | Vol: ~100/mo | `ontario-standard-lease-2026.md` covers Form 2229E requirements. No post covers what landlords can legally add via addendum (Section 15 of the form), which clauses survive an RTA challenge, and how to draft additional terms that hold up. Small sites (ltbready.ca, singlekey.com, landlordforms.ca) ranking. Angle: valid additional terms (smoking restrictions, parking rules, utility split), prohibited additions (damage deposits, no-pet clauses, mandatory post-dated cheques), and how to structure the addendum so it doesn't void the lease.
+
+- **prohibited-lease-clauses-ontario** | Est. difficulty: LOW | Vol: ~150/mo | Complements the standard lease post but targets a distinct intent: landlords who want to know what they cannot legally include. Small sites ranking. Angle: list format — no-pet clauses illegal, automatic month-to-month conversion waiver void, damage deposit prohibition, post-dated cheque requirement illegal, waiving notice requirements unenforceable. Practical: each clause with plain-language explanation of why it's void and what to do instead.
+
+- **landlord-insurance-vs-home-insurance-ontario** | Est. difficulty: LOW | Vol: ~150/mo | `rental-property-insurance-ontario.md` is a general insurance guide. This specific angle — why standard home insurance becomes invalid the moment a paying tenant moves in — is a distinct, high-urgency search. Small insurance sites (isure.ca, mitchinsurance.com, kaseinsurance.com) ranking. Angle: what changes at policy level when you rent your home, why insurers deny claims under a homeowner policy for rental units, what landlord insurance adds (rental income protection, higher liability), and real-cost breakdown (~$800–$2,500/year). Local hook: mention recommending SW Ontario brokers.
+
+- **ontario-landlord-legal-obligations-checklist-2026** | Est. difficulty: MEDIUM | Vol: ~150/mo | A comprehensive "what you're legally required to do as a landlord" checklist — maintenance standards, heating minimums, entry notice, insurance, standard lease, smoke detector requirements, rent receipt obligations. foundspaces.ca is ranking for this with a thin post. Angle: structured as a printable checklist format covering all RTA obligations, with Bill 60 additions flagged. Good lead gen: landlords who realize how much is required are more likely to consider professional management.
+
+---
+
+## SKIPPED (2026-06-07 research — too competitive or already covered)
+- ontario-rent-increase-guideline-2026 — HIGH competition (ontario.ca, rentals.ca, multiple major sites). Covered by `rent-increase-ontario-guidelines.md`.
+- ltb-eviction-process-2026 — HIGH competition (tribunalsontario.ca, royalyork). Covered by `evicting-tenant-ontario.md` and `l1-application-ltb-ontario.md`.
+- tenant-not-paying-rent-ontario — COVERED by `late-rent-payments-ontario.md`, `n4-notice-ontario.md`, and `l1-application-ltb-ontario.md`.
+- landlord-entry-24-hour-notice-ontario — COVERED by `landlord-entry-rights-ontario.md`.
+- ltb-eviction-timeline-ontario — COVERED by `how-long-does-eviction-take-ontario.md`; LTB wait times opportunity already noted in prior research.
+- above-guideline-rent-increase-2026 — COVERED by `above-guideline-rent-increase-ontario.md`; see Topics to Expand below.
+- tenant-screening-ontario-2026 — COVERED by `tenant-screening-red-flags.md` and `tenant-credit-check-ontario-landlords.md`; OHRC angle already captured in prior opportunities list.
+- ontario-standard-lease-2026-requirements — COVERED by `ontario-standard-lease-2026.md`.
+
 ---
 
 ## GSC: Low-CTR Queries to Target
@@ -43,3 +67,7 @@ Existing posts that are likely thin on content or contain outdated information:
 - **bill-60-ontario-landlords.md** — Add a dedicated section on fixed-term lease changes with examples of how landlords can use them strategically. The fixed-term change is Bill 60's most significant practical impact for day-to-day landlords and should be given more prominence.
 
 - **tenant-credit-check-ontario-landlords.md** — Add an OHRC compliance section covering source of income as a protected ground, the risk of rejecting ODSP/OW applicants, and how to document screening decisions in a way that is defensible at an HRTO hearing.
+
+- **above-guideline-rent-increase-ontario.md** — Add procedural detail for the L5 application: what documents to attach, the 3-year spreading cap (max 3% per year on approved amounts), qualifying capital expenditure examples (roof, boiler, elevators, balconies), extraordinary property tax increase threshold, how to request interim rent collection during the waiting period, and realistic LTB approval timelines. Search results show multiple smaller sites ranking with more procedurally specific AGI content.
+
+- **rental-property-insurance-ontario.md** — Add a cost breakdown table by property type (house ~$900/year, condo/apartment ~$400/year, multi-unit higher) and coverage amounts ($1M–$2M liability standard), plus a section specifically on what triggers a standard home insurance denial. Competitors (cayugamutual.com, isure.ca, kaseinsurance.com) are ranking with cost-specific content that our general post lacks.
