@@ -603,3 +603,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Formal construction industry association — outreach should go to the membership team and frame Prospera as a service provider to LHBA's builder and developer members. The pitch is not content-based; it's membership-based. Emphasize that Prospera provides management services for the rental properties LHBA members build — a natural supply chain relationship. The business development angle (connecting with developers early) is as valuable as the SEO backlink. Site access was blocked at network level; research drawn from known organizational profile.
 
 ---
+
+## Tenon10 — Ontario Landlord Property Management Blog
+- url: https://www.tenon10.com/blog
+- type: blog
+- why: Free Ontario landlord property management platform with an active, well-indexed blog covering N4, N12, Bill 60, Standard Lease, and rent increase topics — identical subject matter to Prospera's own blog, ideal for a mutual resource mention or guest contribution.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: https://www.tenon10.com/contact (contact form; no public email)
+- site_focus: Free SaaS property management platform for Ontario landlords (unlimited properties, $0/month). Blog is the primary SEO vehicle — covering the full Ontario landlord compliance landscape: N4 notices, N12 own-use evictions, Bill 60 7-day rule changes, Standard Lease requirements for 2026, and rent increase (N1) procedures.
+- hook: Tenon10 explains the procedures; Prospera executes them for London-area landlords daily. A guest post pairing Tenon10's procedural depth with Prospera's on-the-ground case examples ("what actually happens at an LTB hearing in London") gives their audience the practitioner's perspective their software-focused content lacks.
+- specific_content: Their "How to Use the N4 Notice in Ontario" and "Ontario N12 Notices 2026: Complete Own-Use Guide" — Prospera handles both filing types for clients and can contribute real-case texture.
+- researcher_notes: Not a competitor — SaaS platform, not a PM company. Blog is active and well-indexed as of June 2026. Best pitch is a guest post offer on Ontario LTB procedures from a London-area practitioner's perspective. Contact via website form.
+
+---
+
+## liv.rent — Canadian Rental Platform Landlord Blog
+- url: https://liv.rent/blog/landlords/
+- type: blog
+- why: Major national rental listing platform with a dedicated Ontario landlord blog section; a guest post or resource mention reaches tens of thousands of Ontario landlords actively seeking property management guidance.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: media@liv.rent
+- site_focus: Canada's leading rental listing platform (Vancouver-headquartered, national coverage including Ontario). Their landlord blog section covers tenant screening, lease management, Ontario rental law, and property management resources. Platform has significant Ontario landlord traffic.
+- hook: Liv.rent's Ontario landlord content covers rights and regulations; Prospera adds the local, boots-on-ground expertise for London, St. Thomas, and Strathroy landlords who want to stop doing it themselves. A guest post on SW Ontario rental market conditions or Ontario LTB procedures, attributed to Prospera, would give their national blog meaningful local depth.
+- specific_content: Their landlord user guide and Ontario tenancy law posts lack London-specific LTB procedural depth — a contributed piece on "navigating the LTB in Southwestern Ontario" fills a genuine content gap.
+- researcher_notes: BC-headquartered but serving Ontario landlords nationally. Contact: media@liv.rent. Strong domain authority. Best pitch is a contributed guest post positioning Prospera as the SW Ontario regional expert voice.
+
+---
+
+## LandlordForms.ca — Ontario Landlord Documentation Blog
+- url: https://www.landlordforms.ca/blog
+- type: blog
+- why: Ontario landlord forms and lease addendum resource with an active compliance-focused blog; audience is exactly the detail-oriented DIY landlord who is one complex eviction away from hiring a property manager.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: https://www.landlordforms.ca (contact form; no public email found)
+- site_focus: Sells Ontario landlord protection addendums and form kits ($29–$59). Blog covers RTA compliance, Standard Lease requirements, lease documentation best practices, and form use under Bill 60. Audience is small landlords who self-manage and want to stay legally protected.
+- hook: LandlordForms.ca's readers are deeply compliance-conscious — the exact landlord who eventually realizes they'd rather pay a professional than stay current on every RTA change themselves. A resource mention linking to Prospera's management services, or a guest post on "when the paperwork becomes a full-time job," speaks directly to their audience's latent need.
+- specific_content: Their "Ontario Landlord Forms: The Complete Guide for 2026" post — Prospera's property managers handle all of this documentation for London-area clients, removing the compliance burden entirely.
+- researcher_notes: Niche product site with a very well-qualified audience for Prospera's services. No public email; contact via website form. Blog active as of March 2026. Low-friction ask: a "professional management" resource mention in one of their compliance posts.
+
+---
+
+## Sean Prosser — Mortgage Broker London Ontario
+- url: https://www.seanprosser.com/blog/
+- type: mortgage
+- why: London Ontario investment property mortgage broker with an active blog; serves the same local rental property investors Prospera targets — a referral partnership mention is a high-value, low-friction ask.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: mailsprosser@mortgagealliance.com
+- site_focus: Award-winning London Ontario mortgage broker (Mortgage Alliance network). Specializes in investment property mortgages, mortgage renewals, and rental property financing. Blog covers investor financing, first-time rental property buyers, and local London mortgage market conditions. High volume: 250M+ funded.
+- hook: Investors who finance rental properties through Sean are exactly the landlords who then need Prospera to manage them. A mutual resource mention — Sean's blog linking to Prospera's "new landlord" guide, Prospera's blog crediting Sean for investor financing — creates a natural local referral loop that serves both businesses.
+- specific_content: Sean's blog covers "investment property mortgages for savvy investors or first-time rental property buyers" — that's Prospera's core client profile the moment they acquire the property.
+- researcher_notes: Phone: (519) 639-5414. Active London ON broker with strong local presence. Highest-value target in this batch — warm referral partnership potential beyond just a backlink. Email is direct.
+
+---
+
+## Assetsoft — Property Management Technology Blog (Ontario)
+- url: https://www.assetsoft.biz/blogs/
+- type: blog
+- why: Ontario-based property management software consultancy with a well-indexed blog covering regulatory compliance and PM technology topics; reaches PM professionals and decision-makers who influence operator recommendations.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: info@assetsoft.biz
+- site_focus: Yardi and MRI Software consultancy based in Markham, Ontario (since 2012). Blog covers property management technology, software implementation, Ontario regulatory compliance, and industry trends. Their Ontario landlord content includes Bill 60 analysis and rent control FAQ.
+- hook: Assetsoft covers PM compliance from a technology and software lens; Prospera provides the on-the-ground perspective of a London-area operator navigating the same regulatory environment daily. A guest contribution or expert quote from Ebin in an Assetsoft post on Bill 60 or Ontario rent control would give their tech-focused audience a practitioner's voice.
+- specific_content: Their "Ontario Landlord Rules 2026: Rent Control & Bill 60 FAQ" — Prospera operates under these rules daily and can add real-case perspective to Assetsoft's regulatory analysis.
+- researcher_notes: Markham-based, not a competitor in London/St. Thomas/Strathroy. Contact: info@assetsoft.biz, +1 647 276 1616. Blog active and well-indexed. Pitch as a practitioner guest voice for their Ontario regulatory content.
+
+---
+
+## TenantPay — Canadian Rent Payment Platform Blog
+- url: https://www.tenantpay.com/blogs
+- type: blog
+- why: National rent payment platform with an active landlord blog covering Ontario-specific rent issues, eviction procedures, and tenant management — reaches the self-managing Ontario landlords Prospera targets.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: sales@tenantpay.com
+- site_focus: Canada's first rent loyalty program/payment platform for tenants and landlords. Blog covers Ontario landlord and tenant rights, late rent management, LTB eviction procedures, and landlord best practices. Active content covering both landlord and tenant perspectives with Ontario-specific focus.
+- hook: TenantPay's blog audience is active self-managing landlords dealing with rent collection issues — exactly the landlord who would benefit from professional property management when rent problems escalate. A guest post on "when to stop self-managing" or a resource mention linking to Prospera's London-area services would resonate with their readers at a pain-point moment.
+- specific_content: Their "A Landlord's Guide to Handling Tenant Rent Payment Issues in Canada" — Prospera handles late rent escalations and LTB L1/L9 filings daily for London-area clients, removing this exact burden.
+- researcher_notes: National platform, not a competitor. Contact: sales@tenantpay.com or support@tenantpay.com. Blog regularly updated with Ontario-specific content. Low-friction ask: guest post or resource mention in their Ontario landlord articles.
+
+---
+
+## Community Real Estate Group — London Ontario Real Estate Blog
+- url: https://communityrealestategroup.ca/
+- type: blog
+- why: London Ontario eXp Realty team with an active market blog; buyers who purchase investment properties through them immediately need property management — a referral mention is mutually beneficial.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: 226-796-5651 (Shawn Westerik: shawn@communityrealestategroup.ca assumed — contact via website form)
+- site_focus: Greater London Ontario real estate team (eXp Realty) led by Shawn and Angela Westerik, specializing in residential buying, selling, and relocation across London, Thorndale, Exeter, and surrounding communities. Blog covers London market conditions, buying advice, and 2026 market outlook.
+- hook: When Community Real Estate Group's investor clients buy rental properties in the London area, they immediately need a property manager. A resource mention — "once you've purchased, here's who manages it" — or a co-authored post on London Ontario investment property buying paired with Prospera's management guidance creates a natural handoff that serves their clients and both businesses.
+- specific_content: Their "What the 2026 Market Means for Buying or Downsizing in London Ontario" post — investors buying in the London market are Prospera's core acquisition client profile.
+- researcher_notes: Phone: 226-796-5651. Not a competitor — realtors, not property managers. Excellent local referral partner candidate. Cover Greater London and surrounding area. Pitch as a complementary local expert resource for their investor buyer clients.
+
+---
+
+## 360Lending — Ontario Mortgage Brokerage Blog
+- url: https://www.360lending.ca/learn
+- type: mortgage
+- why: Award-winning Ontario online mortgage brokerage with a rental property financing blog; audience of first-time and repeat rental property investors is precisely Prospera's acquisition target.
+- researched: true
+- drafted: true
+- added: 2026-06-07
+- contact_email: info@360lending.ca
+- site_focus: Ontario online mortgage brokerage based in Richmond Hill. Blog at 360lending.ca/learn covers real estate investing, first rental property financing, Ontario market conditions, and mortgage strategies for investors. Active content directly targeting the Ontario rental property investor audience.
+- hook: 360Lending helps investors buy rental properties; Prospera manages those properties. A resource mention linking to Prospera's services in their "how to finance your first rental property" posts — or a guest contribution on "what to expect from property management in Ontario" — adds immediate post-purchase value for their investor readers.
+- specific_content: Their "How to Finance Your First Rental Property in Canada" article targets new Ontario rental investors — Prospera's exact client profile at the moment of acquisition.
+- researcher_notes: Richmond Hill, Ontario. Not a competitor. Contact: info@360lending.ca, (888) 794-1464. National Ontario reach. Blog well-indexed. Strong fit for a resource mention alongside their rental property financing content.
+
+---
