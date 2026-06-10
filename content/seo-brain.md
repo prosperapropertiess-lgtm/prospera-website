@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-06-09
+2026-06-10
 
-## Posts Written: 57 total
+## Posts Written: 58 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -86,8 +86,9 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - how-to-find-a-property-manager-ontario ✅
 - property-manager-london-ontario-cost ✅
 
-### SUPPORTING CLUSTER keywords (1)
+### SUPPORTING CLUSTER keywords (3)
 - landlord-responsibilities-new-tenant-ontario ✅
+- tenant-onboarding-checklist-ontario ✅
 
 ### TENANT keywords (0)
 **Not a priority yet — different conversion intent:**
@@ -111,7 +112,12 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 5. how-to-increase-rent-ontario-step-by-step (supporting cluster for rent-increase-ontario-guidelines)
 6. rta-section-83-ontario (supporting LTB cluster)
 7. property-management-for-landlords-with-one-property-ontario (conversion intent — single-property owners)
-8. tenant-onboarding-checklist-ontario (logical follow-on to landlord-responsibilities-new-tenant-ontario)
+8. ~~tenant-onboarding-checklist-ontario~~ ✅ PUBLISHED 2026-06-10
+
+**Next priority after geographic expansion:**
+- landlord-insurance-vs-tenant-insurance-ontario
+- how-to-increase-rent-ontario-step-by-step
+- rta-section-83-ontario
 
 ---
 
@@ -147,3 +153,4 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - 2026-06-04: Published when-to-hire-a-property-manager-ontario — HIGH-CONVERSION decision-stage post (moved from Recommended Next Posts to published). Covers 10 concrete triggers for hiring a PM: distance from property, past bad tenant experience, legal confusion, time burden, portfolio scaling, rent collection problems, vacancy/marketing struggles, retirement/time constraints, active disputes, and tenant-dynamic discomfort. Differentiates from competitors by being highly specific and actionable rather than generic. Internal links to tenant-screening-red-flags, property-manager-london-ontario-cost, n4-notice-ontario, and how-to-find-a-property-manager-ontario. External links to ontario.ca RTA statute, tribunalsontario.ca/ltb statistics page, and CMHC rental market data tables.
 - 2026-06-08: Published switching-property-management-companies-ontario — HIGH-CONVERSION decision-stage post. Covers why Ontario landlords switch PMs (communication, financial mismanagement, legal mistakes, maintenance neglect), how to read and exit a management agreement, delivering written termination notice, recruiting a replacement during the notice period, retrieving all critical documents (leases, LMR records, inspection reports, LTB files), notifying tenants professionally, running a formal handover meeting, and how to choose better the second time. Differentiates from condo-focused competitors by being specific to residential landlords with 1–5 properties. Internal links to when-to-hire-a-property-manager-ontario, property-manager-london-ontario-cost, how-to-find-a-property-manager-ontario, and property-management-fees-ontario. External links to ontario.ca RTA statute (×2) and tribunalsontario.ca/ltb about page.
 - 2026-06-09: Published landlord-responsibilities-new-tenant-ontario — SUPPORTING CLUSTER (tenant onboarding cluster). Covers unit habitability standards before move-in, mandatory Ontario Standard Lease requirement and consequences for non-compliance, move-in inspection best practices, LMR deposit rules and interest tracking, required disclosures and information, entry rights and ongoing obligations triggered from day one, and consequences table for skipping obligations. Differentiates from ontario.ca/Toronto.ca competitors by being landlord-focused, actionable, and specific to RTA obligations at tenancy start. Internal links to how-to-write-lease-agreement-ontario, move-in-move-out-inspection-ontario, what-can-landlord-deduct-from-last-month-rent-ontario, and landlord-maintenance-responsibilities-ontario. External links to ontario.ca RTA statute, Tribunals Ontario LTB Maintenance brochure, and CMHC rental housing guide.
+- 2026-06-10: Published tenant-onboarding-checklist-ontario — SUPPORTING CLUSTER (tenant onboarding cluster, companion to landlord-responsibilities-new-tenant-ontario). Full operational checklist for Ontario landlords covering pre-lease-signing preparation, lease signing meeting steps, move-in inspection documentation, key handover process, and first-30-day follow-up. Differentiates from tenant-focused moving checklists by being entirely landlord-oriented and RTA-grounded. Includes a master checklist summary with checkboxes organized by phase. Internal links to late-rent-payments-ontario, what-can-landlord-deduct-from-last-month-rent-ontario, move-in-move-out-inspection-ontario, n4-notice-ontario, and landlord-record-keeping-ontario. External links to ontario.ca Ontario Standard Lease document, CMHC rental housing guidance, and Tribunals Ontario LTB resources.
