@@ -92,6 +92,15 @@ GSC INTELLIGENCE (if provided):
 - If declining posts are provided, avoid cannibalizing their keywords — write adjacent topics instead
 - Use performance signals to write smarter, not just more
 
+REDDIT + NEWS SIGNALS (if provided):
+You will receive hot Reddit threads from r/OntarioLandlord and r/londonontario, plus recent Ontario landlord news headlines. Use these as TOPIC SIGNALS ONLY — to understand what landlords are worried about right now and what language they actually use. Rules:
+- NEVER cite Reddit as a source in the post
+- NEVER repeat unverified claims from Reddit as fact
+- If a Reddit thread mentions a specific law, form, LTB ruling, or policy change — you MUST verify it against official sources (ontario.ca, tribunalsontario.ca/ltb, the Residential Tenancies Act) before stating it as fact in the post
+- If you cannot verify a claim, either omit it or frame it as "landlords often ask about..." without stating it as established fact
+- News headlines may reference real policy changes — include them only if you can accurately describe the policy from your training knowledge, and link to the official source
+- The goal: write posts that feel timely and address real current pain, while remaining 100% legally accurate
+
 OUTPUT FORMAT — output EXACTLY this structure, nothing before or after:
 
 ===SLUG===
@@ -288,6 +297,76 @@ async function fetchSerpSnippets(keyword: string): Promise<string> {
   }
 }
 
+// ── Reddit signals — hot threads from r/OntarioLandlord + r/londonontario ─────
+async function fetchRedditSignals(): Promise<string> {
+  try {
+    const subreddits = ["OntarioLandlord", "londonontario"];
+    const results: string[] = [];
+
+    for (const sub of subreddits) {
+      const res = await fetch(
+        `https://www.reddit.com/r/${sub}/search.json?q=landlord+tenant+rent&sort=new&t=week&limit=8`,
+        { headers: { "User-Agent": "prospera-seo-bot/1.0" } }
+      );
+      if (!res.ok) continue;
+      const data = await res.json();
+      const posts = (data?.data?.children ?? [])
+        .map((p: { data: { title: string; score: number; num_comments: number; selftext?: string } }) => p.data)
+        .filter((p: { score: number }) => p.score > 2)
+        .slice(0, 5)
+        .map((p: { title: string; score: number; num_comments: number; selftext?: string }) =>
+          `  - "${p.title}" (${p.score} upvotes, ${p.num_comments} comments)`
+        );
+      if (posts.length) {
+        results.push(`r/${sub}:\n${posts.join("\n")}`);
+      }
+    }
+
+    if (!results.length) return "";
+    return `\nREDDIT SIGNALS (what Ontario landlords are talking about this week):\n${results.join("\n\n")}\n\nUse as topic/language signals only. Fact-check any legal claims before including them.\n`;
+  } catch {
+    return "";
+  }
+}
+
+// ── News signals — recent Ontario landlord/LTB news via Serper ───────────────
+async function fetchNewsSignals(): Promise<string> {
+  const apiKey = process.env.SERPER_API_KEY;
+  if (!apiKey) return "";
+
+  const queries = [
+    "Ontario landlord tenant board 2026 news",
+    "Ontario RTA residential tenancies act amendment 2026",
+    "London Ontario rental market 2026",
+  ];
+
+  try {
+    const allHeadlines: string[] = [];
+
+    for (const q of queries) {
+      const res = await fetch("https://google.serper.dev/news", {
+        method: "POST",
+        headers: { "X-API-KEY": apiKey, "Content-Type": "application/json" },
+        body: JSON.stringify({ q, gl: "ca", hl: "en", num: 3 }),
+      });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const items = (data.news ?? []).slice(0, 3).map(
+        (n: { title: string; source: string; date?: string }) =>
+          `  - "${n.title}" — ${n.source}${n.date ? ` (${n.date})` : ""}`
+      );
+      allHeadlines.push(...items);
+    }
+
+    if (!allHeadlines.length) return "";
+    // Deduplicate
+    const unique = [...new Set(allHeadlines)].slice(0, 8);
+    return `\nRECENT NEWS SIGNALS (Ontario landlord/LTB headlines this week):\n${unique.join("\n")}\n\nIf a headline references a real policy change you can verify, reference it in the post with a link to the official source. If you cannot verify it, do not mention it.\n`;
+  } catch {
+    return "";
+  }
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function parseWriterOutput(raw: string): { slug: string; blog: string; brain: string } | null {
   const slugMatch  = raw.match(/===SLUG===\n([\s\S]*?)===END===/);
@@ -388,16 +467,22 @@ export async function GET(req: NextRequest) {
     console.error("[seo] Keyword selector error (non-fatal, falling back to full writer):", err);
   }
 
-  // ── 2b. COMPETITOR ANALYSIS — fetch top 3 SERP results for keyword ────────
+  // ── 2b. COMPETITOR ANALYSIS + REDDIT + NEWS — all in parallel ───────────────
   let competitorContext = "";
-  if (selectedKeyword) {
-    competitorContext = await fetchSerpSnippets(selectedKeyword);
-    if (competitorContext) {
-      console.log(`[seo] Competitor context fetched for: ${selectedKeyword}`);
-    }
-  }
+  let redditSignals = "";
+  let newsSignals = "";
 
-  // ── 2c. WRITER — write the full post with competitor context ─────────────
+  [competitorContext, redditSignals, newsSignals] = await Promise.all([
+    selectedKeyword ? fetchSerpSnippets(selectedKeyword) : Promise.resolve(""),
+    fetchRedditSignals(),
+    fetchNewsSignals(),
+  ]);
+
+  if (competitorContext) console.log(`[seo] Competitor context fetched for: ${selectedKeyword}`);
+  if (redditSignals)    console.log(`[seo] Reddit signals fetched`);
+  if (newsSignals)      console.log(`[seo] News signals fetched`);
+
+  // ── 2c. WRITER — write the full post with all context ────────────────────
   console.log("[seo] Starting writer...");
   let writerRaw = "";
   try {
@@ -412,7 +497,7 @@ export async function GET(req: NextRequest) {
       messages: [{
         role: "user",
         content: `Today's date: ${today}
-${gscContext}${competitorContext}
+${gscContext}${competitorContext}${redditSignals}${newsSignals}
 SEO Brain document:
 
 ${seoBrain}
