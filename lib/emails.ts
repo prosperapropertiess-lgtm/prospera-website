@@ -1398,3 +1398,70 @@ export function onboardTenantIntroEmail(data: {
     ${signoff()}
   `);
 }
+
+// ── Weekly blog newsletter ────────────────────────────────────────────────────
+export function weeklyBlogEmail({
+  name,
+  blogTitle,
+  blogSlug,
+  blogExcerpt,
+  takeaways,
+  whyItMatters,
+  category,
+}: {
+  name: string;
+  blogTitle: string;
+  blogSlug: string;
+  blogExcerpt: string;
+  takeaways: string[];
+  whyItMatters: string;
+  category: string;
+}): string {
+  const blogUrl = `${BASE_URL}/blog/${blogSlug}`;
+  const firstName = name?.split(" ")[0] || "there";
+
+  const takeawayItems = takeaways
+    .map(
+      (t) =>
+        `<li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">${t}</li>`
+    )
+    .join("");
+
+  return wrapper(`
+    ${heroCard(`Hey ${firstName},`, "New from Prospera this week.")}
+
+    <p style="margin:0 0 20px;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.8;">
+      I just published a new guide that I think is genuinely useful for you as an Ontario landlord:
+    </p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
+      <tr>
+        <td style="background:${BG_SUBTLE};border-left:4px solid ${CRIMSON};border-radius:0 12px 12px 0;padding:20px 24px;">
+          <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">${category}</p>
+          <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:${TEXT};font-family:${FONT};line-height:1.3;">${blogTitle}</p>
+          <p style="margin:0;font-size:14px;color:${MUTED};font-family:${FONT};line-height:1.6;">${blogExcerpt}</p>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">What's covered</p>
+    <ul style="margin:0 0 24px;padding:0 0 0 20px;">
+      ${takeawayItems}
+    </ul>
+
+    ${noteBox(whyItMatters, "Why this matters to you")}
+
+    ${cta("Read the full guide", blogUrl)}
+
+    ${divider()}
+
+    <p style="margin:0 0 8px;font-size:13px;color:${MUTED};font-family:${FONT};line-height:1.6;">
+      You're receiving this because you're on the Prospera Properties landlord list. I send one useful guide per week — no fluff, no spam.
+    </p>
+    <p style="margin:0;font-size:13px;color:${MUTED};font-family:${FONT};">
+      Questions? Reply to this email or call (519) 697-1227.
+    </p>
+    <br>
+    ${signoff()}
+  `);
+}

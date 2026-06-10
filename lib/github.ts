@@ -43,6 +43,35 @@ export async function getFileFromGitHub(path: string): Promise<string | null> {
   }
 }
 
+// ── List files in a directory ────────────────────────────────────────────────
+export async function listFilesFromGitHub(dir: string): Promise<string[]> {
+  const token = process.env.GITHUB_TOKEN;
+  const repo  = process.env.GITHUB_REPO;
+  const branch = process.env.GITHUB_BRANCH || "main";
+
+  if (!token || !repo) return [];
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${repo}/contents/${dir}?ref=${branch}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data)
+      ? data.filter((f: { type: string; name: string }) => f.type === "file").map((f: { name: string }) => f.name)
+      : [];
+  } catch {
+    return [];
+  }
+}
+
 // ── Push files to the repo ───────────────────────────────────────────────────
 export async function pushFilesToGitHub(
   files: FileChange[],
