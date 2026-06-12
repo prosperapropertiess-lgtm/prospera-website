@@ -50,7 +50,7 @@ export default function LondonPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Estimate
@@ -193,7 +193,7 @@ export default function LondonPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote

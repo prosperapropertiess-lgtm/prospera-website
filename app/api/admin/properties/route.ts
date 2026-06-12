@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { supabaseAdmin } from "@/lib/supabase";
 import { newPropertyAgentEmail } from "@/lib/emails";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -10,12 +11,13 @@ function getAdminClient() {
   return createClient(url, key);
 }
 
-function isAuthenticated(req: NextRequest) {
-  const session = req.cookies.get("admin_session");
-  return session?.value === "authenticated";
-}
+
 
 // Auth is enforced by middleware — this route is only reachable with a valid session
+async function isAuthenticated(req: NextRequest) {
+  return isAdminAuthenticated(req);
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const supabase = getSupabaseAdmin();

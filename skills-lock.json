@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "skills": {
+    "app-store-preflight-skills": {
+      "source": "truongduy2611/app-store-preflight-skills",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "3e4cc0450924279cadbc6373da64c1c25d4380dd8f08f97e478770aa06cfc599"
+    },
+    "ask-questions-if-underspecified": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ask-questions-if-underspecified/SKILL.md",
+      "computedHash": "e76c66e16ee2b22c9a446fe9f60cdd558645b357ab1070877d97d13c172ce084"
+    },
+    "audit-library-health": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/audit-library-health/SKILL.md",
+      "computedHash": "e3b14a7d9bf4dc9817a5c32cf0f1ce81416776447dc70553c8d2d9a494234439"
+    },
+    "backend-development": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/backend-development/SKILL.md",
+      "computedHash": "d560e827fb8fadebf13b62ab2927de2331f13b047d5c271eab0471f318c2e1c0"
+    },
+    "best-practices": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/best-practices/SKILL.md",
+      "computedHash": "9986d313c260ffb9ddc2b98b67bf9ce0ed1705e8707377c888714f47dfda032a"
+    },
+    "brandkit": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/brandkit/SKILL.md",
+      "computedHash": "b63012f3c3d21197e0185d3e9cc7ec40c589fb10e0b5a32a561739de31aa3f20"
+    },
+    "browse-and-evaluate": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/browse-and-evaluate/SKILL.md",
+      "computedHash": "22b6241ed30893bd47ee1e5e2fbd9abaf596bb136fee887309c3da1159d0deaa"
+    },
+    "build-workspace-docs": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/build-workspace-docs/SKILL.md",
+      "computedHash": "75046d8fe7192199e1c649e27031fdefa7905bf407a5724651207860fe41180f"
+    },
+    "changelog-generator": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/changelog-generator/SKILL.md",
+      "computedHash": "4fc0135fc0ce17307e4672b790813801f9d63bccae0e72633ecad7b5bea7cb8b"
+    },
+    "code-documentation": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/code-documentation/SKILL.md",
+      "computedHash": "bcc50e2460a3bf8f1298ac70f1420f4a47db8a23fa2c41330648f5135834438b"
+    },
+    "content-research-writer": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/content-research-writer/SKILL.md",
+      "computedHash": "8155402fb3e0b32cd25411040d239f4b09088fe2a7a6a3d455d376acd70880f0"
+    },
+    "curate-a-team-library": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/curate-a-team-library/SKILL.md",
+      "computedHash": "79eff27f643e89722115d2c4b6597f99838f438b3d3a1dca7f9d788f05a604b8"
+    },
+    "database-design": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/database-design/SKILL.md",
+      "computedHash": "cd27a6d944304538d80693287d9902bcf843cc633a4fb5647e5676a7074da372"
+    },
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "9d1e82c5c409d2b0247245a005bc0f7e4447c0999b78dcea60f568c1ba4a6694"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "8bdf9e4e6de7a4969147bf4828a4ad2c5aacd9fba4b690b250a85e0467ca387d"
+    },
+    "full-output-enforcement": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/output-skill/SKILL.md",
+      "computedHash": "26bd29ce4c5e02c7666b2d503609bf466bd32290822e91f0e984147048dbb924"
+    },
+    "gpt-taste": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/gpt-tasteskill/SKILL.md",
+      "computedHash": "cc8f0c601d8240a124e1d11634351a2be7b8a72fd807c75e5b6bf7afcd5ddee0"
+    },
+    "high-end-visual-design": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/soft-skill/SKILL.md",
+      "computedHash": "7db385e4c5370e5a7fca9704a1361b056e4504ea6a03924bb86f33a4f00b5c73"
+    },
+    "image-to-code": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/image-to-code-skill/SKILL.md",
+      "computedHash": "58517b03b2a01f4c9ba65861559d03df931400871bbc200978c975b24bb92c73"
+    },
+    "imagegen-frontend-mobile": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/imagegen-frontend-mobile/SKILL.md",
+      "computedHash": "9ab7f4f6ce66a3cff02bbf5894e5bd5af50bf5d6ef0adffdc88e8fab772fe44f"
+    },
+    "imagegen-frontend-web": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/imagegen-frontend-web/SKILL.md",
+      "computedHash": "65f5ae59fa317567809438310b1c54f78cd133426deb43e4d3d4ca4c8f541628"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": "skill/SKILL.md",
+      "computedHash": "34e59a34b9705187e87039faa5d9585aebe0056ef657f761b905afef276a3362"
+    },
+    "industrial-brutalist-ui": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/brutalist-skill/SKILL.md",
+      "computedHash": "8fc355c4aadb7d29c53ca28bc41be3cd6eea765d121e3737c4dc2d0f90a8effa"
+    },
+    "install-from-remote-library": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/install-from-remote-library/SKILL.md",
+      "computedHash": "f6236db1c8a4472bf20c755cd79d7c7ce26cbdf848e3f322990bf09f33d494ed"
+    },
+    "llm-application-dev": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/llm-application-dev/SKILL.md",
+      "computedHash": "40d1e0994e1d9c79693b6970cfe9ea568e736cbbb7e51731cede9db210c2246c"
+    },
+    "migrate-skills-between-libraries": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/migrate-skills-between-libraries/SKILL.md",
+      "computedHash": "ae24eb4a8b10c498d425db26299bc7cd406e01ede3195080cfaa2f7cb8079076"
+    },
+    "minimalist-ui": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/minimalist-skill/SKILL.md",
+      "computedHash": "08873a3131d3be27bef9bf3304b310b16b44ca6e3561aebe532797be3443f6bd"
+    },
+    "redesign-existing-projects": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/redesign-skill/SKILL.md",
+      "computedHash": "b405eee0e0e80fc243f731d9aa368bca307e356db7e6157d27101d369dac6726"
+    },
+    "review-a-skill": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-a-skill/SKILL.md",
+      "computedHash": "443c68b0d64960e830ceb6cf713e24999d07a676a1e7c0182c7b7309ccde83f7"
+    },
+    "share-a-library": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/share-a-library/SKILL.md",
+      "computedHash": "00c0c4c54b36c6047006508f2f4951de057f5af85a9307d51363c0ad3a340b0a"
+    },
+    "stitch-design-taste": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/stitch-skill/SKILL.md",
+      "computedHash": "3aa58992f0fd9673b975cd48cd4f8ae4b4976fd5cdd9f20e26d3d447aee317fb"
+    },
+    "update-installed-skills": {
+      "source": "skillcreatorai/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/update-installed-skills/SKILL.md",
+      "computedHash": "3df55e6c6ff57e81f9783e1ec179fcdf8d2e8d33ea489ea4df9d7d8f4420bd0a"
+    }
+  }
+}

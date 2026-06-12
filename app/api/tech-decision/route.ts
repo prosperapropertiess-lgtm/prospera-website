@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { waitUntil } from "@vercel/functions";
 
 function getSupabase() {
   return createClient(
@@ -52,15 +53,17 @@ export async function GET(req: NextRequest) {
 
   // ── On approval: immediately trigger the build agent (non-blocking) ───────
   if (approved) {
-    const base = req.nextUrl.origin;
-    fetch(`${base}/api/tech-build`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-notify-secret": process.env.SEO_NOTIFY_SECRET ?? "",
-      },
-      body: JSON.stringify({ proposalId: id }),
-    }).catch((err) => console.error("[tech-decision] Build trigger failed:", err));
+    const base = "https://www.prosperaproperties.co";
+    waitUntil(
+      fetch(`${base}/api/tech-build`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-notify-secret": process.env.SEO_NOTIFY_SECRET ?? "",
+        },
+        body: JSON.stringify({ proposalId: id }),
+      }).catch((err) => console.error("[tech-decision] Build trigger failed:", err))
+    );
   }
 
   return new NextResponse(`<!DOCTYPE html>

@@ -30,10 +30,6 @@ const SYSTEM_PROMPT = `Your name is Laura. You are the friendly virtual assistan
 - Responsive management — 24/7 emergency line
 - Fair, transparent communication
 
-## Portals
-- Landlord portal: https://prosperaproperties.buildiumapp.com
-- Tenant portal: https://prosperaproperties.buildiumapp.com
-
 ## Free Tools on the Website
 - N4 Notice Generator (free, instant PDF download)
 - Free landlord resources: lease templates, inspection checklists, eviction guides

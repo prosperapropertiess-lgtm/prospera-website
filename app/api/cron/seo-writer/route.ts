@@ -14,6 +14,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getFileFromGitHub, pushFilesToGitHub } from "@/lib/github";
 import { submitUrlToGoogle } from "@/lib/google-indexing";
 import { querySearchAnalytics } from "@/lib/google-search-console";
+import { logAgentRun } from "@/lib/agent-logger";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -408,6 +409,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const startedAt = Date.now();
   const today = new Date().toISOString().split("T")[0];
 
   // ── 1. Read SEO brain + fetch GSC data in parallel ────────────────────────
@@ -805,6 +807,14 @@ Write one Facebook post about this topic in the style described. Do not promote 
   }
 
   console.log(`[seo] Done | new: ${newSlug} | optimized: ${optimizeSlug ?? "—"} | links: ${linkedCount} | ${pushResult.commitUrl}`);
+
+  await logAgentRun("seo-writer", "success", {
+    written: newSlug,
+    writtenTitle: newTitle,
+    optimized: optimizeSlug ?? null,
+    internalLinksAdded: linkedCount,
+    commitUrl: pushResult.commitUrl,
+  }, Date.now() - startedAt);
 
   return NextResponse.json({
     success: true,

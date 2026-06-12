@@ -4,6 +4,8 @@ import { waitUntil } from "@vercel/functions";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { pushFilesToGitHub, type FileChange } from "@/lib/github";
 
+export const maxDuration = 120;
+
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const PLATFORM_CONTEXT = `

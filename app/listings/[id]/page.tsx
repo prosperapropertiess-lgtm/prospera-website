@@ -37,27 +37,30 @@ export default async function PropertyDetailPage({ params }: Props) {
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": "RealEstateListing",
+    "@type": "Apartment",
     name: data.title,
     description: data.description,
     url: `https://www.prosperaproperties.co/listings/${id}`,
-    price: data.price,
-    priceCurrency: "CAD",
     address: {
       "@type": "PostalAddress",
       streetAddress: data.address,
       addressLocality: data.city,
-      addressRegion: "Ontario",
+      addressRegion: "ON",
       addressCountry: "CA",
     },
-    numberOfRooms: data.bedrooms,
+    numberOfBedrooms: data.bedrooms,
+    numberOfBathroomsTotal: data.bathrooms,
     petsAllowed: data.pet_friendly,
-    image: data.images?.[0] || undefined,
+    image: data.images?.[0]
+      ? { "@type": "ImageObject", url: data.images[0] }
+      : undefined,
     offers: {
       "@type": "Offer",
       price: data.price,
       priceCurrency: "CAD",
-      availability: data.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      availability: data.available
+        ? "https://schema.org/InStock"
+        : "https://schema.org/SoldOut",
     },
   };
 

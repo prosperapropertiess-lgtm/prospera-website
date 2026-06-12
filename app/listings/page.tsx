@@ -244,7 +244,7 @@ export default function ListingsPage() {
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
-                          className="px-4 py-2 text-xs rounded transition-opacity hover:opacity-80"
+                          className="px-4 py-2 text-xs rounded"
                           style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
                           View Details

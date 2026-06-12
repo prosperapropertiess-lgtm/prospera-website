@@ -142,7 +142,7 @@ function Carousel({ data }: { data: ReviewsData }) {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -40 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             className="text-center cursor-grab active:cursor-grabbing select-none"
           >
             <Stars count={review.rating} />
@@ -177,7 +177,7 @@ function Carousel({ data }: { data: ReviewsData }) {
       <div className="flex items-center justify-center gap-6 mt-6">
         <button
           onClick={prev}
-          className="w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] hover:border-[#8B2030] transition-colors rounded-lg"
+          className="review-nav-btn w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] rounded-lg"
           aria-label="Previous"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -191,10 +191,11 @@ function Carousel({ data }: { data: ReviewsData }) {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className="w-2 h-2 rounded-full transition-all duration-200"
+              className="w-2 h-2 rounded-full"
               style={{
                 backgroundColor: i === current ? "#8B2030" : "rgba(139,32,48,0.2)",
                 transform: i === current ? "scale(1.3)" : "scale(1)",
+                transition: "transform 200ms cubic-bezier(0.23,1,0.32,1), background-color 200ms cubic-bezier(0.23,1,0.32,1)",
               }}
               aria-label={`Review ${i + 1}`}
             />
@@ -203,7 +204,7 @@ function Carousel({ data }: { data: ReviewsData }) {
 
         <button
           onClick={next}
-          className="w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] hover:border-[#8B2030] transition-colors rounded-lg"
+          className="review-nav-btn w-10 h-10 flex items-center justify-center border border-[#D8D2C8] text-[#1F2F3A] rounded-lg"
           aria-label="Next"
         >
           <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">

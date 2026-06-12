@@ -8,6 +8,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import BlogSubscribeForm from "@/components/blog/BlogSubscribeForm";
 import ShareButtons from "@/components/blog/ShareButtons";
 import ViewCounter from "@/components/blog/ViewCounter";
+import TableOfContents from "@/components/blog/TableOfContents";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug);
   if (!post) return {};
   return {
-    title: post.title,
+    title: { absolute: post.title },
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -48,6 +49,31 @@ const categoryColors: Record<string, string> = {
   "Ontario Law": "bg-[#555555] text-[#FAF8F5]",
 };
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[*_`[\]()]/g, "") // strip markdown formatting chars
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function extractHeadings(markdown: string) {
+  return [...markdown.matchAll(/^(#{2,3})\s+(.+)$/gm)].map((m) => {
+    const text = m[2].trim().replace(/\*\*(.+?)\*\*/g, "$1").replace(/`(.+?)`/g, "$1");
+    return { level: m[1].length, text, id: slugify(text) };
+  });
+}
+
+function addHeadingIds(html: string): string {
+  return html.replace(/<h([23])>([\s\S]*?)<\/h\1>/g, (_, level, inner) => {
+    const plainText = inner.replace(/<[^>]+>/g, "");
+    const id = slugify(plainText);
+    return `<h${level} id="${id}">${inner}</h${level}>`;
+  });
+}
+
 function splitAtMidpoint(html: string): [string, string] {
   const parts = html.split("</p>");
   if (parts.length < 4) return [html, ""];
@@ -63,7 +89,9 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  const htmlContent = await marked(post.content);
+  const headings = extractHeadings(post.content);
+  const rawHtml = await marked(post.content);
+  const htmlContent = addHeadingIds(rawHtml);
   const [firstHalf, secondHalf] = splitAtMidpoint(htmlContent);
   const postUrl = `https://www.prosperaproperties.co/blog/${slug}`;
 
@@ -73,19 +101,26 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    image: post.featuredImage ?? undefined,
+    dateModified: post.date,
+    image: post.featuredImage
+      ? { "@type": "ImageObject", url: post.featuredImage }
+      : undefined,
     author: {
       "@type": "Person",
       name: "Ebin Jaison",
-      jobTitle: "Founder, Prospera Properties",
+      url: "https://www.prosperaproperties.co/about",
     },
     publisher: {
       "@type": "Organization",
       name: "Prospera Properties",
       url: "https://www.prosperaproperties.co",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.prosperaproperties.co/icon.png",
+      },
     },
     url: postUrl,
-    mainEntityOfPage: postUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
   };
 
   return (
@@ -103,7 +138,7 @@ export default async function BlogPostPage({ params }: Props) {
             ← Back to Blog
           </Link>
 
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
             <span
               className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${categoryColors[post.category] ?? "bg-[#8B2030] text-[#FAF8F5]"}`}
               style={{ fontFamily: "var(--font-dm-sans)" }}
@@ -169,29 +204,33 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Content — split with mid-post subscribe form */}
-      <article className="max-w-3xl mx-auto px-6 py-16" style={{ backgroundColor: "#F7F5F2" }}>
-        <div
-          className="prose-content"
-          style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
-          dangerouslySetInnerHTML={{ __html: firstHalf }}
-        />
-
-        {secondHalf && <BlogSubscribeForm midPost />}
-
-        {secondHalf && (
+      {/* Content + ToC sidebar */}
+      <div className="max-w-5xl mx-auto px-6 py-16 xl:grid xl:grid-cols-[1fr_220px] xl:gap-12" style={{ backgroundColor: "#F7F5F2" }}>
+        <article>
           <div
             className="prose-content"
             style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
-            dangerouslySetInnerHTML={{ __html: secondHalf }}
+            dangerouslySetInnerHTML={{ __html: firstHalf }}
           />
-        )}
 
-        {/* Share again at end of article */}
-        <div className="mt-12 pt-8 border-t" style={{ borderColor: "#D8D2C8" }}>
-          <ShareButtons url={postUrl} title={post.title} />
-        </div>
-      </article>
+          {secondHalf && <BlogSubscribeForm midPost />}
+
+          {secondHalf && (
+            <div
+              className="prose-content"
+              style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
+              dangerouslySetInnerHTML={{ __html: secondHalf }}
+            />
+          )}
+
+          {/* Share again at end of article */}
+          <div className="mt-12 pt-8 border-t" style={{ borderColor: "#D8D2C8" }}>
+            <ShareButtons url={postUrl} title={post.title} />
+          </div>
+        </article>
+
+        <TableOfContents headings={headings} />
+      </div>
 
       {/* End-of-post subscribe form */}
       <BlogSubscribeForm />
@@ -207,7 +246,7 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-8 py-3 text-xs uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote

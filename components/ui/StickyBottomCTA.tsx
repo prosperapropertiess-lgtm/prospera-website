@@ -21,10 +21,10 @@ export default function StickyBottomCTA() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ y: 80, opacity: 0 }}
+          initial={{ y: "100%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 80, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          exit={{ y: "100%", opacity: 0 }}
+          transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
           className="fixed bottom-0 left-0 right-0 z-[80] md:hidden px-5 pb-6 pt-4"
           style={{
             background: "linear-gradient(to top, #F7F5F2 65%, transparent)",
@@ -32,7 +32,7 @@ export default function StickyBottomCTA() {
         >
           <Link
             href="/contact"
-            className="block w-full py-4 text-xs font-semibold uppercase tracking-widest text-center rounded transition-opacity active:opacity-70"
+            className="btn-primary block w-full py-4 text-xs font-semibold uppercase tracking-widest text-center rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote

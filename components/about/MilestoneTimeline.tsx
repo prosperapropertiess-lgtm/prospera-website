@@ -7,56 +7,56 @@ const milestones = [
   {
     era: "Age 16",
     location: "India",
-    icon: "◎",
+    icon: "01",
     title: "First Business",
     desc: "Started a business from nothing. Built it. Sold it. The real lesson wasn't the money — it was learning that you figure things out by doing them, not by waiting until you feel ready.",
   },
   {
     era: "Age 18",
     location: "India",
-    icon: "◈",
+    icon: "02",
     title: "Digital Marketing Agency",
     desc: "Built a marketing agency and ran it for two years. That's where I learned how to position something, tell a story, and get people to pay attention. That brain followed me to Canada.",
   },
   {
     era: "Age 20",
     location: "Canada",
-    icon: "✈",
+    icon: "03",
     title: "International Student",
     desc: "Landed in Canada with a plan to keep costs low. Signed a $3,200/month house under my own name, moved into one room, and rented the rest to students who barely knew each other.",
   },
   {
     era: "2022–2024",
     location: "The Real Education",
-    icon: "⌂",
+    icon: "04",
     title: "The Chaotic House",
     desc: "Late rent. Broken things. Constant churn. Got the flooring redone mid-tenancy while still studying full time. I genuinely laugh about it now. But that chaos taught me more about tenants than any course ever could.",
   },
   {
     era: "2023",
     location: "Ontario",
-    icon: "◷",
+    icon: "05",
     title: "Department Manager",
     desc: "Got hired at the highest-volume grocery store in Ontario. 600+ labour hours a week — people, pressure, logistics all at once. Still do it. Taught me that systems are what separate good from bad.",
   },
   {
     era: "March 2025",
     location: "London, ON",
-    icon: "◉",
+    icon: "06",
     title: "Started Prospera",
     desc: "No big launch, no press release. Started slow — deliberately. I wanted to learn how to do this right before growing. Took on 10 properties. Started building the system.",
   },
   {
     era: "2025",
     location: "The Honest Pivot",
-    icon: "⊘",
+    icon: "07",
     title: "Fired 7 Properties",
     desc: "Not every fit is right. Cut the portfolio to 3 I could manage exceptionally well. It wasn't comfortable. But I'm not trying to build something big fast — I'm trying to build something good.",
   },
   {
     era: "Today",
     location: "Still Building",
-    icon: "◆",
+    icon: "08",
     title: "Learning Every Day",
     desc: "25+ tenant placements, all paying rent. 0 LTB cases so far — not because I got lucky, but because I take screening seriously. Building the contractor network. Putting my face on the work. That's the plan.",
   },
@@ -122,7 +122,7 @@ function PathSegment({ index }: { index: number }) {
             fill="none"
             initial={{ pathLength: 0 }}
             animate={isInView ? { pathLength: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           />
         </svg>
       </div>
@@ -140,7 +140,7 @@ function PathSegment({ index }: { index: number }) {
               fill="none"
               initial={{ pathLength: 0 }}
               animate={isInView ? { pathLength: 1 } : {}}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
             />
           </svg>
         </div>
@@ -170,7 +170,7 @@ function MilestoneNode({
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.35, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <MilestoneCard milestone={milestone} />
             </motion.div>
@@ -180,14 +180,16 @@ function MilestoneNode({
         {/* Center dot */}
         <div className="flex justify-center">
           <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.12, type: "spring", stiffness: 200 }}
-            className="w-12 h-12 flex items-center justify-center border-2 text-lg"
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.3, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
+            className="w-12 h-12 flex items-center justify-center border-2 text-xs font-semibold"
             style={{
               borderColor: "#8B2030",
               backgroundColor: "#FFFFFF",
               color: "#8B2030",
+              fontFamily: "var(--font-dm-sans)",
+              letterSpacing: "0.05em",
             }}
           >
             {milestone.icon}
@@ -200,7 +202,7 @@ function MilestoneNode({
             <motion.div
               initial={{ opacity: 0, x: -24 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.35, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
               <MilestoneCard milestone={milestone} />
             </motion.div>
@@ -211,14 +213,16 @@ function MilestoneNode({
       {/* ── Mobile: flex row ── */}
       <div className="md:hidden flex gap-4 items-start">
         <motion.div
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
-          className="w-10 h-10 flex items-center justify-center border-2 text-sm shrink-0 mt-1"
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.3, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          className="w-10 h-10 flex items-center justify-center border-2 text-xs font-semibold shrink-0 mt-1"
           style={{
             borderColor: "#8B2030",
             backgroundColor: "#FFFFFF",
             color: "#8B2030",
+            fontFamily: "var(--font-dm-sans)",
+            letterSpacing: "0.05em",
           }}
         >
           {milestone.icon}
@@ -227,7 +231,7 @@ function MilestoneNode({
           className="flex-1"
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.35, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
         >
           <MilestoneCard milestone={milestone} />
         </motion.div>

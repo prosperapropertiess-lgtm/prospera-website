@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import bcrypt from "bcryptjs";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
-function isAuthenticated(req: NextRequest) {
-  return req.cookies.get("admin_session")?.value === "authenticated";
+
+
+async function isAuthenticated(req: NextRequest) {
+  return isAdminAuthenticated(req);
 }
 
 export async function GET(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!await isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -42,7 +45,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!await isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

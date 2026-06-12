@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -7,13 +8,14 @@ function getAdminClient() {
   return createClient(url, key);
 }
 
-function isAuthenticated(req: NextRequest) {
-  const session = req.cookies.get("admin_session");
-  return session?.value === "authenticated";
+
+
+async function isAuthenticated(req: NextRequest) {
+  return isAdminAuthenticated(req);
 }
 
 export async function POST(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!await isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -44,7 +46,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!await isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

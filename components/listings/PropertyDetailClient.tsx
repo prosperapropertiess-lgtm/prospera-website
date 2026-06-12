@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,7 +38,32 @@ export default function PropertyDetailClient({ property }: { property: Property 
   const [activeImage, setActiveImage] = useState(0);
   const [commuteAddress, setCommuteAddress] = useState("");
   const [commuteResult, setCommuteResult] = useState<string | null>(null);
+  const [views, setViews] = useState<number | null>(null);
   const gallery = getGallery(property);
+
+  useEffect(() => {
+    const key = `viewed:listing:${property.id}`;
+    const alreadySeen = localStorage.getItem(key);
+
+    if (alreadySeen) {
+      fetch(`/api/listings/view?id=${encodeURIComponent(property.id)}`)
+        .then((r) => r.json())
+        .then((d) => setViews(d.views ?? null))
+        .catch(() => {});
+    } else {
+      fetch("/api/listings/view", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: property.id }),
+      })
+        .then((r) => r.json())
+        .then((d) => {
+          setViews(d.views ?? null);
+          localStorage.setItem(key, "1");
+        })
+        .catch(() => {});
+    }
+  }, [property.id]);
 
   return (
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
@@ -92,7 +117,7 @@ export default function PropertyDetailClient({ property }: { property: Property 
                 className="relative h-20 w-28 overflow-hidden flex-shrink-0 transition-opacity rounded"
                 style={{ opacity: activeImage === i ? 1 : 0.5 }}
               >
-                <Image src={img} alt="" fill className="object-cover" unoptimized />
+                <Image src={img} alt={`Property photo ${i + 1}`} fill className="object-cover" unoptimized />
               </button>
             ))}
           </div>
@@ -262,6 +287,18 @@ export default function PropertyDetailClient({ property }: { property: Property 
                   </div>
                 ))}
               </div>
+
+              {views !== null && (
+                <div className="mt-4 flex items-center gap-1.5" style={{ color: "#999999" }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <span className="text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    {views.toLocaleString()} {views === 1 ? "view" : "views"}
+                  </span>
+                </div>
+              )}
 
               <div className="mt-6 pt-6 border-t text-center" style={{ borderColor: "#D8D2C8" }}>
                 <p className="text-xs mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Questions?</p>

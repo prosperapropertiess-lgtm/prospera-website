@@ -119,7 +119,7 @@ export default function RentAnalysisPage() {
           <div>
             <a
               href="#get-analysis"
-              className="inline-block px-10 py-4 font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+              className="inline-block px-10 py-4 font-semibold uppercase tracking-widest rounded btn-primary"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)", fontSize: 14 }}
             >
               Get My Free Analysis

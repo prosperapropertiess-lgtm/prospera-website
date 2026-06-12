@@ -35,7 +35,7 @@ export default function NotFound() {
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
           href="/"
-          className="px-8 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+          className="px-8 py-3 text-xs uppercase tracking-widest rounded"
           style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
         >
           Back to Home

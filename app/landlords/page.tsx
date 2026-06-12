@@ -121,14 +121,14 @@ export default function LandlordsPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#pricing"
-              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+              className="btn-primary px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
               See Pricing
             </a>
             <a
               href="#rent-estimator"
-              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest border transition-all rounded"
+              className="btn-ghost px-8 py-4 text-xs font-semibold uppercase tracking-widest border rounded"
               style={{ borderColor: "rgba(250,248,245,0.25)", color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}
             >
               Get a Free Rent Estimate
@@ -261,7 +261,7 @@ export default function LandlordsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
+            className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
             Get a Free Quote

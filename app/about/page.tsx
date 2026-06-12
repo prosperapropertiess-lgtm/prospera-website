@@ -113,10 +113,12 @@ export default function AboutPage() {
                   Owner · Operator · London, ON
                 </p>
 
+                <h1 className="sr-only">About Ebin Jaison — Founder of Prospera Properties</h1>
                 <div className="mb-8 leading-none" style={{ fontFamily: "var(--font-cormorant)" }}>
                   <p
                     className="text-5xl sm:text-7xl lg:text-9xl font-light"
                     style={{ color: "#FAF8F5" }}
+                    aria-hidden="true"
                   >
                     hi,
                   </p>
@@ -144,7 +146,7 @@ export default function AboutPage() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
+                  className="inline-flex items-center gap-3 px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl"
                   style={{
                     backgroundColor: "#8B2030",
                     color: "#FAF8F5",
@@ -436,7 +438,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl transition-opacity hover:opacity-80"
+            className="inline-flex items-center gap-3 px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded-xl"
             style={{
               backgroundColor: "#8B2030",
               color: "#FAF8F5",

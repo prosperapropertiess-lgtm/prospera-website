@@ -102,7 +102,7 @@ export default function ChatWidget() {
       {/* Floating bubble */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-28 right-5 md:bottom-6 md:right-6 z-[85] w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+        className="chat-bubble fixed bottom-28 right-5 md:bottom-6 md:right-6 z-[85] w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
         style={{ backgroundColor: "#8B2030" }}
         aria-label="Open chat"
       >
@@ -128,10 +128,10 @@ export default function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            exit={{ opacity: 0, y: 12, scale: 0.97 }}
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             className="fixed bottom-44 right-5 md:bottom-24 md:right-6 z-[85] w-[calc(100vw-2.5rem)] sm:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: "70vh", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
           >
@@ -190,7 +190,7 @@ export default function ChatWidget() {
                     <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                     <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (optional)" className="w-full px-3 py-2 text-sm rounded-lg border outline-none" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                     <div className="flex gap-2">
-                      <button type="submit" className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="submit" className="btn-primary flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
                       <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
@@ -220,7 +220,7 @@ export default function ChatWidget() {
                 <button
                   onClick={send}
                   disabled={loading || !input.trim()}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-opacity disabled:opacity-40"
+                  className="btn-primary w-10 h-10 rounded-xl flex items-center justify-center disabled:opacity-40"
                   style={{ backgroundColor: "#8B2030" }}
                 >
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>

@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { applicationApprovedTenantEmail, applicationStatusAgentEmail } from "@/lib/emails";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
-function isAuthenticated(req: NextRequest) {
-  return req.cookies.get("admin_session")?.value === "authenticated";
+
+
+async function isAuthenticated(req: NextRequest) {
+  return isAdminAuthenticated(req);
 }
 
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!isAuthenticated(req)) {
+  if (!await isAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

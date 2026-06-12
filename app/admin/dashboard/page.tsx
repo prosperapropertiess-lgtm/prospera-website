@@ -271,6 +271,13 @@ export default function DashboardPage() {
                 <p className="text-xs" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>Add agents, activate or deactivate access</p>
               </div>
             </Link>
+            <Link href="/admin/ops" style={{ textDecoration: "none" }}>
+              <div className="rounded-xl border p-5 hover:opacity-80 transition-opacity cursor-pointer" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+                <p className="text-xs uppercase tracking-widest mb-2" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Automations</p>
+                <p className="text-3xl font-light mb-1" style={{ color: TEXT, fontFamily: "var(--font-cormorant)" }}>All Agents</p>
+                <p className="text-xs" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>Live status, last runs, and manual triggers</p>
+              </div>
+            </Link>
           </div>
         </div>
 

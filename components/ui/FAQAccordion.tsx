@@ -19,7 +19,14 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
             onClick={() => setOpen(open === i ? null : i)}
           >
             <span className="font-medium text-sm md:text-base" style={{ color: "#222222" }}>{item.q}</span>
-            <span className={`text-xl transition-transform duration-200 flex-shrink-0 ${open === i ? "rotate-45" : ""}`} style={{ color: "#8B2030" }}>+</span>
+            <motion.span
+              animate={{ rotate: open === i ? 45 : 0 }}
+              transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
+              className="text-xl flex-shrink-0"
+              style={{ color: "#8B2030", display: "inline-block" }}
+            >
+              +
+            </motion.span>
           </button>
           <AnimatePresence initial={false}>
             {open === i && (
@@ -27,7 +34,10 @@ export default function FAQAccordion({ items }: { items: FAQ[] }) {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                transition={{
+                  height: { duration: 0.22, ease: [0.23, 1, 0.32, 1] },
+                  opacity: { duration: 0.18, ease: "linear" },
+                }}
                 className="overflow-hidden"
               >
                 <p className="pt-4 text-sm leading-relaxed" style={{ color: "#333333" }}>{item.a}</p>

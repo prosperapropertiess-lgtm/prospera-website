@@ -125,7 +125,7 @@ export default function PropertiesPage() {
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.images[0]} alt="" className="w-10 h-10 object-cover rounded-lg" />
+                        <img src={p.images[0]} alt={p.title} className="w-10 h-10 object-cover rounded-lg" />
                       ) : (
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center text-base" style={{ backgroundColor: SURFACE_HI }}>🏠</div>
                       )}
@@ -172,7 +172,7 @@ export default function PropertiesPage() {
                 <div key={p.id} className="p-5 flex gap-4">
                   {p.images?.[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.images[0]} alt="" className="w-16 h-16 object-cover rounded-lg flex-shrink-0" />
+                    <img src={p.images[0]} alt={p.title} className="w-16 h-16 object-cover rounded-lg flex-shrink-0" />
                   ) : (
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: SURFACE_HI }}>🏠</div>
                   )}

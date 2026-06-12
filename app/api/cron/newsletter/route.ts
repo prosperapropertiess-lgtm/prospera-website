@@ -17,6 +17,7 @@ import { Resend } from "resend";
 import { supabaseAdmin } from "@/lib/supabase";
 import { getFileFromGitHub, listFilesFromGitHub } from "@/lib/github";
 import { weeklyBlogEmail } from "@/lib/emails";
+import { logAgentRun } from "@/lib/agent-logger";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -205,6 +206,15 @@ export async function GET(req: NextRequest) {
   });
 
   console.log(`[newsletter] Done — ${sent} sent, ${failed} failed — blog: ${next.slug}`);
+
+  await logAgentRun("newsletter", "success", {
+    sent,
+    failed,
+    blog: next.slug,
+    title: next.title,
+    subject: copy.subject,
+    totalRemaining: allMeta.length - 1,
+  });
 
   return NextResponse.json({
     sent,
