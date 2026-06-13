@@ -1465,3 +1465,518 @@ export function weeklyBlogEmail({
     ${signoff()}
   `);
 }
+
+// ═══════════════════════════════════════════════════════════════
+// EMAIL SEQUENCES — HubSpot contact-type nurture sequences
+// ═══════════════════════════════════════════════════════════════
+
+// ── POTENTIAL LANDLORD sequence ──────────────────────────────
+
+export function seqLandlord1(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Hi ${firstName},`, "A quick gift from Prospera Properties.")}
+    ${md(`I noticed you connected with us — and I wanted to reach out personally.
+
+Managing a rental property in Ontario is more complicated than most people expect. Tenant laws, maintenance timelines, late rent — it adds up fast.
+
+So I put together something that's helped a lot of landlords I know: a **Lease Protection Addendum** that fills in the gaps Ontario's standard lease leaves open.`)}
+    ${noteBox("It covers things like: pet clauses, early termination penalties, property condition documentation, and more. Completely free — no strings attached.", "What's included")}
+    ${cta("Download the Addendum (PDF)", `${BASE_URL}/lease-addendum.pdf`)}
+    ${divider()}
+    ${md(`If you have questions about your rental — or just want a second opinion — reply to this email. I'm happy to help.`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqLandlord2(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Hey ${firstName},`, "3 things Ontario landlords often get wrong.")}
+    ${md(`Quick follow-up — I wanted to share the three biggest mistakes I see landlords make when managing on their own. Not to alarm you — just because knowing these saves a lot of headaches later.
+
+**1. No documented move-in condition report**
+Without one, it's your word against theirs if there's damage at move-out. Ontario tribunals side with tenants when the landlord can't prove pre-existing condition.
+
+**2. Verbal rent increase agreements**
+Any rent increase in Ontario must follow the RTA guidelines AND be given in writing with 90 days' notice. Verbal agreements are unenforceable.
+
+**3. DIY lease clauses that contradict the RTA**
+If a lease clause contradicts the Residential Tenancies Act, it's void — even if the tenant signed it. You lose the protection you thought you had.`)}
+    ${noteBox("These aren't edge cases — they come up all the time at the Landlord and Tenant Board. A solid process prevents all three.", "The fix")}
+    ${md(`If you'd like a free review of your current lease or process, I'm happy to take a look. No commitment — just a conversation.`)}
+    ${cta("Book a Free 15-Min Call", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqLandlord3(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`${firstName}, here's what full management actually looks like.`, "Real results from London, Strathroy & St. Thomas.")}
+    ${md(`I want to be straight with you: property management isn't for everyone. Some landlords love being hands-on. That's fine.
+
+But for landlords who want their time back — here's what working with Prospera actually looks like in practice:`)}
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0 24px;">
+      <tr>
+        <td style="background:${BG_SUBTLE};border-radius:12px;padding:20px 24px;">
+          <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">What we handle</p>
+          <ul style="margin:0;padding:0 0 0 18px;">
+            <li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Tenant screening (credit, reference, employment verification)</li>
+            <li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Lease drafting &amp; signing</li>
+            <li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Move-in / move-out inspections with photo documentation</li>
+            <li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Rent collection &amp; owner transfers</li>
+            <li style="margin:0 0 8px;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Maintenance coordination</li>
+            <li style="margin:0;font-size:14px;color:${TEXT};font-family:${FONT};line-height:1.6;">Monthly owner statements</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+    ${md(`You get one monthly report and a direct line to me. That's it. No late-night maintenance calls, no tribunal stress.`)}
+    ${cta("Let's Talk About Your Property", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqLandlord4(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Last one, ${firstName}.`, "Checking in one more time.")}
+    ${md(`I've sent a few emails over the past few weeks — I don't want to keep showing up in your inbox if it's not useful.
+
+So this is my last check-in. If now isn't the right time to talk about your property, no problem at all.
+
+But if you're at a point where you're thinking about handing off the day-to-day — I'd love to have a 15-minute conversation. No pitch, no pressure. Just an honest look at whether we're a good fit.`)}
+    ${cta("Book a Free 15-Min Consultation", `${BASE_URL}/contact`)}
+    ${divider()}
+    ${md(`Either way — the lease addendum and guides I sent are yours to keep. I hope they've been useful.
+
+If anything changes down the road, you know where to find me.`)}
+    <br>${signoff()}
+  `);
+}
+
+// ── REALTOR sequence ─────────────────────────────────────────
+
+export function seqRealtor1(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Hi ${firstName},`, "Great connecting with you.")}
+    ${md(`I wanted to reach out directly — I think there's a real opportunity for us to work together.
+
+As a property management company in London, Strathroy, and St. Thomas, I work with investors and landlords who are buying income properties. When they close, they need someone to manage the property.
+
+That's where I'd love to be your go-to referral.`)}
+    ${noteBox("When you refer an investor client to Prospera, you look good — they get a reliable, professional manager from day one. No awkward handoffs, no dropped balls.", "Why it works")}
+    ${md(`I keep things simple for your clients:
+- Fast tenant placement (typically 2–3 weeks)
+- Clear, transparent monthly reporting
+- You stay in the loop if they ever want to sell again
+
+Happy to grab a quick call if you want to learn more about how we work.`)}
+    ${cta("Let's Connect", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqRealtor2(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`${firstName}, here's what your clients get.`, "When you refer an investor to Prospera.")}
+    ${md(`I know you're busy — so I'll keep this short.
+
+Here's exactly what happens when you refer a landlord or investor client to us:`)}
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0 24px;">
+      <tr>
+        <td style="background:${BG_SUBTLE};border-radius:12px;padding:20px 24px;">
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="padding:0 0 12px;border-bottom:1px solid ${BORDER};">
+                <p style="margin:0;font-size:14px;font-weight:700;color:${TEXT};font-family:${FONT};">Within 48 hours</p>
+                <p style="margin:4px 0 0;font-size:13px;color:${MUTED};font-family:${FONT};">I contact your client, schedule a walkthrough, and confirm management scope.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0 12px;border-bottom:1px solid ${BORDER};">
+                <p style="margin:0;font-size:14px;font-weight:700;color:${TEXT};font-family:${FONT};">Within 2 weeks</p>
+                <p style="margin:4px 0 0;font-size:13px;color:${MUTED};font-family:${FONT};">Property listed, tenant applications screened, best candidate presented for approval.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0 0;">
+                <p style="margin:0;font-size:14px;font-weight:700;color:${TEXT};font-family:${FONT};">Ongoing</p>
+                <p style="margin:4px 0 0;font-size:13px;color:${MUTED};font-family:${FONT};">Monthly reports, rent collection, maintenance — all handled. Your client hears from us, not you.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    ${md(`I make sure your clients feel well taken care of — because that reflects on you too.
+
+Have a client in mind? Reply here and let's set something up.`)}
+    ${cta("Send a Referral", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqRealtor3(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Staying top of mind, ${firstName}.`, "Just a quick check-in.")}
+    ${md(`I know referrals happen when the timing is right — so I just wanted to stay on your radar.
+
+If you have a client who's recently bought an investment property, is thinking about renting out their home, or is frustrated with their current property manager — I'd love to be your first call.
+
+A few things realtors have told me they appreciate:`)}
+    ${noteBox("\"Ebin responds fast, keeps my clients happy, and I never have to chase him for updates.\" — that's what I'm going for every time.", "From a local realtor")}
+    ${md(`- I always loop you in if the client ever wants to sell again
+- Quick response time — your clients won't feel dropped
+- Serving London, Strathroy, and St. Thomas
+
+Let's keep in touch.`)}
+    ${cta("Connect on LinkedIn or by Phone", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+// ── CLIENT (active) sequence ─────────────────────────────────
+
+export function seqClient1(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Welcome to Prospera, ${firstName}.`, "Here's what happens next.")}
+    ${md(`I'm really glad to have you on board. Here's a quick overview of what the next few weeks look like so you always know where things stand.
+
+**This week:**
+Your property profile is being set up — photos, listing details, and pricing strategy. You'll hear from me if I have any questions.
+
+**Next 1–2 weeks:**
+We'll list the property, start receiving applications, and screen candidates. I'll present you with the top applicant(s) for your approval before any lease is signed.
+
+**Once a tenant is placed:**
+You'll receive a monthly owner statement by the 5th of every month. Rent is transferred to you after that.`)}
+    ${noteBox("My direct line is (519) 697-1227 and email is prosperapropertiess@gmail.com. Don't hesitate to reach out any time.", "How to reach me")}
+    ${md(`One thing I ask: if you have concerns about the property or tenants, come to me first. I handle all tenant communication directly — that's what keeps things professional and protects you legally.`)}
+    ${cta("View Your Property Details", `${BASE_URL}/owners`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqClient2(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`${firstName}, your first 30 days explained.`, "What to expect as a new Prospera client.")}
+    ${md(`Now that we're underway, I want to set clear expectations for the first 30 days. Knowing what's normal saves a lot of unnecessary worry.
+
+**Tenant placement takes 2–3 weeks on average.**
+Don't be alarmed if we don't have a signed lease in the first week — I'd rather wait for the right tenant than rush a placement I'm not confident in.
+
+**You may not hear from me every day.**
+That's actually a good sign. I'll reach out proactively if anything needs your attention. No news is good news.
+
+**Your first owner statement arrives by the 5th.**
+It'll show rent collected, any maintenance costs deducted, and your net transfer. Clear and detailed.`)}
+    ${noteBox("If something feels off or you have a question at any point — just text or email. I respond within a few hours during business days.", "Open door policy")}
+    <br>${signoff()}
+  `);
+}
+
+export function seqClient3(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`A quick check-in, ${firstName}.`, "One week in — how's everything looking?")}
+    ${md(`Just wanted to touch base. By now you should have:
+- Received confirmation of your property listing
+- Heard from me about any initial showing feedback
+- Had a chance to review the management agreement details
+
+If any of that's missing or unclear — reply here and I'll sort it out immediately.
+
+**Your owner portal:**
+You can log in anytime to see your property's status, maintenance history, and payment records.`)}
+    ${cta("Access Owner Portal", `${BASE_URL}/owners`)}
+    ${divider()}
+    ${md(`A reminder: all maintenance requests go through me. If a tenant ever contacts you directly, just forward them my number: **(519) 697-1227**.
+
+Thanks for trusting me with your property — I take that seriously.`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqClient4(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`30-day check-in, ${firstName}.`, "How's the first month been?")}
+    ${md(`It's been about a month — I wanted to check in and make sure everything is running the way you expected.
+
+By now you should have received your first owner statement. If anything on it looks off or you have questions about a line item, just reply and I'll explain it.
+
+**A few things I'd love your feedback on:**
+- Is the communication frequency right for you?
+- Is there anything you'd like more visibility into?
+- Any concerns about the property or tenant so far?`)}
+    ${noteBox("Your feedback directly shapes how I manage your property. If something isn't working for you, I'd rather know now than later.", "Why I'm asking")}
+    ${md(`I'm also always looking for ways to improve the property's value or reduce costs over time. If you have thoughts on that, I'd love to hear them.
+
+Thanks again for being a Prospera client — I'm committed to making this work well for you.`)}
+    ${cta("Reply or Book a Check-In Call", `${BASE_URL}/contact`)}
+    <br>${signoff()}
+  `);
+}
+
+// ── SELF-MANAGER sequence ─────────────────────────────────────
+
+export function seqSelfManager1(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Hi ${firstName},`, "Resources for landlords who do it themselves.")}
+    ${md(`I know you're managing your own rental — and I have a lot of respect for that. It takes real effort.
+
+Since you're handling things yourself, I figured the most useful thing I can do is give you tools that make it easier. Here are the two most valuable resources I offer for free:`)}
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0 24px;">
+      <tr>
+        <td style="padding:0 0 12px;">
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${BG_SUBTLE};border-radius:12px;padding:16px 20px;">
+            <tr>
+              <td>
+                <p style="margin:0 0 4px;font-size:14px;font-weight:700;color:${TEXT};font-family:${FONT};">📄 Lease Protection Addendum</p>
+                <p style="margin:0 0 8px;font-size:13px;color:${MUTED};font-family:${FONT};">Fills in the gaps Ontario's standard lease leaves open — pets, early termination, condition documentation.</p>
+                <a href="${BASE_URL}/lease-addendum.pdf" style="font-size:13px;font-weight:700;color:${CRIMSON};text-decoration:none;font-family:${FONT};">Download PDF &rarr;</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${BG_SUBTLE};border-radius:12px;padding:16px 20px;">
+            <tr>
+              <td>
+                <p style="margin:0 0 4px;font-size:14px;font-weight:700;color:${TEXT};font-family:${FONT};">📊 Free Rent Analysis</p>
+                <p style="margin:0 0 8px;font-size:13px;color:${MUTED};font-family:${FONT};">See what comparable units in your area are renting for — so you know if you're priced right.</p>
+                <a href="${BASE_URL}/rent-analysis" style="font-size:13px;font-weight:700;color:${CRIMSON};text-decoration:none;font-family:${FONT};">Get Your Analysis &rarr;</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    ${md(`No catch. These are just useful and I'd rather you have them.`)}
+    <br>${signoff()}
+  `);
+}
+
+export function seqSelfManager2(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`${firstName}, 5 pitfalls to avoid.`, "Common self-managing landlord mistakes in Ontario.")}
+    ${md(`Managing your own property puts you directly in the path of Ontario's Residential Tenancies Act — which heavily favours tenants. Here are the five most common mistakes I see at the LTB (Landlord and Tenant Board):
+
+**1. Entering without proper notice**
+You need 24 hours written notice for non-emergency entry. Verbal notice doesn't count. Violating this can result in a rent abatement order.
+
+**2. Not documenting everything in writing**
+Rent increases, repairs, tenant complaints — if it's not in writing, it didn't happen in the eyes of the LTB.
+
+**3. Accepting partial rent without a written agreement**
+Accepting partial rent can waive your right to serve an N4 (non-payment notice) for that period.
+
+**4. Raising rent more than the guideline**
+Ontario has an annual rent increase guideline. Exceeding it — even with the tenant's verbal agreement — can be reversed by the LTB.
+
+**5. No formal move-in inspection**
+Without a signed move-in condition report, you cannot claim tenant damage at move-out.`)}
+    ${noteBox("The Lease Protection Addendum I sent last week addresses most of these. If you haven't downloaded it yet, it's worth a few minutes of your time.", "Quick reminder")}
+    <br>${signoff()}
+  `);
+}
+
+export function seqSelfManager3(name: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+  return wrapper(`
+    ${heroCard(`Still here if you need backup, ${firstName}.`, "No pressure — just wanted to check in.")}
+    ${md(`I've sent a couple of emails with resources and tips. I hope they've been useful.
+
+I'm not going to keep filling your inbox — but I did want to say one more thing before I step back:
+
+If you ever hit a situation where you're in over your head — a difficult tenant, an LTB hearing, a property you can't find tenants for — **Prospera is here as backup.**
+
+Some landlords self-manage for years and only call us in a crisis. That's fine. We'll show up when you need us.
+
+Others start self-managing and realize they'd rather hand it off. That's fine too.
+
+There's no wrong answer — just what works for your life.`)}
+    ${cta("Talk to Ebin When You're Ready", `${BASE_URL}/contact`)}
+    ${divider()}
+    ${md(`In the meantime — keep the lease addendum, use the rent analysis when you need it, and feel free to reply any time if you have a question about a tenant situation. I'm happy to give a second opinion, no commitment required.`)}
+    <br>${signoff()}
+  `);
+}
+
+// ── Tenant Placement Process Email ────────────────────────────────────────────
+// Sent manually to landlord prospects to show the full placement process.
+// Attach: lease-addendum.pdf, sample-screening-report.pdf
+
+export function placementProcessEmail(name?: string): string {
+  const firstName = name?.split(" ")[0] || "there";
+
+  function step(num: string, title: string, body: string): string {
+    return `
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
+        <tr>
+          <td>
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+              <tr>
+                <td style="width:36px;vertical-align:top;padding-top:2px;">
+                  <div style="width:28px;height:28px;border-radius:99px;background-color:${CRIMSON};text-align:center;line-height:28px;">
+                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:${WHITE};">${num}</span>
+                  </div>
+                </td>
+                <td style="padding-left:14px;vertical-align:top;">
+                  <p style="margin:0 0 6px;font-family:${FONT};font-size:14px;font-weight:700;color:${TEXT};letter-spacing:0.2px;">${title}</p>
+                  <p style="margin:0;font-family:${FONT};font-size:14px;line-height:1.75;color:#444444;">${body}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>`;
+  }
+
+  function checkList(items: string[]): string {
+    const rows = items.map(item => `
+      <tr>
+        <td style="width:20px;vertical-align:top;padding-top:2px;">
+          <span style="font-family:${FONT};font-size:13px;color:${CRIMSON};font-weight:700;">✓</span>
+        </td>
+        <td style="padding-left:8px;padding-bottom:7px;">
+          <span style="font-family:${FONT};font-size:14px;line-height:1.6;color:${TEXT};">${item}</span>
+        </td>
+      </tr>`).join("");
+    return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin:12px 0 0;">${rows}</table>`;
+  }
+
+  function driveItem(label: string): string {
+    return `<tr>
+      <td style="padding:8px 16px;border-bottom:1px solid ${BORDER};">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+          <tr>
+            <td style="width:20px;">
+              <span style="font-size:13px;">📄</span>
+            </td>
+            <td style="padding-left:10px;">
+              <span style="font-family:${FONT};font-size:13px;color:${TEXT};">${label}</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>`;
+  }
+
+  const driveItems = [
+    "Signed lease agreement",
+    "17-point additional terms and conditions",
+    "All applicable N forms",
+    "Formal tenant screening report",
+    "Full credit report",
+    "Government ID verification",
+    "Employment verification &amp; pay stubs",
+    "Previous landlord reference notes",
+    "102-point move-in inspection report",
+    "Move-in condition photos",
+    "Utilities transfer confirmation",
+    "Itemized financial receipt",
+  ];
+
+  return wrapper(`
+    <!-- Opening -->
+    <p style="margin:0 0 6px;font-family:${FONT};font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Tenant Placement</p>
+    <h1 style="margin:0 0 20px;font-family:${FONT};font-size:26px;font-weight:700;line-height:1.3;color:${TEXT};">Hi ${firstName} — here's exactly how we fill a unit.</h1>
+    <p style="margin:0 0 28px;font-family:${FONT};font-size:15px;line-height:1.8;color:#444444;">Not to sell you anything. Just so you know what the process actually looks like when it's done properly.</p>
+
+    ${divider()}
+
+    <!-- Step 1 -->
+    ${step("1", "The Listing", "We write it. We take the photos. We push it across Facebook Marketplace, Kijiji, our website, and direct outreach channels. We don't just post and wait — we actively track how your unit performs against competing properties in real time.")}
+
+    <!-- Step 2 -->
+    ${step("2", "Showings", "We handle every message and inquiry. We schedule all showings. We show the unit ourselves. You don't take a single call. After every showing, we document what applicants said — what they liked, what they didn't, what they chose instead. That feedback drives our pricing decisions.")}
+
+    <!-- Step 3 -->
+    ${step("3", "Pricing", "We don't guess. We research what similar units nearby are actually renting for right now. We set a strategic opening price, test it with the market, and adjust based on real data. You always know why we priced it the way we did.")}
+
+    <!-- Step 4 -->
+    ${step("4", "Screening", "This is the most important part. And it's where most placements go wrong.")}
+
+    ${noteBox(`Every applicant goes through all of the following before anyone is approved:`, "For every single applicant")}
+
+    ${checkList([
+      "Photo ID verification",
+      "Single Key Report (included in the fee)",
+      "Last 4 pay stubs",
+      "Employment letter",
+      "Direct call to employer to confirm",
+      "Full credit report",
+      "Criminal background check",
+      "Direct call to previous landlord",
+      "Character references",
+      "Emergency contact",
+      "Completed rental application",
+    ])}
+
+    <p style="margin:16px 0 0;font-family:${FONT};font-size:14px;line-height:1.75;color:#444444;">Everything gets compiled into a <strong>formal Tenant Screening Report</strong> — written, assessed, and signed by us. You know exactly who is moving in and why they were approved. See the attached sample.</p>
+
+    ${divider()}
+
+    <!-- Step 5 -->
+    ${step("5", "The Lease", "We use the Ontario standard lease. But we don't stop there. We also attach our <strong>17-point Additional Terms and Conditions</strong> — a document we've built specifically to make the lease airtight and protect you in situations the standard lease doesn't cover.")}
+
+    ${noteBox(`We're including the 17-point lease addendum as a free gift with this email. Use it whether you work with us or not.`, "Attached — yours to keep")}
+
+    <!-- Step 6 -->
+    ${step("6", "Move-In Day", "We show up. We conduct a <strong>102-point move-in inspection</strong> — every room, every detail, documented and photographed. We walk through everything with the tenant. We collect first and last month's rent. We transfer utilities into their name and collect proof. We hand over the keys. We remove the lockbox.")}
+
+    <p style="margin:-8px 0 24px;font-family:${FONT};font-size:14px;line-height:1.75;color:#444444;">You hear from us when it's done.</p>
+
+    <!-- Step 7 -->
+    ${step("7", "Your Money", "First month's rent goes straight to you with a clear itemized breakdown of every dollar. Last month's rent and key deposit follow on the first of the following month. Ongoing rent routed directly to you going forward.")}
+
+    ${divider()}
+
+    <!-- Google Drive folder -->
+    <p style="margin:0 0 14px;font-family:${FONT};font-size:14px;font-weight:700;color:${TEXT};">When it's complete, you receive a Google Drive folder with everything organized:</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid ${BORDER};border-radius:12px;overflow:hidden;margin:0 0 28px;">
+      <tr>
+        <td style="background-color:${NAVY};padding:10px 16px;">
+          <span style="font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);">Your Placement Folder</span>
+        </td>
+      </tr>
+      ${driveItems.map(driveItem).join("")}
+    </table>
+
+    <p style="margin:0 0 28px;font-family:${FONT};font-size:14px;line-height:1.75;color:#444444;">Hard copies of everything mailed to your address as well.</p>
+
+    ${divider()}
+
+    <!-- Financial close -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
+      <tr>
+        <td style="background-color:#FDF9F9;border:1px solid #E8CECE;border-radius:14px;padding:28px 28px 24px;">
+          <p style="margin:0 0 6px;font-family:${FONT};font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Worth thinking about</p>
+          <p style="margin:0 0 16px;font-family:${FONT};font-size:22px;font-weight:700;line-height:1.3;color:${TEXT};">At $2,500/month, every day your unit sits empty costs you $83.</p>
+          <p style="margin:0 0 16px;font-family:${FONT};font-size:14px;line-height:1.75;color:#444444;">Most landlords who handle this themselves take 1–2 months to fill a unit. That's $2,500–$5,000 out of your pocket before they've even found someone. And that doesn't include the time, the stress, or the risk of approving the wrong person.</p>
+          <p style="margin:0;font-family:${FONT};font-size:15px;font-weight:700;color:${CRIMSON};">We fill units in 21 days on average.</p>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 28px;font-family:${FONT};font-size:15px;line-height:1.8;color:#444444;">You could do this yourself. But now you know exactly what it involves.</p>
+
+    ${cta("Book a Free Consultation", `${BASE_URL}/contact`)}
+
+    ${divider()}
+    <br>${signoff()}
+  `);
+}
