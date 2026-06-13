@@ -92,7 +92,7 @@ export default function LeaseAddendumThankYou() {
                 If you'd rather hand off the entire tenant process — that's what I do.
               </h2>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
-                Screening, placement, rent collection, maintenance, LTB situations. I manage 1–5 unit properties across London, Strathroy, and St. Thomas — and I answer my phone.
+                Screening, placement, rent collection, maintenance, LTB situations. I manage 2–5 unit properties across London, Strathroy, and St. Thomas — and I answer my phone.
               </p>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
                 I offer a free 20-minute portfolio review. No pitch. Just honest advice on protecting your rental income.

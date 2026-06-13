@@ -175,7 +175,7 @@ const comparisons = [
   { label: "Rent collection", diy: "Manual texting", bigpm: "✓", prospera: "✓ Automated" },
   { label: "N4 / legal notices", diy: "Google it", bigpm: "✓ (with help)", prospera: "✓ Auto-generated" },
   { label: "Maintenance workflow", diy: "Phone calls", bigpm: "✓ (you coordinate)", prospera: "✓ AI-triaged" },
-  { label: "Built for 1–5 units", diy: "✓ (barely)", bigpm: "✗ Built for 20+", prospera: "✓ Designed for you" },
+  { label: "Built for 2–5 units", diy: "✓ (barely)", bigpm: "✗ Built for 20+", prospera: "✓ Designed for you" },
   { label: "You stay in control", diy: "✓", bigpm: "✗ You hand it over", prospera: "✓ Always" },
   { label: "Contracts required", diy: "—", bigpm: "✓ Often 1–2 year", prospera: "✗ None. Ever." },
   { label: "Money-back guarantee", diy: "—", bigpm: "✗", prospera: "✓ 90 days" },
@@ -525,7 +525,7 @@ export default function PlatformPage() {
               className="text-base text-center mb-14 max-w-xl mx-auto"
               style={{ color: TEXT_2, fontFamily: "var(--font-dm-sans)" }}
             >
-              If you manage 1–5 properties in Ontario, at least 5 of these are your Tuesday.
+              If you manage 2–5 properties in Ontario, at least 5 of these are your Tuesday.
             </p>
           </FadeIn>
 

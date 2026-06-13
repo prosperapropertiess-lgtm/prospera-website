@@ -545,7 +545,7 @@ function PlatformTeaser() {
               <span style={{ color: "rgba(250,248,245,0.3)" }}>Not a second job.</span>
             </h2>
             <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-              We&apos;re building the app that Ontario landlords with 1–5 properties have
+              We&apos;re building the app that Ontario landlords with 2–5 properties have
               been waiting for. Rent, maintenance, legal notices, finances — automated.
               Built by Ebin, who&apos;s been managing properties in London, Ontario since 2021.
             </p>

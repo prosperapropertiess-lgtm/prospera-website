@@ -7,7 +7,7 @@ import PricingCards from "@/components/ui/PricingCards";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management for Landlords with 1–5 Doors",
+  title: "Property Management for Landlords with 2–5 Doors",
   description:
     "Prospera Properties manages your London, St. Thomas, or Strathroy rental — tenant screening, rent collection, maintenance, zero markups. Built for small landlords.",
 };

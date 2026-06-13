@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Ebin — The Story Behind Prospera",
   description:
-    "Meet Ebin Jaison — owner of Prospera Properties. A hands-on property manager serving landlords with 1–5 doors across London, St. Thomas, and Strathroy, Ontario.",
+    "Meet Ebin Jaison — owner of Prospera Properties. A hands-on property manager serving landlords with 2–5 doors across London, St. Thomas, and Strathroy, Ontario.",
 };
 
 const numbers = [
