@@ -53,9 +53,9 @@ function Hero() {
           className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
-          Built for landlords
+          Your rental is supposed to pay you.
           <br />
-          <em style={{ color: "rgba(250,248,245,0.65)" }}>with 1 to 5 doors.</em>
+          <em style={{ color: "rgba(250,248,245,0.65)" }}>Not consume you.</em>
         </motion.h1>
 
         <motion.p
@@ -65,9 +65,9 @@ function Hero() {
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
           style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
         >
-          You bought the rental. We take it from there — tenants, rent,
-          maintenance, all of it. No call centers. No ticket numbers. Just
-          someone who actually picks up the phone.
+          Tenants, rent, maintenance — handled. You find out when something's
+          done, not when it starts. No call centers. No ticket queues. Just
+          someone who picks up the phone and actually knows your property.
         </motion.p>
 
         <motion.div
@@ -122,7 +122,7 @@ function StatsBar() {
     { value: 25, suffix: "+", label: "Tenant Placements" },
     { value: 20, suffix: "+", label: "Five-Star Reviews" },
     { value: 0, suffix: "", label: "LTB Cases. Ever." },
-    { value: 2, suffix: "+ yrs", label: "Managing Rentals" },
+    { value: 21, suffix: " days", label: "Avg. to Fill a Unit" },
   ];
 
   return (
@@ -218,23 +218,23 @@ function FeatureCards() {
   const features = [
     {
       num: "01",
-      title: "Obsessive Tenant Screening",
-      desc: "Credit check. Income verification. Criminal background. Landlord references. Every single time. 25+ placements — all paying rent.",
+      title: "You never lose a year to the wrong tenant",
+      desc: "Every placement goes through credit, income verification, criminal background, and a direct call to their previous landlord. 25+ placements. All paying rent. Zero LTB cases.",
     },
     {
       num: "02",
-      title: "Zero Maintenance Markup",
-      desc: "Two years building a bench of trusted contractors — deep cleans to full reno coordination. You pay what they charge. Not a cent more.",
+      title: "Repairs cost what repairs cost — nothing more",
+      desc: "You pay the contractor's invoice. A flat 8% coordination fee covers our time. No inflated quotes, no mystery markups, no percentage skimmed off every job.",
     },
     {
       num: "03",
-      title: "Boutique by Design",
-      desc: "We keep our portfolio small on purpose. Every landlord we work with gets direct access, fast responses, and someone who actually knows their property.",
+      title: "You get someone who actually knows your property",
+      desc: "The portfolio stays small on purpose. When something happens at your unit, there's no ticket system — there's a person who's been inside it and knows the history.",
     },
     {
       num: "04",
-      title: "Direct Access, Not a Call Center",
-      desc: "You get Ebin's number. When something happens, you're not filing a ticket or waiting on hold. You get a real response.",
+      title: "You text. You get an answer.",
+      desc: "You get Ebin's direct number. When something comes up — maintenance, tenant issue, anything — you reach the person running it. Not a coordinator routing your call to someone else.",
     },
   ];
 
@@ -252,7 +252,7 @@ function FeatureCards() {
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            What we actually do differently.
+            What changes when you stop managing it yourself.
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -292,32 +292,32 @@ function HowItWorks() {
   const phases = [
     {
       num: "01",
-      phase: "Onboarding",
+      phase: "You stop guessing",
       timeline: "Days 1–3",
       steps: [
-        "Property walkthrough & condition report",
-        "Market rent analysis",
-        "Strategy & pricing agreed",
+        "We walk the property and document condition",
+        "Research what's actually renting nearby right now",
+        "You know the price and strategy before anything launches",
       ],
     },
     {
       num: "02",
-      phase: "Tenant Placement",
+      phase: "You stop taking calls",
       timeline: "Weeks 1–4",
       steps: [
-        "Photos + listing written and launched",
-        "Applications reviewed, screened thoroughly",
-        "Lease signed, move-in inspected",
+        "Professional photos, listing live on all platforms",
+        "Every inquiry answered, every showing run — not by you",
+        "You hear from us when someone worth approving comes through",
       ],
     },
     {
       num: "03",
-      phase: "Ongoing Management",
+      phase: "You stop thinking about it",
       timeline: "Every month",
       steps: [
-        "Rent collected, deposited to you",
-        "Maintenance handled start to finish",
-        "Monthly statement, zero surprises",
+        "Rent lands in your account with a clear breakdown",
+        "Maintenance resolved start to finish — you're told when it's done",
+        "Monthly statement on the 5th, zero surprises",
       ],
     },
   ];
@@ -336,7 +336,7 @@ function HowItWorks() {
             className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            From handshake to hands-off<br />in three phases.
+            What the first 30 days<br />looks like for you.
           </h2>
         </FadeIn>
 

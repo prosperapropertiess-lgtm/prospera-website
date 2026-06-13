@@ -38,33 +38,33 @@ const painPoints = [
 const steps = [
   {
     n: "01",
-    title: "Property Walkthrough & Strategy",
-    desc: "We inspect the unit, assess the market, and agree on a rent price and positioning strategy. No guesswork.",
+    title: "You know exactly what your unit should rent for",
+    desc: "We walk the property, research what's actually moving in your area right now, and set a price with a reason behind it. No guessing, no optimism.",
   },
   {
     n: "02",
-    title: "Photography + Listing Launch",
-    desc: "Professional photos, a listing that actually sells the unit — live on all major platforms within days.",
+    title: "Your unit goes to market without touching your schedule",
+    desc: "Professional photos, a listing written to attract serious tenants — live across every platform within days. You don't write a word or take a photo.",
   },
   {
     n: "03",
-    title: "Thorough Tenant Screening",
-    desc: "Credit check. Income verification (2.5–3× rent). Criminal background. Direct landlord reference calls. Every single application.",
+    title: "You know who is moving in before they sign",
+    desc: "Credit check. Income verification (2.5–3× rent). Criminal background. Direct call to their previous landlord. Every single application. No shortcuts.",
   },
   {
     n: "04",
-    title: "Lease Signed, Keys Handed",
-    desc: "Ontario-compliant lease, move-in inspection report with photos, key handover — all handled.",
+    title: "You get a clean handover and a paper trail",
+    desc: "Ontario-compliant lease, 102-point move-in inspection with photos, keys handed over. Everything documented before the tenancy begins.",
   },
   {
     n: "05",
-    title: "Rent Collected Every Month",
-    desc: "Online payments, immediate follow-up on any late payment, deposited to you with a clear statement.",
+    title: "Rent arrives without you asking for it",
+    desc: "Pre-authorized collection from day one. Immediate follow-up on anything late. Deposited to you with a clear line-by-line statement on the 5th.",
   },
   {
     n: "06",
-    title: "Maintenance Start to Finish",
-    desc: "Trusted contractors, 24/7 emergency line, zero markup. You hear about it when it's done.",
+    title: "Maintenance gets resolved — you find out when it's done",
+    desc: "Trusted contractors, 24/7 emergency line, flat 8% coordination fee. No markup inflation, no middle-of-the-night calls. You get a message when it's handled.",
   },
 ];
 
@@ -108,15 +108,14 @@ export default function LandlordsPage() {
             className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-6"
             style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
           >
-            Property management built for
+            You didn&apos;t buy a rental
             <br />
-            <em style={{ color: "rgba(250,248,245,0.6)" }}>landlords with 1 to 5 doors.</em>
+            <em style={{ color: "rgba(250,248,245,0.6)" }}>to spend your evenings managing it.</em>
           </h1>
           <p className="text-base max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
-            You don&apos;t need a corporate property management company built for
-            500-unit portfolios. You need someone who actually picks up the phone,
-            knows the tenant personally, and treats your one property like it
-            matters — because it does.
+            Every hour you spend chasing rent, coordinating repairs, or
+            Googling N4 forms is an hour your rental isn&apos;t passive. We take
+            that off your plate — completely. You own the asset. We run it.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -145,9 +144,9 @@ export default function LandlordsPage() {
               The Real Problems
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              Small landlords face problems
+              If any of these are your life,
               <br />
-              <em>big companies don&apos;t care about.</em>
+              <em>your rental isn&apos;t passive income yet.</em>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -172,9 +171,9 @@ export default function LandlordsPage() {
               The Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              From first call to
+              What stops happening
               <br />
-              <em>completely hands-off.</em>
+              <em>the moment you hand it over.</em>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
