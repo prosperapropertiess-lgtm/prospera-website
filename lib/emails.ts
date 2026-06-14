@@ -1823,24 +1823,20 @@ There's no wrong answer — just what works for your life.`)}
 export function placementProcessEmail(name?: string): string {
   const firstName = name?.split(" ")[0] || "there";
 
+  const P = `margin:0 0 28px;font-family:${FONT};font-size:19px;line-height:2.1;color:#222222;`;
+
   function step(num: string, title: string, body: string): string {
     return `
-      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 36px;">
         <tr>
-          <td>
-            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-              <tr>
-                <td style="width:36px;vertical-align:top;padding-top:2px;">
-                  <div style="width:28px;height:28px;border-radius:99px;background-color:${CRIMSON};text-align:center;line-height:28px;">
-                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:${WHITE};">${num}</span>
-                  </div>
-                </td>
-                <td style="padding-left:14px;vertical-align:top;">
-                  <p style="margin:0 0 6px;font-family:${FONT};font-size:14px;font-weight:700;color:${TEXT};letter-spacing:0.2px;">${title}</p>
-                  <p style="margin:0;font-family:${FONT};font-size:16px;line-height:1.9;color:#333333;">${body}</p>
-                </td>
-              </tr>
-            </table>
+          <td style="width:40px;vertical-align:top;padding-top:3px;">
+            <div style="width:32px;height:32px;border-radius:99px;background-color:${CRIMSON};text-align:center;line-height:32px;">
+              <span style="font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};">${num}</span>
+            </div>
+          </td>
+          <td style="padding-left:16px;vertical-align:top;">
+            <p style="margin:0 0 10px;font-family:${FONT};font-size:13px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:1.5px;">${title}</p>
+            <p style="margin:0;font-family:${FONT};font-size:19px;line-height:2.1;color:#222222;">${body}</p>
           </td>
         </tr>
       </table>`;
@@ -1849,26 +1845,24 @@ export function placementProcessEmail(name?: string): string {
   function checkList(items: string[]): string {
     const rows = items.map(item => `
       <tr>
-        <td style="width:20px;vertical-align:top;padding-top:2px;">
-          <span style="font-family:${FONT};font-size:13px;color:${CRIMSON};font-weight:700;">✓</span>
+        <td style="width:24px;vertical-align:top;padding-top:5px;">
+          <span style="font-family:${FONT};font-size:14px;color:${CRIMSON};font-weight:700;">✓</span>
         </td>
-        <td style="padding-left:8px;padding-bottom:7px;">
-          <span style="font-family:${FONT};font-size:16px;line-height:1.9;color:${TEXT};">${item}</span>
+        <td style="padding-left:10px;padding-bottom:14px;">
+          <span style="font-family:${FONT};font-size:17px;line-height:1.9;color:#222222;">${item}</span>
         </td>
       </tr>`).join("");
-    return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin:12px 0 0;">${rows}</table>`;
+    return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0 8px;width:100%;">${rows}</table>`;
   }
 
   function driveItem(label: string): string {
     return `<tr>
-      <td style="padding:8px 16px;border-bottom:1px solid ${BORDER};">
+      <td style="padding:13px 20px;border-bottom:1px solid ${BORDER};">
         <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
           <tr>
-            <td style="width:20px;">
-              <span style="font-size:13px;">📄</span>
-            </td>
-            <td style="padding-left:10px;">
-              <span style="font-family:${FONT};font-size:13px;color:${TEXT};">${label}</span>
+            <td style="width:20px;font-size:14px;">📄</td>
+            <td style="padding-left:12px;">
+              <span style="font-family:${FONT};font-size:16px;color:#222222;line-height:1.6;">${label}</span>
             </td>
           </tr>
         </table>
@@ -1892,26 +1886,21 @@ export function placementProcessEmail(name?: string): string {
   ];
 
   return wrapper(`
-    <!-- Opening -->
-    <p style="margin:0 0 6px;font-family:${FONT};font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Tenant Placement</p>
-    <h1 style="margin:0 0 20px;font-family:${FONT};font-size:26px;font-weight:700;line-height:1.3;color:${TEXT};">Hi ${firstName} — here's exactly how we fill a unit.</h1>
-    <p style="margin:0 0 28px;font-family:${FONT};font-size:17px;line-height:2.0;color:#333333;">Not to sell you anything. Just so you know what the process actually looks like when it's done properly.</p>
+    <p style="margin:0 0 8px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${MUTED};">Tenant Placement</p>
+    <h1 style="margin:0 0 24px;font-family:${FONT};font-size:28px;font-weight:700;line-height:1.3;color:${TEXT};">Hi ${firstName} — here's exactly how we fill a unit.</h1>
+    <p style="${P}">Not to sell you anything. Just so you know what the process actually looks like when it's done properly.</p>
 
     ${divider()}
 
-    <!-- Step 1 -->
     ${step("1", "The Listing", "We write it. We take the photos. We push it across Facebook Marketplace, Kijiji, our website, and direct outreach channels. We don't just post and wait — we actively track how your unit performs against competing properties in real time.")}
 
-    <!-- Step 2 -->
-    ${step("2", "Showings", "We handle every message and inquiry. We schedule all showings. We show the unit ourselves. You don't take a single call. After every showing, we document what applicants said — what they liked, what they didn't, what they chose instead. That feedback drives our pricing decisions.")}
+    ${step("2", "Showings", "We handle every message and every inquiry. We schedule all showings and show the unit ourselves. You don't take a single call. After every showing, we document what applicants said — what they liked, what they didn't, what they chose instead. That feedback drives our pricing decisions.")}
 
-    <!-- Step 3 -->
     ${step("3", "Pricing", "We don't guess. We research what similar units nearby are actually renting for right now. We set a strategic opening price, test it with the market, and adjust based on real data. You always know why we priced it the way we did.")}
 
-    <!-- Step 4 -->
     ${step("4", "Screening", "This is the most important part. And it's where most placements go wrong.")}
 
-    ${noteBox(`Every applicant goes through all of the following before anyone is approved:`, "For every single applicant")}
+    ${noteBox("Every applicant goes through all of the following before anyone is approved.", "For every single applicant")}
 
     ${checkList([
       "Photo ID verification",
@@ -1927,58 +1916,53 @@ export function placementProcessEmail(name?: string): string {
       "Completed rental application",
     ])}
 
-    <p style="margin:16px 0 0;font-family:${FONT};font-size:16px;line-height:1.9;color:#333333;">Everything gets compiled into a <strong>formal Tenant Screening Report</strong> — written, assessed, and signed by us. You know exactly who is moving in and why they were approved. See the attached sample.</p>
+    <p style="${P}">Everything gets compiled into a <strong>formal Tenant Screening Report</strong> — written, assessed, and signed by us. You know exactly who is moving in and why they were approved. See the attached sample.</p>
 
     ${divider()}
 
-    <!-- Step 5 -->
-    ${step("5", "The Lease", "We use the Ontario standard lease. But we don't stop there. We also attach our <strong>17-point Additional Terms and Conditions</strong> — a document we've built specifically to make the lease airtight and protect you in situations the standard lease doesn't cover.")}
+    ${step("5", "The Lease", "We use the Ontario standard lease — and we attach our <strong>17-point Additional Terms and Conditions</strong> on top. It's a document we built specifically to close the gaps the standard lease leaves open.")}
 
-    ${noteBox(`We're including the 17-point lease addendum as a free gift with this email. Use it whether you work with us or not.`, "Attached — yours to keep")}
+    ${noteBox("We're including the 17-point lease addendum as a free gift with this email. Use it whether you work with us or not.", "Attached — yours to keep")}
 
-    <!-- Step 6 -->
-    ${step("6", "Move-In Day", "We show up. We conduct a <strong>102-point move-in inspection</strong> — every room, every detail, documented and photographed. We walk through everything with the tenant. We collect first and last month's rent. We transfer utilities into their name and collect proof. We hand over the keys. We remove the lockbox.")}
+    ${step("6", "Move-In Day", "We show up. We conduct a <strong>102-point move-in inspection</strong> — every room, every detail, documented and photographed. We walk through everything with the tenant. We collect first and last month's rent, transfer utilities into their name, hand over the keys, and remove the lockbox.")}
 
-    <p style="margin:-8px 0 24px;font-family:${FONT};font-size:16px;line-height:1.9;color:#333333;">You hear from us when it's done.</p>
+    <p style="${P}">You hear from us when it's done.</p>
 
-    <!-- Step 7 -->
-    ${step("7", "Your Money", "First month's rent goes straight to you with a clear itemized breakdown of every dollar. Last month's rent and key deposit follow on the first of the following month. Ongoing rent routed directly to you going forward.")}
+    ${step("7", "Your Money", "First month's rent goes straight to you with a clear itemized breakdown of every dollar. Last month's rent and key deposit follow on the first of the following month. Ongoing rent routed directly to you from there.")}
 
     ${divider()}
 
-    <!-- Google Drive folder -->
-    <p style="margin:0 0 14px;font-family:${FONT};font-size:14px;font-weight:700;color:${TEXT};">When it's complete, you receive a Google Drive folder with everything organized:</p>
+    <p style="margin:0 0 16px;font-family:${FONT};font-size:16px;font-weight:700;color:${TEXT};">When it's complete, you get a Google Drive folder with everything:</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid ${BORDER};border-radius:12px;overflow:hidden;margin:0 0 28px;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid ${BORDER};border-radius:12px;overflow:hidden;margin:0 0 36px;">
       <tr>
-        <td style="background-color:${NAVY};padding:10px 16px;">
-          <span style="font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);">Your Placement Folder</span>
+        <td style="background-color:${NAVY};padding:12px 20px;">
+          <span style="font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);">Your Placement Folder</span>
         </td>
       </tr>
       ${driveItems.map(driveItem).join("")}
     </table>
 
-    <p style="margin:0 0 28px;font-family:${FONT};font-size:16px;line-height:1.9;color:#333333;">Hard copies of everything mailed to your address as well.</p>
+    <p style="${P}">Hard copies of everything mailed to your address as well.</p>
 
     ${divider()}
 
-    <!-- Financial close -->
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
       <tr>
-        <td style="background-color:#FDF9F9;border:1px solid #E8CECE;border-radius:14px;padding:28px 28px 24px;">
-          <p style="margin:0 0 6px;font-family:${FONT};font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Worth thinking about</p>
-          <p style="margin:0 0 16px;font-family:${FONT};font-size:22px;font-weight:700;line-height:1.3;color:${TEXT};">At $2,500/month, every day your unit sits empty costs you $83.</p>
-          <p style="margin:0 0 16px;font-family:${FONT};font-size:16px;line-height:1.9;color:#333333;">Most landlords who handle this themselves take 1–2 months to fill a unit. That's $2,500–$5,000 out of your pocket before they've even found someone. And that doesn't include the time, the stress, or the risk of approving the wrong person.</p>
-          <p style="margin:0;font-family:${FONT};font-size:15px;font-weight:700;color:${CRIMSON};">We fill units in 21 days on average.</p>
+        <td style="background-color:#FDF9F9;border:1px solid #E8CECE;border-radius:14px;padding:32px;">
+          <p style="margin:0 0 8px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${MUTED};">Worth thinking about</p>
+          <p style="margin:0 0 20px;font-family:${FONT};font-size:24px;font-weight:700;line-height:1.35;color:${TEXT};">At $2,500/month, every day your unit sits empty costs you $83.</p>
+          <p style="margin:0 0 20px;font-family:${FONT};font-size:19px;line-height:2.1;color:#333333;">Most landlords who handle this themselves take 1–2 months to fill a unit. That's $2,500–$5,000 out of your pocket before they've even found someone. And that doesn't include the time, the stress, or the risk of approving the wrong person.</p>
+          <p style="margin:0;font-family:${FONT};font-size:17px;font-weight:700;color:${CRIMSON};">We fill units in 21 days on average.</p>
         </td>
       </tr>
     </table>
 
-    <p style="margin:0 0 28px;font-family:${FONT};font-size:17px;line-height:2.0;color:#333333;">You could do this yourself. But now you know exactly what it involves.</p>
+    <p style="${P}">You could do this yourself. But now you know exactly what it involves.</p>
 
     ${cta("Book a Free Consultation", `${BASE_URL}/contact`)}
 
     ${divider()}
-    <br>${signoff()}
+    ${signoff()}
   `);
 }
