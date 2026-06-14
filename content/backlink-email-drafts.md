@@ -879,3 +879,145 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## RentZen — 2026-06-14
+To: https://rentzen.ca/contact (contact form)
+Subject: Guest post idea — Bill 60 on the ground in SW Ontario
+
+Your "Ontario Bill 60 Explained" guide is one of the clearest breakdowns of the new LTB timelines I've seen — especially the compression of the non-payment notice from 14 days to 7. We've been navigating those changes live since they took effect.
+
+I'm Ebin, I manage Prospera Properties in London, St. Thomas, and Strathroy. We handle LTB filings and N4 notices for our clients week in, week out. I'd love to write a short guest post on how the Bill 60 timeline changes have played out operationally in SW Ontario — real procedural texture to complement your regulatory analysis.
+
+Would that interest your team?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## LondonTopic — 2026-06-14
+To: http://www.londontopic.ca/contact/ (contact form)
+Subject: A rental market angle for your London real estate section
+
+Richard,
+
+Your real estate market forecast content covers the purchase side well — the long-term trend analysis is genuinely useful for anyone tracking the London market.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. I'd love to contribute a short piece on "What London's rental market looks like in 2026" — vacancy rates, average rents, what the investor picture looks like on the ground. A complement to your existing content that adds the rental dimension your readers don't often see.
+
+Would that be a fit for the site?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Mortgage Sandbox — 2026-06-14
+To: customerservice@mortgagesandbox.com
+Subject: London rental market data — complement to your forecast page
+
+Hi,
+
+Your Metro London Ontario forecast page is thorough on the price-trend side — the property-type breakdown and multi-factor risk scoring are genuinely useful for investors running London market analysis.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. I track vacancy rates, average rents by unit type, and tenant demand signals in those markets closely. I'd be happy to contribute rental market data to complement your existing sales-side forecast content — a "rental market" section that gives investors the full income picture alongside your price analysis.
+
+Happy to share numbers if that would be useful.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## LendCity Mortgages — 2026-06-14
+To: https://lendcity.ca/contact (contact form)
+Subject: Guest post idea — when to skip the PM software and hire a manager
+
+Hi,
+
+Your "Best Property Management Software for Canadians (2026)" review is well put together — useful for investors weighing their self-management options. The natural follow-on question is when the software isn't the right answer.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. I'd love to write a guest post: "When to skip the PM software and hire a property manager: a SW Ontario investor's guide." Your content covers the tools; this covers the point where the tools stop making sense. Complementary, not competing. Would your team consider a submission?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Matrix Mortgage Global — London Ontario — 2026-06-14
+To: matrix@mmgb.ca
+Subject: London investor clients — property management referral fit
+
+Hi,
+
+Your London Ontario mortgage page positions Matrix well for local investment buyers — London's more accessible price point compared to the GTA has been bringing a lot of investor activity to the market.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. When your London investor clients close their purchase, the immediate next question is who manages the property. I'd love to explore a resource mention on your London page as the recommended management partner for investors in this market, or a simple reciprocal referral arrangement. Worth a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Nesto — London Ontario Housing Market — 2026-06-14
+To: https://www.nesto.ca/contact (contact form)
+Subject: London rental market data for your housing outlook page
+
+Hi,
+
+Your London Housing Market 2026 page already references average rent data alongside the sales-side picture — which tells me your team is interested in the full investment story for London.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. I track vacancy rates, unit-level rent benchmarks, and demand signals in those markets closely. If your editorial team wants to deepen the rental data on your London page — vacancy rates, average rents by bedroom count, market demand observations — I'd be happy to serve as a local expert source.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Paul Gardiner RE/MAX Centre City — 2026-06-14
+To: https://paulgardiner.remaxcentrecity.ca/ (contact via website)
+Subject: Referral partnership — London investment buyer clients
+
+Hi Paul,
+
+Your piece on London home prices stabilizing in 2026 is a useful read for buyers who've been on the sidelines — you laid out the buyer advantage clearly.
+
+I'm Ebin, I run Prospera Properties managing rentals across London. When your investment buyer clients close on their first rental, the immediate next question is who manages it. I'd love to set up a simple mutual referral — you point new landlords to Prospera for management; we recommend you when owner-clients want to sell. Or I'd write a guest post: "What to do in the first 90 days after buying a London investment property." Worth a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Brown Beattie O'Donovan LLP — 2026-06-14
+To: https://www.bbo.on.ca/contact/ (contact form)
+Subject: Property management resource for your investment property content
+
+Hi,
+
+Your "Investment Property in Ontario: Buying Considerations" post covers the legal checklist for acquisition well — exactly what your real estate clients need before they sign.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London, St. Thomas, and Strathroy. What comes right after the purchase is what we handle — tenant selection, lease execution, compliance, and LTB management for London-area landlords.
+
+I'd love to contribute a short piece on what investors should know about property management once the deal closes, or simply be listed as a trusted local resource for your investment property clients. Would that be worth exploring?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
