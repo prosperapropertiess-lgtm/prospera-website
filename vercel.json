@@ -7,6 +7,6 @@
     { "path": "/api/cron/hubspot-sync", "schedule": "0 9 * * *" },
     { "path": "/api/cron/sequence-sender", "schedule": "0 15 * * *" },
     { "path": "/api/cron/weekly-improvement", "schedule": "0 1 * * 1" },
-    { "path": "/api/cron/intelligence", "schedule": "0 12 * * *" }
+    { "path": "/api/cron/intelligence", "schedule": "30 11 * * *" }
   ]
 }

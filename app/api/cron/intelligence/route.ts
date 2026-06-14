@@ -1,23 +1,30 @@
 /**
- * Daily Founder Intelligence Cycle — runs every day at 7am EST (12:00 UTC)
+ * Daily Founder Intelligence Cycle — runs every day at 6:30am EST (11:30 UTC)
+ *
+ * Compounding engine:
+ *   - Reads the last 7 successful runs from agent_runs
+ *   - Passes the domain history to Claude so each session builds on the last
  *
  * Each run:
  *   1. Picks one core concept from a rotation of deep domains
- *   2. Uses Claude Sonnet to generate the full intelligence cycle
- *   3. Sends to ebinjaison02@gmail.com via Resend
- *   4. Logs to agent_runs
+ *   2. Loads history from Supabase for the compounding context
+ *   3. Uses Claude Sonnet to generate the full intelligence cycle
+ *   4. Sends to ebinjaison02@gmail.com via Resend
+ *   5. Logs to agent_runs
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
 import { logAgentRun } from "@/lib/agent-logger";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const RECIPIENT = "ebinjaison02@gmail.com";
 const FROM = "Ebin Intelligence <hello@prosperaproperties.co>";
+const FONT = "Arial, Helvetica, sans-serif";
 
 const DOMAINS = [
   "incentive design",
@@ -105,7 +112,7 @@ Ask ONE question that forces high-level operator reasoning. Must: break surface 
 
 🧬 COMPOUNDING RULE (HOW THIS CONNECTS)
 
-Connect today's concept to the broader system being built. Show what yesterday's insight this builds on or contradicts. If this is Day 1, frame as: "Day 1 baseline — this concept is the foundation everything else will build on or contradict."
+Connect today's concept to the broader system being built. If prior domains are provided in context, explicitly name which one today's insight builds on, contradicts, or amplifies. Show the compound effect — what becomes possible when two or more of these ideas are understood together. If this is Day 1, frame as: "Day 1 baseline — this concept is the foundation everything else will build on or contradict."
 
 ---
 
@@ -114,78 +121,145 @@ End with this exact line on its own:
 
 Output plain text only. No markdown code fences. Keep it dense and specific — no filler, no motivation, no softening.`;
 
-function emailHtml(date: string, domain: string, body: string): string {
+// ── Compounding engine ───────────────────────────────────────
+async function getPriorSessions(): Promise<Array<{ date: string; domain: string; dayNum: number }>> {
+  try {
+    const sb = getSupabaseAdmin();
+    const { data } = await sb
+      .from("agent_runs")
+      .select("summary, created_at")
+      .eq("agent", "intelligence")
+      .eq("status", "success")
+      .order("created_at", { ascending: false })
+      .limit(7);
+
+    if (!data || data.length === 0) return [];
+
+    return data.map((row, i) => ({
+      date: new Date(row.created_at).toLocaleDateString("en-CA", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        timeZone: "America/Toronto",
+      }),
+      domain: (row.summary as { domain?: string })?.domain ?? "unknown",
+      dayNum: data.length - i,
+    })).reverse();
+  } catch {
+    return [];
+  }
+}
+
+// ── Email HTML ───────────────────────────────────────────────
+function emailHtml(date: string, domain: string, dayNumber: number, priorDomains: string[], body: string): string {
+  const NAVY = "#1a2634";
+  const CRIMSON = "#8B2030";
+  const year = new Date().getFullYear();
+
   const lines = body.split("\n");
   let html = lines
     .map((line) => {
-      if (line.startsWith("⚙️") || line.startsWith("🏢") || line.startsWith("📦") || line.startsWith("🧠") || line.startsWith("🧱") || line.startsWith("💰") || line.startsWith("🔍") || line.startsWith("🎯") || line.startsWith("🧬")) {
-        return `<h2 style="margin:32px 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#8B2030;text-transform:uppercase;letter-spacing:1px;">${line}</h2>`;
+      const isHeader = ["⚙️","🏢","📦","🧠","🧱","💰","🔍","🎯","🧬"].some(e => line.startsWith(e));
+      if (isHeader) {
+        return `
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin:40px 0 12px;">
+            <tr><td style="height:1px;background:#eceae6;"></td></tr>
+          </table>
+          <p style="margin:0 0 10px;font-family:${FONT};font-size:11px;font-weight:700;color:${CRIMSON};text-transform:uppercase;letter-spacing:2px;">${line}</p>`;
       }
-      if (line.trim() === "---") {
-        return `<hr style="border:none;border-top:1px solid #e4e2df;margin:20px 0;" />`;
-      }
+      if (line.trim() === "---") return "";
       if (line.startsWith("A.") || line.startsWith("B.") || line.startsWith("C.")) {
-        return `<p style="margin:12px 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;color:#1b1c1a;">${line}</p>`;
+        return `<p style="margin:24px 0 8px;font-family:${FONT};font-size:16px;font-weight:700;color:#111111;">${line}</p>`;
       }
-      if (line.trim() === "") return `<br/>`;
+      if (line.trim() === "") return `<div style="height:12px;"></div>`;
       if (line === "If this is solved, everything downstream becomes easier.") {
-        return `<p style="margin:32px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;color:#8B2030;font-style:italic;">${line}</p>`;
+        return `
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin:40px 0 0;">
+            <tr><td style="height:1px;background:#eceae6;"></td></tr>
+          </table>
+          <p style="margin:28px 0 0;font-family:${FONT};font-size:17px;font-weight:700;color:${CRIMSON};font-style:italic;">${line}</p>`;
       }
-      return `<p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.75;color:#333333;">${line}</p>`;
+      return `<p style="margin:0 0 22px;font-family:${FONT};font-size:17px;line-height:2.0;color:#222222;">${line}</p>`;
     })
     .join("\n");
+
+  const compoundBar = priorDomains.length > 0
+    ? `<p style="margin:0;font-family:${FONT};font-size:12px;color:rgba(255,255,255,0.4);line-height:1.8;">
+        <span style="color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;font-size:10px;">Prior sessions: </span>
+        ${priorDomains.map(d => `<span style="color:rgba(255,255,255,0.5);">${d}</span>`).join(' <span style="color:rgba(255,255,255,0.2);">·</span> ')}
+      </p>`
+    : `<p style="margin:0;font-family:${FONT};font-size:12px;color:rgba(255,255,255,0.35);">Session 1 — compounding begins today.</p>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Daily Intelligence Cycle</title>
+<title>Intelligence Cycle</title>
+<style>
+  body { margin:0; padding:0; background-color:${NAVY}; }
+  @media only screen and (max-width:620px) {
+    .outer { padding:0 !important; }
+    .header-cell { padding:20px 24px !important; }
+    .meta-cell { padding:20px 24px !important; border-radius:0 !important; }
+    .body-cell { padding:32px 24px 40px !important; border-radius:0 !important; }
+    .footer-cell { padding:28px 24px !important; }
+    .compound-row { padding:16px 24px !important; }
+    p { font-size:17px !important; line-height:2.0 !important; }
+  }
+</style>
 </head>
-<body style="margin:0;padding:0;background-color:#1F2F3A;font-family:Arial,Helvetica,sans-serif;">
+<body style="margin:0;padding:0;background-color:${NAVY};font-family:${FONT};">
 <table width="100%" cellpadding="0" cellspacing="0">
   <tr>
-    <td align="center" style="padding:24px 16px;background-color:#1F2F3A;">
-      <table cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
+    <td class="outer" align="center" style="padding:24px 16px;background-color:${NAVY};">
+      <table cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
         <!-- Header -->
         <tr>
-          <td style="padding:28px 40px 20px;background-color:#1F2F3A;">
+          <td class="header-cell" style="padding:24px 32px 16px;background-color:${NAVY};">
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
                 <td>
-                  <div style="display:inline-block;background-color:#ffffff;border-radius:8px;padding:6px 12px;">
-                    <span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;color:#1F2F3A;">PROSPERA</span>
+                  <div style="display:inline-block;background:#ffffff;border-radius:6px;padding:5px 11px;">
+                    <span style="font-family:${FONT};font-size:12px;font-weight:700;color:${NAVY};letter-spacing:0.5px;">PROSPERA</span>
                   </div>
                 </td>
                 <td style="text-align:right;">
-                  <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">Intelligence Cycle</span>
+                  <span style="font-family:${FONT};font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.5px;">Day ${dayNumber} · Intelligence</span>
                 </td>
               </tr>
             </table>
           </td>
         </tr>
 
-        <!-- Meta strip -->
+        <!-- Meta -->
         <tr>
-          <td style="padding:0 24px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0D1820;border-radius:12px 12px 0 0;padding:16px 24px;">
+          <td style="padding:0 16px;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#101d27;border-radius:12px 12px 0 0;">
               <tr>
-                <td style="padding:16px 24px;">
-                  <p style="margin:0 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1.5px;">${date}</p>
-                  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;color:#ffffff;">Today's Domain: <span style="color:#c97070;">${domain}</span></p>
+                <td class="meta-cell" style="padding:22px 32px;">
+                  <p style="margin:0 0 6px;font-family:${FONT};font-size:11px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:2px;">${date}</p>
+                  <p style="margin:0 0 4px;font-family:${FONT};font-size:22px;font-weight:700;color:#ffffff;line-height:1.3;">Today: <span style="color:#c97070;">${domain}</span></p>
                 </td>
               </tr>
+              ${priorDomains.length > 0 ? `
+              <tr>
+                <td class="compound-row" style="padding:12px 32px 20px;border-top:1px solid rgba(255,255,255,0.06);">
+                  ${compoundBar}
+                </td>
+              </tr>` : `
+              <tr><td class="compound-row" style="padding:8px 32px 18px;">${compoundBar}</td></tr>`}
             </table>
           </td>
         </tr>
 
-        <!-- White card -->
+        <!-- Body -->
         <tr>
-          <td style="padding:0 24px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:0 0 20px 20px;">
+          <td style="padding:0 16px;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:0 0 16px 16px;">
               <tr>
-                <td style="padding:36px 40px 40px;">
+                <td class="body-cell" style="padding:40px 40px 48px;">
                   ${html}
                 </td>
               </tr>
@@ -195,10 +269,10 @@ function emailHtml(date: string, domain: string, body: string): string {
 
         <!-- Footer -->
         <tr>
-          <td style="padding:32px 40px;text-align:center;background-color:#1F2F3A;">
-            <p style="margin:0 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;color:#ffffff;">Ebin</p>
-            <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.2em;">Founder · Prospera Properties</p>
-            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:9px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.1em;">© ${new Date().getFullYear()} PROSPERA PROPERTIES MANAGEMENT GROUP</p>
+          <td class="footer-cell" style="padding:32px;text-align:center;background-color:${NAVY};">
+            <p style="margin:0 0 4px;font-family:${FONT};font-size:15px;font-weight:700;color:#ffffff;">Ebin Jaison</p>
+            <p style="margin:0 0 20px;font-family:${FONT};font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1.5px;">Founder · Prospera Properties</p>
+            <p style="margin:0;font-family:${FONT};font-size:10px;color:rgba(255,255,255,0.15);text-transform:uppercase;letter-spacing:0.5px;">© ${year} Prospera Properties Management Group</p>
           </td>
         </tr>
 
@@ -226,15 +300,26 @@ export async function GET(req: NextRequest) {
     );
     const domain = DOMAINS[dayOfYear % DOMAINS.length];
 
+    // Load compounding history
+    const priorSessions = await getPriorSessions();
+    const dayNumber = priorSessions.length + 1;
+    const priorDomains = priorSessions.map(s => s.domain);
+
+    const historyContext = priorSessions.length > 0
+      ? `\n\nCompounding context — prior sessions (oldest → most recent):\n${priorSessions.map(
+          (s, i) => `Day ${i + 1} (${s.date}): ${s.domain}`
+        ).join("\n")}\n\nThis is Day ${dayNumber}. In the Compounding Rule section, explicitly connect today's domain to the most relevant prior sessions. Name specific ideas from previous domains that either reinforce, contradict, or amplify today's concept.`
+      : "\n\nThis is Day 1. No prior sessions. In the Compounding Rule section, frame this as the baseline from which all future sessions will build.";
+
     // Generate intelligence cycle
     const message = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
-      max_tokens: 2400,
+      max_tokens: 2800,
       system: SYSTEM_PROMPT,
       messages: [
         {
           role: "user",
-          content: `Today's core concept domain: ${domain}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 2–5 doors toward 1,000+.`,
+          content: `Today's core concept domain: ${domain}${historyContext}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 2–5 doors toward 1,000+.`,
         },
       ],
     });
@@ -255,27 +340,28 @@ export async function GET(req: NextRequest) {
       timeZone: "America/Toronto",
     });
 
-    const subject = `🧠 Daily Intelligence Cycle — ${new Date().toLocaleDateString("en-CA", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      timeZone: "America/Toronto",
-    })}`;
+    const subject = `Day ${dayNumber} · ${domain.charAt(0).toUpperCase() + domain.slice(1)}`;
 
     // Send email
     const { data, error } = await resend.emails.send({
       from: FROM,
       to: RECIPIENT,
       subject,
-      html: emailHtml(dateStr, domain, body),
+      html: emailHtml(dateStr, domain, dayNumber, priorDomains, body),
     });
 
     if (error) throw new Error(JSON.stringify(error));
 
     const duration = Date.now() - start;
-    await logAgentRun("intelligence", "success", { domain, emailId: data?.id, dateStr }, duration);
+    await logAgentRun("intelligence", "success", {
+      domain,
+      dayNumber,
+      emailId: data?.id,
+      dateStr,
+      priorDomains,
+    }, duration);
 
-    return NextResponse.json({ ok: true, domain, emailId: data?.id });
+    return NextResponse.json({ ok: true, domain, dayNumber, emailId: data?.id });
   } catch (err) {
     const duration = Date.now() - start;
     await logAgentRun("intelligence", "error", undefined, duration, String(err));
