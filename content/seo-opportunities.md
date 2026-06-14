@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-06-07
+Last updated: 2026-06-14
 
 ## New Topic Opportunities
 Topics found in competitor/search results that we have no post covering. Blog agent should prioritize these above the default keyword list.
@@ -36,7 +36,25 @@ Topics found in competitor/search results that we have no post covering. Blog ag
 
 - **ontario-landlord-legal-obligations-checklist-2026** | Est. difficulty: MEDIUM | Vol: ~150/mo | A comprehensive "what you're legally required to do as a landlord" checklist — maintenance standards, heating minimums, entry notice, insurance, standard lease, smoke detector requirements, rent receipt obligations. foundspaces.ca is ranking for this with a thin post. Angle: structured as a printable checklist format covering all RTA obligations, with Bill 60 additions flagged. Good lead gen: landlords who realize how much is required are more likely to consider professional management.
 
+### Added 2026-06-14
+
+- **n12-bill-60-compensation-waiver-ontario** | Est. difficulty: LOW | Vol: ~100/mo | Bill 60 (November 2025) created a second N12 path landlords don't know exists: the 120-day Compensation Waiver. Instead of the traditional 60-day notice + one month's compensation, landlords can give 120 days and waive the payment. Tenon10 and azilaw.com both now have dedicated 2026 N12 guides covering this. Our n12-notice-ontario.md predates Bill 60's implementation and almost certainly doesn't include the waiver calculation. Angle: the two paths side-by-side, break-even analysis (when 60 extra days of tenancy is worth less than one month's compensation), what "genuine intention" still means under the new rules, and documentation landlords need to avoid an L2 bad-faith claim.
+
+- **can-landlord-charge-late-fees-ontario** | Est. difficulty: LOW | Vol: ~200/mo | "Can I charge late fees?" is one of the most common landlord questions in Ontario — and the answer (definitively no, RTA s.134 voids any such clause) isn't what they expect. No competitor post leads with this framing. Our n4-notice-ontario.md and late-rent-payments-ontario.md touch on it but don't answer the question directly. Angle: why late fees are void and cannot be enforced at the LTB, what IS legal (N4 notice, L9 for arrears, rent reporting to credit bureaus via FrontLobby/Landlord Credit Bureau), how to draft a rent reminder system that deters late payment within the law, and when escalation to an N4 becomes the right move.
+
+- **n10-form-ontario-above-guideline-agreement** | Est. difficulty: LOW | Vol: ~75/mo | The N10 "Agreement to Increase Rent Above the Guideline" allows landlords and tenants to agree to an above-guideline increase without LTB involvement — distinct from an L5 application, which requires board approval. No existing post covers this. Angle: when N10 is appropriate vs. L5, what value exchange landlords typically offer tenants (capital improvements, appliance upgrades), how to structure a valid N10, LTB's stance on signed N10 agreements if disputes arise later, and tenant protections that can't be waived even with a signed N10.
+
 ---
+
+## SKIPPED (2026-06-14 research — too competitive or already covered)
+- ontario-landlord-rights-2026 — Broad topic dominated by ontario.ca, tribunalsontario.ca. Covered across multiple existing posts.
+- can-landlord-enter-property-ontario — COVERED by `landlord-entry-rights-ontario.md`. No new angle found.
+- tenant-not-paying-rent-ontario — COVERED by `late-rent-payments-ontario.md`, `n4-notice-ontario.md`, and `l1-application-ltb-ontario.md`.
+- rent-increase-ontario-landlord-guide — COVERED by `rent-increase-ontario-guidelines.md` + `n1-form-ontario.md`; N1 step-by-step guide already in prior opportunities.
+- tenant-screening-ontario-2026 — COVERED by `tenant-screening-red-flags.md` and `tenant-credit-check-ontario-landlords.md`; OHRC angle already in prior opportunities.
+- eviction-notice-ontario-how-long — COVERED by `how-long-does-eviction-take-ontario.md`; LTB wait times by application type already in prior opportunities.
+- ontario-standard-lease-requirements — COVERED by `ontario-standard-lease-2026.md`; addendum and prohibited clauses opportunities already noted.
+- above-guideline-rent-increase-ontario — COVERED by `above-guideline-rent-increase-ontario.md`; procedural L5 detail already in Topics to Expand below.
 
 ## SKIPPED (2026-06-07 research — too competitive or already covered)
 - ontario-rent-increase-guideline-2026 — HIGH competition (ontario.ca, rentals.ca, multiple major sites). Covered by `rent-increase-ontario-guidelines.md`.
@@ -71,3 +89,5 @@ Existing posts that are likely thin on content or contain outdated information:
 - **above-guideline-rent-increase-ontario.md** — Add procedural detail for the L5 application: what documents to attach, the 3-year spreading cap (max 3% per year on approved amounts), qualifying capital expenditure examples (roof, boiler, elevators, balconies), extraordinary property tax increase threshold, how to request interim rent collection during the waiting period, and realistic LTB approval timelines. Search results show multiple smaller sites ranking with more procedurally specific AGI content.
 
 - **rental-property-insurance-ontario.md** — Add a cost breakdown table by property type (house ~$900/year, condo/apartment ~$400/year, multi-unit higher) and coverage amounts ($1M–$2M liability standard), plus a section specifically on what triggers a standard home insurance denial. Competitors (cayugamutual.com, isure.ca, kaseinsurance.com) are ranking with cost-specific content that our general post lacks.
+
+- **n12-notice-ontario.md** — Update required for Bill 60 (November 2025). Add the new 120-day Compensation Waiver path: landlords who give 120 days notice can waive the one-month compensation payment. Azilaw.com and tenon10.com have dedicated 2026 N12 guides covering this; our post almost certainly predates this change. Add a side-by-side comparison table (60-day + pay vs. 120-day + waive), a break-even calculation, updated documentation requirements under Bill 60, and what happens if the landlord fails to genuinely move in (still 12 months' rent penalty + costs).
