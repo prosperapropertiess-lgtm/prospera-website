@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-06-16
+2026-06-17
 
-## Posts Written: 60 total
+## Posts Written: 61 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -87,11 +87,12 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - how-to-find-a-property-manager-ontario ✅
 - property-manager-london-ontario-cost ✅
 
-### SUPPORTING CLUSTER keywords (4)
+### SUPPORTING CLUSTER keywords (5)
 - landlord-responsibilities-new-tenant-ontario ✅
 - tenant-onboarding-checklist-ontario ✅
 - landlord-insurance-vs-tenant-insurance-ontario ✅
 - how-to-increase-rent-ontario-step-by-step ✅ _(supporting rent-increase-ontario-guidelines cluster)_
+- n1-form-ontario-landlord-guide ✅ _(supporting how-to-increase-rent-ontario-step-by-step and rent-increase-ontario-guidelines cluster)_
 
 ### TENANT keywords (0)
 **Not a priority yet — different conversion intent:**
@@ -113,12 +114,10 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 **Supporting cluster content (topical depth):**
 4. rta-section-83-ontario (supporting LTB cluster)
 5. property-management-for-landlords-with-one-property-ontario (conversion intent — single-property owners)
-6. n1-form-ontario-landlord-guide (supporting how-to-increase-rent cluster — N1 deep-dive)
 
 **Next priority after geographic expansion:**
 - rta-section-83-ontario
 - property-management-for-landlords-with-one-property-ontario
-- n1-form-ontario-landlord-guide
 
 ---
 
@@ -157,3 +156,4 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - 2026-06-10: Published tenant-onboarding-checklist-ontario — SUPPORTING CLUSTER (tenant onboarding cluster, companion to landlord-responsibilities-new-tenant-ontario). Full operational checklist for Ontario landlords covering pre-lease-signing preparation, lease signing meeting steps, move-in inspection documentation, key handover process, and first-30-day follow-up. Differentiates from tenant-focused moving checklists by being entirely landlord-oriented and RTA-grounded. Includes a master checklist summary with checkboxes organized by phase. Internal links to late-rent-payments-ontario, what-can-landlord-deduct-from-last-month-rent-ontario, move-in-move-out-inspection-ontario, n4-notice-ontario, and landlord-record-keeping-ontario. External links to ontario.ca Ontario Standard Lease document, CMHC rental housing guidance, and Tribunals Ontario LTB resources.
 - 2026-06-11: Published landlord-insurance-vs-tenant-insurance-ontario — SUPPORTING CLUSTER (insurance cluster, supporting rental-property-insurance-ontario). Covers what landlord insurance covers (building, lost rent, liability, optional add-ons), what tenant insurance covers (personal property, liability, additional living expenses), whether Ontario landlords can require tenant insurance (RTA position vs. lease clause strategy), four damage scenarios showing how the policies interact, what to look for in a landlord policy (malicious damage, vacancy clauses, sewer backup, replacement cost vs. ACV), and Southwestern Ontario-specific insurance considerations for older housing stock. Differentiates from SquareOne/BrokerLink competitors by being landlord-focused, Ontario-law-grounded, and actionable. Internal links to rental-property-tax-deductions-ontario, tenant-onboarding-checklist-ontario, landlord-maintenance-responsibilities-ontario, and rental-property-insurance-ontario. External links to ontario.ca RTA statute, CMHC rental housing data, and tribunalsontario.ca/ltb.
 - 2026-06-16: Published how-to-increase-rent-ontario-step-by-step — SUPPORTING CLUSTER (supporting rent-increase-ontario-guidelines; long-tail expansion). Covers rent control exemption threshold (post-Nov 15 2018 units), 12-month rule mechanics, 90-day notice requirement, N1 form completion and valid service methods, guideline calculation with example, above-guideline increase overview, tenant dispute rights (T1 application), fixed-term lease timing rules, and 9-step summary checklist. Differentiates from ontario.ca and CLEO competitors by being landlord-process-focused with step-by-step operational guidance and common-mistake warnings. Internal links to above-guideline-rent-increase-ontario, landlord-record-keeping-ontario, late-rent-payments-ontario, and lease-renewal-ontario-landlord-guide. External links to ontario.ca RTA statute, ontario.ca/page/residential-rent-increases, and tribunalsontario.ca/ltb/forms/.
+- 2026-06-17: Published n1-form-ontario-landlord-guide — SUPPORTING CLUSTER (deep-dive companion to how-to-increase-rent-ontario-step-by-step and rent-increase-ontario-guidelines). Covers N1 form field-by-field walkthrough, rent control eligibility (pre/post Nov 15 2018), 2026 guideline (2.5%), 90-day notice rule mechanics, 12-month rule, all valid RTA service methods with deemed-receipt rules, T1 tenant dispute process, LMR top-up obligation after rent increase, and 7 most common N1 mistakes. Differentiates from tribunalsontario.ca PDF and ontario.ca competitors by being fully landlord-process-oriented with mistake prevention guidance. Internal links to above-guideline-rent-increase-ontario, how-to-increase-rent-ontario-step-by-step, landlord-record-keeping-ontario, what-can-landlord-deduct-from-last-month-rent-ontario, and lease-renewal-ontario-landlord-guide. External links to ontario.ca RTA statute, ontario.ca/page/residential-rent-increases, and tribunalsontario.ca/ltb/forms/.
