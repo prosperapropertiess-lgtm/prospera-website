@@ -8,6 +8,7 @@ import {
   formatDollars,
   type ClaudeNarrative,
 } from "@/lib/owner-report-email";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 // Runs on the 3rd of every month at 9am Eastern (13:00 UTC)
 // Schedule: 0 13 3 * *
@@ -174,7 +175,18 @@ export async function GET(req: NextRequest) {
           };
         }
 
-        const htmlBody = buildEmailHTML(bundle, narrative, ownerNames, false);
+        // Look up portal token for this owner bundle
+        const notionOwnerIds = bundle.owners.map(o => o.id);
+        const sb = getSupabaseAdmin();
+        const { data: accessRow } = await sb
+          .from("owner_access")
+          .select("token")
+          .contains("notion_owner_ids", notionOwnerIds)
+          .limit(1)
+          .single();
+        const portalToken = accessRow?.token ?? undefined;
+
+        const htmlBody = buildEmailHTML(bundle, narrative, ownerNames, false, portalToken);
 
         const ownerEmails = [...new Set(bundle.owners.map(o => o.email).filter(Boolean))];
         await resend.emails.send({
