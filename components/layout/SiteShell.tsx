@@ -47,16 +47,18 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     };
   }, [isLP, isAdmin, isOwners, isTenants]);
 
+  const isPortal = isAdmin || isOwners || isLP || isTenants;
+
   return (
     <>
-      <ScrollProgress />
-      {!isAdmin && !isOwners && !isLP && <Navbar />}
+      {!isPortal && <ScrollProgress />}
+      {!isPortal && <Navbar />}
       <main className="flex-1">{children}</main>
-      {!isAdmin && !isOwners && !isLP && <Footer />}
-      {!isAdmin && !isOwners && !isLP && <PopupController />}
-      {!isAdmin && !isOwners && !isLP && <ChatWidget />}
-      {!isAdmin && !isOwners && !isLP && <StickyBottomCTA />}
-      {!isAdmin && !isOwners && !isLP && <RentActivityToast />}
+      {!isPortal && <Footer />}
+      {!isPortal && <PopupController />}
+      {!isPortal && <ChatWidget />}
+      {!isPortal && <StickyBottomCTA />}
+      {!isPortal && <RentActivityToast />}
     </>
   );
 }
