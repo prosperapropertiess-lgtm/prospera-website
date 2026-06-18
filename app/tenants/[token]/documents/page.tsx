@@ -5,6 +5,7 @@ import {
   getTenantDocuments,
   getTenantInfo,
 } from "@/lib/tenant-data";
+import { fetchTenantFiles } from "@/lib/notion";
 import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 import DocumentsClient from "./DocumentsClient";
@@ -25,9 +26,10 @@ export default async function DocumentsPage({ params }: Props) {
   const access = await validateTenantToken(token);
   if (!access) return notFound();
 
-  const [tenant, documents] = await Promise.all([
+  const [tenant, documents, notionFiles] = await Promise.all([
     getTenantInfo(access.notion_tenant_id),
     getTenantDocuments(token),
+    fetchTenantFiles(access.notion_tenant_id).catch(() => []),
   ]);
 
   if (!tenant) return notFound();
@@ -66,7 +68,7 @@ export default async function DocumentsPage({ params }: Props) {
             Documents
           </h1>
 
-          <DocumentsClient documents={documents} token={token} />
+          <DocumentsClient documents={documents} notionFiles={notionFiles} token={token} />
 
         </main>
 

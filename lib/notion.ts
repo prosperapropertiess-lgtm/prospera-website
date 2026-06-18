@@ -85,6 +85,42 @@ function pageId(page: any): string {
   return page.id.replace(/-/g, "");
 }
 
+async function getPage(pageId: string): Promise<any> {
+  const res = await fetch(`${NOTION_API}/pages/${pageId}`, {
+    headers: headers(),
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`Notion getPage failed: ${await res.text()}`);
+  return res.json();
+}
+
+export interface NotionFile {
+  name: string;
+  url: string;
+  /** "notion" = expires ~1hr, "external" = permanent */
+  source: "notion" | "external";
+}
+
+/** Returns all files attached to any "files" property on a Notion page. */
+export async function fetchTenantFiles(notionTenantId: string): Promise<NotionFile[]> {
+  // Notion page IDs use hyphens; strip them if needed
+  const id = notionTenantId.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, "$1-$2-$3-$4-$5");
+  const page = await getPage(id);
+
+  const results: NotionFile[] = [];
+  for (const [, value] of Object.entries<any>(page.properties ?? {})) {
+    if (value?.type !== "files") continue;
+    for (const f of value.files ?? []) {
+      if (f.type === "file" && f.file?.url) {
+        results.push({ name: f.name, url: f.file.url, source: "notion" });
+      } else if (f.type === "external" && f.external?.url) {
+        results.push({ name: f.name, url: f.external.url, source: "external" });
+      }
+    }
+  }
+  return results;
+}
+
 export function daysSince(dateStr: string): number {
   const then = new Date(dateStr);
   const now = new Date();
