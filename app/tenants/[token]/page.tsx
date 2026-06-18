@@ -17,17 +17,27 @@ import {
 import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 
-const PAGE_BG = "#090E17";
-const CARD = "#0D1825";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const GREEN = "#34d399";
-const RED = "#f87171";
-const AMBER = "#fbbf24";
-const BLUE = "#60a5fa";
-const PURPLE = "#a78bfa";
-const PINK = "#f472b6";
+// Design tokens
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const BURGUNDY = "#8B2030";
+const GOLD = "#B8922A";
+const GOLD_BG = "rgba(184,146,42,0.09)";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const RED = "#B91C1C";
+const RED_BG = "rgba(185,28,28,0.08)";
+const BLUE = "#1D4ED8";
+const BLUE_BG = "rgba(29,78,216,0.08)";
+const RADIUS = "20px";
+const RADIUS_SM = "12px";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -37,12 +47,6 @@ export const revalidate = 21600;
 
 function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-}
-
-function leaseCountdownColor(daysLeft: number): string {
-  if (daysLeft <= 30) return RED;
-  if (daysLeft <= 90) return AMBER;
-  return GREEN;
 }
 
 export default async function TenantHomePage({ params }: Props) {
@@ -62,17 +66,10 @@ export default async function TenantHomePage({ params }: Props) {
   const firstName = tenant.name.split(" ")[0];
 
   const now = new Date();
-  const dateLabel = now.toLocaleDateString("en-CA", { month: "long", year: "numeric" });
+  const dateLabel = now.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" });
 
   // Current month rent status — most recent entry
   const currentRent = rentHistory[0] ?? null;
-
-  // Lease countdown
-  let daysLeft: number | null = null;
-  if (tenant.leaseEnd) {
-    const leaseEndDate = new Date(tenant.leaseEnd);
-    daysLeft = Math.ceil((leaseEndDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-  }
 
   // Upcoming events (future only, sorted)
   const futureEvents = upcoming.filter(e => {
@@ -80,21 +77,18 @@ export default async function TenantHomePage({ params }: Props) {
     return new Date(e.event_date) >= now;
   });
 
-  const rentStatusColor = () => {
-    if (!currentRent) return TEXT_SEC;
+  const nextEvent = futureEvents.length > 0 ? futureEvents[0] : null;
+
+  const rentStatus = (): "paid" | "due" | "overdue" => {
+    if (!currentRent) return "due";
     const s = currentRent.paymentStatus.toLowerCase();
-    if (s === "paid") return GREEN;
-    if (s === "overdue") return RED;
-    return AMBER;
+    if (s === "paid") return "paid";
+    if (s === "overdue") return "overdue";
+    return "due";
   };
 
-  const rentStatusLabel = () => {
-    if (!currentRent) return "No data";
-    const s = currentRent.paymentStatus.toLowerCase();
-    if (s === "paid") return "Paid";
-    if (s === "overdue") return "Overdue";
-    return "Due";
-  };
+  const status = rentStatus();
+  const rentTopBorder = status === "paid" ? GREEN : status === "overdue" ? RED : AMBER;
 
   const quickCards = [
     {
@@ -103,7 +97,7 @@ export default async function TenantHomePage({ params }: Props) {
       subtitle: "Submit a request",
       href: `/tenants/${token}/maintenance`,
       iconColor: AMBER,
-      chipBg: "rgba(251,191,36,0.12)",
+      chipBg: AMBER_BG,
     },
     {
       icon: "folder",
@@ -111,25 +105,39 @@ export default async function TenantHomePage({ params }: Props) {
       subtitle: "Lease & reports",
       href: `/tenants/${token}/documents`,
       iconColor: BLUE,
-      chipBg: "rgba(96,165,250,0.12)",
+      chipBg: BLUE_BG,
+    },
+    {
+      icon: "menu_book",
+      label: "Home Guide",
+      subtitle: "How things work",
+      href: `/tenants/${token}/home-guide`,
+      iconColor: GREEN,
+      chipBg: GREEN_BG,
+    },
+    {
+      icon: "calendar_today",
+      label: "Schedule",
+      subtitle: futureEvents.length > 0 ? `${futureEvents.length} upcoming` : "Nothing upcoming",
+      href: `/tenants/${token}/schedule`,
+      iconColor: GOLD,
+      chipBg: GOLD_BG,
     },
     {
       icon: "chat",
       label: "Messages",
       subtitle: "Talk to Ebin & Laura",
       href: `/tenants/${token}/messages`,
-      iconColor: PINK,
-      chipBg: "rgba(244,114,182,0.12)",
+      iconColor: BURGUNDY,
+      chipBg: "rgba(139,32,48,0.08)",
     },
     {
-      icon: "event",
-      label: "Schedule",
-      subtitle: futureEvents.length > 0
-        ? `${futureEvents.length} upcoming`
-        : "Nothing upcoming",
-      href: `/tenants/${token}/schedule`,
-      iconColor: PURPLE,
-      chipBg: "rgba(167,139,250,0.12)",
+      icon: "receipt_long",
+      label: "Payments",
+      subtitle: "Rent history",
+      href: `/tenants/${token}/payments`,
+      iconColor: NAVY,
+      chipBg: "rgba(15,28,40,0.06)",
     },
   ];
 
@@ -140,28 +148,46 @@ export default async function TenantHomePage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: PAGE_BG }}>
+      <div style={{ minHeight: "100vh", background: BG, position: "relative" }}>
+        {/* Decorative orb */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "fixed",
+            top: "-120px",
+            right: "-120px",
+            width: "480px",
+            height: "480px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(139,32,48,0.12) 0%, rgba(184,146,42,0.07) 50%, transparent 70%)",
+            filter: "blur(60px)",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        />
+
         <TenantHeader firstName={firstName} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "56px 24px 120px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 24px 120px", position: "relative", zIndex: 1 }}>
 
-          {/* Greeting */}
-          <div style={{ marginBottom: "40px" }}>
+          {/* Hero section */}
+          <div style={{ marginBottom: "32px" }}>
             {/* Date pill */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "6px",
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                gap: "7px",
+                background: CARD,
+                boxShadow: CARD_SHADOW,
+                border: `1px solid ${CARD_BORDER}`,
                 borderRadius: "100px",
-                padding: "4px 12px 4px 4px",
-                marginBottom: "20px",
+                padding: "5px 14px 5px 10px",
+                marginBottom: "24px",
               }}
             >
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: GREEN, flexShrink: 0, marginLeft: "4px" }} />
-              <span style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+              <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: GREEN, flexShrink: 0 }} />
+              <span style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}>
                 {dateLabel}
               </span>
             </div>
@@ -169,196 +195,303 @@ export default async function TenantHomePage({ params }: Props) {
             <h1
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(52px, 7vw, 72px)",
+                fontSize: "clamp(56px, 8vw, 80px)",
                 fontWeight: 300,
-                color: TEXT,
+                color: NAVY,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.0,
-                marginBottom: "8px",
+                marginBottom: "6px",
               }}
             >
               Hi {firstName}.
             </h1>
-            <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+            <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
               {tenant.propertyAddress}{tenant.propertyCity ? `, ${tenant.propertyCity}` : ""}
             </p>
           </div>
 
-          {/* Rent status card */}
+          {/* Rent status hero card */}
           <div
             style={{
               background: CARD,
               border: `1px solid ${CARD_BORDER}`,
-              borderRadius: "22px",
+              borderRadius: RADIUS,
+              boxShadow: CARD_SHADOW,
+              borderTop: `2px solid ${rentTopBorder}`,
               padding: "28px",
-              marginBottom: "24px",
+              marginBottom: "20px",
             }}
           >
-            <p
-              style={{
-                fontSize: "11px",
-                fontFamily: "var(--font-dm-sans)",
-                color: TEXT_SEC,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: "16px",
-              }}
-            >
-              Rent — {currentRent ? `${currentRent.month} ${currentRent.year}` : "Current Month"}
-            </p>
-
             {currentRent ? (
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
-                <div>
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      background: `${rentStatusColor()}18`,
-                      border: `1px solid ${rentStatusColor()}40`,
-                      borderRadius: "100px",
-                      padding: "5px 14px",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: rentStatusColor() }} />
-                    <span style={{ color: rentStatusColor(), fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-dm-sans)" }}>
-                      {rentStatusLabel()}
-                    </span>
+              <>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: "16px", marginBottom: "16px" }}>
+                  <div>
+                    {/* Big amount */}
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "4px" }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-cormorant)",
+                          fontSize: "56px",
+                          fontWeight: 400,
+                          color: NAVY,
+                          lineHeight: 1,
+                          letterSpacing: "-0.02em",
+                        }}
+                      >
+                        {currentRent.amountDue != null ? fmt$(currentRent.amountDue) : "—"}
+                      </span>
+                    </div>
+                    <p style={{ color: MUTED, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
+                      for {currentRent.month} {currentRent.year}
+                    </p>
                   </div>
-                  {currentRent.amountDue != null && (
-                    <p style={{ color: TEXT_SEC, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
-                      Amount due: <span style={{ color: TEXT }}>{fmt$(currentRent.amountDue)}</span>
-                    </p>
-                  )}
-                  {currentRent.amountPaid != null && (
-                    <p style={{ color: TEXT_SEC, fontSize: "13px", fontFamily: "var(--font-dm-sans)", marginTop: "4px" }}>
-                      Amount paid: <span style={{ color: GREEN }}>{fmt$(currentRent.amountPaid)}</span>
-                    </p>
-                  )}
+
+                  {/* Status badge */}
+                  <div>
+                    {status === "paid" && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          background: GREEN_BG,
+                          color: GREEN,
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          fontFamily: "var(--font-dm-sans)",
+                          borderRadius: "100px",
+                          padding: "8px 18px",
+                        }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>check_circle</span>
+                        Rent Paid
+                      </span>
+                    )}
+                    {status === "due" && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          background: AMBER_BG,
+                          color: AMBER,
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          fontFamily: "var(--font-dm-sans)",
+                          borderRadius: "100px",
+                          padding: "8px 18px",
+                        }}
+                      >
+                        Due{currentRent.datePaid ? ` ${new Date(currentRent.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}` : ""}
+                      </span>
+                    )}
+                    {status === "overdue" && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          background: RED_BG,
+                          color: RED,
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          fontFamily: "var(--font-dm-sans)",
+                          borderRadius: "100px",
+                          padding: "8px 18px",
+                        }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>warning</span>
+                        Overdue
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div style={{ textAlign: "right" }}>
-                  {currentRent.datePaid && (
-                    <p style={{ color: TEXT_SEC, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
-                      Paid on {new Date(currentRent.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
-                    </p>
-                  )}
+
+                {/* Extra detail row */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "8px" }}>
+                  <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                    {status === "paid" && currentRent.datePaid && (
+                      <p style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+                        Paid {new Date(currentRent.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
+                      </p>
+                    )}
+                    {currentRent.amountPaid != null && (
+                      <p style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+                        Amount paid: <span style={{ color: GREEN, fontWeight: 600 }}>{fmt$(currentRent.amountPaid)}</span>
+                      </p>
+                    )}
+                  </div>
                   <Link
                     href={`/tenants/${token}/payments`}
-                    style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", textDecoration: "none", display: "inline-block", marginTop: "8px" }}
+                    style={{ color: BURGUNDY, fontSize: "12px", fontFamily: "var(--font-dm-sans)", fontWeight: 600, textDecoration: "none" }}
                   >
-                    View all payments →
+                    View history →
                   </Link>
                 </div>
-              </div>
+              </>
             ) : (
-              <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
-                No payment records yet.
-              </p>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>No payment records yet.</p>
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    background: GREEN_BG,
+                    color: GREEN,
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    fontFamily: "var(--font-dm-sans)",
+                    borderRadius: "100px",
+                    padding: "8px 18px",
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>check_circle</span>
+                  All paid up
+                </span>
+              </div>
             )}
           </div>
 
-          {/* Quick access cards — 2×2 grid */}
+          {/* Quick action grid */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
               gap: "12px",
-              marginBottom: "24px",
+              marginBottom: "20px",
             }}
           >
             {quickCards.map((card) => (
-              <Link key={card.label} href={card.href} style={{ textDecoration: "none" }}>
-                <div
-                  style={{
-                    background: CARD,
-                    border: `1px solid ${CARD_BORDER}`,
-                    borderRadius: "22px",
-                    padding: "24px",
-                    minHeight: "130px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "12px",
-                      background: card.chipBg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "16px",
-                    }}
-                  >
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: "20px", color: card.iconColor }}
-                    >
-                      {card.icon}
-                    </span>
-                  </div>
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: "17px",
-                        fontWeight: 600,
-                        color: TEXT,
-                        letterSpacing: "-0.01em",
-                        marginBottom: "4px",
-                      }}
-                    >
-                      {card.label}
-                    </p>
-                    <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC }}>
-                      {card.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <QuickCard key={card.label} card={card} />
             ))}
           </div>
 
-          {/* Lease countdown strip */}
-          {daysLeft !== null && (
+          {/* Upcoming event strip */}
+          {nextEvent && (
             <div
               style={{
                 background: CARD,
                 border: `1px solid ${CARD_BORDER}`,
-                borderRadius: "14px",
-                padding: "16px 20px",
+                borderRadius: RADIUS_SM,
+                boxShadow: CARD_SHADOW,
+                padding: "14px 18px",
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
+                gap: "10px",
+                marginBottom: "32px",
               }}
             >
-              <span
-                className="material-symbols-outlined"
-                style={{ fontSize: "18px", color: leaseCountdownColor(daysLeft), flexShrink: 0 }}
-              >
-                contract
-              </span>
-              <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC }}>
-                Lease ends{" "}
-                <span style={{ color: TEXT }}>
-                  {new Date(tenant.leaseEnd!).toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric" })}
-                </span>
-                {" · "}
-                <span style={{ color: leaseCountdownColor(daysLeft), fontWeight: 600 }}>
-                  {daysLeft > 0 ? `${daysLeft} days remaining` : "Expired"}
-                </span>
+              <span style={{ fontSize: "16px" }}>📅</span>
+              <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: NAVY, fontWeight: 500 }}>
+                Next:{" "}
+                <span style={{ fontWeight: 600 }}>{nextEvent.title}</span>
+                {nextEvent.event_date && (
+                  <span style={{ color: MUTED }}>
+                    {" · "}{new Date(nextEvent.event_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
+                  </span>
+                )}
               </p>
             </div>
           )}
+
+          {/* Trust footer */}
+          <div
+            style={{
+              textAlign: "center",
+              paddingTop: "24px",
+              borderTop: `1px solid ${CARD_BORDER}`,
+            }}
+          >
+            <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, lineHeight: 1.6 }}>
+              Managed by Ebin Jaison · Prospera Properties
+            </p>
+            <a
+              href="tel:5196971227"
+              style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, textDecoration: "none" }}
+            >
+              (519) 697-1227
+            </a>
+          </div>
 
         </main>
 
         <TenantMobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function QuickCard({ card }: {
+  card: {
+    icon: string;
+    label: string;
+    subtitle: string;
+    href: string;
+    iconColor: string;
+    chipBg: string;
+  }
+}) {
+  return (
+    <Link href={card.href} style={{ textDecoration: "none" }}>
+      <div
+        style={{
+          background: "#FFFFFF",
+          border: "1px solid rgba(15,28,40,0.07)",
+          borderRadius: "20px",
+          boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+          padding: "20px",
+          minHeight: "110px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          transition: "transform 0.18s ease, box-shadow 0.18s ease",
+          cursor: "pointer",
+        }}
+        onMouseEnter={e => {
+          (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+          (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(15,28,40,0.08), 0 16px 40px rgba(15,28,40,0.10)";
+        }}
+        onMouseLeave={e => {
+          (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+          (e.currentTarget as HTMLElement).style.boxShadow = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+        }}
+      >
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "12px",
+            background: card.chipBg,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: "20px", color: card.iconColor }}
+          >
+            {card.icon}
+          </span>
+        </div>
+        <div>
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "15px",
+              fontWeight: 700,
+              color: "#0F1C28",
+              marginBottom: "3px",
+            }}
+          >
+            {card.label}
+          </p>
+          <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "rgba(15,28,40,0.45)" }}>
+            {card.subtitle}
+          </p>
+        </div>
+      </div>
+    </Link>
   );
 }

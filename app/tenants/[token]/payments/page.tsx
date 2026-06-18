@@ -8,16 +8,23 @@ import {
 import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 
-const PAGE_BG = "#090E17";
-const CARD = "#0D1825";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const DIVIDER = "rgba(255,255,255,0.05)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const TEXT_DIM = "rgba(237,232,225,0.20)";
-const GREEN = "#34d399";
-const RED = "#f87171";
-const AMBER = "#fbbf24";
+// Design tokens
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const BURGUNDY = "#8B2030";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const RED = "#B91C1C";
+const RED_BG = "rgba(185,28,28,0.08)";
+const RADIUS = "20px";
+const RADIUS_SM = "12px";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -29,21 +36,13 @@ function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
-function statusColor(status: string): string {
+function getStatusStyle(status: string): { color: string; bg: string; label: string; leftBorder: string } {
   const s = status.toLowerCase();
-  if (s === "paid") return GREEN;
-  if (s === "overdue" || s === "unpaid") return RED;
-  return AMBER;
-}
-
-function statusLabel(status: string): string {
-  const s = status.toLowerCase();
-  if (s === "paid") return "Paid";
-  if (s === "overdue") return "Overdue";
-  if (s === "unpaid") return "Unpaid";
-  if (s === "partial") return "Partial";
-  if (s === "late") return "Late";
-  return status;
+  if (s === "paid") return { color: GREEN, bg: GREEN_BG, label: "Paid", leftBorder: GREEN };
+  if (s === "overdue" || s === "unpaid") return { color: RED, bg: RED_BG, label: s === "overdue" ? "Overdue" : "Unpaid", leftBorder: RED };
+  if (s === "partial") return { color: AMBER, bg: AMBER_BG, label: "Partial", leftBorder: AMBER };
+  if (s === "late") return { color: RED, bg: RED_BG, label: "Late", leftBorder: RED };
+  return { color: MUTED, bg: "rgba(15,28,40,0.05)", label: status, leftBorder: SUBTLE };
 }
 
 export default async function PaymentsPage({ params }: Props) {
@@ -76,14 +75,14 @@ export default async function PaymentsPage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: PAGE_BG }}>
+      <div style={{ minHeight: "100vh", background: BG }}>
         <TenantHeader firstName={firstName} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "56px 24px 120px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 24px 120px" }}>
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -91,14 +90,14 @@ export default async function PaymentsPage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(40px, 6vw, 58px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: TEXT,
+              color: NAVY,
               letterSpacing: "-0.02em",
               marginBottom: "32px",
             }}
           >
-            Payments
+            Rent History
           </h1>
 
           {/* YTD summary strip */}
@@ -110,9 +109,9 @@ export default async function PaymentsPage({ params }: Props) {
               marginBottom: "32px",
             }}
           >
-            <StatPill label="Paid YTD" value={fmt$(totalPaidYTD)} color={GREEN} />
-            <StatPill label="Due YTD" value={fmt$(totalDueYTD)} color={TEXT} />
-            <StatPill
+            <StatCard label="Paid YTD" value={fmt$(totalPaidYTD)} color={GREEN} />
+            <StatCard label="Due YTD" value={fmt$(totalDueYTD)} color={NAVY} />
+            <StatCard
               label="Balance"
               value={fmt$(Math.abs(balance))}
               color={balance > 0 ? RED : GREEN}
@@ -120,96 +119,96 @@ export default async function PaymentsPage({ params }: Props) {
             />
           </div>
 
-          {/* Payment table */}
-          <div
-            style={{
-              background: CARD,
-              border: `1px solid ${CARD_BORDER}`,
-              borderRadius: "22px",
-              overflow: "hidden",
-            }}
-          >
-            {/* Table header */}
+          {/* Payment list */}
+          {recent12.length === 0 ? (
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr 1fr 80px 80px",
-                padding: "14px 20px",
-                borderBottom: `1px solid ${DIVIDER}`,
+                background: CARD,
+                border: `1px solid ${CARD_BORDER}`,
+                borderRadius: RADIUS,
+                boxShadow: CARD_SHADOW,
+                padding: "60px 24px",
+                textAlign: "center",
               }}
             >
-              {["Month", "Amount Due", "Amount Paid", "Date Paid", "Status", "Receipt"].map((col) => (
-                <span
-                  key={col}
-                  style={{
-                    fontSize: "11px",
-                    fontFamily: "var(--font-dm-sans)",
-                    color: TEXT_DIM,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                  }}
-                >
-                  {col}
-                </span>
-              ))}
+              <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+                No payment records yet.
+              </p>
             </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              {recent12.map((entry) => {
+                const st = getStatusStyle(entry.paymentStatus);
+                return (
+                  <div
+                    key={entry.id}
+                    style={{
+                      background: CARD,
+                      border: `1px solid ${CARD_BORDER}`,
+                      borderRadius: RADIUS_SM,
+                      boxShadow: CARD_SHADOW,
+                      borderLeft: `3px solid ${st.leftBorder}`,
+                      padding: "18px 20px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                      gap: "12px",
+                    }}
+                  >
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginBottom: "4px" }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 600, color: NAVY }}>
+                          {entry.month} {entry.year}
+                        </p>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            padding: "2px 10px",
+                            borderRadius: "100px",
+                            fontSize: "11px",
+                            fontWeight: 600,
+                            fontFamily: "var(--font-dm-sans)",
+                            background: st.bg,
+                            color: st.color,
+                          }}
+                        >
+                          {st.label}
+                        </span>
+                      </div>
+                      {entry.datePaid && (
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED }}>
+                          Paid {new Date(entry.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
+                        </p>
+                      )}
+                    </div>
 
-            {recent12.length === 0 ? (
-              <div style={{ padding: "40px 20px", textAlign: "center" }}>
-                <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
-                  No payment records yet.
-                </p>
-              </div>
-            ) : (
-              recent12.map((entry, idx) => (
-                <div
-                  key={entry.id}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr 1fr 80px 80px",
-                    padding: "16px 20px",
-                    borderBottom: idx < recent12.length - 1 ? `1px solid ${DIVIDER}` : "none",
-                    alignItems: "center",
-                  }}
-                >
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT }}>
-                    {entry.month} {entry.year}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT_SEC }}>
-                    {entry.amountDue != null ? fmt$(entry.amountDue) : "—"}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: entry.amountPaid != null ? GREEN : TEXT_SEC }}>
-                    {entry.amountPaid != null ? fmt$(entry.amountPaid) : "—"}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: TEXT_SEC }}>
-                    {entry.datePaid
-                      ? new Date(entry.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
-                      : "—"}
-                  </span>
-                  <div>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        padding: "3px 10px",
-                        borderRadius: "100px",
-                        fontSize: "11px",
-                        fontWeight: 600,
-                        fontFamily: "var(--font-dm-sans)",
-                        background: `${statusColor(entry.paymentStatus)}18`,
-                        color: statusColor(entry.paymentStatus),
-                        border: `1px solid ${statusColor(entry.paymentStatus)}30`,
-                      }}
-                    >
-                      {statusLabel(entry.paymentStatus)}
-                    </span>
+                    <div style={{ textAlign: "right", flexShrink: 0 }}>
+                      {entry.amountDue != null && (
+                        <p
+                          style={{
+                            fontFamily: "var(--font-cormorant)",
+                            fontSize: "28px",
+                            fontWeight: 400,
+                            color: NAVY,
+                            lineHeight: 1,
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
+                          {fmt$(entry.amountDue)}
+                        </p>
+                      )}
+                      {entry.amountPaid != null && entry.amountPaid !== entry.amountDue && (
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: GREEN, marginTop: "2px" }}>
+                          Paid: {fmt$(entry.amountPaid)}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <span style={{ color: TEXT_DIM, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>—</span>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+                );
+              })}
+            </div>
+          )}
 
         </main>
 
@@ -219,7 +218,7 @@ export default async function PaymentsPage({ params }: Props) {
   );
 }
 
-function StatPill({
+function StatCard({
   label,
   value,
   color,
@@ -235,33 +234,34 @@ function StatPill({
       style={{
         background: CARD,
         border: `1px solid ${CARD_BORDER}`,
-        borderRadius: "20px",
-        padding: "20px",
+        borderRadius: RADIUS_SM,
+        boxShadow: CARD_SHADOW,
+        padding: "18px",
       }}
     >
       <p
         style={{
           fontSize: "11px",
           fontFamily: "var(--font-dm-sans)",
-          color: TEXT_SEC,
+          color: MUTED,
           textTransform: "uppercase",
           letterSpacing: "0.06em",
-          marginBottom: "8px",
+          marginBottom: "6px",
         }}
       >
         {label}
       </p>
       {prefix && (
-        <p style={{ fontSize: "10px", fontFamily: "var(--font-dm-sans)", color: color, marginBottom: "2px" }}>
+        <p style={{ fontSize: "10px", fontFamily: "var(--font-dm-sans)", color: color, marginBottom: "1px", fontWeight: 600 }}>
           {prefix}
         </p>
       )}
       <p
         style={{
-          fontFamily: "var(--font-outfit)",
+          fontFamily: "var(--font-cormorant)",
           fontSize: "clamp(22px, 3.5vw, 30px)",
-          fontWeight: 700,
-          letterSpacing: "-0.03em",
+          fontWeight: 500,
+          letterSpacing: "-0.02em",
           color: color,
         }}
       >

@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Outfit, Inter } from "next/font/google";
+import { Cormorant, DM_Sans } from "next/font/google";
 import "../globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const cormorant = Cormorant({
+  variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
     title: "My Portal",
   },
   other: {
@@ -34,10 +34,11 @@ export const metadata: Metadata = {
 export default function TenantsLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${outfit.variable} ${inter.variable} min-h-screen`}
+      className={`${cormorant.variable} ${dmSans.variable}`}
       style={{
-        background: "linear-gradient(135deg, #0f1624 0%, #141b2c 40%, #1a1029 100%)",
-        fontFamily: "var(--font-inter), -apple-system, sans-serif",
+        minHeight: "100vh",
+        background: "#F5F4F1",
+        fontFamily: "var(--font-dm-sans), -apple-system, sans-serif",
       }}
     >
       {children}

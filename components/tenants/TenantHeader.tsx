@@ -8,8 +8,6 @@ interface Props {
   token: string;
 }
 
-const BRAND_GRAD = "linear-gradient(135deg, #8B2030, #C9A84C)";
-
 export default function TenantHeader({ firstName, token }: Props) {
   return (
     <header
@@ -17,10 +15,10 @@ export default function TenantHeader({ firstName, token }: Props) {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(9,14,23,0.88)",
+        background: "rgba(255,255,255,0.92)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(15,28,40,0.07)",
       }}
     >
       <div
@@ -34,8 +32,11 @@ export default function TenantHeader({ firstName, token }: Props) {
           justifyContent: "space-between",
         }}
       >
-        <Link href={`/tenants/${token}`} style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-          <Image src="/logo.png" alt="Prospera" width={44} height={44} style={{ objectFit: "contain" }} />
+        <Link href={`/tenants/${token}`} style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
+          <Image src="/logo.png" alt="Prospera" width={36} height={36} style={{ objectFit: "contain" }} />
+          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "18px", fontWeight: 500, color: "#0F1C28", letterSpacing: "-0.01em" }}>
+            Prospera Properties
+          </span>
         </Link>
 
         <div
@@ -43,8 +44,8 @@ export default function TenantHeader({ firstName, token }: Props) {
             display: "flex",
             alignItems: "center",
             gap: "8px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.09)",
+            background: "rgba(139,32,48,0.06)",
+            border: "1px solid rgba(139,32,48,0.15)",
             borderRadius: "100px",
             padding: "5px 14px 5px 5px",
           }}
@@ -54,20 +55,20 @@ export default function TenantHeader({ firstName, token }: Props) {
               width: "28px",
               height: "28px",
               borderRadius: "50%",
-              background: BRAND_GRAD,
+              background: "linear-gradient(135deg, #8B2030, #B8922A)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "12px",
               fontWeight: 700,
               color: "white",
-              fontFamily: "var(--font-outfit)",
+              fontFamily: "var(--font-dm-sans)",
               flexShrink: 0,
             }}
           >
             {firstName.charAt(0).toUpperCase()}
           </div>
-          <span style={{ color: "rgba(237,232,225,0.5)", fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
+          <span style={{ color: "#0F1C28", fontSize: "13px", fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}>
             {firstName}
           </span>
         </div>

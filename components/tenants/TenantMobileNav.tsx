@@ -45,10 +45,10 @@ export function TenantMobileNav({ token }: Props) {
           left: 0,
           right: 0,
           zIndex: 200,
-          background: "rgba(9,14,23,0.92)",
+          background: "rgba(255,255,255,0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderTop: "1px solid rgba(255,255,255,0.07)",
+          borderTop: "1px solid rgba(15,28,40,0.07)",
           paddingBottom: "env(safe-area-inset-bottom)",
           justifyContent: "space-around",
           alignItems: "stretch",
@@ -91,7 +91,7 @@ function NavItem({
 
   return (
     <Link href={href} style={style}>
-      {/* Active indicator — gold line at top */}
+      {/* Active indicator — burgundy line at top */}
       {active && (
         <div
           style={{
@@ -99,9 +99,9 @@ function NavItem({
             top: 0,
             left: "50%",
             transform: "translateX(-50%)",
-            width: "20px",
+            width: "24px",
             height: "2px",
-            background: "#C9A84C",
+            background: "#8B2030",
             borderRadius: "0 0 3px 3px",
           }}
         />
@@ -110,7 +110,7 @@ function NavItem({
         className="material-symbols-outlined"
         style={{
           fontSize: "22px",
-          color: active ? "#C9A84C" : "rgba(237,232,225,0.28)",
+          color: active ? "#8B2030" : "rgba(15,28,40,0.45)",
           transition: "color 0.2s",
         }}
       >
@@ -121,7 +121,8 @@ function NavItem({
           fontSize: "10px",
           fontWeight: active ? 600 : 500,
           letterSpacing: "0.02em",
-          color: active ? "rgba(237,232,225,0.85)" : "rgba(237,232,225,0.28)",
+          fontFamily: "var(--font-dm-sans)",
+          color: active ? "#8B2030" : "rgba(15,28,40,0.45)",
           transition: "color 0.2s",
         }}
       >

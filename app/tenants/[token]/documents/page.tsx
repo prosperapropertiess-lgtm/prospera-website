@@ -10,9 +10,13 @@ import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 import DocumentsClient from "./DocumentsClient";
 
-const PAGE_BG = "#090E17";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const RADIUS = "20px";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -43,14 +47,14 @@ export default async function DocumentsPage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: PAGE_BG }}>
+      <div style={{ minHeight: "100vh", background: BG }}>
         <TenantHeader firstName={firstName} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "56px 24px 120px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 24px 120px" }}>
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -58,9 +62,9 @@ export default async function DocumentsPage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(40px, 6vw, 58px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: TEXT,
+              color: NAVY,
               letterSpacing: "-0.02em",
               marginBottom: "32px",
             }}
@@ -68,7 +72,17 @@ export default async function DocumentsPage({ params }: Props) {
             Documents
           </h1>
 
-          <DocumentsClient documents={documents} notionFiles={notionFiles} token={token} />
+          <div
+            style={{
+              background: CARD,
+              border: `1px solid ${CARD_BORDER}`,
+              borderRadius: RADIUS,
+              boxShadow: CARD_SHADOW,
+              padding: "24px",
+            }}
+          >
+            <DocumentsClient documents={documents} notionFiles={notionFiles} token={token} />
+          </div>
 
         </main>
 

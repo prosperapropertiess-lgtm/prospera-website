@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { getDashboard } from "@/lib/owners-data";
 import { MobileNav } from "@/components/owners/MobileNav";
 import OwnerHeader from "@/components/owners/OwnerHeader";
+import { OwnerHomeClient } from "@/components/owners/OwnerHomeClient";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -32,8 +32,22 @@ export default async function OwnerHomePage({ params }: Props) {
     ({ dashboard } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
   } catch {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#090E17" }}>
-        <p style={{ color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)" }}>
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#F5F4F1",
+        }}
+      >
+        <p
+          style={{
+            color: "rgba(15,28,40,0.45)",
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "14px",
+          }}
+        >
           Unable to load data. Please try again in a moment.
         </p>
       </div>
@@ -58,27 +72,24 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Properties",
       subtitle: `${dashboard.properties.length} active rental${dashboard.properties.length !== 1 ? "s" : ""}`,
       href: propertyHref,
-      iconColor: "#60a5fa",
-      chipBg: "rgba(96,165,250,0.12)",
-      disabled: false,
+      iconColor: "#1D4ED8",
+      chipBg: "rgba(29,78,216,0.08)",
     },
     {
       icon: "trending_up",
       label: "Financials",
       subtitle: `${fmt$(dashboard.totalNet)} net this year`,
       href: `/owners/${token}/financials`,
-      iconColor: dashboard.totalNet >= 0 ? "#34d399" : "#f87171",
-      chipBg: dashboard.totalNet >= 0 ? "rgba(52,211,153,0.12)" : "rgba(248,113,113,0.12)",
-      disabled: false,
+      iconColor: dashboard.totalNet >= 0 ? "#0A7A52" : "#B91C1C",
+      chipBg: dashboard.totalNet >= 0 ? "rgba(10,122,82,0.09)" : "rgba(185,28,28,0.08)",
     },
     {
       icon: "people",
       label: "Tenants",
       subtitle: `${totalTenants} active tenant${totalTenants !== 1 ? "s" : ""}`,
       href: `/owners/${token}/tenants`,
-      iconColor: "#a78bfa",
-      chipBg: "rgba(167,139,250,0.12)",
-      disabled: false,
+      iconColor: "#8B2030",
+      chipBg: "rgba(139,32,48,0.08)",
     },
     {
       icon: "build",
@@ -87,32 +98,41 @@ export default async function OwnerHomePage({ params }: Props) {
         ? `${dashboard.totalOpenIssues} open issue${dashboard.totalOpenIssues !== 1 ? "s" : ""}`
         : "All clear",
       href: `/owners/${token}/maintenance`,
-      iconColor: dashboard.totalOpenIssues > 0 ? "#fbbf24" : "#34d399",
-      chipBg: dashboard.totalOpenIssues > 0 ? "rgba(251,191,36,0.12)" : "rgba(52,211,153,0.12)",
-      disabled: false,
+      iconColor: dashboard.totalOpenIssues > 0 ? "#B45309" : "#0A7A52",
+      chipBg: dashboard.totalOpenIssues > 0 ? "rgba(180,83,9,0.09)" : "rgba(10,122,82,0.09)",
     },
     {
       icon: "chat",
       label: "Messages",
       subtitle: "Updates from your property manager",
       href: `/owners/${token}/messages`,
-      iconColor: "#f472b6",
-      chipBg: "rgba(244,114,182,0.12)",
-      disabled: false,
+      iconColor: "#8B2030",
+      chipBg: "rgba(139,32,48,0.08)",
     },
     {
       icon: "folder",
       label: "Documents",
       subtitle: "Leases, reports & notices",
       href: `/owners/${token}/documents`,
-      iconColor: "rgba(237,232,225,0.3)",
-      chipBg: "rgba(255,255,255,0.06)",
-      disabled: false,
+      iconColor: "#B8922A",
+      chipBg: "rgba(184,146,42,0.09)",
     },
   ];
 
   const now = new Date();
-  const dateLabel = now.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" });
+  const dateLabel = now.toLocaleDateString("en-CA", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Trust chips data
+  const firstProp = dashboard.properties[0];
+  const rentStatus = firstProp?.rentCurrentMonth?.[0]?.paymentStatus ?? null;
+  const leaseExpiry = firstProp?.nextLeaseExpiry ?? null;
+  const leaseDaysRemaining = leaseExpiry
+    ? Math.floor((new Date(leaseExpiry).getTime() - Date.now()) / 864e5)
+    : null;
 
   return (
     <>
@@ -121,28 +141,68 @@ export default async function OwnerHomePage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: "#090E17" }}>
+      <div style={{ minHeight: "100vh", background: "#F5F4F1" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "72px 24px 120px" }}>
+        <main
+          style={{
+            maxWidth: "860px",
+            margin: "0 auto",
+            padding: "48px 20px 120px",
+            position: "relative",
+          }}
+        >
+          {/* Radial orb — purely decorative CSS, no images */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "-100px",
+              right: "-100px",
+              width: "500px",
+              height: "500px",
+              background:
+                "radial-gradient(circle, rgba(139,32,48,0.07) 0%, rgba(184,146,42,0.04) 50%, transparent 70%)",
+              filter: "blur(60px)",
+              pointerEvents: "none",
+              zIndex: 0,
+              borderRadius: "50%",
+            }}
+          />
 
-          {/* Greeting */}
-          <div style={{ marginBottom: "48px" }}>
+          {/* Hero greeting */}
+          <div style={{ position: "relative", zIndex: 1, marginBottom: "40px" }}>
             {/* Date pill */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "6px",
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                gap: "7px",
+                background: "#FFFFFF",
+                border: "1px solid rgba(15,28,40,0.07)",
                 borderRadius: "100px",
-                padding: "4px 12px 4px 4px",
-                marginBottom: "20px",
+                padding: "5px 14px 5px 8px",
+                marginBottom: "22px",
+                boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
               }}
             >
-              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#34d399", flexShrink: 0, marginLeft: "4px" }} />
-              <span style={{ color: "rgba(237,232,225,0.42)", fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+              <div
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  background: "#0A7A52",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  color: "rgba(15,28,40,0.45)",
+                  fontSize: "12px",
+                  fontFamily: "var(--font-dm-sans)",
+                  fontWeight: 500,
+                }}
+              >
                 {dateLabel}
               </span>
             </div>
@@ -150,175 +210,262 @@ export default async function OwnerHomePage({ params }: Props) {
             <h1
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(58px, 8vw, 80px)",
+                fontSize: "clamp(56px, 10vw, 80px)",
                 fontWeight: 300,
-                color: "#EDE8E1",
+                color: "#0F1C28",
                 letterSpacing: "-0.02em",
                 lineHeight: 1.0,
-                marginBottom: "0",
+                marginBottom: "10px",
               }}
             >
               Hi {firstNames}.
             </h1>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "15px",
+                color: "rgba(15,28,40,0.45)",
+                fontWeight: 400,
+              }}
+            >
+              Here&apos;s your portfolio at a glance.
+            </p>
           </div>
 
-          {/* Stat cards — 3 column grid */}
+          {/* Hero number card */}
           <div
             style={{
+              position: "relative",
+              zIndex: 1,
+              background: "#FFFFFF",
+              border: "1px solid rgba(15,28,40,0.07)",
+              borderTop: "2px solid #8B2030",
+              borderRadius: "20px",
+              padding: "28px 28px 24px",
+              marginBottom: "16px",
+              boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "11px",
+                fontFamily: "var(--font-dm-sans)",
+                color: "rgba(15,28,40,0.22)",
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                marginBottom: "10px",
+                fontWeight: 600,
+              }}
+            >
+              Collected this month
+            </p>
+
+            <p
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(52px, 8vw, 72px)",
+                fontWeight: 600,
+                color: "#0F1C28",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.0,
+                marginBottom: "18px",
+              }}
+            >
+              {fmt$(dashboard.totalRentCollected)}
+            </p>
+
+            {/* Trust chips */}
+            <OwnerHomeClient
+              rentStatus={rentStatus}
+              leaseDaysRemaining={leaseDaysRemaining}
+              leaseExpiry={leaseExpiry}
+            />
+          </div>
+
+          {/* Stats row — 3 cards */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "12px",
-              marginBottom: "48px",
+              gap: "10px",
+              marginBottom: "16px",
             }}
           >
             <StatCard
-              label="Collected"
-              value={fmt$(dashboard.totalRentCollected)}
-              color="#EDE8E1"
+              label="Net income"
+              value={fmt$(dashboard.totalNet)}
+              valueColor={dashboard.totalNet >= 0 ? "#0A7A52" : "#B91C1C"}
             />
             <StatCard
-              label="In your pocket"
-              value={fmt$(dashboard.totalNet)}
-              color={dashboard.totalNet >= 0 ? "#34d399" : "#f87171"}
+              label="Expenses"
+              value={fmt$(dashboard.totalExpenses)}
+              valueColor="#B45309"
             />
             <StatCard
               label="Open issues"
               value={String(dashboard.totalOpenIssues)}
-              color={dashboard.totalOpenIssues > 0 ? "#fbbf24" : "rgba(237,232,225,0.20)"}
+              valueColor={
+                dashboard.totalOpenIssues === 0
+                  ? "#0A7A52"
+                  : dashboard.totalOpenIssues <= 2
+                  ? "#B45309"
+                  : "#B91C1C"
+              }
             />
           </div>
 
-          {/* Navigation cards — 2 column grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "12px",
-            }}
-          >
-            {navCards.map((card) => {
-              const cardEl = (
-                <div
-                  style={{
-                    background: "#0D1825",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    borderRadius: "22px",
-                    padding: "26px",
-                    minHeight: "148px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    opacity: card.disabled ? 0.45 : 1,
-                    cursor: card.disabled ? "default" : "pointer",
-                  }}
-                >
-                  {/* Icon chip */}
-                  <div
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "12px",
-                      background: card.chipBg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "16px",
-                    }}
-                  >
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: "20px", color: card.iconColor }}
-                    >
-                      {card.icon}
-                    </span>
-                  </div>
+          {/* Navigation cards — 2-col grid */}
+          <NavCardsGrid navCards={navCards} />
 
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "#EDE8E1",
-                        letterSpacing: "-0.01em",
-                        marginBottom: "4px",
-                      }}
-                    >
-                      {card.label}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        fontFamily: "var(--font-dm-sans)",
-                        color: "rgba(237,232,225,0.42)",
-                      }}
-                    >
-                      {card.subtitle}
-                    </p>
-                  </div>
-                </div>
-              );
+          {/* Upcoming section */}
+          <div style={{ position: "relative", zIndex: 1, marginTop: "32px" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontWeight: 700,
+                fontSize: "14px",
+                color: "#0F1C28",
+                marginBottom: "12px",
+              }}
+            >
+              Upcoming
+            </p>
 
-              return card.href ? (
-                <Link key={card.label} href={card.href} style={{ textDecoration: "none" }}>
-                  {cardEl}
-                </Link>
-              ) : (
-                <div key={card.label}>{cardEl}</div>
-              );
-            })}
+            <div
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(15,28,40,0.07)",
+                borderRadius: "20px",
+                padding: "4px 0",
+                boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+                overflow: "hidden",
+              }}
+            >
+              <UpcomingRow
+                icon="search"
+                iconBg="rgba(29,78,216,0.08)"
+                iconColor="#1D4ED8"
+                title="Annual Inspection"
+                dateLabel="Jul 15, 2026"
+                chipLabel="27 days"
+                chipBg="rgba(29,78,216,0.08)"
+                chipColor="#1D4ED8"
+              />
+              <div style={{ height: "1px", background: "rgba(15,28,40,0.06)", margin: "0 20px" }} />
+              <UpcomingRow
+                icon="local_fire_department"
+                iconBg="rgba(180,83,9,0.09)"
+                iconColor="#B45309"
+                title="Furnace Service"
+                dateLabel="Sep 2026"
+                chipLabel="Annually recommended"
+                chipBg="rgba(180,83,9,0.09)"
+                chipColor="#B45309"
+              />
+              <div style={{ height: "1px", background: "rgba(15,28,40,0.06)", margin: "0 20px" }} />
+              <UpcomingRow
+                icon="water_drop"
+                iconBg="rgba(15,28,40,0.06)"
+                iconColor="rgba(15,28,40,0.45)"
+                title="Water Heater"
+                dateLabel="Mar 2027"
+                chipLabel="9 years old"
+                chipBg="rgba(15,28,40,0.06)"
+                chipColor="rgba(15,28,40,0.45)"
+              />
+            </div>
           </div>
 
           {/* Multi-property list */}
           {dashboard.properties.length > 1 && (
-            <div style={{ marginTop: "56px" }}>
+            <div style={{ position: "relative", zIndex: 1, marginTop: "32px" }}>
               <p
                 style={{
                   fontSize: "11px",
                   fontFamily: "var(--font-dm-sans)",
-                  color: "rgba(237,232,225,0.20)",
+                  color: "rgba(15,28,40,0.22)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
-                  marginBottom: "16px",
+                  marginBottom: "12px",
+                  fontWeight: 600,
                 }}
               >
                 Your Properties
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 {dashboard.properties.map((p) => (
-                  <Link
+                  <a
                     key={p.property.id}
                     href={`/owners/${token}/${p.property.id}`}
                     style={{ textDecoration: "none" }}
                   >
                     <div
                       style={{
-                        background: "#0D1825",
-                        border: "1px solid rgba(255,255,255,0.07)",
-                        borderRadius: "14px",
-                        padding: "18px 20px",
+                        background: "#FFFFFF",
+                        border: "1px solid rgba(15,28,40,0.07)",
+                        borderRadius: "12px",
+                        padding: "16px 20px",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                         gap: "16px",
+                        boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
                       }}
                     >
                       <div>
-                        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: "#EDE8E1", marginBottom: "2px" }}>
+                        <p
+                          style={{
+                            fontFamily: "var(--font-dm-sans)",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            color: "#0F1C28",
+                            marginBottom: "2px",
+                          }}
+                        >
                           {p.property.address}
                         </p>
-                        <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "rgba(237,232,225,0.42)" }}>
+                        <p
+                          style={{
+                            fontSize: "12px",
+                            fontFamily: "var(--font-dm-sans)",
+                            color: "rgba(15,28,40,0.45)",
+                          }}
+                        >
                           {p.property.city} · {p.property.type}
                         </p>
                       </div>
-                      <span style={{ color: "rgba(237,232,225,0.20)", fontSize: "16px" }}>→</span>
+                      <span style={{ color: "rgba(15,28,40,0.22)", fontSize: "16px" }}>→</span>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
           )}
 
+          {/* Trust footer strip */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              textAlign: "center",
+              marginTop: "56px",
+              paddingTop: "24px",
+              borderTop: "1px solid rgba(15,28,40,0.07)",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "13px",
+                color: "rgba(15,28,40,0.22)",
+                lineHeight: 1.8,
+              }}
+            >
+              Managed by Ebin Jaison · Prospera Properties · (519) 697-1227
+            </p>
+          </div>
         </main>
 
         <MobileNav token={token} />
@@ -327,39 +474,265 @@ export default async function OwnerHomePage({ params }: Props) {
   );
 }
 
-function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
+function StatCard({
+  label,
+  value,
+  valueColor,
+}: {
+  label: string;
+  value: string;
+  valueColor: string;
+}) {
   return (
     <div
       style={{
-        background: "#0D1825",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: "20px",
-        padding: "20px",
+        background: "#FFFFFF",
+        border: "1px solid rgba(15,28,40,0.07)",
+        borderRadius: "12px",
+        padding: "16px 14px",
+        boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
       }}
     >
       <p
         style={{
           fontSize: "11px",
           fontFamily: "var(--font-dm-sans)",
-          color: "rgba(237,232,225,0.42)",
+          color: "rgba(15,28,40,0.22)",
           textTransform: "uppercase",
-          letterSpacing: "0.06em",
+          letterSpacing: "0.08em",
           marginBottom: "8px",
+          fontWeight: 600,
         }}
       >
         {label}
       </p>
       <p
         style={{
-          fontFamily: "var(--font-outfit)",
-          fontSize: "clamp(26px, 4vw, 34px)",
-          fontWeight: 700,
-          letterSpacing: "-0.03em",
-          color: color,
+          fontFamily: "var(--font-cormorant)",
+          fontSize: "clamp(24px, 4vw, 32px)",
+          fontWeight: 600,
+          color: valueColor,
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
         }}
       >
         {value}
       </p>
+    </div>
+  );
+}
+
+function NavCardsGrid({
+  navCards,
+}: {
+  navCards: Array<{
+    icon: string;
+    label: string;
+    subtitle: string;
+    href: string;
+    iconColor: string;
+    chipBg: string;
+  }>;
+}) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: "12px",
+        marginTop: "0",
+      }}
+    >
+      {navCards.map((card) => (
+        <NavCard key={card.label} card={card} />
+      ))}
+    </div>
+  );
+}
+
+function NavCard({
+  card,
+}: {
+  card: {
+    icon: string;
+    label: string;
+    subtitle: string;
+    href: string;
+    iconColor: string;
+    chipBg: string;
+  };
+}) {
+  return (
+    <a href={card.href} style={{ textDecoration: "none" }}>
+      <div
+        style={{
+          background: "#FFFFFF",
+          border: "1px solid rgba(15,28,40,0.07)",
+          borderRadius: "20px",
+          padding: "24px",
+          minHeight: "140px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          position: "relative",
+          boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+          transition: "transform 0.18s ease, box-shadow 0.18s ease",
+        }}
+      >
+        {/* Icon chip */}
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "12px",
+            background: card.chipBg,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "16px",
+          }}
+        >
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: "20px", color: card.iconColor }}
+          >
+            {card.icon}
+          </span>
+        </div>
+
+        <div>
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "16px",
+              fontWeight: 700,
+              color: "#0F1C28",
+              letterSpacing: "-0.01em",
+              marginBottom: "4px",
+            }}
+          >
+            {card.label}
+          </p>
+          <p
+            style={{
+              fontSize: "13px",
+              fontFamily: "var(--font-dm-sans)",
+              color: "rgba(15,28,40,0.45)",
+              lineHeight: 1.4,
+            }}
+          >
+            {card.subtitle}
+          </p>
+        </div>
+
+        {/* Arrow */}
+        <span
+          style={{
+            position: "absolute",
+            top: "24px",
+            right: "20px",
+            color: "rgba(15,28,40,0.22)",
+            fontSize: "14px",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
+          →
+        </span>
+      </div>
+    </a>
+  );
+}
+
+function UpcomingRow({
+  icon,
+  iconBg,
+  iconColor,
+  title,
+  dateLabel,
+  chipLabel,
+  chipBg,
+  chipColor,
+}: {
+  icon: string;
+  iconBg: string;
+  iconColor: string;
+  title: string;
+  dateLabel: string;
+  chipLabel: string;
+  chipBg: string;
+  chipColor: string;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "14px",
+        padding: "16px 20px",
+        flexWrap: "wrap",
+      }}
+    >
+      <div
+        style={{
+          width: "36px",
+          height: "36px",
+          borderRadius: "10px",
+          background: iconBg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        <span className="material-symbols-outlined" style={{ fontSize: "18px", color: iconColor }}>
+          {icon}
+        </span>
+      </div>
+
+      <div style={{ flex: 1, minWidth: "100px" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#0F1C28",
+            marginBottom: "2px",
+          }}
+        >
+          {title}
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "12px",
+            color: "rgba(15,28,40,0.45)",
+          }}
+        >
+          {dateLabel}
+        </p>
+      </div>
+
+      <div
+        style={{
+          padding: "4px 10px",
+          borderRadius: "100px",
+          background: chipBg,
+          flexShrink: 0,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "11px",
+            fontWeight: 600,
+            color: chipColor,
+          }}
+        >
+          {chipLabel}
+        </span>
+      </div>
     </div>
   );
 }

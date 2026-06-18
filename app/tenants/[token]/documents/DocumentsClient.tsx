@@ -4,27 +4,31 @@ import { useState } from "react";
 import type { TenantDocument } from "@/lib/tenant-data";
 import type { NotionFile } from "@/lib/notion";
 
-const CARD = "#0D1825";
-const CARD_HOVER = "#111F2E";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const TEXT_DIM = "rgba(237,232,225,0.20)";
-const GREEN = "#34d399";
-const AMBER = "#fbbf24";
-const BLUE = "#60a5fa";
-const PURPLE = "#a78bfa";
-const GOLD = "#C9A84C";
+// Design tokens
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const BURGUNDY = "#8B2030";
+const BURG_BG = "rgba(139,32,48,0.08)";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const BLUE = "#1D4ED8";
+const BLUE_BG = "rgba(29,78,216,0.08)";
+const PURPLE = "#7C3AED";
+const PURPLE_BG = "rgba(124,58,237,0.08)";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
 
 const CATEGORIES = ["All", "Lease Agreement", "Inspection Report", "Notice", "Receipt", "Other"] as const;
 type Category = typeof CATEGORIES[number];
 
-function categoryColor(cat: string): string {
-  if (cat === "Lease Agreement") return BLUE;
-  if (cat === "Inspection Report") return PURPLE;
-  if (cat === "Notice") return AMBER;
-  if (cat === "Receipt") return GREEN;
-  return TEXT_SEC;
+function categoryColor(cat: string): { color: string; bg: string } {
+  if (cat === "Lease Agreement") return { color: BLUE, bg: BLUE_BG };
+  if (cat === "Inspection Report") return { color: PURPLE, bg: PURPLE_BG };
+  if (cat === "Notice") return { color: AMBER, bg: AMBER_BG };
+  if (cat === "Receipt") return { color: GREEN, bg: GREEN_BG };
+  return { color: MUTED, bg: "rgba(15,28,40,0.05)" };
 }
 
 function formatBytes(bytes: number | null): string {
@@ -41,7 +45,6 @@ function fileIcon(mimeType: string | null): string {
   return "description";
 }
 
-/** Guess a category label from the Notion file name */
 function guessCategory(name: string): string {
   const n = name.toLowerCase();
   if (n.includes("lease") || n.includes("tenancy") || n.includes("rental agreement")) return "Lease Agreement";
@@ -99,25 +102,25 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
     onDownload: () => void;
     isLast: boolean;
   }) {
+    const { color, bg } = categoryColor(category);
+
     return (
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "16px",
-          padding: "18px 20px",
-          borderBottom: isLast ? "none" : "1px solid rgba(255,255,255,0.05)",
-          transition: "background 0.15s",
+          gap: "14px",
+          padding: "16px 0",
+          borderBottom: isLast ? "none" : `1px solid ${CARD_BORDER}`,
+          transition: "opacity 0.15s",
         }}
-        onMouseEnter={e => (e.currentTarget.style.background = CARD_HOVER)}
-        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
       >
         <div
           style={{
             width: "40px",
             height: "40px",
             borderRadius: "10px",
-            background: `${categoryColor(category)}15`,
+            background: bg,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -126,14 +129,14 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "20px", color: categoryColor(category) }}
+            style={{ fontSize: "20px", color: color }}
           >
             {fileIcon(mimeType)}
           </span>
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: TEXT, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 600, color: NAVY, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {label}
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
@@ -145,17 +148,17 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
                 fontSize: "11px",
                 fontWeight: 600,
                 fontFamily: "var(--font-dm-sans)",
-                background: `${categoryColor(category)}18`,
-                color: categoryColor(category),
+                background: bg,
+                color: color,
               }}
             >
               {category}
             </span>
-            <span style={{ color: TEXT_DIM, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+            <span style={{ color: SUBTLE, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
               {date}
             </span>
             {fileSize != null && (
-              <span style={{ color: TEXT_DIM, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+              <span style={{ color: SUBTLE, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
                 {formatBytes(fileSize)}
               </span>
             )}
@@ -166,17 +169,18 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
           onClick={onDownload}
           disabled={downloading === id}
           style={{
-            padding: "8px 16px",
-            borderRadius: "10px",
-            background: downloading === id ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.09)",
-            color: downloading === id ? TEXT_DIM : TEXT_SEC,
+            padding: "7px 16px",
+            borderRadius: "100px",
+            background: downloading === id ? "rgba(15,28,40,0.04)" : BURG_BG,
+            border: "none",
+            color: downloading === id ? MUTED : BURGUNDY,
             fontSize: "12px",
             fontWeight: 600,
             fontFamily: "var(--font-dm-sans)",
             cursor: downloading === id ? "not-allowed" : "pointer",
             whiteSpace: "nowrap",
             flexShrink: 0,
+            transition: "all 0.15s",
           }}
         >
           {downloading === id ? "Opening…" : "Download"}
@@ -188,7 +192,7 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
   return (
     <div>
       {/* Category filter tabs */}
-      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "24px" }}>
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "20px" }}>
         {CATEGORIES.map((cat) => {
           const active = cat === activeCategory;
           return (
@@ -196,11 +200,11 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
               key={cat}
               onClick={() => setActiveCategory(cat)}
               style={{
-                padding: "7px 16px",
+                padding: "6px 16px",
                 borderRadius: "100px",
-                border: active ? `1px solid ${GOLD}60` : "1px solid rgba(255,255,255,0.08)",
-                background: active ? `${GOLD}15` : "transparent",
-                color: active ? GOLD : TEXT_SEC,
+                border: active ? `1px solid rgba(139,32,48,0.25)` : `1px solid ${CARD_BORDER}`,
+                background: active ? BURG_BG : "transparent",
+                color: active ? BURGUNDY : MUTED,
                 fontSize: "13px",
                 fontFamily: "var(--font-dm-sans)",
                 fontWeight: active ? 600 : 400,
@@ -218,32 +222,22 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
       {totalCount === 0 ? (
         <div
           style={{
-            background: CARD,
-            border: `1px solid ${CARD_BORDER}`,
-            borderRadius: "22px",
-            padding: "60px 24px",
+            padding: "48px 24px",
             textAlign: "center",
           }}
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "40px", color: TEXT_DIM, display: "block", marginBottom: "16px" }}
+            style={{ fontSize: "40px", color: SUBTLE, display: "block", marginBottom: "16px" }}
           >
             folder_open
           </span>
-          <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
+          <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
             No documents yet. Ebin will add your lease and documents here.
           </p>
         </div>
       ) : (
-        <div
-          style={{
-            background: CARD,
-            border: `1px solid ${CARD_BORDER}`,
-            borderRadius: "22px",
-            overflow: "hidden",
-          }}
-        >
+        <div>
           {/* Notion-sourced files (lease etc.) */}
           {filteredNotion.map((f, idx) => {
             const cat = guessCategory(f.name);

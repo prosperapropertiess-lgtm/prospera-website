@@ -17,19 +17,6 @@ function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
-function StatPill({ label, value, color }: { label: string; value: string; color?: string }) {
-  return (
-    <div>
-      <p style={{ fontSize: "11px", fontFamily: "var(--font-dm-sans)", color: "rgba(237,232,225,0.42)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "5px" }}>
-        {label}
-      </p>
-      <p style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 700, letterSpacing: "-0.02em", color: color ?? "#EDE8E1" }}>
-        {value}
-      </p>
-    </div>
-  );
-}
-
 export default async function FinancialsPage({ params }: Props) {
   const { token } = await params;
 
@@ -58,15 +45,28 @@ export default async function FinancialsPage({ params }: Props) {
 
   return (
     <>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
 
-      <div style={{ minHeight: "100vh", background: "#090E17" }}>
+      <div style={{ minHeight: "100vh", background: "#F5F4F1" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 100px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "32px 20px 100px" }}>
           <Link
             href={`/owners/${token}`}
-            style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{
+              color: "rgba(15,28,40,0.45)",
+              fontSize: "13px",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "4px",
+              marginBottom: "28px",
+              fontFamily: "var(--font-dm-sans)",
+              fontWeight: 500,
+            }}
           >
             ← Back
           </Link>
@@ -74,11 +74,12 @@ export default async function FinancialsPage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(36px, 5vw, 52px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: "#EDE8E1",
+              color: "#0F1C28",
               letterSpacing: "-0.02em",
-              marginBottom: "8px",
+              marginBottom: "32px",
+              lineHeight: 1,
             }}
           >
             Financials
@@ -86,13 +87,20 @@ export default async function FinancialsPage({ params }: Props) {
 
           {/* Portfolio totals when multiple properties */}
           {multiProperty && (
-            <div style={{ display: "flex", gap: "40px", marginBottom: "48px", paddingBottom: "40px", borderBottom: "1px solid rgba(255,255,255,0.05)", flexWrap: "wrap", marginTop: "32px" }}>
-              <StatPill label="Total Collected" value={fmt$(dashboard.totalRentCollected)} />
-              <StatPill label="Total Expenses" value={fmt$(dashboard.totalExpenses)} />
-              <StatPill
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "10px",
+                marginBottom: "40px",
+              }}
+            >
+              <StatCard label="Total Collected" value={fmt$(dashboard.totalRentCollected)} valueColor="#0F1C28" />
+              <StatCard label="Total Expenses" value={fmt$(dashboard.totalExpenses)} valueColor="#B45309" />
+              <StatCard
                 label="Total Net"
                 value={fmt$(dashboard.totalNet)}
-                color={dashboard.totalNet >= 0 ? "#34d399" : "#f87171"}
+                valueColor={dashboard.totalNet >= 0 ? "#0A7A52" : "#B91C1C"}
               />
             </div>
           )}
@@ -108,38 +116,49 @@ export default async function FinancialsPage({ params }: Props) {
             return (
               <div key={property.id}>
                 {multiProperty && (
-                  <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(237,232,225,0.42)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx === 0 ? "0" : "40px" }}>
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      color: "rgba(15,28,40,0.22)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.10em",
+                      marginBottom: "16px",
+                      marginTop: idx === 0 ? "0" : "48px",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
                     {property.address}
                   </p>
                 )}
-                {!multiProperty && idx === 0 && <div style={{ marginTop: "32px" }} />}
+                {!multiProperty && idx === 0 && <div style={{ marginTop: "0" }} />}
 
-                {/* YTD stats */}
-                <div style={{ display: "flex", gap: "40px", marginBottom: "24px", flexWrap: "wrap" }}>
-                  <StatPill label="Collected" value={fmt$(ytdRentCollected)} />
-                  <StatPill label="Expenses" value={fmt$(ytdExpenses)} />
-                  <StatPill
+                {/* YTD stats — 3 cards */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gap: "10px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <StatCard label="Collected" value={fmt$(ytdRentCollected)} valueColor="#0F1C28" />
+                  <StatCard label="Expenses" value={fmt$(ytdExpenses)} valueColor="#B45309" />
+                  <StatCard
                     label="Net"
                     value={fmt$(ytdNet)}
-                    color={ytdNet >= 0 ? "#34d399" : "#f87171"}
+                    valueColor={ytdNet >= 0 ? "#0A7A52" : "#B91C1C"}
                   />
                 </div>
 
-                {/* Income chart */}
-                <div style={{ background: "#0D1825", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "16px", padding: "24px", marginBottom: "16px" }}>
-                  <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-                    6-Month Overview
-                  </p>
-                  <IncomeChart history={history} />
-                </div>
-
-                {/* Annual projection */}
+                {/* Annual projection card */}
                 {projectedAnnualNet !== null && (
                   <div
                     style={{
-                      background: "#0A1D2E",
-                      border: "1px solid rgba(52,211,153,0.18)",
-                      borderRadius: "16px",
+                      background: "#FFFFFF",
+                      border: "1px solid rgba(15,28,40,0.07)",
+                      borderTop: `2px solid ${projectedAnnualNet >= 0 ? "#0A7A52" : "#B91C1C"}`,
+                      borderRadius: "20px",
                       padding: "24px 28px",
                       marginBottom: "16px",
                       display: "flex",
@@ -147,35 +166,114 @@ export default async function FinancialsPage({ params }: Props) {
                       justifyContent: "space-between",
                       flexWrap: "wrap",
                       gap: "12px",
+                      boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
                     }}
                   >
                     <div>
-                      <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
+                      <p
+                        style={{
+                          color: "rgba(15,28,40,0.22)",
+                          fontSize: "11px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.10em",
+                          marginBottom: "10px",
+                          fontFamily: "var(--font-dm-sans)",
+                          fontWeight: 600,
+                        }}
+                      >
                         Annual Projection · {dashboard.currentYear}
                       </p>
-                      <p style={{ color: projectedAnnualNet >= 0 ? "#34d399" : "#f87171", fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5vw, 40px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1 }}>
+                      <p
+                        style={{
+                          color: projectedAnnualNet >= 0 ? "#0A7A52" : "#B91C1C",
+                          fontFamily: "var(--font-cormorant)",
+                          fontSize: "clamp(32px, 5vw, 48px)",
+                          fontWeight: 600,
+                          letterSpacing: "-0.02em",
+                          lineHeight: 1,
+                        }}
+                      >
                         {projectedAnnualNet >= 0 ? "+" : ""}{fmt$(projectedAnnualNet)}
                       </p>
-                      <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "12px", marginTop: "6px" }}>
-                        projected net this year · avg {fmt$(avgMonthlyNet!)} / mo
+                      <p
+                        style={{
+                          color: "rgba(15,28,40,0.45)",
+                          fontSize: "12px",
+                          marginTop: "8px",
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
+                        projected net · avg {fmt$(avgMonthlyNet!)} / mo
                       </p>
                     </div>
                     <div style={{ textAlign: "right" }}>
-                      <p style={{ color: "rgba(237,232,225,0.20)", fontSize: "11px" }}>
+                      <p
+                        style={{
+                          color: "rgba(15,28,40,0.22)",
+                          fontSize: "11px",
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
                         Based on {activeMonthsYTD} month{activeMonthsYTD > 1 ? "s" : ""} of data
                       </p>
                     </div>
                   </div>
                 )}
 
-                {/* 12-month table */}
-                <div style={{ background: "#0D1825", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "16px", padding: "24px", marginBottom: "16px" }}>
-                  <FinancialTable history={history} currentMonth={dashboard.currentMonth} currentYear={dashboard.currentYear} />
+                {/* Income chart in a white card */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1px solid rgba(15,28,40,0.07)",
+                    borderRadius: "20px",
+                    padding: "24px",
+                    marginBottom: "16px",
+                    boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+                  }}
+                >
+                  <p
+                    style={{
+                      color: "rgba(15,28,40,0.22)",
+                      fontSize: "11px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.10em",
+                      marginBottom: "16px",
+                      fontFamily: "var(--font-dm-sans)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    6-Month Overview
+                  </p>
+                  <IncomeChart history={history} />
+                </div>
+
+                {/* 12-month table in a white card */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1px solid rgba(15,28,40,0.07)",
+                    borderRadius: "20px",
+                    padding: "24px",
+                    marginBottom: "16px",
+                    boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+                  }}
+                >
+                  <FinancialTable
+                    history={history}
+                    currentMonth={dashboard.currentMonth}
+                    currentYear={dashboard.currentYear}
+                  />
                 </div>
 
                 {/* Divider between properties */}
                 {multiProperty && idx < dashboard.properties.length - 1 && (
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.05)", margin: "40px 0" }} />
+                  <div
+                    style={{
+                      height: "1px",
+                      background: "rgba(15,28,40,0.07)",
+                      margin: "40px 0",
+                    }}
+                  />
                 )}
               </div>
             );
@@ -185,5 +283,53 @@ export default async function FinancialsPage({ params }: Props) {
         <MobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  valueColor,
+}: {
+  label: string;
+  value: string;
+  valueColor: string;
+}) {
+  return (
+    <div
+      style={{
+        background: "#FFFFFF",
+        border: "1px solid rgba(15,28,40,0.07)",
+        borderRadius: "12px",
+        padding: "16px 14px",
+        boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+      }}
+    >
+      <p
+        style={{
+          fontSize: "11px",
+          fontFamily: "var(--font-dm-sans)",
+          color: "rgba(15,28,40,0.22)",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          marginBottom: "8px",
+          fontWeight: 600,
+        }}
+      >
+        {label}
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--font-cormorant)",
+          fontSize: "clamp(22px, 4vw, 32px)",
+          fontWeight: 600,
+          color: valueColor,
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
+        }}
+      >
+        {value}
+      </p>
+    </div>
   );
 }
