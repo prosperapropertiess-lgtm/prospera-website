@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json().catch(() => ({}));
-  const { owner_name, owner_email, owner_phone, property_address, property_type } = body;
+  const { owner_name, owner_email, owner_phone, property_address, property_type, service_type } = body;
 
   if (!owner_name || !owner_email || !property_address) {
     return NextResponse.json({ error: "owner_name, owner_email, and property_address are required" }, { status: 400 });
@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
     token,
     current_step: 2,
     status: "in_progress",
+    service_type: service_type === "management" ? "management" : "placement",
     owner_name,
     owner_email,
     owner_phone: owner_phone || null,

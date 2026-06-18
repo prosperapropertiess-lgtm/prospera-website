@@ -24,10 +24,12 @@ interface Session {
   token: string;
   current_step: number;
   status: string;
+  service_type: string;
   owner_name: string | null;
   owner_email: string | null;
   property_address: string | null;
   created_at: string;
+  placement_completed_at: string | null;
   completed_at: string | null;
 }
 
@@ -122,6 +124,7 @@ export default function OnboardListPage() {
   const [ownerPhone,       setOwnerPhone]        = useState("");
   const [propertyAddress,  setPropertyAddress]   = useState("");
   const [propertyType,     setPropertyType]      = useState("");
+  const [serviceType,      setServiceType]       = useState<"placement" | "management">("placement");
 
   useEffect(() => {
     fetch("/api/onboard/list", {
@@ -135,7 +138,7 @@ export default function OnboardListPage() {
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyType("");
-    setFormError("");
+    setServiceType("placement"); setFormError("");
   }
 
   async function handleDelete(token: string, e: React.MouseEvent) {
@@ -174,6 +177,7 @@ export default function OnboardListPage() {
           owner_phone: ownerPhone.trim() || undefined,
           property_address: propertyAddress.trim(),
           property_type: propertyType || undefined,
+          service_type: serviceType,
         }),
       });
       const d = await r.json();
@@ -247,6 +251,39 @@ export default function OnboardListPage() {
                 </div>
               </div>
 
+              {/* Service type selector */}
+              <div style={{ marginBottom: 20 }}>
+                <p style={{
+                  fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase",
+                  letterSpacing: "0.07em", marginBottom: 10,
+                  fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                }}>Service</p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  {(["placement", "management"] as const).map(type => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setServiceType(type)}
+                      style={{
+                        padding: "14px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left",
+                        border: `2px solid ${serviceType === type ? BURGUNDY : CARD_BORDER}`,
+                        background: serviceType === type ? "rgba(139,32,48,0.04)" : CARD,
+                        transition: "all 0.15s", fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                      }}
+                    >
+                      <p style={{ margin: "0 0 3px", fontSize: 14, fontWeight: 700, color: serviceType === type ? BURGUNDY : NAVY }}>
+                        {type === "placement" ? "Tenant Placement" : "Placement + Management"}
+                      </p>
+                      <p style={{ margin: 0, fontSize: 12, color: MUTED }}>
+                        {type === "placement"
+                          ? "Find & place a tenant. One-time fee."
+                          : "Place a tenant then manage ongoing."}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {formError && (
                 <p style={{ margin: "0 0 16px", fontSize: 14, color: RED, fontWeight: 500 }}>{formError}</p>
               )}
@@ -317,6 +354,12 @@ export default function OnboardListPage() {
                           background: st.badgeBg, padding: "2px 8px", borderRadius: 6,
                         }}>
                           {st.label}
+                        </span>
+                        <span style={{
+                          fontSize: 11, fontWeight: 600, color: SUBTLE,
+                          background: "rgba(15,28,40,0.06)", padding: "2px 8px", borderRadius: 6,
+                        }}>
+                          {s.service_type === "management" ? "Placement + Mgmt" : "Placement only"}
                         </span>
                       </div>
                       {s.owner_email && <p style={{ margin: "0 0 2px", fontSize: 14, color: MUTED }}>{s.owner_email}</p>}

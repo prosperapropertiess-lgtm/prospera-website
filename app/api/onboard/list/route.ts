@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   const { data, error } = await sb
     .from("onboarding_sessions")
     .select(
-      "id, token, current_step, status, owner_name, owner_email, property_address, created_at, step2_completed_at, step3_completed_at, completed_at"
+      "id, token, current_step, status, service_type, owner_name, owner_email, property_address, created_at, placement_completed_at, completed_at"
     )
     .order("created_at", { ascending: false })
     .limit(50);
