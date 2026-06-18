@@ -234,6 +234,26 @@ export async function fetchAllTenants(): Promise<Tenant[]> {
   }));
 }
 
+export async function fetchRentForTenant(notionTenantId: string): Promise<RentEntry[]> {
+  const pages = await queryDatabase(DB.rentTracker, {
+    property: "Tenant",
+    relation: { contains: notionTenantId },
+  });
+  return pages.map(p => ({
+    id: pageId(p),
+    entry: text(p, "Entry"),
+    propertyId: relations(p, "Property")[0] ?? "",
+    tenantId: relations(p, "Tenant")[0] ?? null,
+    month: text(p, "Month"),
+    year: num(p, "Year"),
+    amountDue: num(p, "Amount Due"),
+    amountPaid: num(p, "Amount Paid"),
+    datePaid: dateStart(p, "Date Paid"),
+    paymentStatus: text(p, "Payment Status"),
+    notes: text(p, "Notes"),
+  }));
+}
+
 export async function fetchRentForMonth(month: string, year: number): Promise<RentEntry[]> {
   const pages = await queryDatabase(DB.rentTracker, {
     and: [

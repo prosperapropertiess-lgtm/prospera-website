@@ -66,6 +66,24 @@ const cards = [
     description: "Upload leases, inspection reports, and notices to owner portals",
     cta: "Manage documents",
   },
+  {
+    href: "/admin/tenants",
+    label: "Tenant Portals",
+    description: "Generate tenant portal links and manage tenant access",
+    cta: "Manage tenants",
+  },
+  {
+    href: "/admin/home-guides",
+    label: "Home Guides",
+    description: "Edit property home guides — breakers, shutoffs, appliances, garbage schedules",
+    cta: "Edit guides",
+  },
+  {
+    href: "/admin/schedules",
+    label: "Schedules",
+    description: "Manage property events, inspections, and tenant reminders",
+    cta: "Manage schedules",
+  },
 ];
 
 function getGreeting() {
