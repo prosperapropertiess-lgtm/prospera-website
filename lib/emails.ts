@@ -1179,7 +1179,10 @@ export function onboardEmail1Welcome(data: {
     <!-- Title -->
     <p style="margin:0 0 4px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">Prospera Properties</p>
     <p style="margin:0 0 4px;font-family:${FONT};font-size:26px;font-weight:700;color:${NAVY};line-height:1.2;">Welcome to Prospera, ${firstName}.</p>
-    <p style="margin:0 0 28px;font-family:${FONT};font-size:16px;color:${MUTED};line-height:1.6;">${data.propertyAddress} is in good hands.</p>
+    <p style="margin:0 0 24px;font-family:${FONT};font-size:16px;color:${MUTED};line-height:1.6;">${data.propertyAddress} is in good hands.</p>
+
+    <p style="margin:0 0 16px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">I'm Ebin — I run Prospera personally. Thank you for trusting us with your property. I know that's not a small thing, and I take it seriously.</p>
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">We've set up a personal dashboard just for you. Think of it like a live checklist — it shows exactly what's been done, what's coming up next, and where everything stands. You'll get an email every time something changes.</p>
 
     <!-- Progress bar -->
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;">
