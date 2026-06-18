@@ -17,9 +17,10 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isAdmin = pathname?.startsWith("/admin");
   const isOwners = pathname?.startsWith("/owners");
   const isLP = pathname?.startsWith("/lp");
+  const isTenants = pathname?.startsWith("/tenants");
 
   useEffect(() => {
-    if (isLP) return;
+    if (isLP || isAdmin || isOwners || isTenants) return;
 
     let lenis: import("@studio-freight/lenis").default | null = null;
     let raf: number;
@@ -44,7 +45,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       cancelAnimationFrame(raf);
       lenis?.destroy();
     };
-  }, [isLP]);
+  }, [isLP, isAdmin, isOwners, isTenants]);
 
   return (
     <>
