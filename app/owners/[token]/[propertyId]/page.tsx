@@ -139,8 +139,6 @@ export default async function PropertyDetailPage({ params }: Props) {
                 <Link
                   href={`/owners/${token}`}
                   style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "none" }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#5A6A7A")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#9AA5B1")}
                 >
                   Portfolio
                 </Link>
