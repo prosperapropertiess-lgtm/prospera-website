@@ -1121,7 +1121,7 @@ function onboardChecklist(items: { label: string; done: boolean }[]): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0;">${rows}</table>`;
 }
 
-// Email 1 — Welcome + Dashboard Link
+// Email 1 — Welcome (warm handshake — dashboard does the heavy lifting)
 export function onboardEmail1Welcome(data: {
   ownerName: string;
   propertyAddress: string;
@@ -1131,83 +1131,26 @@ export function onboardEmail1Welcome(data: {
   return wrapper(`
     ${heroCard(
       `Welcome to Prospera, ${firstName}.`,
-      `Let's get ${data.propertyAddress} set up.`
+      `We're glad you're here.`
     )}
 
-    ${onboardProgressBar(2, "Owner info received")}
-
-    <p style="margin:24px 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      You're in our system. From here, everything happens in your personal onboarding dashboard — it's the single place where you'll see what's been done, what's next, and where you are in the process.
+    <p style="margin:24px 0 20px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Thank you for choosing us to manage ${data.propertyAddress}. That trust means a lot — and we don't take it lightly.
     </p>
 
-    ${cta("Open Your Onboarding Dashboard", data.dashboardUrl)}
+    <p style="margin:0 0 20px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      I'm Ebin. I run Prospera personally, and I'll be the one looking after your property. You'll hear from me at every step — nothing gets handed off to a call centre or a ticketing system.
+    </p>
 
-    ${divider()}
+    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      We've set up your own onboarding dashboard — it shows exactly where things are, what's coming next, and what we need from you. Think of it as your home base while we get everything set up together.
+    </p>
 
-    <p style="margin:0 0 16px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">What happens next</p>
+    ${cta("Open My Dashboard", data.dashboardUrl)}
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
-      <tr>
-        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
-          <table cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td style="width:32px;vertical-align:top;padding-top:1px;">
-                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">1</div>
-              </td>
-              <td style="padding-left:12px;">
-                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Upload your lease <span style="font-weight:400;color:${MUTED};">(if you have one)</span></p>
-                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">We'll pull all the details automatically — tenant names, rent, dates.</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
-          <table cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td style="width:32px;vertical-align:top;padding-top:1px;">
-                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">2</div>
-              </td>
-              <td style="padding-left:12px;">
-                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Confirm your property details</p>
-                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">A short form — unit count, rent amount, any notes for us.</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
-          <table cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td style="width:32px;vertical-align:top;padding-top:1px;">
-                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">3</div>
-              </td>
-              <td style="padding-left:12px;">
-                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Sign your management agreement</p>
-                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">Two minutes to read. One click to sign.</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:10px 0;">
-          <table cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td style="width:32px;vertical-align:top;padding-top:1px;">
-                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">4</div>
-              </td>
-              <td style="padding-left:12px;">
-                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">We take it from here</p>
-                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">Keys, inspection, tenant intro — we'll handle everything and keep you updated.</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    <p style="margin:16px 0 0;text-align:center;font-family:${FONT};font-size:13px;color:${MUTED};">
+      Questions? Just reply to this email — I read every one.
+    </p>
 
     ${divider()}
     ${signoff()}
