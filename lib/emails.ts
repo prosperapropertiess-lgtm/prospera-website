@@ -152,7 +152,7 @@ function divider(): string {
 function cta(text: string, url: string): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:32px 0;">
     <tr>
-      <td>
+      <td align="center" style="text-align:center;">
         <a class="cta-btn" href="${url}" style="display:inline-block;padding:16px 36px;background-color:${CRIMSON};color:${WHITE};text-decoration:none;font-size:16px;font-weight:700;letter-spacing:0.3px;font-family:${FONT};border-radius:10px;">${text} &rarr;</a>
       </td>
     </tr>
@@ -1121,33 +1121,93 @@ function onboardChecklist(items: { label: string; done: boolean }[]): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0;">${rows}</table>`;
 }
 
-// Email 1 — Welcome + Lease Upload Link
+// Email 1 — Welcome + Dashboard Link
 export function onboardEmail1Welcome(data: {
   ownerName: string;
   propertyAddress: string;
-  leaseUploadUrl: string;
-  skipUrl: string;
+  dashboardUrl: string;
 }): string {
+  const firstName = data.ownerName.split(" ")[0];
   return wrapper(`
     ${heroCard(
-      `Welcome to Prospera, ${data.ownerName.split(" ")[0]}.`,
+      `Welcome to Prospera, ${firstName}.`,
       `Let's get ${data.propertyAddress} set up.`
     )}
 
     ${onboardProgressBar(2, "Owner info received")}
 
-    <p style="margin:24px 0 8px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      You're officially in our system. We're excited to manage your property and make ownership as stress-free as possible.
-    </p>
-    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      <strong>Your first step:</strong> If you have an existing lease, upload it below. We'll pull every detail automatically — tenant names, rent amounts, dates — so you don't have to type a thing. Takes 30 seconds.
+    <p style="margin:24px 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      You're in our system. From here, everything happens in your personal onboarding dashboard — it's the single place where you'll see what's been done, what's next, and where you are in the process.
     </p>
 
-    ${cta("Upload Your Lease Agreement →", data.leaseUploadUrl)}
+    ${cta("Open Your Onboarding Dashboard", data.dashboardUrl)}
 
-    <p style="margin:16px 0 0;text-align:center;font-family:${FONT};font-size:13px;color:${MUTED};">
-      No lease yet? <a href="${data.skipUrl}" style="color:${CRIMSON};text-decoration:none;font-weight:600;">Skip this step →</a>
-    </p>
+    ${divider()}
+
+    <p style="margin:0 0 16px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">What happens next</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+          <table cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="width:32px;vertical-align:top;padding-top:1px;">
+                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">1</div>
+              </td>
+              <td style="padding-left:12px;">
+                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Upload your lease <span style="font-weight:400;color:${MUTED};">(if you have one)</span></p>
+                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">We'll pull all the details automatically — tenant names, rent, dates.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+          <table cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="width:32px;vertical-align:top;padding-top:1px;">
+                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">2</div>
+              </td>
+              <td style="padding-left:12px;">
+                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Confirm your property details</p>
+                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">A short form — unit count, rent amount, any notes for us.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+          <table cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="width:32px;vertical-align:top;padding-top:1px;">
+                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">3</div>
+              </td>
+              <td style="padding-left:12px;">
+                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Sign your management agreement</p>
+                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">Two minutes to read. One click to sign.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:10px 0;">
+          <table cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td style="width:32px;vertical-align:top;padding-top:1px;">
+                <div style="width:22px;height:22px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:12px;font-weight:700;color:${WHITE};line-height:22px;">4</div>
+              </td>
+              <td style="padding-left:12px;">
+                <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">We take it from here</p>
+                <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">Keys, inspection, tenant intro — we'll handle everything and keep you updated.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
 
     ${divider()}
     ${signoff()}

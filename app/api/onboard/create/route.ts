@@ -47,8 +47,7 @@ export async function POST(req: NextRequest) {
     const html = onboardEmail1Welcome({
       ownerName: owner_name,
       propertyAddress: property_address,
-      leaseUploadUrl: `${BASE}/onboard/${token}/lease`,
-      skipUrl: `${BASE}/onboard/${token}/details`,
+      dashboardUrl: `${BASE}/onboard/${token}`,
     });
 
     await resend.emails.send({

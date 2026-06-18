@@ -11,8 +11,7 @@ export async function GET(req: NextRequest) {
   const html = onboardEmail1Welcome({
     ownerName: "Randy Lahey",
     propertyAddress: "27 Horton Street, St. Thomas",
-    leaseUploadUrl: "https://www.prosperaproperties.co/onboard/demo/lease",
-    skipUrl: "https://www.prosperaproperties.co/onboard/demo/details",
+    dashboardUrl: "https://www.prosperaproperties.co/onboard/demo",
   });
 
   const { error } = await resend.emails.send({
