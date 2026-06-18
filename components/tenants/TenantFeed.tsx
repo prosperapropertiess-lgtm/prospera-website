@@ -151,7 +151,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: "20px", color: SUBTLE }}
+                style={{ fontSize: "23px", color: SUBTLE }}
               >
                 chat_bubble_outline
               </span>
@@ -159,7 +159,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             <p
               style={{
                 color: MUTED,
-                fontSize: "14px",
+                fontSize: "17px",
                 lineHeight: "1.6",
                 maxWidth: "320px",
                 fontFamily: "var(--font-dm-sans)",
@@ -188,7 +188,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
           <p
             style={{
               color: RED,
-              fontSize: "13px",
+              fontSize: "16px",
               marginBottom: "10px",
               padding: "8px 12px",
               background: RED_BG,
@@ -210,7 +210,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
               flex: 1,
               resize: "none",
               padding: "10px 14px",
-              fontSize: "14px",
+              fontSize: "17px",
               fontFamily: "var(--font-dm-sans)",
               color: NAVY,
               background: BG,
@@ -230,7 +230,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
               color: sending || !draft.trim() ? SUBTLE : "#FFFFFF",
               border: "none",
               cursor: sending || !draft.trim() ? "not-allowed" : "pointer",
-              fontSize: "13px",
+              fontSize: "16px",
               fontWeight: 600,
               fontFamily: "var(--font-dm-sans)",
               whiteSpace: "nowrap",
@@ -240,7 +240,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             {sending ? "Sending…" : "Send"}
           </button>
         </div>
-        <p style={{ color: SUBTLE, fontSize: "11px", marginTop: "8px", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ color: SUBTLE, fontSize: "14px", marginTop: "8px", fontFamily: "var(--font-dm-sans)" }}>
           Laura usually responds instantly · Ebin reviews all conversations
         </p>
       </div>
@@ -313,7 +313,7 @@ function MessageBubble({
           style={{
             color: avatarColor,
             fontWeight: 700,
-            fontSize: "13px",
+            fontSize: "16px",
             fontFamily: "var(--font-dm-sans)",
           }}
         >
@@ -335,7 +335,7 @@ function MessageBubble({
         >
           <span
             style={{
-              fontSize: "12px",
+              fontSize: "15px",
               fontWeight: 600,
               color: MUTED,
               fontFamily: "var(--font-dm-sans)",
@@ -343,7 +343,7 @@ function MessageBubble({
           >
             {message.author_name}
           </span>
-          <span style={{ fontSize: "11px", color: SUBTLE, fontFamily: "var(--font-dm-sans)" }}>
+          <span style={{ fontSize: "14px", color: SUBTLE, fontFamily: "var(--font-dm-sans)" }}>
             {formatTimestamp(message.created_at)}
           </span>
         </div>
@@ -360,7 +360,7 @@ function MessageBubble({
         >
           <p
             style={{
-              fontSize: "14px",
+              fontSize: "17px",
               lineHeight: "1.6",
               color: bubbleTextColor,
               margin: 0,

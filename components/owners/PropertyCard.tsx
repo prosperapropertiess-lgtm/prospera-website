@@ -114,7 +114,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
                   background: badge.color,
                 }}
               />
-              <span style={{ color: badge.color, fontSize: "11px", fontWeight: 600 }}>
+              <span style={{ color: badge.color, fontSize: "14px", fontWeight: 600 }}>
                 {badge.label}
               </span>
             </div>
@@ -130,7 +130,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
                 border: "1px solid #E8E4DF",
               }}
             >
-              <span style={{ color: "#5A6A7A", fontSize: "11px" }}>
+              <span style={{ color: "#5A6A7A", fontSize: "14px" }}>
                 {property.type}
               </span>
             </div>
@@ -150,7 +150,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
             >
               {property.address}
             </h3>
-            <p style={{ color: "#5A6A7A", fontSize: "13px", marginBottom: "16px" }}>
+            <p style={{ color: "#5A6A7A", fontSize: "16px", marginBottom: "16px" }}>
               {property.city}
             </p>
 
@@ -191,7 +191,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
               justifyContent: "space-between",
             }}
           >
-            <span style={{ color: "#9AA5B1", fontSize: "12px" }}>
+            <span style={{ color: "#9AA5B1", fontSize: "15px" }}>
               View details →
             </span>
           </div>
@@ -216,11 +216,11 @@ function StatChip({ icon, label, valueColor }: { icon: string; label: string; va
     >
       <span
         className="material-symbols-outlined"
-        style={{ fontSize: "12px", color: valueColor ?? "#5A6A7A" }}
+        style={{ fontSize: "15px", color: valueColor ?? "#5A6A7A" }}
       >
         {icon}
       </span>
-      <span style={{ color: valueColor ?? "#5A6A7A", fontSize: "11px", fontWeight: 500 }}>{label}</span>
+      <span style={{ color: valueColor ?? "#5A6A7A", fontSize: "14px", fontWeight: 500 }}>{label}</span>
     </div>
   );
 }

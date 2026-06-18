@@ -71,7 +71,7 @@ export default async function MaintenancePage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -94,7 +94,7 @@ export default async function MaintenancePage({ params }: Props) {
             <div style={{ marginBottom: "36px" }}>
               <p
                 style={{
-                  fontSize: "11px",
+                  fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
                   color: SUBTLE,
                   textTransform: "uppercase",
@@ -125,7 +125,7 @@ export default async function MaintenancePage({ params }: Props) {
                             display: "inline-block",
                             padding: "2px 10px",
                             borderRadius: "100px",
-                            fontSize: "11px",
+                            fontSize: "14px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
                             background: "rgba(15,28,40,0.05)",
@@ -139,7 +139,7 @@ export default async function MaintenancePage({ params }: Props) {
                             display: "inline-block",
                             padding: "2px 10px",
                             borderRadius: "100px",
-                            fontSize: "11px",
+                            fontSize: "14px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
                             background: st.bg,
@@ -149,10 +149,10 @@ export default async function MaintenancePage({ params }: Props) {
                           {st.label}
                         </span>
                       </div>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: NAVY, marginBottom: "4px", lineHeight: "1.5", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "17px", color: NAVY, marginBottom: "4px", lineHeight: "1.5", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {req.description}
                       </p>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED }}>
                         Submitted {new Date(req.created_at).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
                       </p>
                     </div>
@@ -167,7 +167,7 @@ export default async function MaintenancePage({ params }: Props) {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "18px",
+                fontSize: "21px",
                 fontWeight: 700,
                 color: NAVY,
                 marginBottom: "16px",

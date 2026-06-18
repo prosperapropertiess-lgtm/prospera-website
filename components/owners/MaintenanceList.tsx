@@ -58,7 +58,7 @@ export function MaintenanceList({ open, completed }: Props) {
         <p
           style={{
             color: "#0A7A52",
-            fontSize: "13px",
+            fontSize: "16px",
             fontWeight: 500,
             fontFamily: "var(--font-dm-sans)",
           }}
@@ -100,7 +100,7 @@ export function MaintenanceList({ open, completed }: Props) {
               <span
                 style={{
                   color: p.color,
-                  fontSize: "10px",
+                  fontSize: "16px",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
@@ -114,7 +114,7 @@ export function MaintenanceList({ open, completed }: Props) {
               <p
                 style={{
                   color: "#0F1C28",
-                  fontSize: "13px",
+                  fontSize: "16px",
                   fontWeight: 500,
                   marginBottom: "2px",
                   fontFamily: "var(--font-dm-sans)",
@@ -125,7 +125,7 @@ export function MaintenanceList({ open, completed }: Props) {
               <p
                 style={{
                   color: "rgba(15,28,40,0.45)",
-                  fontSize: "11px",
+                  fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -151,7 +151,7 @@ export function MaintenanceList({ open, completed }: Props) {
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "16px", color: "#0A7A52", flexShrink: 0 }}
+            style={{ fontSize: "19px", color: "#0A7A52", flexShrink: 0 }}
           >
             check_circle
           </span>
@@ -159,7 +159,7 @@ export function MaintenanceList({ open, completed }: Props) {
             <p
               style={{
                 color: "rgba(15,28,40,0.45)",
-                fontSize: "13px",
+                fontSize: "16px",
                 textDecoration: "line-through",
                 fontFamily: "var(--font-dm-sans)",
               }}
@@ -170,7 +170,7 @@ export function MaintenanceList({ open, completed }: Props) {
           <span
             style={{
               color: "#0A7A52",
-              fontSize: "11px",
+              fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
               fontWeight: 600,
             }}

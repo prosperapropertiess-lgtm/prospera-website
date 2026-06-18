@@ -47,20 +47,20 @@ function CustomTooltip({ active, payload, label }: any) {
         border: "1px solid rgba(15,28,40,0.10)",
         borderRadius: "12px",
         padding: "12px 16px",
-        fontSize: "13px",
+        fontSize: "16px",
         color: NAVY,
         boxShadow: "0 4px 16px rgba(15,28,40,0.10)",
         minWidth: "140px",
       }}
     >
-      <p style={{ fontWeight: 700, marginBottom: "8px", fontFamily: "var(--font-poppins)", fontSize: "14px" }}>
+      <p style={{ fontWeight: 700, marginBottom: "8px", fontFamily: "var(--font-poppins)", fontSize: "17px" }}>
         {label}
       </p>
       <p style={{ color: "#2563EB", margin: "3px 0", fontFamily: "var(--font-poppins)" }}>
         Utilities: <strong>${utilityEntry.value.toLocaleString()}</strong>
       </p>
       {avgEntry && avgEntry.value > 0 && (
-        <p style={{ color: MUTED, margin: "3px 0", fontSize: "12px", fontFamily: "var(--font-poppins)" }}>
+        <p style={{ color: MUTED, margin: "3px 0", fontSize: "15px", fontFamily: "var(--font-poppins)" }}>
           3-mo avg: ${Math.round(avgEntry.value).toLocaleString()}
         </p>
       )}
@@ -97,7 +97,7 @@ export function UtilityChart({ history }: Props) {
 
   if (!hasData) {
     return (
-      <div style={{ padding: "32px", textAlign: "center", color: MUTED, fontSize: "14px", fontFamily: "var(--font-poppins)" }}>
+      <div style={{ padding: "32px", textAlign: "center", color: MUTED, fontSize: "17px", fontFamily: "var(--font-poppins)" }}>
         No utility expenses on record yet.
       </div>
     );
@@ -166,7 +166,7 @@ export function UtilityChart({ history }: Props) {
         </ComposedChart>
       </ResponsiveContainer>
 
-      <p style={{ color: SUBTLE, fontSize: "11px", marginTop: "8px", textAlign: "right", fontFamily: "var(--font-poppins)" }}>
+      <p style={{ color: SUBTLE, fontSize: "14px", marginTop: "8px", textAlign: "right", fontFamily: "var(--font-poppins)" }}>
         Dashed line = 3-month rolling average · Dashed horizontal = 12-month avg
       </p>
     </div>
@@ -181,14 +181,14 @@ function StatPill({ label, value, sub, subColor }: {
 }) {
   return (
     <div>
-      <p style={{ color: SUBTLE, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px", fontFamily: "var(--font-poppins)" }}>
+      <p style={{ color: SUBTLE, fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px", fontFamily: "var(--font-poppins)" }}>
         {label}
       </p>
       <p style={{ color: NAVY, fontFamily: "var(--font-poppins)", fontSize: "21px", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>
         {value}
       </p>
       {sub && (
-        <p style={{ color: subColor ?? SUBTLE, fontSize: "12px", marginTop: "3px", fontFamily: "var(--font-poppins)" }}>
+        <p style={{ color: subColor ?? SUBTLE, fontSize: "15px", marginTop: "3px", fontFamily: "var(--font-poppins)" }}>
           {sub}
         </p>
       )}

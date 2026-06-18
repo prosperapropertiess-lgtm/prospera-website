@@ -58,7 +58,7 @@ export default async function FinancialsPage({ params }: Props) {
             href={`/owners/${token}`}
             style={{
               color: "rgba(15,28,40,0.45)",
-              fontSize: "13px",
+              fontSize: "16px",
               textDecoration: "none",
               display: "inline-flex",
               alignItems: "center",
@@ -118,7 +118,7 @@ export default async function FinancialsPage({ params }: Props) {
                 {multiProperty && (
                   <p
                     style={{
-                      fontSize: "11px",
+                      fontSize: "14px",
                       fontWeight: 700,
                       color: "rgba(15,28,40,0.22)",
                       textTransform: "uppercase",
@@ -173,7 +173,7 @@ export default async function FinancialsPage({ params }: Props) {
                       <p
                         style={{
                           color: "rgba(15,28,40,0.22)",
-                          fontSize: "11px",
+                          fontSize: "14px",
                           textTransform: "uppercase",
                           letterSpacing: "0.10em",
                           marginBottom: "10px",
@@ -198,7 +198,7 @@ export default async function FinancialsPage({ params }: Props) {
                       <p
                         style={{
                           color: "rgba(15,28,40,0.45)",
-                          fontSize: "12px",
+                          fontSize: "15px",
                           marginTop: "8px",
                           fontFamily: "var(--font-dm-sans)",
                         }}
@@ -210,7 +210,7 @@ export default async function FinancialsPage({ params }: Props) {
                       <p
                         style={{
                           color: "rgba(15,28,40,0.22)",
-                          fontSize: "11px",
+                          fontSize: "14px",
                           fontFamily: "var(--font-dm-sans)",
                         }}
                       >
@@ -234,7 +234,7 @@ export default async function FinancialsPage({ params }: Props) {
                   <p
                     style={{
                       color: "rgba(15,28,40,0.22)",
-                      fontSize: "11px",
+                      fontSize: "14px",
                       textTransform: "uppercase",
                       letterSpacing: "0.10em",
                       marginBottom: "16px",
@@ -307,7 +307,7 @@ function StatCard({
     >
       <p
         style={{
-          fontSize: "11px",
+          fontSize: "14px",
           fontFamily: "var(--font-dm-sans)",
           color: "rgba(15,28,40,0.22)",
           textTransform: "uppercase",

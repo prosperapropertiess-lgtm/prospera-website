@@ -80,7 +80,7 @@ export function OwnerHomeClient({ rentStatus, leaseDaysRemaining, leaseExpiry }:
           <span
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: "12px",
+              fontSize: "15px",
               fontWeight: 600,
               color: chip.color,
               whiteSpace: "nowrap",

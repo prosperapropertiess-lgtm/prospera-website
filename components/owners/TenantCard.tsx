@@ -135,7 +135,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
             <span
               style={{
                 color: "white",
-                fontSize: "15px",
+                fontSize: "18px",
                 fontWeight: 700,
                 fontFamily: "var(--font-dm-sans)",
               }}
@@ -148,7 +148,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
               style={{
                 color: "#0F1C28",
                 fontWeight: 700,
-                fontSize: "15px",
+                fontSize: "18px",
                 fontFamily: "var(--font-dm-sans)",
                 marginBottom: "2px",
               }}
@@ -158,7 +158,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
             <p
               style={{
                 color: "rgba(15,28,40,0.45)",
-                fontSize: "12px",
+                fontSize: "15px",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -183,7 +183,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
           <p
             style={{
               color: "rgba(15,28,40,0.45)",
-              fontSize: "11px",
+              fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -213,7 +213,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
             <p
               style={{
                 color: "rgba(15,28,40,0.22)",
-                fontSize: "10px",
+                fontSize: "16px",
                 textTransform: "uppercase",
                 letterSpacing: "0.06em",
                 marginBottom: "3px",
@@ -226,7 +226,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
             <p
               style={{
                 color: "rgba(15,28,40,0.55)",
-                fontSize: "12px",
+                fontSize: "15px",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -260,7 +260,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
             <span
               style={{
                 color: countdown.color,
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: 600,
                 fontFamily: "var(--font-dm-sans)",
                 whiteSpace: "nowrap",
@@ -309,7 +309,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
           <span
             style={{
               color: rentBadge.color,
-              fontSize: "11px",
+              fontSize: "14px",
               fontWeight: 600,
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -325,7 +325,7 @@ export function TenantCard({ tenant, rentHistory, index }: Props) {
           <p
             style={{
               color: "rgba(15,28,40,0.22)",
-              fontSize: "10px",
+              fontSize: "16px",
               textTransform: "uppercase",
               letterSpacing: "0.06em",
               marginBottom: "6px",

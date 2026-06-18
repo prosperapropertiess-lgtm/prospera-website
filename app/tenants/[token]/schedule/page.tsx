@@ -78,7 +78,7 @@ export default async function SchedulePage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -121,11 +121,11 @@ export default async function SchedulePage({ params }: Props) {
                 flexShrink: 0,
               }}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px", color: GREEN }}>
+              <span className="material-symbols-outlined" style={{ fontSize: "19px", color: GREEN }}>
                 delete
               </span>
             </div>
-            <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: MUTED, lineHeight: "1.5" }}>
+            <p style={{ fontSize: "16px", fontFamily: "var(--font-dm-sans)", color: MUTED, lineHeight: "1.5" }}>
               <span style={{ color: NAVY, fontWeight: 600 }}>Garbage & Recycling</span> — Check your local municipality schedule or ask Ebin for your specific pickup days.
             </p>
           </div>
@@ -146,7 +146,7 @@ export default async function SchedulePage({ params }: Props) {
               <span className="material-symbols-outlined" style={{ fontSize: "40px", color: SUBTLE, display: "block", marginBottom: "16px" }}>
                 event_available
               </span>
-              <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
+              <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
                 No upcoming events. Ebin will add inspections, reminders, and important dates here.
               </p>
             </div>
@@ -178,7 +178,7 @@ export default async function SchedulePage({ params }: Props) {
                         flexShrink: 0,
                       }}
                     >
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.60)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "2px" }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "16px", fontWeight: 700, color: "rgba(255,255,255,0.60)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "2px" }}>
                         {month}
                       </p>
                       <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "22px", fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>
@@ -210,13 +210,13 @@ export default async function SchedulePage({ params }: Props) {
                             flexShrink: 0,
                           }}
                         >
-                          <span className="material-symbols-outlined" style={{ fontSize: "13px", color }}>
+                          <span className="material-symbols-outlined" style={{ fontSize: "16px", color }}>
                             {event.event_type === "inspection" ? "search" :
                              event.event_type === "maintenance" ? "build" :
                              event.event_type === "reminder" ? "notifications" : "event"}
                           </span>
                         </div>
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 700, color: NAVY }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "18px", fontWeight: 700, color: NAVY }}>
                           {event.title}
                         </p>
                         <span
@@ -224,7 +224,7 @@ export default async function SchedulePage({ params }: Props) {
                             display: "inline-block",
                             padding: "2px 8px",
                             borderRadius: "100px",
-                            fontSize: "11px",
+                            fontSize: "14px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
                             background: bg,
@@ -235,7 +235,7 @@ export default async function SchedulePage({ params }: Props) {
                         </span>
                       </div>
                       {event.description && (
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: MUTED, lineHeight: "1.5" }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "16px", color: MUTED, lineHeight: "1.5" }}>
                           {event.description}
                         </p>
                       )}
@@ -251,7 +251,7 @@ export default async function SchedulePage({ params }: Props) {
             <div>
               <p
                 style={{
-                  fontSize: "11px",
+                  fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
                   color: SUBTLE,
                   textTransform: "uppercase",
@@ -296,15 +296,15 @@ export default async function SchedulePage({ params }: Props) {
                           flexShrink: 0,
                         }}
                       >
-                        <span className="material-symbols-outlined" style={{ fontSize: "16px", color }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: "19px", color }}>
                           repeat
                         </span>
                       </div>
                       <div style={{ flex: 1 }}>
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 700, color: NAVY, marginBottom: "2px" }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "17px", fontWeight: 700, color: NAVY, marginBottom: "2px" }}>
                           {event.title}
                         </p>
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED }}>
                           {event.recurring}
                         </p>
                       </div>

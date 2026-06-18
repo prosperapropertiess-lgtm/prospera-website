@@ -45,7 +45,7 @@ export default async function OwnerHomePage({ params }: Props) {
           style={{
             color: "rgba(15,28,40,0.45)",
             fontFamily: "var(--font-dm-sans)",
-            fontSize: "14px",
+            fontSize: "17px",
           }}
         >
           Unable to load data. Please try again in a moment.
@@ -198,7 +198,7 @@ export default async function OwnerHomePage({ params }: Props) {
               <span
                 style={{
                   color: "rgba(15,28,40,0.45)",
-                  fontSize: "12px",
+                  fontSize: "15px",
                   fontFamily: "var(--font-dm-sans)",
                   fontWeight: 500,
                 }}
@@ -223,7 +223,7 @@ export default async function OwnerHomePage({ params }: Props) {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "15px",
+                fontSize: "18px",
                 color: "rgba(15,28,40,0.45)",
                 fontWeight: 400,
               }}
@@ -248,7 +248,7 @@ export default async function OwnerHomePage({ params }: Props) {
           >
             <p
               style={{
-                fontSize: "11px",
+                fontSize: "14px",
                 fontFamily: "var(--font-dm-sans)",
                 color: "rgba(15,28,40,0.22)",
                 textTransform: "uppercase",
@@ -325,7 +325,7 @@ export default async function OwnerHomePage({ params }: Props) {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontWeight: 700,
-                fontSize: "14px",
+                fontSize: "17px",
                 color: "#0F1C28",
                 marginBottom: "12px",
               }}
@@ -383,7 +383,7 @@ export default async function OwnerHomePage({ params }: Props) {
             <div style={{ position: "relative", zIndex: 1, marginTop: "32px" }}>
               <p
                 style={{
-                  fontSize: "11px",
+                  fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
                   color: "rgba(15,28,40,0.22)",
                   textTransform: "uppercase",
@@ -418,7 +418,7 @@ export default async function OwnerHomePage({ params }: Props) {
                         <p
                           style={{
                             fontFamily: "var(--font-dm-sans)",
-                            fontSize: "14px",
+                            fontSize: "17px",
                             fontWeight: 600,
                             color: "#0F1C28",
                             marginBottom: "2px",
@@ -428,7 +428,7 @@ export default async function OwnerHomePage({ params }: Props) {
                         </p>
                         <p
                           style={{
-                            fontSize: "12px",
+                            fontSize: "15px",
                             fontFamily: "var(--font-dm-sans)",
                             color: "rgba(15,28,40,0.45)",
                           }}
@@ -436,7 +436,7 @@ export default async function OwnerHomePage({ params }: Props) {
                           {p.property.city} · {p.property.type}
                         </p>
                       </div>
-                      <span style={{ color: "rgba(15,28,40,0.22)", fontSize: "16px" }}>→</span>
+                      <span style={{ color: "rgba(15,28,40,0.22)", fontSize: "19px" }}>→</span>
                     </div>
                   </a>
                 ))}
@@ -458,7 +458,7 @@ export default async function OwnerHomePage({ params }: Props) {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "13px",
+                fontSize: "16px",
                 color: "rgba(15,28,40,0.22)",
                 lineHeight: 1.8,
               }}
@@ -495,7 +495,7 @@ function StatCard({
     >
       <p
         style={{
-          fontSize: "11px",
+          fontSize: "14px",
           fontFamily: "var(--font-dm-sans)",
           color: "rgba(15,28,40,0.22)",
           textTransform: "uppercase",
@@ -596,7 +596,7 @@ function NavCard({
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "20px", color: card.iconColor }}
+            style={{ fontSize: "23px", color: card.iconColor }}
           >
             {card.icon}
           </span>
@@ -606,7 +606,7 @@ function NavCard({
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: "16px",
+              fontSize: "19px",
               fontWeight: 700,
               color: "#0F1C28",
               letterSpacing: "-0.01em",
@@ -617,7 +617,7 @@ function NavCard({
           </p>
           <p
             style={{
-              fontSize: "13px",
+              fontSize: "16px",
               fontFamily: "var(--font-dm-sans)",
               color: "rgba(15,28,40,0.45)",
               lineHeight: 1.4,
@@ -634,7 +634,7 @@ function NavCard({
             top: "24px",
             right: "20px",
             color: "rgba(15,28,40,0.22)",
-            fontSize: "14px",
+            fontSize: "17px",
             fontFamily: "var(--font-dm-sans)",
           }}
         >
@@ -686,7 +686,7 @@ function UpcomingRow({
           flexShrink: 0,
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "18px", color: iconColor }}>
+        <span className="material-symbols-outlined" style={{ fontSize: "21px", color: iconColor }}>
           {icon}
         </span>
       </div>
@@ -695,7 +695,7 @@ function UpcomingRow({
         <p
           style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: "14px",
+            fontSize: "17px",
             fontWeight: 600,
             color: "#0F1C28",
             marginBottom: "2px",
@@ -706,7 +706,7 @@ function UpcomingRow({
         <p
           style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: "12px",
+            fontSize: "15px",
             color: "rgba(15,28,40,0.45)",
           }}
         >
@@ -725,7 +725,7 @@ function UpcomingRow({
         <span
           style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: "11px",
+            fontSize: "14px",
             fontWeight: 600,
             color: chipColor,
           }}

@@ -129,14 +129,14 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "20px", color: color }}
+            style={{ fontSize: "23px", color: color }}
           >
             {fileIcon(mimeType)}
           </span>
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 600, color: NAVY, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "18px", fontWeight: 600, color: NAVY, marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {label}
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
@@ -145,7 +145,7 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
                 display: "inline-block",
                 padding: "2px 8px",
                 borderRadius: "100px",
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: 600,
                 fontFamily: "var(--font-dm-sans)",
                 background: bg,
@@ -154,11 +154,11 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
             >
               {category}
             </span>
-            <span style={{ color: SUBTLE, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+            <span style={{ color: SUBTLE, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
               {date}
             </span>
             {fileSize != null && (
-              <span style={{ color: SUBTLE, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+              <span style={{ color: SUBTLE, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
                 {formatBytes(fileSize)}
               </span>
             )}
@@ -174,7 +174,7 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
             background: downloading === id ? "rgba(15,28,40,0.04)" : BURG_BG,
             border: "none",
             color: downloading === id ? MUTED : BURGUNDY,
-            fontSize: "12px",
+            fontSize: "15px",
             fontWeight: 600,
             fontFamily: "var(--font-dm-sans)",
             cursor: downloading === id ? "not-allowed" : "pointer",
@@ -205,7 +205,7 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
                 border: active ? `1px solid rgba(139,32,48,0.25)` : `1px solid ${CARD_BORDER}`,
                 background: active ? BURG_BG : "transparent",
                 color: active ? BURGUNDY : MUTED,
-                fontSize: "13px",
+                fontSize: "16px",
                 fontFamily: "var(--font-dm-sans)",
                 fontWeight: active ? 600 : 400,
                 cursor: "pointer",
@@ -232,7 +232,7 @@ export default function DocumentsClient({ documents, notionFiles, token }: Props
           >
             folder_open
           </span>
-          <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
+          <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)", lineHeight: "1.6", maxWidth: "300px", margin: "0 auto" }}>
             No documents yet. Ebin will add your lease and documents here.
           </p>
         </div>

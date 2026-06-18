@@ -35,7 +35,7 @@ export default function OwnerHeader({ firstName, token }: Props) {
       >
         <Link href={`/owners/${token}`} style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
           <Image src="/logo.png" alt="Prospera" width={36} height={36} style={{ objectFit: "contain" }} />
-          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "18px", fontWeight: 500, color: "#0F1C28", letterSpacing: "-0.01em" }}>
+          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "21px", fontWeight: 500, color: "#0F1C28", letterSpacing: "-0.01em" }}>
             Prospera Properties
           </span>
         </Link>
@@ -62,7 +62,7 @@ export default function OwnerHeader({ firstName, token }: Props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "12px",
+              fontSize: "15px",
               fontWeight: 700,
               color: "white",
               fontFamily: "var(--font-dm-sans)",
@@ -74,7 +74,7 @@ export default function OwnerHeader({ firstName, token }: Props) {
           <span
             style={{
               color: "rgba(15,28,40,0.55)",
-              fontSize: "13px",
+              fontSize: "16px",
               fontFamily: "var(--font-dm-sans)",
               fontWeight: 500,
             }}

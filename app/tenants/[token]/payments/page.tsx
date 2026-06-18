@@ -82,7 +82,7 @@ export default async function PaymentsPage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -131,7 +131,7 @@ export default async function PaymentsPage({ params }: Props) {
                 textAlign: "center",
               }}
             >
-              <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+              <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)" }}>
                 No payment records yet.
               </p>
             </div>
@@ -158,7 +158,7 @@ export default async function PaymentsPage({ params }: Props) {
                   >
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginBottom: "4px" }}>
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 600, color: NAVY }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "18px", fontWeight: 600, color: NAVY }}>
                           {entry.month} {entry.year}
                         </p>
                         <span
@@ -166,7 +166,7 @@ export default async function PaymentsPage({ params }: Props) {
                             display: "inline-block",
                             padding: "2px 10px",
                             borderRadius: "100px",
-                            fontSize: "11px",
+                            fontSize: "14px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
                             background: st.bg,
@@ -177,7 +177,7 @@ export default async function PaymentsPage({ params }: Props) {
                         </span>
                       </div>
                       {entry.datePaid && (
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED }}>
                           Paid {new Date(entry.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
                         </p>
                       )}
@@ -199,7 +199,7 @@ export default async function PaymentsPage({ params }: Props) {
                         </p>
                       )}
                       {entry.amountPaid != null && entry.amountPaid !== entry.amountDue && (
-                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: GREEN, marginTop: "2px" }}>
+                        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: GREEN, marginTop: "2px" }}>
                           Paid: {fmt$(entry.amountPaid)}
                         </p>
                       )}
@@ -241,7 +241,7 @@ function StatCard({
     >
       <p
         style={{
-          fontSize: "11px",
+          fontSize: "14px",
           fontFamily: "var(--font-dm-sans)",
           color: MUTED,
           textTransform: "uppercase",
@@ -252,7 +252,7 @@ function StatCard({
         {label}
       </p>
       {prefix && (
-        <p style={{ fontSize: "10px", fontFamily: "var(--font-dm-sans)", color: color, marginBottom: "1px", fontWeight: 600 }}>
+        <p style={{ fontSize: "16px", fontFamily: "var(--font-dm-sans)", color: color, marginBottom: "1px", fontWeight: 600 }}>
           {prefix}
         </p>
       )}

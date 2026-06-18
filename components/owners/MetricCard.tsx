@@ -99,7 +99,7 @@ export function MetricCard({
         <span
           className="material-symbols-outlined"
           style={{
-            fontSize: "20px",
+            fontSize: "23px",
             color: "#9AA5B1",
             marginBottom: "2px",
           }}
@@ -135,7 +135,7 @@ export function MetricCard({
         {delta != null && deltaColor && (
           <span
             style={{
-              fontSize: "11px",
+              fontSize: "14px",
               fontWeight: 600,
               color: deltaColor,
               whiteSpace: "nowrap",

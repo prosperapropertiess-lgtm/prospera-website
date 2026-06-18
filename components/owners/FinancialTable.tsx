@@ -30,7 +30,7 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
 
   return (
     <div style={{ overflowX: "auto", borderRadius: "16px", border: "1px solid rgba(15,28,40,0.07)", background: "#FFFFFF", boxShadow: "0 1px 3px rgba(15,28,40,0.05)" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "15px" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "18px" }}>
         <thead>
           <tr style={{ borderBottom: "1px solid rgba(15,28,40,0.07)", background: "rgba(15,28,40,0.02)" }}>
             {["Month", "Rent Due", "Collected", "Expenses", "Net"].map(h => (
@@ -40,7 +40,7 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
                   padding: "14px 18px",
                   textAlign: h === "Month" ? "left" : "right",
                   color: SUBTLE,
-                  fontSize: "12px",
+                  fontSize: "15px",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.07em",
@@ -72,9 +72,9 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
               >
                 <td style={{ padding: "13px 18px", color: isCurrent ? NAVY : MUTED, fontWeight: isCurrent ? 600 : 400, whiteSpace: "nowrap", fontFamily: "var(--font-poppins)" }}>
                   {MONTH_ABBR[row.month]}{" "}
-                  {showYear && <span style={{ color: SUBTLE, fontSize: "13px" }}>{row.year}</span>}
+                  {showYear && <span style={{ color: SUBTLE, fontSize: "16px" }}>{row.year}</span>}
                   {isCurrent && (
-                    <span style={{ marginLeft: "8px", fontSize: "11px", color: BURGUNDY, fontWeight: 700, background: "rgba(139,32,48,0.08)", padding: "2px 8px", borderRadius: "6px" }}>
+                    <span style={{ marginLeft: "8px", fontSize: "14px", color: BURGUNDY, fontWeight: 700, background: "rgba(139,32,48,0.08)", padding: "2px 8px", borderRadius: "6px" }}>
                       NOW
                     </span>
                   )}
@@ -97,7 +97,7 @@ export function FinancialTable({ history, currentMonth, currentYear }: Props) {
         </tbody>
         <tfoot>
           <tr style={{ borderTop: "2px solid rgba(15,28,40,0.08)", background: "rgba(15,28,40,0.02)" }}>
-            <td style={{ padding: "14px 18px", color: NAVY, fontSize: "13px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-poppins)" }}>
+            <td style={{ padding: "14px 18px", color: NAVY, fontSize: "16px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-poppins)" }}>
               Total
             </td>
             <td style={{ padding: "14px 18px", textAlign: "right", color: NAVY, fontWeight: 600, fontFamily: "var(--font-poppins)" }}>

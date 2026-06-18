@@ -58,7 +58,7 @@ export default async function MaintenancePage({ params }: Props) {
             href={`/owners/${token}`}
             style={{
               color: "rgba(15,28,40,0.45)",
-              fontSize: "13px",
+              fontSize: "16px",
               textDecoration: "none",
               display: "inline-block",
               marginBottom: "28px",
@@ -107,7 +107,7 @@ export default async function MaintenancePage({ params }: Props) {
               <span
                 style={{
                   fontFamily: "var(--font-dm-sans)",
-                  fontSize: "12px",
+                  fontSize: "15px",
                   fontWeight: 600,
                   color: totalOpen > 0 ? "#B45309" : "#0A7A52",
                 }}
@@ -137,7 +137,7 @@ export default async function MaintenancePage({ params }: Props) {
                 <span
                   style={{
                     fontFamily: "var(--font-dm-sans)",
-                    fontSize: "12px",
+                    fontSize: "15px",
                     fontWeight: 600,
                     color: "#0A7A52",
                   }}
@@ -168,7 +168,7 @@ export default async function MaintenancePage({ params }: Props) {
               <p
                 style={{
                   color: "#0A7A52",
-                  fontSize: "14px",
+                  fontSize: "17px",
                   fontFamily: "var(--font-dm-sans)",
                   fontWeight: 500,
                 }}
@@ -188,7 +188,7 @@ export default async function MaintenancePage({ params }: Props) {
                   {multiProperty && (
                     <p
                       style={{
-                        fontSize: "11px",
+                        fontSize: "14px",
                         fontWeight: 700,
                         color: "rgba(15,28,40,0.22)",
                         textTransform: "uppercase",
@@ -315,7 +315,7 @@ function MaintenanceListLight({
               <span
                 style={{
                   color: p.color,
-                  fontSize: "10px",
+                  fontSize: "16px",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
@@ -329,7 +329,7 @@ function MaintenanceListLight({
               <p
                 style={{
                   color: "#0F1C28",
-                  fontSize: "13px",
+                  fontSize: "16px",
                   fontWeight: 500,
                   marginBottom: "2px",
                   fontFamily: "var(--font-dm-sans)",
@@ -340,7 +340,7 @@ function MaintenanceListLight({
               <p
                 style={{
                   color: "rgba(15,28,40,0.45)",
-                  fontSize: "11px",
+                  fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -366,7 +366,7 @@ function MaintenanceListLight({
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "16px", color: "#0A7A52", flexShrink: 0 }}
+            style={{ fontSize: "19px", color: "#0A7A52", flexShrink: 0 }}
           >
             check_circle
           </span>
@@ -374,7 +374,7 @@ function MaintenanceListLight({
             <p
               style={{
                 color: "rgba(15,28,40,0.45)",
-                fontSize: "13px",
+                fontSize: "16px",
                 textDecoration: "line-through",
                 fontFamily: "var(--font-dm-sans)",
               }}
@@ -385,7 +385,7 @@ function MaintenanceListLight({
           <span
             style={{
               color: "#0A7A52",
-              fontSize: "11px",
+              fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
               fontWeight: 600,
             }}

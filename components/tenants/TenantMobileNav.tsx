@@ -118,7 +118,7 @@ function NavItem({
       </span>
       <span
         style={{
-          fontSize: "10px",
+          fontSize: "16px",
           fontWeight: active ? 600 : 500,
           letterSpacing: "0.02em",
           fontFamily: "var(--font-dm-sans)",

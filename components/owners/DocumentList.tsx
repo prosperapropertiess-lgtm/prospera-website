@@ -45,7 +45,7 @@ function CategoryBadge({ category }: { category: string }) {
         display: "inline-block",
         padding: "3px 10px",
         borderRadius: "100px",
-        fontSize: "11px",
+        fontSize: "14px",
         fontWeight: 600,
         background: style.bg,
         color: style.color,
@@ -109,7 +109,7 @@ function DocumentRow({
         <p
           style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: "14px",
+            fontSize: "17px",
             fontWeight: 600,
             color: "#0F1C28",
             marginBottom: "2px",
@@ -119,7 +119,7 @@ function DocumentRow({
         </p>
         <p
           style={{
-            fontSize: "12px",
+            fontSize: "15px",
             color: "rgba(15,28,40,0.45)",
             fontFamily: "var(--font-dm-sans)",
           }}
@@ -130,7 +130,7 @@ function DocumentRow({
         {error && (
           <p
             style={{
-              fontSize: "12px",
+              fontSize: "15px",
               color: "#B91C1C",
               marginTop: "4px",
               fontFamily: "var(--font-dm-sans)",
@@ -143,7 +143,7 @@ function DocumentRow({
 
       <p
         style={{
-          fontSize: "12px",
+          fontSize: "15px",
           color: "rgba(15,28,40,0.45)",
           fontFamily: "var(--font-dm-sans)",
           whiteSpace: "nowrap",
@@ -161,7 +161,7 @@ function DocumentRow({
           border: "1px solid rgba(15,28,40,0.10)",
           background: loading ? "rgba(15,28,40,0.04)" : "#FFFFFF",
           color: loading ? "rgba(15,28,40,0.25)" : "#0F1C28",
-          fontSize: "13px",
+          fontSize: "16px",
           fontWeight: 500,
           cursor: loading ? "not-allowed" : "pointer",
           fontFamily: "var(--font-dm-sans)",
@@ -188,7 +188,7 @@ export function DocumentList({ propertyId, token, initialDocuments }: Props) {
         <p
           style={{
             color: "rgba(15,28,40,0.45)",
-            fontSize: "14px",
+            fontSize: "17px",
             fontFamily: "var(--font-dm-sans)",
             lineHeight: 1.6,
           }}

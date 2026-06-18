@@ -101,7 +101,7 @@ export default function HomeGuideAccordion({ sections }: Props) {
                 >
                   <span
                     className="material-symbols-outlined"
-                    style={{ fontSize: "18px", color: meta.iconColor }}
+                    style={{ fontSize: "21px", color: meta.iconColor }}
                   >
                     {meta.icon}
                   </span>
@@ -109,7 +109,7 @@ export default function HomeGuideAccordion({ sections }: Props) {
                 <span
                   style={{
                     fontFamily: "var(--font-dm-sans)",
-                    fontSize: "16px",
+                    fontSize: "19px",
                     fontWeight: 700,
                     color: NAVY,
                   }}
@@ -120,7 +120,7 @@ export default function HomeGuideAccordion({ sections }: Props) {
               <span
                 className="material-symbols-outlined"
                 style={{
-                  fontSize: "20px",
+                  fontSize: "23px",
                   color: SUBTLE,
                   transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.2s ease",
@@ -143,7 +143,7 @@ export default function HomeGuideAccordion({ sections }: Props) {
                 <p
                   style={{
                     fontFamily: "var(--font-dm-sans)",
-                    fontSize: "15px",
+                    fontSize: "18px",
                     color: hasContent ? NAVY_MED : MUTED,
                     lineHeight: "1.7",
                     whiteSpace: "pre-wrap",

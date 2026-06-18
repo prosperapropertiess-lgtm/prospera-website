@@ -60,7 +60,7 @@ export default async function TenantsPage({ params }: Props) {
             href={`/owners/${token}`}
             style={{
               color: "rgba(15,28,40,0.45)",
-              fontSize: "13px",
+              fontSize: "16px",
               textDecoration: "none",
               display: "inline-block",
               marginBottom: "28px",
@@ -87,7 +87,7 @@ export default async function TenantsPage({ params }: Props) {
             <span
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "14px",
+                fontSize: "17px",
                 color: "rgba(15,28,40,0.45)",
                 fontWeight: 400,
               }}
@@ -110,7 +110,7 @@ export default async function TenantsPage({ params }: Props) {
               <p
                 style={{
                   color: "rgba(15,28,40,0.45)",
-                  fontSize: "14px",
+                  fontSize: "17px",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -127,7 +127,7 @@ export default async function TenantsPage({ params }: Props) {
                   {multiProperty && (
                     <p
                       style={{
-                        fontSize: "11px",
+                        fontSize: "14px",
                         fontWeight: 700,
                         color: "rgba(15,28,40,0.22)",
                         textTransform: "uppercase",
@@ -158,7 +158,7 @@ export default async function TenantsPage({ params }: Props) {
                       <span
                         className="material-symbols-outlined"
                         style={{
-                          fontSize: "20px",
+                          fontSize: "23px",
                           color: leaseDays <= 30 ? "#B91C1C" : "#B45309",
                           flexShrink: 0,
                           marginTop: "1px",
@@ -170,7 +170,7 @@ export default async function TenantsPage({ params }: Props) {
                         <p
                           style={{
                             color: leaseDays <= 30 ? "#B91C1C" : "#B45309",
-                            fontSize: "14px",
+                            fontSize: "17px",
                             fontWeight: 600,
                             marginBottom: "2px",
                             fontFamily: "var(--font-dm-sans)",
@@ -181,7 +181,7 @@ export default async function TenantsPage({ params }: Props) {
                         <p
                           style={{
                             color: leaseDays <= 30 ? "#B91C1C" : "#B45309",
-                            fontSize: "13px",
+                            fontSize: "16px",
                             opacity: 0.8,
                             fontFamily: "var(--font-dm-sans)",
                           }}

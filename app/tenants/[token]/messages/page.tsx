@@ -48,7 +48,7 @@ export default async function MessagesPage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -65,7 +65,7 @@ export default async function MessagesPage({ params }: Props) {
           >
             Messages
           </h1>
-          <p style={{ color: MUTED, fontSize: "13px", fontFamily: "var(--font-dm-sans)", marginBottom: "28px" }}>
+          <p style={{ color: MUTED, fontSize: "16px", fontFamily: "var(--font-dm-sans)", marginBottom: "28px" }}>
             Laura responds instantly. Ebin reviews all conversations.
           </p>
 

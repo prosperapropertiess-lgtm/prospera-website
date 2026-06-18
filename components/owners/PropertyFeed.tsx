@@ -149,7 +149,7 @@ export function PropertyFeed({
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: "20px", color: "rgba(15,28,40,0.22)" }}
+                style={{ fontSize: "23px", color: "rgba(15,28,40,0.22)" }}
               >
                 chat_bubble_outline
               </span>
@@ -157,7 +157,7 @@ export function PropertyFeed({
             <p
               style={{
                 color: "rgba(15,28,40,0.45)",
-                fontSize: "14px",
+                fontSize: "17px",
                 lineHeight: "1.6",
                 maxWidth: "320px",
                 fontFamily: "var(--font-dm-sans)",
@@ -184,7 +184,7 @@ export function PropertyFeed({
           <p
             style={{
               color: "#B91C1C",
-              fontSize: "13px",
+              fontSize: "16px",
               marginBottom: "10px",
               padding: "8px 12px",
               background: "rgba(185,28,28,0.08)",
@@ -206,7 +206,7 @@ export function PropertyFeed({
               flex: 1,
               resize: "none",
               padding: "10px 14px",
-              fontSize: "14px",
+              fontSize: "17px",
               fontFamily: "var(--font-dm-sans)",
               color: "#0F1C28",
               background: "rgba(15,28,40,0.04)",
@@ -226,7 +226,7 @@ export function PropertyFeed({
               color: sending || !draft.trim() ? "rgba(15,28,40,0.25)" : "#FFFFFF",
               border: "none",
               cursor: sending || !draft.trim() ? "not-allowed" : "pointer",
-              fontSize: "13px",
+              fontSize: "16px",
               fontWeight: 600,
               fontFamily: "var(--font-dm-sans)",
               whiteSpace: "nowrap",
@@ -239,7 +239,7 @@ export function PropertyFeed({
         <p
           style={{
             color: "rgba(15,28,40,0.22)",
-            fontSize: "11px",
+            fontSize: "14px",
             marginTop: "8px",
             fontFamily: "var(--font-dm-sans)",
           }}
@@ -290,7 +290,7 @@ function MessageBubble({
           style={{
             color: isEbin ? "#FFFFFF" : "rgba(15,28,40,0.55)",
             fontWeight: 700,
-            fontSize: "13px",
+            fontSize: "16px",
             fontFamily: "var(--font-dm-sans)",
           }}
         >
@@ -312,7 +312,7 @@ function MessageBubble({
         >
           <span
             style={{
-              fontSize: "12px",
+              fontSize: "15px",
               fontWeight: 600,
               color: "rgba(15,28,40,0.45)",
               fontFamily: "var(--font-dm-sans)",
@@ -323,14 +323,14 @@ function MessageBubble({
           {icon && (
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: "13px", color: "rgba(15,28,40,0.30)" }}
+              style={{ fontSize: "16px", color: "rgba(15,28,40,0.30)" }}
             >
               {icon}
             </span>
           )}
           <span
             style={{
-              fontSize: "11px",
+              fontSize: "14px",
               color: "rgba(15,28,40,0.22)",
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -350,7 +350,7 @@ function MessageBubble({
         >
           <p
             style={{
-              fontSize: "14px",
+              fontSize: "17px",
               lineHeight: "1.6",
               color: "#0F1C28",
               margin: 0,

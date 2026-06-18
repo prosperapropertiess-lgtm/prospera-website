@@ -54,7 +54,7 @@ export default async function DocumentsPage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>

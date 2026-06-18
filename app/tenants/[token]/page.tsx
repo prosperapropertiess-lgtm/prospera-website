@@ -187,7 +187,7 @@ export default async function TenantHomePage({ params }: Props) {
               }}
             >
               <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: GREEN, flexShrink: 0 }} />
-              <span style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}>
+              <span style={{ color: MUTED, fontSize: "15px", fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}>
                 {dateLabel}
               </span>
             </div>
@@ -205,7 +205,7 @@ export default async function TenantHomePage({ params }: Props) {
             >
               Hi {firstName}.
             </h1>
-            <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+            <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)" }}>
               {tenant.propertyAddress}{tenant.propertyCity ? `, ${tenant.propertyCity}` : ""}
             </p>
           </div>
@@ -241,7 +241,7 @@ export default async function TenantHomePage({ params }: Props) {
                         {currentRent.amountDue != null ? fmt$(currentRent.amountDue) : "—"}
                       </span>
                     </div>
-                    <p style={{ color: MUTED, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
+                    <p style={{ color: MUTED, fontSize: "16px", fontFamily: "var(--font-dm-sans)" }}>
                       for {currentRent.month} {currentRent.year}
                     </p>
                   </div>
@@ -256,14 +256,14 @@ export default async function TenantHomePage({ params }: Props) {
                           gap: "6px",
                           background: GREEN_BG,
                           color: GREEN,
-                          fontSize: "14px",
+                          fontSize: "17px",
                           fontWeight: 600,
                           fontFamily: "var(--font-dm-sans)",
                           borderRadius: "100px",
                           padding: "8px 18px",
                         }}
                       >
-                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>check_circle</span>
+                        <span className="material-symbols-outlined" style={{ fontSize: "19px" }}>check_circle</span>
                         Rent Paid
                       </span>
                     )}
@@ -275,7 +275,7 @@ export default async function TenantHomePage({ params }: Props) {
                           gap: "6px",
                           background: AMBER_BG,
                           color: AMBER,
-                          fontSize: "14px",
+                          fontSize: "17px",
                           fontWeight: 600,
                           fontFamily: "var(--font-dm-sans)",
                           borderRadius: "100px",
@@ -293,14 +293,14 @@ export default async function TenantHomePage({ params }: Props) {
                           gap: "6px",
                           background: RED_BG,
                           color: RED,
-                          fontSize: "14px",
+                          fontSize: "17px",
                           fontWeight: 600,
                           fontFamily: "var(--font-dm-sans)",
                           borderRadius: "100px",
                           padding: "8px 18px",
                         }}
                       >
-                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>warning</span>
+                        <span className="material-symbols-outlined" style={{ fontSize: "19px" }}>warning</span>
                         Overdue
                       </span>
                     )}
@@ -311,19 +311,19 @@ export default async function TenantHomePage({ params }: Props) {
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "8px" }}>
                   <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                     {status === "paid" && currentRent.datePaid && (
-                      <p style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+                      <p style={{ color: MUTED, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
                         Paid {new Date(currentRent.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
                       </p>
                     )}
                     {currentRent.amountPaid != null && (
-                      <p style={{ color: MUTED, fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+                      <p style={{ color: MUTED, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
                         Amount paid: <span style={{ color: GREEN, fontWeight: 600 }}>{fmt$(currentRent.amountPaid)}</span>
                       </p>
                     )}
                   </div>
                   <Link
                     href={`/tenants/${token}/payments`}
-                    style={{ color: BURGUNDY, fontSize: "12px", fontFamily: "var(--font-dm-sans)", fontWeight: 600, textDecoration: "none" }}
+                    style={{ color: BURGUNDY, fontSize: "15px", fontFamily: "var(--font-dm-sans)", fontWeight: 600, textDecoration: "none" }}
                   >
                     View history →
                   </Link>
@@ -331,7 +331,7 @@ export default async function TenantHomePage({ params }: Props) {
               </>
             ) : (
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>No payment records yet.</p>
+                <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)" }}>No payment records yet.</p>
                 <span
                   style={{
                     display: "inline-flex",
@@ -339,14 +339,14 @@ export default async function TenantHomePage({ params }: Props) {
                     gap: "6px",
                     background: GREEN_BG,
                     color: GREEN,
-                    fontSize: "14px",
+                    fontSize: "17px",
                     fontWeight: 600,
                     fontFamily: "var(--font-dm-sans)",
                     borderRadius: "100px",
                     padding: "8px 18px",
                   }}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>check_circle</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "19px" }}>check_circle</span>
                   All paid up
                 </span>
               </div>
@@ -382,8 +382,8 @@ export default async function TenantHomePage({ params }: Props) {
                 marginBottom: "32px",
               }}
             >
-              <span style={{ fontSize: "16px" }}>📅</span>
-              <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: NAVY, fontWeight: 500 }}>
+              <span style={{ fontSize: "19px" }}>📅</span>
+              <p style={{ fontSize: "16px", fontFamily: "var(--font-dm-sans)", color: NAVY, fontWeight: 500 }}>
                 Next:{" "}
                 <span style={{ fontWeight: 600 }}>{nextEvent.title}</span>
                 {nextEvent.event_date && (
@@ -403,12 +403,12 @@ export default async function TenantHomePage({ params }: Props) {
               borderTop: `1px solid ${CARD_BORDER}`,
             }}
           >
-            <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, lineHeight: 1.6 }}>
+            <p style={{ fontSize: "16px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, lineHeight: 1.6 }}>
               Managed by Ebin Jaison · Prospera Properties
             </p>
             <a
               href="tel:5196971227"
-              style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, textDecoration: "none" }}
+              style={{ fontSize: "16px", fontFamily: "var(--font-dm-sans)", color: SUBTLE, textDecoration: "none" }}
             >
               (519) 697-1227
             </a>
@@ -470,7 +470,7 @@ function QuickCard({ card }: {
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "20px", color: card.iconColor }}
+            style={{ fontSize: "23px", color: card.iconColor }}
           >
             {card.icon}
           </span>
@@ -479,7 +479,7 @@ function QuickCard({ card }: {
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: "15px",
+              fontSize: "18px",
               fontWeight: 700,
               color: "#0F1C28",
               marginBottom: "3px",
@@ -487,7 +487,7 @@ function QuickCard({ card }: {
           >
             {card.label}
           </p>
-          <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "rgba(15,28,40,0.45)" }}>
+          <p style={{ fontSize: "15px", fontFamily: "var(--font-dm-sans)", color: "rgba(15,28,40,0.45)" }}>
             {card.subtitle}
           </p>
         </div>

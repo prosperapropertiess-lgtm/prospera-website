@@ -168,12 +168,12 @@ export default async function PropertyDetailPage({ params }: Props) {
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
                 <Link
                   href={`/owners/${token}`}
-                  style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "none" }}
+                  style={{ color: "#9AA5B1", fontSize: "16px", textDecoration: "none" }}
                 >
                   Portfolio
                 </Link>
-                <span className="material-symbols-outlined" style={{ fontSize: "14px", color: "#9AA5B1" }}>chevron_right</span>
-                <span style={{ color: "#5A6A7A", fontSize: "13px" }}>{property.address}</span>
+                <span className="material-symbols-outlined" style={{ fontSize: "17px", color: "#9AA5B1" }}>chevron_right</span>
+                <span style={{ color: "#5A6A7A", fontSize: "16px" }}>{property.address}</span>
               </div>
             </ScrollReveal>
 
@@ -192,11 +192,11 @@ export default async function PropertyDetailPage({ params }: Props) {
                   >
                     {property.address}
                   </h1>
-                  <p style={{ color: "#5A6A7A", fontSize: "14px", display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                  <p style={{ color: "#5A6A7A", fontSize: "17px", display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
                     <span>{property.city} · {property.type} · {property.status}</span>
                     {updatedLabel && (
-                      <span style={{ color: "#9AA5B1", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}>
-                        <span className="material-symbols-outlined" style={{ fontSize: "12px" }}>schedule</span>
+                      <span style={{ color: "#9AA5B1", fontSize: "15px", display: "flex", alignItems: "center", gap: "4px" }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>schedule</span>
                         {updatedLabel}
                       </span>
                     )}
@@ -214,8 +214,8 @@ export default async function PropertyDetailPage({ params }: Props) {
                       gap: "6px",
                     }}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: "14px", color: leaseCd.color }}>schedule</span>
-                    <span style={{ color: leaseCd.color, fontSize: "13px", fontWeight: 500 }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: "17px", color: leaseCd.color }}>schedule</span>
+                    <span style={{ color: leaseCd.color, fontSize: "16px", fontWeight: 500 }}>
                       {leaseCd.text} on lease
                     </span>
                   </div>
@@ -271,22 +271,22 @@ export default async function PropertyDetailPage({ params }: Props) {
                 >
                   <span
                     className="material-symbols-outlined"
-                    style={{ fontSize: "18px", color: allPaid ? "#16a34a" : "#d97706" }}
+                    style={{ fontSize: "21px", color: allPaid ? "#16a34a" : "#d97706" }}
                   >
                     {allPaid ? "check_circle" : "pending"}
                   </span>
-                  <span style={{ color: allPaid ? "#16a34a" : "#d97706", fontSize: "14px", fontWeight: 600 }}>
+                  <span style={{ color: allPaid ? "#16a34a" : "#d97706", fontSize: "17px", fontWeight: 600 }}>
                     {allPaid
                       ? `All ${totalCount} tenant${totalCount > 1 ? "s" : ""} paid this month`
                       : `${paidCount} of ${totalCount} paid${outstandingAmount > 0 ? ` · ${fmt$(outstandingAmount)} outstanding` : ""}`}
                   </span>
                 </div>
               )}
-              <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "14px" }}>
+              <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "14px" }}>
                 {dashboard.currentMonth} {dashboard.currentYear} — Rent Status
               </p>
               {rentCurrentMonth.length === 0 ? (
-                <p style={{ color: "#9AA5B1", fontSize: "13px" }}>No rent entries for this month yet.</p>
+                <p style={{ color: "#9AA5B1", fontSize: "16px" }}>No rent entries for this month yet.</p>
               ) : (
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                   {rentCurrentMonth.map(r => {
@@ -305,16 +305,16 @@ export default async function PropertyDetailPage({ params }: Props) {
                           borderRadius: "10px",
                         }}
                       >
-                        <span style={{ color: "#1F2F3A", fontSize: "13px" }}>{r.entry}</span>
+                        <span style={{ color: "#1F2F3A", fontSize: "16px" }}>{r.entry}</span>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                          <span style={{ color: "#5A6A7A", fontSize: "13px" }}>
+                          <span style={{ color: "#5A6A7A", fontSize: "16px" }}>
                             {r.amountPaid != null ? fmt$(r.amountPaid) : fmt$(r.amountDue ?? 0)}
                           </span>
                           <span
                             style={{
                               padding: "3px 8px",
                               borderRadius: "6px",
-                              fontSize: "11px",
+                              fontSize: "14px",
                               fontWeight: 600,
                               color: isPaid ? "#16a34a" : isPartial ? "#d97706" : "#dc2626",
                               background: isPaid ? "#f0fdf4" : isPartial ? "#fffbeb" : "#fef2f2",
@@ -334,7 +334,7 @@ export default async function PropertyDetailPage({ params }: Props) {
             {/* Month-over-month comparison */}
             {prevMonthSnapshot && netMoM !== null && (
               <div style={{ background: "#F7F5F2", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
-                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
                   {dashboard.currentMonth} vs {prevMonthSnapshot.month}
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
@@ -346,7 +346,7 @@ export default async function PropertyDetailPage({ params }: Props) {
             )}
 
             <div style={{ background: "#FFFFFF", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
-              <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+              <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
                 6-Month Overview
               </p>
               <IncomeChart history={history} />
@@ -368,7 +368,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                 }}
               >
                 <div>
-                  <p style={{ color: "rgba(250,248,245,0.45)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
+                  <p style={{ color: "rgba(250,248,245,0.45)", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
                     Annual Projection · {dashboard.currentYear}
                   </p>
                   <p
@@ -383,12 +383,12 @@ export default async function PropertyDetailPage({ params }: Props) {
                   >
                     {projectedAnnualNet >= 0 ? "+" : ""}{fmt$(projectedAnnualNet)}
                   </p>
-                  <p style={{ color: "rgba(250,248,245,0.35)", fontSize: "12px", marginTop: "6px" }}>
+                  <p style={{ color: "rgba(250,248,245,0.35)", fontSize: "15px", marginTop: "6px" }}>
                     projected net this year · avg {fmt$(avgMonthlyNet!)} / mo
                   </p>
                 </div>
                 <div style={{ textAlign: "right" }}>
-                  <p style={{ color: "rgba(250,248,245,0.25)", fontSize: "11px" }}>
+                  <p style={{ color: "rgba(250,248,245,0.25)", fontSize: "14px" }}>
                     Based on {activeMonthsYTD} month{activeMonthsYTD > 1 ? "s" : ""} of data
                   </p>
                 </div>
@@ -426,7 +426,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                   padding: "24px",
                 }}
               >
-                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
                   Where Expenses Go (YTD)
                 </p>
                 <ExpenseBreakdown history={history} currentYear={dashboard.currentYear} />
@@ -460,15 +460,15 @@ export default async function PropertyDetailPage({ params }: Props) {
                 >
                   <span
                     className="material-symbols-outlined"
-                    style={{ fontSize: "20px", color: leaseDays <= 30 ? "#dc2626" : "#d97706", flexShrink: 0, marginTop: "1px" }}
+                    style={{ fontSize: "23px", color: leaseDays <= 30 ? "#dc2626" : "#d97706", flexShrink: 0, marginTop: "1px" }}
                   >
                     warning
                   </span>
                   <div>
-                    <p style={{ color: leaseDays <= 30 ? "#991b1b" : "#92400e", fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>
+                    <p style={{ color: leaseDays <= 30 ? "#991b1b" : "#92400e", fontSize: "17px", fontWeight: 600, marginBottom: "2px" }}>
                       Lease expires in {leaseDays === 0 ? "today" : `${leaseDays} day${leaseDays > 1 ? "s" : ""}`}
                     </p>
-                    <p style={{ color: leaseDays <= 30 ? "#dc2626" : "#d97706", fontSize: "13px" }}>
+                    <p style={{ color: leaseDays <= 30 ? "#dc2626" : "#d97706", fontSize: "16px" }}>
                       Renewal or vacancy planning should be underway. Contact Ebin if you have questions.
                     </p>
                   </div>
@@ -533,26 +533,26 @@ export default async function PropertyDetailPage({ params }: Props) {
                   <span style={{ color: "white", fontFamily: "var(--font-outfit)", fontWeight: 700, fontSize: "22px" }}>E</span>
                 </div>
                 <div>
-                  <p style={{ color: "#1F2F3A", fontWeight: 700, fontSize: "16px", fontFamily: "var(--font-outfit)" }}>Ebin Jaison</p>
-                  <p style={{ color: "#9AA5B1", fontSize: "13px" }}>Property Manager · Prospera Properties</p>
+                  <p style={{ color: "#1F2F3A", fontWeight: 700, fontSize: "19px", fontFamily: "var(--font-outfit)" }}>Ebin Jaison</p>
+                  <p style={{ color: "#9AA5B1", fontSize: "16px" }}>Property Manager · Prospera Properties</p>
                 </div>
               </div>
-              <p style={{ color: "#5A6A7A", fontSize: "13px", lineHeight: "1.6", marginBottom: "20px" }}>
+              <p style={{ color: "#5A6A7A", fontSize: "16px", lineHeight: "1.6", marginBottom: "20px" }}>
                 Have questions about your property? Ebin is available by phone or email any time.
               </p>
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 <a
                   href="mailto:hello@prosperaproperties.co"
-                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#F7F5F2", border: "1px solid #E8E4DF", color: "#1F2F3A", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
+                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#F7F5F2", border: "1px solid #E8E4DF", color: "#1F2F3A", fontSize: "16px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#1F2F3A" }}>mail</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "19px", color: "#1F2F3A" }}>mail</span>
                   hello@prosperaproperties.co
                 </a>
                 <a
                   href="tel:+15196971227"
-                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#8B2030", border: "1px solid #8B2030", color: "white", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
+                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#8B2030", border: "1px solid #8B2030", color: "white", fontSize: "16px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>call</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "19px" }}>call</span>
                   519-697-1227
                 </a>
               </div>
@@ -568,7 +568,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h2 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, color: "#C8BFB5", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "24px", paddingTop: "8px" }}>
+    <h2 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 600, color: "#C8BFB5", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "24px", paddingTop: "8px" }}>
       {children}
     </h2>
   );
@@ -581,11 +581,11 @@ function MoMStat({ label, current, delta, invert }: { label: string; current: nu
   const arrow = isNeutral ? "→" : delta > 0 ? "↑" : "↓";
   return (
     <div>
-      <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>{label}</p>
-      <p style={{ color: "#1F2F3A", fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "3px" }}>
+      <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>{label}</p>
+      <p style={{ color: "#1F2F3A", fontFamily: "var(--font-outfit)", fontSize: "23px", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "3px" }}>
         ${current.toLocaleString()}
       </p>
-      <p style={{ color, fontSize: "12px", fontWeight: 500 }}>
+      <p style={{ color, fontSize: "15px", fontWeight: 500 }}>
         {arrow} {isNeutral ? "same as last month" : `${delta > 0 ? "+" : ""}$${Math.abs(delta).toLocaleString()} vs last mo`}
       </p>
     </div>
@@ -595,7 +595,7 @@ function MoMStat({ label, current, delta, invert }: { label: string; current: nu
 function FinStat({ label, value, color, large }: { label: string; value: string; color: string; large?: boolean }) {
   return (
     <div>
-      <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>{label}</p>
+      <p style={{ color: "#9AA5B1", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>{label}</p>
       <p style={{ color, fontFamily: "var(--font-outfit)", fontSize: large ? "28px" : "20px", fontWeight: 700, letterSpacing: "-0.02em" }}>{value}</p>
     </div>
   );

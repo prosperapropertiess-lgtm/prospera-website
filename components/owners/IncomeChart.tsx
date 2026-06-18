@@ -35,7 +35,7 @@ function CustomTooltip({ active, payload, label }: any) {
         border: "1px solid rgba(15,28,40,0.10)",
         borderRadius: "12px",
         padding: "12px 16px",
-        fontSize: "13px",
+        fontSize: "16px",
         color: NAVY,
         boxShadow: "0 4px 16px rgba(15,28,40,0.10)",
       }}
@@ -78,7 +78,7 @@ export function IncomeChart({ history }: Props) {
         />
         <Tooltip content={<CustomTooltip />} />
         <Legend
-          wrapperStyle={{ paddingTop: "12px", fontSize: "12px", color: MUTED, fontFamily: "var(--font-poppins)" }}
+          wrapperStyle={{ paddingTop: "12px", fontSize: "15px", color: MUTED, fontFamily: "var(--font-poppins)" }}
         />
         <Bar dataKey="Rent" fill="rgba(139,32,48,0.65)" radius={[4, 4, 0, 0]} />
         <Bar dataKey="Expenses" fill="rgba(15,28,40,0.10)" radius={[4, 4, 0, 0]} />

@@ -66,7 +66,7 @@ export default async function DocumentsPage({ params }: Props) {
             href={`/owners/${token}`}
             style={{
               color: "rgba(15,28,40,0.45)",
-              fontSize: "13px",
+              fontSize: "16px",
               textDecoration: "none",
               display: "inline-block",
               marginBottom: "28px",
@@ -100,7 +100,7 @@ export default async function DocumentsPage({ params }: Props) {
                 {multiProperty && (
                   <p
                     style={{
-                      fontSize: "11px",
+                      fontSize: "14px",
                       fontWeight: 700,
                       color: "rgba(15,28,40,0.22)",
                       textTransform: "uppercase",
@@ -178,7 +178,7 @@ function DocumentListLight(props: {
         <p
           style={{
             color: "rgba(15,28,40,0.45)",
-            fontSize: "14px",
+            fontSize: "17px",
             fontFamily: "var(--font-dm-sans)",
             lineHeight: 1.6,
           }}

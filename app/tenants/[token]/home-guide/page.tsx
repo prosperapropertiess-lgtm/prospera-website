@@ -65,7 +65,7 @@ export default async function HomeGuidePage({ params }: Props) {
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: MUTED, fontSize: "16px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -82,7 +82,7 @@ export default async function HomeGuidePage({ params }: Props) {
           >
             Home Guide
           </h1>
-          <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)", marginBottom: "32px" }}>
+          <p style={{ color: MUTED, fontSize: "17px", fontFamily: "var(--font-dm-sans)", marginBottom: "32px" }}>
             {tenant.propertyAddress}{tenant.propertyCity ? `, ${tenant.propertyCity}` : ""}
           </p>
 
@@ -99,7 +99,7 @@ export default async function HomeGuidePage({ params }: Props) {
           >
             <p
               style={{
-                fontSize: "11px",
+                fontSize: "14px",
                 fontFamily: "var(--font-dm-sans)",
                 color: MUTED,
                 textTransform: "uppercase",
@@ -136,12 +136,12 @@ export default async function HomeGuidePage({ params }: Props) {
                     >
                       <span
                         className="material-symbols-outlined"
-                        style={{ fontSize: "16px", color: contact.color }}
+                        style={{ fontSize: "19px", color: contact.color }}
                       >
                         {contact.icon}
                       </span>
                     </div>
-                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: NAVY, fontWeight: 500 }}>
+                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "17px", color: NAVY, fontWeight: 500 }}>
                       {contact.label}
                     </span>
                   </div>
@@ -149,7 +149,7 @@ export default async function HomeGuidePage({ params }: Props) {
                     href={`tel:${contact.phone.replace(/\D/g, "")}`}
                     style={{
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "14px",
+                      fontSize: "17px",
                       fontWeight: 700,
                       color: contact.color,
                       textDecoration: "none",
