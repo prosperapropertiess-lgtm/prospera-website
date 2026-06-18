@@ -8,20 +8,24 @@ interface Props {
   currentYear: number;
 }
 
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.55)";
+const SUBTLE = "rgba(15,28,40,0.35)";
+
 const CATEGORY_COLORS: Record<string, string> = {
   "Management Fee": "#8B2030",
   "Management": "#8B2030",
-  "Repairs": "#f59e0b",
-  "Repair": "#f59e0b",
-  "Maintenance": "#f59e0b",
-  "Utilities": "#60a5fa",
-  "Water": "#60a5fa",
-  "Hydro": "#60a5fa",
-  "Gas": "#60a5fa",
-  "Insurance": "#a78bfa",
-  "Property Tax": "#34d399",
-  "Landscaping": "#6ee7b7",
-  "Cleaning": "#93c5fd",
+  "Repairs": "#B45309",
+  "Repair": "#B45309",
+  "Maintenance": "#B45309",
+  "Utilities": "#2563EB",
+  "Water": "#2563EB",
+  "Hydro": "#2563EB",
+  "Gas": "#2563EB",
+  "Insurance": "#7C3AED",
+  "Property Tax": "#0A7A52",
+  "Landscaping": "#059669",
+  "Cleaning": "#0284C7",
 };
 
 function getColor(category: string): string {
@@ -29,7 +33,7 @@ function getColor(category: string): string {
   for (const [key, color] of Object.entries(CATEGORY_COLORS)) {
     if (lower.includes(key.toLowerCase())) return color;
   }
-  return "rgba(255,255,255,0.4)";
+  return "rgba(15,28,40,0.35)";
 }
 
 export function ExpenseBreakdown({ history, currentYear }: Props) {
@@ -44,7 +48,7 @@ export function ExpenseBreakdown({ history, currentYear }: Props) {
 
   const total = Object.values(totals).reduce((s, v) => s + v, 0);
   if (total === 0) return (
-    <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "13px", padding: "8px 0" }}>
+    <p style={{ color: SUBTLE, fontSize: "15px", padding: "8px 0", fontFamily: "var(--font-poppins)" }}>
       No expense data recorded yet.
     </p>
   );
@@ -65,12 +69,12 @@ export function ExpenseBreakdown({ history, currentYear }: Props) {
             transition={{ duration: 0.4, delay: i * 0.05, ease: [0.23, 1, 0.32, 1] }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-              <span style={{ color: "rgba(255,255,255,0.65)", fontSize: "13px" }}>{cat}</span>
-              <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>
+              <span style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-poppins)" }}>{cat}</span>
+              <span style={{ color: SUBTLE, fontSize: "13px", fontFamily: "var(--font-poppins)" }}>
                 ${amount.toLocaleString()} · <span style={{ color }}>{Math.round(pct)}%</span>
               </span>
             </div>
-            <div style={{ height: "5px", background: "rgba(255,255,255,0.07)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{ height: "5px", background: "rgba(15,28,40,0.07)", borderRadius: "3px", overflow: "hidden" }}>
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${pct}%` }}
@@ -83,9 +87,9 @@ export function ExpenseBreakdown({ history, currentYear }: Props) {
         );
       })}
 
-      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: "8px", borderTop: "1px solid rgba(255,255,255,0.08)", marginTop: "4px" }}>
-        <span style={{ color: "rgba(255,255,255,0.35)", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Total</span>
-        <span style={{ color: "white", fontSize: "13px", fontFamily: "var(--font-outfit)", fontWeight: 700 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: "8px", borderTop: "1px solid rgba(15,28,40,0.08)", marginTop: "4px" }}>
+        <span style={{ color: SUBTLE, fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-poppins)" }}>Total</span>
+        <span style={{ color: NAVY, fontSize: "15px", fontFamily: "var(--font-poppins)", fontWeight: 700 }}>
           ${total.toLocaleString()}
         </span>
       </div>

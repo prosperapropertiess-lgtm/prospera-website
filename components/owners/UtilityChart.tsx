@@ -23,7 +23,10 @@ const MONTH_ABBR: Record<string, string> = {
   September: "Sep", October: "Oct", November: "Nov", December: "Dec",
 };
 
-// Utility-related category names to match against Notion
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.35)";
+
 const UTILITY_KEYWORDS = ["utilit", "water", "hydro", "gas", "electric", "heat", "internet", "sewer"];
 
 function isUtility(category: string): boolean {
@@ -40,23 +43,24 @@ function CustomTooltip({ active, payload, label }: any) {
   return (
     <div
       style={{
-        background: "rgba(20,27,44,0.97)",
-        border: "1px solid rgba(255,255,255,0.12)",
+        background: "#FFFFFF",
+        border: "1px solid rgba(15,28,40,0.10)",
         borderRadius: "12px",
         padding: "12px 16px",
-        fontSize: "12px",
-        color: "white",
+        fontSize: "13px",
+        color: NAVY,
+        boxShadow: "0 4px 16px rgba(15,28,40,0.10)",
         minWidth: "140px",
       }}
     >
-      <p style={{ fontWeight: 700, marginBottom: "8px", fontFamily: "var(--font-outfit)", fontSize: "13px" }}>
+      <p style={{ fontWeight: 700, marginBottom: "8px", fontFamily: "var(--font-poppins)", fontSize: "14px" }}>
         {label}
       </p>
-      <p style={{ color: "#60a5fa", margin: "3px 0" }}>
+      <p style={{ color: "#2563EB", margin: "3px 0", fontFamily: "var(--font-poppins)" }}>
         Utilities: <strong>${utilityEntry.value.toLocaleString()}</strong>
       </p>
       {avgEntry && avgEntry.value > 0 && (
-        <p style={{ color: "rgba(255,255,255,0.4)", margin: "3px 0", fontSize: "11px" }}>
+        <p style={{ color: MUTED, margin: "3px 0", fontSize: "12px", fontFamily: "var(--font-poppins)" }}>
           3-mo avg: ${Math.round(avgEntry.value).toLocaleString()}
         </p>
       )}
@@ -65,7 +69,6 @@ function CustomTooltip({ active, payload, label }: any) {
 }
 
 export function UtilityChart({ history }: Props) {
-  // Extract utility cost per month
   const data = history.map((s, i) => {
     const utilityTotal = Object.entries(s.expensesByCategory)
       .filter(([cat]) => isUtility(cat))
@@ -77,7 +80,6 @@ export function UtilityChart({ history }: Props) {
     return { month: label, fullMonth: s.month, year: s.year, Utilities: utilityTotal };
   });
 
-  // Compute 3-month rolling average
   const withAvg = data.map((d, i) => {
     const window = data.slice(Math.max(0, i - 2), i + 1);
     const avg = window.reduce((s, w) => s + w.Utilities, 0) / window.length;
@@ -95,14 +97,7 @@ export function UtilityChart({ history }: Props) {
 
   if (!hasData) {
     return (
-      <div
-        style={{
-          padding: "32px",
-          textAlign: "center",
-          color: "#9AA5B1",
-          fontSize: "13px",
-        }}
-      >
+      <div style={{ padding: "32px", textAlign: "center", color: MUTED, fontSize: "14px", fontFamily: "var(--font-poppins)" }}>
         No utility expenses on record yet.
       </div>
     );
@@ -110,7 +105,6 @@ export function UtilityChart({ history }: Props) {
 
   return (
     <div>
-      {/* Summary stats */}
       <div style={{ display: "flex", gap: "24px", marginBottom: "20px", flexWrap: "wrap" }}>
         <StatPill
           label="This month"
@@ -120,7 +114,7 @@ export function UtilityChart({ history }: Props) {
               ? `${delta >= 0 ? "+" : ""}${Math.round(delta)}% vs last month`
               : undefined
           }
-          subColor={delta !== null ? (delta > 15 ? "#d97706" : delta < -10 ? "#16a34a" : "#9AA5B1") : undefined}
+          subColor={delta !== null ? (delta > 15 ? "#B45309" : delta < -10 ? "#0A7A52" : SUBTLE) : undefined}
         />
         <StatPill
           label="Monthly avg"
@@ -133,40 +127,38 @@ export function UtilityChart({ history }: Props) {
         />
       </div>
 
-      {/* Chart */}
       <ResponsiveContainer width="100%" height={200}>
         <ComposedChart data={withAvg} margin={{ top: 4, right: 8, left: 8, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(31,47,58,0.06)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(15,28,40,0.06)" vertical={false} />
           <XAxis
             dataKey="month"
-            tick={{ fill: "#9AA5B1", fontSize: 10 }}
+            tick={{ fill: MUTED, fontSize: 11, fontFamily: "var(--font-poppins)" }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#9AA5B1", fontSize: 10 }}
+            tick={{ fill: MUTED, fontSize: 11, fontFamily: "var(--font-poppins)" }}
             axisLine={false}
             tickLine={false}
             tickFormatter={v => `$${v}`}
           />
           <Tooltip content={<CustomTooltip />} />
-          {/* Average reference line */}
           <ReferenceLine
             y={average}
-            stroke="rgba(31,47,58,0.12)"
+            stroke="rgba(15,28,40,0.12)"
             strokeDasharray="4 4"
           />
           <Bar
             dataKey="Utilities"
-            fill="rgba(96,165,250,0.5)"
-            stroke="rgba(96,165,250,0.8)"
+            fill="rgba(37,99,235,0.45)"
+            stroke="rgba(37,99,235,0.7)"
             strokeWidth={1}
             radius={[4, 4, 0, 0]}
           />
           <Line
             type="monotone"
             dataKey="3-mo avg"
-            stroke="#60a5fa"
+            stroke="#2563EB"
             strokeWidth={2}
             dot={false}
             strokeDasharray="4 3"
@@ -174,7 +166,7 @@ export function UtilityChart({ history }: Props) {
         </ComposedChart>
       </ResponsiveContainer>
 
-      <p style={{ color: "#C8BFB5", fontSize: "10px", marginTop: "8px", textAlign: "right" }}>
+      <p style={{ color: SUBTLE, fontSize: "11px", marginTop: "8px", textAlign: "right", fontFamily: "var(--font-poppins)" }}>
         Dashed line = 3-month rolling average · Dashed horizontal = 12-month avg
       </p>
     </div>
@@ -189,14 +181,14 @@ function StatPill({ label, value, sub, subColor }: {
 }) {
   return (
     <div>
-      <p style={{ color: "#9AA5B1", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px" }}>
+      <p style={{ color: SUBTLE, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px", fontFamily: "var(--font-poppins)" }}>
         {label}
       </p>
-      <p style={{ color: "#1F2F3A", fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>
+      <p style={{ color: NAVY, fontFamily: "var(--font-poppins)", fontSize: "21px", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>
         {value}
       </p>
       {sub && (
-        <p style={{ color: subColor ?? "#9AA5B1", fontSize: "11px", marginTop: "3px" }}>
+        <p style={{ color: subColor ?? SUBTLE, fontSize: "12px", marginTop: "3px", fontFamily: "var(--font-poppins)" }}>
           {sub}
         </p>
       )}

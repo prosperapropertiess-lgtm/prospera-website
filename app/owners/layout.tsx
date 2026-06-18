@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Cormorant, DM_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "../globals.css";
 
-const cormorant = Cormorant({
-  variable: "--font-cormorant",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -26,10 +19,16 @@ export const metadata: Metadata = {
 export default function OwnersLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${cormorant.variable} ${dmSans.variable} min-h-screen`}
+      className={`${poppins.variable} min-h-screen`}
       style={{
         background: "#F5F4F1",
-        fontFamily: "var(--font-dm-sans), -apple-system, sans-serif",
+        fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+        // Map legacy font vars to Poppins so all existing components pick it up
+        // @ts-ignore
+        "--font-dm-sans": "var(--font-poppins)",
+        "--font-outfit": "var(--font-poppins)",
+        "--font-cormorant": "var(--font-poppins)",
+        "--font-inter": "var(--font-poppins)",
       }}
     >
       {children}
