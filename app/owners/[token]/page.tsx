@@ -43,7 +43,7 @@ export default async function OwnerHomePage({ params }: Props) {
       >
         <p
           style={{
-            color: "rgba(15,28,40,0.45)",
+            color: "rgba(15,28,40,0.58)",
             fontFamily: "var(--font-dm-sans)",
             fontSize: "17px",
           }}
@@ -197,7 +197,7 @@ export default async function OwnerHomePage({ params }: Props) {
               />
               <span
                 style={{
-                  color: "rgba(15,28,40,0.45)",
+                  color: "rgba(15,28,40,0.58)",
                   fontSize: "15px",
                   fontFamily: "var(--font-dm-sans)",
                   fontWeight: 500,
@@ -224,7 +224,7 @@ export default async function OwnerHomePage({ params }: Props) {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: "18px",
-                color: "rgba(15,28,40,0.45)",
+                color: "rgba(15,28,40,0.58)",
                 fontWeight: 400,
               }}
             >
@@ -246,40 +246,79 @@ export default async function OwnerHomePage({ params }: Props) {
               boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
             }}
           >
+            {/* Month label */}
             <p
               style={{
-                fontSize: "14px",
-                fontFamily: "var(--font-dm-sans)",
-                color: "rgba(15,28,40,0.22)",
+                fontSize: "13px",
+                fontFamily: "var(--font-poppins)",
+                color: "rgba(15,28,40,0.40)",
                 textTransform: "uppercase",
                 letterSpacing: "0.10em",
-                marginBottom: "10px",
+                marginBottom: "8px",
                 fontWeight: 600,
               }}
             >
-              Collected this month
+              Rent collected · {dashboard.currentMonth} {dashboard.currentYear}
             </p>
 
-            <p
-              style={{
-                fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(52px, 8vw, 72px)",
-                fontWeight: 600,
-                color: "#0F1C28",
-                letterSpacing: "-0.02em",
-                lineHeight: 1.0,
-                marginBottom: "18px",
-              }}
-            >
-              {fmt$(dashboard.totalRentCollected)}
-            </p>
+            {/* Big number + out-of context */}
+            <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "6px", flexWrap: "wrap" }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-poppins)",
+                  fontSize: "clamp(44px, 8vw, 64px)",
+                  fontWeight: 800,
+                  color: "#0F1C28",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.0,
+                }}
+              >
+                {fmt$(dashboard.totalCurrentMonthCollected)}
+              </p>
+              {dashboard.totalCurrentMonthDue > 0 && (
+                <p style={{ fontFamily: "var(--font-poppins)", fontSize: "17px", color: "rgba(15,28,40,0.40)", fontWeight: 500 }}>
+                  of {fmt$(dashboard.totalCurrentMonthDue)}
+                </p>
+              )}
+            </div>
+
+            {/* Collection status line */}
+            {(() => {
+              const collected = dashboard.totalCurrentMonthCollected;
+              const due = dashboard.totalCurrentMonthDue;
+              const outstanding = due - collected;
+              if (due === 0) return null;
+              if (outstanding <= 0) {
+                return (
+                  <p style={{ fontFamily: "var(--font-poppins)", fontSize: "15px", color: "#0A7A52", fontWeight: 600, marginBottom: "20px" }}>
+                    ✓ All rent collected
+                  </p>
+                );
+              }
+              return (
+                <p style={{ fontFamily: "var(--font-poppins)", fontSize: "15px", color: "#B45309", fontWeight: 600, marginBottom: "20px" }}>
+                  {fmt$(outstanding)} outstanding
+                </p>
+              );
+            })()}
 
             {/* Trust chips */}
             <OwnerHomeClient
               rentStatus={rentStatus}
               leaseDaysRemaining={leaseDaysRemaining}
               leaseExpiry={leaseExpiry}
+              totalTenants={totalTenants}
             />
+
+            {/* YTD divider line */}
+            <div style={{ height: "1px", background: "rgba(15,28,40,0.07)", margin: "20px 0 16px" }} />
+            <p style={{ fontFamily: "var(--font-poppins)", fontSize: "15px", color: "rgba(15,28,40,0.50)", fontWeight: 500 }}>
+              Year to date &nbsp;·&nbsp;
+              <span style={{ color: dashboard.totalNet >= 0 ? "#0A7A52" : "#B91C1C", fontWeight: 700 }}>
+                {dashboard.totalNet >= 0 ? "+" : ""}{fmt$(dashboard.totalNet)} net
+              </span>
+              &nbsp;·&nbsp; {fmt$(dashboard.totalExpenses)} expenses
+            </p>
           </div>
 
           {/* Stats row — 3 cards */}
@@ -294,12 +333,12 @@ export default async function OwnerHomePage({ params }: Props) {
             }}
           >
             <StatCard
-              label="Net income"
+              label="YTD net"
               value={fmt$(dashboard.totalNet)}
               valueColor={dashboard.totalNet >= 0 ? "#0A7A52" : "#B91C1C"}
             />
             <StatCard
-              label="Expenses"
+              label="YTD expenses"
               value={fmt$(dashboard.totalExpenses)}
               valueColor="#B45309"
             />
@@ -385,7 +424,7 @@ export default async function OwnerHomePage({ params }: Props) {
                 style={{
                   fontSize: "14px",
                   fontFamily: "var(--font-dm-sans)",
-                  color: "rgba(15,28,40,0.22)",
+                  color: "rgba(15,28,40,0.58)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                   marginBottom: "12px",
@@ -430,13 +469,13 @@ export default async function OwnerHomePage({ params }: Props) {
                           style={{
                             fontSize: "15px",
                             fontFamily: "var(--font-dm-sans)",
-                            color: "rgba(15,28,40,0.45)",
+                            color: "rgba(15,28,40,0.58)",
                           }}
                         >
                           {p.property.city} · {p.property.type}
                         </p>
                       </div>
-                      <span style={{ color: "rgba(15,28,40,0.22)", fontSize: "19px" }}>→</span>
+                      <span style={{ color: "rgba(15,28,40,0.58)", fontSize: "19px" }}>→</span>
                     </div>
                   </a>
                 ))}
@@ -459,7 +498,7 @@ export default async function OwnerHomePage({ params }: Props) {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: "16px",
-                color: "rgba(15,28,40,0.22)",
+                color: "rgba(15,28,40,0.58)",
                 lineHeight: 1.8,
               }}
             >
@@ -619,7 +658,7 @@ function NavCard({
             style={{
               fontSize: "15px",
               fontFamily: "var(--font-poppins)",
-              color: "rgba(15,28,40,0.45)",
+              color: "rgba(15,28,40,0.58)",
               lineHeight: 1.4,
             }}
           >
@@ -706,7 +745,7 @@ function UpcomingRow({
           style={{
             fontFamily: "var(--font-poppins)",
             fontSize: "15px",
-            color: "rgba(15,28,40,0.45)",
+            color: "rgba(15,28,40,0.58)",
           }}
         >
           {dateLabel}

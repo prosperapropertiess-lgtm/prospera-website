@@ -46,6 +46,8 @@ export interface PropertyDashboard {
   // 12-month history for the chart and table
   history: MonthlySnapshot[];
   // Computed totals
+  currentMonthCollected: number;
+  currentMonthDue: number;
   ytdRentCollected: number;
   ytdExpenses: number;
   ytdNet: number;
@@ -59,12 +61,17 @@ export interface OwnerDashboard {
   properties: PropertyDashboard[];
   currentMonth: string;
   currentYear: number;
-  // Portfolio totals
-  totalRentCollected: number;
+  // Current month
+  totalCurrentMonthCollected: number;
+  totalCurrentMonthDue: number;
+  // Year-to-date
+  totalYtdCollected: number;
   totalExpenses: number;
   totalNet: number;
   totalOpenIssues: number;
   cachedAt?: string;
+  /** @deprecated use totalCurrentMonthCollected */
+  totalRentCollected: number;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -189,6 +196,9 @@ export async function buildOwnerDashboard(
 
     const history = buildHistory(pid, rentByYear, expensesByYearMonth, currentMonth, currentYear);
 
+    const currentMonthCollected = rentCurrentMonth.reduce((s, r) => s + effectivePaid(r), 0);
+    const currentMonthDue = rentCurrentMonth.reduce((s, r) => s + (r.amountDue ?? 0), 0);
+
     const ytdRent = rentCurrentYear.filter(r => r.propertyId === pid);
     const ytdExp = expensesHistory.filter(e => e.propertyId === pid && e.date && e.date >= ytdStart);
     const ytdRentCollected = ytdRent.reduce((s, r) => s + effectivePaid(r), 0);
@@ -208,6 +218,8 @@ export async function buildOwnerDashboard(
       maintenanceCompletedRecent,
       expensesCurrentMonth,
       history,
+      currentMonthCollected,
+      currentMonthDue,
       ytdRentCollected,
       ytdExpenses,
       ytdNet: ytdRentCollected - ytdExpenses,
@@ -216,9 +228,12 @@ export async function buildOwnerDashboard(
     };
   });
 
-  const totalRentCollected = propertyDashboards.reduce((s, p) => s + p.ytdRentCollected, 0);
+  const totalCurrentMonthCollected = propertyDashboards.reduce((s, p) => s + p.currentMonthCollected, 0);
+  const totalCurrentMonthDue = propertyDashboards.reduce((s, p) => s + p.currentMonthDue, 0);
+  const totalYtdCollected = propertyDashboards.reduce((s, p) => s + p.ytdRentCollected, 0);
   const totalExpenses = propertyDashboards.reduce((s, p) => s + p.ytdExpenses, 0);
   const totalOpenIssues = propertyDashboards.reduce((s, p) => s + p.openIssuesCount, 0);
+  const totalNet = totalYtdCollected - totalExpenses;
 
   return {
     owners,
@@ -226,10 +241,14 @@ export async function buildOwnerDashboard(
     properties: propertyDashboards,
     currentMonth,
     currentYear,
-    totalRentCollected,
+    totalCurrentMonthCollected,
+    totalCurrentMonthDue,
+    totalYtdCollected,
     totalExpenses,
-    totalNet: totalRentCollected - totalExpenses,
+    totalNet,
     totalOpenIssues,
+    // deprecated alias kept for cache compat
+    totalRentCollected: totalCurrentMonthCollected,
   };
 }
 
