@@ -253,7 +253,7 @@ export default async function PropertyDetailPage({ params }: Props) {
         <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "40px 24px 80px" }}>
 
           {/* Rent & Income */}
-          <section style={{ marginBottom: "72px" }}>
+          <section id="financials" style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Rent & Income</SectionLabel></ScrollReveal>
 
             {/* Rent status card — collection rate merged as inline status at top */}
@@ -435,14 +435,14 @@ export default async function PropertyDetailPage({ params }: Props) {
           </section>
 
           {/* Maintenance */}
-          <section style={{ marginBottom: "72px" }}>
+          <section id="maintenance" style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Property Health</SectionLabel></ScrollReveal>
             <MaintenanceList open={maintenanceOpen} completed={maintenanceCompletedRecent} />
           </section>
 
           {/* Tenants */}
           {tenants.length > 0 && (
-            <section style={{ marginBottom: "72px" }}>
+            <section id="tenants" style={{ marginBottom: "72px" }}>
               <ScrollReveal><SectionLabel>Tenants</SectionLabel></ScrollReveal>
 
               {/* Lease expiry alert — border removed, background kept */}
@@ -492,7 +492,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           </section>
 
           {/* Documents */}
-          <section style={{ marginBottom: "72px" }}>
+          <section id="documents" style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Documents</SectionLabel></ScrollReveal>
             <DocumentList
               propertyId={property.id}
@@ -502,7 +502,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           </section>
 
           {/* Updates */}
-          <section style={{ marginBottom: "72px" }}>
+          <section id="messages" style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Updates & Messages</SectionLabel></ScrollReveal>
             <PropertyFeed
               propertyId={property.id}
