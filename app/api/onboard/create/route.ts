@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
   const { error } = await sb.from("onboarding_sessions").insert({
     token,
-    current_step: 2,
+    current_step: 3,
     status: "in_progress",
     service_type: service_type === "management" ? "management" : "placement",
     owner_name,
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
     owner_phone: owner_phone || null,
     property_address,
     property_type: property_type || null,
+    step2_completed_at: new Date().toISOString(),
   });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

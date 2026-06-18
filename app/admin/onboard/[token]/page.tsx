@@ -369,9 +369,14 @@ function Step2Form({ token, onComplete }: { token: string; onComplete: () => voi
 
 // ── Step 3 form ──────────────────────────────────────────────────
 
-function Step3Form({ token, onComplete }: { token: string; onComplete: () => void }) {
+function Step3Form({ token, onComplete, initialAddress, initialType }: {
+  token: string; onComplete: () => void;
+  initialAddress?: string | null; initialType?: string | null;
+}) {
   const [form, setForm] = useState({
-    property_address: "", property_city: "", property_type: "",
+    property_address: initialAddress ?? "",
+    property_city: "",
+    property_type: initialType ?? "",
     num_units: "", approx_monthly_rent: "", fee_structure: "", fee_amount: "", property_notes: "",
   });
   const [saving, setSaving] = useState(false);
@@ -731,25 +736,21 @@ export default function OnboardChecklist() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
-          {/* Step 2 */}
+          {/* Step 2 — auto-completed on creation */}
           <StepCard
-            num={2} title="Owner Basic Info"
-            status={stepStatus(2)}
-            completedAt={session.step2_completed_at}
+            num={2} title="Landlord Added"
+            status="complete"
+            completedAt={session.step2_completed_at ?? session.created_at}
             summary={
               <div>
                 <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: NAVY }}>{session.owner_name}</p>
                 <p style={{ margin: "3px 0 0", fontSize: 14, color: MUTED }}>
                   {session.owner_email}{session.owner_phone ? ` · ${session.owner_phone}` : ""}
                 </p>
-                {session.notion_owner_id && (
-                  <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion owner record created</p>
-                )}
+                <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Welcome email sent</p>
               </div>
             }
-          >
-            <Step2Form token={token} onComplete={load} />
-          </StepCard>
+          />
 
           {/* Step 3 */}
           <StepCard
@@ -772,7 +773,7 @@ export default function OnboardChecklist() {
               </div>
             }
           >
-            <Step3Form token={token} onComplete={load} />
+            <Step3Form token={token} onComplete={load} initialAddress={session.property_address} initialType={session.property_type} />
           </StepCard>
 
           {/* Step 4 — owner action */}
