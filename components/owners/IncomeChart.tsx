@@ -59,7 +59,7 @@ export function IncomeChart({ history }: Props) {
 
   return (
     <ResponsiveContainer width="100%" height={220}>
-      <ComposedChart data={data} margin={{ top: 8, right: 8, left: -10, bottom: 0 }}>
+      <ComposedChart data={data} margin={{ top: 8, right: 8, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="rgba(31,47,58,0.06)" vertical={false} />
         <XAxis
           dataKey="month"

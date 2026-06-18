@@ -99,7 +99,7 @@ export function UtilityChart({ history }: Props) {
         style={{
           padding: "32px",
           textAlign: "center",
-          color: "rgba(255,255,255,0.25)",
+          color: "#9AA5B1",
           fontSize: "13px",
         }}
       >
@@ -120,7 +120,7 @@ export function UtilityChart({ history }: Props) {
               ? `${delta >= 0 ? "+" : ""}${Math.round(delta)}% vs last month`
               : undefined
           }
-          subColor={delta !== null ? (delta > 15 ? "#f59e0b" : delta < -10 ? "#22c55e" : "rgba(255,255,255,0.3)") : undefined}
+          subColor={delta !== null ? (delta > 15 ? "#d97706" : delta < -10 ? "#16a34a" : "#9AA5B1") : undefined}
         />
         <StatPill
           label="Monthly avg"
@@ -135,16 +135,16 @@ export function UtilityChart({ history }: Props) {
 
       {/* Chart */}
       <ResponsiveContainer width="100%" height={200}>
-        <ComposedChart data={withAvg} margin={{ top: 4, right: 8, left: -10, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+        <ComposedChart data={withAvg} margin={{ top: 4, right: 8, left: 8, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(31,47,58,0.06)" vertical={false} />
           <XAxis
             dataKey="month"
-            tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }}
+            tick={{ fill: "#9AA5B1", fontSize: 10 }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }}
+            tick={{ fill: "#9AA5B1", fontSize: 10 }}
             axisLine={false}
             tickLine={false}
             tickFormatter={v => `$${v}`}
@@ -153,7 +153,7 @@ export function UtilityChart({ history }: Props) {
           {/* Average reference line */}
           <ReferenceLine
             y={average}
-            stroke="rgba(255,255,255,0.12)"
+            stroke="rgba(31,47,58,0.12)"
             strokeDasharray="4 4"
           />
           <Bar
@@ -174,7 +174,7 @@ export function UtilityChart({ history }: Props) {
         </ComposedChart>
       </ResponsiveContainer>
 
-      <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "10px", marginTop: "8px", textAlign: "right" }}>
+      <p style={{ color: "#C8BFB5", fontSize: "10px", marginTop: "8px", textAlign: "right" }}>
         Dashed line = 3-month rolling average · Dashed horizontal = 12-month avg
       </p>
     </div>
@@ -189,14 +189,14 @@ function StatPill({ label, value, sub, subColor }: {
 }) {
   return (
     <div>
-      <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px" }}>
+      <p style={{ color: "#9AA5B1", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "2px" }}>
         {label}
       </p>
-      <p style={{ color: "white", fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>
+      <p style={{ color: "#1F2F3A", fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1 }}>
         {value}
       </p>
       {sub && (
-        <p style={{ color: subColor ?? "rgba(255,255,255,0.3)", fontSize: "11px", marginTop: "3px" }}>
+        <p style={{ color: subColor ?? "#9AA5B1", fontSize: "11px", marginTop: "3px" }}>
           {sub}
         </p>
       )}
