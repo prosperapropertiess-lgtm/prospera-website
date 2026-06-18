@@ -1184,6 +1184,25 @@ export function onboardEmail1Welcome(data: {
     <p style="margin:0 0 16px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">I'm Ebin — I run Prospera personally. Thank you for trusting us with your property. I know that's not a small thing, and I take it seriously.</p>
     <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">We've set up a personal dashboard just for you. Think of it like a live checklist — it shows exactly what's been done, what's coming up next, and where everything stands. You'll get an email every time something changes.</p>
 
+    <!-- Before you start block -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
+      <tr>
+        <td style="background:#f6f4f1;border-radius:12px;padding:22px 24px;">
+          <p style="margin:0 0 12px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${MUTED};">Before you start — set aside 30 minutes</p>
+          <p style="margin:0 0 16px;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.8;">This is the only time you'll ever fill this in. Once it's done, you hand it off and never think about it again. Here's what you'll need handy:</p>
+          <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">📄 &nbsp;Your current lease (PDF or a photo is fine)</td></tr>
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">💳 &nbsp;Banking details for receiving your rent</td></tr>
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🔑 &nbsp;Access codes — front door, garage, alarm (if any)</td></tr>
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🛡️ &nbsp;Your insurance provider name (optional but helpful)</td></tr>
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🔧 &nbsp;Names of any contractors you already trust</td></tr>
+            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🗑️ &nbsp;Garbage pickup day and where the bins go</td></tr>
+          </table>
+          <p style="margin:16px 0 0;font-family:${FONT};font-size:15px;color:${MUTED};line-height:1.8;">Thirty minutes now saves you hours of phone calls, back-and-forth, and late-night stress down the road. That's the whole point.</p>
+        </td>
+      </tr>
+    </table>
+
     <!-- Progress bar -->
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;">
       <tr><td>
