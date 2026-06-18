@@ -72,14 +72,14 @@ export function OwnerHomeClient({ rentStatus, leaseDaysRemaining, leaseExpiry }:
           style={{
             display: "inline-flex",
             alignItems: "center",
-            padding: "5px 12px",
+            padding: "7px 16px",
             borderRadius: "100px",
             background: chip.bg,
           }}
         >
           <span
             style={{
-              fontFamily: "var(--font-dm-sans)",
+              fontFamily: "var(--font-poppins)",
               fontSize: "15px",
               fontWeight: 600,
               color: chip.color,

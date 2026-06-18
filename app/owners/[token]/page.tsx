@@ -488,19 +488,19 @@ function StatCard({
       style={{
         background: "#FFFFFF",
         border: "1px solid rgba(15,28,40,0.07)",
-        borderRadius: "12px",
-        padding: "16px 14px",
+        borderRadius: "16px",
+        padding: "22px 18px",
         boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
       }}
     >
       <p
         style={{
-          fontSize: "14px",
-          fontFamily: "var(--font-dm-sans)",
-          color: "rgba(15,28,40,0.22)",
+          fontSize: "12px",
+          fontFamily: "var(--font-poppins)",
+          color: "rgba(15,28,40,0.30)",
           textTransform: "uppercase",
-          letterSpacing: "0.08em",
-          marginBottom: "8px",
+          letterSpacing: "0.09em",
+          marginBottom: "10px",
           fontWeight: 600,
         }}
       >
@@ -508,9 +508,9 @@ function StatCard({
       </p>
       <p
         style={{
-          fontFamily: "var(--font-cormorant)",
-          fontSize: "clamp(24px, 4vw, 32px)",
-          fontWeight: 600,
+          fontFamily: "var(--font-poppins)",
+          fontSize: "clamp(22px, 4vw, 30px)",
+          fontWeight: 700,
           color: valueColor,
           letterSpacing: "-0.02em",
           lineHeight: 1,
@@ -571,8 +571,8 @@ function NavCard({
           background: "#FFFFFF",
           border: "1px solid rgba(15,28,40,0.07)",
           borderRadius: "20px",
-          padding: "24px",
-          minHeight: "140px",
+          padding: "28px 24px",
+          minHeight: "170px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -581,22 +581,22 @@ function NavCard({
           transition: "transform 0.18s ease, box-shadow 0.18s ease",
         }}
       >
-        {/* Icon chip */}
+        {/* Icon bubble */}
         <div
           style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: "12px",
+            width: "52px",
+            height: "52px",
+            borderRadius: "16px",
             background: card.chipBg,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: "16px",
+            marginBottom: "20px",
           }}
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "23px", color: card.iconColor }}
+            style={{ fontSize: "27px", color: card.iconColor }}
           >
             {card.icon}
           </span>
@@ -605,20 +605,20 @@ function NavCard({
         <div>
           <p
             style={{
-              fontFamily: "var(--font-dm-sans)",
+              fontFamily: "var(--font-poppins)",
               fontSize: "19px",
               fontWeight: 700,
               color: "#0F1C28",
               letterSpacing: "-0.01em",
-              marginBottom: "4px",
+              marginBottom: "5px",
             }}
           >
             {card.label}
           </p>
           <p
             style={{
-              fontSize: "16px",
-              fontFamily: "var(--font-dm-sans)",
+              fontSize: "15px",
+              fontFamily: "var(--font-poppins)",
               color: "rgba(15,28,40,0.45)",
               lineHeight: 1.4,
             }}
@@ -632,10 +632,9 @@ function NavCard({
           style={{
             position: "absolute",
             top: "24px",
-            right: "20px",
-            color: "rgba(15,28,40,0.22)",
-            fontSize: "17px",
-            fontFamily: "var(--font-dm-sans)",
+            right: "22px",
+            color: "rgba(15,28,40,0.20)",
+            fontSize: "18px",
           }}
         >
           →
@@ -669,16 +668,16 @@ function UpcomingRow({
       style={{
         display: "flex",
         alignItems: "center",
-        gap: "14px",
-        padding: "16px 20px",
+        gap: "16px",
+        padding: "20px 24px",
         flexWrap: "wrap",
       }}
     >
       <div
         style={{
-          width: "36px",
-          height: "36px",
-          borderRadius: "10px",
+          width: "46px",
+          height: "46px",
+          borderRadius: "14px",
           background: iconBg,
           display: "flex",
           alignItems: "center",
@@ -686,7 +685,7 @@ function UpcomingRow({
           flexShrink: 0,
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "21px", color: iconColor }}>
+        <span className="material-symbols-outlined" style={{ fontSize: "24px", color: iconColor }}>
           {icon}
         </span>
       </div>
@@ -694,18 +693,18 @@ function UpcomingRow({
       <div style={{ flex: 1, minWidth: "100px" }}>
         <p
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-poppins)",
             fontSize: "17px",
             fontWeight: 600,
             color: "#0F1C28",
-            marginBottom: "2px",
+            marginBottom: "3px",
           }}
         >
           {title}
         </p>
         <p
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-poppins)",
             fontSize: "15px",
             color: "rgba(15,28,40,0.45)",
           }}
@@ -716,7 +715,7 @@ function UpcomingRow({
 
       <div
         style={{
-          padding: "4px 10px",
+          padding: "6px 14px",
           borderRadius: "100px",
           background: chipBg,
           flexShrink: 0,
@@ -724,7 +723,7 @@ function UpcomingRow({
       >
         <span
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-poppins)",
             fontSize: "14px",
             fontWeight: 600,
             color: chipColor,

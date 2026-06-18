@@ -440,8 +440,8 @@ function QuickCard({ card }: {
           border: "1px solid rgba(15,28,40,0.07)",
           borderRadius: "20px",
           boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
-          padding: "20px",
-          minHeight: "110px",
+          padding: "26px 22px",
+          minHeight: "155px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -459,9 +459,9 @@ function QuickCard({ card }: {
       >
         <div
           style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: "12px",
+            width: "52px",
+            height: "52px",
+            borderRadius: "16px",
             background: card.chipBg,
             display: "flex",
             alignItems: "center",
@@ -470,7 +470,7 @@ function QuickCard({ card }: {
         >
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: "23px", color: card.iconColor }}
+            style={{ fontSize: "27px", color: card.iconColor }}
           >
             {card.icon}
           </span>
@@ -478,16 +478,16 @@ function QuickCard({ card }: {
         <div>
           <p
             style={{
-              fontFamily: "var(--font-dm-sans)",
+              fontFamily: "var(--font-poppins)",
               fontSize: "18px",
               fontWeight: 700,
               color: "#0F1C28",
-              marginBottom: "3px",
+              marginBottom: "4px",
             }}
           >
             {card.label}
           </p>
-          <p style={{ fontSize: "15px", fontFamily: "var(--font-dm-sans)", color: "rgba(15,28,40,0.45)" }}>
+          <p style={{ fontSize: "15px", fontFamily: "var(--font-poppins)", color: "rgba(15,28,40,0.45)" }}>
             {card.subtitle}
           </p>
         </div>
