@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { getDashboard } from "@/lib/owners-data";
-import { PropertyCard } from "@/components/owners/PropertyCard";
-import { MetricCard } from "@/components/owners/MetricCard";
-import { ScrollReveal } from "@/components/owners/ScrollReveal";
 import { MobileNav } from "@/components/owners/MobileNav";
 import OwnerHeader from "@/components/owners/OwnerHeader";
 
@@ -11,9 +9,13 @@ interface Props {
   params: Promise<{ token: string }>;
 }
 
-export const revalidate = 21600; // regenerate every 6 hours
+export const revalidate = 21600;
 
-export default async function OwnerOverviewPage({ params }: Props) {
+function fmt$(n: number) {
+  return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+export default async function OwnerHomePage({ params }: Props) {
   const { token } = await params;
 
   const sb = getSupabaseAdmin();
@@ -31,7 +33,7 @@ export default async function OwnerOverviewPage({ params }: Props) {
   } catch {
     return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F7F5F2" }}>
-        <p style={{ color: "#9AA5B1", fontFamily: "var(--font-outfit)" }}>
+        <p style={{ color: "#9AA5B1", fontFamily: "var(--font-dm-sans)" }}>
           Unable to load data. Please try again in a moment.
         </p>
       </div>
@@ -42,16 +44,66 @@ export default async function OwnerOverviewPage({ params }: Props) {
     .split(/\s*[&,]\s*/)
     .map((n: string) => n.trim().split(" ")[0])
     .join(" & ");
-  const multiProperty = dashboard.properties.length > 1;
 
-  const updatedLabel = dashboard.cachedAt
-    ? (() => {
-        const mins = Math.round((Date.now() - new Date(dashboard.cachedAt).getTime()) / 60000);
-        if (mins < 60) return `Updated ${mins}m ago`;
-        const hrs = Math.round(mins / 60);
-        return `Updated ${hrs}h ago`;
-      })()
-    : null;
+  const firstProperty = dashboard.properties[0];
+  const propertyHref = firstProperty
+    ? `/owners/${token}/${firstProperty.property.id}`
+    : `/owners/${token}`;
+
+  const totalTenants = dashboard.properties.reduce((s, p) => s + p.tenants.length, 0);
+
+  const navCards = [
+    {
+      icon: "home",
+      label: "Properties",
+      subtitle: `${dashboard.properties.length} active rental${dashboard.properties.length !== 1 ? "s" : ""}`,
+      href: propertyHref,
+      accentColor: null as string | null,
+      disabled: false,
+    },
+    {
+      icon: "trending_up",
+      label: "Financials",
+      subtitle: `${fmt$(dashboard.totalNet)} net this year`,
+      href: propertyHref,
+      accentColor: dashboard.totalNet >= 0 ? "#16a34a" : "#dc2626",
+      disabled: false,
+    },
+    {
+      icon: "people",
+      label: "Tenants",
+      subtitle: `${totalTenants} active tenant${totalTenants !== 1 ? "s" : ""}`,
+      href: propertyHref,
+      accentColor: null as string | null,
+      disabled: false,
+    },
+    {
+      icon: "build",
+      label: "Maintenance",
+      subtitle: dashboard.totalOpenIssues > 0
+        ? `${dashboard.totalOpenIssues} open issue${dashboard.totalOpenIssues !== 1 ? "s" : ""}`
+        : "All clear",
+      href: propertyHref,
+      accentColor: dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a",
+      disabled: false,
+    },
+    {
+      icon: "chat",
+      label: "Messages",
+      subtitle: "Updates from your property manager",
+      href: propertyHref,
+      accentColor: null as string | null,
+      disabled: false,
+    },
+    {
+      icon: "folder",
+      label: "Documents",
+      subtitle: "Coming soon",
+      href: null,
+      accentColor: null as string | null,
+      disabled: true,
+    },
+  ];
 
   return (
     <>
@@ -63,172 +115,216 @@ export default async function OwnerOverviewPage({ params }: Props) {
       <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        {/* Hero section */}
-        <div
-          style={{
-            background: "#FFFFFF",
-            borderBottom: "1px solid #E8E4DF",
-            padding: "40px 24px 32px",
-          }}
-        >
-          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "72px 24px 120px" }}>
+
+          {/* Greeting */}
+          <div style={{ marginBottom: "52px" }}>
             <h1
               style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                fontWeight: 700,
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(48px, 6vw, 68px)",
+                fontWeight: 300,
                 color: "#1F2F3A",
-                letterSpacing: "-0.03em",
-                marginBottom: "8px",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.05,
+                marginBottom: "12px",
               }}
             >
-              Hi {firstNames} 👋
+              Hi {firstNames}.
             </h1>
-            <p style={{ color: "#5A6A7A", fontSize: "15px", display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-              <span>{dashboard.currentMonth} {dashboard.currentYear} · Your portfolio at a glance</span>
-              {updatedLabel && (
-                <span style={{ color: "#9AA5B1", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: "12px" }}>schedule</span>
-                  {updatedLabel}
-                </span>
-              )}
+            <p style={{ color: "#B0BBBF", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+              {dashboard.currentMonth} {dashboard.currentYear}
             </p>
           </div>
-        </div>
 
-        <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 80px" }}>
+          {/* Inline stats — no boxes */}
+          <div
+            style={{
+              display: "flex",
+              gap: "40px",
+              marginBottom: "64px",
+              paddingBottom: "48px",
+              borderBottom: "1px solid #E8E4DF",
+              flexWrap: "wrap",
+            }}
+          >
+            <StatPill label="Collected" value={fmt$(dashboard.totalRentCollected)} />
+            <StatPill
+              label="In your pocket"
+              value={fmt$(dashboard.totalNet)}
+              color={dashboard.totalNet >= 0 ? "#16a34a" : "#dc2626"}
+            />
+            <StatPill
+              label="Open issues"
+              value={String(dashboard.totalOpenIssues)}
+              color={dashboard.totalOpenIssues > 0 ? "#d97706" : "#9AA5B1"}
+            />
+          </div>
 
-          {/* Portfolio summary */}
+          {/* Navigation cards */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: "12px",
-              marginBottom: "40px",
+              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+              gap: "14px",
             }}
           >
-            <MetricCard label="Collected This Year" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
-            <MetricCard label="Expenses This Year" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
-            <MetricCard label="In Your Pocket" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
-            <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a"} />
+            {navCards.map((card) => {
+              const cardEl = (
+                <div
+                  style={{
+                    background: card.disabled ? "rgba(240,237,232,0.6)" : "#FFFFFF",
+                    borderRadius: "20px",
+                    padding: "28px 28px 24px",
+                    boxShadow: card.disabled ? "none" : "0 1px 3px rgba(0,0,0,0.06)",
+                    opacity: card.disabled ? 0.55 : 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: "168px",
+                    cursor: card.disabled ? "default" : "pointer",
+                  }}
+                >
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: "26px", color: "#C8BFB5", marginBottom: "20px" }}
+                  >
+                    {card.icon}
+                  </span>
+
+                  <div style={{ flex: 1 }}>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: "17px",
+                        fontWeight: 600,
+                        color: "#1F2F3A",
+                        letterSpacing: "-0.01em",
+                        marginBottom: "5px",
+                      }}
+                    >
+                      {card.label}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        fontFamily: "var(--font-dm-sans)",
+                        color: card.accentColor ?? "#9AA5B1",
+                        fontWeight: card.accentColor ? 500 : 400,
+                      }}
+                    >
+                      {card.subtitle}
+                    </p>
+                  </div>
+
+                  {!card.disabled && (
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "#C8BFB5",
+                        fontFamily: "var(--font-dm-sans)",
+                        marginTop: "16px",
+                      }}
+                    >
+                      View →
+                    </p>
+                  )}
+                </div>
+              );
+
+              return card.href ? (
+                <Link key={card.label} href={card.href} style={{ textDecoration: "none" }}>
+                  {cardEl}
+                </Link>
+              ) : (
+                <div key={card.label}>{cardEl}</div>
+              );
+            })}
           </div>
 
-          {/* Section label */}
-          <ScrollReveal delay={0.05}>
-            <h2
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "11px",
-                fontWeight: 600,
-                color: "#9AA5B1",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                marginBottom: "16px",
-              }}
-            >
-              {dashboard.properties.length === 1 ? "Your Property" : `Your Properties (${dashboard.properties.length})`}
-            </h2>
-          </ScrollReveal>
-
-          {/* Property cards */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: "20px",
-              marginBottom: "48px",
-            }}
-          >
-            {dashboard.properties.map((p, i) => (
-              <PropertyCard key={p.property.id} data={p} token={token} index={i} />
-            ))}
-          </div>
-
-          {/* Manager contact card */}
-          <ScrollReveal delay={0.1}>
-            <div
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid #E8E4DF",
-                borderRadius: "20px",
-                padding: "28px",
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
+          {/* Multi-property list */}
+          {dashboard.properties.length > 1 && (
+            <div style={{ marginTop: "56px" }}>
+              <p
                 style={{
-                  width: "52px",
-                  height: "52px",
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #8B2030, #a02540)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
+                  fontSize: "11px",
+                  fontFamily: "var(--font-dm-sans)",
+                  color: "#C8BFB5",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  marginBottom: "16px",
                 }}
               >
-                <span style={{ color: "white", fontFamily: "var(--font-outfit)", fontWeight: 700, fontSize: "20px" }}>E</span>
-              </div>
-              <div style={{ flex: 1, minWidth: "200px" }}>
-                <p style={{ color: "#1F2F3A", fontWeight: 600, fontSize: "15px", marginBottom: "2px", fontFamily: "var(--font-outfit)" }}>
-                  Ebin Jaison
-                </p>
-                <p style={{ color: "#9AA5B1", fontSize: "13px" }}>
-                  Property Manager · Prospera Properties
-                </p>
-                <p style={{ color: "#5A6A7A", fontSize: "13px", marginTop: "6px" }}>
-                  Ebin is available by phone or email any time.
-                </p>
-              </div>
-              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                <a
-                  href="mailto:hello@prosperaproperties.co"
-                  style={{
-                    padding: "10px 18px",
-                    borderRadius: "10px",
-                    background: "#F7F5F2",
-                    border: "1px solid #E8E4DF",
-                    color: "#1F2F3A",
-                    fontSize: "13px",
-                    fontWeight: 500,
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  <span className="material-symbols-outlined" style={{ fontSize: "15px", color: "#1F2F3A" }}>mail</span>
-                  Email
-                </a>
-                <a
-                  href="tel:+15196971227"
-                  style={{
-                    padding: "10px 18px",
-                    borderRadius: "10px",
-                    background: "#8B2030",
-                    border: "1px solid #8B2030",
-                    color: "white",
-                    fontSize: "13px",
-                    fontWeight: 500,
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                >
-                  <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>call</span>
-                  Call
-                </a>
+                Your Properties
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {dashboard.properties.map((p) => (
+                  <Link
+                    key={p.property.id}
+                    href={`/owners/${token}/${p.property.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div
+                      style={{
+                        background: "#FFFFFF",
+                        borderRadius: "14px",
+                        padding: "18px 20px",
+                        boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "16px",
+                      }}
+                    >
+                      <div>
+                        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: "#1F2F3A", marginBottom: "2px" }}>
+                          {p.property.address}
+                        </p>
+                        <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "#9AA5B1" }}>
+                          {p.property.city} · {p.property.type}
+                        </p>
+                      </div>
+                      <span style={{ color: "#C8BFB5", fontSize: "16px" }}>→</span>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
-          </ScrollReveal>
+          )}
+
         </main>
 
         <MobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function StatPill({ label, value, color }: { label: string; value: string; color?: string }) {
+  return (
+    <div>
+      <p
+        style={{
+          fontSize: "11px",
+          fontFamily: "var(--font-dm-sans)",
+          color: "#C8BFB5",
+          textTransform: "uppercase",
+          letterSpacing: "0.06em",
+          marginBottom: "5px",
+        }}
+      >
+        {label}
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--font-outfit)",
+          fontSize: "24px",
+          fontWeight: 700,
+          letterSpacing: "-0.02em",
+          color: color ?? "#1F2F3A",
+        }}
+      >
+        {value}
+      </p>
+    </div>
   );
 }
