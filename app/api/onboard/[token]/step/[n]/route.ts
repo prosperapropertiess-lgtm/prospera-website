@@ -142,8 +142,7 @@ export async function POST(
         const html = onboardEmail1Welcome({
           ownerName: session.owner_name || "there",
           propertyAddress: property_address,
-          leaseUploadUrl: `${BASE_URL}/onboard/${token}/lease`,
-          skipUrl: `${BASE_URL}/onboard/${token}/details`,
+          dashboardUrl: `${BASE_URL}/onboard/${token}`,
         });
         await sendEmail(
           session.owner_email,
