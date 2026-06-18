@@ -53,15 +53,26 @@ export default async function DocumentsPage({ params }: Props) {
 
   return (
     <>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
 
-      <div style={{ minHeight: "100vh", background: "#090E17" }}>
+      <div style={{ minHeight: "100vh", background: "#F5F4F1" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 100px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "32px 20px 100px" }}>
           <Link
             href={`/owners/${token}`}
-            style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{
+              color: "rgba(15,28,40,0.45)",
+              fontSize: "13px",
+              textDecoration: "none",
+              display: "inline-block",
+              marginBottom: "28px",
+              fontFamily: "var(--font-dm-sans)",
+              fontWeight: 500,
+            }}
           >
             ← Back
           </Link>
@@ -69,11 +80,12 @@ export default async function DocumentsPage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(36px, 5vw, 52px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: "#EDE8E1",
+              color: "#0F1C28",
               letterSpacing: "-0.02em",
-              marginBottom: "40px",
+              marginBottom: "32px",
+              lineHeight: 1,
             }}
           >
             Documents
@@ -86,19 +98,47 @@ export default async function DocumentsPage({ params }: Props) {
             return (
               <div key={property.id}>
                 {multiProperty && (
-                  <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(237,232,225,0.42)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx > 0 ? "40px" : "0" }}>
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      color: "rgba(15,28,40,0.22)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.10em",
+                      marginBottom: "16px",
+                      marginTop: idx > 0 ? "40px" : "0",
+                      fontFamily: "var(--font-dm-sans)",
+                    }}
+                  >
                     {property.address}
                   </p>
                 )}
 
-                <DocumentList
-                  propertyId={property.id}
-                  token={token}
-                  initialDocuments={initialDocuments}
-                />
+                {/* DocumentList wrapped in white card */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1px solid rgba(15,28,40,0.07)",
+                    borderRadius: "20px",
+                    overflow: "hidden",
+                    boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+                  }}
+                >
+                  <DocumentListLight
+                    propertyId={property.id}
+                    token={token}
+                    initialDocuments={initialDocuments}
+                  />
+                </div>
 
                 {multiProperty && idx < dashboard.properties.length - 1 && (
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.05)", margin: "40px 0" }} />
+                  <div
+                    style={{
+                      height: "1px",
+                      background: "rgba(15,28,40,0.07)",
+                      margin: "40px 0",
+                    }}
+                  />
                 )}
               </div>
             );
@@ -108,5 +148,50 @@ export default async function DocumentsPage({ params }: Props) {
         <MobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function DocumentListLight(props: {
+  propertyId: string;
+  token: string;
+  initialDocuments: OwnerDocument[];
+}) {
+  if (props.initialDocuments.length === 0) {
+    return (
+      <div
+        style={{
+          padding: "48px 24px",
+          textAlign: "center",
+        }}
+      >
+        <span
+          className="material-symbols-outlined"
+          style={{
+            fontSize: "32px",
+            color: "rgba(15,28,40,0.22)",
+            display: "block",
+            marginBottom: "10px",
+          }}
+        >
+          folder_open
+        </span>
+        <p
+          style={{
+            color: "rgba(15,28,40,0.45)",
+            fontSize: "14px",
+            fontFamily: "var(--font-dm-sans)",
+            lineHeight: 1.6,
+          }}
+        >
+          No documents yet. Ebin will upload your lease and inspection reports here.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "8px 0" }}>
+      <DocumentList {...props} />
+    </div>
   );
 }

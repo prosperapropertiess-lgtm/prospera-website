@@ -3,13 +3,19 @@
 import { useState, useRef, useEffect } from "react";
 import type { TenantMessage } from "@/lib/tenant-data";
 
-const CARD = "#0D1825";
-const CARD_HOVER = "#111F2E";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const TEXT_DIM = "rgba(237,232,225,0.20)";
-const CRIMSON = "#8B2030";
+// Design tokens
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const BURGUNDY = "#8B2030";
+const BURG_BG = "rgba(139,32,48,0.08)";
+const GOLD = "#B8922A";
+const RED = "#B91C1C";
+const RED_BG = "rgba(185,28,28,0.08)";
 
 interface Props {
   token: string;
@@ -72,7 +78,6 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
       }
 
       const json = await res.json();
-      // Replace optimistic with real tenant message, then add AI reply
       setMessages(prev => {
         const without = prev.filter(m => m.id !== optimistic.id);
         const added = json.message ? [...without, json.message] : without;
@@ -101,7 +106,8 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
       style={{
         background: CARD,
         border: `1px solid ${CARD_BORDER}`,
-        borderRadius: "16px",
+        borderRadius: "20px",
+        boxShadow: CARD_SHADOW,
         overflow: "hidden",
       }}
     >
@@ -115,6 +121,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
           display: "flex",
           flexDirection: "column",
           gap: "16px",
+          background: BG,
         }}
       >
         {messages.length === 0 ? (
@@ -134,7 +141,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
                 width: "44px",
                 height: "44px",
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.05)",
+                background: CARD,
                 border: `1px solid ${CARD_BORDER}`,
                 display: "flex",
                 alignItems: "center",
@@ -144,14 +151,14 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: "20px", color: TEXT_DIM }}
+                style={{ fontSize: "20px", color: SUBTLE }}
               >
                 chat_bubble_outline
               </span>
             </div>
             <p
               style={{
-                color: TEXT_SEC,
+                color: MUTED,
                 fontSize: "14px",
                 lineHeight: "1.6",
                 maxWidth: "320px",
@@ -169,19 +176,22 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Divider */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }} />
-
       {/* Compose area */}
-      <div style={{ padding: "16px 20px" }}>
+      <div
+        style={{
+          padding: "16px 20px",
+          background: CARD,
+          borderTop: `1px solid ${CARD_BORDER}`,
+        }}
+      >
         {error && (
           <p
             style={{
-              color: "#f87171",
+              color: RED,
               fontSize: "13px",
               marginBottom: "10px",
               padding: "8px 12px",
-              background: "rgba(248,113,113,0.10)",
+              background: RED_BG,
               borderRadius: "8px",
               fontFamily: "var(--font-dm-sans)",
             }}
@@ -202,10 +212,10 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
               padding: "10px 14px",
               fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
-              color: TEXT,
-              background: "rgba(255,255,255,0.05)",
+              color: NAVY,
+              background: BG,
               border: `1px solid ${CARD_BORDER}`,
-              borderRadius: "10px",
+              borderRadius: "12px",
               outline: "none",
               lineHeight: "1.5",
             }}
@@ -214,10 +224,10 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             onClick={handleSend}
             disabled={sending || !draft.trim()}
             style={{
-              padding: "10px 18px",
-              borderRadius: "10px",
-              background: sending || !draft.trim() ? "rgba(255,255,255,0.06)" : CRIMSON,
-              color: sending || !draft.trim() ? TEXT_DIM : TEXT,
+              padding: "10px 20px",
+              borderRadius: "12px",
+              background: sending || !draft.trim() ? "rgba(15,28,40,0.07)" : BURGUNDY,
+              color: sending || !draft.trim() ? SUBTLE : "#FFFFFF",
               border: "none",
               cursor: sending || !draft.trim() ? "not-allowed" : "pointer",
               fontSize: "13px",
@@ -230,7 +240,7 @@ export function TenantFeed({ token, tenantName, initialMessages }: Props) {
             {sending ? "Sending…" : "Send"}
           </button>
         </div>
-        <p style={{ color: TEXT_DIM, fontSize: "11px", marginTop: "8px", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ color: SUBTLE, fontSize: "11px", marginTop: "8px", fontFamily: "var(--font-dm-sans)" }}>
           Laura usually responds instantly · Ebin reviews all conversations
         </p>
       </div>
@@ -249,30 +259,32 @@ function MessageBubble({
   const isAI = message.author === "ai";
   const isEbin = message.author === "ebin";
 
+  // Avatar
   const avatarBg = isAI
-    ? "rgba(201,168,76,0.20)"
+    ? "rgba(184,146,42,0.15)"
     : isEbin
-    ? "rgba(139,32,48,0.40)"
-    : "rgba(255,255,255,0.08)";
+    ? NAVY
+    : "linear-gradient(135deg, #8B2030, #B8922A)";
 
   const avatarLabel = isAI ? "L" : isEbin ? "E" : tenantInitial;
-  const avatarColor = isAI ? "#C9A84C" : isEbin ? "#f87171" : TEXT_SEC;
+  const avatarColor = isAI ? GOLD : "#FFFFFF";
 
-  const bubbleBg = isAI
-    ? "rgba(201,168,76,0.10)"
-    : isEbin
-    ? "rgba(139,32,48,0.12)"
-    : CARD_HOVER;
+  // Bubble
+  const bubbleBg = isTenant
+    ? BURGUNDY
+    : isAI
+    ? CARD
+    : NAVY;
 
   const bubbleBorder = isAI
-    ? "1px solid rgba(201,168,76,0.20)"
-    : isEbin
-    ? "1px solid rgba(139,32,48,0.25)"
+    ? `1px solid ${CARD_BORDER}`
     : "none";
 
+  const bubbleTextColor = isTenant ? "#FFFFFF" : isAI ? NAVY : "#FFFFFF";
+
   const bubbleRadius = isTenant
-    ? "12px 4px 12px 12px"
-    : "4px 12px 12px 12px";
+    ? "16px 4px 16px 16px"
+    : "4px 16px 16px 16px";
 
   return (
     <div
@@ -302,7 +314,7 @@ function MessageBubble({
             color: avatarColor,
             fontWeight: 700,
             fontSize: "13px",
-            fontFamily: "var(--font-outfit)",
+            fontFamily: "var(--font-dm-sans)",
           }}
         >
           {avatarLabel}
@@ -325,13 +337,13 @@ function MessageBubble({
             style={{
               fontSize: "12px",
               fontWeight: 600,
-              color: TEXT_SEC,
+              color: MUTED,
               fontFamily: "var(--font-dm-sans)",
             }}
           >
             {message.author_name}
           </span>
-          <span style={{ fontSize: "11px", color: TEXT_DIM }}>
+          <span style={{ fontSize: "11px", color: SUBTLE, fontFamily: "var(--font-dm-sans)" }}>
             {formatTimestamp(message.created_at)}
           </span>
         </div>
@@ -343,13 +355,14 @@ function MessageBubble({
             borderRadius: bubbleRadius,
             background: bubbleBg,
             border: bubbleBorder,
+            boxShadow: isAI ? CARD_SHADOW : "none",
           }}
         >
           <p
             style={{
               fontSize: "14px",
               lineHeight: "1.6",
-              color: TEXT,
+              color: bubbleTextColor,
               margin: 0,
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",

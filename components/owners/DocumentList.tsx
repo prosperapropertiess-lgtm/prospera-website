@@ -18,12 +18,12 @@ interface Props {
   initialDocuments: OwnerDocument[];
 }
 
-const CATEGORY_COLORS: Record<string, { bg: string; color: string }> = {
-  "Lease Agreement": { bg: "rgba(96,165,250,0.15)", color: "#60a5fa" },
-  "Inspection Report": { bg: "rgba(167,139,250,0.15)", color: "#a78bfa" },
-  "Notice": { bg: "rgba(251,191,36,0.15)", color: "#fbbf24" },
-  "Statement": { bg: "rgba(52,211,153,0.15)", color: "#34d399" },
-  "Other": { bg: "rgba(255,255,255,0.07)", color: "rgba(237,232,225,0.42)" },
+const CATEGORY_STYLES: Record<string, { bg: string; color: string }> = {
+  "Lease Agreement": { bg: "rgba(29,78,216,0.08)", color: "#1D4ED8" },
+  "Inspection Report": { bg: "rgba(139,32,48,0.08)", color: "#8B2030" },
+  "Notice": { bg: "rgba(180,83,9,0.09)", color: "#B45309" },
+  "Statement": { bg: "rgba(10,122,82,0.09)", color: "#0A7A52" },
+  "Other": { bg: "rgba(15,28,40,0.06)", color: "rgba(15,28,40,0.45)" },
 };
 
 function formatSize(bytes: number | null): string {
@@ -34,23 +34,24 @@ function formatSize(bytes: number | null): string {
 }
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-CA", { month: "short", day: "numeric" });
+  return new Date(iso).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" });
 }
 
 function CategoryBadge({ category }: { category: string }) {
-  const style = CATEGORY_COLORS[category] ?? CATEGORY_COLORS["Other"];
+  const style = CATEGORY_STYLES[category] ?? CATEGORY_STYLES["Other"];
   return (
     <span
       style={{
         display: "inline-block",
-        padding: "2px 8px",
-        borderRadius: "20px",
+        padding: "3px 10px",
+        borderRadius: "100px",
         fontSize: "11px",
         fontWeight: 600,
         background: style.bg,
         color: style.color,
         letterSpacing: "0.02em",
         flexShrink: 0,
+        fontFamily: "var(--font-dm-sans)",
       }}
     >
       {category}
@@ -58,7 +59,15 @@ function CategoryBadge({ category }: { category: string }) {
   );
 }
 
-function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyId: string; token: string }) {
+function DocumentRow({
+  doc,
+  propertyId,
+  token,
+}: {
+  doc: OwnerDocument;
+  propertyId: string;
+  token: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -69,10 +78,10 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
       const url = `/api/owners/documents?propertyId=${encodeURIComponent(propertyId)}&token=${encodeURIComponent(token)}&action=download&documentId=${encodeURIComponent(doc.id)}`;
       const res = await fetch(url);
       if (!res.ok) {
-        const json = await res.json() as { error?: string };
+        const json = (await res.json()) as { error?: string };
         throw new Error(json.error ?? "Failed to get download link");
       }
-      const { signedUrl } = await res.json() as { signedUrl: string };
+      const { signedUrl } = (await res.json()) as { signedUrl: string };
       window.open(signedUrl, "_blank", "noopener,noreferrer");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Download failed");
@@ -86,31 +95,60 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
   return (
     <div
       style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: "16px",
         padding: "16px 20px",
         display: "flex",
         alignItems: "center",
         gap: "14px",
         flexWrap: "wrap",
+        borderBottom: "1px solid rgba(15,28,40,0.06)",
       }}
     >
       <CategoryBadge category={doc.category} />
 
       <div style={{ flex: 1, minWidth: "140px" }}>
-        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "14px", fontWeight: 600, color: "#EDE8E1", marginBottom: "2px" }}>
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#0F1C28",
+            marginBottom: "2px",
+          }}
+        >
           {doc.label}
         </p>
-        <p style={{ fontSize: "12px", color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)" }}>
-          {doc.file_name}{sizeLabel ? ` · ${sizeLabel}` : ""}
+        <p
+          style={{
+            fontSize: "12px",
+            color: "rgba(15,28,40,0.45)",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
+          {doc.file_name}
+          {sizeLabel ? ` · ${sizeLabel}` : ""}
         </p>
         {error && (
-          <p style={{ fontSize: "12px", color: "#f87171", marginTop: "4px" }}>{error}</p>
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#B91C1C",
+              marginTop: "4px",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            {error}
+          </p>
         )}
       </div>
 
-      <p style={{ fontSize: "12px", color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)", whiteSpace: "nowrap" }}>
+      <p
+        style={{
+          fontSize: "12px",
+          color: "rgba(15,28,40,0.45)",
+          fontFamily: "var(--font-dm-sans)",
+          whiteSpace: "nowrap",
+        }}
+      >
         {formatDate(doc.uploaded_at)}
       </p>
 
@@ -119,16 +157,17 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
         disabled={loading}
         style={{
           padding: "8px 16px",
-          borderRadius: "8px",
-          border: "1px solid rgba(255,255,255,0.07)",
-          background: loading ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
-          color: loading ? "rgba(237,232,225,0.20)" : "#EDE8E1",
+          borderRadius: "10px",
+          border: "1px solid rgba(15,28,40,0.10)",
+          background: loading ? "rgba(15,28,40,0.04)" : "#FFFFFF",
+          color: loading ? "rgba(15,28,40,0.25)" : "#0F1C28",
           fontSize: "13px",
           fontWeight: 500,
           cursor: loading ? "not-allowed" : "pointer",
           fontFamily: "var(--font-dm-sans)",
           whiteSpace: "nowrap",
           flexShrink: 0,
+          transition: "background 0.15s",
         }}
       >
         {loading ? "Loading…" : "Download"}
@@ -142,14 +181,18 @@ export function DocumentList({ propertyId, token, initialDocuments }: Props) {
     return (
       <div
         style={{
-          background: "#0D1825",
-          border: "1px solid rgba(255,255,255,0.07)",
-          borderRadius: "16px",
-          padding: "32px 24px",
+          padding: "48px 24px",
           textAlign: "center",
         }}
       >
-        <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+        <p
+          style={{
+            color: "rgba(15,28,40,0.45)",
+            fontSize: "14px",
+            fontFamily: "var(--font-dm-sans)",
+            lineHeight: 1.6,
+          }}
+        >
           No documents yet. Ebin will upload your lease and inspection reports here.
         </p>
       </div>
@@ -157,9 +200,18 @@ export function DocumentList({ propertyId, token, initialDocuments }: Props) {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      {initialDocuments.map((doc) => (
-        <DocumentRow key={doc.id} doc={doc} propertyId={propertyId} token={token} />
+    <div>
+      {initialDocuments.map((doc, idx) => (
+        <div
+          key={doc.id}
+          style={
+            idx === initialDocuments.length - 1
+              ? {}
+              : {}
+          }
+        >
+          <DocumentRow doc={doc} propertyId={propertyId} token={token} />
+        </div>
       ))}
     </div>
   );

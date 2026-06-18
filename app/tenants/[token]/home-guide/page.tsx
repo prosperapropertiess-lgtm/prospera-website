@@ -9,13 +9,20 @@ import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 import HomeGuideAccordion from "@/components/tenants/HomeGuideAccordion";
 
-const PAGE_BG = "#090E17";
-const CARD = "#0D1825";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const RED = "#f87171";
-const AMBER = "#fbbf24";
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const RED = "#B91C1C";
+const RED_BG = "rgba(185,28,28,0.08)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const RADIUS = "20px";
+const RADIUS_SM = "12px";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -39,9 +46,9 @@ export default async function HomeGuidePage({ params }: Props) {
   const firstName = tenant.name.split(" ")[0];
 
   const emergencyContacts = [
-    { label: "Ebin (Prospera)", phone: "(519) 697-1227", icon: "phone", color: "#34d399" },
-    { label: "Gas Leak — Enbridge", phone: "1-866-763-5427", icon: "local_fire_department", color: RED },
-    { label: "Hydro Outage — Hydro One", phone: "1-800-434-1235", icon: "bolt", color: AMBER },
+    { label: "Ebin (Prospera)", phone: "(519) 697-1227", icon: "phone", color: GREEN, bg: GREEN_BG },
+    { label: "Gas Leak — Enbridge", phone: "1-866-763-5427", icon: "local_fire_department", color: RED, bg: RED_BG },
+    { label: "Hydro Outage — Hydro One", phone: "1-800-434-1235", icon: "bolt", color: AMBER, bg: AMBER_BG },
   ];
 
   return (
@@ -51,14 +58,14 @@ export default async function HomeGuidePage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: PAGE_BG }}>
+      <div style={{ minHeight: "100vh", background: BG }}>
         <TenantHeader firstName={firstName} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "56px 24px 120px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 24px 120px" }}>
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -66,37 +73,39 @@ export default async function HomeGuidePage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(40px, 6vw, 58px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: TEXT,
+              color: NAVY,
               letterSpacing: "-0.02em",
-              marginBottom: "8px",
+              marginBottom: "6px",
             }}
           >
             Home Guide
           </h1>
-          <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)", marginBottom: "32px" }}>
+          <p style={{ color: MUTED, fontSize: "14px", fontFamily: "var(--font-dm-sans)", marginBottom: "32px" }}>
             {tenant.propertyAddress}{tenant.propertyCity ? `, ${tenant.propertyCity}` : ""}
           </p>
 
-          {/* Emergency contacts strip */}
+          {/* Emergency contacts */}
           <div
             style={{
               background: CARD,
               border: `1px solid ${CARD_BORDER}`,
-              borderRadius: "16px",
-              padding: "20px",
-              marginBottom: "28px",
+              borderRadius: RADIUS,
+              boxShadow: CARD_SHADOW,
+              padding: "20px 24px",
+              marginBottom: "24px",
             }}
           >
             <p
               style={{
                 fontSize: "11px",
                 fontFamily: "var(--font-dm-sans)",
-                color: TEXT_SEC,
+                color: MUTED,
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 marginBottom: "16px",
+                fontWeight: 600,
               }}
             >
               Emergency Contacts
@@ -113,13 +122,26 @@ export default async function HomeGuidePage({ params }: Props) {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: "18px", color: contact.color, flexShrink: 0 }}
+                    <div
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "8px",
+                        background: contact.bg,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
                     >
-                      {contact.icon}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT }}>
+                      <span
+                        className="material-symbols-outlined"
+                        style={{ fontSize: "16px", color: contact.color }}
+                      >
+                        {contact.icon}
+                      </span>
+                    </div>
+                    <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: NAVY, fontWeight: 500 }}>
                       {contact.label}
                     </span>
                   </div>
@@ -128,7 +150,7 @@ export default async function HomeGuidePage({ params }: Props) {
                     style={{
                       fontFamily: "var(--font-dm-sans)",
                       fontSize: "14px",
-                      fontWeight: 600,
+                      fontWeight: 700,
                       color: contact.color,
                       textDecoration: "none",
                     }}
@@ -140,7 +162,7 @@ export default async function HomeGuidePage({ params }: Props) {
             </div>
           </div>
 
-          {/* Guide sections accordion */}
+          {/* Guide sections accordion — wrapped in white cards */}
           <HomeGuideAccordion sections={guideSections} />
 
         </main>

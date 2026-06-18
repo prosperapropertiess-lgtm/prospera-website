@@ -21,13 +21,15 @@ interface Props {
 
 function formatTimestamp(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("en-CA", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  }).replace(",", " ·");
+  return d
+    .toLocaleString("en-CA", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .replace(",", " ·");
 }
 
 function messageTypeIcon(type: string): string | null {
@@ -107,14 +109,7 @@ export function PropertyFeed({
   }
 
   return (
-    <div
-      style={{
-        background: "#0D1825",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: "16px",
-        overflow: "hidden",
-      }}
-    >
+    <div>
       {/* Message thread */}
       <div
         style={{
@@ -144,8 +139,8 @@ export function PropertyFeed({
                 width: "44px",
                 height: "44px",
                 borderRadius: "50%",
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(15,28,40,0.05)",
+                border: "1px solid rgba(15,28,40,0.07)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -154,21 +149,22 @@ export function PropertyFeed({
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: "20px", color: "rgba(237,232,225,0.20)" }}
+                style={{ fontSize: "20px", color: "rgba(15,28,40,0.22)" }}
               >
                 chat_bubble_outline
               </span>
             </div>
             <p
               style={{
-                color: "rgba(237,232,225,0.42)",
+                color: "rgba(15,28,40,0.45)",
                 fontSize: "14px",
                 lineHeight: "1.6",
                 maxWidth: "320px",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
-              No updates yet. Ebin will post here when there&apos;s something to share about your property.
+              No updates yet. Ebin will post here when there&apos;s something to share about your
+              property.
             </p>
           </div>
         ) : (
@@ -180,19 +176,20 @@ export function PropertyFeed({
       </div>
 
       {/* Divider */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }} />
+      <div style={{ borderTop: "1px solid rgba(15,28,40,0.07)" }} />
 
       {/* Compose area */}
       <div style={{ padding: "16px 20px" }}>
         {error && (
           <p
             style={{
-              color: "#f87171",
+              color: "#B91C1C",
               fontSize: "13px",
               marginBottom: "10px",
               padding: "8px 12px",
-              background: "rgba(248,113,113,0.10)",
+              background: "rgba(185,28,28,0.08)",
               borderRadius: "8px",
+              fontFamily: "var(--font-dm-sans)",
             }}
           >
             {error}
@@ -211,9 +208,9 @@ export function PropertyFeed({
               padding: "10px 14px",
               fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
-              color: "#EDE8E1",
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.07)",
+              color: "#0F1C28",
+              background: "rgba(15,28,40,0.04)",
+              border: "1px solid rgba(15,28,40,0.08)",
               borderRadius: "10px",
               outline: "none",
               lineHeight: "1.5",
@@ -225,8 +222,8 @@ export function PropertyFeed({
             style={{
               padding: "10px 18px",
               borderRadius: "10px",
-              background: sending || !draft.trim() ? "rgba(255,255,255,0.06)" : "#8B2030",
-              color: sending || !draft.trim() ? "rgba(237,232,225,0.20)" : "#EDE8E1",
+              background: sending || !draft.trim() ? "rgba(15,28,40,0.06)" : "#8B2030",
+              color: sending || !draft.trim() ? "rgba(15,28,40,0.25)" : "#FFFFFF",
               border: "none",
               cursor: sending || !draft.trim() ? "not-allowed" : "pointer",
               fontSize: "13px",
@@ -239,7 +236,14 @@ export function PropertyFeed({
             {sending ? "Sending…" : "Send"}
           </button>
         </div>
-        <p style={{ color: "rgba(237,232,225,0.20)", fontSize: "11px", marginTop: "8px" }}>
+        <p
+          style={{
+            color: "rgba(15,28,40,0.22)",
+            fontSize: "11px",
+            marginTop: "8px",
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
           Cmd+Enter to send
         </p>
       </div>
@@ -273,8 +277,8 @@ function MessageBubble({
           height: "32px",
           borderRadius: "50%",
           background: isEbin
-            ? "linear-gradient(135deg, #8B2030, #a02540)"
-            : "rgba(255,255,255,0.08)",
+            ? "linear-gradient(135deg, #8B2030, #C9A84C)"
+            : "rgba(15,28,40,0.08)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -284,10 +288,10 @@ function MessageBubble({
       >
         <span
           style={{
-            color: isEbin ? "#FFFFFF" : "rgba(237,232,225,0.42)",
+            color: isEbin ? "#FFFFFF" : "rgba(15,28,40,0.55)",
             fontWeight: 700,
             fontSize: "13px",
-            fontFamily: "var(--font-outfit)",
+            fontFamily: "var(--font-dm-sans)",
           }}
         >
           {isEbin ? "E" : ownerInitial.toUpperCase()}
@@ -310,7 +314,7 @@ function MessageBubble({
             style={{
               fontSize: "12px",
               fontWeight: 600,
-              color: "rgba(237,232,225,0.42)",
+              color: "rgba(15,28,40,0.45)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -319,12 +323,18 @@ function MessageBubble({
           {icon && (
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: "13px", color: "rgba(237,232,225,0.42)" }}
+              style={{ fontSize: "13px", color: "rgba(15,28,40,0.30)" }}
             >
               {icon}
             </span>
           )}
-          <span style={{ fontSize: "11px", color: "rgba(237,232,225,0.20)" }}>
+          <span
+            style={{
+              fontSize: "11px",
+              color: "rgba(15,28,40,0.22)",
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
             {formatTimestamp(message.created_at)}
           </span>
         </div>
@@ -334,15 +344,15 @@ function MessageBubble({
           style={{
             padding: "10px 14px",
             borderRadius: isEbin ? "4px 12px 12px 12px" : "12px 4px 12px 12px",
-            background: isEbin ? "rgba(255,255,255,0.05)" : "rgba(139,32,48,0.15)",
-            border: isEbin ? "none" : "1px solid rgba(139,32,48,0.25)",
+            background: isEbin ? "rgba(15,28,40,0.04)" : "rgba(139,32,48,0.08)",
+            border: isEbin ? "1px solid rgba(15,28,40,0.06)" : "1px solid rgba(139,32,48,0.15)",
           }}
         >
           <p
             style={{
               fontSize: "14px",
               lineHeight: "1.6",
-              color: "#EDE8E1",
+              color: "#0F1C28",
               margin: 0,
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",

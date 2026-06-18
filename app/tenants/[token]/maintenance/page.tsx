@@ -9,17 +9,23 @@ import TenantHeader from "@/components/tenants/TenantHeader";
 import { TenantMobileNav } from "@/components/tenants/TenantMobileNav";
 import MaintenanceWizard from "@/components/tenants/MaintenanceWizard";
 
-const PAGE_BG = "#090E17";
-const CARD = "#0D1825";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const DIVIDER = "rgba(255,255,255,0.05)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const TEXT_DIM = "rgba(237,232,225,0.20)";
-const GREEN = "#34d399";
-const AMBER = "#fbbf24";
-const BLUE = "#60a5fa";
-const PURPLE = "#a78bfa";
+const BG = "#F5F4F1";
+const CARD = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY = "#0F1C28";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const BLUE = "#1D4ED8";
+const BLUE_BG = "rgba(29,78,216,0.08)";
+const PURPLE = "#7C3AED";
+const PURPLE_BG = "rgba(124,58,237,0.08)";
+const RADIUS = "20px";
+const RADIUS_SM = "12px";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -27,20 +33,12 @@ interface Props {
 
 export const revalidate = 0;
 
-function statusColor(status: string): string {
-  if (status === "submitted") return BLUE;
-  if (status === "acknowledged") return AMBER;
-  if (status === "scheduled") return PURPLE;
-  if (status === "resolved") return GREEN;
-  return TEXT_SEC;
-}
-
-function statusLabel(status: string): string {
-  if (status === "submitted") return "Submitted";
-  if (status === "acknowledged") return "Acknowledged";
-  if (status === "scheduled") return "Scheduled";
-  if (status === "resolved") return "Resolved";
-  return status;
+function statusStyle(status: string): { color: string; bg: string; label: string } {
+  if (status === "submitted") return { color: BLUE, bg: BLUE_BG, label: "Submitted" };
+  if (status === "acknowledged") return { color: AMBER, bg: AMBER_BG, label: "Acknowledged" };
+  if (status === "scheduled") return { color: PURPLE, bg: PURPLE_BG, label: "Scheduled" };
+  if (status === "resolved") return { color: GREEN, bg: GREEN_BG, label: "Resolved" };
+  return { color: MUTED, bg: "rgba(15,28,40,0.05)", label: status };
 }
 
 export default async function MaintenancePage({ params }: Props) {
@@ -66,14 +64,14 @@ export default async function MaintenancePage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: PAGE_BG }}>
+      <div style={{ minHeight: "100vh", background: BG }}>
         <TenantHeader firstName={firstName} token={token} />
 
-        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "56px 24px 120px" }}>
+        <main style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 24px 120px" }}>
 
           <Link
             href={`/tenants/${token}`}
-            style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: MUTED, fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "28px", fontFamily: "var(--font-dm-sans)" }}
           >
             ← Home
           </Link>
@@ -81,9 +79,9 @@ export default async function MaintenancePage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(40px, 6vw, 58px)",
+              fontSize: "clamp(40px, 6vw, 60px)",
               fontWeight: 300,
-              color: TEXT,
+              color: NAVY,
               letterSpacing: "-0.02em",
               marginBottom: "32px",
             }}
@@ -93,39 +91,34 @@ export default async function MaintenancePage({ params }: Props) {
 
           {/* Open requests */}
           {openRequests.length > 0 && (
-            <div style={{ marginBottom: "40px" }}>
+            <div style={{ marginBottom: "36px" }}>
               <p
                 style={{
                   fontSize: "11px",
                   fontFamily: "var(--font-dm-sans)",
-                  color: TEXT_DIM,
+                  color: SUBTLE,
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                   marginBottom: "14px",
+                  fontWeight: 600,
                 }}
               >
                 Open Requests
               </p>
-              <div
-                style={{
-                  background: CARD,
-                  border: `1px solid ${CARD_BORDER}`,
-                  borderRadius: "22px",
-                  overflow: "hidden",
-                }}
-              >
-                {openRequests.map((req, idx) => (
-                  <div
-                    key={req.id}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "14px",
-                      padding: "18px 20px",
-                      borderBottom: idx < openRequests.length - 1 ? `1px solid ${DIVIDER}` : "none",
-                    }}
-                  >
-                    <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {openRequests.map((req) => {
+                  const st = statusStyle(req.status);
+                  return (
+                    <div
+                      key={req.id}
+                      style={{
+                        background: CARD,
+                        border: `1px solid ${CARD_BORDER}`,
+                        borderRadius: RADIUS_SM,
+                        boxShadow: CARD_SHADOW,
+                        padding: "16px 20px",
+                      }}
+                    >
                       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap", marginBottom: "6px" }}>
                         <span
                           style={{
@@ -135,8 +128,8 @@ export default async function MaintenancePage({ params }: Props) {
                             fontSize: "11px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
-                            background: "rgba(255,255,255,0.06)",
-                            color: TEXT_SEC,
+                            background: "rgba(15,28,40,0.05)",
+                            color: MUTED,
                           }}
                         >
                           {req.category}
@@ -149,35 +142,35 @@ export default async function MaintenancePage({ params }: Props) {
                             fontSize: "11px",
                             fontWeight: 600,
                             fontFamily: "var(--font-dm-sans)",
-                            background: `${statusColor(req.status)}18`,
-                            color: statusColor(req.status),
+                            background: st.bg,
+                            color: st.color,
                           }}
                         >
-                          {statusLabel(req.status)}
+                          {st.label}
                         </span>
                       </div>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT, marginBottom: "4px", lineHeight: "1.5", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: NAVY, marginBottom: "4px", lineHeight: "1.5", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {req.description}
                       </p>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: TEXT_DIM }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED }}>
                         Submitted {new Date(req.created_at).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
                       </p>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
 
-          {/* New request */}
+          {/* Submit new request */}
           <div>
             <p
               style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: "20px",
-                fontWeight: 600,
-                color: TEXT,
-                marginBottom: "20px",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "18px",
+                fontWeight: 700,
+                color: NAVY,
+                marginBottom: "16px",
               }}
             >
               Submit a New Request
@@ -186,7 +179,8 @@ export default async function MaintenancePage({ params }: Props) {
               style={{
                 background: CARD,
                 border: `1px solid ${CARD_BORDER}`,
-                borderRadius: "22px",
+                borderRadius: RADIUS,
+                boxShadow: CARD_SHADOW,
                 padding: "28px",
               }}
             >

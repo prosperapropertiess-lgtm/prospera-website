@@ -2,18 +2,24 @@
 
 import { useState } from "react";
 
-const CARD = "#0D1825";
-const CARD_HOVER = "#111F2E";
-const CARD_BORDER = "rgba(255,255,255,0.07)";
-const TEXT = "#EDE8E1";
-const TEXT_SEC = "rgba(237,232,225,0.42)";
-const TEXT_DIM = "rgba(237,232,225,0.20)";
-const GREEN = "#34d399";
-const AMBER = "#fbbf24";
-const BLUE = "#60a5fa";
-const PURPLE = "#a78bfa";
-const PINK = "#f472b6";
-const CRIMSON = "#8B2030";
+// Design tokens
+const NAVY = "#0F1C28";
+const NAVY_MED = "#2A3D4F";
+const MUTED = "rgba(15,28,40,0.45)";
+const SUBTLE = "rgba(15,28,40,0.22)";
+const BURGUNDY = "#8B2030";
+const BURG_BG = "rgba(139,32,48,0.08)";
+const BURG_BORDER = "rgba(139,32,48,0.20)";
+const GREEN = "#0A7A52";
+const GREEN_BG = "rgba(10,122,82,0.09)";
+const AMBER = "#B45309";
+const AMBER_BG = "rgba(180,83,9,0.09)";
+const BLUE = "#1D4ED8";
+const BLUE_BG = "rgba(29,78,216,0.08)";
+const RED = "#B91C1C";
+const RED_BG = "rgba(185,28,28,0.08)";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
 
 type WizardState = "category" | "describe" | "diagnosing" | "troubleshoot" | "submit" | "done";
 type DoneVariant = "resolved" | "submitted";
@@ -23,15 +29,16 @@ interface CategoryOption {
   label: string;
   icon: string;
   color: string;
+  bg: string;
 }
 
 const CATEGORIES: CategoryOption[] = [
-  { id: "Plumbing", label: "Plumbing", icon: "water_drop", color: BLUE },
-  { id: "Electrical", label: "Electrical", icon: "bolt", color: AMBER },
-  { id: "Appliances", label: "Appliances", icon: "kitchen", color: PURPLE },
-  { id: "HVAC / Heating", label: "HVAC / Heating", icon: "thermostat", color: PINK },
-  { id: "Pest / Rodents", label: "Pest / Rodents", icon: "pest_control", color: GREEN },
-  { id: "Other", label: "Other", icon: "build", color: TEXT_SEC },
+  { id: "Plumbing", label: "Plumbing", icon: "water_drop", color: BLUE, bg: BLUE_BG },
+  { id: "Electrical", label: "Electrical", icon: "bolt", color: AMBER, bg: AMBER_BG },
+  { id: "Appliances", label: "Appliances", icon: "kitchen", color: GREEN, bg: GREEN_BG },
+  { id: "HVAC / Heating", label: "HVAC / Heating", icon: "thermostat", color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  { id: "Pest / Rodents", label: "Pest / Rodents", icon: "pest_control", color: GREEN, bg: GREEN_BG },
+  { id: "Other", label: "Other", icon: "build", color: MUTED, bg: "rgba(15,28,40,0.05)" },
 ];
 
 interface Props {
@@ -117,14 +124,14 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
   if (state === "category") {
     return (
       <div>
-        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT_SEC, marginBottom: "20px" }}>
+        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: MUTED, marginBottom: "20px" }}>
           What type of issue are you experiencing?
         </p>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "12px",
+            gap: "10px",
           }}
         >
           {CATEGORIES.map((cat) => (
@@ -132,25 +139,26 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
               key={cat.id}
               onClick={() => { setCategory(cat.id); setState("describe"); }}
               style={{
-                background: CARD,
+                background: "#FFFFFF",
                 border: `1px solid ${CARD_BORDER}`,
                 borderRadius: "16px",
-                padding: "20px",
+                boxShadow: CARD_SHADOW,
+                padding: "18px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                gap: "12px",
+                gap: "10px",
                 cursor: "pointer",
                 textAlign: "left",
-                transition: "background 0.15s, border-color 0.15s",
+                transition: "border-color 0.15s, box-shadow 0.15s",
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = CARD_HOVER;
-                (e.currentTarget as HTMLElement).style.borderColor = `${cat.color}40`;
+                (e.currentTarget as HTMLElement).style.borderColor = BURG_BORDER;
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(15,28,40,0.08), 0 16px 40px rgba(15,28,40,0.10)";
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = CARD;
                 (e.currentTarget as HTMLElement).style.borderColor = CARD_BORDER;
+                (e.currentTarget as HTMLElement).style.boxShadow = CARD_SHADOW;
               }}
             >
               <div
@@ -158,7 +166,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
                   width: "36px",
                   height: "36px",
                   borderRadius: "10px",
-                  background: `${cat.color}18`,
+                  background: cat.bg,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -168,7 +176,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
                   {cat.icon}
                 </span>
               </div>
-              <span style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: TEXT }}>
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 700, color: NAVY }}>
                 {cat.label}
               </span>
             </button>
@@ -184,7 +192,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
           <button
             onClick={() => setState("category")}
-            style={{ background: "none", border: "none", color: TEXT_SEC, cursor: "pointer", fontSize: "13px", fontFamily: "var(--font-dm-sans)", padding: 0 }}
+            style={{ background: "none", border: "none", color: MUTED, cursor: "pointer", fontSize: "13px", fontFamily: "var(--font-dm-sans)", padding: 0 }}
           >
             ← Back
           </button>
@@ -192,11 +200,12 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             style={{
               padding: "3px 12px",
               borderRadius: "100px",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.09)",
+              background: BURG_BG,
+              border: `1px solid ${BURG_BORDER}`,
               fontSize: "12px",
               fontFamily: "var(--font-dm-sans)",
-              color: TEXT_SEC,
+              color: BURGUNDY,
+              fontWeight: 600,
             }}
           >
             {category}
@@ -204,7 +213,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
         </div>
 
         {error && (
-          <p style={{ color: "#f87171", fontSize: "13px", marginBottom: "12px", padding: "8px 12px", background: "rgba(248,113,113,0.10)", borderRadius: "8px", fontFamily: "var(--font-dm-sans)" }}>
+          <p style={{ color: RED, fontSize: "13px", marginBottom: "12px", padding: "10px 14px", background: RED_BG, borderRadius: "10px", fontFamily: "var(--font-dm-sans)" }}>
             {error}
           </p>
         )}
@@ -220,8 +229,8 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             padding: "14px 16px",
             fontSize: "14px",
             fontFamily: "var(--font-dm-sans)",
-            color: TEXT,
-            background: CARD,
+            color: NAVY,
+            background: "#FAFAF9",
             border: `1px solid ${CARD_BORDER}`,
             borderRadius: "12px",
             outline: "none",
@@ -236,8 +245,8 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
           style={{
             padding: "12px 24px",
             borderRadius: "12px",
-            background: description.trim().length >= 10 ? CRIMSON : "rgba(255,255,255,0.06)",
-            color: description.trim().length >= 10 ? TEXT : TEXT_DIM,
+            background: description.trim().length >= 10 ? BURGUNDY : "rgba(15,28,40,0.07)",
+            color: description.trim().length >= 10 ? "#FFFFFF" : SUBTLE,
             border: "none",
             cursor: description.trim().length >= 10 ? "pointer" : "not-allowed",
             fontSize: "14px",
@@ -263,7 +272,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                background: "#C9A84C",
+                background: BURGUNDY,
                 animation: `pulse-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
               }}
             />
@@ -275,7 +284,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             40% { opacity: 1; transform: scale(1); }
           }
         `}</style>
-        <p style={{ color: TEXT_SEC, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ color: MUTED, fontSize: "15px", fontFamily: "var(--font-dm-sans)" }}>
           Laura is reviewing your issue…
         </p>
       </div>
@@ -290,11 +299,12 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             style={{
               padding: "3px 12px",
               borderRadius: "100px",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.09)",
+              background: BURG_BG,
+              border: `1px solid ${BURG_BORDER}`,
               fontSize: "12px",
               fontFamily: "var(--font-dm-sans)",
-              color: TEXT_SEC,
+              color: BURGUNDY,
+              fontWeight: 600,
             }}
           >
             {category}
@@ -304,28 +314,47 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
         {/* AI diagnosis box */}
         <div
           style={{
-            background: CARD,
-            borderLeft: `3px solid ${BLUE}`,
-            borderRadius: "12px",
+            background: BLUE_BG,
+            border: `1px solid rgba(29,78,216,0.15)`,
+            borderRadius: "14px",
             padding: "18px 20px",
             marginBottom: "24px",
+            display: "flex",
+            gap: "12px",
           }}
         >
-          <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: BLUE, marginBottom: "10px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-            Laura&apos;s Assessment
-          </p>
-          <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, lineHeight: "1.7", whiteSpace: "pre-wrap" }}>
-            {aiDiagnosis}
-          </p>
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              background: "rgba(29,78,216,0.12)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              marginTop: "2px",
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: "16px", color: BLUE }}>psychology</span>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: BLUE, marginBottom: "8px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Laura&apos;s Assessment
+            </p>
+            <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: NAVY_MED, lineHeight: "1.7", whiteSpace: "pre-wrap" }}>
+              {aiDiagnosis}
+            </p>
+          </div>
         </div>
 
         {/* Checklist */}
         {troubleshootingSteps.length > 0 && (
           <div style={{ marginBottom: "24px" }}>
-            <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, marginBottom: "14px", fontWeight: 600 }}>
+            <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: MUTED, marginBottom: "12px", fontWeight: 600 }}>
               Steps to try before requesting dispatch:
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {troubleshootingSteps.map((step, i) => {
                 const checked = checkedSteps.has(i);
                 return (
@@ -338,8 +367,8 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
                       cursor: "pointer",
                       padding: "12px 16px",
                       borderRadius: "10px",
-                      background: checked ? "rgba(52,211,153,0.06)" : "rgba(255,255,255,0.03)",
-                      border: `1px solid ${checked ? "rgba(52,211,153,0.20)" : CARD_BORDER}`,
+                      background: checked ? GREEN_BG : "rgba(15,28,40,0.03)",
+                      border: `1px solid ${checked ? "rgba(10,122,82,0.20)" : CARD_BORDER}`,
                       transition: "all 0.15s",
                     }}
                   >
@@ -355,7 +384,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
                       }}
                       style={{ marginTop: "2px", accentColor: GREEN, flexShrink: 0 }}
                     />
-                    <span style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: checked ? TEXT_SEC : TEXT, lineHeight: "1.5", textDecoration: checked ? "line-through" : "none" }}>
+                    <span style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: checked ? MUTED : NAVY, lineHeight: "1.5", textDecoration: checked ? "line-through" : "none" }}>
                       {step}
                     </span>
                   </label>
@@ -372,8 +401,8 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             style={{
               padding: "12px 20px",
               borderRadius: "12px",
-              background: "transparent",
-              border: `1px solid ${GREEN}`,
+              background: GREEN_BG,
+              border: `1px solid rgba(10,122,82,0.25)`,
               color: GREEN,
               fontSize: "14px",
               fontWeight: 600,
@@ -389,9 +418,9 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             style={{
               padding: "12px 20px",
               borderRadius: "12px",
-              background: allChecked ? CRIMSON : "rgba(255,255,255,0.06)",
+              background: allChecked ? BURGUNDY : "rgba(15,28,40,0.07)",
               border: "none",
-              color: allChecked ? TEXT : TEXT_DIM,
+              color: allChecked ? "#FFFFFF" : SUBTLE,
               fontSize: "14px",
               fontWeight: 600,
               fontFamily: "var(--font-dm-sans)",
@@ -411,21 +440,21 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
       <div>
         <button
           onClick={() => setState("troubleshoot")}
-          style={{ background: "none", border: "none", color: TEXT_SEC, cursor: "pointer", fontSize: "13px", fontFamily: "var(--font-dm-sans)", padding: 0, marginBottom: "20px" }}
+          style={{ background: "none", border: "none", color: MUTED, cursor: "pointer", fontSize: "13px", fontFamily: "var(--font-dm-sans)", padding: 0, marginBottom: "20px" }}
         >
           ← Back
         </button>
 
         <div
           style={{
-            background: CARD,
+            background: "#FAFAF9",
             border: `1px solid ${CARD_BORDER}`,
             borderRadius: "16px",
-            padding: "24px",
+            padding: "20px",
             marginBottom: "20px",
           }}
         >
-          <p style={{ fontSize: "11px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "16px" }}>
+          <p style={{ fontSize: "11px", fontFamily: "var(--font-dm-sans)", color: MUTED, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "14px", fontWeight: 600 }}>
             Request Summary
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -438,12 +467,12 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
           </div>
         </div>
 
-        <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, marginBottom: "20px", lineHeight: "1.6" }}>
+        <p style={{ fontSize: "13px", fontFamily: "var(--font-dm-sans)", color: MUTED, marginBottom: "20px", lineHeight: "1.6" }}>
           By submitting, Ebin will be notified and will schedule a contractor.
         </p>
 
         {error && (
-          <p style={{ color: "#f87171", fontSize: "13px", marginBottom: "12px", padding: "8px 12px", background: "rgba(248,113,113,0.10)", borderRadius: "8px", fontFamily: "var(--font-dm-sans)" }}>
+          <p style={{ color: RED, fontSize: "13px", marginBottom: "12px", padding: "10px 14px", background: RED_BG, borderRadius: "10px", fontFamily: "var(--font-dm-sans)" }}>
             {error}
           </p>
         )}
@@ -453,9 +482,9 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
           style={{
             padding: "14px 28px",
             borderRadius: "12px",
-            background: CRIMSON,
+            background: BURGUNDY,
             border: "none",
-            color: TEXT,
+            color: "#FFFFFF",
             fontSize: "14px",
             fontWeight: 600,
             fontFamily: "var(--font-dm-sans)",
@@ -477,8 +506,8 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             width: "56px",
             height: "56px",
             borderRadius: "50%",
-            background: "rgba(52,211,153,0.12)",
-            border: `1px solid rgba(52,211,153,0.30)`,
+            background: GREEN_BG,
+            border: `1px solid rgba(10,122,82,0.25)`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -487,10 +516,10 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
         >
           <span className="material-symbols-outlined" style={{ fontSize: "28px", color: GREEN }}>check_circle</span>
         </div>
-        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 600, color: TEXT, marginBottom: "8px" }}>
+        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "8px" }}>
           Great, glad that worked!
         </p>
-        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT_SEC }}>
+        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: MUTED }}>
           No further action needed.
         </p>
       </div>
@@ -504,22 +533,22 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
           width: "56px",
           height: "56px",
           borderRadius: "50%",
-          background: `${CRIMSON}20`,
-          border: `1px solid ${CRIMSON}50`,
+          background: BURG_BG,
+          border: `1px solid ${BURG_BORDER}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           margin: "0 auto 20px",
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#C9A84C" }}>task_alt</span>
+        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: BURGUNDY }}>task_alt</span>
       </div>
-      <p style={{ fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 600, color: TEXT, marginBottom: "8px" }}>
+      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "20px", fontWeight: 700, color: NAVY, marginBottom: "8px" }}>
         Request Submitted
       </p>
-      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: TEXT_SEC, lineHeight: "1.6" }}>
+      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: MUTED, lineHeight: "1.6" }}>
         Ebin has been notified and will be in touch.
-        {submittedId && <span style={{ display: "block", color: TEXT_DIM, fontSize: "12px", marginTop: "6px" }}>Ref: {submittedId.slice(0, 8)}</span>}
+        {submittedId && <span style={{ display: "block", color: SUBTLE, fontSize: "12px", marginTop: "6px" }}>Ref: {submittedId.slice(0, 8)}</span>}
       </p>
     </div>
   );
@@ -528,10 +557,10 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p style={{ fontSize: "11px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "2px" }}>
+      <p style={{ fontSize: "11px", fontFamily: "var(--font-dm-sans)", color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "2px", fontWeight: 600 }}>
         {label}
       </p>
-      <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: TEXT, lineHeight: "1.5" }}>
+      <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: NAVY, lineHeight: "1.5" }}>
         {value}
       </p>
     </div>

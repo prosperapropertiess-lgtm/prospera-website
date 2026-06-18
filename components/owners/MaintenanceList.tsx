@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { MaintenanceItem } from "@/lib/notion";
 
 interface Props {
@@ -8,11 +7,34 @@ interface Props {
   completed: MaintenanceItem[];
 }
 
-const PRIORITY_COLORS: Record<string, { color: string; bg: string; border: string; leftBorder: string }> = {
-  critical: { color: "#f87171", bg: "rgba(248,113,113,0.10)", border: "rgba(248,113,113,0.20)", leftBorder: "#f87171" },
-  high:     { color: "#fbbf24", bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.20)",  leftBorder: "#fbbf24" },
-  medium:   { color: "#fbbf24", bg: "rgba(251,191,36,0.08)",  border: "rgba(251,191,36,0.15)",  leftBorder: "#f59e0b" },
-  low:      { color: "rgba(237,232,225,0.35)", bg: "rgba(255,255,255,0.03)", border: "rgba(255,255,255,0.07)", leftBorder: "rgba(255,255,255,0.12)" },
+const PRIORITY_STYLE: Record<
+  string,
+  { color: string; bg: string; border: string; leftBorder: string }
+> = {
+  critical: {
+    color: "#B91C1C",
+    bg: "rgba(185,28,28,0.08)",
+    border: "rgba(185,28,28,0.18)",
+    leftBorder: "#B91C1C",
+  },
+  high: {
+    color: "#B45309",
+    bg: "rgba(180,83,9,0.09)",
+    border: "rgba(180,83,9,0.18)",
+    leftBorder: "#B45309",
+  },
+  medium: {
+    color: "#B45309",
+    bg: "rgba(180,83,9,0.06)",
+    border: "rgba(180,83,9,0.12)",
+    leftBorder: "#B45309",
+  },
+  low: {
+    color: "rgba(15,28,40,0.45)",
+    bg: "rgba(15,28,40,0.04)",
+    border: "rgba(15,28,40,0.07)",
+    leftBorder: "rgba(15,28,40,0.14)",
+  },
 };
 
 export function MaintenanceList({ open, completed }: Props) {
@@ -22,15 +44,25 @@ export function MaintenanceList({ open, completed }: Props) {
         style={{
           padding: "24px",
           textAlign: "center",
-          background: "rgba(52,211,153,0.08)",
-          border: "1px solid rgba(52,211,153,0.15)",
+          background: "rgba(10,122,82,0.05)",
+          border: "1px solid rgba(10,122,82,0.12)",
           borderRadius: "14px",
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#34d399", display: "block", marginBottom: "6px" }}>
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: "28px", color: "#0A7A52", display: "block", marginBottom: "6px" }}
+        >
           check_circle
         </span>
-        <p style={{ color: "#34d399", fontSize: "13px", fontWeight: 500 }}>
+        <p
+          style={{
+            color: "#0A7A52",
+            fontSize: "13px",
+            fontWeight: 500,
+            fontFamily: "var(--font-dm-sans)",
+          }}
+        >
           No open maintenance issues
         </p>
       </div>
@@ -39,20 +71,18 @@ export function MaintenanceList({ open, completed }: Props) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {open.map((item, i) => {
-        const p = PRIORITY_COLORS[(item.priority ?? "low").toLowerCase()] ?? PRIORITY_COLORS.low;
+      {open.map((item) => {
+        const p =
+          PRIORITY_STYLE[(item.priority ?? "low").toLowerCase()] ?? PRIORITY_STYLE.low;
         return (
-          <motion.div
+          <div
             key={item.id}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.05 }}
             style={{
               display: "flex",
               alignItems: "flex-start",
               gap: "12px",
-              padding: "14px",
-              background: "#0D1825",
+              padding: "14px 16px",
+              background: p.bg,
               border: `1px solid ${p.border}`,
               borderLeft: `4px solid ${p.leftBorder}`,
               borderRadius: "12px",
@@ -60,31 +90,54 @@ export function MaintenanceList({ open, completed }: Props) {
           >
             <div
               style={{
-                padding: "4px 8px",
+                padding: "3px 8px",
                 borderRadius: "6px",
-                background: p.bg,
+                background: "rgba(255,255,255,0.70)",
                 border: `1px solid ${p.border}`,
                 flexShrink: 0,
               }}
             >
-              <span style={{ color: p.color, fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+              <span
+                style={{
+                  color: p.color,
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
                 {item.priority}
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ color: "#EDE8E1", fontSize: "13px", fontWeight: 500, marginBottom: "2px" }}>
+              <p
+                style={{
+                  color: "#0F1C28",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                  marginBottom: "2px",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
                 {item.issue}
               </p>
-              <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "11px" }}>
+              <p
+                style={{
+                  color: "rgba(15,28,40,0.45)",
+                  fontSize: "11px",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
                 {item.category}
                 {item.daysPending != null && ` · ${item.daysPending}d pending`}
               </p>
             </div>
-          </motion.div>
+          </div>
         );
       })}
 
-      {completed.map((item, i) => (
+      {completed.map((item) => (
         <div
           key={item.id}
           style={{
@@ -92,21 +145,41 @@ export function MaintenanceList({ open, completed }: Props) {
             alignItems: "center",
             gap: "12px",
             padding: "12px 14px",
-            background: "rgba(255,255,255,0.03)",
+            background: "rgba(10,122,82,0.05)",
             borderRadius: "12px",
           }}
         >
-          <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#16a34a", flexShrink: 0 }}>
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: "16px", color: "#0A7A52", flexShrink: 0 }}
+          >
             check_circle
           </span>
           <div style={{ flex: 1 }}>
-            <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "line-through" }}>
+            <p
+              style={{
+                color: "rgba(15,28,40,0.45)",
+                fontSize: "13px",
+                textDecoration: "line-through",
+                fontFamily: "var(--font-dm-sans)",
+              }}
+            >
               {item.issue}
             </p>
           </div>
-          <span style={{ color: "#16a34a", fontSize: "11px" }}>
+          <span
+            style={{
+              color: "#0A7A52",
+              fontSize: "11px",
+              fontFamily: "var(--font-dm-sans)",
+              fontWeight: 600,
+            }}
+          >
             {item.dateCompleted
-              ? new Date(item.dateCompleted).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
+              ? new Date(item.dateCompleted).toLocaleDateString("en-CA", {
+                  month: "short",
+                  day: "numeric",
+                })
               : "Done"}
           </span>
         </div>
