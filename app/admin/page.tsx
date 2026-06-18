@@ -54,6 +54,12 @@ const cards = [
     description: "Track search impressions, rankings, and top queries from Google Search Console",
     cta: "View SEO stats",
   },
+  {
+    href: "/admin/messages",
+    label: "Owner Messages",
+    description: "Post updates to landlord portals — tenant notes, maintenance updates, and general communications",
+    cta: "Post update",
+  },
 ];
 
 function getGreeting() {
