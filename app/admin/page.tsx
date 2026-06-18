@@ -13,6 +13,12 @@ const ACCENT = "#C4374A";
 
 const cards = [
   {
+    href: "/admin/onboard",
+    label: "Onboarding",
+    description: "Add new landlords, send welcome emails, and track each step of the onboarding process",
+    cta: "Manage onboarding",
+  },
+  {
     href: "/admin/leads",
     label: "Leads",
     description: "Every contact form submission and subscriber — with email, source, and one-click reply",
