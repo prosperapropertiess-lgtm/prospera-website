@@ -13,6 +13,8 @@ import { MobileNav } from "@/components/owners/MobileNav";
 import OwnerHeader from "@/components/owners/OwnerHeader";
 import { PropertyFeed } from "@/components/owners/PropertyFeed";
 import type { PropertyMessage } from "@/components/owners/PropertyFeed";
+import { DocumentList } from "@/components/owners/DocumentList";
+import type { OwnerDocument } from "@/components/owners/DocumentList";
 
 interface Props {
   params: Promise<{ token: string; propertyId: string }>;
@@ -115,6 +117,14 @@ export default async function PropertyDetailPage({ params }: Props) {
     .filter(r => !isPaidStatus(r.paymentStatus ?? ""))
     .reduce((s, r) => s + (r.amountDue ?? 0), 0);
   const allPaid = totalCount > 0 && paidCount === totalCount;
+
+  // Fetch initial documents
+  const { data: initialDocuments } = await getSupabaseAdmin()
+    .from("owner_documents")
+    .select("id, label, category, file_name, file_size, mime_type, uploaded_at")
+    .eq("property_id", property.id)
+    .order("uploaded_at", { ascending: false })
+    .limit(50);
 
   // Fetch initial messages for the feed
   const { data: initialMessages } = await getSupabaseAdmin()
@@ -479,6 +489,16 @@ export default async function PropertyDetailPage({ params }: Props) {
           <section style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>12-Month Summary</SectionLabel></ScrollReveal>
             <FinancialTable history={history} currentMonth={dashboard.currentMonth} currentYear={dashboard.currentYear} />
+          </section>
+
+          {/* Documents */}
+          <section style={{ marginBottom: "72px" }}>
+            <ScrollReveal><SectionLabel>Documents</SectionLabel></ScrollReveal>
+            <DocumentList
+              propertyId={property.id}
+              token={token}
+              initialDocuments={(initialDocuments ?? []) as OwnerDocument[]}
+            />
           </section>
 
           {/* Updates */}

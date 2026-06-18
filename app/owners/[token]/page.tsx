@@ -98,10 +98,10 @@ export default async function OwnerHomePage({ params }: Props) {
     {
       icon: "folder",
       label: "Documents",
-      subtitle: "Coming soon",
-      href: null,
+      subtitle: "Leases, reports & notices",
+      href: propertyHref,
       accentColor: null as string | null,
-      disabled: true,
+      disabled: false,
     },
   ];
 

@@ -60,6 +60,12 @@ const cards = [
     description: "Post updates to landlord portals — tenant notes, maintenance updates, and general communications",
     cta: "Post update",
   },
+  {
+    href: "/admin/documents",
+    label: "Documents",
+    description: "Upload leases, inspection reports, and notices to owner portals",
+    cta: "Manage documents",
+  },
 ];
 
 function getGreeting() {
