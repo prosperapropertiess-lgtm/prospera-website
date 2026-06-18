@@ -1270,25 +1270,36 @@ export function onboardEmail3AgreementSigned(data: {
   ownerName: string;
   propertyAddress: string;
   signedAt: string;
-  calendlyUrl?: string;
+  agreementUrl?: string;
 }): string {
-  const bookingLink = data.calendlyUrl
-    ?? `mailto:hello@prosperaproperties.co?subject=Key%20Handover%20%E2%80%94%20${encodeURIComponent(data.propertyAddress)}`;
+  const firstName = data.ownerName.split(" ")[0];
+  const signedDate = new Date(data.signedAt).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+
   return wrapper(`
-    ${heroCard("Agreement confirmed. ✓", "Let's meet at the property.")}
+    <p style="margin:0 0 4px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">Prospera Properties</p>
+    <p style="margin:0 0 4px;font-family:${FONT};font-size:26px;font-weight:700;color:${NAVY};line-height:1.2;">Agreement signed, ${firstName}.</p>
+    <p style="margin:0 0 28px;font-family:${FONT};font-size:16px;color:${MUTED};line-height:1.6;">${data.propertyAddress}</p>
 
-    ${onboardProgressBar(5, "Management agreement signed")}
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Your management agreement is signed and on file. Ebin has been notified and will reach out shortly to arrange a time to meet at the property, collect the keys, and do the initial walkthrough — usually 30–45 minutes.</p>
 
-    ${noteBox(`Signed by ${data.ownerName} on ${new Date(data.signedAt).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}. Saved to your file.`, "Agreement on record")}
+    ${noteBox(`Signed by ${data.ownerName} · ${signedDate}`, "Agreement on record")}
 
-    <p style="margin:20px 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      Next step: let's meet at the property to collect the keys, do a quick walkthrough, and complete the initial inspection. Usually 30–45 minutes.
-    </p>
-
-    ${cta("Book Your Key Handover →", bookingLink)}
+    ${data.agreementUrl ? `
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0 32px;">
+      <tr>
+        <td style="background:#f6f4f1;border-radius:12px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;">
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation"><tr>
+            <td style="font-family:${FONT};font-size:15px;color:${TEXT};font-weight:600;">📄 &nbsp;Management Agreement.pdf</td>
+            <td align="right" style="white-space:nowrap;">
+              <a href="${data.agreementUrl}" style="font-family:${FONT};font-size:14px;font-weight:700;color:${CRIMSON};text-decoration:none;">Download →</a>
+            </td>
+          </tr></table>
+        </td>
+      </tr>
+    </table>` : ""}
 
     ${divider()}
-    ${signoff()}
+    <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.9;">Nothing else needed from you right now. I'll be in touch soon.<br><br>&#8212; Ebin &nbsp;&middot;&nbsp; (519) 697-1227</p>
   `);
 }
 
@@ -1426,11 +1437,20 @@ export function onboardEmail8Welcome(data: {
       { label: "Your personal dashboard is ready", done: true },
     ])}
 
-    ${cta("Access Your Dashboard →", data.dashboardUrl)}
+    ${cta("Open Your Owner Dashboard →", data.dashboardUrl)}
 
-    <p style="margin:8px 0 24px;text-align:center;font-family:${FONT};font-size:12px;color:${MUTED};">
-      Bookmark this link — it's yours forever.
-    </p>
+    <!-- Homescreen + bookmark tip -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0 32px;">
+      <tr>
+        <td style="background:#f6f4f1;border-radius:12px;padding:20px 24px;">
+          <p style="margin:0 0 12px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${MUTED};">Save this for quick access</p>
+          <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+            <tr><td style="padding:4px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">📱 &nbsp;<strong>Add to home screen</strong> — open the dashboard in your browser, tap Share → "Add to Home Screen" (iPhone) or the three-dot menu → "Add to Home Screen" (Android)</td></tr>
+            <tr><td style="padding:4px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">⭐ &nbsp;<strong>Bookmark this email</strong> — it has your personal dashboard link. Keep it somewhere you can find it.</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
 
     ${data.checkInDate
       ? noteBox(`I'll reach out on ${data.checkInDate} for our first check-in. Until then, my direct line is always open.`, "30-Day Check-In")

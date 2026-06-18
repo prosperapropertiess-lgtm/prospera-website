@@ -223,6 +223,7 @@ export async function POST(
           ownerName: session.owner_name || "there",
           propertyAddress: session.property_address || "your property",
           signedAt,
+          agreementUrl: `${BASE_URL}/api/onboard/${token}/agreement`,
         });
         await sendEmail(
           session.owner_email,
