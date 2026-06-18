@@ -1,0 +1,24 @@
+{
+  "name": "My Prospera Portal",
+  "short_name": "My Portal",
+  "description": "Your tenant portal — payments, maintenance, documents & more.",
+  "start_url": "/tenants",
+  "display": "standalone",
+  "background_color": "#090E17",
+  "theme_color": "#090E17",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

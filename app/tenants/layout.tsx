@@ -18,9 +18,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tenant Portal — Prospera Properties",
-  description: "Manage your tenancy, payments, and maintenance requests.",
+  title: "My Portal — Prospera Properties",
+  description: "Your tenant portal — payments, documents, maintenance & more.",
   robots: { index: false, follow: false },
+  manifest: "/tenant-manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "My Portal",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function TenantsLayout({ children }: { children: ReactNode }) {
