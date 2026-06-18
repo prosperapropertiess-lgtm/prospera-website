@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   title: "My Portal — Prospera Properties",
   description: "Your tenant portal — payments, documents, maintenance & more.",
   robots: { index: false, follow: false },
-  manifest: "/tenant-manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

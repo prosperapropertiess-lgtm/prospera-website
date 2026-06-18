@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+
+export async function generateMetadata({ params }: { params: Promise<{ token: string }> }): Promise<Metadata> {
+  const { token } = await params;
+  return {
+    manifest: `/tenants/${token}/manifest.json`,
+  };
+}
 import {
   validateTenantToken,
   getTenantInfo,
