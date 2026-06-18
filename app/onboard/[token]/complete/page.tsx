@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { Balloons, type BalloonsRef } from "@/components/ui/balloons";
+
 const BG          = "#F5F4F1";
 const CARD        = "#FFFFFF";
 const CARD_BORDER = "rgba(15,28,40,0.07)";
@@ -5,7 +10,6 @@ const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.0
 const NAVY        = "#0F1C28";
 const MUTED       = "rgba(15,28,40,0.60)";
 const SUBTLE      = "rgba(15,28,40,0.42)";
-const BURGUNDY    = "#8B2030";
 const GREEN       = "#0A7A52";
 const GREEN_BG    = "rgba(10,122,82,0.09)";
 
@@ -24,6 +28,16 @@ const NEXT_STEPS = [
 ];
 
 export default function OnboardCompletePage() {
+  const balloonsRef = useRef<BalloonsRef>(null);
+
+  useEffect(() => {
+    // Fire balloons after the page animations settle
+    const t = setTimeout(() => {
+      balloonsRef.current?.launch();
+    }, 900);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div style={{
       minHeight: "100vh",
@@ -34,8 +48,8 @@ export default function OnboardCompletePage() {
     }}>
       <style>{`
         * { box-sizing: border-box; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes checkIn { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes checkIn { from { opacity: 0; transform: scale(0.7); }       to { opacity: 1; transform: scale(1); } }
         .check-item { animation: fadeUp 0.5s ease both; }
         .check-item:nth-child(1) { animation-delay: 0.3s; }
         .check-item:nth-child(2) { animation-delay: 0.45s; }
@@ -44,9 +58,12 @@ export default function OnboardCompletePage() {
         .check-item:nth-child(5) { animation-delay: 0.9s; }
       `}</style>
 
+      {/* Balloons canvas — renders over the page via balloons-js portaling */}
+      <Balloons ref={balloonsRef} />
+
       {/* 100% green progress bar */}
       <div style={{ height: 4, background: "rgba(15,28,40,0.08)" }}>
-        <div style={{ height: "100%", width: "100%", background: GREEN, transition: "width 0.8s ease" }} />
+        <div style={{ height: "100%", width: "100%", background: GREEN }} />
       </div>
 
       {/* Header */}
@@ -63,8 +80,7 @@ export default function OnboardCompletePage() {
             width: 72, height: 72, borderRadius: "50%",
             background: GREEN_BG,
             display: "flex", alignItems: "center", justifyContent: "center",
-            marginBottom: 28,
-            fontSize: 32, color: GREEN,
+            marginBottom: 28, fontSize: 32, color: GREEN,
             animation: "checkIn 0.5s ease 0.1s both",
           }}>
             ✓
@@ -99,13 +115,9 @@ export default function OnboardCompletePage() {
 
           {/* What happens next */}
           <div style={{
-            background: CARD,
-            border: `1px solid ${CARD_BORDER}`,
-            boxShadow: CARD_SHADOW,
-            borderRadius: 20,
-            padding: "24px",
-            marginBottom: 24,
-            animation: "fadeUp 0.5s ease 1.1s both",
+            background: CARD, border: `1px solid ${CARD_BORDER}`,
+            boxShadow: CARD_SHADOW, borderRadius: 20, padding: "24px",
+            marginBottom: 24, animation: "fadeUp 0.5s ease 1.1s both",
           }}>
             <p style={{ margin: "0 0 18px", fontSize: 11, fontWeight: 700, color: SUBTLE, letterSpacing: "0.07em", textTransform: "uppercase" }}>
               What happens next
@@ -134,28 +146,22 @@ export default function OnboardCompletePage() {
           <div style={{ animation: "fadeUp 0.5s ease 1.2s both" }}>
             <p style={{ margin: "0 0 10px", fontSize: 13, color: SUBTLE }}>Questions? Reach Ebin directly:</p>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <a
-                href="mailto:prosperapropertiess@gmail.com"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 6,
-                  background: CARD, border: `1px solid ${CARD_BORDER}`,
-                  boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
-                  borderRadius: 10, padding: "9px 14px",
-                  fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500,
-                }}
-              >
+              <a href="mailto:prosperapropertiess@gmail.com" style={{
+                display: "inline-flex", alignItems: "center",
+                background: CARD, border: `1px solid ${CARD_BORDER}`,
+                boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
+                borderRadius: 10, padding: "9px 14px",
+                fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500,
+              }}>
                 prosperapropertiess@gmail.com
               </a>
-              <a
-                href="tel:5196971227"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 6,
-                  background: CARD, border: `1px solid ${CARD_BORDER}`,
-                  boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
-                  borderRadius: 10, padding: "9px 14px",
-                  fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500,
-                }}
-              >
+              <a href="tel:5196971227" style={{
+                display: "inline-flex", alignItems: "center",
+                background: CARD, border: `1px solid ${CARD_BORDER}`,
+                boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
+                borderRadius: 10, padding: "9px 14px",
+                fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500,
+              }}>
                 (519) 697-1227
               </a>
             </div>
