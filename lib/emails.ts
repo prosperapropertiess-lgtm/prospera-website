@@ -62,6 +62,7 @@ function md(text: string): string {
 
 function wrapper(content: string): string {
   const year = new Date().getFullYear();
+  const BG_OUTER = "#F5F4F1";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,12 +73,12 @@ function wrapper(content: string): string {
   <title>Prospera Properties</title>
   <style>
     :root { color-scheme: light only; supported-color-schemes: light only; }
-    body { background-color: ${NAVY} !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: ${BG_OUTER} !important; margin: 0 !important; padding: 0 !important; }
     @media only screen and (max-width: 620px) {
       .outer-pad  { padding: 0 !important; }
       .body-pad   { padding: 36px 24px 40px !important; }
-      .header-pad { padding: 20px 24px !important; }
-      .footer-pad { padding: 32px 24px !important; }
+      .header-pad { padding: 16px 20px !important; }
+      .footer-pad { padding: 28px 20px !important; }
       .card-wrap  { padding: 0 !important; border-radius: 0 !important; }
       .cta-btn    { width: 100% !important; text-align: center !important; display: block !important; box-sizing: border-box !important; }
       .market-col { display: block !important; width: 100% !important; text-align: center !important; padding: 12px 0 !important; }
@@ -85,24 +86,22 @@ function wrapper(content: string): string {
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:${NAVY};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;" bgcolor="${NAVY}">
+<body style="margin:0;padding:0;background-color:${BG_OUTER};font-family:${FONT};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;" bgcolor="${BG_OUTER}">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
     <tr>
-      <td class="outer-pad" align="center" style="padding:24px 16px;background-color:${NAVY};" bgcolor="${NAVY}">
-        <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" bgcolor="${NAVY}" style="max-width:600px;width:100%;background-color:${NAVY};">
+      <td class="outer-pad" align="center" style="padding:28px 16px;background-color:${BG_OUTER};" bgcolor="${BG_OUTER}">
+        <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;">
 
           <!-- Header -->
           <tr>
-            <td class="header-pad" style="padding:24px 32px;background-color:${NAVY};" bgcolor="${NAVY}">
+            <td class="header-pad" style="padding:20px 8px 16px;" bgcolor="${BG_OUTER}">
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
                   <td>
-                    <div style="display:inline-block;background-color:#ffffff;border-radius:8px;padding:6px 12px;">
-                      <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="28" style="height:28px;width:auto;display:block;" onerror="this.style.display='none'" />
-                    </div>
+                    <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="32" style="height:32px;width:auto;display:block;" onerror="this.style.display='none'" />
                   </td>
                   <td style="text-align:right;">
-                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.12em;">PROSPERA</span>
+                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:rgba(15,28,40,0.40);text-transform:uppercase;letter-spacing:0.12em;">Prospera Properties</span>
                   </td>
                 </tr>
               </table>
@@ -111,8 +110,8 @@ function wrapper(content: string): string {
 
           <!-- White content card -->
           <tr>
-            <td class="card-wrap" style="padding:0 16px;border-radius:16px;">
-              <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:${WHITE};border-radius:16px;overflow:hidden;">
+            <td class="card-wrap" style="padding:0;border-radius:20px;overflow:hidden;box-shadow:0 2px 8px rgba(15,28,40,0.06),0 12px 32px rgba(15,28,40,0.08);">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:${WHITE};border-radius:20px;overflow:hidden;">
                 <tr>
                   <td class="body-pad" style="padding:44px 40px 48px;">
                     ${content}
@@ -124,15 +123,15 @@ function wrapper(content: string): string {
 
           <!-- Footer -->
           <tr>
-            <td class="footer-pad" style="padding:36px 32px 40px;text-align:center;background-color:${NAVY};" bgcolor="${NAVY}">
-              <div style="width:44px;height:44px;border-radius:99px;overflow:hidden;margin:0 auto 14px;border:2px solid rgba(255,255,255,0.15);">
-                <img src="https://www.prosperaproperties.co/ebin-founder.jpg" alt="Ebin" width="44" height="44" style="width:44px;height:44px;object-fit:cover;display:block;" onerror="this.style.display='none'" />
+            <td class="footer-pad" style="padding:28px 8px 36px;text-align:center;" bgcolor="${BG_OUTER}">
+              <div style="width:40px;height:40px;border-radius:99px;overflow:hidden;margin:0 auto 12px;border:2px solid rgba(15,28,40,0.10);">
+                <img src="https://www.prosperaproperties.co/ebin-founder.jpg" alt="Ebin" width="40" height="40" style="width:40px;height:40px;object-fit:cover;display:block;" onerror="this.style.display='none'" />
               </div>
-              <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${WHITE};">Ebin Jaison</p>
-              <p style="margin:0 0 16px;font-family:${FONT};font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">Prospera Properties</p>
-              <p style="margin:0 0 6px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:${FONT};font-size:16px;color:#c97070;text-decoration:none;">prosperapropertiess@gmail.com</a></p>
-              <p style="margin:0 0 28px;font-family:${FONT};font-size:13px;color:rgba(255,255,255,0.4);">(519) 697-1227</p>
-              <p style="margin:0;font-family:${FONT};font-size:10px;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:0.1em;">&#169; ${year} Prospera Properties Management Group</p>
+              <p style="margin:0 0 2px;font-family:${FONT};font-size:14px;font-weight:700;color:${NAVY};">Ebin Jaison</p>
+              <p style="margin:0 0 12px;font-family:${FONT};font-size:11px;color:rgba(15,28,40,0.45);letter-spacing:0.08em;text-transform:uppercase;">Prospera Properties</p>
+              <p style="margin:0 0 4px;"><a href="mailto:prosperapropertiess@gmail.com" style="font-family:${FONT};font-size:14px;color:${CRIMSON};text-decoration:none;">prosperapropertiess@gmail.com</a></p>
+              <p style="margin:0 0 20px;font-family:${FONT};font-size:13px;color:rgba(15,28,40,0.45);">(519) 697-1227</p>
+              <p style="margin:0;font-family:${FONT};font-size:10px;color:rgba(15,28,40,0.25);text-transform:uppercase;letter-spacing:0.1em;">&#169; ${year} Prospera Properties Management Group</p>
             </td>
           </tr>
 
