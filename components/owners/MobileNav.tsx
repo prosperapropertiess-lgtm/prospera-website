@@ -9,8 +9,18 @@ interface Props {
 
 export function MobileNav({ token }: Props) {
   const pathname = usePathname() ?? "";
-  const isDetail = pathname.split("/").filter(Boolean).length > 2;
-  const portfolioHref = `/owners/${token}`;
+
+  const homeHref = `/owners/${token}`;
+  const financialsHref = `/owners/${token}/financials`;
+  const tenantsHref = `/owners/${token}/tenants`;
+  const maintenanceHref = `/owners/${token}/maintenance`;
+  const messagesHref = `/owners/${token}/messages`;
+
+  const isHome = pathname === homeHref;
+  const isFinancials = pathname.startsWith(financialsHref);
+  const isTenants = pathname.startsWith(tenantsHref);
+  const isMaintenance = pathname.startsWith(maintenanceHref);
+  const isMessages = pathname.startsWith(messagesHref);
 
   return (
     <>
@@ -40,34 +50,11 @@ export function MobileNav({ token }: Props) {
           alignItems: "stretch",
         }}
       >
-        <NavItem
-          href={portfolioHref}
-          icon="home"
-          label="Portfolio"
-          active={!isDetail}
-        />
-        {isDetail && (
-          <NavItem
-            href={pathname}
-            icon="apartment"
-            label="Property"
-            active={isDetail}
-          />
-        )}
-        <NavItem
-          href="tel:+15196971227"
-          icon="call"
-          label="Call"
-          active={false}
-          external
-        />
-        <NavItem
-          href="mailto:hello@prosperaproperties.co"
-          icon="mail"
-          label="Email"
-          active={false}
-          external
-        />
+        <NavItem href={homeHref} icon="home" label="Home" active={isHome} />
+        <NavItem href={financialsHref} icon="trending_up" label="Financials" active={isFinancials} />
+        <NavItem href={tenantsHref} icon="people" label="Tenants" active={isTenants} />
+        <NavItem href={maintenanceHref} icon="build" label="Maintenance" active={isMaintenance} />
+        <NavItem href={messagesHref} icon="chat" label="Messages" active={isMessages} />
       </nav>
     </>
   );
