@@ -109,9 +109,9 @@ export function PropertyFeed({
   return (
     <div
       style={{
-        background: "#FFFFFF",
+        background: "#0D1825",
+        border: "1px solid rgba(255,255,255,0.07)",
         borderRadius: "16px",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
         overflow: "hidden",
       }}
     >
@@ -144,8 +144,8 @@ export function PropertyFeed({
                 width: "44px",
                 height: "44px",
                 borderRadius: "50%",
-                background: "#F7F5F2",
-                border: "1px solid #E8E4DF",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.07)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -154,14 +154,14 @@ export function PropertyFeed({
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: "20px", color: "#C8BFB5" }}
+                style={{ fontSize: "20px", color: "rgba(237,232,225,0.20)" }}
               >
                 chat_bubble_outline
               </span>
             </div>
             <p
               style={{
-                color: "#9AA5B1",
+                color: "rgba(237,232,225,0.42)",
                 fontSize: "14px",
                 lineHeight: "1.6",
                 maxWidth: "320px",
@@ -180,18 +180,18 @@ export function PropertyFeed({
       </div>
 
       {/* Divider */}
-      <div style={{ borderTop: "1px solid #E8E4DF" }} />
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }} />
 
       {/* Compose area */}
       <div style={{ padding: "16px 20px" }}>
         {error && (
           <p
             style={{
-              color: "#dc2626",
+              color: "#f87171",
               fontSize: "13px",
               marginBottom: "10px",
               padding: "8px 12px",
-              background: "#fef2f2",
+              background: "rgba(248,113,113,0.10)",
               borderRadius: "8px",
             }}
           >
@@ -211,9 +211,9 @@ export function PropertyFeed({
               padding: "10px 14px",
               fontSize: "14px",
               fontFamily: "var(--font-dm-sans)",
-              color: "#1F2F3A",
-              background: "#F7F5F2",
-              border: "1px solid #E8E4DF",
+              color: "#EDE8E1",
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.07)",
               borderRadius: "10px",
               outline: "none",
               lineHeight: "1.5",
@@ -225,8 +225,8 @@ export function PropertyFeed({
             style={{
               padding: "10px 18px",
               borderRadius: "10px",
-              background: sending || !draft.trim() ? "#E8E4DF" : "#8B2030",
-              color: sending || !draft.trim() ? "#9AA5B1" : "#FFFFFF",
+              background: sending || !draft.trim() ? "rgba(255,255,255,0.06)" : "#8B2030",
+              color: sending || !draft.trim() ? "rgba(237,232,225,0.20)" : "#EDE8E1",
               border: "none",
               cursor: sending || !draft.trim() ? "not-allowed" : "pointer",
               fontSize: "13px",
@@ -239,7 +239,7 @@ export function PropertyFeed({
             {sending ? "Sending…" : "Send"}
           </button>
         </div>
-        <p style={{ color: "#C8BFB5", fontSize: "11px", marginTop: "8px" }}>
+        <p style={{ color: "rgba(237,232,225,0.20)", fontSize: "11px", marginTop: "8px" }}>
           Cmd+Enter to send
         </p>
       </div>
@@ -274,7 +274,7 @@ function MessageBubble({
           borderRadius: "50%",
           background: isEbin
             ? "linear-gradient(135deg, #8B2030, #a02540)"
-            : "#E8E4DF",
+            : "rgba(255,255,255,0.08)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -284,7 +284,7 @@ function MessageBubble({
       >
         <span
           style={{
-            color: isEbin ? "#FFFFFF" : "#5A6A7A",
+            color: isEbin ? "#FFFFFF" : "rgba(237,232,225,0.42)",
             fontWeight: 700,
             fontSize: "13px",
             fontFamily: "var(--font-outfit)",
@@ -310,7 +310,7 @@ function MessageBubble({
             style={{
               fontSize: "12px",
               fontWeight: 600,
-              color: "#5A6A7A",
+              color: "rgba(237,232,225,0.42)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -319,12 +319,12 @@ function MessageBubble({
           {icon && (
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: "13px", color: "#9AA5B1" }}
+              style={{ fontSize: "13px", color: "rgba(237,232,225,0.42)" }}
             >
               {icon}
             </span>
           )}
-          <span style={{ fontSize: "11px", color: "#C8BFB5" }}>
+          <span style={{ fontSize: "11px", color: "rgba(237,232,225,0.20)" }}>
             {formatTimestamp(message.created_at)}
           </span>
         </div>
@@ -334,16 +334,15 @@ function MessageBubble({
           style={{
             padding: "10px 14px",
             borderRadius: isEbin ? "4px 12px 12px 12px" : "12px 4px 12px 12px",
-            background: isEbin ? "#F7F5F2" : "#FFFFFF",
-            border: isEbin ? "none" : "1px solid #E8E4DF",
-            boxShadow: isEbin ? "none" : "0 1px 3px rgba(0,0,0,0.04)",
+            background: isEbin ? "rgba(255,255,255,0.05)" : "rgba(139,32,48,0.15)",
+            border: isEbin ? "none" : "1px solid rgba(139,32,48,0.25)",
           }}
         >
           <p
             style={{
               fontSize: "14px",
               lineHeight: "1.6",
-              color: "#1F2F3A",
+              color: "#EDE8E1",
               margin: 0,
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",

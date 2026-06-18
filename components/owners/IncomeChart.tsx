@@ -60,25 +60,25 @@ export function IncomeChart({ history }: Props) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <ComposedChart data={data} margin={{ top: 8, right: 8, left: 8, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(31,47,58,0.06)" vertical={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
         <XAxis
           dataKey="month"
-          tick={{ fill: "#9AA5B1", fontSize: 11 }}
+          tick={{ fill: "rgba(237,232,225,0.35)", fontSize: 11 }}
           axisLine={false}
           tickLine={false}
         />
         <YAxis
-          tick={{ fill: "#9AA5B1", fontSize: 10 }}
+          tick={{ fill: "rgba(237,232,225,0.35)", fontSize: 10 }}
           axisLine={false}
           tickLine={false}
           tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
         />
         <Tooltip content={<CustomTooltip />} />
         <Legend
-          wrapperStyle={{ paddingTop: "12px", fontSize: "11px", color: "#9AA5B1" }}
+          wrapperStyle={{ paddingTop: "12px", fontSize: "11px", color: "rgba(237,232,225,0.42)" }}
         />
         <Bar dataKey="Rent" fill="rgba(139,32,48,0.55)" radius={[4, 4, 0, 0]} />
-        <Bar dataKey="Expenses" fill="rgba(31,47,58,0.08)" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="Expenses" fill="rgba(255,255,255,0.08)" radius={[4, 4, 0, 0]} />
         <Line
           type="monotone"
           dataKey="Net"

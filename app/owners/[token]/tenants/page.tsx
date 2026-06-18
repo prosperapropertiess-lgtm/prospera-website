@@ -49,13 +49,13 @@ export default async function TenantsPage({ params }: Props) {
     <>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-      <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
+      <div style={{ minHeight: "100vh", background: "#090E17" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
         <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 100px" }}>
           <Link
             href={`/owners/${token}`}
-            style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
           >
             ← Back
           </Link>
@@ -63,9 +63,9 @@ export default async function TenantsPage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(32px, 5vw, 48px)",
+              fontSize: "clamp(36px, 5vw, 52px)",
               fontWeight: 300,
-              color: "#1F2F3A",
+              color: "#EDE8E1",
               letterSpacing: "-0.02em",
               marginBottom: "8px",
             }}
@@ -74,13 +74,13 @@ export default async function TenantsPage({ params }: Props) {
           </h1>
 
           {/* Portfolio stat */}
-          <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: "#9AA5B1", marginBottom: "40px" }}>
+          <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: "rgba(237,232,225,0.42)", marginBottom: "40px" }}>
             {totalTenants} active tenant{totalTenants !== 1 ? "s" : ""}
           </p>
 
           {totalTenants === 0 ? (
-            <div style={{ background: "#FFFFFF", borderRadius: "16px", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", padding: "40px 24px", textAlign: "center" }}>
-              <p style={{ color: "#9AA5B1", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+            <div style={{ background: "#0D1825", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "16px", padding: "40px 24px", textAlign: "center" }}>
+              <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
                 No active tenants on record.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default async function TenantsPage({ params }: Props) {
               return (
                 <div key={property.id}>
                   {multiProperty && (
-                    <p style={{ fontSize: "13px", fontWeight: 600, color: "#9AA5B1", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx > 0 ? "40px" : "0" }}>
+                    <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(237,232,225,0.42)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx > 0 ? "40px" : "0" }}>
                       {property.address}
                     </p>
                   )}
@@ -106,18 +106,19 @@ export default async function TenantsPage({ params }: Props) {
                         gap: "12px",
                         padding: "16px 18px",
                         borderRadius: "12px",
-                        background: leaseDays <= 30 ? "#fef2f2" : "#fffbeb",
+                        background: leaseDays <= 30 ? "rgba(248,113,113,0.10)" : "rgba(251,191,36,0.10)",
+                        border: `1px solid ${leaseDays <= 30 ? "rgba(248,113,113,0.20)" : "rgba(251,191,36,0.20)"}`,
                         marginBottom: "16px",
                       }}
                     >
-                      <span className="material-symbols-outlined" style={{ fontSize: "20px", color: leaseDays <= 30 ? "#dc2626" : "#d97706", flexShrink: 0, marginTop: "1px" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "20px", color: leaseDays <= 30 ? "#f87171" : "#fbbf24", flexShrink: 0, marginTop: "1px" }}>
                         warning
                       </span>
                       <div>
-                        <p style={{ color: leaseDays <= 30 ? "#991b1b" : "#92400e", fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>
+                        <p style={{ color: leaseDays <= 30 ? "#f87171" : "#fbbf24", fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>
                           Lease expires in {leaseDays === 0 ? "today" : `${leaseDays} day${leaseDays > 1 ? "s" : ""}`}
                         </p>
-                        <p style={{ color: leaseDays <= 30 ? "#dc2626" : "#d97706", fontSize: "13px" }}>
+                        <p style={{ color: leaseDays <= 30 ? "#f87171" : "#fbbf24", fontSize: "13px", opacity: 0.8 }}>
                           Renewal or vacancy planning should be underway. Contact Ebin if you have questions.
                         </p>
                       </div>
@@ -131,7 +132,7 @@ export default async function TenantsPage({ params }: Props) {
                   </div>
 
                   {multiProperty && idx < propertiesWithTenants.length - 1 && (
-                    <div style={{ height: "1px", background: "#E8E4DF", margin: "40px 0" }} />
+                    <div style={{ height: "1px", background: "rgba(255,255,255,0.05)", margin: "40px 0" }} />
                   )}
                 </div>
               );

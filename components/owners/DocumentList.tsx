@@ -19,11 +19,11 @@ interface Props {
 }
 
 const CATEGORY_COLORS: Record<string, { bg: string; color: string }> = {
-  "Lease Agreement": { bg: "#E8EDF2", color: "#1F2F3A" },
-  "Inspection Report": { bg: "#EBF3FC", color: "#1D4ED8" },
-  "Notice": { bg: "#FEF9C3", color: "#92400E" },
-  "Statement": { bg: "#DCFCE7", color: "#166534" },
-  "Other": { bg: "#F3F4F6", color: "#6B7280" },
+  "Lease Agreement": { bg: "rgba(96,165,250,0.15)", color: "#60a5fa" },
+  "Inspection Report": { bg: "rgba(167,139,250,0.15)", color: "#a78bfa" },
+  "Notice": { bg: "rgba(251,191,36,0.15)", color: "#fbbf24" },
+  "Statement": { bg: "rgba(52,211,153,0.15)", color: "#34d399" },
+  "Other": { bg: "rgba(255,255,255,0.07)", color: "rgba(237,232,225,0.42)" },
 };
 
 function formatSize(bytes: number | null): string {
@@ -86,10 +86,10 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
   return (
     <div
       style={{
-        background: "#FFFFFF",
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.07)",
         borderRadius: "16px",
         padding: "16px 20px",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
         display: "flex",
         alignItems: "center",
         gap: "14px",
@@ -99,18 +99,18 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
       <CategoryBadge category={doc.category} />
 
       <div style={{ flex: 1, minWidth: "140px" }}>
-        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "14px", fontWeight: 600, color: "#1F2F3A", marginBottom: "2px" }}>
+        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "14px", fontWeight: 600, color: "#EDE8E1", marginBottom: "2px" }}>
           {doc.label}
         </p>
-        <p style={{ fontSize: "12px", color: "#9AA5B1", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ fontSize: "12px", color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)" }}>
           {doc.file_name}{sizeLabel ? ` · ${sizeLabel}` : ""}
         </p>
         {error && (
-          <p style={{ fontSize: "12px", color: "#dc2626", marginTop: "4px" }}>{error}</p>
+          <p style={{ fontSize: "12px", color: "#f87171", marginTop: "4px" }}>{error}</p>
         )}
       </div>
 
-      <p style={{ fontSize: "12px", color: "#9AA5B1", fontFamily: "var(--font-dm-sans)", whiteSpace: "nowrap" }}>
+      <p style={{ fontSize: "12px", color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)", whiteSpace: "nowrap" }}>
         {formatDate(doc.uploaded_at)}
       </p>
 
@@ -120,9 +120,9 @@ function DocumentRow({ doc, propertyId, token }: { doc: OwnerDocument; propertyI
         style={{
           padding: "8px 16px",
           borderRadius: "8px",
-          border: "1px solid #E8E4DF",
-          background: loading ? "#F7F5F2" : "#FFFFFF",
-          color: loading ? "#9AA5B1" : "#1F2F3A",
+          border: "1px solid rgba(255,255,255,0.07)",
+          background: loading ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
+          color: loading ? "rgba(237,232,225,0.20)" : "#EDE8E1",
           fontSize: "13px",
           fontWeight: 500,
           cursor: loading ? "not-allowed" : "pointer",
@@ -142,14 +142,14 @@ export function DocumentList({ propertyId, token, initialDocuments }: Props) {
     return (
       <div
         style={{
-          background: "#FFFFFF",
+          background: "#0D1825",
+          border: "1px solid rgba(255,255,255,0.07)",
           borderRadius: "16px",
           padding: "32px 24px",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
           textAlign: "center",
         }}
       >
-        <p style={{ color: "#9AA5B1", fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+        <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "14px", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
           No documents yet. Ebin will upload your lease and inspection reports here.
         </p>
       </div>

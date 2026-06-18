@@ -9,10 +9,10 @@ interface Props {
 }
 
 const PRIORITY_COLORS: Record<string, { color: string; bg: string; border: string; leftBorder: string }> = {
-  critical: { color: "#dc2626", bg: "#fef2f2",   border: "#fecaca",  leftBorder: "#dc2626" },
-  high:     { color: "#d97706", bg: "#fffbeb",   border: "#fde68a",  leftBorder: "#d97706" },
-  medium:   { color: "#d97706", bg: "#fffbeb",   border: "#fde68a",  leftBorder: "#f59e0b" },
-  low:      { color: "#9AA5B1", bg: "#F7F5F2",   border: "#E8E4DF",  leftBorder: "#E8E4DF" },
+  critical: { color: "#f87171", bg: "rgba(248,113,113,0.10)", border: "rgba(248,113,113,0.20)", leftBorder: "#f87171" },
+  high:     { color: "#fbbf24", bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.20)",  leftBorder: "#fbbf24" },
+  medium:   { color: "#fbbf24", bg: "rgba(251,191,36,0.08)",  border: "rgba(251,191,36,0.15)",  leftBorder: "#f59e0b" },
+  low:      { color: "rgba(237,232,225,0.35)", bg: "rgba(255,255,255,0.03)", border: "rgba(255,255,255,0.07)", leftBorder: "rgba(255,255,255,0.12)" },
 };
 
 export function MaintenanceList({ open, completed }: Props) {
@@ -22,15 +22,15 @@ export function MaintenanceList({ open, completed }: Props) {
         style={{
           padding: "24px",
           textAlign: "center",
-          background: "#f0fdf4",
-          border: "1px solid #bbf7d0",
+          background: "rgba(52,211,153,0.08)",
+          border: "1px solid rgba(52,211,153,0.15)",
           borderRadius: "14px",
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#16a34a", display: "block", marginBottom: "6px" }}>
+        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#34d399", display: "block", marginBottom: "6px" }}>
           check_circle
         </span>
-        <p style={{ color: "#16a34a", fontSize: "13px", fontWeight: 500 }}>
+        <p style={{ color: "#34d399", fontSize: "13px", fontWeight: 500 }}>
           No open maintenance issues
         </p>
       </div>
@@ -52,7 +52,7 @@ export function MaintenanceList({ open, completed }: Props) {
               alignItems: "flex-start",
               gap: "12px",
               padding: "14px",
-              background: "#FFFFFF",
+              background: "#0D1825",
               border: `1px solid ${p.border}`,
               borderLeft: `4px solid ${p.leftBorder}`,
               borderRadius: "12px",
@@ -72,10 +72,10 @@ export function MaintenanceList({ open, completed }: Props) {
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ color: "#1F2F3A", fontSize: "13px", fontWeight: 500, marginBottom: "2px" }}>
+              <p style={{ color: "#EDE8E1", fontSize: "13px", fontWeight: 500, marginBottom: "2px" }}>
                 {item.issue}
               </p>
-              <p style={{ color: "#9AA5B1", fontSize: "11px" }}>
+              <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "11px" }}>
                 {item.category}
                 {item.daysPending != null && ` · ${item.daysPending}d pending`}
               </p>
@@ -92,7 +92,7 @@ export function MaintenanceList({ open, completed }: Props) {
             alignItems: "center",
             gap: "12px",
             padding: "12px 14px",
-            background: "#F7F5F2",
+            background: "rgba(255,255,255,0.03)",
             borderRadius: "12px",
           }}
         >
@@ -100,7 +100,7 @@ export function MaintenanceList({ open, completed }: Props) {
             check_circle
           </span>
           <div style={{ flex: 1 }}>
-            <p style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "line-through" }}>
+            <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "line-through" }}>
               {item.issue}
             </p>
           </div>

@@ -32,8 +32,8 @@ export default async function OwnerHomePage({ params }: Props) {
     ({ dashboard } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
   } catch {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F7F5F2" }}>
-        <p style={{ color: "#9AA5B1", fontFamily: "var(--font-dm-sans)" }}>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#090E17" }}>
+        <p style={{ color: "rgba(237,232,225,0.42)", fontFamily: "var(--font-dm-sans)" }}>
           Unable to load data. Please try again in a moment.
         </p>
       </div>
@@ -58,7 +58,8 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Properties",
       subtitle: `${dashboard.properties.length} active rental${dashboard.properties.length !== 1 ? "s" : ""}`,
       href: propertyHref,
-      accentColor: null as string | null,
+      iconColor: "#60a5fa",
+      chipBg: "rgba(96,165,250,0.12)",
       disabled: false,
     },
     {
@@ -66,7 +67,8 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Financials",
       subtitle: `${fmt$(dashboard.totalNet)} net this year`,
       href: `/owners/${token}/financials`,
-      accentColor: dashboard.totalNet >= 0 ? "#16a34a" : "#dc2626",
+      iconColor: dashboard.totalNet >= 0 ? "#34d399" : "#f87171",
+      chipBg: dashboard.totalNet >= 0 ? "rgba(52,211,153,0.12)" : "rgba(248,113,113,0.12)",
       disabled: false,
     },
     {
@@ -74,7 +76,8 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Tenants",
       subtitle: `${totalTenants} active tenant${totalTenants !== 1 ? "s" : ""}`,
       href: `/owners/${token}/tenants`,
-      accentColor: null as string | null,
+      iconColor: "#a78bfa",
+      chipBg: "rgba(167,139,250,0.12)",
       disabled: false,
     },
     {
@@ -84,7 +87,8 @@ export default async function OwnerHomePage({ params }: Props) {
         ? `${dashboard.totalOpenIssues} open issue${dashboard.totalOpenIssues !== 1 ? "s" : ""}`
         : "All clear",
       href: `/owners/${token}/maintenance`,
-      accentColor: dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a",
+      iconColor: dashboard.totalOpenIssues > 0 ? "#fbbf24" : "#34d399",
+      chipBg: dashboard.totalOpenIssues > 0 ? "rgba(251,191,36,0.12)" : "rgba(52,211,153,0.12)",
       disabled: false,
     },
     {
@@ -92,7 +96,8 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Messages",
       subtitle: "Updates from your property manager",
       href: `/owners/${token}/messages`,
-      accentColor: null as string | null,
+      iconColor: "#f472b6",
+      chipBg: "rgba(244,114,182,0.12)",
       disabled: false,
     },
     {
@@ -100,10 +105,14 @@ export default async function OwnerHomePage({ params }: Props) {
       label: "Documents",
       subtitle: "Leases, reports & notices",
       href: `/owners/${token}/documents`,
-      accentColor: null as string | null,
+      iconColor: "rgba(237,232,225,0.3)",
+      chipBg: "rgba(255,255,255,0.06)",
       disabled: false,
     },
   ];
+
+  const now = new Date();
+  const dateLabel = now.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" });
 
   return (
     <>
@@ -112,94 +121,127 @@ export default async function OwnerHomePage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
+      <div style={{ minHeight: "100vh", background: "#090E17" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
         <main style={{ maxWidth: "860px", margin: "0 auto", padding: "72px 24px 120px" }}>
 
           {/* Greeting */}
-          <div style={{ marginBottom: "52px" }}>
+          <div style={{ marginBottom: "48px" }}>
+            {/* Date pill */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "100px",
+                padding: "4px 12px 4px 4px",
+                marginBottom: "20px",
+              }}
+            >
+              <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#34d399", flexShrink: 0, marginLeft: "4px" }} />
+              <span style={{ color: "rgba(237,232,225,0.42)", fontSize: "12px", fontFamily: "var(--font-dm-sans)" }}>
+                {dateLabel}
+              </span>
+            </div>
+
             <h1
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(48px, 6vw, 68px)",
+                fontSize: "clamp(58px, 8vw, 80px)",
                 fontWeight: 300,
-                color: "#1F2F3A",
+                color: "#EDE8E1",
                 letterSpacing: "-0.02em",
-                lineHeight: 1.05,
-                marginBottom: "12px",
+                lineHeight: 1.0,
+                marginBottom: "0",
               }}
             >
               Hi {firstNames}.
             </h1>
-            <p style={{ color: "#B0BBBF", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
-              {dashboard.currentMonth} {dashboard.currentYear}
-            </p>
           </div>
 
-          {/* Inline stats — no boxes */}
-          <div
-            style={{
-              display: "flex",
-              gap: "40px",
-              marginBottom: "64px",
-              paddingBottom: "48px",
-              borderBottom: "1px solid #E8E4DF",
-              flexWrap: "wrap",
-            }}
-          >
-            <StatPill label="Collected" value={fmt$(dashboard.totalRentCollected)} />
-            <StatPill
-              label="In your pocket"
-              value={fmt$(dashboard.totalNet)}
-              color={dashboard.totalNet >= 0 ? "#16a34a" : "#dc2626"}
-            />
-            <StatPill
-              label="Open issues"
-              value={String(dashboard.totalOpenIssues)}
-              color={dashboard.totalOpenIssues > 0 ? "#d97706" : "#9AA5B1"}
-            />
-          </div>
-
-          {/* Navigation cards */}
+          {/* Stat cards — 3 column grid */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-              gap: "14px",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "12px",
+              marginBottom: "48px",
+            }}
+          >
+            <StatCard
+              label="Collected"
+              value={fmt$(dashboard.totalRentCollected)}
+              color="#EDE8E1"
+            />
+            <StatCard
+              label="In your pocket"
+              value={fmt$(dashboard.totalNet)}
+              color={dashboard.totalNet >= 0 ? "#34d399" : "#f87171"}
+            />
+            <StatCard
+              label="Open issues"
+              value={String(dashboard.totalOpenIssues)}
+              color={dashboard.totalOpenIssues > 0 ? "#fbbf24" : "rgba(237,232,225,0.20)"}
+            />
+          </div>
+
+          {/* Navigation cards — 2 column grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "12px",
             }}
           >
             {navCards.map((card) => {
               const cardEl = (
                 <div
                   style={{
-                    background: card.disabled ? "rgba(240,237,232,0.6)" : "#FFFFFF",
-                    borderRadius: "20px",
-                    padding: "28px 28px 24px",
-                    boxShadow: card.disabled ? "none" : "0 1px 3px rgba(0,0,0,0.06)",
-                    opacity: card.disabled ? 0.55 : 1,
+                    background: "#0D1825",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: "22px",
+                    padding: "26px",
+                    minHeight: "148px",
                     display: "flex",
                     flexDirection: "column",
-                    minHeight: "168px",
+                    justifyContent: "space-between",
+                    opacity: card.disabled ? 0.45 : 1,
                     cursor: card.disabled ? "default" : "pointer",
                   }}
                 >
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ fontSize: "26px", color: "#C8BFB5", marginBottom: "20px" }}
+                  {/* Icon chip */}
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "12px",
+                      background: card.chipBg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "16px",
+                    }}
                   >
-                    {card.icon}
-                  </span>
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontSize: "20px", color: card.iconColor }}
+                    >
+                      {card.icon}
+                    </span>
+                  </div>
 
-                  <div style={{ flex: 1 }}>
+                  <div>
                     <p
                       style={{
                         fontFamily: "var(--font-outfit)",
-                        fontSize: "17px",
+                        fontSize: "18px",
                         fontWeight: 600,
-                        color: "#1F2F3A",
+                        color: "#EDE8E1",
                         letterSpacing: "-0.01em",
-                        marginBottom: "5px",
+                        marginBottom: "4px",
                       }}
                     >
                       {card.label}
@@ -208,26 +250,12 @@ export default async function OwnerHomePage({ params }: Props) {
                       style={{
                         fontSize: "13px",
                         fontFamily: "var(--font-dm-sans)",
-                        color: card.accentColor ?? "#9AA5B1",
-                        fontWeight: card.accentColor ? 500 : 400,
+                        color: "rgba(237,232,225,0.42)",
                       }}
                     >
                       {card.subtitle}
                     </p>
                   </div>
-
-                  {!card.disabled && (
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        color: "#C8BFB5",
-                        fontFamily: "var(--font-dm-sans)",
-                        marginTop: "16px",
-                      }}
-                    >
-                      View →
-                    </p>
-                  )}
                 </div>
               );
 
@@ -248,7 +276,7 @@ export default async function OwnerHomePage({ params }: Props) {
                 style={{
                   fontSize: "11px",
                   fontFamily: "var(--font-dm-sans)",
-                  color: "#C8BFB5",
+                  color: "rgba(237,232,225,0.20)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                   marginBottom: "16px",
@@ -265,10 +293,10 @@ export default async function OwnerHomePage({ params }: Props) {
                   >
                     <div
                       style={{
-                        background: "#FFFFFF",
+                        background: "#0D1825",
+                        border: "1px solid rgba(255,255,255,0.07)",
                         borderRadius: "14px",
                         padding: "18px 20px",
-                        boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
@@ -276,14 +304,14 @@ export default async function OwnerHomePage({ params }: Props) {
                       }}
                     >
                       <div>
-                        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: "#1F2F3A", marginBottom: "2px" }}>
+                        <p style={{ fontFamily: "var(--font-outfit)", fontSize: "15px", fontWeight: 600, color: "#EDE8E1", marginBottom: "2px" }}>
                           {p.property.address}
                         </p>
-                        <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "#9AA5B1" }}>
+                        <p style={{ fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: "rgba(237,232,225,0.42)" }}>
                           {p.property.city} · {p.property.type}
                         </p>
                       </div>
-                      <span style={{ color: "#C8BFB5", fontSize: "16px" }}>→</span>
+                      <span style={{ color: "rgba(237,232,225,0.20)", fontSize: "16px" }}>→</span>
                     </div>
                   </Link>
                 ))}
@@ -299,17 +327,24 @@ export default async function OwnerHomePage({ params }: Props) {
   );
 }
 
-function StatPill({ label, value, color }: { label: string; value: string; color?: string }) {
+function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
   return (
-    <div>
+    <div
+      style={{
+        background: "#0D1825",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: "20px",
+        padding: "20px",
+      }}
+    >
       <p
         style={{
           fontSize: "11px",
           fontFamily: "var(--font-dm-sans)",
-          color: "#C8BFB5",
+          color: "rgba(237,232,225,0.42)",
           textTransform: "uppercase",
           letterSpacing: "0.06em",
-          marginBottom: "5px",
+          marginBottom: "8px",
         }}
       >
         {label}
@@ -317,10 +352,10 @@ function StatPill({ label, value, color }: { label: string; value: string; color
       <p
         style={{
           fontFamily: "var(--font-outfit)",
-          fontSize: "24px",
+          fontSize: "clamp(26px, 4vw, 34px)",
           fontWeight: 700,
-          letterSpacing: "-0.02em",
-          color: color ?? "#1F2F3A",
+          letterSpacing: "-0.03em",
+          color: color,
         }}
       >
         {value}

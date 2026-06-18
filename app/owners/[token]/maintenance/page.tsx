@@ -45,13 +45,13 @@ export default async function MaintenancePage({ params }: Props) {
     <>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-      <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
+      <div style={{ minHeight: "100vh", background: "#090E17" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
         <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 100px" }}>
           <Link
             href={`/owners/${token}`}
-            style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
+            style={{ color: "rgba(237,232,225,0.42)", fontSize: "13px", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}
           >
             ← Back
           </Link>
@@ -59,9 +59,9 @@ export default async function MaintenancePage({ params }: Props) {
           <h1
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(32px, 5vw, 48px)",
+              fontSize: "clamp(36px, 5vw, 52px)",
               fontWeight: 300,
-              color: "#1F2F3A",
+              color: "#EDE8E1",
               letterSpacing: "-0.02em",
               marginBottom: "8px",
             }}
@@ -70,8 +70,8 @@ export default async function MaintenancePage({ params }: Props) {
           </h1>
 
           {/* Stats row */}
-          <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: "#9AA5B1", marginBottom: "40px" }}>
-            <span style={{ color: totalOpen > 0 ? "#d97706" : "#9AA5B1" }}>
+          <p style={{ fontSize: "14px", fontFamily: "var(--font-dm-sans)", color: "rgba(237,232,225,0.42)", marginBottom: "40px" }}>
+            <span style={{ color: totalOpen > 0 ? "#fbbf24" : "rgba(237,232,225,0.42)" }}>
               {totalOpen} open
             </span>
             {" · "}
@@ -79,8 +79,8 @@ export default async function MaintenancePage({ params }: Props) {
           </p>
 
           {!hasAny ? (
-            <div style={{ background: "#FFFFFF", borderRadius: "16px", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", padding: "40px 24px", textAlign: "center" }}>
-              <p style={{ color: "#9AA5B1", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
+            <div style={{ background: "#0D1825", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "16px", padding: "40px 24px", textAlign: "center" }}>
+              <p style={{ color: "rgba(237,232,225,0.42)", fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>
                 No open maintenance requests.
               </p>
             </div>
@@ -93,7 +93,7 @@ export default async function MaintenancePage({ params }: Props) {
               return (
                 <div key={property.id}>
                   {multiProperty && (
-                    <p style={{ fontSize: "13px", fontWeight: 600, color: "#9AA5B1", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx > 0 ? "40px" : "0" }}>
+                    <p style={{ fontSize: "13px", fontWeight: 600, color: "rgba(237,232,225,0.42)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px", marginTop: idx > 0 ? "40px" : "0" }}>
                       {property.address}
                     </p>
                   )}
@@ -101,7 +101,7 @@ export default async function MaintenancePage({ params }: Props) {
                   <MaintenanceList open={maintenanceOpen} completed={maintenanceCompletedRecent} />
 
                   {multiProperty && idx < dashboard.properties.length - 1 && hasPropMaintenance && (
-                    <div style={{ height: "1px", background: "#E8E4DF", margin: "40px 0" }} />
+                    <div style={{ height: "1px", background: "rgba(255,255,255,0.05)", margin: "40px 0" }} />
                   )}
                 </div>
               );
