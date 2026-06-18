@@ -93,7 +93,6 @@ export function MaintenanceList({ open, completed }: Props) {
             gap: "12px",
             padding: "12px 14px",
             background: "#F7F5F2",
-            border: "1px solid #E8E4DF",
             borderRadius: "12px",
           }}
         >

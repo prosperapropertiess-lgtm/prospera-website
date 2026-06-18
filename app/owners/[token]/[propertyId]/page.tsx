@@ -7,7 +7,6 @@ import { IncomeChart } from "@/components/owners/IncomeChart";
 import { TenantCard } from "@/components/owners/TenantCard";
 import { MaintenanceList } from "@/components/owners/MaintenanceList";
 import { FinancialTable } from "@/components/owners/FinancialTable";
-import { UtilityChart } from "@/components/owners/UtilityChart";
 import { ExpenseBreakdown } from "@/components/owners/ExpenseBreakdown";
 import { ScrollReveal } from "@/components/owners/ScrollReveal";
 import { MobileNav } from "@/components/owners/MobileNav";
@@ -135,7 +134,7 @@ export default async function PropertyDetailPage({ params }: Props) {
       <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        {/* Hero */}
+        {/* Hero — structural borderBottom intentionally kept */}
         <div
           style={{
             background: "#FFFFFF",
@@ -234,22 +233,20 @@ export default async function PropertyDetailPage({ params }: Props) {
         <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "40px 24px 80px" }}>
 
           {/* Rent & Income */}
-          <section style={{ marginBottom: "48px" }}>
+          <section style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Rent & Income</SectionLabel></ScrollReveal>
 
-            {/* Rent collection rate banner */}
-            {totalCount > 0 && (
-              <ScrollReveal delay={0.05}>
+            {/* Rent status card — collection rate merged as inline status at top */}
+            <div style={{ background: "#FFFFFF", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
+              {totalCount > 0 && (
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "10px",
-                    padding: "12px 16px",
-                    borderRadius: "12px",
-                    background: allPaid ? "#f0fdf4" : "#fffbeb",
-                    border: `1px solid ${allPaid ? "#bbf7d0" : "#fde68a"}`,
-                    marginBottom: "12px",
+                    paddingBottom: "12px",
+                    marginBottom: "14px",
+                    borderBottom: "1px solid #F0EDE8",
                   }}
                 >
                   <span
@@ -264,227 +261,198 @@ export default async function PropertyDetailPage({ params }: Props) {
                       : `${paidCount} of ${totalCount} paid${outstandingAmount > 0 ? ` · ${fmt$(outstandingAmount)} outstanding` : ""}`}
                   </span>
                 </div>
-              </ScrollReveal>
-            )}
-
-            <ScrollReveal delay={0.08}>
-              <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "20px" }}>
-                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "14px" }}>
-                  {dashboard.currentMonth} {dashboard.currentYear} — Rent Status
-                </p>
-                {rentCurrentMonth.length === 0 ? (
-                  <p style={{ color: "#9AA5B1", fontSize: "13px" }}>No rent entries for this month yet.</p>
-                ) : (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                    {rentCurrentMonth.map(r => {
-                      const s = (r.paymentStatus ?? "").toLowerCase();
-                      const isPaid = s === "paid" || s === "on time";
-                      const isPartial = s === "partial";
-                      return (
-                        <div
-                          key={r.id}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            padding: "10px 14px",
-                            background: isPaid ? "#f0fdf4" : isPartial ? "#fffbeb" : "#fef2f2",
-                            borderRadius: "10px",
-                            border: `1px solid ${isPaid ? "#bbf7d0" : isPartial ? "#fde68a" : "#fecaca"}`,
-                          }}
-                        >
-                          <span style={{ color: "#1F2F3A", fontSize: "13px" }}>{r.entry}</span>
-                          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                            <span style={{ color: "#5A6A7A", fontSize: "13px" }}>
-                              {r.amountPaid != null ? fmt$(r.amountPaid) : fmt$(r.amountDue ?? 0)}
-                            </span>
-                            <span
-                              style={{
-                                padding: "3px 8px",
-                                borderRadius: "6px",
-                                fontSize: "11px",
-                                fontWeight: 600,
-                                color: isPaid ? "#16a34a" : isPartial ? "#d97706" : "#dc2626",
-                                background: isPaid ? "#f0fdf4" : isPartial ? "#fffbeb" : "#fef2f2",
-                                border: `1px solid ${isPaid ? "#bbf7d0" : isPartial ? "#fde68a" : "#fecaca"}`,
-                              }}
-                            >
-                              {r.paymentStatus}
-                              {r.datePaid ? ` · ${new Date(r.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}` : ""}
-                            </span>
-                          </div>
+              )}
+              <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "14px" }}>
+                {dashboard.currentMonth} {dashboard.currentYear} — Rent Status
+              </p>
+              {rentCurrentMonth.length === 0 ? (
+                <p style={{ color: "#9AA5B1", fontSize: "13px" }}>No rent entries for this month yet.</p>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  {rentCurrentMonth.map(r => {
+                    const s = (r.paymentStatus ?? "").toLowerCase();
+                    const isPaid = s === "paid" || s === "on time";
+                    const isPartial = s === "partial";
+                    return (
+                      <div
+                        key={r.id}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "10px 14px",
+                          background: isPaid ? "#f0fdf4" : isPartial ? "#fffbeb" : "#fef2f2",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <span style={{ color: "#1F2F3A", fontSize: "13px" }}>{r.entry}</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                          <span style={{ color: "#5A6A7A", fontSize: "13px" }}>
+                            {r.amountPaid != null ? fmt$(r.amountPaid) : fmt$(r.amountDue ?? 0)}
+                          </span>
+                          <span
+                            style={{
+                              padding: "3px 8px",
+                              borderRadius: "6px",
+                              fontSize: "11px",
+                              fontWeight: 600,
+                              color: isPaid ? "#16a34a" : isPartial ? "#d97706" : "#dc2626",
+                              background: isPaid ? "#f0fdf4" : isPartial ? "#fffbeb" : "#fef2f2",
+                            }}
+                          >
+                            {r.paymentStatus}
+                            {r.datePaid ? ` · ${new Date(r.datePaid).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}` : ""}
+                          </span>
                         </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </ScrollReveal>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             {/* Month-over-month comparison */}
             {prevMonthSnapshot && netMoM !== null && (
-              <ScrollReveal delay={0.09}>
-                <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
-                  <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-                    {dashboard.currentMonth} vs {prevMonthSnapshot.month}
-                  </p>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
-                    <MoMStat label="Net Income" current={currMonthSnapshot.net} delta={netMoM} />
-                    <MoMStat label="Rent Collected" current={currMonthSnapshot.rentCollected} delta={rentMoM!} />
-                    <MoMStat label="Expenses" current={currMonthSnapshot.expenses} delta={expMoM!} invert />
-                  </div>
+              <div style={{ background: "#F7F5F2", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
+                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                  {dashboard.currentMonth} vs {prevMonthSnapshot.month}
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+                  <MoMStat label="Net Income" current={currMonthSnapshot.net} delta={netMoM} />
+                  <MoMStat label="Rent Collected" current={currMonthSnapshot.rentCollected} delta={rentMoM!} />
+                  <MoMStat label="Expenses" current={currMonthSnapshot.expenses} delta={expMoM!} invert />
                 </div>
-              </ScrollReveal>
+              </div>
             )}
 
-            <ScrollReveal delay={0.1}>
-              <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "20px" }}>
-                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-                  6-Month Overview
-                </p>
-                <IncomeChart history={history} />
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.12}>
-              <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "20px" }}>
-                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-                  Utility Costs — 12 Months
-                </p>
-                <UtilityChart history={history} />
-              </div>
-            </ScrollReveal>
+            <div style={{ background: "#FFFFFF", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
+              <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                6-Month Overview
+              </p>
+              <IncomeChart history={history} />
+            </div>
 
             {/* Annual projection */}
             {projectedAnnualNet !== null && activeMonthsYTD >= 2 && (
-              <ScrollReveal delay={0.09}>
-                <div
-                  style={{
-                    background: "#1F2F3A",
-                    borderRadius: "16px",
-                    padding: "24px 28px",
-                    marginBottom: "16px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    gap: "12px",
-                  }}
-                >
-                  <div>
-                    <p style={{ color: "rgba(250,248,245,0.45)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
-                      Annual Projection · {dashboard.currentYear}
-                    </p>
-                    <p
-                      style={{
-                        color: projectedAnnualNet >= 0 ? "#4ade80" : "#f87171",
-                        fontFamily: "var(--font-outfit)",
-                        fontSize: "clamp(28px, 5vw, 40px)",
-                        fontWeight: 700,
-                        letterSpacing: "-0.03em",
-                        lineHeight: 1,
-                      }}
-                    >
-                      {projectedAnnualNet >= 0 ? "+" : ""}{fmt$(projectedAnnualNet)}
-                    </p>
-                    <p style={{ color: "rgba(250,248,245,0.35)", fontSize: "12px", marginTop: "6px" }}>
-                      projected net this year · avg {fmt$(avgMonthlyNet!)} / mo
-                    </p>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <p style={{ color: "rgba(250,248,245,0.25)", fontSize: "11px" }}>
-                      Based on {activeMonthsYTD} month{activeMonthsYTD > 1 ? "s" : ""} of data
-                    </p>
-                  </div>
+              <div
+                style={{
+                  background: "#1F2F3A",
+                  borderRadius: "16px",
+                  padding: "24px 28px",
+                  marginBottom: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                <div>
+                  <p style={{ color: "rgba(250,248,245,0.45)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
+                    Annual Projection · {dashboard.currentYear}
+                  </p>
+                  <p
+                    style={{
+                      color: projectedAnnualNet >= 0 ? "#4ade80" : "#f87171",
+                      fontFamily: "var(--font-outfit)",
+                      fontSize: "clamp(28px, 5vw, 40px)",
+                      fontWeight: 700,
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {projectedAnnualNet >= 0 ? "+" : ""}{fmt$(projectedAnnualNet)}
+                  </p>
+                  <p style={{ color: "rgba(250,248,245,0.35)", fontSize: "12px", marginTop: "6px" }}>
+                    projected net this year · avg {fmt$(avgMonthlyNet!)} / mo
+                  </p>
                 </div>
-              </ScrollReveal>
+                <div style={{ textAlign: "right" }}>
+                  <p style={{ color: "rgba(250,248,245,0.25)", fontSize: "11px" }}>
+                    Based on {activeMonthsYTD} month{activeMonthsYTD > 1 ? "s" : ""} of data
+                  </p>
+                </div>
+              </div>
             )}
 
             {/* YTD financial summary + expense breakdown side by side */}
-            <ScrollReveal delay={0.1}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: "16px",
+              }}
+            >
               <div
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                  gap: "16px",
+                  background: "#FFFFFF",
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+                  borderRadius: "16px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
                 }}
               >
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    border: "1px solid #E8E4DF",
-                    borderRadius: "16px",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "20px",
-                  }}
-                >
-                  <FinStat label="Collected This Year" value={fmt$(ytdRentCollected)} color="#1F2F3A" />
-                  <FinStat label="Expenses This Year" value={fmt$(ytdExpenses)} color="#5A6A7A" />
-                  <FinStat label="In Your Pocket" value={fmt$(ytdNet)} color={ytdNet >= 0 ? "#16a34a" : "#dc2626"} large />
-                </div>
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    border: "1px solid #E8E4DF",
-                    borderRadius: "16px",
-                    padding: "24px",
-                  }}
-                >
-                  <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-                    Where Expenses Go (YTD)
-                  </p>
-                  <ExpenseBreakdown history={history} currentYear={dashboard.currentYear} />
-                </div>
+                <FinStat label="Collected This Year" value={fmt$(ytdRentCollected)} color="#1F2F3A" />
+                <FinStat label="Expenses This Year" value={fmt$(ytdExpenses)} color="#5A6A7A" />
+                <FinStat label="In Your Pocket" value={fmt$(ytdNet)} color={ytdNet >= 0 ? "#16a34a" : "#dc2626"} large />
               </div>
-            </ScrollReveal>
+              <div
+                style={{
+                  background: "#FFFFFF",
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+                  borderRadius: "16px",
+                  padding: "24px",
+                }}
+              >
+                <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                  Where Expenses Go (YTD)
+                </p>
+                <ExpenseBreakdown history={history} currentYear={dashboard.currentYear} />
+              </div>
+            </div>
           </section>
 
           {/* Maintenance */}
-          <section style={{ marginBottom: "48px" }}>
+          <section style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>Property Health</SectionLabel></ScrollReveal>
-            <ScrollReveal delay={0.05}>
-              <MaintenanceList open={maintenanceOpen} completed={maintenanceCompletedRecent} />
-            </ScrollReveal>
+            <MaintenanceList open={maintenanceOpen} completed={maintenanceCompletedRecent} />
           </section>
 
           {/* Tenants */}
           {tenants.length > 0 && (
-            <section style={{ marginBottom: "48px" }}>
+            <section style={{ marginBottom: "72px" }}>
               <ScrollReveal><SectionLabel>Tenants</SectionLabel></ScrollReveal>
 
-              {/* Lease expiry alert */}
+              {/* Lease expiry alert — border removed, background kept */}
               {leaseDays !== null && leaseDays <= 90 && leaseDays >= 0 && (
-                <ScrollReveal delay={0.05}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "12px",
-                      padding: "16px 18px",
-                      borderRadius: "12px",
-                      background: leaseDays <= 30 ? "#fef2f2" : "#fffbeb",
-                      border: `1px solid ${leaseDays <= 30 ? "#fecaca" : "#fde68a"}`,
-                      marginBottom: "16px",
-                    }}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                    padding: "16px 18px",
+                    borderRadius: "12px",
+                    background: leaseDays <= 30 ? "#fef2f2" : "#fffbeb",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: "20px", color: leaseDays <= 30 ? "#dc2626" : "#d97706", flexShrink: 0, marginTop: "1px" }}
                   >
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: "20px", color: leaseDays <= 30 ? "#dc2626" : "#d97706", flexShrink: 0, marginTop: "1px" }}
-                    >
-                      warning
-                    </span>
-                    <div>
-                      <p style={{ color: leaseDays <= 30 ? "#991b1b" : "#92400e", fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>
-                        Lease expires in {leaseDays === 0 ? "today" : `${leaseDays} day${leaseDays > 1 ? "s" : ""}`}
-                      </p>
-                      <p style={{ color: leaseDays <= 30 ? "#dc2626" : "#d97706", fontSize: "13px" }}>
-                        Renewal or vacancy planning should be underway. Contact Ebin if you have questions.
-                      </p>
-                    </div>
+                    warning
+                  </span>
+                  <div>
+                    <p style={{ color: leaseDays <= 30 ? "#991b1b" : "#92400e", fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>
+                      Lease expires in {leaseDays === 0 ? "today" : `${leaseDays} day${leaseDays > 1 ? "s" : ""}`}
+                    </p>
+                    <p style={{ color: leaseDays <= 30 ? "#dc2626" : "#d97706", fontSize: "13px" }}>
+                      Renewal or vacancy planning should be underway. Contact Ebin if you have questions.
+                    </p>
                   </div>
-                </ScrollReveal>
+                </div>
               )}
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
@@ -498,59 +466,55 @@ export default async function PropertyDetailPage({ params }: Props) {
           )}
 
           {/* 12-Month Table */}
-          <section style={{ marginBottom: "48px" }}>
+          <section style={{ marginBottom: "72px" }}>
             <ScrollReveal><SectionLabel>12-Month Summary</SectionLabel></ScrollReveal>
-            <ScrollReveal delay={0.05}>
-              <FinancialTable history={history} currentMonth={dashboard.currentMonth} currentYear={dashboard.currentYear} />
-            </ScrollReveal>
+            <FinancialTable history={history} currentMonth={dashboard.currentMonth} currentYear={dashboard.currentYear} />
           </section>
 
           {/* Manager */}
           <section>
             <ScrollReveal><SectionLabel>Your Manager</SectionLabel></ScrollReveal>
-            <ScrollReveal delay={0.05}>
-              <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "20px", padding: "28px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
-                  <div
-                    style={{
-                      width: "56px",
-                      height: "56px",
-                      borderRadius: "50%",
-                      background: "linear-gradient(135deg, #8B2030, #a02540)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <span style={{ color: "white", fontFamily: "var(--font-outfit)", fontWeight: 700, fontSize: "22px" }}>E</span>
-                  </div>
-                  <div>
-                    <p style={{ color: "#1F2F3A", fontWeight: 700, fontSize: "16px", fontFamily: "var(--font-outfit)" }}>Ebin Jaison</p>
-                    <p style={{ color: "#9AA5B1", fontSize: "13px" }}>Property Manager · Prospera Properties</p>
-                  </div>
+            <div style={{ background: "#FFFFFF", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", borderRadius: "20px", padding: "28px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
+                <div
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #8B2030, #a02540)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <span style={{ color: "white", fontFamily: "var(--font-outfit)", fontWeight: 700, fontSize: "22px" }}>E</span>
                 </div>
-                <p style={{ color: "#5A6A7A", fontSize: "13px", lineHeight: "1.6", marginBottom: "20px" }}>
-                  Have questions about your property? Ebin is available by phone or email any time.
-                </p>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                  <a
-                    href="mailto:hello@prosperaproperties.co"
-                    style={{ padding: "11px 20px", borderRadius: "10px", background: "#F7F5F2", border: "1px solid #E8E4DF", color: "#1F2F3A", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
-                  >
-                    <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#1F2F3A" }}>mail</span>
-                    hello@prosperaproperties.co
-                  </a>
-                  <a
-                    href="tel:+15196971227"
-                    style={{ padding: "11px 20px", borderRadius: "10px", background: "#8B2030", border: "1px solid #8B2030", color: "white", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
-                  >
-                    <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>call</span>
-                    519-697-1227
-                  </a>
+                <div>
+                  <p style={{ color: "#1F2F3A", fontWeight: 700, fontSize: "16px", fontFamily: "var(--font-outfit)" }}>Ebin Jaison</p>
+                  <p style={{ color: "#9AA5B1", fontSize: "13px" }}>Property Manager · Prospera Properties</p>
                 </div>
               </div>
-            </ScrollReveal>
+              <p style={{ color: "#5A6A7A", fontSize: "13px", lineHeight: "1.6", marginBottom: "20px" }}>
+                Have questions about your property? Ebin is available by phone or email any time.
+              </p>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                <a
+                  href="mailto:hello@prosperaproperties.co"
+                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#F7F5F2", border: "1px solid #E8E4DF", color: "#1F2F3A", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#1F2F3A" }}>mail</span>
+                  hello@prosperaproperties.co
+                </a>
+                <a
+                  href="tel:+15196971227"
+                  style={{ padding: "11px 20px", borderRadius: "10px", background: "#8B2030", border: "1px solid #8B2030", color: "white", fontSize: "13px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "7px" }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>call</span>
+                  519-697-1227
+                </a>
+              </div>
+            </div>
           </section>
         </main>
 
@@ -562,7 +526,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h2 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, color: "#9AA5B1", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "16px" }}>
+    <h2 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, color: "#C8BFB5", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "24px", paddingTop: "8px" }}>
       {children}
     </h2>
   );
