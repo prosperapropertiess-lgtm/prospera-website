@@ -3,6 +3,20 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
+const TRADES = ["Plumber", "Electrician", "Handyman", "HVAC", "Roofer", "Painter", "Landscaping", "Pest Control", "Cleaner", "Other"];
+
+type Contractor = {
+  id: string;
+  trade: string;
+  name: string;
+  phone: string;
+  email: string;
+};
+
+function newContractor(): Contractor {
+  return { id: Math.random().toString(36).slice(2), trade: "Plumber", name: "", phone: "", email: "" };
+}
+
 const BG          = "#F5F4F1";
 const CARD        = "#FFFFFF";
 const CARD_BORDER = "rgba(15,28,40,0.07)";
@@ -43,10 +57,7 @@ type FormState = {
   internet_included: boolean;
   hydro_account: string;
   gas_account: string;
-  preferred_plumber: string;
-  preferred_electrician: string;
-  preferred_handyman: string;
-  preferred_contractors_other: string;
+  contractors: Contractor[];
   emergency_contact_name: string;
   emergency_contact_phone: string;
   preferred_contact_method: string;
@@ -68,7 +79,7 @@ const defaultForm: FormState = {
   monthly_mortgage: "", annual_property_tax: "",
   hydro_included: false, gas_included: false, water_included: false, internet_included: false,
   hydro_account: "", gas_account: "",
-  preferred_plumber: "", preferred_electrician: "", preferred_handyman: "", preferred_contractors_other: "",
+  contractors: [],
   emergency_contact_name: "", emergency_contact_phone: "",
   preferred_contact_method: "text", best_time_to_reach: "", other_contacts: "",
   maintenance_issues: "", tenant_disputes: "", planned_renovations: "", other_notes: "",
@@ -385,15 +396,67 @@ export default function OwnerDetailsPage() {
 
           {/* 7 — Preferred Contractors */}
           <SectionCard num="07" title="Preferred Contractors" sub="Anyone you already trust — we'll call them first" optional>
-            <p style={{ margin: "0 0 16px", fontSize: 13, color: MUTED, lineHeight: 1.6 }}>
-              If you have contractors you&apos;ve worked with and trust, list them here. Name and phone is enough.
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
-              <InputField label="Preferred Plumber" name="preferred_plumber" value={form.preferred_plumber} onChange={setStr("preferred_plumber")} placeholder="Name + phone" />
-              <InputField label="Preferred Electrician" name="preferred_electrician" value={form.preferred_electrician} onChange={setStr("preferred_electrician")} placeholder="Name + phone" />
-              <InputField label="Preferred Handyman / General" name="preferred_handyman" value={form.preferred_handyman} onChange={setStr("preferred_handyman")} placeholder="Name + phone" />
-              <InputField label="Other (HVAC, landscaping, etc.)" name="preferred_contractors_other" value={form.preferred_contractors_other} onChange={setStr("preferred_contractors_other")} placeholder="Name, trade + phone" />
-            </div>
+            {/* Column headers — hidden on very small screens */}
+            {form.contractors.length > 0 && (
+              <div style={{ display: "grid", gridTemplateColumns: "140px 1fr 1fr 1fr 36px", gap: "0 10px", marginBottom: 6, paddingBottom: 8, borderBottom: `1px solid ${INPUT_BORDER}` }}>
+                {["Trade", "Name", "Phone", "Email", ""].map((h) => (
+                  <span key={h} style={{ fontSize: 10, fontWeight: 700, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.06em" }}>{h}</span>
+                ))}
+              </div>
+            )}
+
+            {/* Rows */}
+            {form.contractors.map((c) => (
+              <div key={c.id} style={{ display: "grid", gridTemplateColumns: "140px 1fr 1fr 1fr 36px", gap: "0 10px", marginBottom: 8, alignItems: "center" }}>
+                {/* Trade dropdown */}
+                <select
+                  value={c.trade}
+                  onChange={(e) => setForm(p => ({ ...p, contractors: p.contractors.map(r => r.id === c.id ? { ...r, trade: e.target.value } : r) }))}
+                  style={{ background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 10px", fontSize: 14, color: NAVY, outline: "none", fontFamily: "var(--font-poppins), -apple-system, sans-serif", width: "100%", boxSizing: "border-box" as const }}
+                >
+                  {TRADES.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+                {/* Name */}
+                <input value={c.name} onChange={(e) => setForm(p => ({ ...p, contractors: p.contractors.map(r => r.id === c.id ? { ...r, name: e.target.value } : r) }))}
+                  placeholder="Name" style={{ background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 12px", fontSize: 14, color: NAVY, outline: "none", width: "100%", boxSizing: "border-box" as const, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                />
+                {/* Phone */}
+                <input value={c.phone} onChange={(e) => setForm(p => ({ ...p, contractors: p.contractors.map(r => r.id === c.id ? { ...r, phone: e.target.value } : r) }))}
+                  placeholder="Phone" type="tel" style={{ background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 12px", fontSize: 14, color: NAVY, outline: "none", width: "100%", boxSizing: "border-box" as const, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                />
+                {/* Email */}
+                <input value={c.email} onChange={(e) => setForm(p => ({ ...p, contractors: p.contractors.map(r => r.id === c.id ? { ...r, email: e.target.value } : r) }))}
+                  placeholder="Email (optional)" type="email" style={{ background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 12px", fontSize: 14, color: NAVY, outline: "none", width: "100%", boxSizing: "border-box" as const, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                />
+                {/* Delete */}
+                <button
+                  type="button"
+                  onClick={() => setForm(p => ({ ...p, contractors: p.contractors.filter(r => r.id !== c.id) }))}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: SUBTLE, fontSize: 18, padding: 0, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, borderRadius: 8, transition: "background 0.15s" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(185,28,28,0.07)"; (e.currentTarget as HTMLButtonElement).style.color = "#B91C1C"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "none"; (e.currentTarget as HTMLButtonElement).style.color = SUBTLE; }}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+
+            {/* Add button */}
+            <button
+              type="button"
+              onClick={() => setForm(p => ({ ...p, contractors: [...p.contractors, newContractor()] }))}
+              style={{
+                marginTop: form.contractors.length > 0 ? 8 : 0,
+                background: "none", border: `1px dashed ${INPUT_BORDER}`, borderRadius: 10,
+                padding: "10px 16px", fontSize: 14, color: MUTED, cursor: "pointer",
+                fontFamily: "var(--font-poppins), -apple-system, sans-serif", fontWeight: 500,
+                display: "flex", alignItems: "center", gap: 8, transition: "border-color 0.15s, color 0.15s",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = BURGUNDY; (e.currentTarget as HTMLButtonElement).style.color = BURGUNDY; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = INPUT_BORDER; (e.currentTarget as HTMLButtonElement).style.color = MUTED; }}
+            >
+              + Add Contractor
+            </button>
           </SectionCard>
 
           {/* 8 — Contact Preferences */}

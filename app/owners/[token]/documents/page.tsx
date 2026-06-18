@@ -51,6 +51,14 @@ export default async function DocumentsPage({ params }: Props) {
     )
   );
 
+  // Check if an onboarding lease exists for this owner
+  const { data: onboardingSession } = await sb
+    .from("onboarding_sessions")
+    .select("lease_storage_path, property_address, created_at")
+    .eq("owner_access_token", token)
+    .not("lease_storage_path", "is", null)
+    .single();
+
   return (
     <>
       <link
@@ -90,6 +98,16 @@ export default async function DocumentsPage({ params }: Props) {
           >
             Documents
           </h1>
+
+          {/* Lease download card */}
+          {onboardingSession && (
+            <div style={{ marginBottom: 32 }}>
+              <p style={{ margin: "0 0 14px", fontSize: 12, fontWeight: 700, color: "rgba(15,28,40,0.35)", textTransform: "uppercase", letterSpacing: "0.10em", fontFamily: "var(--font-dm-sans)" }}>
+                Lease Agreement
+              </p>
+              <LeaseDownloadCard token={token} propertyAddress={onboardingSession.property_address} uploadedAt={onboardingSession.created_at} />
+            </div>
+          )}
 
           {dashboard.properties.map((propData, idx) => {
             const { property } = propData;
@@ -148,6 +166,70 @@ export default async function DocumentsPage({ params }: Props) {
         <MobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function LeaseDownloadCard({ token, propertyAddress, uploadedAt }: {
+  token: string;
+  propertyAddress: string | null;
+  uploadedAt: string | null;
+}) {
+  const date = uploadedAt
+    ? new Date(uploadedAt).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })
+    : "";
+
+  return (
+    <div style={{
+      background: "#FFFFFF",
+      border: "1px solid rgba(15,28,40,0.07)",
+      borderRadius: "16px",
+      boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
+      padding: "18px 22px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "16px",
+      flexWrap: "wrap" as const,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{
+          width: 40, height: 40, borderRadius: 10,
+          background: "rgba(139,32,48,0.07)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 20, flexShrink: 0,
+        }}>
+          📄
+        </div>
+        <div>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "#0F1C28", fontFamily: "var(--font-dm-sans)" }}>
+            {propertyAddress ? `Lease — ${propertyAddress}` : "Lease Agreement"}
+          </p>
+          {date && (
+            <p style={{ margin: "2px 0 0", fontSize: 13, color: "rgba(15,28,40,0.45)", fontFamily: "var(--font-dm-sans)" }}>
+              Uploaded {date}
+            </p>
+          )}
+        </div>
+      </div>
+      <a
+        href={`/api/owners/${token}/lease`}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background: "#0F1C28",
+          color: "#fff",
+          borderRadius: 10,
+          padding: "9px 18px",
+          fontSize: 14,
+          fontWeight: 600,
+          textDecoration: "none",
+          flexShrink: 0,
+          fontFamily: "var(--font-dm-sans)",
+        }}
+      >
+        Download
+      </a>
+    </div>
   );
 }
 
