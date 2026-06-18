@@ -97,11 +97,11 @@ function wrapper(content: string): string {
             <td class="header-pad" style="padding:20px 8px 16px;" bgcolor="${BG_OUTER}">
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
-                  <td>
-                    <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="32" style="height:32px;width:auto;display:block;" onerror="this.style.display='none'" />
+                  <td style="vertical-align:middle;">
+                    <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="34" style="height:34px;width:auto;display:block;" />
                   </td>
-                  <td style="text-align:right;">
-                    <span style="font-family:${FONT};font-size:11px;font-weight:700;color:rgba(15,28,40,0.40);text-transform:uppercase;letter-spacing:0.12em;">Prospera Properties</span>
+                  <td style="text-align:right;vertical-align:middle;">
+                    <span style="font-family:${FONT};font-size:12px;font-weight:700;color:rgba(15,28,40,0.45);text-transform:uppercase;letter-spacing:0.10em;">Prospera Properties</span>
                   </td>
                 </tr>
               </table>
@@ -175,13 +175,12 @@ function signoff(name = "Ebin"): string {
 }
 
 function heroCard(greeting: string, subtitle: string): string {
-  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:-44px -40px 36px;width:calc(100% + 80px);">
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
     <tr>
-      <td style="background:${NAVY};padding:40px 36px 32px;text-align:center;">
-        <div style="display:inline-block;padding:4px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;border-radius:99px;margin-bottom:18px;font-family:${FONT};">Prospera Properties</div>
-        <p style="margin:0 0 12px;font-family:${FONT};font-size:26px;font-weight:700;color:${WHITE};line-height:1.25;">${greeting}</p>
-        <p style="margin:0;font-family:${FONT};font-size:17px;color:rgba(255,255,255,0.6);line-height:1.7;">${subtitle}</p>
-        <div style="height:1px;background:rgba(255,255,255,0.08);margin:28px 0 0;"></div>
+      <td style="background:${NAVY};border-radius:14px;padding:32px 28px 28px;text-align:center;">
+        <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="30" style="height:30px;width:auto;display:block;margin:0 auto 18px;filter:brightness(0) invert(1);opacity:0.9;" />
+        <p style="margin:0 0 10px;font-family:${FONT};font-size:24px;font-weight:700;color:${WHITE};line-height:1.3;">${greeting}</p>
+        <p style="margin:0;font-family:${FONT};font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;">${subtitle}</p>
       </td>
     </tr>
   </table>`;
