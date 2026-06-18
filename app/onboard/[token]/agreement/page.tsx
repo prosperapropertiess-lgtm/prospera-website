@@ -20,7 +20,7 @@ const DIVIDER     = "rgba(15,28,40,0.07)";
 const SECTIONS = [
   {
     title: "What this is",
-    body: "This is the agreement that lets us legally manage your property on your behalf. We've written it in plain language because we believe you should fully understand what you're agreeing to before you sign.",
+    body: "This is the agreement that lets us legally manage your property on your behalf.",
   },
   {
     title: "What we do for you",
