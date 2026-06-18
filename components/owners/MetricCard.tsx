@@ -75,7 +75,7 @@ export function MetricCard({
   const valueFontSize = size === "lg" ? "32px" : size === "md" ? "26px" : "20px";
   const labelFontSize = size === "lg" ? "13px" : "12px";
 
-  const deltaColor = delta == null ? null : delta > 0 ? "#22c55e" : "#ef4444";
+  const deltaColor = delta == null ? null : delta > 0 ? "#16a34a" : "#dc2626";
   const deltaIcon = delta == null ? null : delta > 0 ? "↑" : "↓";
 
   return (
@@ -86,14 +86,8 @@ export function MetricCard({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay: delay / 1000, ease: [0.23, 1, 0.32, 1] }}
       style={{
-        background: highlight
-          ? "linear-gradient(135deg, rgba(139,32,48,0.25), rgba(139,32,48,0.12))"
-          : "rgba(255,255,255,0.06)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: highlight
-          ? "1px solid rgba(139,32,48,0.35)"
-          : "1px solid rgba(255,255,255,0.1)",
+        background: highlight ? "rgba(139,32,48,0.04)" : "#FFFFFF",
+        border: highlight ? "1px solid rgba(139,32,48,0.15)" : "1px solid #E8E4DF",
         borderRadius: "16px",
         padding: size === "lg" ? "24px" : "20px",
         display: "flex",
@@ -106,7 +100,7 @@ export function MetricCard({
           className="material-symbols-outlined"
           style={{
             fontSize: "20px",
-            color: highlight ? "rgba(220,100,120,0.9)" : "rgba(255,255,255,0.4)",
+            color: "#9AA5B1",
             marginBottom: "2px",
           }}
         >
@@ -119,7 +113,7 @@ export function MetricCard({
           fontFamily: "var(--font-outfit)",
           fontSize: valueFontSize,
           fontWeight: 700,
-          color: colorClass || (highlight ? "#f87171" : "white"),
+          color: colorClass || (highlight ? "#8B2030" : "#1F2F3A"),
           letterSpacing: "-0.03em",
           lineHeight: 1,
         }}
@@ -130,7 +124,7 @@ export function MetricCard({
         <div
           style={{
             fontSize: labelFontSize,
-            color: "rgba(255,255,255,0.45)",
+            color: "#9AA5B1",
             fontWeight: 500,
             letterSpacing: "0.04em",
             textTransform: "uppercase",
@@ -139,7 +133,17 @@ export function MetricCard({
           {label}
         </div>
         {delta != null && deltaColor && (
-          <span style={{ fontSize: "11px", fontWeight: 600, color: deltaColor, whiteSpace: "nowrap" }}>
+          <span
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              color: deltaColor,
+              whiteSpace: "nowrap",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              background: delta > 0 ? "#f0fdf4" : "#fef2f2",
+            }}
+          >
             {deltaIcon} {Math.abs(Math.round(delta))}%
           </span>
         )}

@@ -33,10 +33,8 @@ export function MobileNav({ token }: Props) {
           left: 0,
           right: 0,
           zIndex: 200,
-          background: "rgba(11,16,28,0.96)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
+          background: "#FFFFFF",
+          borderTop: "1px solid #E8E4DF",
           paddingBottom: "env(safe-area-inset-bottom)",
           justifyContent: "space-around",
           alignItems: "stretch",
@@ -106,7 +104,7 @@ function NavItem({
         className="material-symbols-outlined"
         style={{
           fontSize: "22px",
-          color: active ? "#c85070" : "rgba(255,255,255,0.35)",
+          color: active ? "#8B2030" : "#9AA5B1",
           transition: "color 0.2s",
         }}
       >
@@ -117,7 +115,7 @@ function NavItem({
           fontSize: "10px",
           fontWeight: 500,
           letterSpacing: "0.02em",
-          color: active ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.3)",
+          color: active ? "#1F2F3A" : "#9AA5B1",
           transition: "color 0.2s",
         }}
       >

@@ -8,11 +8,11 @@ interface Props {
   completed: MaintenanceItem[];
 }
 
-const PRIORITY_COLORS: Record<string, { color: string; bg: string }> = {
-  critical: { color: "#ef4444", bg: "rgba(239,68,68,0.15)" },
-  high:     { color: "#f59e0b", bg: "rgba(245,158,11,0.15)" },
-  medium:   { color: "#fbbf24", bg: "rgba(251,191,36,0.12)" },
-  low:      { color: "rgba(255,255,255,0.35)", bg: "rgba(255,255,255,0.06)" },
+const PRIORITY_COLORS: Record<string, { color: string; bg: string; border: string; leftBorder: string }> = {
+  critical: { color: "#dc2626", bg: "#fef2f2",   border: "#fecaca",  leftBorder: "#dc2626" },
+  high:     { color: "#d97706", bg: "#fffbeb",   border: "#fde68a",  leftBorder: "#d97706" },
+  medium:   { color: "#d97706", bg: "#fffbeb",   border: "#fde68a",  leftBorder: "#f59e0b" },
+  low:      { color: "#9AA5B1", bg: "#F7F5F2",   border: "#E8E4DF",  leftBorder: "#E8E4DF" },
 };
 
 export function MaintenanceList({ open, completed }: Props) {
@@ -22,15 +22,15 @@ export function MaintenanceList({ open, completed }: Props) {
         style={{
           padding: "24px",
           textAlign: "center",
-          background: "rgba(34,197,94,0.05)",
-          border: "1px solid rgba(34,197,94,0.15)",
+          background: "#f0fdf4",
+          border: "1px solid #bbf7d0",
           borderRadius: "14px",
         }}
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#22c55e", display: "block", marginBottom: "6px" }}>
+        <span className="material-symbols-outlined" style={{ fontSize: "28px", color: "#16a34a", display: "block", marginBottom: "6px" }}>
           check_circle
         </span>
-        <p style={{ color: "rgba(34,197,94,0.8)", fontSize: "13px", fontWeight: 500 }}>
+        <p style={{ color: "#16a34a", fontSize: "13px", fontWeight: 500 }}>
           No open maintenance issues
         </p>
       </div>
@@ -52,8 +52,9 @@ export function MaintenanceList({ open, completed }: Props) {
               alignItems: "flex-start",
               gap: "12px",
               padding: "14px",
-              background: "rgba(255,255,255,0.04)",
-              border: `1px solid ${p.color}30`,
+              background: "#FFFFFF",
+              border: `1px solid ${p.border}`,
+              borderLeft: `4px solid ${p.leftBorder}`,
               borderRadius: "12px",
             }}
           >
@@ -62,7 +63,7 @@ export function MaintenanceList({ open, completed }: Props) {
                 padding: "4px 8px",
                 borderRadius: "6px",
                 background: p.bg,
-                border: `1px solid ${p.color}40`,
+                border: `1px solid ${p.border}`,
                 flexShrink: 0,
               }}
             >
@@ -71,10 +72,10 @@ export function MaintenanceList({ open, completed }: Props) {
               </span>
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "13px", fontWeight: 500, marginBottom: "2px" }}>
+              <p style={{ color: "#1F2F3A", fontSize: "13px", fontWeight: 500, marginBottom: "2px" }}>
                 {item.issue}
               </p>
-              <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px" }}>
+              <p style={{ color: "#9AA5B1", fontSize: "11px" }}>
                 {item.category}
                 {item.daysPending != null && ` · ${item.daysPending}d pending`}
               </p>
@@ -91,20 +92,20 @@ export function MaintenanceList({ open, completed }: Props) {
             alignItems: "center",
             gap: "12px",
             padding: "12px 14px",
-            background: "rgba(34,197,94,0.04)",
-            border: "1px solid rgba(34,197,94,0.12)",
+            background: "#F7F5F2",
+            border: "1px solid #E8E4DF",
             borderRadius: "12px",
           }}
         >
-          <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#22c55e", flexShrink: 0 }}>
+          <span className="material-symbols-outlined" style={{ fontSize: "16px", color: "#16a34a", flexShrink: 0 }}>
             check_circle
           </span>
           <div style={{ flex: 1 }}>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", textDecoration: "line-through" }}>
+            <p style={{ color: "#9AA5B1", fontSize: "13px", textDecoration: "line-through" }}>
               {item.issue}
             </p>
           </div>
-          <span style={{ color: "rgba(34,197,94,0.6)", fontSize: "11px" }}>
+          <span style={{ color: "#16a34a", fontSize: "11px" }}>
             {item.dateCompleted
               ? new Date(item.dateCompleted).toLocaleDateString("en-CA", { month: "short", day: "numeric" })
               : "Done"}

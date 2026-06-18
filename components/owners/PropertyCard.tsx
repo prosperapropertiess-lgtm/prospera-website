@@ -17,15 +17,15 @@ function statusBadge(openIssues: number, rentCurrentMonth: { paymentStatus: stri
   });
 
   if (openIssues > 0 && unpaid.length > 0) {
-    return { label: "Needs Attention", color: "#ef4444", bg: "rgba(239,68,68,0.15)" };
+    return { label: "Needs Attention", color: "#dc2626", bg: "#fef2f2", border: "#fecaca" };
   }
   if (unpaid.length > 0) {
-    return { label: "Rent Pending", color: "#f59e0b", bg: "rgba(245,158,11,0.15)" };
+    return { label: "Rent Pending", color: "#d97706", bg: "#fffbeb", border: "#fde68a" };
   }
   if (openIssues > 0) {
-    return { label: "Maintenance Open", color: "#f59e0b", bg: "rgba(245,158,11,0.15)" };
+    return { label: "Maintenance Open", color: "#d97706", bg: "#fffbeb", border: "#fde68a" };
   }
-  return { label: "All Good", color: "#22c55e", bg: "rgba(34,197,94,0.15)" };
+  return { label: "All Good", color: "#16a34a", bg: "#f0fdf4", border: "#bbf7d0" };
 }
 
 function leaseCountdownShort(leaseEnd: string | null): string {
@@ -58,29 +58,27 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
       <Link href={`/owners/${token}/${property.id}`} style={{ textDecoration: "none" }}>
         <div
           style={{
-            background: "rgba(255,255,255,0.06)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: "20px",
+            background: "#FFFFFF",
+            border: "1px solid #E8E4DF",
+            borderRadius: "16px",
             overflow: "hidden",
             cursor: "pointer",
-            transition: "box-shadow 0.3s",
+            transition: "box-shadow 0.3s, border-color 0.3s",
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 20px 60px -15px rgba(0,0,0,0.5)";
-            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.2)";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+            (e.currentTarget as HTMLDivElement).style.borderColor = "#D4CFC9";
           }}
           onMouseLeave={e => {
             (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.1)";
+            (e.currentTarget as HTMLDivElement).style.borderColor = "#E8E4DF";
           }}
         >
-          {/* Property image placeholder with gradient */}
+          {/* Property image placeholder */}
           <div
             style={{
               height: "140px",
-              background: "linear-gradient(135deg, #1a2240 0%, #0f1624 100%)",
+              background: "#F0EDE8",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -89,7 +87,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
           >
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: "48px", color: "rgba(255,255,255,0.15)" }}
+              style={{ fontSize: "48px", color: "#C8BFB5" }}
             >
               home
             </span>
@@ -102,7 +100,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
                 padding: "4px 10px",
                 borderRadius: "20px",
                 background: badge.bg,
-                border: `1px solid ${badge.color}40`,
+                border: `1px solid ${badge.border}`,
                 display: "flex",
                 alignItems: "center",
                 gap: "5px",
@@ -128,11 +126,11 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
                 right: "12px",
                 padding: "4px 10px",
                 borderRadius: "20px",
-                background: "rgba(0,0,0,0.4)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.85)",
+                border: "1px solid #E8E4DF",
               }}
             >
-              <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "11px" }}>
+              <span style={{ color: "#5A6A7A", fontSize: "11px" }}>
                 {property.type}
               </span>
             </div>
@@ -145,14 +143,14 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
                 fontFamily: "var(--font-outfit)",
                 fontSize: "17px",
                 fontWeight: 700,
-                color: "white",
+                color: "#1F2F3A",
                 marginBottom: "4px",
                 letterSpacing: "-0.02em",
               }}
             >
               {property.address}
             </h3>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "13px", marginBottom: "16px" }}>
+            <p style={{ color: "#5A6A7A", fontSize: "13px", marginBottom: "16px" }}>
               {property.city}
             </p>
 
@@ -161,48 +159,40 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
               <StatChip
                 icon="payments"
                 label={`$${currentMonthRent.toLocaleString()}/mo`}
-                color="rgba(255,255,255,0.7)"
               />
               <StatChip
                 icon="trending_up"
                 label={`$${ytdNet.toLocaleString()} in pocket`}
-                color={ytdNet >= 0 ? "rgba(134,239,172,0.9)" : "rgba(248,113,113,0.9)"}
+                valueColor={ytdNet >= 0 ? "#16a34a" : "#dc2626"}
               />
               {openIssuesCount > 0 && (
                 <StatChip
                   icon="build"
                   label={`${openIssuesCount} issue${openIssuesCount > 1 ? "s" : ""}`}
-                  color="rgba(251,191,36,0.9)"
+                  valueColor="#d97706"
                 />
               )}
               {nextLeaseExpiry && (
                 <StatChip
                   icon="calendar_today"
                   label={`Lease ${leaseCountdownShort(nextLeaseExpiry)}`}
-                  color="rgba(255,255,255,0.45)"
                 />
               )}
             </div>
           </div>
 
-          {/* Arrow */}
+          {/* Footer */}
           <div
             style={{
               padding: "12px 20px",
-              borderTop: "1px solid rgba(255,255,255,0.06)",
+              borderTop: "1px solid #E8E4DF",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
-            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px" }}>
-              View details
-            </span>
-            <span
-              className="material-symbols-outlined"
-              style={{ fontSize: "16px", color: "rgba(255,255,255,0.3)" }}
-            >
-              arrow_forward
+            <span style={{ color: "#9AA5B1", fontSize: "12px" }}>
+              View details →
             </span>
           </div>
         </div>
@@ -211,7 +201,7 @@ export function PropertyCard({ data, token, index }: PropertyCardProps) {
   );
 }
 
-function StatChip({ icon, label, color }: { icon: string; label: string; color: string }) {
+function StatChip({ icon, label, valueColor }: { icon: string; label: string; valueColor?: string }) {
   return (
     <div
       style={{
@@ -220,17 +210,17 @@ function StatChip({ icon, label, color }: { icon: string; label: string; color: 
         gap: "4px",
         padding: "4px 8px",
         borderRadius: "8px",
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.08)",
+        background: "#F7F5F2",
+        border: "1px solid #E8E4DF",
       }}
     >
       <span
         className="material-symbols-outlined"
-        style={{ fontSize: "12px", color }}
+        style={{ fontSize: "12px", color: valueColor ?? "#5A6A7A" }}
       >
         {icon}
       </span>
-      <span style={{ color, fontSize: "11px", fontWeight: 500 }}>{label}</span>
+      <span style={{ color: valueColor ?? "#5A6A7A", fontSize: "11px", fontWeight: 500 }}>{label}</span>
     </div>
   );
 }

@@ -30,8 +30,8 @@ export default async function OwnerOverviewPage({ params }: Props) {
     ({ dashboard } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
   } catch {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-outfit)" }}>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F7F5F2" }}>
+        <p style={{ color: "#9AA5B1", fontFamily: "var(--font-outfit)" }}>
           Unable to load data. Please try again in a moment.
         </p>
       </div>
@@ -60,37 +60,43 @@ export default async function OwnerOverviewPage({ params }: Props) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
 
-      <div style={{ minHeight: "100vh" }}>
+      <div style={{ minHeight: "100vh", background: "#F7F5F2" }}>
         <OwnerHeader firstName={firstNames} token={token} />
 
-        <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px 80px" }}>
+        {/* Hero section */}
+        <div
+          style={{
+            background: "#FFFFFF",
+            borderBottom: "1px solid #E8E4DF",
+            padding: "40px 24px 32px",
+          }}
+        >
+          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                fontWeight: 700,
+                color: "#1F2F3A",
+                letterSpacing: "-0.03em",
+                marginBottom: "8px",
+              }}
+            >
+              Hi {firstNames} 👋
+            </h1>
+            <p style={{ color: "#5A6A7A", fontSize: "15px", display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+              <span>{dashboard.currentMonth} {dashboard.currentYear} · Your portfolio at a glance</span>
+              {updatedLabel && (
+                <span style={{ color: "#9AA5B1", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: "12px" }}>schedule</span>
+                  {updatedLabel}
+                </span>
+              )}
+            </p>
+          </div>
+        </div>
 
-          {/* Welcome */}
-          <ScrollReveal>
-            <div style={{ paddingTop: "40px", marginBottom: "40px" }}>
-              <h1
-                style={{
-                  fontFamily: "var(--font-outfit)",
-                  fontSize: "clamp(28px, 4vw, 40px)",
-                  fontWeight: 700,
-                  color: "white",
-                  letterSpacing: "-0.03em",
-                  marginBottom: "8px",
-                }}
-              >
-                Hi {firstNames} 👋
-              </h1>
-              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "15px", display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-                <span>{dashboard.currentMonth} {dashboard.currentYear} · Your portfolio at a glance</span>
-                {updatedLabel && (
-                  <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: "12px" }}>schedule</span>
-                    {updatedLabel}
-                  </span>
-                )}
-              </p>
-            </div>
-          </ScrollReveal>
+        <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 80px" }}>
 
           {/* Portfolio summary — only if multiple properties */}
           {multiProperty && (
@@ -105,7 +111,7 @@ export default async function OwnerOverviewPage({ params }: Props) {
               <MetricCard label="Collected This Year" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
               <MetricCard label="Expenses This Year" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
               <MetricCard label="In Your Pocket" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
-              <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#fbbf24" : "#22c55e"} />
+              <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a"} />
             </div>
           )}
 
@@ -113,10 +119,10 @@ export default async function OwnerOverviewPage({ params }: Props) {
           <ScrollReveal delay={0.05}>
             <h2
               style={{
-                fontFamily: "var(--font-outfit)",
-                fontSize: "13px",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
                 fontWeight: 600,
-                color: "rgba(255,255,255,0.3)",
+                color: "#9AA5B1",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 marginBottom: "16px",
@@ -144,8 +150,8 @@ export default async function OwnerOverviewPage({ params }: Props) {
           <ScrollReveal delay={0.1}>
             <div
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "#FFFFFF",
+                border: "1px solid #E8E4DF",
                 borderRadius: "20px",
                 padding: "28px",
                 display: "flex",
@@ -169,11 +175,14 @@ export default async function OwnerOverviewPage({ params }: Props) {
                 <span style={{ color: "white", fontFamily: "var(--font-outfit)", fontWeight: 700, fontSize: "20px" }}>E</span>
               </div>
               <div style={{ flex: 1, minWidth: "200px" }}>
-                <p style={{ color: "white", fontWeight: 600, fontSize: "15px", marginBottom: "2px", fontFamily: "var(--font-outfit)" }}>
+                <p style={{ color: "#1F2F3A", fontWeight: 600, fontSize: "15px", marginBottom: "2px", fontFamily: "var(--font-outfit)" }}>
                   Ebin Jaison
                 </p>
-                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "13px" }}>
+                <p style={{ color: "#9AA5B1", fontSize: "13px" }}>
                   Property Manager · Prospera Properties
+                </p>
+                <p style={{ color: "#5A6A7A", fontSize: "13px", marginTop: "6px" }}>
+                  Ebin is available by phone or email any time.
                 </p>
               </div>
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -182,9 +191,9 @@ export default async function OwnerOverviewPage({ params }: Props) {
                   style={{
                     padding: "10px 18px",
                     borderRadius: "10px",
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    color: "white",
+                    background: "#F7F5F2",
+                    border: "1px solid #E8E4DF",
+                    color: "#1F2F3A",
                     fontSize: "13px",
                     fontWeight: 500,
                     textDecoration: "none",
@@ -193,7 +202,7 @@ export default async function OwnerOverviewPage({ params }: Props) {
                     gap: "6px",
                   }}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>mail</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "15px", color: "#1F2F3A" }}>mail</span>
                   Email
                 </a>
                 <a
@@ -201,8 +210,8 @@ export default async function OwnerOverviewPage({ params }: Props) {
                   style={{
                     padding: "10px 18px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, rgba(139,32,48,0.4), rgba(139,32,48,0.2))",
-                    border: "1px solid rgba(139,32,48,0.4)",
+                    background: "#8B2030",
+                    border: "1px solid #8B2030",
                     color: "white",
                     fontSize: "13px",
                     fontWeight: 500,
