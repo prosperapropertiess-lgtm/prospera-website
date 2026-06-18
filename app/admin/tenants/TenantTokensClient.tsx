@@ -58,8 +58,10 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
   const [notionTenantId, setNotionTenantId] = useState("");
   const [tenantName, setTenantName] = useState("");
   const [propertyId, setPropertyId] = useState("");
+  const [tenantEmail, setTenantEmail] = useState("");
+  const [propertyAddress, setPropertyAddress] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{ token: string; portalUrl: string } | null>(null);
+  const [result, setResult] = useState<{ token: string; portalUrl: string; emailSent?: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const [tokens, setTokens] = useState<TokenRecord[]>(initialTokens);
@@ -76,7 +78,7 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${adminSecret}`,
         },
-        body: JSON.stringify({ notionTenantId, tenantName, propertyId }),
+        body: JSON.stringify({ notionTenantId, tenantName, propertyId, tenantEmail: tenantEmail || undefined, propertyAddress: propertyAddress || undefined }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -86,6 +88,8 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
         setNotionTenantId("");
         setTenantName("");
         setPropertyId("");
+        setTenantEmail("");
+        setPropertyAddress("");
         // Reload tokens
         const listRes = await fetch("/api/admin/tenant-tokens", {
           headers: { Authorization: `Bearer ${adminSecret}` },
@@ -144,6 +148,17 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
               <Input value={propertyId} onChange={setPropertyId} placeholder="e.g. 19d44116874346b3..." />
             </div>
 
+            <div style={{ height: "1px", background: BORDER, margin: "4px 0" }} />
+
+            <div>
+              <Label>Tenant Email — sends welcome email automatically</Label>
+              <Input value={tenantEmail} onChange={setTenantEmail} placeholder="tenant@email.com (optional)" />
+            </div>
+            <div>
+              <Label>Property Address — shown in welcome email</Label>
+              <Input value={propertyAddress} onChange={setPropertyAddress} placeholder="e.g. 27 Horton St, London ON" />
+            </div>
+
             <button
               type="submit"
               disabled={loading || !notionTenantId || !tenantName || !propertyId}
@@ -161,7 +176,7 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
                 alignSelf: "flex-start",
               }}
             >
-              {loading ? "Generating..." : "Generate portal link"}
+              {loading ? "Creating..." : tenantEmail ? "Create portal & send welcome email" : "Create portal link"}
             </button>
           </form>
 
@@ -174,7 +189,7 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
           {result && (
             <div style={{ marginTop: "24px", background: INPUT_BG, border: "1px solid rgba(52,211,153,0.2)", borderRadius: "12px", padding: "20px" }}>
               <p style={{ color: "#34d399", fontSize: "12px", fontFamily: "var(--font-dm-sans)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "12px" }}>
-                Portal created
+                Portal created {result.emailSent ? "· Welcome email sent ✓" : ""}
               </p>
               <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", marginBottom: "4px" }}>Token</p>
               <p style={{ color: TEXT, fontSize: "13px", fontFamily: "monospace", marginBottom: "16px", wordBreak: "break-all" }}>
