@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
           from: "Ebin at Prospera <hello@prosperaproperties.co>",
           replyTo: "prosperapropertiess@gmail.com",
           to: email,
+          cc: ["prosperapropertiess@gmail.com"],
           subject: "We received your message — Prospera Properties",
           html: contactConfirmationEmail(name, type),
         });

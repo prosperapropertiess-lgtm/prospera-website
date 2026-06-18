@@ -57,6 +57,7 @@ export async function POST(
         await resend.emails.send({
           from: "Ebin | Prospera Properties <hello@prosperaproperties.co>",
           to: session.owner_email,
+          cc: ["prosperapropertiess@gmail.com"],
           subject: "Details received — one signature and you're halfway there",
           html,
         });

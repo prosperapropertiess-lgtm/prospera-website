@@ -58,6 +58,7 @@ export async function GET(req: NextRequest) {
       await resend.emails.send({
         from: "Prospera Properties <hello@prosperaproperties.co>",
         to: app.tenant_email,
+        cc: ["prosperapropertiess@gmail.com"],
         subject: `Following up on your application — ${propertyAddress}`,
         html: agentFollowUpEmail({
           tenantName: app.tenant_name,

@@ -186,6 +186,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM,
         to: tenantEmail,
+        cc: [EBIN_EMAIL],
         subject: `Your tenant portal is ready, ${firstName} 🏠`,
         html: welcomeEmailHtml({ firstName, portalUrl, propertyAddress: addr }),
       }),

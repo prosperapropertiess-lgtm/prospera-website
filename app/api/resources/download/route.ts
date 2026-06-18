@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: "Ebin at Prospera <hello@prosperaproperties.co>",
           to: email,
+          cc: ["prosperapropertiess@gmail.com"],
           subject,
           html,
         });

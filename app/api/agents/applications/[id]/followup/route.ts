@@ -38,6 +38,7 @@ export async function POST(
     from: "Prospera Properties <hello@prosperaproperties.co>",
     replyTo: "prosperapropertiess@gmail.com",
     to: application.tenant_email,
+    cc: ["prosperapropertiess@gmail.com"],
     subject: `Following up on your application — ${propertyAddress}`,
     html: agentFollowUpEmail({
       tenantName: application.tenant_name,

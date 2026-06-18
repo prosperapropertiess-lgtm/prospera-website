@@ -16,7 +16,7 @@ import { updateNotionPage } from "@/lib/notion";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.prosperaproperties.co";
 
-async function sendEmail(to: string, subject: string, html: string) {
+async function sendEmail(to: string, subject: string, html: string, cc?: string[]) {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     console.error("[onboard] RESEND_API_KEY not set — email skipped:", subject);
@@ -27,6 +27,7 @@ async function sendEmail(to: string, subject: string, html: string) {
   const result = await resend.emails.send({
     from: "Ebin | Prospera Properties <hello@prosperaproperties.co>",
     to,
+    ...(cc ? { cc } : {}),
     subject,
     html,
   });
@@ -147,7 +148,8 @@ export async function POST(
         await sendEmail(
           session.owner_email,
           "Your Prospera setup is live — here's your first step",
-          html
+          html,
+          ["prosperapropertiess@gmail.com"]
         );
       } catch (e) {
         console.error("Email 1 failed:", e);
@@ -226,7 +228,8 @@ export async function POST(
         await sendEmail(
           session.owner_email,
           "Agreement confirmed — let's meet at the property",
-          html
+          html,
+          ["prosperapropertiess@gmail.com"]
         );
       } catch (e) {
         console.error("Email 3 failed:", e);
@@ -265,7 +268,7 @@ export async function POST(
           propertyAddress: session.property_address || "your property",
           keyCount: body.num_keys ? Number(body.num_keys) : undefined,
         });
-        await sendEmail(session.owner_email, "Keys received — your property is secure with us 🔑", html);
+        await sendEmail(session.owner_email, "Keys received — your property is secure with us 🔑", html, ["prosperapropertiess@gmail.com"]);
       } catch (e) { console.error("Email 4 failed:", e); }
     }
 
@@ -300,7 +303,8 @@ export async function POST(
           issues.length > 0
             ? `Initial inspection done — ${issues.length} item${issues.length > 1 ? "s" : ""} noted 📋`
             : "Initial inspection done — all clear 📋",
-          html
+          html,
+          ["prosperapropertiess@gmail.com"]
         );
       } catch (e) { console.error("Email 5 failed:", e); }
     }
@@ -324,7 +328,8 @@ export async function POST(
         await sendEmail(
           tenantEmail,
           `Important: your property is now managed by Prospera Properties`,
-          html
+          html,
+          ["prosperapropertiess@gmail.com"]
         );
         tenantEmailsSent++;
       } catch (e) { console.error(`Tenant intro email failed for ${tenantEmail}:`, e); }
@@ -338,7 +343,7 @@ export async function POST(
           propertyAddress: session.property_address || "your property",
           tenantCount: tenantEmailsSent || tenants.length,
         });
-        await sendEmail(session.owner_email, "Your tenants have been notified ✅", html);
+        await sendEmail(session.owner_email, "Your tenants have been notified ✅", html, ["prosperapropertiess@gmail.com"]);
       } catch (e) { console.error("Email 6 failed:", e); }
     }
 
@@ -372,7 +377,7 @@ export async function POST(
           rentCollectionDate: rentDate,
           feeDescription: feeDesc,
         });
-        await sendEmail(session.owner_email, "Financial setup complete — here's what happens next 💰", html);
+        await sendEmail(session.owner_email, "Financial setup complete — here's what happens next 💰", html, ["prosperapropertiess@gmail.com"]);
       } catch (e) { console.error("Email 7 failed:", e); }
     }
 
@@ -431,7 +436,7 @@ export async function POST(
           rentCollectionDate: rentDate,
           dashboardUrl: `${BASE_URL}/owners/${accessToken}`,
         });
-        await sendEmail(session.owner_email, "You're officially with Prospera Properties 🎉", html);
+        await sendEmail(session.owner_email, "You're officially with Prospera Properties 🎉", html, ["prosperapropertiess@gmail.com"]);
       } catch (e) { console.error("Email 8 failed:", e); }
     }
 

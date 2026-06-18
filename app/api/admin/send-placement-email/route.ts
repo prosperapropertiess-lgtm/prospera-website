@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
     const { data, error } = await resend.emails.send({
       from: "Ebin at Prospera <hello@prosperaproperties.co>",
       to,
+      cc: ["prosperapropertiess@gmail.com"],
       subject: "How we handle tenant placement — Prospera Properties",
       html,
       attachments: attachments.length ? attachments : undefined,

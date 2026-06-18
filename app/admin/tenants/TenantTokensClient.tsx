@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const BG = "#0B1219";
@@ -19,6 +19,17 @@ interface TokenRecord {
   created_at: string;
 }
 
+interface NotionTenant {
+  id: string;
+  name: string;
+  propertyId: string;
+}
+
+interface NotionProperty {
+  id: string;
+  address: string;
+}
+
 interface Props {
   adminSecret: string;
   initialTokens: TokenRecord[];
@@ -32,39 +43,73 @@ function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Input({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
-  return (
-    <input
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      style={{
-        width: "100%",
-        background: INPUT_BG,
-        border: `1px solid ${BORDER}`,
-        borderRadius: "8px",
-        padding: "10px 14px",
-        color: TEXT,
-        fontSize: "14px",
-        fontFamily: "var(--font-dm-sans)",
-        outline: "none",
-        boxSizing: "border-box",
-      }}
-    />
-  );
-}
+const selectStyle: React.CSSProperties = {
+  width: "100%",
+  background: INPUT_BG,
+  border: `1px solid ${BORDER}`,
+  borderRadius: "8px",
+  padding: "10px 14px",
+  color: TEXT,
+  fontSize: "14px",
+  fontFamily: "var(--font-dm-sans)",
+  outline: "none",
+  boxSizing: "border-box",
+  appearance: "none",
+  cursor: "pointer",
+};
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: INPUT_BG,
+  border: `1px solid ${BORDER}`,
+  borderRadius: "8px",
+  padding: "10px 14px",
+  color: TEXT,
+  fontSize: "14px",
+  fontFamily: "var(--font-dm-sans)",
+  outline: "none",
+  boxSizing: "border-box",
+};
 
 export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
-  const [notionTenantId, setNotionTenantId] = useState("");
+  const [notionTenants, setNotionTenants] = useState<NotionTenant[]>([]);
+  const [notionProperties, setNotionProperties] = useState<NotionProperty[]>([]);
+  const [loadingNotion, setLoadingNotion] = useState(true);
+
+  const [selectedTenantId, setSelectedTenantId] = useState("");
   const [tenantName, setTenantName] = useState("");
-  const [propertyId, setPropertyId] = useState("");
-  const [tenantEmail, setTenantEmail] = useState("");
+  const [selectedPropertyId, setSelectedPropertyId] = useState("");
   const [propertyAddress, setPropertyAddress] = useState("");
+  const [tenantEmail, setTenantEmail] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ token: string; portalUrl: string; emailSent?: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const [tokens, setTokens] = useState<TokenRecord[]>(initialTokens);
+
+  useEffect(() => {
+    fetch("/api/admin/notion-tenants", {
+      headers: { Authorization: `Bearer ${adminSecret}` },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setNotionTenants(data.tenants ?? []);
+        setNotionProperties(data.properties ?? []);
+      })
+      .catch(() => {})
+      .finally(() => setLoadingNotion(false));
+  }, [adminSecret]);
+
+  function handleTenantSelect(tenantId: string) {
+    setSelectedTenantId(tenantId);
+    const t = notionTenants.find((x) => x.id === tenantId);
+    if (!t) { setTenantName(""); setSelectedPropertyId(""); return; }
+    setTenantName(t.name);
+    // Auto-select their property if it's in the list
+    const matchedProp = notionProperties.find((p) => p.id === t.propertyId);
+    if (matchedProp) setSelectedPropertyId(matchedProp.id);
+  }
 
   async function handleGenerate(e: React.FormEvent) {
     e.preventDefault();
@@ -78,19 +123,24 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${adminSecret}`,
         },
-        body: JSON.stringify({ notionTenantId, tenantName, propertyId, tenantEmail: tenantEmail || undefined, propertyAddress: propertyAddress || undefined }),
+        body: JSON.stringify({
+          notionTenantId: selectedTenantId,
+          tenantName,
+          propertyId: selectedPropertyId,
+          tenantEmail: tenantEmail || undefined,
+          propertyAddress: propertyAddress || undefined,
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error ?? "Failed to generate token");
       } else {
         setResult(data);
-        setNotionTenantId("");
+        setSelectedTenantId("");
         setTenantName("");
-        setPropertyId("");
+        setSelectedPropertyId("");
         setTenantEmail("");
         setPropertyAddress("");
-        // Reload tokens
         const listRes = await fetch("/api/admin/tenant-tokens", {
           headers: { Authorization: `Bearer ${adminSecret}` },
         });
@@ -111,6 +161,8 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
     setCopied(key);
     setTimeout(() => setCopied(null), 2000);
   }
+
+  const canSubmit = !loading && selectedTenantId && tenantName && selectedPropertyId;
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: BG }}>
@@ -135,33 +187,68 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
           </p>
 
           <form onSubmit={handleGenerate} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            {/* Tenant dropdown */}
             <div>
-              <Label>Notion Tenant ID</Label>
-              <Input value={notionTenantId} onChange={setNotionTenantId} placeholder="e.g. abc123def456..." />
+              <Label>Tenant</Label>
+              <div style={{ position: "relative" }}>
+                <select
+                  value={selectedTenantId}
+                  onChange={(e) => handleTenantSelect(e.target.value)}
+                  disabled={loadingNotion}
+                  style={{ ...selectStyle, opacity: loadingNotion ? 0.5 : 1 }}
+                >
+                  <option value="">{loadingNotion ? "Loading from Notion…" : "Select tenant"}</option>
+                  {notionTenants.map((t) => (
+                    <option key={t.id} value={t.id}>{t.name}</option>
+                  ))}
+                </select>
+                <span style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", color: TEXT_SEC, pointerEvents: "none", fontSize: "12px" }}>▼</span>
+              </div>
             </div>
+
+            {/* Property dropdown */}
             <div>
-              <Label>Tenant Name</Label>
-              <Input value={tenantName} onChange={setTenantName} placeholder="e.g. John Smith" />
-            </div>
-            <div>
-              <Label>Notion Property ID</Label>
-              <Input value={propertyId} onChange={setPropertyId} placeholder="e.g. 19d44116874346b3..." />
+              <Label>Property</Label>
+              <div style={{ position: "relative" }}>
+                <select
+                  value={selectedPropertyId}
+                  onChange={(e) => setSelectedPropertyId(e.target.value)}
+                  disabled={loadingNotion}
+                  style={{ ...selectStyle, opacity: loadingNotion ? 0.5 : 1 }}
+                >
+                  <option value="">{loadingNotion ? "Loading from Notion…" : "Select property"}</option>
+                  {notionProperties.map((p) => (
+                    <option key={p.id} value={p.id}>{p.address}</option>
+                  ))}
+                </select>
+                <span style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", color: TEXT_SEC, pointerEvents: "none", fontSize: "12px" }}>▼</span>
+              </div>
             </div>
 
             <div style={{ height: "1px", background: BORDER, margin: "4px 0" }} />
 
             <div>
               <Label>Tenant Email — sends welcome email automatically</Label>
-              <Input value={tenantEmail} onChange={setTenantEmail} placeholder="tenant@email.com (optional)" />
+              <input
+                value={tenantEmail}
+                onChange={(e) => setTenantEmail(e.target.value)}
+                placeholder="tenant@email.com (optional)"
+                style={inputStyle}
+              />
             </div>
             <div>
               <Label>Property Address — shown in welcome email</Label>
-              <Input value={propertyAddress} onChange={setPropertyAddress} placeholder="e.g. 27 Horton St, London ON" />
+              <input
+                value={propertyAddress}
+                onChange={(e) => setPropertyAddress(e.target.value)}
+                placeholder="e.g. 27 Horton St, London ON"
+                style={inputStyle}
+              />
             </div>
 
             <button
               type="submit"
-              disabled={loading || !notionTenantId || !tenantName || !propertyId}
+              disabled={!canSubmit}
               style={{
                 background: ACCENT,
                 color: TEXT,
@@ -171,8 +258,8 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
                 fontSize: "14px",
                 fontFamily: "var(--font-dm-sans)",
                 fontWeight: 600,
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.6 : 1,
+                cursor: !canSubmit ? "not-allowed" : "pointer",
+                opacity: !canSubmit ? 0.5 : 1,
                 alignSelf: "flex-start",
               }}
             >

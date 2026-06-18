@@ -151,6 +151,7 @@ export async function POST(req: NextRequest) {
             from: "Laura at Prospera <hello@prosperaproperties.co>",
             replyTo: "prosperapropertiess@gmail.com",
             to: emailAddress,
+            cc: ["prosperapropertiess@gmail.com"],
             subject: `Your rent analysis — ${submission.city} property`,
             html: rentAnalysisReportEmail({
               name,

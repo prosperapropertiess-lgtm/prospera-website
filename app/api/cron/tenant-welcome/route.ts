@@ -230,6 +230,7 @@ export async function GET(req: NextRequest) {
       const { error: emailError } = await resend.emails.send({
         from: FROM,
         to: tenant.email,
+        cc: [EBIN_EMAIL],
         subject: `Your tenant portal is ready, ${firstName} 🏠`,
         html: welcomeEmailHtml({ firstName, portalUrl, propertyAddress }),
       });

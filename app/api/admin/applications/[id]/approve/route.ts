@@ -60,6 +60,7 @@ export async function POST(
     resend.emails.send({
       from: "Prospera Properties <hello@prosperaproperties.co>",
       to: application.tenant_email,
+      cc: ["prosperapropertiess@gmail.com"],
       subject: `Your application has been approved — ${propertyAddress}`,
       html: applicationApprovedTenantEmail({ tenantName: application.tenant_name, propertyAddress }),
     }).catch((err: unknown) => console.error("[approve] Tenant email failed:", err));

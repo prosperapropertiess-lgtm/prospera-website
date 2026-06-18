@@ -124,6 +124,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: "Prospera Properties <hello@prosperaproperties.co>",
         to: agent.email,
+        cc: ["prosperapropertiess@gmail.com"],
         subject: `New application — ${tenant_name} for ${property.address}`,
         html: applicationReceivedAgentEmail({
           agentName: agent.name,
