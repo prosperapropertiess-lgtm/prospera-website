@@ -96,6 +96,17 @@ export default async function PropertyDetailPage({ params }: Props) {
     ? ((currMonthSnapshot.net - prevMonthSnapshot.net) / Math.abs(prevMonthSnapshot.net)) * 100
     : null;
 
+  // Month-over-month absolute deltas
+  const netMoM = prevMonthSnapshot ? currMonthSnapshot.net - prevMonthSnapshot.net : null;
+  const rentMoM = prevMonthSnapshot ? currMonthSnapshot.rentCollected - prevMonthSnapshot.rentCollected : null;
+  const expMoM = prevMonthSnapshot ? currMonthSnapshot.expenses - prevMonthSnapshot.expenses : null;
+
+  // Annual net projection based on active months YTD
+  const currentYearHistory = history.filter(s => s.year === dashboard.currentYear);
+  const activeMonthsYTD = currentYearHistory.filter(s => s.rentCollected > 0 || s.expenses > 0).length;
+  const projectedAnnualNet = activeMonthsYTD > 0 ? Math.round((ytdNet / activeMonthsYTD) * 12) : null;
+  const avgMonthlyNet = activeMonthsYTD > 0 ? Math.round(ytdNet / activeMonthsYTD) : null;
+
   // Rent collection rate
   const paidCount = rentCurrentMonth.filter(r => isPaidStatus(r.paymentStatus ?? "")).length;
   const totalCount = rentCurrentMonth.length;
@@ -310,6 +321,22 @@ export default async function PropertyDetailPage({ params }: Props) {
               </div>
             </ScrollReveal>
 
+            {/* Month-over-month comparison */}
+            {prevMonthSnapshot && netMoM !== null && (
+              <ScrollReveal delay={0.09}>
+                <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "12px" }}>
+                  <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
+                    {dashboard.currentMonth} vs {prevMonthSnapshot.month}
+                  </p>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+                    <MoMStat label="Net Income" current={currMonthSnapshot.net} delta={netMoM} />
+                    <MoMStat label="Rent Collected" current={currMonthSnapshot.rentCollected} delta={rentMoM!} />
+                    <MoMStat label="Expenses" current={currMonthSnapshot.expenses} delta={expMoM!} invert />
+                  </div>
+                </div>
+              </ScrollReveal>
+            )}
+
             <ScrollReveal delay={0.1}>
               <div style={{ background: "#FFFFFF", border: "1px solid #E8E4DF", borderRadius: "16px", padding: "20px", marginBottom: "20px" }}>
                 <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
@@ -327,6 +354,51 @@ export default async function PropertyDetailPage({ params }: Props) {
                 <UtilityChart history={history} />
               </div>
             </ScrollReveal>
+
+            {/* Annual projection */}
+            {projectedAnnualNet !== null && activeMonthsYTD >= 2 && (
+              <ScrollReveal delay={0.09}>
+                <div
+                  style={{
+                    background: "#1F2F3A",
+                    borderRadius: "16px",
+                    padding: "24px 28px",
+                    marginBottom: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "12px",
+                  }}
+                >
+                  <div>
+                    <p style={{ color: "rgba(250,248,245,0.45)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
+                      Annual Projection · {dashboard.currentYear}
+                    </p>
+                    <p
+                      style={{
+                        color: projectedAnnualNet >= 0 ? "#4ade80" : "#f87171",
+                        fontFamily: "var(--font-outfit)",
+                        fontSize: "clamp(28px, 5vw, 40px)",
+                        fontWeight: 700,
+                        letterSpacing: "-0.03em",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {projectedAnnualNet >= 0 ? "+" : ""}{fmt$(projectedAnnualNet)}
+                    </p>
+                    <p style={{ color: "rgba(250,248,245,0.35)", fontSize: "12px", marginTop: "6px" }}>
+                      projected net this year · avg {fmt$(avgMonthlyNet!)} / mo
+                    </p>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <p style={{ color: "rgba(250,248,245,0.25)", fontSize: "11px" }}>
+                      Based on {activeMonthsYTD} month{activeMonthsYTD > 1 ? "s" : ""} of data
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            )}
 
             {/* YTD financial summary + expense breakdown side by side */}
             <ScrollReveal delay={0.1}>
@@ -493,6 +565,24 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     <h2 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 600, color: "#9AA5B1", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "16px" }}>
       {children}
     </h2>
+  );
+}
+
+function MoMStat({ label, current, delta, invert }: { label: string; current: number; delta: number; invert?: boolean }) {
+  const isPositive = invert ? delta < 0 : delta > 0;
+  const isNeutral = delta === 0;
+  const color = isNeutral ? "#9AA5B1" : isPositive ? "#16a34a" : "#dc2626";
+  const arrow = isNeutral ? "→" : delta > 0 ? "↑" : "↓";
+  return (
+    <div>
+      <p style={{ color: "#9AA5B1", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>{label}</p>
+      <p style={{ color: "#1F2F3A", fontFamily: "var(--font-outfit)", fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "3px" }}>
+        ${current.toLocaleString()}
+      </p>
+      <p style={{ color, fontSize: "12px", fontWeight: 500 }}>
+        {arrow} {isNeutral ? "same as last month" : `${delta > 0 ? "+" : ""}$${Math.abs(delta).toLocaleString()} vs last mo`}
+      </p>
+    </div>
   );
 }
 

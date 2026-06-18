@@ -98,22 +98,20 @@ export default async function OwnerOverviewPage({ params }: Props) {
 
         <main style={{ maxWidth: "1100px", margin: "0 auto", padding: "32px 24px 80px" }}>
 
-          {/* Portfolio summary — only if multiple properties */}
-          {multiProperty && (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "12px",
-                marginBottom: "40px",
-              }}
-            >
-              <MetricCard label="Collected This Year" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
-              <MetricCard label="Expenses This Year" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
-              <MetricCard label="In Your Pocket" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
-              <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a"} />
-            </div>
-          )}
+          {/* Portfolio summary */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gap: "12px",
+              marginBottom: "40px",
+            }}
+          >
+            <MetricCard label="Collected This Year" value={dashboard.totalRentCollected} prefix="$" format="currency" icon="payments" delay={0} />
+            <MetricCard label="Expenses This Year" value={dashboard.totalExpenses} prefix="$" format="currency" icon="receipt_long" delay={80} />
+            <MetricCard label="In Your Pocket" value={dashboard.totalNet} prefix="$" format="currency" highlight icon="trending_up" delay={160} />
+            <MetricCard label="Open Issues" value={dashboard.totalOpenIssues} icon="build" delay={240} colorClass={dashboard.totalOpenIssues > 0 ? "#d97706" : "#16a34a"} />
+          </div>
 
           {/* Section label */}
           <ScrollReveal delay={0.05}>
