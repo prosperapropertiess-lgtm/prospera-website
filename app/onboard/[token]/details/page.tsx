@@ -25,6 +25,12 @@ type FormState = {
   alarm_code: string;
   repair_limit: string;
   mailbox_notes: string;
+  washer_dryer_location: string;
+  washer_dryer_instructions: string;
+  appliance_notes: string;
+  garbage_pickup_day: string;
+  garbage_bin_location: string;
+  recycling_notes: string;
   insurance_provider: string;
   insurance_policy: string;
   insurance_contact: string;
@@ -37,6 +43,10 @@ type FormState = {
   internet_included: boolean;
   hydro_account: string;
   gas_account: string;
+  preferred_plumber: string;
+  preferred_electrician: string;
+  preferred_handyman: string;
+  preferred_contractors_other: string;
   emergency_contact_name: string;
   emergency_contact_phone: string;
   preferred_contact_method: string;
@@ -52,10 +62,13 @@ const defaultForm: FormState = {
   payment_method: "e-transfer",
   etransfer_email: "", bank_institution: "", bank_transit: "", bank_account: "",
   front_door_code: "", garage_code: "", alarm_code: "", repair_limit: "200", mailbox_notes: "",
+  washer_dryer_location: "in-unit", washer_dryer_instructions: "", appliance_notes: "",
+  garbage_pickup_day: "", garbage_bin_location: "", recycling_notes: "",
   insurance_provider: "", insurance_policy: "", insurance_contact: "", insurance_phone: "",
   monthly_mortgage: "", annual_property_tax: "",
   hydro_included: false, gas_included: false, water_included: false, internet_included: false,
   hydro_account: "", gas_account: "",
+  preferred_plumber: "", preferred_electrician: "", preferred_handyman: "", preferred_contractors_other: "",
   emergency_contact_name: "", emergency_contact_phone: "",
   preferred_contact_method: "text", best_time_to_reach: "", other_contacts: "",
   maintenance_issues: "", tenant_disputes: "", planned_renovations: "", other_notes: "",
@@ -216,7 +229,7 @@ export default function OwnerDetailsPage() {
       });
       const d = await r.json();
       if (!r.ok) { setError(d.error || "Something went wrong."); setSaving(false); return; }
-      router.push(`/onboard/${token}/agreement`);
+      router.push(`/onboard/${token}/complete`);
     } catch {
       setError("Something went wrong. Please try again.");
       setSaving(false);
@@ -237,8 +250,17 @@ export default function OwnerDetailsPage() {
 
       {/* Header */}
       <div style={{ padding: "20px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: NAVY }}>Prospera Properties</p>
-        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 2 of 3 · Property Details</span>
+        <button
+          onClick={() => router.push(`/onboard/${token}/lease`)}
+          style={{
+            background: "none", border: "none", cursor: "pointer", padding: "6px 0",
+            fontSize: 14, color: MUTED, fontWeight: 500, display: "flex", alignItems: "center", gap: 6,
+            fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+          }}
+        >
+          ← Back
+        </button>
+        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 3 of 3 · Property Details</span>
       </div>
 
       {/* Main */}
@@ -291,8 +313,54 @@ export default function OwnerDetailsPage() {
             </div>
           </SectionCard>
 
-          {/* 3 — Insurance & Financials */}
-          <SectionCard num="03" title="Insurance & Financials" sub="Helps us prepare accurate monthly reports" optional>
+          {/* 3 — Appliances & Laundry */}
+          <SectionCard num="03" title="Appliances & Laundry" sub="Helps us handle tenant questions and maintenance correctly">
+            <SelectField label="Washer / Dryer" value={form.washer_dryer_location} onChange={setStr("washer_dryer_location")}
+              options={[
+                { value: "in-unit", label: "In-unit (washer & dryer in the unit)" },
+                { value: "shared", label: "Shared laundry in building" },
+                { value: "coin-op", label: "Coin-op laundry nearby" },
+                { value: "none", label: "No laundry available" },
+              ]}
+            />
+            {(form.washer_dryer_location === "in-unit" || form.washer_dryer_location === "shared") && (
+              <TextareaField
+                label="Lint trap location & cleaning instructions"
+                name="washer_dryer_instructions"
+                value={form.washer_dryer_instructions}
+                onChange={setStr("washer_dryer_instructions")}
+                placeholder="e.g. Lint trap is inside the dryer door. Clean after every use. Filter in laundry room sink."
+                rows={2}
+              />
+            )}
+            <TextareaField
+              label="Other appliance notes"
+              name="appliance_notes"
+              value={form.appliance_notes}
+              onChange={setStr("appliance_notes")}
+              placeholder="e.g. HVAC filter replaced every 3 months, dishwasher needs salt top-up, stove left element runs hot…"
+              rows={2}
+            />
+          </SectionCard>
+
+          {/* 4 — Garbage & Recycling */}
+          <SectionCard num="04" title="Garbage & Recycling" sub="So we can brief new tenants and handle complaints correctly">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
+              <InputField label="Garbage Pickup Day(s)" name="garbage_pickup_day" value={form.garbage_pickup_day} onChange={setStr("garbage_pickup_day")} placeholder="e.g. Monday, or Mon & Thu" />
+              <InputField label="Bin Location" name="garbage_bin_location" value={form.garbage_bin_location} onChange={setStr("garbage_bin_location")} placeholder="e.g. Side of house, back alley" />
+            </div>
+            <TextareaField
+              label="Recycling & special instructions"
+              name="recycling_notes"
+              value={form.recycling_notes}
+              onChange={setStr("recycling_notes")}
+              placeholder="e.g. Blue box on Fridays, green bin weekly, bulky items first Monday of month, no styrofoam in recycling…"
+              rows={2}
+            />
+          </SectionCard>
+
+          {/* 5 — Insurance & Financials */}
+          <SectionCard num="05" title="Insurance & Financials" sub="Helps us prepare accurate monthly reports" optional>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
               <InputField label="Insurance Provider" name="insurance_provider" value={form.insurance_provider} onChange={setStr("insurance_provider")} placeholder="Intact, Aviva…" />
               <InputField label="Policy Number" name="insurance_policy" value={form.insurance_policy} onChange={setStr("insurance_policy")} placeholder="Optional" />
@@ -303,8 +371,8 @@ export default function OwnerDetailsPage() {
             </div>
           </SectionCard>
 
-          {/* 4 — Utilities */}
-          <SectionCard num="04" title="Utilities" sub="Which utilities are included in the rent?">
+          {/* 6 — Utilities */}
+          <SectionCard num="06" title="Utilities" sub="Which utilities are included in the rent?">
             <Toggle label="Hydro / Electricity included in rent" checked={form.hydro_included} onChange={setBool("hydro_included")} />
             <Toggle label="Gas included in rent" checked={form.gas_included} onChange={setBool("gas_included")} />
             <Toggle label="Water included in rent" checked={form.water_included} onChange={setBool("water_included")} />
@@ -315,8 +383,21 @@ export default function OwnerDetailsPage() {
             </div>
           </SectionCard>
 
-          {/* 5 — Contact Preferences */}
-          <SectionCard num="05" title="Contact Preferences" sub="How you'd like us to reach you">
+          {/* 7 — Preferred Contractors */}
+          <SectionCard num="07" title="Preferred Contractors" sub="Anyone you already trust — we'll call them first" optional>
+            <p style={{ margin: "0 0 16px", fontSize: 13, color: MUTED, lineHeight: 1.6 }}>
+              If you have contractors you&apos;ve worked with and trust, list them here. Name and phone is enough.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
+              <InputField label="Preferred Plumber" name="preferred_plumber" value={form.preferred_plumber} onChange={setStr("preferred_plumber")} placeholder="Name + phone" />
+              <InputField label="Preferred Electrician" name="preferred_electrician" value={form.preferred_electrician} onChange={setStr("preferred_electrician")} placeholder="Name + phone" />
+              <InputField label="Preferred Handyman / General" name="preferred_handyman" value={form.preferred_handyman} onChange={setStr("preferred_handyman")} placeholder="Name + phone" />
+              <InputField label="Other (HVAC, landscaping, etc.)" name="preferred_contractors_other" value={form.preferred_contractors_other} onChange={setStr("preferred_contractors_other")} placeholder="Name, trade + phone" />
+            </div>
+          </SectionCard>
+
+          {/* 8 — Contact Preferences */}
+          <SectionCard num="08" title="Contact Preferences" sub="How you'd like us to reach you">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
               <InputField label="Emergency Contact Name" name="emergency_contact_name" value={form.emergency_contact_name} onChange={setStr("emergency_contact_name")} placeholder="Name + relationship" />
               <InputField label="Emergency Contact Phone" name="emergency_contact_phone" value={form.emergency_contact_phone} onChange={setStr("emergency_contact_phone")} type="tel" placeholder="Phone number" />
@@ -332,8 +413,8 @@ export default function OwnerDetailsPage() {
             <TextareaField label="Other Contacts (accountant, spouse, family)" name="other_contacts" value={form.other_contacts} onChange={setStr("other_contacts")} placeholder="Optional — anyone else we should know about" rows={2} />
           </SectionCard>
 
-          {/* 6 — Anything We Should Know? */}
-          <SectionCard num="06" title="Anything We Should Know?" sub="Issues, disputes, or upcoming plans at the property">
+          {/* 9 — Anything We Should Know? */}
+          <SectionCard num="09" title="Anything We Should Know?" sub="Issues, disputes, or upcoming plans at the property">
             {([
               { key: "maintenance_issues", label: "Known Maintenance Issues", placeholder: "Leaky faucet in unit 2, needs HVAC service…" },
               { key: "tenant_disputes", label: "Ongoing Tenant Disputes", placeholder: "Any late payment history, noise complaints, etc." },

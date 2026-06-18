@@ -104,10 +104,17 @@ export default function LeaseUploadPage() {
 
       {/* Header */}
       <div style={{ padding: "20px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: NAVY, letterSpacing: "-0.01em" }}>
-          Prospera Properties
-        </p>
-        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 1 of 3 · Upload Lease</span>
+        <button
+          onClick={() => router.push(`/onboard/${token}/agreement`)}
+          style={{
+            background: "none", border: "none", cursor: "pointer", padding: "6px 0",
+            fontSize: 14, color: MUTED, fontWeight: 500, display: "flex", alignItems: "center", gap: 6,
+            fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+          }}
+        >
+          ← Back
+        </button>
+        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 2 of 3 · Upload Lease</span>
       </div>
 
       {/* Main content */}

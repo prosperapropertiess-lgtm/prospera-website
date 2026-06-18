@@ -315,11 +315,11 @@ export default function OnboardPortal() {
   const doneCount = [true, leaseUploaded, detailsDone, agreementDone, ebinSetupDone, live].filter(Boolean).length;
   const pct = Math.round((doneCount / 6) * 100);
 
-  // Step statuses
-  const leaseStatus: StepStatus  = leaseUploaded ? "done" : (!detailsDone ? "active" : "done");
-  const detailsStatus: StepStatus = detailsDone ? "done" : (leaseUploaded || true ? "active" : "locked");
-  const agreementStatus: StepStatus = agreementDone ? "done" : (detailsDone ? "active" : "locked");
-  const ebinStatus: StepStatus   = ebinSetupDone ? "done" : (agreementDone ? "ebin" : "locked");
+  // Step statuses — new order: agreement → lease → details → ebin → live
+  const agreementStatus: StepStatus = agreementDone ? "done" : "active";
+  const leaseStatus: StepStatus  = leaseUploaded ? "done" : (agreementDone ? "active" : "locked");
+  const detailsStatus: StepStatus = detailsDone ? "done" : (leaseUploaded ? "active" : "locked");
+  const ebinStatus: StepStatus   = ebinSetupDone ? "done" : (detailsDone ? "ebin" : "locked");
   const liveStatus: StepStatus   = live ? "done" : (ebinSetupDone ? "active" : "locked");
 
   // Emails sent so far
@@ -443,9 +443,24 @@ export default function OnboardPortal() {
             </div>
           </StepRow>
 
-          {/* Step 2 — Upload lease */}
+          {/* Step 2 — Agreement (first owner action) */}
           <StepRow
             num={2}
+            title="Sign your management agreement"
+            subtitle={
+              agreementDone
+                ? "Signed and on file."
+                : "Read through and sign your management agreement. Takes 2 minutes — written in plain English."
+            }
+            status={agreementStatus}
+            date={agreementDone ? fmt(session.agreement_signed_at) : null}
+            cta="Sign Agreement"
+            ctaHref={`/onboard/${token}/agreement`}
+          />
+
+          {/* Step 3 — Upload lease */}
+          <StepRow
+            num={3}
             title="Upload your lease"
             subtitle={
               leaseUploaded
@@ -458,34 +473,19 @@ export default function OnboardPortal() {
             ctaHref={`/onboard/${token}/lease`}
           />
 
-          {/* Step 3 — Details form */}
+          {/* Step 4 — Details form */}
           <StepRow
-            num={3}
+            num={4}
             title="Fill in your property details"
             subtitle={
               detailsDone
-                ? "Access codes, payment preferences, and insurance all saved."
-                : "Takes about 5 minutes. Access codes, how you'd like to receive rent, insurance info, and anything else we should know."
+                ? "Access codes, payment preferences, contractors, and everything else saved."
+                : "Takes about 5 minutes. Access codes, how you'd like to receive rent, garbage schedule, preferred contractors, and anything else we should know."
             }
             status={detailsStatus}
             date={detailsDone ? fmt(session.step4_completed_at) : null}
             cta="Fill In Details"
             ctaHref={`/onboard/${token}/details`}
-          />
-
-          {/* Step 4 — Agreement */}
-          <StepRow
-            num={4}
-            title="Sign your management agreement"
-            subtitle={
-              agreementDone
-                ? "Signed and on file."
-                : "Read through and sign your management agreement. Takes 2 minutes."
-            }
-            status={agreementStatus}
-            date={agreementDone ? fmt(session.agreement_signed_at) : null}
-            cta="Sign Agreement"
-            ctaHref={`/onboard/${token}/agreement`}
           />
 
           {/* Step 5 — Ebin's work */}
@@ -495,9 +495,9 @@ export default function OnboardPortal() {
             subtitle={
               ebinSetupDone
                 ? "Initial inspection done, keys received, financial setup confirmed."
-                : agreementDone
+                : detailsDone
                 ? "Ebin will reach out to arrange key handover and the initial walkthrough. Nothing needed from you right now."
-                : "Once you've signed your agreement, Ebin will handle the rest of this step."
+                : "Once you've filled in your property details, Ebin will handle the rest of this step."
             }
             status={ebinStatus}
             date={ebinSetupDone ? fmt(session.step9_data ? session.created_at : null) : null}
