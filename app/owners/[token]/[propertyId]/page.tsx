@@ -17,7 +17,7 @@ interface Props {
   params: Promise<{ token: string; propertyId: string }>;
 }
 
-export const dynamic = "force-static";
+export const revalidate = 21600; // regenerate every 6 hours
 
 function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });

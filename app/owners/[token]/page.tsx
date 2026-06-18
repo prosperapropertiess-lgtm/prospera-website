@@ -11,7 +11,7 @@ interface Props {
   params: Promise<{ token: string }>;
 }
 
-export const dynamic = "force-static";
+export const revalidate = 21600; // regenerate every 6 hours
 
 export default async function OwnerOverviewPage({ params }: Props) {
   const { token } = await params;
