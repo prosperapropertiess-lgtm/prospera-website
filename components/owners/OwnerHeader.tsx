@@ -31,7 +31,7 @@ export default function OwnerHeader({ firstName, token }: Props) {
         }}
       >
         <Link href={`/owners/${token}`} style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-          <Image src="/logo.png" alt="Prospera" width={110} height={28} style={{ objectFit: "contain" }} />
+          <Image src="/logo.png" alt="Prospera" width={44} height={44} style={{ objectFit: "contain" }} />
         </Link>
 
         <span style={{ color: "#9AA5B1", fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>
