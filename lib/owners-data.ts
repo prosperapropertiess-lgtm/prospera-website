@@ -3,7 +3,6 @@
  * Extends the monthly report data with 12-month history.
  */
 
-import { unstable_cache } from "next/cache";
 import {
   fetchAllOwners,
   fetchAllProperties,
@@ -176,7 +175,10 @@ export async function buildOwnerDashboard(
 
   const propertyDashboards: PropertyDashboard[] = properties.map(property => {
     const pid = property.id;
-    const tenants = allTenants.filter(t => t.propertyId === pid && t.status === "Active");
+    const INACTIVE = new Set(["former", "evicted", "ended", "past", "inactive", "terminated", "moved out"]);
+    const tenants = allTenants.filter(t =>
+      t.propertyId === pid && !INACTIVE.has(t.status.toLowerCase().trim())
+    );
     const rentCurrentMonth = rentCurrentYear.filter(r => r.propertyId === pid && r.month === currentMonth);
     const maintenanceForProp = maintenance.filter(m => m.propertyId === pid);
     const maintenanceOpen = maintenanceForProp.filter(m => m.status !== "Done");
@@ -264,25 +266,14 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
 }
 
 /**
- * Cached loader using Next.js unstable_cache (Vercel Data Cache).
- * - First load: fetches from Notion, result cached for 24 hours
- * - Subsequent loads: instant, served from Vercel's edge cache
- * - Weekly cron calls revalidateTag("owner-dashboard") to bust the cache
+ * Fetches the owner dashboard from Notion.
+ * Caching is handled entirely by Next.js ISR (revalidate = 21600 on pages).
  */
-export function getDashboard(
+export async function getDashboard(
   token: string,
   notionOwnerIds: string[],
   ownerNames: string
 ): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
-  const cached = unstable_cache(
-    async () => {
-      const dashboard = await buildOwnerDashboard(notionOwnerIds, ownerNames);
-      return { dashboard, isStale: false };
-    },
-    [`owner-dashboard-${token}`],
-    {
-      revalidate: 60 * 60 * 6, // 6 hours — auto-refreshes 4x/day
-    }
-  );
-  return cached();
+  const dashboard = await buildOwnerDashboard(notionOwnerIds, ownerNames);
+  return { dashboard, isStale: false };
 }
