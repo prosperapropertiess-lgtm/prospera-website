@@ -18,6 +18,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isOwners = pathname?.startsWith("/owners");
   const isLP = pathname?.startsWith("/lp");
   const isTenants = pathname?.startsWith("/tenants");
+  const isOnboard = pathname?.startsWith("/onboard");
 
   useEffect(() => {
     if (isLP || isAdmin || isOwners || isTenants) return;
@@ -47,7 +48,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     };
   }, [isLP, isAdmin, isOwners, isTenants]);
 
-  const isPortal = isAdmin || isOwners || isLP || isTenants;
+  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard;
 
   return (
     <>

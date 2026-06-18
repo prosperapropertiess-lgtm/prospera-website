@@ -278,11 +278,11 @@ export default function OnboardPortal() {
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
-    const r = await fetch(`/api/onboard/${token}/status`);
-    if (r.ok) {
-      setSession(await r.json());
-      setLoading(false);
-    }
+    try {
+      const r = await fetch(`/api/onboard/${token}/status`);
+      if (r.ok) setSession(await r.json());
+    } catch {}
+    setLoading(false);
   }, [token]);
 
   useEffect(() => {
