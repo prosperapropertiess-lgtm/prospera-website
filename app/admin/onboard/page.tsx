@@ -115,6 +115,7 @@ export default function OnboardListPage() {
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError]   = useState("");
+  const [deleting, setDeleting]     = useState<string | null>(null);
 
   const [ownerName,        setOwnerName]        = useState("");
   const [ownerEmail,       setOwnerEmail]        = useState("");
@@ -135,6 +136,21 @@ export default function OnboardListPage() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyType("");
     setFormError("");
+  }
+
+  async function handleDelete(token: string, e: React.MouseEvent) {
+    e.stopPropagation();
+    if (!confirm("Delete this onboarding session? This cannot be undone.")) return;
+    setDeleting(token);
+    try {
+      await fetch(`/api/onboard/${token}/delete`, {
+        method: "DELETE",
+        headers: { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" },
+      });
+      setSessions(prev => prev.filter(s => s.token !== token));
+    } finally {
+      setDeleting(null);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -316,9 +332,25 @@ export default function OnboardListPage() {
                         </div>
                       </div>
                     </div>
-                    <p style={{ margin: 0, fontSize: 12, color: SUBTLE, flexShrink: 0, paddingTop: 2 }}>
-                      {timeAgo(s.created_at)}
-                    </p>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+                      <p style={{ margin: 0, fontSize: 12, color: SUBTLE }}>{timeAgo(s.created_at)}</p>
+                      <button
+                        onClick={e => handleDelete(s.token, e)}
+                        disabled={deleting === s.token}
+                        style={{
+                          background: "none", border: "none", cursor: "pointer",
+                          color: deleting === s.token ? SUBTLE : RED,
+                          fontSize: 13, fontWeight: 600, padding: "2px 6px",
+                          borderRadius: 6, opacity: deleting === s.token ? 0.5 : 1,
+                          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                          transition: "background 0.15s",
+                        }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = RED_BG; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "none"; }}
+                      >
+                        {deleting === s.token ? "…" : "Delete"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
