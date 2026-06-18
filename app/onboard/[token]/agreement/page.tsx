@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const BG      = "#080c14";
-const SURFACE = "#0f1520";
-const BORDER  = "rgba(255,255,255,0.08)";
-const TEXT    = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.55)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT  = "#8B2030";
-const FONT    = "var(--font-dm-sans, sans-serif)";
+const BG          = "#F5F4F1";
+const CARD        = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY        = "#0F1C28";
+const MUTED       = "rgba(15,28,40,0.60)";
+const SUBTLE      = "rgba(15,28,40,0.42)";
+const BURGUNDY    = "#8B2030";
+const GREEN       = "#0A7A52";
+const GREEN_BG    = "rgba(10,122,82,0.09)";
+const INPUT_BORDER = "rgba(15,28,40,0.10)";
+const INPUT_FOCUS  = "rgba(139,32,48,0.40)";
 
 const AGREEMENT_TEXT = `PROPERTY MANAGEMENT AGREEMENT
 
@@ -38,22 +42,14 @@ Owner agrees to pay Manager the management fee as specified during onboarding. T
 Owner shall:
 • Maintain adequate property insurance at all times
 • Provide accurate information about the property
-• Cooperate with Manager in carrying out the terms of this Agreement
-• Fund repairs exceeding the approved repair limit promptly upon notification
+• Notify Manager promptly of any issues or changes
+• Obtain Manager's approval before entering the property
 
-6. TRUST ACCOUNT
-All funds collected on Owner's behalf will be held in a designated trust account and disbursed in accordance with applicable regulations.
+6. REPAIR AUTHORIZATION
+Manager is authorized to approve repairs up to the repair limit specified during onboarding without prior Owner approval. Larger repairs will be discussed before proceeding.
 
-7. LIABILITY
-Manager shall not be liable for any act or omission of any tenant, or for any loss or damage to the property unless caused by Manager's negligence or willful misconduct.
-
-8. GOVERNING LAW
-This Agreement is governed by the laws of Ontario, Canada.
-
-9. ENTIRE AGREEMENT
-This document constitutes the entire agreement between the parties and supersedes all prior discussions and understandings.
-
-By typing your full name below, you agree to the terms of this Property Management Agreement and confirm you are authorized to enter into this agreement on behalf of the property owner.`;
+7. GOVERNING LAW
+This Agreement is governed by the laws of Ontario and the Residential Tenancies Act, 2006.`;
 
 export default function AgreementPage() {
   const params = useParams();
@@ -64,23 +60,22 @@ export default function AgreementPage() {
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const [ip, setIp] = useState("");
+
+  useEffect(() => {
+    fetch("https://api.ipify.org?format=json")
+      .then((r) => r.json())
+      .then((d) => setIp(d.ip ?? ""))
+      .catch(() => {});
+  }, []);
 
   async function sign(e: React.FormEvent) {
     e.preventDefault();
-    if (!signedName.trim() || signedName.trim().split(" ").length < 2) {
+    if (!signedName.trim() || signedName.trim().split(/\s+/).filter(Boolean).length < 2) {
       setError("Please type your full name (first and last).");
       return;
     }
     setSaving(true); setError("");
-
-    // Get IP (best effort)
-    let ip = "";
-    try {
-      const r = await fetch("https://api.ipify.org?format=json");
-      const d = await r.json();
-      ip = d.ip ?? "";
-    } catch { /* ignore */ }
-
     const r = await fetch(`/api/onboard/${token}/step/5`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -92,98 +87,102 @@ export default function AgreementPage() {
     setTimeout(() => router.push(`/onboard/${token}/complete`), 2500);
   }
 
-  const canSign = signedName.trim().split(" ").filter(Boolean).length >= 2;
+  const canSign = signedName.trim().split(/\s+/).filter(Boolean).length >= 2;
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, fontFamily: FONT }}>
+    <div style={{
+      minHeight: "100vh",
+      background: BG,
+      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+    }}>
       <style>{`
         * { box-sizing: border-box; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
-        @keyframes checkIn { from { opacity: 0; transform: scale(0.7) } to { opacity: 1; transform: scale(1) } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes checkIn { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: scale(1); } }
       `}</style>
 
       {/* Progress bar */}
-      <div style={{ height: 3, backgroundColor: "rgba(255,255,255,0.05)" }}>
-        <div style={{ height: "100%", width: "75%", backgroundColor: ACCENT, transition: "width 0.6s ease" }} />
+      <div style={{ height: 4, background: "rgba(15,28,40,0.08)" }}>
+        <div style={{ height: "100%", width: done ? "100%" : "66%", background: BURGUNDY, transition: "width 0.6s ease" }} />
       </div>
 
-      {/* Logo */}
-      <div style={{ padding: "24px 32px" }}>
-        <p style={{ margin: 0, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: ACCENT }}>
-          Prospera Properties
-        </p>
+      {/* Header */}
+      <div style={{ padding: "20px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: NAVY }}>Prospera Properties</p>
+        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 3 of 3 · Agreement</span>
       </div>
 
-      <div style={{ maxWidth: 600, margin: "0 auto", padding: "16px 24px 80px", animation: "fadeUp 0.6s cubic-bezier(0.23,1,0.32,1) both" }}>
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: "16px 20px 80px", animation: "fadeUp 0.5s ease both" }}>
 
         {done ? (
           <div style={{ textAlign: "center", paddingTop: 60 }}>
             <div style={{
               width: 72, height: 72, borderRadius: "50%",
-              backgroundColor: "rgba(139,32,48,0.12)",
+              background: GREEN_BG,
               display: "flex", alignItems: "center", justifyContent: "center",
               margin: "0 auto 24px",
-              fontSize: 32,
-              animation: "checkIn 0.4s cubic-bezier(0.23,1,0.32,1) both",
+              fontSize: 30, color: GREEN,
+              animation: "checkIn 0.4s ease both",
             }}>
               ✓
             </div>
-            <h1 style={{ margin: "0 0 12px", fontSize: 28, fontWeight: 700, letterSpacing: "-0.03em", color: TEXT }}>
-              Agreement signed.
+            <h1 style={{ margin: "0 0 10px", fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em" }}>
+              Signed ✓
             </h1>
-            <p style={{ margin: "0 0 8px", fontSize: 16, color: TEXT_SEC, lineHeight: 1.6 }}>
-              Saved to your file. Ebin has been notified.
+            <p style={{ margin: "0 0 6px", fontSize: 15, color: MUTED, lineHeight: 1.6 }}>
+              Agreement saved to your file. Ebin has been notified.
             </p>
-            <p style={{ margin: 0, fontSize: 14, color: TEXT_MUT }}>
-              Taking you to the final step…
-            </p>
+            <p style={{ margin: 0, fontSize: 13, color: SUBTLE }}>Taking you to the final step…</p>
           </div>
         ) : (
           <>
-            <div style={{ marginBottom: 32 }}>
-              <p style={{ margin: "0 0 6px", fontSize: 13, letterSpacing: "0.08em", textTransform: "uppercase", color: TEXT_MUT }}>
-                Step 3 of 3
-              </p>
-              <h1 style={{ margin: "0 0 12px", fontSize: 30, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.15, color: TEXT }}>
+            <div style={{ marginBottom: 28 }}>
+              <h1 style={{ margin: "0 0 10px", fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
                 Management Agreement
               </h1>
-              <p style={{ margin: 0, fontSize: 15, color: TEXT_SEC, lineHeight: 1.7 }}>
+              <p style={{ margin: 0, fontSize: 15, color: MUTED, lineHeight: 1.7 }}>
                 Read through the agreement below, then type your full name to sign. Takes about 2 minutes.
               </p>
             </div>
 
             {/* Agreement text */}
             <div style={{
-              backgroundColor: SURFACE,
-              border: `1px solid ${BORDER}`,
+              background: CARD,
+              border: `1px solid ${CARD_BORDER}`,
+              boxShadow: CARD_SHADOW,
               borderRadius: 16,
               padding: "24px",
               maxHeight: 400,
               overflowY: "scroll",
-              marginBottom: 28,
+              marginBottom: 20,
             }}>
               <pre style={{
-                margin: 0, whiteSpace: "pre-wrap", fontSize: 13,
-                lineHeight: 1.8, color: TEXT_SEC, fontFamily: FONT,
+                margin: 0,
+                whiteSpace: "pre-wrap",
+                fontSize: 13,
+                lineHeight: 1.8,
+                color: MUTED,
+                fontFamily: "var(--font-poppins), -apple-system, sans-serif",
               }}>
                 {AGREEMENT_TEXT}
               </pre>
             </div>
 
-            {/* Signature */}
+            {/* Signature form */}
             <form onSubmit={sign}>
               <div style={{
-                backgroundColor: SURFACE,
-                border: `1px solid ${canSign ? "rgba(139,32,48,0.4)" : BORDER}`,
+                background: CARD,
+                border: `1px solid ${canSign ? "rgba(139,32,48,0.25)" : CARD_BORDER}`,
+                boxShadow: CARD_SHADOW,
                 borderRadius: 16,
                 padding: "24px",
                 marginBottom: 16,
                 transition: "border-color 0.2s",
               }}>
-                <p style={{ margin: "0 0 6px", fontSize: 11, letterSpacing: "0.07em", textTransform: "uppercase", color: TEXT_MUT }}>
+                <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: SUBTLE, letterSpacing: "0.05em", textTransform: "uppercase" }}>
                   Your Signature
                 </p>
-                <p style={{ margin: "0 0 16px", fontSize: 13, color: TEXT_MUT }}>
+                <p style={{ margin: "0 0 16px", fontSize: 13, color: MUTED }}>
                   Type your full legal name exactly as it appears on your ID
                 </p>
                 <input
@@ -194,29 +193,30 @@ export default function AgreementPage() {
                   autoComplete="name"
                   style={{
                     width: "100%",
-                    backgroundColor: "rgba(255,255,255,0.04)",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: 8,
+                    background: BG,
+                    border: `1px solid ${INPUT_BORDER}`,
+                    borderRadius: 10,
                     padding: "14px 16px",
                     fontSize: 18,
-                    color: TEXT,
+                    color: NAVY,
                     outline: "none",
-                    fontFamily: FONT,
+                    fontFamily: "var(--font-poppins), -apple-system, sans-serif",
                     letterSpacing: "0.01em",
                     transition: "border-color 0.15s",
+                    boxSizing: "border-box",
                   }}
-                  onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.6)"; }}
-                  onBlur={(e) => { e.target.style.borderColor = BORDER; }}
+                  onFocus={(e) => { e.target.style.borderColor = INPUT_FOCUS; }}
+                  onBlur={(e) => { e.target.style.borderColor = INPUT_BORDER; }}
                 />
                 {signedName && (
-                  <p style={{ margin: "8px 0 0", fontSize: 12, color: canSign ? "rgba(34,197,94,0.8)" : TEXT_MUT }}>
+                  <p style={{ margin: "8px 0 0", fontSize: 12, color: canSign ? GREEN : MUTED, fontWeight: 500 }}>
                     {canSign ? "✓ Full name confirmed" : "Please include both first and last name"}
                   </p>
                 )}
               </div>
 
               {error && (
-                <p style={{ margin: "0 0 14px", fontSize: 13, color: "#f87171", textAlign: "center" }}>{error}</p>
+                <p style={{ margin: "0 0 14px", fontSize: 13, color: "#B91C1C", textAlign: "center", fontWeight: 500 }}>{error}</p>
               )}
 
               <button
@@ -224,15 +224,15 @@ export default function AgreementPage() {
                 disabled={!canSign || saving}
                 style={{
                   width: "100%",
-                  backgroundColor: canSign ? ACCENT : "rgba(255,255,255,0.06)",
-                  color: canSign ? "#fff" : TEXT_MUT,
+                  background: canSign ? BURGUNDY : "rgba(15,28,40,0.06)",
+                  color: canSign ? "#fff" : SUBTLE,
                   border: "none",
                   borderRadius: 12,
                   padding: "15px 24px",
                   fontSize: 15,
                   fontWeight: 700,
                   cursor: canSign ? "pointer" : "not-allowed",
-                  letterSpacing: "-0.01em",
+                  fontFamily: "var(--font-poppins), -apple-system, sans-serif",
                   transition: "all 0.2s",
                   marginBottom: 12,
                 }}
@@ -240,7 +240,7 @@ export default function AgreementPage() {
                 {saving ? "Signing…" : canSign ? `Sign as "${signedName}" →` : "Type your full name above"}
               </button>
 
-              <p style={{ margin: 0, textAlign: "center", fontSize: 12, color: TEXT_MUT, lineHeight: 1.6 }}>
+              <p style={{ margin: 0, textAlign: "center", fontSize: 12, color: SUBTLE, lineHeight: 1.6 }}>
                 By signing, you agree to the terms above. This is a legally binding agreement.
                 <br />
                 Your signature, timestamp, and IP address are recorded for your records.

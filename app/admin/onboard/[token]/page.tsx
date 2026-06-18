@@ -1,26 +1,27 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 
-const BG         = "#080c14";
-const SURFACE    = "#0f1520";
-const SURFACE_HI = "#141d2c";
-const BORDER     = "rgba(255,255,255,0.07)";
-const BORDER_ACT = "rgba(139,32,48,0.35)";
-const TEXT       = "#EDE9E3";
-const TEXT_SEC   = "rgba(237,233,227,0.5)";
-const TEXT_MUT   = "rgba(237,233,227,0.25)";
-const ACCENT     = "#8B2030";
-const GREEN      = "#22c55e";
-const AMBER      = "#f59e0b";
+const BG          = "#F5F4F1";
+const CARD        = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY        = "#0F1C28";
+const MUTED       = "rgba(15,28,40,0.60)";
+const SUBTLE      = "rgba(15,28,40,0.42)";
+const BURGUNDY    = "#8B2030";
+const GREEN       = "#0A7A52";
+const GREEN_BG    = "rgba(10,122,82,0.09)";
+const AMBER       = "#B45309";
+const AMBER_BG    = "rgba(180,83,9,0.09)";
+const INPUT_BORDER = "rgba(15,28,40,0.10)";
+const INPUT_FOCUS  = "rgba(139,32,48,0.40)";
 
 interface ParsedLease {
-  tenants?: Array<{ name?: string; email?: string; unit?: string }>;
-  monthlyRent?: number | null;
-  leaseStart?: string | null;
-  leaseEnd?: string | null;
+  tenants?: Array<{ name: string; email: string; unit: string; phone: string }>;
+  [key: string]: unknown;
 }
 
 interface Session {
@@ -54,11 +55,29 @@ interface Session {
   created_at: string;
 }
 
+const ADMIN_HEADER = { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" };
+
 function fmt(iso: string | null) {
   if (!iso) return null;
   const d = new Date(iso);
-  return d.toLocaleDateString("en-CA", { month: "short", day: "numeric" }) +
-    " · " + d.toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" });
+  return (
+    d.toLocaleDateString("en-CA", { month: "short", day: "numeric" }) +
+    " · " +
+    d.toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" })
+  );
+}
+
+// ── Shared form primitives ───────────────────────────────────────
+
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, marginBottom: 5, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+        {label}{required && <span style={{ color: BURGUNDY }}> *</span>}
+      </label>
+      {children}
+    </div>
+  );
 }
 
 function Input({ label, name, value, onChange, type = "text", placeholder, required }: {
@@ -66,10 +85,7 @@ function Input({ label, name, value, onChange, type = "text", placeholder, requi
   type?: string; placeholder?: string; required?: boolean;
 }) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <label style={{ display: "block", fontSize: 12, color: TEXT_MUT, marginBottom: 5, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-        {label}{required && <span style={{ color: ACCENT }}> *</span>}
-      </label>
+    <Field label={label} required={required}>
       <input
         name={name}
         type={type}
@@ -78,21 +94,21 @@ function Input({ label, name, value, onChange, type = "text", placeholder, requi
         placeholder={placeholder}
         style={{
           width: "100%",
-          backgroundColor: "rgba(255,255,255,0.04)",
-          border: `1px solid ${BORDER}`,
-          borderRadius: 8,
+          background: CARD,
+          border: `1px solid ${INPUT_BORDER}`,
+          borderRadius: 10,
           padding: "10px 14px",
-          fontSize: 14,
-          color: TEXT,
+          fontSize: 15,
+          color: NAVY,
           outline: "none",
           boxSizing: "border-box",
-          fontFamily: "var(--font-dm-sans, sans-serif)",
+          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
           transition: "border-color 0.15s",
         }}
-        onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.5)"; }}
-        onBlur={(e) => { e.target.style.borderColor = BORDER; }}
+        onFocus={(e) => { e.target.style.borderColor = INPUT_FOCUS; }}
+        onBlur={(e) => { e.target.style.borderColor = INPUT_BORDER; }}
       />
-    </div>
+    </Field>
   );
 }
 
@@ -101,109 +117,189 @@ function Select({ label, name, value, onChange, options, required }: {
   options: { value: string; label: string }[]; required?: boolean;
 }) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <label style={{ display: "block", fontSize: 12, color: TEXT_MUT, marginBottom: 5, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-        {label}{required && <span style={{ color: ACCENT }}> *</span>}
-      </label>
+    <Field label={label} required={required}>
       <select
         name={name}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
           width: "100%",
-          backgroundColor: "rgba(255,255,255,0.04)",
-          border: `1px solid ${BORDER}`,
-          borderRadius: 8,
+          background: CARD,
+          border: `1px solid ${INPUT_BORDER}`,
+          borderRadius: 10,
           padding: "10px 14px",
-          fontSize: 14,
-          color: value ? TEXT : TEXT_MUT,
+          fontSize: 15,
+          color: value ? NAVY : MUTED,
           outline: "none",
           cursor: "pointer",
-          fontFamily: "var(--font-dm-sans, sans-serif)",
+          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
         }}
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value} style={{ backgroundColor: SURFACE }}>
-            {o.label}
-          </option>
+          <option key={o.value} value={o.value}>{o.label}</option>
         ))}
       </select>
-    </div>
+    </Field>
   );
 }
 
-// ── Step card wrapper ────────────────────────────────────────────
+function Textarea({ label, name, value, onChange, placeholder, rows = 3 }: {
+  label: string; name: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; rows?: number;
+}) {
+  return (
+    <Field label={label}>
+      <textarea
+        name={name}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        rows={rows}
+        style={{
+          width: "100%",
+          background: CARD,
+          border: `1px solid ${INPUT_BORDER}`,
+          borderRadius: 10,
+          padding: "10px 14px",
+          fontSize: 15,
+          color: NAVY,
+          outline: "none",
+          resize: "vertical",
+          boxSizing: "border-box",
+          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+          transition: "border-color 0.15s",
+        }}
+        onFocus={(e) => { e.target.style.borderColor = INPUT_FOCUS; }}
+        onBlur={(e) => { e.target.style.borderColor = INPUT_BORDER; }}
+      />
+    </Field>
+  );
+}
+
+function PrimaryBtn({ children, disabled, type = "submit", onClick }: {
+  children: React.ReactNode; disabled?: boolean; type?: "submit" | "button"; onClick?: () => void;
+}) {
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      style={{
+        background: BURGUNDY,
+        color: "#fff",
+        border: "none",
+        borderRadius: 10,
+        padding: "12px 24px",
+        fontSize: 15,
+        fontWeight: 700,
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.45 : 1,
+        fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+        transition: "opacity 0.15s",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ErrorMsg({ msg }: { msg: string }) {
+  if (!msg) return null;
+  return <p style={{ color: "#B91C1C", fontSize: 13, margin: "0 0 12px", fontWeight: 500 }}>{msg}</p>;
+}
+
+// ── Step card ────────────────────────────────────────────────────
+
 function StepCard({
-  num, title, status, completedAt, summary, children, isActive,
+  num, title, status, completedAt, summary, children,
 }: {
   num: number; title: string;
-  status: "complete" | "active" | "locked";
+  status: "complete" | "active" | "locked" | "owner";
   completedAt?: string | null;
   summary?: React.ReactNode;
   children?: React.ReactNode;
-  isActive?: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const icon = status === "complete" ? "✓" : status === "active" ? `${num}` : "🔒";
-  const iconColor = status === "complete" ? GREEN : status === "active" ? ACCENT : TEXT_MUT;
-  const iconBg = status === "complete" ? `${GREEN}20` : status === "active" ? `${ACCENT}20` : "rgba(255,255,255,0.04)";
 
-  // Scroll into view when this step becomes active
   useEffect(() => {
     if (status === "active" && cardRef.current) {
-      setTimeout(() => {
-        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 120);
+      setTimeout(() => cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
     }
   }, [status]);
+
+  const borderColor =
+    status === "complete" ? GREEN :
+    status === "active" ? NAVY :
+    status === "owner" ? AMBER :
+    "rgba(15,28,40,0.12)";
+
+  const chipBg =
+    status === "complete" ? GREEN_BG :
+    status === "active" ? "rgba(15,28,40,0.08)" :
+    status === "owner" ? AMBER_BG :
+    "rgba(15,28,40,0.04)";
+
+  const chipColor =
+    status === "complete" ? GREEN :
+    status === "active" ? NAVY :
+    status === "owner" ? AMBER :
+    SUBTLE;
 
   return (
     <div
       ref={cardRef}
       style={{
-        backgroundColor: SURFACE,
-        border: `1px solid ${isActive ? BORDER_ACT : BORDER}`,
-        borderRadius: 14,
+        background: CARD,
+        border: `1px solid ${CARD_BORDER}`,
+        borderLeft: `3px solid ${borderColor}`,
+        boxShadow: CARD_SHADOW,
+        borderRadius: 16,
         overflow: "hidden",
-        transition: "border-color 0.2s",
       }}
     >
-      {/* Header row */}
+      {/* Header */}
       <div style={{ padding: "18px 22px", display: "flex", alignItems: "center", gap: 14 }}>
         <div style={{
-          width: 32, height: 32, borderRadius: "50%",
-          backgroundColor: iconBg,
+          width: 30, height: 30, borderRadius: "50%",
+          background: chipBg,
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: status === "complete" ? 14 : 13,
-          fontWeight: 700, color: iconColor, flexShrink: 0,
+          fontSize: 13, fontWeight: 700, color: chipColor, flexShrink: 0,
         }}>
-          {icon}
+          {status === "complete" ? "✓" : status === "locked" ? "🔒" : num}
         </div>
         <div style={{ flex: 1 }}>
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: status === "locked" ? TEXT_MUT : TEXT }}>
+          <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: status === "locked" ? SUBTLE : NAVY }}>
             Step {num} — {title}
           </p>
           {status === "complete" && completedAt && (
-            <p style={{ margin: "2px 0 0", fontSize: 12, color: TEXT_MUT }}>{fmt(completedAt)}</p>
+            <p style={{ margin: "2px 0 0", fontSize: 12, color: SUBTLE }}>{fmt(completedAt)}</p>
           )}
         </div>
         {status === "complete" && (
-          <div style={{ padding: "3px 10px", borderRadius: 6, fontSize: 12, fontWeight: 600, color: GREEN, backgroundColor: `${GREEN}18` }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: GREEN, background: GREEN_BG, padding: "3px 10px", borderRadius: 8 }}>
             Done
-          </div>
+          </span>
+        )}
+        {status === "owner" && (
+          <span style={{ fontSize: 12, fontWeight: 700, color: AMBER, background: AMBER_BG, padding: "3px 10px", borderRadius: 8 }}>
+            Owner&apos;s turn
+          </span>
+        )}
+        {status === "locked" && (
+          <span style={{ fontSize: 12, color: SUBTLE }}>Complete previous steps first</span>
         )}
       </div>
 
-      {/* Summary line (completed steps) */}
+      {/* Summary (done) */}
       {status === "complete" && summary && (
-        <div style={{ padding: "0 22px 16px", borderTop: `1px solid ${BORDER}` }}>
+        <div style={{ padding: "0 22px 18px", borderTop: `1px solid ${CARD_BORDER}` }}>
           <div style={{ paddingTop: 14 }}>{summary}</div>
         </div>
       )}
 
-      {/* Active step form */}
-      {status === "active" && children && (
-        <div style={{ padding: "0 22px 22px", borderTop: `1px solid ${BORDER}` }}>
+      {/* Active form */}
+      {(status === "active" || status === "owner") && children && (
+        <div style={{ padding: "0 22px 22px", borderTop: `1px solid ${CARD_BORDER}` }}>
           <div style={{ paddingTop: 18 }}>{children}</div>
         </div>
       )}
@@ -211,31 +307,49 @@ function StepCard({
   );
 }
 
+// ── Progress bar ─────────────────────────────────────────────────
+
+function ProgressBar({ current }: { current: number }) {
+  const pct = Math.max(0, Math.min(100, ((current - 2) / 8) * 100));
+  return (
+    <div style={{ marginBottom: 28 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+        <span style={{ fontSize: 13, color: MUTED, fontWeight: 500 }}>Onboarding progress</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: current >= 10 ? GREEN : BURGUNDY }}>{Math.round(pct)}%</span>
+      </div>
+      <div style={{ height: 6, background: "rgba(15,28,40,0.08)", borderRadius: 4 }}>
+        <div style={{
+          height: "100%",
+          width: `${pct}%`,
+          background: current >= 10 ? GREEN : BURGUNDY,
+          borderRadius: 4,
+          transition: "width 0.6s cubic-bezier(0.23,1,0.32,1)",
+        }} />
+      </div>
+    </div>
+  );
+}
+
 // ── Step 2 form ──────────────────────────────────────────────────
+
 function Step2Form({ token, onComplete }: { token: string; onComplete: () => void }) {
   const [form, setForm] = useState({ owner_name: "", owner_email: "", owner_phone: "" });
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
-
   const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.owner_name.trim() || !form.owner_email.trim()) {
-      setError("Name and email are required.");
-      return;
-    }
+    if (!form.owner_name.trim() || !form.owner_email.trim()) { setError("Name and email are required."); return; }
     setSaving(true); setError("");
     const r = await fetch(`/api/onboard/${token}/step/2`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
       body: JSON.stringify(form),
     });
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Failed"); setSaving(false); return; }
-    setSaved(true);
-    setTimeout(onComplete, 400);
+    onComplete();
   }
 
   return (
@@ -247,32 +361,21 @@ function Step2Form({ token, onComplete }: { token: string; onComplete: () => voi
         <Input label="Email" name="owner_email" value={form.owner_email} onChange={set("owner_email")} type="email" placeholder="randy@email.com" required />
         <Input label="Phone" name="owner_phone" value={form.owner_phone} onChange={set("owner_phone")} type="tel" placeholder="519-555-0101" />
       </div>
-      {error && <p style={{ color: "#f87171", fontSize: 13, margin: "0 0 12px" }}>{error}</p>}
-      <button
-        type="submit"
-        disabled={saving}
-        style={{
-          backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8,
-          padding: "11px 24px", fontSize: 14, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer",
-          opacity: saving ? 0.7 : 1, letterSpacing: "-0.01em",
-        }}
-      >
-        {saved ? "✓ Saved" : saving ? "Saving…" : "Save Owner Info →"}
-      </button>
+      <ErrorMsg msg={error} />
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Save Owner Info →"}</PrimaryBtn>
     </form>
   );
 }
 
 // ── Step 3 form ──────────────────────────────────────────────────
+
 function Step3Form({ token, onComplete }: { token: string; onComplete: () => void }) {
   const [form, setForm] = useState({
     property_address: "", property_city: "", property_type: "",
     num_units: "", approx_monthly_rent: "", fee_structure: "", fee_amount: "", property_notes: "",
   });
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
-
   const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
 
   async function submit(e: React.FormEvent) {
@@ -281,7 +384,7 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
     setSaving(true); setError("");
     const r = await fetch(`/api/onboard/${token}/step/3`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
       body: JSON.stringify({
         ...form,
         num_units: form.num_units ? parseInt(form.num_units) : null,
@@ -291,8 +394,7 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
     });
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Failed"); setSaving(false); return; }
-    setSaved(true);
-    setTimeout(onComplete, 400);
+    onComplete();
   }
 
   return (
@@ -302,96 +404,232 @@ function Step3Form({ token, onComplete }: { token: string; onComplete: () => voi
           <Input label="Property Address" name="property_address" value={form.property_address} onChange={set("property_address")} placeholder="27 Horton St, London, ON" required />
         </div>
         <Input label="City" name="property_city" value={form.property_city} onChange={set("property_city")} placeholder="London" />
-        <Select
-          label="Property Type" name="property_type" value={form.property_type} onChange={set("property_type")}
+        <Select label="Property Type" name="property_type" value={form.property_type} onChange={set("property_type")}
           options={[
             { value: "", label: "Select type…" },
-            { value: "Single Family", label: "Single Family" },
+            { value: "House", label: "House" },
             { value: "Duplex", label: "Duplex" },
             { value: "Triplex", label: "Triplex" },
-            { value: "Fourplex", label: "Fourplex" },
-            { value: "Multi-Unit (5+)", label: "Multi-Unit (5+)" },
             { value: "Condo", label: "Condo" },
-            { value: "Townhouse", label: "Townhouse" },
+            { value: "Other", label: "Other" },
           ]}
         />
         <Input label="Number of Units" name="num_units" value={form.num_units} onChange={set("num_units")} type="number" placeholder="2" />
         <Input label="Approx. Monthly Rent ($)" name="approx_monthly_rent" value={form.approx_monthly_rent} onChange={set("approx_monthly_rent")} type="number" placeholder="3100" />
-        <Select
-          label="Fee Structure" name="fee_structure" value={form.fee_structure} onChange={set("fee_structure")}
+        <Select label="Fee Structure" name="fee_structure" value={form.fee_structure} onChange={set("fee_structure")}
           options={[
             { value: "", label: "Select…" },
-            { value: "10% of gross", label: "10% of gross rent" },
-            { value: "flat", label: "Flat monthly amount" },
-            { value: "custom", label: "Custom" },
+            { value: "Percentage", label: "Percentage" },
+            { value: "Flat Fee", label: "Flat Fee" },
           ]}
         />
-        {(form.fee_structure === "flat" || form.fee_structure === "custom") && (
-          <Input label="Fee Amount ($)" name="fee_amount" value={form.fee_amount} onChange={set("fee_amount")} type="number" placeholder="300" />
+        {form.fee_structure && (
+          <Input label="Fee Amount" name="fee_amount" value={form.fee_amount} onChange={set("fee_amount")} type="number" placeholder={form.fee_structure === "Percentage" ? "10" : "300"} />
         )}
         <div style={{ gridColumn: "1 / -1" }}>
-          <div style={{ marginBottom: 14 }}>
-            <label style={{ display: "block", fontSize: 12, color: TEXT_MUT, marginBottom: 5, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-              Notes
-            </label>
-            <textarea
-              value={form.property_notes}
-              onChange={(e) => set("property_notes")(e.target.value)}
-              placeholder="Anything else worth noting…"
-              rows={2}
-              style={{
-                width: "100%", backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${BORDER}`,
-                borderRadius: 8, padding: "10px 14px", fontSize: 14, color: TEXT,
-                outline: "none", resize: "vertical", boxSizing: "border-box",
-                fontFamily: "var(--font-dm-sans, sans-serif)",
-              }}
-              onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.5)"; }}
-              onBlur={(e) => { e.target.style.borderColor = BORDER; }}
-            />
-          </div>
+          <Textarea label="Property Notes" name="property_notes" value={form.property_notes} onChange={set("property_notes")} placeholder="Anything else worth noting…" rows={2} />
         </div>
       </div>
-      {error && <p style={{ color: "#f87171", fontSize: 13, margin: "0 0 12px" }}>{error}</p>}
+      <ErrorMsg msg={error} />
+      <PrimaryBtn disabled={saving}>{saving ? "Saving + Sending Email…" : "Save Property & Send Email 1 →"}</PrimaryBtn>
+    </form>
+  );
+}
+
+// ── Step 6: Keys & Access ────────────────────────────────────────
+
+function Step6Form({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [form, setForm] = useState({ num_keys: "", repair_limit: "200", front_door_code: "", garage_code: "", alarm_code: "", mailbox_notes: "" });
+  const [saving, setSaving] = useState(false);
+  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    await fetch(`/api/onboard/${token}/step/6`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(form),
+    });
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+        <Input label="Number of Keys" name="num_keys" value={form.num_keys} onChange={set("num_keys")} type="number" placeholder="2" />
+        <Input label="Repair Limit ($)" name="repair_limit" value={form.repair_limit} onChange={set("repair_limit")} type="number" placeholder="200" />
+        <Input label="Front Door Code" name="front_door_code" value={form.front_door_code} onChange={set("front_door_code")} placeholder="Optional" />
+        <Input label="Garage Code" name="garage_code" value={form.garage_code} onChange={set("garage_code")} placeholder="Optional" />
+        <Input label="Alarm Code" name="alarm_code" value={form.alarm_code} onChange={set("alarm_code")} placeholder="Optional" />
+        <Input label="Mailbox Notes" name="mailbox_notes" value={form.mailbox_notes} onChange={set("mailbox_notes")} placeholder="Key in lockbox at door" />
+      </div>
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Save Keys & Access →"}</PrimaryBtn>
+    </form>
+  );
+}
+
+// ── Step 7: Inspection ───────────────────────────────────────────
+
+function Step7Form({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [form, setForm] = useState({ overall_condition: "", issues: "", notes: "", inspected_at: new Date().toISOString().slice(0, 10) });
+  const [saving, setSaving] = useState(false);
+  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    await fetch(`/api/onboard/${token}/step/7`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(form),
+    });
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+        <Select label="Overall Condition" name="overall_condition" value={form.overall_condition} onChange={set("overall_condition")}
+          options={[
+            { value: "", label: "Select…" },
+            { value: "Excellent", label: "Excellent" },
+            { value: "Good", label: "Good" },
+            { value: "Fair", label: "Fair" },
+            { value: "Needs Work", label: "Needs Work" },
+          ]}
+        />
+        <Input label="Inspection Date" name="inspected_at" value={form.inspected_at} onChange={set("inspected_at")} type="date" />
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Textarea label="Issues Found" name="issues" value={form.issues} onChange={set("issues")} placeholder="List any issues, one per line…" rows={3} />
+        </div>
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Textarea label="Notes" name="notes" value={form.notes} onChange={set("notes")} placeholder="Any other observations…" rows={2} />
+        </div>
+      </div>
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Save Inspection →"}</PrimaryBtn>
+    </form>
+  );
+}
+
+// ── Step 9: Financial Setup ──────────────────────────────────────
+
+function Step9Form({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [form, setForm] = useState({ payment_method: "e-transfer", etransfer_email: "", bank_institution: "", rent_collection_confirmed: false, fee_active: false });
+  const [saving, setSaving] = useState(false);
+  const setStr = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
+  const setBool = (k: keyof typeof form) => (v: boolean) => setForm((p) => ({ ...p, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    await fetch(`/api/onboard/${token}/step/9`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(form),
+    });
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <Select label="Payment Method" name="payment_method" value={form.payment_method} onChange={setStr("payment_method")}
+        options={[
+          { value: "e-transfer", label: "e-Transfer" },
+          { value: "direct deposit", label: "Direct Deposit" },
+          { value: "cheque", label: "Cheque" },
+        ]}
+      />
+      {form.payment_method === "e-transfer" && (
+        <Input label="e-Transfer Email" name="etransfer_email" value={form.etransfer_email} onChange={setStr("etransfer_email")} type="email" placeholder="owner@email.com" />
+      )}
+      <Input label="Bank Institution" name="bank_institution" value={form.bank_institution} onChange={setStr("bank_institution")} placeholder="TD, RBC, etc." />
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 18 }}>
+        {[
+          { key: "rent_collection_confirmed" as const, label: "Rent Tracker confirmed in Notion" },
+          { key: "fee_active" as const, label: "Management fee active in system" },
+        ].map(({ key, label }) => (
+          <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={form[key] as boolean}
+              onChange={(e) => setBool(key)(e.target.checked)}
+              style={{ width: 16, height: 16, accentColor: BURGUNDY, cursor: "pointer" }}
+            />
+            <span style={{ fontSize: 14, color: MUTED, fontWeight: 500 }}>{label}</span>
+          </label>
+        ))}
+      </div>
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Confirm Financial Setup →"}</PrimaryBtn>
+    </form>
+  );
+}
+
+// ── Step 10: Welcome & Handover ──────────────────────────────────
+
+function Step10Form({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [checks, setChecks] = useState({ dashboard_ready: false, welcome_email_ready: false });
+  const [saving, setSaving] = useState(false);
+  const set = (k: keyof typeof checks) => (v: boolean) => setChecks((p) => ({ ...p, [k]: v }));
+  const allDone = checks.dashboard_ready && checks.welcome_email_ready;
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    await fetch(`/api/onboard/${token}/step/10`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(checks),
+    });
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <p style={{ fontSize: 14, color: MUTED, margin: "4px 0 16px", lineHeight: 1.6 }}>
+        Review everything, then activate the owner&apos;s dashboard and send the welcome email.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 20 }}>
+        {[
+          { key: "dashboard_ready" as const, label: "Notion records reviewed — all data looks correct" },
+          { key: "welcome_email_ready" as const, label: "Ready to send welcome email + dashboard link" },
+        ].map(({ key, label }) => (
+          <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={checks[key]}
+              onChange={(e) => set(key)(e.target.checked)}
+              style={{ width: 16, height: 16, accentColor: BURGUNDY, cursor: "pointer" }}
+            />
+            <span style={{ fontSize: 14, color: MUTED, fontWeight: 500 }}>{label}</span>
+          </label>
+        ))}
+      </div>
       <button
         type="submit"
-        disabled={saving}
+        disabled={saving || !allDone}
         style={{
-          backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8,
-          padding: "11px 24px", fontSize: 14, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer",
-          opacity: saving ? 0.7 : 1, letterSpacing: "-0.01em",
+          background: GREEN,
+          color: "#fff",
+          border: "none",
+          borderRadius: 10,
+          padding: "12px 24px",
+          fontSize: 15,
+          fontWeight: 700,
+          cursor: (saving || !allDone) ? "not-allowed" : "pointer",
+          opacity: (saving || !allDone) ? 0.45 : 1,
+          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+          transition: "opacity 0.2s",
         }}
       >
-        {saved ? "✓ Saved — Email 1 sent" : saving ? "Saving + Sending Email…" : "Save Property & Send Email 1 →"}
+        {saving ? "Activating…" : "Complete Onboarding"}
       </button>
     </form>
   );
 }
 
-// ── Progress bar ────────────────────────────────────────────────
-function ProgressBar({ current }: { current: number }) {
-  const total = 9; // steps 2–10
-  const done = Math.max(0, current - 2);
-  const pct = Math.round((done / total) * 100);
-  return (
-    <div style={{ marginBottom: 28 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-        <span style={{ fontSize: 12, color: TEXT_MUT }}>Onboarding progress</span>
-        <span style={{ fontSize: 12, color: current >= 10 ? GREEN : ACCENT, fontWeight: 600 }}>{pct}%</span>
-      </div>
-      <div style={{ height: 5, backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 3 }}>
-        <div style={{
-          height: "100%",
-          width: `${pct}%`,
-          backgroundColor: current >= 10 ? GREEN : ACCENT,
-          borderRadius: 3,
-          transition: "width 0.6s cubic-bezier(0.23,1,0.32,1)",
-        }} />
-      </div>
-    </div>
-  );
-}
+// ── Main page ────────────────────────────────────────────────────
 
-// ── Main page ───────────────────────────────────────────────────
 export default function OnboardChecklist() {
   const params = useParams();
   const token = params.token as string;
@@ -400,7 +638,7 @@ export default function OnboardChecklist() {
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const load = useCallback(async () => {
-    const r = await fetch(`/api/onboard/${token}/status`);
+    const r = await fetch(`/api/onboard/${token}/status`, { headers: ADMIN_HEADER });
     if (r.ok) {
       const d = await r.json();
       setSession(d);
@@ -410,33 +648,25 @@ export default function OnboardChecklist() {
 
   useEffect(() => {
     load();
-    // Poll while in progress
-    pollRef.current = setInterval(() => {
-      if (session?.status === "complete") {
-        if (pollRef.current) clearInterval(pollRef.current);
-        return;
-      }
-      load();
-    }, 5000);
+    pollRef.current = setInterval(() => { load(); }, 5000);
     return () => { if (pollRef.current) clearInterval(pollRef.current); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [load]);
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", backgroundColor: BG, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 24, height: 24, border: `2px solid ${BORDER}`, borderTopColor: ACCENT, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-        <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 30, height: 30, border: "3px solid rgba(15,28,40,0.10)", borderTopColor: BURGUNDY, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
   if (!session) {
     return (
-      <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
         <div style={{ textAlign: "center" }}>
-          <p style={{ fontSize: 18, fontWeight: 600 }}>Session not found</p>
-          <Link href="/admin/onboard" style={{ color: ACCENT, textDecoration: "none", fontSize: 14 }}>← Back to onboarding list</Link>
+          <p style={{ fontSize: 18, fontWeight: 700, color: NAVY, marginBottom: 12 }}>Session not found</p>
+          <Link href="/admin/onboard" style={{ color: BURGUNDY, textDecoration: "none", fontSize: 14 }}>← Back to onboarding list</Link>
         </div>
       </div>
     );
@@ -451,65 +681,69 @@ export default function OnboardChecklist() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, fontFamily: "var(--font-dm-sans, sans-serif)" }}>
+    <div style={{
+      minHeight: "100vh",
+      background: BG,
+      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+    }}>
       <style>{`
-        @keyframes spin{to{transform:rotate(360deg)}}
+        @keyframes spin { to { transform: rotate(360deg); } }
         * { box-sizing: border-box; }
         input[type=number]::-webkit-inner-spin-button { opacity: 0.4; }
-        select option { background: #0f1520; }
       `}</style>
 
-      {/* Header */}
-      <div style={{ borderBottom: `1px solid ${BORDER}`, padding: "20px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      {/* Top bar */}
+      <div style={{
+        background: CARD,
+        borderBottom: `1px solid ${CARD_BORDER}`,
+        padding: "16px 32px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
+      }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <Link href="/admin/onboard" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Onboarding</Link>
-          <span style={{ color: BORDER, fontSize: 13 }}>·</span>
+          <Link href="/admin/onboard" style={{ color: SUBTLE, fontSize: 13, textDecoration: "none", fontWeight: 500 }}>
+            ← Onboarding
+          </Link>
+          <span style={{ color: CARD_BORDER, fontSize: 13 }}>·</span>
           <div>
-            <span style={{ fontSize: 15, fontWeight: 600, color: TEXT }}>
+            <span style={{ fontSize: 15, fontWeight: 700, color: NAVY }}>
               {session.owner_name || "New Owner"}
             </span>
             {session.property_address && (
-              <span style={{ fontSize: 13, color: TEXT_SEC, marginLeft: 8 }}>
+              <span style={{ fontSize: 13, color: MUTED, marginLeft: 8 }}>
                 {session.property_address}
               </span>
             )}
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {session.status === "complete" && (
-            <span style={{ padding: "4px 12px", borderRadius: 6, fontSize: 12, fontWeight: 600, color: GREEN, backgroundColor: `${GREEN}18` }}>
-              Complete
-            </span>
-          )}
-          <span style={{ fontSize: 12, color: TEXT_MUT }}>
-            {new Date(session.created_at).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
+        {session.status === "complete" && (
+          <span style={{ fontSize: 12, fontWeight: 700, color: GREEN, background: GREEN_BG, padding: "4px 12px", borderRadius: 8 }}>
+            Complete
           </span>
-        </div>
+        )}
       </div>
 
       {/* Main content */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px 24px" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px 20px" }}>
         <ProgressBar current={step} />
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
           {/* Step 2 */}
           <StepCard
             num={2} title="Owner Basic Info"
             status={stepStatus(2)}
             completedAt={session.step2_completed_at}
-            isActive={step === 2}
             summary={
               <div>
-                <p style={{ margin: 0, fontSize: 14, color: TEXT }}>{session.owner_name}</p>
-                <p style={{ margin: "3px 0 0", fontSize: 13, color: TEXT_SEC }}>
-                  {session.owner_email}
-                  {session.owner_phone ? ` · ${session.owner_phone}` : ""}
+                <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: NAVY }}>{session.owner_name}</p>
+                <p style={{ margin: "3px 0 0", fontSize: 14, color: MUTED }}>
+                  {session.owner_email}{session.owner_phone ? ` · ${session.owner_phone}` : ""}
                 </p>
                 {session.notion_owner_id && (
-                  <p style={{ margin: "4px 0 0", fontSize: 12, color: TEXT_MUT }}>
-                    ✓ Notion owner record created
-                  </p>
+                  <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion owner record created</p>
                 )}
               </div>
             }
@@ -522,21 +756,18 @@ export default function OnboardChecklist() {
             num={3} title="Property Details"
             status={stepStatus(3)}
             completedAt={session.step3_completed_at}
-            isActive={step === 3}
             summary={
               <div>
-                <p style={{ margin: 0, fontSize: 14, color: TEXT }}>
+                <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: NAVY }}>
                   {session.property_address}{session.property_city ? `, ${session.property_city}` : ""}
                 </p>
-                <p style={{ margin: "3px 0 0", fontSize: 13, color: TEXT_SEC }}>
+                <p style={{ margin: "3px 0 0", fontSize: 14, color: MUTED }}>
                   {session.property_type || "—"}
                   {session.num_units ? ` · ${session.num_units} unit${session.num_units > 1 ? "s" : ""}` : ""}
                   {session.approx_monthly_rent ? ` · $${Number(session.approx_monthly_rent).toLocaleString()}/mo` : ""}
                 </p>
                 {session.notion_property_id && (
-                  <p style={{ margin: "4px 0 0", fontSize: 12, color: TEXT_MUT }}>
-                    ✓ Notion property record created · 📧 Email 1 sent to owner
-                  </p>
+                  <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion property record created · Email 1 sent to owner</p>
                 )}
               </div>
             }
@@ -547,94 +778,67 @@ export default function OnboardChecklist() {
           {/* Step 4 — owner action */}
           <StepCard
             num={4} title="Lease Upload & Details Form"
-            status={stepStatus(4)}
+            status={step > 4 ? "complete" : step === 4 ? "owner" : "locked"}
             completedAt={session.step4_completed_at}
-            isActive={step === 4}
             summary={
               <div>
                 {session.lease_parsed_data ? (
-                  <>
-                    <p style={{ margin: "0 0 4px", fontSize: 13, color: TEXT_SEC }}>
-                      {Array.isArray(session.lease_parsed_data.tenants)
-                        ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} · `
-                        : ""}
-                      {session.lease_parsed_data.monthlyRent
-                        ? `$${Number(session.lease_parsed_data.monthlyRent).toLocaleString()}/mo · `
-                        : ""}
-                      lease parsed
-                    </p>
-                    <p style={{ margin: 0, fontSize: 12, color: TEXT_MUT }}>
-                      ✓ Details form submitted · Notion tenants + rent tracker created
-                    </p>
-                  </>
-                ) : (
-                  <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                    Owner form + lease parsing complete
+                  <p style={{ margin: 0, fontSize: 14, color: MUTED }}>
+                    {Array.isArray(session.lease_parsed_data.tenants)
+                      ? `${session.lease_parsed_data.tenants.length} tenant(s) extracted · `
+                      : ""}
+                    Lease parsed · Details form submitted
                   </p>
+                ) : (
+                  <p style={{ margin: 0, fontSize: 14, color: MUTED }}>Owner form + lease parsing complete</p>
                 )}
               </div>
             }
           >
-            <div style={{ padding: "4px 0 8px" }}>
+            <div>
               {session.lease_parsed_data ? (
-                <>
-                  {/* Lease uploaded, awaiting details form */}
-                  <div style={{
-                    display: "flex", alignItems: "center", gap: 10, marginBottom: 14,
-                    padding: "10px 14px", backgroundColor: "rgba(34,197,94,0.06)",
-                    border: "1px solid rgba(34,197,94,0.2)", borderRadius: 8,
-                  }}>
-                    <span style={{ fontSize: 13, color: GREEN }}>✓ Lease uploaded</span>
-                    <span style={{ fontSize: 12, color: TEXT_MUT }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: GREEN_BG, border: `1px solid rgba(10,122,82,0.20)`, borderRadius: 10 }}>
+                    <span style={{ fontSize: 14, color: GREEN, fontWeight: 600 }}>✓ Lease uploaded</span>
+                    <span style={{ fontSize: 13, color: MUTED }}>
                       {Array.isArray(session.lease_parsed_data.tenants)
-                        ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} extracted`
+                        ? `${session.lease_parsed_data.tenants.length} tenant(s) extracted`
                         : "parsed"}
                     </span>
                   </div>
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <Link
-                      href={`/admin/onboard/${token}/review`}
-                      style={{
-                        display: "inline-flex", alignItems: "center", gap: 6,
-                        backgroundColor: `${ACCENT}18`, border: `1px solid ${ACCENT}40`,
-                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: ACCENT, textDecoration: "none",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Review extracted fields →
-                    </Link>
-                  </div>
-                </>
+                  <Link
+                    href={`/admin/onboard/${token}/review`}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: 6,
+                      background: "rgba(139,32,48,0.07)", border: `1px solid rgba(139,32,48,0.20)`,
+                      borderRadius: 10, padding: "10px 16px", fontSize: 14, color: BURGUNDY, textDecoration: "none", fontWeight: 600,
+                    }}
+                  >
+                    Review extracted fields →
+                  </Link>
+                </div>
               ) : (
-                <>
-                  <p style={{ margin: "0 0 10px", fontSize: 14, color: TEXT_SEC, lineHeight: 1.6 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ margin: "0 0 8px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
                     Waiting for the owner to upload their lease and fill in the details form.
                   </p>
                   <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                     <a
                       href={`/onboard/${token}/lease`}
                       target="_blank" rel="noreferrer"
-                      style={{
-                        display: "inline-flex", alignItems: "center", gap: 6,
-                        backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
-                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
-                      }}
+                      style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
                     >
-                      Preview lease upload page ↗
+                      Lease Upload ↗
                     </a>
                     <a
                       href={`/onboard/${token}/details`}
                       target="_blank" rel="noreferrer"
-                      style={{
-                        display: "inline-flex", alignItems: "center", gap: 6,
-                        backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
-                        borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
-                      }}
+                      style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
                     >
-                      Preview details form ↗
+                      Details Form ↗
                     </a>
                   </div>
-                </>
+                </div>
               )}
             </div>
           </StepCard>
@@ -642,60 +846,45 @@ export default function OnboardChecklist() {
           {/* Step 5 — owner action */}
           <StepCard
             num={5} title="Management Agreement"
-            status={stepStatus(5)}
+            status={step > 5 ? "complete" : step === 5 ? "owner" : "locked"}
             completedAt={session.agreement_signed_at}
-            isActive={step === 5}
             summary={
               session.agreement_signed_at ? (
-                <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                  Signed at {fmt(session.agreement_signed_at)}
-                </p>
+                <p style={{ margin: 0, fontSize: 14, color: MUTED }}>Signed at {fmt(session.agreement_signed_at)}</p>
               ) : undefined
             }
           >
-            <p style={{ margin: "4px 0 10px", fontSize: 14, color: TEXT_SEC }}>
-              Waiting for owner to read and sign the management agreement.
-            </p>
-            <a
-              href={`/onboard/${token}/agreement`}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 6,
-                backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
-                borderRadius: 8, padding: "8px 14px", fontSize: 13, color: TEXT, textDecoration: "none",
-              }}
-            >
-              Preview agreement page ↗
-            </a>
+            <div>
+              <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
+                Waiting for owner to read and sign the management agreement.
+              </p>
+              <a
+                href={`/onboard/${token}/agreement`}
+                target="_blank"
+                rel="noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
+              >
+                Preview →
+              </a>
+            </div>
           </StepCard>
 
           {/* Step 6 — Ebin */}
           <StepCard
             num={6} title="Keys & Access"
             status={stepStatus(6)}
-            completedAt={session.step6_data?._completed_at as string ?? null}
-            isActive={step === 6}
-            summary={
-              <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                Access details recorded
-              </p>
-            }
+            completedAt={null}
+            summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Access details recorded</p>}
           >
             <Step6Form token={token} onComplete={load} />
           </StepCard>
 
           {/* Step 7 — Ebin */}
           <StepCard
-            num={7} title="Photos & Inspection"
+            num={7} title="Inspection"
             status={stepStatus(7)}
-            completedAt={session.step8_completed_at}
-            isActive={step === 7}
-            summary={
-              <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                Inspection complete
-              </p>
-            }
+            completedAt={null}
+            summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Inspection complete</p>}
           >
             <Step7Form token={token} onComplete={load} />
           </StepCard>
@@ -705,25 +894,20 @@ export default function OnboardChecklist() {
             num={8} title="Tenant Notifications"
             status={stepStatus(8)}
             completedAt={session.step8_completed_at}
-            isActive={step === 8}
             summary={
               <div>
-                <p style={{ margin: "0 0 2px", fontSize: 13, color: TEXT_SEC }}>
-                  Intro letters sent automatically — auto-fired after Step 7
-                </p>
-                {session.lease_parsed_data?.tenants && (
-                  <p style={{ margin: 0, fontSize: 12, color: TEXT_MUT }}>
-                    {Array.isArray(session.lease_parsed_data.tenants)
-                      ? `${session.lease_parsed_data.tenants.length} tenant${session.lease_parsed_data.tenants.length !== 1 ? "s" : ""} notified`
-                      : "Tenants notified"}
+                <p style={{ margin: "0 0 2px", fontSize: 14, color: MUTED }}>Intro letters auto-sent after Step 7</p>
+                {session.lease_parsed_data?.tenants && Array.isArray(session.lease_parsed_data.tenants) && (
+                  <p style={{ margin: 0, fontSize: 12, color: GREEN, fontWeight: 500 }}>
+                    ✓ {session.lease_parsed_data.tenants.length} tenant(s) notified
                   </p>
                 )}
               </div>
             }
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "4px 0" }}>
-              <div style={{ width: 18, height: 18, border: `2px solid ${BORDER}`, borderTopColor: ACCENT, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-              <span style={{ fontSize: 14, color: TEXT_SEC }}>Auto-firing tenant notifications…</span>
+              <div style={{ width: 18, height: 18, border: "2px solid rgba(15,28,40,0.10)", borderTopColor: BURGUNDY, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+              <span style={{ fontSize: 14, color: MUTED }}>Auto-firing tenant notifications…</span>
             </div>
           </StepCard>
 
@@ -731,13 +915,8 @@ export default function OnboardChecklist() {
           <StepCard
             num={9} title="Financial Setup"
             status={stepStatus(9)}
-            completedAt={session.step9_data ? new Date().toISOString() : null}
-            isActive={step === 9}
-            summary={
-              <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC }}>
-                Financial setup confirmed
-              </p>
-            }
+            completedAt={null}
+            summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Financial setup confirmed</p>}
           >
             <Step9Form token={token} onComplete={load} />
           </StepCard>
@@ -747,20 +926,16 @@ export default function OnboardChecklist() {
             num={10} title="Welcome & Handover"
             status={stepStatus(10)}
             completedAt={session.completed_at}
-            isActive={step === 10}
             summary={
               <div>
-                <p style={{ margin: 0, fontSize: 14, color: GREEN, fontWeight: 600 }}>
-                  🎉 Onboarding complete
-                </p>
+                <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: GREEN }}>Onboarding complete</p>
                 {session.owner_access_token && (
                   <a
                     href={`/owners/${session.owner_access_token}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ fontSize: 13, color: ACCENT, textDecoration: "none", display: "inline-block", marginTop: 4 }}
+                    target="_blank" rel="noreferrer"
+                    style={{ fontSize: 14, color: BURGUNDY, textDecoration: "none", display: "inline-block", marginTop: 6, fontWeight: 600 }}
                   >
-                    View owner dashboard ↗
+                    View owner portal: /owners/{session.owner_access_token} ↗
                   </a>
                 )}
               </div>
@@ -772,190 +947,5 @@ export default function OnboardChecklist() {
         </div>
       </div>
     </div>
-  );
-}
-
-// ── Step 6: Keys & Access ────────────────────────────────────────
-function Step6Form({ token, onComplete }: { token: string; onComplete: () => void }) {
-  const [form, setForm] = useState({ num_keys: "", front_door_code: "", garage_code: "", mailbox_notes: "", alarm_code: "", repair_limit: "200" });
-  const [saving, setSaving] = useState(false);
-  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    await fetch(`/api/onboard/${token}/step/6`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form),
-    });
-    onComplete();
-  }
-
-  return (
-    <form onSubmit={submit}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
-        <Input label="Number of Keys" name="num_keys" value={form.num_keys} onChange={set("num_keys")} type="number" placeholder="2" />
-        <Input label="Repair Limit (no approval, $)" name="repair_limit" value={form.repair_limit} onChange={set("repair_limit")} type="number" placeholder="200" />
-        <Input label="Front Door Code" name="front_door_code" value={form.front_door_code} onChange={set("front_door_code")} placeholder="Optional" />
-        <Input label="Garage Code" name="garage_code" value={form.garage_code} onChange={set("garage_code")} placeholder="Optional" />
-        <Input label="Alarm Code" name="alarm_code" value={form.alarm_code} onChange={set("alarm_code")} placeholder="Optional" />
-        <Input label="Mailbox Notes" name="mailbox_notes" value={form.mailbox_notes} onChange={set("mailbox_notes")} placeholder="Key in lockbox at door" />
-      </div>
-      <button type="submit" disabled={saving} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "11px 24px", fontSize: 14, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.7 : 1 }}>
-        {saving ? "Saving…" : "Save Keys & Access →"}
-      </button>
-    </form>
-  );
-}
-
-// ── Step 7: Inspection ───────────────────────────────────────────
-function Step7Form({ token, onComplete }: { token: string; onComplete: () => void }) {
-  const [form, setForm] = useState({ overall_condition: "", issues: "", notes: "" });
-  const [saving, setSaving] = useState(false);
-  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    await fetch(`/api/onboard/${token}/step/7`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, inspected_at: new Date().toISOString() }),
-    });
-    onComplete();
-  }
-
-  return (
-    <form onSubmit={submit}>
-      <Select label="Overall Condition" name="overall_condition" value={form.overall_condition} onChange={set("overall_condition")}
-        options={[
-          { value: "", label: "Select…" },
-          { value: "Excellent", label: "Excellent" },
-          { value: "Good", label: "Good" },
-          { value: "Fair", label: "Fair" },
-          { value: "Needs Work", label: "Needs Work" },
-        ]}
-      />
-      <div style={{ marginBottom: 14 }}>
-        <label style={{ display: "block", fontSize: 12, color: TEXT_MUT, marginBottom: 5, letterSpacing: "0.05em", textTransform: "uppercase" }}>Issues Found</label>
-        <textarea value={form.issues} onChange={(e) => set("issues")(e.target.value)} placeholder="List any issues, one per line…" rows={3}
-          style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "10px 14px", fontSize: 14, color: TEXT, outline: "none", resize: "vertical", boxSizing: "border-box", fontFamily: "var(--font-dm-sans, sans-serif)" }}
-          onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.5)"; }}
-          onBlur={(e) => { e.target.style.borderColor = BORDER; }}
-        />
-      </div>
-      <div style={{ marginBottom: 16 }}>
-        <label style={{ display: "block", fontSize: 12, color: TEXT_MUT, marginBottom: 5, letterSpacing: "0.05em", textTransform: "uppercase" }}>Notes</label>
-        <textarea value={form.notes} onChange={(e) => set("notes")(e.target.value)} placeholder="Any other observations…" rows={2}
-          style={{ width: "100%", backgroundColor: "rgba(255,255,255,0.04)", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "10px 14px", fontSize: 14, color: TEXT, outline: "none", resize: "vertical", boxSizing: "border-box", fontFamily: "var(--font-dm-sans, sans-serif)" }}
-          onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.5)"; }}
-          onBlur={(e) => { e.target.style.borderColor = BORDER; }}
-        />
-      </div>
-      <button type="submit" disabled={saving} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "11px 24px", fontSize: 14, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.7 : 1 }}>
-        {saving ? "Saving…" : "Save Inspection →"}
-      </button>
-    </form>
-  );
-}
-
-// ── Step 9: Financial Setup ──────────────────────────────────────
-function Step9Form({ token, onComplete }: { token: string; onComplete: () => void }) {
-  const [form, setForm] = useState({ bank_institution: "", etransfer_email: "", payment_method: "e-transfer", rent_collection_confirmed: false, fee_active: false });
-  const [saving, setSaving] = useState(false);
-  const set = (k: keyof typeof form) => (v: string | boolean) => setForm((p) => ({ ...p, [k]: v }));
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    await fetch(`/api/onboard/${token}/step/9`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form),
-    });
-    onComplete();
-  }
-
-  return (
-    <form onSubmit={submit}>
-      <Select label="Payment Method" name="payment_method" value={form.payment_method} onChange={set("payment_method")}
-        options={[
-          { value: "e-transfer", label: "e-Transfer" },
-          { value: "direct deposit", label: "Direct Deposit" },
-          { value: "cheque", label: "Cheque" },
-        ]}
-      />
-      {form.payment_method === "e-transfer" && (
-        <Input label="e-Transfer Email" name="etransfer_email" value={form.etransfer_email} onChange={set("etransfer_email") as (v: string) => void} type="email" placeholder="owner@email.com" />
-      )}
-      <Input label="Bank Institution" name="bank_institution" value={form.bank_institution} onChange={set("bank_institution") as (v: string) => void} placeholder="TD, RBC, etc." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
-        {[
-          { key: "rent_collection_confirmed", label: "Rent Tracker confirmed in Notion" },
-          { key: "fee_active", label: "Management fee active in system" },
-        ].map(({ key, label }) => (
-          <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
-            <input
-              type="checkbox"
-              checked={form[key as keyof typeof form] as boolean}
-              onChange={(e) => set(key as keyof typeof form)(e.target.checked)}
-              style={{ width: 16, height: 16, accentColor: ACCENT, cursor: "pointer" }}
-            />
-            <span style={{ fontSize: 14, color: TEXT_SEC }}>{label}</span>
-          </label>
-        ))}
-      </div>
-      <button type="submit" disabled={saving} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "11px 24px", fontSize: 14, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.7 : 1 }}>
-        {saving ? "Saving…" : "Confirm Financial Setup →"}
-      </button>
-    </form>
-  );
-}
-
-// ── Step 10: Welcome & Handover ──────────────────────────────────
-function Step10Form({ token, onComplete }: { token: string; onComplete: () => void }) {
-  const [saving, setSaving] = useState(false);
-  const [checks, setChecks] = useState({ dashboard_ready: false, welcome_email_ready: false });
-  const set = (k: keyof typeof checks) => (v: boolean) => setChecks((p) => ({ ...p, [k]: v }));
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    await fetch(`/api/onboard/${token}/step/10`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(checks),
-    });
-    onComplete();
-  }
-
-  return (
-    <form onSubmit={submit}>
-      <p style={{ fontSize: 14, color: TEXT_SEC, margin: "4px 0 14px", lineHeight: 1.6 }}>
-        Review everything, then activate the owner&apos;s dashboard and send the welcome email.
-      </p>
-      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
-        {[
-          { key: "dashboard_ready", label: "Notion records reviewed — all data looks correct" },
-          { key: "welcome_email_ready", label: "Ready to send welcome email + dashboard link" },
-        ].map(({ key, label }) => (
-          <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
-            <input
-              type="checkbox"
-              checked={checks[key as keyof typeof checks]}
-              onChange={(e) => set(key as keyof typeof checks)(e.target.checked)}
-              style={{ width: 16, height: 16, accentColor: ACCENT, cursor: "pointer" }}
-            />
-            <span style={{ fontSize: 14, color: TEXT_SEC }}>{label}</span>
-          </label>
-        ))}
-      </div>
-      <button
-        type="submit"
-        disabled={saving || !checks.dashboard_ready || !checks.welcome_email_ready}
-        style={{
-          backgroundColor: GREEN, color: "#fff", border: "none", borderRadius: 8,
-          padding: "11px 24px", fontSize: 14, fontWeight: 600,
-          cursor: (saving || !checks.dashboard_ready || !checks.welcome_email_ready) ? "not-allowed" : "pointer",
-          opacity: (saving || !checks.dashboard_ready || !checks.welcome_email_ready) ? 0.5 : 1,
-          transition: "opacity 0.2s",
-        }}
-      >
-        {saving ? "Activating…" : "🎉 Complete Onboarding"}
-      </button>
-    </form>
   );
 }

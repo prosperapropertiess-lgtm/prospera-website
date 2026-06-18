@@ -4,15 +4,35 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
-const BG      = "#080c14";
-const SURFACE = "#0f1520";
-const BORDER  = "rgba(255,255,255,0.07)";
-const TEXT    = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.25)";
-const ACCENT  = "#8B2030";
-const GREEN   = "#22c55e";
-const AMBER   = "#f59e0b";
+const BG          = "#F5F4F1";
+const CARD        = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY        = "#0F1C28";
+const MUTED       = "rgba(15,28,40,0.60)";
+const SUBTLE      = "rgba(15,28,40,0.42)";
+const BURGUNDY    = "#8B2030";
+const GREEN       = "#0A7A52";
+const GREEN_BG    = "rgba(10,122,82,0.09)";
+const AMBER       = "#B45309";
+const AMBER_BG    = "rgba(180,83,9,0.09)";
+const INPUT_BORDER = "rgba(15,28,40,0.10)";
+const INPUT_FOCUS  = "rgba(139,32,48,0.40)";
+
+const ADMIN_HEADER = { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" };
+
+interface ReviewedData {
+  tenants: Array<{ name: string; email: string; unit: string; phone: string }>;
+  monthlyRent: string;
+  securityDeposit: string;
+  leaseStart: string;
+  leaseEnd: string;
+  rentDueDay: string;
+  lateFeeStructure: string;
+  petPolicy: string;
+  parkingDetails: string;
+  landlordName: string;
+}
 
 interface ParsedLease {
   tenants?: Array<{ name?: string; email?: string; phone?: string; unit?: string }>;
@@ -25,8 +45,6 @@ interface ParsedLease {
   petPolicy?: string | null;
   parkingDetails?: string | null;
   landlordName?: string | null;
-  specialClauses?: string[] | null;
-  noticesServed?: string[] | null;
   [key: string]: unknown;
 }
 
@@ -34,34 +52,35 @@ interface Session {
   token: string;
   owner_name: string | null;
   property_address: string | null;
-  lease_storage_path: string | null;
   lease_parsed_data: ParsedLease | null;
   step4_completed_at: string | null;
 }
 
 function ReviewField({
-  label, value, onChange, type = "text", dim,
+  label, value, onChange, type = "text", fromParsed,
 }: {
   label: string; value: string; onChange: (v: string) => void;
-  type?: string; dim?: boolean;
+  type?: string; fromParsed?: boolean;
 }) {
   const isEmpty = !value;
+  const borderColor = isEmpty ? "rgba(180,83,9,0.30)" : fromParsed ? "rgba(10,122,82,0.25)" : INPUT_BORDER;
+  const bgColor = isEmpty ? AMBER_BG : fromParsed ? GREEN_BG : CARD;
+
   return (
     <div style={{ marginBottom: 16 }}>
       <label style={{
         display: "flex", alignItems: "center", gap: 6,
-        fontSize: 11, color: TEXT_MUT, marginBottom: 5,
-        letterSpacing: "0.06em", textTransform: "uppercase",
+        fontSize: 11, fontWeight: 700, color: SUBTLE, marginBottom: 5,
+        letterSpacing: "0.05em", textTransform: "uppercase",
       }}>
         {label}
-        {isEmpty && (
-          <span style={{ padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, backgroundColor: `${AMBER}20`, color: AMBER }}>
-            Missing
+        {isEmpty ? (
+          <span style={{ padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, background: AMBER_BG, color: AMBER }}>
+            missing
           </span>
-        )}
-        {!isEmpty && (
-          <span style={{ padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, backgroundColor: `${GREEN}18`, color: GREEN }}>
-            Extracted
+        ) : (
+          <span style={{ padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, background: GREEN_BG, color: GREEN }}>
+            extracted
           </span>
         )}
       </label>
@@ -71,19 +90,19 @@ function ReviewField({
         onChange={(e) => onChange(e.target.value)}
         style={{
           width: "100%",
-          backgroundColor: isEmpty ? "rgba(245,158,11,0.05)" : "rgba(255,255,255,0.04)",
-          border: `1px solid ${isEmpty ? "rgba(245,158,11,0.3)" : dim ? BORDER : "rgba(34,197,94,0.2)"}`,
-          borderRadius: 8,
+          background: bgColor,
+          border: `1px solid ${borderColor}`,
+          borderRadius: 10,
           padding: "10px 14px",
-          fontSize: 14,
-          color: TEXT,
+          fontSize: 15,
+          color: NAVY,
           outline: "none",
-          fontFamily: "var(--font-dm-sans, sans-serif)",
+          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
           boxSizing: "border-box",
           transition: "border-color 0.15s",
         }}
-        onFocus={(e) => { e.target.style.borderColor = "rgba(139,32,48,0.5)"; }}
-        onBlur={(e) => { e.target.style.borderColor = isEmpty ? "rgba(245,158,11,0.3)" : dim ? BORDER : "rgba(34,197,94,0.2)"; }}
+        onFocus={(e) => { e.target.style.borderColor = INPUT_FOCUS; }}
+        onBlur={(e) => { e.target.style.borderColor = borderColor; }}
       />
     </div>
   );
@@ -99,51 +118,67 @@ export default function LeaseReviewPage() {
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
 
-  // Editable extracted data
-  const [data, setData] = useState<ParsedLease>({});
-  const [tenants, setTenants] = useState<Array<{ name: string; email: string; unit: string; phone: string }>>([]);
+  const [reviewed, setReviewed] = useState<ReviewedData>({
+    tenants: [],
+    monthlyRent: "", securityDeposit: "",
+    leaseStart: "", leaseEnd: "",
+    rentDueDay: "", lateFeeStructure: "",
+    petPolicy: "", parkingDetails: "", landlordName: "",
+  });
 
   useEffect(() => {
-    fetch(`/api/onboard/${token}/status`)
+    fetch(`/api/onboard/${token}/status`, { headers: ADMIN_HEADER })
       .then((r) => r.json())
       .then((s: Session) => {
         setSession(s);
-        const parsed = s.lease_parsed_data ?? {};
-        setData(parsed);
-        const t = Array.isArray(parsed.tenants) ? parsed.tenants : [];
-        setTenants(t.map((ten) => ({
-          name: String(ten.name ?? ""),
-          email: String(ten.email ?? ""),
-          unit: String(ten.unit ?? ""),
-          phone: String(ten.phone ?? ""),
-        })));
+        const p = s.lease_parsed_data ?? {};
+        const rawTenants = Array.isArray(p.tenants) ? p.tenants : [];
+        setReviewed({
+          tenants: rawTenants.map((t) => ({
+            name: String(t.name ?? ""),
+            email: String(t.email ?? ""),
+            unit: String(t.unit ?? ""),
+            phone: String(t.phone ?? ""),
+          })),
+          monthlyRent: p.monthlyRent != null ? String(p.monthlyRent) : "",
+          securityDeposit: p.securityDeposit != null ? String(p.securityDeposit) : "",
+          leaseStart: String(p.leaseStart ?? ""),
+          leaseEnd: String(p.leaseEnd ?? ""),
+          rentDueDay: p.rentDueDay != null ? String(p.rentDueDay) : "",
+          lateFeeStructure: String(p.lateFeeStructure ?? ""),
+          petPolicy: String(p.petPolicy ?? ""),
+          parkingDetails: String(p.parkingDetails ?? ""),
+          landlordName: String(p.landlordName ?? ""),
+        });
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [token]);
 
-  function setField(k: keyof ParsedLease) {
-    return (v: string) => setData((p) => ({ ...p, [k]: v || null }));
+  function setField<K extends keyof ReviewedData>(k: K) {
+    return (v: ReviewedData[K]) => setReviewed((p) => ({ ...p, [k]: v }));
   }
 
-  function setTenant(i: number, k: keyof typeof tenants[0]) {
-    return (v: string) => setTenants((prev) => prev.map((t, idx) => idx === i ? { ...t, [k]: v } : t));
+  function setTenant(i: number, k: keyof ReviewedData["tenants"][0]) {
+    return (v: string) => setReviewed((prev) => ({
+      ...prev,
+      tenants: prev.tenants.map((t, idx) => idx === i ? { ...t, [k]: v } : t),
+    }));
   }
 
   function addTenant() {
-    setTenants((p) => [...p, { name: "", email: "", unit: "", phone: "" }]);
+    setReviewed((p) => ({ ...p, tenants: [...p.tenants, { name: "", email: "", unit: "", phone: "" }] }));
   }
 
   function removeTenant(i: number) {
-    setTenants((p) => p.filter((_, idx) => idx !== i));
+    setReviewed((p) => ({ ...p, tenants: p.tenants.filter((_, idx) => idx !== i) }));
   }
 
   async function confirm() {
     setSaving(true);
-    const reviewed = { ...data, tenants };
     await fetch(`/api/onboard/${token}/confirm-review`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
       body: JSON.stringify({ reviewed_data: reviewed }),
     });
     setDone(true);
@@ -152,121 +187,161 @@ export default function LeaseReviewPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", backgroundColor: BG, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 24, height: 24, border: `2px solid ${BORDER}`, borderTopColor: ACCENT, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-        <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 30, height: 30, border: "3px solid rgba(15,28,40,0.10)", borderTopColor: BURGUNDY, borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
-  if (!session?.lease_parsed_data && !loading) {
+  if (!session?.lease_parsed_data) {
     return (
-      <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-dm-sans, sans-serif)" }}>
+      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
         <div style={{ textAlign: "center" }}>
-          <p style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>No lease data yet</p>
-          <p style={{ color: TEXT_SEC, fontSize: 14, marginBottom: 16 }}>The owner hasn&apos;t uploaded a lease or parsing hasn&apos;t completed.</p>
-          <Link href={`/admin/onboard/${token}`} style={{ color: ACCENT, textDecoration: "none", fontSize: 14 }}>← Back to checklist</Link>
+          <p style={{ fontSize: 18, fontWeight: 700, color: NAVY, margin: "0 0 8px" }}>No lease data yet</p>
+          <p style={{ fontSize: 14, color: MUTED, margin: "0 0 16px" }}>The owner hasn&apos;t uploaded a lease or parsing hasn&apos;t completed.</p>
+          <Link href={`/admin/onboard/${token}`} style={{ color: BURGUNDY, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>← Back to checklist</Link>
         </div>
       </div>
     );
   }
 
-  const extractedCount = Object.entries(data).filter(([k, v]) => k !== "tenants" && v !== null && v !== undefined && v !== "").length + tenants.length;
-  const missingCount = ["monthlyRent", "leaseStart", "leaseEnd", "securityDeposit", "rentDueDay"].filter((k) => !data[k]).length;
+  const parsedData = session.lease_parsed_data;
+  const fieldCount = Object.entries(reviewed).filter(([k, v]) => k !== "tenants" && v !== "").length + reviewed.tenants.length;
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, fontFamily: "var(--font-dm-sans, sans-serif)" }}>
+    <div style={{
+      minHeight: "100vh",
+      background: BG,
+      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+    }}>
       <style>{`
         * { box-sizing: border-box; }
-        @keyframes spin { to { transform: rotate(360deg) } }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
-      {/* Header */}
-      <div style={{ borderBottom: `1px solid ${BORDER}`, padding: "18px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      {/* Top bar */}
+      <div style={{
+        background: CARD,
+        borderBottom: `1px solid ${CARD_BORDER}`,
+        padding: "16px 32px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
+      }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <Link href={`/admin/onboard/${token}`} style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Checklist</Link>
-          <span style={{ color: BORDER }}>·</span>
-          <div>
-            <span style={{ fontSize: 15, fontWeight: 600, color: TEXT }}>Lease Review</span>
-            {session?.owner_name && (
-              <span style={{ fontSize: 13, color: TEXT_SEC, marginLeft: 8 }}>{session.owner_name}</span>
-            )}
-          </div>
+          <Link href={`/admin/onboard/${token}`} style={{ color: SUBTLE, fontSize: 13, textDecoration: "none", fontWeight: 500 }}>
+            ← Checklist
+          </Link>
+          <span style={{ color: CARD_BORDER }}>·</span>
+          <span style={{ fontSize: 15, fontWeight: 700, color: NAVY }}>Lease Review</span>
+          {session.owner_name && (
+            <span style={{ fontSize: 13, color: MUTED }}>{session.owner_name}</span>
+          )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 12, color: GREEN }}>{extractedCount} fields extracted</span>
-          {missingCount > 0 && (
-            <span style={{ fontSize: 12, color: AMBER }}>{missingCount} missing</span>
-          )}
+          <span style={{ fontSize: 12, fontWeight: 600, color: GREEN, background: GREEN_BG, padding: "3px 10px", borderRadius: 8 }}>
+            {fieldCount} fields extracted
+          </span>
         </div>
       </div>
 
       {done ? (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "80px 24px" }}>
           <div style={{ textAlign: "center" }}>
-            <div style={{ width: 52, height: 52, borderRadius: "50%", backgroundColor: `${GREEN}20`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontSize: 22 }}>✓</div>
-            <p style={{ fontSize: 18, fontWeight: 600, margin: "0 0 6px" }}>Confirmed — Email 2 sent to owner</p>
-            <p style={{ fontSize: 13, color: TEXT_MUT }}>Redirecting to checklist…</p>
+            <div style={{ width: 56, height: 56, borderRadius: "50%", background: GREEN_BG, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontSize: 22, color: GREEN }}>✓</div>
+            <p style={{ fontSize: 18, fontWeight: 700, color: NAVY, margin: "0 0 6px" }}>Confirmed & sent to owner</p>
+            <p style={{ fontSize: 13, color: MUTED }}>Redirecting to checklist…</p>
           </div>
         </div>
       ) : (
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "32px 24px", animation: "fadeUp 0.5s cubic-bezier(0.23,1,0.32,1) both" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "32px 20px", animation: "fadeUp 0.4s ease both" }}>
 
-          <p style={{ margin: "0 0 28px", fontSize: 14, color: TEXT_SEC, lineHeight: 1.7 }}>
-            Review what Claude extracted from the lease. Green = extracted, amber = missing (fill in manually). When confirmed, Email 2 goes to the owner with the agreement link.
+          <p style={{ margin: "0 0 28px", fontSize: 14, color: MUTED, lineHeight: 1.7 }}>
+            Review what was extracted from the lease. Green fields were pulled automatically; amber fields are missing and should be filled in manually.
           </p>
 
           {/* Tenants */}
-          <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "22px", marginBottom: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-              <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>
-                Tenants ({tenants.length})
+          <div style={{ background: CARD, border: `1px solid ${CARD_BORDER}`, boxShadow: CARD_SHADOW, borderRadius: 20, padding: "24px", marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+              <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: NAVY }}>
+                Tenants ({reviewed.tenants.length})
               </h3>
               <button
                 onClick={addTenant}
-                style={{ background: "none", border: `1px solid ${BORDER}`, borderRadius: 6, padding: "5px 12px", fontSize: 12, color: TEXT_SEC, cursor: "pointer" }}
+                style={{
+                  background: "none",
+                  border: `1px solid ${CARD_BORDER}`,
+                  borderRadius: 8,
+                  padding: "6px 14px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: NAVY,
+                  cursor: "pointer",
+                  fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                }}
               >
                 + Add Tenant
               </button>
             </div>
-            {tenants.length === 0 ? (
-              <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>No tenants extracted. Click "+ Add Tenant" to add manually.</p>
-            ) : tenants.map((t, i) => (
-              <div key={i} style={{ padding: "14px 0", borderTop: i > 0 ? `1px solid ${BORDER}` : "none" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
-                  <span style={{ fontSize: 12, color: TEXT_MUT, letterSpacing: "0.06em", textTransform: "uppercase" }}>Tenant {i + 1}</span>
-                  <button onClick={() => removeTenant(i)} style={{ background: "none", border: "none", fontSize: 12, color: TEXT_MUT, cursor: "pointer", padding: 0 }}>Remove</button>
+            {reviewed.tenants.length === 0 ? (
+              <p style={{ fontSize: 14, color: MUTED, margin: 0 }}>No tenants extracted. Click "+ Add Tenant" to add manually.</p>
+            ) : (
+              reviewed.tenants.map((t, i) => (
+                <div key={i} style={{ padding: "16px 0", borderTop: i > 0 ? `1px solid ${CARD_BORDER}` : "none" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: SUBTLE, letterSpacing: "0.05em", textTransform: "uppercase" }}>Tenant {i + 1}</span>
+                    <button
+                      onClick={() => removeTenant(i)}
+                      style={{ background: "none", border: "none", fontSize: 13, color: MUTED, cursor: "pointer", padding: 0, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
+                    <ReviewField
+                      label="Full Name" value={t.name} onChange={setTenant(i, "name")}
+                      fromParsed={!!(parsedData?.tenants?.[i]?.name)}
+                    />
+                    <ReviewField
+                      label="Unit / Description" value={t.unit} onChange={setTenant(i, "unit")}
+                      fromParsed={!!(parsedData?.tenants?.[i]?.unit)}
+                    />
+                    <ReviewField
+                      label="Email" value={t.email} onChange={setTenant(i, "email")} type="email"
+                      fromParsed={!!(parsedData?.tenants?.[i]?.email)}
+                    />
+                    <ReviewField
+                      label="Phone" value={t.phone} onChange={setTenant(i, "phone")} type="tel"
+                      fromParsed={!!(parsedData?.tenants?.[i]?.phone)}
+                    />
+                  </div>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 12px" }}>
-                  <ReviewField label="Full Name" value={t.name} onChange={setTenant(i, "name")} />
-                  <ReviewField label="Unit / Description" value={t.unit} onChange={setTenant(i, "unit")} dim />
-                  <ReviewField label="Email" value={t.email} onChange={setTenant(i, "email")} type="email" dim />
-                  <ReviewField label="Phone" value={t.phone} onChange={setTenant(i, "phone")} type="tel" dim />
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
           {/* Lease Terms */}
-          <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "22px", marginBottom: 16 }}>
-            <h3 style={{ margin: "0 0 18px", fontSize: 15, fontWeight: 700 }}>Lease Terms</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 12px" }}>
-              <ReviewField label="Monthly Rent ($)" value={String(data.monthlyRent ?? "")} onChange={setField("monthlyRent")} type="number" />
-              <ReviewField label="Security Deposit ($)" value={String(data.securityDeposit ?? "")} onChange={setField("securityDeposit")} type="number" />
-              <ReviewField label="Lease Start" value={String(data.leaseStart ?? "")} onChange={setField("leaseStart")} type="date" />
-              <ReviewField label="Lease End" value={String(data.leaseEnd ?? "")} onChange={setField("leaseEnd")} type="date" />
-              <ReviewField label="Rent Due Day (1–31)" value={String(data.rentDueDay ?? "")} onChange={setField("rentDueDay")} type="number" />
-              <ReviewField label="Late Fee Structure" value={String(data.lateFeeStructure ?? "")} onChange={setField("lateFeeStructure")} dim />
+          <div style={{ background: CARD, border: `1px solid ${CARD_BORDER}`, boxShadow: CARD_SHADOW, borderRadius: 20, padding: "24px", marginBottom: 16 }}>
+            <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 700, color: NAVY }}>Lease Terms</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
+              <ReviewField label="Monthly Rent ($)" value={reviewed.monthlyRent} onChange={setField("monthlyRent")} type="number" fromParsed={parsedData?.monthlyRent != null} />
+              <ReviewField label="Security Deposit ($)" value={reviewed.securityDeposit} onChange={setField("securityDeposit")} type="number" fromParsed={parsedData?.securityDeposit != null} />
+              <ReviewField label="Lease Start" value={reviewed.leaseStart} onChange={setField("leaseStart")} type="date" fromParsed={!!parsedData?.leaseStart} />
+              <ReviewField label="Lease End" value={reviewed.leaseEnd} onChange={setField("leaseEnd")} type="date" fromParsed={!!parsedData?.leaseEnd} />
+              <ReviewField label="Rent Due Day (1–31)" value={reviewed.rentDueDay} onChange={setField("rentDueDay")} type="number" fromParsed={parsedData?.rentDueDay != null} />
+              <ReviewField label="Late Fee Structure" value={reviewed.lateFeeStructure} onChange={setField("lateFeeStructure")} fromParsed={!!parsedData?.lateFeeStructure} />
             </div>
           </div>
 
           {/* Additional */}
-          <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "22px", marginBottom: 24 }}>
-            <h3 style={{ margin: "0 0 18px", fontSize: 15, fontWeight: 700 }}>Additional Details</h3>
-            <ReviewField label="Pet Policy" value={String(data.petPolicy ?? "")} onChange={setField("petPolicy")} dim />
-            <ReviewField label="Parking Details" value={String(data.parkingDetails ?? "")} onChange={setField("parkingDetails")} dim />
-            <ReviewField label="Landlord Name (from lease)" value={String(data.landlordName ?? "")} onChange={setField("landlordName")} dim />
+          <div style={{ background: CARD, border: `1px solid ${CARD_BORDER}`, boxShadow: CARD_SHADOW, borderRadius: 20, padding: "24px", marginBottom: 28 }}>
+            <h3 style={{ margin: "0 0 20px", fontSize: 16, fontWeight: 700, color: NAVY }}>Additional Details</h3>
+            <ReviewField label="Pet Policy" value={reviewed.petPolicy} onChange={setField("petPolicy")} fromParsed={!!parsedData?.petPolicy} />
+            <ReviewField label="Parking Details" value={reviewed.parkingDetails} onChange={setField("parkingDetails")} fromParsed={!!parsedData?.parkingDetails} />
+            <ReviewField label="Landlord Name (from lease)" value={reviewed.landlordName} onChange={setField("landlordName")} fromParsed={!!parsedData?.landlordName} />
           </div>
 
           {/* Confirm button */}
@@ -275,21 +350,22 @@ export default function LeaseReviewPage() {
             disabled={saving}
             style={{
               width: "100%",
-              backgroundColor: ACCENT,
+              background: BURGUNDY,
               color: "#fff",
               border: "none",
               borderRadius: 12,
               padding: "14px 24px",
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: 700,
               cursor: saving ? "not-allowed" : "pointer",
-              opacity: saving ? 0.7 : 1,
-              letterSpacing: "-0.01em",
+              opacity: saving ? 0.45 : 1,
+              fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+              transition: "opacity 0.15s",
             }}
           >
-            {saving ? "Confirming…" : "Confirm & Send Email 2 to Owner →"}
+            {saving ? "Confirming…" : "Confirm & Send to Owner →"}
           </button>
-          <p style={{ margin: "10px 0 0", textAlign: "center", fontSize: 12, color: TEXT_MUT }}>
+          <p style={{ margin: "10px 0 0", textAlign: "center", fontSize: 12, color: SUBTLE }}>
             This sends the owner the agreement signing link.
           </p>
         </div>

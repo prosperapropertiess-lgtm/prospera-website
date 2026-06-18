@@ -3,15 +3,18 @@
 import { useState, useRef, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const BG      = "#080c14";
-const SURFACE = "#0f1520";
-const BORDER  = "rgba(255,255,255,0.08)";
-const BORDER_DRAG = "rgba(139,32,48,0.6)";
-const TEXT    = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.55)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT  = "#8B2030";
-const GREEN   = "#22c55e";
+const BG          = "#F5F4F1";
+const CARD        = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY        = "#0F1C28";
+const MUTED       = "rgba(15,28,40,0.60)";
+const SUBTLE      = "rgba(15,28,40,0.42)";
+const BURGUNDY    = "#8B2030";
+const GREEN       = "#0A7A52";
+const GREEN_BG    = "rgba(10,122,82,0.09)";
+const RED         = "#B91C1C";
+const RED_BG      = "rgba(185,28,28,0.08)";
 
 type Stage = "idle" | "dragging" | "uploading" | "parsing" | "done" | "error";
 
@@ -38,6 +41,7 @@ export default function LeaseUploadPage() {
     }
     setFile(f);
     setErrorMsg("");
+    setStage("idle");
   }, []);
 
   function onDrop(e: React.DragEvent) {
@@ -51,10 +55,8 @@ export default function LeaseUploadPage() {
     if (!file) return;
     setStage("uploading");
     setErrorMsg("");
-
     const fd = new FormData();
     fd.append("file", file);
-
     try {
       setStage("parsing");
       const r = await fetch(`/api/onboard/${token}/upload-lease`, {
@@ -69,7 +71,6 @@ export default function LeaseUploadPage() {
       }
       setFieldsExtracted(d.fields_extracted ?? 0);
       setStage("done");
-      // Redirect to details form after short delay
       setTimeout(() => router.push(`/onboard/${token}/details`), 2000);
     } catch {
       setErrorMsg("Something went wrong. Please try again.");
@@ -77,110 +78,102 @@ export default function LeaseUploadPage() {
     }
   }
 
-  async function skip() {
-    router.push(`/onboard/${token}/details`);
-  }
-
   const isDone = stage === "done";
+  const isError = stage === "error";
   const isProcessing = stage === "uploading" || stage === "parsing";
   const canUpload = !!file && stage === "idle";
 
   return (
     <div style={{
       minHeight: "100vh",
-      backgroundColor: BG,
-      color: TEXT,
-      fontFamily: "var(--font-dm-sans, sans-serif)",
+      background: BG,
+      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
       display: "flex",
       flexDirection: "column",
     }}>
       <style>{`
         * { box-sizing: border-box; }
-        @keyframes spin { to { transform: rotate(360deg) } }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px) }
-          to   { opacity: 1; transform: translateY(0) }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1 }
-          50% { opacity: 0.5 }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
-      {/* Progress bar */}
-      <div style={{ height: 3, backgroundColor: "rgba(255,255,255,0.05)" }}>
-        <div style={{ height: "100%", width: "20%", backgroundColor: ACCENT, transition: "width 0.6s ease" }} />
+      {/* Step progress bar */}
+      <div style={{ height: 4, background: "rgba(15,28,40,0.08)" }}>
+        <div style={{ height: "100%", width: isDone ? "66%" : "33%", background: BURGUNDY, transition: "width 0.6s ease" }} />
       </div>
 
-      {/* Logo */}
-      <div style={{ padding: "24px 32px" }}>
-        <p style={{ margin: 0, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: ACCENT }}>
+      {/* Header */}
+      <div style={{ padding: "20px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: NAVY, letterSpacing: "-0.01em" }}>
           Prospera Properties
         </p>
+        <span style={{ fontSize: 13, color: SUBTLE, fontWeight: 500 }}>Step 1 of 3 · Upload Lease</span>
       </div>
 
-      {/* Main */}
-      <div style={{
-        flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
-        padding: "40px 24px",
-      }}>
-        <div style={{ width: "100%", maxWidth: 520, animation: "fadeUp 0.6s cubic-bezier(0.23,1,0.32,1) both" }}>
+      {/* Main content */}
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ width: "100%", maxWidth: 520, animation: "fadeUp 0.5s ease both" }}>
 
           {isDone ? (
-            // Done state
-            <div style={{ textAlign: "center" }}>
+            <div style={{
+              background: CARD,
+              border: `1px solid rgba(10,122,82,0.20)`,
+              boxShadow: CARD_SHADOW,
+              borderRadius: 20,
+              padding: "48px 32px",
+              textAlign: "center",
+            }}>
               <div style={{
                 width: 64, height: 64, borderRadius: "50%",
-                backgroundColor: `${GREEN}20`,
+                background: GREEN_BG,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 margin: "0 auto 24px",
-                fontSize: 28,
+                fontSize: 28, color: GREEN,
               }}>
                 ✓
               </div>
-              <h1 style={{ margin: "0 0 12px", fontSize: 28, fontWeight: 700, letterSpacing: "-0.03em", color: TEXT }}>
+              <h1 style={{ margin: "0 0 10px", fontSize: 26, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em" }}>
                 Lease received.
               </h1>
-              <p style={{ margin: "0 0 8px", fontSize: 16, color: TEXT_SEC, lineHeight: 1.6 }}>
+              <p style={{ margin: "0 0 6px", fontSize: 15, color: MUTED, lineHeight: 1.6 }}>
                 We pulled {fieldsExtracted} fields automatically.
               </p>
-              <p style={{ margin: 0, fontSize: 14, color: TEXT_MUT }}>
-                Taking you to the next step…
-              </p>
+              <p style={{ margin: 0, fontSize: 13, color: SUBTLE }}>Taking you to the next step…</p>
             </div>
           ) : (
             <>
               {/* Heading */}
-              <div style={{ marginBottom: 40 }}>
-                <p style={{ margin: "0 0 6px", fontSize: 13, letterSpacing: "0.08em", textTransform: "uppercase", color: TEXT_MUT }}>
-                  Step 1 of 3
-                </p>
-                <h1 style={{ margin: "0 0 14px", fontSize: 32, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.15, color: TEXT }}>
-                  Upload your lease agreement
+              <div style={{ marginBottom: 32 }}>
+                <h1 style={{ margin: "0 0 12px", fontSize: 30, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+                  Upload your lease
                 </h1>
-                <p style={{ margin: 0, fontSize: 16, color: TEXT_SEC, lineHeight: 1.7 }}>
-                  We&apos;ll pull all the details automatically — tenant names, rent, dates — so you don&apos;t have to re-enter anything.
+                <p style={{ margin: 0, fontSize: 15, color: MUTED, lineHeight: 1.7 }}>
+                  We&apos;ll extract the details automatically — takes about 30 seconds.
                 </p>
               </div>
 
               {/* Drop zone */}
               <div
                 onDragEnter={() => setStage("dragging")}
-                onDragLeave={() => setStage("idle")}
+                onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setStage("idle"); }}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={onDrop}
-                onClick={() => !file && inputRef.current?.click()}
+                onClick={() => !isProcessing && !file && inputRef.current?.click()}
                 style={{
-                  border: `2px dashed ${stage === "dragging" ? BORDER_DRAG : file ? "rgba(34,197,94,0.4)" : BORDER}`,
+                  background: stage === "dragging"
+                    ? "rgba(139,32,48,0.04)"
+                    : file ? "rgba(10,122,82,0.04)"
+                    : CARD,
+                  border: `2px dashed ${
+                    stage === "dragging" ? BURGUNDY
+                    : file ? "rgba(10,122,82,0.35)"
+                    : CARD_BORDER
+                  }`,
+                  boxShadow: CARD_SHADOW,
                   borderRadius: 16,
-                  backgroundColor: stage === "dragging"
-                    ? "rgba(139,32,48,0.06)"
-                    : file
-                    ? "rgba(34,197,94,0.04)"
-                    : "rgba(255,255,255,0.02)",
-                  padding: "40px 24px",
+                  padding: "44px 32px",
                   textAlign: "center",
-                  cursor: file ? "default" : "pointer",
+                  cursor: isProcessing || file ? "default" : "pointer",
                   transition: "all 0.2s",
                   marginBottom: 16,
                 }}
@@ -200,29 +193,34 @@ export default function LeaseUploadPage() {
                   <div>
                     <div style={{
                       width: 32, height: 32,
-                      border: `2px solid rgba(255,255,255,0.1)`,
-                      borderTopColor: ACCENT,
+                      border: "3px solid rgba(15,28,40,0.10)",
+                      borderTopColor: BURGUNDY,
                       borderRadius: "50%",
                       animation: "spin 0.8s linear infinite",
                       margin: "0 auto 16px",
                     }} />
-                    <p style={{ margin: 0, fontSize: 15, color: TEXT_SEC }}>
-                      {stage === "uploading" ? "Uploading…" : "Reading your lease — this takes about 15 seconds…"}
+                    <p style={{ margin: 0, fontSize: 15, color: MUTED, fontWeight: 500 }}>
+                      {stage === "uploading" ? "Uploading…" : "Reading your lease — about 30 seconds…"}
                     </p>
                   </div>
                 ) : file ? (
                   <div>
-                    <p style={{ margin: "0 0 8px", fontSize: 24 }}>📄</p>
-                    <p style={{ margin: "0 0 6px", fontSize: 15, fontWeight: 600, color: TEXT }}>{file.name}</p>
-                    <p style={{ margin: "0 0 14px", fontSize: 13, color: TEXT_MUT }}>
+                    <div style={{ fontSize: 32, marginBottom: 10 }}>📄</div>
+                    <p style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: NAVY }}>{file.name}</p>
+                    <p style={{ margin: "0 0 14px", fontSize: 13, color: SUBTLE }}>
                       {(file.size / 1024 / 1024).toFixed(1)} MB
                     </p>
                     <button
-                      onClick={(e) => { e.stopPropagation(); setFile(null); }}
+                      onClick={(e) => { e.stopPropagation(); setFile(null); setStage("idle"); }}
                       style={{
-                        background: "none", border: `1px solid ${BORDER}`,
-                        borderRadius: 6, padding: "5px 12px",
-                        fontSize: 12, color: TEXT_MUT, cursor: "pointer",
+                        background: "none",
+                        border: `1px solid ${CARD_BORDER}`,
+                        borderRadius: 8,
+                        padding: "5px 14px",
+                        fontSize: 13,
+                        color: MUTED,
+                        cursor: "pointer",
+                        fontFamily: "var(--font-poppins), -apple-system, sans-serif",
                       }}
                     >
                       Remove
@@ -230,21 +228,41 @@ export default function LeaseUploadPage() {
                   </div>
                 ) : (
                   <div>
-                    <p style={{ margin: "0 0 12px", fontSize: 28 }}>📎</p>
-                    <p style={{ margin: "0 0 6px", fontSize: 15, fontWeight: 600, color: TEXT }}>
+                    <div style={{ fontSize: 36, marginBottom: 14 }}>📄</div>
+                    <p style={{ margin: "0 0 6px", fontSize: 16, fontWeight: 700, color: NAVY }}>
                       Drop your lease here
                     </p>
-                    <p style={{ margin: 0, fontSize: 13, color: TEXT_MUT }}>
-                      or click to browse — PDF, JPG, PNG · Max 10MB
+                    <p style={{ margin: 0, fontSize: 13, color: MUTED }}>
+                      or click to browse · PDF, JPG, PNG · Max 10MB
                     </p>
                   </div>
                 )}
               </div>
 
-              {errorMsg && (
-                <p style={{ margin: "0 0 14px", fontSize: 13, color: "#f87171", textAlign: "center" }}>
-                  {errorMsg}
-                </p>
+              {/* Error */}
+              {(errorMsg || isError) && (
+                <div style={{
+                  background: RED_BG,
+                  border: `1px solid rgba(185,28,28,0.20)`,
+                  borderRadius: 10,
+                  padding: "12px 16px",
+                  marginBottom: 14,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}>
+                  <span style={{ color: RED, fontSize: 13, fontWeight: 600 }}>
+                    {errorMsg || "Something went wrong."}
+                  </span>
+                  {isError && (
+                    <button
+                      onClick={() => { setStage("idle"); setErrorMsg(""); }}
+                      style={{ marginLeft: "auto", background: "none", border: "none", fontSize: 13, color: RED, cursor: "pointer", fontWeight: 700, padding: 0 }}
+                    >
+                      Retry
+                    </button>
+                  )}
+                </div>
               )}
 
               {/* Upload button */}
@@ -253,17 +271,17 @@ export default function LeaseUploadPage() {
                 disabled={!canUpload}
                 style={{
                   width: "100%",
-                  backgroundColor: canUpload ? ACCENT : "rgba(255,255,255,0.06)",
-                  color: canUpload ? "#fff" : TEXT_MUT,
+                  background: canUpload ? BURGUNDY : "rgba(15,28,40,0.06)",
+                  color: canUpload ? "#fff" : SUBTLE,
                   border: "none",
                   borderRadius: 12,
                   padding: "15px 24px",
                   fontSize: 15,
                   fontWeight: 700,
                   cursor: canUpload ? "pointer" : "not-allowed",
-                  letterSpacing: "-0.01em",
+                  fontFamily: "var(--font-poppins), -apple-system, sans-serif",
                   transition: "all 0.2s",
-                  marginBottom: 14,
+                  marginBottom: 12,
                 }}
               >
                 Upload & Continue →
@@ -271,20 +289,21 @@ export default function LeaseUploadPage() {
 
               {/* Skip */}
               <button
-                onClick={skip}
+                onClick={() => router.push(`/onboard/${token}/details`)}
                 style={{
                   width: "100%",
                   background: "none",
                   border: "none",
                   padding: "10px",
                   fontSize: 13,
-                  color: TEXT_MUT,
+                  color: SUBTLE,
                   cursor: "pointer",
+                  fontFamily: "var(--font-poppins), -apple-system, sans-serif",
                   textDecoration: "underline",
-                  textDecorationColor: "rgba(237,233,227,0.15)",
+                  textDecorationColor: "rgba(15,28,40,0.20)",
                 }}
               >
-                I don&apos;t have a lease yet — skip this step
+                Skip for now →
               </button>
             </>
           )}

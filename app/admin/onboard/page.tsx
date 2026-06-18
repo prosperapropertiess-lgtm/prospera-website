@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const BG      = "#080c14";
-const SURFACE = "#0f1520";
-const SURFACE_HI = "#141d2c";
-const BORDER  = "rgba(255,255,255,0.07)";
-const TEXT    = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.25)";
-const ACCENT  = "#8B2030";
-const GREEN   = "#22c55e";
-const AMBER   = "#f59e0b";
+const BG          = "#F5F4F1";
+const CARD        = "#FFFFFF";
+const CARD_BORDER = "rgba(15,28,40,0.07)";
+const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
+const NAVY        = "#0F1C28";
+const MUTED       = "rgba(15,28,40,0.60)";
+const SUBTLE      = "rgba(15,28,40,0.42)";
+const BURGUNDY    = "#8B2030";
+const GREEN       = "#0A7A52";
+const GREEN_BG    = "rgba(10,122,82,0.09)";
+const AMBER       = "#B45309";
+const AMBER_BG    = "rgba(180,83,9,0.09)";
+const RED         = "#B91C1C";
+const RED_BG      = "rgba(185,28,28,0.08)";
 
 interface Session {
   id: string;
@@ -29,33 +32,37 @@ interface Session {
   completed_at: string | null;
 }
 
-function stepLabel(step: number) {
-  const labels: Record<number, string> = {
-    2: "Owner Info",
-    3: "Property Details",
-    4: "Lease & Details",
-    5: "Agreement",
-    6: "Keys & Access",
-    7: "Inspection",
-    8: "Tenants Notified",
-    9: "Financial Setup",
-    10: "Complete",
-  };
-  return labels[step] ?? `Step ${step}`;
-}
-
-function statusDot(status: string) {
-  if (status === "complete") return { color: GREEN, label: "Complete" };
-  if (status === "abandoned") return { color: TEXT_MUT, label: "Abandoned" };
-  return { color: AMBER, label: "In Progress" };
-}
-
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
   const h = Math.floor(diff / 3600000);
   if (h < 1) return `${Math.floor(diff / 60000)}m ago`;
   if (h < 24) return `${h}h ago`;
   return `${Math.floor(h / 24)}d ago`;
+}
+
+function statusStyle(status: string) {
+  if (status === "complete") return { border: GREEN, badge: GREEN, badgeBg: GREEN_BG, label: "Complete" };
+  if (status === "in_progress") return { border: AMBER, badge: AMBER, badgeBg: AMBER_BG, label: "In Progress" };
+  return { border: RED, badge: RED, badgeBg: RED_BG, label: "New" };
+}
+
+function SkeletonCard() {
+  return (
+    <div style={{
+      background: CARD,
+      border: `1px solid ${CARD_BORDER}`,
+      boxShadow: CARD_SHADOW,
+      borderRadius: 16,
+      padding: "22px 24px",
+      borderLeft: `3px solid ${CARD_BORDER}`,
+    }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ height: 16, width: "40%", borderRadius: 8, background: "rgba(15,28,40,0.07)", animation: "pulse 1.5s ease-in-out infinite" }} />
+        <div style={{ height: 13, width: "60%", borderRadius: 8, background: "rgba(15,28,40,0.05)", animation: "pulse 1.5s ease-in-out infinite" }} />
+        <div style={{ height: 6, borderRadius: 4, background: "rgba(15,28,40,0.05)", marginTop: 4, animation: "pulse 1.5s ease-in-out infinite" }} />
+      </div>
+    </div>
+  );
 }
 
 export default function OnboardListPage() {
@@ -65,7 +72,9 @@ export default function OnboardListPage() {
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
-    fetch("/api/onboard/list")
+    fetch("/api/onboard/list", {
+      headers: { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" },
+    })
       .then((r) => r.json())
       .then((d) => { setSessions(d.sessions ?? []); setLoading(false); })
       .catch(() => setLoading(false));
@@ -73,132 +82,142 @@ export default function OnboardListPage() {
 
   async function startNew() {
     setCreating(true);
-    const r = await fetch("/api/onboard/create", { method: "POST" });
-    const d = await r.json();
-    if (d.token) {
-      router.push(`/admin/onboard/${d.token}`);
-    } else {
+    try {
+      const r = await fetch("/api/onboard/create", {
+        method: "POST",
+        headers: { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" },
+      });
+      const d = await r.json();
+      if (d.token) {
+        router.push(`/admin/onboard/${d.token}`);
+      } else {
+        setCreating(false);
+      }
+    } catch {
       setCreating(false);
     }
   }
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG, color: TEXT, fontFamily: "var(--font-dm-sans, sans-serif)" }}>
-      {/* Header */}
-      <div style={{ borderBottom: `1px solid ${BORDER}`, padding: "24px 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div>
-          <Link href="/admin" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none", letterSpacing: "0.05em" }}>
-            ← Admin
-          </Link>
-          <h1 style={{ margin: "8px 0 0", fontSize: 22, fontWeight: 600, letterSpacing: "-0.02em" }}>
-            Landlord Onboarding
+    <div style={{
+      minHeight: "100vh",
+      background: BG,
+      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+    }}>
+      <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }`}</style>
+
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 20px" }}>
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
+          <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em" }}>
+            Onboarding
           </h1>
+          <button
+            onClick={startNew}
+            disabled={creating}
+            style={{
+              background: BURGUNDY,
+              color: "#fff",
+              border: "none",
+              borderRadius: 10,
+              padding: "12px 24px",
+              fontSize: 15,
+              fontWeight: 700,
+              cursor: creating ? "not-allowed" : "pointer",
+              opacity: creating ? 0.45 : 1,
+              fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+              transition: "opacity 0.15s",
+            }}
+          >
+            {creating ? "Creating…" : "Start New Onboarding"}
+          </button>
         </div>
-        <button
-          onClick={startNew}
-          disabled={creating}
-          style={{
-            backgroundColor: ACCENT,
-            color: "#fff",
-            border: "none",
-            borderRadius: 10,
-            padding: "12px 24px",
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: creating ? "not-allowed" : "pointer",
-            opacity: creating ? 0.7 : 1,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {creating ? "Creating…" : "+ Onboard New Landlord"}
-        </button>
-      </div>
 
-      {/* Content */}
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "32px 24px" }}>
-
+        {/* Content */}
         {loading ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {[1, 2, 3].map((i) => (
-              <div key={i} style={{ height: 80, borderRadius: 12, backgroundColor: SURFACE, animation: "pulse 2s infinite" }} />
-            ))}
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
           </div>
         ) : sessions.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "80px 0" }}>
-            <p style={{ fontSize: 32, marginBottom: 8 }}>🏠</p>
-            <p style={{ color: TEXT_SEC, fontSize: 15 }}>No onboardings yet.</p>
-            <p style={{ color: TEXT_MUT, fontSize: 13, marginTop: 4 }}>Click the button above to start one.</p>
+          <div style={{
+            background: CARD,
+            border: `1px solid ${CARD_BORDER}`,
+            boxShadow: CARD_SHADOW,
+            borderRadius: 20,
+            padding: "60px 32px",
+            textAlign: "center",
+          }}>
+            <p style={{ fontSize: 40, margin: "0 0 12px" }}>🏠</p>
+            <p style={{ fontSize: 16, fontWeight: 600, color: NAVY, margin: "0 0 6px" }}>No onboardings yet</p>
+            <p style={{ fontSize: 14, color: MUTED, margin: 0 }}>Click "Start New Onboarding" to begin.</p>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {sessions.map((s) => {
-              const dot = statusDot(s.status);
-              const progress = Math.round(((s.current_step - 2) / 9) * 100);
+              const st = statusStyle(s.status);
+              const progress = Math.max(0, Math.min(100, ((s.current_step - 2) / 8) * 100));
               return (
-                <Link
+                <div
                   key={s.token}
-                  href={`/admin/onboard/${s.token}`}
-                  style={{ textDecoration: "none" }}
+                  onClick={() => router.push(`/admin/onboard/${s.token}`)}
+                  style={{
+                    background: CARD,
+                    border: `1px solid ${CARD_BORDER}`,
+                    borderLeft: `3px solid ${st.border}`,
+                    boxShadow: CARD_SHADOW,
+                    borderRadius: 16,
+                    padding: "20px 24px",
+                    cursor: "pointer",
+                    transition: "box-shadow 0.15s",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(15,28,40,0.08), 0 12px 32px rgba(15,28,40,0.12)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = CARD_SHADOW; }}
                 >
-                  <div
-                    style={{
-                      backgroundColor: SURFACE,
-                      border: `1px solid ${BORDER}`,
-                      borderRadius: 12,
-                      padding: "18px 22px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 16,
-                      cursor: "pointer",
-                      transition: "background-color 0.15s",
-                    }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = SURFACE_HI; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = SURFACE; }}
-                  >
-                    {/* Status dot */}
-                    <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dot.color, flexShrink: 0 }} />
-
-                    {/* Name + address */}
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: TEXT, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                        {s.owner_name || "Unnamed"}
-                      </p>
-                      <p style={{ margin: "2px 0 0", fontSize: 13, color: TEXT_SEC, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                        {s.property_address || "No address yet"}{s.owner_email ? ` · ${s.owner_email}` : ""}
-                      </p>
-                    </div>
-
-                    {/* Progress bar */}
-                    {s.status !== "complete" && (
-                      <div style={{ width: 120, flexShrink: 0 }}>
-                        <div style={{ height: 4, backgroundColor: "rgba(255,255,255,0.08)", borderRadius: 2 }}>
-                          <div style={{ height: "100%", width: `${progress}%`, backgroundColor: ACCENT, borderRadius: 2, transition: "width 0.3s" }} />
-                        </div>
-                        <p style={{ margin: "4px 0 0", fontSize: 12, color: TEXT_MUT, textAlign: "right" }}>
-                          {stepLabel(s.current_step)}
+                      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                        <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: NAVY }}>
+                          {s.owner_name || "Unnamed"}
                         </p>
+                        <span style={{
+                          fontSize: 12,
+                          fontWeight: 600,
+                          color: st.badge,
+                          background: st.badgeBg,
+                          padding: "2px 8px",
+                          borderRadius: 6,
+                        }}>
+                          {st.label}
+                        </span>
                       </div>
-                    )}
-
-                    {/* Status badge */}
-                    <div style={{
-                      padding: "4px 10px",
-                      borderRadius: 6,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: dot.color,
-                      backgroundColor: `${dot.color}18`,
-                      flexShrink: 0,
-                    }}>
-                      {dot.label}
+                      {s.owner_email && (
+                        <p style={{ margin: "0 0 2px", fontSize: 14, color: MUTED }}>{s.owner_email}</p>
+                      )}
+                      {s.property_address && (
+                        <p style={{ margin: "0 0 12px", fontSize: 14, color: MUTED }}>{s.property_address}</p>
+                      )}
+                      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <span style={{ fontSize: 13, color: SUBTLE, flexShrink: 0 }}>
+                          Step {s.current_step} of 10
+                        </span>
+                        <div style={{ flex: 1, height: 5, background: "rgba(15,28,40,0.08)", borderRadius: 3 }}>
+                          <div style={{
+                            height: "100%",
+                            width: `${progress}%`,
+                            background: BURGUNDY,
+                            borderRadius: 3,
+                            transition: "width 0.3s",
+                          }} />
+                        </div>
+                      </div>
                     </div>
-
-                    {/* Time */}
-                    <p style={{ margin: 0, fontSize: 12, color: TEXT_MUT, flexShrink: 0 }}>
+                    <p style={{ margin: 0, fontSize: 12, color: SUBTLE, flexShrink: 0, paddingTop: 2 }}>
                       {timeAgo(s.created_at)}
                     </p>
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>
