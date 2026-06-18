@@ -165,7 +165,7 @@ export default function AgreementPage() {
                 <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: SUBTLE, letterSpacing: "0.08em", textTransform: "uppercase" }}>
                   Property Management Agreement
                 </p>
-                <p style={{ margin: 0, fontSize: 14, color: MUTED }}>
+                <p style={{ margin: 0, fontSize: 15, color: MUTED }}>
                   Between you and Prospera Properties (operated by Ebin Jaison, London, Ontario)
                 </p>
               </div>
@@ -175,19 +175,20 @@ export default function AgreementPage() {
                 <div
                   key={i}
                   style={{
-                    padding: "20px 28px",
+                    padding: "22px 28px",
                     borderBottom: i < SECTIONS.length - 1 ? `1px solid ${DIVIDER}` : "none",
                   }}
                 >
-                  <p style={{ margin: "0 0 8px", fontSize: 14, fontWeight: 700, color: NAVY }}>
+                  <p style={{ margin: "0 0 10px", fontSize: 15, fontWeight: 700, color: NAVY }}>
                     {s.title}
                   </p>
                   <p style={{
                     margin: 0,
-                    fontSize: 14,
-                    color: MUTED,
-                    lineHeight: 1.75,
+                    fontSize: 16,
+                    color: NAVY,
+                    lineHeight: 1.85,
                     whiteSpace: "pre-line",
+                    opacity: 0.82,
                   }}>
                     {s.body}
                   </p>
