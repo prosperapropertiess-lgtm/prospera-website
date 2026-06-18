@@ -80,7 +80,7 @@ function wrapper(content: string): string {
       .header-pad { padding: 16px 20px !important; }
       .footer-pad { padding: 28px 20px !important; }
       .card-wrap  { padding: 0 !important; border-radius: 0 !important; }
-      .cta-btn    { width: 100% !important; text-align: center !important; display: block !important; box-sizing: border-box !important; }
+      .cta-btn    { width: auto !important; text-align: center !important; display: inline-block !important; box-sizing: border-box !important; }
       .market-col { display: block !important; width: 100% !important; text-align: center !important; padding: 12px 0 !important; }
       p, li       { font-size: 17px !important; line-height: 2.0 !important; }
     }
@@ -1121,39 +1121,131 @@ function onboardChecklist(items: { label: string; done: boolean }[]): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:20px 0;">${rows}</table>`;
 }
 
-// Email 1 — Welcome (warm handshake — dashboard does the heavy lifting)
+// Email 1 — Welcome + progress snapshot + next steps
 export function onboardEmail1Welcome(data: {
   ownerName: string;
   propertyAddress: string;
   dashboardUrl: string;
 }): string {
   const firstName = data.ownerName.split(" ")[0];
+  const GREEN_DARK = "#0A7A52";
+  const GREEN_BG   = "#F0FAF6";
   return wrapper(`
     ${heroCard(
       `Welcome to Prospera, ${firstName}.`,
-      `We're glad you're here.`
+      `${data.propertyAddress} is in good hands.`
     )}
 
-    <p style="margin:24px 0 20px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      Thank you for choosing us to manage ${data.propertyAddress}. That trust means a lot — and we don't take it lightly.
+    <p style="margin:24px 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">
+      I'm Ebin — I run Prospera personally. Thank you for trusting us with your property. I know that's not a small thing, and I take it seriously.
     </p>
 
-    <p style="margin:0 0 20px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      I'm Ebin. I run Prospera personally, and I'll be the one looking after your property. You'll hear from me at every step — nothing gets handed off to a call centre or a ticketing system.
-    </p>
-
-    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      We've set up your own onboarding dashboard — it shows exactly where things are, what's coming next, and what we need from you. Think of it as your home base while we get everything set up together.
-    </p>
-
-    ${cta("Open My Dashboard", data.dashboardUrl)}
-
-    <p style="margin:16px 0 0;text-align:center;font-family:${FONT};font-size:13px;color:${MUTED};">
-      Questions? Just reply to this email — I read every one.
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.9;">
+      We've created a personal dashboard for you. Think of it like a checklist — it shows exactly what we've already done, what's coming up next, and where things stand at any point. You'll get an email every time something changes.
     </p>
 
     ${divider()}
-    ${signoff()}
+
+    <!-- Progress bar -->
+    <p style="margin:0 0 10px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">Your progress so far</p>
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;">
+      <tr>
+        <td>
+          <div style="background:#e5e7eb;border-radius:6px;height:10px;overflow:hidden;">
+            <div style="background:${GREEN_DARK};border-radius:6px;height:10px;width:30%;"></div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <p style="margin:0 0 20px;font-family:${FONT};font-size:13px;color:${MUTED};">3 of 10 steps complete</p>
+
+    <!-- Completed steps -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;background:${GREEN_BG};border-radius:12px;overflow:hidden;">
+      <tr><td style="padding:16px 20px 8px;">
+        <p style="margin:0 0 12px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${GREEN_DARK};">Already done ✓</p>
+      </td></tr>
+      <tr><td style="padding:0 20px 6px;">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+          <tr><td style="padding:6px 0;border-bottom:1px solid rgba(10,122,82,0.12);">
+            <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+              <td style="width:24px;font-size:16px;">✅</td>
+              <td style="padding-left:10px;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.6;">We met and talked about your property</td>
+            </tr></table>
+          </td></tr>
+          <tr><td style="padding:6px 0;border-bottom:1px solid rgba(10,122,82,0.12);">
+            <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+              <td style="width:24px;font-size:16px;">✅</td>
+              <td style="padding-left:10px;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.6;">Your property was added to our system</td>
+            </tr></table>
+          </td></tr>
+          <tr><td style="padding:6px 0 14px;">
+            <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+              <td style="width:24px;font-size:16px;">✅</td>
+              <td style="padding-left:10px;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.6;">This welcome email was sent</td>
+            </tr></table>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>
+
+    <!-- Next steps -->
+    <p style="margin:0 0 14px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED};">What's next — your to-do list</p>
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
+      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+        <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+          <td style="width:28px;vertical-align:top;padding-top:2px;">
+            <div style="width:20px;height:20px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:11px;font-weight:700;color:#fff;line-height:20px;">1</div>
+          </td>
+          <td style="padding-left:12px;">
+            <p style="margin:0 0 3px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Upload your current lease</p>
+            <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">If you already have tenants, just upload the lease you signed with them. We'll read it and pull all the details automatically — you won't have to type anything.</p>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+        <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+          <td style="width:28px;vertical-align:top;padding-top:2px;">
+            <div style="width:20px;height:20px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:11px;font-weight:700;color:#fff;line-height:20px;">2</div>
+          </td>
+          <td style="padding-left:12px;">
+            <p style="margin:0 0 3px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Answer a few quick questions</p>
+            <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">Things like: how many units, roughly how much rent, any notes we should know about. Takes about 3 minutes.</p>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER};">
+        <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+          <td style="width:28px;vertical-align:top;padding-top:2px;">
+            <div style="width:20px;height:20px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:11px;font-weight:700;color:#fff;line-height:20px;">3</div>
+          </td>
+          <td style="padding-left:12px;">
+            <p style="margin:0 0 3px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Sign the management agreement</p>
+            <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">A simple agreement that explains exactly what we're doing for you and what it costs. Short and plain — no confusing legal language.</p>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="padding:10px 0;">
+        <table cellpadding="0" cellspacing="0" role="presentation"><tr>
+          <td style="width:28px;vertical-align:top;padding-top:2px;">
+            <div style="width:20px;height:20px;border-radius:99px;background:${CRIMSON};text-align:center;font-family:${FONT};font-size:11px;font-weight:700;color:#fff;line-height:20px;">4</div>
+          </td>
+          <td style="padding-left:12px;">
+            <p style="margin:0 0 3px;font-family:${FONT};font-size:15px;font-weight:700;color:${TEXT};">Hand over the keys — and we take it from there</p>
+            <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.7;">We'll do the first inspection, introduce ourselves to your tenants, and set everything up. After that, you won't need to worry about the day-to-day anymore.</p>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+
+    ${cta("Open My Dashboard", data.dashboardUrl)}
+
+    <p style="margin:12px 0 0;text-align:center;font-family:${FONT};font-size:13px;color:${MUTED};">
+      Your dashboard shows all of this live — updated as we go.
+    </p>
+
+    ${divider()}
+
+    <p style="margin:0;font-size:15px;color:${TEXT};font-family:${FONT};line-height:1.9;">Any questions? Just reply to this email — I read every single one personally.<br><br>&#8212; Ebin &nbsp;·&nbsp; (519) 697-1227</p>
   `);
 }
 
