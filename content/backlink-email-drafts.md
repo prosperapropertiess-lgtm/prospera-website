@@ -1021,3 +1021,155 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## Openroom Education Hub — 2026-06-21
+To: hello@openroom.ca
+Subject: Guest piece idea — how professional managers use screening data to reduce LTB filings
+
+Hi,
+
+Your "Trust But Verify" piece on data-driven tenant screening is excellent — the point about tribunal record searches surfacing what traditional credit checks miss is something I've seen play out directly with London clients.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy, and tenant screening is where we invest most heavily on behalf of clients.
+
+I'd love to write a companion piece for your education hub: "How a London property manager uses data-driven screening to reduce LTB filings: real workflows and outcomes." Practical, professional, and relevant to your landlord audience. Would you be open to a guest contribution?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Garry Sidhu — Mortgage Broker — 2026-06-21
+To: garrysidhu@akal.ca
+Subject: London property management partner for your investor clients
+
+Hi Garry,
+
+Your First-Time Home Buyer Programs update for 2026 caught my eye — the mention of London's forgivable loan program tells me you're actively working with clients buying in this market.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. When your London-area clients close on investment properties with your help, the next immediate question is who manages the asset.
+
+I'd love to set up a simple referral — you flag new London investor clients to Prospera, we refer owner-clients looking to refinance or buy again to you. Happy to keep it informal. Worth a quick call?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## CatchTheKey RE/MAX West — 2026-06-21
+To: https://www.catchthekey.ca/contact.php (contact form)
+Subject: Resource for your London investor readers
+
+Hi,
+
+Your "Top London Real Estate Trends – 2026 Outlook" is a useful read for investors eyeing the London market — the strategic framing for buyers who've been waiting for better conditions is well done.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London, St. Thomas, and Strathroy. Investors who act on the opportunity your article describes need a local manager they can trust post-close.
+
+I'd love to contribute a short practical post for your London readers on property management considerations after buying — or simply be listed as a recommended local resource for investor buyers. Would either of those work?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Middlesex Banner — 2026-06-21
+To: editor@banner.on.ca
+Subject: Local rental market perspective for your Strathroy readers
+
+Hi,
+
+I noticed the Banner covered the 2026 Strathroy-Caradoc Home, Garden & Leisure Show — your coverage of local property and home events tells me your readership includes a lot of property owners.
+
+I'm Ebin, I run Prospera Properties managing rentals in Strathroy, London, and St. Thomas. The local rental market in Strathroy has shifted noticeably in 2026 — vacancy rates, average rents, and what landlords are actually dealing with under the updated Ontario tenancy rules.
+
+I'd love to write a short piece for the Banner: a straightforward look at Strathroy's 2026 rental market from the perspective of someone managing properties here. Would that be something you'd consider for an upcoming issue?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Truth About Real Estate Investing — 2026-06-21
+To: iwin@infinitywealth.ca
+Subject: London Ontario investor angle — property management in 2026
+
+Hi Erwin,
+
+Been following your podcast for a while — the episodes on cash flow pivots to Southwestern Ontario markets have been particularly relevant to what I'm seeing on the ground.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy. I work with a lot of out-of-town investors who acquire London properties and need professional management in place before tenant #1 moves in.
+
+I'd love to be a guest on the show to talk through what London Ontario investors actually need to know about professional property management in 2026 — the LTB changes, what screening looks like now, how we handle the first 90 days. Worth a conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## London Renovations — 2026-06-21
+To: info@londonrenovations.ca
+Subject: Referral partnership — landlord clients post-renovation
+
+Hi,
+
+Your legal basement suite and rental unit renovation work is exactly the kind of project that immediately raises the question of "now who manages it?" for London landlords.
+
+I'm Ebin, I run Prospera Properties managing residential rentals across London. When a landlord finishes a renovation project and is ready to tenant a unit, we step in — tenant screening, lease execution, LTB compliance, and ongoing management.
+
+I'd love to set up a mutual referral arrangement — you point post-renovation clients to Prospera; we point owner-clients needing renovation work to you. Zero cost to either of us and a genuine service to landlords. Worth a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Kim Mullan London Ontario Realtor — 2026-06-21
+To: kim@kimcan.ca
+Subject: Referral partnership — London investment buyer clients
+
+Hi Kim,
+
+Your neighbourhood guides are some of the most thorough London area resources I've come across — the depth on Old North and similar established neighbourhoods clearly serves buyers who are doing serious research.
+
+I'm Ebin, I run Prospera Properties managing rentals across London. When your investment buyer clients close on their first rental, they immediately need a property manager they can trust.
+
+I'd love to set up a mutual referral arrangement — you recommend Prospera to new landlord clients; we recommend you when owner-clients want to sell or acquire another London property. Worth a quick chat?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Strathroy & District Chamber of Commerce — 2026-06-21
+To: info@sdcc.on.ca
+Subject: Prospera Properties — Strathroy membership and newsletter feature
+
+Hi,
+
+I run Prospera Properties, a property management company serving landlords in Strathroy, London, and St. Thomas. We manage residential rentals locally and work with property owners navigating Ontario's current rental market — leasing, LTB compliance, tenant screening, and ongoing management.
+
+Strathroy is an active part of our business, and I'd love to explore Chamber membership and whether there's an opportunity to share a short piece in your e-newsletter on what Strathroy landlords should know about Ontario's rental market in 2026. I think it would be useful for your property-owning members.
+
+Is there a good time to connect about membership and how the Chamber supports local professional services businesses?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---

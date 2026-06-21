@@ -634,21 +634,6 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 
 ---
 
-## LandlordForms.ca — Ontario Landlord Documentation Blog
-- url: https://www.landlordforms.ca/blog
-- type: blog
-- why: Ontario landlord forms and lease addendum resource with an active compliance-focused blog; audience is exactly the detail-oriented DIY landlord who is one complex eviction away from hiring a property manager.
-- researched: true
-- drafted: true
-- added: 2026-06-07
-- contact_email: https://www.landlordforms.ca (contact form; no public email found)
-- site_focus: Sells Ontario landlord protection addendums and form kits ($29–$59). Blog covers RTA compliance, Standard Lease requirements, lease documentation best practices, and form use under Bill 60. Audience is small landlords who self-manage and want to stay legally protected.
-- hook: LandlordForms.ca's readers are deeply compliance-conscious — the exact landlord who eventually realizes they'd rather pay a professional than stay current on every RTA change themselves. A resource mention linking to Prospera's management services, or a guest post on "when the paperwork becomes a full-time job," speaks directly to their audience's latent need.
-- specific_content: Their "Ontario Landlord Forms: The Complete Guide for 2026" post — Prospera's property managers handle all of this documentation for London-area clients, removing the compliance burden entirely.
-- researcher_notes: Niche product site with a very well-qualified audience for Prospera's services. No public email; contact via website form. Blog active as of March 2026. Low-friction ask: a "professional management" resource mention in one of their compliance posts.
-
----
-
 ## Sean Prosser — Mortgage Broker London Ontario
 - url: https://www.seanprosser.com/blog/
 - type: mortgage
@@ -691,36 +676,6 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - hook: TenantPay's blog audience is active self-managing landlords dealing with rent collection issues — exactly the landlord who would benefit from professional property management when rent problems escalate. A guest post on "when to stop self-managing" or a resource mention linking to Prospera's London-area services would resonate with their readers at a pain-point moment.
 - specific_content: Their "A Landlord's Guide to Handling Tenant Rent Payment Issues in Canada" — Prospera handles late rent escalations and LTB L1/L9 filings daily for London-area clients, removing this exact burden.
 - researcher_notes: National platform, not a competitor. Contact: sales@tenantpay.com or support@tenantpay.com. Blog regularly updated with Ontario-specific content. Low-friction ask: guest post or resource mention in their Ontario landlord articles.
-
----
-
-## Community Real Estate Group — London Ontario Real Estate Blog
-- url: https://communityrealestategroup.ca/
-- type: blog
-- why: London Ontario eXp Realty team with an active market blog; buyers who purchase investment properties through them immediately need property management — a referral mention is mutually beneficial.
-- researched: true
-- drafted: true
-- added: 2026-06-07
-- contact_email: 226-796-5651 (Shawn Westerik: shawn@communityrealestategroup.ca assumed — contact via website form)
-- site_focus: Greater London Ontario real estate team (eXp Realty) led by Shawn and Angela Westerik, specializing in residential buying, selling, and relocation across London, Thorndale, Exeter, and surrounding communities. Blog covers London market conditions, buying advice, and 2026 market outlook.
-- hook: When Community Real Estate Group's investor clients buy rental properties in the London area, they immediately need a property manager. A resource mention — "once you've purchased, here's who manages it" — or a co-authored post on London Ontario investment property buying paired with Prospera's management guidance creates a natural handoff that serves their clients and both businesses.
-- specific_content: Their "What the 2026 Market Means for Buying or Downsizing in London Ontario" post — investors buying in the London market are Prospera's core acquisition client profile.
-- researcher_notes: Phone: 226-796-5651. Not a competitor — realtors, not property managers. Excellent local referral partner candidate. Cover Greater London and surrounding area. Pitch as a complementary local expert resource for their investor buyer clients.
-
----
-
-## 360Lending — Ontario Mortgage Brokerage Blog
-- url: https://www.360lending.ca/learn
-- type: mortgage
-- why: Award-winning Ontario online mortgage brokerage with a rental property financing blog; audience of first-time and repeat rental property investors is precisely Prospera's acquisition target.
-- researched: true
-- drafted: true
-- added: 2026-06-07
-- contact_email: info@360lending.ca
-- site_focus: Ontario online mortgage brokerage based in Richmond Hill. Blog at 360lending.ca/learn covers real estate investing, first rental property financing, Ontario market conditions, and mortgage strategies for investors. Active content directly targeting the Ontario rental property investor audience.
-- hook: 360Lending helps investors buy rental properties; Prospera manages those properties. A resource mention linking to Prospera's services in their "how to finance your first rental property" posts — or a guest contribution on "what to expect from property management in Ontario" — adds immediate post-purchase value for their investor readers.
-- specific_content: Their "How to Finance Your First Rental Property in Canada" article targets new Ontario rental investors — Prospera's exact client profile at the moment of acquisition.
-- researcher_notes: Richmond Hill, Ontario. Not a competitor. Contact: info@360lending.ca, (888) 794-1464. National Ontario reach. Blog well-indexed. Strong fit for a resource mention alongside their rental property financing content.
 
 ---
 
@@ -841,5 +796,125 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - hook: BBO's real estate clients — buyers completing investment property acquisitions in London — are Prospera's immediate target market. A guest blog contribution on "What to consider before signing with a property manager in Ontario" or a resource mention in their investment property buying guide adds practical value to BBO's real estate content while positioning Prospera as the professional management option their investment clients need post-closing.
 - specific_content: Their "Investment Property in Ontario: Buying Considerations" blog post — the legal checklist for buying ends exactly where Prospera's work begins. A "what happens next" resource mention is the natural insertion point.
 - researcher_notes: Established London law firm (75+ years). Not a competitor. Outreach tone should be formal and professional. Frame as adding practical value for their real estate clients post-closing. Phone: (519) 679-0400. Contact via website form.
+
+---
+
+## Openroom — Ontario Landlord Education Hub
+- url: https://learn.openroom.ca/
+- type: blog
+- why: Ontario rental ecosystem platform with a high-quality education hub for landlords covering tenant screening, eviction law, LTB procedures, and property management — their landlord audience in Ontario would benefit from a case study or guest piece from a London-area professional manager.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: hello@openroom.ca
+- site_focus: Openroom is a transparent Canadian rental ecosystem and Consumer Reporting Agency registered in Ontario, providing landlords with LTB tribunal record searches, tenant screening tools, and an education hub covering the full Ontario landlord workflow — from screening and leasing through evictions and enforcement. The blog covers Ontario Landlord Tenant Board procedures, eviction law, LTB hearing preparation, and tenant screening best practices at a sophisticated level.
+- hook: Openroom's landlord readers are sophisticated enough to use tribunal record searches — they'd appreciate a practical guest piece from Ebin on how a London property management firm uses data-driven screening to reduce LTB filings: real workflows, real outcomes, relevant to their audience.
+- specific_content: Their "Trust But Verify: How To Find Good Tenants With A Data-Driven Approach" article — a natural opening for Ebin to contribute a companion piece on how professional property managers in London apply rigorous screening to reduce vacancy and eviction risk.
+- researcher_notes: Rental tech/education platform, not a PM company. Contact: hello@openroom.ca. Education hub is high quality and topically authoritative on Ontario landlord law. Outreach tone should be professional and content-forward — offer a practical, expert guest post, not a promotional link ask.
+
+---
+
+## Garry Sidhu — Ontario Mortgage Broker Blog
+- url: https://www.garrysidhu.ca/blog/
+- type: blog
+- why: Ontario mortgage broker (Mortgage Alliance) with an active blog covering first-time home buyer programs, mortgage rate forecasts, and Ontario housing programs — investor and first-time buyer clients who close on London-area rentals with Garry are Prospera's ideal clients.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: garrysidhu@akal.ca
+- site_focus: Garry Sidhu is a mortgage agent with Mortgage Alliance serving homebuyers across Ontario, including London. His blog covers first-time home buyer programs (2026 update), hidden mortgage programs, Ontario mortgage rate forecasts, and market timing guidance — content aimed at buyers entering the market for the first time or purchasing investment properties with financing help.
+- hook: Garry's clients who close on London-area investment properties immediately need a property manager. A referral mention or resource link to Prospera in his Ontario buyer content completes the post-financing investor journey for his London clients.
+- specific_content: His "First-Time Home Buyer Programs in Ontario (2026 Update)" blog post — which mentions the London forgivable loan program, indicating Garry actively serves London-area clients who could directly benefit from Prospera's management services.
+- researcher_notes: Ontario mortgage broker, Mississauga/Bradford area but actively covering London. Not a competitor. Contact: garrysidhu@akal.ca, phone 437-961-0004. Outreach should be brief and referral-focused — note the London connection specifically.
+
+---
+
+## CatchTheKey — RE/MAX West Real Estate Blog
+- url: https://www.catchthekey.ca/
+- type: blog
+- why: RE/MAX West real estate platform covering GTA and London Ontario with investor-relevant market analysis, including a dedicated 2026 London trends blog post — their London-area investment buyer clients are Prospera's target property management clients post-close.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: https://www.catchthekey.ca/contact.php (contact form; no public email found)
+- site_focus: CatchTheKey is a RE/MAX West Realty real estate platform serving investors and buyers in the GTA and London Ontario areas. Their blog covers local real estate market trends with an investor lens, including a dedicated "Top London Real Estate Trends – 2026 Outlook" post analyzing what buyers, sellers, and investors should watch and how to act strategically in London's current market.
+- hook: CatchTheKey's London market content attracts buyers considering London investment properties — a guest contribution or resource mention from Prospera on post-purchase property management in London gives their investor readers a practical next step after buying, and earns a locally relevant backlink.
+- specific_content: Their "Top London Real Estate Trends – 2026 Outlook" blog post — covering London market conditions for investors and buyers, which is exactly the audience Prospera serves once they close on a London rental property.
+- researcher_notes: RE/MAX West platform (Etobicoke/GTA) with London coverage. Not a PM company — no conflict. No email publicly listed; contact via form at catchthekey.ca/contact.php. Outreach tone should be professional and practical — frame as adding value for their London investor readers.
+
+---
+
+## Middlesex Banner — Strathroy & Middlesex Local News
+- url: https://middlesexbanner.ca/
+- type: other
+- why: Twice-monthly paid community newspaper serving Strathroy and Middlesex County — a local feature or business profile in the Banner introduces Prospera to Strathroy's landlord and property owner community with a geographically hyper-targeted audience that includes their rental market.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: editor@banner.on.ca
+- site_focus: The Middlesex Banner is a twice-monthly paid circulation community newspaper based at 71C Front Street West, Strathroy, serving Middlesex County and the Strathroy-Caradoc area. Coverage includes municipal news, local business, community events, and regional real estate and home show coverage including the 2026 Strathroy-Caradoc Home, Garden & Leisure Show.
+- hook: The Banner's readers are Strathroy homeowners and landlords — a business feature or opinion piece on rental market conditions in Strathroy from Ebin as a local property management professional would be directly relevant to their readership and would earn a locally credible reference with backlink potential.
+- specific_content: Their coverage of the 2026 Strathroy-Caradoc Home, Garden & Leisure Show and their ongoing Strathroy-Caradoc municipal news section — the property-owning community in their readership is exactly Prospera's target market.
+- researcher_notes: Local print + online community publication. Contact: editor@banner.on.ca, phone (519) 245-6116. Best pitch is a local expert voice piece: short op-ed or Q&A on rental market conditions in Strathroy for 2026. Approach editor directly and keep it local and community-focused.
+
+---
+
+## Truth About Real Estate Investing — Erwin Szeto Ontario Podcast & Blog
+- url: https://www.truthaboutrealestateinvesting.ca/
+- type: blog
+- why: High-authority Ontario real estate investing podcast and blog run by Erwin Szeto (iWIN Real Estate, Oakville) with a deep audience of active Ontario property investors — a guest interview or co-authored post positions Ebin and Prospera as the London-area property management experts for iWIN's investor clients.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: iwin@infinitywealth.ca
+- site_focus: Truth About Real Estate Investing is Erwin Szeto's long-running Canadian real estate investing podcast and blog, featuring investor interviews, market analysis, and practical guidance for Canadian landlords. Erwin is a 4X Investor Realtor of the Year with nearly $500M in income property transactions, hosting an audience of serious Ontario investors who actively buy and hold rental properties.
+- hook: Erwin's investor audience buys rental properties across Ontario — many in Southwestern Ontario markets including London. A guest episode or contributed piece from Ebin on "What London Ontario investors need to know about professional property management in 2026" would be genuinely valuable to Erwin's audience and introduce Prospera to a highly qualified investor base.
+- specific_content: Their recurring podcast content on Ontario investor strategies and the "Pivoting to Find Cash Flow" episodes featuring investors entering Southwestern Ontario markets — listeners actively seeking London-area investment opportunities are exactly who Prospera serves.
+- researcher_notes: Well-established Ontario investor platform. Contact Erwin at iwin@infinitywealth.ca, phone 289-288-5019. Outreach should be warm and investor-peer-to-business in tone — Ebin as a local professional and active market participant in London, not a pitch. Lead with the London investor audience angle.
+
+---
+
+## London Renovations — London Ontario Renovation Blog
+- url: https://www.londonrenovations.ca/
+- type: blog
+- why: Full-service London Ontario renovation and general contracting company covering legal basement suites, major remodels, and rental property upgrades — their landlord renovation clients need property management once the renovated unit is ready to rent, creating a natural referral loop.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: info@londonrenovations.ca
+- site_focus: London Renovations provides complete construction and renovation management for residential and light commercial projects in London Ontario, handling everything from major home remodels to legal basement suites. Their blog covers renovation guidance for homeowners and landlords, with content relevant to London-area property investors upgrading rental units.
+- hook: London Renovations builds legal basement suites and renovates rental units for London landlords — clients who complete a renovation project need a property manager to tenant and manage the newly upgraded unit. A referral arrangement (they recommend Prospera for management post-renovation; Prospera recommends them for renovation work) benefits both parties with zero cost.
+- specific_content: Their general contractors and legal basement suite renovation services — landlords who use London Renovations to add or upgrade a rental unit are immediately in need of a professional property manager, which is exactly where Prospera enters.
+- researcher_notes: Local London contractor, not a PM company. Contact: info@londonrenovations.ca. Outreach tone should be warm and collaborative — position as a natural referral loop, not a link ask. A brief, direct email from one London professional to another.
+
+---
+
+## Kim Mullan — London Ontario Realtor Blog
+- url: https://www.kimcan.ca/
+- type: blog
+- why: Award-winning London Ontario realtor at Sutton Group Select Realty with a blog covering London neighbourhoods, home buying guidance, and home inspection considerations — investment buyer clients who work with Kim to acquire London rentals become Prospera's management clients post-close.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: kim@kimcan.ca
+- site_focus: Kim Mullan is an award-winning Realtor at Sutton Group Select Realty in London, Ontario, operating through kimcan.ca. Her blog covers London neighbourhoods, the home inspection process, buying and selling guidance for London area buyers and sellers. Kim maintains a professional network including stagers, contractors, inspectors, mortgage brokers, and additional licensed realtors.
+- hook: Kim's investor buyer clients who close on London rentals immediately need a trusted property manager. A mutual referral arrangement — Kim recommends Prospera for management; Prospera recommends Kim when owner-clients want to sell or buy additional London properties — creates a low-effort referral loop that benefits both parties.
+- specific_content: Her "What You Should Know About the Home Inspection Condition" blog post and London neighbourhood guides — the buyer who closes on a London investment property based on her guidance is exactly who Prospera serves in the months that follow.
+- researcher_notes: Local London realtor (Sutton Group Select, 250 Wharncliffe Rd). Not a PM company. Contact: kim@kimcan.ca. Outreach tone should use her first name and feel warm, local, and peer-to-peer. Lead with the referral loop — no promotional language.
+
+---
+
+## Strathroy & District Chamber of Commerce
+- url: https://www.sdcc.on.ca/
+- type: association
+- why: Strathroy's local business chamber with an e-newsletter reaching local business owners and community members including property owners and landlords — a member profile, newsletter feature, or resource listing introduces Prospera as the professional property management option for the Strathroy business community.
+- researched: true
+- drafted: true
+- added: 2026-06-21
+- contact_email: info@sdcc.on.ca
+- site_focus: The Strathroy & District Chamber of Commerce is Strathroy's local business association based at 67 Front Street W. They publish a regular e-newsletter reaching local members and the community, maintain a business directory, and promote member news and community events through social media and their website.
+- hook: Prospera Properties operates in Strathroy and serves the local rental market there — a Chamber membership and directory listing, combined with a newsletter feature on the local rental market from Ebin's perspective, would give Prospera visibility with Strathroy's property-owning business community and earn a local citation/link.
+- specific_content: Their business directory (business.sdcc.on.ca) and member news e-newsletter — a listing here and a short feature article on rental market conditions in Strathroy would reach exactly the local landlord and property investor audience Prospera serves.
+- researcher_notes: Local Strathroy business association. Contact: info@sdcc.on.ca, phone (519) 245-7620. This may require a Chamber membership ($). Ask about the cost and process; if affordable, it's also a legitimate local business relationship, not just a link. Tone: professional and community-oriented.
 
 ---
