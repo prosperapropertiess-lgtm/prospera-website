@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-06-14
+Last updated: 2026-06-21
 
 ## New Topic Opportunities
 Topics found in competitor/search results that we have no post covering. Blog agent should prioritize these above the default keyword list.
@@ -91,3 +91,33 @@ Existing posts that are likely thin on content or contain outdated information:
 - **rental-property-insurance-ontario.md** — Add a cost breakdown table by property type (house ~$900/year, condo/apartment ~$400/year, multi-unit higher) and coverage amounts ($1M–$2M liability standard), plus a section specifically on what triggers a standard home insurance denial. Competitors (cayugamutual.com, isure.ca, kaseinsurance.com) are ranking with cost-specific content that our general post lacks.
 
 - **n12-notice-ontario.md** — Update required for Bill 60 (November 2025). Add the new 120-day Compensation Waiver path: landlords who give 120 days notice can waive the one-month compensation payment. Azilaw.com and tenon10.com have dedicated 2026 N12 guides covering this; our post almost certainly predates this change. Add a side-by-side comparison table (60-day + pay vs. 120-day + waive), a break-even calculation, updated documentation requirements under Bill 60, and what happens if the landlord fails to genuinely move in (still 12 months' rent penalty + costs).
+
+### Added 2026-06-21
+
+- **bill-82-ontario-above-guideline-rents** | Est. difficulty: LOW | Vol: ~150/mo | Bill 82 — "Protecting Renters from Unfair Above Guideline Rent Increases Act, 2026" — was tabled at the Ontario Legislative Assembly in 2026 and introduces new mandatory documentation requirements for AGI applications involving capital expenditures. Landlords must now submit an engineering or professional report demonstrating that the capital work was structurally necessary or required for health and safety — a requirement that catches many landlords off guard. No existing post covers Bill 82 directly. Angle: what Bill 82 changes vs. the existing L5 process, which AGI applications are affected, what reports are required and what they cost, and whether this makes AGIs impractical for most small landlords. Strong lead-gen hook: landlords who discover this complexity are candidates for professional management.
+
+- **landlord-insurance-non-resident-requirement-ontario** | Est. difficulty: LOW | Vol: ~100/mo | Search results surfaced a specific insurance angle not in any existing post: most Canadian insurers now require a locally based property manager as a precondition to issue or renew landlord insurance for out-of-province or non-resident owners of Ontario rentals. This creates a concrete, insurance-driven reason to hire a local PM — separate from the usual convenience/LTB arguments. McFarlan Rowlands and Cayuga Mutual both reference this in their 2026 content. Angle: which insurer categories apply this requirement, what "locally based PM" means in practice, what happens at renewal if you don't have one, and why this requirement exists (insurer risk management for absent landlords). Strong lead-gen: the out-of-province investor or non-resident who discovers this is immediately motivated to hire Prospera.
+
+- **showings-tenanted-property-ontario-rules** | Est. difficulty: LOW | Vol: ~150/mo | The specific rules for showing a tenanted unit (for sale or re-rental) are distinct from general landlord entry rules and create frequent confusion. Francoisepollard.com ranks specifically for "Showings on a Tenanted Property in Ontario." Our `landlord-entry-rights-ontario.md` covers the 24-hour notice rule in general but does not address the specific friction points of showings: how many times per week a landlord can show, tenant right to refuse specific times, what "reasonable" showing frequency means, compensation if showings disrupt tenants, and how to handle an uncooperative tenant when trying to sell or re-rent. Angle: landlord rights during showings, required notice, what tenants can legally refuse, and when refusal to allow a showing becomes an LTB application ground.
+
+---
+
+## SKIPPED (2026-06-21 research — too competitive or already covered)
+- ontario-landlord-rights-2026 — Broad topic dominated by ontario.ca, tribunalsontario.ca. Covered across multiple existing posts. Repeated from prior skipped lists.
+- LTB eviction process step by step — COVERED by `evicting-tenant-ontario.md`, `ltb-hearing-preparation-ontario-landlords.md`; wait times opportunity already in file.
+- N4 N8 N12 comparison guide — Individual forms covered by dedicated posts; "Complete LTB Forms Directory" already in opportunities list.
+- tenant screening Ontario background check — COVERED by `tenant-screening-red-flags.md`, `tenant-credit-check-ontario-landlords.md`; OHRC angle already in opportunities list.
+- eviction notice Ontario how long — COVERED by `how-long-does-eviction-take-ontario.md`; LTB wait times by application type already in opportunities list.
+- Ontario standard lease requirements 2026 — COVERED by `ontario-standard-lease-2026.md`; addendum and prohibited clauses already in opportunities.
+- above-guideline-rent-increase-ontario — COVERED by `above-guideline-rent-increase-ontario.md`; Topics to Expand entry already flags L5 procedural gap. Bill 82 captured as new opportunity above.
+- rent deposit rules Ontario — COVERED by `security-deposits-ontario.md` and `what-can-landlord-deduct-from-last-month-rent-ontario.md`; last-month-rent-deposit-interest opportunity already in file.
+- Ontario landlord insurance guide — COVERED by `rental-property-insurance-ontario.md`; non-resident PM requirement angle captured as new opportunity above.
+
+---
+
+## Topics to Expand — 2026-06-21 additions
+
+- **n4-notice-ontario.md** — Confirm the September 21, 2026 effective date for the Bill 60 7-day notice change. The existing "Topics to Expand" entry already flags this, but note the specific date: effective September 21, 2026, N4 termination periods for monthly tenancies drop from 14 to 7 days. Add a prominent "2026 Update" callout at the top and update the notice period language in the body.
+
+- **above-guideline-rent-increase-ontario.md** — Add a "Bill 82 Update (2026)" section covering the new mandatory engineering report requirement for capital expenditure AGIs. This is a significant compliance addition that existing content predates and that landlords are actively searching for.
+
