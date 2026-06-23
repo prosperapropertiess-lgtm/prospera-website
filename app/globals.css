@@ -41,7 +41,7 @@
 }
 
 html {
-  font-size: 350% !important;
+  font-size: 125% !important;
 }
 
 body {
@@ -52,7 +52,7 @@ body {
 
 /* Mobile text scale — bump base size so text isn't tiny */
 @media (max-width: 767px) {
-  html { font-size: 160% !important; }
+  html { font-size: 137% !important; }
   /* Reduce extreme letter-spacing on labels at small sizes */
   .tracking-widest { letter-spacing: 0.06em; }
   /* Looser line height for body text on narrow screens */

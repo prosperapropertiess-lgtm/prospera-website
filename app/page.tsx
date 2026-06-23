@@ -28,7 +28,7 @@ function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto" style={{ zIndex: 3 }}>
+      <div className="relative max-w-5xl mx-auto" style={{ zIndex: 3 }}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ function StatsBar() {
 
   return (
     <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}>
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
         {stats.map((stat, i) => (
           <FadeIn key={stat.label} delay={i * 0.08}>
             <div>
@@ -176,7 +176,7 @@ function PainPoints() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
@@ -241,7 +241,7 @@ function FeatureCards() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
@@ -325,7 +325,7 @@ function HowItWorks() {
 
   return (
     <section id="how-it-works" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
@@ -420,7 +420,7 @@ function FounderSnippet() {
 function CaseStudy() {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
@@ -552,7 +552,7 @@ const col3 = ALL_TESTIMONIALS.slice(6, 9);
 function Testimonials() {
   return (
     <section className="py-24 px-5 sm:px-8 overflow-hidden" style={{ backgroundColor: "#F7F5F2" }}>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <FadeIn className="text-center mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
@@ -609,7 +609,7 @@ function PlatformTeaser() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1820" }}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-14 lg:gap-20 items-start">
           {/* Left */}
           <div className="flex-1">
@@ -683,7 +683,7 @@ function PlatformTeaser() {
 function TenantBar() {
   return (
     <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
             Looking for a Rental?
