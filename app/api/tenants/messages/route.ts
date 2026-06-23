@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantMessages, getTenantInfo } from "@/lib/tenant-data";
 
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
   if (insertError) return NextResponse.json({ error: insertError.message }, { status: 500 });
 
-  const aiResponse = await anthropic.messages.create({
+  const aiResponse = await getAnthropic().messages.create({
     model: "claude-haiku-4-5-20251001",
     max_tokens: 300,
     system: LAURA_SYSTEM,

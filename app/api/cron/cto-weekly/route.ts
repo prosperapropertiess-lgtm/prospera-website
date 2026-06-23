@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 // ── CTO identity and mission ────────────────────────────────────────────────
 const PLATFORM_CONTEXT = `
@@ -120,7 +120,7 @@ export async function generateAndSendProposal(metrics: Awaited<ReturnType<typeof
     .join("\n") || "None yet — this is the first week.";
 
   // ── Ask Claude to propose the next feature ──────────────────────────────
-  const response = await anthropic.messages.create({
+  const response = await getAnthropic().messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 1200,
     system: PLATFORM_CONTEXT,

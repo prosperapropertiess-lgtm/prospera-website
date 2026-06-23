@@ -19,7 +19,7 @@ import { Resend } from "resend";
 import { logAgentRun } from "@/lib/agent-logger";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const RECIPIENT = "ebinjaison02@gmail.com";
@@ -312,7 +312,7 @@ export async function GET(req: NextRequest) {
       : "\n\nThis is Day 1. No prior sessions. In the Compounding Rule section, frame this as the baseline from which all future sessions will build.";
 
     // Generate intelligence cycle
-    const message = await anthropic.messages.create({
+    const message = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 2800,
       system: SYSTEM_PROMPT,

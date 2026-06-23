@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const SYSTEM_PROMPT = `Your name is Laura. You are the friendly virtual assistant for Prospera Properties, a property management company in Ontario, Canada. You help landlords and tenants get answers fast. If anyone asks your name, you are Laura.
 
@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
       }).catch(() => {});
     }
 
-    const response = await client.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 400,
       system: SYSTEM_PROMPT,

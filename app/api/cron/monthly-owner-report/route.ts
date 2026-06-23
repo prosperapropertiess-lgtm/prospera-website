@@ -13,7 +13,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 // Runs on the 3rd of every month at 9am Eastern (13:00 UTC)
 // Schedule: 0 13 3 * *
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 // ── Claude system prompt ───────────────────────────────────────────────────
 
@@ -145,7 +145,7 @@ export async function GET(req: NextRequest) {
         const dataSummary = bundleToDataSummary(bundle);
 
         // Ask Claude for narrative JSON
-        const response = await anthropic.messages.create({
+        const response = await getAnthropic().messages.create({
           model: "claude-sonnet-4-6",
           max_tokens: 1200,
           system: SYSTEM_PROMPT,

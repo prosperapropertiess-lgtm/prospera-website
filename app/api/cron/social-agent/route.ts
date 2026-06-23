@@ -17,7 +17,7 @@ import { logAgentRun } from "@/lib/agent-logger";
 
 export const maxDuration = 120;
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 const SITE_URL = "https://www.prosperaproperties.co/";
 const FB_PAGE_URL = "https://www.facebook.com/381380218388134";
 const LI_PAGE_URL = "https://www.linkedin.com/company/prospera-properties";
@@ -307,7 +307,7 @@ export async function GET(req: NextRequest) {
   // ── 2. Generate both posts ────────────────────────────────────────────────
   let raw = "";
   try {
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1400,
       system: SOCIAL_SYSTEM,

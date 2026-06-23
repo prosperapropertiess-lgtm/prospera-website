@@ -41,8 +41,9 @@ export async function POST(
   const { token, n } = await params;
   const step = parseInt(n, 10);
 
-  // Steps 2, 3, 6, 7, 9, 10 are Ebin's — require admin auth
-  const ebinSteps = [2, 3, 6, 7, 9, 10];
+  // Steps 2, 4, 6, 7, 9, 10 are Ebin's — require admin auth
+  // Step 3 = owner signs agreement, Step 5 = owner lease/details
+  const ebinSteps = [2, 4, 6, 7, 9, 10];
   if (ebinSteps.includes(step)) {
     if (!(await isAdminAuthenticated(req))) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -89,8 +90,58 @@ export async function POST(
     return NextResponse.json({ ok: true, next_step: 3, notion_owner_id: notionOwnerId });
   }
 
-  // ── Step 3: Property Details ─────────────────────────────────
+  // ── Step 3: Management Agreement (owner-submitted — FIRST owner action) ──
   if (step === 3) {
+    const { signed_name, ip } = body;
+
+    const signedAt = new Date().toISOString();
+
+    await sb.from("onboarding_sessions").update({
+      agreement_signed_at: signedAt,
+      agreement_ip: ip || null,
+      agreement_name: signed_name || null,
+      current_step: 4,
+    }).eq("token", token);
+
+    // Email to owner confirming agreement + letting them know next steps
+    if (session.owner_email) {
+      try {
+        const html = onboardEmail3AgreementSigned({
+          ownerName: session.owner_name || "there",
+          propertyAddress: session.property_address || "your property",
+          signedAt,
+          agreementUrl: `${BASE_URL}/api/onboard/${token}/agreement`,
+        });
+        await sendEmail(
+          session.owner_email,
+          "Agreement confirmed — here's what happens next",
+          html,
+          ["prosperapropertiess@gmail.com"]
+        );
+      } catch (e) {
+        console.error("Email 3 failed:", e);
+      }
+    }
+
+    // Alert Ebin to fill in property details
+    const ebinEmail = process.env.EBIN_EMAIL || "prosperapropertiess@gmail.com";
+    try {
+      await sendEmail(
+        ebinEmail,
+        `${session.owner_name || "Owner"} signed the management agreement`,
+        `<p><strong>${session.owner_name}</strong> signed the management agreement for <strong>${session.property_address}</strong>.</p>
+         <p>Next step: fill in the property details on the admin checklist.</p>
+         <p><a href="${BASE_URL}/admin/onboard/${token}">View checklist →</a></p>`
+      );
+    } catch (e) {
+      console.error("Ebin alert failed:", e);
+    }
+
+    return NextResponse.json({ ok: true, next_step: 4 });
+  }
+
+  // ── Step 4: Property Details (Ebin — after agreement is signed) ──
+  if (step === 4) {
     const {
       property_address,
       property_city,
@@ -132,11 +183,11 @@ export async function POST(
       fee_amount: fee_amount || null,
       property_notes: property_notes || null,
       notion_property_id: notionPropertyId,
-      current_step: 4,
+      current_step: 5,
       step3_completed_at: new Date().toISOString(),
     }).eq("token", token);
 
-    // Send Email 1 to owner (welcome + lease upload link)
+    // Send Email 1 to owner (lease upload link — now that Notion property exists)
     if (session.owner_email) {
       try {
         const html = onboardEmail1Welcome({
@@ -146,20 +197,20 @@ export async function POST(
         });
         await sendEmail(
           session.owner_email,
-          "Your Prospera setup is live — here's your first step",
+          "Next step: upload your lease",
           html,
           ["prosperapropertiess@gmail.com"]
         );
       } catch (e) {
-        console.error("Email 1 failed:", e);
+        console.error("Email 1 (lease prompt) failed:", e);
       }
     }
 
-    return NextResponse.json({ ok: true, next_step: 4, notion_property_id: notionPropertyId });
+    return NextResponse.json({ ok: true, next_step: 5, notion_property_id: notionPropertyId });
   }
 
-  // ── Step 4: Owner Details Form (owner-submitted) ─────────────
-  if (step === 4) {
+  // ── Step 5: Owner Lease + Details Form (owner-submitted) ─────────────
+  if (step === 5) {
     // body is the full details JSON from the owner
     const parsedLease = session.lease_parsed_data ?? {};
     const tenants: Array<Record<string, unknown>> = Array.isArray(parsedLease.tenants) ? parsedLease.tenants : [];
@@ -196,59 +247,9 @@ export async function POST(
 
     await sb.from("onboarding_sessions").update({
       details: body,
-      current_step: 5,
+      current_step: 6,
       step4_completed_at: new Date().toISOString(),
     }).eq("token", token);
-
-    return NextResponse.json({ ok: true, next_step: 5 });
-  }
-
-  // ── Step 5: Management Agreement (owner-submitted) ────────────
-  if (step === 5) {
-    const { signed_name, ip } = body;
-
-    const signedAt = new Date().toISOString();
-
-    await sb.from("onboarding_sessions").update({
-      agreement_signed_at: signedAt,
-      agreement_ip: ip || null,
-      agreement_name: signed_name || null,
-      current_step: 6,
-    }).eq("token", token);
-
-    // Send Email 3 to owner (agreement confirmed + book meeting)
-    if (session.owner_email) {
-      try {
-        const html = onboardEmail3AgreementSigned({
-          ownerName: session.owner_name || "there",
-          propertyAddress: session.property_address || "your property",
-          signedAt,
-          agreementUrl: `${BASE_URL}/api/onboard/${token}/agreement`,
-        });
-        await sendEmail(
-          session.owner_email,
-          "Agreement confirmed — let's meet at the property",
-          html,
-          ["prosperapropertiess@gmail.com"]
-        );
-      } catch (e) {
-        console.error("Email 3 failed:", e);
-      }
-    }
-
-    // Alert Ebin
-    const ebinEmail = process.env.EBIN_EMAIL || "prosperapropertiess@gmail.com";
-    try {
-      await sendEmail(
-        ebinEmail,
-        `${session.owner_name || "Owner"} signed the management agreement`,
-        `<p><strong>${session.owner_name}</strong> signed the management agreement for <strong>${session.property_address}</strong> at ${new Date(signedAt).toLocaleString("en-CA")}.</p>
-         <p>Their details form has been submitted. Ready for keys handover.</p>
-         <p><a href="${BASE_URL}/admin/onboard/${token}">View checklist →</a></p>`
-      );
-    } catch (e) {
-      console.error("Ebin alert failed:", e);
-    }
 
     return NextResponse.json({ ok: true, next_step: 6 });
   }

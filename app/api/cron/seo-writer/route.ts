@@ -16,7 +16,7 @@ import { submitUrlToGoogle } from "@/lib/google-indexing";
 import { querySearchAnalytics } from "@/lib/google-search-console";
 import { logAgentRun } from "@/lib/agent-logger";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const SITE_URL = "https://www.prosperaproperties.co/";
 const BLOG_PREFIX = `${SITE_URL}blog/`;
@@ -450,7 +450,7 @@ export async function GET(req: NextRequest) {
   let selectedSlug = "";
   let selectedKeyword = "";
   try {
-    const kwResponse = await anthropic.messages.create({
+    const kwResponse = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 200,
       system: KEYWORD_SELECTOR_SYSTEM,
@@ -492,7 +492,7 @@ export async function GET(req: NextRequest) {
       ? `Write the post for this keyword: "${selectedKeyword}" (slug: ${selectedSlug})\n`
       : "Pick the highest-priority missing keyword and write the full blog post.\n";
 
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 8000,
       system: SEO_SYSTEM,
@@ -584,7 +584,7 @@ ${slugInstruction}Follow the output format exactly.`,
     const originalContent = await getFileFromGitHub(`content/blog/${optimizeSlug}.md`);
     if (originalContent) {
       try {
-        const optResponse = await anthropic.messages.create({
+        const optResponse = await getAnthropic().messages.create({
           model: "claude-sonnet-4-6",
           max_tokens: 10000,
           system: OPTIMIZER_SYSTEM,
@@ -634,7 +634,7 @@ Optimize this post following all instructions. Output the complete improved file
   // ── 4. Internal linking engine ────────────────────────────────────────────
   try {
     const slugSample = existingSlugs.filter((s) => s !== newSlug).slice(0, 40).join(", ");
-    const linkResponse = await anthropic.messages.create({
+    const linkResponse = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1500,
       system: LINKING_SYSTEM,
@@ -764,7 +764,7 @@ Which 2–3 existing posts should add a contextual link to the new post? Return 
       // Strip frontmatter, pass first ~800 chars of body to Claude
       const bodyOnly = newBlog.replace(/^---[\s\S]*?---\n/, "").slice(0, 800);
 
-      const socialResponse = await anthropic.messages.create({
+      const socialResponse = await getAnthropic().messages.create({
         model: "claude-sonnet-4-6",
         max_tokens: 600,
         system: SOCIAL_SYSTEM,

@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantMaintenanceRequests, getTenantInfo } from "@/lib/tenant-data";
 
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -71,7 +71,7 @@ async function handleDiagnose(body: DiagnoseBody, _tenantId: string) {
     return NextResponse.json({ error: "Missing category or description" }, { status: 400 });
   }
 
-  const message = await anthropic.messages.create({
+  const message = await getAnthropic().messages.create({
     model: "claude-haiku-4-5-20251001",
     max_tokens: 400,
     system: DIAGNOSE_SYSTEM,

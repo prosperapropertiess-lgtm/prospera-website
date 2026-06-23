@@ -12,7 +12,7 @@ import { getFileFromGitHub, pushFilesToGitHub } from "@/lib/github";
 import { submitUrlToGoogle } from "@/lib/google-indexing";
 import { querySearchAnalytics } from "@/lib/google-search-console";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const SITE_URL = "https://www.prosperaproperties.co/";
 const BLOG_PREFIX = `${SITE_URL}blog/`;
@@ -165,7 +165,7 @@ export async function GET(req: NextRequest) {
 
     try {
       const otherSlugs = allSlugs.filter((s) => s !== target.slug);
-      const optResponse = await anthropic.messages.create({
+      const optResponse = await getAnthropic().messages.create({
         model: "claude-sonnet-4-6",
         max_tokens: 10000,
         system: OPTIMIZER_SYSTEM,

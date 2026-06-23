@@ -18,7 +18,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { logAgentRun } from "@/lib/agent-logger";
 import { SEQUENCES } from "@/lib/email-sequences";
 
-const anthropic   = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const CRON_SECRET = process.env.CRON_SECRET;
 const EBIN_EMAIL  = "prosperapropertiess@gmail.com";
@@ -188,7 +188,7 @@ Your job:
 
 Format your response with clear sections using ##. Be direct. Ebin is a busy property manager, not a marketer.`;
 
-    const aiResponse = await anthropic.messages.create({
+    const aiResponse = await getAnthropic().messages.create({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1200,
       messages: [{ role: "user", content: claudePrompt }],

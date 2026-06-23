@@ -19,7 +19,7 @@ import { getFileFromGitHub, listFilesFromGitHub } from "@/lib/github";
 import { weeklyBlogEmail } from "@/lib/emails";
 import { logAgentRun } from "@/lib/agent-logger";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -46,7 +46,7 @@ async function generateEmailCopy(
   body: string
 ): Promise<{ subject: string; takeaways: string[]; whyItMatters: string } | null> {
   try {
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 600,
       system: `You write weekly newsletter copy for Prospera Properties — a property management company in London, St. Thomas, and Strathroy, Ontario. The audience is independent Ontario landlords with 1–5 properties.

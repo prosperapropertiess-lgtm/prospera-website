@@ -6,7 +6,7 @@ import { pushFilesToGitHub, type FileChange } from "@/lib/github";
 
 export const maxDuration = 120;
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
 
 const PLATFORM_CONTEXT = `
 You are a senior Next.js engineer building features for Prospera — a proptech platform for Ontario landlords.
@@ -117,7 +117,7 @@ Build for 10,000 users, not 10.`;
   const MAX_ITERATIONS = 3; // prevent runaway loops
 
   while (iterations < MAX_ITERATIONS) {
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 16000,
       system: PLATFORM_CONTEXT,
