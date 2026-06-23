@@ -193,11 +193,12 @@ function PainPoints() {
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pains.map((pain, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
+            <FadeIn key={i} delay={i * 0.08} className="h-full">
               <div
-                className="pain-card p-7 border rounded-xl"
-                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", borderLeft: "4px solid #8B2030", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                className="pain-card p-7 border rounded-xl overflow-hidden relative h-full"
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
               >
+                <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: "#8B2030" }} />
                 <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.label}
                 </p>
@@ -395,12 +396,12 @@ function FounderSnippet() {
             className="text-3xl sm:text-4xl font-light leading-tight mb-6"
             style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
           >
-            &ldquo;I&apos;ve been the tenant. The house coordinator. The operations
-            manager. I built this with all three lenses — and I choose to stay
-            small on purpose.&rdquo;
+            &ldquo;I&apos;ve rented, managed houses, and run the day-to-day.
+            That experience is why every property in our portfolio gets
+            real attention — not a ticket number.&rdquo;
           </blockquote>
           <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
-            — Ebin Jaison, Owner
+            — Ebin Jaison, Founder
           </p>
           <Link
             href="/about"
