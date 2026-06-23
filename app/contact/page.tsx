@@ -46,11 +46,11 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>Reach Out</p>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>Reach Out</p>
           <h1 className="text-5xl md:text-6xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Let&apos;s Talk.
           </h1>
-          <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Whether you&apos;re a landlord looking for management or a tenant looking for a home — we&apos;re here. Fill out the form or reach us directly.
           </p>
         </FadeIn>
@@ -62,19 +62,19 @@ export default function ContactPage() {
           <FadeIn>
             <div className="space-y-10">
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Phone</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Phone</p>
                 <a href="tel:5196971227" className="text-2xl font-light transition-colors hover:opacity-80" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                   (519) 697-1227
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Email</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Email</p>
                 <a href="mailto:hello@prosperaproperties.co" className="text-sm transition-colors hover:opacity-80 break-all" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                   hello@prosperaproperties.co
                 </a>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
+                <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
                 <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
               </div>
             </div>
@@ -90,8 +90,8 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Message Received.</p>
-                <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>We&apos;ll be in touch within 1 business day.</p>
-                <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>In the meantime, feel free to call us at <a href="tel:+15196971227" className="hover:opacity-80" style={{ color: "#8B2030" }}>(519) 697-1227</a></p>
+                <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>We&apos;ll be in touch within 1 business day.</p>
+                <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>In the meantime, feel free to call us at <a href="tel:+15196971227" className="hover:opacity-80" style={{ color: "#8B2030" }}>(519) 697-1227</a></p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 bg-white rounded-xl p-8 border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
@@ -106,7 +106,7 @@ export default function ContactPage() {
                       style={{
                         backgroundColor: form.type === t ? "#1F2F3A" : "transparent",
                         borderColor: form.type === t ? "#1F2F3A" : "#D8D2C8",
-                        color: form.type === t ? "#FAF8F5" : "#444444",
+                        color: form.type === t ? "#FAF8F5" : "#333333",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     >
@@ -117,19 +117,19 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Full Name *</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Full Name *</label>
                     <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inputClass} style={inputStyle} placeholder="Your full name" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Email *</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Email *</label>
                     <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputClass} style={inputStyle} placeholder="your@email.com" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Phone</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Phone</label>
                     <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputClass} style={inputStyle} placeholder="(519) 000-0000" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>City</label>
+                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>City</label>
                     <select value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} className={inputClass} style={inputStyle}>
                       <option value="">Select city...</option>
                       <option>London, ON</option>
@@ -141,7 +141,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs mb-1.5 block" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Message *</label>
+                  <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Message *</label>
                   <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className={inputClass} style={inputStyle} placeholder="Tell us about your property or what you're looking for..." />
                 </div>
 

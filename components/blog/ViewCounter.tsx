@@ -35,7 +35,7 @@ export default function ViewCounter({ slug }: { slug: string }) {
   return (
     <span
       className="flex items-center gap-1 text-xs"
-      style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+      style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
     >
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />

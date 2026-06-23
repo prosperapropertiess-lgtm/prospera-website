@@ -66,18 +66,18 @@ export default function RentAnalysisPage() {
   if (submitted) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center" style={{ backgroundColor: "#F7F5F2" }}>
-        <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>
+        <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>
           Check your inbox
         </p>
         <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 38, fontWeight: 300, marginBottom: 16, maxWidth: 480, lineHeight: 1.2 }}>
           Your analysis link is on its way.
         </p>
-        <p style={{ color: "#444444", fontFamily: "var(--font-dm-sans)", fontSize: 16, maxWidth: 400, lineHeight: 1.7, marginBottom: 32 }}>
+        <p style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 16, maxWidth: 400, lineHeight: 1.7, marginBottom: 32 }}>
           We sent a personalized link to {form.email}. Click it and tell us about your property — we&apos;ll do the rest.
         </p>
         <Link
           href="/"
-          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 14, letterSpacing: "0.1em", textDecoration: "none" }}
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 14, letterSpacing: "0.1em", textDecoration: "none" }}
         >
           ← Back to Prospera Properties
         </Link>
@@ -91,7 +91,7 @@ export default function RentAnalysisPage() {
       {/* ── Hero ── */}
       <section className="px-5 sm:px-8 py-24 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-3xl mx-auto">
-          <p style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 20 }}>
+          <p style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 20 }}>
             Free · No Obligation · London · St. Thomas · Strathroy
           </p>
           <h1
@@ -148,7 +148,7 @@ export default function RentAnalysisPage() {
       {/* ── What you get ── */}
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
-          <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
+          <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
             What&apos;s Included
           </p>
           <h2
@@ -186,7 +186,7 @@ export default function RentAnalysisPage() {
                 <h3 className="text-xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 24 }}>
                   {item.title}
                 </h3>
-                <p className="leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>
+                <p className="leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>
                   {item.desc}
                 </p>
               </div>
@@ -198,7 +198,7 @@ export default function RentAnalysisPage() {
       {/* ── Where the data comes from ── */}
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-4xl mx-auto">
-          <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
+          <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
             The Data Behind It
           </p>
           <h2
@@ -207,7 +207,7 @@ export default function RentAnalysisPage() {
           >
             Built on actual current listings.
           </h2>
-          <p className="leading-relaxed text-center max-w-xl mx-auto mb-14" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)", fontSize: 16 }}>
+          <p className="leading-relaxed text-center max-w-xl mx-auto mb-14" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 16 }}>
             We pull from Kijiji, Realtor.ca, Rentals.ca, and Zumper every week. Every number you see is based on what&apos;s actually listed right now in your city — not a national average, not data from 8 months ago.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -252,7 +252,7 @@ export default function RentAnalysisPage() {
       {/* ── Form ── */}
       <section id="get-analysis" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-lg mx-auto">
-          <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
+          <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", textAlign: "center", marginBottom: 12 }}>
             Free · Takes 2 Minutes
           </p>
           <h2
@@ -261,7 +261,7 @@ export default function RentAnalysisPage() {
           >
             Get your analysis.
           </h2>
-          <p className="text-center mb-10" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)", fontSize: 16 }}>
+          <p className="text-center mb-10" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 16 }}>
             We&apos;ll email you a personalized link. Fill in your property details and we&apos;ll send the analysis straight to your inbox.
           </p>
 
@@ -277,7 +277,7 @@ export default function RentAnalysisPage() {
                   value={form.city}
                   onChange={(e) => set("city", e.target.value)}
                   required
-                  style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: form.city ? "#222222" : "#999999", padding: "14px 14px", fontSize: 15, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 6, boxSizing: "border-box" }}
+                  style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: form.city ? "#222222" : "#666666", padding: "14px 14px", fontSize: 15, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 6, boxSizing: "border-box" }}
                 >
                   <option value="">Select city</option>
                   {CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -290,7 +290,7 @@ export default function RentAnalysisPage() {
                 <select
                   value={form.bedrooms}
                   onChange={(e) => set("bedrooms", e.target.value)}
-                  style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: form.bedrooms ? "#222222" : "#999999", padding: "14px 14px", fontSize: 15, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 6, boxSizing: "border-box" }}
+                  style={{ width: "100%", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: form.bedrooms ? "#222222" : "#666666", padding: "14px 14px", fontSize: 15, fontFamily: "var(--font-dm-sans)", outline: "none", borderRadius: 6, boxSizing: "border-box" }}
                 >
                   <option value="">Select</option>
                   {["1","2","3","4","5+"].map((n) => <option key={n} value={n === "5+" ? "5" : n}>{n}</option>)}
@@ -307,7 +307,7 @@ export default function RentAnalysisPage() {
 
             {!estimateLoading && estimate?.source === "computed" && estimate.median && (
               <div style={{ backgroundColor: "#1F2F3A", borderRadius: 8, padding: "24px" }}>
-                <p style={{ margin: "0 0 18px", fontSize: 13, color: "rgba(250,248,245,0.55)", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}>
+                <p style={{ margin: "0 0 18px", fontSize: 13, color: "rgba(250,248,245,0.75)", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}>
                   {form.city} · {form.bedrooms}-bedroom · what rentals are going for
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 18 }}>
@@ -330,7 +330,7 @@ export default function RentAnalysisPage() {
 
             {!estimateLoading && form.city && form.bedrooms && estimate?.source === "static" && (
               <div style={{ backgroundColor: "#F5F0EB", borderLeft: "3px solid #8B2030", borderRadius: 6, padding: "16px 20px" }}>
-                <p style={{ margin: 0, fontSize: 15, color: "#444444", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+                <p style={{ margin: 0, fontSize: 15, color: "#333333", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
                   We don&apos;t have enough data for that segment yet — your analysis will draw on our local market knowledge directly.
                 </p>
               </div>
@@ -359,7 +359,7 @@ export default function RentAnalysisPage() {
                         fontFamily: "var(--font-dm-sans)",
                         border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
                         backgroundColor: selected ? "#8B2030" : "#FFFFFF",
-                        color: selected ? "#FAF8F5" : "#444444",
+                        color: selected ? "#FAF8F5" : "#333333",
                         cursor: "pointer", borderRadius: 8,
                         fontWeight: selected ? 600 : 400,
                         touchAction: "manipulation",
@@ -409,7 +409,7 @@ export default function RentAnalysisPage() {
             >
               {submitting ? "Sending..." : "Get My Personalized Analysis →"}
             </button>
-            <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 14, textAlign: "center" }}>
+            <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 14, textAlign: "center" }}>
               Free. No sales call. No obligation. Just your number.
             </p>
           </form>

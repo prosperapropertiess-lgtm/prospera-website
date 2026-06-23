@@ -95,7 +95,7 @@ export default function LeaseAddendumLP() {
       >
         {status === "loading" ? "Sending…" : status === "success" ? "Sent ✓" : "Send Me the Free Addendum →"}
       </button>
-      <p className="text-xs text-center" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+      <p className="text-xs text-center" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
         No spam. No sales calls. Just the document and occasional landlord tips.
       </p>
     </form>
@@ -133,9 +133,9 @@ export default function LeaseAddendumLP() {
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               Your Standard Ontario Lease Protects Your Tenant.{" "}
-              <em style={{ color: "rgba(250,248,245,0.55)" }}>Not You.</em>
+              <em style={{ color: "rgba(250,248,245,0.75)" }}>Not You.</em>
             </h1>
-            <p className="text-base leading-relaxed max-w-2xl" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-base leading-relaxed max-w-2xl" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
               Download the free 17-point lease addendum used across rental properties in London, Strathroy, and St. Thomas — tested against real Ontario tenant scenarios. Attach it to any standard lease in minutes.
             </p>
           </div>
@@ -155,10 +155,10 @@ export default function LeaseAddendumLP() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>Ebin Jaison</p>
-                  <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties · London, ON</p>
+                  <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties · London, ON</p>
                 </div>
               </div>
-              <p className="text-sm mb-5 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm mb-5 leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 I'll send it to your inbox within 5 minutes. Built it myself after seeing what gaps in the standard lease actually cost landlords.
               </p>
               {form}
@@ -206,7 +206,7 @@ export default function LeaseAddendumLP() {
           ].map(t => (
             <div key={t.l} className="text-center">
               <p className="text-lg font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{t.v}</p>
-              <p className="text-xs mt-0.5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{t.l}</p>
+              <p className="text-xs mt-0.5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{t.l}</p>
             </div>
           ))}
         </div>
@@ -221,7 +221,7 @@ export default function LeaseAddendumLP() {
           <h2 className="text-4xl font-light mb-8 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             Most landlords find out their lease has gaps when it's already too late.
           </h2>
-          <div className="space-y-5 text-base leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <div className="space-y-5 text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             <p>
               The standard Ontario lease is the minimum. It was written to be fair to both sides — which means it leaves room for tenants to push back on pet damage, unauthorized occupants, early termination, and property condition disputes.
             </p>
@@ -244,7 +244,7 @@ export default function LeaseAddendumLP() {
           <h2 className="text-4xl font-light mb-8 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             The fix isn't a lawyer. It's a better lease.
           </h2>
-          <div className="space-y-5 text-base leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <div className="space-y-5 text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             <p>
               We built a 17-point addendum — tested against real Ontario tenant scenarios — that attaches directly to your standard lease. It closes the gaps before a tenant ever signs.
             </p>

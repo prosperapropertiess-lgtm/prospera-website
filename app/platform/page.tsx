@@ -71,7 +71,7 @@ function FeatureRow({
         {bullets && (
           <ul className="space-y-2.5">
             {bullets.map((b, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+              <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
                 <span className="flex-shrink-0 mt-0.5 font-bold" style={{ color: ACCENT }}>✓</span>
                 {b}
               </li>
@@ -502,7 +502,7 @@ export default function PlatformPage() {
               "90-day money-back guarantee",
               "No contracts. Ever.",
             ].map((fact, i) => (
-              <p key={i} className="text-sm" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+              <p key={i} className="text-sm" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
                 <span className="font-bold mr-2" style={{ color: TEXT_1 }}>·</span>
                 {fact}
               </p>
@@ -1030,7 +1030,7 @@ export default function PlatformPage() {
               >
                 <p
                   className="text-xs uppercase tracking-widest mb-4"
-                  style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Option 02
                 </p>

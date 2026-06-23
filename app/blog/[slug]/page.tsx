@@ -145,10 +145,10 @@ export default async function BlogPostPage({ params }: Props) {
             >
               {post.category}
             </span>
-            <span className="text-xs" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
               {post.readTime}
             </span>
-            <span className="text-xs" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+            <span className="text-xs" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
               {new Date(post.date).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
             </span>
             <ViewCounter slug={slug} />
@@ -195,7 +195,7 @@ export default async function BlogPostPage({ params }: Props) {
               <p className="text-sm font-medium" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                 Ebin Jaison
               </p>
-              <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 Founder, Prospera Properties
               </p>
             </div>
@@ -209,7 +209,7 @@ export default async function BlogPostPage({ params }: Props) {
         <article>
           <div
             className="prose-content"
-            style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
+            style={{ fontFamily: "var(--font-dm-sans)", color: "#333333" }}
             dangerouslySetInnerHTML={{ __html: firstHalf }}
           />
 
@@ -218,7 +218,7 @@ export default async function BlogPostPage({ params }: Props) {
           {secondHalf && (
             <div
               className="prose-content"
-              style={{ fontFamily: "var(--font-dm-sans)", color: "#444444" }}
+              style={{ fontFamily: "var(--font-dm-sans)", color: "#333333" }}
               dangerouslySetInnerHTML={{ __html: secondHalf }}
             />
           )}
@@ -241,7 +241,7 @@ export default async function BlogPostPage({ params }: Props) {
           <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Need Help With Your Property?
           </h2>
-          <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             We manage rentals across London, St. Thomas, and Strathroy. Get a free, no-obligation quote.
           </p>
           <Link
@@ -291,7 +291,7 @@ function RelatedPosts({ currentSlug }: { currentSlug: string }) {
               >
                 {post.title}
               </h4>
-              <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 {post.readTime} · {new Date(post.date).toLocaleDateString("en-CA", { month: "long", year: "numeric" })}
               </p>
             </Link>

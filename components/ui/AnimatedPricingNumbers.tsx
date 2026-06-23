@@ -71,7 +71,7 @@ export default function AnimatedPricingNumbers() {
           className="px-6 py-4 text-left"
           style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}
         >
-          <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
             On $2,000/mo rent
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function AnimatedPricingNumbers() {
           className="px-6 py-4 text-center"
           style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}
         >
-          <p className="text-xs uppercase tracking-widest" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             Managed 8%
           </p>
         </div>
@@ -111,14 +111,14 @@ export default function AnimatedPricingNumbers() {
             >
               {row.managed ? (
                 isInView ? (
-                  <AnimNum prefix={row.managed.prefix} value={row.managed.value} suffix={row.managed.suffix} color="#444444" />
+                  <AnimNum prefix={row.managed.prefix} value={row.managed.value} suffix={row.managed.suffix} color="#333333" />
                 ) : (
-                  <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                     {row.managed.prefix}0{row.managed.suffix}
                   </p>
                 )
               ) : (
-                <p className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>—</p>
+                <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>—</p>
               )}
             </div>
 

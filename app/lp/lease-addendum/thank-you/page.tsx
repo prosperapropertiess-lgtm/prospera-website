@@ -76,7 +76,7 @@ export default function LeaseAddendumThankYou() {
               />
               <div className="absolute bottom-4 left-6">
                 <p className="text-sm font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>Ebin Jaison</p>
-                <p className="text-xs" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties · London, ON</p>
+                <p className="text-xs" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>Prospera Properties · London, ON</p>
               </div>
             </div>
 

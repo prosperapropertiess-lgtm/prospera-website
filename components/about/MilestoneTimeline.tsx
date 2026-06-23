@@ -74,7 +74,7 @@ function MilestoneCard({ milestone }: { milestone: (typeof milestones)[0] }) {
         </span>
         <span
           className="text-xs"
-          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
         >
           {milestone.location}
         </span>

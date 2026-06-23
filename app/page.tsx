@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import ParticleCanvas from "@/components/animations/ParticleCanvas";
-import GoogleReviews from "@/components/ui/GoogleReviews";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
@@ -27,7 +28,7 @@ function Hero() {
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto" style={{ zIndex: 3 }}>
+      <div className="relative max-w-7xl mx-auto" style={{ zIndex: 3 }}>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +56,7 @@ function Hero() {
         >
           Your rental is supposed to pay you.
           <br />
-          <em style={{ color: "rgba(250,248,245,0.65)" }}>Not consume you.</em>
+          <em style={{ color: "rgba(250,248,245,0.8)" }}>Not consume you.</em>
         </motion.h1>
 
         <motion.p
@@ -63,7 +64,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.38, ease: [0.23, 1, 0.32, 1] }}
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
         >
           Tenants, rent, maintenance — handled. You find out when something's
           done, not when it starts. No call centers. No ticket queues. Just
@@ -127,7 +128,7 @@ function StatsBar() {
 
   return (
     <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2", borderBottom: "1px solid #D8D2C8" }}>
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
         {stats.map((stat, i) => (
           <FadeIn key={stat.label} delay={i * 0.08}>
             <div>
@@ -139,7 +140,7 @@ function StatsBar() {
               </div>
               <div
                 className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
               >
                 {stat.label}
               </div>
@@ -175,11 +176,11 @@ function PainPoints() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
             Sound Familiar?
           </p>
@@ -200,7 +201,7 @@ function PainPoints() {
                 <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.label}
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                   {pain.sub}
                 </p>
               </div>
@@ -240,11 +241,11 @@ function FeatureCards() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
             Why Prospera
           </p>
@@ -273,7 +274,7 @@ function FeatureCards() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   {f.desc}
                 </p>
@@ -324,11 +325,11 @@ function HowItWorks() {
 
   return (
     <section id="how-it-works" className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
             The Process
           </p>
@@ -358,7 +359,7 @@ function HowItWorks() {
                     <p className="font-semibold text-base" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                       {phase.phase}
                     </p>
-                    <p className="text-xs mt-0.5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-xs mt-0.5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       {phase.timeline}
                     </p>
                   </div>
@@ -387,7 +388,7 @@ function HowItWorks() {
 function FounderSnippet() {
   return (
     <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center">
         <FadeIn>
           <div className="w-10 h-px mx-auto mb-8" style={{ backgroundColor: "rgba(250,248,245,0.3)" }} />
           <blockquote
@@ -419,11 +420,11 @@ function FounderSnippet() {
 function CaseStudy() {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
             Real Result
           </p>
@@ -435,7 +436,7 @@ function CaseStudy() {
           </h2>
           <p
             className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
-            style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
           >
             An owner was renting rooms individually with all utilities included.
             Tenants had zero reason to conserve. Bills were skyrocketing. He
@@ -447,7 +448,7 @@ function CaseStudy() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FadeIn delay={0.1}>
             <div className="p-8 border rounded-xl" style={{ backgroundColor: "#FDF9F9", borderColor: "#E8CECE", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 Before Prospera
               </p>
               <ul className="space-y-4">
@@ -469,7 +470,7 @@ function CaseStudy() {
 
           <FadeIn delay={0.2}>
             <div className="p-8 border rounded-xl" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 After Prospera
               </p>
               <ul className="space-y-4">
@@ -496,25 +497,100 @@ function CaseStudy() {
 
 // ── Testimonials ──────────────────────────────────────────────────────────────
 
+const ALL_TESTIMONIALS: Testimonial[] = [
+  {
+    name: "Gilsy Sebastian",
+    role: "Google Review",
+    text: "Very efficient, professional and promising agent. Highly recommended if anyone looking for property management or rent services.",
+  },
+  {
+    name: "Manjit Singh",
+    role: "Google Review",
+    text: "Thank you for the seamless work. Your staging advice and regular updates made all the difference. I'll be sure to recommend you.",
+  },
+  {
+    name: "Ryan",
+    role: "Google Review",
+    text: "Really smooth renting experience. The team was helpful and responsive — highly recommend!",
+  },
+  {
+    name: "Nahala Naushad",
+    role: "Google Review",
+    text: "I found my new home near my workplace with the help of Prospera Properties, and it was a great experience. Ebin was very friendly, responsive, and always available to answer my questions. Highly recommend.",
+  },
+  {
+    name: "Anna Shaji",
+    role: "Google Review",
+    text: "It was confusing to find a bachelor's as a new Western student. Prospera helped narrow things down and made the process easier. Communication was clear and everything went smoothly.",
+  },
+  {
+    name: "Bibin Sebastian",
+    role: "Google Review",
+    text: "Ebin's communication was consistently prompt, clear, and proactive, keeping us informed at every stage. We particularly valued his honest advice and genuine commitment to finding the perfect place.",
+  },
+  {
+    name: "Aarsha Jerome",
+    role: "Google Review",
+    text: "Prospera Properties did a great job helping me find a private room. The process was smooth, professional, and stress-free. I would definitely recommend Prospera Properties to anyone looking for a rental.",
+  },
+  {
+    name: "Aadhil T Mujeeb",
+    role: "Google Review",
+    text: "Overall a great experience. Super easy to deal with and quick to respond whenever I needed something.",
+  },
+  {
+    name: "Clibert Devassy",
+    role: "Google Review",
+    text: "Delivers exceptional service — punctual, reliable, and always accessible. His professionalism and dedication give us complete peace of mind. Highly recommended.",
+  },
+];
+
+const col1 = ALL_TESTIMONIALS.slice(0, 3);
+const col2 = ALL_TESTIMONIALS.slice(3, 6);
+const col3 = ALL_TESTIMONIALS.slice(6, 9);
+
 function Testimonials() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
-      <div className="max-w-3xl mx-auto">
+    <section className="py-24 px-5 sm:px-8 overflow-hidden" style={{ backgroundColor: "#F7F5F2" }}>
+      <div className="max-w-6xl mx-auto">
         <FadeIn className="text-center mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            What Landlords Say
+            What Landlords &amp; Tenants Say
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            Real reviews. Real landlords.
+            Real reviews. Real people.
           </h2>
+          <p className="mt-4 text-sm" style={{ color: "rgba(15,28,40,0.50)", fontFamily: "var(--font-dm-sans)" }}>
+            5.0 ★ on Google · 20+ reviews
+          </p>
         </FadeIn>
-        <GoogleReviews />
+
+        <div
+          className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]"
+          style={{ maxHeight: 680, overflow: "hidden" }}
+        >
+          <TestimonialsColumn testimonials={col1} duration={18} />
+          <TestimonialsColumn testimonials={col2} duration={22} className="hidden md:block" />
+          <TestimonialsColumn testimonials={col3} duration={20} className="hidden lg:block" />
+        </div>
+
+        <div className="text-center mt-10">
+          <a
+            href="https://share.google/Zicj8qNuNcLhLhqvf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs hover:opacity-70 transition-opacity"
+            style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}
+          >
+            See all reviews on Google →
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -533,7 +609,7 @@ function PlatformTeaser() {
 
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1820" }}>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-14 lg:gap-20 items-start">
           {/* Left */}
           <div className="flex-1">
@@ -559,7 +635,7 @@ function PlatformTeaser() {
               </span>
               <span
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
-                style={{ backgroundColor: "rgba(250,248,245,0.06)", border: "1px solid rgba(250,248,245,0.12)", color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+                style={{ backgroundColor: "rgba(250,248,245,0.06)", border: "1px solid rgba(250,248,245,0.12)", color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
               >
                 Then a fraction of a PM fee
               </span>
@@ -589,7 +665,7 @@ function PlatformTeaser() {
                   style={{ backgroundColor: "rgba(250,248,245,0.03)", borderColor: "rgba(250,248,245,0.06)" }}
                 >
                   <span className="text-xs mt-0.5 flex-shrink-0" style={{ color: "#8B2030" }}>✓</span>
-                  <p className="text-sm leading-snug" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm leading-snug" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
                     {item}
                   </p>
                 </div>
@@ -607,7 +683,7 @@ function PlatformTeaser() {
 function TenantBar() {
   return (
     <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
-      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
             Looking for a Rental?
@@ -646,7 +722,7 @@ function CTABanner() {
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
-          style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
         >
           Free consultation. Honest assessment. No pressure. Just a
           straightforward conversation about what your property could look like
@@ -734,7 +810,7 @@ export default function HomePage() {
       <PlatformTeaser />
       <TenantBar />
       <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-5xl mx-auto space-y-4">
           <BlogNudge
             hook="One bad tenant can cost you an entire year's profit."
             title="5 Red Flags When Screening Tenants"

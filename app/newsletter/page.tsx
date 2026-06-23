@@ -46,7 +46,7 @@ export default function NewsletterPage() {
         <FadeIn>
           <p
             className="text-xs uppercase tracking-widest mb-4"
-            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
           >
             Ontario Landlord Newsletter
           </p>
@@ -58,7 +58,7 @@ export default function NewsletterPage() {
           </h1>
           <p
             className="text-sm max-w-md mx-auto leading-relaxed"
-            style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
           >
             Weekly insights on Ontario landlord law, LTB updates, tenant screening, and the numbers that actually matter.
             No fluff. Unsubscribe any time.
@@ -91,13 +91,13 @@ export default function NewsletterPage() {
                 </p>
                 <p
                   className="text-sm mb-2"
-                  style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Check your inbox — a welcome email is on its way.
                 </p>
                 <p
                   className="text-xs"
-                  style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Questions? Reach us at{" "}
                   <a href="mailto:hello@prosperaproperties.co" className="hover:opacity-80" style={{ color: "#8B2030" }}>
@@ -114,7 +114,7 @@ export default function NewsletterPage() {
                 <div>
                   <p
                     className="text-xs uppercase tracking-widest mb-6"
-                    style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Free. Weekly. Ontario-focused.
                   </p>
@@ -153,7 +153,7 @@ export default function NewsletterPage() {
                     <div>
                       <label
                         className="text-xs mb-1.5 block"
-                        style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                       >
                         First Name
                       </label>
@@ -168,7 +168,7 @@ export default function NewsletterPage() {
                     <div>
                       <label
                         className="text-xs mb-1.5 block"
-                        style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                       >
                         Email Address *
                       </label>
@@ -202,7 +202,7 @@ export default function NewsletterPage() {
 
                 <p
                   className="text-xs text-center"
-                  style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                 >
                   No spam. Unsubscribe any time.
                 </p>

@@ -77,7 +77,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
         <FadeIn>
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
           >
             Free for Ontario Landlords
           </p>
@@ -91,7 +91,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
           </h1>
           <p
             className="text-base max-w-xl mx-auto leading-relaxed mb-10"
-            style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
           >
             Every Ontario LTB form you&apos;ll ever need — explained in plain English,
             pre-filled in under 2 minutes, ready to serve. Free. No account. No PDF editor.
@@ -126,7 +126,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-7 rounded-xl border" style={{ borderColor: "#F0C4C4", backgroundColor: "#FDF9F9" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                   Before This Tool
                 </p>
                 {[
@@ -184,7 +184,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
             </h2>
             <p
               className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed"
-              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
             >
               Pick your situation. We&apos;ll tell you exactly which form, what it does, and when to use it.
             </p>
@@ -225,10 +225,10 @@ export default async function ResourcesPage({ searchParams }: Props) {
                           {s.plain}
                         </p>
                         <div className="flex items-start gap-2">
-                          <span className="text-xs shrink-0 mt-0.5" style={{ color: "#999999" }}>⚠</span>
+                          <span className="text-xs shrink-0 mt-0.5" style={{ color: "#666666" }}>⚠</span>
                           <p
                             className="text-xs leading-relaxed"
-                            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                           >
                             {s.when}
                           </p>
@@ -255,7 +255,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
                             className="block text-center py-3 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
                             style={{
                               borderColor: "#D8D2C8",
-                              color: "#444444",
+                              color: "#333333",
                               fontFamily: "var(--font-dm-sans)",
                             }}
                           >
@@ -269,7 +269,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
                           className="block text-center py-2.5 px-5 text-xs font-semibold uppercase tracking-widest rounded-lg border transition-colors hover:border-[#1F2F3A]"
                           style={{
                             borderColor: "#D8D2C8",
-                            color: "#444444",
+                            color: "#333333",
                             fontFamily: "var(--font-dm-sans)",
                           }}
                         >
@@ -338,7 +338,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
           </h2>
           <p
             className="text-sm mb-8 max-w-md mx-auto"
-            style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
           >
             That&apos;s what Prospera is for. We handle the forms, the notices, the follow-up, everything.
             Free consultation — no pressure.

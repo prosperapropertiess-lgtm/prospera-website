@@ -78,7 +78,7 @@ export default function WaitlistForm({
         </p>
         <p
           className="text-sm"
-          style={{ color: dark ? "rgba(250,248,245,0.55)" : "#444444", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: dark ? "rgba(250,248,245,0.75)" : "#333333", fontFamily: "var(--font-dm-sans)" }}
         >
           We&apos;ll reach out when early access opens. You&apos;ll be first.
         </p>
@@ -125,7 +125,7 @@ export default function WaitlistForm({
         )}
         <p
           className="text-xs text-center"
-          style={{ color: dark ? "rgba(250,248,245,0.35)" : "#999999", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: dark ? "rgba(250,248,245,0.35)" : "#666666", fontFamily: "var(--font-dm-sans)" }}
         >
           No spam. No credit card. Just early access.
         </p>
@@ -174,7 +174,7 @@ export default function WaitlistForm({
       )}
       <p
         className="text-xs mt-3"
-        style={{ color: dark ? "rgba(250,248,245,0.35)" : "#999999", fontFamily: "var(--font-dm-sans)" }}
+        style={{ color: dark ? "rgba(250,248,245,0.35)" : "#666666", fontFamily: "var(--font-dm-sans)" }}
       >
         No spam. No credit card. Unsubscribe anytime.
       </p>

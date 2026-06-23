@@ -149,7 +149,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
         <h1 style={{ margin: "0 0 4px", fontSize: 26, fontWeight: 400, color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
           {property.address}
         </h1>
-        <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
           {property.city} &nbsp;·&nbsp; {property.bedrooms}bd / {property.bathrooms}ba &nbsp;·&nbsp; <strong style={{ color: "rgba(250,248,245,0.8)" }}>${property.price.toLocaleString()}/mo</strong>
         </p>
       </div>

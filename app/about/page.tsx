@@ -73,7 +73,7 @@ export default function AboutPage() {
                 >
                   <p
                     className="text-[10px] uppercase tracking-widest mb-2"
-                    style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Track Record
                   </p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                       </p>
                       <p
                         className="text-xs leading-tight"
-                        style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                       >
                         0 LTB cases
                       </p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
               <div className="md:pl-8 lg:pl-16">
                 <p
                   className="text-[11px] uppercase tracking-[0.35em] mb-10"
-                  style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Owner · Operator · London, ON
                 </p>
@@ -138,7 +138,7 @@ export default function AboutPage() {
 
                 <p
                   className="text-base leading-relaxed mb-10 max-w-sm"
-                  style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
                 >
                   I built Prospera to be the property manager I wish had existed —
                   hands-on, reachable, and actually invested in your property.
@@ -204,7 +204,7 @@ export default function AboutPage() {
               <div className="w-10 h-px" style={{ backgroundColor: "#D8D2C8" }} />
               <p
                 className="text-xs uppercase tracking-widest"
-                style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
               >
                 Ebin Jaison — Founder
               </p>
@@ -418,7 +418,7 @@ export default function AboutPage() {
         <FadeIn>
           <p
             className="text-[11px] font-semibold uppercase tracking-widest mb-6"
-            style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}
           >
             Let&apos;s Talk
           </p>

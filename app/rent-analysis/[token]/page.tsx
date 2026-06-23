@@ -125,7 +125,7 @@ export default function RentAnalysisForm() {
                 fontFamily: "var(--font-dm-sans)",
                 border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
                 backgroundColor: selected ? "#8B2030" : "#FFFFFF",
-                color: selected ? "#FAF8F5" : "#444444",
+                color: selected ? "#FAF8F5" : "#333333",
                 cursor: "pointer",
                 borderRadius: 8,
                 fontWeight: selected ? 600 : 400,
@@ -309,7 +309,7 @@ export default function RentAnalysisForm() {
   // ── Loading / error / success states ────────────────────────────────────
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#F7F5F2" }}>
-      <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>Loading...</p>
+      <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>Loading...</p>
     </div>
   );
 
@@ -327,7 +327,7 @@ export default function RentAnalysisForm() {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center" style={{ backgroundColor: "#F7F5F2" }}>
       <div style={{ fontSize: 48, marginBottom: 20 }}>📬</div>
       <p style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, marginBottom: 16, maxWidth: 480 }}>Check your inbox in a few minutes</p>
-      <p style={{ color: "#444444", fontFamily: "var(--font-dm-sans)", fontSize: 16, marginBottom: 32, maxWidth: 420, lineHeight: 1.7 }}>
+      <p style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 16, marginBottom: 32, maxWidth: 420, lineHeight: 1.7 }}>
         We&apos;re analyzing your property against current market data. Your personalized report will land in your inbox shortly.
       </p>
       <Link href="/" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)", fontSize: 15, textDecoration: "none" }}>
@@ -425,7 +425,7 @@ export default function RentAnalysisForm() {
                           fontFamily: "var(--font-dm-sans)",
                           border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
                           backgroundColor: selected ? "#8B2030" : "#FFFFFF",
-                          color: selected ? "#FAF8F5" : "#444444",
+                          color: selected ? "#FAF8F5" : "#333333",
                           cursor: "pointer", borderRadius: 8,
                           fontWeight: selected ? 600 : 400,
                           touchAction: "manipulation",
@@ -550,7 +550,7 @@ export default function RentAnalysisForm() {
                             fontFamily: "var(--font-dm-sans)",
                             border: `2px solid ${selected ? "#8B2030" : "#D8D2C8"}`,
                             backgroundColor: selected ? "#8B2030" : "#FFFFFF",
-                            color: selected ? "#FAF8F5" : "#444444",
+                            color: selected ? "#FAF8F5" : "#333333",
                             cursor: "pointer", borderRadius: 8, fontWeight: selected ? 600 : 400,
                             touchAction: "manipulation",
                           }}

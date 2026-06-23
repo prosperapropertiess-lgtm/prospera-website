@@ -86,7 +86,7 @@ function FeaturedCard({ post }: { post: Post }) {
         <p className="text-sm leading-relaxed mb-5" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
           {post.excerpt}
         </p>
-        <div className="flex items-center gap-3 text-xs mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+        <div className="flex items-center gap-3 text-xs mb-5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           <span>{post.readTime}</span>
           <span>·</span>
           <span>{new Date(post.date).toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric" })}</span>
@@ -126,7 +126,7 @@ function TrendingCard({ post, index }: { post: Post; index: number }) {
         >
           {post.title}
         </h3>
-        <p className="text-xs mt-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs mt-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           {post.readTime}
         </p>
       </div>
@@ -194,9 +194,9 @@ function ArticleCard({ post }: { post: Post }) {
           {post.excerpt}
         </p>
         <div className="flex items-center gap-2.5 pt-3 border-t" style={{ borderColor: "#F0EDE8" }}>
-          <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{post.readTime}</span>
+          <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{post.readTime}</span>
           <span className="text-xs" style={{ color: "#D8D2C8" }}>·</span>
-          <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+          <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
             {new Date(post.date).toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })}
           </span>
           <ViewCounter slug={post.slug} />
@@ -250,7 +250,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
 
       {filtered.length === 0 ? (
         <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-          <p style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>No posts in this category yet.</p>
+          <p style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>No posts in this category yet.</p>
         </div>
       ) : (
         <div className="max-w-6xl mx-auto px-6 py-10 space-y-14">
@@ -288,7 +288,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
                   <div className="flex items-center gap-3 mb-6">
                     <span
                       className="text-xs font-bold uppercase tracking-widest"
-                      style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                      style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Latest
                     </span>
@@ -310,7 +310,7 @@ export default function BlogGrid({ posts }: { posts: Post[] }) {
               <div className="flex items-center gap-3 mb-8">
                 <span
                   className="text-xs font-bold uppercase tracking-widest"
-                  style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                 >
                   More Articles
                 </span>

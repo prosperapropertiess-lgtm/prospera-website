@@ -35,7 +35,7 @@ export default function StudentRentalManagementPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Student Rental Management<br />London Ontario
           </h1>
-          <p className="text-lg max-w-2xl leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-2xl leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             We manage student rentals near Western University and Fanshawe College — handling the full annual cycle so you never have to think about turnover season.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -55,10 +55,10 @@ export default function StudentRentalManagementPage() {
           <h2 className="text-3xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             Student Rentals Require a Different Approach
           </h2>
-          <p className="text-base leading-relaxed mb-4" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base leading-relaxed mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             London has two major post-secondary institutions — Western University and Fanshawe College — driving consistent demand for rental housing. But student rentals come with challenges that regular residential properties don't: annual turnover, joint tenancies, guarantor requirements, and a concentrated leasing season that runs January through March.
           </p>
-          <p className="text-base leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             Most landlords self-managing student properties spend weeks every winter scrambling to re-list and re-screen. Prospera handles the entire cycle — from listing in January to keys-in-hand in September — so you don't have to be involved at all.
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function StudentRentalManagementPage() {
           ].map((s) => (
             <div key={s.label}>
               <p className="text-3xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-wider" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-wider" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>

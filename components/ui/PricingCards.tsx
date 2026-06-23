@@ -120,8 +120,8 @@ function PlanCard({
       ? "none"
       : "1px solid #D8D2C8";
   const headingColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
-  const bodyColor = plan.dark ? "rgba(250,248,245,0.65)" : "#333333";
-  const labelColor = plan.dark ? "rgba(250,248,245,0.55)" : "#8B2030";
+  const bodyColor = plan.dark ? "rgba(250,248,245,0.8)" : "#333333";
+  const labelColor = plan.dark ? "rgba(250,248,245,0.75)" : "#8B2030";
   const checkColor = plan.dark ? "#FAF8F5" : "#8B2030";
   const priceColor = plan.dark ? "#FAF8F5" : "#1F2F3A";
   const placementColor = plan.placementHighlight ? "#8B2030" : bodyColor;
@@ -266,7 +266,7 @@ export default function PricingCards() {
               className="flex-1 py-3 text-xs uppercase tracking-widest transition-colors font-semibold"
               style={{
                 backgroundColor: active === i ? "#1F2F3A" : "#FFFFFF",
-                color: active === i ? "#FAF8F5" : "#444444",
+                color: active === i ? "#FAF8F5" : "#333333",
                 fontFamily: "var(--font-dm-sans)",
               }}
             >

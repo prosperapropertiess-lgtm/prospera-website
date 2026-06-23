@@ -36,7 +36,7 @@ export default function RentCollectionPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-6 leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Rent Collection Services<br />London Ontario
           </h1>
-          <p className="text-lg max-w-2xl leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-2xl leading-relaxed mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             We collect rent, enforce leases, and handle arrears — so you stop chasing tenants and start receiving reliable monthly deposits.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -56,10 +56,10 @@ export default function RentCollectionPage() {
           <h2 className="text-3xl font-light mb-6" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             Late Rent Is Expensive. Chasing It Is Worse.
           </h2>
-          <p className="text-base leading-relaxed mb-4" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base leading-relaxed mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             In Ontario, collecting late rent isn't just uncomfortable — it requires strict legal compliance. Accepting a partial payment at the wrong time can void your N4 notice. Missing the 7-day window to serve the notice resets the clock. Small procedural errors cost you weeks at the LTB.
           </p>
-          <p className="text-base leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             We set up automated collection from day one and enforce the RTA timeline exactly — so you never lose your legal standing and you never have an awkward conversation with a tenant about money.
           </p>
         </div>
@@ -93,7 +93,7 @@ export default function RentCollectionPage() {
           ].map((s) => (
             <div key={s.label}>
               <p className="text-3xl font-light mb-1" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-wider" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-wider" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>

@@ -28,13 +28,13 @@ export default function StThomasPage() {
       {/* Hero */}
       <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas, Ontario
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in St. Thomas, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             St. Thomas is one of Ontario&apos;s most exciting rental markets right now. We&apos;re on the ground helping landlords capitalize on it.
           </p>
           <Link
@@ -53,7 +53,7 @@ export default function StThomasPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -66,7 +66,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Why St. Thomas Is Worth Your Attention
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               This isn&apos;t just a bedroom community anymore. St. Thomas is developing its own economic identity.
             </p>
           </FadeIn>
@@ -126,7 +126,7 @@ export default function StThomasPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               What&apos;s Included in Our Management
             </h2>
-            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               One simple fee covers everything — no hidden charges, no per-repair markups.
             </p>
           </FadeIn>

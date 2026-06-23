@@ -1,10 +1,11 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const CITIES = ["London", "St. Thomas", "Strathroy"];
 const UTILITY_OPTIONS = ["Heat", "Water", "Hydro", "Internet"];
+const MAX_PHOTOS = 20;
 
 interface PropertyFormData {
   id?: string;
@@ -55,6 +56,13 @@ export default function PropertyForm({ initial }: Props) {
   const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  // AI generation state
+  const [generating, setGenerating] = useState(false);
+  const [aiTitle, setAiTitle] = useState("");
+  const [aiDescription, setAiDescription] = useState("");
+  const [aiError, setAiError] = useState("");
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
   function set<K extends keyof PropertyFormData>(key: K, value: PropertyFormData[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
@@ -66,11 +74,79 @@ export default function PropertyForm({ initial }: Props) {
     );
   }
 
+  // Copy to clipboard with visual feedback
+  const copyToClipboard = useCallback(async (text: string, field: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch {
+      // Fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    }
+  }, []);
+
+  // AI generate listing title + description
+  async function handleGenerate() {
+    setGenerating(true);
+    setAiError("");
+    setAiTitle("");
+    setAiDescription("");
+
+    try {
+      const res = await fetch("/api/admin/generate-listing", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address: form.address,
+          city: form.city,
+          bedrooms: form.bedrooms,
+          bathrooms: form.bathrooms,
+          sqft: form.sqft,
+          price: form.price,
+          pet_friendly: form.pet_friendly,
+          parking: form.parking,
+          utilities_included: form.utilities_included,
+          utilities_list: form.utilities_list,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to generate");
+      }
+
+      const data = await res.json();
+      setAiTitle(data.title || "");
+      setAiDescription(data.description || "");
+    } catch (err: unknown) {
+      setAiError(err instanceof Error ? err.message : "Failed to generate listing. Try again.");
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  // Use AI-generated content directly in the form
+  function useAiTitle() {
+    if (aiTitle) set("title", aiTitle);
+  }
+
+  function useAiDescription() {
+    if (aiDescription) set("description", aiDescription);
+  }
+
   async function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
 
-    const remaining = 8 - form.images.length;
+    const remaining = MAX_PHOTOS - form.images.length;
     const toUpload = files.slice(0, remaining);
 
     for (let i = 0; i < toUpload.length; i++) {
@@ -134,6 +210,7 @@ export default function PropertyForm({ initial }: Props) {
   }
 
   const isEdit = !!initial?.id;
+  const hasEnoughForAI = form.city && (form.bedrooms || form.bathrooms || form.address);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
@@ -239,18 +316,6 @@ export default function PropertyForm({ initial }: Props) {
           </div>
         </section>
 
-        {/* Description */}
-        <section className="bg-white rounded-xl border border-[#D8D2C8] p-6 space-y-5">
-          <h2 className="font-[family-name:var(--font-cormorant)] text-xl" style={{ color: "#1F2F3A" }}>Description</h2>
-          <textarea
-            value={form.description}
-            onChange={(e) => set("description", e.target.value)}
-            rows={5}
-            placeholder="Describe the property — neighbourhood, finishes, highlights..."
-            className={inputCls + " resize-none"}
-          />
-        </section>
-
         {/* Features */}
         <section className="bg-white rounded-xl border border-[#D8D2C8] p-6 space-y-5">
           <h2 className="font-[family-name:var(--font-cormorant)] text-xl" style={{ color: "#1F2F3A" }}>Features</h2>
@@ -301,11 +366,130 @@ export default function PropertyForm({ initial }: Props) {
           </div>
         </section>
 
+        {/* Description */}
+        <section className="bg-white rounded-xl border border-[#D8D2C8] p-6 space-y-5">
+          <h2 className="font-[family-name:var(--font-cormorant)] text-xl" style={{ color: "#1F2F3A" }}>Description</h2>
+          <textarea
+            value={form.description}
+            onChange={(e) => set("description", e.target.value)}
+            rows={5}
+            placeholder="Describe the property — neighbourhood, finishes, highlights..."
+            className={inputCls + " resize-none"}
+          />
+        </section>
+
+        {/* AI Listing Generator */}
+        <section className="bg-white rounded-xl border border-[#D8D2C8] p-6 space-y-5">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-[family-name:var(--font-cormorant)] text-xl" style={{ color: "#1F2F3A" }}>AI Listing Generator</h2>
+              <p className="text-sm mt-1" style={{ color: "#666666" }}>
+                Fill in the details above, then generate a title and description you can use anywhere.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleGenerate}
+            disabled={generating || !hasEnoughForAI}
+            className="px-6 py-3 text-sm rounded transition-opacity hover:opacity-80 disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5" }}
+          >
+            {generating ? (
+              <span className="flex items-center gap-2">
+                <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Generating...
+              </span>
+            ) : (
+              "Generate Title & Description"
+            )}
+          </button>
+
+          {aiError && (
+            <p className="text-sm px-4 py-3 rounded bg-red-50" style={{ color: "#8B2030" }}>{aiError}</p>
+          )}
+
+          {/* AI Generated Title */}
+          {aiTitle && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-widest" style={{ color: "#666666" }}>Generated Title</span>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={useAiTitle}
+                    className="text-xs px-3 py-1.5 rounded border transition-colors hover:border-[#1F2F3A]"
+                    style={{ borderColor: "#D8D2C8", color: "#333333" }}
+                  >
+                    Use as Title
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard(aiTitle, "title")}
+                    className="text-xs px-3 py-1.5 rounded transition-colors"
+                    style={{
+                      backgroundColor: copiedField === "title" ? "#1F2F3A" : "#F7F5F2",
+                      color: copiedField === "title" ? "#FAF8F5" : "#333333",
+                      border: "1px solid #D8D2C8",
+                    }}
+                  >
+                    {copiedField === "title" ? "Copied!" : "Copy"}
+                  </button>
+                </div>
+              </div>
+              <div
+                className="px-4 py-3 rounded text-sm"
+                style={{ backgroundColor: "#F7F5F2", color: "#222222", border: "1px solid #D8D2C8" }}
+              >
+                {aiTitle}
+              </div>
+            </div>
+          )}
+
+          {/* AI Generated Description */}
+          {aiDescription && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-widest" style={{ color: "#666666" }}>Generated Description</span>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={useAiDescription}
+                    className="text-xs px-3 py-1.5 rounded border transition-colors hover:border-[#1F2F3A]"
+                    style={{ borderColor: "#D8D2C8", color: "#333333" }}
+                  >
+                    Use as Description
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard(aiDescription, "description")}
+                    className="text-xs px-3 py-1.5 rounded transition-colors"
+                    style={{
+                      backgroundColor: copiedField === "description" ? "#1F2F3A" : "#F7F5F2",
+                      color: copiedField === "description" ? "#FAF8F5" : "#333333",
+                      border: "1px solid #D8D2C8",
+                    }}
+                  >
+                    {copiedField === "description" ? "Copied!" : "Copy"}
+                  </button>
+                </div>
+              </div>
+              <div
+                className="px-4 py-3 rounded text-sm whitespace-pre-wrap leading-relaxed"
+                style={{ backgroundColor: "#F7F5F2", color: "#222222", border: "1px solid #D8D2C8" }}
+              >
+                {aiDescription}
+              </div>
+            </div>
+          )}
+        </section>
+
         {/* Photos */}
         <section className="bg-white rounded-xl border border-[#D8D2C8] p-6 space-y-5">
           <div className="flex items-center justify-between">
             <h2 className="font-[family-name:var(--font-cormorant)] text-xl" style={{ color: "#1F2F3A" }}>Photos</h2>
-            <span className="text-xs" style={{ color: "#999999" }}>{form.images.length} / 8</span>
+            <span className="text-xs" style={{ color: "#666666" }}>{form.images.length} / {MAX_PHOTOS}</span>
           </div>
 
           {form.images.length > 0 && (
@@ -334,7 +518,7 @@ export default function PropertyForm({ initial }: Props) {
             </div>
           )}
 
-          {form.images.length < 8 && (
+          {form.images.length < MAX_PHOTOS && (
             <div>
               <input
                 ref={fileRef}
@@ -348,9 +532,9 @@ export default function PropertyForm({ initial }: Props) {
               <label
                 htmlFor="photo-upload"
                 className={`flex items-center justify-center w-full py-8 border-2 border-dashed border-[#D8D2C8] rounded-lg cursor-pointer hover:border-[#1F2F3A] transition-colors text-sm ${uploadingIdx !== null ? "opacity-50 pointer-events-none" : ""}`}
-                style={{ color: "#999999" }}
+                style={{ color: "#666666" }}
               >
-                {uploadingIdx !== null ? `Uploading photo ${uploadingIdx + 1}...` : `Click to upload photos (up to ${8 - form.images.length} more)`}
+                {uploadingIdx !== null ? `Uploading photo ${uploadingIdx + 1}...` : `Click to upload photos (up to ${MAX_PHOTOS - form.images.length} more)`}
               </label>
             </div>
           )}
@@ -373,7 +557,7 @@ export default function PropertyForm({ initial }: Props) {
             type="button"
             onClick={() => router.push("/admin")}
             className="px-8 py-3 border text-sm rounded transition-colors hover:border-[#1F2F3A]"
-            style={{ borderColor: "#D8D2C8", color: "#444444" }}
+            style={{ borderColor: "#D8D2C8", color: "#333333" }}
           >
             Cancel
           </button>
@@ -386,7 +570,7 @@ export default function PropertyForm({ initial }: Props) {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#444444" }}>
+      <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: "#333333" }}>
         {label}{required && <span className="ml-0.5" style={{ color: "#8B2030" }}>*</span>}
       </label>
       {children}

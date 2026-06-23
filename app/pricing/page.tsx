@@ -79,7 +79,7 @@ export default function PricingPage() {
         <p
           className="text-xs uppercase tracking-widest mb-6"
           style={{
-            color: "rgba(250,248,245,0.55)",
+            color: "rgba(250,248,245,0.75)",
             fontFamily: "var(--font-dm-sans)",
           }}
         >
@@ -127,7 +127,7 @@ export default function PricingPage() {
           <p
             className="text-base max-w-xl mx-auto leading-relaxed"
             style={{
-              color: "rgba(250,248,245,0.65)",
+              color: "rgba(250,248,245,0.8)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -147,7 +147,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest text-center mb-4"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               What You&apos;re Actually Getting
             </p>
@@ -187,7 +187,7 @@ export default function PricingPage() {
                     <p
                       className="text-xs mt-0.5"
                       style={{
-                        color: "#999999",
+                        color: "#666666",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     >
@@ -265,7 +265,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest text-center mb-3"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               Choose Your Plan
             </p>
@@ -314,7 +314,7 @@ export default function PricingPage() {
           <p
             className="text-xs uppercase tracking-widest mb-4"
             style={{
-              color: "rgba(250,248,245,0.55)",
+              color: "rgba(250,248,245,0.75)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -359,7 +359,7 @@ export default function PricingPage() {
           <p
             className="text-base max-w-lg mx-auto leading-relaxed mb-4"
             style={{
-              color: "rgba(250,248,245,0.65)",
+              color: "rgba(250,248,245,0.8)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -397,7 +397,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest mb-4"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               Run the Numbers
             </p>
@@ -409,7 +409,7 @@ export default function PricingPage() {
             </h2>
             <p
               className="text-base mb-16 leading-relaxed"
-              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
             >
               On a $2,000/month rental, the difference between Managed and
               Passive is $140/month. Free placement saves you $2,000 every
@@ -428,7 +428,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest mb-4"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               The Real Cost of Self-Managing
             </p>
@@ -440,7 +440,7 @@ export default function PricingPage() {
             </h2>
             <p
               className="text-base mb-14 leading-relaxed"
-              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
             >
               Most landlords underestimate what self-managing actually costs
               them. It&apos;s not just time — it&apos;s the markups you&apos;re
@@ -484,7 +484,7 @@ export default function PricingPage() {
                   <p
                     className="text-xs uppercase tracking-widest mb-2"
                     style={{
-                      color: "#999999",
+                      color: "#666666",
                       fontFamily: "var(--font-dm-sans)",
                     }}
                   >
@@ -521,7 +521,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest text-center mb-4"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               What Others Charge
             </p>
@@ -533,7 +533,7 @@ export default function PricingPage() {
             </h2>
             <p
               className="text-sm text-center mb-14"
-              style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
             >
               Every one of these is $0 with Prospera.
             </p>
@@ -609,7 +609,7 @@ export default function PricingPage() {
                       <td
                         className="px-6 py-4 text-center"
                         style={{
-                          color: "#999999",
+                          color: "#666666",
                           fontFamily: "var(--font-dm-sans)",
                         }}
                       >
@@ -630,7 +630,7 @@ export default function PricingPage() {
           <FadeIn>
             <p
               className="text-xs uppercase tracking-widest text-center mb-4"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               Common Questions
             </p>
@@ -654,7 +654,7 @@ export default function PricingPage() {
           <p
             className="text-xs uppercase tracking-widest mb-4"
             style={{
-              color: "rgba(250,248,245,0.55)",
+              color: "rgba(250,248,245,0.75)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >
@@ -671,7 +671,7 @@ export default function PricingPage() {
           <p
             className="text-base mb-10 max-w-md mx-auto leading-relaxed"
             style={{
-              color: "rgba(250,248,245,0.65)",
+              color: "rgba(250,248,245,0.8)",
               fontFamily: "var(--font-dm-sans)",
             }}
           >

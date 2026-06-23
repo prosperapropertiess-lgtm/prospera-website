@@ -48,7 +48,7 @@ export default function ApplicationRow({ application }: { application: Applicati
         </p>
       </td>
       <td style={{ padding: "14px 16px" }}>
-        <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+        <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
           {propertyAddress}
         </p>
       </td>

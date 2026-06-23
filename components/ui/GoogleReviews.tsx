@@ -123,7 +123,7 @@ function Carousel({ data }: { data: ReviewsData }) {
           href={GOOGLE_REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#999999] hover:text-[#8B2030] transition-colors underline"
+          className="text-xs text-[#666666] hover:text-[#8B2030] transition-colors underline"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {data.total}+ Google reviews
@@ -154,7 +154,7 @@ function Carousel({ data }: { data: ReviewsData }) {
             </p>
             <p
               className="text-xs uppercase tracking-widest"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
             >
               {review.author}
             </p>

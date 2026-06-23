@@ -193,7 +193,7 @@ export default function ChatWidget() {
                       <button type="submit" className="btn-primary flex-1 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                         Send
                       </button>
-                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                      <button type="button" onClick={() => setShowLeadForm(false)} className="px-3 py-2 text-xs rounded-lg" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                         Skip
                       </button>
                     </div>
@@ -226,7 +226,7 @@ export default function ChatWidget() {
                   <svg width="16" height="16" fill="none" stroke="#FAF8F5" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                 </button>
               </div>
-              <p className="text-center text-xs mt-2" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-center text-xs mt-2" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 Powered by Prospera Properties · (519) 697-1227
               </p>
             </div>

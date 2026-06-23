@@ -14,13 +14,13 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="pt-32 pb-16 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
             Questions & Answers
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Frequently Asked Questions
           </h1>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Answers to the most common questions from landlords and tenants across London, St. Thomas, and Strathroy.
           </p>
         </FadeIn>
@@ -36,7 +36,7 @@ export default function FAQPage() {
             <h2 className="text-3xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Still Have Questions?
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-8" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               Reach out directly — we answer every inquiry personally, usually within a few hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

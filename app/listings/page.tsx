@@ -77,11 +77,11 @@ export default function ListingsPage() {
       {/* Hero */}
       <section className="pt-32 pb-14 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>Available Now</p>
+          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>Available Now</p>
           <h1 className="text-5xl md:text-6xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Find Your Next Home.
           </h1>
-          <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Quality rentals across London, St. Thomas, and Strathroy — professionally managed.
           </p>
         </FadeIn>
@@ -100,7 +100,7 @@ export default function ListingsPage() {
                 style={{
                   backgroundColor: city === c ? "#1F2F3A" : "transparent",
                   borderColor: city === c ? "#1F2F3A" : "#D8D2C8",
-                  color: city === c ? "#FAF8F5" : "#444444",
+                  color: city === c ? "#FAF8F5" : "#333333",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -113,7 +113,7 @@ export default function ListingsPage() {
 
           {/* Bedrooms */}
           <div className="flex items-center gap-2">
-            <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Beds:</span>
+            <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Beds:</span>
             {BEDS.map((b) => (
               <button
                 key={b}
@@ -122,7 +122,7 @@ export default function ListingsPage() {
                 style={{
                   backgroundColor: beds === b ? "#8B2030" : "transparent",
                   borderColor: beds === b ? "#8B2030" : "#D8D2C8",
-                  color: beds === b ? "#FAF8F5" : "#444444",
+                  color: beds === b ? "#FAF8F5" : "#333333",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -135,7 +135,7 @@ export default function ListingsPage() {
 
           {/* Max Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs whitespace-nowrap" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs whitespace-nowrap" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
             <input
               type="range"
               min={800}
@@ -157,10 +157,10 @@ export default function ListingsPage() {
               onChange={(e) => setPetFriendly(e.target.checked)}
               className="accent-[#8B2030]"
             />
-            <span className="text-xs" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
+            <span className="text-xs" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
           </label>
 
-          <div className="ml-auto text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+          <div className="ml-auto text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
             {loading ? "Loading..." : `${filtered.length} ${filtered.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function ListingsPage() {
           ) : error || filtered.length === 0 ? (
             <div className="text-center py-24">
               <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
-              <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
+              <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
               <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
                 Contact Us
               </Link>
@@ -226,21 +226,21 @@ export default function ListingsPage() {
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h3 className="text-xl font-medium leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{p.title}</h3>
                       </div>
-                      <p className="text-xs mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{p.address}, {p.city}</p>
+                      <p className="text-xs mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{p.address}, {p.city}</p>
 
                       {/* Specs */}
-                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                         <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
                         <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
                         {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
                         {p.parking && <span>🚗 Parking</span>}
                       </div>
 
-                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
+                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
 
                       <div className="flex items-center justify-between">
                         <p className="text-2xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-                          ${p.price.toLocaleString()}<span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/mo</span>
+                          ${p.price.toLocaleString()}<span className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>/mo</span>
                         </p>
                         <Link
                           href={`/listings/${p.id}`}
@@ -265,7 +265,7 @@ export default function ListingsPage() {
           <p className="text-3xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Don&apos;t see what you&apos;re looking for?
           </p>
-          <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
           </p>
           <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>

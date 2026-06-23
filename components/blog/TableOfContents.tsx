@@ -50,7 +50,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
       >
         <p
           className="text-xs uppercase tracking-widest mb-4 font-medium"
-          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
         >
           In this article
         </p>

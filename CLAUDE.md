@@ -15,8 +15,8 @@
 | White Surface | `#FFFFFF` | Cards, modals, forms |
 | Neutral Border | `#D8D2C8` | All borders, dividers, decorative dots/lines |
 | Primary Text | `#222222` | Main body text |
-| Secondary Text | `#444444` | Supporting paragraphs |
-| Muted Text | `#999999` | Labels, metadata, timestamps, eyebrow text |
+| Secondary Text | `#333333` | Supporting paragraphs |
+| Muted Text | `#666666` | Labels, metadata, timestamps, eyebrow text |
 | Light on Dark | `#FAF8F5` | Text on navy/dark backgrounds only |
 
 **rgba() equivalents:**
@@ -25,7 +25,7 @@
 
 ### Color rules (non-negotiable)
 - Burgundy is **rare**. It only appears on: primary buttons, and at most one accent element per section (a left border, a checkmark). Never on labels, dots, decorative lines, or secondary text.
-- Section eyebrow labels are always `#999999` — never burgundy.
+- Section eyebrow labels are always `#666666` — never burgundy.
 - Bullet dots and decorative elements are always `#D8D2C8` — never burgundy.
 - Never use any other accent color. No gold, no bright red, no teal. The palette above is the whole palette.
 

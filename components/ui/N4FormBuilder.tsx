@@ -22,7 +22,7 @@ const inputStyle = {
 };
 
 const labelClass = "block text-xs font-semibold uppercase tracking-wider mb-1.5";
-const labelStyle = { color: "#444444", fontFamily: "var(--font-dm-sans)" };
+const labelStyle = { color: "#333333", fontFamily: "var(--font-dm-sans)" };
 
 // Auto-calculate termination date (14 days from notice date, month/year tenants)
 function calcTerminationDate(noticeDate: string): string {
@@ -165,7 +165,7 @@ export default function N4FormBuilder() {
         </div>
         <p
           className="mt-3 text-sm leading-relaxed"
-          style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
         >
           Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly — no PDF editor needed.
         </p>
@@ -200,7 +200,7 @@ export default function N4FormBuilder() {
                       style={inputStyle}
                       placeholder="e.g. John Smith, Jane Smith"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       List all tenants in possession of the unit
                     </p>
                   </div>
@@ -225,7 +225,7 @@ export default function N4FormBuilder() {
                       style={inputStyle}
                       placeholder="e.g. Unit 2, 123 Main Street, London, ON N6A 1A1"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       Include unit number and postal code
                     </p>
                   </div>
@@ -251,7 +251,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       style={inputStyle}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       Must be the day after rent was due
                     </p>
                   </div>
@@ -265,7 +265,7 @@ export default function N4FormBuilder() {
                       style={inputStyle}
                       placeholder="DD/MM/YYYY — auto-filled (14 days)"
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       Auto-set to 14 days. Adjust if adding mail delivery days.
                     </p>
                   </div>
@@ -442,7 +442,7 @@ export default function N4FormBuilder() {
                       className={inputClass}
                       style={inputStyle}
                     />
-                    <p className="mt-1 text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       Defaults to notice date if left blank
                     </p>
                   </div>
@@ -507,7 +507,7 @@ export default function N4FormBuilder() {
                   <p className="text-sm font-medium text-left" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
                     I&apos;d like Prospera to handle this for me
                   </p>
-                  <p className="text-xs mt-0.5 text-left" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-xs mt-0.5 text-left" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                     Ebin will reach out within 24 hours — free consultation, no pressure.
                   </p>
                 </div>
@@ -540,7 +540,7 @@ export default function N4FormBuilder() {
                   type="button"
                   onClick={() => setStep("form")}
                   className="text-xs transition-opacity hover:opacity-70"
-                  style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   ← Go back and edit
                 </button>
@@ -598,7 +598,7 @@ export default function N4FormBuilder() {
                 <button
                   onClick={() => { setStep("form"); }}
                   className="flex-1 py-3 text-xs font-semibold uppercase tracking-widest border rounded-lg transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-                  style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ borderColor: "#D8D2C8", color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fill Another N4
                 </button>
@@ -617,7 +617,7 @@ export default function N4FormBuilder() {
 
       {/* Disclaimer */}
       <div className="px-8 py-4 border-t" style={{ borderColor: "#D8D2C8" }}>
-        <p className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           This tool generates the official Ontario LTB N4 form. Always verify dates and amounts before serving. Prospera Properties is not a law firm. For complex situations, consult a paralegal or lawyer.
         </p>
       </div>

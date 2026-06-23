@@ -101,7 +101,7 @@ export default function LandlordsPage() {
       {/* Hero */}
       <section className="pt-36 pb-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
             For Landlords
           </p>
           <h1
@@ -112,7 +112,7 @@ export default function LandlordsPage() {
             <br />
             <em style={{ color: "rgba(250,248,245,0.6)" }}>to spend your evenings managing it.</em>
           </h1>
-          <p className="text-base max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-base max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Every hour you spend chasing rent, coordinating repairs, or
             Googling N4 forms is an hour your rental isn&apos;t passive. We take
             that off your plate — completely. You own the asset. We run it.
@@ -140,7 +140,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               The Real Problems
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -155,7 +155,7 @@ export default function LandlordsPage() {
                 <div className="bg-[#F7F5F2] border p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
                   <span className="block text-2xl mb-4" style={{ color: "#8B2030" }}>{p.icon}</span>
                   <h3 className="font-semibold text-base mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{p.label}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{p.desc}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{p.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -167,7 +167,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               The Process
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -207,7 +207,7 @@ export default function LandlordsPage() {
       <section id="pricing" className="py-24" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Transparent Pricing
             </p>
             <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight px-5 sm:px-8" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
@@ -215,7 +215,7 @@ export default function LandlordsPage() {
               <br />
               <em>No hidden fees. Ever.</em>
             </h2>
-            <p className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               Zero setup fee. Lease renewal always free. The only number you pay is the one listed below.
             </p>
           </FadeIn>
@@ -236,7 +236,7 @@ export default function LandlordsPage() {
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Common Questions
             </p>
             <h2 className="text-4xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>

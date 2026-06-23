@@ -106,7 +106,7 @@ export default function RentActivityToast() {
             </p>
             <p style={{
               fontSize: 11,
-              color: "#999999",
+              color: "#666666",
               fontFamily: "var(--font-dm-sans)",
               margin: "3px 0 0",
             }}>

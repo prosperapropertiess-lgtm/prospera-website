@@ -55,13 +55,13 @@ export default function StroathroyPage() {
       {/* Hero */}
       <section className="pt-36 pb-24 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy, Ontario
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-6 max-w-3xl mx-auto leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Property Management in Strathroy, Ontario
           </h1>
-          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Strathroy offers what London can&apos;t — affordability, stability, and strong cash flow. We handle the day-to-day so you don&apos;t have to.
           </p>
           <Link
@@ -80,7 +80,7 @@ export default function StroathroyPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <p className="text-3xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{s.value}</p>
-              <p className="text-xs uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
+              <p className="text-xs uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -93,7 +93,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Full-Service Management for Strathroy Landlords
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               One flat rate. Everything included. No hidden fees, no maintenance markups.
             </p>
           </FadeIn>
@@ -118,7 +118,7 @@ export default function StroathroyPage() {
             <h2 className="text-3xl font-light text-center mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               We Know Strathroy&apos;s Neighbourhoods
             </h2>
-            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-center text-sm mb-12 max-w-xl mx-auto" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               Pricing and tenant profiles differ by area. We use that knowledge to keep your unit full.
             </p>
           </FadeIn>
@@ -129,7 +129,7 @@ export default function StroathroyPage() {
                   <div className="w-1 shrink-0 mt-1 rounded-full" style={{ backgroundColor: "#8B2030" }} />
                   <div>
                     <h3 className="font-medium mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{n.name}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{n.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -166,9 +166,9 @@ export default function StroathroyPage() {
                   ].map((row, i) => (
                     <tr key={row.type} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2" }}>
                       <td className="p-4 font-medium" style={{ color: "#222222" }}>{row.type}</td>
-                      <td className="p-4 text-right" style={{ color: "#999999" }}>{row.low}</td>
+                      <td className="p-4 text-right" style={{ color: "#666666" }}>{row.low}</td>
                       <td className="p-4 text-right font-semibold" style={{ color: "#8B2030" }}>{row.avg}</td>
-                      <td className="p-4 text-right" style={{ color: "#999999" }}>{row.high}</td>
+                      <td className="p-4 text-right" style={{ color: "#666666" }}>{row.high}</td>
                     </tr>
                   ))}
                 </tbody>

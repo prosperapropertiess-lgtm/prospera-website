@@ -60,7 +60,7 @@ export default function FAQTabs() {
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 borderColor: activeTab === tab ? "#8B2030" : "transparent",
-                color: activeTab === tab ? "#8B2030" : "#999999",
+                color: activeTab === tab ? "#8B2030" : "#666666",
               }}
             >
               {tab}

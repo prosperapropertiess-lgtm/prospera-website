@@ -107,7 +107,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
               {/* Close */}
               <button
                 onPointerDown={dismiss}
-                className="absolute top-2 right-2 text-[#999999] hover:text-[#222222] transition-colors text-xl leading-none p-3"
+                className="absolute top-2 right-2 text-[#666666] hover:text-[#222222] transition-colors text-xl leading-none p-3"
                 aria-label="Close"
                 style={{ touchAction: "manipulation" }}
               >
@@ -119,7 +119,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                   <p className="text-3xl mb-3" style={{ fontFamily: "var(--font-cormorant)", color: "#1F2F3A" }}>
                     You&apos;re in.
                   </p>
-                  <p className="text-sm" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                     {isLandlord
                       ? "We'll be in touch with tips and market updates."
                       : "We'll notify you when new listings match your search."}
@@ -148,7 +148,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                       {/* What it covers */}
                       <p
                         className="text-xs uppercase tracking-widest mb-2 mt-4"
-                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                       >
                         The addendum covers
                       </p>
@@ -160,7 +160,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                         ].map((item) => (
                           <li key={item} className="flex items-start gap-2">
                             <span style={{ color: "#8B2030", marginTop: 2, flexShrink: 0 }}>—</span>
-                            <span className="text-sm leading-snug" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                            <span className="text-sm leading-snug" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                               {item}
                             </span>
                           </li>
@@ -202,7 +202,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
                       <p
                         className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                         onClick={dismiss}
                       >
                         My lease is already airtight
@@ -256,7 +256,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           className="px-4 py-3 text-sm outline-none border rounded"
-                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: city ? "#222222" : "#999999", fontFamily: "var(--font-dm-sans)" }}
+                          style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: city ? "#222222" : "#666666", fontFamily: "var(--font-dm-sans)" }}
                         >
                           <option value="">Preferred city (optional)</option>
                           <option value="London">London</option>
@@ -280,7 +280,7 @@ export default function NewsletterPopup({ variant, delayMs = 30000 }: Props) {
 
                       <p
                         className="text-xs text-center mt-4 cursor-pointer hover:opacity-70 transition-opacity"
-                        style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                         onClick={dismiss}
                       >
                         No thanks

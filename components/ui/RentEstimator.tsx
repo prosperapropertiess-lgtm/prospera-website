@@ -119,7 +119,7 @@ export default function RentEstimator() {
         fontFamily: "var(--font-dm-sans)",
         border: `1px solid ${lead[field as keyof typeof lead] === value ? "#8B2030" : "#D8D2C8"}`,
         backgroundColor: lead[field as keyof typeof lead] === value ? "rgba(139,32,48,0.07)" : "transparent",
-        color: lead[field as keyof typeof lead] === value ? "#8B2030" : "#444444",
+        color: lead[field as keyof typeof lead] === value ? "#8B2030" : "#333333",
         cursor: "pointer",
         borderRadius: 4,
         transition: "all 0.15s",
@@ -132,13 +132,13 @@ export default function RentEstimator() {
   return (
     <div id="rent-estimator" className="px-5 sm:px-8 py-16" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8", borderBottom: "1px solid #D8D2C8" }}>
       <div className="max-w-2xl mx-auto">
-        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           Free Tool
         </p>
         <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
           What could your property rent for?
         </h2>
-        <p className="text-sm mb-8" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+        <p className="text-sm mb-8" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
           Get an instant estimate based on current market rents in your city.
         </p>
 
@@ -186,9 +186,9 @@ export default function RentEstimator() {
               <p className="text-5xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
                 ${result.low.toLocaleString()} – ${result.high.toLocaleString()}
               </p>
-              <span className="text-sm" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>/month</span>
+              <span className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>/month</span>
             </div>
-            <p className="text-xs mb-5" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs mb-5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               {result?.live
                 ? `Based on ${result.count} active listings · ${beds}-bed units in ${city}`
                 : `City-wide estimate for ${beds}-bed units in ${city}`}
@@ -198,7 +198,7 @@ export default function RentEstimator() {
               <p className="text-base mb-2 font-light leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", fontSize: 22 }}>
                 That ${spread.toLocaleString()}/month spread is ${(spread * 12).toLocaleString()}/year.
               </p>
-              <p className="text-sm leading-relaxed mb-5" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 This range doesn&apos;t account for your city zone, garage, finishes, inclusions, transit access, or 15 other factors that actually move rent. Your unit could sit at either end — or outside it entirely. A precise number takes 3 minutes.
               </p>
               <button
@@ -208,7 +208,7 @@ export default function RentEstimator() {
               >
                 Get My Precise Estimate — Free →
               </button>
-              <p className="text-xs text-center mt-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-xs text-center mt-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 Personalized analysis emailed within the hour. No obligation.
               </p>
             </div>
@@ -218,35 +218,35 @@ export default function RentEstimator() {
         {/* Step 3 — Lead capture form */}
         {showLeadForm && submitStatus !== "done" && (
           <div className="border bg-white p-7 rounded-xl" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Step 2 of 2
             </p>
             <p className="text-xl font-light mb-1" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Tell us where to send your analysis
             </p>
-            <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               We&apos;ll email you a secure link to fill out the full property details. Takes 3 minutes.
             </p>
 
             <form onSubmit={handleLeadSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Name *</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Name *</label>
                   <input type="text" required value={lead.name} onChange={(e) => setLeadField("name", e.target.value)} placeholder="First name" style={inputStyle} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Email *</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Email *</label>
                   <input type="email" required value={lead.email} onChange={(e) => setLeadField("email", e.target.value)} placeholder="your@email.com" style={inputStyle} />
                 </div>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Phone</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Phone</label>
                   <input type="tel" value={lead.phone} onChange={(e) => setLeadField("phone", e.target.value)} placeholder="(519) 000-0000" style={inputStyle} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Best time to call</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Best time to call</label>
                   <select value={lead.best_time_to_call} onChange={(e) => setLeadField("best_time_to_call", e.target.value)} style={inputStyle}>
                     <option value="">Select</option>
                     <option value="morning">Morning (8–12)</option>
@@ -258,12 +258,12 @@ export default function RentEstimator() {
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Property address</label>
+                <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Property address</label>
                 <input type="text" value={lead.address} onChange={(e) => setLeadField("address", e.target.value)} placeholder="123 Main St (optional)" style={inputStyle} />
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>I am a</label>
+                <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>I am a</label>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {toggleBtn("owner_role", "landlord", "Landlord")}
                   {toggleBtn("owner_role", "realtor", "Realtor")}
@@ -273,7 +273,7 @@ export default function RentEstimator() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Properties owned / managed</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Properties owned / managed</label>
                   <select value={lead.properties_owned} onChange={(e) => setLeadField("properties_owned", e.target.value)} style={inputStyle}>
                     <option value="">Select</option>
                     <option value="1">1</option>
@@ -284,7 +284,7 @@ export default function RentEstimator() {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "#999999", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>Currently</label>
+                  <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "var(--font-dm-sans)" }}>Currently</label>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {toggleBtn("management_status", "self_managing", "Self-managing")}
                     {toggleBtn("management_status", "using_pm", "Using a PM")}
@@ -306,7 +306,7 @@ export default function RentEstimator() {
                 type="button"
                 onClick={() => setShowLeadForm(false)}
                 className="text-xs text-center transition-opacity hover:opacity-60"
-                style={{ color: "#999999", fontFamily: "var(--font-dm-sans)", background: "none", border: "none", cursor: "pointer" }}
+                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", background: "none", border: "none", cursor: "pointer" }}
               >
                 ← Back to estimate
               </button>
@@ -320,7 +320,7 @@ export default function RentEstimator() {
             <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               Check your inbox.
             </p>
-            <p className="text-sm leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
               We sent you a secure link to complete your property details. The full analysis will be emailed back within the hour.
             </p>
           </div>

@@ -23,7 +23,7 @@
   --burgundy:  #8B2030;
   --neutral:   #D8D2C8;
   --text:      #222222;
-  --muted:     #444444;
+  --muted:     #333333;
 
   /* Custom easing curves — stronger than CSS built-ins */
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
@@ -40,6 +40,10 @@
   --font-dm-sans:   var(--font-dm-sans);
 }
 
+html {
+  font-size: 350% !important;
+}
+
 body {
   background-color: var(--warm-bg);
   color: var(--text);
@@ -48,7 +52,7 @@ body {
 
 /* Mobile text scale — bump base size so text isn't tiny */
 @media (max-width: 767px) {
-  html { font-size: 107%; }
+  html { font-size: 160% !important; }
   /* Reduce extreme letter-spacing on labels at small sizes */
   .tracking-widest { letter-spacing: 0.06em; }
   /* Looser line height for body text on narrow screens */
@@ -159,7 +163,7 @@ input:focus, select:focus, textarea:focus {
   font-size: 1rem;
   line-height: 1.9;
   margin-bottom: 1.4rem;
-  color: #444444;
+  color: #333333;
 }
 .prose-content ul, .prose-content ol {
   padding-left: 1.5rem;
@@ -168,7 +172,7 @@ input:focus, select:focus, textarea:focus {
 .prose-content li {
   line-height: 1.85;
   margin-bottom: 0.4rem;
-  color: #444444;
+  color: #333333;
 }
 .prose-content a { color: #8B2030; text-decoration: underline; }
 .prose-content blockquote {
@@ -180,7 +184,7 @@ input:focus, select:focus, textarea:focus {
 }
 .prose-content table { width: 100%; border-collapse: collapse; margin: 1.75rem 0; font-size: 0.9rem; }
 .prose-content th { background-color: #1F2F3A; color: #FAF8F5; padding: 0.75rem 1rem; text-align: left; font-weight: 500; }
-.prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #D8D2C8; color: #444444; }
+.prose-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #D8D2C8; color: #333333; }
 .prose-content tr:nth-child(even) td { background-color: #F7F5F2; }
 .prose-content strong { font-weight: 600; color: #222222; }
 .prose-content code { background-color: #F0EDE8; color: #8B2030; padding: 0.1em 0.4em; font-size: 0.875em; }

@@ -65,12 +65,12 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
       >
         <div className="h-1 w-full" style={{ backgroundColor: "#8B2030" }} />
         <div className="p-8">
-          <button onClick={onClose} className="absolute top-4 right-5 text-[#999999] hover:text-[#222222] text-xl leading-none">×</button>
+          <button onClick={onClose} className="absolute top-4 right-5 text-[#666666] hover:text-[#222222] text-xl leading-none">×</button>
           {status === "success" ? (
             <div className="text-center py-6">
               <p className="text-4xl mb-2">📬</p>
               <h3 className="text-2xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
-              <p className="text-sm mb-6" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 We&apos;ve sent <strong>{resource.title}</strong> to {email}.
               </p>
               <button onClick={onClose} className="text-xs uppercase tracking-widest underline" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Close</button>
@@ -79,7 +79,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
             <>
               <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
               <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
-              <p className="text-sm mb-6 leading-relaxed" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+              <p className="text-sm mb-6 leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                 Enter your email and we&apos;ll send it instantly. No spam — just the occasional landlord tip.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -122,7 +122,7 @@ export default function ResourcesGrid() {
                   <button
                     onClick={() => setActiveResource(resource)}
                     className="w-full py-3 text-xs uppercase tracking-widest border rounded transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-                    style={{ borderColor: "#D8D2C8", color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ borderColor: "#D8D2C8", color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                   >
                     Download Free
                   </button>

@@ -23,7 +23,7 @@ export default function WelcomeBanner() {
             </p>
             <p
               className="text-xs mt-0.5 leading-relaxed"
-              style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
             >
               Ebin will reach out within 24 hours with your rental analysis and to book your strategy call.
             </p>

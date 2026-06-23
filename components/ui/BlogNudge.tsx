@@ -50,14 +50,14 @@ export default function BlogNudge({
           </p>
           <p
             className="text-sm leading-relaxed line-clamp-2"
-            style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}
+            style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
           >
             {excerpt}
           </p>
         </div>
         <div
           className="text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-2 transition-colors group-hover:text-[#8B2030] font-semibold"
-          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
         >
           Read more
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" className="transition-transform group-hover:translate-x-1">
