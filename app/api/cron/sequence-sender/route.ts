@@ -13,7 +13,7 @@ import { logAgentRun } from "@/lib/agent-logger";
 import { SEQUENCES } from "@/lib/email-sequences";
 import { Resend } from "resend";
 
-const resend        = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const CRON_SECRET   = process.env.CRON_SECRET;
 const FROM_EMAIL    = "Ebin at Prospera <ebin@prosperaproperties.co>";
 const BATCH_LIMIT   = 50; // max emails per cron run
@@ -75,7 +75,7 @@ export async function GET(req: NextRequest) {
       const html = emailDef.getHtml(name);
 
       // Send via Resend
-      const { error: sendErr } = await resend.emails.send({
+      const { error: sendErr } = await getResend().emails.send({
         from:    FROM_EMAIL,
         to:      row.email,
         subject: emailDef.subject,

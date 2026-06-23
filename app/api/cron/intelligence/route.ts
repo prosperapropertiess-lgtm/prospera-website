@@ -20,7 +20,7 @@ import { logAgentRun } from "@/lib/agent-logger";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const RECIPIENT = "ebinjaison02@gmail.com";
 const FROM = "Ebin Intelligence <hello@prosperaproperties.co>";
@@ -343,7 +343,7 @@ export async function GET(req: NextRequest) {
     const subject = `Day ${dayNumber} · ${domain.charAt(0).toUpperCase() + domain.slice(1)}`;
 
     // Send email
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: FROM,
       to: RECIPIENT,
       subject,

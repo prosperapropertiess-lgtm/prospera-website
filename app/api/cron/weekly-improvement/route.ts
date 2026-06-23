@@ -19,7 +19,7 @@ import { logAgentRun } from "@/lib/agent-logger";
 import { SEQUENCES } from "@/lib/email-sequences";
 
 const anthropic   = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const resend      = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const CRON_SECRET = process.env.CRON_SECRET;
 const EBIN_EMAIL  = "prosperapropertiess@gmail.com";
 const FROM_EMAIL  = "Prospera AI <ebin@prosperaproperties.co>";
@@ -275,7 +275,7 @@ ${typeBreakdown}
     const emailHtml = htmlReport(bodyContent);
 
     // ── 6. Send the report to Ebin ────────────────────────────────────────────
-    const { error: sendErr } = await resend.emails.send({
+    const { error: sendErr } = await getResend().emails.send({
       from:    FROM_EMAIL,
       to:      EBIN_EMAIL,
       subject: `📊 Weekly Email Report — ${totalSent} sent, ${analysis.length > 0 ? "improvements ready" : "nothing to report"}`,

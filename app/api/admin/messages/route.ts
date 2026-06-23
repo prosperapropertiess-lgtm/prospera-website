@@ -6,7 +6,9 @@ import { Resend } from "resend";
 // Owner email notifications are skipped for now. Add an owner_email column to owner_access
 // and update this route to send owner notifications when that column is available.
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY!);
+}
 const FROM_EMAIL = "Ebin at Prospera <ebin@prosperaproperties.co>";
 const ADMIN_SECRET = process.env.ADMIN_API_SECRET;
 
@@ -51,7 +53,7 @@ export async function POST(req: NextRequest) {
   const propertyLabel = propertyAddress || "the property";
   const propertyUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://prosperaproperties.co"}/owners/${token}/${propertyId}`;
 
-  const { error: emailErr } = await resend.emails.send({
+  const { error: emailErr } = await getResend().emails.send({
     from: FROM_EMAIL,
     to: "prosperapropertiess@gmail.com",
     subject: `Update posted to ${ownerName ?? "owner"} — ${propertyLabel}`,

@@ -20,7 +20,7 @@ import { weeklyBlogEmail } from "@/lib/emails";
 import { logAgentRun } from "@/lib/agent-logger";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
 const BASE_URL = "https://www.prosperaproperties.co";
@@ -179,7 +179,7 @@ export async function GET(req: NextRequest) {
         category: next.category,
       });
 
-      await resend.emails.send({
+      await getResend().emails.send({
         from: FROM,
         to: sub.email,
         subject: copy.subject,

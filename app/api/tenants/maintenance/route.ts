@@ -4,7 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantMaintenanceRequests, getTenantInfo } from "@/lib/tenant-data";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
@@ -62,6 +62,7 @@ interface SubmitBody {
   description: string;
   troubleshootingSteps: string;
   aiDiagnosis: string;
+  photoUrls?: string[];
 }
 
 async function handleDiagnose(body: DiagnoseBody, _tenantId: string) {
@@ -78,7 +79,7 @@ async function handleDiagnose(body: DiagnoseBody, _tenantId: string) {
   });
 
   const steps = message.content[0].type === "text" ? message.content[0].text : "";
-  return NextResponse.json({ steps });
+  return NextResponse.json({ diagnosis: steps });
 }
 
 async function handleSubmit(
@@ -86,7 +87,7 @@ async function handleSubmit(
   access: { notion_tenant_id: string; tenant_name: string; property_id: string },
   token: string
 ) {
-  const { category, description, troubleshootingSteps, aiDiagnosis } = body;
+  const { category, description, troubleshootingSteps, aiDiagnosis, photoUrls } = body;
   if (!category || !description) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
@@ -94,24 +95,40 @@ async function handleSubmit(
   const sb = getSupabaseAdmin();
   const info = await getTenantInfo(access.notion_tenant_id);
 
-  const { data: request, error } = await sb
+  const baseData = {
+    tenant_id: access.notion_tenant_id,
+    property_id: access.property_id,
+    token,
+    category,
+    description,
+    troubleshooting_steps: troubleshootingSteps ?? "[]",
+    ai_diagnosis: aiDiagnosis ?? "",
+    status: "submitted",
+  };
+
+  let insertResult = await sb
     .from("tenant_maintenance_requests")
-    .insert({
-      tenant_id: access.notion_tenant_id,
-      property_id: access.property_id,
-      token,
-      category,
-      description,
-      troubleshooting_steps: troubleshootingSteps ?? "[]",
-      ai_diagnosis: aiDiagnosis ?? "",
-      status: "submitted",
-    })
+    .insert({ ...baseData, photo_urls: photoUrls ?? [] })
     .select()
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (insertResult.error?.message?.includes("photo_urls")) {
+    insertResult = await sb
+      .from("tenant_maintenance_requests")
+      .insert(baseData)
+      .select()
+      .single();
+  }
 
-  await resend.emails.send({
+  if (insertResult.error) return NextResponse.json({ error: insertResult.error.message }, { status: 500 });
+
+  const photosHtml =
+    photoUrls && photoUrls.length > 0
+      ? `<hr/><p><strong>Photos attached (${photoUrls.length}):</strong></p>` +
+        photoUrls.map((u) => `<p><a href="${u}">${u}</a></p>`).join("")
+      : "";
+
+  await getResend().emails.send({
     from: FROM,
     to: EBIN_EMAIL,
     subject: `Maintenance Request — ${access.tenant_name} — ${category}`,
@@ -123,8 +140,8 @@ async function handleSubmit(
 <p><strong>AI Troubleshooting Steps Provided:</strong></p>
 <pre>${aiDiagnosis}</pre>
 <p><strong>Steps Tenant Tried:</strong></p>
-<pre>${troubleshootingSteps}</pre>`,
+<pre>${troubleshootingSteps}</pre>${photosHtml}`,
   });
 
-  return NextResponse.json({ request });
+  return NextResponse.json({ request: insertResult.data });
 }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const FROM_EMAIL = "Ebin at Prospera <ebin@prosperaproperties.co>";
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
 
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
 
   const propertyUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://prosperaproperties.co"}/owners/${token}/${propertyId}`;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to: EBIN_EMAIL,
     subject: `New message from ${authorName} — your property`,

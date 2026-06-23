@@ -6,7 +6,7 @@ import { fetchAllTenants, fetchAllProperties } from "@/lib/notion";
 // Runs daily at 10am Eastern (14:00 UTC)
 // Scans all Active tenants in Notion → creates portal token for any without one → sends welcome email
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://prosperaproperties.co";
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
@@ -227,7 +227,7 @@ export async function GET(req: NextRequest) {
       const portalUrl = `${SITE_URL}/tenants/${token}`;
 
       // Send welcome email to tenant
-      const { error: emailError } = await resend.emails.send({
+      const { error: emailError } = await getResend().emails.send({
         from: FROM,
         to: tenant.email,
         cc: [EBIN_EMAIL],
@@ -241,7 +241,7 @@ export async function GET(req: NextRequest) {
       }
 
       // Notify Ebin
-      await resend.emails.send({
+      await getResend().emails.send({
         from: FROM,
         to: EBIN_EMAIL,
         subject: `Tenant portal created — ${tenant.name}`,

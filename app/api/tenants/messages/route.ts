@@ -4,7 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantMessages, getTenantInfo } from "@/lib/tenant-data";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
   const needsEscalation = aiText.includes("Ebin will follow up") || aiText.toLowerCase().includes("emergency");
   if (needsEscalation) {
     const info = await getTenantInfo(access.notion_tenant_id);
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM,
       to: EBIN_EMAIL,
       subject: `Tenant Message Needs Follow-Up — ${access.tenant_name}`,

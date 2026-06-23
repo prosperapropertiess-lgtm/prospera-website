@@ -4,7 +4,7 @@ import { placementProcessEmail } from "@/lib/emails";
 import fs from "fs";
 import path from "path";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: "Ebin at Prospera <hello@prosperaproperties.co>",
       to,
       cc: ["prosperapropertiess@gmail.com"],
