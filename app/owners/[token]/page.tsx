@@ -358,64 +358,7 @@ export default async function OwnerHomePage({ params }: Props) {
           {/* Navigation cards — 2-col grid */}
           <NavCardsGrid navCards={navCards} />
 
-          {/* Upcoming section */}
-          <div style={{ position: "relative", zIndex: 1, marginTop: "32px" }}>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontWeight: 700,
-                fontSize: "17px",
-                color: "#0F1C28",
-                marginBottom: "12px",
-              }}
-            >
-              Upcoming
-            </p>
-
-            <div
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid rgba(15,28,40,0.07)",
-                borderRadius: "20px",
-                padding: "4px 0",
-                boxShadow: "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)",
-                overflow: "hidden",
-              }}
-            >
-              <UpcomingRow
-                icon="search"
-                iconBg="rgba(29,78,216,0.08)"
-                iconColor="#1D4ED8"
-                title="Annual Inspection"
-                dateLabel="Jul 15, 2026"
-                chipLabel="27 days"
-                chipBg="rgba(29,78,216,0.08)"
-                chipColor="#1D4ED8"
-              />
-              <div style={{ height: "1px", background: "rgba(15,28,40,0.06)", margin: "0 20px" }} />
-              <UpcomingRow
-                icon="local_fire_department"
-                iconBg="rgba(180,83,9,0.09)"
-                iconColor="#B45309"
-                title="Furnace Service"
-                dateLabel="Sep 2026"
-                chipLabel="Annually recommended"
-                chipBg="rgba(180,83,9,0.09)"
-                chipColor="#B45309"
-              />
-              <div style={{ height: "1px", background: "rgba(15,28,40,0.06)", margin: "0 20px" }} />
-              <UpcomingRow
-                icon="water_drop"
-                iconBg="rgba(15,28,40,0.06)"
-                iconColor="rgba(15,28,40,0.45)"
-                title="Water Heater"
-                dateLabel="Mar 2027"
-                chipLabel="9 years old"
-                chipBg="rgba(15,28,40,0.06)"
-                chipColor="rgba(15,28,40,0.45)"
-              />
-            </div>
-          </div>
+          {/* Upcoming section — hidden until real scheduling data exists */}
 
           {/* Multi-property list */}
           {dashboard.properties.length > 1 && (

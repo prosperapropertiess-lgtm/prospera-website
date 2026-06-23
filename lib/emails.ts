@@ -2061,3 +2061,109 @@ export function placementProcessEmail(name?: string): string {
     ${signoff()}
   `);
 }
+
+// ── MAINTENANCE: ACKNOWLEDGEMENT EMAIL ──────────────────────
+
+interface MaintenanceAckParams {
+  tenantName: string;
+  propertyAddress: string;
+  category: string;
+  description: string;
+  photoUrls?: string[];
+}
+
+export function maintenanceAckTenantEmail(p: MaintenanceAckParams): string {
+  const P = `margin:0 0 28px;font-size:17px;line-height:2.0;color:${TEXT};font-family:${FONT};`;
+
+  const photosHtml = p.photoUrls && p.photoUrls.length > 0
+    ? `<p style="${P}"><strong>Photos attached:</strong> ${p.photoUrls.length} image${p.photoUrls.length > 1 ? "s" : ""}</p>`
+    : "";
+
+  return wrapper(`
+    ${heroCard("We got your request.", `${p.propertyAddress}`)}
+
+    <p style="${P}">Hi ${p.tenantName.split(" ")[0]},</p>
+
+    <p style="${P}">Your maintenance request has been received. Here's what you reported:</p>
+
+    ${noteBox(`<strong>${p.category}</strong><br/>${p.description}`, "Issue Reported")}
+
+    ${photosHtml}
+
+    <p style="${P}"><strong>What happens next:</strong></p>
+    <ul style="margin:16px 0 28px;padding-left:24px;">
+      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;color:${TEXT};font-family:${FONT};">Ebin reviews this within a few hours</li>
+      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;color:${TEXT};font-family:${FONT};">You'll get a follow-up email with possible solutions you can try</li>
+      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;color:${TEXT};font-family:${FONT};">If a technician is needed, we'll coordinate everything — you don't have to find anyone</li>
+    </ul>
+
+    <p style="${P}">If this is <strong>urgent</strong> (flooding, gas smell, no heat in winter), call Ebin directly at <a href="tel:5196971227" style="color:${CRIMSON};text-decoration:none;font-weight:700;">(519) 697-1227</a>.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+export function maintenanceAckAdminEmail(p: MaintenanceAckParams & { tenantEmail?: string; ownerName?: string }): string {
+  const P = `margin:0 0 28px;font-size:17px;line-height:2.0;color:${TEXT};font-family:${FONT};`;
+
+  const photosHtml = p.photoUrls && p.photoUrls.length > 0
+    ? p.photoUrls.map(u => `<p style="margin:0 0 8px;"><a href="${u}" style="color:${CRIMSON};font-size:15px;font-family:${FONT};">View photo</a></p>`).join("")
+    : "<p style='font-size:15px;color:" + MUTED + ";font-family:" + FONT + ";'>No photos attached</p>";
+
+  return wrapper(`
+    ${heroCard("New Maintenance Request", `${p.tenantName} · ${p.propertyAddress}`)}
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
+      <tr>
+        <td style="background-color:${BG_SUBTLE};border-radius:12px;padding:24px;">
+          <p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Details</p>
+          <p style="margin:0 0 8px;font-size:16px;color:${TEXT};font-family:${FONT};"><strong>Tenant:</strong> ${p.tenantName}${p.tenantEmail ? ` (${p.tenantEmail})` : ""}</p>
+          <p style="margin:0 0 8px;font-size:16px;color:${TEXT};font-family:${FONT};"><strong>Property:</strong> ${p.propertyAddress}</p>
+          ${p.ownerName ? `<p style="margin:0 0 8px;font-size:16px;color:${TEXT};font-family:${FONT};"><strong>Owner:</strong> ${p.ownerName}</p>` : ""}
+          <p style="margin:0 0 8px;font-size:16px;color:${TEXT};font-family:${FONT};"><strong>Category:</strong> ${p.category}</p>
+          <p style="margin:0;font-size:16px;color:${TEXT};font-family:${FONT};"><strong>Issue:</strong> ${p.description}</p>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">Photos</p>
+    ${photosHtml}
+
+    ${divider()}
+    <p style="${P}">AI analysis email will be sent to the tenant shortly.</p>
+  `);
+}
+
+// ── MAINTENANCE: AI ANALYSIS EMAIL ──────────────────────────
+
+interface MaintenanceAnalysisParams {
+  tenantName: string;
+  propertyAddress: string;
+  category: string;
+  description: string;
+  analysis: string;
+}
+
+export function maintenanceAnalysisEmail(p: MaintenanceAnalysisParams): string {
+  const P = `margin:0 0 28px;font-size:17px;line-height:2.0;color:${TEXT};font-family:${FONT};`;
+
+  return wrapper(`
+    ${heroCard("Here's what we think is going on.", `${p.category} · ${p.propertyAddress}`)}
+
+    <p style="${P}">Hi ${p.tenantName.split(" ")[0]},</p>
+
+    <p style="${P}">We've looked into your maintenance request and put together some information that might help.</p>
+
+    ${md(p.analysis)}
+
+    ${divider()}
+
+    <p style="${P}">If none of this resolves the issue, <strong>you don't need to do anything else</strong>. Ebin is already aware and will coordinate next steps.</p>
+
+    <p style="${P}">For anything urgent, call <a href="tel:5196971227" style="color:${CRIMSON};text-decoration:none;font-weight:700;">(519) 697-1227</a>.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}

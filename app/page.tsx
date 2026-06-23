@@ -54,9 +54,9 @@ function Hero() {
           className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
           style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
         >
-          Your rental is supposed to pay you.
+          Stop losing sleep
           <br />
-          <em style={{ color: "rgba(250,248,245,0.8)" }}>Not consume you.</em>
+          <em style={{ color: "rgba(250,248,245,0.8)" }}>over your rental.</em>
         </motion.h1>
 
         <motion.p
@@ -66,9 +66,9 @@ function Hero() {
           className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
           style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
         >
-          Tenants, rent, maintenance — handled. You find out when something's
-          done, not when it starts. No call centers. No ticket queues. Just
-          someone who picks up the phone and actually knows your property.
+          Late rent, bad tenants, midnight maintenance calls — gone.
+          You get a monthly deposit and a clear statement. That's it.
+          Your time stays yours.
         </motion.p>
 
         <motion.div
@@ -92,7 +92,7 @@ function Hero() {
             className="text-xs"
             style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}
           >
-            Find out what your property should be earning
+            Takes 60 seconds. No commitment.
           </span>
         </motion.div>
       </div>
@@ -120,10 +120,10 @@ function Hero() {
 
 function StatsBar() {
   const stats = [
-    { value: 25, suffix: "+", label: "Tenant Placements" },
-    { value: 20, suffix: "+", label: "Five-Star Reviews" },
-    { value: 0, suffix: "", label: "LTB Cases. Ever." },
-    { value: 21, suffix: " days", label: "Avg. to Fill a Unit" },
+    { value: 25, suffix: "+", label: "Tenants Placed Without a Single Eviction" },
+    { value: 20, suffix: "+", label: "Landlords Who Sleep Better" },
+    { value: 0, suffix: "", label: "LTB Hearings. Zero." },
+    { value: 21, suffix: " days", label: "Average Vacancy — Then It's Filled" },
   ];
 
   return (
@@ -157,20 +157,20 @@ function StatsBar() {
 function PainPoints() {
   const pains = [
     {
-      label: "Chasing rent at the end of every month",
-      sub: "One late payment and your whole budget is off.",
+      label: "You're texting tenants about rent again",
+      sub: "Every month it's the same stress. You shouldn't have to chase money you're already owed.",
     },
     {
-      label: "Midnight maintenance calls you didn't sign up for",
-      sub: "You own a rental. You didn't buy a second job.",
+      label: "A pipe bursts at 11pm. It's your problem.",
+      sub: "You wanted passive income. Instead you got a second job you can't clock out of.",
     },
     {
-      label: "One bad tenant who drains a whole year",
-      sub: "The wrong placement costs you more than any management fee.",
+      label: "One bad tenant just cost you $8,000",
+      sub: "Missed rent, property damage, legal fees. A single bad placement wipes out a year of profit.",
     },
     {
-      label: "No idea if your rent is priced right",
-      sub: "Leave money on the table, or sit vacant. Neither is good.",
+      label: "You're guessing what to charge for rent",
+      sub: "Too high and you sit vacant. Too low and you leave thousands on the table every year.",
     },
   ];
 
@@ -182,13 +182,13 @@ function PainPoints() {
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            Sound Familiar?
+            This Is Costing You
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            If you own a rental,<br />you&apos;ve felt at least one of these.
+            Every month you manage it yourself,<br />you&apos;re losing money or time. Usually both.
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -220,23 +220,23 @@ function FeatureCards() {
   const features = [
     {
       num: "01",
-      title: "You never lose a year to the wrong tenant",
-      desc: "Every placement goes through credit, income verification, criminal background, and a direct call to their previous landlord. 25+ placements. All paying rent. Zero LTB cases.",
+      title: "Stop worrying about who's living in your property",
+      desc: "Bad tenants cost thousands. Every applicant goes through credit, income, criminal, and landlord reference checks. 25+ placements so far — zero evictions, zero LTB cases.",
     },
     {
       num: "02",
-      title: "Repairs cost what repairs cost — nothing more",
-      desc: "You pay the contractor's invoice. A flat 8% coordination fee covers our time. No inflated quotes, no mystery markups, no percentage skimmed off every job.",
+      title: "Stop overpaying for repairs you can't verify",
+      desc: "You see the contractor's actual invoice. A flat 8% coordination fee covers the rest. No inflated quotes, no hidden markups, no percentage skimmed off every job.",
     },
     {
       num: "03",
-      title: "You get someone who actually knows your property",
-      desc: "The portfolio stays small on purpose. When something happens at your unit, there's no ticket system — there's a person who's been inside it and knows the history.",
+      title: "Stop explaining your property to a new person every time",
+      desc: "Your property isn't one of 200 in a portfolio. When something happens, the person who picks up has been inside your unit and knows its history.",
     },
     {
       num: "04",
-      title: "You text. You get an answer.",
-      desc: "You get Ebin's direct number. When something comes up — maintenance, tenant issue, anything — you reach the person running it. Not a coordinator routing your call to someone else.",
+      title: "Stop waiting 3 days for a callback",
+      desc: "You text. You get an answer. Not a receptionist, not a ticket — the person who actually manages your property. That's how it should work.",
     },
   ];
 
@@ -248,13 +248,13 @@ function FeatureCards() {
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            Why Prospera
+            The Difference
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            What changes when you stop managing it yourself.
+            What your life looks like when<br />someone competent handles it.
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -294,32 +294,32 @@ function HowItWorks() {
   const phases = [
     {
       num: "01",
-      phase: "You stop guessing",
+      phase: "You get clarity",
       timeline: "Days 1–3",
       steps: [
-        "We walk the property and document condition",
-        "Research what's actually renting nearby right now",
-        "You know the price and strategy before anything launches",
+        "Know exactly what your property should earn — no guessing",
+        "Get a pricing strategy based on real local rental data",
+        "Understand the plan before a single dollar is spent",
       ],
     },
     {
       num: "02",
-      phase: "You stop taking calls",
+      phase: "You get your time back",
       timeline: "Weeks 1–4",
       steps: [
-        "Professional photos, listing live on all platforms",
-        "Every inquiry answered, every showing run — not by you",
-        "You hear from us when someone worth approving comes through",
+        "Your phone stops ringing with tenant inquiries",
+        "Showings, screening, and lease signing — all handled",
+        "You only hear from us when there's a qualified tenant ready",
       ],
     },
     {
       num: "03",
-      phase: "You stop thinking about it",
+      phase: "You get passive income. Actually passive.",
       timeline: "Every month",
       steps: [
-        "Rent lands in your account with a clear breakdown",
-        "Maintenance resolved start to finish — you're told when it's done",
-        "Monthly statement on the 5th, zero surprises",
+        "Rent deposited to your account — no chasing, no reminders",
+        "Maintenance resolved before you even knew it was an issue",
+        "One clear statement on the 5th. That's your only touchpoint.",
       ],
     },
   ];
@@ -332,13 +332,13 @@ function HowItWorks() {
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            The Process
+            First 30 Days
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-16 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            What the first 30 days<br />looks like for you.
+            How fast your life changes<br />once you stop doing this yourself.
           </h2>
         </FadeIn>
 
@@ -396,9 +396,9 @@ function FounderSnippet() {
             className="text-3xl sm:text-4xl font-light leading-tight mb-6"
             style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
           >
-            &ldquo;I&apos;ve rented, managed houses, and run the day-to-day.
-            That experience is why every property in our portfolio gets
-            real attention — not a ticket number.&rdquo;
+            &ldquo;I&apos;ve sat in the parking lot after a move-out staring at $4,000
+            in damage. I&apos;ve had the tenant who was perfect on paper and a nightmare
+            in person. Every system we use exists because I learned the hard way first.&rdquo;
           </blockquote>
           <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
             — Ebin Jaison, Founder
@@ -427,22 +427,21 @@ function CaseStudy() {
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            Real Result
+            Real Landlord, Real Numbers
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            From drowning in utility bills<br />to covering the mortgage.
+            He was losing money every month<br />on a property he owned.
           </h2>
           <p
             className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
             style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
           >
-            An owner was renting rooms individually with all utilities included.
-            Tenants had zero reason to conserve. Bills were skyrocketing. He
-            couldn&apos;t raise rent — the market wouldn&apos;t support it. He was losing
-            money every month on a property he owned.
+            Utilities included. Tenants running everything full blast.
+            Bills climbing every month with no way to raise rent.
+            He was paying to be a landlord. Here&apos;s what changed.
           </p>
         </FadeIn>
 
@@ -559,13 +558,13 @@ function Testimonials() {
             className="text-xs font-semibold uppercase tracking-widest mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            What Landlords &amp; Tenants Say
+            Don&apos;t Take Our Word For It
           </p>
           <h2
             className="text-4xl sm:text-5xl font-light leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            Real reviews. Real people.
+            Here&apos;s what they said after switching.
           </h2>
           <p className="mt-4 text-sm" style={{ color: "rgba(15,28,40,0.50)", fontFamily: "var(--font-dm-sans)" }}>
             5.0 ★ on Google · 20+ reviews
@@ -618,13 +617,13 @@ function PlatformTeaser() {
               Introducing · Prospera Platform
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              You bought passive income.<br />
-              <span style={{ color: "rgba(250,248,245,0.3)" }}>Not a second job.</span>
+              Tired of spreadsheets<br />
+              <span style={{ color: "rgba(250,248,245,0.3)" }}>and scattered texts?</span>
             </h2>
             <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-              We&apos;re building the app that Ontario landlords with 2–5 properties have
-              been waiting for. Rent, maintenance, legal notices, finances — automated.
-              Built by Ebin, who&apos;s been managing properties in London, Ontario since 2021.
+              Rent collection, maintenance requests, legal notices, financial tracking —
+              one place instead of twelve. Built for Ontario landlords with 2–5 properties
+              who want their rental income without the operational chaos.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-10">
@@ -690,7 +689,7 @@ function TenantBar() {
             Looking for a Rental?
           </p>
           <p className="text-xl font-semibold" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-            Browse professionally managed rentals in Southwestern Ontario.
+            Quality rentals that are actually maintained. See what&apos;s available.
           </p>
         </div>
         <Link
@@ -719,15 +718,15 @@ function CTABanner() {
           className="text-5xl sm:text-6xl font-light mb-4 leading-tight"
           style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
         >
-          Own a rental.<br />Not a second job.
+          What would you do with<br />10 extra hours a month?
         </h2>
         <p
           className="text-sm leading-relaxed mb-10 max-w-sm mx-auto"
           style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
         >
-          Free consultation. Honest assessment. No pressure. Just a
-          straightforward conversation about what your property could look like
-          with the right management.
+          Find out what your property should be earning and what
+          it&apos;s costing you to manage it yourself. Free analysis.
+          No pressure. No sales pitch.
         </p>
         <motion.div
           animate={{
@@ -779,8 +778,8 @@ function StickyCTA() {
           }}
         >
           <p className="text-xs sm:text-sm" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            <span className="sm:hidden">Free landlord quote</span>
-            <span className="hidden sm:inline">Own a rental in Southwestern Ontario?</span>
+            <span className="sm:hidden">Stop managing it yourself</span>
+            <span className="hidden sm:inline">Find out what your property should be earning</span>
           </p>
           <Link
             href="/rent-analysis"
@@ -813,14 +812,14 @@ export default function HomePage() {
       <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto space-y-4">
           <BlogNudge
-            hook="One bad tenant can cost you an entire year's profit."
+            hook="One bad tenant just wiped out your entire year's profit."
             title="5 Red Flags When Screening Tenants"
             excerpt="Finding great tenants starts with knowing what to watch for. Here are five warning signs experienced landlords never ignore."
             slug="tenant-screening-red-flags"
             label="Protect your investment"
           />
           <BlogNudge
-            hook="Do you know what you can legally charge in London right now?"
+            hook="You might be charging $200/month less than you should be."
             title="How Much Can You Charge for Rent in London, Ontario?"
             excerpt="Current market rents by unit type across London, St. Thomas, and Strathroy — and how to price your property for fast, quality tenants."
             slug="how-much-charge-rent-london-ontario"
