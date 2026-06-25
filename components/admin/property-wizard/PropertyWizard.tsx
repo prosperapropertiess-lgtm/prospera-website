@@ -257,14 +257,14 @@ export default function PropertyWizard({ initial }: Props) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
       {/* Top bar */}
-      <div className="px-6 py-4 flex items-center gap-4" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
-        <button onClick={() => router.push("/admin/properties")} className="text-sm transition-colors" style={{ color: TEXT_SEC }}>
+      <div className="px-6 py-4 flex items-center gap-4" style={{ backgroundColor: NAV, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <button onClick={() => router.push("/admin/properties")} className="text-sm transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>
           ← Properties
         </button>
-        <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>
+        <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: "#FAF8F5" }}>
           {initial?.id ? "Edit Property" : "New Property"}
         </span>
-        {saving && <span className="text-xs ml-auto" style={{ color: TEXT_SEC }}>Saving...</span>}
+        {saving && <span className="text-xs ml-auto" style={{ color: "rgba(250,248,245,0.55)" }}>Saving...</span>}
       </div>
 
       {/* Mobile step indicator */}
