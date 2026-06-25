@@ -118,32 +118,40 @@ export default function LeaseStep({ data, onChange }: Props) {
           </div>
         )}
 
-        <div className="flex gap-3">
-          <input
-            type="text"
-            value={costLabel}
-            onChange={(e) => setCostLabel(e.target.value)}
-            placeholder="e.g. Key Deposit"
-            className={inputCls + " flex-1"}
-            style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
-          />
-          <input
-            type="number"
-            value={costAmount}
-            onChange={(e) => setCostAmount(e.target.value)}
-            placeholder="Amount"
-            min={0}
-            className={inputCls + " w-32"}
-            style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
-          />
-          <button
-            onClick={addCost}
-            disabled={!costLabel || !costAmount}
-            className="px-4 py-3 text-xs rounded-lg transition-opacity hover:opacity-80 disabled:opacity-30"
-            style={{ backgroundColor: ACCENT, color: "#fff" }}
-          >
-            Add
-          </button>
+        <div className="grid grid-cols-[1fr_120px_auto] gap-3">
+          <div>
+            <label className="block text-xs mb-1.5" style={{ color: TEXT_MUT }}>Cost name</label>
+            <input
+              type="text"
+              value={costLabel}
+              onChange={(e) => setCostLabel(e.target.value)}
+              placeholder="e.g. Key Deposit"
+              className={inputCls}
+              style={{ backgroundColor: "#FFFFFF", color: TEXT, border: `1px solid ${BORDER}` }}
+            />
+          </div>
+          <div>
+            <label className="block text-xs mb-1.5" style={{ color: TEXT_MUT }}>Amount ($)</label>
+            <input
+              type="number"
+              value={costAmount}
+              onChange={(e) => setCostAmount(e.target.value)}
+              placeholder="100"
+              min={0}
+              className={inputCls}
+              style={{ backgroundColor: "#FFFFFF", color: TEXT, border: `1px solid ${BORDER}` }}
+            />
+          </div>
+          <div className="flex items-end">
+            <button
+              onClick={addCost}
+              disabled={!costLabel || !costAmount}
+              className="px-5 py-3 text-xs font-medium rounded-lg transition-opacity hover:opacity-80 disabled:opacity-30"
+              style={{ backgroundColor: ACCENT, color: "#fff" }}
+            >
+              Add
+            </button>
+          </div>
         </div>
       </div>
     </div>
