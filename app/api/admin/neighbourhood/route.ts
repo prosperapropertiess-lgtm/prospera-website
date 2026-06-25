@@ -211,7 +211,10 @@ export async function POST(req: NextRequest) {
       "St. Thomas": "Talbot St & Railway St, St. Thomas, ON",
       "Strathroy": "Frank St & Centre St, Strathroy, ON",
     };
-    const destination = downtowns[city as string] || downtowns["London"];
+    // Match city name flexibly
+    const cityStr = String(city || "").trim();
+    const matchedCity = Object.keys(downtowns).find((k) => cityStr.toLowerCase().includes(k.toLowerCase()));
+    const destination = matchedCity ? downtowns[matchedCity] : downtowns["London"];
 
     const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${latitude},${longitude}&destination=${encodeURIComponent(destination)}&mode=transit&alternatives=true&key=${GOOGLE_API_KEY}`;
     const dirRes = await fetch(directionsUrl);

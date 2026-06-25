@@ -40,15 +40,46 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
       }
 
       const result = await res.json();
-      onChange({
+      const updates: Partial<WizardData> = {
         latitude: result.latitude ?? data.latitude,
         longitude: result.longitude ?? data.longitude,
         neighbourhood_data: result.places ?? data.neighbourhood_data,
         walk_score: result.walk_score ?? data.walk_score,
         transit_score: result.transit_score ?? data.transit_score,
         bike_score: result.bike_score ?? data.bike_score,
-        bus_routes: result.bus_routes ?? data.bus_routes,
-      });
+        bus_routes: result.bus_routes?.length ? result.bus_routes : data.bus_routes,
+      };
+      if (result.neighbourhood_vibe) {
+        updates.neighbourhood_vibe = result.neighbourhood_vibe;
+      }
+      onChange(updates);
+
+      // Auto-generate vibe if we got places but no vibe from API
+      if (!result.neighbourhood_vibe && result.places && Object.keys(result.places).length > 0) {
+        setGeneratingVibe(true);
+        try {
+          const vibeRes = await fetch("/api/admin/generate-listing", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              address: data.address,
+              city: data.city,
+              neighbourhood_data: result.places,
+              bus_routes: result.bus_routes || [],
+              walk_score: result.walk_score,
+              transit_score: result.transit_score,
+              _vibe_only: true,
+            }),
+          });
+          if (vibeRes.ok) {
+            const vibeResult = await vibeRes.json();
+            if (vibeResult.description) {
+              onChange({ neighbourhood_vibe: vibeResult.description });
+            }
+          }
+        } catch { /* ignore */ }
+        setGeneratingVibe(false);
+      }
     } catch (err) {
       setFetchError(err instanceof Error ? err.message : "Failed to fetch data");
     } finally {
