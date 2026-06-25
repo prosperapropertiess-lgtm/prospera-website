@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Car, Bus, Footprints } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -114,12 +115,12 @@ export default function CommuteSimulator({ property }: Props) {
             style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
           >
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
-              <input
-                type="text"
+              <AddressAutocomplete
                 value={origin}
-                onChange={(e) => setOrigin(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleCalculate()}
+                onChange={(val) => setOrigin(val)}
+                onPlaceSelect={(place) => setOrigin(place.formatted_address)}
                 placeholder="Enter your workplace or address..."
+                types="establishment"
                 className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
                 style={{
                   borderColor: "#D8D2C8",

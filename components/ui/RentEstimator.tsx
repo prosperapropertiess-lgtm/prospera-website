@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 
 // Fallback static estimates if live data isn't available yet
 const FALLBACK: Record<string, Record<number, { low: number; high: number }>> = {
@@ -259,7 +260,7 @@ export default function RentEstimator() {
 
               <div>
                 <label style={{ display: "block", fontSize: 11, color: "#666666", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5, fontFamily: "var(--font-dm-sans)" }}>Property address</label>
-                <input type="text" value={lead.address} onChange={(e) => setLeadField("address", e.target.value)} placeholder="123 Main St (optional)" style={inputStyle} />
+                <AddressAutocomplete value={lead.address} onChange={(val) => setLeadField("address", val)} placeholder="123 Main St (optional)" style={inputStyle} />
               </div>
 
               <div>

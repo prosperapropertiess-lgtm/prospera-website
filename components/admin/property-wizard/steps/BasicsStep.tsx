@@ -1,4 +1,5 @@
 import type { WizardData } from "../PropertyWizard";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 
 const SURFACE = "#FFFFFF";
 const BORDER = "#D8D2C8";
@@ -40,12 +41,22 @@ export default function BasicsStep({ data, onChange }: Props) {
 
       <div className="rounded-xl border p-6 space-y-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
         <Field label="Street Address" required>
-          <input
-            type="text"
+          <AddressAutocomplete
             value={data.address}
-            onChange={(e) => onChange({ address: e.target.value })}
-            placeholder="e.g. 123 Main St"
-            required
+            onChange={(val) => onChange({ address: val })}
+            onPlaceSelect={(place) => {
+              const updates: Partial<WizardData> = {
+                address: place.formatted_address,
+                latitude: place.lat,
+                longitude: place.lng,
+              };
+              if (place.city) {
+                const cityMap: Record<string, string> = { "London": "London", "St. Thomas": "St. Thomas", "Strathroy": "Strathroy", "Strathroy-Caradoc": "Strathroy" };
+                if (cityMap[place.city]) updates.city = cityMap[place.city];
+              }
+              onChange(updates);
+            }}
+            placeholder="Start typing an address..."
             className={inputCls}
             style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
           />
