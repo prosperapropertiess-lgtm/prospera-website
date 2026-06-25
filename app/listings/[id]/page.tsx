@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import PropertyDetailClient from "@/components/listings/PropertyDetailClient";
+import ListingPage from "@/components/listings/detail/ListingPage";
 import JsonLd from "@/components/seo/JsonLd";
 
 interface Props {
@@ -17,15 +17,21 @@ function getSupabase() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const { data } = await getSupabase().from("properties").select("title, city, price, bedrooms, bathrooms, description").eq("id", id).single();
+  const { data } = await getSupabase().from("properties").select("title, city, price, bedrooms, bathrooms, description, available_date, ai_life_intro, images").eq("id", id).single();
   if (!data) return {};
+
+  const desc = data.ai_life_intro
+    ? data.ai_life_intro.split("\n")[0]
+    : `${data.bedrooms} bed, ${data.bathrooms} bath in ${data.city}, Ontario. $${data.price?.toLocaleString()}/mo.`;
+
   return {
     title: `${data.title} — ${data.city}, ON`,
-    description: `${data.bedrooms} bed, ${data.bathrooms} bath in ${data.city}, Ontario. $${data.price.toLocaleString()}/mo. ${data.description?.slice(0, 120)}`,
+    description: `${desc} ${data.description?.slice(0, 100) || ""}`,
     openGraph: {
       title: `${data.title} — Prospera Properties`,
-      description: `${data.bedrooms} bed · ${data.bathrooms} bath · $${data.price.toLocaleString()}/mo in ${data.city}, ON`,
+      description: `${data.bedrooms} bed · ${data.bathrooms} bath · $${data.price?.toLocaleString()}/mo in ${data.city}, ON`,
       type: "website",
+      images: data.images?.[0] ? [{ url: data.images[0], width: 1200, height: 630 }] : undefined,
     },
   };
 }
@@ -51,23 +57,26 @@ export default async function PropertyDetailPage({ params }: Props) {
     numberOfBedrooms: data.bedrooms,
     numberOfBathroomsTotal: data.bathrooms,
     petsAllowed: data.pet_friendly,
-    image: data.images?.[0]
-      ? { "@type": "ImageObject", url: data.images[0] }
-      : undefined,
+    floorSize: data.sqft ? { "@type": "QuantitativeValue", value: data.sqft, unitCode: "FTK" } : undefined,
+    image: data.images?.[0] ? { "@type": "ImageObject", url: data.images[0] } : undefined,
     offers: {
       "@type": "Offer",
       price: data.price,
       priceCurrency: "CAD",
-      availability: data.available
-        ? "https://schema.org/InStock"
-        : "https://schema.org/SoldOut",
+      availability: data.available ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+      availabilityStarts: data.available_date || undefined,
     },
+    geo: data.latitude && data.longitude ? {
+      "@type": "GeoCoordinates",
+      latitude: data.latitude,
+      longitude: data.longitude,
+    } : undefined,
   };
 
   return (
     <>
       <JsonLd data={schema} />
-      <PropertyDetailClient property={data} />
+      <ListingPage property={data} />
     </>
   );
 }

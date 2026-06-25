@@ -24,12 +24,17 @@ interface Property {
   bathrooms: number;
   available: boolean;
   images: string[] | null;
+  status: string;
+  wizard_step: number | null;
 }
+
+type FilterTab = "all" | "published" | "draft";
 
 export default function PropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [filter, setFilter] = useState<FilterTab>("all");
   const router = useRouter();
 
   async function load() {
@@ -40,7 +45,7 @@ export default function PropertiesPage() {
     );
     const { data } = await supabase
       .from("properties")
-      .select("id, title, address, city, price, bedrooms, bathrooms, available, images")
+      .select("id, title, address, city, price, bedrooms, bathrooms, available, images, status, wizard_step")
       .order("created_at", { ascending: false });
     setProperties(data || []);
     setLoading(false);
@@ -57,11 +62,55 @@ export default function PropertiesPage() {
     setDeleting(null);
   }
 
+  async function handleTogglePublish(p: Property) {
+    const isPublished = p.status === "published";
+    const endpoint = `/api/admin/properties/${p.id}/publish`;
+    const method = isPublished ? "DELETE" : "POST";
+    const res = await fetch(endpoint, { method });
+    if (res.ok) {
+      const updated = await res.json();
+      setProperties((prev) => prev.map((prop) => prop.id === p.id ? { ...prop, status: updated.status } : prop));
+    }
+  }
+
   async function handleLogout() {
     await fetch("/api/admin/login", { method: "DELETE" });
     router.push("/admin/login");
     router.refresh();
   }
+
+  const filtered = filter === "all" ? properties : properties.filter((p) => p.status === filter);
+  const draftCount = properties.filter((p) => p.status === "draft").length;
+  const publishedCount = properties.filter((p) => p.status === "published").length;
+
+  function statusBadge(p: Property) {
+    if (p.status === "draft") {
+      const step = p.wizard_step || 1;
+      return (
+        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(251,191,36,0.12)", color: "#fbbf24" }}>
+          Draft · Step {step}/8
+        </span>
+      );
+    }
+    if (p.status === "published") {
+      return (
+        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(34,197,94,0.12)", color: "#4ade80" }}>
+          Published
+        </span>
+      );
+    }
+    return (
+      <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.06)", color: TEXT_MUT }}>
+        Archived
+      </span>
+    );
+  }
+
+  const tabs: { key: FilterTab; label: string; count: number }[] = [
+    { key: "all", label: "All", count: properties.length },
+    { key: "published", label: "Published", count: publishedCount },
+    { key: "draft", label: "Drafts", count: draftCount },
+  ];
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
@@ -75,7 +124,7 @@ export default function PropertiesPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light" style={{ color: TEXT }}>Properties</h1>
             <p className="text-sm mt-1" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
@@ -91,19 +140,44 @@ export default function PropertiesPage() {
           </Link>
         </div>
 
+        {/* Filter Tabs */}
+        <div className="flex gap-1 mb-6 p-1 rounded-lg w-fit" style={{ backgroundColor: SURFACE }}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setFilter(tab.key)}
+              className="px-4 py-2 text-xs rounded-md transition-all"
+              style={{
+                backgroundColor: filter === tab.key ? SURFACE_HI : "transparent",
+                color: filter === tab.key ? TEXT : TEXT_MUT,
+                borderColor: filter === tab.key ? BORDER_HI : "transparent",
+                border: filter === tab.key ? `1px solid ${BORDER_HI}` : "1px solid transparent",
+              }}
+            >
+              {tab.label} <span style={{ color: TEXT_MUT }}>({tab.count})</span>
+            </button>
+          ))}
+        </div>
+
         {loading ? (
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-16 rounded-xl animate-pulse" style={{ backgroundColor: SURFACE }} />
             ))}
           </div>
-        ) : properties.length === 0 ? (
+        ) : filtered.length === 0 ? (
           <div className="rounded-xl border p-20 text-center" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
-            <p className="font-[family-name:var(--font-cormorant)] text-3xl mb-3" style={{ color: TEXT }}>No properties yet</p>
-            <p className="text-sm mb-6" style={{ color: TEXT_SEC }}>Add your first property to get started.</p>
-            <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: ACCENT }}>
-              Add Property
-            </Link>
+            <p className="font-[family-name:var(--font-cormorant)] text-3xl mb-3" style={{ color: TEXT }}>
+              {filter === "draft" ? "No drafts" : filter === "published" ? "No published properties" : "No properties yet"}
+            </p>
+            <p className="text-sm mb-6" style={{ color: TEXT_SEC }}>
+              {filter === "all" ? "Add your first property to get started." : "Change filter to see other properties."}
+            </p>
+            {filter === "all" && (
+              <Link href="/admin/properties/new" className="inline-block px-6 py-2.5 text-white text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: ACCENT }}>
+                Add Property
+              </Link>
+            )}
           </div>
         ) : (
           <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
@@ -116,11 +190,11 @@ export default function PropertiesPage() {
                   <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Price</th>
                   <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Beds</th>
                   <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Status</th>
-                  <th className="px-4 py-4 w-28"></th>
+                  <th className="px-4 py-4 w-40"></th>
                 </tr>
               </thead>
               <tbody>
-                {properties.map((p, i) => (
+                {filtered.map((p, i) => (
                   <tr key={p.id} style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
                     <td className="px-6 py-4">
                       {p.images?.[0] ? (
@@ -131,26 +205,22 @@ export default function PropertiesPage() {
                       )}
                     </td>
                     <td className="px-4 py-4">
-                      <p className="text-sm font-medium" style={{ color: TEXT }}>{p.title}</p>
+                      <p className="text-sm font-medium" style={{ color: TEXT }}>{p.title || "Untitled Property"}</p>
                       <p className="text-xs mt-0.5" style={{ color: TEXT_MUT }}>{p.address}</p>
                     </td>
                     <td className="px-4 py-4 text-sm" style={{ color: TEXT_SEC }}>{p.city}</td>
-                    <td className="px-4 py-4 text-sm font-medium" style={{ color: TEXT }}>${p.price.toLocaleString()}/mo</td>
-                    <td className="px-4 py-4 text-sm" style={{ color: TEXT_SEC }}>{p.bedrooms} bed</td>
-                    <td className="px-4 py-4">
-                      <span
-                        className="text-xs px-2.5 py-1 rounded-full font-medium"
-                        style={{
-                          backgroundColor: p.available ? "rgba(34,197,94,0.12)" : "rgba(255,255,255,0.06)",
-                          color: p.available ? "#4ade80" : TEXT_MUT,
-                        }}
-                      >
-                        {p.available ? "Available" : "Unavailable"}
-                      </span>
-                    </td>
+                    <td className="px-4 py-4 text-sm font-medium" style={{ color: TEXT }}>{p.price ? `$${p.price.toLocaleString()}/mo` : "—"}</td>
+                    <td className="px-4 py-4 text-sm" style={{ color: TEXT_SEC }}>{p.bedrooms ? `${p.bedrooms} bed` : "—"}</td>
+                    <td className="px-4 py-4">{statusBadge(p)}</td>
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3 justify-end">
-                        <Link href={`/admin/properties/${p.id}/applicants`} className="text-xs transition-colors" style={{ color: TEXT_MUT }}>Applicants</Link>
+                        <button
+                          onClick={() => handleTogglePublish(p)}
+                          className="text-xs transition-colors"
+                          style={{ color: p.status === "published" ? "#fbbf24" : "#4ade80" }}
+                        >
+                          {p.status === "published" ? "Unpublish" : "Publish"}
+                        </button>
                         <Link href={`/admin/properties/${p.id}`} className="text-xs transition-colors" style={{ color: TEXT_MUT }}>Edit</Link>
                         <button
                           onClick={() => handleDelete(p.id, p.title)}
@@ -168,7 +238,7 @@ export default function PropertiesPage() {
             </table>
 
             <div className="md:hidden divide-y" style={{ borderColor: BORDER }}>
-              {properties.map((p) => (
+              {filtered.map((p) => (
                 <div key={p.id} className="p-5 flex gap-4">
                   {p.images?.[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -177,12 +247,13 @@ export default function PropertiesPage() {
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: SURFACE_HI }}>🏠</div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate" style={{ color: TEXT }}>{p.title}</p>
-                    <p className="text-xs mt-0.5" style={{ color: TEXT_SEC }}>{p.city} · {p.bedrooms} bed · ${p.price.toLocaleString()}/mo</p>
-                    <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: p.available ? "rgba(34,197,94,0.12)" : "rgba(255,255,255,0.06)", color: p.available ? "#4ade80" : TEXT_MUT }}>
-                      {p.available ? "Available" : "Unavailable"}
-                    </span>
+                    <p className="text-sm font-medium truncate" style={{ color: TEXT }}>{p.title || "Untitled Property"}</p>
+                    <p className="text-xs mt-0.5" style={{ color: TEXT_SEC }}>{p.city} · {p.bedrooms ? `${p.bedrooms} bed · ` : ""}{p.price ? `$${p.price.toLocaleString()}/mo` : ""}</p>
+                    <div className="mt-2">{statusBadge(p)}</div>
                     <div className="flex gap-4 mt-2">
+                      <button onClick={() => handleTogglePublish(p)} className="text-xs underline" style={{ color: p.status === "published" ? "#fbbf24" : "#4ade80" }}>
+                        {p.status === "published" ? "Unpublish" : "Publish"}
+                      </button>
                       <Link href={`/admin/properties/${p.id}`} className="text-xs underline" style={{ color: TEXT_MUT }}>Edit</Link>
                       <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs underline" style={{ color: "#f87171" }}>
                         {deleting === p.id ? "Deleting..." : "Delete"}

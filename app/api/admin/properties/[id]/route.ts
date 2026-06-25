@@ -1,29 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 
-function getAdminClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-  return createClient(url, key);
-}
-
-
-
-async function isAuthenticated(req: NextRequest) {
-  return isAdminAuthenticated(req);
-}
-
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  if (!await isAuthenticated(req)) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;
   const body = await req.json();
-  const supabase = getAdminClient();
+  const supabase = getSupabaseAdmin();
 
-  const { data, error } = await supabase.from("properties").update(body).eq("id", id).select().single();
+  const { data, error } = await supabase
+    .from("properties")
+    .update({ ...body, last_saved_at: new Date().toISOString() })
+    .eq("id", id)
+    .select()
+    .single();
   if (error) {
     console.error("Update error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -33,12 +26,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  if (!await isAuthenticated(req)) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;
-  const supabase = getAdminClient();
+  const supabase = getSupabaseAdmin();
 
   // Delete photos from storage first
   const { data: property } = await supabase.from("properties").select("images").eq("id", id).single();

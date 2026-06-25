@@ -21,6 +21,9 @@ interface Property {
   utilities_included: boolean;
   utilities_list: string[] | null;
   images: string[] | null;
+  property_type: string | null;
+  available_date: string | null;
+  status: string;
 }
 
 const CITIES = ["All Cities", "London", "St. Thomas", "Strathroy"];
@@ -52,7 +55,7 @@ export default function ListingsPage() {
       setLoading(true);
       setError(false);
       try {
-        let query = supabase.from("properties").select("*").eq("available", true).eq("is_managed", true).order("created_at", { ascending: false });
+        let query = supabase.from("properties").select("*").eq("status", "published").eq("is_managed", true).order("created_at", { ascending: false });
         if (city !== "All Cities") query = query.eq("city", city);
         if (petFriendly) query = query.eq("pet_friendly", true);
         if (beds === "3+") query = query.gte("bedrooms", 3);
