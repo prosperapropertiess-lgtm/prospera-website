@@ -46,7 +46,7 @@ export default function BasicsStep({ data, onChange }: Props) {
             onChange={(val) => onChange({ address: val })}
             onPlaceSelect={(place) => {
               const updates: Partial<WizardData> = {
-                address: place.formatted_address,
+                address: place.street_address,
                 latitude: place.lat,
                 longitude: place.lng,
               };

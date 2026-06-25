@@ -13,6 +13,7 @@ interface Props {
   onChange: (value: string) => void;
   onPlaceSelect?: (place: {
     formatted_address: string;
+    street_address: string;
     lat: number;
     lng: number;
     city?: string;
@@ -22,9 +23,7 @@ interface Props {
   placeholder?: string;
   className?: string;
   style?: React.CSSProperties;
-  /** Restrict to specific country. Default: "ca" */
   country?: string;
-  /** Restrict to specific types. Default: "address" */
   types?: string;
 }
 
@@ -79,28 +78,51 @@ export default function AddressAutocomplete({
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
-  const [ready, setReady] = useState(false);
+  // Use local state to avoid React/Google DOM fight
+  const [localValue, setLocalValue] = useState(value);
+  const skipNextSync = useRef(false);
+
+  // Sync parent value → local only when parent changes (not from our own updates)
+  useEffect(() => {
+    if (!skipNextSync.current) {
+      setLocalValue(value);
+    }
+    skipNextSync.current = false;
+  }, [value]);
 
   const handlePlaceChanged = useCallback(() => {
     const place = autocompleteRef.current?.getPlace();
     if (!place?.geometry?.location) return;
 
-    const formatted = place.formatted_address || "";
-    onChange(formatted);
+    // Extract just the street address (number + street name), not the full formatted address
+    let streetNumber = "";
+    let route = "";
+    let city = "";
+    let province = "";
+    let postal_code = "";
+
+    for (const comp of place.address_components || []) {
+      if (comp.types.includes("street_number")) streetNumber = comp.long_name;
+      if (comp.types.includes("route")) route = comp.long_name;
+      if (comp.types.includes("locality")) city = comp.long_name;
+      if (comp.types.includes("administrative_area_level_1")) province = comp.short_name;
+      if (comp.types.includes("postal_code")) postal_code = comp.long_name;
+    }
+
+    // Build clean street address: "969 Battery St"
+    const streetAddress = streetNumber && route
+      ? `${streetNumber} ${route}`
+      : place.formatted_address?.split(",")[0] || "";
+
+    // Update local state immediately to prevent flicker
+    setLocalValue(streetAddress);
+    skipNextSync.current = true;
+    onChange(streetAddress);
 
     if (onPlaceSelect) {
-      let city = "";
-      let province = "";
-      let postal_code = "";
-
-      for (const comp of place.address_components || []) {
-        if (comp.types.includes("locality")) city = comp.long_name;
-        if (comp.types.includes("administrative_area_level_1")) province = comp.short_name;
-        if (comp.types.includes("postal_code")) postal_code = comp.long_name;
-      }
-
       onPlaceSelect({
-        formatted_address: formatted,
+        formatted_address: place.formatted_address || "",
+        street_address: streetAddress,
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
         city: city || undefined,
@@ -113,7 +135,7 @@ export default function AddressAutocomplete({
   useEffect(() => {
     loadGoogleScript().then(() => {
       if (!window.google?.maps?.places || !inputRef.current) return;
-      if (autocompleteRef.current) return; // already initialized
+      if (autocompleteRef.current) return;
 
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
         componentRestrictions: { country },
@@ -123,7 +145,6 @@ export default function AddressAutocomplete({
 
       autocomplete.addListener("place_changed", handlePlaceChanged);
       autocompleteRef.current = autocomplete;
-      setReady(true);
     });
 
     return () => {
@@ -137,9 +158,12 @@ export default function AddressAutocomplete({
     <input
       ref={inputRef}
       type="text"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={ready ? placeholder : placeholder}
+      value={localValue}
+      onChange={(e) => {
+        setLocalValue(e.target.value);
+        onChange(e.target.value);
+      }}
+      placeholder={placeholder}
       className={className}
       style={style}
       autoComplete="off"
