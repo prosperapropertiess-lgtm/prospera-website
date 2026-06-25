@@ -14,6 +14,31 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
 
+  // Vibe-only mode: just generate a neighbourhood personality description
+  if (body._vibe_only) {
+    const nearbyLines: string[] = [];
+    if (body.neighbourhood_data) {
+      for (const [category, places] of Object.entries(body.neighbourhood_data)) {
+        const list = places as { name: string; walk_time?: string }[];
+        if (list?.length) {
+          nearbyLines.push(`${category}: ${list.slice(0, 3).map((p) => p.name).join(", ")}`);
+        }
+      }
+    }
+    const vibePrompt = `You are describing the neighbourhood personality of ${body.address}, ${body.city}, Ontario for a rental listing.
+
+Nearby places: ${nearbyLines.join("; ") || "limited data"}
+Walk score: ${body.walk_score || "unknown"}, Transit score: ${body.transit_score || "unknown"}
+Bus routes: ${body.bus_routes?.length ? body.bus_routes.map((r: { route: string; stop_name: string }) => `Route ${r.route} at ${r.stop_name}`).join(", ") : "none found"}
+
+Write 2-3 sentences describing the neighbourhood personality. Cover: who lives here (students, families, professionals), the noise/activity level, the feel at different times of day, and what makes it distinctive. Be honest and specific. Use real place names. No hype words. Plain, direct tone.`;
+
+    const client = new Anthropic({ apiKey });
+    const msg = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
+    const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
+    return NextResponse.json({ description: vibeText.trim() });
+  }
+
   // Build comprehensive property details
   const sections: string[] = [];
 

@@ -20,6 +20,7 @@ interface Props {
 export default function NeighbourhoodStep({ data, onChange, propertyId }: Props) {
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState("");
+  const [generatingVibe, setGeneratingVibe] = useState(false);
 
   async function fetchNeighbourhoodData() {
     if (!data.address || !data.city) return;
@@ -247,11 +248,47 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
 
       {/* Neighbourhood Vibe */}
       <div className="rounded-xl border p-6 space-y-4" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
-        <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Neighbourhood Vibe</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Neighbourhood Vibe</h3>
+          <button
+            type="button"
+            onClick={async () => {
+              if (!data.address || !data.city) return;
+              setGeneratingVibe(true);
+              try {
+                const res = await fetch("/api/admin/generate-listing", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    address: data.address,
+                    city: data.city,
+                    neighbourhood_data: data.neighbourhood_data,
+                    bus_routes: data.bus_routes,
+                    walk_score: data.walk_score,
+                    transit_score: data.transit_score,
+                    _vibe_only: true,
+                  }),
+                });
+                if (res.ok) {
+                  const result = await res.json();
+                  if (result.description) {
+                    onChange({ neighbourhood_vibe: result.description });
+                  }
+                }
+              } catch { /* ignore */ }
+              setGeneratingVibe(false);
+            }}
+            disabled={generatingVibe || !data.address}
+            className="text-xs px-3 py-1.5 rounded-lg transition-opacity hover:opacity-80 disabled:opacity-40"
+            style={{ backgroundColor: ACCENT, color: "#fff" }}
+          >
+            {generatingVibe ? "Generating..." : "Auto-generate with AI"}
+          </button>
+        </div>
         <textarea
           value={data.neighbourhood_vibe}
           onChange={(e) => onChange({ neighbourhood_vibe: e.target.value })}
-          placeholder="Describe the neighbourhood personality — is it student-heavy, family-oriented, quiet professional? What's the noise level? Street activity? Seasonal feel?"
+          placeholder="Click 'Auto-generate with AI' or describe the neighbourhood personality — student-heavy, family-oriented, quiet professional? Noise level? Street activity?"
           rows={4}
           className={inputCls + " resize-none"}
           style={{ backgroundColor: INPUT_BG, color: TEXT, border: `1px solid ${BORDER}` }}

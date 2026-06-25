@@ -89,7 +89,7 @@ export interface WizardData {
 
 const BLANK: WizardData = {
   title: "", address: "", city: "London", property_type: "", price: "", bedrooms: "", bathrooms: "", sqft: "", available_date: "",
-  lease_term: "", deposit: "", first_month_required: true, last_month_required: true, move_in_costs: {},
+  lease_term: "", deposit: "", first_month_required: true, last_month_required: true, move_in_costs: { "Key Deposit": 100 },
   parking: false, parking_type: "none", laundry_type: "none", ac: false, heating_type: "", appliances: [], outdoor_space: "none", furnished: false, storage: false, elevator: false, wheelchair_accessible: false,
   pet_friendly: false, pet_policy: { cats: false, dogs: false, other: false, deposit: "", restrictions: "" }, smoking_allowed: false, guest_policy: "", quiet_hours: "", max_occupants: "", ideal_tenant_profile: [],
   utilities_included: false, utilities_list: [],
