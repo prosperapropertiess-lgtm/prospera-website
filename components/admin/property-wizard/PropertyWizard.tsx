@@ -218,6 +218,11 @@ export default function PropertyWizard({ initial }: Props) {
     if (!propertyId && currentStep === 1) {
       const id = await createProperty();
       if (!id) return;
+      // Redirect to the edit URL so refresh preserves state
+      setData((prev) => ({ ...prev, wizard_step: Math.max(prev.wizard_step, nextStep) }));
+      setCurrentStep(nextStep);
+      router.replace(`/admin/properties/${id}`, { scroll: false });
+      return;
     } else {
       setSaving(true);
       await saveNow();
