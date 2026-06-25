@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 declare global {
   interface Window {
@@ -78,15 +78,13 @@ export default function AddressAutocomplete({
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
-  // Use local state to avoid React/Google DOM fight
-  const [localValue, setLocalValue] = useState(value);
-  const lastParentValue = useRef(value);
+  const isInitialMount = useRef(true);
 
-  // Only sync parent → local when parent value genuinely changes (external update)
+  // Set initial value only on mount — after that, the input is uncontrolled
   useEffect(() => {
-    if (value !== lastParentValue.current) {
-      lastParentValue.current = value;
-      setLocalValue(value);
+    if (isInitialMount.current && inputRef.current && value) {
+      inputRef.current.value = value;
+      isInitialMount.current = false;
     }
   }, [value]);
 
@@ -94,7 +92,6 @@ export default function AddressAutocomplete({
     const place = autocompleteRef.current?.getPlace();
     if (!place?.geometry?.location) return;
 
-    // Extract just the street address (number + street name), not the full formatted address
     let streetNumber = "";
     let route = "";
     let city = "";
@@ -109,14 +106,14 @@ export default function AddressAutocomplete({
       if (comp.types.includes("postal_code")) postal_code = comp.long_name;
     }
 
-    // Build clean street address: "969 Battery St"
     const streetAddress = streetNumber && route
       ? `${streetNumber} ${route}`
       : place.formatted_address?.split(",")[0] || "";
 
-    // Update local state immediately to prevent flicker
-    setLocalValue(streetAddress);
-    lastParentValue.current = streetAddress;
+    // Set the input to just the street address
+    if (inputRef.current) {
+      inputRef.current.value = streetAddress;
+    }
     onChange(streetAddress);
 
     if (onPlaceSelect) {
@@ -158,11 +155,8 @@ export default function AddressAutocomplete({
     <input
       ref={inputRef}
       type="text"
-      value={localValue}
-      onChange={(e) => {
-        setLocalValue(e.target.value);
-        onChange(e.target.value);
-      }}
+      defaultValue={value}
+      onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       className={className}
       style={style}
