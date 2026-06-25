@@ -86,19 +86,6 @@ export default function BasicsStep({ data, onChange }: Props) {
           </Field>
         </div>
 
-        <Field label="Property Title">
-          <input
-            type="text"
-            value={data.title}
-            onChange={(e) => onChange({ title: e.target.value })}
-            placeholder="e.g. Charming 2BR in Old South (AI can generate this later)"
-            className={inputCls}
-            style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
-          />
-          <p className="text-xs mt-1.5" style={{ color: TEXT_MUT }}>
-            Leave blank — AI will generate one in Step 8 based on all your details.
-          </p>
-        </Field>
       </div>
 
       <div className="rounded-xl border p-6 space-y-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
