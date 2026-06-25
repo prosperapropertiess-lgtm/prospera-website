@@ -55,7 +55,7 @@ export function TenantMobileNav({ token }: Props) {
         }}
       >
         <NavItem href={homeHref} icon="home" label="Home" active={isHome} />
-        <NavItem href={paymentsHref} icon="payments" label="Payments" active={isPayments} />
+        <NavItem href={paymentsHref} icon="receipt_long" label="Payments" active={isPayments} />
         <NavItem href={maintenanceHref} icon="build" label="Maintenance" active={isMaintenance} />
         <NavItem href={documentsHref} icon="folder" label="Documents" active={isDocuments} />
         <NavItem href={scheduleHref} icon="event" label="Schedule" active={isSchedule} />
@@ -118,7 +118,7 @@ function NavItem({
       </span>
       <span
         style={{
-          fontSize: "16px",
+          fontSize: "11px",
           fontWeight: active ? 600 : 500,
           letterSpacing: "0.02em",
           fontFamily: "var(--font-dm-sans)",

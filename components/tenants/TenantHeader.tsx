@@ -15,7 +15,7 @@ export default function TenantHeader({ firstName, token }: Props) {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(255,255,255,0.92)",
+        background: "rgba(245,244,241,0.92)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid rgba(15,28,40,0.07)",
@@ -23,7 +23,7 @@ export default function TenantHeader({ firstName, token }: Props) {
     >
       <div
         style={{
-          maxWidth: "960px",
+          maxWidth: "860px",
           margin: "0 auto",
           padding: "0 24px",
           height: "60px",

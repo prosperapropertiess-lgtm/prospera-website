@@ -100,6 +100,9 @@ export default async function PaymentsPage({ params }: Props) {
             Rent History
           </h1>
 
+          {/* How to Pay card */}
+          <HowToPayCard monthlyRent={tenant.monthlyRent} />
+
           {/* YTD summary strip */}
           <div
             style={{
@@ -215,6 +218,95 @@ export default async function PaymentsPage({ params }: Props) {
         <TenantMobileNav token={token} />
       </div>
     </>
+  );
+}
+
+function PayRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "160px 1fr",
+        gap: "12px",
+        padding: "10px 0",
+        borderBottom: `1px solid ${CARD_BORDER}`,
+      }}
+    >
+      <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED, fontWeight: 500 }}>
+        {label}
+      </span>
+      <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: NAVY, fontWeight: 600 }}>
+        {value}
+      </span>
+    </div>
+  );
+}
+
+function HowToPayCard({ monthlyRent }: { monthlyRent: number | null }) {
+  const now = new Date();
+  const monthName = now.toLocaleDateString("en-CA", { month: "long", year: "numeric" });
+  const amountDisplay = monthlyRent != null ? fmt$(monthlyRent) : "Your monthly rent";
+
+  return (
+    <div
+      style={{
+        background: CARD,
+        border: `1px solid ${CARD_BORDER}`,
+        borderRadius: RADIUS,
+        boxShadow: CARD_SHADOW,
+        borderLeft: "3px solid #0A7A52",
+        padding: "24px 28px",
+        marginBottom: "28px",
+      }}
+    >
+      <p
+        style={{
+          fontFamily: "var(--font-dm-sans)",
+          fontSize: "13px",
+          fontWeight: 700,
+          color: GREEN,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          marginBottom: "16px",
+        }}
+      >
+        How to Pay
+      </p>
+      <div style={{ borderTop: `1px solid ${CARD_BORDER}` }}>
+        <PayRow label="Send e-transfer to" value="prosperapropertiess@gmail.com" />
+        <PayRow label="Amount" value={amountDisplay} />
+        <PayRow label="Message" value={`${monthName} – [Your last name]`} />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "160px 1fr",
+            gap: "12px",
+            padding: "10px 0",
+          }}
+        >
+          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED, fontWeight: 500 }}>
+            Due
+          </span>
+          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: NAVY, fontWeight: 600 }}>
+            1st of each month
+          </span>
+        </div>
+      </div>
+      <p
+        style={{
+          fontFamily: "var(--font-dm-sans)",
+          fontSize: "14px",
+          color: MUTED,
+          marginTop: "16px",
+          padding: "10px 14px",
+          background: "rgba(10,122,82,0.06)",
+          borderRadius: "10px",
+          lineHeight: "1.5",
+        }}
+      >
+        Tip: set up auto-send in your banking app so you never miss a date.
+      </p>
+    </div>
   );
 }
 

@@ -15,12 +15,14 @@ export function MobileNav({ token }: Props) {
   const tenantsHref = `/owners/${token}/tenants`;
   const maintenanceHref = `/owners/${token}/maintenance`;
   const messagesHref = `/owners/${token}/messages`;
+  const documentsHref = `/owners/${token}/documents`;
 
   const isHome = pathname === homeHref;
   const isFinancials = pathname.startsWith(financialsHref);
   const isTenants = pathname.startsWith(tenantsHref);
   const isMaintenance = pathname.startsWith(maintenanceHref);
   const isMessages = pathname.startsWith(messagesHref);
+  const isDocuments = pathname.startsWith(documentsHref);
 
   return (
     <>
@@ -55,7 +57,8 @@ export function MobileNav({ token }: Props) {
         <NavItem href={homeHref} icon="home" label="Home" active={isHome} />
         <NavItem href={financialsHref} icon="trending_up" label="Financials" active={isFinancials} />
         <NavItem href={tenantsHref} icon="people" label="Tenants" active={isTenants} />
-        <NavItem href={maintenanceHref} icon="build" label="Maintenance" active={isMaintenance} />
+        <NavItem href={maintenanceHref} icon="build" label="Repairs" active={isMaintenance} />
+        <NavItem href={documentsHref} icon="folder" label="Docs" active={isDocuments} />
         <NavItem href={messagesHref} icon="chat" label="Messages" active={isMessages} />
       </nav>
     </>
@@ -79,7 +82,7 @@ function NavItem({
     alignItems: "center",
     justifyContent: "center",
     gap: "3px",
-    padding: "10px 16px",
+    padding: "10px 6px",
     textDecoration: "none",
     flex: 1,
     minHeight: "56px",
@@ -107,7 +110,7 @@ function NavItem({
         className="material-symbols-outlined"
         style={{
           fontSize: "22px",
-          color: active ? "#8B2030" : "rgba(15,28,40,0.30)",
+          color: active ? "#8B2030" : "rgba(15,28,40,0.45)",
           transition: "color 0.2s",
         }}
       >
@@ -115,11 +118,11 @@ function NavItem({
       </span>
       <span
         style={{
-          fontSize: "16px",
+          fontSize: "11px",
           fontWeight: active ? 600 : 500,
           letterSpacing: "0.02em",
           fontFamily: "var(--font-dm-sans)",
-          color: active ? "#8B2030" : "rgba(15,28,40,0.30)",
+          color: active ? "#8B2030" : "rgba(15,28,40,0.45)",
           transition: "color 0.2s",
         }}
       >

@@ -387,7 +387,7 @@ function Step3Form({ token, onComplete, initialAddress, initialType }: {
     e.preventDefault();
     if (!form.property_address.trim()) { setError("Address is required."); return; }
     setSaving(true); setError("");
-    const r = await fetch(`/api/onboard/${token}/step/3`, {
+    const r = await fetch(`/api/onboard/${token}/step/4`, {
       method: "POST",
       headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
       body: JSON.stringify({
@@ -752,10 +752,46 @@ export default function OnboardChecklist() {
             }
           />
 
-          {/* Step 3 */}
+          {/* Step 3 — owner signs agreement FIRST */}
           <StepCard
-            num={3} title="Property Details"
-            status={stepStatus(3)}
+            num={3} title="Management Agreement"
+            status={step > 3 ? "complete" : step === 3 ? "owner" : "locked"}
+            completedAt={session.agreement_signed_at}
+            summary={
+              session.agreement_signed_at ? (
+                <p style={{ margin: 0, fontSize: 14, color: MUTED }}>Signed {fmt(session.agreement_signed_at)}</p>
+              ) : undefined
+            }
+          >
+            <div>
+              <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
+                Waiting for the owner to read and sign the management agreement.
+              </p>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                <a
+                  href={`/onboard/${token}/agreement`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
+                >
+                  Preview →
+                </a>
+                <a
+                  href={`/onboard/${token}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
+                >
+                  Owner portal ↗
+                </a>
+              </div>
+            </div>
+          </StepCard>
+
+          {/* Step 4 — Ebin fills property details after agreement is signed */}
+          <StepCard
+            num={4} title="Property Details"
+            status={stepStatus(4)}
             completedAt={session.step3_completed_at}
             summary={
               <div>
@@ -768,7 +804,7 @@ export default function OnboardChecklist() {
                   {session.approx_monthly_rent ? ` · $${Number(session.approx_monthly_rent).toLocaleString()}/mo` : ""}
                 </p>
                 {session.notion_property_id && (
-                  <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion property record created · Email 1 sent to owner</p>
+                  <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion property record created · Lease upload email sent</p>
                 )}
               </div>
             }
@@ -776,10 +812,10 @@ export default function OnboardChecklist() {
             <Step3Form token={token} onComplete={load} initialAddress={session.property_address} initialType={session.property_type} />
           </StepCard>
 
-          {/* Step 4 — owner action */}
+          {/* Step 5 — owner uploads lease + details */}
           <StepCard
-            num={4} title="Lease Upload & Details Form"
-            status={step > 4 ? "complete" : step === 4 ? "owner" : "locked"}
+            num={5} title="Lease Upload & Details Form"
+            status={step > 5 ? "complete" : step === 5 ? "owner" : "locked"}
             completedAt={session.step4_completed_at}
             summary={
               <div>
@@ -841,32 +877,6 @@ export default function OnboardChecklist() {
                   </div>
                 </div>
               )}
-            </div>
-          </StepCard>
-
-          {/* Step 5 — owner action */}
-          <StepCard
-            num={5} title="Management Agreement"
-            status={step > 5 ? "complete" : step === 5 ? "owner" : "locked"}
-            completedAt={session.agreement_signed_at}
-            summary={
-              session.agreement_signed_at ? (
-                <p style={{ margin: 0, fontSize: 14, color: MUTED }}>Signed at {fmt(session.agreement_signed_at)}</p>
-              ) : undefined
-            }
-          >
-            <div>
-              <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
-                Waiting for owner to read and sign the management agreement.
-              </p>
-              <a
-                href={`/onboard/${token}/agreement`}
-                target="_blank"
-                rel="noreferrer"
-                style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(15,28,40,0.04)", border: `1px solid ${CARD_BORDER}`, borderRadius: 10, padding: "9px 14px", fontSize: 13, color: NAVY, textDecoration: "none", fontWeight: 500 }}
-              >
-                Preview →
-              </a>
             </div>
           </StepCard>
 

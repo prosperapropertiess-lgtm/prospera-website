@@ -65,12 +65,41 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
   const [checkedSteps, setCheckedSteps] = useState<Set<number>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [submittedId, setSubmittedId] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [photoUrls, setPhotoUrls] = useState<string[]>([]);
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
+
+  function handlePhotoAdd(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    setPhotos(prev => [...prev, ...files].slice(0, 3));
+    e.target.value = "";
+  }
+
+  function handlePhotoRemove(index: number) {
+    setPhotos(prev => prev.filter((_, i) => i !== index));
+  }
+
+  async function uploadPhotos(): Promise<string[]> {
+    if (photos.length === 0) return [];
+    const fd = new FormData();
+    fd.append("token", token);
+    photos.forEach(f => fd.append("photo", f));
+    const res = await fetch("/api/tenants/maintenance/photos", { method: "POST", body: fd });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error ?? "Photo upload failed");
+    return json.urls as string[];
+  }
 
   async function handleDiagnose() {
     if (description.trim().length < 10) return;
     setState("diagnosing");
     setError(null);
     try {
+      setUploadingPhotos(true);
+      const urls = await uploadPhotos();
+      setPhotoUrls(urls);
+      setUploadingPhotos(false);
+
       const res = await fetch("/api/tenants/maintenance", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,6 +111,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
       setTroubleshootingSteps(parseTroubleshootingSteps(json.diagnosis ?? ""));
       setState("troubleshoot");
     } catch (err) {
+      setUploadingPhotos(false);
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setState("describe");
     }
@@ -102,6 +132,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
           description,
           troubleshootingSteps: aiDiagnosis,
           aiDiagnosis,
+          photoUrls,
         }),
       });
       const json = await res.json();
@@ -239,6 +270,77 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
             marginBottom: "16px",
           }}
         />
+        {/* Photo upload section */}
+        <div style={{ marginBottom: "16px" }}>
+          {photos.length > 0 && (
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "10px" }}>
+              {photos.map((file, i) => (
+                <div key={i} style={{ position: "relative", width: "60px", height: "60px" }}>
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={file.name}
+                    style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "8px", border: `1px solid ${CARD_BORDER}` }}
+                  />
+                  <button
+                    onClick={() => handlePhotoRemove(i)}
+                    style={{
+                      position: "absolute",
+                      top: "-6px",
+                      right: "-6px",
+                      width: "18px",
+                      height: "18px",
+                      borderRadius: "50%",
+                      background: NAVY,
+                      color: "#fff",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "11px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      lineHeight: 1,
+                    }}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          {photos.length < 3 && (
+            <label
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "10px 16px",
+                borderRadius: "10px",
+                border: `1.5px dashed ${CARD_BORDER}`,
+                cursor: "pointer",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "15px",
+                color: MUTED,
+                background: "transparent",
+              }}
+            >
+              <span>Add photos (optional)</span>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                style={{ display: "none" }}
+                onChange={handlePhotoAdd}
+              />
+            </label>
+          )}
+        </div>
+
+        {uploadingPhotos && (
+          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: MUTED, marginBottom: "12px" }}>
+            Uploading photos…
+          </p>
+        )}
+
         <button
           onClick={handleDiagnose}
           disabled={description.trim().length < 10}

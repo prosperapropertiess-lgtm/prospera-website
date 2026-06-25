@@ -181,6 +181,23 @@ export default function PropertyForm({ initial }: Props) {
     setSaving(true);
     setError("");
 
+    // Validate required fields
+    if (!form.price || Number(form.price) <= 0) {
+      setError("Monthly rent must be greater than $0.");
+      setSaving(false);
+      return;
+    }
+    if (!form.bedrooms || Number(form.bedrooms) < 1) {
+      setError("Property must have at least 1 bedroom.");
+      setSaving(false);
+      return;
+    }
+    if (!form.bathrooms || Number(form.bathrooms) < 1) {
+      setError("Property must have at least 1 bathroom.");
+      setSaving(false);
+      return;
+    }
+
     const payload = {
       ...form,
       price: Number(form.price),
@@ -268,7 +285,7 @@ export default function PropertyForm({ initial }: Props) {
               value={form.price}
               onChange={(e) => set("price", e.target.value === "" ? "" : Number(e.target.value))}
               required
-              min={0}
+              min={1}
               placeholder="1800"
               className={inputCls}
             />
@@ -286,7 +303,7 @@ export default function PropertyForm({ initial }: Props) {
                 value={form.bedrooms}
                 onChange={(e) => set("bedrooms", e.target.value === "" ? "" : Number(e.target.value))}
                 required
-                min={0}
+                min={1}
                 placeholder="2"
                 className={inputCls}
               />
@@ -297,7 +314,7 @@ export default function PropertyForm({ initial }: Props) {
                 value={form.bathrooms}
                 onChange={(e) => set("bathrooms", e.target.value === "" ? "" : Number(e.target.value))}
                 required
-                min={0}
+                min={1}
                 step={0.5}
                 placeholder="1"
                 className={inputCls}
@@ -523,7 +540,7 @@ export default function PropertyForm({ initial }: Props) {
               <input
                 ref={fileRef}
                 type="file"
-                accept="image/*"
+                accept="image/*,.heic,.heif"
                 multiple
                 onChange={handlePhotoUpload}
                 className="hidden"
