@@ -210,7 +210,27 @@ export async function POST(req: NextRequest) {
     walk_time: stop.walk_time,
   }));
 
-  // Use reused meta as fallback for scores/vibe if Walk Score API didn't return data
+  // Estimate scores from Google Places data if Walk Score API unavailable
+  if (!walk_score && !reusedMeta?.walk_score) {
+    // Score based on how many amenity categories have places within walking distance
+    const categories = ["grocery_or_supermarket", "pharmacy", "restaurant", "cafe", "bank", "park"];
+    const nearbyCount = categories.filter((cat) => {
+      const list = places[cat] as { distance?: string }[] || [];
+      return list.some((p) => parseInt(p.distance || "9999") < 1000); // within 1km
+    }).length;
+    walk_score = Math.min(100, Math.round((nearbyCount / categories.length) * 85 + 10));
+  }
+
+  if (!transit_score && !reusedMeta?.transit_score) {
+    const transitCount = (places.transit_station as unknown[] || []).length;
+    transit_score = transitCount >= 5 ? 75 : transitCount >= 3 ? 60 : transitCount >= 1 ? 45 : 25;
+  }
+
+  if (!bike_score && !reusedMeta?.bike_score) {
+    // Estimate bike score: if walkable + has parks/cafes nearby, likely bikeable
+    bike_score = walk_score ? Math.min(100, Math.round(walk_score * 0.85)) : 50;
+  }
+
   const finalWalkScore = walk_score ?? reusedMeta?.walk_score ?? null;
   const finalTransitScore = transit_score ?? reusedMeta?.transit_score ?? null;
   const finalBikeScore = bike_score ?? reusedMeta?.bike_score ?? null;
