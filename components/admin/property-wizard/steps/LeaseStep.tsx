@@ -70,15 +70,20 @@ export default function LeaseStep({ data, onChange }: Props) {
         <Field label="Security Deposit ($)">
           <input
             type="number"
-            value={data.deposit}
+            value={data.deposit === "" && data.price ? data.price : data.deposit}
             onChange={(e) => onChange({ deposit: e.target.value === "" ? "" : Number(e.target.value) })}
-            placeholder="0"
+            placeholder={data.price ? String(data.price) : "0"}
             min={0}
             className={inputCls}
             style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
+            onFocus={() => {
+              if (data.deposit === "" && data.price) {
+                onChange({ deposit: Number(data.price) });
+              }
+            }}
           />
           <p className="text-xs mt-1.5" style={{ color: TEXT_MUT }}>
-            Note: In Ontario, landlords can only collect last month&apos;s rent deposit, not a damage deposit.
+            Defaults to one month&apos;s rent. In Ontario, landlords can only collect last month&apos;s rent deposit, not a damage deposit.
           </p>
         </Field>
       </div>
