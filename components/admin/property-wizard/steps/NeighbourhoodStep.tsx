@@ -31,6 +31,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
       const res = await fetch("/api/admin/neighbourhood", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ address: data.address, city: data.city }),
       });
 
@@ -61,6 +62,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
           const vibeRes = await fetch("/api/admin/generate-listing", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify({
               address: data.address,
               city: data.city,
@@ -77,10 +79,13 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
               onChange({ neighbourhood_vibe: vibeResult.description });
             }
           }
-        } catch { /* ignore */ }
+        } catch (vibeErr) {
+          console.error("[vibe] generation failed:", vibeErr);
+        }
         setGeneratingVibe(false);
       }
     } catch (err) {
+      console.error("[neighbourhood] fetch failed:", err);
       setFetchError(err instanceof Error ? err.message : "Failed to fetch data");
     } finally {
       setFetching(false);
@@ -290,6 +295,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
                 const res = await fetch("/api/admin/generate-listing", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
+                  credentials: "include",
                   body: JSON.stringify({
                     address: data.address,
                     city: data.city,
@@ -305,8 +311,14 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
                   if (result.description) {
                     onChange({ neighbourhood_vibe: result.description });
                   }
+                } else {
+                  const errData = await res.json().catch(() => ({}));
+                  setFetchError(`Vibe generation failed: ${errData.error || res.statusText}`);
                 }
-              } catch { /* ignore */ }
+              } catch (err) {
+                console.error("[vibe] button failed:", err);
+                setFetchError("Vibe generation failed. Check console.");
+              }
               setGeneratingVibe(false);
             }}
             disabled={generatingVibe || !data.address}
