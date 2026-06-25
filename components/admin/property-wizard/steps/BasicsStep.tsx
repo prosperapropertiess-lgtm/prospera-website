@@ -1,5 +1,9 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
 import type { WizardData } from "../PropertyWizard";
 import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "lucide-react";
 
 const SURFACE = "#FFFFFF";
 const BORDER = "#D8D2C8";
@@ -28,6 +32,28 @@ interface Props {
 }
 
 export default function BasicsStep({ data, onChange }: Props) {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  // Close calendar on click outside
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false);
+      }
+    }
+    if (calendarOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [calendarOpen]);
+
+  const selectedDate = data.available_date ? new Date(data.available_date + "T00:00:00") : undefined;
+
+  function formatDisplayDate(dateStr: string): string {
+    if (!dateStr) return "";
+    const d = new Date(dateStr + "T00:00:00");
+    return d.toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric" });
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -85,7 +111,6 @@ export default function BasicsStep({ data, onChange }: Props) {
             </select>
           </Field>
         </div>
-
       </div>
 
       <div className="rounded-xl border p-6 space-y-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
@@ -146,13 +171,39 @@ export default function BasicsStep({ data, onChange }: Props) {
         </div>
 
         <Field label="Available Date">
-          <input
-            type="date"
-            value={data.available_date}
-            onChange={(e) => onChange({ available_date: e.target.value })}
-            className={inputCls}
-            style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
-          />
+          <div className="relative" ref={calendarRef}>
+            <button
+              type="button"
+              onClick={() => setCalendarOpen(!calendarOpen)}
+              className={inputCls + " flex items-center justify-between cursor-pointer text-left"}
+              style={{ backgroundColor: INPUT_BG, color: data.available_date ? TEXT : TEXT_MUT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
+            >
+              <span>{data.available_date ? formatDisplayDate(data.available_date) : "Pick a date..."}</span>
+              <CalendarIcon size={16} style={{ color: TEXT_MUT }} />
+            </button>
+
+            {calendarOpen && (
+              <div
+                className="absolute top-full left-0 mt-2 z-50 rounded-xl border shadow-lg"
+                style={{ backgroundColor: SURFACE, borderColor: BORDER }}
+              >
+                <Calendar
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={(date) => {
+                    if (date) {
+                      const iso = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+                      onChange({ available_date: iso });
+                    } else {
+                      onChange({ available_date: "" });
+                    }
+                    setCalendarOpen(false);
+                  }}
+                  disabled={{ before: new Date() }}
+                />
+              </div>
+            )}
+          </div>
           <p className="text-xs mt-1.5" style={{ color: TEXT_MUT }}>When can a tenant move in?</p>
         </Field>
       </div>

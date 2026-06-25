@@ -3,6 +3,17 @@
 > These rules apply to EVERY edit, page, component, or section built for this project.
 > Before writing any UI code, check against this file. No exceptions.
 
+## Copywriting Rules
+
+**Before writing ANY copy** (listings, emails, descriptions, CTAs, marketing text, AI prompts that generate copy), read `COPYWRITING.md` in the project root. It contains the full Prospera copywriting system — voice, compliance, structure, and hard guardrails. Key rules:
+- Never invent facts, stats, or testimonials
+- Never describe the ideal tenant in listings (Ontario Human Rights Code)
+- Never guarantee outcomes (rent, occupancy, returns)
+- Never imply AI makes leasing decisions
+- One idea, one promise, one action per piece
+- Plain, direct, confident voice — no hype words (amazing, revolutionary, seamless, game-changing)
+- Scrub AI tells before any copy ships
+
 ---
 
 ## Brand Palette
