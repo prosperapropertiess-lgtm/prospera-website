@@ -201,14 +201,61 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Step 5: Bus routes from transit stops
-  const transitStops = (places.transit_station || []) as { name: string; distance: string; walk_time: string }[];
-  const bus_routes = transitStops.slice(0, 5).map((stop) => ({
-    route: "",
-    stop_name: stop.name,
-    frequency: "",
-    walk_time: stop.walk_time,
-  }));
+  // Step 5: Bus routes — use Google Directions API to find transit routes to downtown
+  let bus_routes: { route: string; stop_name: string; frequency: string; walk_time: string }[] = [];
+
+  try {
+    // Query transit directions to downtown London to discover route numbers
+    const downtowns: Record<string, string> = {
+      "London": "Dundas St & Richmond St, London, ON",
+      "St. Thomas": "Talbot St & Railway St, St. Thomas, ON",
+      "Strathroy": "Frank St & Centre St, Strathroy, ON",
+    };
+    const destination = downtowns[city as string] || downtowns["London"];
+
+    const directionsUrl = `https://maps.googleapis.com/maps/api/directions/json?origin=${latitude},${longitude}&destination=${encodeURIComponent(destination)}&mode=transit&alternatives=true&key=${GOOGLE_API_KEY}`;
+    const dirRes = await fetch(directionsUrl);
+    const dirData = await dirRes.json();
+
+    if (dirData.status === "OK" && dirData.routes) {
+      const seenRoutes = new Set<string>();
+
+      for (const route of dirData.routes) {
+        for (const leg of route.legs || []) {
+          for (const step of leg.steps || []) {
+            if (step.travel_mode === "TRANSIT" && step.transit_details) {
+              const td = step.transit_details;
+              const routeNum = td.line?.short_name || td.line?.name || "";
+              const stopName = td.departure_stop?.name || "";
+
+              if (routeNum && !seenRoutes.has(routeNum)) {
+                seenRoutes.add(routeNum);
+                bus_routes.push({
+                  route: routeNum,
+                  stop_name: stopName,
+                  frequency: td.headway ? `Every ${Math.round(td.headway / 60)} min` : "",
+                  walk_time: step.duration?.text ? `${stopName}` : "",
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error("[neighbourhood] Transit directions failed:", err);
+  }
+
+  // Fallback: use transit station names from Places if Directions returned nothing
+  if (bus_routes.length === 0) {
+    const transitStops = (places.transit_station || []) as { name: string; distance: string; walk_time: string }[];
+    bus_routes = transitStops.slice(0, 5).map((stop) => ({
+      route: "",
+      stop_name: stop.name,
+      frequency: "",
+      walk_time: stop.walk_time,
+    }));
+  }
 
   // Estimate scores from Google Places data if Walk Score API unavailable
   if (!walk_score && !reusedMeta?.walk_score) {
