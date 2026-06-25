@@ -91,6 +91,16 @@ export default function FeaturesStep({ data, onChange }: Props) {
               />
             ))}
           </div>
+          {data.parking_type && data.parking_type !== "none" && (
+            <input
+              type="text"
+              value={(data.transparency?.parking_enforcement as string) || ""}
+              onChange={(e) => onChange({ transparency: { ...data.transparency, parking_enforcement: e.target.value } })}
+              placeholder="e.g. 2 assigned spots, visitor parking available, no overnight street parking"
+              className={inputCls + " mt-3"}
+              style={{ backgroundColor: "#FFFFFF", color: TEXT, border: `1px solid ${BORDER}` }}
+            />
+          )}
         </Field>
 
         <Field label="Laundry">
