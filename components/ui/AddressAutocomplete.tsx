@@ -80,14 +80,14 @@ export default function AddressAutocomplete({
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   // Use local state to avoid React/Google DOM fight
   const [localValue, setLocalValue] = useState(value);
-  const skipNextSync = useRef(false);
+  const lastParentValue = useRef(value);
 
-  // Sync parent value → local only when parent changes (not from our own updates)
+  // Only sync parent → local when parent value genuinely changes (external update)
   useEffect(() => {
-    if (!skipNextSync.current) {
+    if (value !== lastParentValue.current) {
+      lastParentValue.current = value;
       setLocalValue(value);
     }
-    skipNextSync.current = false;
   }, [value]);
 
   const handlePlaceChanged = useCallback(() => {
@@ -116,7 +116,7 @@ export default function AddressAutocomplete({
 
     // Update local state immediately to prevent flicker
     setLocalValue(streetAddress);
-    skipNextSync.current = true;
+    lastParentValue.current = streetAddress;
     onChange(streetAddress);
 
     if (onPlaceSelect) {
