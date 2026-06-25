@@ -184,7 +184,7 @@ export default function BasicsStep({ data, onChange }: Props) {
 
             {calendarOpen && (
               <div
-                className="absolute top-full left-0 mt-2 z-50 rounded-xl border shadow-lg"
+                className="absolute bottom-full left-0 mb-2 z-50 rounded-xl border shadow-lg"
                 style={{ backgroundColor: SURFACE, borderColor: BORDER }}
               >
                 <Calendar
