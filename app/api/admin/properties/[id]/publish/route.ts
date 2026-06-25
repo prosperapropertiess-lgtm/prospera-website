@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { createPropertyInNotion } from "@/lib/notion";
 
 function generateMarketplaceDescription(p: Record<string, unknown>): string {
   const lines: string[] = [];
@@ -84,6 +85,26 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (error) {
     console.error("Publish error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // ── Sync to Notion (non-blocking) ──
+  if (data && process.env.NOTION_API_KEY) {
+    (async () => {
+      try {
+        // Only create in Notion if not already synced (no notion_property_id stored)
+        const notionId = await createPropertyInNotion({
+          address: String(data.address || data.title || ""),
+          city: String(data.city || "London"),
+          type: String(data.property_type || "Other"),
+          monthlyRent: Number(data.price) || 0,
+          ownerId: "", // No owner linked from admin — can be updated later
+          notes: `Supabase ID: ${data.id}\nBedrooms: ${data.bedrooms || "?"}\nBathrooms: ${data.bathrooms || "?"}`,
+        });
+        console.log(`[publish] Created Notion property: ${notionId}`);
+      } catch (err) {
+        console.error("[publish] Notion sync failed:", err);
+      }
+    })();
   }
 
   // ── Tenant Matching: email past waitlisted/disqualified tenants ──
