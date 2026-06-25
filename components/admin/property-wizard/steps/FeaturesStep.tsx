@@ -158,14 +158,27 @@ export default function FeaturesStep({ data, onChange }: Props) {
 
         <Field label="Outdoor Space">
           <div className="grid grid-cols-3 gap-2">
-            {OUTDOOR_TYPES.map((t) => (
-              <OptionButton
-                key={t.value}
-                label={t.label}
-                selected={data.outdoor_space === t.value}
-                onClick={() => onChange({ outdoor_space: t.value })}
-              />
-            ))}
+            {OUTDOOR_TYPES.map((t) => {
+              const currentSpaces = (data.outdoor_space || "").split(",").filter(Boolean);
+              const isSelected = t.value === "none" ? currentSpaces.length === 0 || currentSpaces.includes("none") : currentSpaces.includes(t.value);
+              return (
+                <OptionButton
+                  key={t.value}
+                  label={t.label}
+                  selected={isSelected}
+                  checkable
+                  onClick={() => {
+                    if (t.value === "none") {
+                      onChange({ outdoor_space: "none" });
+                    } else {
+                      const without = currentSpaces.filter((s) => s !== "none" && s !== t.value);
+                      const updated = isSelected ? without : [...without, t.value];
+                      onChange({ outdoor_space: updated.length === 0 ? "none" : updated.join(",") });
+                    }
+                  }}
+                />
+              );
+            })}
           </div>
         </Field>
 
