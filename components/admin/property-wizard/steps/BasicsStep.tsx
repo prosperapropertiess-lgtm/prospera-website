@@ -1,13 +1,13 @@
 import type { WizardData } from "../PropertyWizard";
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const INPUT_BG = "#0B1219";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const INPUT_BG = "#F7F5F2";
 
-const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#C4374A]/40";
+const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 const CITIES = ["London", "St. Thomas", "Strathroy"];
 const PROPERTY_TYPES = [
@@ -166,7 +166,7 @@ function Field({ label, required, children }: { label: string; required?: boolea
   return (
     <div>
       <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: TEXT_MUT }}>
-        {label}{required && <span className="ml-0.5" style={{ color: "#C4374A" }}>*</span>}
+        {label}{required && <span className="ml-0.5" style={{ color: "#8B2030" }}>*</span>}
       </label>
       {children}
     </div>

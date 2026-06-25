@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const SURFACE_HI = "#172234";
-const BORDER = "rgba(255,255,255,0.08)";
-const BORDER_HI = "rgba(255,255,255,0.14)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT = "#C4374A";
+const BG = "#F7F5F2";
+const NAV = "#1F2F3A";  // keep navy top bar
+const SURFACE = "#FFFFFF";
+const SURFACE_HI = "#F7F5F2";
+const BORDER = "#D8D2C8";
+const BORDER_HI = "#C5BFB5";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const ACCENT = "#8B2030";
 
 interface Property {
   id: string;
@@ -87,20 +87,20 @@ export default function PropertiesPage() {
     if (p.status === "draft") {
       const step = p.wizard_step || 1;
       return (
-        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(251,191,36,0.12)", color: "#fbbf24" }}>
+        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(251,191,36,0.08)", color: "#92400e" }}>
           Draft · Step {step}/8
         </span>
       );
     }
     if (p.status === "published") {
       return (
-        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(34,197,94,0.12)", color: "#4ade80" }}>
+        <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(34,197,94,0.08)", color: "#15803d" }}>
           Published
         </span>
       );
     }
     return (
-      <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.06)", color: TEXT_MUT }}>
+      <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(0,0,0,0.04)", color: TEXT_MUT }}>
         Archived
       </span>
     );
@@ -114,13 +114,13 @@ export default function PropertiesPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="flex items-center gap-5">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/admin" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>← Home</Link>
-          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>↗ View site</Link>
+          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: "#FAF8F5" }}>Prospera</span>
+          <Link href="/admin" className="text-xs transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>← Home</Link>
+          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>↗ View site</Link>
         </div>
-        <button onClick={handleLogout} className="text-xs" style={{ color: TEXT_SEC }}>Sign out</button>
+        <button onClick={handleLogout} className="text-xs" style={{ color: "rgba(250,248,245,0.55)" }}>Sign out</button>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-10">
@@ -183,7 +183,7 @@ export default function PropertiesPage() {
           <div className="rounded-xl border overflow-hidden" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
             <table className="w-full hidden md:table">
               <thead>
-                <tr style={{ borderBottom: `1px solid ${BORDER}`, backgroundColor: NAV }}>
+                <tr style={{ borderBottom: `1px solid ${BORDER}`, backgroundColor: SURFACE_HI }}>
                   <th className="text-left text-xs uppercase tracking-widest px-6 py-4 font-normal w-14" style={{ color: TEXT_MUT }}></th>
                   <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>Property</th>
                   <th className="text-left text-xs uppercase tracking-widest px-4 py-4 font-normal" style={{ color: TEXT_MUT, fontFamily: "var(--font-dm-sans)" }}>City</th>
@@ -217,7 +217,7 @@ export default function PropertiesPage() {
                         <button
                           onClick={() => handleTogglePublish(p)}
                           className="text-xs transition-colors"
-                          style={{ color: p.status === "published" ? "#fbbf24" : "#4ade80" }}
+                          style={{ color: p.status === "published" ? "#d97706" : "#15803d" }}
                         >
                           {p.status === "published" ? "Unpublish" : "Publish"}
                         </button>
@@ -226,7 +226,7 @@ export default function PropertiesPage() {
                           onClick={() => handleDelete(p.id, p.title)}
                           disabled={deleting === p.id}
                           className="text-xs transition-colors disabled:opacity-40"
-                          style={{ color: "#f87171" }}
+                          style={{ color: "#dc2626" }}
                         >
                           {deleting === p.id ? "..." : "Delete"}
                         </button>
@@ -251,11 +251,11 @@ export default function PropertiesPage() {
                     <p className="text-xs mt-0.5" style={{ color: TEXT_SEC }}>{p.city} · {p.bedrooms ? `${p.bedrooms} bed · ` : ""}{p.price ? `$${p.price.toLocaleString()}/mo` : ""}</p>
                     <div className="mt-2">{statusBadge(p)}</div>
                     <div className="flex gap-4 mt-2">
-                      <button onClick={() => handleTogglePublish(p)} className="text-xs underline" style={{ color: p.status === "published" ? "#fbbf24" : "#4ade80" }}>
+                      <button onClick={() => handleTogglePublish(p)} className="text-xs underline" style={{ color: p.status === "published" ? "#d97706" : "#15803d" }}>
                         {p.status === "published" ? "Unpublish" : "Publish"}
                       </button>
                       <Link href={`/admin/properties/${p.id}`} className="text-xs underline" style={{ color: TEXT_MUT }}>Edit</Link>
-                      <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs underline" style={{ color: "#f87171" }}>
+                      <button onClick={() => handleDelete(p.id, p.title)} disabled={deleting === p.id} className="text-xs underline" style={{ color: "#dc2626" }}>
                         {deleting === p.id ? "Deleting..." : "Delete"}
                       </button>
                     </div>

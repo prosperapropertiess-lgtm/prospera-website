@@ -1,15 +1,15 @@
 import { useState } from "react";
 import type { WizardData } from "../PropertyWizard";
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const INPUT_BG = "#0B1219";
-const ACCENT = "#C4374A";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const INPUT_BG = "#F7F5F2";
+const ACCENT = "#8B2030";
 
-const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#C4374A]/40";
+const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 interface Props {
   data: WizardData;
@@ -112,7 +112,7 @@ export default function PreviewStep({ data, onChange, propertyId }: Props) {
         </div>
 
         {genError && (
-          <p className="text-xs px-3 py-2 rounded-lg" style={{ backgroundColor: "rgba(196,55,74,0.15)", color: "#f87171" }}>{genError}</p>
+          <p className="text-xs px-3 py-2 rounded-lg" style={{ backgroundColor: "rgba(139,32,48,0.08)", color: "#8B2030" }}>{genError}</p>
         )}
       </div>
 
@@ -280,7 +280,7 @@ export default function PreviewStep({ data, onChange, propertyId }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 text-sm rounded-lg transition-opacity hover:opacity-80"
-            style={{ border: `1px solid ${BORDER}`, color: TEXT_SEC }}
+            style={{ border: `1px solid #D8D2C8`, color: TEXT_SEC }}
           >
             Preview Listing Page ↗
           </a>

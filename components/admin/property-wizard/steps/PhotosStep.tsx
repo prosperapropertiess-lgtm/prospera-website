@@ -2,15 +2,15 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import type { WizardData } from "../PropertyWizard";
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const INPUT_BG = "#0B1219";
-const ACCENT = "#C4374A";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const INPUT_BG = "#F7F5F2";
+const ACCENT = "#8B2030";
 
-const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#C4374A]/40";
+const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 const MAX_PHOTOS = 20;
 const PHOTO_LABELS = [
@@ -174,7 +174,7 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
                   value={photo.label}
                   onChange={(e) => updateLabel(i, e.target.value)}
                   className="w-full px-2 py-1.5 text-xs outline-none"
-                  style={{ backgroundColor: INPUT_BG, color: TEXT_SEC, border: "none" }}
+                  style={{ backgroundColor: "#F7F5F2", color: TEXT_SEC, border: "none" }}
                 >
                   {PHOTO_LABELS.map((l) => (
                     <option key={l.value} value={l.value}>{l.label}</option>
@@ -198,7 +198,7 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
             />
             <label
               htmlFor="wizard-photo-upload"
-              className={`flex items-center justify-center w-full py-10 border-2 border-dashed rounded-xl cursor-pointer transition-colors hover:border-[#C4374A]/40 text-sm ${uploading ? "opacity-50 pointer-events-none" : ""}`}
+              className={`flex items-center justify-center w-full py-10 border-2 border-dashed rounded-xl cursor-pointer transition-colors hover:border-[#8B2030]/40 text-sm ${uploading ? "opacity-50 pointer-events-none" : ""}`}
               style={{ borderColor: BORDER, color: TEXT_MUT }}
             >
               {uploading ? "Uploading..." : `Click or drag photos here (up to ${MAX_PHOTOS - data.photo_labels.length} more)`}

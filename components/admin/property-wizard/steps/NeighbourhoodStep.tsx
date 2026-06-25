@@ -1,15 +1,15 @@
 import { useState } from "react";
 import type { WizardData } from "../PropertyWizard";
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const INPUT_BG = "#0B1219";
-const ACCENT = "#C4374A";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const INPUT_BG = "#F7F5F2";
+const ACCENT = "#8B2030";
 
-const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#C4374A]/40";
+const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 interface Props {
   data: WizardData;
@@ -104,7 +104,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
           </button>
         </div>
         {fetchError && (
-          <p className="text-xs px-3 py-2 rounded-lg" style={{ backgroundColor: "rgba(196,55,74,0.15)", color: "#f87171" }}>
+          <p className="text-xs px-3 py-2 rounded-lg" style={{ backgroundColor: "rgba(139,32,48,0.08)", color: "#8B2030" }}>
             {fetchError}
           </p>
         )}
@@ -159,7 +159,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
             type="button"
             onClick={() => onChange({ bus_routes: [...data.bus_routes, { route: "", stop_name: "", frequency: "", walk_time: "" }] })}
             className="text-xs px-3 py-1.5 rounded-lg"
-            style={{ border: `1px solid ${BORDER}`, color: TEXT_SEC }}
+            style={{ border: `1px solid #D8D2C8`, color: TEXT_SEC }}
           >
             + Add Route
           </button>
@@ -263,13 +263,13 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
 
 function ScoreInput({ label, value, onChange }: { label: string; value: number | ""; onChange: (v: number | "") => void }) {
   const numVal = typeof value === "number" ? value : 0;
-  const color = numVal >= 70 ? "#4ade80" : numVal >= 50 ? "#fbbf24" : numVal > 0 ? "#f87171" : "rgba(237,233,227,0.28)";
+  const color = numVal >= 70 ? "#4ade80" : numVal >= 50 ? "#fbbf24" : numVal > 0 ? "#f87171" : "#D8D2C8";
 
   return (
     <div className="text-center">
       <div className="relative w-20 h-20 mx-auto mb-2">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-          <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" />
+          <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E8E4DE" strokeWidth="3" />
           <path
             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
             fill="none" stroke={color} strokeWidth="3"
@@ -281,7 +281,7 @@ function ScoreInput({ label, value, onChange }: { label: string; value: number |
           {value || "—"}
         </span>
       </div>
-      <label className="block text-xs" style={{ color: "rgba(237,233,227,0.5)" }}>{label}</label>
+      <label className="block text-xs" style={{ color: "#666666" }}>{label}</label>
       <input
         type="number"
         value={value}
@@ -290,7 +290,7 @@ function ScoreInput({ label, value, onChange }: { label: string; value: number |
         min={0}
         max={100}
         className="mt-1 w-full px-2 py-1.5 rounded text-xs text-center outline-none"
-        style={{ backgroundColor: "#0B1219", color: "#EDE9E3", border: "1px solid rgba(255,255,255,0.08)" }}
+        style={{ backgroundColor: "#F7F5F2", color: "#222222", border: "1px solid #D8D2C8" }}
       />
     </div>
   );

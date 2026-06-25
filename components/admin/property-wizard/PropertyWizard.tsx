@@ -12,11 +12,11 @@ import NeighbourhoodStep from "./steps/NeighbourhoodStep";
 import PhotosStep from "./steps/PhotosStep";
 import PreviewStep from "./steps/PreviewStep";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
+const BG = "#F7F5F2";
+const NAV = "#1F2F3A";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
 
 // ─── Full property data shape ───────────────────────────────
 export interface WizardData {
@@ -277,7 +277,7 @@ export default function PropertyWizard({ initial }: Props) {
               className="h-1 rounded-full transition-all"
               style={{
                 width: i + 1 === currentStep ? 20 : 8,
-                backgroundColor: i + 1 <= currentStep ? "#C4374A" : "rgba(255,255,255,0.1)",
+                backgroundColor: i + 1 <= currentStep ? "#8B2030" : "#D8D2C8",
               }}
             />
           ))}
@@ -297,7 +297,7 @@ export default function PropertyWizard({ initial }: Props) {
         {/* Step content */}
         <div className="flex-1 min-w-0">
           {error && (
-            <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "rgba(196,55,74,0.15)", color: "#f87171" }}>
+            <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "rgba(139,32,48,0.08)", color: "#8B2030" }}>
               {error}
             </div>
           )}
@@ -317,7 +317,7 @@ export default function PropertyWizard({ initial }: Props) {
               onClick={goPrev}
               disabled={currentStep <= 1}
               className="px-6 py-3 text-sm rounded-lg transition-opacity disabled:opacity-20"
-              style={{ color: TEXT_SEC, border: `1px solid ${BORDER}` }}
+              style={{ color: TEXT_SEC, border: `1px solid #D8D2C8` }}
             >
               ← Previous
             </button>
@@ -327,7 +327,7 @@ export default function PropertyWizard({ initial }: Props) {
                 onClick={goNext}
                 disabled={saving}
                 className="px-8 py-3 text-sm text-white rounded-lg transition-opacity hover:opacity-80 disabled:opacity-50"
-                style={{ backgroundColor: "#C4374A" }}
+                style={{ backgroundColor: "#8B2030" }}
               >
                 {saving ? "Saving..." : currentStep === 1 && !propertyId ? "Save & Continue" : "Next →"}
               </button>
@@ -339,7 +339,7 @@ export default function PropertyWizard({ initial }: Props) {
                     router.push("/admin/properties");
                   }}
                   className="px-6 py-3 text-sm rounded-lg transition-opacity"
-                  style={{ color: TEXT_SEC, border: `1px solid ${BORDER}` }}
+                  style={{ color: TEXT_SEC, border: `1px solid #D8D2C8` }}
                 >
                   Save Draft
                 </button>
@@ -353,7 +353,7 @@ export default function PropertyWizard({ initial }: Props) {
                   }}
                   disabled={saving}
                   className="px-8 py-3 text-sm text-white rounded-lg transition-opacity hover:opacity-80 disabled:opacity-50"
-                  style={{ backgroundColor: "#C4374A" }}
+                  style={{ backgroundColor: "#8B2030" }}
                 >
                   Publish Listing
                 </button>

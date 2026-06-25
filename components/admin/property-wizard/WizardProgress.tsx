@@ -9,13 +9,13 @@ const STEPS = [
   { num: 8, label: "Preview & Publish", icon: "🚀" },
 ];
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const BORDER_HI = "rgba(255,255,255,0.14)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT = "#C4374A";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const BORDER_HI = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const ACCENT = "#8B2030";
 
 interface Props {
   currentStep: number;
@@ -57,7 +57,7 @@ export default function WizardProgress({ currentStep, highestStep, onStepClick, 
               disabled={!isReachable}
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
               style={{
-                backgroundColor: isActive ? "rgba(196,55,74,0.1)" : "transparent",
+                backgroundColor: isActive ? "rgba(139,32,48,0.08)" : "transparent",
                 borderLeft: isActive ? `2px solid ${ACCENT}` : "2px solid transparent",
                 cursor: isReachable ? "pointer" : "not-allowed",
                 opacity: isReachable ? 1 : 0.35,
@@ -85,7 +85,7 @@ export default function WizardProgress({ currentStep, highestStep, onStepClick, 
             <span className="text-xs" style={{ color: TEXT_MUT }}>Progress</span>
             <span className="text-xs font-medium" style={{ color: TEXT_SEC }}>{Math.round(((highestStep - 1) / 8) * 100)}%</span>
           </div>
-          <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#E8E4DE" }}>
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{ width: `${((highestStep - 1) / 8) * 100}%`, backgroundColor: ACCENT }}

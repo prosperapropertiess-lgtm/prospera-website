@@ -1,14 +1,14 @@
 import type { WizardData } from "../PropertyWizard";
 
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const INPUT_BG = "#0B1219";
-const ACCENT = "#C4374A";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#333333";
+const TEXT_MUT = "#666666";
+const INPUT_BG = "#F7F5F2";
+const ACCENT = "#8B2030";
 
-const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#C4374A]/40";
+const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 const PARKING_TYPES = [
   { value: "none", label: "No Parking" },
@@ -173,7 +173,7 @@ export default function FeaturesStep({ data, onChange }: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: "rgba(237,233,227,0.28)" }}>{label}</label>
+      <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: "#666666" }}>{label}</label>
       {children}
     </div>
   );
@@ -185,7 +185,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
       <span className="text-sm" style={{ color: TEXT_SEC }}>{label}</span>
       <div
         onClick={() => onChange(!checked)}
-        className={`relative w-12 h-6 rounded-full transition-colors ${checked ? "bg-[#C4374A]" : "bg-[rgba(255,255,255,0.1)]"}`}
+        className={`relative w-12 h-6 rounded-full transition-colors ${checked ? "bg-[#8B2030]" : "bg-[#D8D2C8]"}`}
       >
         <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${checked ? "translate-x-6" : "translate-x-0"}`} />
       </div>
@@ -200,9 +200,9 @@ function OptionButton({ label, selected, onClick, checkable }: { label: string; 
       onClick={onClick}
       className="px-3 py-2.5 rounded-lg text-xs text-center transition-all"
       style={{
-        backgroundColor: selected ? "rgba(196,55,74,0.15)" : INPUT_BG,
+        backgroundColor: selected ? "rgba(139,32,48,0.08)" : INPUT_BG,
         border: `1px solid ${selected ? ACCENT : BORDER}`,
-        color: selected ? TEXT : TEXT_SEC,
+        color: selected ? "#8B2030" : TEXT_SEC,
       }}
     >
       {checkable && selected && <span className="mr-1">✓</span>}
