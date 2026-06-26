@@ -14,17 +14,18 @@ const CHARACTERS = [
   { src: "/characters/char-9.png", label: "Roofer" },
 ];
 
-// Fixed positions — large, sharp, visible
+// The PNGs have the character in the top-left ~25% of a large canvas
+// So we need massive sizes for the container, the character renders at ~25% of this
 const POSITIONS = [
-  { top: "-5%", left: "-2%", size: 520, delay: 0,    speed: 18, blur: 0, opacity: 0.75 },
-  { top: "0%",  left: "70%", size: 600, delay: 1.5,  speed: 22, blur: 0, opacity: 0.7  },
-  { top: "25%", left: "80%", size: 480, delay: 3,    speed: 16, blur: 0, opacity: 0.65 },
-  { top: "40%", left: "-3%", size: 500, delay: 0.8,  speed: 20, blur: 0, opacity: 0.7  },
-  { top: "55%", left: "75%", size: 560, delay: 2.5,  speed: 24, blur: 0, opacity: 0.75 },
-  { top: "10%", left: "85%", size: 420, delay: 4,    speed: 14, blur: 0, opacity: 0.55 },
-  { top: "45%", left: "5%",  size: 450, delay: 2,    speed: 19, blur: 0, opacity: 0.65 },
-  { top: "-5%", left: "38%", size: 380, delay: 5,    speed: 15, blur: 0, opacity: 0.5  },
-  { top: "65%", left: "45%", size: 500, delay: 1,    speed: 21, blur: 0, opacity: 0.7  },
+  { top: "-15%", left: "-10%", size: 1400, delay: 0,    speed: 18, opacity: 0.8  },
+  { top: "-10%", left: "60%",  size: 1600, delay: 1.5,  speed: 22, opacity: 0.75 },
+  { top: "15%",  left: "75%",  size: 1300, delay: 3,    speed: 16, opacity: 0.7  },
+  { top: "30%",  left: "-12%", size: 1400, delay: 0.8,  speed: 20, opacity: 0.75 },
+  { top: "45%",  left: "65%",  size: 1500, delay: 2.5,  speed: 24, opacity: 0.8  },
+  { top: "-5%",  left: "80%",  size: 1100, delay: 4,    speed: 14, opacity: 0.6  },
+  { top: "35%",  left: "-5%",  size: 1200, delay: 2,    speed: 19, opacity: 0.7  },
+  { top: "-20%", left: "30%",  size: 1000, delay: 5,    speed: 15, opacity: 0.55 },
+  { top: "55%",  left: "35%",  size: 1400, delay: 1,    speed: 21, opacity: 0.75 },
 ];
 
 export default function FloatingCharacters() {
@@ -67,7 +68,6 @@ export default function FloatingCharacters() {
               width: pos.size,
               height: pos.size,
               opacity: pos.opacity,
-              filter: pos.blur > 0 ? `blur(${pos.blur}px)` : undefined,
               animation: `fade-in-char 0.8s ease ${pos.delay + 0.5}s both`,
             }}
           >

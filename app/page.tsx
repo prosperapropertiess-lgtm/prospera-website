@@ -85,24 +85,54 @@ function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; durat
   );
 }
 
+// ── Elegant Shape (floating glass pill) ───────────────────────────────────────
+
+function ElegantShape({ className, delay = 0, width = 400, height = 100, rotate = 0, gradient = "from-white/[0.08]" }: {
+  className?: string; delay?: number; width?: number; height?: number; rotate?: number; gradient?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
+      animate={{ opacity: 1, y: 0, rotate }}
+      transition={{ duration: 2.4, delay, ease: [0.23, 0.86, 0.39, 0.96], opacity: { duration: 1.2 } }}
+      className={`absolute ${className || ""}`}
+    >
+      <motion.div
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        style={{ width, height }}
+        className="relative"
+      >
+        <div className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`} />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
 const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000", fontSize: "16px" }}>
-      {/* Video Background — raw HTML to bypass React autoplay issues */}
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{ zIndex: 0 }}
-        dangerouslySetInnerHTML={{
-          __html: `<video autoplay loop muted playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" src="${VIDEO_URL}"></video>`,
-        }}
-      />
+    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#030303", fontSize: "16px" }}>
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
-        {/* Floating characters */}
-        <FloatingCharacters />
+      {/* Elegant floating shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <ElegantShape delay={0.3} width={600} height={140} rotate={12} gradient="from-indigo-500/[0.15]" className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]" />
+        <ElegantShape delay={0.5} width={500} height={120} rotate={-15} gradient="from-rose-500/[0.15]" className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]" />
+        <ElegantShape delay={0.4} width={300} height={80} rotate={-8} gradient="from-violet-500/[0.15]" className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]" />
+        <ElegantShape delay={0.6} width={200} height={60} rotate={20} gradient="from-amber-500/[0.15]" className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]" />
+        <ElegantShape delay={0.7} width={150} height={40} rotate={-25} gradient="from-cyan-500/[0.15]" className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]" />
+      </div>
+
+      {/* Top/bottom gradient fade */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" style={{ zIndex: 4 }} />
+
+      {/* Floating characters */}
+      <FloatingCharacters />
 
         {/* Content layer */}
         <div className="relative flex-1 flex flex-col" style={{ zIndex: 2 }}>
