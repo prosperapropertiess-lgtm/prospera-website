@@ -24,6 +24,7 @@ import {
   Navigation,
 } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import RentSimulator from "./RentSimulator";
 
 // ── Colour tokens ─────────────────────────────────────────────────────────────
 const NAVY      = "#1F2F3A";
@@ -1034,6 +1035,16 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
             </FadeIn>
           </div>
         </section>
+      )}
+
+      {/* ── Interactive Rent Simulator ──────────────────────────────────── */}
+      {rent_low && rent_market && rent_premium && (
+        <RentSimulator
+          rentLow={rent_low}
+          rentMarket={rent_market}
+          rentPremium={rent_premium}
+          compRents={comparables.map((c) => c.rent).filter(Boolean)}
+        />
       )}
 
       {/* ── F. Amenity Comparison Matrix ───────────────────────────────────── */}
