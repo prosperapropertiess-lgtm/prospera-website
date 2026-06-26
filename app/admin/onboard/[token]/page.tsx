@@ -53,6 +53,7 @@ interface Session {
   completed_at: string | null;
   owner_access_token: string | null;
   created_at: string;
+  service_type: string;
 }
 
 const ADMIN_HEADER = { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" };
@@ -754,7 +755,7 @@ export default function OnboardChecklist() {
 
           {/* Step 3 — owner signs agreement FIRST */}
           <StepCard
-            num={3} title="Management Agreement"
+            num={3} title={session.service_type === "placement" ? "Placement Agreement" : "Management Agreement"}
             status={step > 3 ? "complete" : step === 3 ? "owner" : "locked"}
             completedAt={session.agreement_signed_at}
             summary={
@@ -765,7 +766,9 @@ export default function OnboardChecklist() {
           >
             <div>
               <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
-                Waiting for the owner to read and sign the management agreement.
+                {session.service_type === "placement"
+                  ? "Waiting for the owner to read and sign the tenant placement agreement."
+                  : "Waiting for the owner to read and sign the management agreement."}
               </p>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <a
@@ -788,6 +791,31 @@ export default function OnboardChecklist() {
             </div>
           </StepCard>
 
+          {/* ── Placement: after agreement, redirect to add property ── */}
+          {session.service_type === "placement" && session.agreement_signed_at && (
+            <StepCard
+              num={4} title="Add Property & Find Tenant"
+              status={session.completed_at ? "complete" : "active"}
+              completedAt={session.completed_at}
+              summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Property listed and tenant placement in progress</p>}
+            >
+              <div>
+                <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
+                  Agreement signed. Next: add the property to start finding a tenant.
+                </p>
+                <Link
+                  href="/admin/properties/new"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: BURGUNDY, borderRadius: 10, padding: "10px 18px", fontSize: 14, color: "#fff", textDecoration: "none", fontWeight: 600 }}
+                >
+                  Add Property →
+                </Link>
+              </div>
+            </StepCard>
+          )}
+
+          {/* ── Management-only steps (4-10) ── */}
+          {session.service_type !== "placement" && (
+          <>
           {/* Step 4 — Ebin fills property details after agreement is signed */}
           <StepCard
             num={4} title="Property Details"
@@ -954,6 +982,8 @@ export default function OnboardChecklist() {
           >
             <Step10Form token={token} onComplete={load} />
           </StepCard>
+          </>
+          )}
 
         </div>
       </div>
