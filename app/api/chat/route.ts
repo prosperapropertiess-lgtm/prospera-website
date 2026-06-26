@@ -54,6 +54,15 @@ interface Message {
   content: string;
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: NextRequest) {
   try {
     // 20 messages per IP per 10 minutes — prevents AI cost abuse
@@ -94,7 +103,7 @@ export async function POST(req: NextRequest) {
           <p><strong>Phone:</strong> ${phone || "not provided"}</p>
           <hr/>
           <p><strong>Conversation:</strong></p>
-          ${messages.map((m: Message) => `<p><strong>${m.role === "user" ? "Visitor" : "Bot"}:</strong> ${m.content}</p>`).join("")}
+          ${messages.map((m: Message) => `<p><strong>${m.role === "user" ? "Visitor" : "Bot"}:</strong> ${escapeHtml(m.content)}</p>`).join("")}
           <hr/>
           <p style="color:#888;font-size:12px">Via live chat on prosperaproperties.co</p>
         `,
@@ -115,7 +124,7 @@ export async function POST(req: NextRequest) {
       model: "claude-haiku-4-5-20251001",
       max_tokens: 400,
       system: SYSTEM_PROMPT,
-      messages: messages.map((m: Message) => ({
+      messages: messages.slice(-12).map((m: Message) => ({
         role: m.role,
         content: m.content,
       })),

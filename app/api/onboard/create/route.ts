@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomBytes } from "crypto";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { onboardEmail1Welcome, placementWelcomeEmail } from "@/lib/emails";
 
 function generateToken(): string {
-  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-  const rand = Array.from({ length: 10 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+  const rand = randomBytes(8).toString("hex");
   return `ob-${rand}`;
 }
 

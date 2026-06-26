@@ -5,7 +5,7 @@ async function verifySessionToken(token: string): Promise<boolean> {
     const [expiresStr, sigHex] = token.split("|");
     if (!expiresStr || !sigHex) return false;
     if (Date.now() > Number(expiresStr)) return false;
-    const secret = process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD || "fallback";
+    const secret = process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD || "";
     const key = await crypto.subtle.importKey(
       "raw",
       new TextEncoder().encode(secret),

@@ -99,8 +99,9 @@ function stat(label: string, value: string | number) {
 export async function GET(req: NextRequest) {
   const start = Date.now();
 
-  const auth = req.headers.get("authorization");
-  if (CRON_SECRET && auth !== `Bearer ${CRON_SECRET}`) {
+  const cronSecret = process.env.CRON_SECRET;
+  const authHeader = req.headers.get("authorization");
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

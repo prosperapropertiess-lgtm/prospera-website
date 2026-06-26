@@ -19,6 +19,7 @@ export interface Post extends PostMeta {
 }
 
 export function getAllPosts(): PostMeta[] {
+  if (!fs.existsSync(BLOG_DIR)) return [];
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
   const posts = files.map((filename) => {
     const slug = filename.replace(/\.md$/, "");

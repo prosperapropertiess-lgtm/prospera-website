@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import React from "react";
 import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -18,9 +19,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       style={{
         fontFamily: "var(--font-poppins), -apple-system, sans-serif",
         fontSize: "118%",
-        // @ts-ignore
         "--font-dm-sans": "var(--font-poppins)",
-      }}
+      } as React.CSSProperties}
     >
       {children}
     </div>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { listFilesFromGitHub } from "@/lib/github";
 
@@ -81,9 +82,7 @@ const AGENT_DEFS = [
 ] as const;
 
 export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
-  const cookieAuth = req.cookies.get("admin_token")?.value;
-  if (!authHeader && !cookieAuth) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

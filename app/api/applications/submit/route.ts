@@ -50,6 +50,17 @@ export async function POST(req: NextRequest) {
 
     if (!property) return NextResponse.json({ error: "This property is no longer available" }, { status: 400 });
 
+    // Prevent duplicate applications
+    const { data: existing } = await supabaseAdmin
+      .from("applications")
+      .select("id")
+      .eq("tenant_email", tenant_email.toLowerCase().trim())
+      .eq("property_id", property_id)
+      .maybeSingle();
+    if (existing) {
+      return NextResponse.json({ error: "You have already applied for this property." }, { status: 409 });
+    }
+
     // Insert application
     const { data: application, error: appErr } = await supabaseAdmin
       .from("applications")

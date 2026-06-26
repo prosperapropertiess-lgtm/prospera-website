@@ -9,13 +9,8 @@ function getAdminClient() {
 }
 
 
-
-async function isAuthenticated(req: NextRequest) {
-  return isAdminAuthenticated(req);
-}
-
 export async function POST(req: NextRequest) {
-  if (!await isAuthenticated(req)) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -25,6 +20,11 @@ export async function POST(req: NextRequest) {
 
   if (!file) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
+  }
+
+  const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"];
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return NextResponse.json({ error: "Only JPEG, PNG, WebP, and HEIC images are allowed." }, { status: 400 });
   }
 
   const supabase = getAdminClient();
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  if (!await isAuthenticated(req)) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

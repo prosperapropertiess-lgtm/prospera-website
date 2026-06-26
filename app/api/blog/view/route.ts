@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
+const viewLimits = new Map<string, number>();
+
 // POST /api/blog/view — increment view count, return new total
 export async function POST(req: NextRequest) {
   const { slug } = await req.json();
   if (!slug || typeof slug !== "string") {
     return NextResponse.json({ error: "Missing slug" }, { status: 400 });
   }
+
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
+  const key = `${ip}:${slug}`;
+  const lastView = viewLimits.get(key) || 0;
+  if (Date.now() - lastView < 86400000) { // 24 hours
+    return NextResponse.json({ ok: true }); // silently skip
+  }
+  viewLimits.set(key, Date.now());
 
   const db = getSupabaseAdmin();
 

@@ -24,6 +24,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Maximum 3 photos allowed" }, { status: 400 });
   }
 
+  const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+  const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/heic"];
+
+  for (const file of photoFiles) {
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json({ error: "File too large. Maximum 10MB." }, { status: 400 });
+    }
+    if (!ALLOWED.includes(file.type)) {
+      return NextResponse.json({ error: "Only image files are allowed." }, { status: 400 });
+    }
+  }
+
   const sb = getSupabaseAdmin();
   const urls: string[] = [];
 

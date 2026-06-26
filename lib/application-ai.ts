@@ -1,7 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { supabaseAdmin } from "@/lib/supabase";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
+}
 
 export interface ApplicationData {
   tenant_name: string;
@@ -166,7 +168,7 @@ Rules:
   });
 
   try {
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1500,
       messages: [{ role: "user", content: contentBlocks as Anthropic.MessageParam["content"] }],
@@ -259,7 +261,7 @@ One clear action: Approve / Decline / Request more info. If decline or more info
 
 Score rubric: 9-10 = strong approve, 7-8 = approve, 5-6 = borderline, 3-4 = decline, 1-2 = clear decline.`;
 
-  const response = await anthropic.messages.create({
+  const response = await getAnthropic().messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 1500,
     messages: [{ role: "user", content: prompt }],

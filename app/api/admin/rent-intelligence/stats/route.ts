@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { createClient } from "@supabase/supabase-js";
 
 function getSupabase() {
@@ -9,9 +9,8 @@ function getSupabase() {
   );
 }
 
-export async function GET() {
-  const cookieStore = await cookies();
-  if (!cookieStore.get("admin_session")) {
+export async function GET(req: NextRequest) {
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

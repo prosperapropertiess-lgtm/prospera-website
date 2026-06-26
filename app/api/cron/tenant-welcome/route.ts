@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomBytes } from "crypto";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { fetchAllTenants, fetchAllProperties } from "@/lib/notion";
@@ -19,7 +20,7 @@ function generateToken(name: string): string {
     .map((w) => w[0]?.toLowerCase() ?? "")
     .join("")
     .slice(0, 3);
-  const rand = Math.random().toString(36).slice(2, 10);
+  const rand = randomBytes(8).toString("hex");
   return `${initials}-${rand}`;
 }
 
