@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
         const propertyLine = `${property.title || property.address} — ${property.city}`;
 
         // Generate ICS calendar file
-        const icsContent = generateICS(viewingDateObj, property, tenant_name);
+        const icsContent = generateICS(viewingDateObj, property, tenant_name, tenant_email);
 
         // 1. Tenant confirmation
         await resend.emails.send({
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(data, { status: 201 });
 }
 
-function generateICS(date: Date, property: Record<string, unknown>, tenantName: string): string {
+function generateICS(date: Date, property: Record<string, unknown>, tenantName: string, tenantEmail: string): string {
   const start = date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const end = new Date(date.getTime() + 30 * 60000).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
@@ -101,7 +101,7 @@ function generateICS(date: Date, property: Record<string, unknown>, tenantName: 
     `DESCRIPTION:Viewing at ${property.address}\\, ${property.city}. Contact Ebin at (519) 697-1227.`,
     `LOCATION:${property.address}\\, ${property.city}\\, ON`,
     `ORGANIZER;CN=Prospera Properties:mailto:hello@prosperaproperties.co`,
-    `ATTENDEE;CN=${tenantName}:mailto:`,
+    `ATTENDEE;RSVP=TRUE;CN=${tenantName}:mailto:${tenantEmail}`,
     "STATUS:CONFIRMED",
     "END:VEVENT",
     "END:VCALENDAR",

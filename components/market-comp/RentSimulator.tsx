@@ -39,7 +39,8 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
     const daysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(pos, 1.3));
 
     // Application quality: sweet spot around market rate
-    const distFromMarket = Math.abs(rent - rentMarket) / (rentPremium - rentLow);
+    const spread = rentPremium - rentLow;
+    const distFromMarket = spread > 0 ? Math.abs(rent - rentMarket) / spread : 0;
     const appQuality = distFromMarket < 0.15 ? "High" : distFromMarket < 0.35 ? "Good" : distFromMarket < 0.6 ? "Fair" : "Low";
 
     // Applicant pool estimate

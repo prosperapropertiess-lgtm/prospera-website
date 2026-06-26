@@ -25,12 +25,12 @@ function buildPolicies(property: PropertyRecord): PolicyRow[] {
     });
   }
 
-  const smoking = (property as Record<string, unknown>).smoking as string | undefined;
-  if (smoking) {
+  const smokingAllowed = property.smoking_allowed;
+  if (smokingAllowed !== undefined && smokingAllowed !== null) {
     rows.push({
       icon: <Cigarette size={16} />,
       label: "Smoking",
-      value: smoking,
+      value: smokingAllowed === false ? "No smoking" : "Smoking permitted",
     });
   }
 

@@ -227,6 +227,10 @@ export default function PropertyWizard({ initial }: Props) {
       setSaving(true);
       await saveNow();
       setSaving(false);
+      // Auto-fill deposit with price if still empty
+      if (currentStep === 1 && dataRef.current.deposit === "" && dataRef.current.price !== "") {
+        update({ deposit: Number(dataRef.current.price) });
+      }
     }
 
     setData((prev) => ({ ...prev, wizard_step: Math.max(prev.wizard_step, nextStep) }));
@@ -351,8 +355,15 @@ export default function PropertyWizard({ initial }: Props) {
                 <button
                   onClick={async () => {
                     if (!propertyId) return;
+                    setSaving(true);
                     await saveNow();
-                    await fetch(`/api/admin/properties/${propertyId}/publish`, { method: "POST" });
+                    const pubRes = await fetch(`/api/admin/properties/${propertyId}/publish`, { method: "POST" });
+                    if (!pubRes.ok) {
+                      const err = await pubRes.json().catch(() => ({}));
+                      setError(err.error || "Publish failed. Try again.");
+                      setSaving(false);
+                      return;
+                    }
                     update({ status: "published" });
                     router.push("/admin/properties");
                   }}

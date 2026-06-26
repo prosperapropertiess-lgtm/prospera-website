@@ -131,7 +131,7 @@ export default function AgreementPage() {
     setDone(true);
     if (isPlacement) {
       // Placement: go straight to add property
-      setTimeout(() => router.push(`/admin/properties/new`), 2500);
+      setTimeout(() => router.push(`/onboard/${token}`), 2500);
     } else {
       // Management: continue to lease upload
       setTimeout(() => router.push(`/onboard/${token}/lease`), 2500);

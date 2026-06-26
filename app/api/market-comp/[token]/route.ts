@@ -115,7 +115,7 @@ async function fetchWalkScore(
   lng: number,
   address: string
 ): Promise<{ walk: number; transit: number; bike: number }> {
-  const apiKey = process.env.WALKSCORE_API_KEY;
+  const apiKey = process.env.WALK_SCORE_API_KEY;
   if (!apiKey) return { walk: 0, transit: 0, bike: 0 };
 
   try {

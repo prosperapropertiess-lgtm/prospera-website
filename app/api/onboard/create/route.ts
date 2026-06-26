@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
         rentLow: Number(rent_low) || 0,
         rentMarket: Number(rent_market) || 0,
         rentPremium: Number(rent_premium) || 0,
-        comparables: comparables || [],
+        comparables: (comparables || []).map((c: { address: string; rent: number }) => `${c.address} — $${c.rent?.toLocaleString()}/mo`),
       });
       subject = `Market analysis for ${property_address} — Prospera Properties`;
     } else {

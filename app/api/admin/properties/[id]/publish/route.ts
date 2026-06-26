@@ -151,7 +151,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
           if (existing) continue;
 
-          const firstName = tenant.full_name.split(" ")[0];
+          const firstName = (tenant.full_name || "there").split(" ")[0];
 
           await resend.emails.send({
             from: "Prospera Properties <hello@prosperaproperties.co>",

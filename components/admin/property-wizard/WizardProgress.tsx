@@ -83,12 +83,12 @@ export default function WizardProgress({ currentStep, highestStep, onStepClick, 
         <div className="pt-4 mt-4" style={{ borderTop: `1px solid ${BORDER_HI}` }}>
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs" style={{ color: TEXT_MUT }}>Progress</span>
-            <span className="text-xs font-medium" style={{ color: TEXT_SEC }}>{Math.round(((highestStep - 1) / 8) * 100)}%</span>
+            <span className="text-xs font-medium" style={{ color: TEXT_SEC }}>{Math.round((Math.min(highestStep, 8) / 8) * 100)}%</span>
           </div>
           <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#E8E4DE" }}>
             <div
               className="h-full rounded-full transition-all duration-500"
-              style={{ width: `${((highestStep - 1) / 8) * 100}%`, backgroundColor: ACCENT }}
+              style={{ width: `${(Math.min(highestStep, 8) / 8) * 100}%`, backgroundColor: ACCENT }}
             />
           </div>
         </div>

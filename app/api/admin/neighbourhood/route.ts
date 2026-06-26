@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
                   route: routeNum,
                   stop_name: stopName,
                   frequency: td.headway ? `Every ${Math.round(td.headway / 60)} min` : "",
-                  walk_time: step.duration?.text ? `${stopName}` : "",
+                  walk_time: step.duration?.text || "",
                 });
               }
             }
