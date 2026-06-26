@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSupabaseAdmin } from "@/lib/supabase";
+
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 import { getDashboard } from "@/lib/owners-data";
 import { MobileNav } from "@/components/owners/MobileNav";
 import OwnerHeader from "@/components/owners/OwnerHeader";

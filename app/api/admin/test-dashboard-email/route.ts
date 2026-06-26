@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { onboardEmail8Welcome } from "@/lib/emails";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://www.prosperaproperties.co";
 
 export async function GET(req: NextRequest) {
+  if (!await isAdminAuthenticated(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const to = req.nextUrl.searchParams.get("to") ?? "ebinjaison02@gmail.com";
   const resend = new Resend(process.env.RESEND_API_KEY);
   const sb = getSupabaseAdmin();

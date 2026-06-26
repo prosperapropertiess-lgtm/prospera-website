@@ -6,6 +6,7 @@ export async function generateMetadata({ params }: { params: Promise<{ token: st
   const { token } = await params;
   return {
     manifest: `/tenants/${token}/manifest.json`,
+    robots: { index: false, follow: false },
   };
 }
 import {

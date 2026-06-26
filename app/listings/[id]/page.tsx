@@ -17,7 +17,7 @@ function getSupabase() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const { data } = await getSupabase().from("properties").select("title, city, price, bedrooms, bathrooms, description, available_date, ai_life_intro, images").eq("id", id).single();
+  const { data } = await getSupabase().from("properties").select("title, city, price, bedrooms, bathrooms, description, available_date, ai_life_intro, images").eq("id", id).eq("status", "published").single();
   if (!data) return {};
 
   const desc = data.ai_life_intro
@@ -38,12 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PropertyDetailPage({ params }: Props) {
   const { id } = await params;
-  const { data } = await getSupabase().from("properties").select("*").eq("id", id).single();
+  const { data } = await getSupabase().from("properties").select("*").eq("id", id).eq("status", "published").single();
   if (!data) notFound();
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Apartment",
+    "@type": data.property_type === "house" ? "House" : data.property_type === "townhouse" ? "Residence" : "Apartment",
     name: data.title,
     description: data.description,
     url: `https://www.prosperaproperties.co/listings/${id}`,

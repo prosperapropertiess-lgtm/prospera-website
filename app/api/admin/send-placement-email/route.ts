@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { placementProcessEmail } from "@/lib/emails";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import fs from "fs";
 import path from "path";
 
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 export async function POST(req: NextRequest) {
+  if (!await isAdminAuthenticated(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const { to, name } = await req.json();
     if (!to || !name) return NextResponse.json({ error: "to and name required" }, { status: 400 });

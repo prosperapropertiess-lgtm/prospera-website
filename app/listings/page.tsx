@@ -55,7 +55,7 @@ export default function ListingsPage() {
       setLoading(true);
       setError(false);
       try {
-        let query = supabase.from("properties").select("*").eq("status", "published").eq("is_managed", true).order("created_at", { ascending: false });
+        let query = supabase.from("properties").select("*").eq("status", "published").eq("is_managed", true).eq("available", true).order("created_at", { ascending: false });
         if (city !== "All Cities") query = query.eq("city", city);
         if (petFriendly) query = query.eq("pet_friendly", true);
         if (beds === "3+") query = query.gte("bedrooms", 3);

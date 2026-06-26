@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Poppins } from "next/font/google";
+
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 const poppins = Poppins({
   variable: "--font-poppins",

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: ["/api/", "/admin/", "/owners/", "/tenants/", "/onboard/", "/agents/", "/apply/", "/market-comp/"],
     },
     sitemap: "https://www.prosperaproperties.co/sitemap.xml",
   };

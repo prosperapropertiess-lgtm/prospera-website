@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin as supabase } from "@/lib/supabase";
 import { contactConfirmationEmail } from "@/lib/emails";
 
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, phone, city, message, type, property, traffic_source } = await req.json();
@@ -60,7 +64,7 @@ export async function POST(req: NextRequest) {
             ${property ? `<p><strong>Property:</strong> ${property}</p>` : ""}
             <p><strong>Traffic source:</strong> ${traffic_source ?? "direct"}</p>
             <p><strong>Message:</strong></p>
-            <blockquote>${message}</blockquote>
+            <blockquote>${escapeHtml(message)}</blockquote>
           `,
         });
       } catch (emailErr) {

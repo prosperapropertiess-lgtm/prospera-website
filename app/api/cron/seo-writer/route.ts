@@ -695,11 +695,13 @@ Which 2–3 existing posts should add a contextual link to the new post? Return 
   }
 
   // ── 6. Trigger one Vercel rebuild ─────────────────────────────────────────
-  try {
-    await fetch("https://api.vercel.com/v1/integrations/deploy/prj_BepoLv37pz2jz2RiQDryRAyyJcmS/0PL9bLgRJf", { method: "POST" });
-    console.log("[seo] Vercel rebuild triggered");
-  } catch (err) {
-    console.error("[seo] Vercel deploy hook failed:", err);
+  if (process.env.VERCEL_DEPLOY_HOOK_URL) {
+    try {
+      await fetch(process.env.VERCEL_DEPLOY_HOOK_URL, { method: "POST" });
+      console.log("[seo] Vercel rebuild triggered");
+    } catch (err) {
+      console.error("[seo] Vercel deploy hook failed:", err);
+    }
   }
 
   // ── 7. Google Indexing pings ──────────────────────────────────────────────
