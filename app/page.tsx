@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
@@ -72,121 +72,159 @@ function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; durat
   );
 }
 
-// ── Hero ──────────────────────────────────────────────────────────────────────
+// ── Hero with scroll-driven video ────────────────────────────────────────────
+
+const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
 
 function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-driven video scrubbing
+  useEffect(() => {
+    const video = videoRef.current;
+    const container = containerRef.current;
+    if (!video || !container) return;
+
+    let ticking = false;
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!video || !container) { ticking = false; return; }
+        const rect = container.getBoundingClientRect();
+        const scrollHeight = container.scrollHeight - window.innerHeight;
+        const scrolled = -rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / scrollHeight));
+
+        if (video.duration && isFinite(video.duration)) {
+          video.currentTime = progress * video.duration;
+        }
+        ticking = false;
+      });
+    }
+
+    // Pause autoplay — we control playback via scroll
+    video.addEventListener("loadedmetadata", () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
-      {/* Video Background — raw, no overlay */}
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ zIndex: 0 }}
-        poster="/ebin-founder.jpg"
-        onCanPlay={(e) => { (e.target as HTMLVideoElement).play().catch(() => {}); }}
-      >
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4" />
-      </video>
+    <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
+      <section className="sticky top-0 h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
+        {/* Video Background — scroll-driven, no overlay */}
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
+          <source src={VIDEO_URL} type="video/mp4" />
+        </video>
 
-      {/* Content layer */}
-      <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
+        {/* Content layer */}
+        <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
 
-        {/* Hero content — pushed to bottom */}
-        <div className="flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16">
-          <div className="lg:grid lg:grid-cols-2 lg:items-end">
+          {/* Hero content — pushed to bottom */}
+          <div className="flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16">
+            <div className="lg:grid lg:grid-cols-2 lg:items-end">
 
-            {/* Left Column — Main content */}
-            <div>
-              {/* Location tag */}
-              <HeroFadeIn delay={100} duration={600}>
-                <div className="mb-6">
-                  <span
-                    className="liquid-glass inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg border border-white/20"
-                    style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+              {/* Left Column — Main content */}
+              <div>
+                {/* Location tag */}
+                <HeroFadeIn delay={100} duration={600}>
+                  <div className="mb-6">
+                    <span
+                      className="liquid-glass inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg border border-white/20"
+                      style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      London · St. Thomas · Strathroy
+                    </span>
+                  </div>
+                </HeroFadeIn>
+
+                {/* Animated heading */}
+                <AnimatedHeading
+                  text={"You bought a property.\nNot a second job."}
+                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
+                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
+                />
+
+                {/* Subheading */}
+                <HeroFadeIn delay={800} duration={1000}>
+                  <p
+                    className="text-base md:text-lg mb-5 max-w-xl"
+                    style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
                   >
-                    London · St. Thomas · Strathroy
-                  </span>
-                </div>
-              </HeroFadeIn>
+                    Rent collected. Tenants handled. Maintenance sorted. You get a deposit on the first and a statement at the end of the month. Nothing else.
+                  </p>
+                </HeroFadeIn>
 
-              {/* Animated heading */}
-              <AnimatedHeading
-                text={"Stop losing sleep\nover your rental."}
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light mb-4"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
-              />
+                {/* Buttons */}
+                <HeroFadeIn delay={1200} duration={1000}>
+                  <div className="flex flex-wrap gap-4 mb-8 lg:mb-0">
+                    <Link
+                      href="/rent-analysis"
+                      className="bg-white text-black px-8 py-3 rounded-lg font-medium text-sm transition-colors hover:bg-gray-100"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Get a Free Rental Analysis
+                    </Link>
+                    <Link
+                      href="/listings"
+                      className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium text-sm transition-all hover:bg-white hover:text-black"
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Browse Listings
+                    </Link>
+                  </div>
+                </HeroFadeIn>
+              </div>
 
-              {/* Subheading */}
-              <HeroFadeIn delay={800} duration={1000}>
-                <p
-                  className="text-base md:text-lg mb-5 max-w-xl"
-                  style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
-                >
-                  Late rent, bad tenants, midnight maintenance calls — gone.
-                  You get a monthly deposit and a clear statement. That's it.
-                </p>
-              </HeroFadeIn>
-
-              {/* Buttons */}
-              <HeroFadeIn delay={1200} duration={1000}>
-                <div className="flex flex-wrap gap-4 mb-8 lg:mb-0">
-                  <Link
-                    href="/rent-analysis"
-                    className="bg-white text-black px-8 py-3 rounded-lg font-medium text-sm transition-colors hover:bg-gray-100"
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    Get a Free Rental Analysis
-                  </Link>
-                  <Link
-                    href="/listings"
-                    className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium text-sm transition-all hover:bg-white hover:text-black"
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    Browse Listings
-                  </Link>
-                </div>
-              </HeroFadeIn>
-            </div>
-
-            {/* Right Column — Tag */}
-            <div className="flex items-end justify-start lg:justify-end">
-              <HeroFadeIn delay={1400} duration={1000}>
-                <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
-                  <span
-                    className="text-lg md:text-xl lg:text-2xl font-light"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                  >
-                    Management. Placement. Peace of mind.
-                  </span>
-                </div>
-              </HeroFadeIn>
+              {/* Right Column — Tag */}
+              <div className="flex items-end justify-start lg:justify-end">
+                <HeroFadeIn delay={1400} duration={1000}>
+                  <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
+                    <span
+                      className="text-lg md:text-xl lg:text-2xl font-light"
+                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                    >
+                      Management. Placement. Peace of mind.
+                    </span>
+                  </div>
+                </HeroFadeIn>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2"
-        >
+          {/* Scroll indicator */}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2 }}
+            className="absolute bottom-4 left-1/2 -translate-x-1/2"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }
 
