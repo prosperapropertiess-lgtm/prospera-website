@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import ParticleCanvas from "@/components/animations/ParticleCanvas";
+import FloatingCharacters from "@/components/animations/FloatingCharacters";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
@@ -100,8 +101,11 @@ function Hero() {
         }}
       />
 
+        {/* Floating characters */}
+        <FloatingCharacters />
+
         {/* Content layer */}
-        <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
+        <div className="relative flex-1 flex flex-col" style={{ zIndex: 2 }}>
 
           {/* Hero content — pushed to bottom */}
           <div className="flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16">
