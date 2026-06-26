@@ -27,28 +27,40 @@ function AnimatedHeading({ text, className, style }: { text: string; className?:
 
   return (
     <h1 className={className} style={style}>
-      {lines.map((line, lineIdx) => (
-        <span key={lineIdx} className="block">
-          {line.split("").map((char, charIdx) => {
-            const delay = globalIndex * charDelay;
-            globalIndex++;
-            return (
-              <span
-                key={`${lineIdx}-${charIdx}`}
-                className="inline-block transition-all"
-                style={{
-                  opacity: triggered ? 1 : 0,
-                  transform: triggered ? "translateX(0)" : "translateX(-18px)",
-                  transitionDuration: "500ms",
-                  transitionDelay: `${delay}ms`,
-                }}
-              >
-                {char === " " ? "\u00A0" : char}
+      {lines.map((line, lineIdx) => {
+        // Split into words, animate per-character but wrap per-word
+        const words = line.split(" ");
+        return (
+          <span key={lineIdx} className="block">
+            {words.map((word, wordIdx) => (
+              <span key={wordIdx} className="inline-block whitespace-nowrap">
+                {word.split("").map((char) => {
+                  const delay = globalIndex * charDelay;
+                  globalIndex++;
+                  return (
+                    <span
+                      key={`${lineIdx}-${globalIndex}`}
+                      className="inline-block transition-all"
+                      style={{
+                        opacity: triggered ? 1 : 0,
+                        transform: triggered ? "translateX(0)" : "translateX(-18px)",
+                        transitionDuration: "500ms",
+                        transitionDelay: `${delay}ms`,
+                      }}
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
+                {wordIdx < words.length - 1 && (() => {
+                  globalIndex++;
+                  return <span className="inline-block" style={{ width: "0.3em" }} />;
+                })()}
               </span>
-            );
-          })}
-        </span>
-      ))}
+            ))}
+          </span>
+        );
+      })}
     </h1>
   );
 }
@@ -78,18 +90,14 @@ const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIX
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
-      {/* Video Background — autoplay, loop, raw */}
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
+    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000", fontSize: "16px" }}>
+      {/* Video Background — raw HTML to bypass React autoplay issues */}
+      <div
+        className="absolute inset-0 w-full h-full"
         style={{ zIndex: 0 }}
-        src={VIDEO_URL}
+        dangerouslySetInnerHTML={{
+          __html: `<video autoplay loop muted playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" src="${VIDEO_URL}"></video>`,
+        }}
       />
 
         {/* Content layer */}
@@ -116,7 +124,7 @@ function Hero() {
                 {/* Animated heading */}
                 <AnimatedHeading
                   text={"What if your investment\nwas ACTUALLY passive?"}
-                  className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
+                  className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal mb-4"
                   style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
                 />
 
