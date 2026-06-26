@@ -103,7 +103,7 @@ function ElegantShape({ className, delay = 0, width = 400, height = 100, rotate 
         style={{ width, height }}
         className="relative"
       >
-        <div className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`} />
+        <div className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border border-[#D8D2C8]/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(31,47,58,0.03),transparent_70%)]`} />
       </motion.div>
     </motion.div>
   );
@@ -115,21 +115,21 @@ const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIX
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#030303", fontSize: "16px" }}>
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#F7F5F2", fontSize: "16px" }}>
+      {/* Subtle warm gradient */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 20%, rgba(139,32,48,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(31,47,58,0.05) 0%, transparent 50%)" }} />
 
-      {/* Elegant floating shapes */}
+      {/* Elegant floating shapes — warm tones */}
       <div className="absolute inset-0 overflow-hidden">
-        <ElegantShape delay={0.3} width={600} height={140} rotate={12} gradient="from-indigo-500/[0.15]" className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]" />
-        <ElegantShape delay={0.5} width={500} height={120} rotate={-15} gradient="from-rose-500/[0.15]" className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]" />
-        <ElegantShape delay={0.4} width={300} height={80} rotate={-8} gradient="from-violet-500/[0.15]" className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]" />
-        <ElegantShape delay={0.6} width={200} height={60} rotate={20} gradient="from-amber-500/[0.15]" className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]" />
-        <ElegantShape delay={0.7} width={150} height={40} rotate={-25} gradient="from-cyan-500/[0.15]" className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]" />
+        <ElegantShape delay={0.3} width={600} height={140} rotate={12} gradient="from-[#8B2030]/[0.08]" className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]" />
+        <ElegantShape delay={0.5} width={500} height={120} rotate={-15} gradient="from-[#1F2F3A]/[0.06]" className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]" />
+        <ElegantShape delay={0.4} width={300} height={80} rotate={-8} gradient="from-[#D8D2C8]/[0.2]" className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]" />
+        <ElegantShape delay={0.6} width={200} height={60} rotate={20} gradient="from-[#8B2030]/[0.06]" className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]" />
+        <ElegantShape delay={0.7} width={150} height={40} rotate={-25} gradient="from-[#1F2F3A]/[0.05]" className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]" />
       </div>
 
-      {/* Top/bottom gradient fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" style={{ zIndex: 4 }} />
+      {/* Soft edge fades */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#F7F5F2] via-transparent to-[#F7F5F2]/60 pointer-events-none" style={{ zIndex: 4 }} />
 
       {/* Floating characters */}
       <FloatingCharacters />
@@ -147,8 +147,8 @@ function Hero() {
                 <HeroFadeIn delay={100} duration={600}>
                   <div className="mb-6">
                     <span
-                      className="liquid-glass inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg border border-white/20"
-                      style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+                      className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg"
+                      style={{ color: "#666666", fontFamily: "var(--font-dm-sans)", backgroundColor: "rgba(31,47,58,0.06)", border: "1px solid #D8D2C8" }}
                     >
                       London · St. Thomas · Strathroy
                     </span>
@@ -158,15 +158,15 @@ function Hero() {
                 {/* Animated heading */}
                 <AnimatedHeading
                   text={"What if your investment\nwas ACTUALLY passive?"}
-                  className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal mb-4"
-                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
+                  className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4"
+                  style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
                 />
 
                 {/* Subheading */}
                 <HeroFadeIn delay={800} duration={1000}>
                   <p
                     className="text-base md:text-lg mb-5 max-w-xl"
-                    style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
+                    style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
                   >
                     Own a rental property without losing your sanity. Built for landlords with 2–5 properties who want their time back.
                   </p>
@@ -177,15 +177,15 @@ function Hero() {
                   <div className="flex flex-wrap gap-4 mb-8 lg:mb-0">
                     <Link
                       href="/rent-analysis"
-                      className="bg-white text-black px-8 py-3 rounded-lg font-medium text-sm transition-colors hover:bg-gray-100"
-                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                      className="px-8 py-3 rounded-lg font-medium text-sm transition-opacity hover:opacity-80"
+                      style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Get a Free Rental Analysis
                     </Link>
                     <Link
                       href="/listings"
-                      className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium text-sm transition-all hover:bg-white hover:text-black"
-                      style={{ fontFamily: "var(--font-dm-sans)" }}
+                      className="px-8 py-3 rounded-lg font-medium text-sm transition-all hover:bg-[#1F2F3A] hover:text-white"
+                      style={{ border: "1px solid #D8D2C8", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
                     >
                       Browse Listings
                     </Link>
@@ -196,10 +196,10 @@ function Hero() {
               {/* Right Column — Tag */}
               <div className="flex items-end justify-start lg:justify-end">
                 <HeroFadeIn delay={1400} duration={1000}>
-                  <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
+                  <div className="px-6 py-3 rounded-xl" style={{ backgroundColor: "rgba(31,47,58,0.06)", border: "1px solid #D8D2C8" }}>
                     <span
                       className="text-lg md:text-xl lg:text-2xl font-light"
-                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                      style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
                     >
                       Management. Placement. Peace of mind.
                     </span>
@@ -220,7 +220,7 @@ function Hero() {
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(31,47,58,0.3)" strokeWidth="1.5">
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </motion.div>

@@ -14,18 +14,27 @@ const CHARACTERS = [
   { src: "/characters/char-9.png", label: "Roofer" },
 ];
 
-// The PNGs have the character in the top-left ~25% of a large canvas
-// So we need massive sizes for the container, the character renders at ~25% of this
+// Characters sit in top-left ~25% of canvas, so containers must be huge
+// Positioned around edges to frame the center text area
 const POSITIONS = [
-  { top: "-15%", left: "-10%", size: 1400, delay: 0,    speed: 18, opacity: 0.8  },
-  { top: "-10%", left: "60%",  size: 1600, delay: 1.5,  speed: 22, opacity: 0.75 },
-  { top: "15%",  left: "75%",  size: 1300, delay: 3,    speed: 16, opacity: 0.7  },
-  { top: "30%",  left: "-12%", size: 1400, delay: 0.8,  speed: 20, opacity: 0.75 },
-  { top: "45%",  left: "65%",  size: 1500, delay: 2.5,  speed: 24, opacity: 0.8  },
-  { top: "-5%",  left: "80%",  size: 1100, delay: 4,    speed: 14, opacity: 0.6  },
-  { top: "35%",  left: "-5%",  size: 1200, delay: 2,    speed: 19, opacity: 0.7  },
-  { top: "-20%", left: "30%",  size: 1000, delay: 5,    speed: 15, opacity: 0.55 },
-  { top: "55%",  left: "35%",  size: 1400, delay: 1,    speed: 21, opacity: 0.75 },
+  // Top-left corner
+  { top: "-20%", left: "-15%", size: 2000, delay: 0,    speed: 18, opacity: 0.9  },
+  // Top-right corner
+  { top: "-25%", left: "55%",  size: 2200, delay: 1.5,  speed: 22, opacity: 0.85 },
+  // Right side middle
+  { top: "10%",  left: "72%",  size: 1800, delay: 3,    speed: 16, opacity: 0.8  },
+  // Left side middle
+  { top: "15%",  left: "-18%", size: 1900, delay: 0.8,  speed: 20, opacity: 0.85 },
+  // Bottom-right
+  { top: "40%",  left: "68%",  size: 2100, delay: 2.5,  speed: 24, opacity: 0.9  },
+  // Far right top
+  { top: "-15%", left: "78%",  size: 1500, delay: 4,    speed: 14, opacity: 0.7  },
+  // Bottom-left
+  { top: "35%",  left: "-12%", size: 1700, delay: 2,    speed: 19, opacity: 0.8  },
+  // Top center-right (behind text, subtle)
+  { top: "-30%", left: "35%",  size: 1400, delay: 5,    speed: 15, opacity: 0.5  },
+  // Bottom center-right
+  { top: "45%",  left: "50%",  size: 1900, delay: 1,    speed: 21, opacity: 0.85 },
 ];
 
 export default function FloatingCharacters() {
