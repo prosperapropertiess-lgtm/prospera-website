@@ -14,17 +14,17 @@ const CHARACTERS = [
   { src: "/characters/char-9.png", label: "Roofer" },
 ];
 
-// Fixed positions — bigger, sharper, more visible
+// Fixed positions — large, sharp, visible
 const POSITIONS = [
-  { top: "5%",  left: "3%",  size: 180, delay: 0,    speed: 18, blur: 0, opacity: 0.7  },
-  { top: "10%", left: "75%", size: 200, delay: 1.5,  speed: 22, blur: 0, opacity: 0.65 },
-  { top: "30%", left: "85%", size: 160, delay: 3,    speed: 16, blur: 0, opacity: 0.6  },
-  { top: "50%", left: "2%",  size: 170, delay: 0.8,  speed: 20, blur: 0, opacity: 0.65 },
-  { top: "65%", left: "80%", size: 190, delay: 2.5,  speed: 24, blur: 0, opacity: 0.7  },
-  { top: "20%", left: "90%", size: 140, delay: 4,    speed: 14, blur: 1, opacity: 0.5  },
-  { top: "55%", left: "8%",  size: 150, delay: 2,    speed: 19, blur: 0, opacity: 0.6  },
-  { top: "2%",  left: "42%", size: 130, delay: 5,    speed: 15, blur: 1, opacity: 0.45 },
-  { top: "75%", left: "50%", size: 170, delay: 1,    speed: 21, blur: 0, opacity: 0.65 },
+  { top: "-5%", left: "-2%", size: 520, delay: 0,    speed: 18, blur: 0, opacity: 0.75 },
+  { top: "0%",  left: "70%", size: 600, delay: 1.5,  speed: 22, blur: 0, opacity: 0.7  },
+  { top: "25%", left: "80%", size: 480, delay: 3,    speed: 16, blur: 0, opacity: 0.65 },
+  { top: "40%", left: "-3%", size: 500, delay: 0.8,  speed: 20, blur: 0, opacity: 0.7  },
+  { top: "55%", left: "75%", size: 560, delay: 2.5,  speed: 24, blur: 0, opacity: 0.75 },
+  { top: "10%", left: "85%", size: 420, delay: 4,    speed: 14, blur: 0, opacity: 0.55 },
+  { top: "45%", left: "5%",  size: 450, delay: 2,    speed: 19, blur: 0, opacity: 0.65 },
+  { top: "-5%", left: "38%", size: 380, delay: 5,    speed: 15, blur: 0, opacity: 0.5  },
+  { top: "65%", left: "45%", size: 500, delay: 1,    speed: 21, blur: 0, opacity: 0.7  },
 ];
 
 export default function FloatingCharacters() {
