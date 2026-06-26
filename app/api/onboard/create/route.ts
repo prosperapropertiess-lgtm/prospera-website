@@ -35,8 +35,15 @@ export async function POST(req: NextRequest) {
     owner_email,
     owner_phone: owner_phone || null,
     property_address,
+    property_city: property_city || null,
     property_type: property_type || null,
+    approx_monthly_rent: rent_market || null,
+    bedrooms: bedrooms ? Number(bedrooms) : null,
+    rent_low: rent_low ? Number(rent_low) : null,
+    rent_market: rent_market ? Number(rent_market) : null,
+    rent_premium: rent_premium ? Number(rent_premium) : null,
     step2_completed_at: new Date().toISOString(),
+    ...(comparables?.length ? { comparables } : {}),
   });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

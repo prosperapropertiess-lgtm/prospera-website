@@ -130,6 +130,7 @@ export default function OnboardListPage() {
   const [rentLow,          setRentLow]            = useState("");
   const [rentMarket,       setRentMarket]         = useState("");
   const [rentPremium,      setRentPremium]        = useState("");
+  const [comps, setComps] = useState<Array<{ address: string; rent: string; days_on_market: string; ad_description: string }>>([]);
 
   useEffect(() => {
     fetch("/api/onboard/list", {
@@ -144,7 +145,7 @@ export default function OnboardListPage() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyType(""); setPropertyCity("London");
     setBedrooms("2"); setRentLow(""); setRentMarket(""); setRentPremium("");
-    setServiceType("placement"); setFormError("");
+    setComps([]); setServiceType("placement"); setFormError("");
   }
 
   async function handleDelete(token: string, e: React.MouseEvent) {
@@ -190,6 +191,12 @@ export default function OnboardListPage() {
             rent_low: Number(rentLow) || undefined,
             rent_market: Number(rentMarket) || undefined,
             rent_premium: Number(rentPremium) || undefined,
+            comparables: comps.filter(c => c.address.trim()).map(c => ({
+              address: c.address.trim(),
+              rent: Number(c.rent) || 0,
+              days_on_market: c.days_on_market ? Number(c.days_on_market) : null,
+              ad_description: c.ad_description || "",
+            })),
           } : {}),
         }),
       });
@@ -319,8 +326,74 @@ export default function OnboardListPage() {
                     <InputField label="Market Rate Rent ($)" value={rentMarket} onChange={setRentMarket} type="number" placeholder="1800" />
                     <InputField label="Premium Rent ($)" value={rentPremium} onChange={setRentPremium} type="number" placeholder="2000" />
                   </div>
-                  <p style={{ margin: "8px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
-                    The landlord sees all three ranges in the welcome email. They sign the agreement once they're comfortable with pricing.
+
+                  {/* Comparables Entry */}
+                  <div style={{ marginTop: 20 }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+                      <p style={{ fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", margin: 0, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                        Comparable Properties ({comps.length}/5)
+                      </p>
+                      {comps.length < 5 && (
+                        <button
+                          type="button"
+                          onClick={() => setComps([...comps, { address: "", rent: "", days_on_market: "", ad_description: "" }])}
+                          style={{ fontSize: 13, fontWeight: 600, color: BURGUNDY, background: "none", border: `1px solid ${CARD_BORDER}`, borderRadius: 8, padding: "6px 14px", cursor: "pointer", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                        >
+                          + Add Comp
+                        </button>
+                      )}
+                    </div>
+
+                    {comps.length === 0 && (
+                      <p style={{ fontSize: 13, color: MUTED, margin: "0 0 8px" }}>
+                        Add up to 5 comparable listings. The system auto-fetches amenities, transit, and scores for each address.
+                      </p>
+                    )}
+
+                    {comps.map((comp, i) => (
+                      <div key={i} style={{ background: "#f6f4f1", borderRadius: 12, padding: "16px 18px", marginBottom: 10, position: "relative" }}>
+                        <button
+                          type="button"
+                          onClick={() => setComps(comps.filter((_, j) => j !== i))}
+                          style={{ position: "absolute", top: 10, right: 14, background: "none", border: "none", cursor: "pointer", fontSize: 16, color: MUTED, fontFamily: "var(--font-poppins)" }}
+                        >×</button>
+                        <p style={{ margin: "0 0 8px", fontSize: 12, fontWeight: 700, color: SUBTLE }}>COMP {i + 1}</p>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 100px 100px", gap: 10, marginBottom: 10 }}>
+                          <input
+                            type="text"
+                            value={comp.address}
+                            onChange={e => { const u = [...comps]; u[i] = { ...u[i], address: e.target.value }; setComps(u); }}
+                            placeholder="Property address"
+                            style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none" }}
+                          />
+                          <input
+                            type="number"
+                            value={comp.rent}
+                            onChange={e => { const u = [...comps]; u[i] = { ...u[i], rent: e.target.value }; setComps(u); }}
+                            placeholder="Rent $"
+                            style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none" }}
+                          />
+                          <input
+                            type="number"
+                            value={comp.days_on_market}
+                            onChange={e => { const u = [...comps]; u[i] = { ...u[i], days_on_market: e.target.value }; setComps(u); }}
+                            placeholder="Days"
+                            style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none" }}
+                          />
+                        </div>
+                        <textarea
+                          value={comp.ad_description}
+                          onChange={e => { const u = [...comps]; u[i] = { ...u[i], ad_description: e.target.value }; setComps(u); }}
+                          placeholder="Paste the listing ad description here..."
+                          rows={3}
+                          style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "none" }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <p style={{ margin: "12px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
+                    The landlord sees a full market report with rent ranges, comparable breakdowns, amenity comparisons, and neighbourhood data. They sign the agreement once they're comfortable with pricing.
                   </p>
                 </div>
               )}

@@ -2268,8 +2268,9 @@ export function placementWelcomeEmail(data: {
       <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128221;</td><td style="padding-left:10px;font-family:${FONT_S};font-size:15px;color:${TEXT_S};line-height:1.7;"><strong>Lease signed, deposits collected</strong> — first month is our fee, last month goes to you before key handover</td></tr></table></td></tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 12px;"><tr><td align="center"><a href="${data.dashboardUrl}" style="display:inline-block;background:${CRIMSON_S};color:#fff;font-family:${FONT_S};font-size:16px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;">Review & Sign Agreement</a></td></tr></table>
-    <p style="margin:0 0 28px;text-align:center;font-family:${FONT_S};font-size:13px;color:${MUTED_S};">Review the numbers, and when you're ready, sign the agreement from your dashboard.</p>
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 12px;"><tr><td align="center"><a href="${data.dashboardUrl.replace("/onboard/", "/market-comp/")}" style="display:inline-block;background:${CRIMSON_S};color:#fff;font-family:${FONT_S};font-size:16px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;">View Full Market Report</a></td></tr></table>
+    <p style="margin:8px 0 0;text-align:center;font-family:${FONT_S};"><a href="${data.dashboardUrl}" style="font-size:14px;color:${CRIMSON_S};text-decoration:none;font-weight:600;">Or go straight to your dashboard &#8594;</a></p>
+    <p style="margin:8px 0 28px;text-align:center;font-family:${FONT_S};font-size:13px;color:${MUTED_S};">Review the full report, then sign the agreement when you're ready.</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${BORDER_S};padding:0;height:1px;"></td></tr></table>
     <div style="height:24px;"></div>
