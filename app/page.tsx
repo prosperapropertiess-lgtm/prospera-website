@@ -10,108 +10,178 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
 
+// ── Animated Heading (character-by-character) ────────────────────────────────
+
+function AnimatedHeading({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  const [triggered, setTriggered] = useState(false);
+  const lines = text.split("\n");
+  const charDelay = 30;
+  const initialDelay = 200;
+
+  useEffect(() => {
+    const t = setTimeout(() => setTriggered(true), initialDelay);
+    return () => clearTimeout(t);
+  }, []);
+
+  let globalIndex = 0;
+
+  return (
+    <h1 className={className} style={style}>
+      {lines.map((line, lineIdx) => (
+        <span key={lineIdx} className="block">
+          {line.split("").map((char, charIdx) => {
+            const delay = globalIndex * charDelay;
+            globalIndex++;
+            return (
+              <span
+                key={`${lineIdx}-${charIdx}`}
+                className="inline-block transition-all"
+                style={{
+                  opacity: triggered ? 1 : 0,
+                  transform: triggered ? "translateX(0)" : "translateX(-18px)",
+                  transitionDuration: "500ms",
+                  transitionDelay: `${delay}ms`,
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            );
+          })}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
+// ── Fade In (delay-based) ────────────────────────────────────────────────────
+
+function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; duration?: number; children: React.ReactNode }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(t);
+  }, [delay]);
+
+  return (
+    <div
+      className="transition-opacity"
+      style={{ opacity: visible ? 1 : 0, transitionDuration: `${duration}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
 function Hero() {
   return (
-    <section
-      className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 text-center overflow-hidden"
-      style={{ backgroundColor: "#1F2F3A" }}
-    >
-      <ParticleCanvas />
+    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
+      {/* Video Background — raw, no overlay */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4" />
+      </video>
 
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse at 75% 15%, rgba(139,32,48,0.2) 0%, transparent 55%)",
-          zIndex: 2,
-        }}
-      />
+      {/* Content layer */}
+      <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
 
-      <div className="relative max-w-5xl mx-auto" style={{ zIndex: 3 }}>
+        {/* Hero content — pushed to bottom */}
+        <div className="flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16">
+          <div className="lg:grid lg:grid-cols-2 lg:items-end">
+
+            {/* Left Column — Main content */}
+            <div>
+              {/* Location tag */}
+              <HeroFadeIn delay={100} duration={600}>
+                <div className="mb-6">
+                  <span
+                    className="liquid-glass inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg border border-white/20"
+                    style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    London · St. Thomas · Strathroy
+                  </span>
+                </div>
+              </HeroFadeIn>
+
+              {/* Animated heading */}
+              <AnimatedHeading
+                text={"Stop losing sleep\nover your rental."}
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light mb-4"
+                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
+              />
+
+              {/* Subheading */}
+              <HeroFadeIn delay={800} duration={1000}>
+                <p
+                  className="text-base md:text-lg mb-5 max-w-xl"
+                  style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
+                >
+                  Late rent, bad tenants, midnight maintenance calls — gone.
+                  You get a monthly deposit and a clear statement. That's it.
+                </p>
+              </HeroFadeIn>
+
+              {/* Buttons */}
+              <HeroFadeIn delay={1200} duration={1000}>
+                <div className="flex flex-wrap gap-4 mb-8 lg:mb-0">
+                  <Link
+                    href="/rent-analysis"
+                    className="bg-white text-black px-8 py-3 rounded-lg font-medium text-sm transition-colors hover:bg-gray-100"
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    Get a Free Rental Analysis
+                  </Link>
+                  <Link
+                    href="/listings"
+                    className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium text-sm transition-all hover:bg-white hover:text-black"
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    Browse Listings
+                  </Link>
+                </div>
+              </HeroFadeIn>
+            </div>
+
+            {/* Right Column — Tag */}
+            <div className="flex items-end justify-start lg:justify-end">
+              <HeroFadeIn delay={1400} duration={1000}>
+                <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
+                  <span
+                    className="text-lg md:text-xl lg:text-2xl font-light"
+                    style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+                  >
+                    Management. Placement. Peace of mind.
+                  </span>
+                </div>
+              </HeroFadeIn>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2"
         >
-          <span
-            className="inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2"
-            style={{
-              color: "rgba(250,248,245,0.7)",
-              fontFamily: "var(--font-dm-sans)",
-              border: "1px solid rgba(250,248,245,0.2)",
-            }}
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
           >
-            London · St. Thomas · Strathroy
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-          className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-7"
-          style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-        >
-          Stop losing sleep
-          <br />
-          <em style={{ color: "rgba(250,248,245,0.8)" }}>over your rental.</em>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.38, ease: [0.23, 1, 0.32, 1] }}
-          className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
-        >
-          Late rent, bad tenants, midnight maintenance calls — gone.
-          You get a monthly deposit and a clear statement. That's it.
-          Your time stays yours.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.52, ease: [0.23, 1, 0.32, 1] }}
-          className="flex flex-col items-center justify-center gap-3"
-        >
-          <Link
-            href="/rent-analysis"
-            className="btn-primary px-10 py-4 text-xs font-semibold uppercase tracking-widest rounded"
-            style={{
-              backgroundColor: "#8B2030",
-              color: "#FAF8F5",
-              fontFamily: "var(--font-dm-sans)",
-            }}
-          >
-            Get a Free Rental Analysis
-          </Link>
-          <span
-            className="text-xs"
-            style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Takes 60 seconds. No commitment.
-          </span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </motion.div>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
