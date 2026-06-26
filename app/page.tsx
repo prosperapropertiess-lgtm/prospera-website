@@ -72,64 +72,25 @@ function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; durat
   );
 }
 
-// ── Hero with scroll-driven video ────────────────────────────────────────────
+// ── Hero ──────────────────────────────────────────────────────────────────────
 
 const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
 
 function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Scroll-driven video scrubbing
-  useEffect(() => {
-    const video = videoRef.current;
-    const container = containerRef.current;
-    if (!video || !container) return;
-
-    let ticking = false;
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        if (!video || !container) { ticking = false; return; }
-        const rect = container.getBoundingClientRect();
-        const scrollHeight = container.scrollHeight - window.innerHeight;
-        const scrolled = -rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / scrollHeight));
-
-        if (video.duration && isFinite(video.duration)) {
-          video.currentTime = progress * video.duration;
-        }
-        ticking = false;
-      });
-    }
-
-    // Pause autoplay — we control playback via scroll
-    video.addEventListener("loadedmetadata", () => {
-      video.pause();
-      video.currentTime = 0;
-    });
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
-      <section className="sticky top-0 h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
-        {/* Video Background — scroll-driven, no overlay */}
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ zIndex: 0 }}
-        >
-          <source src={VIDEO_URL} type="video/mp4" />
-        </video>
+    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#000" }}>
+      {/* Video Background — autoplay, loop, raw */}
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+        src={VIDEO_URL}
+      />
 
         {/* Content layer */}
         <div className="relative flex-1 flex flex-col" style={{ zIndex: 1 }}>
@@ -154,7 +115,7 @@ function Hero() {
 
                 {/* Animated heading */}
                 <AnimatedHeading
-                  text={"What if your investment\nwas actually passive?"}
+                  text={"What if your investment\nwas ACTUALLY passive?"}
                   className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
                   style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
                 />
@@ -224,7 +185,6 @@ function Hero() {
           </motion.div>
         </div>
       </section>
-    </div>
   );
 }
 
