@@ -732,7 +732,7 @@ export default function OnboardChecklist() {
       </div>
 
       {/* Main content */}
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "36px 20px" }}>
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "44px 28px", fontSize: "118%" }}>
         <ProgressBar current={step} />
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

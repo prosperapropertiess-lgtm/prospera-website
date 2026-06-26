@@ -199,7 +199,7 @@ export default function OnboardListPage() {
         @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
       `}</style>
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "40px 20px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 28px", fontSize: "118%" }}>
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
