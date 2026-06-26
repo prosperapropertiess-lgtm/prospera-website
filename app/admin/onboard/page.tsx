@@ -125,6 +125,11 @@ export default function OnboardListPage() {
   const [propertyAddress,  setPropertyAddress]   = useState("");
   const [propertyType,     setPropertyType]      = useState("");
   const [serviceType,      setServiceType]       = useState<"placement" | "management">("placement");
+  const [propertyCity,     setPropertyCity]       = useState("London");
+  const [bedrooms,         setBedrooms]           = useState("2");
+  const [rentLow,          setRentLow]            = useState("");
+  const [rentMarket,       setRentMarket]         = useState("");
+  const [rentPremium,      setRentPremium]        = useState("");
 
   useEffect(() => {
     fetch("/api/onboard/list", {
@@ -137,7 +142,8 @@ export default function OnboardListPage() {
 
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
-    setPropertyAddress(""); setPropertyType("");
+    setPropertyAddress(""); setPropertyType(""); setPropertyCity("London");
+    setBedrooms("2"); setRentLow(""); setRentMarket(""); setRentPremium("");
     setServiceType("placement"); setFormError("");
   }
 
@@ -178,6 +184,13 @@ export default function OnboardListPage() {
           property_address: propertyAddress.trim(),
           property_type: propertyType || undefined,
           service_type: serviceType,
+          ...(serviceType === "placement" ? {
+            property_city: propertyCity,
+            bedrooms: Number(bedrooms) || 2,
+            rent_low: Number(rentLow) || undefined,
+            rent_market: Number(rentMarket) || undefined,
+            rent_premium: Number(rentPremium) || undefined,
+          } : {}),
         }),
       });
       const d = await r.json();
@@ -283,6 +296,34 @@ export default function OnboardListPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Placement-specific: market comp fields */}
+              {serviceType === "placement" && (
+                <div style={{ marginBottom: 20, animation: "slideDown 0.2s ease" }}>
+                  <p style={{
+                    fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase",
+                    letterSpacing: "0.07em", marginBottom: 10,
+                    fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                  }}>Market Comps (included in welcome email)</p>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 16px" }}>
+                    <div>
+                      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>City</label>
+                      <select value={propertyCity} onChange={e => setPropertyCity(e.target.value)} style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 14px", fontSize: 15, color: NAVY, fontFamily: "var(--font-poppins), -apple-system, sans-serif", outline: "none" }}>
+                        <option value="London">London</option>
+                        <option value="St. Thomas">St. Thomas</option>
+                        <option value="Strathroy">Strathroy</option>
+                      </select>
+                    </div>
+                    <InputField label="Bedrooms" value={bedrooms} onChange={setBedrooms} type="number" placeholder="2" />
+                    <InputField label="Conservative Rent ($)" value={rentLow} onChange={setRentLow} type="number" placeholder="1600" />
+                    <InputField label="Market Rate Rent ($)" value={rentMarket} onChange={setRentMarket} type="number" placeholder="1800" />
+                    <InputField label="Premium Rent ($)" value={rentPremium} onChange={setRentPremium} type="number" placeholder="2000" />
+                  </div>
+                  <p style={{ margin: "8px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
+                    The landlord sees all three ranges in the welcome email. They sign the agreement once they're comfortable with pricing.
+                  </p>
+                </div>
+              )}
 
               {formError && (
                 <p style={{ margin: "0 0 16px", fontSize: 14, color: RED, fontWeight: 500 }}>{formError}</p>
