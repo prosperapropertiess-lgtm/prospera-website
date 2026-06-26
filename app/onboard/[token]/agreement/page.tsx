@@ -17,7 +17,7 @@ const INPUT_BORDER = "rgba(15,28,40,0.10)";
 const INPUT_FOCUS  = "rgba(139,32,48,0.40)";
 const DIVIDER     = "rgba(15,28,40,0.07)";
 
-const SECTIONS = [
+const MANAGEMENT_SECTIONS = [
   {
     title: "What this is",
     body: "This is the agreement that lets us legally manage your property on your behalf.",
@@ -48,6 +48,45 @@ const SECTIONS = [
   },
 ];
 
+const PLACEMENT_SECTIONS = [
+  {
+    title: "What this is",
+    body: "This agreement appoints Prospera Properties to find and place a qualified tenant for your property. We handle the marketing, screening, and lease coordination — you approve the final tenant and keep full control.",
+  },
+  {
+    title: "What we do for you",
+    body: "Once this is signed, we handle the full placement process:\n\n• Create and publish your rental listing across multiple platforms (Kijiji, Facebook Marketplace, our website)\n• Write a professional listing description and position your property competitively\n• Handle all tenant inquiries and communication\n• Pre-qualify prospective tenants before scheduling viewings\n• Conduct viewings and coordinate schedules",
+  },
+  {
+    title: "How we screen tenants",
+    body: "Every applicant goes through our full screening process:\n\n• Credit check (with applicant consent)\n• Employment and income verification\n• Previous landlord reference checks\n• Rental history verification\n\nYou see the full file on each qualified applicant. You make the final call — we never approve a tenant without your say.",
+  },
+  {
+    title: "Lease coordination",
+    body: "Once you approve a tenant, we handle the paperwork:\n\n• Prepare the Ontario Standard Lease\n• Coordinate signing between you and the tenant\n• Collect first month's rent and last month's rent deposit\n• Hand everything over to you cleanly",
+  },
+  {
+    title: "What you pay us",
+    body: "Our placement fee is the rate we discussed. It's payable once a tenant signs the lease and moves in — not before. If we don't place a tenant, you don't pay.",
+  },
+  {
+    title: "Replacement guarantee",
+    body: "If the tenant we place breaks the lease within the first 90 days, or is evicted for reasons that our screening should have caught, we'll find a replacement tenant at no additional placement fee.",
+  },
+  {
+    title: "What we need from you",
+    body: "• Provide accurate information about the property (we'll walk you through it)\n• Keep the property in showable condition during the placement period\n• Respond to tenant approval requests within a reasonable time\n• Cooperate with showing schedules\n• Ensure the rental unit meets all legal requirements",
+  },
+  {
+    title: "Your right to cancel",
+    body: "Either party can cancel this agreement with 7 days written notice. If you cancel after marketing has begun, you may be asked to reimburse incurred advertising costs (if any). No hidden fees, no lock-in.",
+  },
+  {
+    title: "Ontario law",
+    body: "This agreement and all placement activities comply with Ontario's Residential Tenancies Act, 2006, the Ontario Human Rights Code, and all applicable fair housing regulations. We screen based on legitimate business factors only — never on protected grounds.",
+  },
+];
+
 export default function AgreementPage() {
   const params = useParams();
   const router = useRouter();
@@ -58,13 +97,22 @@ export default function AgreementPage() {
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
   const [ip, setIp] = useState("");
+  const [serviceType, setServiceType] = useState<"placement" | "management">("placement");
 
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
       .then((r) => r.json())
       .then((d) => setIp(d.ip ?? ""))
       .catch(() => {});
-  }, []);
+    // Fetch session to get service_type
+    fetch(`/api/onboard/${token}/status`)
+      .then((r) => r.json())
+      .then((d) => { if (d.service_type) setServiceType(d.service_type); })
+      .catch(() => {});
+  }, [token]);
+
+  const isPlacement = serviceType === "placement";
+  const SECTIONS = isPlacement ? PLACEMENT_SECTIONS : MANAGEMENT_SECTIONS;
 
   async function sign(e: React.FormEvent) {
     e.preventDefault();
@@ -81,7 +129,13 @@ export default function AgreementPage() {
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Something went wrong."); setSaving(false); return; }
     setDone(true);
-    setTimeout(() => router.push(`/onboard/${token}/lease`), 2500);
+    if (isPlacement) {
+      // Placement: go straight to add property
+      setTimeout(() => router.push(`/admin/properties/new`), 2500);
+    } else {
+      // Management: continue to lease upload
+      setTimeout(() => router.push(`/onboard/${token}/lease`), 2500);
+    }
   }
 
   const canSign = signedName.trim().split(/\s+/).filter(Boolean).length >= 2;
@@ -138,13 +192,15 @@ export default function AgreementPage() {
             <p style={{ margin: "0 0 6px", fontSize: 15, color: MUTED, lineHeight: 1.6 }}>
               Your agreement is on file. Ebin has been notified.
             </p>
-            <p style={{ margin: 0, fontSize: 13, color: SUBTLE }}>Taking you to the next step…</p>
+            <p style={{ margin: 0, fontSize: 13, color: SUBTLE }}>
+              {isPlacement ? "Taking you to add your property…" : "Taking you to the next step…"}
+            </p>
           </div>
         ) : (
           <>
             <div style={{ marginBottom: 32 }}>
               <h1 style={{ margin: "0 0 10px", fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
-                Management Agreement
+                {isPlacement ? "Tenant Placement Agreement" : "Management Agreement"}
               </h1>
               <p style={{ margin: 0, fontSize: 15, color: MUTED, lineHeight: 1.7 }}>
                 Read through the agreement below, then type your full name to sign. Takes about 2 minutes.
@@ -163,7 +219,7 @@ export default function AgreementPage() {
               {/* Agreement header */}
               <div style={{ padding: "24px 28px 20px", borderBottom: `1px solid ${DIVIDER}` }}>
                 <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: SUBTLE, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                  Property Management Agreement
+                  {isPlacement ? "Tenant Placement Agreement" : "Property Management Agreement"}
                 </p>
                 <p style={{ margin: 0, fontSize: 15, color: MUTED }}>
                   Between you and Prospera Properties (operated by Ebin Jaison, London, Ontario)

@@ -446,10 +446,12 @@ export default function OnboardPortal() {
           {/* Step 2 — Agreement (first owner action) */}
           <StepRow
             num={2}
-            title="Sign your management agreement"
+            title={session.service_type === "placement" ? "Sign your placement agreement" : "Sign your management agreement"}
             subtitle={
               agreementDone
                 ? "Signed and on file."
+                : session.service_type === "placement"
+                ? "Read through and sign your tenant placement agreement. Takes 2 minutes — written in plain English."
                 : "Read through and sign your management agreement. Takes 2 minutes — written in plain English."
             }
             status={agreementStatus}
