@@ -732,7 +732,7 @@ export default function OnboardChecklist() {
       </div>
 
       {/* Main content */}
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: "44px 28px", fontSize: "118%" }}>
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "44px 28px" }}>
         <ProgressBar current={step} />
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -792,7 +792,7 @@ export default function OnboardChecklist() {
           </StepCard>
 
           {/* ── Placement: after agreement, redirect to add property ── */}
-          {session.service_type === "placement" && session.agreement_signed_at && (
+          {session.service_type === "placement" && step >= 3 && (
             <StepCard
               num={4} title="Add Property & Find Tenant"
               status={session.completed_at ? "complete" : "active"}

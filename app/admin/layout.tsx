@@ -14,6 +14,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       className={`${poppins.variable}`}
       style={{
         fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+        fontSize: "118%",
         // @ts-ignore
         "--font-dm-sans": "var(--font-poppins)",
       }}
