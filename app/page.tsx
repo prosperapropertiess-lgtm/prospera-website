@@ -154,7 +154,7 @@ function Hero() {
 
                 {/* Animated heading */}
                 <AnimatedHeading
-                  text={"You bought a property.\nNot a second job."}
+                  text={"What if your investment\nwas actually passive?"}
                   className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
                   style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
                 />
@@ -165,7 +165,7 @@ function Hero() {
                     className="text-base md:text-lg mb-5 max-w-xl"
                     style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
                   >
-                    Rent collected. Tenants handled. Maintenance sorted. You get a deposit on the first and a statement at the end of the month. Nothing else.
+                    Own a rental property without losing your sanity. Built for landlords with 2–5 properties who want their time back.
                   </p>
                 </HeroFadeIn>
 
