@@ -50,9 +50,9 @@ body {
   font-family: var(--font-dm-sans), -apple-system, sans-serif;
 }
 
-/* Mobile text scale — bump base size so text isn't tiny */
+/* Mobile text scale */
 @media (max-width: 767px) {
-  html { font-size: 137% !important; }
+  html { font-size: 107% !important; }
   /* Reduce extreme letter-spacing on labels at small sizes */
   .tracking-widest { letter-spacing: 0.06em; }
   /* Looser line height for body text on narrow screens */
