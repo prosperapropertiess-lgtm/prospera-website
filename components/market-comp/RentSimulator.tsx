@@ -232,31 +232,81 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
               <style>{`@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }`}</style>
             </div>
 
-            {/* Annual income comparison */}
-            <div className="grid grid-cols-2 gap-4 p-5 rounded-xl mb-6" style={{ backgroundColor: "rgba(255,255,255,0.7)", border: `1px solid ${BORDER}` }}>
-              <div className="text-center">
-                <p className="text-xs uppercase tracking-wider mb-1" style={{ color: MUTED }}>Your Annual Income</p>
-                <motion.p
-                  key={Math.round(metrics.annualIncome)}
-                  initial={{ scale: 1.05 }}
-                  animate={{ scale: 1 }}
-                  className="text-2xl sm:text-3xl font-bold"
-                  style={{ color: metrics.color, fontFamily: "var(--font-cormorant)" }}
-                >
-                  ${Math.round(metrics.annualIncome).toLocaleString()}
-                </motion.p>
-                <p className="text-xs mt-1" style={{ color: MUTED }}>
-                  after ~{metrics.daysToFill} day vacancy
+            {/* The real cost of overpricing */}
+            <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
+              <div className="p-4 sm:p-5" style={{ backgroundColor: rent > rentMarket ? "rgba(220,38,38,0.04)" : "rgba(22,163,74,0.04)" }}>
+                <p className="text-xs uppercase tracking-wider mb-3 font-semibold" style={{ color: MUTED }}>
+                  {rent > rentMarket ? "The real cost of overpricing" : "Smart pricing pays off"}
                 </p>
+
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div>
+                    <p className="text-xs mb-1" style={{ color: MUTED }}>Monthly Rent</p>
+                    <p className="text-lg sm:text-xl font-bold" style={{ color: TEXT }}>${rent.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs mb-1" style={{ color: MUTED }}>Vacancy</p>
+                    <p className="text-lg sm:text-xl font-bold" style={{ color: metrics.daysToFill > 21 ? "#dc2626" : "#16a34a" }}>~{metrics.daysToFill} days</p>
+                  </div>
+                  <div>
+                    <p className="text-xs mb-1" style={{ color: MUTED }}>Lost to Vacancy</p>
+                    <p className="text-lg sm:text-xl font-bold" style={{ color: "#dc2626" }}>
+                      -${Math.round(rent * metrics.daysToFill / 30).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <p className="text-xs uppercase tracking-wider mb-1" style={{ color: MUTED }}>At Market Rate</p>
-                <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
-                  ${Math.round(metrics.marketAnnual).toLocaleString()}
-                </p>
-                <p className="text-xs mt-1 font-medium" style={{ color: metrics.incomeDiff >= 0 ? "#16a34a" : "#dc2626" }}>
-                  {metrics.incomeDiff >= 0 ? "+" : ""}${Math.round(metrics.incomeDiff).toLocaleString()}/yr vs market
-                </p>
+
+              <div className="p-4 sm:p-5" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(255,255,255,0.7)" }}>
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                    <p className="text-xs mb-1" style={{ color: MUTED }}>Your Annual Take-Home</p>
+                    <motion.p
+                      key={Math.round(metrics.annualIncome)}
+                      initial={{ scale: 1.05 }}
+                      animate={{ scale: 1 }}
+                      className="text-2xl sm:text-3xl font-bold"
+                      style={{ color: metrics.color, fontFamily: "var(--font-cormorant)" }}
+                    >
+                      ${Math.round(metrics.annualIncome).toLocaleString()}
+                    </motion.p>
+                  </div>
+                  <div>
+                    <p className="text-xs mb-1" style={{ color: MUTED }}>At Market Rate (${rentMarket.toLocaleString()})</p>
+                    <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
+                      ${Math.round(metrics.marketAnnual).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+
+                {rent > rentMarket && metrics.incomeDiff < 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-4 p-3 rounded-lg text-center"
+                    style={{ backgroundColor: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.15)" }}
+                  >
+                    <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
+                      You lose ${Math.abs(Math.round(metrics.incomeDiff)).toLocaleString()} per year by pricing above market.
+                    </p>
+                    <p className="text-xs mt-1" style={{ color: MUTED }}>
+                      Higher rent sounds better monthly, but the vacancy eats it — and then some.
+                    </p>
+                  </motion.div>
+                )}
+
+                {rent <= rentMarket && metrics.incomeDiff >= 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-4 p-3 rounded-lg text-center"
+                    style={{ backgroundColor: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.15)" }}
+                  >
+                    <p className="text-sm font-semibold" style={{ color: "#16a34a" }}>
+                      Smart pricing. You earn ${Math.round(metrics.incomeDiff).toLocaleString()} more per year with faster fill.
+                    </p>
+                  </motion.div>
+                )}
               </div>
             </div>
 
