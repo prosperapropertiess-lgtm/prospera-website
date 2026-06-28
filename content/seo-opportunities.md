@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-06-21
+Last updated: 2026-06-28
 
 ## New Topic Opportunities
 Topics found in competitor/search results that we have no post covering. Blog agent should prioritize these above the default keyword list.
@@ -120,4 +120,42 @@ Existing posts that are likely thin on content or contain outdated information:
 - **n4-notice-ontario.md** — Confirm the September 21, 2026 effective date for the Bill 60 7-day notice change. The existing "Topics to Expand" entry already flags this, but note the specific date: effective September 21, 2026, N4 termination periods for monthly tenancies drop from 14 to 7 days. Add a prominent "2026 Update" callout at the top and update the notice period language in the body.
 
 - **above-guideline-rent-increase-ontario.md** — Add a "Bill 82 Update (2026)" section covering the new mandatory engineering report requirement for capital expenditure AGIs. This is a significant compliance addition that existing content predates and that landlords are actively searching for.
+
+### Added 2026-06-28
+
+- **n7-notice-ontario-landlord-guide** | Est. difficulty: LOW | Vol: ~250/mo | We cover N4, N5, N6, N8, N12, N13 — the N7 (Notice to End Tenancy for Causing Serious Problems) is a confirmed gap. Ranking sites: ahmedlegalservices.ca, ltbready.ca, chubzlegal.ca, ylaw.legal — small legal/paralegal sites with no major PM company presence. N7 is the most urgent eviction tool: 10-day non-voidable notice for serious safety impairment, wilful damage, or misuse causing serious damage. Angle: the four grounds for N7 (safety impairment, wilful damage, serious damage from misuse, interference in small building), how N7 differs from N5/N6, what evidence is required (incidents must be specific and documented), 10-day non-voidable notice mechanics, and what to do if the LTB doesn't grant the order. Strong practical utility post that completes the N-form series.
+
+- **student-rental-london-ontario-landlord** | Est. difficulty: LOW | Vol: ~300/mo | **Local signal.** The only site ranking for this specific topic is lsrentals.ca (a student-focused listing platform) with generic tips content. Prospera has a genuine local advantage here: Western University and Fanshawe College drive a large student rental market in London, and Prospera operates there daily. No other London-based PM blog covers student-specific guidance. Angle: unique characteristics of student tenancies in London (9–12 month leases, May start dates, guarantor requirements, shared accommodations, noise/party risk), how to screen student tenants, typical student landlord mistakes, and why professional management adds disproportionate value for student rentals (high tenant turnover, maintenance demands). Strong local SEO signal and clear lead-gen hook for London landlords with student properties.
+
+- **guarantor-co-signer-lease-ontario-landlord** | Est. difficulty: LOW | Vol: ~350/mo | A frequent landlord question with thin, paralegal-written content ranking (sfg.legal, ranger.legal, therentalmarket.ca, tenantrights.ca). Not covered anywhere in our existing blog. Key nuance: the LTB has no jurisdiction over guarantors — a fact that surprises most landlords. If a guaranteed tenant leaves owing arrears, the landlord must pursue the guarantor in Small Claims Court, not through the LTB. Angle: co-signer vs. guarantor (legal distinction), how to draft a valid guarantee agreement, LTB jurisdiction limitation, how to collect from a guarantor in Small Claims Court, and when to require one (students, new immigrants, ODSP recipients). OHRC note: landlords cannot require a guarantor solely on the basis of a protected ground — this must be handled carefully.
+
+- **mold-in-rental-unit-ontario-landlord-responsibilities** | Est. difficulty: MEDIUM | Vol: ~600/mo | Landlord-facing mold content has real search volume and the ranking sites are mostly mold remediation companies (safeair.ca, ultimatemoldcrew.ca, restorationmate.ca) and tenantrights.ca — not landlord-focused blogs. Marda Management has one post but it's thin. Our `landlord-maintenance-responsibilities-ontario.md` covers general repair obligations but not mold specifically. Angle: when mold is the landlord's legal responsibility vs. tenant-caused (RTA s.20), required response timeline (immediate for extensive mold), how the LTB calculates rent abatement for mold delay, post-remediation clearance testing as legal protection, the specific duty to respond in writing within 24 hours, and documentation best practices. Strong maintenance-authority post that attracts landlords before and after a mold dispute.
+
+- **early-lease-termination-ontario-landlord-n11** | Est. difficulty: LOW-MEDIUM | Vol: ~400/mo | No existing post covers the N11 (Agreement to End Tenancy) or the landlord's limited grounds for ending a tenancy early. Our `lease-renewal-ontario-landlord-guide.md` covers renewal mechanics; `n12-notice-ontario.md` covers personal-use termination — but there's no dedicated guide on mutual early termination or the N11 form itself. Ranking competition is low (maximum-property.com, clavispm.com, buttonwood.ca — all smaller PM blogs). Angle: the only legal grounds landlords can end a tenancy early (non-payment, personal use, renoviction, sale — all requiring proper N-forms); the N11 Agreement to End Tenancy (mutual termination, how to structure it, what happens if tenant changes their mind after signing); and why the N11 is not always a safe shortcut. The "landlord ends lease" framing attracts landlords in dispute who need clear guidance.
+
+- **ontario-landlord-heating-requirements-temperature** | Est. difficulty: MEDIUM | Vol: ~350/mo | Confirmed gap with reasonable search volume. Ranking sites: Royal York PM (high authority), ontariolandlord.ca, rentalawareness.com, City of Toronto. Winnable because most content is Toronto-specific (21°C) without addressing provincial minimums and London/municipal differences. Angle: provincial RTA requirement (20°C minimum vital service), heating season (September 1 to June 15 provincially), who is responsible when lease is silent on heat (landlord), what tenants can do if heat fails (T6 application, City of London property standards), landlord liability for delayed heat repairs, and practical guidance on furnace inspection schedules. Strong maintenance-authority post.
+
+- **cannabis-smoking-marijuana-rental-ontario-landlord-2026** | Est. difficulty: MEDIUM | Vol: ~400/mo | Most ranking content dates from 2018–2019 when cannabis was first legalized in Canada — seriously outdated and mostly tenant-facing. The landlord-facing angle (what can you prohibit? how do you enforce it? what happens when tenant grows indoors?) is undersupplied with 2026-current content. Angle: what landlords CAN prohibit (smoking cannabis anywhere on the property via lease clause), what they CANNOT prohibit (possession, but can prohibit smoking), the medical cannabis OHRC accommodation requirement, how to respond to indoor growing (4-plant limit, mold and humidity risk, insurance voiding, how to serve an N5 or N6), and documentation requirements. A 2026-updated post on this topic would immediately outrank 5-year-old content across the board.
+
+---
+
+## SKIPPED (2026-06-28 research — too competitive or already covered)
+- ontario-landlord-rights-2026 — Repeated from prior lists. Dominated by ontario.ca, tribunalsontario.ca. Covered across existing posts.
+- ltb-wait-times-backlog-ontario-2026 — Already in opportunities file (added 2026-06-14).
+- n6-notice-ontario — Already in opportunities file (added 2026-06-14).
+- l2-application-ltb-ontario — Already in opportunities file (added prior run).
+- ltb-eviction-process-step-by-step — COVERED by `evicting-tenant-ontario.md` and `ltb-hearing-preparation-ontario-landlords.md`; Tribunals Ontario ranks #1.
+- tenant-not-paying-rent-ontario — COVERED by `late-rent-payments-ontario.md`, `n4-notice-ontario.md`, `l1-application-ltb-ontario.md`.
+- property-management-software-ontario — MEDIUM-HIGH competition (Capterra, LendCity, multiple SaaS review sites). Commercial/transactional intent — not a good informational blog fit for Prospera.
+- rent-deposit-last-month-rent-rules — COVERED by `security-deposits-ontario.md`; LMR interest opportunity already in file.
+- landlord-harassment-ontario-tenant-perspective — Mostly tenant-facing content; the landlord angle (how to avoid harassment accusations) has thin search intent and is better handled as a section within an existing post than as a standalone article.
+
+---
+
+## Topics to Expand — 2026-06-28 additions
+
+- **landlord-maintenance-responsibilities-ontario.md** — Add a dedicated "Mold" subsection: when mold is landlord's legal obligation (RTA s.20 fitness for habitation), required response timeline, post-remediation clearance testing as legal protection, LTB rent abatement risk for delayed response. This directly supports the `mold-in-rental-unit-ontario-landlord-responsibilities` opportunity post and builds internal link authority.
+
+- **winter-maintenance-ontario-landlords.md** — Add a "Heat Requirements" section with specific provincial minimums (20°C RTA minimum), London-specific property standards, heating season dates (September 1 to June 15), emergency response requirements for heating failures, and the tenant T6 application process. Supports the `ontario-landlord-heating-requirements-temperature` opportunity post.
+
 
