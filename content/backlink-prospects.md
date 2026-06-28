@@ -918,3 +918,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Local Strathroy business association. Contact: info@sdcc.on.ca, phone (519) 245-7620. This may require a Chamber membership ($). Ask about the cost and process; if affordable, it's also a legitimate local business relationship, not just a link. Tone: professional and community-oriented.
 
 ---
+
+## New Life Mortgages — Dallas Martin
+- url: https://www.newlifemortgages.ca/
+- type: mortgage
+- why: London-based mortgage agent serving London, St. Thomas, and Strathroy — the exact same cities as Prospera. Investors who finance rental properties through Dallas immediately need property management in place.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: dallas@themortgagefirm.ca
+- site_focus: Dallas Martin is a mortgage agent at The Mortgage Firm in London, Ontario, serving investors and homebuyers across London, St. Thomas, Strathroy, and surrounding areas. His blog covers mortgage guides for London Ontario including types, rates, and investment property financing.
+- hook: Dallas's investor clients who close on London-area rental properties need professional management immediately after financing — Prospera fills that gap. A mutual resource mention connects two local professionals serving the same London investor client base.
+- specific_content: His "Complete Guide to Mortgages in London Ontario: Types, Rates & Expert Advice" blog post at newlifemortgages.ca/index.php/blog — directly targets London-area investors who are Prospera's primary management clients.
+- researcher_notes: London-based mortgage agent (204 Oxford St W, London, ON). Not a competitor. Contact: dallas@themortgagefirm.ca, phone 519-495-7250. Outreach should be warm and local — peer-to-peer referral angle. Keep it brief and direct.
+
+---
+
+## Mortgage Broker London Ontario — Mark Mitchell
+- url: https://www.londonontariomortgages.ca/
+- type: mortgage
+- why: London Ontario mortgage broker serving investors with 35+ lenders and a blog covering property investment financing — clients who close on London rentals need professional management as their next step.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: https://www.londonontariomortgages.ca/contact/
+- site_focus: Mark Mitchell is a London Ontario mortgage broker available 24/7, working with 35+ mortgage lenders to serve homebuyers and investors in London. His blog at londonontariomortgages.ca/blogs-2/ covers topics on bank vs. broker mortgage value and investment property financing.
+- hook: Mark's investor clients who secure London rental property financing through him need a property manager before tenant day one — Prospera is the natural next call. A mutual referral arrangement benefits both local professionals without cost.
+- specific_content: His blog post "Why do the Big Banks charge Homeowners more Interest than a Mortgage Broker" — practical investor-oriented content that attracts the same London landlord audience Prospera serves.
+- researcher_notes: Local London mortgage broker (920 Commissioners Road East, London ON). Not a competitor. Contact via form at londonontariomortgages.ca/contact/, phone 519-860-2102. No public email found. Outreach tone: peer local professional, referral angle.
+
+---
+
+## Prime Real Estate Brokerage
+- url: https://www.primebrokerage.ca/
+- type: blog
+- why: Established London Ontario real estate brokerage with an active investor-focused blog — investor buyer clients who close on London rentals through Prime are a natural fit for Prospera property management services post-purchase.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: info@primebrokerage.ca
+- site_focus: Prime Real Estate Brokerage is a locally owned London Ontario full-service brokerage at 200 Villagewalk Blvd with an in-house media production team. Their blog at primebrokerage.ca/blog covers London Ontario real estate with an investor lens, targeting buyers and sellers in the local market.
+- hook: Prime's investor buyer clients who acquire London rentals need professional property management immediately after closing — a guest post or resource mention positions Prospera as the recommended management partner for Prime's London investor clients.
+- specific_content: Their London Ontario real estate investor blog content at primebrokerage.ca/blog/tag/london+ontario+real+estate — locally targeted, investment-oriented content that attracts the same London landlord audience Prospera serves.
+- researcher_notes: Local London real estate brokerage (200 Villagewalk Blvd #302, London, ON). Not a PM company — no conflict. Contact: info@primebrokerage.ca, phone 519-473-9992. Outreach tone: professional peer, guest post offer, locally relevant angle.
+
+---
+
+## Legal Matters Toronto — Ontario Landlord Paralegal Blog
+- url: https://legalmatterstoronto.com/
+- type: other
+- why: Ontario paralegal firm with a content-rich blog covering income property investing, landlord obligations, and LTB matters — their Ontario landlord readership is a direct match for Prospera's target client base.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: https://legalmatterstoronto.com/contact
+- site_focus: Legal Matters Toronto is an Ontario paralegal services firm specializing in landlord-tenant law and condominium matters. Their blog covers income property investing, LTB procedures, landlord obligations under the RTA, and Ontario-specific legal guidance for property investors — all province-wide in scope.
+- hook: Legal Matters' Ontario landlord readers need both legal guidance and professional property management — a resource mention of Prospera as the recommended management partner for Southwestern Ontario landlords completes the picture for their audience.
+- specific_content: Their "Income Property Investor: 7 Powerful Truths You Can't Ignore" and "Landlord Obligations Ontario: 7 Essential Rules for Ultimate Success" — content targeting landlords navigating the same compliance landscape Prospera manages for clients daily.
+- researcher_notes: Toronto-based paralegal firm serving Ontario landlords province-wide. Not a competitor. Contact via form at legalmatterstoronto.com/contact, phone 437-265-9529. Outreach angle: resource mention for their SW Ontario landlord readers. Keep email under 150 words and reference specific article.
+
+---
+
+## Landlii — Canadian Landlord Blog & Platform
+- url: https://landlii.ca/
+- type: blog
+- why: Active Canadian landlord blog covering Ontario-specific rental law, rent increase guidelines, and property management software — an ideal fit for a guest post or resource mention reaching Ontario landlords evaluating professional management options.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: https://landlii.ca/contact
+- site_focus: Landlii is a Canadian landlord platform and blog offering property management software tools built for provincial RTA compliance, T776 tax reporting, and rent rule tracking. Their Ontario-specific blog content covers rent increase guidelines, CCA classes for rental properties, and software guides — a practical, information-first audience of active Canadian landlords.
+- hook: Landlii's Ontario landlord readers who manage London, St. Thomas, or Strathroy properties are exactly who Prospera serves — a guest post on professional property management in London Ontario 2026 would be genuinely valuable and locally specific content for their audience.
+- specific_content: Their "Ontario Rent Increase Guideline 2026: What Landlords Need to Know" and "Best Property Management Software for Small Firms in Canada (2026)" — Ontario landlords reading these articles are actively managing or considering managing rental properties, which is Prospera's exact audience.
+- researcher_notes: Canadian landlord blog/platform. Not a PM company. No public contact email found — use contact form on website. Outreach tone: content contributor, practical and non-promotional guest post offer.
+
+---
+
+## Rees Professional Accounting — London Ontario
+- url: https://reesaccounting.com/
+- type: other
+- why: London-based accounting firm with a real estate investor focus and blog covering real estate accounting specifically for London Ontario landlords — their client base overlaps directly with Prospera's, creating a natural mutual referral opportunity.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: https://reesaccounting.com/contact-us/
+- site_focus: Rees Professional Accounting is a London Ontario accounting firm at 490 Wonderland Rd S specializing in real estate investor accounting, tax compliance, and bookkeeping. Their blog at reesaccounting.com/blog/ covers real estate accounting rules for property investors and expert tips for London Ontario landlords — locally targeted content for active rental property owners.
+- hook: Rees's real estate investor clients in London need both an accountant and a property manager — a mutual referral arrangement (Rees recommends Prospera for management; Prospera recommends Rees for investor accounting) serves the same client base at no cost to either firm.
+- specific_content: Their "Expert Tips for Real Estate Accounting in London Ontario" and "9 Real Estate Accounting Rules for Property Investors" blog posts — London-specific, investor-focused content reaching exactly the same landlord audience Prospera serves.
+- researcher_notes: London Ontario accounting firm (490 Wonderland Rd S, London ON N6K 3T1). Not a competitor. Phone 519-719-6629. No public email found — use contact form. Outreach tone: warm local peer, mutual referral focus, keep it practical and London-specific.
+
+---
+
+## Real Estate Tax Tips — Cherry Chan CPA
+- url: https://realestatetaxtips.ca/
+- type: blog
+- why: One of Canada's most recognized real estate investor tax blogs, with Ontario-specific content reaching a province-wide audience of active landlords and property investors — a guest post or resource mention would introduce Prospera to a large, qualified Ontario investor audience.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: admin@cccpa.ca
+- site_focus: Real Estate Tax Tips is Cherry Chan CPA's Canadian real estate investor tax blog and accounting practice based in Oakville, Ontario. Cherry is a Chartered Accountant with a recognized Ontario real estate investor audience, covering T776 filing, capital gains, rental income tracking, CCA, and property investor tax strategies province-wide.
+- hook: Cherry's Ontario investor audience includes London-area landlords who need professional property management — a guest post from Ebin on what London Ontario investors should have in place for management and compliance in 2026 would be valuable and locally specific content for her national audience.
+- specific_content: Her blog content on Ontario rental income reporting, T776 strategies, and real estate investor tax planning — her audience actively holds Ontario rental properties and is exactly who Prospera serves in London, St. Thomas, and Strathroy.
+- researcher_notes: High-authority Canadian real estate investor CPA blog (Oakville, ON). Not a competitor. Contact: admin@cccpa.ca, phone 416-548-4228. Outreach tone: professional peer, guest post offer, mention specific Cherry Chan content. Keep well under 150 words.
+
+---
+
+## AllOntario.ca — Ontario News & Information Resource
+- url: https://allontario.ca/
+- type: blog
+- why: Ontario-focused information and business directory site with active landlord and tenant news content covering Bill 60 and the 2026 RTA changes — a resource link to Prospera's Ontario landlord guides would serve their SW Ontario landlord readership.
+- researched: true
+- drafted: true
+- added: 2026-06-28
+- contact_email: info@allontario.ca
+- site_focus: AllOntario.ca is a general-purpose Ontario information resource and business marketplace covering local news, legal resources, and community information across the province. Their landlord and tenant content covers Bill 60 changes, LTB procedures, and Ontario rental law updates — reaching a broad Ontario audience including London-area landlords.
+- hook: AllOntario's landlord-focused content reaches the same Ontario property owner audience Prospera serves — a resource mention linking to Prospera's London Ontario guides in their landlord content would add local, practitioner-level depth to their coverage.
+- specific_content: Their "12 New Rules Every Tenant and Landlord Must Know in 2026 - Ontario Bill 60" article — Ontario landlords reading this are trying to understand their obligations, which is exactly the audience Prospera's guides serve.
+- researcher_notes: Ontario general-purpose information site. Not a PM company. Contact: info@allontario.ca. Outreach angle: resource mention for their landlord content, position Prospera's guides as locally specific SW Ontario resources. Keep email concise and direct.
+
+---

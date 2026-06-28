@@ -1173,3 +1173,155 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## New Life Mortgages — 2026-06-28
+To: dallas@themortgagefirm.ca
+Subject: Collaboration idea — London landlord clients post-close
+
+Hi Dallas,
+
+Your complete guide to mortgages in London Ontario is one of the more thorough resources I've come across for investors navigating financing here — especially the breakdown on types and rate expectations for London-area buyers.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London, St. Thomas, and Strathroy. A lot of our clients are investors who financed locally and need management in place before their first tenant moves in.
+
+Would you be open to a brief mention of Prospera in your investment-focused mortgage content, or a mutual referral arrangement? Both of us serve the same London investor client at different stages of the same decision.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Mortgage Broker London Ontario (Mark Mitchell) — 2026-06-28
+To: https://www.londonontariomortgages.ca/contact/
+Subject: Referral idea — London investor clients post-financing
+
+Hi Mark,
+
+Your blog post on bank rates vs. broker value is exactly the kind of practical resource London investors need when they're weighing how to finance a rental property. Clear and direct.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London. Investors who close on London properties through local brokers immediately need property management in place — tenant screening, lease execution, and LTB compliance from day one.
+
+Would you be open to a mutual referral mention — you point London investor clients to Prospera for management; I recommend you when landlord clients need financing? Two local professionals, one shared client base.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Prime Real Estate Brokerage — 2026-06-28
+To: info@primebrokerage.ca
+Subject: Guest post idea — London rental property management
+
+Hi,
+
+Your London Ontario investor content on the Prime blog is exactly the kind of practically grounded resource buyers in this market need — not generic advice, but London-specific.
+
+I'm Ebin, I run Prospera Properties managing residential rentals across London. I'd love to contribute a guest post for your investor audience: something like "What London Ontario investors need in place before their first tenant moves in." Practical, non-promotional, and directly relevant to buyers who just closed on a rental.
+
+Let me know if that kind of content would be useful for your readers.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Legal Matters Toronto — 2026-06-28
+To: https://legalmatterstoronto.com/contact
+Subject: Resource mention — Ontario landlords in Southwestern Ontario
+
+Hi,
+
+Your "Income Property Investor: 7 Powerful Truths" piece covers the discipline side of rental investing well — the LTB process, landlord obligations, and where small landlords get tripped up.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy, Ontario. For landlords in Southwestern Ontario who need professional management alongside legal guidance, we handle day-to-day operations — LTB filings, tenant screening, and lease compliance.
+
+Would you be open to mentioning Prospera as a resource for your Ontario landlord readers in the Southwestern Ontario market?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Landlii Canadian Landlord Blog — 2026-06-28
+To: https://landlii.ca/contact
+Subject: Guest post — professional property management in London Ontario
+
+Hi,
+
+Your 2026 Ontario rent increase guideline post is one of the cleaner explanations of the 2.1% cap I've seen — you cut through to what landlords actually need to do, not just what the rule says.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London, St. Thomas, and Strathroy. I'd love to contribute a guest post for your Canadian landlord audience on what London Ontario investors need to know about professional property management in 2026 — LTB changes, how screening has shifted, what a management fee actually covers. Practical, not promotional.
+
+Interested?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Rees Professional Accounting — 2026-06-28
+To: https://reesaccounting.com/contact-us/
+Subject: Referral partnership — London real estate investor clients
+
+Hi,
+
+Your real estate accounting post for London Ontario investors is one of the few I've seen that's actually specific to this market — the breakdown of what London landlords should be tracking is genuinely useful.
+
+I'm Ebin, I run Prospera Properties managing residential rentals across London. Our clients are London-area landlords who take the investment side seriously — and they need both a solid property manager and a real estate-savvy accountant.
+
+Would you be open to a mutual referral arrangement? You recommend Prospera to investment property clients who need management; I point landlord clients your way for real estate accounting support. Same client base, complementary services.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Real Estate Tax Tips — Cherry Chan CPA — 2026-06-28
+To: admin@cccpa.ca
+Subject: Guest post idea — Ontario landlord strategy in 2026
+
+Hi Cherry,
+
+Your content on Canadian real estate investor tax strategy is consistently one of the most practical resources I point London-area clients toward — especially the T776 guidance and rental income tracking breakdowns.
+
+I'm Ebin, I run Prospera Properties managing residential rentals in London, St. Thomas, and Strathroy, Ontario. I'd love to contribute a guest post for your readers on what Ontario landlords managing Southwestern Ontario properties need to know in 2026 — LTB compliance changes, what professional management covers, and how it affects their tax position. Practical and Ontario-specific.
+
+Let me know if that kind of content would be a fit.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## AllOntario.ca — 2026-06-28
+To: info@allontario.ca
+Subject: Resource for your landlord content — Southwestern Ontario
+
+Hi,
+
+Your "12 New Rules for Landlords and Tenants in 2026" piece on Bill 60 is one of the more complete quick-reference breakdowns I've seen — useful for landlords and tenants both trying to understand what actually changed under the new RTA rules.
+
+I'm Ebin, I run Prospera Properties managing rentals in London, St. Thomas, and Strathroy, Ontario. We publish practical guides for Ontario landlords — LTB procedures, N4 notices, rent increase steps — all London and Southwestern Ontario specific.
+
+Would you be open to linking to a couple of our guides as additional resources for your Ontario landlord audience?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
