@@ -34,8 +34,8 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
     const rentability = Math.max(0, Math.min(100, Math.round(100 * Math.pow(1 - pos, 1.5))));
 
     const baseDays = 7;
-    const maxDays = 60;
-    const daysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(pos, 1.3));
+    const maxDays = 120;
+    const daysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(pos, 1.8));
 
     const spread = rentPremium - rentLow;
     const distFromMarket = spread > 0 ? Math.abs(rent - rentMarket) / spread : 0;
