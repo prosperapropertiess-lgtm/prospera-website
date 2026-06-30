@@ -33,7 +33,7 @@ interface Session {
   completed_at: string | null;
 }
 
-const PROPERTY_TYPES = ["House", "Duplex", "Triplex", "Condo", "Other"];
+const PROPERTY_TYPES = ["House", "Townhouse", "Apartment", "Duplex", "Triplex", "Condo", "Other"];
 
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
@@ -260,9 +260,50 @@ export default function OnboardListPage() {
             <h2 style={{ margin: "0 0 6px", fontSize: 18, fontWeight: 700, color: NAVY }}>
               Add New Landlord
             </h2>
-            <p style={{ margin: "0 0 24px", fontSize: 14, color: MUTED }}>
+            <p style={{ margin: "0 0 16px", fontSize: 14, color: MUTED }}>
               A welcome email with their onboarding link will be sent immediately.
             </p>
+
+            {/* Discovery Call Script */}
+            <details style={{ marginBottom: 20, background: "#f6f4f1", border: `1px solid ${CARD_BORDER}`, borderRadius: 12, overflow: "hidden" }}>
+              <summary style={{ padding: "14px 18px", cursor: "pointer", fontSize: 13, fontWeight: 700, color: NAVY, fontFamily: "var(--font-poppins), -apple-system, sans-serif", listStyle: "none", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span>📞 Discovery Call Script</span>
+                <span style={{ fontSize: 11, color: MUTED, fontWeight: 500 }}>Click to expand</span>
+              </summary>
+              <div style={{ padding: "0 18px 18px", fontSize: 14, color: NAVY, lineHeight: 1.8, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>1. Anchor the deal</p>
+                  <p style={{ margin: 0, color: MUTED }}>&quot;Can I grab the property address first?&quot;</p>
+                </div>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>2. Property snapshot</p>
+                  <p style={{ margin: 0, color: MUTED }}>What type of property? How many beds and baths? Vacant or occupied?</p>
+                </div>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>3. Rental expectations</p>
+                  <p style={{ margin: 0, color: MUTED }}>What rent are you hoping to achieve? Based on past rent or market guess?</p>
+                </div>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>4. Ownership history</p>
+                  <p style={{ margin: 0, color: MUTED }}>Rented before? Self-managed or through a PM? What happened?</p>
+                </div>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>5. Situation check (find the pain)</p>
+                  <p style={{ margin: 0, color: MUTED }}>What&apos;s happening right now that made you reach out? Any vacancy or timing pressure?</p>
+                </div>
+                <div style={{ marginBottom: 16 }}>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>6. Service branch</p>
+                  <p style={{ margin: 0, color: MUTED }}>Looking for tenant placement or full property management?</p>
+                </div>
+                <div>
+                  <p style={{ margin: "0 0 4px", fontSize: 11, fontWeight: 700, color: BURGUNDY, textTransform: "uppercase", letterSpacing: "0.08em" }}>7. Soft close</p>
+                  <p style={{ margin: 0, color: MUTED }}>&quot;If everything lines up, are you looking to move forward quickly or still comparing options?&quot;</p>
+                </div>
+                <div style={{ marginTop: 14, padding: "10px 14px", background: "rgba(139,32,48,0.06)", borderRadius: 8, fontSize: 12, color: MUTED }}>
+                  <strong style={{ color: NAVY }}>Close:</strong> &quot;I&apos;ll send you our analysis with a detailed market report and our services breakdown. You can review it at your own pace and sign the agreement when you&apos;re ready.&quot;
+                </div>
+              </div>
+            </details>
 
             <form onSubmit={handleSubmit}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 20px", marginBottom: 20 }}>
