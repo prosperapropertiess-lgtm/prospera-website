@@ -114,115 +114,108 @@ const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIX
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: "#030303", fontSize: "16px" }}>
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
+    <section className="relative overflow-hidden" style={{ backgroundColor: "#1F2F3A", fontSize: "16px" }}>
+      {/* Two-panel layout: content left, founder photo right */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 min-h-screen items-center">
 
-      {/* Elegant floating shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ElegantShape delay={0.3} width={600} height={140} rotate={12} gradient="from-indigo-500/[0.15]" className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]" />
-        <ElegantShape delay={0.5} width={500} height={120} rotate={-15} gradient="from-rose-500/[0.15]" className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]" />
-        <ElegantShape delay={0.4} width={300} height={80} rotate={-8} gradient="from-violet-500/[0.15]" className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]" />
-        <ElegantShape delay={0.6} width={200} height={60} rotate={20} gradient="from-amber-500/[0.15]" className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]" />
-        <ElegantShape delay={0.7} width={150} height={40} rotate={-25} gradient="from-cyan-500/[0.15]" className="left-[20%] md:left-[25%] top-[5%] md:top-[10%]" />
-      </div>
+          {/* Left — Copy */}
+          <div className="pt-32 pb-16 lg:py-0">
+            {/* Category identifier — instant clarity */}
+            <HeroFadeIn delay={0} duration={500}>
+              <p
+                className="text-xs font-semibold uppercase tracking-widest mb-6"
+                style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Property Management · London, Ontario
+              </p>
+            </HeroFadeIn>
 
-      {/* Top/bottom gradient fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" style={{ zIndex: 4 }} />
+            {/* Heading */}
+            <AnimatedHeading
+              text={"What if your investment\nwas ACTUALLY passive?"}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6"
+              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+            />
 
-        {/* Content layer */}
-        <div className="relative flex-1 flex flex-col" style={{ zIndex: 2 }}>
+            {/* Subheading */}
+            <HeroFadeIn delay={800} duration={1000}>
+              <p
+                className="text-base md:text-lg mb-8 max-w-lg"
+                style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
+              >
+                We manage your rental so you don't have to. Tenant screening, rent collection, maintenance, the 2am calls. Handled.
+              </p>
+            </HeroFadeIn>
 
-          {/* Hero content — pushed to bottom */}
-          <div className="flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16">
-            <div className="lg:grid lg:grid-cols-2 lg:items-end">
-
-              {/* Left Column — Main content */}
-              <div>
-                {/* Location tag */}
-                <HeroFadeIn delay={100} duration={600}>
-                  <div className="mb-6">
-                    <span
-                      className="liquid-glass inline-block text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-lg border border-white/20"
-                      style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
-                    >
-                      London · St. Thomas · Strathroy
-                    </span>
-                  </div>
-                </HeroFadeIn>
-
-                {/* Animated heading */}
-                <AnimatedHeading
-                  text={"What if your investment\nwas ACTUALLY passive?"}
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal mb-4"
-                  style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.04em", lineHeight: 1.05 }}
-                />
-
-                {/* Subheading */}
-                <HeroFadeIn delay={800} duration={1000}>
-                  <p
-                    className="text-sm sm:text-base md:text-lg mb-5 max-w-xl"
-                    style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.7 }}
-                  >
-                    Own a rental property without losing your sanity. Built for landlords with 2–5 properties who want their time back.
-                  </p>
-                </HeroFadeIn>
-
-                {/* Buttons */}
-                <HeroFadeIn delay={1200} duration={1000}>
-                  <div className="flex flex-wrap gap-4 mb-8 lg:mb-0">
-                    <Link
-                      href="/rent-analysis"
-                      className="bg-white text-black px-6 sm:px-8 py-3 rounded-lg font-medium text-xs sm:text-sm transition-colors hover:bg-gray-100"
-                      style={{ fontFamily: "var(--font-dm-sans)" }}
-                    >
-                      Get a Free Rental Analysis
-                    </Link>
-                    <Link
-                      href="/listings"
-                      className="liquid-glass border border-white/20 text-white px-6 sm:px-8 py-3 rounded-lg font-medium text-xs sm:text-sm transition-all hover:bg-white hover:text-black"
-                      style={{ fontFamily: "var(--font-dm-sans)" }}
-                    >
-                      Browse Listings
-                    </Link>
-                  </div>
-                </HeroFadeIn>
+            {/* CTA */}
+            <HeroFadeIn delay={1100} duration={1000}>
+              <div className="flex flex-wrap items-center gap-4 mb-6">
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  Get a Free Quote
+                </Link>
+                <a
+                  href="tel:5196971227"
+                  className="text-sm font-medium transition-opacity hover:opacity-70"
+                  style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  or call (519) 697-1227
+                </a>
               </div>
+              <p className="text-xs" style={{ color: "rgba(250,248,245,0.35)" }}>
+                90-day guarantee · No contracts · We pick up the phone
+              </p>
+            </HeroFadeIn>
 
-              {/* Right Column — Tag */}
-              <div className="flex items-end justify-start lg:justify-end">
-                <HeroFadeIn delay={1400} duration={1000}>
-                  <div className="liquid-glass border border-white/20 px-4 sm:px-6 py-2 sm:py-3 rounded-xl">
-                    <span
-                      className="text-sm sm:text-lg md:text-xl lg:text-2xl font-light"
-                      style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-                    >
-                      Management. Placement. Peace of mind.
-                    </span>
+            {/* Trust strip */}
+            <HeroFadeIn delay={1400} duration={1000}>
+              <div className="flex flex-wrap gap-6 mt-10 pt-8" style={{ borderTop: "1px solid rgba(250,248,245,0.1)" }}>
+                {[
+                  { num: "25+", label: "Tenants placed" },
+                  { num: "0", label: "Evictions" },
+                  { num: "21d", label: "Avg fill time" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <p className="text-2xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.num}</p>
+                    <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)" }}>{s.label}</p>
                   </div>
-                </HeroFadeIn>
+                ))}
               </div>
-            </div>
+            </HeroFadeIn>
           </div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className="absolute bottom-4 left-1/2 -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,245,0.3)" strokeWidth="1.5">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </motion.div>
-          </motion.div>
+          {/* Right — Founder photo */}
+          <div className="hidden lg:flex items-end justify-center relative">
+            <HeroFadeIn delay={600} duration={1200}>
+              <div className="relative">
+                <img
+                  src="/ebin-founder.jpg"
+                  alt="Ebin Jaison — Founder, Prospera Properties"
+                  className="w-full max-w-md object-cover rounded-t-3xl"
+                  style={{ aspectRatio: "3/4", objectPosition: "top" }}
+                />
+                {/* Gradient fade at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(transparent, #1F2F3A)" }} />
+                {/* Floating card */}
+                <div
+                  className="absolute bottom-8 left-0 right-0 mx-4 p-4 rounded-xl"
+                  style={{ backgroundColor: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.1)" }}
+                >
+                  <p className="text-sm font-medium" style={{ color: "#FAF8F5" }}>Ebin Jaison</p>
+                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.5)" }}>Founder · Managing since 2021</p>
+                </div>
+              </div>
+            </HeroFadeIn>
+          </div>
+
         </div>
-      </section>
+      </div>
+
+    </section>
   );
 }
 
