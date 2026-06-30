@@ -52,13 +52,23 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
     const zone = pos < 0.3 ? "Sweet Spot" : pos < 0.55 ? "Competitive" : pos < 0.75 ? "Aggressive" : "Risky";
     const zoneEmoji = pos < 0.3 ? "🟢" : pos < 0.55 ? "🟡" : pos < 0.75 ? "🟠" : "🔴";
 
-    const expectedVacancy = daysToFill / 30;
-    const annualIncome = rent * (12 - expectedVacancy);
-    const marketVacancy = (baseDays + (maxDays - baseDays) * Math.pow((rentMarket - floor) / range, 1.3)) / 30;
-    const marketAnnual = rentMarket * (12 - marketVacancy);
-    const incomeDiff = annualIncome - marketAnnual;
+    // Vacancy cost = full daily rent × days empty
+    const dailyRent = rent / 30;
+    const vacancyCost = Math.round(dailyRent * daysToFill);
+    const grossAnnual = rent * 12;
+    const netAnnual = grossAnnual - vacancyCost;
 
-    return { rentability, daysToFill, appQuality, pool, color, bgColor, barColor, zone, zoneEmoji, annualIncome, marketAnnual, incomeDiff, pos };
+    // Market rate comparison
+    const marketPos = Math.max(0, Math.min(1, (rentMarket - floor) / range));
+    const marketDaysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(marketPos, 1.3));
+    const marketDailyRent = rentMarket / 30;
+    const marketVacancyCost = Math.round(marketDailyRent * marketDaysToFill);
+    const marketGrossAnnual = rentMarket * 12;
+    const marketNetAnnual = marketGrossAnnual - marketVacancyCost;
+
+    const netDiff = netAnnual - marketNetAnnual;
+
+    return { rentability, daysToFill, appQuality, pool, color, bgColor, barColor, zone, zoneEmoji, grossAnnual, vacancyCost, netAnnual, marketDaysToFill, marketVacancyCost, marketGrossAnnual, marketNetAnnual, netDiff, pos };
   }, [rent, floor, ceiling, rentMarket, rentLow, rentPremium]);
 
   // Drag-based slider for better touch/click support
@@ -232,81 +242,95 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
               <style>{`@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }`}</style>
             </div>
 
-            {/* The real cost of overpricing */}
+            {/* Show the math — side by side */}
             <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-              <div className="p-4 sm:p-5" style={{ backgroundColor: rent > rentMarket ? "rgba(220,38,38,0.04)" : "rgba(22,163,74,0.04)" }}>
-                <p className="text-xs uppercase tracking-wider mb-3 font-semibold" style={{ color: MUTED }}>
-                  {rent > rentMarket ? "The real cost of overpricing" : "Smart pricing pays off"}
-                </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                {/* YOUR PRICE */}
+                <div className="p-5" style={{ backgroundColor: rent > rentMarket ? "rgba(220,38,38,0.03)" : "rgba(22,163,74,0.03)" }}>
+                  <p className="text-xs uppercase tracking-wider font-semibold mb-4" style={{ color: metrics.color }}>
+                    {rent > rentMarket ? "Your Price" : "Your Price"}
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Monthly rent</span>
+                      <span className="font-semibold" style={{ color: TEXT }}>${rent.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>× 12 months</span>
+                      <span style={{ color: TEXT }}>${metrics.grossAnnual.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Est. vacancy</span>
+                      <span style={{ color: metrics.daysToFill > 21 ? "#dc2626" : MUTED }}>~{metrics.daysToFill} days</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Vacancy cost</span>
+                      <span className="font-semibold" style={{ color: "#dc2626" }}>-${metrics.vacancyCost.toLocaleString()}</span>
+                    </div>
+                    <div className="pt-3 mt-3 flex justify-between" style={{ borderTop: `1px solid ${BORDER}` }}>
+                      <span className="text-sm font-bold" style={{ color: TEXT }}>Net annual income</span>
+                      <motion.span
+                        key={metrics.netAnnual}
+                        initial={{ scale: 1.05 }}
+                        animate={{ scale: 1 }}
+                        className="text-xl font-bold"
+                        style={{ color: metrics.color, fontFamily: "var(--font-cormorant)" }}
+                      >
+                        ${metrics.netAnnual.toLocaleString()}
+                      </motion.span>
+                    </div>
+                  </div>
+                </div>
 
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  <div>
-                    <p className="text-xs mb-1" style={{ color: MUTED }}>Monthly Rent</p>
-                    <p className="text-lg sm:text-xl font-bold" style={{ color: TEXT }}>${rent.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs mb-1" style={{ color: MUTED }}>Vacancy</p>
-                    <p className="text-lg sm:text-xl font-bold" style={{ color: metrics.daysToFill > 21 ? "#dc2626" : "#16a34a" }}>~{metrics.daysToFill} days</p>
-                  </div>
-                  <div>
-                    <p className="text-xs mb-1" style={{ color: MUTED }}>Lost to Vacancy</p>
-                    <p className="text-lg sm:text-xl font-bold" style={{ color: "#dc2626" }}>
-                      -${Math.round(rent * metrics.daysToFill / 30).toLocaleString()}
-                    </p>
+                {/* MARKET RATE */}
+                <div className="p-5" style={{ borderLeft: `1px solid ${BORDER}`, borderTop: window?.innerWidth < 640 ? `1px solid ${BORDER}` : "none", backgroundColor: "rgba(31,47,58,0.02)" }}>
+                  <p className="text-xs uppercase tracking-wider font-semibold mb-4" style={{ color: NAVY }}>
+                    At Market Rate (${rentMarket.toLocaleString()})
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Monthly rent</span>
+                      <span className="font-semibold" style={{ color: TEXT }}>${rentMarket.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>× 12 months</span>
+                      <span style={{ color: TEXT }}>${metrics.marketGrossAnnual.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Est. vacancy</span>
+                      <span style={{ color: "#16a34a" }}>~{metrics.marketDaysToFill} days</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span style={{ color: MUTED }}>Vacancy cost</span>
+                      <span className="font-semibold" style={{ color: "#dc2626" }}>-${metrics.marketVacancyCost.toLocaleString()}</span>
+                    </div>
+                    <div className="pt-3 mt-3 flex justify-between" style={{ borderTop: `1px solid ${BORDER}` }}>
+                      <span className="text-sm font-bold" style={{ color: TEXT }}>Net annual income</span>
+                      <span className="text-xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
+                        ${metrics.marketNetAnnual.toLocaleString()}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 sm:p-5" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(255,255,255,0.7)" }}>
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div>
-                    <p className="text-xs mb-1" style={{ color: MUTED }}>Your Annual Take-Home</p>
-                    <motion.p
-                      key={Math.round(metrics.annualIncome)}
-                      initial={{ scale: 1.05 }}
-                      animate={{ scale: 1 }}
-                      className="text-2xl sm:text-3xl font-bold"
-                      style={{ color: metrics.color, fontFamily: "var(--font-cormorant)" }}
-                    >
-                      ${Math.round(metrics.annualIncome).toLocaleString()}
-                    </motion.p>
-                  </div>
-                  <div>
-                    <p className="text-xs mb-1" style={{ color: MUTED }}>At Market Rate (${rentMarket.toLocaleString()})</p>
-                    <p className="text-2xl sm:text-3xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
-                      ${Math.round(metrics.marketAnnual).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-
-                {rent > rentMarket && metrics.incomeDiff < 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="mt-4 p-3 rounded-lg text-center"
-                    style={{ backgroundColor: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.15)" }}
+              {/* Bottom line — the verdict */}
+              <div className="p-4 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: metrics.netDiff >= 0 ? "rgba(22,163,74,0.04)" : "rgba(220,38,38,0.04)" }}>
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={metrics.netDiff}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    className="text-sm font-semibold"
+                    style={{ color: metrics.netDiff >= 0 ? "#16a34a" : "#dc2626" }}
                   >
-                    <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
-                      You lose ${Math.abs(Math.round(metrics.incomeDiff)).toLocaleString()} per year by pricing above market.
-                    </p>
-                    <p className="text-xs mt-1" style={{ color: MUTED }}>
-                      Higher rent sounds better monthly, but the vacancy eats it — and then some.
-                    </p>
-                  </motion.div>
-                )}
-
-                {rent <= rentMarket && metrics.incomeDiff >= 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="mt-4 p-3 rounded-lg text-center"
-                    style={{ backgroundColor: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.15)" }}
-                  >
-                    <p className="text-sm font-semibold" style={{ color: "#16a34a" }}>
-                      Smart pricing. You earn ${Math.round(metrics.incomeDiff).toLocaleString()} more per year with faster fill.
-                    </p>
-                  </motion.div>
-                )}
+                    {metrics.netDiff >= 0
+                      ? `At $${rent.toLocaleString()}/mo you net $${Math.round(metrics.netDiff).toLocaleString()} more per year — but wait ${metrics.daysToFill - metrics.marketDaysToFill} extra days to fill.`
+                      : `You lose $${Math.abs(Math.round(metrics.netDiff)).toLocaleString()} per year at this price. The vacancy eats your higher rent.`
+                    }
+                  </motion.p>
+                </AnimatePresence>
               </div>
             </div>
 
@@ -332,7 +356,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                   <><strong>Extended vacancy likely.</strong> At ${rent.toLocaleString()}/mo, expect the unit to sit for over a month. That&apos;s ${rent.toLocaleString()}+ in lost rent. The applicant pool gets weaker at this level — fewer options means less leverage on screening.</>
                 )}
                 {metrics.rentability < 15 && (
-                  <><strong>Above what the market supports.</strong> This pricing will likely result in 6+ weeks of vacancy with a weak applicant pool. The math works against you here — at market rate (${rentMarket.toLocaleString()}) you&apos;d actually earn <strong>${Math.round(metrics.marketAnnual - metrics.annualIncome).toLocaleString()} more per year</strong>.</>
+                  <><strong>Above what the market supports.</strong> This pricing will likely result in 6+ weeks of vacancy with a weak applicant pool. The math works against you here — at market rate (${rentMarket.toLocaleString()}) you&apos;d actually net <strong>${Math.round(metrics.marketNetAnnual - metrics.netAnnual).toLocaleString()} more per year</strong>.</>
                 )}
               </motion.div>
             </AnimatePresence>
