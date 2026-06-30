@@ -194,7 +194,7 @@ function Hero() {
               <div className="relative">
                 <img
                   src="/ebin-founder.jpg"
-                  alt="Ebin Jaison — Founder, Prospera Properties"
+                  alt="Ebin Jaison — Owner, Prospera Properties"
                   className="w-full max-w-md object-cover rounded-t-3xl"
                   style={{ aspectRatio: "3/4", objectPosition: "top" }}
                 />
@@ -206,7 +206,7 @@ function Hero() {
                   style={{ backgroundColor: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.1)" }}
                 >
                   <p className="text-sm font-medium" style={{ color: "#FAF8F5" }}>Ebin Jaison</p>
-                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.5)" }}>Founder · Managing since 2021</p>
+                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.5)" }}>Owner · Managing since 2021</p>
                 </div>
               </div>
             </HeroFadeIn>

@@ -101,21 +101,21 @@ export default function LandlordsPage() {
       {/* Hero */}
       <section className="pt-36 pb-24 px-5 sm:px-8 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
-            For Landlords
+          <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}>
+            Property Management · London, Ontario
           </p>
           <h1
-            className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-6"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.02em" }}
           >
-            You didn&apos;t buy a rental
+            Your phone buzzes.
             <br />
-            <em style={{ color: "rgba(250,248,245,0.6)" }}>to spend your evenings managing it.</em>
+            <span style={{ color: "rgba(250,248,245,0.6)" }}>It&apos;s not your tenant.</span>
           </h1>
-          <p className="text-base max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            Every hour you spend chasing rent, coordinating repairs, or
-            Googling N4 forms is an hour your rental isn&apos;t passive. We take
-            that off your plate — completely. You own the asset. We run it.
+          <p className="text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
+            It&apos;s your bank. Rent just hit your account. The maintenance
+            call went to us at 2am. The lease renewal was handled last week.
+            You didn&apos;t know about any of it. That&apos;s the whole point.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a

@@ -121,7 +121,7 @@ export default function AgreementPage() {
       return;
     }
     setSaving(true); setError("");
-    const r = await fetch(`/api/onboard/${token}/step/5`, {
+    const r = await fetch(`/api/onboard/${token}/step/3`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ signed_name: signedName.trim(), ip }),
