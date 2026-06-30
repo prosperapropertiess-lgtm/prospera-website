@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 const SERPER_API_KEY = process.env.SERPER_API_KEY || "";
-const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || "";
 
 export async function POST(req: NextRequest) {
   if (!await isAdminAuthenticated(req)) {
@@ -15,38 +14,53 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "City and bedrooms required" }, { status: 400 });
   }
 
-  // Step 1: Search for comparable rentals via Serper
+  if (!SERPER_API_KEY) {
+    return NextResponse.json({ error: "SERPER_API_KEY not configured" }, { status: 500 });
+  }
+
+  // Search for individual rental listings — not category pages
   const searchQueries = [
-    `${bedrooms} bedroom for rent ${city} Ontario site:kijiji.ca`,
-    `${bedrooms} bedroom rental ${city} Ontario rentals.ca`,
-    `${bedrooms} bed apartment rent near ${address || ""} ${city} Ontario`,
+    `"${bedrooms} bedroom" "for rent" "${city}" "$" site:kijiji.ca/v-`,
+    `${bedrooms} bedroom apartment for rent ${city} Ontario "$" site:rentals.ca`,
+    `${bedrooms} bed rental ${address || city} Ontario "$" -"ads for"`,
   ];
 
   const allResults: Array<{ title: string; snippet: string; link: string }> = [];
 
-  if (SERPER_API_KEY) {
-    for (const query of searchQueries.slice(0, 2)) {
-      try {
-        const res = await fetch("https://google.serper.dev/search", {
-          method: "POST",
-          headers: { "X-API-KEY": SERPER_API_KEY, "Content-Type": "application/json" },
-          body: JSON.stringify({ q: query, num: 10, gl: "ca", hl: "en" }),
-        });
-        const data = await res.json();
-        if (data.organic) {
-          allResults.push(...data.organic.map((r: { title: string; snippet: string; link: string }) => ({
-            title: r.title || "",
-            snippet: r.snippet || "",
-            link: r.link || "",
-          })));
-        }
-      } catch (err) {
-        console.error("[auto-comps] Serper search failed:", err);
+  for (const query of searchQueries) {
+    try {
+      const res = await fetch("https://google.serper.dev/search", {
+        method: "POST",
+        headers: { "X-API-KEY": SERPER_API_KEY, "Content-Type": "application/json" },
+        body: JSON.stringify({ q: query, num: 10, gl: "ca", hl: "en" }),
+      });
+      const data = await res.json();
+      if (data.organic) {
+        allResults.push(...data.organic.map((r: { title: string; snippet: string; link: string }) => ({
+          title: r.title || "",
+          snippet: r.snippet || "",
+          link: r.link || "",
+        })));
       }
+    } catch (err) {
+      console.error("[auto-comps] Serper search failed:", err);
     }
   }
 
-  // Step 2: Parse rental listings from search results
+  // Filter out category/search pages — only keep individual listings
+  const filtered = allResults.filter((r) => {
+    const t = r.title.toLowerCase();
+    // Skip Kijiji category pages
+    if (/^\d+\s+ads?\s+for/.test(t)) return false;
+    if (t.includes("rentals near you")) return false;
+    if (t.includes("in all categories")) return false;
+    if (t.includes("in long term rentals")) return false;
+    // Skip results without a dollar amount
+    if (!(/\$[\d,]+/.test(r.title + " " + r.snippet))) return false;
+    return true;
+  });
+
+  // Parse individual listings
   const comps: Array<{
     address: string;
     rent: number;
@@ -55,52 +69,83 @@ export async function POST(req: NextRequest) {
     source: string;
   }> = [];
 
-  const seenAddresses = new Set<string>();
+  const seenKeys = new Set<string>();
 
-  for (const result of allResults) {
-    // Extract rent from title/snippet (look for $X,XXX patterns)
-    const rentMatch = (result.title + " " + result.snippet).match(/\$\s*([\d,]+)\s*(?:\/?\s*(?:mo|month|mth))?/i);
-    if (!rentMatch) continue;
+  for (const result of filtered) {
+    const text = result.title + " " + result.snippet;
 
-    const rent = parseInt(rentMatch[1].replace(/,/g, ""), 10);
-    if (rent < 500 || rent > 10000) continue; // Filter unreasonable rents
+    // Extract ALL dollar amounts and pick the most likely rent
+    const rentMatches = [...text.matchAll(/\$([\d,]+)(?:\.00)?/g)];
+    if (!rentMatches.length) continue;
 
-    // Extract address from title/snippet
+    const rents = rentMatches
+      .map(m => parseInt(m[1].replace(/,/g, ""), 10))
+      .filter(r => r >= 800 && r <= 8000); // Reasonable rent range
+
+    if (!rents.length) continue;
+    const rent = rents[0]; // First reasonable rent is usually the asking price
+
+    // Extract street address
+    const addrPatterns = [
+      /(\d+\s+[A-Z][a-zA-Z]+(?:\s+[A-Za-z]+)*\s+(?:St(?:reet)?|Ave(?:nue)?|Rd|Road|Dr(?:ive)?|Blvd|Boulevard|Cres(?:cent)?|Ct|Court|Way|Lane|Ln|Pl(?:ace)?|Terr(?:ace)?|Cir(?:cle)?|Park|Gate|Trail|Grove|Pkwy|Hwy))/i,
+      /(\d+\s+(?:North|South|East|West|N|S|E|W)\s+[A-Z][a-zA-Z]+(?:\s+[A-Za-z]+)*)/i,
+    ];
+
     let extractedAddress = "";
-
-    // Try to find street address pattern (number + street name)
-    const addrMatch = (result.title + " " + result.snippet).match(/(\d+\s+[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*\s+(?:St|Street|Ave|Avenue|Rd|Road|Dr|Drive|Blvd|Boulevard|Cres|Crescent|Ct|Court|Way|Lane|Ln|Pl|Place|Terr|Terrace|Cir|Circle))/i);
-    if (addrMatch) {
-      extractedAddress = addrMatch[1].trim();
-    } else {
-      // Use title as fallback (often contains the address or area)
-      extractedAddress = result.title.split(/[-–|·]/).map(s => s.trim()).find(s => /\d/.test(s) || s.length > 10) || result.title.slice(0, 60);
+    for (const pattern of addrPatterns) {
+      const match = text.match(pattern);
+      if (match) { extractedAddress = match[1].trim(); break; }
     }
 
-    // Deduplicate
-    const key = extractedAddress.toLowerCase().replace(/\s+/g, " ");
-    if (seenAddresses.has(key)) continue;
-    seenAddresses.add(key);
+    // If no address found, try to extract from the title (Kijiji titles often have location)
+    if (!extractedAddress) {
+      // Use the first meaningful part of the title
+      const titleParts = result.title.split(/[-–|·,]/).map(s => s.trim());
+      const meaningful = titleParts.find(s => s.length > 10 && !s.includes("Kijiji") && !s.includes("Rentals"));
+      extractedAddress = meaningful || result.title.slice(0, 50);
+    }
+
+    // Deduplicate by rent + first 20 chars of address
+    const key = `${rent}-${extractedAddress.slice(0, 20).toLowerCase()}`;
+    if (seenKeys.has(key)) continue;
+    seenKeys.add(key);
 
     // Determine source
     const source = result.link.includes("kijiji") ? "Kijiji"
       : result.link.includes("rentals.ca") ? "Rentals.ca"
       : result.link.includes("facebook") ? "Facebook"
       : result.link.includes("zumper") ? "Zumper"
+      : result.link.includes("padmapper") ? "PadMapper"
       : "Web";
 
+    // Extract bedrooms/bathrooms from snippet if mentioned
+    const bedMatch = text.match(/(\d+)\s*(?:bed|bedroom|br|bdr)/i);
+    const bathMatch = text.match(/(\d+(?:\.\d)?)\s*(?:bath|bathroom|ba)/i);
+    const sqftMatch = text.match(/([\d,]+)\s*(?:sq\s*ft|sqft|square\s*feet)/i);
+
+    // Build a clean description
+    let desc = result.snippet.replace(/\s+/g, " ").trim();
+    if (desc.length > 250) desc = desc.slice(0, 250) + "...";
+
+    // Add extracted specs to description if found
+    const specs: string[] = [];
+    if (bedMatch) specs.push(`${bedMatch[1]} bed`);
+    if (bathMatch) specs.push(`${bathMatch[1]} bath`);
+    if (sqftMatch) specs.push(`${sqftMatch[1]} sqft`);
+    if (specs.length) desc = `[${specs.join(" · ")}] ${desc}`;
+
     comps.push({
-      address: `${extractedAddress}, ${city}, ON`,
+      address: extractedAddress.includes(city) ? extractedAddress : `${extractedAddress}, ${city}, ON`,
       rent,
       days_on_market: "",
-      ad_description: result.snippet.slice(0, 300),
+      ad_description: desc,
       source,
     });
 
     if (comps.length >= 8) break;
   }
 
-  // Step 3: Calculate rent ranges from found comps
+  // Calculate rent ranges from found comps
   const rents = comps.map(c => c.rent).sort((a, b) => a - b);
   let rentLow = 0, rentMarket = 0, rentPremium = 0;
 
@@ -125,7 +170,8 @@ export async function POST(req: NextRequest) {
     rentLow,
     rentMarket,
     rentPremium,
-    totalFound: allResults.length,
+    totalSearchResults: allResults.length,
+    filteredResults: filtered.length,
     compsParsed: comps.length,
   });
 }
