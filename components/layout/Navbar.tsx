@@ -19,10 +19,8 @@ import {
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
-  { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -105,6 +103,13 @@ export default function Navbar() {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="tel:5196971227"
+              className="text-xs font-medium transition-opacity hover:opacity-70"
+              style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              (519) 697-1227
+            </a>
             <Link
               href="/platform"
               className="relative flex items-center gap-2 px-4 py-2 rounded text-xs font-semibold uppercase tracking-widest transition-all duration-200 hover:opacity-90"

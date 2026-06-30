@@ -125,7 +125,7 @@ export default function PricingPage() {
 
         <FadeIn delay={0.55}>
           <p
-            className="text-base max-w-xl mx-auto leading-relaxed"
+            className="text-base max-w-xl mx-auto leading-relaxed mb-4"
             style={{
               color: "rgba(250,248,245,0.8)",
               fontFamily: "var(--font-dm-sans)",
@@ -134,6 +134,9 @@ export default function PricingPage() {
             Every vacant month costs you $2,000+. Every maintenance markup costs
             you hundreds more. Every hour you spend managing is an hour you
             don&apos;t get back. We fix all three — starting at 8%.
+          </p>
+          <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
+            90-day guarantee · No contracts · Cancel anytime
           </p>
         </FadeIn>
       </section>
@@ -689,6 +692,9 @@ export default function PricingPage() {
           >
             Book Your Free Call
           </Link>
+          <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
+            90-day guarantee · No contracts · Cancel anytime
+          </p>
         </FadeIn>
       </section>
 

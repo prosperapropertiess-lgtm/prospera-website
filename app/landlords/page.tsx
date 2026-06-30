@@ -133,6 +133,9 @@ export default function LandlordsPage() {
               Get a Free Rent Estimate
             </a>
           </div>
+          <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
+            90-day guarantee · No contracts · Cancel anytime
+          </p>
         </FadeIn>
       </section>
 
@@ -265,6 +268,9 @@ export default function LandlordsPage() {
           >
             Get a Free Quote
           </Link>
+          <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
+            90-day guarantee · No contracts · Cancel anytime
+          </p>
         </FadeIn>
       </section>
 

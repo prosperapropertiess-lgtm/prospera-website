@@ -50,8 +50,11 @@ export default function ContactPage() {
           <h1 className="text-5xl md:text-6xl font-light mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Let&apos;s Talk.
           </h1>
-          <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm max-w-md mx-auto leading-relaxed mb-3" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
             Whether you&apos;re a landlord looking for management or a tenant looking for a home — we&apos;re here. Fill out the form or reach us directly.
+          </p>
+          <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
+            90-day guarantee · No contracts · We respond within 4 hours
           </p>
         </FadeIn>
       </section>
@@ -76,6 +79,10 @@ export default function ContactPage() {
               <div>
                 <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Service Areas</p>
                 <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>London, Ontario<br />St. Thomas, Ontario<br />Strathroy, Ontario</p>
+              </div>
+              <div style={{ marginTop: 16 }}>
+                <p className="text-xs uppercase tracking-widest font-semibold mb-1" style={{ color: "#666666" }}>Response Time</p>
+                <p className="text-sm" style={{ color: "#333333" }}>Within 4 hours during business hours. Usually faster.</p>
               </div>
             </div>
           </FadeIn>
@@ -155,6 +162,15 @@ export default function ContactPage() {
                 >
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </button>
+
+                <div className="mt-6 pt-6" style={{ borderTop: "1px solid #D8D2C8" }}>
+                  <p className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color: "#666666" }}>What happens next</p>
+                  <div className="space-y-2">
+                    <p className="text-sm" style={{ color: "#333333" }}>1. We review your message within 4 hours</p>
+                    <p className="text-sm" style={{ color: "#333333" }}>2. We call or email you back — no automated responses</p>
+                    <p className="text-sm" style={{ color: "#333333" }}>3. If you&apos;re a landlord, we prepare a free rental analysis</p>
+                  </div>
+                </div>
               </form>
             )}
           </FadeIn>

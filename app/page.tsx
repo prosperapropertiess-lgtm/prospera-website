@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 import ParticleCanvas from "@/components/animations/ParticleCanvas";
-import FloatingCharacters from "@/components/animations/FloatingCharacters";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
@@ -131,9 +130,6 @@ function Hero() {
       {/* Top/bottom gradient fade */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" style={{ zIndex: 4 }} />
 
-      {/* Floating characters */}
-      <FloatingCharacters />
-
         {/* Content layer */}
         <div className="relative flex-1 flex flex-col" style={{ zIndex: 2 }}>
 
@@ -234,10 +230,10 @@ function Hero() {
 
 function StatsBar() {
   const stats = [
-    { value: 25, suffix: "+", label: "Tenants Placed Without a Single Eviction" },
-    { value: 20, suffix: "+", label: "Landlords Who Sleep Better" },
-    { value: 0, suffix: "", label: "LTB Hearings. Zero." },
-    { value: 21, suffix: " days", label: "Average Vacancy — Then It's Filled" },
+    { value: 25, suffix: "+", label: "Tenants Placed — Zero Evictions" },
+    { value: 20, suffix: "+", label: "Landlords Who Trust Us" },
+    { value: 0, suffix: "", label: "LTB Hearings. Zero. Ever." },
+    { value: 21, suffix: " days", label: "Average Time to Fill a Vacancy" },
   ];
 
   return (
@@ -710,88 +706,6 @@ function Testimonials() {
   );
 }
 
-// ── Platform Teaser ───────────────────────────────────────────────────────────
-
-function PlatformTeaser() {
-  const items = [
-    "Rent collected automatically — no texts, no chasing",
-    "N4 forms generated the moment rent is missed",
-    "AI-triaged maintenance without the 11pm calls",
-    "Every dollar tracked. Tax time handled.",
-    "Tenant portal so they stop texting your personal number",
-  ];
-
-  return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#0D1820" }}>
-      <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-14 lg:gap-20 items-start">
-          {/* Left */}
-          <div className="flex-1">
-            <p className="text-xs uppercase tracking-widest mb-5" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
-              Introducing · Prospera Platform
-            </p>
-            <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              Tired of spreadsheets<br />
-              <span style={{ color: "rgba(250,248,245,0.3)" }}>and scattered texts?</span>
-            </h2>
-            <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-              Rent collection, maintenance requests, legal notices, financial tracking —
-              one place instead of twelve. Built for Ontario landlords with 2–5 properties
-              who want their rental income without the operational chaos.
-            </p>
-
-            <div className="flex flex-wrap gap-3 mb-10">
-              <span
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
-                style={{ backgroundColor: "rgba(139,32,48,0.2)", border: "1px solid rgba(139,32,48,0.35)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-              >
-                90 days free for early members
-              </span>
-              <span
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
-                style={{ backgroundColor: "rgba(250,248,245,0.06)", border: "1px solid rgba(250,248,245,0.12)", color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Then a fraction of a PM fee
-              </span>
-            </div>
-
-            <Link
-              href="/platform"
-              className="inline-block px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-            >
-              Join the Waitlist — 90 Days Free →
-            </Link>
-          </div>
-
-          {/* Right — feature list */}
-          <div className="flex-shrink-0 w-full lg:w-80">
-            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(250,248,245,0.08)" }}>
-              <div className="px-6 py-4 border-b" style={{ backgroundColor: "rgba(139,32,48,0.15)", borderColor: "rgba(250,248,245,0.08)" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-                  What it does
-                </p>
-              </div>
-              {items.map((item, i) => (
-                <div
-                  key={i}
-                  className="px-6 py-4 flex items-start gap-3 border-b last:border-b-0"
-                  style={{ backgroundColor: "rgba(250,248,245,0.03)", borderColor: "rgba(250,248,245,0.06)" }}
-                >
-                  <span className="text-xs mt-0.5 flex-shrink-0" style={{ color: "#8B2030" }}>✓</span>
-                  <p className="text-sm leading-snug" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-                    {item}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ── Tenants Bar ───────────────────────────────────────────────────────────────
 
 function TenantBar() {
@@ -921,7 +835,6 @@ export default function HomePage() {
       <FounderSnippet />
       <CaseStudy />
       <Testimonials />
-      <PlatformTeaser />
       <TenantBar />
       <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-5xl mx-auto space-y-4">
