@@ -314,22 +314,56 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                 </div>
               </div>
 
-              {/* Bottom line — the verdict */}
-              <div className="p-4 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: metrics.netDiff >= 0 ? "rgba(22,163,74,0.04)" : "rgba(220,38,38,0.04)" }}>
+              {/* The real tradeoff — concrete */}
+              <div className="p-5" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
                 <AnimatePresence mode="wait">
-                  <motion.p
-                    key={metrics.netDiff}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    className="text-sm font-semibold"
-                    style={{ color: metrics.netDiff >= 0 ? "#16a34a" : "#dc2626" }}
+                  <motion.div
+                    key={rent}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {metrics.netDiff >= 0
-                      ? `At $${rent.toLocaleString()}/mo you net $${Math.round(metrics.netDiff).toLocaleString()} more per year — but wait ${metrics.daysToFill - metrics.marketDaysToFill} extra days to fill.`
-                      : `You lose $${Math.abs(Math.round(metrics.netDiff)).toLocaleString()} per year at this price. The vacancy eats your higher rent.`
-                    }
-                  </motion.p>
+                    {rent > rentMarket ? (
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <span className="text-lg mt-0.5">💡</span>
+                          <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                            Drop your rent by <strong>${(rent - rentMarket).toLocaleString()}/mo</strong> and you lose <strong style={{ color: "#dc2626" }}>${((rent - rentMarket) * 12).toLocaleString()}/year</strong> in lower rent.
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <span className="text-lg mt-0.5">⚠️</span>
+                          <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                            But if it doesn&apos;t fill by the 1st, you lose <strong style={{ color: "#dc2626" }}>${rent.toLocaleString()}</strong> for every empty month. At ~{metrics.daysToFill} days to fill, that&apos;s {metrics.daysToFill > 30 ? `${Math.floor(metrics.daysToFill / 30)}+ months of zero income` : "cutting it close"}.
+                          </p>
+                        </div>
+                        {metrics.vacancyCost > (rent - rentMarket) * 12 && (
+                          <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.12)" }}>
+                            <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
+                              The vacancy costs you more than the higher rent earns you. You&apos;d actually pocket <strong>${Math.abs(Math.round(metrics.netDiff)).toLocaleString()} more per year</strong> at market rate.
+                            </p>
+                          </div>
+                        )}
+                        {metrics.vacancyCost <= (rent - rentMarket) * 12 && (
+                          <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.15)" }}>
+                            <p className="text-sm font-semibold" style={{ color: "#92400e" }}>
+                              The higher rent covers the vacancy cost — but you&apos;re waiting {metrics.daysToFill - metrics.marketDaysToFill} extra days with a smaller, weaker applicant pool.
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="flex items-start gap-3">
+                        <span className="text-lg mt-0.5">✅</span>
+                        <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                          At <strong>${rent.toLocaleString()}/mo</strong>, you fill in ~{metrics.daysToFill} days with {metrics.pool}+ applicants.
+                          {rent < rentMarket && ` You leave $${((rentMarket - rent) * 12).toLocaleString()}/year on the table vs market rate — but you fill faster and pick from a stronger pool.`}
+                          {rent === rentMarket && " This is the sweet spot — competitive pricing with a solid applicant pool."}
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
                 </AnimatePresence>
               </div>
             </div>
