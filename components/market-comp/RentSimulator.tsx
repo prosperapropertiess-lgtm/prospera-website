@@ -242,130 +242,98 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
               <style>{`@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }`}</style>
             </div>
 
-            {/* Show the math — side by side */}
+            {/* The simple math that kills the overpricing argument */}
             <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-              <div className="grid grid-cols-1 sm:grid-cols-2">
-                {/* YOUR PRICE */}
-                <div className="p-5" style={{ backgroundColor: rent > rentMarket ? "rgba(220,38,38,0.03)" : "rgba(22,163,74,0.03)" }}>
-                  <p className="text-xs uppercase tracking-wider font-semibold mb-4" style={{ color: metrics.color }}>
-                    {rent > rentMarket ? "Your Price" : "Your Price"}
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Monthly rent</span>
-                      <span className="font-semibold" style={{ color: TEXT }}>${rent.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>× 12 months</span>
-                      <span style={{ color: TEXT }}>${metrics.grossAnnual.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Est. vacancy</span>
-                      <span style={{ color: metrics.daysToFill > 21 ? "#dc2626" : MUTED }}>~{metrics.daysToFill} days</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Vacancy cost</span>
-                      <span className="font-semibold" style={{ color: "#dc2626" }}>-${metrics.vacancyCost.toLocaleString()}</span>
-                    </div>
-                    <div className="pt-3 mt-3 flex justify-between" style={{ borderTop: `1px solid ${BORDER}` }}>
-                      <span className="text-sm font-bold" style={{ color: TEXT }}>Net annual income</span>
-                      <motion.span
-                        key={metrics.netAnnual}
-                        initial={{ scale: 1.05 }}
-                        animate={{ scale: 1 }}
-                        className="text-xl font-bold"
-                        style={{ color: metrics.color, fontFamily: "var(--font-cormorant)" }}
-                      >
-                        ${metrics.netAnnual.toLocaleString()}
-                      </motion.span>
-                    </div>
-                  </div>
-                </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={rent}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {rent > rentMarket ? (() => {
+                    const diff = rent - rentMarket;
+                    const annualGain = diff * 12;
+                    const oneEmptyMonth = rent;
+                    const monthsToRecover = Math.ceil(oneEmptyMonth / diff);
+                    const marketMonthly = Math.round(rentMarket / 12 * 100) / 100;
 
-                {/* MARKET RATE */}
-                <div className="p-5" style={{ borderLeft: `1px solid ${BORDER}`, borderTop: window?.innerWidth < 640 ? `1px solid ${BORDER}` : "none", backgroundColor: "rgba(31,47,58,0.02)" }}>
-                  <p className="text-xs uppercase tracking-wider font-semibold mb-4" style={{ color: NAVY }}>
-                    At Market Rate (${rentMarket.toLocaleString()})
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Monthly rent</span>
-                      <span className="font-semibold" style={{ color: TEXT }}>${rentMarket.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>× 12 months</span>
-                      <span style={{ color: TEXT }}>${metrics.marketGrossAnnual.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Est. vacancy</span>
-                      <span style={{ color: "#16a34a" }}>~{metrics.marketDaysToFill} days</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span style={{ color: MUTED }}>Vacancy cost</span>
-                      <span className="font-semibold" style={{ color: "#dc2626" }}>-${metrics.marketVacancyCost.toLocaleString()}</span>
-                    </div>
-                    <div className="pt-3 mt-3 flex justify-between" style={{ borderTop: `1px solid ${BORDER}` }}>
-                      <span className="text-sm font-bold" style={{ color: TEXT }}>Net annual income</span>
-                      <span className="text-xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
-                        ${metrics.marketNetAnnual.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    return (
+                      <div>
+                        {/* The question */}
+                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(31,47,58,0.03)" }}>
+                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
+                            Is the extra ${diff.toLocaleString()}/mo worth the risk?
+                          </p>
+                          <p className="text-xs" style={{ color: MUTED }}>Here&apos;s the math.</p>
+                        </div>
 
-              {/* The real tradeoff — concrete */}
-              <div className="p-5" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={rent}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {rent > rentMarket ? (
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg mt-0.5">💡</span>
-                          <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
-                            Drop your rent by <strong>${(rent - rentMarket).toLocaleString()}/mo</strong> and you lose <strong style={{ color: "#dc2626" }}>${((rent - rentMarket) * 12).toLocaleString()}/year</strong> in lower rent.
+                        {/* Two scenarios */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2">
+                          {/* Scenario A: Higher rent, misses the 1st */}
+                          <div className="p-5" style={{ backgroundColor: "rgba(220,38,38,0.03)", borderRight: `1px solid ${BORDER}` }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#dc2626" }}>
+                              If it doesn&apos;t fill by the 1st
+                            </p>
+                            <div className="space-y-3">
+                              <div>
+                                <p className="text-sm" style={{ color: MUTED }}>You lose the entire month</p>
+                                <p className="text-2xl font-bold" style={{ color: "#dc2626", fontFamily: "var(--font-cormorant)" }}>
+                                  -${oneEmptyMonth.toLocaleString()}
+                                </p>
+                              </div>
+                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(220,38,38,0.06)" }}>
+                                <p className="text-sm" style={{ color: TEXT }}>
+                                  That&apos;s <strong>{monthsToRecover} months</strong> of the higher rent just to break even on <strong>one</strong> empty month.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Scenario B: Market rate, fills fast */}
+                          <div className="p-5" style={{ backgroundColor: "rgba(22,163,74,0.03)" }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#16a34a" }}>
+                              At ${rentMarket.toLocaleString()}/mo — fills on time
+                            </p>
+                            <div className="space-y-3">
+                              <div>
+                                <p className="text-sm" style={{ color: MUTED }}>You &quot;lose&quot; in lower rent</p>
+                                <p className="text-2xl font-bold" style={{ color: "#92400e", fontFamily: "var(--font-cormorant)" }}>
+                                  ${annualGain.toLocaleString()}/yr
+                                </p>
+                              </div>
+                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(22,163,74,0.06)" }}>
+                                <p className="text-sm" style={{ color: TEXT }}>
+                                  That&apos;s only <strong>${diff.toLocaleString()}/mo</strong> — or <strong>${Math.round(diff / 30).toLocaleString()}/day</strong>. You save the ${oneEmptyMonth.toLocaleString()} vacancy and pick from a stronger tenant pool.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Bottom line */}
+                        <div className="p-4 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(220,38,38,0.04)" }}>
+                          <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
+                            One empty month at ${rent.toLocaleString()} wipes out {monthsToRecover} months of the higher rent. The math rarely works in your favour.
                           </p>
                         </div>
-                        <div className="flex items-start gap-3">
-                          <span className="text-lg mt-0.5">⚠️</span>
-                          <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
-                            But if it doesn&apos;t fill by the 1st, you lose <strong style={{ color: "#dc2626" }}>${rent.toLocaleString()}</strong> for every empty month. At ~{metrics.daysToFill} days to fill, that&apos;s {metrics.daysToFill > 30 ? `${Math.floor(metrics.daysToFill / 30)}+ months of zero income` : "cutting it close"}.
-                          </p>
-                        </div>
-                        {metrics.vacancyCost > (rent - rentMarket) * 12 && (
-                          <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.12)" }}>
-                            <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
-                              The vacancy costs you more than the higher rent earns you. You&apos;d actually pocket <strong>${Math.abs(Math.round(metrics.netDiff)).toLocaleString()} more per year</strong> at market rate.
-                            </p>
-                          </div>
-                        )}
-                        {metrics.vacancyCost <= (rent - rentMarket) * 12 && (
-                          <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.15)" }}>
-                            <p className="text-sm font-semibold" style={{ color: "#92400e" }}>
-                              The higher rent covers the vacancy cost — but you&apos;re waiting {metrics.daysToFill - metrics.marketDaysToFill} extra days with a smaller, weaker applicant pool.
-                            </p>
-                          </div>
-                        )}
                       </div>
-                    ) : (
+                    );
+                  })() : (
+                    <div className="p-5">
                       <div className="flex items-start gap-3">
                         <span className="text-lg mt-0.5">✅</span>
                         <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
                           At <strong>${rent.toLocaleString()}/mo</strong>, you fill in ~{metrics.daysToFill} days with {metrics.pool}+ applicants.
-                          {rent < rentMarket && ` You leave $${((rentMarket - rent) * 12).toLocaleString()}/year on the table vs market rate — but you fill faster and pick from a stronger pool.`}
+                          {rent < rentMarket && ` You leave $${((rentMarket - rent) * 12).toLocaleString()}/year on the table vs market rate — but you save $${rent.toLocaleString()} per month you would have sat empty, and you pick from a stronger applicant pool.`}
                           {rent === rentMarket && " This is the sweet spot — competitive pricing with a solid applicant pool."}
                         </p>
                       </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Dynamic insight message */}
