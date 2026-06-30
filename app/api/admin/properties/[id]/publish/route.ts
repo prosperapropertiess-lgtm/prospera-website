@@ -107,6 +107,24 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     })();
   }
 
+  // ── Link property to onboarding session (if address matches) ──
+  if (data) {
+    (async () => {
+      try {
+        const address = String(data.address || "").toLowerCase().trim();
+        if (address) {
+          await supabase
+            .from("onboarding_sessions")
+            .update({ property_id: data.id })
+            .ilike("property_address", `%${address}%`)
+            .is("property_id", null);
+        }
+      } catch (err) {
+        console.error("[publish] Onboarding session link failed:", err);
+      }
+    })();
+  }
+
   // ── Tenant Matching: email past waitlisted/disqualified tenants ──
   const resendKey = process.env.RESEND_API_KEY;
   if (resendKey && data) {

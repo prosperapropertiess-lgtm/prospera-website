@@ -103,18 +103,23 @@ export async function POST(
       current_step: 4,
     }).eq("token", token);
 
-    // Email to owner confirming agreement + letting them know next steps
+    // Email to owner confirming agreement + next steps (different for placement vs management)
     if (session.owner_email) {
       try {
-        const html = onboardEmail3AgreementSigned({
-          ownerName: session.owner_name || "there",
-          propertyAddress: session.property_address || "your property",
-          signedAt,
-          agreementUrl: `${BASE_URL}/api/onboard/${token}/agreement`,
-        });
+        const isPlacement = session.service_type === "placement";
+        const html = isPlacement
+          ? placementAgreementSignedEmail(session.owner_name || "there", session.property_address || "your property", signedAt, `${BASE_URL}/onboard/${token}`)
+          : onboardEmail3AgreementSigned({
+              ownerName: session.owner_name || "there",
+              propertyAddress: session.property_address || "your property",
+              signedAt,
+              agreementUrl: `${BASE_URL}/api/onboard/${token}/agreement`,
+            });
         await sendEmail(
           session.owner_email,
-          "Agreement confirmed — here's what happens next",
+          isPlacement
+            ? "Agreement signed — your property goes live now"
+            : "Agreement confirmed — here's what happens next",
           html,
           ["prosperapropertiess@gmail.com"]
         );
@@ -445,4 +450,46 @@ export async function POST(
   }
 
   return NextResponse.json({ error: `Step ${step} not handled` }, { status: 400 });
+}
+
+// ── Placement-specific agreement signed email ────────────────────────────────
+
+function placementAgreementSignedEmail(ownerName: string, propertyAddress: string, signedAt: string, dashboardUrl: string): string {
+  const firstName = ownerName.split(" ")[0];
+  const signedDate = new Date(signedAt).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+  const FONT_E = "Arial, Helvetica, sans-serif";
+  const NAVY_E = "#1F2F3A";
+  const TEXT_E = "#1a1a1a";
+  const MUTED_E = "#5a6068";
+  const BORDER_E = "#e8e4df";
+  const CRIMSON_E = "#8B2030";
+
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Agreement Signed</title></head><body style="margin:0;padding:0;background:#F5F4F1;font-family:${FONT_E};">
+  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+    <div style="background:${NAVY_E};border-radius:12px;padding:32px 28px;margin-bottom:32px;">
+      <h1 style="color:#FAF8F5;font-size:24px;font-weight:300;margin:0 0 8px;">Agreement signed. Let's go.</h1>
+      <p style="color:rgba(250,248,245,0.7);font-size:15px;margin:0;">${propertyAddress}</p>
+    </div>
+
+    <p style="font-size:17px;line-height:2.0;margin:0 0 28px;color:${TEXT_E};">Hi ${firstName},</p>
+
+    <p style="font-size:17px;line-height:2.0;margin:0 0 28px;color:${TEXT_E};">Your placement agreement is signed and on file. Here's what happens now — fast.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
+      <tr><td style="padding:12px 0;border-bottom:1px solid ${BORDER_E};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#9989;</td><td style="padding-left:10px;font-size:17px;color:${TEXT_E};line-height:1.7;"><strong>Agreement signed</strong> — ${signedDate}</td></tr></table></td></tr>
+      <tr><td style="padding:12px 0;border-bottom:1px solid ${BORDER_E};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128248;</td><td style="padding-left:10px;font-size:17px;color:${TEXT_E};line-height:1.7;"><strong>Property goes live within the hour</strong> — listing on our site, Kijiji, Facebook Marketplace</td></tr></table></td></tr>
+      <tr><td style="padding:12px 0;border-bottom:1px solid ${BORDER_E};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#127968;</td><td style="padding-left:10px;font-size:17px;color:${TEXT_E};line-height:1.7;"><strong>Lawn sign up within 12-24 hours</strong> — if applicable to your property</td></tr></table></td></tr>
+      <tr><td style="padding:12px 0;border-bottom:1px solid ${BORDER_E};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128203;</td><td style="padding-left:10px;font-size:17px;color:${TEXT_E};line-height:1.7;"><strong>You'll get updates</strong> — every inquiry, viewing, and application hits your dashboard</td></tr></table></td></tr>
+    </table>
+
+    <p style="font-size:17px;line-height:2.0;margin:0 0 28px;color:${TEXT_E};">Your dashboard will update in real-time as inquiries come in. You don't need to do anything else.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 12px;"><tr><td align="center"><a href="${dashboardUrl}" style="display:inline-block;background:${CRIMSON_E};color:#fff;font-size:16px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;">View Your Dashboard</a></td></tr></table>
+
+    <p style="margin:0 0 28px;text-align:center;font-size:13px;color:${MUTED_E};">We'll email you the moment your listing goes live.</p>
+
+    <div style="border-top:1px solid ${BORDER_E};padding-top:20px;">
+      <p style="font-size:15px;color:${TEXT_E};line-height:1.9;margin:0;">Questions? Reply to this email or call me directly.<br><br>&#8212; Ebin &middot; (519) 697-1227</p>
+    </div>
+  </div></body></html>`;
 }
