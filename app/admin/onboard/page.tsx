@@ -132,6 +132,7 @@ export default function OnboardListPage() {
   const [rentPremium,      setRentPremium]        = useState("");
   const [comps, setComps] = useState<Array<{ address: string; rent: string; days_on_market: string; ad_description: string; notes: string }>>([]);
   const [autoFilling, setAutoFilling] = useState(false);
+  const [marketResearch, setMarketResearch] = useState("");
 
   useEffect(() => {
     fetch("/api/onboard/list", {
@@ -146,7 +147,7 @@ export default function OnboardListPage() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyType(""); setPropertyCity("London");
     setBedrooms("2"); setRentLow(""); setRentMarket(""); setRentPremium("");
-    setComps([]); setServiceType("placement"); setFormError("");
+    setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError("");
   }
 
   async function handleDelete(token: string, e: React.MouseEvent) {
@@ -197,7 +198,9 @@ export default function OnboardListPage() {
               rent: Number(c.rent) || 0,
               days_on_market: c.days_on_market ? Number(c.days_on_market) : null,
               ad_description: c.ad_description || "",
+              notes: c.notes || "",
             })),
+            market_research: marketResearch || undefined,
           } : {}),
         }),
       });
@@ -436,8 +439,25 @@ export default function OnboardListPage() {
                     ))}
                   </div>
 
+                  {/* Your Market Research */}
+                  <div style={{ marginTop: 20, background: "#fff", border: `1px solid ${INPUT_BORDER}`, borderRadius: 12, padding: "18px" }}>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 8px", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                      Your Market Research
+                    </p>
+                    <p style={{ fontSize: 12, color: MUTED, margin: "0 0 10px" }}>
+                      Your own analysis — what you found, what you think, what the auto-fill missed. This is YOUR input, not the AI's.
+                    </p>
+                    <textarea
+                      value={marketResearch}
+                      onChange={e => setMarketResearch(e.target.value)}
+                      placeholder={"e.g.\n• Checked 8 listings on Kijiji within 2km — most 2-beds asking $1,700-$1,900\n• The $2,100 listing at 45 Oxford has been sitting for 6 weeks — overpriced\n• Units with parking included are getting $100-150 more\n• This area has high student demand Sept-Apr, slower in summer\n• My recommendation: $1,800 market, could push $1,900 with parking included"}
+                      rows={6}
+                      style={{ width: "100%", background: "#f6f4f1", border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "12px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.7 }}
+                    />
+                  </div>
+
                   <p style={{ margin: "12px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
-                    The landlord sees a full market report with rent ranges, comparable breakdowns, and neighbourhood data.
+                    The landlord sees a full market report with your research, rent ranges, comparable breakdowns, and neighbourhood data.
                   </p>
                 </div>
               )}
