@@ -3,105 +3,53 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const ACCENT = "#C4374A";
-
-const cards = [
-  {
-    href: "/admin/onboard",
-    label: "Onboarding",
-    description: "Add new landlords, send welcome emails, and track each step of the onboarding process",
-    cta: "Manage onboarding",
-  },
-  {
-    href: "/admin/leads",
-    label: "Leads",
-    description: "Every contact form submission and subscriber — with email, source, and one-click reply",
-    cta: "View leads",
-  },
-  {
-    href: "/admin/properties",
-    label: "Properties",
-    description: "Add, edit, and manage your rental listings",
-    cta: "Manage properties",
-  },
-  {
-    href: "/admin/dashboard",
-    label: "Outreach & CRM",
-    description: "Log outreach, track your pipeline, and monitor ad spend",
-    cta: "Open dashboard",
-  },
-  {
-    href: "/admin/intelligence",
-    label: "Rent Intelligence",
-    description: "Weekly market benchmarks, scraping results, and landlord enquiries",
-    cta: "View intelligence",
-  },
-  {
-    href: "/admin/applications",
-    label: "Applications",
-    description: "Review tenant applications, AI scores, and approve or reject",
-    cta: "Review applications",
-  },
-  {
-    href: "/admin/agents",
-    label: "Agents",
-    description: "Add leasing agents, manage access, and track their activity",
-    cta: "Manage agents",
-  },
-  {
-    href: "/admin/seo",
-    label: "SEO",
-    description: "Track search impressions, rankings, and top queries from Google Search Console",
-    cta: "View SEO stats",
-  },
-  {
-    href: "/admin/messages",
-    label: "Owner Messages",
-    description: "Post updates to landlord portals — tenant notes, maintenance updates, and general communications",
-    cta: "Post update",
-  },
-  {
-    href: "/admin/documents",
-    label: "Documents",
-    description: "Upload leases, inspection reports, and notices to owner portals",
-    cta: "Manage documents",
-  },
-  {
-    href: "/admin/tenants",
-    label: "Tenant Portals",
-    description: "Generate tenant portal links and manage tenant access",
-    cta: "Manage tenants",
-  },
-  {
-    href: "/admin/home-guides",
-    label: "Home Guides",
-    description: "Edit property home guides — breakers, shutoffs, appliances, garbage schedules",
-    cta: "Edit guides",
-  },
-  {
-    href: "/admin/schedules",
-    label: "Schedules",
-    description: "Manage property events, inspections, and tenant reminders",
-    cta: "Manage schedules",
-  },
-];
-
 function getGreeting() {
   const hour = new Date().getHours();
-  if (hour < 12) return "Good morning.";
-  if (hour < 17) return "Good afternoon.";
-  return "Good evening.";
+  if (hour < 12) return "Good morning, Ebin.";
+  if (hour < 17) return "Good afternoon, Ebin.";
+  return "Good evening, Ebin.";
 }
+
+const SECTIONS = [
+  {
+    title: "Leasing & Tenants",
+    items: [
+      { href: "/admin/properties", icon: "🏠", label: "Properties", desc: "Add, edit, publish listings" },
+      { href: "/admin/applications", icon: "📋", label: "Applications", desc: "Review, score, approve" },
+      { href: "/admin/agents", icon: "👤", label: "Agents", desc: "Manage leasing agents" },
+      { href: "/admin/tenants", icon: "🔑", label: "Tenant Portals", desc: "Manage tenant access" },
+    ],
+  },
+  {
+    title: "Landlord Operations",
+    items: [
+      { href: "/admin/onboard", icon: "🚀", label: "Onboarding", desc: "Add landlords, track setup" },
+      { href: "/admin/messages", icon: "💬", label: "Owner Messages", desc: "Post updates to portals" },
+      { href: "/admin/documents", icon: "📄", label: "Documents", desc: "Leases, reports, notices" },
+      { href: "/admin/schedules", icon: "📅", label: "Schedules", desc: "Inspections, reminders" },
+    ],
+  },
+  {
+    title: "Property Details",
+    items: [
+      { href: "/admin/home-guides", icon: "📖", label: "Home Guides", desc: "Breakers, shutoffs, garbage" },
+    ],
+  },
+  {
+    title: "Growth & Intelligence",
+    items: [
+      { href: "/admin/leads", icon: "📩", label: "Leads", desc: "Contact submissions, subscribers" },
+      { href: "/admin/dashboard", icon: "📊", label: "Outreach & CRM", desc: "Pipeline, ads, outreach logs" },
+      { href: "/admin/intelligence", icon: "🧠", label: "Rent Intelligence", desc: "Market benchmarks, trends" },
+      { href: "/admin/seo", icon: "🔍", label: "SEO", desc: "Search Console, rankings" },
+    ],
+  },
+];
 
 export default function AdminHome() {
   const router = useRouter();
   const greeting = useMemo(() => getGreeting(), []);
+  const today = new Date().toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" });
 
   async function handleLogout() {
     await fetch("/api/admin/login", { method: "DELETE" });
@@ -110,54 +58,84 @@ export default function AdminHome() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: BG }}>
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
+      {/* Top bar */}
+      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="flex items-center gap-5">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: TEXT_SEC }}>↗ View site</Link>
+          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: "#FAF8F5" }}>Prospera</span>
+          <Link href="/" target="_blank" className="text-xs transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>↗ View site</Link>
         </div>
-        <button onClick={handleLogout} className="text-xs transition-colors" style={{ color: TEXT_SEC }}>Sign out</button>
+        <button onClick={handleLogout} className="text-xs transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>Sign out</button>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-20">
-        <div className="mb-14">
-          <h1 className="font-[family-name:var(--font-cormorant)] text-6xl font-light mb-3" style={{ color: TEXT }}>
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        {/* Greeting */}
+        <div className="mb-12">
+          <h1 className="font-[family-name:var(--font-cormorant)] text-4xl sm:text-5xl font-light mb-2" style={{ color: "#1F2F3A" }}>
             {greeting}
           </h1>
-          <p className="text-sm" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
-            What would you like to work on?
-          </p>
+          <p className="text-sm" style={{ color: "#666666" }}>{today}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map((card) => (
-            <Link
-              key={card.href}
-              href={card.href}
-              className="group flex flex-col justify-between rounded-xl p-7 transition-all"
-              style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, minHeight: "210px" }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "#172234";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = SURFACE;
-                (e.currentTarget as HTMLElement).style.borderColor = BORDER;
-              }}
-            >
-              <div>
-                <p className="font-[family-name:var(--font-cormorant)] text-2xl font-light mb-3" style={{ color: TEXT }}>
-                  {card.label}
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: TEXT_SEC, fontFamily: "var(--font-dm-sans)" }}>
-                  {card.description}
-                </p>
+        {/* Grouped sections */}
+        <div className="space-y-10">
+          {SECTIONS.map((section) => (
+            <div key={section.title}>
+              <h2 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#666666" }}>
+                {section.title}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group flex items-start gap-3 p-4 rounded-xl bg-white border transition-all hover:shadow-md hover:border-[#8B2030]/20"
+                    style={{ borderColor: "#D8D2C8" }}
+                  >
+                    <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold mb-0.5 group-hover:text-[#8B2030] transition-colors" style={{ color: "#1F2F3A" }}>
+                        {item.label}
+                      </p>
+                      <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
               </div>
-              <p className="text-xs mt-8 transition-colors" style={{ color: "rgba(237,233,227,0.22)", fontFamily: "var(--font-dm-sans)" }}>
-                {card.cta} →
-              </p>
-            </Link>
+            </div>
           ))}
+        </div>
+
+        {/* Quick actions */}
+        <div className="mt-12 pt-8" style={{ borderTop: "1px solid #D8D2C8" }}>
+          <h2 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#666666" }}>
+            Quick Actions
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/admin/properties/new"
+              className="px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-lg text-white transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#8B2030" }}
+            >
+              + Add Property
+            </Link>
+            <Link
+              href="/admin/onboard"
+              className="px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all hover:bg-[#1F2F3A] hover:text-white"
+              style={{ border: "1px solid #D8D2C8", color: "#1F2F3A" }}
+            >
+              + Add Landlord
+            </Link>
+            <Link
+              href="/admin/applications"
+              className="px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all hover:bg-[#1F2F3A] hover:text-white"
+              style={{ border: "1px solid #D8D2C8", color: "#1F2F3A" }}
+            >
+              Review Applications
+            </Link>
+          </div>
         </div>
       </div>
     </div>
