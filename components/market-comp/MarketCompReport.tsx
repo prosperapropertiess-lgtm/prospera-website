@@ -303,7 +303,7 @@ function ComparableCard({
       ? haversineKm(subjectLat, subjectLng, comp.latitude, comp.longitude)
       : null;
 
-  const isRented = comp.days_on_market !== null && comp.days_on_market > 0;
+  const hasDOM = comp.days_on_market !== null && comp.days_on_market > 0;
   const compWalk = comp.walk_score ?? 0;
   const compTransit = comp.transit_score ?? 0;
   const compBike = comp.bike_score ?? 0;
@@ -362,16 +362,14 @@ function ComparableCard({
             <span
               className="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full"
               style={{
-                background: isRented
-                  ? "rgba(10,122,82,0.10)"
-                  : "rgba(180,83,9,0.10)",
-                color: isRented ? GREEN : AMBER,
+                background: hasDOM
+                  ? "rgba(180,83,9,0.10)"
+                  : "rgba(10,122,82,0.10)",
+                color: hasDOM ? AMBER : GREEN,
               }}
             >
-              {isRented
-                ? `Rented in ${comp.days_on_market}d`
-                : comp.days_on_market === 0
-                ? "Rented same day"
+              {hasDOM
+                ? `Listed ${comp.days_on_market}d ago`
                 : "Active listing"}
             </span>
           </div>
