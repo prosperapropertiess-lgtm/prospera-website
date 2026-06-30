@@ -312,10 +312,17 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                           </div>
                         </div>
 
-                        {/* Bottom line */}
-                        <div className="p-4 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(220,38,38,0.04)" }}>
-                          <p className="text-sm font-semibold" style={{ color: "#dc2626" }}>
-                            One empty month at ${rent.toLocaleString()} wipes out {monthsToRecover} months of the higher rent. The math rarely works in your favour.
+                        {/* Bottom line — dead simple */}
+                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(220,38,38,0.04)" }}>
+                          <p className="text-base font-bold mb-2" style={{ color: "#dc2626" }}>
+                            You save ${diff.toLocaleString()}/month.
+                            You lose ${oneEmptyMonth.toLocaleString()} if it sits empty.
+                          </p>
+                          <p className="text-sm" style={{ color: MUTED }}>
+                            {monthsToRecover <= 12
+                              ? `That's ${monthsToRecover === 1 ? "a month" : monthsToRecover <= 6 ? `${monthsToRecover} months` : `almost ${Math.round(monthsToRecover / 12 * 10) / 10} year${monthsToRecover > 18 ? "s" : ""}`} of savings — gone in one empty month.`
+                              : `That's over ${Math.floor(monthsToRecover / 12)} year${monthsToRecover >= 24 ? "s" : ""} of savings — gone in one empty month.`
+                            }
                           </p>
                         </div>
                       </div>
