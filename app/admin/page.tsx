@@ -84,20 +84,20 @@ export default function AdminHome() {
               <h2 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#666666" }}>
                 {section.title}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {section.items.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="group flex items-start gap-3 p-4 rounded-xl bg-white border transition-all hover:shadow-md hover:border-[#8B2030]/20"
-                    style={{ borderColor: "#D8D2C8" }}
+                    className="group flex flex-col gap-3 p-6 rounded-xl bg-white border transition-all hover:shadow-md hover:border-[#8B2030]/20"
+                    style={{ borderColor: "#D8D2C8", aspectRatio: "1", justifyContent: "center", alignItems: "center", textAlign: "center" }}
                   >
-                    <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold mb-0.5 group-hover:text-[#8B2030] transition-colors" style={{ color: "#1F2F3A" }}>
+                    <span className="text-4xl mb-1">{item.icon}</span>
+                    <div>
+                      <p className="text-base font-semibold mb-1 group-hover:text-[#8B2030] transition-colors" style={{ color: "#1F2F3A" }}>
                         {item.label}
                       </p>
-                      <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
+                      <p className="text-sm leading-relaxed" style={{ color: "#666666" }}>
                         {item.desc}
                       </p>
                     </div>
