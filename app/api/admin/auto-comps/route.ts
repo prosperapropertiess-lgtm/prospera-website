@@ -17,9 +17,9 @@ export async function POST(req: NextRequest) {
 
   // Step 1: Search for comparable rentals via Serper
   const searchQueries = [
-    `${bedrooms} bedroom rental ${city} Ontario kijiji`,
-    `${bedrooms} bedroom apartment for rent ${city} Ontario`,
-    `${bedrooms} bed rental near ${address || city} Ontario`,
+    `${bedrooms} bedroom for rent ${city} Ontario site:kijiji.ca`,
+    `${bedrooms} bedroom rental ${city} Ontario rentals.ca`,
+    `${bedrooms} bed apartment rent near ${address || ""} ${city} Ontario`,
   ];
 
   const allResults: Array<{ title: string; snippet: string; link: string }> = [];
