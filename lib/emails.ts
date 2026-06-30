@@ -2182,136 +2182,41 @@ export function placementWelcomeEmail(data: {
   comparables?: string[];
 }): string {
   const firstName = data.ownerName.split(" ")[0];
-  const FONT_S = "Arial, Helvetica, sans-serif";
-  const NAVY_S = "#1F2F3A";
-  const TEXT_S = "#1a1a1a";
-  const MUTED_S = "#5a6068";
-  const BORDER_S = "#e8e4df";
-  const CRIMSON_S = "#8B2030";
+  const reportUrl = data.dashboardUrl.replace("/onboard/", "/market-comp/");
+  const F = "Arial, Helvetica, sans-serif";
+  const N = "#1F2F3A";
+  const T = "#1a1a1a";
+  const M = "#5a6068";
+  const B = "#e8e4df";
+  const C = "#8B2030";
 
   return wrapper(`
-    <p style="margin:0 0 4px;font-family:${FONT_S};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED_S};">Prospera Properties — Tenant Placement</p>
-    <p style="margin:0 0 4px;font-family:${FONT_S};font-size:26px;font-weight:700;color:${NAVY_S};line-height:1.2;">Hi ${firstName}.</p>
-    <p style="margin:0 0 24px;font-family:${FONT_S};font-size:16px;color:${MUTED_S};line-height:1.6;">Here's what we found for ${data.propertyAddress}.</p>
+    <p style="margin:0 0 4px;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${M};">Prospera Properties</p>
+    <p style="margin:0 0 4px;font-family:${F};font-size:26px;font-weight:700;color:${N};line-height:1.2;">Hi ${firstName}.</p>
+    <p style="margin:0 0 28px;font-family:${F};font-size:16px;color:${M};line-height:1.6;">Your rental analysis for ${data.propertyAddress} is ready.</p>
 
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT_S};font-family:${FONT_S};line-height:1.9;">Good talking today. Before anything moves forward, I want to show you what the market actually supports for your property. These numbers come from current comparable listings in ${data.city} — not a guess.</p>
+    <p style="margin:0 0 28px;font-size:18px;color:${T};font-family:${F};line-height:1.9;">Good talking today. I put together a full market analysis for your property — comparable listings, recommended pricing, and an interactive tool that shows exactly how pricing affects your vacancy and annual income.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${BORDER_S};padding:0;height:1px;"></td></tr></table>
-    <div style="height:24px;"></div>
-
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 8px;">
-      <tr><td style="background:${NAVY_S};border-radius:12px 12px 0 0;padding:18px 24px;">
-        <p style="margin:0 0 2px;font-family:${FONT_S};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,248,245,0.5);">Market Analysis</p>
-        <p style="margin:0;font-family:${FONT_S};font-size:18px;font-weight:700;color:#FAF8F5;">${data.bedrooms} Bedroom in ${data.city}</p>
-      </td></tr>
-    </table>
-
-    <!-- Rent ranges — stacked for mobile compatibility -->
+    <!-- Quick snapshot -->
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
-      <!-- Conservative -->
-      <tr><td style="padding:0 0 8px;">
-        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-          <tr>
-            <td style="background:#f6f4f1;border-radius:12px;padding:18px 20px;">
-              <table width="100%" cellpadding="0" cellspacing="0"><tr>
-                <td style="vertical-align:middle;">
-                  <p style="margin:0 0 2px;font-family:${FONT_S};font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#16a34a;">&#9679; Conservative</p>
-                  <p style="margin:0;font-family:${FONT_S};font-size:13px;color:${MUTED_S};line-height:1.5;">Fills fast. Under 2 weeks.</p>
-                </td>
-                <td style="text-align:right;vertical-align:middle;">
-                  <p style="margin:0;font-family:${FONT_S};font-size:32px;font-weight:800;color:${NAVY_S};">$${data.rentLow.toLocaleString()}</p>
-                </td>
-              </tr></table>
-            </td>
-          </tr>
-        </table>
-      </td></tr>
-      <!-- Market Rate (highlighted) -->
-      <tr><td style="padding:0 0 8px;">
-        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-          <tr>
-            <td style="background:${NAVY_S};border-radius:12px;padding:22px 20px;">
-              <table width="100%" cellpadding="0" cellspacing="0"><tr>
-                <td style="vertical-align:middle;">
-                  <p style="margin:0 0 2px;font-family:${FONT_S};font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,248,245,0.5);">&#11088; Recommended — Market Rate</p>
-                  <p style="margin:0;font-family:${FONT_S};font-size:13px;color:rgba(250,248,245,0.6);line-height:1.5;">Where comparable units sit. 2-4 weeks.</p>
-                </td>
-                <td style="text-align:right;vertical-align:middle;">
-                  <p style="margin:0;font-family:${FONT_S};font-size:36px;font-weight:800;color:#FAF8F5;">$${data.rentMarket.toLocaleString()}</p>
-                </td>
-              </tr></table>
-            </td>
-          </tr>
-        </table>
-      </td></tr>
-      <!-- Premium -->
-      <tr><td>
-        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-          <tr>
-            <td style="background:#f6f4f1;border-radius:12px;padding:18px 20px;">
-              <table width="100%" cellpadding="0" cellspacing="0"><tr>
-                <td style="vertical-align:middle;">
-                  <p style="margin:0 0 2px;font-family:${FONT_S};font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#d97706;">&#9679; Premium</p>
-                  <p style="margin:0;font-family:${FONT_S};font-size:13px;color:${MUTED_S};line-height:1.5;">With upgrades or utilities included. 4-6 weeks.</p>
-                </td>
-                <td style="text-align:right;vertical-align:middle;">
-                  <p style="margin:0;font-family:${FONT_S};font-size:32px;font-weight:800;color:${NAVY_S};">$${data.rentPremium.toLocaleString()}</p>
-                </td>
-              </tr></table>
-            </td>
-          </tr>
-        </table>
+      <tr><td style="background:${N};border-radius:12px;padding:24px;">
+        <p style="margin:0 0 8px;font-family:${F};font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,248,245,0.45);">${data.bedrooms} Bedroom in ${data.city} — Market Range</p>
+        <p style="margin:0;font-family:${F};font-size:32px;font-weight:800;color:#FAF8F5;">$${data.rentLow.toLocaleString()} — $${data.rentPremium.toLocaleString()}<span style="font-size:16px;font-weight:400;color:rgba(250,248,245,0.5);"> /mo</span></p>
+        <p style="margin:8px 0 0;font-family:${F};font-size:14px;color:rgba(250,248,245,0.6);">Recommended: <strong style="color:#FAF8F5;">$${data.rentMarket.toLocaleString()}/mo</strong></p>
       </td></tr>
     </table>
 
-    ${data.comparables?.length ? `
-    <p style="margin:0 0 8px;font-family:${FONT_S};font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${MUTED_S};">How we got here</p>
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 24px;">
-      ${data.comparables.map(c => `<tr><td style="padding:6px 0;font-family:${FONT_S};font-size:15px;color:${TEXT_S};line-height:1.7;border-bottom:1px solid ${BORDER_S};">&#128205; ${c}</td></tr>`).join("")}
-    </table>
-    ` : ""}
+    <p style="margin:0 0 28px;font-size:17px;color:${T};font-family:${F};line-height:1.9;">The full report includes ${data.comparables?.length ? `${data.comparables.length} comparable properties, ` : ""}a pricing simulator, neighbourhood analysis, and our honest recommendation on where to price.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
-      <tr>
-        <td style="background:#f6f4f1;border:1px solid ${BORDER_S};border-radius:12px;padding:24px;">
-          <p style="margin:0 0 16px;font-family:${FONT_S};font-size:14px;font-weight:700;color:${NAVY_S};">Want to push toward the premium range?</p>
-          <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
-            <tr><td style="padding:8px 0;font-family:${FONT_S};font-size:16px;color:${TEXT_S};line-height:1.8;"><strong>&#128161; Include utilities</strong> — tenants pay more for predictable monthly costs</td></tr>
-            <tr><td style="padding:8px 0;font-family:${FONT_S};font-size:16px;color:${TEXT_S};line-height:1.8;"><strong>&#127873; Move-in incentive</strong> — fills faster at a higher base rent</td></tr>
-            <tr><td style="padding:8px 0;font-family:${FONT_S};font-size:16px;color:${TEXT_S};line-height:1.8;"><strong>&#128247; Professional listing</strong> — we handle photos, copy, and positioning</td></tr>
-            <tr><td style="padding:8px 0;font-family:${FONT_S};font-size:16px;color:${TEXT_S};line-height:1.8;"><strong>&#128295; Cosmetic upgrades</strong> — fresh paint and new fixtures have the highest ROI</td></tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    <!-- Big CTA -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 8px;"><tr><td align="center"><a href="${reportUrl}" style="display:inline-block;background:${C};color:#fff;font-family:${F};font-size:18px;font-weight:700;text-decoration:none;padding:18px 48px;border-radius:12px;">View Your Market Report</a></td></tr></table>
+    <p style="margin:0 0 28px;text-align:center;font-family:${F};font-size:13px;color:${M};">Takes 3 minutes to review. Includes an interactive pricing tool.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${BORDER_S};padding:0;height:1px;"></td></tr></table>
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${B};padding:0;height:1px;"></td></tr></table>
     <div style="height:24px;"></div>
 
-    <p style="margin:0 0 28px;font-size:18px;color:${TEXT_S};font-family:${FONT_S};line-height:1.9;"><strong>The honest truth:</strong> these numbers are what the market supports right now. We market your property well — professional listing, multi-platform distribution, pre-qualified tenants — but we can't outmarket pricing that the market won't bear.</p>
-    <p style="margin:0 0 28px;font-size:18px;color:${TEXT_S};font-family:${FONT_S};line-height:1.9;">If you're comfortable with one of these ranges, here's what happens next.</p>
+    <p style="margin:0 0 28px;font-size:16px;color:${T};font-family:${F};line-height:1.9;">Once you've reviewed the numbers and you're comfortable with pricing, you can sign the placement agreement directly from the report. The whole thing takes 2 minutes.</p>
 
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${BORDER_S};padding:0;height:1px;"></td></tr></table>
-    <div style="height:24px;"></div>
-
-    <p style="margin:0 0 12px;font-family:${FONT_S};font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:${MUTED_S};">Once you agree on pricing</p>
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#9997;&#65039;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Sign the placement agreement</strong> — 2 minutes, plain English, no lock-in</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128248;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Property goes live within the hour</strong> — our site, Kijiji, Facebook. Lawn sign up within 12-24 hours.</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128203;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Inquiries start coming in</strong> — we handle all communication and pre-qualify every lead</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#127968;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Viewings with qualified tenants only</strong> — no time-wasters</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128270;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Full screening</strong> — credit, income, employment, landlord references. You see the full file.</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#9989;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>You approve the tenant</strong> — we never place someone without your say</td></tr></table></td></tr>
-      <tr><td style="padding:10px 0;border-bottom:1px solid ${BORDER_S};"><table cellpadding="0" cellspacing="0" role="presentation" width="100%"><tr><td style="width:28px;vertical-align:top;font-size:15px;">&#128221;</td><td style="padding-left:12px;font-family:${FONT_S};font-size:17px;color:${TEXT_S};line-height:1.8;"><strong>Lease signed, deposits collected</strong> — first month is our fee, last month goes to you before key handover</td></tr></table></td></tr>
-    </table>
-
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 12px;"><tr><td align="center"><a href="${data.dashboardUrl.replace("/onboard/", "/market-comp/")}" style="display:inline-block;background:${CRIMSON_S};color:#fff;font-family:${FONT_S};font-size:16px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;">View Full Market Report</a></td></tr></table>
-    <p style="margin:8px 0 0;text-align:center;font-family:${FONT_S};"><a href="${data.dashboardUrl}" style="font-size:14px;color:${CRIMSON_S};text-decoration:none;font-weight:600;">Or go straight to your dashboard &#8594;</a></p>
-    <p style="margin:8px 0 28px;text-align:center;font-family:${FONT_S};font-size:13px;color:${MUTED_S};">Review the full report, then sign the agreement when you're ready.</p>
-
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${BORDER_S};padding:0;height:1px;"></td></tr></table>
-    <div style="height:24px;"></div>
-
-    <p style="margin:0;font-size:15px;color:${TEXT_S};font-family:${FONT_S};line-height:1.9;">Questions about the pricing or the process? Reply to this email or call me — I'm happy to walk through the comparables in detail.<br><br>&#8212; Ebin &nbsp;&middot;&nbsp; (519) 697-1227</p>
+    <p style="margin:0;font-size:15px;color:${T};font-family:${F};line-height:1.9;">Questions? Reply to this email or call me. I'm happy to walk through every number in detail.<br><br>&#8212; Ebin &nbsp;&middot;&nbsp; (519) 697-1227</p>
   `);
 }
