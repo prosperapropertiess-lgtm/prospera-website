@@ -130,7 +130,8 @@ export default function OnboardListPage() {
   const [rentLow,          setRentLow]            = useState("");
   const [rentMarket,       setRentMarket]         = useState("");
   const [rentPremium,      setRentPremium]        = useState("");
-  const [comps, setComps] = useState<Array<{ address: string; rent: string; days_on_market: string; ad_description: string }>>([]);
+  const [comps, setComps] = useState<Array<{ address: string; rent: string; days_on_market: string; ad_description: string; notes: string }>>([]);
+  const [autoFilling, setAutoFilling] = useState(false);
 
   useEffect(() => {
     fetch("/api/onboard/list", {
@@ -333,20 +334,56 @@ export default function OnboardListPage() {
                       <p style={{ fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", margin: 0, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
                         Comparable Properties ({comps.length}/5)
                       </p>
-                      {comps.length < 5 && (
+                      <div style={{ display: "flex", gap: 8 }}>
                         <button
                           type="button"
-                          onClick={() => setComps([...comps, { address: "", rent: "", days_on_market: "", ad_description: "" }])}
-                          style={{ fontSize: 13, fontWeight: 600, color: BURGUNDY, background: "none", border: `1px solid ${CARD_BORDER}`, borderRadius: 8, padding: "6px 14px", cursor: "pointer", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                          disabled={autoFilling}
+                          onClick={async () => {
+                            setAutoFilling(true);
+                            try {
+                              const res = await fetch("/api/admin/auto-comps", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                credentials: "include",
+                                body: JSON.stringify({ address: propertyAddress, city: propertyCity, bedrooms: Number(bedrooms) }),
+                              });
+                              if (res.ok) {
+                                const data = await res.json();
+                                if (data.comps?.length) {
+                                  setComps(data.comps.map((c: { address: string; rent: number; days_on_market: string; ad_description: string; source?: string }) => ({
+                                    address: c.address,
+                                    rent: String(c.rent),
+                                    days_on_market: c.days_on_market || "",
+                                    ad_description: c.ad_description || "",
+                                    notes: c.source ? `Source: ${c.source}` : "",
+                                  })));
+                                }
+                                if (data.rentLow) setRentLow(String(data.rentLow));
+                                if (data.rentMarket) setRentMarket(String(data.rentMarket));
+                                if (data.rentPremium) setRentPremium(String(data.rentPremium));
+                              }
+                            } catch { /* ignore */ }
+                            setAutoFilling(false);
+                          }}
+                          style={{ fontSize: 13, fontWeight: 600, color: "#fff", background: BURGUNDY, border: "none", borderRadius: 8, padding: "6px 14px", cursor: "pointer", fontFamily: "var(--font-poppins), -apple-system, sans-serif", opacity: autoFilling ? 0.5 : 1 }}
                         >
-                          + Add Comp
+                          {autoFilling ? "Searching..." : "⚡ Auto-Fill from Web"}
                         </button>
-                      )}
+                        {comps.length < 5 && (
+                          <button
+                            type="button"
+                            onClick={() => setComps([...comps, { address: "", rent: "", days_on_market: "", ad_description: "", notes: "" }])}
+                            style={{ fontSize: 13, fontWeight: 600, color: BURGUNDY, background: "none", border: `1px solid ${CARD_BORDER}`, borderRadius: 8, padding: "6px 14px", cursor: "pointer", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+                          >
+                            + Add Manually
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     {comps.length === 0 && (
                       <p style={{ fontSize: 13, color: MUTED, margin: "0 0 8px" }}>
-                        Add up to 5 comparable listings. The system auto-fetches amenities, transit, and scores for each address.
+                        Click &quot;Auto-Fill from Web&quot; to pull comparable listings from Kijiji, Rentals.ca, and other sources. Or add them manually.
                       </p>
                     )}
 
@@ -385,15 +422,22 @@ export default function OnboardListPage() {
                           value={comp.ad_description}
                           onChange={e => { const u = [...comps]; u[i] = { ...u[i], ad_description: e.target.value }; setComps(u); }}
                           placeholder="Paste the listing ad description here..."
-                          rows={3}
-                          style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "none" }}
+                          rows={2}
+                          style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "none", marginBottom: 8 }}
+                        />
+                        <input
+                          type="text"
+                          value={comp.notes}
+                          onChange={e => { const u = [...comps]; u[i] = { ...u[i], notes: e.target.value }; setComps(u); }}
+                          placeholder="Your notes (e.g. 'nicer finishes than ours', 'no parking', 'been sitting')"
+                          style={{ width: "100%", background: "#fff", border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "8px 12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", fontStyle: "italic" }}
                         />
                       </div>
                     ))}
                   </div>
 
                   <p style={{ margin: "12px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
-                    The landlord sees a full market report with rent ranges, comparable breakdowns, amenity comparisons, and neighbourhood data. They sign the agreement once they're comfortable with pricing.
+                    The landlord sees a full market report with rent ranges, comparable breakdowns, and neighbourhood data.
                   </p>
                 </div>
               )}
