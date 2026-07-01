@@ -118,7 +118,7 @@ Build for 10,000 users, not 10.`;
 
   while (iterations < MAX_ITERATIONS) {
     const response = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 16000,
       system: PLATFORM_CONTEXT,
       messages,

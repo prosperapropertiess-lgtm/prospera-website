@@ -166,7 +166,7 @@ export async function GET(req: NextRequest) {
     try {
       const otherSlugs = allSlugs.filter((s) => s !== target.slug);
       const optResponse = await getAnthropic().messages.create({
-        model: "claude-sonnet-4-6",
+        model: "claude-sonnet-4-20250514",
         max_tokens: 10000,
         system: OPTIMIZER_SYSTEM,
         messages: [{

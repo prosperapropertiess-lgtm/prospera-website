@@ -451,7 +451,7 @@ export async function GET(req: NextRequest) {
   let selectedKeyword = "";
   try {
     const kwResponse = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 200,
       system: KEYWORD_SELECTOR_SYSTEM,
       messages: [{
@@ -493,7 +493,7 @@ export async function GET(req: NextRequest) {
       : "Pick the highest-priority missing keyword and write the full blog post.\n";
 
     const response = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 8000,
       system: SEO_SYSTEM,
       messages: [{
@@ -585,7 +585,7 @@ ${slugInstruction}Follow the output format exactly.`,
     if (originalContent) {
       try {
         const optResponse = await getAnthropic().messages.create({
-          model: "claude-sonnet-4-6",
+          model: "claude-sonnet-4-20250514",
           max_tokens: 10000,
           system: OPTIMIZER_SYSTEM,
           messages: [{
@@ -635,7 +635,7 @@ Optimize this post following all instructions. Output the complete improved file
   try {
     const slugSample = existingSlugs.filter((s) => s !== newSlug).slice(0, 40).join(", ");
     const linkResponse = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 1500,
       system: LINKING_SYSTEM,
       messages: [{
@@ -767,7 +767,7 @@ Which 2–3 existing posts should add a contextual link to the new post? Return 
       const bodyOnly = newBlog.replace(/^---[\s\S]*?---\n/, "").slice(0, 800);
 
       const socialResponse = await getAnthropic().messages.create({
-        model: "claude-sonnet-4-6",
+        model: "claude-sonnet-4-20250514",
         max_tokens: 600,
         system: SOCIAL_SYSTEM,
         messages: [{

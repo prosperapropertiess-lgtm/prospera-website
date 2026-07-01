@@ -121,7 +121,7 @@ export async function generateAndSendProposal(metrics: Awaited<ReturnType<typeof
 
   // ── Ask Claude to propose the next feature ──────────────────────────────
   const response = await getAnthropic().messages.create({
-    model: "claude-sonnet-4-6",
+    model: "claude-sonnet-4-20250514",
     max_tokens: 1200,
     system: PLATFORM_CONTEXT,
     messages: [

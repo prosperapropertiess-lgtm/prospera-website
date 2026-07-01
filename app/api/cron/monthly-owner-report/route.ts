@@ -146,7 +146,7 @@ export async function GET(req: NextRequest) {
 
         // Ask Claude for narrative JSON
         const response = await getAnthropic().messages.create({
-          model: "claude-sonnet-4-6",
+          model: "claude-sonnet-4-20250514",
           max_tokens: 1200,
           system: SYSTEM_PROMPT,
           messages: [{
