@@ -115,7 +115,7 @@ function Hero() {
       {/* Dark overlay for text contrast */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to bottom, rgba(31,47,58,0.7) 0%, rgba(31,47,58,0.55) 50%, rgba(31,47,58,0.85) 100%)", zIndex: 1 }}
+        style={{ background: "linear-gradient(to bottom, rgba(15,23,30,0.82) 0%, rgba(15,23,30,0.72) 50%, rgba(15,23,30,0.9) 100%)", zIndex: 1 }}
       />
 
       {/* Content — centered over video */}
@@ -126,7 +126,7 @@ function Hero() {
           <HeroFadeIn delay={0} duration={500}>
             <p
               className="text-xs font-semibold uppercase tracking-widest mb-6"
-              style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
             >
               Property Management · London, Ontario
             </p>
@@ -136,14 +136,14 @@ function Hero() {
           <AnimatedHeading
             text={"What if your investment\nwas ACTUALLY passive?"}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6"
-            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+            style={{ color: "#FFFFFF", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.03em", lineHeight: 1.1, textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
           />
 
           {/* Subheading */}
           <HeroFadeIn delay={800} duration={1000}>
             <p
               className="text-base md:text-lg mb-10 max-w-xl mx-auto"
-              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
+              style={{ color: "rgba(250,248,245,0.9)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
             >
               We manage your rental so you don't have to. Tenant screening, rent collection, maintenance, the 2am calls. Handled.
             </p>
@@ -162,12 +162,12 @@ function Hero() {
               <a
                 href="tel:5196971227"
                 className="text-sm font-medium transition-opacity hover:opacity-70"
-                style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}
               >
                 or call (519) 697-1227
               </a>
             </div>
-            <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)" }}>
+            <p className="text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>
               90-day guarantee · No contracts · We pick up the phone
             </p>
           </HeroFadeIn>
@@ -176,7 +176,7 @@ function Hero() {
           <HeroFadeIn delay={1400} duration={1000}>
             <div
               className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-12 pt-8 mx-auto"
-              style={{ borderTop: "1px solid rgba(250,248,245,0.12)" }}
+              style={{ borderTop: "1px solid rgba(250,248,245,0.2)" }}
             >
               {[
                 { num: "25+", label: "Tenants placed" },
@@ -185,7 +185,7 @@ function Hero() {
               ].map((s) => (
                 <div key={s.label} className="text-center">
                   <p className="text-2xl sm:text-3xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.num}</p>
-                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.45)" }}>{s.label}</p>
+                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.7)" }}>{s.label}</p>
                 </div>
               ))}
             </div>
