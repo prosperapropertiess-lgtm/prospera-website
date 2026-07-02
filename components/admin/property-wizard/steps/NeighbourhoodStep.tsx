@@ -286,7 +286,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
       {/* Neighbourhood Vibe */}
       <div className="rounded-xl border p-6 space-y-4" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Neighbourhood Vibe</h3>
+          <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Neighbourhood Description</h3>
           <button
             type="button"
             onClick={async () => {
@@ -332,8 +332,8 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
         <textarea
           value={data.neighbourhood_vibe}
           onChange={(e) => onChange({ neighbourhood_vibe: e.target.value })}
-          placeholder="Click 'Auto-generate with AI' or describe the neighbourhood personality — student-heavy, family-oriented, quiet professional? Noise level? Street activity?"
-          rows={4}
+          placeholder="Click 'Auto-generate with AI' to create a detailed neighbourhood description. This is the primary selling copy for the location — it describes daily essentials, transit, neighbourhood character, and what living here actually feels like."
+          rows={10}
           className={inputCls + " resize-none"}
           style={{ backgroundColor: INPUT_BG, color: TEXT, border: `1px solid ${BORDER}` }}
         />

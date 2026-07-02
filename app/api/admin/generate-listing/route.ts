@@ -15,27 +15,80 @@ export async function POST(req: NextRequest) {
   const client = new Anthropic({ apiKey });
   const body = await req.json();
 
-  // Vibe-only mode: just generate a neighbourhood personality description
+  // Vibe-only mode: generate neighbourhood description — this is the PRIMARY selling copy
   if (body._vibe_only) {
-    const nearbyLines: string[] = [];
+    // Separate popular spots (selling points) from generic amenities
+    const sellingPoints: string[] = [];
+    const walkableAmenities: string[] = [];
+
     if (body.neighbourhood_data) {
       for (const [category, places] of Object.entries(body.neighbourhood_data)) {
-        const list = places as { name: string; walk_time?: string }[];
-        if (list?.length) {
-          nearbyLines.push(`${category}: ${list.slice(0, 3).map((p) => p.name).join(", ")}`);
+        const list = places as { name: string; walk_time?: string; distance?: string }[];
+        if (!list?.length || category === "categories") continue;
+
+        if (category === "popular_spots") {
+          for (const p of list.slice(0, 10)) {
+            sellingPoints.push(`${p.name} (${p.walk_time || p.distance || "nearby"})`);
+          }
+        } else {
+          const label: Record<string, string> = {
+            grocery_or_supermarket: "Grocery",
+            pharmacy: "Pharmacy",
+            gym: "Gym",
+            transit_station: "Transit",
+            school: "School",
+            hospital: "Hospital",
+            park: "Park",
+            restaurant: "Restaurant",
+            cafe: "Café",
+            bank: "Bank",
+          };
+          const top = list.slice(0, 3).map((p) => `${p.name} (${p.walk_time || p.distance || "nearby"})`);
+          walkableAmenities.push(`${label[category] || category}: ${top.join(", ")}`);
         }
       }
     }
-    const vibePrompt = `You are describing the neighbourhood personality of ${body.address}, ${body.city}, Ontario for a rental listing.
 
-Nearby places: ${nearbyLines.join("; ") || "limited data"}
-Walk score: ${body.walk_score || "unknown"}, Transit score: ${body.transit_score || "unknown"}
-Bus routes: ${body.bus_routes?.length ? body.bus_routes.map((r: { route: string; stop_name: string }) => `Route ${r.route} at ${r.stop_name}`).join(", ") : "none found"}
+    const busInfo = body.bus_routes?.length
+      ? body.bus_routes.map((r: { route: string; stop_name: string; walk_time?: string }) =>
+          `Route ${r.route} at ${r.stop_name}${r.walk_time ? ` (${r.walk_time} walk)` : ""}`
+        ).join(", ")
+      : "none found";
 
-Write 2-3 sentences describing the neighbourhood personality. Cover: who lives here (students, families, professionals), the noise/activity level, the feel at different times of day, and what makes it distinctive. Be honest and specific. Use real place names. No hype words. Plain, direct tone.`;
+    const vibePrompt = `You are writing the neighbourhood description for a rental property listing at ${body.address}, ${body.city}, Ontario. This is published on prosperaproperties.co.
+
+This description is the PRIMARY selling copy for this location. It needs to help a prospective tenant picture their daily life here, and it needs to rank in Google for "${body.city} rental" and "${body.address} rental" searches.
+
+LOCATION DATA:
+Walk Score: ${body.walk_score || "unknown"}/100
+Transit Score: ${body.transit_score || "unknown"}/100
+Bus Routes: ${busInfo}
+
+DAILY ESSENTIALS NEARBY (these are selling points — mention the specific names):
+${sellingPoints.length ? sellingPoints.join("\n") : "No data available"}
+
+WALKABLE AMENITIES:
+${walkableAmenities.length ? walkableAmenities.join("\n") : "No data available"}
+
+COPYWRITING RULES (follow exactly):
+- Audience: a prospective tenant scanning many listings. They want to picture themselves living here.
+- Voice: direct, plain-spoken, warm but not soft. No hype words (stunning, vibrant, must-see, breathtaking, nestled, boasts). No exclamation marks.
+- Describe the EXPERIENCE of living here. What does a Tuesday morning look like? Where do you grab coffee? Where do you do your weekly grocery run? How do you get to work?
+- Name specific stores, parks, and transit stops by name. "Tim Hortons is a 4-minute walk" beats "coffee shops nearby."
+- Costco, Real Canadian Superstore, Walmart, Giant Tiger — these aren't "attractions." They're where people do their weekly shop. Frame them as practical daily-life conveniences: "Your weekly Costco run is a 5-minute drive" or "Real Canadian Superstore is right down the road."
+- Mention transit practically: "Route 10 stops at [stop name], [X] minute walk from the front door" — not just "transit nearby."
+- Include the neighbourhood character: is it quiet residential? Busy? Student-heavy? Family-oriented? What's the noise level?
+- DO NOT describe the ideal tenant (Ontario Human Rights Code). Describe the place, never who should live there.
+- DO NOT invent any facts. Only use the data provided above.
+- DO NOT use these AI tells: "nestled in the heart of," "stands as a testament," "vibrant community," negative parallelism ("It's not just X — it's Y"), em-dash pileups, or trailing participle phrases.
+
+FORMAT:
+Write 3-4 paragraphs, roughly 150-200 words total. First paragraph: the immediate surroundings and daily essentials (grocery, coffee, pharmacy). Second paragraph: getting around (transit, walkability, commute). Third paragraph: the neighbourhood feel and character. Optional fourth: parks, recreation, weekend life.
+
+Make it specific enough that someone from ${body.city} would read it and think "yeah, that's exactly what that area is like."`;
 
     try {
-      const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
+      const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 800, messages: [{ role: "user", content: vibePrompt }] });
       const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
       return NextResponse.json({ description: vibeText.trim() });
     } catch (err) {
