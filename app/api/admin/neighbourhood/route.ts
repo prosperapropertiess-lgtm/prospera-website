@@ -162,7 +162,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=${cat.type}&key=${GOOGLE_API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&type=${cat.type}&key=${GOOGLE_API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
 
@@ -211,13 +211,17 @@ export async function POST(req: NextRequest) {
       const batch = POPULAR_KEYWORD_SEARCHES.slice(i, i + 5);
       const batchResults = await Promise.allSettled(
         batch.map(async (keyword) => {
-          const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&keyword=${encodeURIComponent(keyword)}&key=${GOOGLE_API_KEY}`;
+          const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&keyword=${encodeURIComponent(keyword)}&key=${GOOGLE_API_KEY}`;
           const res = await fetch(url);
           const data = await res.json();
           if (data.status === "OK" && data.results?.length) {
-            // Take only the closest result per keyword
-            const p = data.results[0] as PlaceResult;
-            return p;
+            // Sort by actual distance and take the closest, not Google's prominence ranking
+            const sorted = (data.results as PlaceResult[]).sort((a, b) => {
+              const distA = haversineDistance(latitude, longitude, a.geometry.location.lat, a.geometry.location.lng);
+              const distB = haversineDistance(latitude, longitude, b.geometry.location.lat, b.geometry.location.lng);
+              return distA - distB;
+            });
+            return sorted[0];
           }
           return null;
         })
