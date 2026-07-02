@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { useInView } from "framer-motion";
 
 const rows = [
   {
@@ -30,13 +29,22 @@ const rows = [
   },
 ];
 
+/**
+ * SEO-safe AnimNum: starts at target value (visible in SSR HTML),
+ * then animates from 0 to target after hydration when in view.
+ */
 function AnimNum({ prefix = "", value, suffix = "", color }: { prefix?: string; value: number; suffix?: string; color: string }) {
-  const [count, setCount] = useState(0);
+  // Start at target value so SSR HTML shows real number for crawlers
+  const [count, setCount] = useState(value);
   const fired = useRef(false);
 
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
+    // After hydration: reset to 0 and animate up
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    setCount(0);
     const start = performance.now();
     const duration = 800;
     const tick = (now: number) => {
@@ -56,12 +64,8 @@ function AnimNum({ prefix = "", value, suffix = "", color }: { prefix?: string; 
 }
 
 export default function AnimatedPricingNumbers() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.4 });
-
   return (
     <div
-      ref={ref}
       className="rounded-xl overflow-hidden border"
       style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
     >
@@ -110,13 +114,7 @@ export default function AnimatedPricingNumbers() {
               style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F5F2", borderTop: "1px solid #D8D2C8", borderLeft: "1px solid #D8D2C8" }}
             >
               {row.managed ? (
-                isInView ? (
-                  <AnimNum prefix={row.managed.prefix} value={row.managed.value} suffix={row.managed.suffix} color="#333333" />
-                ) : (
-                  <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                    {row.managed.prefix}0{row.managed.suffix}
-                  </p>
-                )
+                <AnimNum prefix={row.managed.prefix} value={row.managed.value} suffix={row.managed.suffix} color="#333333" />
               ) : (
                 <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>—</p>
               )}
@@ -129,18 +127,12 @@ export default function AnimatedPricingNumbers() {
               style={{ backgroundColor: "#1F2F3A", borderTop: "1px solid rgba(255,255,255,0.08)" }}
             >
               {row.passive ? (
-                isInView ? (
-                  <AnimNum
-                    prefix={row.passive.prefix}
-                    value={row.passive.value}
-                    suffix={row.passive.suffix}
-                    color={row.passiveHighlight ? "#8B2030" : "#FAF8F5"}
-                  />
-                ) : (
-                  <p className="text-sm" style={{ color: row.passiveHighlight ? "#8B2030" : "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                    {row.passive.prefix}0{row.passive.suffix}
-                  </p>
-                )
+                <AnimNum
+                  prefix={row.passive.prefix}
+                  value={row.passive.value}
+                  suffix={row.passive.suffix}
+                  color={row.passiveHighlight ? "#8B2030" : "#FAF8F5"}
+                />
               ) : (
                 <p className="text-sm font-semibold" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Free</p>
               )}

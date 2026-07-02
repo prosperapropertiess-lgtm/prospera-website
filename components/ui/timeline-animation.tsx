@@ -1,66 +1,78 @@
 "use client";
 
-import React, { ElementType, RefObject } from "react";
-import { motion, Variants, useInView } from "framer-motion";
+import React, { ElementType, RefObject, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface TimelineContentProps {
   as?: ElementType;
   animationNum?: number;
   timelineRef?: RefObject<HTMLElement | null>;
-  customVariants?: Variants;
+  customVariants?: unknown;
   className?: string;
   children?: React.ReactNode;
   [key: string]: unknown;
 }
 
+/**
+ * SEO-safe TimelineContent:
+ * - Content always visible (opacity: 1) — never hidden from crawlers
+ * - After hydration, below-fold elements get a subtle slide + fade animation
+ * - Above-fold elements are never hidden
+ * - Respects prefers-reduced-motion
+ */
 export function TimelineContent({
   as: _Tag = "div",
   animationNum = 0,
   timelineRef: _timelineRef,
-  customVariants,
+  customVariants: _customVariants,
   className,
   children,
+  style,
+  onClick,
   ...rest
-}: TimelineContentProps) {
-  const internalRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(internalRef, { once: true, amount: 0.2 });
+}: TimelineContentProps & { style?: React.CSSProperties; onClick?: React.MouseEventHandler }) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const defaultVariants: Variants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        delay: i * 0.15,
-        duration: 0.5,
-        ease: "easeOut",
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    // Check if already above fold
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) return;
+
+    const delay = animationNum * 150;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(16px)";
+    el.style.filter = "blur(4px)";
+    el.style.transition = `opacity 500ms ease-out ${delay}ms, transform 500ms ease-out ${delay}ms, filter 500ms ease-out ${delay}ms`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.style.filter = "none";
+          observer.disconnect();
+        }
       },
-    }),
-  };
-
-  const variants = customVariants ?? defaultVariants;
-
-  // Spread only safe motion props; ignore unknown rest keys at runtime
-  const { style, onClick, ...safeRest } = rest as {
-    style?: React.CSSProperties;
-    onClick?: React.MouseEventHandler;
-    [key: string]: unknown;
-  };
+      { rootMargin: "0px", threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [animationNum]);
 
   return (
-    <motion.div
-      ref={internalRef}
+    <div
+      ref={ref}
       className={cn(className)}
-      custom={animationNum}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variants}
       style={style}
       onClick={onClick}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

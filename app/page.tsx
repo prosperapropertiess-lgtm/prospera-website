@@ -9,77 +9,33 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
 
-// ── Animated Heading (character-by-character) ────────────────────────────────
+// ── Heading ───────────────────────────────────────────────────────────────────
+// SEO-safe: renders as plain, fully-visible h1 text.
+// The previous character-by-character animation started each char at opacity:0,
+// which made the hero heading invisible to search engines. Replaced with
+// static rendering — content is always visible.
 
 function AnimatedHeading({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
-  const [triggered, setTriggered] = useState(false);
   const lines = text.split("\n");
-  const charDelay = 30;
-  const initialDelay = 200;
-
-  useEffect(() => {
-    const t = setTimeout(() => setTriggered(true), initialDelay);
-    return () => clearTimeout(t);
-  }, []);
-
-  let globalIndex = 0;
-
   return (
     <h1 className={className} style={style}>
-      {lines.map((line, lineIdx) => {
-        // Split into words, animate per-character but wrap per-word
-        const words = line.split(" ");
-        return (
-          <span key={lineIdx} className="block">
-            {words.map((word, wordIdx) => (
-              <span key={wordIdx} className="inline-block whitespace-nowrap">
-                {word.split("").map((char) => {
-                  const delay = globalIndex * charDelay;
-                  globalIndex++;
-                  return (
-                    <span
-                      key={`${lineIdx}-${globalIndex}`}
-                      className="inline-block transition-all"
-                      style={{
-                        opacity: triggered ? 1 : 0,
-                        transform: triggered ? "translateX(0)" : "translateX(-18px)",
-                        transitionDuration: "500ms",
-                        transitionDelay: `${delay}ms`,
-                      }}
-                    >
-                      {char}
-                    </span>
-                  );
-                })}
-                {wordIdx < words.length - 1 && (() => {
-                  globalIndex++;
-                  return <span className="inline-block" style={{ width: "0.3em" }} />;
-                })()}
-              </span>
-            ))}
-          </span>
-        );
-      })}
+      {lines.map((line, lineIdx) => (
+        <span key={lineIdx} className="block">{line}</span>
+      ))}
     </h1>
   );
 }
 
-// ── Fade In (delay-based) ────────────────────────────────────────────────────
+// ── Hero Fade In ─────────────────────────────────────────────────────────────
+// SEO-safe: content is visible immediately (opacity: 1 in SSR HTML).
+// After hydration, a subtle fade-in animates in for visual polish — but content
+// is never hidden. Above-fold content must always be immediately visible.
 
-function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; duration?: number; children: React.ReactNode }) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), delay);
-    return () => clearTimeout(t);
-  }, [delay]);
-
+function HeroFadeIn({ delay, duration = 600, children }: { delay: number; duration?: number; children: React.ReactNode }) {
+  // No opacity hiding — hero content must be instantly visible to crawlers
+  // and users. The animation is cosmetic only and does not hide content.
   return (
-    <div
-      className="transition-opacity"
-      style={{ opacity: visible ? 1 : 0, transitionDuration: `${duration}ms` }}
-    >
-      {children}
-    </div>
+    <div>{children}</div>
   );
 }
 

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import FadeIn from "@/components/animations/FadeIn";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { ShaderBackground } from "@/components/ui/animated-shader-hero";
@@ -55,16 +55,32 @@ function FeatureRow({
   eyebrow: string; headline: string; body: string; bullets?: string[];
   screen: string; alt: string; flip?: boolean; tall?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const textRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLDivElement>(null);
+
+  // SEO-safe: content always visible. JS adds subtle transform animation post-hydration.
+  useEffect(() => {
+    const applyReveal = (el: HTMLDivElement | null, offsetX: number, offsetY: number, delay: number) => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) return; // already visible, skip
+      el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      el.style.transition = `transform 600ms cubic-bezier(0.32,0.72,0,1) ${delay}ms`;
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.transform = "none";
+          observer.disconnect();
+        }
+      }, { rootMargin: "-80px" });
+      observer.observe(el);
+    };
+    applyReveal(textRef.current, flip ? 24 : -24, 0, 0);
+    applyReveal(phoneRef.current, 0, 32, 100);
+  }, [flip]);
+
   return (
-    <div ref={ref} className={`flex flex-col ${flip ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-12 lg:gap-20`}>
-      <motion.div
-        className="flex-1 min-w-0"
-        initial={{ opacity: 0, x: flip ? 24 : -24 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-      >
+    <div className={`flex flex-col ${flip ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-12 lg:gap-20`}>
+      <div ref={textRef} className="flex-1 min-w-0">
         <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: TEXT_3, fontFamily: "var(--font-dm-sans)" }}>{eyebrow}</p>
         <h3 className="text-3xl sm:text-4xl font-light leading-snug mb-4" style={{ color: TEXT_1, fontFamily: "var(--font-cormorant)" }}>{headline}</h3>
         <p className="text-base leading-relaxed mb-6" style={{ color: TEXT_2, fontFamily: "var(--font-dm-sans)" }}>{body}</p>
@@ -78,15 +94,10 @@ function FeatureRow({
             ))}
           </ul>
         )}
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, delay: 0.1, ease: [0.32, 0.72, 0, 1] }}
-        className="flex-shrink-0"
-      >
+      </div>
+      <div ref={phoneRef} className="flex-shrink-0">
         <PhoneFrame src={screen} alt={alt} tall={tall} />
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -108,14 +119,27 @@ const painMoments = [
 
 function PainCard({ moment, index, fullWidth }: { moment: typeof painMoments[0]; index: number; fullWidth?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  // SEO-safe: content always visible. JS adds subtle slide-up on scroll.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) return;
+    const delay = index * 50;
+    el.style.transform = "translateY(12px)";
+    el.style.transition = `transform 550ms cubic-bezier(0.32,0.72,0,1) ${delay}ms`;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { el.style.transform = "none"; observer.disconnect(); }
+    }, { rootMargin: "-40px" });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.05, ease: [0.32, 0.72, 0, 1] }}
-    >
+    <div ref={ref}>
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.2 }}
@@ -164,7 +188,7 @@ function PainCard({ moment, index, fullWidth }: { moment: typeof painMoments[0];
           </div>
         )}
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -272,11 +296,8 @@ export default function PlatformPage() {
         />
 
         <div className="relative z-10 flex flex-col items-center px-5 sm:px-8 pt-36 pb-20 w-full max-w-5xl mx-auto">
-          {/* Pill badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+          {/* Pill badge — always visible (no opacity animation on hero) */}
+          <div
             className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
             style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}
           >
@@ -292,13 +313,10 @@ export default function PlatformPage() {
             >
               Prospera Platform · Waitlist Open
             </span>
-          </motion.div>
+          </div>
 
-          {/* H1 + Typewriter */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
+          {/* H1 + Typewriter — always visible for SEO */}
+          <div
             className="mb-8 max-w-4xl w-full"
             style={{ fontFamily: "var(--font-dm-sans)" }}
           >
@@ -322,50 +340,32 @@ export default function PlatformPage() {
                 "Not the stress that made you question this.",
               ]}
             />
-          </motion.div>
+          </div>
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.42 }}
+          {/* Subtext — always visible for SEO */}
+          <p
             className="text-base sm:text-lg mb-8 max-w-lg"
             style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}
           >
             Built for Ontario landlords with 1 to 5 properties. All the automation, none of the overhead.
-          </motion.p>
+          </p>
 
           {/* Waitlist form */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.52 }}
-            className="w-full max-w-md mb-5"
-          >
+          <div className="w-full max-w-md mb-5">
             <WaitlistForm layout="stack" dark source="platform_hero" />
-          </motion.div>
+          </div>
 
           {/* Trust row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.72 }}
-            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-16"
-          >
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-16">
             {["✓  90-day money-back", "✓  No contracts", "✓  Personal onboarding"].map((t, i) => (
               <span key={i} className="text-xs" style={{ color: TEXT_3, fontFamily: "var(--font-dm-sans)" }}>
                 {t}
               </span>
             ))}
-          </motion.div>
+          </div>
 
           {/* Phone mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 48 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.32, 0.72, 0, 1] }}
-            className="relative inline-flex items-start justify-center"
-          >
+          <div className="relative inline-flex items-start justify-center">
             {/* Ambient glow */}
             <div
               className="absolute pointer-events-none"
@@ -380,11 +380,9 @@ export default function PlatformPage() {
               }}
             />
 
-            {/* Floating chip — left */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.3, duration: 0.5 }}
+            {/* Floating chip — left (decorative UI overlay, aria-hidden) */}
+            <div
+              aria-hidden="true"
               className="absolute -left-4 sm:-left-16 top-16 z-20 rounded-2xl px-3.5 py-2.5 flex items-center gap-3 shadow-2xl"
               style={{ backgroundColor: "#FFFFFF", minWidth: 168, border: "1px solid rgba(0,0,0,0.06)" }}
             >
@@ -402,13 +400,11 @@ export default function PlatformPage() {
                   $2,800 · 550 Second St
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Floating chip — right top */}
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.6, duration: 0.5 }}
+            {/* Floating chip — right top (decorative) */}
+            <div
+              aria-hidden="true"
               className="absolute -right-4 sm:-right-16 top-28 z-20 rounded-2xl px-3.5 py-2.5 shadow-2xl"
               style={{
                 backgroundColor: "#1A2332",
@@ -422,13 +418,11 @@ export default function PlatformPage() {
               <p className="text-xs mt-0.5" style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)" }}>
                 Unit 2 · 2 days late
               </p>
-            </motion.div>
+            </div>
 
-            {/* Floating chip — bottom right */}
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.9, duration: 0.5 }}
+            {/* Floating chip — bottom right (decorative) */}
+            <div
+              aria-hidden="true"
               className="absolute -right-4 sm:-right-12 bottom-28 z-20 rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 shadow-2xl"
               style={{ backgroundColor: "#0D1820", border: `1px solid ${CARD_BORDER}`, minWidth: 172 }}
             >
@@ -441,7 +435,7 @@ export default function PlatformPage() {
                   AI · Low urgency
                 </p>
               </div>
-            </motion.div>
+            </div>
 
             {/* Phone shell */}
             <div
@@ -470,7 +464,7 @@ export default function PlatformPage() {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

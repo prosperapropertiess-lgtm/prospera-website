@@ -4,14 +4,22 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
+/**
+ * SEO-safe AnimatedNum: starts at real value (visible in SSR HTML),
+ * then animates from 0 to target after hydration.
+ */
 function AnimatedNum({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
+  // Start at target so SSR shows real number for search engines
+  const [count, setCount] = useState(value);
   const started = useRef(false);
 
-  // Triggered externally via a prop change (isInView passed as value)
   useEffect(() => {
-    if (started.current || value === 0) { setCount(value); return; }
+    if (started.current || value === 0) return;
     started.current = true;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    // Reset to 0 then animate up
+    setCount(0);
     const start = performance.now();
     const duration = 700;
     const tick = (now: number) => {
@@ -113,6 +121,24 @@ function PlanCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
+  // SEO-safe scroll reveal: set below-fold offset after hydration
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) return;
+    const delay = index * 120;
+    el.style.transform = "translateY(20px)";
+    el.style.transition = `transform 500ms cubic-bezier(0.23,1,0.32,1) ${delay}ms`;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { el.style.transform = "none"; observer.disconnect(); }
+    }, { rootMargin: "0px", threshold: 0.3 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
   const bg = plan.dark ? "#1F2F3A" : "#FFFFFF";
   const border = plan.accentBorder
     ? "2px solid #8B2030"
@@ -138,13 +164,7 @@ function PlanCard({
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 28 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.12,
-        ease: [0.23, 1, 0.32, 1],
-      }}
+      // No opacity animation — content must be visible to crawlers
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={`relative rounded-2xl p-8 flex flex-col ${full ? "h-full" : ""}`}
       style={{
@@ -177,13 +197,13 @@ function PlanCard({
           {plan.label}
         </p>
 
-        {/* Animated price */}
+        {/* Price — always shows real value, animates on scroll as enhancement */}
         <div className="flex items-end gap-2 mb-1">
           <p
             className="text-6xl font-light leading-none"
             style={{ color: priceColor, fontFamily: "var(--font-cormorant)" }}
           >
-            <AnimatedNum value={isInView ? plan.priceNum : 0} suffix={plan.priceSuffix} />
+            <AnimatedNum value={plan.priceNum} suffix={plan.priceSuffix} />
           </p>
           <p
             className="text-sm mb-2"

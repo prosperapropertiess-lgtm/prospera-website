@@ -13,13 +13,13 @@ export default function PopupController() {
   if (EXCLUDED_PATHS.some((p) => pathname.startsWith(p))) return null;
 
   if (TENANT_PATHS.some((p) => pathname.startsWith(p))) {
-    return <NewsletterPopup variant="tenant" delayMs={15000} />;
+    return <NewsletterPopup variant="tenant" />;
   }
 
   if (LANDLORD_PATHS.some((p) => pathname.startsWith(p))) {
-    return <NewsletterPopup variant="landlord" delayMs={15000} />;
+    return <NewsletterPopup variant="landlord" />;
   }
 
   // Homepage
-  return <NewsletterPopup variant="landlord" delayMs={15000} />;
+  return <NewsletterPopup variant="landlord" />;
 }

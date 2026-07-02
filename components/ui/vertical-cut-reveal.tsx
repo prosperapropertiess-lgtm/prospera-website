@@ -166,6 +166,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         ref={containerRef}
         {...props}
       >
+        {/* SEO: always-visible text for crawlers */}
         <span className="sr-only">{text}</span>
 
         {wordObjects.map((wordObj, wordIndex, array) => {

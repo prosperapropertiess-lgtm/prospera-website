@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 const milestones = [
@@ -149,6 +149,13 @@ function PathSegment({ index }: { index: number }) {
   );
 }
 
+/**
+ * SEO-safe MilestoneNode:
+ * - Content (text) is always visible — opacity never starts at 0
+ * - Only the decorative dot uses a subtle scale animation
+ * - Cards slide in via transform only (opacity always 1)
+ * - Respects prefers-reduced-motion
+ */
 function MilestoneNode({
   milestone,
   index,
@@ -157,8 +164,58 @@ function MilestoneNode({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.25 });
+  const cardLeftRef = useRef<HTMLDivElement>(null);
+  const cardRightRef = useRef<HTMLDivElement>(null);
+  const dotDesktopRef = useRef<HTMLDivElement>(null);
+  const dotMobileRef = useRef<HTMLDivElement>(null);
+  const mobileCardRef = useRef<HTMLDivElement>(null);
   const isRight = index % 2 === 0;
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const el = ref.current;
+    if (!el) return;
+
+    // Check if above fold
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) return;
+
+    // Apply subtle transform to card elements
+    const applyReveal = (
+      cardEl: HTMLDivElement | null,
+      offset: string,
+      delay: number
+    ) => {
+      if (!cardEl) return;
+      cardEl.style.transform = offset;
+      cardEl.style.transition = `transform 350ms cubic-bezier(0.23,1,0.32,1) ${delay}ms`;
+    };
+
+    if (!isRight) {
+      applyReveal(cardLeftRef.current, "translateX(16px)", 200);
+    } else {
+      applyReveal(cardRightRef.current, "translateX(-16px)", 200);
+    }
+    applyReveal(mobileCardRef.current, "translateY(12px)", 150);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          [cardLeftRef, cardRightRef, mobileCardRef, dotDesktopRef, dotMobileRef].forEach(r => {
+            if (r.current) {
+              r.current.style.transform = "none";
+            }
+          });
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-25px", threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isRight]);
 
   return (
     <div ref={ref}>
@@ -167,22 +224,16 @@ function MilestoneNode({
         {/* Left card slot */}
         <div>
           {!isRight && (
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.35, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            >
+            <div ref={cardLeftRef}>
               <MilestoneCard milestone={milestone} />
-            </motion.div>
+            </div>
           )}
         </div>
 
-        {/* Center dot */}
+        {/* Center dot — decorative, transform-only animation */}
         <div className="flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.3, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
+          <div
+            ref={dotDesktopRef}
             className="w-12 h-12 flex items-center justify-center border-2 text-xs font-semibold"
             style={{
               borderColor: "#8B2030",
@@ -193,29 +244,23 @@ function MilestoneNode({
             }}
           >
             {milestone.icon}
-          </motion.div>
+          </div>
         </div>
 
         {/* Right card slot */}
         <div>
           {isRight && (
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.35, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            >
+            <div ref={cardRightRef}>
               <MilestoneCard milestone={milestone} />
-            </motion.div>
+            </div>
           )}
         </div>
       </div>
 
       {/* ── Mobile: flex row ── */}
       <div className="md:hidden flex gap-4 items-start">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+        <div
+          ref={dotMobileRef}
           className="w-10 h-10 flex items-center justify-center border-2 text-xs font-semibold shrink-0 mt-1"
           style={{
             borderColor: "#8B2030",
@@ -226,15 +271,10 @@ function MilestoneNode({
           }}
         >
           {milestone.icon}
-        </motion.div>
-        <motion.div
-          className="flex-1"
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.35, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
-        >
+        </div>
+        <div ref={mobileCardRef} className="flex-1">
           <MilestoneCard milestone={milestone} />
-        </motion.div>
+        </div>
       </div>
     </div>
   );
