@@ -18,7 +18,8 @@ If you cannot answer confidently, say: "I've noted your message and Ebin will fo
 Keep responses under 120 words. Be conversational, not corporate.`;
 
 export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("token");
+  const token = req.nextUrl.searchParams.get("token")
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
   if (!token) return NextResponse.json({ error: "Missing token" }, { status: 400 });
 
   const access = await validateTenantToken(token);
@@ -36,7 +37,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { token, content } = body;
+  const bodyToken = body.token;
+  const token = bodyToken
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
+  const { content } = body;
   if (!token || !content) {
     return NextResponse.json({ error: "Missing token or content" }, { status: 400 });
   }

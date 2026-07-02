@@ -1,0 +1,14 @@
+[
+  {
+    "id": "task-design-mobile-app-architecture",
+    "key": "design-mobile-app-architecture",
+    "content": "Task completed: design-mobile-app-architecture",
+    "namespace": "tasks",
+    "type": "task-outcome",
+    "metadata": {
+      "success": true,
+      "quality": 0.85
+    },
+    "createdAt": 1782996887319
+  }
+]

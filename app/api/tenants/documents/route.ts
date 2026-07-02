@@ -3,7 +3,8 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantDocuments } from "@/lib/tenant-data";
 
 export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("token");
+  const token = req.nextUrl.searchParams.get("token")
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
   if (!token) return NextResponse.json({ error: "Missing token" }, { status: 400 });
 
   const access = await validateTenantToken(token);

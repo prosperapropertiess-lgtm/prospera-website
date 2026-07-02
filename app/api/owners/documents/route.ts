@@ -23,7 +23,8 @@ async function validateToken(sb: ReturnType<typeof getSupabaseAdmin>, token: str
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const propertyId = searchParams.get("propertyId");
-  const token = searchParams.get("token");
+  const token = searchParams.get("token")
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
   const action = searchParams.get("action");
   const documentId = searchParams.get("documentId");
 

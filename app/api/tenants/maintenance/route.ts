@@ -41,7 +41,8 @@ One brief tip about preventing this issue in the future, or something useful the
 Keep the tone warm, professional, and reassuring. The tenant should feel like someone competent is handling this. Max 400 words total.`;
 
 export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("token");
+  const token = req.nextUrl.searchParams.get("token")
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
   if (!token) return NextResponse.json({ error: "Missing token" }, { status: 400 });
 
   const access = await validateTenantToken(token);
@@ -59,7 +60,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { token, action } = body as { token?: string; action?: string };
+  const bodyToken = (body as { token?: string }).token;
+  const token = bodyToken
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
+  const { action } = body as { action?: string };
   if (!token || !action) return NextResponse.json({ error: "Missing token or action" }, { status: 400 });
 
   const access = await validateTenantToken(token as string);

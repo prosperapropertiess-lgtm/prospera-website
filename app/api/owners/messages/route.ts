@@ -27,7 +27,8 @@ async function validateToken(token: string): Promise<boolean> {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const propertyId = searchParams.get("propertyId");
-  const token = searchParams.get("token");
+  const token = searchParams.get("token")
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
 
   if (!propertyId || !token) {
     return NextResponse.json({ error: "Missing propertyId or token" }, { status: 400 });
@@ -53,12 +54,14 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { propertyId, token, content, authorName } = body as {
+  const { propertyId, token: bodyToken, content, authorName } = body as {
     propertyId: string;
     token: string;
     content: string;
     authorName: string;
   };
+  const token = bodyToken
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
 
   if (!propertyId || !token || !content || !authorName) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });

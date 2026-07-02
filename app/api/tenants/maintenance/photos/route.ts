@@ -10,8 +10,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
   }
 
-  const token = formData.get("token");
-  if (!token || typeof token !== "string") {
+  const formToken = formData.get("token");
+  const token = (typeof formToken === "string" ? formToken : null)
+    ?? req.headers.get("authorization")?.replace("Bearer ", "");
+  if (!token) {
     return NextResponse.json({ error: "Missing token" }, { status: 400 });
   }
 
