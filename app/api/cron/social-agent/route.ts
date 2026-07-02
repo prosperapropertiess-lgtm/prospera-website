@@ -17,7 +17,9 @@ import { logAgentRun } from "@/lib/agent-logger";
 
 export const maxDuration = 120;
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 const SITE_URL = "https://www.prosperaproperties.co/";
 const FB_PAGE_URL = "https://www.facebook.com/381380218388134";
 const LI_PAGE_URL = "https://www.linkedin.com/company/prospera-properties";
@@ -307,13 +309,13 @@ export async function GET(req: NextRequest) {
   // ── 2. Generate both posts ────────────────────────────────────────────────
   let raw = "";
   try {
-    const response = await getAnthropic().messages.create({
+    const client = getAnthropic();
+    const socialResult = await client.messages.create({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 1400,
-      system: SOCIAL_SYSTEM,
+      max_tokens: 2048,
       messages: [{
         role: "user",
-        content: `Today: ${today}
+        content: `${SOCIAL_SYSTEM}\n\nToday: ${today}
 
 RECENT ONTARIO LANDLORD NEWS:
 ${newsContext || "No news fetched today — use a timely evergreen angle for post 1."}
@@ -327,10 +329,10 @@ ${recentPostSummary}
 Write both posts. Return JSON only.`,
       }],
     });
-    raw = response.content[0].type === "text" ? response.content[0].text.trim() : "";
+    raw = (socialResult.content[0].type === "text" ? socialResult.content[0].text : "").trim();
   } catch (err) {
-    console.error("[social-agent] Claude error:", err);
-    return NextResponse.json({ error: "Claude API error", detail: String(err) }, { status: 500 });
+    console.error("[social-agent] Anthropic error:", err);
+    return NextResponse.json({ error: "Anthropic API error", detail: String(err) }, { status: 500 });
   }
 
   // ── 3. Parse ──────────────────────────────────────────────────────────────

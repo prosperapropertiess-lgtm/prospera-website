@@ -5,7 +5,9 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { validateTenantToken, getTenantMessages, getTenantInfo } from "@/lib/tenant-data";
 
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -64,14 +66,13 @@ export async function POST(req: NextRequest) {
 
   if (insertError) return NextResponse.json({ error: insertError.message }, { status: 500 });
 
-  const aiResponse = await getAnthropic().messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 300,
-    system: LAURA_SYSTEM,
-    messages: [{ role: "user", content }],
+  const client = getAnthropic();
+  const aiMsg = await client.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 512,
+    messages: [{ role: "user", content: `${LAURA_SYSTEM}\n\n${content}` }],
   });
-
-  const aiText = aiResponse.content[0].type === "text" ? aiResponse.content[0].text : "";
+  const aiText = aiMsg.content[0].type === "text" ? aiMsg.content[0].text : "";
 
   const { data: aiMessage, error: aiInsertError } = await sb
     .from("tenant_messages")

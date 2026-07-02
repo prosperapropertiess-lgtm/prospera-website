@@ -37,51 +37,50 @@ Rules:
 - rentDueDay is the day of month rent is due (e.g. 1 for the 1st)
 - Return ONLY the JSON object, no other text`;
 
-async function parseLeaseWithClaude(
+async function parseLeaseWithAnthropic(
   fileBuffer: ArrayBuffer,
   mimeType: string
 ): Promise<Record<string, unknown>> {
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error("ANTHROPIC_API_KEY not configured");
+
+  const client = new Anthropic({ apiKey });
   const base64 = Buffer.from(fileBuffer).toString("base64");
 
-  const isPdf = mimeType === "application/pdf";
+  // Build the content block based on media type
+  type AnthropicMediaType = "application/pdf" | "image/jpeg" | "image/png" | "image/webp";
+  const supportedMediaTypes: AnthropicMediaType[] = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
+  if (!supportedMediaTypes.includes(mimeType as AnthropicMediaType)) {
+    throw new Error(`Unsupported media type: ${mimeType}`);
+  }
+  const typedMimeType = mimeType as AnthropicMediaType;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const contentBlock: any = isPdf
+  const contentBlock = mimeType === "application/pdf"
     ? {
-        type: "document",
-        source: {
-          type: "base64",
-          media_type: "application/pdf",
-          data: base64,
-        },
+        type: "document" as const,
+        source: { type: "base64" as const, media_type: typedMimeType, data: base64 },
       }
     : {
-        type: "image",
-        source: {
-          type: "base64",
-          media_type: mimeType,
-          data: base64,
-        },
+        type: "image" as const,
+        source: { type: "base64" as const, media_type: typedMimeType, data: base64 },
       };
 
-  const response = await client.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: [
-          contentBlock,
-          { type: "text", text: EXTRACT_PROMPT },
-        ],
-      },
-    ],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await client.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1024,
+    messages: [{
+      role: "user",
+      content: [
+        contentBlock as any,
+        { type: "text" as const, text: EXTRACT_PROMPT },
+      ],
+    }],
   });
 
-  const text = response.content[0].type === "text" ? response.content[0].text : "{}";
+  const text = result.content[0].type === "text" ? result.content[0].text : "";
 
-  // Extract JSON from response (Claude sometimes wraps in markdown)
+  // Extract JSON from response (model sometimes wraps in markdown)
   const match = text.match(/\{[\s\S]*\}/);
   if (!match) return {};
 
@@ -143,12 +142,12 @@ export async function POST(
     // Continue even if storage fails — parsing is more important
   }
 
-  // Parse with Claude
+  // Parse with Anthropic
   let parsedData: Record<string, unknown> = {};
   try {
-    parsedData = await parseLeaseWithClaude(buffer, file.type);
+    parsedData = await parseLeaseWithAnthropic(buffer, file.type);
   } catch (e) {
-    console.error("Claude parse error:", e);
+    console.error("Anthropic parse error:", e);
     // Don't fail the upload if parsing fails
   }
 

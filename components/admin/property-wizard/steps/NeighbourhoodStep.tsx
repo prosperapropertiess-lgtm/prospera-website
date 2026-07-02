@@ -105,6 +105,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
     { key: "restaurant", label: "Restaurants", icon: "🍽️" },
     { key: "cafe", label: "Cafés", icon: "☕" },
     { key: "bank", label: "Banks", icon: "🏦" },
+    { key: "popular_spots", label: "Popular Spots", icon: "⭐" },
   ];
 
   return (

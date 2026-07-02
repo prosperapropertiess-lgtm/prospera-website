@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 // ── CTO identity and mission ────────────────────────────────────────────────
 const PLATFORM_CONTEXT = `
@@ -120,14 +122,13 @@ export async function generateAndSendProposal(metrics: Awaited<ReturnType<typeof
     .join("\n") || "None yet — this is the first week.";
 
   // ── Ask Claude to propose the next feature ──────────────────────────────
-  const response = await getAnthropic().messages.create({
+  const client = getAnthropic();
+  const ctoResult = await client.messages.create({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 1200,
-    system: PLATFORM_CONTEXT,
-    messages: [
-      {
-        role: "user",
-        content: `Today is ${new Date().toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}.
+    max_tokens: 2048,
+    messages: [{
+      role: "user",
+      content: `${PLATFORM_CONTEXT}\n\nToday is ${new Date().toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}.
 
 BUSINESS DATA:
 - New leads (contact form): ${metrics.newLeads} (${metrics.totalLeads} total)
@@ -191,11 +192,10 @@ Respond ONLY with valid JSON — no preamble, no explanation:
   "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
   "performance_notes": "Caching, DB indexes, or efficiency considerations. Or null."
 }`,
-      },
-    ],
+    }],
   });
 
-  const raw = response.content[0].type === "text" ? response.content[0].text : "";
+  const raw = ctoResult.content[0].type === "text" ? ctoResult.content[0].text : "";
   const jsonMatch = raw.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("Claude returned no valid JSON");
 

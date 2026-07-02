@@ -6,7 +6,9 @@ import { pushFilesToGitHub, type FileChange } from "@/lib/github";
 
 export const maxDuration = 120;
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 const PLATFORM_CONTEXT = `
 You are a senior Next.js engineer building features for Prospera — a proptech platform for Ontario landlords.
@@ -18,7 +20,7 @@ TECH STACK:
 - Framer Motion (animations)
 - Supabase: import { getSupabaseAdmin } from "@/lib/supabase" for server, { getSupabase } for client
 - Resend: import dynamically — const { Resend } = await import("resend")
-- Anthropic: import Anthropic from "@anthropic-ai/sdk"
+- Claude/Anthropic: import Anthropic from "@anthropic-ai/sdk"
 - Rate limiting: import { rateLimit, getClientIp } from "@/lib/rate-limit"
 
 FILE STRUCTURE:
@@ -88,7 +90,7 @@ function parseImplementation(raw: string): { files: FileChange[]; sql: string | 
   return { files, sql: noSql ? null : sql };
 }
 
-// ── Generate code with Claude, continuing if output is truncated ─────────────
+// ── Generate code with Gemini ─────────────────────────────────────────────
 async function generateImplementation(proposal: Record<string, string>, steps: string[]): Promise<string> {
   const userPrompt = `Implement this feature for Prospera.
 
@@ -108,36 +110,13 @@ Include SQL only if new tables or columns are required.
 Think about data that should be logged for future intelligence — this platform compounds with data.
 Build for 10,000 users, not 10.`;
 
-  const messages: Anthropic.MessageParam[] = [
-    { role: "user", content: userPrompt },
-  ];
-
-  let fullOutput = "";
-  let iterations = 0;
-  const MAX_ITERATIONS = 3; // prevent runaway loops
-
-  while (iterations < MAX_ITERATIONS) {
-    const response = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 16000,
-      system: PLATFORM_CONTEXT,
-      messages,
-    });
-
-    const chunk = response.content[0].type === "text" ? response.content[0].text : "";
-    fullOutput += chunk;
-    iterations++;
-
-    // If Claude didn't hit the token limit, we're done
-    if (response.stop_reason !== "max_tokens") break;
-
-    // Output was truncated — continue from where it left off
-    console.log(`[tech-build] Output truncated (iteration ${iterations}), continuing...`);
-    messages.push({ role: "assistant", content: chunk });
-    messages.push({ role: "user", content: "Continue exactly where you left off. Do not repeat anything already written." });
-  }
-
-  return fullOutput;
+  const client = getAnthropic();
+  const result = await client.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 8192,
+    messages: [{ role: "user", content: `${PLATFORM_CONTEXT}\n\n${userPrompt}` }],
+  });
+  return result.content[0].type === "text" ? result.content[0].text : "";
 }
 
 // ── Trigger the next proposal to keep the build loop running ─────────────────

@@ -11,7 +11,15 @@ import {
 } from "@/lib/emails";
 
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+async function callAnthropic(systemInstruction: string, userContent: string): Promise<string> {
+  const msg = await anthropic.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: `${systemInstruction}\n\n${userContent}` }],
+  });
+  return msg.content[0].type === "text" ? msg.content[0].text : "";
+}
 
 const EBIN_EMAIL = "prosperapropertiess@gmail.com";
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -100,14 +108,7 @@ async function handleDiagnose(body: DiagnoseBody) {
     return NextResponse.json({ error: "Missing category or description" }, { status: 400 });
   }
 
-  const message = await getAnthropic().messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 400,
-    system: DIAGNOSE_SYSTEM,
-    messages: [{ role: "user", content: `Category: ${category}\nIssue: ${description}` }],
-  });
-
-  const steps = message.content[0].type === "text" ? message.content[0].text : "";
+  const steps = await callAnthropic(DIAGNOSE_SYSTEM, `Category: ${category}\nIssue: ${description}`);
   return NextResponse.json({ diagnosis: steps });
 }
 
@@ -204,19 +205,10 @@ async function handleSubmit(
   // EMAIL 2: AI analysis (non-blocking, runs after response)
   (async () => {
     try {
-      const analysisMessage = await getAnthropic().messages.create({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 800,
-        system: ANALYSIS_SYSTEM,
-        messages: [{
-          role: "user",
-          content: `Category: ${category}\nProperty: ${propertyAddress}\nTenant's description: ${description}\nTroubleshooting already attempted: ${troubleshootingSteps}`,
-        }],
-      });
-
-      const analysis = analysisMessage.content[0].type === "text"
-        ? analysisMessage.content[0].text
-        : "";
+      const analysis = await callAnthropic(
+        ANALYSIS_SYSTEM,
+        `Category: ${category}\nProperty: ${propertyAddress}\nTenant's description: ${description}\nTroubleshooting already attempted: ${troubleshootingSteps}`
+      );
 
       if (analysis && info?.email) {
         const analysisCc = [EBIN_EMAIL];

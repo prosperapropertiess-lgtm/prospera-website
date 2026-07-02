@@ -19,7 +19,9 @@ import { Resend } from "resend";
 import { logAgentRun } from "@/lib/agent-logger";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const RECIPIENT = "ebinjaison02@gmail.com";
@@ -312,20 +314,17 @@ export async function GET(req: NextRequest) {
       : "\n\nThis is Day 1. No prior sessions. In the Compounding Rule section, frame this as the baseline from which all future sessions will build.";
 
     // Generate intelligence cycle
-    const message = await getAnthropic().messages.create({
+    const client = getAnthropic();
+    const intelligenceResult = await client.messages.create({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 2800,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: "user",
-          content: `Today's core concept domain: ${domain}${historyContext}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 2–5 doors toward 1,000+.`,
-        },
-      ],
+      max_tokens: 4096,
+      messages: [{
+        role: "user",
+        content: `${SYSTEM_PROMPT}\n\nToday's core concept domain: ${domain}${historyContext}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 2–5 doors toward 1,000+.`,
+      }],
     });
 
-    const body =
-      message.content[0].type === "text" ? message.content[0].text : "";
+    const body = intelligenceResult.content[0].type === "text" ? intelligenceResult.content[0].text : "";
 
     if (!body) {
       throw new Error("Claude returned empty response");

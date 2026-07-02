@@ -19,7 +19,9 @@ import { getFileFromGitHub, listFilesFromGitHub } from "@/lib/github";
 import { weeklyBlogEmail } from "@/lib/emails";
 import { logAgentRun } from "@/lib/agent-logger";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 
 const FROM = "Ebin at Prospera <ebin@prosperaproperties.co>";
@@ -46,9 +48,10 @@ async function generateEmailCopy(
   body: string
 ): Promise<{ subject: string; takeaways: string[]; whyItMatters: string } | null> {
   try {
-    const response = await getAnthropic().messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 600,
+    const client = getAnthropic();
+    const nlResult = await client.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 512,
       system: `You write weekly newsletter copy for Prospera Properties — a property management company in London, St. Thomas, and Strathroy, Ontario. The audience is independent Ontario landlords with 1–5 properties.
 
 Write copy that is:
@@ -69,10 +72,10 @@ Output EXACTLY this JSON structure (no markdown, no code fences):
       }],
     });
 
-    const raw = response.content[0].type === "text" ? response.content[0].text.trim() : "";
+    const raw = (nlResult.content[0].type === "text" ? nlResult.content[0].text : "").trim();
     return JSON.parse(raw);
   } catch (err) {
-    console.error("[newsletter] Claude error:", err);
+    console.error("[newsletter] Anthropic error:", err);
     return null;
   }
 }

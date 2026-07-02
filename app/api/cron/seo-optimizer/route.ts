@@ -12,7 +12,9 @@ import { getFileFromGitHub, pushFilesToGitHub } from "@/lib/github";
 import { submitUrlToGoogle } from "@/lib/google-indexing";
 import { querySearchAnalytics } from "@/lib/google-search-console";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 const SITE_URL = "https://www.prosperaproperties.co/";
 const BLOG_PREFIX = `${SITE_URL}blog/`;
@@ -165,13 +167,13 @@ export async function GET(req: NextRequest) {
 
     try {
       const otherSlugs = allSlugs.filter((s) => s !== target.slug);
-      const optResponse = await getAnthropic().messages.create({
+      const client = getAnthropic();
+      const optResult = await client.messages.create({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 10000,
-        system: OPTIMIZER_SYSTEM,
+        max_tokens: 8192,
         messages: [{
           role: "user",
-          content: `Today's date: ${today}
+          content: `${OPTIMIZER_SYSTEM}\n\nToday's date: ${today}
 Optimization target: ${target.slug}
 Reason selected: ${target.reason}
 
@@ -186,7 +188,7 @@ Optimize this post following all instructions. Output the complete improved file
         }],
       });
 
-      const optRaw = optResponse.content[0].type === "text" ? optResponse.content[0].text : "";
+      const optRaw = optResult.content[0].type === "text" ? optResult.content[0].text : "";
       const optimized = parseOptimizerOutput(optRaw);
 
       if (optimized) {

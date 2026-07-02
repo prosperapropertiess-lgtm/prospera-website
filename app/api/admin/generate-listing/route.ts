@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "ANTHROPIC_API_KEY not configured" }, { status: 500 });
   }
 
+  const client = new Anthropic({ apiKey });
   const body = await req.json();
 
   // Vibe-only mode: just generate a neighbourhood personality description
@@ -33,10 +34,14 @@ Bus routes: ${body.bus_routes?.length ? body.bus_routes.map((r: { route: string;
 
 Write 2-3 sentences describing the neighbourhood personality. Cover: who lives here (students, families, professionals), the noise/activity level, the feel at different times of day, and what makes it distinctive. Be honest and specific. Use real place names. No hype words. Plain, direct tone.`;
 
-    const client = new Anthropic({ apiKey });
-    const msg = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
-    const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
-    return NextResponse.json({ description: vibeText.trim() });
+    try {
+      const msg = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
+      const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
+      return NextResponse.json({ description: vibeText.trim() });
+    } catch (err) {
+      console.error("[generate-listing] Vibe generation failed:", err);
+      return NextResponse.json({ error: `AI generation failed: ${err instanceof Error ? err.message : "Unknown error"}` }, { status: 500 });
+    }
   }
 
   // Build comprehensive property details
@@ -126,15 +131,14 @@ Write 2-3 sentences describing the neighbourhood personality. Cover: who lives h
 
   const allDetails = sections.join("\n\n");
 
-  const client = new Anthropic({ apiKey });
-
-  const message = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `You are a rental property listing copywriter for Prospera Properties, a professional property management company in Ontario, Canada. You need to generate FIVE pieces of content for this property listing.
+  try {
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 2048,
+      messages: [
+        {
+          role: "user",
+          content: `You are a rental property listing copywriter for Prospera Properties, a professional property management company in Ontario, Canada. You need to generate FIVE pieces of content for this property listing.
 
 PROPERTY DATA:
 ${allDetails}
@@ -149,7 +153,7 @@ Generate ALL FIVE of these:
 
 4. "life_simulation" — Object with 4 keys: "morning", "afternoon", "evening", "night". Each is 2-3 sentences painting a picture of what that time of day looks like living here. Use REAL nearby place names, real distances, real transit info. Make the reader imagine themselves living here. Keep each period under 60 words.
 
-5. "life_intro" — 3 short punchy lines separated by newlines. This is the emotional hook at the very top of the listing page. Format: "Wake up [distance] from [real place].\nGrab coffee at [real nearby café].\nBe downtown in [real commute time]." Use REAL data only. If you don't have nearby places data, write about the neighbourhood character instead.
+5. "life_intro" — 3 short punchy lines separated by newlines. This is the emotional hook at the very top of the listing page. Format: "Wake up [distance] from [real place].\\nGrab coffee at [real nearby café].\\nBe downtown in [real commute time]." Use REAL data only. If you don't have nearby places data, write about the neighbourhood character instead.
 
 RULES:
 - Use ONLY facts from the property data above. Never invent features.
@@ -159,13 +163,11 @@ RULES:
 
 Respond in this exact JSON format only, no markdown code fences:
 {"title": "...", "description": "...", "highlights": ["...", "...", "...", "...", "..."], "life_simulation": {"morning": "...", "afternoon": "...", "evening": "...", "night": "..."}, "life_intro": "..."}`,
-      },
-    ],
-  });
+        },
+      ],
+    });
 
-  try {
     const text = message.content[0].type === "text" ? message.content[0].text : "";
-    // Strip any markdown code fences if present
     const cleaned = text.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
     const parsed = JSON.parse(cleaned);
     return NextResponse.json({
@@ -175,7 +177,8 @@ Respond in this exact JSON format only, no markdown code fences:
       life_simulation: parsed.life_simulation || { morning: "", afternoon: "", evening: "", night: "" },
       life_intro: parsed.life_intro || "",
     });
-  } catch {
-    return NextResponse.json({ error: "Failed to parse AI response" }, { status: 500 });
+  } catch (err) {
+    console.error("[generate-listing] AI generation failed:", err);
+    return NextResponse.json({ error: `AI generation failed: ${err instanceof Error ? err.message : "Unknown error"}` }, { status: 500 });
   }
 }

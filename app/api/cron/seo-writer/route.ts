@@ -16,7 +16,19 @@ import { submitUrlToGoogle } from "@/lib/google-indexing";
 import { querySearchAnalytics } from "@/lib/google-search-console";
 import { logAgentRun } from "@/lib/agent-logger";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
+
+async function callClaude(systemPrompt: string, userContent: string, maxTokens = 8192): Promise<string> {
+  const client = getAnthropic();
+  const result = await client.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: maxTokens,
+    messages: [{ role: "user", content: `${systemPrompt}\n\n${userContent}` }],
+  });
+  return result.content[0].type === "text" ? result.content[0].text : "";
+}
 
 const SITE_URL = "https://www.prosperaproperties.co/";
 const BLOG_PREFIX = `${SITE_URL}blog/`;
@@ -450,16 +462,7 @@ export async function GET(req: NextRequest) {
   let selectedSlug = "";
   let selectedKeyword = "";
   try {
-    const kwResponse = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 200,
-      system: KEYWORD_SELECTOR_SYSTEM,
-      messages: [{
-        role: "user",
-        content: `Today's date: ${today}\n\nSEO Brain:\n\n${seoBrain}\n\nReturn JSON only.`,
-      }],
-    });
-    const kwRaw = kwResponse.content[0].type === "text" ? kwResponse.content[0].text.trim() : "";
+    const kwRaw = (await callClaude(KEYWORD_SELECTOR_SYSTEM, `Today's date: ${today}\n\nSEO Brain:\n\n${seoBrain}\n\nReturn JSON only.`, 512)).trim();
     const kwJson = kwRaw.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
     const kw = JSON.parse(kwJson);
     selectedSlug = kw.slug ?? "";
@@ -492,25 +495,16 @@ export async function GET(req: NextRequest) {
       ? `Write the post for this keyword: "${selectedKeyword}" (slug: ${selectedSlug})\n`
       : "Pick the highest-priority missing keyword and write the full blog post.\n";
 
-    const response = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 8000,
-      system: SEO_SYSTEM,
-      messages: [{
-        role: "user",
-        content: `Today's date: ${today}
+    writerRaw = await callClaude(SEO_SYSTEM, `Today's date: ${today}
 ${gscContext}${competitorContext}${redditSignals}${newsSignals}
 SEO Brain document:
 
 ${seoBrain}
 
-${slugInstruction}Follow the output format exactly.`,
-      }],
-    });
-    writerRaw = response.content[0].type === "text" ? response.content[0].text : "";
+${slugInstruction}Follow the output format exactly.`);
   } catch (err) {
-    console.error("[seo] Writer Claude error:", err);
-    return NextResponse.json({ error: "Writer Claude API error", detail: String(err) }, { status: 500 });
+    console.error("[seo] Writer Anthropic error:", err);
+    return NextResponse.json({ error: "Writer Anthropic API error", detail: String(err) }, { status: 500 });
   }
 
   const writerParsed = parseWriterOutput(writerRaw);
@@ -584,13 +578,7 @@ ${slugInstruction}Follow the output format exactly.`,
     const originalContent = await getFileFromGitHub(`content/blog/${optimizeSlug}.md`);
     if (originalContent) {
       try {
-        const optResponse = await getAnthropic().messages.create({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 10000,
-          system: OPTIMIZER_SYSTEM,
-          messages: [{
-            role: "user",
-            content: `Today's date: ${today}
+        const optRaw = await callClaude(OPTIMIZER_SYSTEM, `Today's date: ${today}
 Optimization target: ${optimizeSlug}
 Reason selected: ${optimizeReason}
 
@@ -601,11 +589,7 @@ Here is the current post content to optimize:
 
 ${originalContent}
 
-Optimize this post following all instructions. Output the complete improved file.`,
-          }],
-        });
-
-        const optRaw = optResponse.content[0].type === "text" ? optResponse.content[0].text : "";
+Optimize this post following all instructions. Output the complete improved file.`);
         const optimized = parseOptimizerOutput(optRaw);
 
         if (optimized) {
@@ -634,24 +618,14 @@ Optimize this post following all instructions. Output the complete improved file
   // ── 4. Internal linking engine ────────────────────────────────────────────
   try {
     const slugSample = existingSlugs.filter((s) => s !== newSlug).slice(0, 40).join(", ");
-    const linkResponse = await getAnthropic().messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1500,
-      system: LINKING_SYSTEM,
-      messages: [{
-        role: "user",
-        content: `New post just published:
+    const linkRaw = (await callClaude(LINKING_SYSTEM, `New post just published:
 Title: "${newTitle}"
 Slug: ${newSlug}
 Excerpt: ${newExcerpt}
 
 Existing posts (slugs): ${slugSample}
 
-Which 2–3 existing posts should add a contextual link to the new post? Return JSON only.`,
-      }],
-    });
-
-    const linkRaw = linkResponse.content[0].type === "text" ? linkResponse.content[0].text.trim() : "[]";
+Which 2–3 existing posts should add a contextual link to the new post? Return JSON only.`, 1024)).trim();
     const jsonStr = linkRaw.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
     const suggestions: { slug: string; searchText: string; replaceText: string }[] = JSON.parse(jsonStr);
 
@@ -766,26 +740,14 @@ Which 2–3 existing posts should add a contextual link to the new post? Return 
       // Strip frontmatter, pass first ~800 chars of body to Claude
       const bodyOnly = newBlog.replace(/^---[\s\S]*?---\n/, "").slice(0, 800);
 
-      const socialResponse = await getAnthropic().messages.create({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 600,
-        system: SOCIAL_SYSTEM,
-        messages: [{
-          role: "user",
-          content: `Blog post topic: "${newTitle}"
+      const socialPost = (await callClaude(SOCIAL_SYSTEM, `Blog post topic: "${newTitle}"
 Category: ${newCategory}
 Excerpt: ${newExcerpt}
 
 Opening content:
 ${bodyOnly}
 
-Write one Facebook post about this topic in the style described. Do not promote the blog post — write standalone content that stands on its own.`,
-        }],
-      });
-
-      const socialPost = socialResponse.content[0].type === "text"
-        ? socialResponse.content[0].text.trim()
-        : null;
+Write one Facebook post about this topic in the style described. Do not promote the blog post — write standalone content that stands on its own.`, 1024)).trim() || null;
 
       if (socialPost) {
         await fetch(`${SITE_URL}api/social/draft`, {

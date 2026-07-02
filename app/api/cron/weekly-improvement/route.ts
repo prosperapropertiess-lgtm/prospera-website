@@ -18,7 +18,9 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { logAgentRun } from "@/lib/agent-logger";
 import { SEQUENCES } from "@/lib/email-sequences";
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 function getResend() { return new Resend(process.env.RESEND_API_KEY!); }
 const CRON_SECRET = process.env.CRON_SECRET;
 const EBIN_EMAIL  = "prosperapropertiess@gmail.com";
@@ -189,15 +191,14 @@ Your job:
 
 Format your response with clear sections using ##. Be direct. Ebin is a busy property manager, not a marketer.`;
 
-    const aiResponse = await getAnthropic().messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 1200,
+    const client = getAnthropic();
+    const aiResult = await client.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 2048,
       messages: [{ role: "user", content: claudePrompt }],
     });
 
-    const analysis = aiResponse.content[0].type === "text"
-      ? aiResponse.content[0].text
-      : "Analysis unavailable.";
+    const analysis = (aiResult.content[0].type === "text" ? aiResult.content[0].text : "") || "Analysis unavailable.";
 
     // ── 5. Format the HTML email ──────────────────────────────────────────────
     const TEXT    = "#1b1c1a";

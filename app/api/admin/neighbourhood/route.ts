@@ -18,6 +18,27 @@ const PLACE_CATEGORIES = [
   { type: "bank", label: "Banks" },
 ];
 
+// Popular Canadian chains and landmarks tenants actually search for
+const POPULAR_KEYWORD_SEARCHES = [
+  "Tim Hortons",
+  "Costco",
+  "Real Canadian Superstore",
+  "Walmart",
+  "Giant Tiger",
+  "No Frills",
+  "Food Basics",
+  "Shoppers Drug Mart",
+  "LCBO",
+  "Canadian Tire",
+  "Dollar Tree",
+  "Dollarama",
+  "McDonald's",
+  "Starbucks",
+  "Pizza Pizza",
+  "FreshCo",
+  "Metro",
+];
+
 interface PlaceResult {
   name: string;
   vicinity: string;
@@ -180,6 +201,62 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // Step 3b: Search for popular Canadian chains (wider 5km radius for big-box)
+  if (!cachedCategories.has("popular_spots") && !places["popular_spots"]) {
+    const popularResults: { name: string; vicinity: string; rating: number | null; place_id: string; distance: string; walk_time: string }[] = [];
+    const seenPlaceIds = new Set<string>();
+
+    // Run keyword searches in parallel (batches of 5 to avoid rate limits)
+    for (let i = 0; i < POPULAR_KEYWORD_SEARCHES.length; i += 5) {
+      const batch = POPULAR_KEYWORD_SEARCHES.slice(i, i + 5);
+      const batchResults = await Promise.allSettled(
+        batch.map(async (keyword) => {
+          const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&keyword=${encodeURIComponent(keyword)}&key=${GOOGLE_API_KEY}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data.status === "OK" && data.results?.length) {
+            // Take only the closest result per keyword
+            const p = data.results[0] as PlaceResult;
+            return p;
+          }
+          return null;
+        })
+      );
+
+      for (const result of batchResults) {
+        if (result.status === "fulfilled" && result.value && !seenPlaceIds.has(result.value.place_id)) {
+          const p = result.value;
+          seenPlaceIds.add(p.place_id);
+          const dist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+          popularResults.push({
+            name: p.name,
+            vicinity: p.vicinity,
+            rating: p.rating || null,
+            place_id: p.place_id,
+            distance: `${(dist * 1000).toFixed(0)}m`,
+            walk_time: dist <= 2 ? estimateWalkTime(dist) : `${(dist).toFixed(1)} km`,
+          });
+        }
+      }
+    }
+
+    // Sort by distance
+    popularResults.sort((a, b) => parseInt(a.distance) - parseInt(b.distance));
+    places["popular_spots"] = popularResults;
+
+    // Cache
+    if (popularResults.length > 0) {
+      await supabase.from("neighbourhood_cache").upsert({
+        lat_key: latKey,
+        lng_key: lngKey,
+        category: "popular_spots",
+        data: popularResults,
+        fetched_at: new Date().toISOString(),
+        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      }, { onConflict: "lat_key,lng_key,category" });
+    }
+  }
+
   // Step 4: Walk Score (optional)
   let walk_score: number | null = null;
   let transit_score: number | null = null;
@@ -285,10 +362,38 @@ export async function POST(req: NextRequest) {
   const finalTransitScore = transit_score ?? reusedMeta?.transit_score ?? null;
   const finalBikeScore = bike_score ?? reusedMeta?.bike_score ?? null;
 
+  // Build categories array for listing page display
+  const CATEGORY_LABELS: Record<string, string> = {
+    grocery_or_supermarket: "Grocery Stores",
+    pharmacy: "Pharmacies",
+    gym: "Gyms & Fitness",
+    transit_station: "Transit Stops",
+    school: "Schools",
+    hospital: "Hospitals & Clinics",
+    park: "Parks",
+    restaurant: "Restaurants",
+    cafe: "Cafés",
+    bank: "Banks",
+    popular_spots: "Popular Spots",
+  };
+
+  const categories = Object.entries(places)
+    .filter(([, list]) => Array.isArray(list) && list.length > 0)
+    .map(([key, list]) => ({
+      name: CATEGORY_LABELS[key] || key,
+      places: (list as { name: string; distance?: string; walk_time?: string }[]).slice(0, 8).map((p) => ({
+        name: p.name,
+        distance: p.walk_time || p.distance || undefined,
+      })),
+    }));
+
+  // Include both raw places and formatted categories
+  const neighbourhoodData = { ...places, categories };
+
   return NextResponse.json({
     latitude,
     longitude,
-    places,
+    places: neighbourhoodData,
     walk_score: finalWalkScore,
     transit_score: finalTransitScore,
     bike_score: finalBikeScore,

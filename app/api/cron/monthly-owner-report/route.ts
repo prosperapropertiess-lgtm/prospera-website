@@ -13,7 +13,9 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 // Runs on the 3rd of every month at 9am Eastern (13:00 UTC)
 // Schedule: 0 13 3 * *
 
-function getAnthropic() { return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! }); }
+function getAnthropic() {
+  return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+}
 
 // ── Claude system prompt ───────────────────────────────────────────────────
 
@@ -145,17 +147,17 @@ export async function GET(req: NextRequest) {
         const dataSummary = bundleToDataSummary(bundle);
 
         // Ask Claude for narrative JSON
-        const response = await getAnthropic().messages.create({
+        const client = getAnthropic();
+        const ownerReportResult = await client.messages.create({
           model: "claude-sonnet-4-20250514",
-          max_tokens: 1200,
-          system: SYSTEM_PROMPT,
+          max_tokens: 1024,
           messages: [{
             role: "user",
-            content: `Write the narrative JSON for the monthly owner report using this Notion data:\n\n${dataSummary}`,
+            content: `${SYSTEM_PROMPT}\n\nWrite the narrative JSON for the monthly owner report using this Notion data:\n\n${dataSummary}`,
           }],
         });
 
-        const rawText = response.content[0].type === "text" ? response.content[0].text.trim() : "{}";
+        const rawText = (ownerReportResult.content[0].type === "text" ? ownerReportResult.content[0].text : "").trim();
 
         // Strip markdown code fences if present
         const jsonText = rawText.replace(/^```(?:json)?\n?/m, "").replace(/\n?```$/m, "").trim();
