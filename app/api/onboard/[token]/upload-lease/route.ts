@@ -67,7 +67,7 @@ async function parseLeaseWithAnthropic(
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 1024,
     messages: [{
       role: "user",

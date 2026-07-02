@@ -169,7 +169,7 @@ export async function GET(req: NextRequest) {
       const otherSlugs = allSlugs.filter((s) => s !== target.slug);
       const client = getAnthropic();
       const optResult = await client.messages.create({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-haiku-4-5-20251001",
         max_tokens: 8192,
         messages: [{
           role: "user",

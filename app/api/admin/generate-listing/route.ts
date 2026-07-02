@@ -35,7 +35,7 @@ Bus routes: ${body.bus_routes?.length ? body.bus_routes.map((r: { route: string;
 Write 2-3 sentences describing the neighbourhood personality. Cover: who lives here (students, families, professionals), the noise/activity level, the feel at different times of day, and what makes it distinctive. Be honest and specific. Use real place names. No hype words. Plain, direct tone.`;
 
     try {
-      const msg = await client.messages.create({ model: "claude-sonnet-4-20250514", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
+      const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 300, messages: [{ role: "user", content: vibePrompt }] });
       const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
       return NextResponse.json({ description: vibeText.trim() });
     } catch (err) {
@@ -133,7 +133,7 @@ Write 2-3 sentences describing the neighbourhood personality. Cover: who lives h
 
   try {
     const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-haiku-4-5-20251001",
       max_tokens: 2048,
       messages: [
         {

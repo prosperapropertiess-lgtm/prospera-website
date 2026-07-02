@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
 
   const client = getAnthropic();
   const aiMsg = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 512,
     messages: [{ role: "user", content: `${LAURA_SYSTEM}\n\n${content}` }],
   });
