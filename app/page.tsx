@@ -145,13 +145,13 @@ function Hero() {
               className="text-base md:text-lg mb-10 max-w-xl mx-auto"
               style={{ color: "rgba(250,248,245,0.9)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
             >
-              We manage your rental so you don't have to. Tenant screening, rent collection, maintenance, the 2am calls. Handled.
+              You bought the property for freedom. Instead you got midnight calls, chasing rent, and tenants who treat your investment like it&apos;s disposable. We fix that.
             </p>
           </HeroFadeIn>
 
           {/* CTA */}
           <HeroFadeIn delay={1100} duration={1000}>
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-5">
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
               <Link
                 href="/contact"
                 className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
@@ -167,27 +167,16 @@ function Hero() {
                 or call (519) 697-1227
               </a>
             </div>
-            <p className="text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>
-              90-day guarantee · No contracts · We pick up the phone
-            </p>
-          </HeroFadeIn>
-
-          {/* Trust strip */}
-          <HeroFadeIn delay={1400} duration={1000}>
             <div
-              className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-12 pt-8 mx-auto"
-              style={{ borderTop: "1px solid rgba(250,248,245,0.2)" }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full"
+              style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
             >
-              {[
-                { num: "25+", label: "Tenants placed" },
-                { num: "0", label: "Evictions" },
-                { num: "21d", label: "Avg fill time" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="text-2xl sm:text-3xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.num}</p>
-                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.7)" }}>{s.label}</p>
-                </div>
-              ))}
+              <span className="text-sm font-semibold" style={{ color: "#FFFFFF", fontFamily: "var(--font-dm-sans)" }}>
+                90-Day Satisfaction Guarantee
+              </span>
+              <span className="text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>
+                · No contracts · We pick up the phone
+              </span>
             </div>
           </HeroFadeIn>
 
@@ -423,11 +412,11 @@ function HowItWorks() {
           </h2>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {phases.map((phase, i) => (
-            <FadeIn key={phase.num} delay={i * 0.12}>
+            <FadeIn key={phase.num} delay={i * 0.12} className="flex">
               <div
-                className="border p-8 rounded-xl"
+                className="border p-8 rounded-xl flex flex-col w-full"
                 style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
               >
                 <div className="flex items-start gap-4 mb-5">
@@ -508,63 +497,67 @@ function CaseStudy() {
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
           >
-            Real Landlord, Real Numbers
+            Real Landlord, Real Results
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
+            className="text-4xl sm:text-5xl font-bold text-center mb-4 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
           >
-            He was losing money every month<br />on a property he owned.
+            He was paying to be a landlord.
           </h2>
           <p
-            className="text-sm text-center max-w-xl mx-auto mb-14 leading-relaxed"
+            className="text-base text-center max-w-xl mx-auto mb-14 leading-relaxed"
             style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
           >
-            Utilities included. Tenants running everything full blast.
-            Bills climbing every month with no way to raise rent.
-            He was paying to be a landlord. Here&apos;s what changed.
+            Utilities included in the lease. Tenants running heat, AC, and hot water at full blast 24/7. Bills climbing every month with no legal way to raise rent. He was losing money on a property he owned outright.
           </p>
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FadeIn delay={0.1}>
-            <div className="p-8 border rounded-xl" style={{ backgroundColor: "#FDF9F9", borderColor: "#E8CECE", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                Before Prospera
+          <FadeIn delay={0.1} className="flex">
+            <div className="p-8 border rounded-xl flex flex-col w-full" style={{ backgroundColor: "#FDF9F9", borderColor: "#E8CECE", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999", fontFamily: "var(--font-dm-sans)" }}>
+                What he was dealing with
               </p>
               <ul className="space-y-4">
                 {[
-                  "All utilities included — tenants ran everything at full tilt",
-                  "Skyrocketing hydro, water, and gas bills each month",
-                  "Rooms rented piecemeal, no structure, high churn",
-                  "Mortgage barely getting covered",
-                  "Owner doing all lawn and snow himself",
+                  { bold: "Watching money disappear every month.", detail: "Hydro, gas, and water bills climbing — and he was the one paying all of it." },
+                  { bold: "No idea what his property was actually earning.", detail: "Rooms rented to whoever showed up. No screening. No structure. Tenants coming and going." },
+                  { bold: "Doing the yard work himself.", detail: "Mowing, shovelling, hauling salt — on top of his full-time job. Every weekend." },
+                  { bold: "Dreading every phone call.", detail: "Broken this, leaking that, a tenant who won't pay. No system, no backup, no break." },
+                  { bold: "Mortgage barely covered.", detail: "After expenses, he was making nothing. Some months he was in the red." },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#C09090" }}>✕</span>
-                    <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-sm mt-0.5" style={{ color: "#C09090" }}>✕</span>
+                    <div>
+                      <span className="text-sm font-semibold block" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{item.bold}</span>
+                      <span className="text-sm" style={{ color: "#666", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <div className="p-8 border rounded-xl" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                After Prospera
+          <FadeIn delay={0.2} className="flex">
+            <div className="p-8 border rounded-xl flex flex-col w-full" style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#999", fontFamily: "var(--font-dm-sans)" }}>
+                What changed
               </p>
               <ul className="space-y-4">
                 {[
-                  "Legally separated upstairs and basement into two distinct units",
-                  "Utilities transferred to tenants' names — their bill, their problem",
-                  "Sourced used lawn and snow equipment, passed responsibility to tenants",
-                  "Owner now covers mortgage, bills, AND the management fee",
-                  "Structure in place — the problem can't come back",
+                  { bold: "Rent deposited on the 1st. Statement on the 5th.", detail: "No more chasing tenants. No more guessing what he earned. One clear report every month." },
+                  { bold: "Utilities off his books entirely.", detail: "We transferred everything to the tenants' names. Their usage, their bill." },
+                  { bold: "He gets a text every time something is fixed.", detail: "Maintenance handled, photo attached, cost listed. He knows what happened without lifting a finger." },
+                  { bold: "One dashboard for everything.", detail: "Rent status, maintenance history, lease dates, documents — all in one place. No spreadsheets, no guessing." },
+                  { bold: "He covers mortgage, bills, management fee — and still profits.", detail: "Restructured the property into two legal units. Income up. Expenses down. The math finally works." },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 text-xs mt-1" style={{ color: "#8B2030" }}>✓</span>
-                    <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{item}</span>
+                    <span className="shrink-0 text-sm mt-0.5" style={{ color: "#8B2030" }}>✓</span>
+                    <div>
+                      <span className="text-sm font-semibold block" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>{item.bold}</span>
+                      <span className="text-sm" style={{ color: "#666", fontFamily: "var(--font-dm-sans)" }}>{item.detail}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
