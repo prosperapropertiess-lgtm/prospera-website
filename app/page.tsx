@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
-import ParticleCanvas from "@/components/animations/ParticleCanvas";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
@@ -84,137 +83,116 @@ function HeroFadeIn({ delay, duration = 1000, children }: { delay: number; durat
   );
 }
 
-// ── Elegant Shape (floating glass pill) ───────────────────────────────────────
-
-function ElegantShape({ className, delay = 0, width = 400, height = 100, rotate = 0, gradient = "from-white/[0.08]" }: {
-  className?: string; delay?: number; width?: number; height?: number; rotate?: number; gradient?: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
-      animate={{ opacity: 1, y: 0, rotate }}
-      transition={{ duration: 2.4, delay, ease: [0.23, 0.86, 0.39, 0.96], opacity: { duration: 1.2 } }}
-      className={`absolute ${className || ""}`}
-    >
-      <motion.div
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        style={{ width, height }}
-        className="relative"
-      >
-        <div className={`absolute inset-0 rounded-full bg-gradient-to-r to-transparent ${gradient} backdrop-blur-[2px] border-2 border-white/[0.15] shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]`} />
-      </motion.div>
-    </motion.div>
-  );
-}
-
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
-const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
-
 function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Ensure video plays on mount (autoplay can be finicky)
+    const v = videoRef.current;
+    if (v) {
+      v.play().catch(() => {});
+    }
+  }, []);
+
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: "#1F2F3A", fontSize: "16px" }}>
-      {/* Two-panel layout: content left, founder photo right */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-12 min-h-screen items-center">
+    <section className="relative overflow-hidden" style={{ fontSize: "16px" }}>
+      {/* Video background — fills entire hero */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/hero-poster.jpg"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-          {/* Left — Copy */}
-          <div className="pt-32 pb-16 lg:py-0">
-            {/* Category identifier — instant clarity */}
-            <HeroFadeIn delay={0} duration={500}>
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-6"
-                style={{ color: "rgba(250,248,245,0.45)", fontFamily: "var(--font-dm-sans)" }}
+      {/* Dark overlay for text contrast */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom, rgba(31,47,58,0.7) 0%, rgba(31,47,58,0.55) 50%, rgba(31,47,58,0.85) 100%)", zIndex: 1 }}
+      />
+
+      {/* Content — centered over video */}
+      <div className="relative flex items-center justify-center min-h-screen px-5 sm:px-8" style={{ zIndex: 2 }}>
+        <div className="max-w-3xl text-center py-32">
+
+          {/* Eyebrow */}
+          <HeroFadeIn delay={0} duration={500}>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-6"
+              style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Property Management · London, Ontario
+            </p>
+          </HeroFadeIn>
+
+          {/* Heading */}
+          <AnimatedHeading
+            text={"What if your investment\nwas ACTUALLY passive?"}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6"
+            style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
+          />
+
+          {/* Subheading */}
+          <HeroFadeIn delay={800} duration={1000}>
+            <p
+              className="text-base md:text-lg mb-10 max-w-xl mx-auto"
+              style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
+            >
+              We manage your rental so you don't have to. Tenant screening, rent collection, maintenance, the 2am calls. Handled.
+            </p>
+          </HeroFadeIn>
+
+          {/* CTA */}
+          <HeroFadeIn delay={1100} duration={1000}>
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-5">
+              <Link
+                href="/contact"
+                className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                Property Management · London, Ontario
-              </p>
-            </HeroFadeIn>
-
-            {/* Heading */}
-            <AnimatedHeading
-              text={"What if your investment\nwas ACTUALLY passive?"}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6"
-              style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)", letterSpacing: "-0.03em", lineHeight: 1.1 }}
-            />
-
-            {/* Subheading */}
-            <HeroFadeIn delay={800} duration={1000}>
-              <p
-                className="text-base md:text-lg mb-8 max-w-lg"
-                style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
+                Get a Free Quote
+              </Link>
+              <a
+                href="tel:5196971227"
+                className="text-sm font-medium transition-opacity hover:opacity-70"
+                style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
               >
-                We manage your rental so you don't have to. Tenant screening, rent collection, maintenance, the 2am calls. Handled.
-              </p>
-            </HeroFadeIn>
+                or call (519) 697-1227
+              </a>
+            </div>
+            <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)" }}>
+              90-day guarantee · No contracts · We pick up the phone
+            </p>
+          </HeroFadeIn>
 
-            {/* CTA */}
-            <HeroFadeIn delay={1100} duration={1000}>
-              <div className="flex flex-wrap items-center gap-4 mb-6">
-                <Link
-                  href="/contact"
-                  className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  Get a Free Quote
-                </Link>
-                <a
-                  href="tel:5196971227"
-                  className="text-sm font-medium transition-opacity hover:opacity-70"
-                  style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  or call (519) 697-1227
-                </a>
-              </div>
-              <p className="text-xs" style={{ color: "rgba(250,248,245,0.35)" }}>
-                90-day guarantee · No contracts · We pick up the phone
-              </p>
-            </HeroFadeIn>
-
-            {/* Trust strip */}
-            <HeroFadeIn delay={1400} duration={1000}>
-              <div className="flex flex-wrap gap-6 mt-10 pt-8" style={{ borderTop: "1px solid rgba(250,248,245,0.1)" }}>
-                {[
-                  { num: "25+", label: "Tenants placed" },
-                  { num: "0", label: "Evictions" },
-                  { num: "21d", label: "Avg fill time" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <p className="text-2xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.num}</p>
-                    <p className="text-xs" style={{ color: "rgba(250,248,245,0.4)" }}>{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </HeroFadeIn>
-          </div>
-
-          {/* Right — Founder photo */}
-          <div className="hidden lg:flex items-end justify-center relative">
-            <HeroFadeIn delay={600} duration={1200}>
-              <div className="relative">
-                <img
-                  src="/ebin-founder.jpg"
-                  alt="Ebin Jaison — Owner, Prospera Properties"
-                  className="w-full max-w-md object-cover rounded-t-3xl"
-                  style={{ aspectRatio: "3/4", objectPosition: "top" }}
-                />
-                {/* Gradient fade at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(transparent, #1F2F3A)" }} />
-                {/* Floating card */}
-                <div
-                  className="absolute bottom-8 left-0 right-0 mx-4 p-4 rounded-xl"
-                  style={{ backgroundColor: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.1)" }}
-                >
-                  <p className="text-sm font-medium" style={{ color: "#FAF8F5" }}>Ebin Jaison</p>
-                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.5)" }}>Owner · Managing since 2021</p>
+          {/* Trust strip */}
+          <HeroFadeIn delay={1400} duration={1000}>
+            <div
+              className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-12 pt-8 mx-auto"
+              style={{ borderTop: "1px solid rgba(250,248,245,0.12)" }}
+            >
+              {[
+                { num: "25+", label: "Tenants placed" },
+                { num: "0", label: "Evictions" },
+                { num: "21d", label: "Avg fill time" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="text-2xl sm:text-3xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>{s.num}</p>
+                  <p className="text-xs" style={{ color: "rgba(250,248,245,0.45)" }}>{s.label}</p>
                 </div>
-              </div>
-            </HeroFadeIn>
-          </div>
+              ))}
+            </div>
+          </HeroFadeIn>
 
         </div>
       </div>
-
     </section>
   );
 }
