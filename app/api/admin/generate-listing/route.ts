@@ -79,35 +79,63 @@ WRITING RULES (follow every single one):
 - DO NOT use these AI tells: "nestled in the heart of," "stands as a testament," "vibrant community," "rich tapestry," "bustling," "thriving," negative parallelism ("It's not just X — it's Y"), or any sentence that starts with "Whether you're..."
 - Vary sentence length. Mix short punchy lines with longer descriptive ones. Read it out loud — it should sound like a person, not a template.
 
-REQUIRED STRUCTURE (use these as section headers in bold):
+REQUIRED STRUCTURE — use bold headers and bullet points throughout. This gets copy-pasted onto Kijiji and Facebook where formatting matters. Bullet points make it scannable on a phone at midnight.
 
 **Where You'll Shop**
-The big one. List EVERY major store from the data — Real Canadian Superstore, Costco, Walmart, Giant Tiger, No Frills, Food Basics, FreshCo, Metro, Shoppers Drug Mart, LCBO, Canadian Tire, Dollarama — whatever is in the data. Give the actual distance or drive time for each. Frame them as "your regular spots." This is what sells a location in ${body.city} — people want to know their Costco run is 5 minutes, not 25. Write 150-200 words on shopping alone.
+Open with 1-2 sentences about how convenient the shopping is here. Then list EVERY major store from the data as bullets:
+• Real Canadian Superstore — [distance/drive time]
+• Costco — [distance/drive time]
+• Walmart — [distance/drive time]
+• Giant Tiger — [distance/drive time]
+...and so on for every store in the data (Shoppers Drug Mart, LCBO, Canadian Tire, Dollarama, No Frills, Food Basics, FreshCo, Metro — whatever is in the data). Each bullet: store name, distance, and one short line about why it matters ("bulk buys without the cross-town drive" or "5 minutes for a pharmacy run"). Write 150-200 words.
 
 **Coffee & Quick Bites**
-Tim Hortons, Starbucks, McDonald's, Pizza Pizza, local cafés — whatever is in the data. Name them, give distances. Describe the morning routine. "Tim Hortons is [X] away — you're grabbing a double-double before you even hit the main road." Write 80-120 words.
+1-2 sentence intro about the morning routine, then bullet every coffee shop and fast food spot from the data:
+• Tim Hortons — [distance] ("double-double before you hit the road")
+• Starbucks — [distance]
+• McDonald's — [distance]
+• Pizza Pizza — [distance]
+...whatever is in the data. Write 80-120 words.
 
 **Getting Around**
-Bus routes by number and stop name. Walk score context (what that number actually means in practice). How long to get downtown. How long to get to the highway. If the walk score is high, say what that means — "you can walk to groceries, the pharmacy, and a coffee shop without touching your car." If it's low, be honest — "you'll want a car here, but the tradeoff is space and quiet." Write 100-150 words.
+1-2 sentences about overall transit access, then bullet the specifics:
+• Walk Score: [X]/100 — explain what that means practically
+• Transit Score: [X]/100
+• Bus Route [number] — stops at [stop name], [walk time] from the front door
+• [Additional bus routes as bullets]
+• Drive to downtown: [estimate based on location]
+If the walk score is high, say what that means in practice. If low, be honest about needing a car. Write 100-150 words.
 
 **Parks & Green Space**
-Name specific parks from the data with distances. What you'd actually do there — walking trails, playgrounds, sports fields, river paths. If there's a major park (Gibbons, Springbank, Pinafore) say so. Write 80-100 words.
+1-2 sentence intro, then bullet each park from the data:
+• [Park name] — [distance] (mention what's there: trails, playground, sports fields, river)
+Write 80-100 words.
 
 **The Neighbourhood**
-The character of the area. Is it a quiet residential street? A busy main road? Mature trees and older homes? New builds? What's the noise level at night? What does the street feel like on a Saturday afternoon? Write 100-120 words.
+No bullets here — this is the character section. 1-2 paragraphs about what the area actually feels like. Quiet residential? Busy? Mature trees? New builds? What's the noise level? What does Sunday morning look like on this street? Write 100-120 words.
 
-**Schools & Health**
-Name specific schools and hospitals/clinics from the data with distances. Don't editorialize about school quality — just name them and give distances. Write 60-80 words.
+**Schools & Clinics Nearby**
+Bullet format:
+• [School name] — [distance]
+• [Hospital/clinic name] — [distance]
+No opinions on quality. Just names and distances. Write 60-80 words.
 
-**The Bottom Line**
-2-3 sentences. Summarize the location's best practical advantage in plain language. "You're [X] from [major store], [X] from [park], and [X] from downtown. Everything you need for your week is within [X] minutes." No sales pitch, just the facts that close.
+**Ready to See It?**
+This is the call to action. 2-3 sentences, direct and confident. Something like:
+"${body.address} is [X] minutes from [biggest selling point store] and [X] from [best park]. Your weekly errands, your morning coffee, and your commute — all sorted. Book a viewing and see the place for yourself — prosperaproperties.co or call (519) 697-1227."
+Always end with the website and phone number. Make the reader feel like they'd be missing out if they don't at least come look.
 
 SEO REQUIREMENTS:
 - Naturally include these phrases at least once: "${body.city} rental", "rent in ${body.city}", "${body.address}"
 - Use the full proper names of stores (not abbreviations)
 - Include the neighbourhood/area name if known
 
-Write approximately 1000 words total. Every paragraph earns its place. Cut anything generic — if you could paste it into a listing for a different address and it would still make sense, it's too vague. Rewrite it with specifics from THIS location.`;
+FORMAT RULES:
+- Use bullet points (•) for all store/amenity lists
+- Use bold (**) for section headers
+- ~1000 words total
+- Every bullet earns its place — if you could paste it into a listing for a different address and it would still work, it's too vague
+- The call to action MUST include prosperaproperties.co and (519) 697-1227`;
 
     try {
       const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 2500, messages: [{ role: "user", content: vibePrompt }] });
