@@ -55,87 +55,107 @@ export async function POST(req: NextRequest) {
         ).join(", ")
       : "none found";
 
-    const vibePrompt = `You are writing the neighbourhood description for a rental property listing at ${body.address}, ${body.city}, Ontario. This will be published on prosperaproperties.co, copied to Facebook Marketplace, Kijiji, and other listing sites. It is the PRIMARY selling copy — the piece that makes someone say "yeah, I want to go see that place."
+    const vibePrompt = `You're writing the full listing description for a rental at ${body.address}, ${body.city}, Ontario, managed by Prospera Properties. This gets published on prosperaproperties.co, then copy-pasted to Kijiji, Facebook Marketplace, and other listing sites.
 
-This needs to be detailed, specific, and long enough to dominate search results. Target ~1000 words across 7-8 sections.
+Someone scrolling Kijiji at midnight on their phone should read this and think: "I need to see this place. And these people seem like they actually give a shit about their tenants."
+
+You're selling TWO things: the LOCATION and the EXPERIENCE of renting through Prospera.
+
+Write it so a third grader could follow it. Short sentences. Simple words. Bullet points for anything that's a list. No big paragraphs. No fancy language. Break everything down.
+
+TARGET: ~800-1000 words across 6 sections.
 
 LOCATION DATA:
 Walk Score: ${body.walk_score || "unknown"}/100
 Transit Score: ${body.transit_score || "unknown"}/100
 Bus Routes: ${busInfo}
 
-DAILY ESSENTIALS & MAJOR STORES NEARBY:
+STORES & DAILY ESSENTIALS NEARBY:
 ${sellingPoints.length ? sellingPoints.join("\n") : "No data available"}
 
-WALKABLE AMENITIES:
+OTHER AMENITIES:
 ${walkableAmenities.length ? walkableAmenities.join("\n") : "No data available"}
 
-WRITING RULES (follow every single one):
-- Voice: direct, plain-spoken, warm but not soft. Like someone who lives on this street telling a friend why it works. No hype words (stunning, vibrant, must-see, breathtaking, nestled, boasts). No exclamation marks. No em-dash pileups. No trailing participle phrases.
-- This is NOT a brochure. It reads like a real person describing what their week looks like living here. Someone reading this on Kijiji at midnight should be able to picture their actual daily routine.
-- Every store, park, bus route, and landmark gets mentioned BY NAME with distance or drive time.
-- DO NOT describe the ideal tenant (Ontario Human Rights Code). Describe the place, never who should live there.
-- DO NOT invent any facts. Only use the data provided above. If a store appears in the data, mention it. If it doesn't, don't make it up.
-- DO NOT use these AI tells: "nestled in the heart of," "stands as a testament," "vibrant community," "rich tapestry," "bustling," "thriving," negative parallelism ("It's not just X — it's Y"), or any sentence that starts with "Whether you're..."
-- Vary sentence length. Mix short punchy lines with longer descriptive ones. Read it out loud — it should sound like a person, not a template.
+WRITING RULES:
+- Write like you're texting a friend about why this spot is solid. Not a brochure. Not a sales pitch. Just real talk.
+- Short sentences. If a sentence has a comma, ask yourself if it should be two sentences instead.
+- No hype words: stunning, vibrant, must-see, breathtaking, nestled, boasts, pristine, charming, exquisite. None.
+- No exclamation marks.
+- No AI tells: "nestled in the heart of," "stands as a testament," "rich tapestry," "Whether you're a..."
+- DO NOT describe who should live here (Ontario Human Rights Code). Describe the place only.
+- DO NOT invent facts. Only use the data above.
 
-REQUIRED STRUCTURE — use bold headers and bullet points throughout. This gets copy-pasted onto Kijiji and Facebook where formatting matters. Bullet points make it scannable on a phone at midnight.
+===== STRUCTURE (follow this exactly) =====
 
-**Where You'll Shop**
-Open with 1-2 sentences about how convenient the shopping is here. Then list EVERY major store from the data as bullets:
-• Real Canadian Superstore — [distance/drive time]
-• Costco — [distance/drive time]
-• Walmart — [distance/drive time]
-• Giant Tiger — [distance/drive time]
-...and so on for every store in the data (Shoppers Drug Mart, LCBO, Canadian Tire, Dollarama, No Frills, Food Basics, FreshCo, Metro — whatever is in the data). Each bullet: store name, distance, and one short line about why it matters ("bulk buys without the cross-town drive" or "5 minutes for a pharmacy run"). Write 150-200 words.
+**What's Nearby**
 
-**Coffee & Quick Bites**
-1-2 sentence intro about the morning routine, then bullet every coffee shop and fast food spot from the data:
-• Tim Hortons — [distance] ("double-double before you hit the road")
-• Starbucks — [distance]
-• McDonald's — [distance]
-• Pizza Pizza — [distance]
-...whatever is in the data. Write 80-120 words.
+Start with ONE sentence: "Everything you need is close." Then bullet every single store from the data:
+
+• [Store Name] — [distance or drive time]
+• [Store Name] — [distance or drive time]
+• [Store Name] — [distance or drive time]
+(list ALL of them — Real Canadian Superstore, Costco, Walmart, Giant Tiger, No Frills, Shoppers Drug Mart, LCBO, Canadian Tire, Dollarama, Tim Hortons, Starbucks, McDonald's, Pizza Pizza — whatever is in the data)
+
+After the bullets, add 2-3 short sentences painting the picture: "Your Costco run is [X] minutes. Grab a coffee at Tim Hortons on the way back. Shoppers Drug Mart is right there when you need a pharmacy."
+
+---
 
 **Getting Around**
-1-2 sentences about overall transit access, then bullet the specifics:
-• Walk Score: [X]/100 — explain what that means practically
-• Transit Score: [X]/100
-• Bus Route [number] — stops at [stop name], [walk time] from the front door
-• [Additional bus routes as bullets]
-• Drive to downtown: [estimate based on location]
-If the walk score is high, say what that means in practice. If low, be honest about needing a car. Write 100-150 words.
 
-**Parks & Green Space**
-1-2 sentence intro, then bullet each park from the data:
-• [Park name] — [distance] (mention what's there: trails, playground, sports fields, river)
-Write 80-100 words.
+Bullet the transit info:
+• Walk Score: [X]/100 — then one sentence explaining what that actually means in plain English
+• Transit Score: [X]/100
+• Bus Route [number] at [stop name] — [walk time] from the door
+(list each route as a bullet)
+
+Then 2-3 sentences: Can you get to work without a car? How long to get downtown? Be honest. If you need a car, say so.
+
+---
 
 **The Neighbourhood**
-No bullets here — this is the character section. 1-2 paragraphs about what the area actually feels like. Quiet residential? Busy? Mature trees? New builds? What's the noise level? What does Sunday morning look like on this street? Write 100-120 words.
 
-**Schools & Clinics Nearby**
-Bullet format:
+3-5 short sentences. What does this street actually feel like? Quiet at night? Kids playing? Mature trees? What do you hear on a Saturday morning? Keep it real and specific to THIS area. No generic "great community" stuff.
+
+---
+
+**Parks & Schools Nearby**
+
+Bullet everything from the data:
+• [Park name] — [distance]
 • [School name] — [distance]
 • [Hospital/clinic name] — [distance]
-No opinions on quality. Just names and distances. Write 60-80 words.
 
-**Ready to See It?**
-This is the call to action. 2-3 sentences, direct and confident. Something like:
-"${body.address} is [X] minutes from [biggest selling point store] and [X] from [best park]. Your weekly errands, your morning coffee, and your commute — all sorted. Book a viewing and see the place for yourself — prosperaproperties.co or call (519) 697-1227."
-Always end with the website and phone number. Make the reader feel like they'd be missing out if they don't at least come look.
+1-2 sentences after the bullets if there's something worth saying about a major park.
 
-SEO REQUIREMENTS:
-- Naturally include these phrases at least once: "${body.city} rental", "rent in ${body.city}", "${body.address}"
-- Use the full proper names of stores (not abbreviations)
-- Include the neighbourhood/area name if known
+---
 
-FORMAT RULES:
-- Use bullet points (•) for all store/amenity lists
-- Use bold (**) for section headers
-- ~1000 words total
-- Every bullet earns its place — if you could paste it into a listing for a different address and it would still work, it's too vague
-- The call to action MUST include prosperaproperties.co and (519) 697-1227`;
+**Why Rent With Prospera Properties**
+
+This is the closer. This is where you sell the COMPANY. Write it as bullets. Every bullet should make someone think "damn, that's better than my current landlord."
+
+• Professionally managed — your landlord isn't some guy who doesn't answer the phone. Prospera Properties handles everything.
+• 24/7 emergency line — pipe bursts at 2am? You call, someone picks up. Every time.
+• Online everything — pay rent, submit maintenance requests, check your lease. All from your phone.
+• Fast maintenance — you report it, we're on it. No chasing. No "I'll get to it next week."
+• Applications reviewed within 24 hours — no waiting around wondering if you got the place.
+• Real people, not a call centre — Prospera is a local ${body.city} company. You're not a ticket number.
+• Transparent lease terms — no hidden fees, no surprises on move-in day. You know exactly what you're paying for.
+
+Write this section with confidence. These aren't maybes — these are how Prospera actually operates.
+
+---
+
+**Schedule a Viewing**
+
+3-4 sentences. Direct. Confident. Make them feel like this place won't sit empty long.
+
+"${body.address} is [X] from [biggest store] and [X] from [best park]. You've got your groceries, your coffee, your commute, and a management company that actually picks up the phone. Spots like this don't sit. Book a viewing at prosperaproperties.co or call (519) 697-1227."
+
+===== END STRUCTURE =====
+
+SEO: Naturally include "${body.city} rental" and "${body.address}" at least once each.
+
+FORMAT: Use • for bullets. Use ** for headers. Keep paragraphs to 2-3 sentences max. This gets read on a phone screen.`;
 
     try {
       const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 2500, messages: [{ role: "user", content: vibePrompt }] });
