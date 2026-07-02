@@ -333,7 +333,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
           value={data.neighbourhood_vibe}
           onChange={(e) => onChange({ neighbourhood_vibe: e.target.value })}
           placeholder="Click 'Auto-generate with AI' to create a detailed neighbourhood description. This is the primary selling copy for the location — it describes daily essentials, transit, neighbourhood character, and what living here actually feels like."
-          rows={10}
+          rows={24}
           className={inputCls + " resize-none"}
           style={{ backgroundColor: INPUT_BG, color: TEXT, border: `1px solid ${BORDER}` }}
         />

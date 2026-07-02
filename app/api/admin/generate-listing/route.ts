@@ -55,40 +55,62 @@ export async function POST(req: NextRequest) {
         ).join(", ")
       : "none found";
 
-    const vibePrompt = `You are writing the neighbourhood description for a rental property listing at ${body.address}, ${body.city}, Ontario. This is published on prosperaproperties.co.
+    const vibePrompt = `You are writing the neighbourhood description for a rental property listing at ${body.address}, ${body.city}, Ontario. This will be published on prosperaproperties.co, copied to Facebook Marketplace, Kijiji, and other listing sites. It is the PRIMARY selling copy — the piece that makes someone say "yeah, I want to go see that place."
 
-This description is the PRIMARY selling copy for this location. It needs to help a prospective tenant picture their daily life here, and it needs to rank in Google for "${body.city} rental" and "${body.address} rental" searches.
+This needs to be detailed, specific, and long enough to dominate search results. Target ~1000 words across 7-8 sections.
 
 LOCATION DATA:
 Walk Score: ${body.walk_score || "unknown"}/100
 Transit Score: ${body.transit_score || "unknown"}/100
 Bus Routes: ${busInfo}
 
-DAILY ESSENTIALS NEARBY (these are selling points — mention the specific names):
+DAILY ESSENTIALS & MAJOR STORES NEARBY:
 ${sellingPoints.length ? sellingPoints.join("\n") : "No data available"}
 
 WALKABLE AMENITIES:
 ${walkableAmenities.length ? walkableAmenities.join("\n") : "No data available"}
 
-COPYWRITING RULES (follow exactly):
-- Audience: a prospective tenant scanning many listings. They want to picture themselves living here.
-- Voice: direct, plain-spoken, warm but not soft. No hype words (stunning, vibrant, must-see, breathtaking, nestled, boasts). No exclamation marks.
-- Describe the EXPERIENCE of living here. What does a Tuesday morning look like? Where do you grab coffee? Where do you do your weekly grocery run? How do you get to work?
-- Name specific stores, parks, and transit stops by name. "Tim Hortons is a 4-minute walk" beats "coffee shops nearby."
-- Costco, Real Canadian Superstore, Walmart, Giant Tiger — these aren't "attractions." They're where people do their weekly shop. Frame them as practical daily-life conveniences: "Your weekly Costco run is a 5-minute drive" or "Real Canadian Superstore is right down the road."
-- Mention transit practically: "Route 10 stops at [stop name], [X] minute walk from the front door" — not just "transit nearby."
-- Include the neighbourhood character: is it quiet residential? Busy? Student-heavy? Family-oriented? What's the noise level?
+WRITING RULES (follow every single one):
+- Voice: direct, plain-spoken, warm but not soft. Like someone who lives on this street telling a friend why it works. No hype words (stunning, vibrant, must-see, breathtaking, nestled, boasts). No exclamation marks. No em-dash pileups. No trailing participle phrases.
+- This is NOT a brochure. It reads like a real person describing what their week looks like living here. Someone reading this on Kijiji at midnight should be able to picture their actual daily routine.
+- Every store, park, bus route, and landmark gets mentioned BY NAME with distance or drive time.
 - DO NOT describe the ideal tenant (Ontario Human Rights Code). Describe the place, never who should live there.
-- DO NOT invent any facts. Only use the data provided above.
-- DO NOT use these AI tells: "nestled in the heart of," "stands as a testament," "vibrant community," negative parallelism ("It's not just X — it's Y"), em-dash pileups, or trailing participle phrases.
+- DO NOT invent any facts. Only use the data provided above. If a store appears in the data, mention it. If it doesn't, don't make it up.
+- DO NOT use these AI tells: "nestled in the heart of," "stands as a testament," "vibrant community," "rich tapestry," "bustling," "thriving," negative parallelism ("It's not just X — it's Y"), or any sentence that starts with "Whether you're..."
+- Vary sentence length. Mix short punchy lines with longer descriptive ones. Read it out loud — it should sound like a person, not a template.
 
-FORMAT:
-Write 3-4 paragraphs, roughly 150-200 words total. First paragraph: the immediate surroundings and daily essentials (grocery, coffee, pharmacy). Second paragraph: getting around (transit, walkability, commute). Third paragraph: the neighbourhood feel and character. Optional fourth: parks, recreation, weekend life.
+REQUIRED STRUCTURE (use these as section headers in bold):
 
-Make it specific enough that someone from ${body.city} would read it and think "yeah, that's exactly what that area is like."`;
+**Where You'll Shop**
+The big one. List EVERY major store from the data — Real Canadian Superstore, Costco, Walmart, Giant Tiger, No Frills, Food Basics, FreshCo, Metro, Shoppers Drug Mart, LCBO, Canadian Tire, Dollarama — whatever is in the data. Give the actual distance or drive time for each. Frame them as "your regular spots." This is what sells a location in ${body.city} — people want to know their Costco run is 5 minutes, not 25. Write 150-200 words on shopping alone.
+
+**Coffee & Quick Bites**
+Tim Hortons, Starbucks, McDonald's, Pizza Pizza, local cafés — whatever is in the data. Name them, give distances. Describe the morning routine. "Tim Hortons is [X] away — you're grabbing a double-double before you even hit the main road." Write 80-120 words.
+
+**Getting Around**
+Bus routes by number and stop name. Walk score context (what that number actually means in practice). How long to get downtown. How long to get to the highway. If the walk score is high, say what that means — "you can walk to groceries, the pharmacy, and a coffee shop without touching your car." If it's low, be honest — "you'll want a car here, but the tradeoff is space and quiet." Write 100-150 words.
+
+**Parks & Green Space**
+Name specific parks from the data with distances. What you'd actually do there — walking trails, playgrounds, sports fields, river paths. If there's a major park (Gibbons, Springbank, Pinafore) say so. Write 80-100 words.
+
+**The Neighbourhood**
+The character of the area. Is it a quiet residential street? A busy main road? Mature trees and older homes? New builds? What's the noise level at night? What does the street feel like on a Saturday afternoon? Write 100-120 words.
+
+**Schools & Health**
+Name specific schools and hospitals/clinics from the data with distances. Don't editorialize about school quality — just name them and give distances. Write 60-80 words.
+
+**The Bottom Line**
+2-3 sentences. Summarize the location's best practical advantage in plain language. "You're [X] from [major store], [X] from [park], and [X] from downtown. Everything you need for your week is within [X] minutes." No sales pitch, just the facts that close.
+
+SEO REQUIREMENTS:
+- Naturally include these phrases at least once: "${body.city} rental", "rent in ${body.city}", "${body.address}"
+- Use the full proper names of stores (not abbreviations)
+- Include the neighbourhood/area name if known
+
+Write approximately 1000 words total. Every paragraph earns its place. Cut anything generic — if you could paste it into a listing for a different address and it would still make sense, it's too vague. Rewrite it with specifics from THIS location.`;
 
     try {
-      const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 800, messages: [{ role: "user", content: vibePrompt }] });
+      const msg = await client.messages.create({ model: "claude-haiku-4-5-20251001", max_tokens: 2500, messages: [{ role: "user", content: vibePrompt }] });
       const vibeText = msg.content[0].type === "text" ? msg.content[0].text : "";
       return NextResponse.json({ description: vibeText.trim() });
     } catch (err) {
