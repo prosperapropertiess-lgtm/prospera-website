@@ -196,64 +196,95 @@ export default function ListingsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((p, i) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
-                  <div className="bg-white rounded-xl overflow-hidden group hover:shadow-md transition-shadow" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
-                    {/* Image */}
-                    <div className="relative h-56 overflow-hidden">
-                      <Image
-                        src={getImage(p, i)}
-                        alt={p.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
-                      />
-                      <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                        <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#8B2030" }}>
-                          Available
-                        </span>
-                        {p.utilities_included && (
-                          <span className="text-white text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "#8B2030" }}>
-                            Utilities Incl.
-                          </span>
-                        )}
-                      </div>
-                      {p.pet_friendly && (
-                        <div className="absolute top-3 right-3">
-                          <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#333333" }}>🐾 Pet OK</span>
+                  <Link href={`/listings/${p.id}`} className="block">
+                    <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                      {/* Image with gradient overlay */}
+                      <div className="relative h-64 overflow-hidden">
+                        <Image
+                          src={getImage(p, i)}
+                          alt={p.title || `${p.bedrooms} bedroom rental in ${p.city}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                          unoptimized
+                        />
+                        {/* Bottom gradient for price readability */}
+                        <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
+
+                        {/* Price overlay on image */}
+                        <div className="absolute bottom-4 left-4">
+                          <p className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)", textShadow: "0 1px 3px rgba(0,0,0,0.3)" }}>
+                            ${p.price.toLocaleString()}<span className="text-sm font-normal opacity-80">/mo</span>
+                          </p>
                         </div>
-                      )}
-                    </div>
 
-                    {/* Details */}
-                    <div className="p-6">
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="text-xl font-medium leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{p.title}</h3>
+                        {/* Badges top-left */}
+                        <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+                          {p.available_date && (
+                            <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                              Available {new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
+                            </span>
+                          )}
+                          {!p.available_date && (
+                            <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                              Available Now
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Badges top-right */}
+                        <div className="absolute top-3 right-3 flex gap-1.5">
+                          {p.pet_friendly && (
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                              🐾 Pets OK
+                            </span>
+                          )}
+                          {p.utilities_included && (
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                              Utilities Incl.
+                            </span>
+                          )}
+                        </div>
                       </div>
-                      <p className="text-xs mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>{p.address}, {p.city}</p>
 
-                      {/* Specs */}
-                      <div className="flex gap-4 text-xs mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                        <span>🛏 {p.bedrooms} bed{p.bedrooms !== 1 ? "s" : ""}</span>
-                        <span>🚿 {p.bathrooms} bath{p.bathrooms !== 1 ? "s" : ""}</span>
-                        {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
-                        {p.parking && <span>🚗 Parking</span>}
-                      </div>
-
-                      <p className="text-xs leading-relaxed mb-5 line-clamp-2" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{p.description}</p>
-
-                      <div className="flex items-center justify-between">
-                        <p className="text-2xl font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-                          ${p.price.toLocaleString()}<span className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>/mo</span>
+                      {/* Content */}
+                      <div className="p-5">
+                        {/* Address first — it's what people scan for */}
+                        <p className="text-sm font-semibold mb-0.5" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                          {p.address}, {p.city}
                         </p>
-                        <Link
-                          href={`/listings/${p.id}`}
-                          className="px-4 py-2 text-xs rounded"
-                          style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                        <p className="text-xs mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                          {p.property_type ? p.property_type.charAt(0).toUpperCase() + p.property_type.slice(1) : "Rental"} · Managed by Prospera Properties
+                        </p>
+
+                        {/* Specs row — clean dividers */}
+                        <div className="flex items-center gap-0 text-sm mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                          <span className="font-medium">{p.bedrooms} Bed{p.bedrooms !== 1 ? "s" : ""}</span>
+                          <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
+                          <span className="font-medium">{p.bathrooms} Bath{p.bathrooms !== 1 ? "s" : ""}</span>
+                          {p.sqft && (
+                            <>
+                              <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
+                              <span>{p.sqft.toLocaleString()} sqft</span>
+                            </>
+                          )}
+                          {p.parking && (
+                            <>
+                              <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
+                              <span>Parking</span>
+                            </>
+                          )}
+                        </div>
+
+                        {/* CTA button — full width */}
+                        <div
+                          className="w-full py-3 text-center text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity group-hover:opacity-90"
+                          style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
-                          View Details
-                        </Link>
+                          View Details & Pre-Qualify
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </FadeIn>
               ))}
             </div>
