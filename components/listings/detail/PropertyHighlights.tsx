@@ -8,6 +8,27 @@ interface Props {
 
 const ICONS = ["🏠", "📍", "🚌", "🐾", "✅"];
 
+// Accent colors for top borders — one per card slot
+const BORDER_COLORS = [
+  "#8B2030",
+  "#1F5FA6",
+  "#2D7A4F",
+  "#7A5A2D",
+  "#1F2F3A",
+];
+
+function deriveLabel(text: string): string {
+  const lower = text.toLowerCase();
+  if (/bedroom|bathroom|sqft|space|room/.test(lower)) return "Lots of Room";
+  if (/walk|minute|close|nearby|steps/.test(lower)) return "Steps Away";
+  if (/bus|transit|route|commute|car/.test(lower)) return "Easy Commute";
+  if (/pet|dog|cat|yard|balcony/.test(lower)) return "Pet Friendly";
+  if (/managed|prospera|24\/7|maintenance|emergency/.test(lower)) return "Pro Managed";
+  if (/laundry|parking|garage|appliance/.test(lower)) return "Move-In Ready";
+  if (/park|trail|green/.test(lower)) return "Near Green Space";
+  return "Key Feature";
+}
+
 export default function PropertyHighlights({ property }: Props) {
   const highlights = property.ai_highlights ?? [];
   if (!highlights.length) return null;
@@ -37,22 +58,23 @@ export default function PropertyHighlights({ property }: Props) {
               className="bg-white rounded-2xl p-7 h-full"
               style={{
                 border: "1px solid #D8D2C8",
+                borderTop: `3px solid ${BORDER_COLORS[i % BORDER_COLORS.length]}`,
                 boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
               }}
             >
-              {/* Number + Icon */}
+              {/* Icon + Label */}
               <div className="flex items-center gap-3 mb-4">
                 <span
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-2xl"
                   style={{ backgroundColor: "#F7F5F2" }}
                 >
                   {ICONS[i] || "✅"}
                 </span>
                 <span
                   className="text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
+                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                 >
-                  Highlight {i + 1}
+                  {deriveLabel(highlight)}
                 </span>
               </div>
               <p

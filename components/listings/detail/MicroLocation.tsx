@@ -65,6 +65,40 @@ interface PlaceCategory {
   places: Array<{ name: string; distance?: string; minutes?: number }>;
 }
 
+const CATEGORY_EMOJI: Record<string, string> = {
+  "Grocery Stores": "🛒",
+  "Pharmacies": "💊",
+  "Gyms & Fitness": "🏋️",
+  "Transit Stops": "🚌",
+  "Schools": "🏫",
+  "Hospitals & Clinics": "🏥",
+  "Parks": "🌳",
+  "Restaurants": "🍽️",
+  "Cafés": "☕",
+  "Cafes": "☕",
+  "Banks": "🏦",
+  "Popular Spots": "⭐",
+};
+
+function getCategoryEmoji(name: string): string {
+  // Exact match first
+  if (CATEGORY_EMOJI[name]) return CATEGORY_EMOJI[name];
+  // Partial match fallback
+  const lower = name.toLowerCase();
+  if (lower.includes("grocer")) return "🛒";
+  if (lower.includes("pharma")) return "💊";
+  if (lower.includes("gym") || lower.includes("fitness")) return "🏋️";
+  if (lower.includes("transit") || lower.includes("bus") || lower.includes("stop")) return "🚌";
+  if (lower.includes("school")) return "🏫";
+  if (lower.includes("hospital") || lower.includes("clinic")) return "🏥";
+  if (lower.includes("park")) return "🌳";
+  if (lower.includes("restaurant")) return "🍽️";
+  if (lower.includes("café") || lower.includes("cafe") || lower.includes("coffee")) return "☕";
+  if (lower.includes("bank")) return "🏦";
+  if (lower.includes("popular") || lower.includes("spot")) return "⭐";
+  return "📍";
+}
+
 function WalkTab({ neighbourhoodData }: { neighbourhoodData: Record<string, unknown> }) {
   const categories = neighbourhoodData.categories as PlaceCategory[] | undefined;
   if (!categories?.length) {
@@ -84,9 +118,10 @@ function WalkTab({ neighbourhoodData }: { neighbourhoodData: Record<string, unkn
           style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
         >
           <h4
-            className="text-xs font-bold uppercase tracking-widest mb-3"
+            className="text-sm font-bold uppercase tracking-widest mb-3 flex items-center gap-2"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
+            <span className="text-base">{getCategoryEmoji(cat.name)}</span>
             {cat.name}
           </h4>
           <ul className="space-y-2">

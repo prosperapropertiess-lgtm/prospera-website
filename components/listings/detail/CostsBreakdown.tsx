@@ -155,6 +155,15 @@ export default function CostsBreakdown({ property }: Props) {
                 ))}
               </div>
             </div>
+            {/* Utilities disclaimer — only when utilities are NOT fully included */}
+            {!property.utilities_included && (
+              <p
+                className="text-xs mt-3"
+                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Utilities are extra and vary by usage.
+              </p>
+            )}
           </div>
         )}
 
