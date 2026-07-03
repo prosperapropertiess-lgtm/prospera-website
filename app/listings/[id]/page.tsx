@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseAdmin } from "@/lib/supabase";
 import ListingPage from "@/components/listings/detail/ListingPage";
 import JsonLd from "@/components/seo/JsonLd";
 
@@ -9,10 +9,7 @@ interface Props {
 }
 
 function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  return getSupabaseAdmin();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -16,6 +16,10 @@
   --sparkles-color: #ffffff;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --warm-bg:   #F7F5F2;
   --white:     #FFFFFF;

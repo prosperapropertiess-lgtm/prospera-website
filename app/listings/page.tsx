@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
-import { supabase } from "@/lib/supabase";
 
 interface Property {
   id: string;
@@ -55,13 +54,13 @@ export default function ListingsPage() {
       setLoading(true);
       setError(false);
       try {
-        let query = supabase.from("properties").select("*").eq("status", "published").eq("is_managed", true).eq("available", true).order("created_at", { ascending: false });
-        if (city !== "All Cities") query = query.eq("city", city);
-        if (petFriendly) query = query.eq("pet_friendly", true);
-        if (beds === "3+") query = query.gte("bedrooms", 3);
-        else if (beds !== "Any") query = query.eq("bedrooms", parseInt(beds));
-        query = query.lte("price", maxPrice);
-        const { data } = await query;
+        const params = new URLSearchParams();
+        if (city !== "All Cities") params.set("city", city);
+        if (petFriendly) params.set("petFriendly", "true");
+        if (beds !== "Any") params.set("beds", beds);
+        params.set("maxPrice", String(maxPrice));
+        const res = await fetch(`/api/listings?${params}`);
+        const data = await res.json();
         setProperties(data || []);
       } catch {
         setError(true);
