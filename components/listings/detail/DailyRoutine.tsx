@@ -1,7 +1,7 @@
 "use client";
 
 import { Sun, Cloud, Sunset, Moon } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -49,7 +49,7 @@ export default function DailyRoutine({ property }: Props) {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-5xl mx-auto">
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -62,13 +62,13 @@ export default function DailyRoutine({ property }: Props) {
           >
             A Day in This Home
           </h2>
-        </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {available.map((slot, i) => {
             const Icon = slot.icon;
             return (
-              <FadeIn key={slot.key} delay={i * 0.1}>
+              <div>
                 <div
                   className="rounded-xl p-8 h-full"
                   style={{
@@ -92,7 +92,7 @@ export default function DailyRoutine({ property }: Props) {
                     {sim[slot.key]}
                   </p>
                 </div>
-              </FadeIn>
+              </div>
             );
           })}
         </div>

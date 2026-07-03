@@ -1,7 +1,7 @@
 "use client";
 
 import { Thermometer, Car, Building2, Trees, Utensils, Check } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -82,7 +82,7 @@ export default function DetailedFeatures({ property }: Props) {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -95,11 +95,11 @@ export default function DetailedFeatures({ property }: Props) {
           >
             Everything Included
           </h2>
-        </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {sections.map((section, i) => (
-            <FadeIn key={section.title} delay={i * 0.07}>
+            <div>
               <div
                 className="rounded-xl p-7 h-full"
                 style={{
@@ -131,7 +131,7 @@ export default function DetailedFeatures({ property }: Props) {
                   ))}
                 </ul>
               </div>
-            </FadeIn>
+            </div>
           ))}
         </div>
       </div>

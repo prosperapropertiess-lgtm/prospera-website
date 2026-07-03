@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, X } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -39,7 +39,7 @@ export default function CostsBreakdown({ property }: Props) {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-4xl mx-auto">
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -52,11 +52,11 @@ export default function CostsBreakdown({ property }: Props) {
           >
             Cost Breakdown
           </h2>
-        </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
           {/* Monthly rent */}
-          <FadeIn delay={0.05}>
+          <div>
             <div
               className="rounded-xl p-8"
               style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
@@ -77,10 +77,10 @@ export default function CostsBreakdown({ property }: Props) {
                 per month
               </p>
             </div>
-          </FadeIn>
+          </div>
 
           {/* Move-in costs */}
-          <FadeIn delay={0.1}>
+          <div>
             <div
               className="rounded-xl p-8"
               style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
@@ -101,12 +101,12 @@ export default function CostsBreakdown({ property }: Props) {
                 First month + ${deposit?.toLocaleString()} deposit
               </p>
             </div>
-          </FadeIn>
+          </div>
         </div>
 
         {/* Utilities table */}
         {allUtilities.length > 0 && (
-          <FadeIn delay={0.15}>
+          <div>
             <div
               className="rounded-xl overflow-hidden"
               style={{ border: "1px solid #D8D2C8" }}
@@ -155,12 +155,12 @@ export default function CostsBreakdown({ property }: Props) {
                 ))}
               </div>
             </div>
-          </FadeIn>
+          </div>
         )}
 
         {/* Estimated monthly */}
         {tenantUtils.some((u) => u.avg_cost) && (
-          <FadeIn delay={0.2}>
+          <div>
             <div
               className="mt-5 rounded-xl p-6 flex items-center justify-between"
               style={{ backgroundColor: "#1F2F3A" }}
@@ -178,7 +178,7 @@ export default function CostsBreakdown({ property }: Props) {
                 ~${estimatedMonthly.toLocaleString()}
               </p>
             </div>
-          </FadeIn>
+          </div>
         )}
       </div>
     </section>

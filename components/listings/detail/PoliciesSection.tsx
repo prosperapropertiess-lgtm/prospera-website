@@ -1,7 +1,7 @@
 "use client";
 
 import { PawPrint, Cigarette, Clock, Users, UserCheck, CalendarDays } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -93,7 +93,7 @@ export default function PoliciesSection({ property }: Props) {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-4xl mx-auto">
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -106,9 +106,9 @@ export default function PoliciesSection({ property }: Props) {
           >
             Policies
           </h2>
-        </FadeIn>
+        </div>
 
-        <FadeIn delay={0.1}>
+        <div>
           <div
             className="bg-white rounded-xl overflow-hidden"
             style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
@@ -138,7 +138,7 @@ export default function PoliciesSection({ property }: Props) {
               ))}
             </div>
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

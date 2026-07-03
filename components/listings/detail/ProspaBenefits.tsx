@@ -1,4 +1,4 @@
-import FadeIn from "@/components/animations/FadeIn";
+
 import Link from "next/link";
 
 const BENEFITS = [
@@ -38,7 +38,7 @@ export default function ProspaBenefits() {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-5xl mx-auto">
-        <FadeIn>
+        <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "rgba(250,248,245,0.5)" }}>
             Didn&apos;t find the right fit?
           </p>
@@ -51,11 +51,11 @@ export default function ProspaBenefits() {
           <p className="text-base text-center max-w-2xl mx-auto mb-14 leading-relaxed" style={{ color: "rgba(250,248,245,0.7)" }}>
             New properties are added regularly. In the meantime, here&apos;s what every Prospera tenant gets — no matter which property you choose.
           </p>
-        </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {BENEFITS.map((b, i) => (
-            <FadeIn key={b.title} delay={i * 0.06}>
+            <div>
               <div
                 className="rounded-xl p-6 h-full"
                 style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
@@ -64,11 +64,11 @@ export default function ProspaBenefits() {
                 <h3 className="text-sm font-semibold mb-2" style={{ color: "#FAF8F5" }}>{b.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,245,0.6)" }}>{b.desc}</p>
               </div>
-            </FadeIn>
+            </div>
           ))}
         </div>
 
-        <FadeIn delay={0.4}>
+        <div>
           <div className="text-center mt-12 space-y-4">
             <Link
               href="/contact"
@@ -81,7 +81,7 @@ export default function ProspaBenefits() {
               Or call Ebin directly: <a href="tel:+15196971227" className="underline" style={{ color: "rgba(250,248,245,0.6)" }}>(519) 697-1227</a>
             </p>
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

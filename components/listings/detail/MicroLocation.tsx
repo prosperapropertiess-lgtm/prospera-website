@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Footprints, Bus, Car } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -225,7 +225,7 @@ export default function MicroLocation({ property }: Props) {
   return (
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -238,17 +238,17 @@ export default function MicroLocation({ property }: Props) {
           >
             Location & Access
           </h2>
-        </FadeIn>
+        </div>
 
         {/* Score circles */}
         {hasScores && (
-          <FadeIn>
+          <div>
             <div className="flex flex-wrap justify-center gap-10 mb-14">
               {walkScore !== null && <ScoreCircle score={walkScore} label="Walk Score" color="#2D7A4F" />}
               {transitScore !== null && <ScoreCircle score={transitScore} label="Transit Score" color="#1F5FA6" />}
               {bikeScore !== null && <ScoreCircle score={bikeScore} label="Bike Score" color="#7A5A2D" />}
             </div>
-          </FadeIn>
+          </div>
         )}
 
         {/* Tabs */}
@@ -273,7 +273,7 @@ export default function MicroLocation({ property }: Props) {
         </div>
 
         {/* Tab content */}
-        <FadeIn key={activeTab} direction="none">
+        <div>
           {activeTab === "walk" && (
             <WalkTab neighbourhoodData={neighbourhoodData ?? {}} />
           )}
@@ -283,7 +283,7 @@ export default function MicroLocation({ property }: Props) {
           {activeTab === "drive" && (
             <DriveTab neighbourhoodData={neighbourhoodData} />
           )}
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

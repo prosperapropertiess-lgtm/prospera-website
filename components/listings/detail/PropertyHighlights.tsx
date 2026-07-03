@@ -1,6 +1,6 @@
 "use client";
 
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -15,7 +15,7 @@ export default function PropertyHighlights({ property }: Props) {
     <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <FadeIn>
+        <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
             style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
@@ -28,12 +28,12 @@ export default function PropertyHighlights({ property }: Props) {
           >
             What Makes It Stand Out
           </h2>
-        </FadeIn>
+        </div>
 
         {/* Highlights grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {highlights.slice(0, 5).map((highlight, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
+            <div>
               <div
                 className="bg-white rounded-xl p-7 h-full border-l-4"
                 style={{
@@ -51,7 +51,7 @@ export default function PropertyHighlights({ property }: Props) {
                   {highlight}
                 </p>
               </div>
-            </FadeIn>
+            </div>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import FadeIn from "@/components/animations/FadeIn";
+
 import type { PropertyRecord } from "./ListingPage";
 
 const PROFILES: Record<string, { label: string; icon: string; desc: string }> = {
@@ -24,21 +24,21 @@ export default function IdealTenant({ property }: Props) {
   return (
     <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
-        <FadeIn>
+        <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#666666" }}>
             Perfect For
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
             This home is ideal for
           </h2>
-        </FadeIn>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {profiles.map((key, i) => {
             const profile = PROFILES[key];
             if (!profile) return null;
             return (
-              <FadeIn key={key} delay={i * 0.08}>
+              <div>
                 <div
                   className="bg-white rounded-xl p-6 border transition-all hover:shadow-md"
                   style={{ borderColor: "#D8D2C8" }}
@@ -49,7 +49,7 @@ export default function IdealTenant({ property }: Props) {
                   </div>
                   <p className="text-sm leading-relaxed" style={{ color: "#333333" }}>{profile.desc}</p>
                 </div>
-              </FadeIn>
+              </div>
             );
           })}
         </div>
