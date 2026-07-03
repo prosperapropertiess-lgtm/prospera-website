@@ -113,7 +113,9 @@ interface BusRoute {
   route?: string;
   name?: string;
   stop?: string;
+  stop_name?: string;
   frequency?: string;
+  walk_time?: string;
   destination?: string;
 }
 
@@ -139,21 +141,24 @@ function TransitTab({ busRoutes }: { busRoutes: BusRoute[] }) {
               className="text-xs font-bold px-2 py-1 rounded"
               style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              {route.route ?? route.name}
+              {route.route || route.name}
             </span>
           )}
           <div className="flex-1 min-w-0">
-            {route.stop && (
-              <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                {route.stop}
-              </p>
-            )}
+            <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+              {route.stop_name || route.stop || route.name || "Bus Stop"}
+            </p>
             {route.destination && (
               <p className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 → {route.destination}
               </p>
             )}
           </div>
+          {route.walk_time && (
+            <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+              {route.walk_time}
+            </span>
+          )}
           {route.frequency && (
             <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
               Every {route.frequency}
