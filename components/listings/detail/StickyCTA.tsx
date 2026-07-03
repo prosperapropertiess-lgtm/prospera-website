@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import type { PropertyRecord } from "./ListingPage";
 import PrequalifyForm from "./PrequalifyForm";
@@ -42,8 +41,6 @@ export default function StickyCTA({ property }: Props) {
     setPrequalified(true);
     setShowPrequalify(false);
   }
-
-  const applyUrl = property.buildium_link ?? "/contact";
 
   return (
     <>
@@ -86,43 +83,32 @@ export default function StickyCTA({ property }: Props) {
               </div>
 
               {/* CTAs */}
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-3 sm:gap-4">
+                {/* Book a Viewing — always available */}
+                <a
+                  href={`/contact?property=${encodeURIComponent(property.title)}&action=viewing`}
+                  className="px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded border"
+                  style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5" }}
+                >
+                  Book a Viewing
+                </a>
+
+                {/* Pre-Qualify — the main CTA */}
                 {prequalified ? (
-                  <a
-                    href={`/contact?property=${encodeURIComponent(property.title)}&prequalified=true`}
-                    className="text-xs font-medium uppercase tracking-widest border-b pb-px transition-opacity hover:opacity-60"
-                    style={{ color: "rgba(250,248,245,0.55)", borderColor: "rgba(250,248,245,0.2)" }}
+                  <span
+                    className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded flex items-center gap-2"
+                    style={{ backgroundColor: "rgba(250,248,245,0.15)", color: "#FAF8F5" }}
                   >
-                    Schedule Viewing
-                  </a>
+                    ✓ Pre-Qualified
+                  </span>
                 ) : (
                   <button
                     onClick={() => setShowPrequalify(true)}
-                    className="text-xs font-medium uppercase tracking-widest border-b pb-px transition-opacity hover:opacity-60"
-                    style={{ color: "rgba(250,248,245,0.55)", borderColor: "rgba(250,248,245,0.2)" }}
+                    className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-90 rounded"
+                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
                   >
-                    Pre-Qualify to View
+                    Pre-Qualify Now
                   </button>
-                )}
-
-                {property.buildium_link ? (
-                  <a
-                    href={property.buildium_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
-                  >
-                    Apply Now
-                  </a>
-                ) : (
-                  <Link
-                    href={applyUrl}
-                    className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded"
-                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
-                  >
-                    Apply Now
-                  </Link>
                 )}
               </div>
             </div>
