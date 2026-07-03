@@ -18,10 +18,23 @@ function buildPolicies(property: PropertyRecord): PolicyRow[] {
   const rows: PolicyRow[] = [];
 
   if (property.pet_friendly !== undefined || property.pet_policy) {
+    let petValue = property.pet_friendly ? "Pets allowed" : "No pets";
+    if (property.pet_policy && typeof property.pet_policy === "object") {
+      const pp = property.pet_policy as Record<string, unknown>;
+      const parts: string[] = [];
+      if (pp.cats) parts.push("Cats allowed");
+      if (pp.dogs) parts.push("Dogs allowed");
+      if (pp.other && typeof pp.other === "string") parts.push(pp.other);
+      if (pp.deposit) parts.push(`Pet deposit: $${pp.deposit}`);
+      if (pp.restrictions && typeof pp.restrictions === "string") parts.push(pp.restrictions);
+      if (parts.length) petValue = parts.join(". ");
+    } else if (typeof property.pet_policy === "string") {
+      petValue = property.pet_policy;
+    }
     rows.push({
       icon: <PawPrint size={16} />,
       label: "Pet Policy",
-      value: property.pet_policy ?? (property.pet_friendly ? "Pets allowed" : "No pets"),
+      value: petValue,
     });
   }
 
