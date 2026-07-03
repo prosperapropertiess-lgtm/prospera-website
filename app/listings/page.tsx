@@ -193,13 +193,13 @@ export default function ListingsPage() {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {filtered.map((p, i) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
                   <Link href={`/listings/${p.id}`} className="block">
                     <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
                       {/* Image with gradient overlay */}
-                      <div className="relative h-64 overflow-hidden">
+                      <div className="relative h-72 overflow-hidden">
                         <Image
                           src={getImage(p, i)}
                           alt={p.title || `${p.bedrooms} bedroom rental in ${p.city}`}
@@ -247,32 +247,23 @@ export default function ListingsPage() {
                       </div>
 
                       {/* Content */}
-                      <div className="p-5">
+                      <div className="p-6">
                         {/* Address first — it's what people scan for */}
-                        <p className="text-sm font-semibold mb-0.5" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                          {p.address}, {p.city}
+                        <p className="text-base font-semibold mb-0.5" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                          📍 {p.address}, {p.city}, ON
                         </p>
                         <p className="text-xs mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                           {p.property_type ? p.property_type.charAt(0).toUpperCase() + p.property_type.slice(1) : "Rental"} · Managed by Prospera Properties
                         </p>
 
                         {/* Specs row — clean dividers */}
-                        <div className="flex items-center gap-0 text-sm mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                          <span className="font-medium">{p.bedrooms} Bed{p.bedrooms !== 1 ? "s" : ""}</span>
-                          <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
-                          <span className="font-medium">{p.bathrooms} Bath{p.bathrooms !== 1 ? "s" : ""}</span>
-                          {p.sqft && (
-                            <>
-                              <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
-                              <span>{p.sqft.toLocaleString()} sqft</span>
-                            </>
-                          )}
-                          {p.parking && (
-                            <>
-                              <span className="mx-2" style={{ color: "#D8D2C8" }}>·</span>
-                              <span>Parking</span>
-                            </>
-                          )}
+                        <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                          <span>🛏 {p.bedrooms} Bed{p.bedrooms !== 1 ? "s" : ""}</span>
+                          <span>🚿 {p.bathrooms} Bath{p.bathrooms !== 1 ? "s" : ""}</span>
+                          {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
+                          {p.parking && <span>🚗 Parking</span>}
+                          {p.pet_friendly && <span>🐾 Pet Friendly</span>}
+                          {p.utilities_included && <span>⚡ Utilities Incl.</span>}
                         </div>
 
                         {/* CTA button — full width */}
