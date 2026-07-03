@@ -61,6 +61,7 @@ function Hero() {
         muted
         loop
         playsInline
+        preload="none"
         poster="/hero-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ zIndex: 0 }}
@@ -676,17 +677,15 @@ function CTABanner() {
           it&apos;s costing you to manage it yourself. Free analysis.
           No pressure. No sales pitch.
         </p>
-        <motion.div
-          animate={{
-            boxShadow: [
-              "0 0 0 0 rgba(139,32,48,0)",
-              "0 0 0 10px rgba(139,32,48,0.12)",
-              "0 0 0 0 rgba(139,32,48,0)",
-            ],
-          }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
-          className="inline-block rounded"
-        >
+        <style>{`
+          @keyframes cta-pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(139,32,48,0); }
+            50%  { box-shadow: 0 0 0 10px rgba(139,32,48,0.12); }
+            100% { box-shadow: 0 0 0 0 rgba(139,32,48,0); }
+          }
+          .cta-pulse { animation: cta-pulse 2.5s ease-out infinite; }
+        `}</style>
+        <div className="cta-pulse inline-block rounded">
           <Link
             href="/rent-analysis"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest btn-primary rounded"
@@ -694,7 +693,7 @@ function CTABanner() {
           >
             Get a Free Rental Analysis
           </Link>
-        </motion.div>
+        </div>
       </FadeIn>
     </section>
   );

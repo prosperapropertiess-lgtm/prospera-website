@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
@@ -19,34 +18,6 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isLP = pathname?.startsWith("/lp");
   const isTenants = pathname?.startsWith("/tenants");
   const isOnboard = pathname?.startsWith("/onboard");
-
-  useEffect(() => {
-    if (isLP || isAdmin || isOwners || isTenants) return;
-
-    let lenis: import("@studio-freight/lenis").default | null = null;
-    let raf: number;
-
-    import("@studio-freight/lenis").then(({ default: Lenis }) => {
-      lenis = new Lenis({
-        duration: 1.4,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo ease-out
-        orientation: "vertical",
-        smoothWheel: true,
-        touchMultiplier: 1.5,
-      });
-
-      function tick(time: number) {
-        lenis!.raf(time);
-        raf = requestAnimationFrame(tick);
-      }
-      raf = requestAnimationFrame(tick);
-    });
-
-    return () => {
-      cancelAnimationFrame(raf);
-      lenis?.destroy();
-    };
-  }, [isLP, isAdmin, isOwners, isTenants]);
 
   const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard;
 

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "motion/react";
 
 export interface Testimonial {
   text: string;
@@ -14,20 +13,27 @@ export const TestimonialsColumn = (props: {
   testimonials: Testimonial[];
   duration?: number;
 }) => {
+  const duration = props.duration || 10;
+
   return (
-    <div className={props.className}>
-      <motion.div
-        animate={{ translateY: "-50%" }}
-        transition={{
-          duration: props.duration || 10,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        className="flex flex-col gap-6 pb-6"
+    <div className={props.className} style={{ overflow: "hidden" }}>
+      <style>{`
+        @keyframes testimonials-scroll-${duration} {
+          from { transform: translateY(0); }
+          to   { transform: translateY(-50%); }
+        }
+        .testimonials-scroll-${duration} {
+          animation: testimonials-scroll-${duration} ${duration}s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .testimonials-scroll-${duration} { animation: none; }
+        }
+      `}</style>
+      <div
+        className={`testimonials-scroll-${duration} flex flex-col gap-6 pb-6`}
       >
-        {[...new Array(2).fill(0).map((_, index) => (
-          <React.Fragment key={index}>
+        {[0, 1].map((setIdx) => (
+          <React.Fragment key={setIdx}>
             {props.testimonials.map(({ text, image, name, role }, i) => (
               <div
                 key={i}
@@ -95,8 +101,8 @@ export const TestimonialsColumn = (props: {
               </div>
             ))}
           </React.Fragment>
-        ))]}
-      </motion.div>
+        ))}
+      </div>
     </div>
   );
 };
