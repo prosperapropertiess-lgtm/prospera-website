@@ -195,9 +195,9 @@ export default function ListingsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {filtered.map((p, i) => (
-                <FadeIn key={p.id} delay={i * 0.05}>
+                <div key={p.id}>
                   <Link href={`/listings/${p.id}`} className="block">
-                    <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                    <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-shadow duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
                       {/* Image with gradient overlay */}
                       <div className="relative h-72 overflow-hidden">
                         <Image
@@ -220,12 +220,12 @@ export default function ListingsPage() {
                         {/* Badges top-left */}
                         <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
                           {p.available_date && (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-3 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Available {new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
                             </span>
                           )}
                           {!p.available_date && (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-3 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Available Now
                             </span>
                           )}
@@ -234,12 +234,12 @@ export default function ListingsPage() {
                         {/* Badges top-right */}
                         <div className="absolute top-3 right-3 flex gap-1.5">
                           {p.pet_friendly && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               🐾 Pets OK
                             </span>
                           )}
                           {p.utilities_included && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium backdrop-blur-sm" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Utilities Incl.
                             </span>
                           )}
@@ -276,7 +276,7 @@ export default function ListingsPage() {
                       </div>
                     </div>
                   </Link>
-                </FadeIn>
+                </div>
               ))}
             </div>
           )}
