@@ -23,10 +23,12 @@ const TRANSPARENCY_LABELS: Record<string, string> = {
 };
 
 export default function TransparencySection({ property }: Props) {
-  const transparency = property.transparency as Record<string, string> | null;
+  const transparency = property.transparency as Record<string, unknown> | null;
   if (!transparency) return null;
 
-  const entries = Object.entries(transparency).filter(([, v]) => v);
+  const entries = Object.entries(transparency)
+    .filter(([, v]) => v != null && v !== "")
+    .map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)] as [string, string]);
   if (!entries.length) return null;
 
   return (

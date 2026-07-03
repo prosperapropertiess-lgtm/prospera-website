@@ -38,7 +38,7 @@ export default function IdealTenant({ property }: Props) {
             const profile = PROFILES[key];
             if (!profile) return null;
             return (
-              <div>
+              <div key={key}>
                 <div
                   className="bg-white rounded-xl p-6 border transition-all hover:shadow-md"
                   style={{ borderColor: "#D8D2C8" }}

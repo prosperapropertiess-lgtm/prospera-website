@@ -45,7 +45,7 @@ export interface PropertyRecord extends Record<string, unknown> {
   utilities_included?: boolean;
   utilities_list?: string[] | null;
   utilities_tenant_paid?: Array<{ name: string; avg_cost?: number }> | null;
-  pet_policy?: string | null;
+  pet_policy?: string | Record<string, unknown> | null;
   smoking_allowed?: boolean | null;
   quiet_hours?: string | null;
   max_occupants?: number | null;

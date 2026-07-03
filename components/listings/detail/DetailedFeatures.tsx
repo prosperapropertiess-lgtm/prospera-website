@@ -99,7 +99,7 @@ export default function DetailedFeatures({ property }: Props) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {sections.map((section, i) => (
-            <div>
+            <div key={section.title}>
               <div
                 className="rounded-xl p-7 h-full"
                 style={{

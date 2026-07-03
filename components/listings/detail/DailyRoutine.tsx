@@ -40,10 +40,11 @@ const TIME_SLOTS = [
 ] as const;
 
 export default function DailyRoutine({ property }: Props) {
-  const sim = property.life_simulation as Record<string, string> | null;
+  const sim = property.life_simulation as Record<string, unknown> | null;
   if (!sim) return null;
 
-  const available = TIME_SLOTS.filter((slot) => sim[slot.key]);
+  // Only show slots where the value is a non-empty string
+  const available = TIME_SLOTS.filter((slot) => typeof sim[slot.key] === "string" && sim[slot.key]);
   if (!available.length) return null;
 
   return (
@@ -68,7 +69,7 @@ export default function DailyRoutine({ property }: Props) {
           {available.map((slot, i) => {
             const Icon = slot.icon;
             return (
-              <div>
+              <div key={slot.key}>
                 <div
                   className="rounded-xl p-8 h-full"
                   style={{
@@ -89,7 +90,7 @@ export default function DailyRoutine({ property }: Props) {
                     className="text-base leading-relaxed"
                     style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
                   >
-                    {sim[slot.key]}
+                    {sim[slot.key] as string}
                   </p>
                 </div>
               </div>

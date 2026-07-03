@@ -55,7 +55,7 @@ export default function ProspaBenefits() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {BENEFITS.map((b, i) => (
-            <div>
+            <div key={b.title}>
               <div
                 className="rounded-xl p-6 h-full"
                 style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}

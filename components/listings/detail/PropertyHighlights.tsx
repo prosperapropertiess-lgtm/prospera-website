@@ -33,7 +33,7 @@ export default function PropertyHighlights({ property }: Props) {
         {/* Highlights grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {highlights.slice(0, 5).map((highlight, i) => (
-            <div>
+            <div key={i}>
               <div
                 className="bg-white rounded-xl p-7 h-full border-l-4"
                 style={{
