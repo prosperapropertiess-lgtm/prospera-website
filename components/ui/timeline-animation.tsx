@@ -39,7 +39,8 @@ export function TimelineContent({
       className={cn(className)}
       style={style}
       onClick={onClick}
-      initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+      // opacity always 1 — content must never be hidden
+      initial={{ opacity: 1, y: 16, filter: "blur(0px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true }}
       transition={{

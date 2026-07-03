@@ -13,7 +13,8 @@ interface CounterAnimationProps {
 /**
  * SEO-safe CounterAnimation:
  * - Server-rendered HTML shows the REAL target number (visible to crawlers)
- * - After hydration, animates from 0 up to the target when element enters view
+ * - After hydration, animates from 80% of target up to the target when in view
+ * - NEVER resets to 0 — content is always visible and readable
  * - Respects prefers-reduced-motion (just shows the target, no animation)
  */
 export default function CounterAnimation({
@@ -24,7 +25,7 @@ export default function CounterAnimation({
   className,
 }: CounterAnimationProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  // Start at target so SSR HTML shows real number
+  // Start at target so SSR HTML shows real number — never reset to 0
   const [count, setCount] = useState(target);
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -36,8 +37,8 @@ export default function CounterAnimation({
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    // Reset to 0 after hydration, then animate when in view
-    setCount(0);
+    // Start from 80% of target (always readable) and animate to 100%
+    const startValue = target === 0 ? 0 : Math.floor(target * 0.8);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -50,13 +51,16 @@ export default function CounterAnimation({
             return;
           }
 
+          setCount(startValue);
+
           const startTime = performance.now();
           let raf: number;
           const tick = (now: number) => {
             const elapsed = (now - startTime) / 1000;
             const t = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - t, 3); // cubic ease-out
-            setCount(Math.round(eased * target));
+            // Animate from startValue to target
+            setCount(Math.round(startValue + eased * (target - startValue)));
             if (t < 1) raf = requestAnimationFrame(tick);
           };
           raf = requestAnimationFrame(tick);

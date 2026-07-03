@@ -18,14 +18,15 @@ function AnimatedNum({ value, suffix = "" }: { value: number; suffix?: string })
     started.current = true;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-    // Reset to 0 then animate up
-    setCount(0);
+    // Animate from 80% of value to 100% — NEVER reset to 0
+    const startValue = Math.floor(value * 0.8);
+    setCount(startValue);
     const start = performance.now();
     const duration = 700;
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
-      setCount(Math.round(eased * value));
+      setCount(Math.round(startValue + eased * (value - startValue)));
       if (t < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

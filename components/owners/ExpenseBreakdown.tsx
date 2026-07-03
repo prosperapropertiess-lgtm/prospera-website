@@ -63,7 +63,8 @@ export function ExpenseBreakdown({ history, currentYear }: Props) {
         return (
           <motion.div
             key={cat}
-            initial={{ opacity: 0, x: -10 }}
+            // opacity always 1 — content must never be hidden
+            initial={{ opacity: 1, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.05, ease: [0.23, 1, 0.32, 1] }}

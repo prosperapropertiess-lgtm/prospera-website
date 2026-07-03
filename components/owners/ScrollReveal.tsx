@@ -20,7 +20,8 @@ export function ScrollReveal({ children, delay = 0, distance = 20, style }: Prop
   return (
     <motion.div
       style={style}
-      initial={{ opacity: 0, y: distance }}
+      // opacity always 1 — content must never be hidden
+      initial={{ opacity: 1, y: distance }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{

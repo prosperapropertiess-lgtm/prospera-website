@@ -41,16 +41,17 @@ function AnimNum({ prefix = "", value, suffix = "", color }: { prefix?: string; 
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
-    // After hydration: reset to 0 and animate up
+    // Animate from 80% of value to 100% — NEVER reset to 0
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-    setCount(0);
+    const startValue = Math.floor(value * 0.8);
+    setCount(startValue);
     const start = performance.now();
     const duration = 800;
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 3);
-      setCount(Math.round(eased * value));
+      setCount(Math.round(startValue + eased * (value - startValue)));
       if (t < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

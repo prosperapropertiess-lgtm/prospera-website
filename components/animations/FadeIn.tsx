@@ -10,6 +10,13 @@ interface FadeInProps {
   direction?: "up" | "down" | "left" | "right" | "none";
 }
 
+/**
+ * FadeIn — SEO-safe scroll animation.
+ *
+ * Content is ALWAYS visible (opacity: 1). Only applies a subtle translateY
+ * transform on scroll. No opacity animation — nothing is ever hidden.
+ * Respects prefers-reduced-motion.
+ */
 export default function FadeIn({
   children,
   delay = 0,
@@ -20,11 +27,11 @@ export default function FadeIn({
   const reduceMotion = useReducedMotion();
 
   const offset = {
-    up: { y: 20 },
-    down: { y: -20 },
-    left: { x: 20 },
-    right: { x: -20 },
-    none: {},
+    up: { y: 12 },
+    down: { y: -12 },
+    left: { x: 12 },
+    right: { x: -12 },
+    none: { y: 0 },
   }[direction];
 
   if (reduceMotion) {
@@ -34,7 +41,8 @@ export default function FadeIn({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, ...offset }}
+      // opacity always 1 — content must never be hidden
+      initial={{ opacity: 1, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{
