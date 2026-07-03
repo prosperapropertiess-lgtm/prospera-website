@@ -263,7 +263,7 @@ export default function MicroLocation({ property }: Props) {
   const hasScores = walkScore !== null || transitScore !== null || bikeScore !== null;
 
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
         <div>
           <p

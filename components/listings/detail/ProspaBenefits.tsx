@@ -36,7 +36,7 @@ const BENEFITS = [
 
 export default function ProspaBenefits() {
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
+    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-5xl mx-auto">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "rgba(250,248,245,0.5)" }}>
@@ -48,13 +48,27 @@ export default function ProspaBenefits() {
           >
             More listings coming soon.
           </h2>
-          <p className="text-base text-center max-w-2xl mx-auto mb-14 leading-relaxed" style={{ color: "rgba(250,248,245,0.7)" }}>
+          <p className="text-base text-center max-w-2xl mx-auto mb-8 md:mb-14 leading-relaxed" style={{ color: "rgba(250,248,245,0.7)" }}>
             New properties are added regularly. In the meantime, here&apos;s what every Prospera tenant gets — no matter which property you choose.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {BENEFITS.map((b, i) => (
+        {/* Mobile: compact bullet list */}
+        <ul className="md:hidden space-y-4 mb-8">
+          {BENEFITS.map((b) => (
+            <li key={b.title} className="flex items-start gap-3">
+              <span className="text-xl shrink-0 mt-0.5">{b.icon}</span>
+              <div>
+                <p className="text-sm font-semibold" style={{ color: "#FAF8F5" }}>{b.title}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,245,0.6)" }}>{b.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop: card grid */}
+        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {BENEFITS.map((b) => (
             <div key={b.title}>
               <div
                 className="rounded-xl p-6 h-full"
@@ -69,7 +83,7 @@ export default function ProspaBenefits() {
         </div>
 
         <div>
-          <div className="text-center mt-12 space-y-4">
+          <div className="text-center mt-8 md:mt-12 space-y-4">
             <Link
               href="/contact"
               className="inline-block px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"

@@ -19,6 +19,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isTenants = pathname?.startsWith("/tenants");
   const isOnboard = pathname?.startsWith("/onboard");
 
+  const isListingDetail = /^\/listings\/[^/]+/.test(pathname ?? "");
   const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard;
 
   return (
@@ -29,7 +30,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       {!isPortal && <Footer />}
       {!isPortal && <PopupController />}
       {!isPortal && <ChatWidget />}
-      {!isPortal && <StickyBottomCTA />}
+      {!isPortal && !isListingDetail && <StickyBottomCTA />}
       {!isPortal && <RentActivityToast />}
     </>
   );

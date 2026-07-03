@@ -48,7 +48,7 @@ export default function DailyRoutine({ property }: Props) {
   if (!available.length) return null;
 
   return (
-    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
+    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-5xl mx-auto">
         <div>
           <p
