@@ -38,16 +38,11 @@ export default function PropertiesPage() {
   const router = useRouter();
 
   async function load() {
-    const { createClient } = await import("@supabase/supabase-js");
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-    const { data } = await supabase
-      .from("properties")
-      .select("id, title, address, city, price, bedrooms, bathrooms, available, images, status, wizard_step")
-      .order("created_at", { ascending: false });
-    setProperties(data || []);
+    const res = await fetch("/api/admin/properties/list", { credentials: "include" });
+    if (res.ok) {
+      const data = await res.json();
+      setProperties(data || []);
+    }
     setLoading(false);
   }
 
