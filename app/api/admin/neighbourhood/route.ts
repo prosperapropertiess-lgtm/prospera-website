@@ -60,7 +60,10 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 function estimateWalkTime(distKm: number): string {
-  const minutes = Math.round(distKm / 0.08); // ~5 km/h walking speed
+  // Straight-line × 1.4 circuity factor = realistic walking distance
+  // Walking speed ~4.5 km/h = 0.075 km/min
+  const walkingDistKm = distKm * 1.4;
+  const minutes = Math.round(walkingDistKm / 0.075);
   if (minutes <= 1) return "1 min walk";
   return `${minutes} min walk`;
 }
@@ -167,17 +170,27 @@ export async function POST(req: NextRequest) {
       const data = await res.json();
 
       if (data.status === "OK" && data.results) {
-        const results = (data.results as PlaceResult[]).slice(0, 8).map((p) => {
-          const dist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+        // Filter out obviously wrong results (pest control in parks, driving school in schools, etc.)
+        const JUNK_KEYWORDS = ["mosquito", "pest control", "exterminator", "driving school", "young drivers", "speech level", "advanced teacher training"];
+        const filtered = (data.results as PlaceResult[]).filter((p) => {
+          const nameLower = p.name.toLowerCase();
+          return !JUNK_KEYWORDS.some((junk) => nameLower.includes(junk));
+        });
+
+        const results = filtered.slice(0, 8).map((p) => {
+          const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+          const walkingDist = straightLineDist * 1.4; // realistic walking distance
+          // Skip places with 0 distance (likely mislocated)
+          if (straightLineDist < 0.01) return null;
           return {
             name: p.name,
             vicinity: p.vicinity,
             rating: p.rating || null,
             place_id: p.place_id,
-            distance: `${(dist * 1000).toFixed(0)}m`,
-            walk_time: estimateWalkTime(dist),
+            distance: `${(walkingDist * 1000).toFixed(0)}m`,
+            walk_time: estimateWalkTime(straightLineDist),
           };
-        });
+        }).filter((r): r is NonNullable<typeof r> => r !== null);
 
         // Sort by distance
         results.sort((a, b) => parseInt(a.distance) - parseInt(b.distance));
@@ -231,14 +244,15 @@ export async function POST(req: NextRequest) {
         if (result.status === "fulfilled" && result.value && !seenPlaceIds.has(result.value.place_id)) {
           const p = result.value;
           seenPlaceIds.add(p.place_id);
-          const dist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+          const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+          const walkingDist = straightLineDist * 1.4;
           popularResults.push({
             name: p.name,
             vicinity: p.vicinity,
             rating: p.rating || null,
             place_id: p.place_id,
-            distance: `${(dist * 1000).toFixed(0)}m`,
-            walk_time: dist <= 2 ? estimateWalkTime(dist) : `${(dist).toFixed(1)} km`,
+            distance: `${(walkingDist * 1000).toFixed(0)}m`,
+            walk_time: walkingDist <= 2 ? estimateWalkTime(straightLineDist) : `${(walkingDist).toFixed(1)} km drive`,
           });
         }
       }
