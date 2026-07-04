@@ -60,12 +60,50 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 function estimateWalkTime(distKm: number): string {
-  // Straight-line × 1.4 circuity factor = realistic walking distance
-  // Walking speed ~4.5 km/h = 0.075 km/min
   const walkingDistKm = distKm * 1.4;
   const minutes = Math.round(walkingDistKm / 0.075);
   if (minutes <= 1) return "1 min walk";
   return `${minutes} min walk`;
+}
+
+/**
+ * Get REAL walking distances from Google Distance Matrix API.
+ * One call handles up to 25 destinations.
+ */
+async function getRealWalkingDistances(
+  originLat: number,
+  originLng: number,
+  places: { name: string; lat: number; lng: number }[],
+  apiKey: string
+): Promise<Map<string, { distance: string; walk_time: string }>> {
+  const result = new Map<string, { distance: string; walk_time: string }>();
+  if (!places.length) return result;
+
+  // Distance Matrix supports up to 25 destinations per call
+  const batch = places.slice(0, 25);
+  const destinations = batch.map((p) => `${p.lat},${p.lng}`).join("|");
+  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originLat},${originLng}&destinations=${destinations}&mode=walking&key=${apiKey}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status === "OK" && data.rows?.[0]?.elements) {
+      data.rows[0].elements.forEach((el: { status: string; distance?: { text: string; value: number }; duration?: { text: string; value: number } }, i: number) => {
+        if (el.status === "OK" && el.distance && el.duration) {
+          const key = `${batch[i].lat},${batch[i].lng}`;
+          result.set(key, {
+            distance: el.distance.text, // "1.2 km" or "350 m"
+            walk_time: el.duration.text, // "15 mins" or "4 mins"
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.error("[neighbourhood] Distance Matrix API failed:", err);
+  }
+
+  return result;
 }
 
 export async function POST(req: NextRequest) {
@@ -177,23 +215,41 @@ export async function POST(req: NextRequest) {
           return !JUNK_KEYWORDS.some((junk) => nameLower.includes(junk));
         });
 
-        const results = filtered.slice(0, 8).map((p) => {
+        // Filter places with 0 distance (mislocated)
+        const validPlaces = filtered.slice(0, 8).filter((p) => {
+          const d = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+          return d >= 0.01;
+        });
+
+        // Get REAL walking distances from Google
+        const realDistances = await getRealWalkingDistances(
+          latitude, longitude,
+          validPlaces.map((p) => ({ name: p.name, lat: p.geometry.location.lat, lng: p.geometry.location.lng })),
+          GOOGLE_API_KEY
+        );
+
+        const results = validPlaces.map((p) => {
+          const key = `${p.geometry.location.lat},${p.geometry.location.lng}`;
+          const real = realDistances.get(key);
           const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
-          const walkingDist = straightLineDist * 1.4; // realistic walking distance
-          // Skip places with 0 distance (likely mislocated)
-          if (straightLineDist < 0.01) return null;
           return {
             name: p.name,
             vicinity: p.vicinity,
             rating: p.rating || null,
             place_id: p.place_id,
-            distance: `${(walkingDist * 1000).toFixed(0)}m`,
-            walk_time: estimateWalkTime(straightLineDist),
+            distance: real?.distance || `${(straightLineDist * 1400).toFixed(0)}m`,
+            walk_time: real?.walk_time ? `${real.walk_time} walk` : estimateWalkTime(straightLineDist),
           };
-        }).filter((r): r is NonNullable<typeof r> => r !== null);
+        });
 
-        // Sort by distance
-        results.sort((a, b) => parseInt(a.distance) - parseInt(b.distance));
+        // Sort by actual distance (parse the distance string)
+        results.sort((a, b) => {
+          const parseM = (s: string) => {
+            if (s.includes("km")) return parseFloat(s) * 1000;
+            return parseInt(s) || 0;
+          };
+          return parseM(a.distance) - parseM(b.distance);
+        });
         places[cat.type] = results;
 
         // Cache the results
@@ -244,22 +300,55 @@ export async function POST(req: NextRequest) {
         if (result.status === "fulfilled" && result.value && !seenPlaceIds.has(result.value.place_id)) {
           const p = result.value;
           seenPlaceIds.add(p.place_id);
-          const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
-          const walkingDist = straightLineDist * 1.4;
+          // Store temporarily with coordinates for Distance Matrix lookup
           popularResults.push({
             name: p.name,
             vicinity: p.vicinity,
             rating: p.rating || null,
             place_id: p.place_id,
-            distance: `${(walkingDist * 1000).toFixed(0)}m`,
-            walk_time: walkingDist <= 2 ? estimateWalkTime(straightLineDist) : `${(walkingDist).toFixed(1)} km drive`,
-          });
+            distance: "", // will be filled by Distance Matrix
+            walk_time: "",
+            _lat: p.geometry.location.lat,
+            _lng: p.geometry.location.lng,
+          } as typeof popularResults[0] & { _lat: number; _lng: number });
         }
       }
     }
 
+    // Get REAL distances from Google Distance Matrix for all popular spots
+    const popPlaces = (popularResults as (typeof popularResults[0] & { _lat?: number; _lng?: number })[])
+      .filter((p) => p._lat && p._lng)
+      .map((p) => ({ name: p.name, lat: p._lat!, lng: p._lng! }));
+
+    const realPopDistances = await getRealWalkingDistances(latitude, longitude, popPlaces, GOOGLE_API_KEY);
+
+    for (const p of popularResults as (typeof popularResults[0] & { _lat?: number; _lng?: number })[]) {
+      if (p._lat && p._lng) {
+        const key = `${p._lat},${p._lng}`;
+        const real = realPopDistances.get(key);
+        if (real) {
+          p.distance = real.distance;
+          // If walking time > 30 min, show as drive instead
+          const mins = parseInt(real.walk_time);
+          p.walk_time = mins > 30 ? `${Math.round(mins / 5)} min drive` : `${real.walk_time} walk`;
+        } else {
+          const d = haversineDistance(latitude, longitude, p._lat, p._lng);
+          p.distance = `${(d * 1400).toFixed(0)}m`;
+          p.walk_time = d * 1.4 > 2 ? `${(d * 1.4).toFixed(1)} km drive` : estimateWalkTime(d);
+        }
+        delete p._lat;
+        delete p._lng;
+      }
+    }
+
     // Sort by distance
-    popularResults.sort((a, b) => parseInt(a.distance) - parseInt(b.distance));
+    popularResults.sort((a, b) => {
+      const parseM = (s: string) => {
+        if (s.includes("km")) return parseFloat(s) * 1000;
+        return parseInt(s) || 0;
+      };
+      return parseM(a.distance) - parseM(b.distance);
+    });
     places["popular_spots"] = popularResults;
 
     // Cache
