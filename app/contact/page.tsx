@@ -132,8 +132,8 @@ export default function ContactPage() {
                     <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputClass} style={inputStyle} placeholder="your@email.com" />
                   </div>
                   <div>
-                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Phone</label>
-                    <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputClass} style={inputStyle} placeholder="(519) 000-0000" />
+                    <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Phone <span style={{ color: "#8B2030" }}>*</span></label>
+                    <input required type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputClass} style={inputStyle} placeholder="(519) 000-0000" />
                   </div>
                   <div>
                     <label className="text-xs mb-1.5 block" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>City</label>
