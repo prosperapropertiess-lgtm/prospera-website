@@ -19,8 +19,10 @@ import {
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
+  { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
