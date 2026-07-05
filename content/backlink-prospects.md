@@ -1038,3 +1038,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Ontario general-purpose information site. Not a PM company. Contact: info@allontario.ca. Outreach angle: resource mention for their landlord content, position Prospera's guides as locally specific SW Ontario resources. Keep email concise and direct.
 
 ---
+
+## Tenon10 — Ontario Landlord Blog
+- url: https://www.tenon10.com
+- type: blog
+- why: Active Ontario landlord education blog with current 2026 guides on the Standard Lease, becoming a landlord, and rental law; Prospera can offer a guest post on SW Ontario operational realities for the self-managing landlord audience Tenon10 reaches.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://www.tenon10.com/contact
+- site_focus: Ontario landlord education blog publishing practical, current guides for small and first-time landlords — topics include the Standard Lease 2026, Bill 60 changes, N12 procedures, and becoming a landlord for the first time. Content targets self-managing Ontario landlords researching compliance and tenant management.
+- hook: Tenon10's audience is self-managing Ontario landlords who are actively trying to do things right — Prospera's guest post on "mistakes we see most in SW Ontario" or "when self-management stops working" converts their research-mode readers into potential management clients at the exact moment they're questioning DIY.
+- specific_content: "Becoming a Landlord in Ontario: 2026 First-Timer's Guide" and "Ontario Standard Lease 2026: The Complete Guide for Landlords" — guides that reach exactly the landlord audience Prospera serves in London, St. Thomas, and Strathroy.
+- researcher_notes: Not a property management company — editorial blog only. Site returns 403 to automated fetch; research drawn from search index results and cached snippets. Contact via website form. Outreach angle: guest post contribution with a practical SW Ontario angle.
+
+---
+
+## The Ontario Landlord Toolbox — Quentin D'Souza
+- url: https://www.theontariolandlordtoolbox.com
+- type: blog
+- why: Award-winning Ontario real estate investor educator (Quentin D'Souza) with a national audience of Ontario landlords; a guest contribution or resource mention on professional management in SW Ontario reaches a highly qualified investor audience actively building portfolios.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://www.theontariolandlordtoolbox.com/contact
+- site_focus: Education platform for Ontario real estate investors and landlords run by Quentin D'Souza — a recognized Ontario investor and published author of "The Property Management Toolbox" and "The Filling Vacancies Toolbox." Covers acquisition strategy, tenant management, legal risk, and professional operations. Audience: active Ontario landlords and investors taking a professional approach to self-management.
+- hook: Quentin's audience is taking self-management seriously — they're the investors who will eventually grow past DIY. Prospera contributing a piece on what a professional management operation in SW Ontario actually looks like, or what the transition point is, would serve his students and put Prospera in front of a large, qualified Ontario investor audience.
+- specific_content: "The Complete Property Management Course for Ontario Real Estate Investors and Landlords" — the course runs from acquisition through tenancy management and legal risk, exactly where Prospera's daily LTB and management experience adds practitioner-level depth.
+- researcher_notes: Highly respected Ontario real estate educator. Not a PM company. Site returns 403 to automated fetch; research drawn from search index. Outreach tone: peer-to-peer professional, content contribution offer. Worth sending via contact form.
+
+---
+
+## Community Real Estate Group — London Ontario
+- url: https://communityrealestategroup.ca
+- type: blog
+- why: London Ontario real estate sales group publishing local market analysis for buyers and investors; Prospera's rental management perspective complements their buyer-facing content and serves the investor-buyer overlap — a referral arrangement or guest piece is a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://communityrealestategroup.ca/contact
+- site_focus: London Ontario real estate sales group writing about the local market for buyers, sellers, and investors. Their blog covers London market conditions, buying in 2026, and downsizing guidance — locally focused content for people making real estate decisions in the London area.
+- hook: Community Real Estate Group's buyer and investor clients often need property management once they close on an investment property — a mutual referral arrangement sends Prospera their investor buyers, and sends CRG the landlords Prospera works with who want to buy more or sell.
+- specific_content: "What the 2026 Market Means for Buying or Downsizing in London Ontario" — local market analysis post reaching London buyers and investors who are actively making investment decisions.
+- researcher_notes: Real estate sales brokerage in London Ontario. Not a property management company — sales only. Site returns 403 to automated fetch; research drawn from search index. Referral arrangement angle is the strongest play here.
+
+---
+
+## LandlordCourse.ca — Chris Seepe
+- url: https://landlordcourse.ca
+- type: blog
+- why: Ontario landlord education platform founded by veteran investor and published author Chris Seepe; their student audience of small Ontario landlords is the exact demographic that eventually hires professional property management when their portfolio grows.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://landlordcourse.ca/contact
+- site_focus: Ontario landlord education platform founded by Chris Seepe, a veteran Ontario real estate investor and published author. Courses span acquisition strategy, tenant management, LTB risk, and professional operations. Content targets Ontario landlords who want to self-manage professionally — both new and experienced independent operators.
+- hook: LandlordCourse students are the most engaged DIY landlords in Ontario — they're willing to invest in education, which means they'll eventually invest in professional management when self-managing stops making sense. A guest module or blog piece from Ebin on what professional management adds beyond what coursework teaches is a compelling pitch that serves Chris's students at the right inflection point.
+- specific_content: Their curriculum description: "education spanning acquisition strategy to tenancy management to legal risk" — Prospera's guest contribution could address the professional management transition as the natural extension of that education arc.
+- researcher_notes: Education-only platform; not a property management company. Site returns 403 to automated fetch; research drawn from search index. Outreach tone: educator-to-practitioner — frame Ebin as a practitioner who can contribute real-world depth to an education-focused platform.
+
+---
+
+## The Mortgage Firm — London Ontario
+- url: https://www.themortgagefirm.ca
+- type: mortgage
+- why: London Ontario mortgage broker with an active blog covering investment property financing, first-time homebuyers, and mortgage strategy; their investor mortgage clients are Prospera's target landlord audience immediately after closing.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://www.themortgagefirm.ca/index.php/contact
+- site_focus: London Ontario mortgage brokerage with an active blog covering local mortgage strategy, investment property financing, and home buying guidance. Their blog includes content on why London mortgage brokers outperform big banks and what to look for in 2026 — locally targeted content reaching active London homebuyers and investors.
+- hook: The Mortgage Firm's investment property mortgage clients need property management as soon as they close — a mutual referral arrangement is a direct, practical fit: they handle the financing, Prospera handles the ongoing management. A resource mention in their investor content or a mutual referral agreement is low-friction and serves the same client base.
+- specific_content: "Why a London, Ontario Mortgage Broker Can Be a Better Choice Than a Big Bank" and "Top London Ontario Mortgage Broker - 2026: What to Look For" — blog posts reaching active London investors at the financing decision stage, just before they need property management.
+- researcher_notes: London Ontario mortgage brokerage. Not a PM company. Site returns 403 to automated fetch; research drawn from search index and blog post titles. Contact via website. Outreach angle: mutual referral — their investor clients need Prospera immediately after closing; Prospera's landlords who want to refinance or purchase additional properties need a broker.
+
+---
+
+## CRESI — Canadian Real Estate Investor
+- url: https://cresi.ca
+- type: blog
+- why: Ontario real estate investor education blog covering BRRRR strategy and mid-term rental models; their active investor audience building SW Ontario portfolios is a direct match for Prospera's professional management services.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://cresi.ca/contact
+- site_focus: Canadian real estate investor education blog covering the BRRRR strategy (Buy, Rehab, Rent, Refinance, Repeat), mid-term furnished rentals, and Ontario landlord wealth-building topics. Content targets Ontario investors actively building rental portfolios and looking for operational guidance on the rental phase of their investment strategy.
+- hook: CRESI's BRRRR audience knows acquisition and rehab — but the "Rent" phase of BRRRR is where operational complexity (tenant compliance, LTB, rent collection) bites most Ontario investors. Prospera managing that phase in London/St. Thomas/Strathroy is directly relevant, and a guest piece on how the rental phase works in practice in SW Ontario would be genuinely useful content for their readers.
+- specific_content: "The BRRRR Strategy: How Ontario Landlords Can Build Wealth Through Smart Property Investments" — their BRRRR guide reaches Ontario investors at the moment they're planning the rental-management phase of their strategy, which is exactly when Prospera's services become relevant.
+- researcher_notes: Real estate investor education blog; not a PM company. Site returns 403 to automated fetch; research drawn from search index. Outreach angle: guest post contribution on the operational rental phase of BRRRR in SW Ontario. Content offer, not a sales pitch.
+
+---
+
+## Dan Balch — London Ontario Mortgage Broker
+- url: https://danbalch.com
+- type: mortgage
+- why: London Ontario mortgage broker with a learning center covering investment financing — their local investor mortgage clients who purchase London-area rentals are Prospera's direct target audience for ongoing property management.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://danbalch.com/contact
+- site_focus: London Ontario mortgage broker with a learning center covering homebuying, mortgage strategy, and investment property financing for London-area buyers. Locally focused educational content explaining mortgage broker vs. bank distinctions and practical guidance for first-time homebuyers and investors in London Ontario.
+- hook: Dan Balch's London investor clients buy properties in London, St. Thomas, and Strathroy — Prospera manages properties in those same markets. A mutual referral arrangement is a low-effort, high-value fit: Dan refers investor clients who need management after closing; Prospera refers landlords who want to refinance or expand their portfolio to Dan.
+- specific_content: "Top Mortgage Brokers in London, Ontario: What You Should Know" — their learning center content reaching London Ontario investors at the point of financing decisions, just before they need property management.
+- researcher_notes: Independent mortgage broker in London Ontario. Not a property management company. Site returns 403 to automated fetch; research drawn from search index. Outreach angle: local peer mutual referral — same client base, complementary services. Use first name (Dan).
+
+---
+
+## Newcastle Financial — Ontario Investment Property Mortgages
+- url: https://www.newcastlefinancial.ca
+- type: mortgage
+- why: Ontario mortgage broker blog targeting investment property buyers with 2026 mortgage rule guides; their investor mortgage readers who are buying Ontario rentals are candidates for Prospera's property management services immediately after closing.
+- researched: true
+- drafted: true
+- added: 2026-07-05
+- contact_email: https://www.newcastlefinancial.ca/contact
+- site_focus: Ontario mortgage brokerage and blog covering investment property financing, rental mortgage rules, and real estate financial planning. Their 2026 content specifically addresses OSFI stress test rules, down payment requirements for rental properties, and investment mortgage guidance for Ontario buyers — reaching active Ontario investors at the point of purchasing a rental property.
+- hook: Newcastle Financial's investment property mortgage readers are actively purchasing Ontario rental properties — Prospera's London/St. Thomas/Strathroy management services are the natural next step. A resource mention in their investor guide ("once you close, you'll need a local property manager — here's what to look for in SW Ontario") or a mutual referral arrangement converts their financed buyers into Prospera clients.
+- specific_content: "Buying a Rental Property in Ontario? The Mortgage Rules You Need to Know in 2026" — specifically written for Ontario investors purchasing rental properties, who will need property management support as soon as financing closes.
+- researcher_notes: Ontario mortgage brokerage blog. Not a property management company. Site returns 403 to automated fetch; research drawn from search index. Outreach angle: resource mention for property management as the next step after closing, or mutual referral arrangement.
+
+---

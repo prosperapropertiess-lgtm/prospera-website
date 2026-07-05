@@ -1325,3 +1325,155 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## Tenon10 — Ontario Landlord Blog — 2026-07-05
+To: https://www.tenon10.com/contact
+Subject: Your 2026 first-timer's guide — a quick question
+
+Hi,
+
+Your "Becoming a Landlord in Ontario: 2026 First-Timer's Guide" is one of the more thorough walk-throughs I've come across for landlords just starting out — the Standard Lease section is particularly clear.
+
+I'm Ebin, I run Prospera Properties — we manage residential rentals in London, St. Thomas, and Strathroy, handling the LTB and day-to-day tenant issues on behalf of our clients every week.
+
+If you'd consider it, I'd be happy to write a companion piece on the mistakes we see most often in SW Ontario — things first-timers don't know to ask about until it's too late. No obligation either way.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## The Ontario Landlord Toolbox — 2026-07-05
+To: https://www.theontariolandlordtoolbox.com/contact
+Subject: Your complete property management course — a thought
+
+Hi Quentin,
+
+Your Property Management Toolbox course is the most comprehensive Ontario-specific curriculum I've come across for landlords who want to self-manage professionally. The depth from acquisition through to legal risk is genuinely rare.
+
+I'm Ebin — I manage residential rentals in London, St. Thomas, and Strathroy, handling the LTB end-to-end for clients who've reached the point where self-managing no longer makes sense.
+
+I'd love to contribute a piece on what the transition from self-management to professional management actually looks like in practice — real scenarios, no fluff. Would that be of interest?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Community Real Estate Group — London Ontario — 2026-07-05
+To: https://communityrealestategroup.ca/contact
+Subject: Your 2026 London market piece — a quick note
+
+Hi,
+
+Your "What the 2026 Market Means for Buying or Downsizing in London Ontario" is a good read — the section on London's stabilizing prices is something investor clients are asking about constantly right now.
+
+I'm Ebin — I run Prospera Properties, which handles property management for residential landlords in London, St. Thomas, and Strathroy. There's real overlap between your buyer clients and our landlords — many of the investment properties your clients close on eventually need a local manager.
+
+Would you be open to a mutual referral arrangement for investor buyers?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## LandlordCourse.ca — 2026-07-05
+To: https://landlordcourse.ca/contact
+Subject: Your acquisition-to-management curriculum — a thought
+
+Hi Chris,
+
+Your curriculum — running from acquisition strategy through to tenancy management and legal risk — is one of the most complete Ontario landlord education programs out there. The LTB risk section is particularly relevant to where landlords are right now in 2026.
+
+I'm Ebin — I manage rentals in London, St. Thomas, and Strathroy and handle LTB applications and hearings for clients daily. I'd be glad to contribute a short piece on what professional management looks like as the natural extension of what your students learn — practical scenarios, SW Ontario specific.
+
+Happy to discuss.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## The Mortgage Firm — London Ontario — 2026-07-05
+To: https://www.themortgagefirm.ca/index.php/contact
+Subject: Your London broker vs. big bank piece — a note
+
+Hi,
+
+Your piece on why a London mortgage broker outperforms the big banks — especially the point about multiple lender access for investment properties — is exactly the kind of thing investor clients need to read before they go straight to their bank.
+
+I'm Ebin, I run Prospera Properties — we manage residential rentals in London, St. Thomas, and Strathroy. Your investment property clients need property management as soon as they close; our landlord clients who want to refinance or buy more units need a reliable local broker.
+
+Would you be open to a mutual referral arrangement?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## CRESI — Canadian Real Estate Investor — 2026-07-05
+To: https://cresi.ca/contact
+Subject: Your BRRRR strategy guide for Ontario
+
+Hi,
+
+Your BRRRR strategy guide for Ontario landlords — the section on building wealth through smart property investments — lays out the investment logic well. SW Ontario is one of the more active markets for executing this right now.
+
+I'm Ebin — I manage residential rentals in London, St. Thomas, and Strathroy. The "Rent" phase of BRRRR is where Ontario landlords often get stuck, particularly around LTB compliance and tenant management.
+
+I'd like to contribute a guest piece on managing the rental phase of a BRRRR deal in Ontario — the operational realities most guides skip. Would that fit your content?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Dan Balch — London Ontario Mortgage Broker — 2026-07-05
+To: https://danbalch.com/contact
+Subject: London investor clients — a thought
+
+Hi Dan,
+
+Your learning center guide on top London mortgage brokers is a solid resource — the explanation of what distinguishes a broker from a bank agent is something London investors don't always understand until a deal falls through.
+
+I'm Ebin, I run Prospera Properties — we manage residential rentals in London, St. Thomas, and Strathroy. A lot of your investor clients close on a property and then need local management.
+
+Would you be open to a mutual referral arrangement? We serve the same client base in the same market — it's a clean fit.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Newcastle Financial — Ontario Investment Property Mortgages — 2026-07-05
+To: https://www.newcastlefinancial.ca/contact
+Subject: Your 2026 investment property mortgage guide — a note
+
+Hi,
+
+Your 2026 guide on Ontario investment property mortgage rules — particularly the OSFI stress test and down payment requirements for rentals — is one of the cleaner explanations I've seen for investors who are new to the process.
+
+I'm Ebin, I run Prospera Properties, managing residential rentals in London, St. Thomas, and Strathroy. Investors who navigate the mortgage side successfully often need someone local to manage the property once they close.
+
+Would you consider a resource mention for property management as the logical next step after financing, or a mutual referral arrangement?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
