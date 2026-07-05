@@ -124,7 +124,7 @@ export default function LandlordsPage() {
             >
               Get a Free Quote
             </a>
-            <
+            <a
               href="#rent-estimator"
               className="btn-ghost px-8 py-4 text-xs font-semibold uppercase tracking-widest border rounded"
               style={{ borderColor: "rgba(250,248,245,0.25)", color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}
