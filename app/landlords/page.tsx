@@ -205,6 +205,66 @@ export default function LandlordsPage() {
         <RentEstimator />
       </section>
 
+      {/* Services */}
+      <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="max-w-5xl mx-auto">
+          <FadeIn>
+            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+              What We Do
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-light text-center mb-14 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+              Pick exactly what you need.
+            </h2>
+          </FadeIn>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {[
+              {
+                href: "/services/tenant-placement",
+                title: "Tenant Placement",
+                desc: "We find, screen, and place a quality tenant. Listing, showings, credit check, income verification, lease signing, and move-in inspection — start to finish.",
+                cta: "How placement works →",
+              },
+              {
+                href: "/services/rent-collection",
+                title: "Rent Collection",
+                desc: "Pre-authorized debit from day one. Immediate follow-up on anything late. Monthly statement deposited to you with a clear line-by-line breakdown.",
+                cta: "How collection works →",
+              },
+              {
+                href: "/services/student-rental-management",
+                title: "Student Rental Management",
+                desc: "High-turnover student properties need a different approach. We handle the faster cycles, co-signer requirements, and end-of-year coordination.",
+                cta: "Student rental details →",
+              },
+              {
+                href: "/services/airbnb-management",
+                title: "Short-Term Rental Management",
+                desc: "Listings optimized for Airbnb and VRBO, dynamic pricing, guest communication, turnovers, and compliance with local short-term rental rules.",
+                cta: "Short-term rental details →",
+              },
+            ].map((s, i) => (
+              <FadeIn key={s.href} delay={i * 0.06}>
+                <Link
+                  href={s.href}
+                  className="block h-full p-7 rounded-xl border transition-all hover:shadow-md group"
+                  style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8" }}
+                >
+                  <h3 className="text-xl font-semibold mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                    {s.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                    {s.desc}
+                  </p>
+                  <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+                    {s.cta}
+                  </span>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-3xl mx-auto">

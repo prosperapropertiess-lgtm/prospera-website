@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,7 +14,15 @@ import {
   Info,
   Mail,
   Zap,
+  Briefcase,
 } from "lucide-react";
+
+const serviceLinks = [
+  { label: "Tenant Placement", href: "/services/tenant-placement" },
+  { label: "Rent Collection", href: "/services/rent-collection" },
+  { label: "Student Rentals", href: "/services/student-rental-management" },
+  { label: "Short-Term Rentals", href: "/services/airbnb-management" },
+];
 
 const navLinks = [
   { label: "For Landlords", href: "/landlords" },
@@ -26,19 +34,25 @@ const navLinks = [
 ];
 
 const mobileNavItems = [
-  { icon: Home,       label: "Home",         href: "/"          },
-  { icon: Building2,  label: "For Landlords", href: "/landlords" },
-  { icon: Users,      label: "For Tenants",   href: "/tenants"   },
-  { icon: LayoutList, label: "Listings",      href: "/listings"  },
-  { icon: BookOpen,   label: "Blog",          href: "/blog"      },
-  { icon: Info,       label: "About",         href: "/about"     },
-  { icon: Mail,       label: "Contact",       href: "/contact"   },
-  { icon: Zap,        label: "App Waitlist",   href: "/platform", accent: true },
+  { icon: Home,       label: "Home",              href: "/"          },
+  { icon: Building2,  label: "For Landlords",      href: "/landlords" },
+  { icon: Briefcase,  label: "Tenant Placement",   href: "/services/tenant-placement" },
+  { icon: Briefcase,  label: "Rent Collection",    href: "/services/rent-collection" },
+  { icon: Briefcase,  label: "Student Rentals",    href: "/services/student-rental-management" },
+  { icon: Briefcase,  label: "Short-Term Rentals", href: "/services/airbnb-management" },
+  { icon: Users,      label: "For Tenants",        href: "/tenants"   },
+  { icon: LayoutList, label: "Listings",           href: "/listings"  },
+  { icon: BookOpen,   label: "Blog",               href: "/blog"      },
+  { icon: Info,       label: "About",              href: "/about"     },
+  { icon: Mail,       label: "Contact",            href: "/contact"   },
+  { icon: Zap,        label: "App Waitlist",        href: "/platform", accent: true },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -52,7 +66,18 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  useEffect(() => { setMenuOpen(false); setServicesOpen(false); }, [pathname]);
+
+  // Close services dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   return (
     <>
@@ -84,6 +109,81 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+
+              // Insert Services dropdown after "For Landlords"
+              if (link.href === "/tenants") {
+                return (
+                  <>
+                    {/* Services dropdown */}
+                    <div key="services-dropdown" ref={servicesRef} className="relative">
+                      <button
+                        onClick={() => setServicesOpen((o) => !o)}
+                        className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors duration-200 hover:text-white"
+                        style={{
+                          color: pathname.startsWith("/services") ? "#FFFFFF" : "rgba(250,248,245,0.75)",
+                          fontFamily: "var(--font-dm-sans)",
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Services
+                        <svg
+                          width="12" height="12" viewBox="0 0 12 12" fill="none"
+                          style={{ transition: "transform 0.2s", transform: servicesOpen ? "rotate(180deg)" : "none" }}
+                        >
+                          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                      <AnimatePresence>
+                        {servicesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 6 }}
+                            transition={{ duration: 0.15 }}
+                            className="absolute top-full left-0 mt-2 py-2 rounded-xl shadow-xl"
+                            style={{
+                              backgroundColor: "#FFFFFF",
+                              border: "1px solid #D8D2C8",
+                              minWidth: 200,
+                              zIndex: 60,
+                            }}
+                          >
+                            {serviceLinks.map((s) => (
+                              <Link
+                                key={s.href}
+                                href={s.href}
+                                className="block px-4 py-2.5 text-sm transition-colors hover:bg-[#F7F5F2]"
+                                style={{
+                                  color: pathname === s.href ? "#8B2030" : "#1F2F3A",
+                                  fontFamily: "var(--font-dm-sans)",
+                                  fontWeight: pathname === s.href ? 600 : 400,
+                                }}
+                              >
+                                {s.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    {/* For Tenants */}
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-sm font-medium tracking-wide transition-colors duration-200 hover:text-white"
+                      style={{
+                        color: isActive ? "#FFFFFF" : "rgba(250,248,245,0.75)",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}

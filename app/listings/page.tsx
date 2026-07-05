@@ -90,7 +90,7 @@ export default function ListingsPage() {
       </section>
 
       {/* Filter Bar */}
-      <div className="sticky top-[64px] z-40 border-b shadow-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
+      <div className="sticky top-20 z-30 border-b shadow-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
           {/* City */}
           <div className="flex gap-2 flex-wrap">
