@@ -743,10 +743,79 @@ function StickyCTA() {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+// ── Services ──────────────────────────────────────────────────────────────────
+
+function Services() {
+  return (
+    <section className="py-20 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
+      <div className="max-w-5xl mx-auto">
+        <FadeIn>
+          <p className="text-xs font-semibold uppercase tracking-widest text-center mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            What We Do
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-light text-center mb-12 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+            Two ways we help landlords.
+          </h2>
+        </FadeIn>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FadeIn delay={0.06}>
+            <Link
+              href="/services/tenant-placement"
+              className="group block rounded-2xl border overflow-hidden transition-shadow hover:shadow-lg"
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}
+            >
+              <div className="px-8 pt-8 pb-3">
+                <div className="text-3xl mb-5">🔍</div>
+                <h3 className="text-2xl font-semibold mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  Tenant Placement
+                </h3>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                  We list, screen, and place a quality tenant — credit check, income verification, reference calls, Ontario-compliant lease, and 102-point move-in inspection. You don&apos;t lift a finger.
+                </p>
+              </div>
+              <div className="px-8 py-4 flex items-center justify-between" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #E8E3DC" }}>
+                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+                  How it works →
+                </span>
+                <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>Typically 2–4 weeks</span>
+              </div>
+            </Link>
+          </FadeIn>
+
+          <FadeIn delay={0.12}>
+            <Link
+              href="/landlords"
+              className="group block rounded-2xl border overflow-hidden transition-shadow hover:shadow-lg"
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}
+            >
+              <div className="px-8 pt-8 pb-3">
+                <div className="text-3xl mb-5">🏠</div>
+                <h3 className="text-2xl font-semibold mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  Property Management
+                </h3>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                  Rent collection, maintenance coordination, tenant communication, monthly statements, lease renewals — all of it. One flat fee, no markups, no midnight calls to you.
+                </p>
+              </div>
+              <div className="px-8 py-4 flex items-center justify-between" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #E8E3DC" }}>
+                <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+                  Full details →
+                </span>
+                <span className="text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>90-day guarantee</span>
+              </div>
+            </Link>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <Services />
       <StatsBar />
       <PainPoints />
       <FeatureCards />
