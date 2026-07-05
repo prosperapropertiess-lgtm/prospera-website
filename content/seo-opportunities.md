@@ -1,8 +1,18 @@
 ---
-Last updated: 2026-06-28
+Last updated: 2026-07-05
 
 ## New Topic Opportunities
 Topics found in competitor/search results that we have no post covering. Blog agent should prioritize these above the default keyword list.
+
+### Added 2026-07-05
+
+- **bill-97-ontario-landlord-changes-2026** | Est. difficulty: LOW-MEDIUM | Vol: ~250/mo | Bill 97 — "Residential Tenancies Amendment Act, 2025" — came into force July 1, 2026 (today), with significant changes distinct from Bill 60. Ranking competition: glllp.ca (Oshawa law firm), getwhatyouwant.ca, powerhousepm.ca — small sites, no major PM companies or government sites ranking for "Bill 97 Ontario landlord." Key changes: (1) mandatory LTB-approved payment agreement forms for all rent repayment plans; (2) tenants now have the right to install window or portable A/C units; (3) RTA fines doubled — $100,000 for individuals, $500,000 for corporations; (4) LTB order review window cut from 30 days to 15 days; (5) N4 notice period drops from 14 to 7 days for monthly tenancies, effective September 21, 2026. We have `bill-60-ontario-landlords.md` but no Bill 97 standalone post. Angle: "What Bill 97 Changes as of July 1, 2026" — compliance checklist, how each change affects landlords in London/SW Ontario, what to update in leases and procedures. URGENT: July 1 effective date means search volume is spiking now.
+
+- **tenant-right-to-install-ac-ontario-2026** | Est. difficulty: LOW | Vol: ~150/mo | Bill 97 (July 1, 2026) grants tenants the right to install window or portable A/C units in their unit, subject to safety conditions — a completely new right that landlords need to understand. No dedicated guide exists yet for landlords (most A/C content is tenant-facing). Ranking sites: small law firms and legal blogs; no major PM blog has published on this. Angle: what units tenants may install, landlord consent conditions, safety and secure installation requirements, whether landlords can charge extra for electricity use, how to handle a non-compliant A/C installation (N5 options), and how to draft or update lease clauses to set reasonable conditions without overriding the new statutory right. Timely post for summer 2026 with ongoing search volume thereafter.
+
+- **ltb-payment-agreement-new-form-ontario-2026** | Est. difficulty: LOW | Vol: ~100/mo | Bill 97 (July 1, 2026) requires all LTB rent repayment agreements to be completed on an LTB-approved form — not a custom document. The approved form includes a Section 78 clause, which allows a landlord to return to the LTB for an eviction order if the tenant violates the agreement, without a new hearing. This is a significant operational change. Our `rent-repayment-agreement-ontario.md` covers repayment arrangements but predates this requirement. Ranking competition: glllp.ca, small paralegal sites. Angle: what the new LTB payment agreement form requires, how Section 78 works and why it benefits landlords, what happens if a landlord uses a custom agreement instead of the approved form, and how to combine an N4 + LTB payment agreement correctly. Strong practical utility for landlords currently in arrears disputes.
+
+- **ontario-landlord-fines-penalties-rta-2026** | Est. difficulty: LOW | Vol: ~100/mo | Bill 97 doubled RTA fines effective July 1, 2026: individuals now face up to $100,000 per violation; corporations up to $500,000. Combined with existing Bill 60 bad-faith N12 penalties (12 months' rent + costs), Ontario landlords face serious financial exposure for violations. No existing post covers landlord liability and penalties comprehensively. Ranking competition: small legal/paralegal sites only. Angle: updated fine schedule under Bill 97, types of violations that trigger fines (illegal eviction, no standard lease, harassment, illegal lock changes, bad-faith N12), Bill 60 bad-faith eviction penalties, and how professional property management reduces exposure. Strong lead-gen hook: landlords who discover the scope of financial risk are motivated to offload compliance to Prospera.
 
 - **N1 Form Ontario: Step-by-Step Guide to Serving a Rent Increase Notice**: Standalone competitor posts (tenon10.com, foundspaces.ca, nihanglaw.ca) rank specifically for "N1 form Ontario 2026." Our `rent-increase-ontario-guidelines.md` covers the guideline percentage but not the mechanics of completing and serving the form. Angle: how to calculate the correct new rent using the 2.1% guideline, the mandatory 90-day notice rule, how and where to serve Form N1, what voids the increase (wrong form, late delivery, incorrect calculation), and how to re-serve if you make an error.
 
@@ -139,6 +149,21 @@ Existing posts that are likely thin on content or contain outdated information:
 
 ---
 
+## SKIPPED (2026-07-05 research — too competitive or already covered)
+- ontario-landlord-rights-2026 — Repeated from prior lists. Dominated by ontario.ca, tribunalsontario.ca, Thomson Reuters. Covered across existing posts.
+- ltb-eviction-process-step-by-step — COVERED by `evicting-tenant-ontario.md` and `ltb-hearing-preparation-ontario-landlords.md`; tribunalsontario.ca ranks #1.
+- tenant-not-paying-rent-ontario — COVERED by `late-rent-payments-ontario.md`, `n4-notice-ontario.md`, `l1-application-ltb-ontario.md`. Repeated skip.
+- rent-increase-ontario-n1-guide — Both `n1-form-ontario.md` and `n1-form-ontario-landlord-guide.md` exist; `rent-increase-ontario-guidelines.md` also covers. Highly contested by ontario.ca, tribunalsontario.ca.
+- tenant-screening-ontario-2026 — COVERED by `tenant-screening-red-flags.md` and `tenant-credit-check-ontario-landlords.md`; OHRC angle already in opportunities file.
+- n4-n8-n12-when-to-use — All three have dedicated posts. A comparison guide has moderate value but would be a thin post; better handled as internal links.
+- eviction-timeline-ontario-2026 — COVERED by `how-long-does-eviction-take-ontario.md`; LTB wait times by application type already in opportunities file.
+- ontario-standard-lease-requirements-2026 — COVERED by `ontario-standard-lease-2026.md`; addendum and prohibited clauses already in opportunities file.
+- above-guideline-rent-increase-l5 — COVERED by `above-guideline-rent-increase-ontario.md`; Bill 82 and L5 procedural detail already in file.
+- ontario-landlord-insurance-requirements — COVERED by `rental-property-insurance-ontario.md`; non-resident PM requirement and home-vs-landlord-insurance opportunities already in file.
+- london-ontario-rental-market-falling-rents — Already in opportunities file (added 2026-06-28 as `london-ontario-rental-market-2026`).
+
+---
+
 ## SKIPPED (2026-06-28 research — too competitive or already covered)
 - ontario-landlord-rights-2026 — Repeated from prior lists. Dominated by ontario.ca, tribunalsontario.ca. Covered across existing posts.
 - ltb-wait-times-backlog-ontario-2026 — Already in opportunities file (added 2026-06-14).
@@ -157,5 +182,13 @@ Existing posts that are likely thin on content or contain outdated information:
 - **landlord-maintenance-responsibilities-ontario.md** — Add a dedicated "Mold" subsection: when mold is landlord's legal obligation (RTA s.20 fitness for habitation), required response timeline, post-remediation clearance testing as legal protection, LTB rent abatement risk for delayed response. This directly supports the `mold-in-rental-unit-ontario-landlord-responsibilities` opportunity post and builds internal link authority.
 
 - **winter-maintenance-ontario-landlords.md** — Add a "Heat Requirements" section with specific provincial minimums (20°C RTA minimum), London-specific property standards, heating season dates (September 1 to June 15), emergency response requirements for heating failures, and the tenant T6 application process. Supports the `ontario-landlord-heating-requirements-temperature` opportunity post.
+
+### Topics to Expand — 2026-07-05 additions
+
+- **bill-60-ontario-landlords.md** — Add a dedicated "Bill 97 (July 1, 2026)" section covering the key changes now in effect: mandatory LTB payment agreement forms, tenant right to install A/C units, doubled fines ($100K individual / $500K corporation), and 15-day review timeline. Bill 97 is frequently searched alongside Bill 60 but our post covers only Bill 60. Adding a Bill 97 section protects this post's rankings as searches shift to the July 1 changes.
+
+- **rent-repayment-agreement-ontario.md** — Update to reflect Bill 97 (July 1, 2026): all LTB payment agreements must now use an LTB-approved form (not a custom document). Add explanation of the Section 78 clause, which lets landlords return to the LTB for an eviction order without a new hearing if a tenant violates the agreement. This is now the operative compliance requirement for rent repayment arrangements.
+
+- **n4-notice-ontario.md** — Confirm and add the September 21, 2026 effective date for the Bill 60 N4 notice period change: monthly tenancies drop from 14 days to 7 days. The September 2026 date is now confirmed by multiple sources including Tribunals Ontario's operational update (June 30, 2026). Add a prominent "Effective September 21, 2026 — Key Change" callout at the top and update all notice period references in the body.
 
 
