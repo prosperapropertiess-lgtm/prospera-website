@@ -43,9 +43,6 @@ export default function RentCollectionPage() {
             <Link href="/contact" className="px-8 py-4 text-xs uppercase tracking-widest" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Get Started →
             </Link>
-            <Link href="/pricing" className="px-8 py-4 text-xs uppercase tracking-widest border" style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              View Pricing
-            </Link>
           </div>
         </div>
       </section>

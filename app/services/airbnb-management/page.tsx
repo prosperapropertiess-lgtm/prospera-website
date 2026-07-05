@@ -17,7 +17,7 @@ const services = [
 
 const faqs = [
   { q: "Is Airbnb management legal in London, Ontario?", a: "Yes, with proper registration. London requires short-term rental operators to register with the city. We handle the registration process and ensure ongoing bylaw compliance for every property we manage." },
-  { q: "What percentage do you charge for Airbnb management?", a: "Our short-term rental management fee is 20% of gross revenue. This covers listing management, guest communication, cleaning coordination, and compliance monitoring. No hidden fees." },
+  { q: "What do you charge for Airbnb management?", a: "Our fee covers listing management, guest communication, cleaning coordination, and compliance monitoring. Contact us for a quote — rates depend on your property and expected occupancy." },
   { q: "Can I switch between short-term and long-term rental?", a: "Yes. We can help you evaluate whether Airbnb or long-term tenancy makes more sense for your property and location, and manage either approach or a seasonal hybrid." },
   { q: "Do you manage properties on platforms other than Airbnb?", a: "Yes — we list on Airbnb, VRBO, and Booking.com simultaneously to maximize exposure and occupancy. All bookings are managed through one system." },
   { q: "How do you handle damage from guests?", a: "We document every check-in and check-out with photos. For damage exceeding the cleaning deposit, we file claims through the platform's host guarantee programs and work with your insurance provider." },
@@ -42,9 +42,6 @@ export default function AirbnbManagementPage() {
           <div className="flex flex-wrap gap-4">
             <Link href="/contact" className="px-8 py-4 text-xs uppercase tracking-widest" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Get a Revenue Estimate →
-            </Link>
-            <Link href="/pricing" className="px-8 py-4 text-xs uppercase tracking-widest border" style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              View Pricing
             </Link>
           </div>
         </div>
@@ -74,7 +71,6 @@ export default function AirbnbManagementPage() {
       <section className="py-16 px-6" style={{ backgroundColor: "#1F2F3A" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { value: "20%", label: "Management fee" },
             { value: "3", label: "Platforms listed" },
             { value: "24/7", label: "Guest support" },
             { value: "Bylaw", label: "Compliant" },

@@ -12,7 +12,6 @@ const quickLinks = [
 
 const landlordLinks = [
   { label: "Get a Free Quote", href: "/contact" },
-  { label: "Pricing", href: "/pricing" },
   { label: "How It Works", href: "/landlords#how-it-works" },
   { label: "Free Resources", href: "/resources" },
 ];

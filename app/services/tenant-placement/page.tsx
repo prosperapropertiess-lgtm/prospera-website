@@ -16,7 +16,7 @@ const steps = [
 ];
 
 const faqs = [
-  { q: "What does tenant placement cost?", a: "Our tenant placement fee is one month's rent. This covers everything from listing to lease signing and move-in inspection. No hidden fees." },
+  { q: "What does tenant placement cost?", a: "Contact us for a quote. Our fee covers everything from listing to lease signing and move-in inspection — no hidden fees." },
   { q: "How long does it take to find a tenant?", a: "Most properties are tenanted within 2–4 weeks. Pricing and property condition are the two biggest factors. We'll give you an honest assessment upfront." },
   { q: "Do you do a full credit and background check on every applicant?", a: "Yes, every time — no exceptions. We use a third-party screening service for credit checks and income verification, and we call previous landlords directly." },
   { q: "What if the tenant doesn't work out?", a: "If we place a tenant who leaves within 90 days without cause, we'll re-place at no additional leasing fee. We stand behind our placements." },
@@ -42,9 +42,6 @@ export default function TenantPlacementPage() {
           <div className="flex flex-wrap gap-4">
             <Link href="/contact" className="px-8 py-4 text-xs uppercase tracking-widest" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Get Started →
-            </Link>
-            <Link href="/pricing" className="px-8 py-4 text-xs uppercase tracking-widest border" style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              View Pricing
             </Link>
           </div>
         </div>

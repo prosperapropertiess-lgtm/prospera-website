@@ -35,7 +35,7 @@ const generalFaqs = [
   { q: "What makes you different from other property managers?", a: "At Prospera, Ebin manages relationships personally. We're transparent about fees, we don't markup maintenance, and we treat tenants with respect — which results in better long-term tenants for landlords." },
   { q: "What tools do you use to manage properties?", a: "We use Buildium for tenant and owner portals, rent collection, and maintenance tracking. It gives both landlords and tenants a professional, reliable experience." },
   { q: "How do I contact you?", a: "You can reach us at (519) 697-1227, submit a form on our contact page, or email us directly. We respond to all inquiries within one business day, usually faster." },
-  { q: "Do you work with single-unit landlords or only larger portfolios?", a: "Both. We work with landlords who own a single basement apartment and with those who own multiple properties. Our pricing and approach are the same — straightforward and personal." },
+  { q: "Do you work with single-unit landlords or only larger portfolios?", a: "Both. We work with landlords who own a single basement apartment and with those who own multiple properties. Our approach is straightforward and personal either way." },
 ];
 
 const faqMap: Record<Tab, { q: string; a: string }[]> = {

@@ -3,7 +3,6 @@ import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
 import BlogNudge from "@/components/ui/BlogNudge";
-import PricingCards from "@/components/ui/PricingCards";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -119,13 +118,13 @@ export default function LandlordsPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#pricing"
+              href="/contact"
               className="btn-primary px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              See Pricing
+              Get a Free Quote
             </a>
-            <a
+            <
               href="#rent-estimator"
               className="btn-ghost px-8 py-4 text-xs font-semibold uppercase tracking-widest border rounded"
               style={{ borderColor: "rgba(250,248,245,0.25)", color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}
@@ -204,35 +203,6 @@ export default function LandlordsPage() {
       {/* Rent Estimator */}
       <section id="rent-estimator" className="py-0">
         <RentEstimator />
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-24" style={{ backgroundColor: "#FFFFFF" }}>
-        <div className="max-w-5xl mx-auto">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4 px-5 sm:px-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-              Transparent Pricing
-            </p>
-            <h2 className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight px-5 sm:px-8" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              Simple plans.
-              <br />
-              <em>No hidden fees. Ever.</em>
-            </h2>
-            <p className="text-sm text-center max-w-lg mx-auto mb-14 leading-relaxed px-5 sm:px-8" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-              Zero setup fee. Lease renewal always free. The only number you pay is the one listed below.
-            </p>
-          </FadeIn>
-
-          <PricingCards />
-
-          <FadeIn delay={0.2}>
-            <div className="mx-5 sm:mx-8 mt-4 p-6 text-center border rounded-xl" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2" }}>
-              <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                All plans include: <strong style={{ color: "#222222" }}>no maintenance markup</strong> · <strong style={{ color: "#222222" }}>no setup fee</strong> · <strong style={{ color: "#222222" }}>no vacancy fee</strong> · <strong style={{ color: "#222222" }}>free lease renewal</strong>
-              </p>
-            </div>
-          </FadeIn>
-        </div>
       </section>
 
       {/* FAQ */}

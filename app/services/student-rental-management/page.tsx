@@ -19,7 +19,7 @@ const faqs = [
   { q: "Is student rental management different from regular property management?", a: "Yes. Student rentals involve higher turnover (usually every 12 months), joint tenancies with multiple leaseholders, and a specific leasing season (January–March for September move-ins). We manage the full cycle." },
   { q: "Do you require guarantors for student tenants?", a: "Yes. We require a co-signer or guarantor for student tenants who don't meet income thresholds. This protects you if rent stops coming in." },
   { q: "What areas near Western University and Fanshawe do you cover?", a: "We manage student rentals in Masonville, Medway, Old North, Broughdale, and East London near Fanshawe. If your property is within 3km of either campus, we can manage it." },
-  { q: "What do you charge for student rental management?", a: "Our management fee is 10% of monthly rent, plus a one-month leasing fee when we place tenants. No markup on maintenance. See our pricing page for full details." },
+  { q: "What do you charge for student rental management?", a: "We charge a straightforward management fee with no markup on maintenance. Contact us for a quote based on your property and location." },
   { q: "What if a student stops paying rent?", a: "We serve the N4 notice immediately — within 7 days of a missed payment. We don't wait. If arrears continue, we file the L1 application with the LTB." },
 ];
 
@@ -41,9 +41,6 @@ export default function StudentRentalManagementPage() {
           <div className="flex flex-wrap gap-4">
             <Link href="/contact" className="px-8 py-4 text-xs uppercase tracking-widest" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
               Get a Free Consultation →
-            </Link>
-            <Link href="/pricing" className="px-8 py-4 text-xs uppercase tracking-widest border" style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-              View Pricing
             </Link>
           </div>
         </div>
