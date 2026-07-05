@@ -200,6 +200,32 @@ export default function LandlordsPage() {
         </div>
       </section>
 
+      {/* Freedom Score nudge */}
+      <section className="py-14 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
+        <FadeIn>
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
+                Free Assessment
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-light leading-tight" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+                How free are you from your rentals?
+              </h3>
+              <p className="text-sm mt-2" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
+                3-minute quiz. Get your Property Freedom Score™ and a personalized action plan.
+              </p>
+            </div>
+            <Link
+              href="/freedom-score"
+              className="flex-shrink-0 px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded border transition-opacity hover:opacity-80"
+              style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              Take the Quiz →
+            </Link>
+          </div>
+        </FadeIn>
+      </section>
+
       {/* Rent Estimator */}
       <section id="rent-estimator" className="py-0">
         <RentEstimator />

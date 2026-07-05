@@ -15,6 +15,7 @@ import {
   Mail,
   Zap,
   Briefcase,
+  BarChart2,
 } from "lucide-react";
 
 const serviceLinks = [
@@ -22,6 +23,7 @@ const serviceLinks = [
   { label: "Rent Collection", href: "/services/rent-collection" },
   { label: "Student Rentals", href: "/services/student-rental-management" },
   { label: "Short-Term Rentals", href: "/services/airbnb-management" },
+  { label: "Property Freedom Score™", href: "/freedom-score", highlight: true },
 ];
 
 const navLinks = [
@@ -45,6 +47,7 @@ const mobileNavItems = [
   { icon: BookOpen,   label: "Blog",               href: "/blog"      },
   { icon: Info,       label: "About",              href: "/about"     },
   { icon: Mail,       label: "Contact",            href: "/contact"   },
+  { icon: BarChart2,  label: "Freedom Score",       href: "/freedom-score", accent: false },
   { icon: Zap,        label: "App Waitlist",        href: "/platform", accent: true },
 ];
 
@@ -150,19 +153,23 @@ export default function Navbar() {
                               zIndex: 60,
                             }}
                           >
-                            {serviceLinks.map((s) => (
-                              <Link
-                                key={s.href}
-                                href={s.href}
-                                className="block px-4 py-2.5 text-sm transition-colors hover:bg-[#F7F5F2]"
-                                style={{
-                                  color: pathname === s.href ? "#8B2030" : "#1F2F3A",
-                                  fontFamily: "var(--font-dm-sans)",
-                                  fontWeight: pathname === s.href ? 600 : 400,
-                                }}
-                              >
-                                {s.label}
-                              </Link>
+                            {serviceLinks.map((s, idx) => (
+                              <span key={s.href}>
+                                {idx === serviceLinks.length - 1 && (
+                                  <div style={{ height: 1, backgroundColor: "#E8E3DC", margin: "4px 0" }} />
+                                )}
+                                <Link
+                                  href={s.href}
+                                  className="block px-4 py-2.5 text-sm transition-colors hover:bg-[#F7F5F2]"
+                                  style={{
+                                    color: ("highlight" in s && s.highlight) ? "#8B2030" : pathname === s.href ? "#8B2030" : "#1F2F3A",
+                                    fontFamily: "var(--font-dm-sans)",
+                                    fontWeight: ("highlight" in s && s.highlight) || pathname === s.href ? 600 : 400,
+                                  }}
+                                >
+                                  {s.label}
+                                </Link>
+                              </span>
                             ))}
                           </motion.div>
                         )}
