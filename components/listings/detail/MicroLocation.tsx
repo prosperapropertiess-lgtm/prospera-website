@@ -62,19 +62,35 @@ function getConfig(name: string) {
 }
 
 function getTransport(place: PlaceItem): { icon: string } {
+  const timeStr = (place.walk_time || place.distance || "").toLowerCase();
+  const isDrive = timeStr.includes("drive");
+  if (isDrive) return { icon: "🚗" };
+
+  // Extract minutes from time string like "5 mins walk" or "15 min walk"
+  const minMatch = timeStr.match(/(\d+)\s*min/);
+  if (minMatch) {
+    const mins = parseInt(minMatch[1]);
+    return { icon: mins <= 20 ? "🚶" : "🚗" };
+  }
+
+  // Fall back to numeric distance in metres
   const dist = parseInt(place.distance || "1200");
-  const wt = place.walk_time || "";
-  const mins = parseInt(wt);
-  const isWalk = dist < 1200 || (mins > 0 && mins <= 20 && wt.toLowerCase().includes("walk"));
-  return { icon: isWalk ? "🚶" : "🚗" };
+  return { icon: dist < 1200 ? "🚶" : "🚗" };
 }
 
 function formatTime(place: PlaceItem): string {
-  if (place.walk_time) return place.walk_time.replace(/\s*walk\s*/i, "").trim();
-  const dist = parseInt(place.distance || "1000");
+  const timeStr = place.walk_time || place.distance || "";
+
+  // If the string already contains time info, clean it up and return it
+  if (/\d+\s*min/i.test(timeStr)) {
+    return timeStr.replace(/\s*walk\s*/i, "").trim();
+  }
+
+  // Numeric distance in metres — estimate
+  const dist = parseInt(timeStr || "1000");
   return dist < 1200
-    ? `${Math.round(dist / 80)} min walk`
-    : `${Math.round(dist / 500)} min drive`;
+    ? `${Math.max(1, Math.round(dist / 80))} min walk`
+    : `${Math.max(1, Math.round(dist / 500))} min drive`;
 }
 
 // ── Score circle (unchanged) ──────────────────────────────────────────────────
@@ -194,6 +210,39 @@ function ProximityDiagram({ spots }: { spots: SpotData[] }) {
   );
 }
 
+// ── Build categories from raw Google-type keys (fallback for older data) ─────
+
+const RAW_TYPE_LABELS: Record<string, string> = {
+  grocery_or_supermarket: "Grocery Stores",
+  pharmacy: "Pharmacies",
+  gym: "Gyms & Fitness",
+  transit_station: "Transit Stops",
+  school: "Schools",
+  hospital: "Hospitals & Clinics",
+  park: "Parks",
+  restaurant: "Restaurants",
+  cafe: "Cafés",
+  bank: "Banks",
+  popular_spots: "Popular Spots",
+};
+
+function buildCategoriesFromRaw(data: Record<string, unknown>): PlaceCategory[] {
+  return Object.entries(data)
+    .filter(([key, val]) => key in RAW_TYPE_LABELS && Array.isArray(val) && (val as unknown[]).length > 0)
+    .map(([key, val]) => ({
+      name: RAW_TYPE_LABELS[key],
+      places: (val as { name: string; distance?: string; walk_time?: string; vicinity?: string; place_id?: string }[])
+        .slice(0, 8)
+        .map((p) => ({
+          name: p.name,
+          distance: p.distance,
+          walk_time: p.walk_time,
+          vicinity: p.vicinity,
+          place_id: p.place_id,
+        })),
+    }));
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function MicroLocation({ property }: Props) {
@@ -204,7 +253,12 @@ export default function MicroLocation({ property }: Props) {
   const walkScore  = property.walk_score   ?? null;
   const transitScore = property.transit_score ?? null;
   const bikeScore  = property.bike_score   ?? null;
-  const categories = (neighbourhoodData?.categories as PlaceCategory[] | undefined) ?? [];
+
+  // Try the formatted categories array first; fall back to building from raw place-type keys
+  const storedCategories = (neighbourhoodData?.categories as PlaceCategory[] | undefined) ?? [];
+  const categories: PlaceCategory[] = storedCategories.length > 0
+    ? storedCategories
+    : (neighbourhoodData ? buildCategoriesFromRaw(neighbourhoodData) : []);
 
   const hasScores = walkScore !== null || transitScore !== null || bikeScore !== null;
 
