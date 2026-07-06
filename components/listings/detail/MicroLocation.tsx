@@ -111,7 +111,6 @@ interface SpotData {
 }
 
 function ProximityDiagram({ spots }: { spots: SpotData[] }) {
-  if (!spots.length) return null;
 
   const SIZE   = 500;
   const CX     = SIZE / 2;
@@ -212,7 +211,8 @@ export default function MicroLocation({ property }: Props) {
     })
     .slice(0, 8);
 
-  if (!categories.length && !busRoutes.length && !hasScores) return null;
+  // Only skip if there is truly nothing to show at all
+  if (!neighbourhoodData && !busRoutes.length && !hasScores) return null;
 
   return (
     <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
@@ -236,12 +236,10 @@ export default function MicroLocation({ property }: Props) {
           </div>
         )}
 
-        {/* Proximity diagram */}
-        {diagramSpots.length > 0 && (
-          <div className="mb-10 px-2 sm:px-8">
-            <ProximityDiagram spots={diagramSpots} />
-          </div>
-        )}
+        {/* Proximity diagram — always show when section renders */}
+        <div className="mb-10 px-2 sm:px-8">
+          <ProximityDiagram spots={diagramSpots} />
+        </div>
 
         {/* Category filter chips */}
         {categories.length > 0 && (
