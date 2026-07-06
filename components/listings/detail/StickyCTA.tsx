@@ -82,19 +82,12 @@ export default function StickyCTA({ property }: Props) {
 
             {/* Mobile CTAs: side by side, compact */}
             <div className="flex items-center gap-2 flex-1 justify-end">
-              <a
-                href={`/contact?property=${encodeURIComponent(property.title)}&action=viewing`}
-                className="px-3 py-2.5 text-xs font-semibold uppercase tracking-wide transition-opacity hover:opacity-80 rounded border text-center"
-                style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5" }}
-              >
-                View
-              </a>
               {prequalified ? (
                 <span
                   className="px-3 py-2.5 text-xs font-semibold uppercase tracking-wide rounded flex items-center gap-1"
                   style={{ backgroundColor: "rgba(250,248,245,0.15)", color: "#FAF8F5" }}
                 >
-                  ✓ Done
+                  ✓ Booked
                 </span>
               ) : (
                 <button
@@ -102,7 +95,7 @@ export default function StickyCTA({ property }: Props) {
                   className="px-4 py-2.5 text-xs font-semibold uppercase tracking-wide transition-opacity hover:opacity-90 rounded"
                   style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
                 >
-                  Pre-Qualify
+                  Book a Viewing
                 </button>
               )}
             </div>
@@ -127,28 +120,30 @@ export default function StickyCTA({ property }: Props) {
 
             {/* CTAs */}
             <div className="flex items-center gap-3 sm:gap-4">
-              <a
-                href={`/contact?property=${encodeURIComponent(property.title)}&action=viewing`}
-                className="px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded border"
-                style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5" }}
-              >
-                Book a Viewing
-              </a>
               {prequalified ? (
                 <span
                   className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded flex items-center gap-2"
                   style={{ backgroundColor: "rgba(250,248,245,0.15)", color: "#FAF8F5" }}
                 >
-                  ✓ Pre-Qualified
+                  ✓ Viewing Requested
                 </span>
               ) : (
-                <button
-                  onClick={() => setShowPrequalify(true)}
-                  className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-90 rounded"
-                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
-                >
-                  Pre-Qualify Now
-                </button>
+                <>
+                  <button
+                    onClick={() => setShowPrequalify(true)}
+                    className="px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded border"
+                    style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5" }}
+                  >
+                    Book a Viewing
+                  </button>
+                  <button
+                    onClick={() => setShowPrequalify(true)}
+                    className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-90 rounded"
+                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
+                  >
+                    Pre-Qualify Now
+                  </button>
+                </>
               )}
             </div>
           </div>
