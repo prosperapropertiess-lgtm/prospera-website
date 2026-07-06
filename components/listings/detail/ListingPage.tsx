@@ -69,15 +69,16 @@ export default function ListingPage({ property }: ListingPageProps) {
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
       <LifeSimHero property={property} />
 
+      {/* Photos immediately after hero — highest conversion priority */}
+      {(property.images?.length || property.photo_labels?.length) ? (
+        <PhotoGallery property={property} />
+      ) : null}
+
       <QuickSummary property={property} />
 
       <ShareBar property={property} />
 
       <SocialProof property={property} />
-
-      {(property.images?.length || property.photo_labels?.length) ? (
-        <PhotoGallery property={property} />
-      ) : null}
 
       {property.ai_highlights?.length ? (
         <PropertyHighlights property={property} />
