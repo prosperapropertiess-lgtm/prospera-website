@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-07-03
+2026-07-06
 
-## Posts Written: 63 total
+## Posts Written: 64 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -94,12 +94,13 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - how-to-increase-rent-ontario-step-by-step ✅ _(supporting rent-increase-ontario-guidelines cluster)_
 - n1-form-ontario-landlord-guide ✅ _(supporting how-to-increase-rent-ontario-step-by-step and rent-increase-ontario-guidelines cluster)_
 
-### GEOGRAPHIC EXPANSION keywords (2 of 3)
+### GEOGRAPHIC EXPANSION keywords (3 of 3 — complete)
 - property-management-tillsonburg-ontario ✅ _(Oxford County market — manufacturing/agricultural/retiree tenant mix, competitor analysis completed, differentiates on operational depth + RTA experience)_
 - property-management-woodstock-ontario ✅ _(Oxford County seat — Toyota/manufacturing anchor, commuter demand from London/Brantford, larger tenant pool than Tillsonburg, detailed fee breakdown and 7-question evaluation framework)_
+- property-management-ingersoll-ontario ✅ _(Small Oxford County manufacturing town — CAMI/GM EV plant anchor, 401 corridor commuters, long-term community residents, agricultural workers; closes Oxford County geographic cluster)_
 
 **Still missing:**
-- property-management-ingersoll-ontario
+_(Oxford County geographic cluster now complete — all three posts published.)_
 
 ### TENANT keywords (0)
 **Not a priority yet — different conversion intent:**
@@ -111,22 +112,19 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 
 ## Recommended Next Posts
 
-**Geographic expansion (continue sequence):**
-1. ~~property-management-woodstock-ontario~~ ✅ Published 2026-07-03
-2. property-management-ingersoll-ontario — smaller Oxford County town, distinct from Woodstock, closes geographic cluster
+**Geographic expansion — Oxford County cluster now complete.**
 
 **Supporting cluster content (topical depth):**
-3. rta-section-83-ontario (supporting LTB cluster — referenced in eviction posts but never deeply covered)
-4. property-management-for-landlords-with-one-property-ontario (conversion intent — single-property owners, high-intent decision-stage audience)
+1. rta-section-83-ontario (supporting LTB cluster — referenced in eviction posts but never deeply covered)
+2. property-management-for-landlords-with-one-property-ontario (conversion intent — single-property owners, high-intent decision-stage audience)
 
-**Next priority after geographic expansion:**
+**Next priority:**
 - rta-section-83-ontario
 - property-management-for-landlords-with-one-property-ontario
 
 ---
 
 ## Do More Of
-- Geographic expansion keywords (Woodstock, Ingersoll next) — one down, two remaining
 - Supporting cluster content deepening internal link graph
 - High-conversion decision-stage posts (next: landlords with one property)
 - Process/timeline posts — strong for AI citations and rich snippets
@@ -162,4 +160,5 @@ _(All LONG-TAIL keywords now published — no remaining gaps.)_
 - 2026-06-16: Published how-to-increase-rent-ontario-step-by-step — SUPPORTING CLUSTER (supporting rent-increase-ontario-guidelines; long-tail expansion). Covers rent control exemption threshold (post-Nov 15 2018 units), 12-month rule mechanics, 90-day notice requirement, N1 form completion and valid service methods, guideline calculation with example, above-guideline increase overview, tenant dispute rights (T1 application), fixed-term lease timing rules, and 9-step summary checklist. Differentiates from ontario.ca and CLEO competitors by being landlord-process-focused with step-by-step operational guidance and common-mistake warnings. Internal links to above-guideline-rent-increase-ontario, landlord-record-keeping-ontario, late-rent-payments-ontario, and lease-renewal-ontario-landlord-guide. External links to ontario.ca RTA statute, ontario.ca/page/residential-rent-increases, and tribunalsontario.ca/ltb/forms/.
 - 2026-06-17: Published n1-form-ontario-landlord-guide — SUPPORTING CLUSTER (deep-dive companion to how-to-increase-rent-ontario-step-by-step and rent-increase-ontario-guidelines). Covers N1 form field-by-field walkthrough, rent control eligibility (pre/post Nov 15 2018), 2026 guideline (2.5%), 90-day notice rule mechanics, 12-month rule, all valid RTA service methods with deemed-receipt rules, T1 tenant dispute process, LMR top-up obligation after rent increase, and 7 most common N1 mistakes. Differentiates from tribunalsontario.ca PDF and ontario.ca competitors by being fully landlord-process-oriented with mistake prevention guidance. Internal links to above-guideline-rent-increase-ontario, how-to-increase-rent-ontario-step-by-step, landlord-record-keeping-ontario, what-can-landlord-deduct-from-last-month-rent-ontario, and lease-renewal-ontario-landlord-guide. External links to ontario.ca RTA statute, ontario.ca/page/residential-rent-increases, and tribunalsontario.ca/ltb/forms/.
 - 2026-06-23: Published property-management-tillsonburg-ontario — GEOGRAPHIC EXPANSION (first of three Oxford County/nearby market posts). Covers Tillsonburg rental market demographics (manufacturing workers, retirees, agricultural workers, London commuters), why self-management breaks down in smaller markets, full scope of professional property management services, fee structure (8–12% monthly + leasing fee), 7-question evaluation framework for hiring a PM, geographic trade-off between local presence and operational depth, and self-management warning signs. Competitor analysis completed (Oversight PM, Stubbe's, Bamford — all thin/directory-level content). Differentiates on RTA depth, actionable evaluation questions, and Southwestern Ontario regional context. Internal links to tenant-screening-red-flags, n4-notice-ontario, property-management-fees-ontario, switching-property-management-companies-ontario, and when-to-hire-a-property-manager-ontario. External links to CMHC rental market reports, ontario.ca RTA statute, and ontario.ca Ontario Standard Lease document.
-- 2026-07-03: Published property-management-woodstock-ontario — GEOGRAPHIC EXPANSION (second of three Oxford County posts). Covers Woodstock rental market specifics (Toyota TMMC anchor employment, commuter demand from London/Brantford, retirees, manufacturing workers), why self-management breaks down, full PM service scope, fee structure (8–12% monthly + leasing fee on ~$1,800/month rents), 7-question evaluation framework, geographic trade-off between Woodstock-based vs. London/regional company, remote-ownership management challenges, and self-management warning signs. Differentiates from Tillsonburg post by market size (~45K vs ~18K population), more diverse applicant pool, and more PM options to evaluate. Internal links to tenant-screening-red-flags, n4-notice-ontario, property-management-fees-ontario, switching-property-management-companies-ontario, when-to-hire-a-property-manager-ontario, and property-management-tillsonburg-ontario. External links to CMHC rental market reports and ontario.ca RTA statute. — GEOGRAPHIC EXPANSION (first of three Oxford County/nearby market posts). Covers Tillsonburg rental market demographics (manufacturing workers, retirees, agricultural workers, London commuters), why self-management breaks down in smaller markets, full scope of professional property management services, fee structure (8–12% monthly + leasing fee), 7-question evaluation framework for hiring a PM, geographic trade-off between local presence and operational depth, and self-management warning signs. Competitor analysis completed (Oversight PM, Stubbe's, Bamford — all thin/directory-level content). Differentiates on RTA depth, actionable evaluation questions, and Southwestern Ontario regional context. Internal links to tenant-screening-red-flags, n4-notice-ontario, property-management-fees-ontario, switching-property-management-companies-ontario, and when-to-hire-a-property-manager-ontario. External links to CMHC rental market reports, ontario.ca RTA statute, and ontario.ca Ontario Standard Lease document.
+- 2026-07-03: Published property-management-woodstock-ontario — GEOGRAPHIC EXPANSION (second of three Oxford County posts). Covers Woodstock rental market specifics (Toyota TMMC anchor employment, commuter demand from London/Brantford, retirees, manufacturing workers), why self-management breaks down, full PM service scope, fee structure (8–12% monthly + leasing fee on ~$1,800/month rents), 7-question evaluation framework, geographic trade-off between Woodstock-based vs. London/regional company, remote-ownership management challenges, and self-management warning signs. Differentiates from Tillsonburg post by market size (~45K vs ~18K population), more diverse applicant pool, and more PM options to evaluate. Internal links to tenant-screening-red-flags, n4-notice-ontario, property-management-fees-ontario, switching-property-management-companies-ontario, when-to-hire-a-property-manager-ontario, and property-management-tillsonburg-ontario. External links to CMHC rental market reports and ontario.ca RTA statute.
+- 2026-07-06: Published property-management-ingersoll-ontario — GEOGRAPHIC EXPANSION (third and final Oxford County post; closes the geographic cluster). Covers Ingersoll rental market specifics (CAMI/GM EV plant anchor employment, 401-corridor commuters priced out of London/Woodstock, long-term community residents, agricultural/agri-business workers), why self-management breaks down in small markets (thin applicant pool, legal mistakes, stale rent, maintenance gaps), full PM service scope, fee structure (8–12% monthly on ~$1,600/month rents), 7-question evaluation framework for hiring a PM, remote-ownership management challenges, and self-management warning signs. Differentiates from Woodstock and Tillsonburg posts by market size (~13K population), CAMI EV manufacturing anchor, and shallower local PM options. Internal links to tenant-screening-red-flags, n4-notice-ontario, property-management-fees-ontario, switching-property-management-companies-ontario, when-to-hire-a-property-manager-ontario, property-management-woodstock-ontario, and property-management-tillsonburg-ontario. External links to CMHC rental market data and ontario.ca RTA statute.
