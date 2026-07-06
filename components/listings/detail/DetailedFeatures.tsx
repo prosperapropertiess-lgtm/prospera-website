@@ -90,7 +90,7 @@ export default function DetailedFeatures({ property }: Props) {
             Features & Amenities
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-bold text-center mb-14 leading-tight"
+            className="text-4xl sm:text-5xl font-bold text-center mb-8 md:mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
             Everything Included

@@ -47,7 +47,7 @@ export default function CostsBreakdown({ property }: Props) {
             Financial Clarity
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-bold text-center mb-14 leading-tight"
+            className="text-4xl sm:text-5xl font-bold text-center mb-8 md:mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
             Cost Breakdown
@@ -171,7 +171,7 @@ export default function CostsBreakdown({ property }: Props) {
         {tenantUtils.some((u) => u.avg_cost) && (
           <div>
             <div
-              className="mt-5 rounded-xl p-6 flex items-center justify-between"
+              className="mt-5 rounded-xl p-6 flex flex-wrap items-center justify-between gap-3"
               style={{ backgroundColor: "#1F2F3A" }}
             >
               <p

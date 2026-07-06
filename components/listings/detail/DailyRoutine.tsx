@@ -58,7 +58,7 @@ export default function DailyRoutine({ property }: Props) {
             Life Here
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-bold text-center mb-14 leading-tight"
+            className="text-4xl sm:text-5xl font-bold text-center mb-8 md:mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
             A Day in This Home

@@ -12,6 +12,14 @@ const LEAD_KEYWORDS = /email|phone|call|contact|name|reach|number/i;
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolledPastHero(window.scrollY > window.innerHeight * 0.6);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -99,8 +107,15 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating bubble */}
-      <button
+      {/* Floating bubble — only appears after scrolling past hero */}
+      <AnimatePresence>
+      {(scrolledPastHero || open) && (
+      <motion.button
+        key="chat-bubble"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.2 }}
         onClick={() => setOpen((o) => !o)}
         className="chat-bubble fixed bottom-28 right-5 md:bottom-6 md:right-6 z-[85] w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
         style={{ backgroundColor: "#8B2030" }}
@@ -122,7 +137,9 @@ export default function ChatWidget() {
         {!open && (
           <span className="absolute top-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={{ backgroundColor: "#1F2F3A" }} />
         )}
-      </button>
+      </motion.button>
+      )}
+      </AnimatePresence>
 
       {/* Chat window */}
       <AnimatePresence>

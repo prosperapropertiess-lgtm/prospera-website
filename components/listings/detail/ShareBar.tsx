@@ -63,10 +63,10 @@ export default function ShareBar({ property }: Props) {
   ];
 
   return (
-    <section className="py-6 px-5 sm:px-8">
-      <div className="max-w-5xl mx-auto flex items-center justify-between">
-        <span className="text-xs uppercase tracking-widest font-medium" style={{ color: "#666666" }}>
-          Share this listing
+    <section className="py-5 px-5 sm:px-8" style={{ borderBottom: "1px solid #E8E4DE" }}>
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
+        <span className="text-xs uppercase tracking-widest font-medium shrink-0" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+          Share
         </span>
         <div className="flex items-center gap-2">
           {shares.map((s) =>
@@ -74,11 +74,12 @@ export default function ShareBar({ property }: Props) {
               <button
                 key={s.label}
                 onClick={s.action}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs transition-all hover:opacity-70"
+                title={s.label}
+                className="flex items-center justify-center gap-1.5 w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-2 rounded-lg text-xs transition-all hover:opacity-70"
                 style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: copied && s.activeLabel ? "#4ade80" : "#333333" }}
               >
                 {s.icon}
-                {copied && s.activeLabel ? s.activeLabel : s.label}
+                <span className="hidden sm:inline">{copied && s.activeLabel ? s.activeLabel : s.label}</span>
               </button>
             ) : (
               <a
@@ -86,11 +87,12 @@ export default function ShareBar({ property }: Props) {
                 href={"href" in s ? s.href : "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs transition-all hover:opacity-70"
+                title={s.label}
+                className="flex items-center justify-center gap-1.5 w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-2 rounded-lg text-xs transition-all hover:opacity-70"
                 style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", color: "#333333" }}
               >
                 {s.icon}
-                {s.label}
+                <span className="hidden sm:inline">{s.label}</span>
               </a>
             )
           )}

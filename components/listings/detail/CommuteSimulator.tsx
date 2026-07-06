@@ -96,7 +96,7 @@ export default function CommuteSimulator({ property }: Props) {
             Plan Your Commute
           </p>
           <h2
-            className="text-4xl sm:text-5xl font-bold text-center mb-6 leading-tight"
+            className="text-4xl sm:text-5xl font-bold text-center mb-4 md:mb-6 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
             Commute Simulator
