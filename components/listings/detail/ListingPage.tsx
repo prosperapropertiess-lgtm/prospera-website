@@ -92,9 +92,7 @@ export default function ListingPage({ property }: ListingPageProps) {
         <DailyRoutine property={property} />
       ) : null}
 
-      {(property.neighbourhood_data || property.bus_routes?.length) ? (
-        <MicroLocation property={property} />
-      ) : null}
+      <MicroLocation property={property} />
 
       {property.neighbourhood_vibe ? (
         <NeighbourhoodVibe property={property} />

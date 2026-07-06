@@ -179,6 +179,17 @@ function ProximityDiagram({ spots }: { spots: SpotData[] }) {
         fill="rgba(250,248,245,0.65)" fontFamily="system-ui, sans-serif" letterSpacing="1">
         YOUR HOME
       </text>
+
+      {/* Empty state — dashed orbit ring with label */}
+      {spots.length === 0 && (
+        <>
+          <circle cx={CX} cy={CY} r={RADIUS} fill="none" stroke="#E8E4DE" strokeWidth="1" strokeDasharray="6 6" />
+          <text x={CX} y={CY - RADIUS - 14} textAnchor="middle" fontSize="11"
+            fill="#AAAAAA" fontFamily="system-ui, sans-serif">
+            Neighbourhood amenities coming soon
+          </text>
+        </>
+      )}
     </svg>
   );
 }
@@ -211,8 +222,7 @@ export default function MicroLocation({ property }: Props) {
     })
     .slice(0, 8);
 
-  // Only skip if there is truly nothing to show at all
-  if (!neighbourhoodData && !busRoutes.length && !hasScores) return null;
+  // Always render — show home pin + empty state when no data yet
 
   return (
     <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
