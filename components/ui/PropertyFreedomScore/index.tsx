@@ -146,7 +146,7 @@ export default function PropertyFreedomScore() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.875rem", marginBottom: "2.5rem" }}>
           {[
             { n: "12", label: "questions" },
-            { n: "2 min", label: "to complete" },
+            { n: "90 sec", label: "to complete" },
             { n: "Free", label: "action plan" },
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8", borderRadius: "0.875rem", padding: "1.25rem", textAlign: "center" }}>
