@@ -7,69 +7,100 @@ interface Props {
   property: PropertyRecord;
 }
 
-/**
- * SEO-safe listing hero:
- * - Property title, address, and intro text always visible in HTML
- * - No opacity-0 animations — content must be indexable by Google
- */
 export default function LifeSimHero({ property }: Props) {
-  const lines = property.ai_life_intro
+  const coverImage = property.images?.[0] ?? null;
+  const aiLines = property.ai_life_intro
     ? property.ai_life_intro.split("\n").filter(Boolean)
-    : null;
+    : [];
 
   return (
-    <section
-      className="relative min-h-[60vh] flex flex-col px-5 sm:px-8 pt-28 pb-20"
-      style={{ backgroundColor: "#1F2F3A" }}
-    >
-      {/* Back link */}
-      <div className="mb-14">
-        <Link
-          href="/listings"
-          className="text-xs uppercase tracking-widest transition-opacity hover:opacity-60"
-          style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
-        >
-          ← All Listings
-        </Link>
-      </div>
+    <>
+      {/* ── Cover image hero ─────────────────────────────────────────────────── */}
+      <section
+        className="relative flex flex-col"
+        style={{ minHeight: "70vh", backgroundColor: "#1F2F3A" }}
+      >
+        {/* Cover photo */}
+        {coverImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={coverImage}
+            alt={property.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
 
-      {/* Content — always visible (no animation hiding) */}
-      <div className="flex-1 flex items-end max-w-5xl mx-auto w-full">
-        {lines ? (
-          <div className="space-y-4">
-            {lines.map((line, i) => (
-              <p
-                key={i}
-                className="text-2xl sm:text-3xl md:text-4xl font-light leading-snug max-w-3xl"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
-                {line}
-              </p>
-            ))}
+        {/* Gradient overlay — darker at top (nav) and bottom (text readability) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: coverImage
+              ? "linear-gradient(to bottom, rgba(15,22,30,0.55) 0%, rgba(15,22,30,0.15) 35%, rgba(15,22,30,0.6) 70%, rgba(15,22,30,0.9) 100%)"
+              : "none",
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative flex flex-col flex-1 px-5 sm:px-8 pt-28 pb-12 max-w-5xl mx-auto w-full">
+          {/* Back link */}
+          <div className="mb-auto">
+            <Link
+              href="/listings"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest transition-opacity hover:opacity-60"
+              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              ← All Listings
+            </Link>
           </div>
-        ) : (
-          <div>
+
+          {/* Title block — anchored to bottom */}
+          <div className="mt-auto">
+            {/* Property type + city pill */}
+            <p
+              className="text-xs uppercase tracking-widest mb-4"
+              style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              {[property.property_type, property.city, "Ontario"].filter(Boolean).join(" · ")}
+            </p>
+
+            {/* Title — always rendered for SEO */}
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-4 max-w-3xl"
+              className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-3 max-w-3xl"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               {property.title}
             </h1>
+
+            {/* Address */}
             <p
-              className="text-base"
+              className="text-sm"
               style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
             >
               {property.address}, {property.city}, ON
             </p>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* Bottom fade overlay */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, transparent, #F7F5F2)" }}
-      />
-    </section>
+      {/* ── AI life intro — narrative block below the hero ────────────────────── */}
+      {aiLines.length > 0 && (
+        <section
+          className="px-5 sm:px-8 py-10"
+          style={{ backgroundColor: "#1F2F3A" }}
+        >
+          <div className="max-w-3xl mx-auto space-y-3">
+            {aiLines.map((line, i) => (
+              <p
+                key={i}
+                className="text-xl sm:text-2xl font-light leading-relaxed"
+                style={{ color: "rgba(250,248,245,0.82)", fontFamily: "var(--font-cormorant)" }}
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   );
 }

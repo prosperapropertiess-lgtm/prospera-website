@@ -12,10 +12,10 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://connect.facebook.net",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://picsum.photos https://images.unsplash.com https://res.cloudinary.com https://lh3.googleusercontent.com https://www.facebook.com https://hwaroazxbzgmjjasgtdb.supabase.co",
-      "connect-src 'self' https://*.supabase.co https://api.anthropic.com https://api.resend.com https://www.facebook.com",
+      "img-src 'self' data: blob: https://picsum.photos https://images.unsplash.com https://res.cloudinary.com https://lh3.googleusercontent.com https://www.facebook.com https://hwaroazxbzgmjjasgtdb.supabase.co https://*.tile.openstreetmap.org https://unpkg.com",
+      "connect-src 'self' https://*.supabase.co https://api.anthropic.com https://api.resend.com https://www.facebook.com https://*.tile.openstreetmap.org",
       "frame-src 'self' https://www.google.com https://maps.google.com",
       "frame-ancestors 'self'",
     ].join("; "),
