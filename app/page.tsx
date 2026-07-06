@@ -751,10 +751,10 @@ function Services() {
       <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-widest text-center mb-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            What We Do
+            For Self-Managing Landlords
           </p>
           <h2 className="text-4xl sm:text-5xl font-light text-center mb-12 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-            Two ways we help landlords.
+            Still doing it yourself with 2–5 units?
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -21,6 +21,7 @@ const navLinks = [
   { label: "For Landlords", href: "/landlords" },
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -58,7 +59,7 @@ export default function Navbar() {
     <>
       {/* ── Header ─────────────────────────────────────────────────────────────── */}
       <header
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-0 left-0 right-0 z-[110]"
         style={{
           backgroundColor: "#1F2F3A",
           boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.12)" : "none",
@@ -162,7 +163,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
+            className="fixed inset-0 z-[100] lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
             style={{ backgroundColor: "rgba(15,22,30,0.82)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
