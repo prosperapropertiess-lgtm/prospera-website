@@ -31,11 +31,11 @@ export default function StickyBottomCTA() {
           }}
         >
           <Link
-            href="/contact"
+            href="/freedom-score"
             className="btn-primary block w-full py-4 text-xs font-semibold uppercase tracking-widest text-center rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Get a Free Quote
+            Take the Freedom Test
           </Link>
         </motion.div>
       )}

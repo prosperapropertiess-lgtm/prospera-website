@@ -110,11 +110,11 @@ function Hero() {
           <HeroFadeIn delay={1100} duration={1000}>
             <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
               <Link
-                href="/contact"
+                href="/freedom-score"
                 className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
                 style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                Get a Free Quote
+                Take the Freedom Test
               </Link>
               <a
                 href="tel:5196971227"
