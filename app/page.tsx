@@ -124,16 +124,18 @@ function Hero() {
                 or call (519) 697-1227
               </a>
             </div>
-            <div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full"
-              style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
-            >
-              <span className="text-sm font-semibold" style={{ color: "#FFFFFF", fontFamily: "var(--font-dm-sans)" }}>
-                90-Day Satisfaction Guarantee
-              </span>
-              <span className="text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>
-                · No contracts · We pick up the phone
-              </span>
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full"
+                style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
+              >
+                <span className="text-sm font-semibold" style={{ color: "#FFFFFF", fontFamily: "var(--font-dm-sans)" }}>
+                  90-Day Satisfaction Guarantee
+                </span>
+              </div>
+              <p className="text-xs text-center" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
+                Built for landlords self-managing 2–5 units in London & surrounding areas within 45 min
+              </p>
             </div>
           </HeroFadeIn>
 
