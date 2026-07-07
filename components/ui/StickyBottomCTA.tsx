@@ -35,7 +35,7 @@ export default function StickyBottomCTA() {
             className="btn-primary block w-full py-4 text-xs font-semibold uppercase tracking-widest text-center rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Take the Freedom Test
+            Landlord Freedom Test
           </Link>
         </motion.div>
       )}

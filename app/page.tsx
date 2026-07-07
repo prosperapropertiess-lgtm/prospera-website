@@ -114,7 +114,7 @@ function Hero() {
                 className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
                 style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                Take the Freedom Test
+                Landlord Freedom Test
               </Link>
               <a
                 href="tel:5196971227"
