@@ -177,12 +177,25 @@ function signoff(name = "Ebin"): string {
 function heroCard(greeting: string, subtitle: string): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;">
     <tr>
-      <td style="background:${NAVY};border-radius:14px;padding:32px 28px 28px;text-align:center;">
-        <img src="https://www.prosperaproperties.co/logo.png" alt="Prospera Properties" height="30" style="height:30px;width:auto;display:block;margin:0 auto 18px;filter:brightness(0) invert(1);opacity:0.9;" />
-        <p style="margin:0 0 10px;font-family:${FONT};font-size:24px;font-weight:700;color:${WHITE};line-height:1.3;">${greeting}</p>
-        <p style="margin:0;font-family:${FONT};font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;">${subtitle}</p>
+      <td style="background:${NAVY};border-radius:14px;padding:36px 32px 32px;text-align:left;">
+        <p style="margin:0 0 4px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(250,248,245,0.45);">Prospera Properties</p>
+        <p style="margin:0 0 12px;font-family:${FONT};font-size:28px;font-weight:700;color:#FAF8F5;line-height:1.25;">${greeting}</p>
+        <p style="margin:0;font-family:${FONT};font-size:15px;color:rgba(250,248,245,0.6);line-height:1.7;">${subtitle}</p>
       </td>
     </tr>
+  </table>`;
+}
+
+// Dark stat band — big bold numbers on navy, like a property spec row
+function darkStats(items: { value: string; label: string }[]): string {
+  const cols = items.map((item, i) => `
+    <td style="text-align:center;padding:28px 12px;${i > 0 ? `border-left:1px solid rgba(250,248,245,0.10);` : ""}">
+      <p style="margin:0 0 6px;font-family:${FONT};font-size:34px;font-weight:700;color:#FAF8F5;line-height:1;">${item.value}</p>
+      <p style="margin:0;font-family:${FONT};font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(250,248,245,0.45);">${item.label}</p>
+    </td>
+  `).join("");
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;border-radius:14px;overflow:hidden;background:${NAVY};">
+    <tr>${cols}</tr>
   </table>`;
 }
 
@@ -192,19 +205,25 @@ export function landlordWelcomeEmail(name: string): string {
   const PDF_URL = `${BASE_URL}/lease-addendum.pdf`;
 
   return wrapper(`
-    ${heroCard(`Hey ${name || "there"},`, "Your Lease Protection Addendum is ready.")}
+    ${heroCard(`Hey ${name || "there"},`, "Your Lease Protection Addendum is ready — and it fills in gaps most landlords don't even know exist.")}
 
-    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Here's your free Lease Protection Addendum — it fills in the gaps Ontario's standard lease leaves open so you're covered before something goes wrong.</p>
+    ${darkStats([
+      { value: "90", label: "Day Guarantee" },
+      { value: "2–5", label: "Unit Specialists" },
+      { value: "24hr", label: "Response Time" },
+    ])}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Ontario's standard lease leaves a lot open. This addendum closes it — noise, pets, parking, utilities, entry notice, subletting. The stuff that causes problems later.</p>
 
     ${cta("Download the Addendum (PDF)", PDF_URL)}
 
     ${divider()}
 
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">I'm Ebin. I run Prospera Properties — full property management across London, St. Thomas, and Strathroy. Tenant screening, rent collection, maintenance — the whole thing.</p>
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">I'm Ebin. I run Prospera Properties — full-service management across London, St. Thomas, and Strathroy. Tenant screening, rent collection, maintenance, the whole thing.</p>
 
-    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">If you ever want someone to take it off your plate, that's what we do.</p>
+    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">If you're still doing it yourself on 2–5 units and want to hand it off, that's exactly who we work with.</p>
 
-    ${cta("See How It Works", `${BASE_URL}/landlords`)}
+    ${cta("See How It Works", `${BASE_URL}/for-landlords`)}
 
     ${divider()}
 
@@ -216,16 +235,15 @@ export function landlordWelcomeEmail(name: string): string {
 
 export function tenantWelcomeEmail(name: string, city?: string): string {
   return wrapper(`
-    ${heroCard(`Hey ${name || "there"},`, "You're on the list.")}
+    ${heroCard(`Hey ${name || "there"},`, `You're on the list${city ? ` for ${city}` : ""}. We'll be in touch as soon as something opens up.`)}
 
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">You're on the list — we'll reach out as soon as something opens up${city ? ` in ${city}` : ""}.</p>
+    ${darkStats([
+      { value: "24hr", label: "Maintenance Response" },
+      { value: "3", label: "Cities Covered" },
+      { value: "100%", label: "Verified Listings" },
+    ])}
 
     <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">We're a bit different from most landlords: maintenance actually gets fixed, phones actually get answered, and our places are properly looked after before you move in.</p>
-
-    ${divider()}
-
-    <p style="margin:0 0 16px;font-size:15px;font-weight:600;color:${TEXT};font-family:${FONT};">While you wait</p>
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Check our listings page — we add new properties regularly.</p>
 
     ${cta("Browse Available Rentals", `${BASE_URL}/listings`)}
 
@@ -248,21 +266,25 @@ export function contactConfirmationEmail(name: string, type?: string): string {
   const isTenant = type === "tenant";
 
   return wrapper(`
-    ${heroCard(`Hey ${name || "there"},`, "We got your message.")}
+    ${heroCard(`Hey ${name || "there"},`, "Got your message. I'll be in touch personally within one business day.")}
 
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Got your message — I'll personally be in touch within one business day.</p>
+    ${darkStats([
+      { value: "1", label: "Business Day Response" },
+      { value: "90", label: "Day Guarantee" },
+      { value: "SW", label: "Ontario Coverage" },
+    ])}
 
     <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">If it's urgent, call me directly at <a href="tel:+15196971227" style="color:${CRIMSON};text-decoration:none;font-weight:600;">(519) 697-1227</a>.</p>
 
     ${divider()}
 
     ${isLandlord
-      ? `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">While you wait, here are our free landlord resources — lease templates, screening checklists, eviction guides.</p>
+      ? `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">In the meantime, our free landlord resources are worth a look — lease templates, screening checklists, eviction guides.</p>
          ${cta("Browse Free Resources", `${BASE_URL}/resources`)}`
       : isTenant
-      ? `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">Check out what's currently available while you wait — we add new properties regularly.</p>
+      ? `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">Check what's available while you wait — we add new properties regularly.</p>
          ${cta("View Available Rentals", `${BASE_URL}/listings`)}`
-      : `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">Find out how Prospera Properties works for landlords and tenants in Southwest Ontario.</p>
+      : `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};">Find out how Prospera Properties works for landlords and tenants across Southwest Ontario.</p>
          ${cta("About Prospera Properties", `${BASE_URL}/about`)}`
     }
 
