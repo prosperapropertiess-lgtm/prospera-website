@@ -50,6 +50,20 @@ function RecommendationCard({ item }: { item: ScoreResult["quickWins"][0] }) {
   );
 }
 
+// ─── KPI tracking ───────────────────────────────────────────────────────────
+
+function trackFreedom(event: string, metadata?: Record<string, unknown>) {
+  fetch("/api/analytics/popup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ event, page: "/freedom-score", metadata }),
+  }).catch(() => {});
+  // Also fire Meta Pixel if available
+  if (typeof window !== "undefined" && (window as unknown as { fbq?: (...a: unknown[]) => void }).fbq) {
+    (window as unknown as { fbq: (...a: unknown[]) => void }).fbq("trackCustom", event, metadata);
+  }
+}
+
 // ─── Main component ─────────────────────────────────────────────────────────
 
 export default function PropertyFreedomScore() {
@@ -63,6 +77,7 @@ export default function PropertyFreedomScore() {
   const [result, setResult] = useState<ScoreResult | null>(null);
   const [visible, setVisible] = useState(true);
   const milestoneTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startedRef = useRef(false);
 
   const pct = Math.round((qIndex / TOTAL) * 100);
   const currentQ = QUESTIONS[qIndex] as AnyQuestion | undefined;
@@ -94,6 +109,7 @@ export default function PropertyFreedomScore() {
     const t = setTimeout(() => {
       const r = computeScoreResult(answers);
       setResult(r);
+      trackFreedom("freedom_test_completed", { score: r.total, category: r.category });
       setPhase("lead");
     }, 1800);
     return () => clearTimeout(t);
@@ -102,12 +118,20 @@ export default function PropertyFreedomScore() {
   function handleSingleAnswer(q: SingleQuestion, value: string, score: number) {
     const updated = { ...answers, [q.id]: value };
     setAnswers(updated);
-    // slight delay so the selection visually registers before transition
+    // Track first answer as "started"
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFreedom("freedom_test_started");
+    }
     setTimeout(() => advanceQ(q), 220);
   }
 
   function handleSliderNext(q: SliderQuestion) {
     if (answers[q.id] === undefined) setAnswers((a) => ({ ...a, [q.id]: q.defaultValue }));
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFreedom("freedom_test_started");
+    }
     advanceQ(q);
   }
 
@@ -118,6 +142,15 @@ export default function PropertyFreedomScore() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: leadName, email: leadEmail, phone: leadPhone, answers, result }),
     }).catch(() => {});
+    // Track completion with score
+    trackFreedom("freedom_test_completed");
+    if (result) {
+      trackFreedom("freedom_test_result", {
+        score: result.total,
+        category: result.category,
+        email: leadEmail,
+      });
+    }
     setPhase("results");
   }
 

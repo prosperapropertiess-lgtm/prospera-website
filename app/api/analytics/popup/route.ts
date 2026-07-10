@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-const VALID_EVENTS = ["popup_shown", "popup_closed", "popup_converted"] as const;
+const VALID_EVENTS = [
+  // Popup events
+  "popup_shown", "popup_closed", "popup_converted",
+  // Freedom Test funnel
+  "freedom_test_click",    // clicked any CTA pointing to /freedom-score
+  "freedom_test_started",  // answered Q1
+  "freedom_test_completed",// finished all questions
+  "freedom_test_result",   // score + category recorded
+] as const;
 type PopupEvent = (typeof VALID_EVENTS)[number];
 
 // POST /api/analytics/popup

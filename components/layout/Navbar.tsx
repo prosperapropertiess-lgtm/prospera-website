@@ -119,11 +119,11 @@ export default function Navbar() {
               App Waitlist
             </Link>
             <Link
-              href="/contact"
+              href="/freedom-score"
               className="px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              Get a Free Quote
+              Landlord Freedom Test
             </Link>
           </div>
 
@@ -237,12 +237,12 @@ export default function Navbar() {
               transition={{ delay: 0.38, duration: 0.3 }}
             >
               <Link
-                href="/contact"
+                href="/freedom-score"
                 onClick={() => setMenuOpen(false)}
                 className="block w-full py-4 text-center text-sm font-semibold uppercase tracking-widest rounded"
                 style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                Get a Free Quote
+                Landlord Freedom Test
               </Link>
             </motion.div>
           </motion.div>

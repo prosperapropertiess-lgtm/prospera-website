@@ -173,30 +173,24 @@ export default function NewsletterPopup({ variant }: Props) {
                       className="text-xs uppercase tracking-widest mb-2"
                       style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                     >
-                      Free — Ontario Landlords
+                      90 Seconds · Free · No Email Required
                     </p>
 
                     <h3
-                      className="text-xl font-light mb-1 leading-snug"
-                      style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+                      className="text-xl font-bold mb-3 leading-snug"
+                      style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
                     >
-                      Ontario&apos;s standard lease has gaps. This fills them.
+                      Are you actually free from your rentals?
                     </h3>
 
-                    <p
-                      className="text-xs uppercase tracking-widest mb-1.5 mt-3"
-                      style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-                    >
-                      The addendum covers
-                    </p>
-                    <ul className="mb-4 space-y-1">
+                    <ul className="mb-5 space-y-2">
                       {[
-                        "Who pays which utilities — no more \"we never agreed to that\"",
-                        "Subletting & Airbnb rules, done properly",
-                        "Parking, storage, and maintenance in writing",
+                        "Find out your Landlord Freedom Score",
+                        "See exactly where self-managing is costing you",
+                        "Get a personalised action plan in 90 seconds",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2">
-                          <span style={{ color: "#D8D2C8", marginTop: 2, flexShrink: 0 }}>—</span>
+                          <span style={{ color: "#8B2030", marginTop: 1, flexShrink: 0 }}>✓</span>
                           <span className="text-sm leading-snug" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                             {item}
                           </span>
@@ -204,45 +198,21 @@ export default function NewsletterPopup({ variant }: Props) {
                       ))}
                     </ul>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
-                      <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="First name"
-                        className="px-3 py-2.5 text-sm outline-none border rounded"
-                        style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
-                      />
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email address"
-                        required
-                        className="px-3 py-2.5 text-sm outline-none border rounded"
-                        style={{ backgroundColor: "#F7F5F2", borderColor: "#D8D2C8", color: "#222222", fontFamily: "var(--font-dm-sans)" }}
-                      />
-                      {status === "error" && (
-                        <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-                          Something went wrong. Please try again.
-                        </p>
-                      )}
-                      <button
-                        type="submit"
-                        disabled={status === "loading"}
-                        className="py-2.5 text-xs uppercase tracking-widest disabled:opacity-50 rounded transition-opacity hover:opacity-80"
-                        style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-                      >
-                        {status === "loading" ? "..." : "Email Me the Addendum →"}
-                      </button>
-                    </form>
+                    <a
+                      href="/freedom-score"
+                      onClick={() => { trackEvent("freedom_test_click", pathname, { source: "popup" }); suppress(); }}
+                      className="block w-full py-3 text-xs font-semibold uppercase tracking-widest text-center rounded transition-opacity hover:opacity-80"
+                      style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Take the Landlord Freedom Test →
+                    </a>
 
                     <p
                       className="text-xs text-center mt-3 cursor-pointer hover:opacity-70 transition-opacity"
                       style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
                       onClick={dismiss}
                     >
-                      My lease is already airtight
+                      I&apos;m already free from my rentals
                     </p>
                   </>
                 ) : (

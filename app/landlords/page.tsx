@@ -118,11 +118,11 @@ export default function LandlordsPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="/contact"
+              href="/freedom-score"
               className="btn-primary px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded"
               style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              Get a Free Quote
+              Landlord Freedom Test
             </a>
             <a
               href="#rent-estimator"
@@ -318,11 +318,11 @@ export default function LandlordsPage() {
             Free consultation. Honest assessment. No pressure.
           </p>
           <Link
-            href="/contact"
+            href="/freedom-score"
             className="inline-block px-10 py-4 text-xs font-semibold uppercase tracking-widest btn-primary rounded"
             style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
           >
-            Get a Free Quote
+            Landlord Freedom Test
           </Link>
           <p className="text-xs mt-3" style={{ color: "rgba(250,248,245,0.5)" }}>
             90-day guarantee · No contracts · Cancel anytime
