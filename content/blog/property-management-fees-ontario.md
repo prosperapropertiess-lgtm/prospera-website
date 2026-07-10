@@ -1,114 +1,165 @@
 ---
-title: "Property Management Fees in Ontario: What's Normal in 2026?"
-excerpt: "Before you hire a property manager, understand what you should be paying — and the hidden fees to watch out for."
-date: "2026-03-28"
+title: "Ontario Property Management Fees 2026: What's Fair & What's Hidden"
+date: "2026-07-10"
+slug: "property-management-fees-ontario"
+excerpt: "Property management fees in Ontario range from 8–15% monthly plus hidden charges. Learn what's normal, what's excessive, and how to spot red flags."
 category: "Landlord Tips"
-readTime: "6 min read"
+readTime: "7 min read"
 featuredImage: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
-Hiring a property manager should make your life easier and your investment more profitable. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer context on the rental housing market across Ontario. But the fee structure varies enormously — and some companies bury costs in places you won't find until you're already locked in.
+You're about to sign a management agreement and hand over control of your most valuable asset. The fee structure looks reasonable on page one — but then you flip to page three and discover maintenance markups, vacancy charges, eviction fees, and lease renewal penalties you never expected.
 
-Here's what you should actually be paying in Ontario in 2026.
+By the time you realize the real cost, you're locked in.
 
-## The Main Fee Categories
+Here's exactly what property management fees should be in Ontario in 2026 — and the sneaky charges to watch for before you sign.
 
-### 1. Monthly Management Fee
+## What Ontario Property Managers Actually Charge
 
-This is the core fee — a percentage of monthly rent collected, charged every month whether there's a tenant or not (in most cases).
+### Monthly Management Fee (The Base Cost)
 
-**Ontario range: 8–15% of monthly rent**
+This is what you'll pay every single month: a percentage of rent collected.
 
-For a $1,900/month unit:
-- 8% = $152/month ($1,824/year)
-- 12% = $228/month ($2,736/year)
-- 15% = $285/month ($3,420/year)
+**Ontario market range: 8–15% of monthly rent**
 
-A $1,500+ gap per year for the same service is significant. Ask what's actually included.
+Real dollar examples for a $1,900/month unit:
+- **8% = $152/month** ($1,824/year) — typically small/independent operators or high-volume management
+- **12% = $228/month** ($2,736/year) — mid-market standard
+- **15% = $285/month** ($3,420/year) — boutique or premium services
 
-**What should be included at any fee level:**
-- Rent collection
-- Tenant communication
-- Maintenance coordination
+That's a **$1,596 annual difference** for the exact same property.
+
+**What must be included in the base fee:**
+- Monthly rent collection and bank deposits
+- Tenant communication (calls, emails, portal access)
+- Maintenance request coordination
 - Monthly financial statements
-- Annual inspections
+- Annual property inspections
+- Lease enforcement basics
 
-**What's often charged separately (watch for these):**
+**Red flag:** If a company won't clearly explain what's included in the base fee, or if the contract lists basic functions separately, walk away.
 
-### 2. Tenant Placement / Leasing Fee
+### Tenant Placement Fee (The Hidden Goldmine)
 
-Charged when a new tenant is placed. Often the most expensive single fee.
+This is charged once per tenant placement and is often where property management companies make the most money — and where incentives get misaligned.
 
 **Ontario range: 50–100% of one month's rent**
 
-This is where companies make a lot of their money, and some have perverse incentives — the more tenants they churn, the more placement fees they collect.
+For a $1,900/month unit: **$950–$1,900 per placement**
 
-**What to ask:** Is there a discount for multi-year tenants? Is there any guarantee period? (If a tenant leaves within 60 days, do you pay again?)
+**Critical questions to ask:**
+1. Is there a **guarantee or re-placement period**? (If the tenant leaves within 60–90 days, do you place again for free?)
+2. **Can this fee be negotiated** for multi-year leases?
+3. What's the fee for lease *renewals* with the same tenant? (See next section — this should be different.)
 
-### 3. Lease Renewal Fee
+**Why this matters:** A company that collects placement fees on every tenant has an incentive to tolerate higher turnover. Ask about average tenant retention rates at any company you're considering.
 
-Some companies charge $150–$500 to renew an existing lease. This one particularly annoys landlords — you've already done the work of finding the tenant, and now you're being charged to keep them?
+### Lease Renewal Fee (Pure Profit)
 
-**Prospera's policy: Free.** Retaining a great tenant is a good outcome for everyone.
+Some companies charge $150–$500 to renew an existing lease with the same tenant. You already did the hard work of finding them. Why pay again?
 
-### 4. Maintenance Coordination Fee / Markup
+**Prospera's policy: No lease renewal fee.** Keeping a great tenant is the goal — renewal should be free.
 
-Some companies charge a percentage markup on top of every maintenance invoice — typically 10–20%. If your furnace costs $800 to repair, you pay $800 + 15% = $920.
+If a property manager is charging to renew, that's a sign they don't think long-term about your returns.
 
-This creates a conflict of interest: the more repairs cost, the more the management company earns. Look for companies that charge cost-only on maintenance, or that are transparent about any coordination fee.
+### Maintenance Coordination & Contractor Markups
 
-### 5. Vacancy Fee
+This is where conflicts of interest hide.
 
-Some companies charge a reduced monthly fee (e.g., 50% of their normal management fee) during vacancies. Others charge nothing. This matters — extended vacancies are already painful enough.
+**Common practice: 10–20% markup on all contractor invoices**
 
-### 6. Other Fees to Watch For
+Example: Furnace repair costs $800. You're billed $800 + 15% = **$920**.
 
-- **Setup / onboarding fee:** $200–$500 in some contracts. Avoid or negotiate.
-- **Professional photo fee:** $150–$400. Quality photos are worth it — but ask upfront.
-- **Annual inspection fee:** Some charge extra per inspection. Should be included.
-- **Eviction coordination fee:** Some charge $500–$1,000+ for LTB file management. Ask if this is included or extra.
-- **Early termination fee:** If you want to leave the management agreement, what do you owe?
+Over a year, if you spend $5,000 on maintenance, you're paying $500–$1,000 in invisible fees. This creates incentive misalignment — the more repairs cost, the more the manager earns.
 
-## Questions to Ask Any Property Manager
+**What to demand:**
+- Cost-only pass-through on maintenance, OR
+- Fixed coordination fee per repair (flat $25–$50), not a percentage
+- Transparency on any markup **before** they approve the work
 
-Before signing anything, get clear answers to:
+### Vacancy Fees (Hitting You When You're Down)
 
-1. What is your monthly management fee, and what exactly does it include?
-2. What is your tenant placement fee?
-3. Do you charge a lease renewal fee?
-4. Do you mark up maintenance costs?
-5. Do you charge during vacancy?
-6. What is the term of the management agreement and what are the exit terms?
+Some companies charge a reduced monthly fee during vacancy (e.g., 50% of normal). Others charge nothing. A few charge full fees even on vacant units — avoid those.
 
-If they're evasive or the contract is hard to read, that's information.
+**Market reality:** A 3-month vacancy already costs you roughly 25% of annual rent. A vacancy fee on top makes it worse.
 
-## What Prospera Properties Charges
+**What to ask:** "What do you charge during vacancy, and is that for full months or proportionally?"
 
-We believe in transparent, simple pricing with nothing hidden:
+## The Full Menu of Hidden Fees
 
-- **Monthly management fee:** 8–10% (based on property type)
-- **Tenant placement:** Half month's rent
+Beyond the main categories above, watch for:
+
+| Fee | Typical Range | Red Flag |
+|-----|---------------|----------|
+| Setup / Onboarding | $200–$500 | Should be negotiable or waived |
+| Professional Photography | $150–$400 | Should be included for quality listings |
+| Annual Inspection Fee | $0–$150 | Often buried in base fee |
+| Eviction Coordination | $500–$1,500 | Varies; ask upfront |
+| LTB Hearing Prep | $300–$800 | Should clarify if included in eviction fee |
+| Early Termination Penalty | Varies widely | Could be 1–3 months of fees |
+| Portal Access or Tech Fee | $10–$50/month | Outdated; should be free in 2026 |
+| Inspection Report | $75–$150 each | Clarify frequency and cost |
+
+**Pro tip:** Request a complete fee schedule in writing before signing. If a company resists, that's your answer.
+
+## How to Compare Property Managers: The Real Conversation
+
+Don't just look at the monthly percentage. Calculate the **total annual cost** for your specific property. Ask these eight questions:
+
+1. **"What's your monthly management fee and what's included?"** (Get the full list.)
+2. **"What's your tenant placement fee and what's your guarantee period?"**
+3. **"Do you charge to renew leases?"** (The answer should be no.)
+4. **"Do you mark up maintenance invoices?"** (Demand a clear answer.)
+5. **"What do you charge during vacancy?"**
+6. **"What's the term of the agreement, and what happens if I want to leave?"**
+7. **"Are there any other fees I should know about?"** (Listen for hesitation.)
+8. **"Can you provide references from landlords with similar properties?"**
+
+If any answer is vague, or if the contract is hard to parse, move to the next company.
+
+## What Prospera Properties Charges (Transparency Standard)
+
+We manage residential properties across [London](/blog/property-management-london-ontario), [St. Thomas](/blog/property-management-st-thomas-ontario), and [Strathroy](/blog/property-management-strathroy-ontario). Here's our complete fee structure:
+
+- **Monthly management:** 8–10% (based on property type and portfolio size)
+- **Tenant placement:** 50% of one month's rent
 - **Lease renewal:** Free
-- **Maintenance markup:** 0% — you pay cost only
+- **Maintenance markup:** 0% — you pay contractor cost only
 - **Vacancy fee:** None
-- **Setup fee:** None
-- **Photos and listing:** Included
+- **Setup / onboarding:** None
+- **Photography and listing:** Included
+- **Annual inspections:** Included
+
+No hidden fees. No surprises.
 
 ## Frequently Asked Questions
 
-### What is a typical property management fee in Ontario in 2026?
-Most residential property managers in Ontario charge a monthly management fee of 8–15% of collected rent. For a $1,900/month unit, that's roughly $150–$285/month. Fees vary based on property type, services included, and local market rates. Always ask for a complete breakdown — monthly fees are just one component of the total cost.
+**Q: What is a reasonable property management fee in Ontario?**
 
-### What is a tenant placement fee and how much should it cost?
-A tenant placement fee (also called a leasing fee) is charged when a new tenant is secured. The Ontario range is typically 50–100% of one month's rent. This is often the largest single fee a landlord pays. Ask whether a guarantee period applies — some companies re-place tenants at no extra cost if the tenant leaves within 60–90 days.
+A: The Ontario market standard is 8–15% of monthly rent for residential properties. For a $1,900/month unit, that's $150–$285/month. Fees depend on property type, portfolio size, and what's included. Always ask for a complete breakdown of base fee, placement fee, renewal fees, and any maintenance markups. The cheapest option isn't always best if it comes with hidden charges or incentive misalignment.
 
-### Do property managers in Ontario charge a maintenance markup?
-Some do. Markups of 10–20% on contractor invoices are common, which creates a financial incentive for property managers to approve more (or more expensive) repairs. Ask any prospective property manager directly whether they mark up maintenance costs, and look for companies that pass through contractor invoices at cost.
+**Q: Do I have to pay a tenant placement fee every time?**
 
-### What fees should an Ontario landlord watch out for when hiring a property manager?
-Watch for lease renewal fees ($150–$500 to keep an existing tenant), setup or onboarding fees ($200–$500), professional photo fees charged separately, eviction coordination fees ($500–$1,000+), and early termination fees if you want to end the management agreement. These items are often buried in the contract.
+A: Most Ontario property managers charge 50–100% of one month's rent per tenant placement. Ask about a guarantee period — reputable companies will re-place a tenant at no extra cost if they leave within 60–90 days. Also ask whether the placement fee applies to lease renewals (it shouldn't). This is often negotiable, especially for multi-property landlords.
 
-### Is it worth hiring a property manager in London or Southwestern Ontario?
-For landlords managing multiple properties, living out of town, or uncomfortable with the LTB process, professional management typically pays for itself. A single missed maintenance issue, a bad tenant, or an improperly served notice can easily cost more than a full year of management fees. The value is greatest when problems are prevented — not just resolved.
+**Q: Why do some property managers charge a maintenance markup?**
 
-[See our full pricing breakdown](/pricing) or [get in touch](/contact) for a quote on your specific property. You can also read our guides to [property management in London, Ontario](/blog/property-management-london-ontario) and [how to find a property manager in Ontario](/blog/how-to-find-a-property-manager-ontario) for more context on evaluating your options.
+A: A 10–20% markup on contractor invoices is common but problematic — it creates incentive misalignment. The more expensive the repair, the more the manager earns. This can lead to approving unnecessary work or failing to shop for competitive quotes. Demand cost-only pass-through or a fixed coordination fee instead. Check [what maintenance landlords are responsible for](/blog/landlord-maintenance-responsibilities-ontario) to understand what repairs are actually your obligation.
+
+**Q: Can I negotiate property management fees in Ontario?**
+
+A: Yes. Fees are negotiable, especially if you own multiple properties, have excellent tenant profiles, or are willing to sign a longer agreement. Negotiate the placement fee, lease renewal fee, maintenance markup, and term. Get any negotiated terms in writing before signing.
+
+**Q: Should I hire a property manager if I only have one rental property?**
+
+A: For most single-property landlords, professional management is worth it. Even one missed [eviction notice](/blog/evicting-tenant-ontario), bad tenant, or [maintenance issue](/blog/landlord-maintenance-responsibilities-ontario) can cost thousands. [Learn more about when to hire a property manager](/blog/when-to-hire-a-property-manager-ontario) and [how to evaluate the best option for you](/blog/how-to-find-a-property-manager-ontario). The risk reduction alone often justifies the annual fee.
+
+**Q: What should I do if my current property manager's fees are unclear?**
+
+A: Request a written fee schedule itemizing all charges. If they won't provide one, or if the contract language is deliberately vague, that's a sign to [switch to a different management company](/blog/switching-property-management-companies-ontario). Transparency is non-negotiable. Read [our property management guide](/blog/best-property-management-company-london-ontario) for what to look for in a trustworthy operator.
+
+## Next Steps
+
+If you manage property in **London, St. Thomas, or Strathroy**, Prospera Properties can provide a transparent fee quote based on your specific property. We're happy to explain every charge and answer questions about what the Ontario market actually looks like.
+
+[Get a free quote](/contact) or [read how Prospera manages properties across Southwestern Ontario](/blog/residential-property-management-london-ontario) to see if our approach is a fit for you.
