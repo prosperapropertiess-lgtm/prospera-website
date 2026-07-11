@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface Props {
   firstName: string;
@@ -9,6 +11,15 @@ interface Props {
 }
 
 export default function OwnerHeader({ firstName, token }: Props) {
+  const router = useRouter();
+  const [refreshing, setRefreshing] = useState(false);
+
+  function handleRefresh() {
+    setRefreshing(true);
+    router.refresh();
+    // Re-enable after 2s — router.refresh() has no callback
+    setTimeout(() => setRefreshing(false), 2000);
+  }
   return (
     <header
       style={{
@@ -40,8 +51,49 @@ export default function OwnerHeader({ firstName, token }: Props) {
           </span>
         </Link>
 
-        {/* Avatar pill */}
-        <div
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Refresh button */}
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            title="Refresh dashboard"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              background: "rgba(255,255,255,0.80)",
+              border: "1px solid rgba(15,28,40,0.07)",
+              borderRadius: "100px",
+              padding: "5px 14px",
+              boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
+              cursor: refreshing ? "default" : "pointer",
+              opacity: refreshing ? 0.5 : 1,
+              transition: "opacity 0.2s",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: "16px",
+                animation: refreshing ? "spin 0.8s linear infinite" : "none",
+              }}
+            >
+              ↻
+            </span>
+            <span
+              style={{
+                color: "rgba(15,28,40,0.55)",
+                fontSize: "15px",
+                fontFamily: "var(--font-dm-sans)",
+                fontWeight: 500,
+              }}
+            >
+              {refreshing ? "Refreshing…" : "Refresh"}
+            </span>
+          </button>
+
+          {/* Avatar pill */}
+          <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -82,7 +134,9 @@ export default function OwnerHeader({ firstName, token }: Props) {
             {firstName}
           </span>
         </div>
+        </div>
       </div>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </header>
   );
 }

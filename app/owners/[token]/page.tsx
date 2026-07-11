@@ -12,7 +12,7 @@ interface Props {
   params: Promise<{ token: string }>;
 }
 
-export const revalidate = 21600;
+export const revalidate = 0;
 
 function fmt$(n: number) {
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
