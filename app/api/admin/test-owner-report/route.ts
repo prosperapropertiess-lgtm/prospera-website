@@ -19,7 +19,7 @@ const mockBundle: OwnerBundle = {
       property: {
         id: "p1", name: "27 Horton", address: "27 Horton Street",
         city: "St. Thomas", type: "Duplex", status: "Occupied",
-        monthlyRent: 3100, bedrooms: 4, bathrooms: 2, notes: "",
+        monthlyRent: 3100, marketRate: null, bedrooms: 4, bathrooms: 2, notes: "",
       },
       tenants: [
         { id: "t1", name: "Mikayla Johnson", email: "mikayla@gmail.com", phone: "519-555-0201", propertyId: "p1", monthlyRent: 1650, securityDeposit: null, leaseStart: "2022-09-01", leaseEnd: "2027-08-31", status: "Active", notes: "" },
