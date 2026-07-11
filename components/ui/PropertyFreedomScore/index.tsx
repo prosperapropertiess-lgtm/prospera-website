@@ -109,7 +109,7 @@ export default function PropertyFreedomScore() {
     const t = setTimeout(() => {
       const r = computeScoreResult(answers);
       setResult(r);
-      trackFreedom("freedom_test_completed", { score: r.total, category: r.category });
+      trackFreedom("freedom_test_completed", { score: r.overall, category: r.label });
       setPhase("lead");
     }, 1800);
     return () => clearTimeout(t);
@@ -146,8 +146,8 @@ export default function PropertyFreedomScore() {
     trackFreedom("freedom_test_completed");
     if (result) {
       trackFreedom("freedom_test_result", {
-        score: result.total,
-        category: result.category,
+        score: result.overall,
+        category: result.label,
         email: leadEmail,
       });
     }
