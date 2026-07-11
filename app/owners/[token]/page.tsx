@@ -311,6 +311,8 @@ export default async function OwnerHomePage({ params }: Props) {
               leaseDaysRemaining={leaseDaysRemaining}
               leaseExpiry={leaseExpiry}
               totalTenants={totalTenants}
+              monthlyRent={firstProp?.property.monthlyRent ?? null}
+              marketRate={firstProp?.property.marketRate ?? null}
             />
 
             {/* YTD divider line */}

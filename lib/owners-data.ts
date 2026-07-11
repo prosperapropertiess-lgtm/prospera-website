@@ -285,14 +285,21 @@ export async function cacheDashboard(token: string, dashboard: OwnerDashboard): 
 }
 
 /**
- * Fetches the owner dashboard from Notion.
- * Caching is handled entirely by Next.js ISR (revalidate = 21600 on pages).
+ * Serve from Supabase cache if available; otherwise build from Notion and cache it.
+ * Pass forceRefresh=true to bypass the cache (used by the Refresh button API route).
  */
 export async function getDashboard(
   token: string,
   notionOwnerIds: string[],
-  ownerNames: string
+  ownerNames: string,
+  forceRefresh = false
 ): Promise<{ dashboard: OwnerDashboard; isStale: boolean }> {
+  if (!forceRefresh) {
+    const cached = await getCachedDashboard(token);
+    if (cached) return { dashboard: cached, isStale: false };
+  }
+
   const dashboard = await buildOwnerDashboard(notionOwnerIds, ownerNames);
+  await cacheDashboard(token, dashboard);
   return { dashboard, isStale: false };
 }

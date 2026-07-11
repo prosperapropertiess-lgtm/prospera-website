@@ -10,6 +10,8 @@ interface Props {
   leaseDaysRemaining: number | null;
   leaseExpiry: string | null;
   totalTenants: number;
+  monthlyRent: number | null;
+  marketRate: number | null;
 }
 
 function getRentChip(status: string | null): {
@@ -45,7 +47,7 @@ function getLeaseChip(days: number | null): {
   return { label: `Lease · ${months} mo left`, bg: "rgba(10,122,82,0.09)", color: "#0A7A52" };
 }
 
-export function OwnerHomeClient({ rentStatus, leaseDaysRemaining, totalTenants }: Props) {
+export function OwnerHomeClient({ rentStatus, leaseDaysRemaining, totalTenants, monthlyRent, marketRate }: Props) {
   const rentChip = getRentChip(rentStatus);
   const leaseChip = getLeaseChip(leaseDaysRemaining);
 
@@ -55,14 +57,21 @@ export function OwnerHomeClient({ rentStatus, leaseDaysRemaining, totalTenants }
     color: "#1D4ED8",
   };
 
-  // TODO: Replace with real market rate comparison data when available
-  const marketChip = {
-    label: "$2,200/mo · +4.8% above market",
-    bg: "rgba(184,146,42,0.09)",
-    color: "#B8922A",
-  };
+  const marketChip = (() => {
+    if (!monthlyRent || !marketRate) return null;
+    const diff = monthlyRent - marketRate;
+    const pct = ((diff / marketRate) * 100).toFixed(1);
+    const fmt = (n: number) => "$" + n.toLocaleString("en-CA", { maximumFractionDigits: 0 });
+    if (diff > 0) {
+      return { label: `${fmt(monthlyRent)}/mo · +${pct}% above market`, bg: "rgba(184,146,42,0.09)", color: "#B8922A" };
+    }
+    if (diff < 0) {
+      return { label: `${fmt(monthlyRent)}/mo · ${pct}% below market`, bg: "rgba(185,28,28,0.08)", color: "#B91C1C" };
+    }
+    return { label: `${fmt(monthlyRent)}/mo · at market rate`, bg: "rgba(10,122,82,0.09)", color: "#0A7A52" };
+  })();
 
-  const chips = [rentChip, tenantsChip, leaseChip, marketChip];
+  const chips = [rentChip, tenantsChip, leaseChip, ...(marketChip ? [marketChip] : [])];
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>

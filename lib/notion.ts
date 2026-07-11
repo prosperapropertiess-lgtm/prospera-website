@@ -146,6 +146,7 @@ export interface Property {
   type: string;
   status: string;
   monthlyRent: number | null;
+  marketRate: number | null;
   bedrooms: number | null;
   bathrooms: number | null;
   notes: string;
@@ -247,6 +248,7 @@ export async function fetchAllProperties(): Promise<Property[]> {
     type: text(p, "Type"),
     status: text(p, "Status"),
     monthlyRent: num(p, "Monthly Rent"),
+    marketRate: num(p, "Market Rate"),
     bedrooms: num(p, "Bedrooms"),
     bathrooms: num(p, "Bathrooms"),
     notes: text(p, "Notes"),

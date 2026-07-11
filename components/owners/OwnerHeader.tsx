@@ -14,11 +14,19 @@ export default function OwnerHeader({ firstName, token }: Props) {
   const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
 
-  function handleRefresh() {
+  async function handleRefresh() {
     setRefreshing(true);
+    try {
+      await fetch("/api/owners/refresh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+    } catch {
+      // non-fatal — still re-render
+    }
     router.refresh();
-    // Re-enable after 2s — router.refresh() has no callback
-    setTimeout(() => setRefreshing(false), 2000);
+    setRefreshing(false);
   }
   return (
     <header
@@ -45,8 +53,8 @@ export default function OwnerHeader({ firstName, token }: Props) {
         }}
       >
         <Link href={`/owners/${token}`} style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
-          <Image src="/logo.png" alt="Prospera" width={36} height={36} style={{ objectFit: "contain" }} />
-          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "21px", fontWeight: 500, color: "#0F1C28", letterSpacing: "-0.01em" }}>
+          <Image src="/logo.png" alt="Prospera" width={32} height={32} style={{ objectFit: "contain", flexShrink: 0 }} />
+          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "18px", fontWeight: 500, color: "#0F1C28", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
             Prospera Properties
           </span>
         </Link>
@@ -92,23 +100,11 @@ export default function OwnerHeader({ firstName, token }: Props) {
             </span>
           </button>
 
-          {/* Avatar pill */}
-          <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            background: "rgba(255,255,255,0.80)",
-            border: "1px solid rgba(15,28,40,0.07)",
-            borderRadius: "100px",
-            padding: "5px 14px 5px 5px",
-            boxShadow: "0 1px 3px rgba(15,28,40,0.05)",
-          }}
-        >
+          {/* Avatar bubble — initial only */}
           <div
             style={{
-              width: "28px",
-              height: "28px",
+              width: "36px",
+              height: "36px",
               borderRadius: "50%",
               background: "linear-gradient(135deg, #8B2030, #C9A84C)",
               display: "flex",
@@ -119,21 +115,11 @@ export default function OwnerHeader({ firstName, token }: Props) {
               color: "white",
               fontFamily: "var(--font-dm-sans)",
               flexShrink: 0,
+              boxShadow: "0 1px 3px rgba(15,28,40,0.12)",
             }}
           >
             {firstName.charAt(0).toUpperCase()}
           </div>
-          <span
-            style={{
-              color: "rgba(15,28,40,0.55)",
-              fontSize: "16px",
-              fontFamily: "var(--font-dm-sans)",
-              fontWeight: 500,
-            }}
-          >
-            {firstName}
-          </span>
-        </div>
         </div>
       </div>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
