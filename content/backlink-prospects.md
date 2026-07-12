@@ -1158,3 +1158,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Ontario mortgage brokerage blog. Not a property management company. Site returns 403 to automated fetch; research drawn from search index. Outreach angle: resource mention for property management as the next step after closing, or mutual referral arrangement.
 
 ---
+
+## Tenon10 — Ontario Landlord Software Blog
+- url: https://www.tenon10.com/blog
+- type: blog
+- why: Ontario-focused property management software platform with a rich educational blog covering LTB forms, rent increases, and landlord guides — their DIY-landlord audience is the exact profile that eventually considers hiring a professional manager.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: https://www.tenon10.com/contact
+- site_focus: Free property management software for Ontario landlords, with an educational blog covering LTB forms (N1, N4, L10, N11), rent increase guides, and Ontario tenancy law. Founded by Syed. Content is highly Ontario-specific and practical.
+- hook: Prospera's full-service management in London/SW Ontario is what many Tenon10 users eventually graduate to — a guest post or resource mention about "when to hire a PM vs. self-manage with software" would be useful to their readers.
+- specific_content: Their "Becoming a Landlord in Ontario: 2026 First-Timer's Guide" and Ontario rent increase N1 guide are particularly aligned with our content.
+- researcher_notes: Not a competitor — software platform, not a PM company. Best angle is educational content about when self-management vs. professional management makes sense, positioning Prospera as the SW Ontario option.
+
+---
+
+## LendCity Mortgages
+- url: https://lendcity.ca/blog/london-ontario-real-estate-investing-guide/
+- type: mortgage
+- why: Investor-focused mortgage brokerage with a dedicated London Ontario real estate investment guide — investors who close deals via LendCity need a property manager, making this a natural referral partner.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: scott@lendcity.ca
+- site_focus: Specialist mortgage brokerage for real estate investors across Canada. Their London Ontario investing guide covers cap rates (6-7%), student rentals near Western University, and market conditions — serving exactly the type of investor who would hire Prospera.
+- hook: Investors who use LendCity to finance London Ontario properties immediately need property management — a cross-promotion or guest post on "what investors need from a London Ontario PM company" would serve both audiences.
+- specific_content: Their "London Ontario Real Estate Investing Guide" — covers cap rates of 6-7% and the strong student housing market, same audience Prospera serves.
+- researcher_notes: Based in Windsor, serves clients province-wide. Founded by Scott Dillingham. Not a competitor. Phone: (226) 212-7200. Strong investor-focused audience — direct email to Scott is available.
+
+---
+
+## ViewHomes.ca — London Ontario Real Estate Blog
+- url: https://www.viewhomes.ca/blog/category/london/
+- type: blog
+- why: London-based real estate blog covering London and St. Thomas market conditions — their investment-property content could naturally recommend Prospera as a trusted local PM partner.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: admin@viewhomes.ca
+- site_focus: London-based real estate brokerage blog (Nu-Vista Pinnacle Realty) covering London and St. Thomas housing market conditions, neighbourhood guides, and buyer resources. Covers our exact service area with consistent market updates.
+- hook: Their investor-oriented blog readers who buy in London/St. Thomas are exactly who Prospera serves — a resource mention or guest contribution on what landlords need to know post-purchase would serve their audience.
+- specific_content: Their "London & St. Thomas Ontario Real Estate Housing Market" posts — directly covering our service area.
+- researcher_notes: Local London/St. Thomas brokerage. Not a competitor (real estate sales, not PM). Strong local relevance. Phone: (519) 438-5478. Email is direct admin contact.
+
+---
+
+## Martin Group — Ontario Rental Investment Blog
+- url: https://themartingroup.ca/blog/ontario-rental-investment-opportunities-in-2025-where-to-find-the-best-returns
+- type: blog
+- why: Oakville-based Ontario brokerage with a blog covering rental investment across Ontario — London gets explicit coverage, making a SW Ontario PM resource mention a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: team@themartingroup.ca
+- site_focus: Oakville-based real estate brokerage (Glenn Martin, Broker of Record) covering Ontario real estate investment, market trends, and neighbourhood guides. Their rental investment content explicitly covers London, Ontario.
+- hook: Their Ontario rental investment blog highlights London as a strong market — Prospera as the recommended local PM would be a logical follow-up resource for their investor readers who buy there.
+- specific_content: Their "Ontario Rental Investment Opportunities" post — covers London's affordability, university sector, and consistent rental demand, the same value proposition Prospera delivers on the management side.
+- researcher_notes: Oakville-based. Not a London PM competitor. 25+ years experience, ~$1B in residential sales. Phone: 905-338-2083.
+
+---
+
+## Proprietio — Independent Property Manager Blog
+- url: https://www.proprietio.com/blog
+- type: blog
+- why: Property management software platform with guides for independent property managers — their audience includes landlords who might outsource to Prospera if self-management becomes too complex.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: contact@proprietio.com
+- site_focus: Property management software for independent operators with a practical blog covering PM operations, eviction law, accounting, and lease management. Priced from $29/month. Covers Canadian landlord issues.
+- hook: A guest post for their audience on "when hiring a professional PM in Ontario makes more financial sense than self-managing" would provide genuine value and position Prospera as the SW Ontario option.
+- specific_content: Their blog covers independent PM guides — eviction law, accounting, maintenance — the same pain points Prospera solves for clients.
+- researcher_notes: Not a competitor (software, not a PM company). Best angle: educational content for readers weighing software vs. full-service management. Good alignment with our existing "when to hire a PM" blog post.
+
+---
+
+## Assetsoft — Ontario Landlord Compliance Blog
+- url: https://www.assetsoft.biz/blogs/
+- type: blog
+- why: Proptech consulting firm in Markham ON with an Ontario-specific blog covering Bill 60, rent control, and compliance — their landlord audience would benefit from SW Ontario PM resources.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: info@assetsoft.biz
+- site_focus: Proptech consulting and software implementation firm (Yardi, MRI) for Canadian multifamily operators. Their blog covers Ontario landlord compliance, Bill 60, rent increases, and property management technology. Based in Markham, ON.
+- hook: Their Ontario landlord compliance blog is read by landlords navigating RTA changes — a guest contribution on what Ontario's new rules mean for landlords in London/SW Ontario would be regionally specific content they don't currently have.
+- specific_content: Their "Ontario Landlord Rules 2026: Rent Control & Bill 60 FAQ" post — directly aligns with our N4, N12, and LTB content library.
+- researcher_notes: Not a competitor (consulting/software, not PM). Phone: +1 647 276 1616. Based in Markham. Ontario-specific compliance content is strong editorial fit for regional guest posts.
+
+---
+
+## Ontario Rental Property — Landlord Resource Site
+- url: https://www.ontariorentalproperty.com/resources-for-landlords-and-tenants-in-ontario
+- type: directory
+- why: Informational site providing Ontario rental property resources — their landlord resources page is a natural place to list Prospera as a recommended professional PM service for SW Ontario.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: https://www.ontariorentalproperty.com/contact
+- site_focus: General Ontario rental property information site covering landlord/tenant rights, resources, and responsibilities under the RTA. Covers LTB procedures, tenant screening, and maintenance responsibilities. Province-wide informational audience.
+- hook: Their "Resources for Landlords and Tenants in Ontario" page lists associations and services — adding Prospera as a recommended PM service for London, St. Thomas, and Strathroy would directly serve readers looking for local professional help.
+- specific_content: Their "Resources for Landlords and Tenants in Ontario" page — already links to LTB, OLA, and other resources; Prospera fits naturally as a local professional PM addition for SW Ontario.
+- researcher_notes: Smaller informational site. No direct email found — will use contact form. Good fit for resource page listing request.
+
+---
+
+## liv.rent Blog — Ontario Tenancy Resources
+- url: https://liv.rent/blog/landlords/
+- type: blog
+- why: Large Canadian rental platform blog with detailed Ontario-specific content on RTA, tenancy forms, and landlord guides — a guest post from Prospera on SW Ontario property management would add regional depth to their coverage.
+- researched: true
+- drafted: true
+- added: 2026-07-12
+- contact_email: https://liv.rent/contact
+- site_focus: Canadian rental platform with a substantial landlord blog covering Ontario tenancy law, LTB procedures, standard lease guides, and landlord responsibilities. Extensive Ontario-specific content with a large national audience of landlords and tenants.
+- hook: Their Ontario content is comprehensive at the province level but lacks regional perspective — Prospera can contribute a piece on managing rentals in London/SW Ontario's specific market conditions, which would be unique content for their blog.
+- specific_content: Their "Your Guide to Ontario Tenancy Forms" and "Ontario Tenancy Act 2026" coverage — strong alignment with our existing blog content and expertise.
+- researcher_notes: Large platform, national reach. Montreal-based, no local competitor conflict. Best angle: regional perspective guest post. May have editorial standards — professional pitch needed.
+
+---
