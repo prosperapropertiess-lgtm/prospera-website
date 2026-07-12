@@ -14,7 +14,8 @@ interface Props {
 
 export const revalidate = 0;
 
-function fmt$(n: number) {
+function fmt$(n: number | null | undefined) {
+  if (n == null || isNaN(n)) return "$0";
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
@@ -33,7 +34,8 @@ export default async function OwnerHomePage({ params }: Props) {
   let dashboard;
   try {
     ({ dashboard } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
-  } catch {
+  } catch (err) {
+    console.error("[owner dashboard] getDashboard failed:", err);
     return (
       <div
         style={{
@@ -57,10 +59,11 @@ export default async function OwnerHomePage({ params }: Props) {
     );
   }
 
-  const firstNames = record.owner_names
+  const firstNames = (record.owner_names ?? "Owner")
     .split(/\s*[&,]\s*/)
     .map((n: string) => n.trim().split(" ")[0])
-    .join(" & ");
+    .filter(Boolean)
+    .join(" & ") || "Owner";
 
   const firstProperty = dashboard.properties[0];
   const propertyHref = firstProperty
