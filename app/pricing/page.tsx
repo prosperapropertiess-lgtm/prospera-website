@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent property management pricing for London, St. Thomas, and Strathroy landlords. Three plans — 7%, 10%, or 15% — with no hidden fees and six written guarantees.",
+    "Transparent property management pricing for London, St. Thomas, and Strathroy landlords. Three plans — 7%, 10%, or 15% — with clear fees and six written guarantees.",
 };
 
 // ── Design tokens ──────────────────────────────────────────────────────────
@@ -21,7 +21,6 @@ const BURGUNDY = "#8B2030";
 const BG = "#F7F5F2";
 const WHITE = "#FFFFFF";
 const BORDER = "#D8D2C8";
-const TEXT = "#222222";
 const MUTED = "#666666";
 const SUBTLE = "#333333";
 
@@ -61,16 +60,16 @@ function Divider() {
 
 export default function PricingPage() {
   return (
-    <div style={{ background: BG, color: TEXT }}>
+    <div style={{ background: BG, color: SUBTLE }}>
 
       {/* ── HERO ── */}
       <section
         style={{
           background: NAVY,
-          padding: "120px 20px 80px",
+          padding: "clamp(100px, 12vw, 160px) clamp(20px, 4vw, 60px) clamp(64px, 8vw, 100px)",
         }}
       >
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
             <p
               style={{
@@ -83,36 +82,38 @@ export default function PricingPage() {
                 marginBottom: "20px",
               }}
             >
-              Property Management · London, St. Thomas & Strathroy
+              Property Management · London, St. Thomas &amp; Strathroy
             </p>
 
             <h1
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(40px, 7vw, 72px)",
+                fontSize: "clamp(44px, 6vw, 80px)",
                 fontWeight: 700,
                 color: "#FAF8F5",
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
                 marginBottom: "24px",
+                whiteSpace: "pre-line",
               }}
             >
-              Straightforward pricing.{"\n"}
-              <span style={{ color: "rgba(250,248,245,0.55)" }}>Nothing buried.</span>
+              Sleep through the night.{"\n"}
+              <span style={{ color: "rgba(250,248,245,0.55)" }}>We&apos;ve got it from here.</span>
             </h1>
 
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "clamp(16px, 2.5vw, 20px)",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: "rgba(250,248,245,0.80)",
                 lineHeight: 1.65,
-                maxWidth: "560px",
-                marginBottom: "36px",
+                maxWidth: "620px",
+                marginBottom: "40px",
               }}
             >
-              Three plans. One flat percentage. No placement markups, no maintenance markups,
-              no invoice inflation. What we charge is what you see — backed by six written guarantees.
+              Real estate should build your wealth — not consume your weekends. Three plans,
+              clear pricing, six written guarantees. Pick the level of involvement you want
+              and hand the rest to us.
             </p>
 
             {/* 90-day guarantee badge */}
@@ -156,7 +157,7 @@ export default function PricingPage() {
                     color: "rgba(250,248,245,0.60)",
                   }}
                 >
-                  Unsatisfied in 90 days? First month's fee refunded.
+                  Not satisfied in 90 days? Every penny of our fees, refunded.
                 </p>
               </div>
             </div>
@@ -164,130 +165,190 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── MATH LEDGER ── */}
+      {/* ── EMOTIONAL SECTION — real cost of self-managing ── */}
       <section
         style={{
           background: WHITE,
-          padding: "72px 20px",
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
         }}
       >
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
-            <SectionLabel>The math</SectionLabel>
+            <SectionLabel>The real cost of self-managing</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
-                marginBottom: "16px",
-                lineHeight: 1.2,
+                marginBottom: "24px",
+                lineHeight: 1.15,
               }}
             >
-              You built the asset.
+              It&apos;s not just the time. It&apos;s everything else.
             </h2>
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: SUBTLE,
-                lineHeight: 1.7,
-                maxWidth: "560px",
-                marginBottom: "36px",
+                lineHeight: 1.75,
+                maxWidth: "680px",
+                marginBottom: "20px",
               }}
             >
-              You saved. You took the risk. You bought the property. Now it's 2AM on a Tuesday
-              and a pipe has burst. The tenant has been late three months in a row. You're
-              googling the Landlord and Tenant Board while trying to remember if you sent the
-              right form. That's not ownership — that's a second job you didn't apply for.
+              The Sunday evening you spent chasing a late rent payment. The 2AM pipe burst.
+              The three hours you spent on hold with the LTB. The anxiety of not knowing if
+              you filed the right form. The argument that made you question why you ever bought
+              the property in the first place.
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(17px, 2vw, 21px)",
+                color: SUBTLE,
+                lineHeight: 1.75,
+                maxWidth: "680px",
+                marginBottom: "56px",
+              }}
+            >
+              None of that is in the spreadsheet. But it&apos;s costing you — in sleep, in stress,
+              in the slow erosion of something that was supposed to be passive.
             </p>
 
-            {/* Ledger card */}
-            <div
-              style={{
-                background: BG,
-                border: `1px solid ${BORDER}`,
-                borderRadius: "16px",
-                padding: "28px",
-                fontFamily: "var(--font-dm-sans)",
-              }}
-            >
+            {/* Quote block */}
+            <div style={{ textAlign: "center", padding: "40px 0" }}>
               <p
                 style={{
-                  fontSize: "12px",
-                  color: MUTED,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
+                  fontFamily: "var(--font-cormorant)",
+                  fontSize: "clamp(32px, 5vw, 56px)",
                   fontWeight: 700,
+                  color: NAVY,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.1,
                   marginBottom: "16px",
                 }}
               >
-                The 2AM math — $2,000 / month property
+                &ldquo;Passive income should be passive.&rdquo;
               </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
+      <Divider />
+
+      {/* ── NOT A LINE ITEM ── */}
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: NAVY,
+        }}
+      >
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <FadeIn>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "rgba(250,248,245,0.45)",
+                marginBottom: "16px",
+              }}
+            >
+              Individual attention
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(36px, 5vw, 64px)",
+                fontWeight: 700,
+                color: "#FAF8F5",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                marginBottom: "24px",
+                maxWidth: "760px",
+              }}
+            >
+              You are not a line item in a $1,500 portfolio.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(17px, 2vw, 20px)",
+                color: "rgba(250,248,245,0.70)",
+                lineHeight: 1.7,
+                maxWidth: "640px",
+                marginBottom: "56px",
+              }}
+            >
+              Most property management companies carry hundreds of doors on their roster.
+              You become a door number, not a relationship. At Prospera, your property has
+              a named manager — one person who knows your address, your tenant, your history.
+              Not whoever picks up the phone.
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: "16px",
+              }}
+            >
               {[
-                { label: "Monthly rent", value: "$2,000", note: "" },
-                { label: "Autopilot management fee (10%)", value: "−$200", note: "", negative: true },
-                { label: "You receive", value: "$1,800", note: "monthly, on time", bold: true },
-                null,
-                { label: "Your time spent managing (old way)", value: "~8 hrs/mo", note: "calls, forms, chasing, stress" },
-                { label: "Your time spent with Prospera", value: "~0 hrs/mo", note: "check your statement, that's it" },
-              ].map((row, i) =>
-                row === null ? (
-                  <div key={i} style={{ height: "1px", background: BORDER, margin: "16px 0" }} />
-                ) : (
-                  <div
-                    key={i}
+                {
+                  icon: "🤝",
+                  title: "A named property manager",
+                  body: "One point of contact. They know your property, your preferences, and your tenant. You won't repeat yourself.",
+                },
+                {
+                  icon: "📞",
+                  title: "Direct, personal access",
+                  body: "Your manager's direct line. Not a queue. Not a ticket number. A person who knows who you are when you call.",
+                },
+                {
+                  icon: "🛡️",
+                  title: "Owner's satisfaction guarantee",
+                  body: "If we're not delivering in 90 days, we refund every single penny of our management fees. No conditions. No fine print.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  style={{
+                    background: "rgba(250,248,245,0.07)",
+                    border: "1px solid rgba(250,248,245,0.12)",
+                    borderRadius: "16px",
+                    padding: "28px 24px",
+                  }}
+                >
+                  <span style={{ fontSize: "28px", display: "block", marginBottom: "14px" }}>{item.icon}</span>
+                  <p
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      padding: "10px 0",
-                      borderBottom: i < 2 ? `1px solid ${BORDER}` : undefined,
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      color: "#FAF8F5",
+                      marginBottom: "10px",
+                      lineHeight: 1.3,
                     }}
                   >
-                    <span
-                      style={{
-                        fontSize: "14px",
-                        color: row.bold ? NAVY : SUBTLE,
-                        fontWeight: row.bold ? 700 : 400,
-                        flex: 1,
-                      }}
-                    >
-                      {row.label}
-                    </span>
-                    <div style={{ textAlign: "right" }}>
-                      <span
-                        style={{
-                          fontSize: row.bold ? "18px" : "15px",
-                          fontWeight: row.bold ? 800 : 600,
-                          color: row.negative ? BURGUNDY : row.bold ? NAVY : SUBTLE,
-                        }}
-                      >
-                        {row.value}
-                      </span>
-                      {row.note && (
-                        <p style={{ fontSize: "11px", color: MUTED, marginTop: "2px" }}>{row.note}</p>
-                      )}
-                    </div>
-                  </div>
-                )
-              )}
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  padding: "14px 18px",
-                  background: "rgba(31,47,58,0.06)",
-                  borderRadius: "10px",
-                  borderLeft: `3px solid ${NAVY}`,
-                }}
-              >
-                <p style={{ fontSize: "14px", color: NAVY, fontWeight: 600, lineHeight: 1.5 }}>
-                  $200 / month is what it costs to never think about your rental property again.
-                </p>
-              </div>
+                    {item.title}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "14px",
+                      color: "rgba(250,248,245,0.65)",
+                      lineHeight: 1.65,
+                    }}
+                  >
+                    {item.body}
+                  </p>
+                </div>
+              ))}
             </div>
           </FadeIn>
         </div>
@@ -296,19 +357,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── PERSONA SELECTOR ── */}
-      <section style={{ padding: "72px 20px", background: BG }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: BG,
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>Which landlord are you?</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
                 marginBottom: "8px",
-                lineHeight: 1.2,
+                lineHeight: 1.15,
               }}
             >
               Find your plan in under 30 seconds.
@@ -316,9 +382,9 @@ export default function PricingPage() {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
-                marginBottom: "32px",
+                marginBottom: "36px",
               }}
             >
               Select the description that fits you best.
@@ -331,19 +397,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── THREE PLANS ── */}
-      <section style={{ padding: "72px 20px", background: WHITE }}>
-        <div style={{ maxWidth: "1020px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: WHITE,
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>The plans</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
                 marginBottom: "8px",
-                lineHeight: 1.2,
+                lineHeight: 1.15,
               }}
             >
               Three plans. One transparent rate.
@@ -351,10 +422,10 @@ export default function PricingPage() {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
-                marginBottom: "40px",
-                maxWidth: "520px",
+                marginBottom: "48px",
+                maxWidth: "560px",
               }}
             >
               All plans are month-to-month. No lock-in contracts.
@@ -368,19 +439,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── SIX GUARANTEES ── */}
-      <section style={{ padding: "72px 20px", background: BG }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: BG,
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>Our guarantees</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
                 marginBottom: "8px",
-                lineHeight: 1.2,
+                lineHeight: 1.15,
               }}
             >
               Six commitments in writing.
@@ -388,10 +464,10 @@ export default function PricingPage() {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
                 marginBottom: "36px",
-                maxWidth: "500px",
+                maxWidth: "540px",
               }}
             >
               Most property managers make promises verbally. We put ours in writing
@@ -409,11 +485,11 @@ export default function PricingPage() {
             >
               {[
                 "21-Day Placement",
-                "No Hidden Fees",
+                "Full Fee Transparency",
                 "4-Hour Response",
                 "10th-of-Month Statements",
                 "30-Day Exit",
-                "90-Day Refund",
+                "90-Day Money-Back",
               ].map((g) => (
                 <span
                   key={g}
@@ -450,19 +526,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── COMPARISON TABLE ── */}
-      <section style={{ padding: "72px 20px", background: WHITE }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: WHITE,
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>Full comparison</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
                 marginBottom: "8px",
-                lineHeight: 1.2,
+                lineHeight: 1.15,
               }}
             >
               See exactly what each plan includes.
@@ -470,7 +551,7 @@ export default function PricingPage() {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
                 marginBottom: "32px",
               }}
@@ -493,42 +574,47 @@ export default function PricingPage() {
 
       <Divider />
 
-      {/* ── TRANSPARENCY STANDARD ── */}
-      <section style={{ padding: "72px 20px", background: BG }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+      {/* ── TRANSPARENCY SECTION ── */}
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: BG,
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>Transparency standard</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
-                marginBottom: "24px",
-                lineHeight: 1.2,
+                marginBottom: "32px",
+                lineHeight: 1.15,
               }}
             >
-              What other managers don't tell you.
+              Everything on the table.
             </h2>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {[
                 {
-                  title: "We don't mark up maintenance invoices.",
-                  body: "Some managers add 10–15% to every vendor invoice. We pass costs through at face value. The plumber charges $180. You're billed $180.",
+                  title: "Maintenance coordination has a markup — and it scales with your plan.",
+                  body: "We don't pretend vendors are free to coordinate. On Essentials, the markup is 18%. On Autopilot, it's 10%. On Hands-Free, there's no markup — it's included in the rate. You know the number before we ever pick up the phone.",
                 },
                 {
-                  title: "We don't charge placement fees on top of management.",
-                  body: "Placement is part of the service. When a tenant turns over, we find the next one. No separate $500–$1,200 placement invoice.",
+                  title: "There's a placement fee — and it's the same across every plan.",
+                  body: "When we place a tenant, we charge 10% of the first month's rent. That covers advertising, showings, screening, and onboarding. It's a one-time charge per tenancy, and it's capped at that. No invoice padding on top.",
                 },
                 {
-                  title: "You can leave.",
-                  body: "Month-to-month. 30 days written notice. Your files, keys, and deposit records transferred cleanly. No ransom, no penalty.",
+                  title: "Two of three plans have an onboarding fee.",
+                  body: "Essentials and Autopilot have a one-time onboarding fee ($149.99 and $99.99 respectively) that covers intake, existing maintenance audit, and system setup. Hands-Free clients have it waived. It's charged once, at the start.",
                 },
                 {
-                  title: "We don't work with every landlord.",
-                  body: "If your property needs significant deferred maintenance, or your expectations aren't aligned with Ontario tenancy law, we'll tell you that upfront rather than take your money and underdeliver.",
+                  title: "You can leave. No penalty.",
+                  body: "Month-to-month agreements. 30 days written notice. Your files, keys, and records transferred cleanly to you or your next manager. We'd rather earn your continued trust than lock it in.",
                 },
               ].map((item) => (
                 <div
@@ -537,16 +623,16 @@ export default function PricingPage() {
                     background: WHITE,
                     border: `1px solid ${BORDER}`,
                     borderRadius: "14px",
-                    padding: "24px",
+                    padding: "28px",
                   }}
                 >
                   <p
                     style={{
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "15px",
+                      fontSize: "16px",
                       fontWeight: 700,
                       color: NAVY,
-                      marginBottom: "8px",
+                      marginBottom: "10px",
                     }}
                   >
                     {item.title}
@@ -554,9 +640,9 @@ export default function PricingPage() {
                   <p
                     style={{
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "14px",
+                      fontSize: "15px",
                       color: SUBTLE,
-                      lineHeight: 1.65,
+                      lineHeight: 1.7,
                     }}
                   >
                     {item.body}
@@ -571,19 +657,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── FIRST 14 DAYS ── */}
-      <section style={{ padding: "72px 20px", background: WHITE }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: WHITE,
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
             <SectionLabel>What happens next</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
                 marginBottom: "8px",
-                lineHeight: 1.2,
+                lineHeight: 1.15,
               }}
             >
               Your first 14 days with Prospera.
@@ -591,12 +682,12 @@ export default function PricingPage() {
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
-                marginBottom: "36px",
+                marginBottom: "48px",
               }}
             >
-              Onboarding is simple. Here's the exact sequence.
+              Onboarding is simple. Here&apos;s the exact sequence.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
@@ -632,7 +723,6 @@ export default function PricingPage() {
                   style={{
                     display: "flex",
                     gap: "20px",
-                    paddingBottom: i < arr.length - 1 ? "0" : "0",
                   }}
                 >
                   {/* Timeline line */}
@@ -728,19 +818,24 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── BEFORE / AFTER ── */}
-      <section style={{ padding: "72px 20px", background: BG }}>
-        <div style={{ maxWidth: "760px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: BG,
+        }}
+      >
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <FadeIn>
-            <SectionLabel>Before & after</SectionLabel>
+            <SectionLabel>Before &amp; after</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(28px, 4vw, 40px)",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
-                marginBottom: "32px",
-                lineHeight: 1.2,
+                marginBottom: "40px",
+                lineHeight: 1.15,
               }}
             >
               Self-managing vs. Prospera.
@@ -750,7 +845,7 @@ export default function PricingPage() {
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
-                gap: "16px",
+                gap: "24px",
               }}
             >
               {/* Before */}
@@ -759,7 +854,7 @@ export default function PricingPage() {
                   background: WHITE,
                   border: `1px solid ${BORDER}`,
                   borderRadius: "16px",
-                  padding: "24px",
+                  padding: "32px",
                 }}
               >
                 <p
@@ -770,7 +865,7 @@ export default function PricingPage() {
                     textTransform: "uppercase",
                     letterSpacing: "0.10em",
                     color: MUTED,
-                    marginBottom: "16px",
+                    marginBottom: "20px",
                   }}
                 >
                   Self-managing
@@ -790,10 +885,10 @@ export default function PricingPage() {
                       display: "flex",
                       alignItems: "flex-start",
                       gap: "10px",
-                      padding: "8px 0",
+                      padding: "10px 0",
                       borderBottom: `1px solid ${BORDER}`,
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "13px",
+                      fontSize: "14px",
                       color: SUBTLE,
                     }}
                   >
@@ -809,7 +904,7 @@ export default function PricingPage() {
                   background: WHITE,
                   border: `1px solid ${NAVY}`,
                   borderRadius: "16px",
-                  padding: "24px",
+                  padding: "32px",
                 }}
               >
                 <p
@@ -820,7 +915,7 @@ export default function PricingPage() {
                     textTransform: "uppercase",
                     letterSpacing: "0.10em",
                     color: BURGUNDY,
-                    marginBottom: "16px",
+                    marginBottom: "20px",
                   }}
                 >
                   With Prospera
@@ -840,10 +935,10 @@ export default function PricingPage() {
                       display: "flex",
                       alignItems: "flex-start",
                       gap: "10px",
-                      padding: "8px 0",
+                      padding: "10px 0",
                       borderBottom: `1px solid ${BORDER}`,
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "13px",
+                      fontSize: "14px",
                       color: NAVY,
                       fontWeight: 500,
                     }}
@@ -861,14 +956,19 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── 90-DAY CERTIFICATE ── */}
-      <section style={{ padding: "72px 20px", background: NAVY }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: NAVY,
+        }}
+      >
         <div style={{ maxWidth: "640px", margin: "0 auto", textAlign: "center" }}>
           <FadeIn>
             <div
               style={{
                 border: "1px solid rgba(250,248,245,0.15)",
                 borderRadius: "20px",
-                padding: "48px 32px",
+                padding: "56px 40px",
                 position: "relative",
               }}
             >
@@ -929,9 +1029,10 @@ export default function PricingPage() {
                   margin: "0 auto 28px",
                 }}
               >
-                Try Prospera for 90 days. If you are not satisfied with the quality
-                of our service in a way we cannot resolve, we will refund your
-                first month's management fee in full. No conditions. No negotiation.
+                Try Prospera for 90 days. If we are not delivering in a way we
+                cannot resolve, we will refund every single penny of our management
+                fees from your first 90 days. No conditions. No negotiation.
+                No fine print.
               </p>
 
               <p
@@ -953,10 +1054,15 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── FINE PRINT ── */}
-      <section style={{ padding: "48px 20px", background: BG }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(48px, 6vw, 80px) clamp(20px, 4vw, 60px)",
+          background: BG,
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <FadeIn>
-            <SectionLabel>The fine print (there isn't much)</SectionLabel>
+            <SectionLabel>The fine print (there isn&apos;t much)</SectionLabel>
             <div
               style={{
                 display: "grid",
@@ -966,8 +1072,8 @@ export default function PricingPage() {
             >
               {[
                 {
-                  q: "Are there setup or onboarding fees?",
-                  a: "No. Onboarding is part of the service.",
+                  q: "Are there onboarding fees?",
+                  a: "Yes — $149.99 for Essentials, $99.99 for Autopilot. Hands-Free clients have it waived. It's a one-time charge.",
                 },
                 {
                   q: "What happens if the unit is vacant?",
@@ -975,11 +1081,15 @@ export default function PricingPage() {
                 },
                 {
                   q: "Do you charge to renew a lease?",
-                  a: "Not on Autopilot or Hands-Free. On Minimum Essentials, lease renewals are a $200 add-on.",
+                  a: "Not on Autopilot or Hands-Free. On Minimum Essentials, lease renewals are available as an add-on.",
                 },
                 {
-                  q: "How are maintenance costs handled?",
-                  a: "Costs are deducted from rent collected and itemized on your monthly statement. No markups.",
+                  q: "Are maintenance costs marked up?",
+                  a: "Yes, depending on your plan. Essentials: 18% coordination fee. Autopilot: 10%. Hands-Free: no markup. All costs are itemized on your monthly statement.",
+                },
+                {
+                  q: "Is there a placement fee?",
+                  a: "Yes — 10% of first month's rent, across all plans. Charged once per new tenancy.",
                 },
                 {
                   q: "Is there a minimum contract length?",
@@ -1030,8 +1140,13 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── DEMO PORTAL ── */}
-      <section style={{ padding: "80px 20px", background: NAVY }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: NAVY,
+        }}
+      >
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
@@ -1049,7 +1164,7 @@ export default function PricingPage() {
           <h2
             style={{
               fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(30px, 5vw, 48px)",
+              fontSize: "clamp(32px, 5vw, 56px)",
               fontWeight: 700,
               color: "#FAF8F5",
               letterSpacing: "-0.02em",
@@ -1063,10 +1178,10 @@ export default function PricingPage() {
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: "16px",
+              fontSize: "clamp(17px, 2vw, 21px)",
               color: "rgba(250,248,245,0.65)",
               textAlign: "center",
-              marginBottom: "48px",
+              marginBottom: "56px",
               lineHeight: 1.6,
             }}
           >
@@ -1074,15 +1189,20 @@ export default function PricingPage() {
             and what your tenant sees.
           </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "20px",
+            }}
+          >
             {/* Owner card */}
             <Link
               href="/demo/owner"
               style={{
                 background: "#FFFFFF",
                 borderRadius: "20px",
-                padding: "32px 24px",
+                padding: "36px 28px",
                 textDecoration: "none",
                 display: "flex",
                 flexDirection: "column",
@@ -1156,7 +1276,7 @@ export default function PricingPage() {
                 background: "rgba(250,248,245,0.07)",
                 border: "1px solid rgba(250,248,245,0.12)",
                 borderRadius: "20px",
-                padding: "32px 24px",
+                padding: "36px 28px",
                 textDecoration: "none",
                 display: "flex",
                 flexDirection: "column",
@@ -1222,7 +1342,6 @@ export default function PricingPage() {
                 Open tenant portal →
               </span>
             </Link>
-
           </div>
         </div>
       </section>
@@ -1230,8 +1349,13 @@ export default function PricingPage() {
       <Divider />
 
       {/* ── CTA FOOTER ── */}
-      <section style={{ padding: "80px 20px 100px", background: WHITE }}>
-        <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
+      <section
+        style={{
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
+          background: WHITE,
+        }}
+      >
+        <div style={{ maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
           <FadeIn>
             <p
               style={{
@@ -1244,32 +1368,35 @@ export default function PricingPage() {
                 marginBottom: "16px",
               }}
             >
-              Ready?
+              The first step is 30 minutes.
             </p>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(32px, 5vw, 52px)",
+                fontSize: "clamp(32px, 5vw, 60px)",
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
-                marginBottom: "16px",
+                marginBottom: "20px",
                 lineHeight: 1.1,
               }}
             >
-              Start with a 30-minute call.
+              You don&apos;t have to figure this out alone.
             </h2>
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: "16px",
+                fontSize: "clamp(17px, 2vw, 21px)",
                 color: MUTED,
-                marginBottom: "36px",
+                marginBottom: "44px",
                 lineHeight: 1.65,
+                maxWidth: "560px",
+                margin: "0 auto 44px",
               }}
             >
-              No commitment. No sales pressure. We'll tell you exactly
-              what managing your property looks like and what it costs.
+              Tell us about your property. We&apos;ll tell you exactly what it costs, what we&apos;d
+              do differently than you&apos;re doing now, and whether we&apos;re the right fit.
+              No pressure. No pitch.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
@@ -1285,11 +1412,11 @@ export default function PricingPage() {
                   letterSpacing: "0.10em",
                   textTransform: "uppercase",
                   textDecoration: "none",
-                  padding: "18px 40px",
+                  padding: "20px 48px",
                   borderRadius: "10px",
                 }}
               >
-                Book your discovery call
+                Book a free call →
               </Link>
 
               <a
@@ -1310,10 +1437,10 @@ export default function PricingPage() {
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: "12px",
                 color: MUTED,
-                marginTop: "32px",
+                marginTop: "40px",
               }}
             >
-              Prospera Properties · London, St. Thomas & Strathroy, Ontario
+              Prospera Properties · London, St. Thomas &amp; Strathroy, Ontario
             </p>
           </FadeIn>
         </div>

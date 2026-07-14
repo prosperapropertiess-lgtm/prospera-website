@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 // ── Constants ──────────────────────────────────────────────────────────────
@@ -10,7 +10,6 @@ const BURGUNDY = "#8B2030";
 const BG = "#F7F5F2";
 const WHITE = "#FFFFFF";
 const BORDER = "#D8D2C8";
-const TEXT = "#222222";
 const MUTED = "#666666";
 const SUBTLE = "#333333";
 
@@ -21,15 +20,18 @@ interface Plan {
   name: string;
   tagline: string;
   rate: string;
-  rateNum: number;
   badge?: string;
   colour: string;
   accentBg: string;
   description: string;
   includes: string[];
-  addOns: string[];
-  notIncluded: string[];
   bestFor: string;
+  fees: {
+    management: string;
+    placement: string;
+    onboarding: string;
+    maintenanceMarkup: string;
+  };
 }
 
 // ── Plan Data ──────────────────────────────────────────────────────────────
@@ -38,85 +40,85 @@ const PLANS: Plan[] = [
   {
     id: "essentials",
     name: "Minimum Essentials",
-    tagline: "The tools. None of the hand-holding.",
+    tagline: "The landlord who wants control but not chaos.",
     rate: "7%",
-    rateNum: 0.07,
     colour: NAVY,
     accentBg: "rgba(31,47,58,0.06)",
     description:
-      "You stay in control. We handle the compliance-heavy pieces: tenant placement, rent collection, and legal paperwork. Everything else is yours.",
+      "You stay involved. We handle the legal and compliance side — lease prep, rent collection, N4s — so the pieces that can get you in trouble are never left to chance. A dedicated property manager is still yours. You just keep your hand on the wheel.",
     includes: [
-      "Tenant placement & screening",
-      "Lease preparation (standard Ontario lease)",
-      "Rent collection & deposit to your account",
-      "N4 preparation when required",
-      "Online tenant portal access",
-      "Annual rent increase calculation",
+      "Dedicated named property manager — yours across every plan",
+      "Qualified, screened tenant placed — or no placement fee charged",
+      "Standard Ontario lease prepared and executed",
+      "Rent collected and deposited to your account",
+      "N4 issued when required — correctly, on time",
+      "Annual rent increase calculated and delivered",
+      "Online tenant portal so maintenance requests don't come to your phone",
     ],
-    addOns: [
-      "Maintenance coordination (+1%)",
-      "Inspection reports (+$150/ea)",
-      "Lease renewal coordination (+$200/ea)",
-    ],
-    notIncluded: [
-      "Maintenance coordination",
-      "Property inspections",
-      "24/7 emergency response",
-      "Vendor management",
-    ],
-    bestFor: "Landlords who want to stay involved but need the compliance handled.",
+    bestFor: "The nearby landlord who wants legal compliance handled but likes staying involved.",
+    fees: {
+      management: "7% of monthly rent collected",
+      placement: "10% of first month's rent (one-time per tenancy)",
+      onboarding: "$149.99 (one-time)",
+      maintenanceMarkup: "18% coordination fee on vendor invoices",
+    },
   },
   {
     id: "autopilot",
     name: "Autopilot",
-    tagline: "Full management. One number.",
+    tagline: "The landlord who just wants to sleep through the night.",
     rate: "10%",
-    rateNum: 0.10,
-    badge: "Most Popular",
+    badge: "Best Value",
     colour: BURGUNDY,
     accentBg: "rgba(139,32,48,0.06)",
     description:
-      "Everything in Minimum Essentials, plus maintenance coordination, property inspections, and 24/7 emergency response. One flat rate. No billing surprises.",
+      "The 2AM call is not yours anymore. The late-rent conversation isn't yours. The vendor coordination, the inspection, the renewal — none of it is yours. You own the asset. We run it completely. For 3% more than the base plan, the entire job is off your plate.",
     includes: [
       "Everything in Minimum Essentials",
-      "Maintenance coordination & vendor management",
-      "Move-in & move-out inspections",
-      "24/7 emergency maintenance response",
-      "Lease renewal coordination",
-      "Bi-annual property inspections",
-      "Owner dashboard with monthly statements",
-      "Expense tracking & year-end summary",
+      "Full maintenance coordination — vendor booked, supervised, invoiced",
+      "24/7 emergency maintenance response (we take the call, not you)",
+      "Move-in and move-out inspections documented with photos",
+      "Bi-annual property inspections — proactive, not reactive",
+      "Lease renewal negotiated and executed before it lapses",
+      "Monthly owner statements delivered by the 10th, every month",
+      "Expense tracking and year-end summary — ready for your accountant",
+      "Maintenance markup: 10% (vs. 18% on Essentials)",
+      "Onboarding fee: $99.99 (vs. $149.99 on Essentials)",
     ],
-    addOns: [
-      "Renovation project management (quoted separately)",
-      "Additional mid-term inspections (+$150/ea)",
-    ],
-    notIncluded: ["Renovation project management"],
-    bestFor: "Landlords who want genuine hands-off operation without paying premium pricing.",
+    bestFor: "The landlord who wants complete peace of mind for a 3% premium over the base plan.",
+    fees: {
+      management: "10% of monthly rent collected",
+      placement: "10% of first month's rent (one-time per tenancy)",
+      onboarding: "$99.99 (one-time)",
+      maintenanceMarkup: "10% coordination fee on vendor invoices",
+    },
   },
   {
     id: "handsfree",
     name: "Hands-Free",
-    tagline: "We act as your property. You own it.",
+    tagline: "Strategic oversight for the multi-property investor.",
     rate: "15%",
-    rateNum: 0.15,
     colour: NAVY,
     accentBg: "rgba(31,47,58,0.06)",
     description:
-      "Everything in Autopilot, plus renovation oversight, portfolio strategy, and direct owner advisory. For landlords who want to forget the property exists.",
+      "Everything in Autopilot, plus quarterly portfolio strategy, capital project oversight, and proactive market rent analysis. Built for investors who want a strategic partner, not just a manager. No maintenance markup. No onboarding fee.",
     includes: [
       "Everything in Autopilot",
-      "Renovation & capital project management",
-      "Portfolio strategy sessions (quarterly)",
-      "Market rent analysis & optimization",
-      "Priority response on all communications",
-      "Dedicated property manager (named contact)",
-      "Tax-ready expense reports with receipts",
-      "Proactive lease renewal strategy",
+      "No maintenance markup — vendor costs passed through at cost",
+      "Onboarding fee waived",
+      "Quarterly portfolio strategy sessions",
+      "Renovation and capital project management overseen end-to-end",
+      "Proactive market rent analysis — never underpriced",
+      "Tax-ready expense reports with receipts attached",
+      "Priority response across all communications",
     ],
-    addOns: ["Nothing. This is the complete offering."],
-    notIncluded: [],
-    bestFor: "Out-of-province owners, multi-property investors, and anyone who values time above all else.",
+    bestFor: "The multi-property investor who wants strategic advisory on top of full management.",
+    fees: {
+      management: "15% of monthly rent collected",
+      placement: "10% of first month's rent (one-time per tenancy)",
+      onboarding: "Waived",
+      maintenanceMarkup: "No markup — vendor costs passed through at cost",
+    },
   },
 ];
 
@@ -128,7 +130,7 @@ const PERSONAS = [
     label: "The Reluctant Landlord",
     icon: "🏠",
     description: "You inherited a property, moved away, or got stuck with a second unit. You didn't sign up to be a landlord.",
-    recommendation: "autopilot",
+    recommendation: "autopilot" as const,
     reason: "Autopilot handles everything that surprises you: the 2AM call, the late rent, the lease renewal you forgot.",
   },
   {
@@ -136,7 +138,7 @@ const PERSONAS = [
     label: "The Investor",
     icon: "📊",
     description: "You own multiple properties. Your time is worth more than any management fee.",
-    recommendation: "handsfree",
+    recommendation: "handsfree" as const,
     reason: "Hands-Free gives you one point of contact, quarterly strategy, and portfolio visibility — across every property.",
   },
   {
@@ -144,7 +146,7 @@ const PERSONAS = [
     label: "The Nearby Owner",
     icon: "🔑",
     description: "You live close. You want to stay involved and handle some things yourself.",
-    recommendation: "essentials",
+    recommendation: "essentials" as const,
     reason: "Minimum Essentials handles the legal and compliance pieces you shouldn't be doing yourself, without removing your control.",
   },
   {
@@ -152,7 +154,7 @@ const PERSONAS = [
     label: "The First-Timer",
     icon: "📋",
     description: "This is your first rental. You don't know what you don't know.",
-    recommendation: "autopilot",
+    recommendation: "autopilot" as const,
     reason: "Autopilot covers the pieces that catch first-timers off guard: maintenance, inspections, and LTB filings.",
   },
 ];
@@ -162,100 +164,6 @@ const PLAN_LABEL: Record<string, string> = {
   autopilot: "Autopilot",
   handsfree: "Hands-Free",
 };
-
-// ── Rent Calculator ───────────────────────────────────────────────────────
-
-function RentCalculator({ plan }: { plan: Plan }) {
-  const [rent, setRent] = useState(2000);
-
-  const fee = Math.round(rent * plan.rateNum);
-  const net = rent - fee;
-
-  return (
-    <div
-      style={{
-        background: plan.accentBg,
-        border: `1px solid ${BORDER}`,
-        borderRadius: "16px",
-        padding: "24px",
-        marginTop: "24px",
-      }}
-    >
-      <p
-        style={{
-          fontSize: "11px",
-          fontFamily: "var(--font-dm-sans)",
-          color: MUTED,
-          textTransform: "uppercase",
-          letterSpacing: "0.10em",
-          fontWeight: 600,
-          marginBottom: "16px",
-        }}
-      >
-        Rent Calculator
-      </p>
-
-      <div style={{ marginBottom: "20px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: SUBTLE }}>Monthly rent</span>
-          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "18px", fontWeight: 700, color: NAVY }}>
-            ${rent.toLocaleString()}
-          </span>
-        </div>
-        <input
-          type="range"
-          min={800}
-          max={5000}
-          step={50}
-          value={rent}
-          onChange={(e) => setRent(Number(e.target.value))}
-          style={{ width: "100%", accentColor: plan.colour, cursor: "pointer" }}
-        />
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-          <span style={{ fontSize: "11px", color: MUTED, fontFamily: "var(--font-dm-sans)" }}>$800</span>
-          <span style={{ fontSize: "11px", color: MUTED, fontFamily: "var(--font-dm-sans)" }}>$5,000</span>
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-        <div
-          style={{
-            background: WHITE,
-            borderRadius: "12px",
-            padding: "16px",
-            border: `1px solid ${BORDER}`,
-            textAlign: "center",
-          }}
-        >
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
-            Management fee
-          </p>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "22px", fontWeight: 800, color: plan.colour }}>
-            ${fee}
-          </p>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, marginTop: "2px" }}>/ month</p>
-        </div>
-        <div
-          style={{
-            background: WHITE,
-            borderRadius: "12px",
-            padding: "16px",
-            border: `1px solid ${BORDER}`,
-            textAlign: "center",
-          }}
-        >
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
-            You receive
-          </p>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "22px", fontWeight: 800, color: NAVY }}>
-            ${net.toLocaleString()}
-          </p>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, marginTop: "2px" }}>/ month</p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ── Plan Card ─────────────────────────────────────────────────────────────
 
@@ -268,14 +176,15 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
       style={{
         background: WHITE,
         border: `1px solid ${highlighted ? plan.colour : BORDER}`,
-        borderTop: `3px solid ${plan.colour}`,
+        borderTop: `4px solid ${plan.colour}`,
         borderRadius: "20px",
-        padding: "32px",
+        padding: "40px 32px 32px",
         position: "relative",
         boxShadow: highlighted
-          ? "0 8px 32px rgba(0,0,0,0.10)"
+          ? "0 12px 40px rgba(0,0,0,0.12)"
           : "0 1px 4px rgba(0,0,0,0.04)",
-        transition: "box-shadow 0.2s",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       {plan.badge && (
@@ -292,7 +201,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
             fontWeight: 700,
             letterSpacing: "0.10em",
             textTransform: "uppercase",
-            padding: "4px 16px",
+            padding: "4px 18px",
             borderRadius: "20px",
             whiteSpace: "nowrap",
           }}
@@ -301,22 +210,31 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
         </div>
       )}
 
-      {/* Rate */}
-      <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "4px" }}>
+      {/* Rate — large and dominant */}
+      <div style={{ marginBottom: "8px" }}>
         <span
           style={{
             fontFamily: "var(--font-cormorant)",
-            fontSize: "clamp(48px, 7vw, 64px)",
+            fontSize: "clamp(64px, 8vw, 80px)",
             fontWeight: 700,
             color: plan.colour,
             lineHeight: 1,
             letterSpacing: "-0.02em",
+            display: "block",
           }}
         >
           {plan.rate}
         </span>
-        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: MUTED }}>
-          of monthly rent
+        <span
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "13px",
+            color: MUTED,
+            marginTop: "4px",
+            display: "block",
+          }}
+        >
+          of monthly rent collected
         </span>
       </div>
 
@@ -324,21 +242,27 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
       <h3
         style={{
           fontFamily: "var(--font-cormorant)",
-          fontSize: "clamp(22px, 3vw, 28px)",
+          fontSize: "clamp(24px, 3vw, 30px)",
           fontWeight: 700,
           color: NAVY,
-          marginBottom: "4px",
+          marginBottom: "6px",
+          marginTop: "16px",
           letterSpacing: "-0.01em",
         }}
       >
         {plan.name}
       </h3>
-      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: MUTED, fontStyle: "italic", marginBottom: "16px" }}>
-        {plan.tagline}
-      </p>
 
       {/* Description */}
-      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", color: SUBTLE, lineHeight: 1.65, marginBottom: "24px" }}>
+      <p
+        style={{
+          fontFamily: "var(--font-dm-sans)",
+          fontSize: "15px",
+          color: SUBTLE,
+          lineHeight: 1.7,
+          marginBottom: "28px",
+        }}
+      >
         {plan.description}
       </p>
 
@@ -349,11 +273,18 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           borderLeft: `3px solid ${plan.colour}`,
           borderRadius: "8px",
           padding: "12px 16px",
-          marginBottom: "24px",
+          marginBottom: "28px",
         }}
       >
-        <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: SUBTLE }}>
-          <span style={{ fontWeight: 700 }}>Best for: </span>{plan.bestFor}
+        <p
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "13px",
+            color: SUBTLE,
+            fontStyle: "italic",
+          }}
+        >
+          {plan.bestFor}
         </p>
       </div>
 
@@ -371,28 +302,33 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
       >
         What's included
       </p>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "20px" }}>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "24px" }}>
         {plan.includes.map((item) => (
           <li
             key={item}
             style={{
               fontFamily: "var(--font-dm-sans)",
               fontSize: "14px",
-              color: TEXT,
-              padding: "6px 0",
+              color: SUBTLE,
+              padding: "8px 0",
               borderBottom: `1px solid ${BORDER}`,
               display: "flex",
               alignItems: "flex-start",
               gap: "10px",
+              lineHeight: 1.5,
             }}
           >
-            <span style={{ color: plan.colour, fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
+            <span
+              style={{ color: plan.colour, fontWeight: 700, flexShrink: 0, marginTop: "1px" }}
+            >
+              ✓
+            </span>
             {item}
           </li>
         ))}
       </ul>
 
-      {/* Expandable: Add-ons & not included */}
+      {/* Fee disclosure toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
         style={{
@@ -408,96 +344,80 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           display: "flex",
           alignItems: "center",
           gap: "6px",
+          textAlign: "left",
         }}
       >
-        {expanded ? "Show less ↑" : "See add-ons & exclusions ↓"}
+        {expanded ? "Hide fee breakdown ↑" : "See all fees ↓"}
       </button>
 
       {expanded && (
-        <div style={{ marginTop: "20px" }}>
-          {plan.addOns.length > 0 && (
-            <>
-              <p
+        <div
+          style={{
+            marginTop: "16px",
+            background: BG,
+            border: `1px solid ${BORDER}`,
+            borderRadius: "12px",
+            padding: "20px",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "11px",
+              color: MUTED,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              fontWeight: 700,
+              marginBottom: "12px",
+            }}
+          >
+            Full fee breakdown
+          </p>
+          {[
+            { label: "Management", value: plan.fees.management },
+            { label: "Placement", value: plan.fees.placement },
+            { label: "Onboarding", value: plan.fees.onboarding },
+            { label: "Maintenance coordination", value: plan.fees.maintenanceMarkup },
+          ].map((fee) => (
+            <div
+              key={fee.label}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                padding: "8px 0",
+                borderBottom: `1px solid ${BORDER}`,
+                gap: "12px",
+              }}
+            >
+              <span
                 style={{
                   fontFamily: "var(--font-dm-sans)",
-                  fontSize: "11px",
+                  fontSize: "13px",
                   color: MUTED,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  fontWeight: 700,
-                  marginBottom: "10px",
+                  flexShrink: 0,
                 }}
               >
-                Available add-ons
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "20px" }}>
-                {plan.addOns.map((item) => (
-                  <li
-                    key={item}
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "14px",
-                      color: SUBTLE,
-                      padding: "6px 0",
-                      borderBottom: `1px solid ${BORDER}`,
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "10px",
-                    }}
-                  >
-                    <span style={{ color: MUTED, flexShrink: 0, marginTop: "1px" }}>+</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          {plan.notIncluded.length > 0 && (
-            <>
-              <p
+                {fee.label}
+              </span>
+              <span
                 style={{
                   fontFamily: "var(--font-dm-sans)",
-                  fontSize: "11px",
-                  color: MUTED,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  fontWeight: 700,
-                  marginBottom: "10px",
+                  fontSize: "13px",
+                  color: SUBTLE,
+                  fontWeight: 600,
+                  textAlign: "right",
                 }}
               >
-                Not included
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {plan.notIncluded.map((item) => (
-                  <li
-                    key={item}
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "14px",
-                      color: MUTED,
-                      padding: "6px 0",
-                      borderBottom: `1px solid ${BORDER}`,
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "10px",
-                    }}
-                  >
-                    <span style={{ color: MUTED, flexShrink: 0 }}>–</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+                {fee.value}
+              </span>
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Calculator */}
-      <RentCalculator plan={plan} />
-
       {/* CTA */}
-      <div style={{ marginTop: "24px" }}>
+      <div style={{ marginTop: "28px" }}>
         <Link
           href="/contact"
           style={{
@@ -511,7 +431,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
             letterSpacing: "0.10em",
             textTransform: "uppercase",
             textDecoration: "none",
-            padding: "16px 24px",
+            padding: "18px 24px",
             borderRadius: "10px",
             transition: "opacity 0.2s",
           }}
@@ -529,7 +449,6 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
 
 export function PersonaSelector() {
   const [selected, setSelected] = useState<string | null>(null);
-  const plansRef = useRef<HTMLDivElement>(null);
 
   const recommendation = selected
     ? PERSONAS.find((p) => p.id === selected)
@@ -679,8 +598,9 @@ export function PlansGrid() {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "24px",
+        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+        gap: "28px",
+        alignItems: "stretch",
       }}
     >
       {PLANS.map((plan) => (
@@ -692,7 +612,18 @@ export function PlansGrid() {
 
 // ── Comparison Table (mobile-scrollable) ──────────────────────────────────
 
-const COMPARE_ROWS = [
+const COMPARE_ROWS: Array<{
+  feature: string;
+  essentials: boolean | string;
+  autopilot: boolean | string;
+  handsfree: boolean | string;
+  isText?: boolean;
+}> = [
+  { feature: "Onboarding fee", essentials: "$149.99", autopilot: "$99.99", handsfree: "Waived", isText: true },
+  { feature: "Management rate", essentials: "7%", autopilot: "10%", handsfree: "15%", isText: true },
+  { feature: "Placement fee", essentials: "10%", autopilot: "10%", handsfree: "10%", isText: true },
+  { feature: "Maintenance markup", essentials: "18%", autopilot: "10%", handsfree: "None", isText: true },
+  { feature: "Dedicated named property manager", essentials: true, autopilot: true, handsfree: true },
   { feature: "Tenant screening & placement", essentials: true, autopilot: true, handsfree: true },
   { feature: "Standard Ontario lease preparation", essentials: true, autopilot: true, handsfree: true },
   { feature: "Rent collection & owner disbursement", essentials: true, autopilot: true, handsfree: true },
@@ -710,7 +641,6 @@ const COMPARE_ROWS = [
   { feature: "Renovation & capital project management", essentials: false, autopilot: false, handsfree: true },
   { feature: "Portfolio strategy sessions (quarterly)", essentials: false, autopilot: false, handsfree: true },
   { feature: "Market rent analysis & optimization", essentials: false, autopilot: false, handsfree: true },
-  { feature: "Dedicated named property manager", essentials: false, autopilot: false, handsfree: true },
   { feature: "Tax-ready reports with receipts", essentials: false, autopilot: false, handsfree: true },
   { feature: "Priority response on all communications", essentials: false, autopilot: false, handsfree: true },
 ];
@@ -770,16 +700,14 @@ export function ComparisonTable() {
         </thead>
         <tbody>
           {COMPARE_ROWS.map((row, i) => (
-            <tr
-              key={row.feature}
-              style={{ background: i % 2 === 0 ? WHITE : BG }}
-            >
+            <tr key={row.feature} style={{ background: i % 2 === 0 ? WHITE : BG }}>
               <td
                 style={{
                   padding: "12px 16px",
                   fontSize: "14px",
-                  color: TEXT,
+                  color: SUBTLE,
                   borderBottom: `1px solid ${BORDER}`,
+                  fontWeight: row.isText ? 600 : 400,
                 }}
               >
                 {row.feature}
@@ -792,10 +720,14 @@ export function ComparisonTable() {
                     padding: "12px 12px",
                     borderBottom: `1px solid ${BORDER}`,
                     background: col === "autopilot" ? "rgba(139,32,48,0.04)" : undefined,
-                    fontSize: "18px",
+                    fontSize: row.isText ? "13px" : "18px",
+                    fontWeight: row.isText ? 600 : 400,
+                    color: row.isText ? SUBTLE : undefined,
                   }}
                 >
-                  {row[col] ? (
+                  {row.isText ? (
+                    <span>{row[col] as string}</span>
+                  ) : row[col] ? (
                     <span style={{ color: col === "autopilot" ? BURGUNDY : "#2E7D32" }}>✓</span>
                   ) : (
                     <span style={{ color: BORDER }}>–</span>
@@ -823,9 +755,9 @@ const GUARANTEES = [
   {
     number: "№2",
     title: "Transparency Guarantee",
-    headline: "No hidden fees. Ever.",
+    headline: "Every fee disclosed upfront. No surprises on your statement.",
     detail:
-      "Our fee schedule is printed above and doesn't change. No markup on maintenance invoices. No admin fees for statements. No surprise charges at year-end. You'll see every transaction before it posts.",
+      "Our fee structure is printed on every plan: management rate, placement fee (10% of first month's rent), onboarding fee (by plan), and maintenance coordination markup (18% on Essentials, 10% on Autopilot, none on Hands-Free). These numbers don't change. You'll see every transaction itemized before it posts.",
   },
   {
     number: "№3",
@@ -850,10 +782,10 @@ const GUARANTEES = [
   },
   {
     number: "№6",
-    title: "90-Day Guarantee",
-    headline: "If it's not working after 90 days, we refund your first month's management fee.",
+    title: "Owner's Satisfaction Guarantee",
+    headline: "Not satisfied in 90 days? Every single penny of our fees, refunded.",
     detail:
-      "This is the overarching guarantee. Try us for 90 days. If you're dissatisfied with the service in a way we can't resolve, we'll refund your first month's management fee — no conditions, no negotiation.",
+      "This is the overarching guarantee. Try Prospera for 90 days. If we are not delivering in a way we cannot resolve, we will refund every penny of our management fees from your first 90 days — no conditions, no negotiation, no fine print. You should trust who you hand your property to. This is how we earn that trust.",
   },
 ];
 
@@ -929,6 +861,7 @@ export function GuaranteeAccordion() {
                 flexShrink: 0,
                 marginTop: "2px",
                 transition: "transform 0.2s",
+                display: "inline-block",
                 transform: open === i ? "rotate(180deg)" : "rotate(0deg)",
               }}
             >
