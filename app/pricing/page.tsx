@@ -8,6 +8,7 @@ import {
   GuaranteeAccordion,
 } from "@/components/ui/PricingInteractive";
 import StatementPreview from "@/components/ui/StatementPreview";
+import ScrollToPlans from "@/components/ui/ScrollToPlans";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -187,19 +188,7 @@ export default function PricingPage() {
               >
                 Start risk-free →
               </Link>
-              <a
-                href="#plans"
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "13px",
-                  color: "rgba(250,248,245,0.55)",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(250,248,245,0.25)",
-                  paddingBottom: "2px",
-                }}
-              >
-                See the plans ↓
-              </a>
+              <ScrollToPlans />
             </div>
           </FadeIn>
         </div>
