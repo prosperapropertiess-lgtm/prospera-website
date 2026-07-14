@@ -1029,6 +1029,206 @@ export default function PricingPage() {
 
       <Divider />
 
+      {/* ── DEMO PORTAL ── */}
+      <section style={{ padding: "80px 20px", background: NAVY }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "11px",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "rgba(250,248,245,0.45)",
+              marginBottom: "16px",
+              textAlign: "center",
+            }}
+          >
+            Try it yourself
+          </p>
+          <h2
+            style={{
+              fontFamily: "var(--font-cormorant)",
+              fontSize: "clamp(30px, 5vw, 48px)",
+              fontWeight: 700,
+              color: "#FAF8F5",
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              marginBottom: "12px",
+              textAlign: "center",
+            }}
+          >
+            See the portal before you sign anything.
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "16px",
+              color: "rgba(250,248,245,0.65)",
+              textAlign: "center",
+              marginBottom: "48px",
+              lineHeight: 1.6,
+            }}
+          >
+            No login. No email required. Explore both sides — what you see as the owner,
+            and what your tenant sees.
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+
+            {/* Owner card */}
+            <Link
+              href="/demo/owner"
+              style={{
+                background: "#FFFFFF",
+                borderRadius: "20px",
+                padding: "32px 24px",
+                textDecoration: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0",
+              }}
+            >
+              <span style={{ fontSize: "36px", marginBottom: "16px", display: "block" }}>🏠</span>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: "rgba(15,28,40,0.40)",
+                  marginBottom: "6px",
+                }}
+              >
+                Owner view
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  fontSize: "clamp(22px, 3.5vw, 30px)",
+                  fontWeight: 700,
+                  color: NAVY,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.15,
+                  marginBottom: "12px",
+                }}
+              >
+                Explore being a Landlord
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "14px",
+                  color: "rgba(15,28,40,0.55)",
+                  lineHeight: 1.6,
+                  marginBottom: "24px",
+                  flex: 1,
+                }}
+              >
+                Financials, repair tracking, tenant details, monthly statements, and your owner dashboard.
+              </p>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  background: NAVY,
+                  color: "#FAF8F5",
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  padding: "13px 20px",
+                  borderRadius: "10px",
+                  alignSelf: "flex-start",
+                }}
+              >
+                Open owner portal →
+              </span>
+            </Link>
+
+            {/* Tenant card */}
+            <Link
+              href="/demo/tenant"
+              style={{
+                background: "rgba(250,248,245,0.07)",
+                border: "1px solid rgba(250,248,245,0.12)",
+                borderRadius: "20px",
+                padding: "32px 24px",
+                textDecoration: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0",
+              }}
+            >
+              <span style={{ fontSize: "36px", marginBottom: "16px", display: "block" }}>🔑</span>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: "rgba(250,248,245,0.35)",
+                  marginBottom: "6px",
+                }}
+              >
+                Tenant view
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  fontSize: "clamp(22px, 3.5vw, 30px)",
+                  fontWeight: 700,
+                  color: "#FAF8F5",
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.15,
+                  marginBottom: "12px",
+                }}
+              >
+                See how tenants experience it
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "14px",
+                  color: "rgba(250,248,245,0.55)",
+                  lineHeight: 1.6,
+                  marginBottom: "24px",
+                  flex: 1,
+                }}
+              >
+                Payment history, maintenance requests, documents, and the message thread with Prospera.
+              </p>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  background: BURGUNDY,
+                  color: "#FAF8F5",
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  padding: "13px 20px",
+                  borderRadius: "10px",
+                  alignSelf: "flex-start",
+                }}
+              >
+                Open tenant portal →
+              </span>
+            </Link>
+
+          </div>
+        </div>
+      </section>
+
+      <Divider />
+
       {/* ── CTA FOOTER ── */}
       <section style={{ padding: "80px 20px 100px", background: WHITE }}>
         <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
@@ -1090,24 +1290,6 @@ export default function PricingPage() {
                 }}
               >
                 Book your discovery call
-              </Link>
-
-              <Link
-                href="/demo"
-                style={{
-                  display: "inline-block",
-                  background: "transparent",
-                  color: NAVY,
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  border: `1px solid ${BORDER}`,
-                  padding: "14px 32px",
-                  borderRadius: "10px",
-                }}
-              >
-                Or try the portal demo first →
               </Link>
 
               <a
