@@ -484,11 +484,11 @@ export default function PricingPage() {
               }}
             >
               {[
-                "21-Day Placement",
+                "21-Day Tenant Placement",
                 "Full Fee Transparency",
-                "4-Hour Response",
-                "10th-of-Month Statements",
-                "30-Day Exit",
+                "4-Hour Maintenance Response",
+                "Statements by the 10th",
+                "30-Day No-Penalty Exit",
                 "90-Day Money-Back",
               ].map((g) => (
                 <span
@@ -955,97 +955,106 @@ export default function PricingPage() {
 
       <Divider />
 
-      {/* ── 90-DAY CERTIFICATE ── */}
+      {/* ── 90-DAY GUARANTEE ── */}
       <section
         style={{
-          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
-          background: NAVY,
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
+          background: BURGUNDY,
         }}
       >
-        <div style={{ maxWidth: "640px", margin: "0 auto", textAlign: "center" }}>
+        <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
           <FadeIn>
-            <div
+            <p
               style={{
-                border: "1px solid rgba(250,248,245,0.15)",
-                borderRadius: "20px",
-                padding: "56px 40px",
-                position: "relative",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                color: "rgba(250,248,245,0.60)",
+                marginBottom: "24px",
               }}
             >
-              {/* Decorative corners */}
-              <div style={{ position: "absolute", top: "16px", left: "16px", width: "24px", height: "24px", borderTop: "2px solid rgba(250,248,245,0.20)", borderLeft: "2px solid rgba(250,248,245,0.20)" }} />
-              <div style={{ position: "absolute", top: "16px", right: "16px", width: "24px", height: "24px", borderTop: "2px solid rgba(250,248,245,0.20)", borderRight: "2px solid rgba(250,248,245,0.20)" }} />
-              <div style={{ position: "absolute", bottom: "16px", left: "16px", width: "24px", height: "24px", borderBottom: "2px solid rgba(250,248,245,0.20)", borderLeft: "2px solid rgba(250,248,245,0.20)" }} />
-              <div style={{ position: "absolute", bottom: "16px", right: "16px", width: "24px", height: "24px", borderBottom: "2px solid rgba(250,248,245,0.20)", borderRight: "2px solid rgba(250,248,245,0.20)" }} />
+              Owner&apos;s Satisfaction Guarantee
+            </p>
 
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                  color: "rgba(250,248,245,0.45)",
-                  marginBottom: "16px",
-                }}
-              >
-                Guarantee №6
-              </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(44px, 7vw, 88px)",
+                fontWeight: 700,
+                color: "#FAF8F5",
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                marginBottom: "32px",
+              }}
+            >
+              If we&apos;re not earning it,<br />
+              <span style={{ color: "rgba(250,248,245,0.70)" }}>you get every penny back.</span>
+            </h2>
 
-              <p
-                style={{
-                  fontFamily: "var(--font-cormorant)",
-                  fontSize: "clamp(56px, 10vw, 96px)",
-                  fontWeight: 700,
-                  color: BURGUNDY,
-                  lineHeight: 1,
-                  marginBottom: "16px",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                90
-              </p>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(17px, 2vw, 20px)",
+                color: "rgba(250,248,245,0.85)",
+                lineHeight: 1.7,
+                maxWidth: "580px",
+                margin: "0 auto 56px",
+              }}
+            >
+              Try Prospera for 90 days. If we are not delivering in a way we cannot
+              resolve, we refund every single penny of our management fees from that
+              period. No conditions. No negotiation. No fine print.
+            </p>
 
-              <p
-                style={{
-                  fontFamily: "var(--font-cormorant)",
-                  fontSize: "clamp(20px, 3vw, 28px)",
-                  fontWeight: 700,
-                  color: "#FAF8F5",
-                  marginBottom: "16px",
-                  lineHeight: 1.3,
-                }}
-              >
-                Days to decide.
-              </p>
-
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "15px",
-                  color: "rgba(250,248,245,0.70)",
-                  lineHeight: 1.65,
-                  maxWidth: "440px",
-                  margin: "0 auto 28px",
-                }}
-              >
-                Try Prospera for 90 days. If we are not delivering in a way we
-                cannot resolve, we will refund every single penny of our management
-                fees from your first 90 days. No conditions. No negotiation.
-                No fine print.
-              </p>
-
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "11px",
-                  color: "rgba(250,248,245,0.35)",
-                  letterSpacing: "0.10em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Prospera Properties · London, Ontario
-              </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gap: "12px",
+                maxWidth: "640px",
+                margin: "0 auto",
+              }}
+            >
+              {[
+                { number: "90", label: "Days to decide" },
+                { number: "100%", label: "Of our fees returned" },
+                { number: "0", label: "Conditions or fine print" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  style={{
+                    background: "rgba(250,248,245,0.12)",
+                    borderRadius: "16px",
+                    padding: "28px 20px",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-cormorant)",
+                      fontSize: "clamp(40px, 6vw, 56px)",
+                      fontWeight: 700,
+                      color: "#FAF8F5",
+                      lineHeight: 1,
+                      marginBottom: "8px",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {item.number}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "13px",
+                      color: "rgba(250,248,245,0.65)",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              ))}
             </div>
           </FadeIn>
         </div>
