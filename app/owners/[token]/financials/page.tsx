@@ -23,7 +23,8 @@ const RED = "#B91C1C";
 const AMBER = "#B45309";
 const CARD_SHADOW = "0 1px 3px rgba(15,28,40,0.05), 0 6px 20px rgba(15,28,40,0.07)";
 
-function fmt$(n: number) {
+function fmt$(n: number | null | undefined) {
+  if (n == null || isNaN(n)) return "$0";
   return "$" + n.toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
@@ -42,14 +43,16 @@ export default async function FinancialsPage({ params }: Props) {
   let dashboard;
   try {
     ({ dashboard } = await getDashboard(token, record.notion_owner_ids, record.owner_names));
-  } catch {
+  } catch (err) {
+    console.error("[financials] getDashboard failed:", err);
     return notFound();
   }
 
-  const firstNames = record.owner_names
+  const firstNames = (record.owner_names ?? "Owner")
     .split(/\s*[&,]\s*/)
     .map((n: string) => n.trim().split(" ")[0])
-    .join(" & ");
+    .filter(Boolean)
+    .join(" & ") || "Owner";
 
   const multiProperty = dashboard.properties.length > 1;
 
