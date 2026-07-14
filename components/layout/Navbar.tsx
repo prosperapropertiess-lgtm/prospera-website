@@ -21,6 +21,7 @@ const navLinks = [
   { label: "For Landlords", href: "/landlords" },
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -33,6 +34,7 @@ const mobileNavItems = [
   { icon: BookOpen,   label: "Blog",            href: "/blog"          },
   { icon: Info,       label: "About",           href: "/about"         },
   { icon: Mail,       label: "Contact",         href: "/contact"       },
+  { icon: BarChart2,  label: "Pricing",         href: "/pricing"       },
   { icon: BarChart2,  label: "Freedom Score",   href: "/freedom-score" },
   { icon: Zap,        label: "App Waitlist",    href: "/platform", accent: true },
 ];
