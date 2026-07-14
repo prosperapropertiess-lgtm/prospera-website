@@ -1092,6 +1092,24 @@ export default function PricingPage() {
                 Book your discovery call
               </Link>
 
+              <Link
+                href="/demo"
+                style={{
+                  display: "inline-block",
+                  background: "transparent",
+                  color: NAVY,
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  border: `1px solid ${BORDER}`,
+                  padding: "14px 32px",
+                  borderRadius: "10px",
+                }}
+              >
+                Or try the portal demo first →
+              </Link>
+
               <a
                 href="tel:+15196971227"
                 style={{

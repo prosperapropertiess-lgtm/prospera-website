@@ -16,11 +16,12 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isAdmin = pathname?.startsWith("/admin");
   const isOwners = pathname?.startsWith("/owners");
   const isLP = pathname?.startsWith("/lp");
+  const isDemo = pathname?.startsWith("/demo");
   const isTenants = pathname?.startsWith("/tenants");
   const isOnboard = pathname?.startsWith("/onboard");
 
   const isListingDetail = /^\/listings\/[^/]+/.test(pathname ?? "");
-  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard;
+  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isDemo;
 
   return (
     <>
