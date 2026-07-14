@@ -12,7 +12,7 @@ interface Props {
   params: Promise<{ token: string }>;
 }
 
-export const revalidate = 0;
+export const revalidate = 3600; // 1-hour ISR — refresh button warms Supabase cache; next ISR picks it up
 
 function fmt$(n: number | null | undefined) {
   if (n == null || isNaN(n)) return "$0";
