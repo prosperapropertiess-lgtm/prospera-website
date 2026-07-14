@@ -312,7 +312,7 @@ export default function PricingPage() {
                 maxWidth: "760px",
               }}
             >
-              You are not a line item in a $1,500 portfolio.
+              You are not a line item in a 1,500-door portfolio company.
             </h2>
             <p
               style={{
