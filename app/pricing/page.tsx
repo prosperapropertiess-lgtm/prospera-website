@@ -341,111 +341,28 @@ export default function PricingPage() {
               a scare tactic. It&apos;s just what 10 years in this market looks like.
             </p>
 
-            {/* Meme-style two-card closer */}
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "11px",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "#999999",
-                marginBottom: "20px",
-              }}
-            >
-              The honest take
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                gap: "16px",
-              }}
-            >
-              {/* Card A — Self-managing */}
-              <div
+            {/* Meme image */}
+            <div style={{ marginTop: "8px" }}>
+              <img
+                src="/meme-charges-less.jpg"
+                alt="There's always someone who charges less."
                 style={{
-                  background: WHITE,
-                  border: "1.5px solid #D8D2C8",
+                  width: "100%",
+                  maxWidth: "480px",
                   borderRadius: "14px",
-                  padding: "28px 28px 32px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                  display: "block",
                 }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                  <span style={{ fontSize: "20px" }}>✓</span>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "15px",
-                      fontWeight: 700,
-                      color: NAVY,
-                      margin: 0,
-                    }}
-                  >
-                    Self-managing
-                  </p>
-                </div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: "14px",
-                    color: SUBTLE,
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  You&apos;re in control. You know what&apos;s happening. You call the shots.
-                  If you&apos;re genuinely good at it — stay the course.
-                </p>
-              </div>
-
-              {/* Card B — Cheap manager */}
-              <div
-                style={{
-                  background: WHITE,
-                  border: "1.5px solid #D8D2C8",
-                  borderRadius: "14px",
-                  padding: "28px 28px 32px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-                  <span style={{ fontSize: "20px", color: "#8B2030" }}>✕</span>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "15px",
-                      fontWeight: 700,
-                      color: NAVY,
-                      margin: 0,
-                    }}
-                  >
-                    Hiring a cheap property manager
-                  </p>
-                </div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: "14px",
-                    color: SUBTLE,
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  You&apos;re paying someone else to lose track of your property. You&apos;re still
-                  getting the 2AM texts — because nobody&apos;s picking up. The chaos just moved one step sideways.
-                </p>
-              </div>
+              />
             </div>
 
             {/* Punchline */}
             <div
               style={{
-                marginTop: "32px",
+                marginTop: "28px",
                 padding: "24px 28px",
                 background: NAVY,
                 borderRadius: "12px",
+                maxWidth: "480px",
               }}
             >
               <p
