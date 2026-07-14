@@ -484,11 +484,11 @@ export default function PricingPage() {
               }}
             >
               {[
-                "21-Day Tenant Placement",
-                "Full Fee Transparency",
-                "4-Hour Maintenance Response",
-                "Statements by the 10th",
-                "30-Day No-Penalty Exit",
+                "21-Day Placement",
+                "24-Hr N4 Enforcement",
+                "60-Min Emergency Dispatch",
+                "Replacement Warranty",
+                "Rent Shield",
                 "90-Day Money-Back",
               ].map((g) => (
                 <span
@@ -601,16 +601,16 @@ export default function PricingPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {[
                 {
-                  title: "Maintenance coordination has a markup — and it scales with your plan.",
-                  body: "We don't pretend vendors are free to coordinate. On Essentials, the markup is 18%. On Autopilot, it's 10%. On Hands-Free, there's no markup — it's included in the rate. You know the number before we ever pick up the phone.",
+                  title: "Our contractor rates are lower than what you'd pay on your own — even with the coordination fee.",
+                  body: "We've built vendor relationships over years. Our trades network gives us priority dispatch and better rates than a one-off call. On Essentials, we add an 18% coordination fee. On Autopilot, 10%. On Hands-Free, nothing. In every case, the total cost to you is typically less than calling the same contractor yourself — because our volume buys you access they wouldn't give you alone.",
                 },
                 {
-                  title: "There's a placement fee — and it's the same across every plan.",
-                  body: "When we place a tenant, we charge 10% of the first month's rent. That covers advertising, showings, screening, and onboarding. It's a one-time charge per tenancy, and it's capped at that. No invoice padding on top.",
+                  title: "Placement fees exist — and they drop significantly as you move up.",
+                  body: "Essentials: 100% of first month's rent. Autopilot: 50%. Hands-Free: 25%. It covers advertising, professional photography, showings, full screening (credit, income, references, ID), Ontario lease prep, and key handover. Each plan also comes with a replacement warranty — 90 days on Essentials, 6 months on Autopilot, 12 months on Hands-Free.",
                 },
                 {
-                  title: "Two of three plans have an onboarding fee.",
-                  body: "Essentials and Autopilot have a one-time onboarding fee ($149.99 and $99.99 respectively) that covers intake, existing maintenance audit, and system setup. Hands-Free clients have it waived. It's charged once, at the start.",
+                  title: "Two of three plans have a one-time onboarding fee.",
+                  body: "Essentials: $149.99. Autopilot: $99.99. Hands-Free: waived. It covers the intake walkthrough, maintenance audit, system setup, and tenant introduction. Charged once, at the start.",
                 },
                 {
                   title: "You can leave. No penalty.",
@@ -955,6 +955,112 @@ export default function PricingPage() {
 
       <Divider />
 
+      {/* ── COMPLIANCE PROCESS SECTION ── */}
+      <section
+        style={{
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+          background: WHITE,
+        }}
+      >
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <FadeIn>
+            <SectionLabel>Process guarantee</SectionLabel>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(32px, 4vw, 56px)",
+                fontWeight: 700,
+                color: NAVY,
+                letterSpacing: "-0.02em",
+                marginBottom: "20px",
+                lineHeight: 1.15,
+                maxWidth: "720px",
+              }}
+            >
+              Think of it like car insurance. You don&apos;t need it — until you really do.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(17px, 2vw, 20px)",
+                color: SUBTLE,
+                lineHeight: 1.75,
+                maxWidth: "660px",
+                marginBottom: "56px",
+              }}
+            >
+              Everything can be going great with your tenant — and it probably is. But a single
+              missed government deadline turns a manageable situation into a year-long LTB
+              proceeding. Sloppy process is the most expensive thing in Ontario landlording.
+              We don&apos;t miss deadlines.
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "16px",
+              }}
+            >
+              {[
+                {
+                  title: "N4 on day 2 — not day 5.",
+                  body: "Rent unpaid by the first business day? N4 is served within 24 hours. Every time. Because waiting costs you days in the LTB queue — and the LTB queue costs you months.",
+                },
+                {
+                  title: "Every government form, filed correctly.",
+                  body: "N4, N5, N12, N1, L1 — every Ontario RTA notice prepared to spec, served the right way, on the right timeline. One error voids the filing. We've built the process so that never happens.",
+                },
+                {
+                  title: "LTB hearings don't catch us off guard.",
+                  body: "On Hands-Free, we prepare and represent. On Autopilot, we prepare and guide. Either way, you're never staring at an LTB date wondering what to bring and what to say.",
+                },
+                {
+                  title: "Compliance calendars run automatically.",
+                  body: "Rent increase notices, lease anniversaries, smoke detector certifications, fire safety obligations — they're tracked and actioned before the deadline, not the day after.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  style={{
+                    background: BG,
+                    border: `1px solid ${BORDER}`,
+                    borderLeft: `3px solid ${NAVY}`,
+                    borderRadius: "14px",
+                    padding: "24px",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      color: NAVY,
+                      marginBottom: "10px",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {item.title}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "14px",
+                      color: SUBTLE,
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <Divider />
+
       {/* ── 90-DAY GUARANTEE ── */}
       <section
         style={{
@@ -1090,15 +1196,15 @@ export default function PricingPage() {
                 },
                 {
                   q: "Do you charge to renew a lease?",
-                  a: "Not on Autopilot or Hands-Free. On Minimum Essentials, lease renewals are available as an add-on.",
+                  a: "Not on Hands-Free — renewals are free forever. On Autopilot, lease renewals are coordinated at no extra charge. On Essentials, renewals are available as an add-on.",
                 },
                 {
                   q: "Are maintenance costs marked up?",
-                  a: "Yes, depending on your plan. Essentials: 18% coordination fee. Autopilot: 10%. Hands-Free: no markup. All costs are itemized on your monthly statement.",
+                  a: "Yes, depending on your plan — 18% on Essentials, 10% on Autopilot, none on Hands-Free. But because of our established vendor relationships, your total repair cost is typically still lower than calling the same contractor yourself. Every cost is itemized on your statement.",
                 },
                 {
-                  q: "Is there a placement fee?",
-                  a: "Yes — 10% of first month's rent, across all plans. Charged once per new tenancy.",
+                  q: "What's the placement fee?",
+                  a: "It varies by plan: 100% of first month's rent on Essentials, 50% on Autopilot, 25% on Hands-Free. Each includes a replacement warranty — 90 days, 6 months, and 12 months respectively.",
                 },
                 {
                   q: "Is there a minimum contract length?",

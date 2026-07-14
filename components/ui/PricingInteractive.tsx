@@ -18,7 +18,6 @@ const SUBTLE = "#333333";
 interface Plan {
   id: "essentials" | "autopilot" | "handsfree";
   name: string;
-  tagline: string;
   rate: string;
   badge?: string;
   colour: string;
@@ -29,6 +28,7 @@ interface Plan {
   fees: {
     management: string;
     placement: string;
+    placementWarranty: string;
     onboarding: string;
     maintenanceMarkup: string;
   };
@@ -40,84 +40,104 @@ const PLANS: Plan[] = [
   {
     id: "essentials",
     name: "Minimum Essentials",
-    tagline: "The landlord who wants control but not chaos.",
     rate: "7%",
     colour: NAVY,
     accentBg: "rgba(31,47,58,0.06)",
     description:
-      "You stay involved. We handle the legal and compliance side — lease prep, rent collection, N4s — so the pieces that can get you in trouble are never left to chance. A dedicated property manager is still yours. You just keep your hand on the wheel.",
+      "You stay involved. We handle the money and the legal paperwork — rent collection, N4s, lease prep — so the pieces that can get you in trouble are never left to chance. Your dedicated property manager is still yours. You just keep your hand on the wheel.",
     includes: [
-      "Dedicated named property manager — yours across every plan",
-      "Qualified, screened tenant placed — or no placement fee charged",
+      "Dedicated named property manager — yours on every plan",
+      "Automated rent collection, multiple methods, direct payout to you",
+      "Monthly owner statement + year-end tax summary",
+      "Late-rent follow-up and N4 notice preparation",
+      "Last month's deposit (LMR) held and tracked",
       "Standard Ontario lease prepared and executed",
-      "Rent collected and deposited to your account",
-      "N4 issued when required — correctly, on time",
-      "Annual rent increase calculated and delivered",
-      "Online tenant portal so maintenance requests don't come to your phone",
+      "Annual rent increase calculated and filed (N1)",
+      "Reactive maintenance coordination — vetted trades network",
+      "Document vault — all leases, notices, records in one place",
+      "Tenant portal — maintenance requests stay off your phone",
     ],
-    bestFor: "The nearby landlord who wants legal compliance handled but likes staying involved.",
+    bestFor: "The nearby owner who wants compliance covered but likes staying involved.",
     fees: {
       management: "7% of monthly rent collected",
-      placement: "10% of first month's rent (one-time per tenancy)",
+      placement: "100% of first month's rent",
+      placementWarranty: "90-day replacement warranty",
       onboarding: "$149.99 (one-time)",
-      maintenanceMarkup: "18% coordination fee on vendor invoices",
+      maintenanceMarkup: "18% coordination fee — still typically below market rate",
     },
   },
   {
     id: "autopilot",
     name: "Autopilot",
-    tagline: "The landlord who just wants to sleep through the night.",
     rate: "10%",
     badge: "Best Value",
     colour: BURGUNDY,
     accentBg: "rgba(139,32,48,0.06)",
     description:
-      "The 2AM call is not yours anymore. The late-rent conversation isn't yours. The vendor coordination, the inspection, the renewal — none of it is yours. You own the asset. We run it completely. For 3% more than the base plan, the entire job is off your plate.",
+      "The 2AM call is not yours anymore. The late-rent conversation isn't yours. Lawn, snow, utilities, maintenance, inspections, renewals — none of it is yours. You own the asset. We run it, completely. For 3% more than the base plan, the entire job is off your plate.",
     includes: [
       "Everything in Minimum Essentials",
-      "Full maintenance coordination — vendor booked, supervised, invoiced",
-      "24/7 emergency maintenance response (we take the call, not you)",
-      "Move-in and move-out inspections documented with photos",
-      "Bi-annual property inspections — proactive, not reactive",
-      "Lease renewal negotiated and executed before it lapses",
-      "Monthly owner statements delivered by the 10th, every month",
-      "Expense tracking and year-end summary — ready for your accountant",
-      "Maintenance markup: 10% (vs. 18% on Essentials)",
+      "100% hands-free management — tenants call us, never you",
+      "Lawn care + snow removal — arranged and managed end-to-end",
+      "Utility transfers handled at turnover; ongoing bill management",
+      "Preventive maintenance calendar — furnace before winter, AC before summer, gutters + roof before fall, smoke/CO compliance",
+      "Quarterly interior inspections + photo condition reports",
+      "Periodic exterior property checks between visits",
+      "Priority contractor dispatch — your jobs jump the queue",
+      "24/7 emergency line — we take the call, not you",
+      "Move-in and move-out condition documentation",
+      "Proactive issue-catching — we flag wear before it becomes a repair",
+      "Monthly care report — what we checked, caught, and coordinated",
+      "Real-time owner dashboard + monthly statements by the 10th",
+      "Expense tracking and year-end summary for your accountant",
+      "Tenant relationship management → lower turnover → fewer placement fees",
+      "Renewal strategy + annual rent benchmarking",
+      "Placement fee: 50% of first month's rent (vs. 100% on Essentials)",
       "Onboarding fee: $99.99 (vs. $149.99 on Essentials)",
     ],
-    bestFor: "The landlord who wants complete peace of mind for a 3% premium over the base plan.",
+    bestFor: "The landlord who wants complete peace of mind for 3% more than the base plan.",
     fees: {
       management: "10% of monthly rent collected",
-      placement: "10% of first month's rent (one-time per tenancy)",
+      placement: "50% of first month's rent",
+      placementWarranty: "6-month replacement warranty",
       onboarding: "$99.99 (one-time)",
-      maintenanceMarkup: "10% coordination fee on vendor invoices",
+      maintenanceMarkup: "10% coordination fee — still typically below market rate",
     },
   },
   {
     id: "handsfree",
     name: "Hands-Free",
-    tagline: "Strategic oversight for the multi-property investor.",
     rate: "15%",
     colour: NAVY,
     accentBg: "rgba(31,47,58,0.06)",
     description:
-      "Everything in Autopilot, plus quarterly portfolio strategy, capital project oversight, and proactive market rent analysis. Built for investors who want a strategic partner, not just a manager. No maintenance markup. No onboarding fee.",
+      "Everything in Autopilot, plus full LTB legal coverage, Rent Shield (we cover up to 60 days if a tenant stops paying), portfolio strategy sessions with a dedicated mortgage agent, and end-to-end eviction support. Built for the investor who never wants to think about the building.",
     includes: [
       "Everything in Autopilot",
-      "No maintenance markup — vendor costs passed through at cost",
-      "Onboarding fee waived",
-      "Quarterly portfolio strategy sessions",
+      "Full LTB legal coverage — N4/N5/N12 prep, filing, and hearing representation",
+      "End-to-end eviction management if it comes to that",
+      "LTB filing fees + licensed paralegal costs covered (up to $2,500 per tenancy)",
+      "Rent Shield — if a Prospera-placed tenant stops paying, we cover your rent up to 60 days",
+      "Quarterly portfolio strategy sessions with a dedicated mortgage agent",
+      "Annual performance review — rent optimization, market analysis, capex planning",
       "Renovation and capital project management overseen end-to-end",
-      "Proactive market rent analysis — never underpriced",
-      "Tax-ready expense reports with receipts attached",
-      "Priority response across all communications",
+      "Monthly interior inspections (vs. quarterly on Autopilot)",
+      "1-hour emergency response SLA",
+      "Free lease renewals — no charge, ever",
+      "Premium marketing: professional video walkthrough to attract quality tenants",
+      "Fire-safety and licensing liaison",
+      "Insurance claims support",
+      "No maintenance markup — vendor costs passed through at exact cost",
+      "Onboarding fee: waived",
+      "Placement fee: 25% of first month's rent with 12-month replacement warranty",
     ],
-    bestFor: "The multi-property investor who wants strategic advisory on top of full management.",
+    bestFor: "The multi-property investor who wants legal coverage and never thinks about the building.",
     fees: {
       management: "15% of monthly rent collected",
-      placement: "10% of first month's rent (one-time per tenancy)",
+      placement: "25% of first month's rent",
+      placementWarranty: "12-month replacement warranty",
       onboarding: "Waived",
-      maintenanceMarkup: "No markup — vendor costs passed through at cost",
+      maintenanceMarkup: "No markup — vendor costs at exact cost",
     },
   },
 ];
@@ -131,7 +151,7 @@ const PERSONAS = [
     icon: "🏠",
     description: "You inherited a property, moved away, or got stuck with a second unit. You didn't sign up to be a landlord.",
     recommendation: "autopilot" as const,
-    reason: "Autopilot handles everything that surprises you: the 2AM call, the late rent, the lease renewal you forgot.",
+    reason: "Autopilot handles everything that surprises you: the 2AM call, the late rent, the lawn, the snow, the lease renewal you forgot.",
   },
   {
     id: "investor",
@@ -139,7 +159,7 @@ const PERSONAS = [
     icon: "📊",
     description: "You own multiple properties. Your time is worth more than any management fee.",
     recommendation: "handsfree" as const,
-    reason: "Hands-Free gives you one point of contact, quarterly strategy, and portfolio visibility — across every property.",
+    reason: "Hands-Free gives you legal coverage, a mortgage agent for portfolio strategy, Rent Shield, and a team that never calls you.",
   },
   {
     id: "nearbyowner",
@@ -155,7 +175,7 @@ const PERSONAS = [
     icon: "📋",
     description: "This is your first rental. You don't know what you don't know.",
     recommendation: "autopilot" as const,
-    reason: "Autopilot covers the pieces that catch first-timers off guard: maintenance, inspections, and LTB filings.",
+    reason: "Autopilot covers every piece that catches first-timers off guard: maintenance, inspections, LTB filings, and the 2AM call.",
   },
 ];
 
@@ -210,7 +230,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
         </div>
       )}
 
-      {/* Rate — large and dominant */}
+      {/* Rate */}
       <div style={{ marginBottom: "8px" }}>
         <span
           style={{
@@ -300,7 +320,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           marginBottom: "12px",
         }}
       >
-        What's included
+        What&apos;s included
       </p>
       <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "24px" }}>
         {plan.includes.map((item) => (
@@ -318,11 +338,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
               lineHeight: 1.5,
             }}
           >
-            <span
-              style={{ color: plan.colour, fontWeight: 700, flexShrink: 0, marginTop: "1px" }}
-            >
-              ✓
-            </span>
+            <span style={{ color: plan.colour, fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
             {item}
           </li>
         ))}
@@ -340,7 +356,6 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           color: plan.colour,
           fontWeight: 600,
           padding: "0",
-          marginBottom: "0",
           display: "flex",
           alignItems: "center",
           gap: "6px",
@@ -375,7 +390,8 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           </p>
           {[
             { label: "Management", value: plan.fees.management },
-            { label: "Placement", value: plan.fees.placement },
+            { label: "Placement fee", value: plan.fees.placement },
+            { label: "Placement warranty", value: plan.fees.placementWarranty },
             { label: "Onboarding", value: plan.fees.onboarding },
             { label: "Maintenance coordination", value: plan.fees.maintenanceMarkup },
           ].map((fee) => (
@@ -390,25 +406,10 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
                 gap: "12px",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "13px",
-                  color: MUTED,
-                  flexShrink: 0,
-                }}
-              >
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: MUTED, flexShrink: 0 }}>
                 {fee.label}
               </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "13px",
-                  color: SUBTLE,
-                  fontWeight: 600,
-                  textAlign: "right",
-                }}
-              >
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: SUBTLE, fontWeight: 600, textAlign: "right" }}>
                 {fee.value}
               </span>
             </div>
@@ -450,15 +451,11 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
 export function PersonaSelector() {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const recommendation = selected
-    ? PERSONAS.find((p) => p.id === selected)
-    : null;
+  const recommendation = selected ? PERSONAS.find((p) => p.id === selected) : null;
 
   const scrollToPlan = (planId: string) => {
     const el = document.getElementById(`plan-${planId}`);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -486,25 +483,10 @@ export function PersonaSelector() {
             }}
           >
             <div style={{ fontSize: "24px", marginBottom: "8px" }}>{p.icon}</div>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "14px",
-                fontWeight: 700,
-                color: selected === p.id ? "#FAF8F5" : NAVY,
-                marginBottom: "6px",
-              }}
-            >
+            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 700, color: selected === p.id ? "#FAF8F5" : NAVY, marginBottom: "6px" }}>
               {p.label}
             </p>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "13px",
-                color: selected === p.id ? "rgba(250,248,245,0.75)" : MUTED,
-                lineHeight: 1.5,
-              }}
-            >
+            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: selected === p.id ? "rgba(250,248,245,0.75)" : MUTED, lineHeight: 1.5 }}>
               {p.description}
             </p>
           </button>
@@ -527,39 +509,13 @@ export function PersonaSelector() {
           }}
         >
           <div>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "11px",
-                color: MUTED,
-                textTransform: "uppercase",
-                letterSpacing: "0.10em",
-                fontWeight: 700,
-                marginBottom: "6px",
-              }}
-            >
+            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, textTransform: "uppercase", letterSpacing: "0.10em", fontWeight: 700, marginBottom: "6px" }}>
               Our recommendation
             </p>
-            <p
-              style={{
-                fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(22px, 3vw, 28px)",
-                fontWeight: 700,
-                color: NAVY,
-                marginBottom: "6px",
-              }}
-            >
+            <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 700, color: NAVY, marginBottom: "6px" }}>
               {PLAN_LABEL[recommendation.recommendation]}
             </p>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "14px",
-                color: SUBTLE,
-                maxWidth: "480px",
-                lineHeight: 1.6,
-              }}
-            >
+            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: SUBTLE, maxWidth: "480px", lineHeight: 1.6 }}>
               {recommendation.reason}
             </p>
           </div>
@@ -578,10 +534,7 @@ export function PersonaSelector() {
               textTransform: "uppercase",
               cursor: "pointer",
               whiteSpace: "nowrap",
-              transition: "opacity 0.2s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             See this plan →
           </button>
@@ -610,7 +563,7 @@ export function PlansGrid() {
   );
 }
 
-// ── Comparison Table (mobile-scrollable) ──────────────────────────────────
+// ── Comparison Table ──────────────────────────────────────────────────────
 
 const COMPARE_ROWS: Array<{
   feature: string;
@@ -621,28 +574,39 @@ const COMPARE_ROWS: Array<{
 }> = [
   { feature: "Onboarding fee", essentials: "$149.99", autopilot: "$99.99", handsfree: "Waived", isText: true },
   { feature: "Management rate", essentials: "7%", autopilot: "10%", handsfree: "15%", isText: true },
-  { feature: "Placement fee", essentials: "10%", autopilot: "10%", handsfree: "10%", isText: true },
+  { feature: "Placement fee", essentials: "100% of 1st month", autopilot: "50% of 1st month", handsfree: "25% of 1st month", isText: true },
+  { feature: "Placement warranty", essentials: "90 days", autopilot: "6 months", handsfree: "12 months", isText: true },
   { feature: "Maintenance markup", essentials: "18%", autopilot: "10%", handsfree: "None", isText: true },
   { feature: "Dedicated named property manager", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Tenant screening & placement", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Standard Ontario lease preparation", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Rent collection & owner disbursement", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Online tenant portal", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Automated rent collection", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Monthly owner statements", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Year-end tax summary", essentials: true, autopilot: true, handsfree: true },
   { feature: "N4 / LTB form preparation", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Annual rent increase calculation", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Owner dashboard & monthly statements", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Maintenance coordination", essentials: false, autopilot: true, handsfree: true },
-  { feature: "24/7 emergency maintenance response", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Move-in & move-out inspections", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Bi-annual property inspections", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Standard Ontario lease", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Annual rent increase (N1)", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Tenant portal", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Document vault", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Lawn care + snow removal", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Utility transfer & bill management", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Preventive maintenance calendar", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Priority contractor dispatch", essentials: false, autopilot: true, handsfree: true },
+  { feature: "24/7 emergency line", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Quarterly interior inspections", essentials: false, autopilot: true, handsfree: false },
+  { feature: "Monthly interior inspections", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Move-in / move-out documentation", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Monthly care report", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Real-time owner dashboard", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Expense tracking + year-end summary", essentials: false, autopilot: true, handsfree: true },
   { feature: "Lease renewal coordination", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Vendor management", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Expense tracking & year-end summary", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Renovation & capital project management", essentials: false, autopilot: false, handsfree: true },
-  { feature: "Portfolio strategy sessions (quarterly)", essentials: false, autopilot: false, handsfree: true },
-  { feature: "Market rent analysis & optimization", essentials: false, autopilot: false, handsfree: true },
-  { feature: "Tax-ready reports with receipts", essentials: false, autopilot: false, handsfree: true },
-  { feature: "Priority response on all communications", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Free lease renewals (forever)", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Annual rent benchmarking", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Full LTB legal coverage (N4/N5/N12)", essentials: false, autopilot: false, handsfree: true },
+  { feature: "End-to-end eviction management", essentials: false, autopilot: false, handsfree: true },
+  { feature: "LTB + paralegal costs covered (to $2,500)", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Rent Shield — up to 60 days rent covered", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Portfolio strategy with mortgage agent", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Renovation & capex project management", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Premium video marketing", essentials: false, autopilot: false, handsfree: true },
 ];
 
 export function ComparisonTable() {
@@ -651,7 +615,7 @@ export function ComparisonTable() {
       <table
         style={{
           width: "100%",
-          minWidth: "560px",
+          minWidth: "600px",
           borderCollapse: "collapse",
           fontFamily: "var(--font-dm-sans)",
         }}
@@ -720,7 +684,7 @@ export function ComparisonTable() {
                     padding: "12px 12px",
                     borderBottom: `1px solid ${BORDER}`,
                     background: col === "autopilot" ? "rgba(139,32,48,0.04)" : undefined,
-                    fontSize: row.isText ? "13px" : "18px",
+                    fontSize: row.isText ? "12px" : "18px",
                     fontWeight: row.isText ? 600 : 400,
                     color: row.isText ? SUBTLE : undefined,
                   }}
@@ -747,45 +711,45 @@ export function ComparisonTable() {
 const GUARANTEES = [
   {
     number: "№1",
-    title: "Placement Guarantee",
-    headline: "Qualified tenant placed within 21 days — or no placement fee.",
+    title: "21-Day Placement Guarantee",
+    headline: "Qualified tenant placed within 21 days — or your placement fee is waived entirely.",
     detail:
-      "If we don't place a qualified, screened tenant within 21 days of your unit being market-ready, our placement fee is waived entirely. We define market-ready as vacant, clean, and priced within 5% of our recommended market rate.",
+      "When your property passes our rent-ready checklist and is listed at our recommended market rent, we will source, screen, and place a qualified tenant within 21 days of marketing going live. If we miss that window, you pay $0 for placement. Clock starts the day marketing goes live.",
   },
   {
     number: "№2",
-    title: "Transparency Guarantee",
-    headline: "Every fee disclosed upfront. No surprises on your statement.",
+    title: "24-Hour N4 Enforcement Guarantee",
+    headline: "Rent unpaid by day 1? N4 served within 24 hours. Or that month's fee is free.",
     detail:
-      "Our fee structure is printed on every plan: management rate, placement fee (10% of first month's rent), onboarding fee (by plan), and maintenance coordination markup (18% on Essentials, 10% on Autopilot, none on Hands-Free). These numbers don't change. You'll see every transaction itemized before it posts.",
+      "On Autopilot and Hands-Free plans, if rent hasn't cleared by the first business day of the month, we serve the official N4 notice within 24 hours — starting the legal clock immediately, every time. Verified payments in processing pause the clock so a paying tenant is never served in error. Miss our window? That month's management fee is credited in full.",
   },
   {
     number: "№3",
-    title: "Response Guarantee",
-    headline: "Tenant repair requests acknowledged within 4 business hours.",
+    title: "60-Minute Emergency Dispatch Guarantee",
+    headline: "Burst pipe at 2AM? Contractor dispatched within 60 minutes. Or that month's fee is free.",
     detail:
-      "On Autopilot and Hands-Free plans, every maintenance request gets a written acknowledgement within 4 business hours, and a resolution path communicated within 24 hours. If we miss that window, we credit $50 to your next statement.",
+      "On Autopilot and Hands-Free plans, we answer, triage, and dispatch a contractor within 60 minutes of your tenant's emergency call — 24 hours a day, 365 days a year. Emergency means active threat to structure or habitability: flooding, no heat in winter, electrical hazard, or lockout with safety risk. If we miss the 60-minute window, that month's management fee is credited in full.",
   },
   {
     number: "№4",
-    title: "Statement Guarantee",
-    headline: "Statements delivered by the 10th of every month.",
+    title: "Replacement Warranty",
+    headline: "If our tenant leaves early, we find the next one free.",
     detail:
-      "Your monthly statement — including rent disbursement, expense breakdown, and maintenance summary — hits your inbox by the 10th of every month. If it's late, we credit $25 to your account.",
+      "If a Prospera-placed tenant vacates or is evicted within the warranty window, the next placement is completely free. Essentials: 90-day warranty. Autopilot: 6-month warranty. Hands-Free: 12-month warranty. We stand behind every tenant we screen.",
   },
   {
     number: "№5",
-    title: "Exit Guarantee",
-    headline: "No lock-in. Leave with 30 days written notice.",
+    title: "Rent Shield — Hands-Free Only",
+    headline: "If a tenant we placed stops paying, we cover your rent — up to 60 days.",
     detail:
-      "We don't believe in holding clients captive. If you're not satisfied, provide 30 days written notice and we'll execute a clean transition: all files, keys, and deposit information transferred to you or your new manager.",
+      "On Hands-Free, if a Prospera-screened tenant stops paying after the N4 is served, we cover your rent from our own pocket — up to 60 days or $4,000 per tenancy, whichever comes first — while we run the enforcement process. Applies to tenants we sourced and approved. We only guarantee tenants we chose, because we stand behind our screening.",
   },
   {
     number: "№6",
     title: "Owner's Satisfaction Guarantee",
     headline: "Not satisfied in 90 days? Every single penny of our fees, refunded.",
     detail:
-      "This is the overarching guarantee. Try Prospera for 90 days. If we are not delivering in a way we cannot resolve, we will refund every penny of our management fees from your first 90 days — no conditions, no negotiation, no fine print. You should trust who you hand your property to. This is how we earn that trust.",
+      "Try Prospera for 90 days. If we are not delivering in a way we cannot resolve, we refund every penny of our management fees from that period. No conditions. No negotiation. No fine print. You should trust who you hand your property to — this is how we earn it.",
   },
 ];
 
@@ -795,12 +759,7 @@ export function GuaranteeAccordion() {
   return (
     <div>
       {GUARANTEES.map((g, i) => (
-        <div
-          key={g.number}
-          style={{
-            borderBottom: `1px solid ${BORDER}`,
-          }}
-        >
+        <div key={g.number} style={{ borderBottom: `1px solid ${BORDER}` }}>
           <button
             onClick={() => setOpen(open === i ? null : i)}
             style={{
@@ -828,28 +787,10 @@ export function GuaranteeAccordion() {
               {g.number}
             </span>
             <div style={{ flex: 1 }}>
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "11px",
-                  color: MUTED,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  fontWeight: 700,
-                  marginBottom: "4px",
-                }}
-              >
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: MUTED, textTransform: "uppercase", letterSpacing: "0.10em", fontWeight: 700, marginBottom: "4px" }}>
                 {g.title}
               </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  color: NAVY,
-                  lineHeight: 1.5,
-                }}
-              >
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "15px", fontWeight: 600, color: NAVY, lineHeight: 1.5 }}>
                 {g.headline}
               </p>
             </div>
@@ -860,29 +801,17 @@ export function GuaranteeAccordion() {
                 color: MUTED,
                 flexShrink: 0,
                 marginTop: "2px",
-                transition: "transform 0.2s",
                 display: "inline-block",
                 transform: open === i ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.2s",
               }}
             >
               ↓
             </span>
           </button>
-
           {open === i && (
-            <div
-              style={{
-                padding: "0 0 20px 52px",
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "14px",
-                  color: SUBTLE,
-                  lineHeight: 1.7,
-                }}
-              >
+            <div style={{ padding: "0 0 20px 52px" }}>
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", color: SUBTLE, lineHeight: 1.7 }}>
                 {g.detail}
               </p>
             </div>
