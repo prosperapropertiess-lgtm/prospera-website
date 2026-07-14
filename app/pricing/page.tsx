@@ -128,16 +128,7 @@ export default function PricingPage() {
                 padding: "14px 20px",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "var(--font-cormorant)",
-                  fontSize: "28px",
-                  fontWeight: 700,
-                  color: BURGUNDY,
-                }}
-              >
-                №6
-              </span>
+              <span style={{ fontSize: "20px" }}>🛡️</span>
               <div>
                 <p
                   style={{
@@ -148,7 +139,7 @@ export default function PricingPage() {
                     marginBottom: "2px",
                   }}
                 >
-                  90-Day Guarantee
+                  Owner&apos;s Satisfaction Guarantee
                 </p>
                 <p
                   style={{
@@ -1117,7 +1108,7 @@ export default function PricingPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "12px",
                 maxWidth: "640px",
                 margin: "0 auto",
@@ -1125,21 +1116,22 @@ export default function PricingPage() {
             >
               {[
                 { number: "90", label: "Days to decide" },
-                { number: "100%", label: "Of our fees returned" },
-                { number: "0", label: "Conditions or fine print" },
+                { number: "100%", label: "Fees returned" },
+                { number: "0", label: "Conditions" },
               ].map((item) => (
                 <div
                   key={item.label}
                   style={{
                     background: "rgba(250,248,245,0.12)",
                     borderRadius: "16px",
-                    padding: "28px 20px",
+                    padding: "24px 16px",
+                    textAlign: "center",
                   }}
                 >
                   <p
                     style={{
                       fontFamily: "var(--font-cormorant)",
-                      fontSize: "clamp(40px, 6vw, 56px)",
+                      fontSize: "clamp(36px, 7vw, 56px)",
                       fontWeight: 700,
                       color: "#FAF8F5",
                       lineHeight: 1,
@@ -1152,7 +1144,7 @@ export default function PricingPage() {
                   <p
                     style={{
                       fontFamily: "var(--font-dm-sans)",
-                      fontSize: "13px",
+                      fontSize: "12px",
                       color: "rgba(250,248,245,0.65)",
                       lineHeight: 1.4,
                     }}

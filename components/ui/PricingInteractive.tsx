@@ -745,7 +745,7 @@ const GUARANTEES = [
       "On Hands-Free, if a Prospera-screened tenant stops paying after the N4 is served, we cover your rent from our own pocket — up to 60 days or $4,000 per tenancy, whichever comes first — while we run the enforcement process. Applies to tenants we sourced and approved. We only guarantee tenants we chose, because we stand behind our screening.",
   },
   {
-    number: "№6",
+    number: "🛡",
     title: "Owner's Satisfaction Guarantee",
     headline: "Not satisfied in 90 days? Every single penny of our fees, refunded.",
     detail:
