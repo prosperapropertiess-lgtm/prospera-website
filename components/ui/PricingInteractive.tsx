@@ -92,7 +92,7 @@ const PLANS: Plan[] = [
       "Lawn care + snow removal — coordinated end-to-end (vendor cost is yours, never a surprise)",
       "Utility transfers at turnover + free utility transition concierge (you never eat an overlap bill)",
       "Preventive maintenance calendar — furnace, AC, gutters, smoke/CO on schedule",
-      "Annual inspection + photo condition report",
+      "Bi-annual inspections + photo condition reports (every 6 months)",
       "AI-assisted triage → priority contractor dispatch (your jobs jump the queue)",
       "24/7 emergency line — we take the call, not you",
       "Annual video walkthrough sent to your phone",
@@ -128,7 +128,7 @@ const PLANS: Plan[] = [
       "Quarterly portfolio strategy sessions with a dedicated mortgage agent",
       "Annual performance review — rent optimization, market analysis, capex planning",
       "Renovation and capital project management overseen end-to-end",
-      "Quarterly interior inspections (vs. annual on Autopilot)",
+      "Quarterly interior inspections (vs. bi-annual on Autopilot)",
       "1-hour emergency response SLA",
       "Free lease renewals — no charge, ever",
       "Premium marketing: professional video walkthrough to attract quality tenants",
@@ -670,8 +670,8 @@ const COMPARE_ROWS: Array<{
   { feature: "Preventive maintenance calendar", essentials: false, autopilot: true, handsfree: true },
   { feature: "Priority contractor dispatch", essentials: false, autopilot: true, handsfree: true },
   { feature: "24/7 emergency line", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Annual inspection + condition report", essentials: false, autopilot: true, handsfree: false },
-  { feature: "Quarterly interior inspections", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Bi-annual inspections (every 6 months)", essentials: false, autopilot: true, handsfree: false },
+  { feature: "Quarterly inspections (4x per year)", essentials: false, autopilot: false, handsfree: true },
   { feature: "Move-in / move-out documentation", essentials: false, autopilot: true, handsfree: true },
   { feature: "Monthly care report", essentials: false, autopilot: true, handsfree: true },
   { feature: "Real-time owner dashboard", essentials: true, autopilot: true, handsfree: true },
@@ -712,6 +712,9 @@ export function ComparisonTable() {
                 letterSpacing: "0.08em",
                 borderBottom: `2px solid ${BORDER}`,
                 background: BG,
+                position: "sticky",
+                left: 0,
+                zIndex: 2,
               }}
             >
               Feature
@@ -747,10 +750,16 @@ export function ComparisonTable() {
               <td
                 style={{
                   padding: "12px 16px",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   color: SUBTLE,
                   borderBottom: `1px solid ${BORDER}`,
                   fontWeight: row.isText ? 600 : 400,
+                  position: "sticky",
+                  left: 0,
+                  background: i % 2 === 0 ? WHITE : BG,
+                  zIndex: 1,
+                  maxWidth: "160px",
+                  minWidth: "120px",
                 }}
               >
                 {row.feature}
