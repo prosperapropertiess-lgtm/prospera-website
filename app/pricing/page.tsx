@@ -62,14 +62,14 @@ export default function PricingPage() {
   return (
     <div style={{ background: BG, color: SUBTLE }}>
 
-      {/* ── HERO ── */}
+      {/* ── HERO — THE OFFER ── */}
       <section
         style={{
           background: NAVY,
-          padding: "clamp(100px, 12vw, 160px) clamp(20px, 4vw, 60px) clamp(64px, 8vw, 100px)",
+          padding: "clamp(100px, 12vw, 160px) clamp(20px, 4vw, 60px) clamp(80px, 10vw, 120px)",
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
           <FadeIn>
             <p
               style={{
@@ -77,80 +77,128 @@ export default function PricingPage() {
                 fontSize: "11px",
                 fontWeight: 700,
                 textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "rgba(250,248,245,0.55)",
-                marginBottom: "20px",
+                letterSpacing: "0.14em",
+                color: "rgba(250,248,245,0.45)",
+                marginBottom: "24px",
               }}
             >
-              Property Management · London, St. Thomas &amp; Strathroy
+              🛡️&nbsp;&nbsp;Owner&apos;s Satisfaction Guarantee · London, St. Thomas &amp; Strathroy
             </p>
 
             <h1
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(44px, 6vw, 80px)",
+                fontSize: "clamp(48px, 7vw, 88px)",
                 fontWeight: 700,
                 color: "#FAF8F5",
-                lineHeight: 1.05,
+                lineHeight: 1.02,
                 letterSpacing: "-0.02em",
-                marginBottom: "24px",
-                whiteSpace: "pre-line",
+                marginBottom: "28px",
               }}
             >
-              Sleep through the night.{"\n"}
-              <span style={{ color: "rgba(250,248,245,0.55)" }}>We&apos;ve got it from here.</span>
+              100% landlord experience.{" "}
+              <span style={{ color: BURGUNDY }}>Or every single penny back.</span>
             </h1>
 
             <p
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: "clamp(17px, 2vw, 21px)",
-                color: "rgba(250,248,245,0.80)",
-                lineHeight: 1.65,
+                color: "rgba(250,248,245,0.75)",
+                lineHeight: 1.7,
                 maxWidth: "620px",
-                marginBottom: "40px",
+                marginBottom: "48px",
               }}
             >
-              Real estate should build your wealth — not consume your weekends. Three plans,
-              clear pricing, six written guarantees. Pick the level of involvement you want
-              and hand the rest to us.
+              Try Prospera for 90 days. Stress-free, completely hands-off rental ownership —
+              with zero risk. If we&apos;re not delivering, we refund every single penny
+              of our management fees. No conditions. No fine print. No negotiation.
             </p>
 
-            {/* 90-day guarantee badge */}
+            {/* Stat row */}
             <div
               style={{
-                display: "inline-flex",
-                alignItems: "center",
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "12px",
-                background: "rgba(250,248,245,0.08)",
-                border: "1px solid rgba(250,248,245,0.15)",
-                borderRadius: "12px",
-                padding: "14px 20px",
+                maxWidth: "560px",
+                marginBottom: "48px",
               }}
             >
-              <span style={{ fontSize: "20px" }}>🛡️</span>
-              <div>
-                <p
+              {[
+                { number: "90", label: "Day trial" },
+                { number: "100%", label: "Fees refunded" },
+                { number: "0", label: "Conditions" },
+              ].map((item) => (
+                <div
+                  key={item.label}
                   style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    color: "#FAF8F5",
-                    marginBottom: "2px",
+                    background: "rgba(250,248,245,0.07)",
+                    border: "1px solid rgba(250,248,245,0.12)",
+                    borderRadius: "14px",
+                    padding: "20px 16px",
+                    textAlign: "center",
                   }}
                 >
-                  Owner&apos;s Satisfaction Guarantee
-                </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: "12px",
-                    color: "rgba(250,248,245,0.60)",
-                  }}
-                >
-                  Not satisfied in 90 days? Every penny of our fees, refunded.
-                </p>
-              </div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-cormorant)",
+                      fontSize: "clamp(36px, 6vw, 52px)",
+                      fontWeight: 700,
+                      color: "#FAF8F5",
+                      lineHeight: 1,
+                      marginBottom: "6px",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {item.number}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "12px",
+                      color: "rgba(250,248,245,0.55)",
+                    }}
+                  >
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+              <Link
+                href="/contact"
+                style={{
+                  display: "inline-block",
+                  background: BURGUNDY,
+                  color: "#FAF8F5",
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.10em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  padding: "18px 36px",
+                  borderRadius: "10px",
+                }}
+              >
+                Start risk-free →
+              </Link>
+              <a
+                href="#plans"
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "13px",
+                  color: "rgba(250,248,245,0.55)",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(250,248,245,0.25)",
+                  paddingBottom: "2px",
+                }}
+              >
+                See the plans ↓
+              </a>
             </div>
           </FadeIn>
         </div>
@@ -389,6 +437,7 @@ export default function PricingPage() {
 
       {/* ── THREE PLANS ── */}
       <section
+        id="plans"
         style={{
           padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
           background: WHITE,
@@ -1095,114 +1144,6 @@ export default function PricingPage() {
                     }}
                   >
                     {item.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      <Divider />
-
-      {/* ── 90-DAY GUARANTEE ── */}
-      <section
-        style={{
-          padding: "clamp(80px, 10vw, 140px) clamp(20px, 4vw, 60px)",
-          background: BURGUNDY,
-        }}
-      >
-        <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
-          <FadeIn>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "11px",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.14em",
-                color: "rgba(250,248,245,0.60)",
-                marginBottom: "24px",
-              }}
-            >
-              Owner&apos;s Satisfaction Guarantee
-            </p>
-
-            <h2
-              style={{
-                fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(44px, 7vw, 88px)",
-                fontWeight: 700,
-                color: "#FAF8F5",
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                marginBottom: "32px",
-              }}
-            >
-              If we&apos;re not earning it,<br />
-              <span style={{ color: "rgba(250,248,245,0.70)" }}>you get every penny back.</span>
-            </h2>
-
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "clamp(17px, 2vw, 20px)",
-                color: "rgba(250,248,245,0.85)",
-                lineHeight: 1.7,
-                maxWidth: "580px",
-                margin: "0 auto 56px",
-              }}
-            >
-              Try Prospera for 90 days. If we are not delivering in a way we cannot
-              resolve, we refund every single penny of our management fees from that
-              period. No conditions. No negotiation. No fine print.
-            </p>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "12px",
-                maxWidth: "640px",
-                margin: "0 auto",
-              }}
-            >
-              {[
-                { number: "90", label: "Days to decide" },
-                { number: "100%", label: "Fees returned" },
-                { number: "0", label: "Conditions" },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  style={{
-                    background: "rgba(250,248,245,0.12)",
-                    borderRadius: "16px",
-                    padding: "24px 16px",
-                    textAlign: "center",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "var(--font-cormorant)",
-                      fontSize: "clamp(36px, 7vw, 56px)",
-                      fontWeight: 700,
-                      color: "#FAF8F5",
-                      lineHeight: 1,
-                      marginBottom: "8px",
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {item.number}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "12px",
-                      color: "rgba(250,248,245,0.65)",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {item.label}
                   </p>
                 </div>
               ))}

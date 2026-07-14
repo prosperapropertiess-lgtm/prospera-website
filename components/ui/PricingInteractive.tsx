@@ -90,7 +90,7 @@ const PLANS: Plan[] = [
     includesExtraLabel: "Autopilot adds",
     includesExtra: [
       "100% hands-free — tenants call us, never you",
-      "Lawn care + snow removal — arranged and managed end-to-end",
+      "Lawn care + snow removal — coordinated and managed end-to-end (vendor cost is yours, never a surprise)",
       "Utility transfers at turnover + free utility transition concierge between tenancies (you never eat an overlap bill)",
       "Preventive maintenance calendar — furnace, AC, gutters, smoke/CO on schedule",
       "Quarterly interior inspections + photo condition reports",
