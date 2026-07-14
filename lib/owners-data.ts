@@ -264,6 +264,20 @@ export async function getCachedDashboard(token: string): Promise<OwnerDashboard 
       .single();
     if (!data) return null;
     const dashboard = data.bundle_json as OwnerDashboard;
+
+    // Bust cache if it was built in a different month than today
+    const now = new Date();
+    const realMonth = MONTHS[now.getMonth()];
+    const realYear = now.getFullYear();
+    if (dashboard.currentMonth !== realMonth || dashboard.currentYear !== realYear) {
+      return null;
+    }
+
+    // Also bust if older than 6 hours
+    const cachedAt = new Date(data.cached_at);
+    const ageHours = (now.getTime() - cachedAt.getTime()) / (1000 * 60 * 60);
+    if (ageHours > 6) return null;
+
     dashboard.cachedAt = data.cached_at;
     return dashboard;
   } catch {
