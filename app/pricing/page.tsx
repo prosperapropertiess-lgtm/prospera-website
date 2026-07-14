@@ -7,6 +7,7 @@ import {
   ComparisonTable,
   GuaranteeAccordion,
 } from "@/components/ui/PricingInteractive";
+import StatementPreview from "@/components/ui/StatementPreview";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -1349,6 +1350,11 @@ export default function PricingPage() {
           </FadeIn>
         </div>
       </section>
+
+      <Divider />
+
+      {/* ── SAMPLE STATEMENT ── */}
+      <StatementPreview />
 
       <Divider />
 
