@@ -49,15 +49,14 @@ const PLANS: Plan[] = [
       "You stay involved. We handle the money and the legal paperwork — rent collection, N4s, lease prep — so the pieces that can get you in trouble are never left to chance. Your dedicated property manager is still yours. You just keep your hand on the wheel.",
     includes: [
       "Dedicated named property manager — yours on every plan",
+      "Tenant portal + Owner dashboard — access on every plan",
       "Automated rent collection, multiple methods, direct payout to you",
       "Monthly owner statement + year-end tax summary",
-      "Late-rent follow-up and N4 notice preparation",
       "Last month's deposit (LMR) held and tracked",
       "Standard Ontario lease prepared and executed",
       "Annual rent increase calculated and filed (N1)",
       "Reactive maintenance coordination — vetted trades network",
       "Document vault — all leases, notices, records in one place",
-      "Tenant portal — maintenance requests stay off your phone",
     ],
     bestFor: "The nearby owner who wants compliance handled but stays hands-on.",
     fees: {
@@ -76,31 +75,30 @@ const PLANS: Plan[] = [
     colour: BURGUNDY,
     accentBg: "rgba(139,32,48,0.06)",
     description:
-      "Most managers collect rent and do one inspection a year. We are on your property every quarter, we handle lawn, snow, and utilities, and we catch the $150 problem before it's a $4,000 one. The 2AM call is not yours. The late-rent conversation isn't yours. You own the asset. We run it.",
+      "The 2AM call is not yours. The late-rent conversation isn't yours. We handle lawn, snow, utilities, and maintenance — and we catch the $150 problem before it's a $4,000 one. You own the asset. We run it.",
     includes: [
       "Dedicated named property manager — yours on every plan",
+      "Tenant portal + Owner dashboard — access on every plan",
       "Automated rent collection, direct payout, monthly owner statement",
-      "Late-rent follow-up and N4 notice preparation",
       "Last month's deposit held and tracked",
       "Standard Ontario lease prepared and executed",
       "Annual rent increase calculated and filed (N1)",
       "Reactive maintenance coordination — vetted trades network",
-      "Document vault and tenant portal",
+      "Document vault",
     ],
     includesExtraLabel: "Autopilot adds",
     includesExtra: [
       "100% hands-free — tenants call us, never you",
-      "Lawn care + snow removal — coordinated and managed end-to-end (vendor cost is yours, never a surprise)",
-      "Utility transfers at turnover + free utility transition concierge between tenancies (you never eat an overlap bill)",
+      "Lawn care + snow removal — coordinated end-to-end (vendor cost is yours, never a surprise)",
+      "Utility transfers at turnover + free utility transition concierge (you never eat an overlap bill)",
       "Preventive maintenance calendar — furnace, AC, gutters, smoke/CO on schedule",
-      "Quarterly interior inspections + photo condition reports",
-      "Periodic exterior property checks between visits",
+      "Annual inspection + photo condition report",
       "AI-assisted triage → priority contractor dispatch (your jobs jump the queue)",
       "24/7 emergency line — we take the call, not you",
       "Annual video walkthrough sent to your phone",
       "Move-in and move-out condition documentation",
       "Monthly care report — what we checked, caught, and coordinated",
-      "Real-time owner dashboard + statements by the 10th",
+      "Statements by the 10th every month",
       "Tenant relationship management and renewal strategy",
       "Annual rent benchmarking",
     ],
@@ -130,7 +128,7 @@ const PLANS: Plan[] = [
       "Quarterly portfolio strategy sessions with a dedicated mortgage agent",
       "Annual performance review — rent optimization, market analysis, capex planning",
       "Renovation and capital project management overseen end-to-end",
-      "Monthly interior inspections (vs. quarterly on Autopilot)",
+      "Quarterly interior inspections (vs. annual on Autopilot)",
       "1-hour emergency response SLA",
       "Free lease renewals — no charge, ever",
       "Premium marketing: professional video walkthrough to attract quality tenants",
@@ -523,9 +521,9 @@ export function PersonaSelector() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "12px",
-          marginBottom: "24px",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "10px",
+          marginBottom: "20px",
         }}
       >
         {PERSONAS.map((p) => (
@@ -534,24 +532,45 @@ export function PersonaSelector() {
             onClick={() => setSelected(selected === p.id ? null : p.id)}
             style={{
               background: selected === p.id ? NAVY : WHITE,
-              border: `1px solid ${selected === p.id ? NAVY : BORDER}`,
+              border: `2px solid ${selected === p.id ? NAVY : BORDER}`,
               borderRadius: "14px",
-              padding: "20px 18px",
+              padding: "16px 12px",
               cursor: "pointer",
-              textAlign: "left",
+              textAlign: "center",
               transition: "all 0.18s",
             }}
           >
-            <div style={{ fontSize: "24px", marginBottom: "8px" }}>{p.icon}</div>
-            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 700, color: selected === p.id ? "#FAF8F5" : NAVY, marginBottom: "6px" }}>
+            <div style={{ fontSize: "22px", marginBottom: "8px" }}>{p.icon}</div>
+            <p style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "12px",
+              fontWeight: 700,
+              color: selected === p.id ? "#FAF8F5" : NAVY,
+              lineHeight: 1.3,
+            }}>
               {p.label}
-            </p>
-            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: selected === p.id ? "rgba(250,248,245,0.75)" : MUTED, lineHeight: 1.5 }}>
-              {p.description}
             </p>
           </button>
         ))}
       </div>
+
+      {/* Description of selected persona */}
+      {selected && !recommendation && null}
+      {recommendation && (
+        <div
+          style={{
+            background: BG,
+            border: `1px solid ${BORDER}`,
+            borderRadius: "12px",
+            padding: "14px 18px",
+            marginBottom: "16px",
+          }}
+        >
+          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: SUBTLE, lineHeight: 1.5 }}>
+            {PERSONAS.find(p => p.id === selected)?.description}
+          </p>
+        </div>
+      )}
 
       {recommendation && (
         <div
@@ -644,18 +663,18 @@ const COMPARE_ROWS: Array<{
   { feature: "N4 / LTB form preparation", essentials: true, autopilot: true, handsfree: true },
   { feature: "Standard Ontario lease", essentials: true, autopilot: true, handsfree: true },
   { feature: "Annual rent increase (N1)", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Tenant portal", essentials: true, autopilot: true, handsfree: true },
+  { feature: "Tenant portal + Owner dashboard", essentials: true, autopilot: true, handsfree: true },
   { feature: "Document vault", essentials: true, autopilot: true, handsfree: true },
-  { feature: "Lawn care + snow removal", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Lawn care + snow removal coordination", essentials: false, autopilot: true, handsfree: true },
   { feature: "Utility transfer & bill management", essentials: false, autopilot: true, handsfree: true },
   { feature: "Preventive maintenance calendar", essentials: false, autopilot: true, handsfree: true },
   { feature: "Priority contractor dispatch", essentials: false, autopilot: true, handsfree: true },
   { feature: "24/7 emergency line", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Quarterly interior inspections", essentials: false, autopilot: true, handsfree: false },
-  { feature: "Monthly interior inspections", essentials: false, autopilot: false, handsfree: true },
+  { feature: "Annual inspection + condition report", essentials: false, autopilot: true, handsfree: false },
+  { feature: "Quarterly interior inspections", essentials: false, autopilot: false, handsfree: true },
   { feature: "Move-in / move-out documentation", essentials: false, autopilot: true, handsfree: true },
   { feature: "Monthly care report", essentials: false, autopilot: true, handsfree: true },
-  { feature: "Real-time owner dashboard", essentials: false, autopilot: true, handsfree: true },
+  { feature: "Real-time owner dashboard", essentials: true, autopilot: true, handsfree: true },
   { feature: "Expense tracking + year-end summary", essentials: false, autopilot: true, handsfree: true },
   { feature: "Lease renewal coordination", essentials: false, autopilot: true, handsfree: true },
   { feature: "Free lease renewals (forever)", essentials: false, autopilot: false, handsfree: true },
