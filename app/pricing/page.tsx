@@ -96,7 +96,7 @@ export default function PricingPage() {
                 marginBottom: "28px",
               }}
             >
-              100% landlord experience.{" "}
+              Sleep through the night.{" "}
               <span style={{ color: BURGUNDY }}>Or every single penny back.</span>
             </h1>
 
