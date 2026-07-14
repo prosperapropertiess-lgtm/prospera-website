@@ -276,6 +276,196 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* ── COMFORTABLE SELF-MANAGER ADDRESS ── */}
+      <section
+        style={{
+          background: "#F7F5F2",
+          padding: "clamp(64px, 8vw, 120px) clamp(20px, 4vw, 60px)",
+        }}
+      >
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <FadeIn>
+            <SectionLabel>A word for landlords who have it under control</SectionLabel>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(30px, 4vw, 50px)",
+                fontWeight: 700,
+                color: NAVY,
+                letterSpacing: "-0.02em",
+                marginBottom: "24px",
+                lineHeight: 1.15,
+              }}
+            >
+              If it&apos;s working — we mean that — keep going.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(16px, 1.8vw, 19px)",
+                color: SUBTLE,
+                lineHeight: 1.75,
+                maxWidth: "660px",
+                marginBottom: "20px",
+              }}
+            >
+              You know your tenant. You have a system. Rent lands on time, repairs get handled,
+              and you sleep fine. Genuinely — that is not nothing.
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(16px, 1.8vw, 19px)",
+                color: SUBTLE,
+                lineHeight: 1.75,
+                maxWidth: "660px",
+                marginBottom: "20px",
+              }}
+            >
+              The question isn&apos;t whether you can do it. The question is: why would you trade
+              your Saturday morning, your Sunday evening, your mental bandwidth — for a couple
+              hundred dollars saved per month?
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(16px, 1.8vw, 19px)",
+                color: SUBTLE,
+                lineHeight: 1.75,
+                maxWidth: "660px",
+                marginBottom: "56px",
+              }}
+            >
+              Self-managing works until it doesn&apos;t. One bad tenant, one LTB filing, one
+              emergency at the worst possible time — and the math changes fast. That&apos;s not
+              a scare tactic. It&apos;s just what 10 years in this market looks like.
+            </p>
+
+            {/* Meme-style two-card closer */}
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "#999999",
+                marginBottom: "20px",
+              }}
+            >
+              The honest take
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: "16px",
+              }}
+            >
+              {/* Card A — Self-managing */}
+              <div
+                style={{
+                  background: WHITE,
+                  border: "1.5px solid #D8D2C8",
+                  borderRadius: "14px",
+                  padding: "28px 28px 32px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                  <span style={{ fontSize: "20px" }}>✓</span>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      color: NAVY,
+                      margin: 0,
+                    }}
+                  >
+                    Self-managing
+                  </p>
+                </div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "14px",
+                    color: SUBTLE,
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  You&apos;re in control. You know what&apos;s happening. You call the shots.
+                  If you&apos;re genuinely good at it — stay the course.
+                </p>
+              </div>
+
+              {/* Card B — Cheap manager */}
+              <div
+                style={{
+                  background: WHITE,
+                  border: "1.5px solid #D8D2C8",
+                  borderRadius: "14px",
+                  padding: "28px 28px 32px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                  <span style={{ fontSize: "20px", color: "#8B2030" }}>✕</span>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      color: NAVY,
+                      margin: 0,
+                    }}
+                  >
+                    Hiring a cheap property manager
+                  </p>
+                </div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "14px",
+                    color: SUBTLE,
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  You&apos;re paying someone else to lose track of your property. You&apos;re still
+                  getting the 2AM texts — because nobody&apos;s picking up. The chaos just moved one step sideways.
+                </p>
+              </div>
+            </div>
+
+            {/* Punchline */}
+            <div
+              style={{
+                marginTop: "32px",
+                padding: "24px 28px",
+                background: NAVY,
+                borderRadius: "12px",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "clamp(14px, 1.6vw, 16px)",
+                  color: "rgba(250,248,245,0.85)",
+                  lineHeight: 1.65,
+                  margin: 0,
+                }}
+              >
+                <span style={{ color: "#FAF8F5", fontWeight: 600 }}>You are better off self-managing than hiring someone cheap to do it for you.</span>{" "}
+                If you&apos;re going to hand over control of your investment, make sure the person
+                holding it actually takes responsibility for the outcome.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       <Divider />
 
       {/* ── NOT A LINE ITEM ── */}
