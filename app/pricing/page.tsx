@@ -919,7 +919,7 @@ export default function PricingPage() {
       >
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <FadeIn>
-            <SectionLabel>Before &amp; after</SectionLabel>
+            <SectionLabel>The honest comparison</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-cormorant)",
@@ -927,12 +927,16 @@ export default function PricingPage() {
                 fontWeight: 700,
                 color: NAVY,
                 letterSpacing: "-0.02em",
-                marginBottom: "40px",
+                marginBottom: "12px",
                 lineHeight: 1.15,
               }}
             >
-              Self-managing vs. Prospera.
+              Self-managing vs. a dedicated manager<br />
+              <span style={{ color: MUTED }}>for your investment.</span>
             </h2>
+            <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(15px, 2vw, 17px)", color: MUTED, marginBottom: "40px", maxWidth: "600px", lineHeight: 1.6 }}>
+              This isn&apos;t about time. It&apos;s about what self-managing actually looks like at 11PM on a Tuesday.
+            </p>
 
             <div
               style={{
@@ -964,28 +968,29 @@ export default function PricingPage() {
                   Self-managing
                 </p>
                 {[
-                  "Chasing rent by the 5th",
-                  "Googling the right LTB form",
-                  "2AM maintenance calls",
-                  "Guessing at legal compliance",
-                  "Coordinating your own vendors",
-                  "Tracking expenses in a spreadsheet",
-                  "Renewal notices on your calendar",
+                  "Tenant texts at 11PM — pipe burst. You're on Kijiji at midnight hunting for a plumber and praying he knows what he's doing.",
+                  "Rent is 4 days late. You don't know if you send the N4 now or wait. You Google it. You get 6 different answers.",
+                  "You call three contractors. One doesn't call back. One quotes $800. You have no idea if that's real.",
+                  "Your tenant stopped paying in October. It's March. You're still waiting for an LTB hearing date.",
+                  "Lease is up in 60 days. You forget to send the renewal. Now you're in a month-to-month you didn't plan for.",
+                  "Snow isn't cleared. Tenant slips. You find out from a liability notice, not a phone call.",
+                  "Tax time. You're digging through 11 months of e-transfers and Home Depot receipts in a shoebox.",
                 ].map((item) => (
                   <div
                     key={item}
                     style={{
                       display: "flex",
                       alignItems: "flex-start",
-                      gap: "10px",
-                      padding: "10px 0",
+                      gap: "12px",
+                      padding: "14px 0",
                       borderBottom: `1px solid ${BORDER}`,
                       fontFamily: "var(--font-dm-sans)",
                       fontSize: "14px",
                       color: SUBTLE,
+                      lineHeight: 1.6,
                     }}
                   >
-                    <span style={{ color: MUTED, flexShrink: 0 }}>–</span>
+                    <span style={{ color: "#C0392B", flexShrink: 0, fontWeight: 700, marginTop: "2px" }}>✕</span>
                     {item}
                   </div>
                 ))}
@@ -1011,16 +1016,16 @@ export default function PricingPage() {
                     marginBottom: "20px",
                   }}
                 >
-                  With Prospera
+                  Your dedicated manager at Prospera
                 </p>
                 {[
-                  "Rent deposited. Statement by the 10th.",
-                  "Legal forms filed correctly, on time.",
-                  "We take the call. You sleep.",
-                  "Ontario RTA compliance, handled.",
-                  "Vetted vendors, real cost passed through.",
-                  "Year-end expense summary, ready.",
-                  "Renewals tracked, negotiated, done.",
+                  "Tenant texts us. We dispatch a vetted contractor within 60 minutes. You find out it was handled in the morning.",
+                  "Rent unpaid by day 1. N4 filed within 24 hours. Legal clock starts immediately, every time.",
+                  "One contractor. Vetted. Pre-negotiated rates. Invoice attached to your statement with no surprises.",
+                  "We handle the LTB filing, the paperwork, and the hearing. You don't miss a single day of work.",
+                  "Renewal tracked, negotiated, and executed 60 days before the deadline. You don't touch it.",
+                  "Lawn and snow coordinated on a schedule before anything becomes a hazard. You're never the last to know.",
+                  "Year-end expense report with receipts attached, ready for your accountant on January 1st.",
                 ].map((item) => (
                   <div
                     key={item}
