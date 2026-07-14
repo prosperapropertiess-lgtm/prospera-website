@@ -465,38 +465,73 @@ export default function PricingPage() {
               — with penalty lines.
             </p>
 
-            {/* Guarantee summary pills */}
+            {/* Guarantee summary cards — 2-col grid with title + penalty line */}
             <div
               style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: "12px",
                 marginBottom: "40px",
               }}
             >
               {[
-                "21-Day Placement",
-                "24-Hr N4 Enforcement",
-                "60-Min Emergency Dispatch",
-                "Replacement Warranty",
-                "Rent Shield",
-                "90-Day Money-Back",
+                {
+                  title: "21-Day Placement",
+                  penalty: "Miss the window → placement fee waived entirely",
+                },
+                {
+                  title: "24-Hr N4 Enforcement",
+                  penalty: "Miss our window → that month's management fee credited",
+                },
+                {
+                  title: "60-Min Emergency Dispatch",
+                  penalty: "Miss 60 minutes → that month's management fee credited",
+                },
+                {
+                  title: "Replacement Warranty",
+                  penalty: "Tenant leaves early → next placement is free",
+                },
+                {
+                  title: "Rent Shield",
+                  penalty: "Tenant stops paying → we cover up to 60 days rent",
+                },
+                {
+                  title: "90-Day Money-Back",
+                  penalty: "Not satisfied → every penny of our fees refunded",
+                },
               ].map((g) => (
-                <span
-                  key={g}
+                <div
+                  key={g.title}
                   style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: "12px",
-                    fontWeight: 600,
-                    color: NAVY,
                     background: WHITE,
                     border: `1px solid ${BORDER}`,
-                    borderRadius: "20px",
-                    padding: "6px 14px",
+                    borderLeft: `3px solid ${NAVY}`,
+                    borderRadius: "12px",
+                    padding: "16px 18px",
                   }}
                 >
-                  {g}
-                </span>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: NAVY,
+                      marginBottom: "6px",
+                    }}
+                  >
+                    {g.title}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      fontSize: "13px",
+                      color: MUTED,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {g.penalty}
+                  </p>
+                </div>
               ))}
             </div>
 
@@ -716,7 +751,7 @@ export default function PricingPage() {
                     gap: "20px",
                   }}
                 >
-                  {/* Timeline line */}
+                  {/* Timeline connector */}
                   <div
                     style={{
                       display: "flex",
@@ -727,20 +762,23 @@ export default function PricingPage() {
                   >
                     <div
                       style={{
-                        width: "32px",
-                        height: "32px",
+                        width: "36px",
+                        height: "36px",
                         borderRadius: "50%",
                         background: i === arr.length - 1 ? BURGUNDY : NAVY,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         flexShrink: 0,
+                        boxShadow: i === arr.length - 1
+                          ? "0 0 0 4px rgba(139,32,48,0.15)"
+                          : "0 0 0 4px rgba(31,47,58,0.08)",
                       }}
                     >
                       <span
                         style={{
                           fontFamily: "var(--font-dm-sans)",
-                          fontSize: "12px",
+                          fontSize: "13px",
                           fontWeight: 700,
                           color: "#FAF8F5",
                         }}
@@ -753,51 +791,66 @@ export default function PricingPage() {
                         style={{
                           width: "1px",
                           flex: 1,
-                          minHeight: "40px",
+                          minHeight: "32px",
                           background: BORDER,
-                          margin: "4px 0",
+                          margin: "6px 0",
                         }}
                       />
                     )}
                   </div>
 
-                  {/* Content */}
-                  <div style={{ paddingBottom: i < arr.length - 1 ? "32px" : "0" }}>
-                    <p
+                  {/* Content card */}
+                  <div
+                    style={{
+                      flex: 1,
+                      paddingBottom: i < arr.length - 1 ? "28px" : "0",
+                    }}
+                  >
+                    <div
                       style={{
-                        fontFamily: "var(--font-dm-sans)",
-                        fontSize: "11px",
-                        fontWeight: 700,
-                        color: MUTED,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.10em",
-                        marginBottom: "4px",
-                        marginTop: "6px",
+                        background: i === arr.length - 1 ? "rgba(139,32,48,0.04)" : WHITE,
+                        border: `1px solid ${i === arr.length - 1 ? "rgba(139,32,48,0.18)" : BORDER}`,
+                        borderRadius: "12px",
+                        padding: "18px 22px",
+                        marginTop: "0",
                       }}
                     >
-                      {step.day}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-dm-sans)",
-                        fontSize: "15px",
-                        fontWeight: 700,
-                        color: NAVY,
-                        marginBottom: "6px",
-                      }}
-                    >
-                      {step.title}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-dm-sans)",
-                        fontSize: "14px",
-                        color: SUBTLE,
-                        lineHeight: 1.65,
-                      }}
-                    >
-                      {step.body}
-                    </p>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-dm-sans)",
+                          fontSize: "11px",
+                          fontWeight: 700,
+                          color: i === arr.length - 1 ? BURGUNDY : MUTED,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.10em",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {step.day}
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-dm-sans)",
+                          fontSize: "16px",
+                          fontWeight: 700,
+                          color: NAVY,
+                          marginBottom: "8px",
+                        }}
+                      >
+                        {step.title}
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-dm-sans)",
+                          fontSize: "14px",
+                          color: SUBTLE,
+                          lineHeight: 1.65,
+                          margin: 0,
+                        }}
+                      >
+                        {step.body}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -835,7 +888,7 @@ export default function PricingPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: "24px",
               }}
             >

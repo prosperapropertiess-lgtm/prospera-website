@@ -24,6 +24,8 @@ interface Plan {
   accentBg: string;
   description: string;
   includes: string[];
+  includesExtra?: string[]; // secondary group (e.g. "Autopilot adds")
+  includesExtraLabel?: string;
   bestFor: string;
   fees: {
     management: string;
@@ -57,7 +59,7 @@ const PLANS: Plan[] = [
       "Document vault — all leases, notices, records in one place",
       "Tenant portal — maintenance requests stay off your phone",
     ],
-    bestFor: "The nearby owner who wants compliance covered but likes staying involved.",
+    bestFor: "The nearby owner who wants compliance handled but stays hands-on.",
     fees: {
       management: "7% of monthly rent collected",
       placement: "100% of first month's rent",
@@ -74,26 +76,33 @@ const PLANS: Plan[] = [
     colour: BURGUNDY,
     accentBg: "rgba(139,32,48,0.06)",
     description:
-      "The 2AM call is not yours anymore. The late-rent conversation isn't yours. Lawn, snow, utilities, maintenance, inspections, renewals — none of it is yours. You own the asset. We run it, completely. For 3% more than the base plan, the entire job is off your plate.",
+      "Most managers collect rent and do one inspection a year. We are on your property every quarter, we handle lawn, snow, and utilities, and we catch the $150 problem before it's a $4,000 one. The 2AM call is not yours. The late-rent conversation isn't yours. You own the asset. We run it.",
     includes: [
-      "Everything in Minimum Essentials",
-      "100% hands-free management — tenants call us, never you",
+      "Dedicated named property manager — yours on every plan",
+      "Automated rent collection, direct payout, monthly owner statement",
+      "Late-rent follow-up and N4 notice preparation",
+      "Last month's deposit held and tracked",
+      "Standard Ontario lease prepared and executed",
+      "Annual rent increase calculated and filed (N1)",
+      "Reactive maintenance coordination — vetted trades network",
+      "Document vault and tenant portal",
+    ],
+    includesExtraLabel: "Autopilot adds",
+    includesExtra: [
+      "100% hands-free — tenants call us, never you",
       "Lawn care + snow removal — arranged and managed end-to-end",
-      "Utility transfers handled at turnover; ongoing bill management",
-      "Preventive maintenance calendar — furnace before winter, AC before summer, gutters + roof before fall, smoke/CO compliance",
+      "Utility transfers at turnover + free utility transition concierge between tenancies (you never eat an overlap bill)",
+      "Preventive maintenance calendar — furnace, AC, gutters, smoke/CO on schedule",
       "Quarterly interior inspections + photo condition reports",
       "Periodic exterior property checks between visits",
-      "Priority contractor dispatch — your jobs jump the queue",
+      "AI-assisted triage → priority contractor dispatch (your jobs jump the queue)",
       "24/7 emergency line — we take the call, not you",
+      "Annual video walkthrough sent to your phone",
       "Move-in and move-out condition documentation",
-      "Proactive issue-catching — we flag wear before it becomes a repair",
       "Monthly care report — what we checked, caught, and coordinated",
-      "Real-time owner dashboard + monthly statements by the 10th",
-      "Expense tracking and year-end summary for your accountant",
-      "Tenant relationship management → lower turnover → fewer placement fees",
-      "Renewal strategy + annual rent benchmarking",
-      "Placement fee: 50% of first month's rent (vs. 100% on Essentials)",
-      "Onboarding fee: $99.99 (vs. $149.99 on Essentials)",
+      "Real-time owner dashboard + statements by the 10th",
+      "Tenant relationship management and renewal strategy",
+      "Annual rent benchmarking",
     ],
     bestFor: "The landlord who wants complete peace of mind for 3% more than the base plan.",
     fees: {
@@ -320,9 +329,9 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           marginBottom: "12px",
         }}
       >
-        What&apos;s included
+        {plan.includesExtraLabel ? "Core features" : "What\u2019s included"}
       </p>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "24px" }}>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: plan.includesExtra ? "0" : "24px" }}>
         {plan.includes.map((item) => (
           <li
             key={item}
@@ -330,7 +339,7 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
               fontFamily: "var(--font-dm-sans)",
               fontSize: "14px",
               color: SUBTLE,
-              padding: "8px 0",
+              padding: "7px 0",
               borderBottom: `1px solid ${BORDER}`,
               display: "flex",
               alignItems: "flex-start",
@@ -343,6 +352,57 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
           </li>
         ))}
       </ul>
+
+      {/* Autopilot / extra group */}
+      {plan.includesExtra && (
+        <>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              margin: "20px 0 12px",
+            }}
+          >
+            <div style={{ flex: 1, height: "1px", background: BORDER }} />
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
+                color: plan.colour,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                fontWeight: 700,
+                flexShrink: 0,
+              }}
+            >
+              {plan.includesExtraLabel}
+            </p>
+            <div style={{ flex: 1, height: "1px", background: BORDER }} />
+          </div>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: "24px" }}>
+            {plan.includesExtra.map((item) => (
+              <li
+                key={item}
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "14px",
+                  color: SUBTLE,
+                  padding: "7px 0",
+                  borderBottom: `1px solid ${BORDER}`,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  lineHeight: 1.5,
+                }}
+              >
+                <span style={{ color: plan.colour, fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {/* Fee disclosure toggle */}
       <button
