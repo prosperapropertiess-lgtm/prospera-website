@@ -685,6 +685,142 @@ function ChartTooltip({ active, payload }: { active?: boolean; payload?: Array<{
   );
 }
 
+// ── Owner Action Plan ─────────────────────────────────────────────────────────
+
+function OwnerActionPlan({ condition }: { condition: string }) {
+  const isMoveInReady = condition === "move_in_ready";
+  const isGreat       = condition === "great";
+  const isGood        = condition === "good";
+  const isFair        = condition === "fair";
+  const isNeedsWork   = condition === "needs_work";
+  const isPristine    = isMoveInReady || isGreat;
+
+  type Item = { text: string; owner: boolean };
+
+  const items: Item[] = isPristine ? [
+    { owner: false, text: "Professional photography and a compelling listing" },
+    { owner: false, text: "Syndicated across Kijiji, Rentals.ca, and social" },
+    { owner: false, text: "Same-day responses to every inquiry" },
+    { owner: false, text: "Full background, credit, and reference checks" },
+    { owner: false, text: "Lease preparation and signing" },
+    { owner: true,  text: "Optional: include utilities (water, hydro, or heat) — this justifies a higher asking rent and widens your applicant pool" },
+  ] : isGood ? [
+    { owner: true,  text: "Fresh coat of paint in a neutral tone (off-white or greige) if walls are scuffed or dated" },
+    { owner: true,  text: "Optional: include utilities — widens your pool and can justify $75–$150 more per month" },
+    { owner: false, text: "Professional photography and listing" },
+    { owner: false, text: "Full tenant screening — background, credit, references" },
+    { owner: false, text: "Lease prep and signing" },
+  ] : isFair ? [
+    { owner: true,  text: "Fresh neutral paint throughout — this is the highest-return prep you can do" },
+    { owner: true,  text: "Deep clean, or hire a cleaner — first impressions set the tone" },
+    { owner: true,  text: "Fix small visible issues: dripping taps, loose handles, burnt-out bulbs" },
+    { owner: true,  text: "Optional: include utilities to offset condition and broaden applicant pool" },
+    { owner: false, text: "Strong listing copy and photography" },
+    { owner: false, text: "Full tenant screening" },
+  ] : isNeedsWork ? [
+    { owner: true,  text: "Prioritize anything that affects safety or function: plumbing, heating, electrical" },
+    { owner: true,  text: "Paint and deep clean — non-negotiable before listing" },
+    { owner: true,  text: "Replace or repair anything a tenant will notice on first walkthrough" },
+    { owner: true,  text: "Consider including utilities — it meaningfully changes how this unit competes" },
+    { owner: false, text: "We'll advise on what to fix vs. what to leave — not every dollar spent returns a dollar in rent" },
+    { owner: false, text: "Photography, listing, screening, and lease — all on us once it's ready" },
+  ] : [];
+
+  return (
+    <section className="px-5 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: WHITE }}>
+      <div className="max-w-4xl mx-auto">
+        <FadeIn>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-center" style={{ color: MUTED }}>
+            Before We List
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center" style={{ color: NAVY, fontFamily: "var(--font-dm-sans)" }}>
+            {isPristine
+              ? "Your property is ready. Here's who does what."
+              : isGood
+                ? "Almost there. A couple of small things from you."
+                : isFair
+                  ? "A few things from you — then we take over."
+                  : "Let's get it rent-ready. Here's the plan."}
+          </h2>
+          <p className="text-sm text-center mb-10 max-w-xl mx-auto" style={{ color: MUTED, lineHeight: 1.7 }}>
+            {isPristine
+              ? "This property is well-maintained and move-in ready. There's very little you need to do — the work from here is ours."
+              : isGood
+                ? "The property is in good shape. A small touch or two from you, and we handle the rest."
+                : isFair
+                  ? "Some targeted prep will make a meaningful difference in the rent you can achieve and how fast it fills."
+                  : "Getting the property rent-ready will directly affect your rent range and days to fill. Here's where to focus."}
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <div className="rounded-2xl border overflow-hidden" style={{ borderColor: BORDER }}>
+            {/* Owner column header */}
+            {!isPristine && (
+              <div className="grid grid-cols-2 text-xs font-semibold uppercase tracking-wider" style={{ borderBottom: `1px solid ${BORDER}` }}>
+                <div className="py-3 px-5" style={{ backgroundColor: "rgba(139,32,48,0.05)", color: BURGUNDY }}>Your action</div>
+                <div className="py-3 px-5" style={{ backgroundColor: "rgba(31,47,58,0.03)", color: NAVY }}>Our action</div>
+              </div>
+            )}
+
+            {isPristine ? (
+              // Single column layout for pristine properties
+              <div>
+                {items.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 px-6 py-4"
+                    style={{
+                      borderBottom: i < items.length - 1 ? `1px solid ${BORDER}` : undefined,
+                      backgroundColor: item.owner ? "rgba(180,83,9,0.03)" : "rgba(31,47,58,0.02)",
+                    }}
+                  >
+                    <span className="text-base mt-0.5 flex-shrink-0">{item.owner ? "💡" : "✓"}</span>
+                    <p className="text-sm leading-relaxed" style={{ color: item.owner ? AMBER : TEXT }}>
+                      {item.owner
+                        ? <><strong style={{ color: AMBER }}>One option for you:</strong> {item.text}</>
+                        : <><strong style={{ color: NAVY }}>Prospera handles this:</strong> {item.text}</>}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // Two-column layout: owner vs Prospera
+              <div className="grid grid-cols-2">
+                <div style={{ borderRight: `1px solid ${BORDER}` }}>
+                  {items.filter(i => i.owner).map((item, i, arr) => (
+                    <div key={i} className="flex items-start gap-3 px-5 py-4" style={{ borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : undefined, backgroundColor: "rgba(139,32,48,0.02)" }}>
+                      <span className="text-sm flex-shrink-0 mt-0.5">→</span>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  {items.filter(i => !i.owner).map((item, i, arr) => (
+                    <div key={i} className="flex items-start gap-3 px-5 py-4" style={{ borderBottom: i < arr.length - 1 ? `1px solid ${BORDER}` : undefined, backgroundColor: "rgba(31,47,58,0.02)" }}>
+                      <span className="text-sm flex-shrink-0 mt-0.5" style={{ color: GREEN }}>✓</span>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Bottom bar */}
+            <div className="px-6 py-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: NAVY }}>
+              <p className="text-sm font-semibold" style={{ color: "#FAF8F5" }}>
+                {isPristine
+                  ? "You've done your part. The rest is on us — listing, screening, and getting the right tenant through the door."
+                  : "Once your prep is done, we take over completely. Listing, screening, lease — all handled."}
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 // ── Main Report Component ─────────────────────────────────────────────────────
 
 export default function MarketCompReport({ data }: { data: MarketCompData }) {
@@ -1038,6 +1174,11 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
             </FadeIn>
           </div>
         </section>
+      )}
+
+      {/* ── Owner Action Plan ──────────────────────────────────────────── */}
+      {property_condition && (
+        <OwnerActionPlan condition={property_condition} />
       )}
 
       {/* ── Interactive Rent Simulator ──────────────────────────────────── */}
