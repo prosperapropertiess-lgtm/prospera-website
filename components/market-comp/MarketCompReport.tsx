@@ -691,10 +691,15 @@ function ChartTooltip({ active, payload }: { active?: boolean; payload?: Array<{
 function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | null; ownerActionItems: string | null }) {
   const hasOwnerItems = ownerActionItems && ownerActionItems.trim().length > 0;
 
-  // Parse agent's notes into bullet lines if they used line breaks or dashes
-  const ownerLines = hasOwnerItems
-    ? ownerActionItems!.split(/\n|•|-(?=\s)/).map(s => s.trim()).filter(Boolean)
-    : [];
+  // Split owner action items from agent notes (separated by "Agent notes:")
+  const [ownerPart, notesPart] = hasOwnerItems
+    ? ownerActionItems!.split(/Agent notes:/i)
+    : ["", ""];
+  const agentNotes = notesPart?.trim() || null;
+
+  // Parse checked items into bullet lines
+  const ownerLines = (ownerPart || "")
+    .split(/\n|•|-(?=\s)/).map(s => s.trim()).filter(Boolean);
 
   const prospераItems = [
     "Professional photography and a compelling listing",
@@ -764,6 +769,12 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
               </div>
             )}
 
+            {agentNotes && (
+              <div className="px-6 py-4" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(180,83,9,0.04)" }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: AMBER }}>Our read on the property</p>
+                <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{agentNotes}</p>
+              </div>
+            )}
             <div className="px-6 py-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: NAVY }}>
               <p className="text-sm font-semibold" style={{ color: "#FAF8F5" }}>
                 {hasOwnerItems

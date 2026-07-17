@@ -134,6 +134,8 @@ export default function OnboardListPage() {
   const [parkingSpots,     setParkingSpots]       = useState("0");
   const [parkingType,      setParkingType]        = useState("none");
   const [propertyCondition, setPropertyCondition] = useState("");
+  const [ownerChecks, setOwnerChecks] = useState<string[]>([]);
+  const [agentNotes,  setAgentNotes]  = useState("");
   const [ownerActionItems,  setOwnerActionItems]   = useState("");
   const [rentLow,          setRentLow]            = useState("");
   const [rentMarket,       setRentMarket]         = useState("");
@@ -156,7 +158,7 @@ export default function OnboardListPage() {
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyLat(null); setPropertyLng(null); setPropertyType(""); setPropertyCity("London");
-    setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition(""); setOwnerActionItems("");
+    setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition(""); setOwnerChecks([]); setAgentNotes(""); setOwnerActionItems("");
     setRentLow(""); setRentMarket(""); setRentPremium("");
     setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError(""); setParseInsights("");
   }
@@ -207,7 +209,12 @@ export default function OnboardListPage() {
             parking_spots: parkingSpots ? Number(parkingSpots) : null,
             parking_type: parkingType || null,
             property_condition: propertyCondition || null,
-            owner_action_items: ownerActionItems.trim() || null,
+            owner_action_items: (() => {
+              const parts: string[] = [];
+              if (ownerChecks.length) parts.push(ownerChecks.map(c => `- ${c}`).join("\n"));
+              if (agentNotes.trim()) parts.push(`Agent notes: ${agentNotes.trim()}`);
+              return parts.length ? parts.join("\n\n") : null;
+            })(),
             rent_low: Number(rentLow) || undefined,
             rent_market: Number(rentMarket) || undefined,
             rent_premium: Number(rentPremium) || undefined,
@@ -441,21 +448,67 @@ export default function OnboardListPage() {
                         <option value="move_in_ready">Move-In Ready</option>
                       </select>
                     </div>
-                    <div style={{ gridColumn: "1 / -1" }}>
-                      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                    {/* Owner action items */}
+                    <div style={{ gridColumn: "1 / -1", background: "#f6f4f1", borderRadius: 12, padding: "16px 18px" }}>
+                      <p style={{ margin: "0 0 12px", fontSize: 12, fontWeight: 700, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
                         What can the owner do?
-                      </label>
+                      </p>
+
+                      {/* Owner levers — checkboxes */}
+                      <p style={{ margin: "0 0 8px", fontSize: 11, fontWeight: 600, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-poppins), sans-serif" }}>Owner&apos;s levers</p>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 16px", marginBottom: 14 }}>
+                        {[
+                          "Fresh coat of paint (neutral tone)",
+                          "Deep clean / professional clean",
+                          "Include utilities (water, hydro, heat)",
+                          "Fix visible issues (taps, handles, bulbs)",
+                          "Add in-suite laundry",
+                          "Landscaping / curb appeal",
+                          "Update flooring",
+                          "Replace appliances",
+                        ].map(opt => (
+                          <label key={opt} style={{ display: "flex", alignItems: "flex-start", gap: 8, cursor: "pointer", fontFamily: "var(--font-poppins), sans-serif" }}>
+                            <input
+                              type="checkbox"
+                              checked={ownerChecks.includes(opt)}
+                              onChange={e => setOwnerChecks(e.target.checked ? [...ownerChecks, opt] : ownerChecks.filter(c => c !== opt))}
+                              style={{ marginTop: 2, accentColor: BURGUNDY, flexShrink: 0 }}
+                            />
+                            <span style={{ fontSize: 13, color: NAVY, lineHeight: 1.4 }}>{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+
+                      {/* Prospera defaults — always on */}
+                      <p style={{ margin: "0 0 8px", fontSize: 11, fontWeight: 600, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-poppins), sans-serif" }}>We do by default</p>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 16px", marginBottom: 14 }}>
+                        {[
+                          "Same-day response to every inquiry",
+                          "In-person showings (we run them)",
+                          "Professional listing copy",
+                          "Full background + credit checks",
+                          "Weekly updates to owner",
+                        ].map(item => (
+                          <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontFamily: "var(--font-poppins), sans-serif" }}>
+                            <span style={{ fontSize: 12, color: GREEN, marginTop: 2, flexShrink: 0 }}>✓</span>
+                            <span style={{ fontSize: 13, color: MUTED, lineHeight: 1.4 }}>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Agent notes */}
+                      <p style={{ margin: "0 0 6px", fontSize: 11, fontWeight: 600, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-poppins), sans-serif" }}>Your notes</p>
                       <textarea
-                        value={ownerActionItems}
-                        onChange={e => setOwnerActionItems(e.target.value)}
-                        placeholder={"Leave blank if nothing — property is ready to list as-is.\n\nOtherwise describe what you saw:\ne.g. repaint the living room (peeling), fix the bathroom faucet drip, replace kitchen cabinet handles\nOptional: include utilities to widen the pool"}
-                        rows={3}
-                        style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 14px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }}
+                        value={agentNotes}
+                        onChange={e => setAgentNotes(e.target.value)}
+                        placeholder={"e.g. No laundry in unit — if there was in-suite laundry this would command $150+ more. Property smells fresh, no issues found."}
+                        rows={2}
+                        style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "10px 12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }}
                         onFocus={e => { e.target.style.borderColor = "rgba(139,32,48,0.40)"; }}
                         onBlur={e => { e.target.style.borderColor = INPUT_BORDER; }}
                       />
                       <p style={{ margin: "4px 0 0", fontSize: 11, color: MUTED, fontFamily: "var(--font-poppins), sans-serif" }}>
-                        This shows up in the landlord&apos;s report as their action items before listing.
+                        Checked items + your notes show up in the landlord&apos;s report.
                       </p>
                     </div>
                     <InputField label="Conservative Rent ($)" value={rentLow} onChange={setRentLow} type="number" placeholder="1600" />

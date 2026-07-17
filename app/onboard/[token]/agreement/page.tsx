@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { Balloons, BalloonsRef } from "@/components/ui/balloons";
 
 const BG          = "#F5F4F1";
 const CARD        = "#FFFFFF";
@@ -51,50 +52,112 @@ const MANAGEMENT_SECTIONS = [
 const PLACEMENT_SECTIONS = [
   {
     title: "First — this is just for both of us",
-    body: "This agreement exists so we both know exactly what to expect. It's not complicated. It's not meant to trap you. It's meant to make sure we're on the same page before we start — so nothing is a surprise, and you always feel like you're in control.\n\nIf something ever feels unclear, just ask. We'd rather explain it twice than have you sign something you're unsure about.",
+    body: "This agreement makes sure we both know what to expect. Nothing in here is meant to trap you or confuse you.\n\nIf anything feels unclear, just ask. We'd rather explain it twice than have you sign something you're unsure about.",
   },
   {
     title: "What we do, from day one to move-in",
-    body: "The moment this is signed, we get to work:\n\n• We complete a rental market analysis so your property is priced right from the start — not too high to sit empty, not too low to leave money on the table\n• We write your listing and post it across all major platforms — Kijiji, Facebook Marketplace, our website, and more\n• We place a lawn sign at the property to attract local interest\n• We handle every inquiry, answer every question, and pre-screen callers before booking a showing\n• We coordinate all showings and collect full applications from interested tenants\n• We run a thorough background check on every applicant: employment verification, income verification, credit check (with their consent), identity verification, and previous landlord references\n• We present you with the full picture on every qualified applicant\n• Once you choose your tenant, we prepare the Ontario Standard Lease, coordinate signing, collect the deposits, and hand you everything cleanly\n\nYou focus on your life. We handle the leasing.",
+    body: "The moment this is signed, we get to work:\n\n• We run a rental market analysis so your property is priced right from the start\n• We write your listing and post it everywhere — Kijiji, Facebook, our website, and more\n• We place a lawn sign at the property to attract local interest\n• We handle every inquiry, answer every question, and pre-screen callers before booking a showing\n• We coordinate all showings and collect full applications\n• We run a full background check on every applicant — employment, income, credit, ID, and previous landlord references\n• We present you with a clear summary of every qualified applicant\n• Once you pick your tenant, we prepare the lease, coordinate signing, and collect the deposits\n\nYou focus on your life. We handle the leasing.",
   },
   {
     title: "You choose the tenant — always",
-    body: "We don't pick your tenant for you. We do the work, run the checks, and give you our honest recommendation. But the final decision is always yours.\n\nWe will never approve a tenant or sign a lease without your explicit go-ahead. If you're not comfortable with an applicant — even if everything checks out on paper — you can say no. No explanation needed.",
+    body: "We do the work and give you our honest recommendation. But the final decision is always yours.\n\nWe will never sign a lease without your go-ahead. If you're not comfortable with an applicant, you can say no — no explanation needed.",
   },
   {
     title: "How the money works",
-    body: "Our placement fee is 75% of the first month's rent.\n\nHere's exactly how it flows:\n\n• Before move-in, we collect the first month's rent and the last month's rent deposit from the tenant\n• We keep 75% of the first month's rent as our placement fee\n• We transfer the remaining 25% of first month's rent to you\n• We transfer the full last month's rent deposit to you — every dollar of it — before the tenant moves in\n• You hold the last month's rent for the duration of the tenancy, as required by Ontario law\n\nYou don't write us a cheque. It comes out of what the tenant pays, and you receive the rest before keys are handed over. If we don't place a tenant, you don't pay us anything. No placement, no fee. Simple.",
+    body: "Our placement fee is 75% of the first month's rent. Here's exactly how it flows:\n\n• We collect the first month's rent and last month's rent deposit from the tenant before move-in\n• We keep 75% of the first month's rent as our fee\n• We send you the remaining 25% of first month's rent\n• We send you the full last month's rent deposit — every dollar — before keys are handed over\n• You hold the last month's deposit for the tenancy, as required by Ontario law\n\nYou don't write us a cheque. If we don't place a tenant, you don't pay us anything.",
   },
   {
     title: "We keep you informed the whole way",
-    body: "You'll never be left wondering what's happening with your property.\n\nWe'll update you at least once a week — even if there's nothing major to report. You'll hear about showing activity, applicant interest, and any feedback we're getting from the market. If something significant happens, we reach out right away.\n\nOur job isn't just to find a tenant. It's to make sure you feel good about the process the whole way through.",
+    body: "You'll never be left wondering what's happening.\n\nWe update you at least once a week — showing activity, applicant interest, market feedback. If something important comes up, we reach out right away.\n\nOur job isn't just to find a tenant. It's to make sure you feel good the whole way through.",
   },
   {
     title: "What we need from you",
-    body: "We only ask for a few things:\n\n• Keep the property in showable condition — clean, accessible, and presentable\n• Tell us anything we should know about the unit (past issues, quirks, restrictions)\n• When we bring you an applicant to review, try to respond within 48 hours — delays can cost you the tenant\n• Make sure the unit meets Ontario's minimum standards for rental housing\n\nThat's it. The rest is on us.",
+    body: "We only ask for a few things:\n\n• Keep the property in showable condition — clean and accessible\n• Tell us anything we should know about the unit (past issues, quirks, restrictions)\n• When we bring you an applicant, try to respond within 48 hours — delays can cost you the tenant\n• Make sure the unit meets Ontario's minimum standards for rental housing",
   },
   {
     title: "What happens if something goes wrong after move-in",
-    body: "We do everything we can to place the right tenant. But no screening process can predict the future — and we won't pretend otherwise.\n\nIf a tenant we place voluntarily leaves or is lawfully evicted within the first 90 days due to something our screening should have caught, we'll perform one replacement tenant search at no additional placement fee.\n\nFor anything that comes up after move-in — a question, a dispute, something you're not sure how to handle — reach out. We'll point you in the right direction. Our relationship doesn't end when the lease is signed.",
+    body: "We work hard to find the right tenant. But no screening process can see the future.\n\nIf a tenant we placed leaves voluntarily or is lawfully evicted within the first 90 days — for something our screening should have caught — we'll do one replacement search at no additional fee.\n\nIf you ever have a question after move-in, reach out. We'll point you in the right direction.",
   },
   {
     title: "A few honest limits",
-    body: "We want to be straight with you about a few things:\n\n• We cannot guarantee any specific rental rate, number of applicants, or how quickly the unit will lease. Those things depend on market conditions, the property itself, and factors outside our control\n• We screen every applicant carefully, but we cannot predict a tenant's future behavior, job stability, or whether their circumstances will change after they move in\n• Our screening process is consistent and thorough — but it's a process, not a crystal ball\n• Prospera Properties is not a law firm and does not provide legal, tax, or financial advice\n\nWhat we can promise is this: we'll work hard, keep you informed, price your property intelligently, screen every applicant the same careful way, and be honest with you throughout. That's what we do.",
+    body: "We want to be straight with you:\n\n• We can't guarantee a specific rent amount, number of applicants, or how fast the unit leases — that depends on the market and the property\n• We screen carefully, but we can't predict what happens in a tenant's life after they move in\n• Our screening is thorough and consistent — but it's a process, not a guarantee\n• Prospera Properties is not a law firm and does not give legal, tax, or financial advice\n\nWhat we can promise: we'll work hard, keep you informed, and be honest with you every step of the way.",
   },
   {
     title: "Your right to cancel",
-    body: "Either party can cancel this agreement with 7 days written notice. If you cancel after we've already started marketing the property, you may be asked to cover any direct advertising costs we incurred — if any. We'll always be upfront about that before it happens.\n\nNo penalty. No lock-in. No hard feelings.",
+    body: "Either party can cancel with 7 days written notice. If we've already started marketing and incurred direct advertising costs, we may ask you to cover those — but we'll always tell you before it happens.\n\nNo penalty. No lock-in. No hard feelings.",
   },
   {
     title: "Ontario law",
-    body: "Everything we do follows Ontario's Residential Tenancies Act, 2006, the Ontario Human Rights Code, and all applicable fair housing laws.\n\nWe screen tenants based on legitimate rental criteria only — income, credit, references, rental history. Never on race, gender, religion, family status, disability, or any other protected ground. That's not just the law. It's the right way to do this.",
+    body: "Everything we do follows Ontario's Residential Tenancies Act, 2006, the Ontario Human Rights Code, and all applicable fair housing laws. We screen on legitimate rental criteria only — income, credit, references, and rental history. Never on race, gender, religion, family status, disability, or any other protected ground.",
   },
 ];
+
+function renderBody(body: string) {
+  const blocks = body.split("\n\n");
+  const elements: React.ReactNode[] = [];
+
+  const pStyle: React.CSSProperties = {
+    fontSize: 15,
+    color: "rgba(15,28,40,0.75)",
+    lineHeight: 2.0,
+    margin: "0 0 16px 0",
+  };
+  const ulStyle: React.CSSProperties = {
+    margin: "12px 0 16px 0",
+    paddingLeft: 0,
+    listStyle: "none",
+  };
+  const liStyle: React.CSSProperties = {
+    fontSize: 15,
+    color: "rgba(15,28,40,0.75)",
+    lineHeight: 1.9,
+    paddingLeft: 20,
+    position: "relative",
+    marginBottom: 10,
+  };
+
+  blocks.forEach((block, bi) => {
+    const lines = block.split("\n");
+    const bulletLines = lines.filter((l) => l.startsWith("•"));
+    const nonBulletLines = lines.filter((l) => !l.startsWith("•"));
+
+    if (bulletLines.length > 0) {
+      // Render any intro text (non-bullet lines before bullets)
+      const introText = nonBulletLines.join(" ").trim();
+      if (introText) {
+        elements.push(
+          <p key={`p-${bi}`} style={pStyle}>{introText}</p>
+        );
+      }
+      elements.push(
+        <ul key={`ul-${bi}`} style={ulStyle}>
+          {bulletLines.map((line, li) => (
+            <li key={li} style={liStyle}>
+              <span style={{ position: "absolute", left: 0, color: "#8B2030" }}>–</span>
+              {line.replace(/^•\s*/, "")}
+            </li>
+          ))}
+        </ul>
+      );
+    } else {
+      const text = block.trim();
+      if (text) {
+        elements.push(
+          <p key={`p-${bi}`} style={pStyle}>{text}</p>
+        );
+      }
+    }
+  });
+
+  return <div style={{ margin: 0 }}>{elements}</div>;
+}
 
 export default function AgreementPage() {
   const params = useParams();
   const router = useRouter();
   const token = params.token as string;
+
+  const balloonsRef = useRef<BalloonsRef>(null);
 
   const [signedName, setSignedName] = useState("");
   const [saving, setSaving] = useState(false);
@@ -133,6 +196,7 @@ export default function AgreementPage() {
     const d = await r.json();
     if (!r.ok) { setError(d.error || "Something went wrong."); setSaving(false); return; }
     setDone(true);
+    balloonsRef.current?.launch();
     if (isPlacement) {
       // Placement: go straight to add property
       setTimeout(() => router.push(`/onboard/${token}`), 2500);
@@ -155,6 +219,8 @@ export default function AgreementPage() {
         @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes checkIn { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: scale(1); } }
       `}</style>
+
+      <Balloons ref={balloonsRef} />
 
       {/* Progress bar */}
       <div style={{ height: 4, background: "rgba(15,28,40,0.08)" }}>
@@ -194,7 +260,7 @@ export default function AgreementPage() {
               Signed and saved.
             </h1>
             <p style={{ margin: "0 0 6px", fontSize: 15, color: MUTED, lineHeight: 1.6 }}>
-              Your agreement is on file. Ebin has been notified.
+              Sit back and relax. Everything else will be handled.
             </p>
             <p style={{ margin: 0, fontSize: 13, color: SUBTLE }}>
               {isPlacement ? "Taking you to add your property…" : "Taking you to the next step…"}
@@ -235,23 +301,14 @@ export default function AgreementPage() {
                 <div
                   key={i}
                   style={{
-                    padding: "22px 28px",
+                    padding: "28px 32px",
                     borderBottom: i < SECTIONS.length - 1 ? `1px solid ${DIVIDER}` : "none",
                   }}
                 >
-                  <p style={{ margin: "0 0 10px", fontSize: 15, fontWeight: 700, color: NAVY }}>
+                  <p style={{ margin: "0 0 14px", fontSize: 16, fontWeight: 700, color: NAVY }}>
                     {s.title}
                   </p>
-                  <p style={{
-                    margin: 0,
-                    fontSize: 16,
-                    color: NAVY,
-                    lineHeight: 1.85,
-                    whiteSpace: "pre-line",
-                    opacity: 0.82,
-                  }}>
-                    {s.body}
-                  </p>
+                  {renderBody(s.body)}
                 </div>
               ))}
             </div>
