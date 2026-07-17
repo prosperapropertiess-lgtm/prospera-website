@@ -124,6 +124,8 @@ export default function OnboardListPage() {
   const [ownerEmail,       setOwnerEmail]        = useState("");
   const [ownerPhone,       setOwnerPhone]        = useState("");
   const [propertyAddress,  setPropertyAddress]   = useState("");
+  const [propertyLat,      setPropertyLat]       = useState<number | null>(null);
+  const [propertyLng,      setPropertyLng]       = useState<number | null>(null);
   const [propertyType,     setPropertyType]      = useState("");
   const [serviceType,      setServiceType]       = useState<"placement" | "management">("placement");
   const [propertyCity,     setPropertyCity]       = useState("London");
@@ -150,7 +152,7 @@ export default function OnboardListPage() {
 
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
-    setPropertyAddress(""); setPropertyType(""); setPropertyCity("London");
+    setPropertyAddress(""); setPropertyLat(null); setPropertyLng(null); setPropertyType(""); setPropertyCity("London");
     setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition("");
     setRentLow(""); setRentMarket(""); setRentPremium("");
     setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError("");
@@ -191,6 +193,8 @@ export default function OnboardListPage() {
           owner_email: ownerEmail.trim(),
           owner_phone: ownerPhone.trim() || undefined,
           property_address: propertyAddress.trim(),
+          property_lat: propertyLat ?? undefined,
+          property_lng: propertyLng ?? undefined,
           property_type: propertyType || undefined,
           service_type: serviceType,
           ...(serviceType === "placement" ? {
@@ -334,6 +338,18 @@ export default function OnboardListPage() {
                     onChange={setPropertyAddress}
                     onPlaceSelect={(place) => {
                       setPropertyAddress(place.street_address);
+                      setPropertyLat(place.lat);
+                      setPropertyLng(place.lng);
+                      if (place.city) {
+                        const cityMap: Record<string, string> = {
+                          "London": "London",
+                          "St. Thomas": "St. Thomas",
+                          "Saint Thomas": "St. Thomas",
+                          "Strathroy": "Strathroy",
+                        };
+                        const mapped = cityMap[place.city];
+                        if (mapped) setPropertyCity(mapped);
+                      }
                     }}
                     placeholder="27 Horton Street, St. Thomas"
                     country="ca"
@@ -443,7 +459,7 @@ export default function OnboardListPage() {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 credentials: "include",
-                                body: JSON.stringify({ address: propertyAddress, city: propertyCity, bedrooms: Number(bedrooms) }),
+                                body: JSON.stringify({ address: propertyAddress, city: propertyCity, bedrooms: Number(bedrooms), lat: propertyLat, lng: propertyLng }),
                               });
                               if (res.ok) {
                                 const data = await res.json();
