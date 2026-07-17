@@ -546,9 +546,9 @@ export default function OnboardListPage() {
                                     notes: c.source ? `Source: ${c.source}` : "",
                                   })));
                                 }
-                                if (data.rentLow) setRentLow(String(data.rentLow));
-                                if (data.rentMarket) setRentMarket(String(data.rentMarket));
-                                if (data.rentPremium) setRentPremium(String(data.rentPremium));
+                                if (data.rentLow    && !rentLow)    setRentLow(String(data.rentLow));
+                                if (data.rentMarket && !rentMarket) setRentMarket(String(data.rentMarket));
+                                if (data.rentPremium && !rentPremium) setRentPremium(String(data.rentPremium));
                               }
                             } catch { /* ignore */ }
                             setAutoFilling(false);
@@ -650,9 +650,9 @@ export default function OnboardListPage() {
                             if (res.ok) {
                               const data = await res.json();
                               if (data.comps?.length) setComps(data.comps.map((c: { address: string; rent: number; days_on_market: string; ad_description: string; notes: string }) => ({ ...c, rent: String(c.rent) })));
-                              if (data.rentLow)    setRentLow(String(data.rentLow));
-                              if (data.rentMarket) setRentMarket(String(data.rentMarket));
-                              if (data.rentPremium) setRentPremium(String(data.rentPremium));
+                              if (data.rentLow     && !rentLow)    setRentLow(String(data.rentLow));
+                              if (data.rentMarket  && !rentMarket) setRentMarket(String(data.rentMarket));
+                              if (data.rentPremium && !rentPremium) setRentPremium(String(data.rentPremium));
                               if (data.insights) setParseInsights(data.insights);
                             }
                           } catch { /* ignore */ }
