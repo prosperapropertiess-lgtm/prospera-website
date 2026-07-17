@@ -73,6 +73,9 @@ export interface MarketCompData {
   approx_monthly_rent: number | null;
   bedrooms: number | null;
   bathrooms: number | null;
+  parking_spots: number | null;
+  parking_type: string | null;
+  property_condition: string | null;
   rent_low: number | null;
   rent_market: number | null;
   rent_premium: number | null;
@@ -687,7 +690,7 @@ function ChartTooltip({ active, payload }: { active?: boolean; payload?: Array<{
 export default function MarketCompReport({ data }: { data: MarketCompData }) {
   const {
     owner_name, property_address, property_city, property_type, service_type,
-    approx_monthly_rent, bedrooms, bathrooms,
+    approx_monthly_rent, bedrooms, bathrooms, parking_spots, parking_type, property_condition,
     rent_low, rent_market, rent_premium,
     comparables, created_at, token,
   } = data;
@@ -873,6 +876,8 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
                   { label: "Service", value: service_type === "management" ? "Placement + Management" : "Tenant Placement" },
                   { label: "Bedrooms", value: bedrooms != null ? String(bedrooms) : null },
                   { label: "Bathrooms", value: bathrooms != null ? String(bathrooms) : null },
+                  { label: "Parking", value: parking_type && parking_type !== "none" ? `${parking_spots || 1} spot${(parking_spots || 1) > 1 ? "s" : ""} (${parking_type === "driveway" ? "Driveway" : parking_type === "garage" ? "Garage" : parking_type === "street" ? "Street" : parking_type})` : parking_spots ? `${parking_spots} spot${parking_spots > 1 ? "s" : ""}` : null },
+                  { label: "Condition", value: property_condition ? ({ needs_work: "Needs Work", fair: "Fair", good: "Good", great: "Great", move_in_ready: "Move-In Ready" }[property_condition] || property_condition) : null },
                   { label: "Asking Rent", value: fmtDollar(approx_monthly_rent) },
                 ].filter((r) => r.value).map(({ label, value }) => (
                   <div key={label}>

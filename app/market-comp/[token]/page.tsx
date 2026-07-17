@@ -19,7 +19,7 @@ async function getReportData(token: string): Promise<MarketCompData | null> {
     const { data, error } = await sb
       .from("onboarding_sessions")
       .select(
-        "token, owner_name, property_address, property_city, property_type, service_type, approx_monthly_rent, bedrooms, bathrooms, rent_low, rent_market, rent_premium, comparables, created_at"
+        "token, owner_name, property_address, property_city, property_type, service_type, approx_monthly_rent, bedrooms, bathrooms, parking_spots, parking_type, property_condition, rent_low, rent_market, rent_premium, comparables, created_at"
       )
       .eq("token", token)
       .single();
@@ -36,6 +36,9 @@ async function getReportData(token: string): Promise<MarketCompData | null> {
       approx_monthly_rent: (data.approx_monthly_rent as number | null) ?? null,
       bedrooms: (data.bedrooms as number | null) ?? null,
       bathrooms: (data.bathrooms as number | null) ?? null,
+      parking_spots: (data.parking_spots as number | null) ?? null,
+      parking_type: (data.parking_type as string | null) ?? null,
+      property_condition: (data.property_condition as string | null) ?? null,
       rent_low: (data.rent_low as number | null) ?? null,
       rent_market: (data.rent_market as number | null) ?? null,
       rent_premium: (data.rent_premium as number | null) ?? null,

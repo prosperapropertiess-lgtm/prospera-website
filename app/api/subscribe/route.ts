@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { landlordWelcomeEmail, tenantWelcomeEmail } from "@/lib/emails";
-import { upsertZohoContact } from "@/lib/zoho";
+import { upsertHubspotContact } from "@/lib/hubspot";
 
 export async function POST(req: NextRequest) {
   try {
@@ -81,9 +81,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Add to Zoho CRM
+    // Add to HubSpot CRM
     try {
-      await upsertZohoContact({ email, name, type, source });
+      await upsertHubspotContact({ email, name, type, source, city: preferred_city });
     } catch {
       // Don't block on CRM failure
     }

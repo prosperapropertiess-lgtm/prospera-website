@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { resourceDownloadEmail } from "@/lib/emails";
-import { upsertZohoContact } from "@/lib/zoho";
+import { upsertHubspotContact } from "@/lib/hubspot";
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
           subject: `New lead: ${name || email} downloaded the lease addendum`,
           html: `<p style="font-family:sans-serif;font-size:15px;color:#222;">
             <strong>${name || "(no name)"}</strong> (${email}) just downloaded the <strong>${resourceTitle}</strong>.<br/><br/>
-            They're in your Supabase subscribers table and Zoho CRM.<br/><br/>
+            They're in your Supabase subscribers table and HubSpot.<br/><br/>
             — Prospera site
           </p>`,
         });
@@ -63,9 +63,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Add to Zoho CRM
+    // Add to HubSpot CRM
     try {
-      await upsertZohoContact({
+      await upsertHubspotContact({
         email,
         name,
         type: "landlord",

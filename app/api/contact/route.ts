@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin as supabase } from "@/lib/supabase";
 import { contactConfirmationEmail } from "@/lib/emails";
+import { upsertHubspotContact } from "@/lib/hubspot";
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -71,6 +72,14 @@ export async function POST(req: NextRequest) {
         console.error("Resend error:", emailErr);
         // Don't fail the request if email fails
       }
+    }
+
+    // HubSpot is the system of record for leads — sync every submission
+    try {
+      await upsertHubspotContact({ email, name, phone, city, type, source: traffic_source, message });
+    } catch (hsErr) {
+      console.error("HubSpot sync error:", hsErr);
+      // Don't block the request on CRM failure
     }
 
     return NextResponse.json({ success: true }, { status: 200 });

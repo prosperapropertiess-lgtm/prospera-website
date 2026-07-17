@@ -108,14 +108,7 @@ function Hero() {
 
           {/* CTA */}
           <HeroFadeIn delay={1100} duration={1000}>
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-              <Link
-                href="/freedom-score"
-                className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Landlord Freedom Test
-              </Link>
+            <div className="flex justify-center mb-6">
               <a
                 href="tel:5196971227"
                 className="text-sm font-medium transition-opacity hover:opacity-70"

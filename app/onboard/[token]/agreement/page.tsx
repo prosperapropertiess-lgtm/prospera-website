@@ -50,40 +50,44 @@ const MANAGEMENT_SECTIONS = [
 
 const PLACEMENT_SECTIONS = [
   {
-    title: "What this is",
-    body: "This agreement appoints Prospera Properties to find and place a qualified tenant for your property. We handle the marketing, screening, and lease coordination — you approve the final tenant and keep full control.",
+    title: "First — this is just for both of us",
+    body: "This agreement exists so we both know exactly what to expect. It's not complicated. It's not meant to trap you. It's meant to make sure we're on the same page before we start — so nothing is a surprise, and you always feel like you're in control.\n\nIf something ever feels unclear, just ask. We'd rather explain it twice than have you sign something you're unsure about.",
   },
   {
-    title: "What we do for you",
-    body: "Once this is signed, we handle the full placement process:\n\n• Create and publish your rental listing across multiple platforms (Kijiji, Facebook Marketplace, our website)\n• Write a professional listing description and position your property competitively\n• Handle all tenant inquiries and communication\n• Pre-qualify prospective tenants before scheduling viewings\n• Conduct viewings and coordinate schedules",
+    title: "What we do, from day one to move-in",
+    body: "The moment this is signed, we get to work:\n\n• We complete a rental market analysis so your property is priced right from the start — not too high to sit empty, not too low to leave money on the table\n• We write your listing and post it across all major platforms — Kijiji, Facebook Marketplace, our website, and more\n• We place a lawn sign at the property to attract local interest\n• We handle every inquiry, answer every question, and pre-screen callers before booking a showing\n• We coordinate all showings and collect full applications from interested tenants\n• We run a thorough background check on every applicant: employment verification, income verification, credit check (with their consent), identity verification, and previous landlord references\n• We present you with the full picture on every qualified applicant\n• Once you choose your tenant, we prepare the Ontario Standard Lease, coordinate signing, collect the deposits, and hand you everything cleanly\n\nYou focus on your life. We handle the leasing.",
   },
   {
-    title: "How we screen tenants",
-    body: "Every applicant goes through our full screening process:\n\n• Credit check (with applicant consent)\n• Employment and income verification\n• Previous landlord reference checks\n• Rental history verification\n\nYou see the full file on each qualified applicant. You make the final call — we never approve a tenant without your say.",
+    title: "You choose the tenant — always",
+    body: "We don't pick your tenant for you. We do the work, run the checks, and give you our honest recommendation. But the final decision is always yours.\n\nWe will never approve a tenant or sign a lease without your explicit go-ahead. If you're not comfortable with an applicant — even if everything checks out on paper — you can say no. No explanation needed.",
   },
   {
-    title: "Lease coordination",
-    body: "Once you approve a tenant, we handle the paperwork:\n\n• Prepare the Ontario Standard Lease\n• Coordinate signing between you and the tenant\n• Collect first month's rent and last month's rent deposit\n• Hand everything over to you cleanly",
+    title: "How the money works",
+    body: "Our placement fee is 75% of the first month's rent.\n\nHere's exactly how it flows:\n\n• Before move-in, we collect the first month's rent and the last month's rent deposit from the tenant\n• We keep 75% of the first month's rent as our placement fee\n• We transfer the remaining 25% of first month's rent to you\n• We transfer the full last month's rent deposit to you — every dollar of it — before the tenant moves in\n• You hold the last month's rent for the duration of the tenancy, as required by Ontario law\n\nYou don't write us a cheque. It comes out of what the tenant pays, and you receive the rest before keys are handed over. If we don't place a tenant, you don't pay us anything. No placement, no fee. Simple.",
   },
   {
-    title: "What you pay us",
-    body: "Our placement fee is the rate we discussed. It's payable once a tenant signs the lease and moves in — not before. If we don't place a tenant, you don't pay.",
-  },
-  {
-    title: "Replacement guarantee",
-    body: "If the tenant we place breaks the lease within the first 90 days, or is evicted for reasons that our screening should have caught, we'll find a replacement tenant at no additional placement fee.",
+    title: "We keep you informed the whole way",
+    body: "You'll never be left wondering what's happening with your property.\n\nWe'll update you at least once a week — even if there's nothing major to report. You'll hear about showing activity, applicant interest, and any feedback we're getting from the market. If something significant happens, we reach out right away.\n\nOur job isn't just to find a tenant. It's to make sure you feel good about the process the whole way through.",
   },
   {
     title: "What we need from you",
-    body: "• Provide accurate information about the property (we'll walk you through it)\n• Keep the property in showable condition during the placement period\n• Respond to tenant approval requests within a reasonable time\n• Cooperate with showing schedules\n• Ensure the rental unit meets all legal requirements",
+    body: "We only ask for a few things:\n\n• Keep the property in showable condition — clean, accessible, and presentable\n• Tell us anything we should know about the unit (past issues, quirks, restrictions)\n• When we bring you an applicant to review, try to respond within 48 hours — delays can cost you the tenant\n• Make sure the unit meets Ontario's minimum standards for rental housing\n\nThat's it. The rest is on us.",
+  },
+  {
+    title: "What happens if something goes wrong after move-in",
+    body: "We do everything we can to place the right tenant. But no screening process can predict the future — and we won't pretend otherwise.\n\nIf a tenant we place voluntarily leaves or is lawfully evicted within the first 90 days due to something our screening should have caught, we'll perform one replacement tenant search at no additional placement fee.\n\nFor anything that comes up after move-in — a question, a dispute, something you're not sure how to handle — reach out. We'll point you in the right direction. Our relationship doesn't end when the lease is signed.",
+  },
+  {
+    title: "A few honest limits",
+    body: "We want to be straight with you about a few things:\n\n• We cannot guarantee any specific rental rate, number of applicants, or how quickly the unit will lease. Those things depend on market conditions, the property itself, and factors outside our control\n• We screen every applicant carefully, but we cannot predict a tenant's future behavior, job stability, or whether their circumstances will change after they move in\n• Our screening process is consistent and thorough — but it's a process, not a crystal ball\n• Prospera Properties is not a law firm and does not provide legal, tax, or financial advice\n\nWhat we can promise is this: we'll work hard, keep you informed, price your property intelligently, screen every applicant the same careful way, and be honest with you throughout. That's what we do.",
   },
   {
     title: "Your right to cancel",
-    body: "Either party can cancel this agreement with 7 days written notice. If you cancel after marketing has begun, you may be asked to reimburse incurred advertising costs (if any). No hidden fees, no lock-in.",
+    body: "Either party can cancel this agreement with 7 days written notice. If you cancel after we've already started marketing the property, you may be asked to cover any direct advertising costs we incurred — if any. We'll always be upfront about that before it happens.\n\nNo penalty. No lock-in. No hard feelings.",
   },
   {
     title: "Ontario law",
-    body: "This agreement and all placement activities comply with Ontario's Residential Tenancies Act, 2006, the Ontario Human Rights Code, and all applicable fair housing regulations. We screen based on legitimate business factors only — never on protected grounds.",
+    body: "Everything we do follows Ontario's Residential Tenancies Act, 2006, the Ontario Human Rights Code, and all applicable fair housing laws.\n\nWe screen tenants based on legitimate rental criteria only — income, credit, references, rental history. Never on race, gender, religion, family status, disability, or any other protected ground. That's not just the law. It's the right way to do this.",
   },
 ];
 

@@ -113,7 +113,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
 
             {/* Big rent number */}
             <div className="text-center mb-2">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="popLayout">
                 <motion.div
                   key={rent}
                   initial={{ y: -10, opacity: 0 }}
@@ -244,9 +244,9 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
 
             {/* The simple math that kills the overpricing argument */}
             <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="popLayout">
                 <motion.div
-                  key={rent}
+                  key={rent > rentMarket ? "above" : rent < rentMarket ? "below" : "at"}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -254,75 +254,69 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                 >
                   {rent > rentMarket ? (() => {
                     const diff = rent - rentMarket;
-                    const annualGain = diff * 12;
-                    const oneEmptyMonth = rent;
-                    const monthsToRecover = Math.ceil(oneEmptyMonth / diff);
-                    const marketMonthly = Math.round(rentMarket / 12 * 100) / 100;
+                    const annualUpside = diff * 12;
+                    const monthsToBreakEven = Math.ceil(rent / diff);
 
                     return (
                       <div>
-                        {/* The question */}
+                        {/* The upside */}
                         <div className="p-5 text-center" style={{ backgroundColor: "rgba(31,47,58,0.03)" }}>
                           <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
-                            Is the extra ${diff.toLocaleString()}/mo worth the risk?
+                            Shooting for ${diff.toLocaleString()}/mo more than market
                           </p>
-                          <p className="text-xs" style={{ color: MUTED }}>Here&apos;s the math.</p>
+                          <p className="text-xs" style={{ color: MUTED }}>Here&apos;s the picture.</p>
                         </div>
 
-                        {/* Two scenarios */}
                         <div className="grid grid-cols-1 sm:grid-cols-2">
-                          {/* Scenario A: Higher rent, misses the 1st */}
-                          <div className="p-5" style={{ backgroundColor: "rgba(220,38,38,0.03)", borderRight: `1px solid ${BORDER}` }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#dc2626" }}>
-                              If it doesn&apos;t fill by the 1st
-                            </p>
-                            <div className="space-y-3">
-                              <div>
-                                <p className="text-sm" style={{ color: MUTED }}>You lose the entire month</p>
-                                <p className="text-2xl font-bold" style={{ color: "#dc2626", fontFamily: "var(--font-cormorant)" }}>
-                                  -${oneEmptyMonth.toLocaleString()}
-                                </p>
-                              </div>
-                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(220,38,38,0.06)" }}>
-                                <p className="text-sm" style={{ color: TEXT }}>
-                                  That&apos;s <strong>{monthsToRecover} months</strong> of the higher rent just to break even on <strong>one</strong> empty month.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Scenario B: Market rate, fills fast */}
-                          <div className="p-5" style={{ backgroundColor: "rgba(22,163,74,0.03)" }}>
+                          {/* If it works */}
+                          <div className="p-5" style={{ backgroundColor: "rgba(22,163,74,0.03)", borderRight: `1px solid ${BORDER}` }}>
                             <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#16a34a" }}>
-                              At ${rentMarket.toLocaleString()}/mo — fills on time
+                              If it fills at ${rent.toLocaleString()}
                             </p>
                             <div className="space-y-3">
                               <div>
-                                <p className="text-sm" style={{ color: MUTED }}>You &quot;lose&quot; in lower rent</p>
-                                <p className="text-2xl font-bold" style={{ color: "#92400e", fontFamily: "var(--font-cormorant)" }}>
-                                  ${annualGain.toLocaleString()}/yr
+                                <p className="text-sm" style={{ color: MUTED }}>Potential annual upside</p>
+                                <p className="text-2xl font-bold" style={{ color: "#16a34a", fontFamily: "var(--font-cormorant)" }}>
+                                  +${annualUpside.toLocaleString()}/yr
                                 </p>
                               </div>
                               <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(22,163,74,0.06)" }}>
                                 <p className="text-sm" style={{ color: TEXT }}>
-                                  That&apos;s only <strong>${diff.toLocaleString()}/mo</strong> — or <strong>${Math.round(diff / 30).toLocaleString()}/day</strong>. You save the ${oneEmptyMonth.toLocaleString()} vacancy and pick from a stronger tenant pool.
+                                  That&apos;s an extra <strong>${diff.toLocaleString()}/mo</strong> if the right tenant comes along. Totally possible.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Market rate safety net */}
+                          <div className="p-5" style={{ backgroundColor: "rgba(31,47,58,0.02)" }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: MUTED }}>
+                              Market rate — your safety net
+                            </p>
+                            <div className="space-y-3">
+                              <div>
+                                <p className="text-sm" style={{ color: MUTED }}>If you adjust down to market</p>
+                                <p className="text-2xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
+                                  ${rentMarket.toLocaleString()}/mo
+                                </p>
+                              </div>
+                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(31,47,58,0.04)" }}>
+                                <p className="text-sm" style={{ color: TEXT }}>
+                                  Fills in ~{metrics.marketDaysToFill} days, stronger applicant pool, and you&apos;re done.
+                                  Sometimes the peace of mind is worth it.
                                 </p>
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Bottom line — dead simple */}
-                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(220,38,38,0.04)" }}>
-                          <p className="text-base font-bold mb-2" style={{ color: "#dc2626" }}>
-                            You save ${diff.toLocaleString()}/month.
-                            You lose ${oneEmptyMonth.toLocaleString()} if it sits empty.
+                        {/* Bottom line — empowering */}
+                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
+                          <p className="text-base font-semibold mb-2" style={{ color: NAVY }}>
+                            Try it. If it doesn&apos;t move in {monthsToBreakEven} days, drop to market and move on.
                           </p>
                           <p className="text-sm" style={{ color: MUTED }}>
-                            {monthsToRecover <= 12
-                              ? `That's ${monthsToRecover === 1 ? "a month" : monthsToRecover <= 6 ? `${monthsToRecover} months` : `almost ${Math.round(monthsToRecover / 12 * 10) / 10} year${monthsToRecover > 18 ? "s" : ""}`} of savings — gone in one empty month.`
-                              : `That's over ${Math.floor(monthsToRecover / 12)} year${monthsToRecover >= 24 ? "s" : ""} of savings — gone in one empty month.`
-                            }
+                            Either way, you&apos;re in control. Set your price, pick your tenant, be done with it.
                           </p>
                         </div>
                       </div>
@@ -333,7 +327,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                         <span className="text-lg mt-0.5">✅</span>
                         <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
                           At <strong>${rent.toLocaleString()}/mo</strong>, you fill in ~{metrics.daysToFill} days with {metrics.pool}+ applicants.
-                          {rent < rentMarket && ` You leave $${((rentMarket - rent) * 12).toLocaleString()}/year on the table vs market rate — but you save $${rent.toLocaleString()} per month you would have sat empty, and you pick from a stronger applicant pool.`}
+                          {rent < rentMarket && ` At this price, expect a fast fill with a strong applicant pool — great if you want a quality tenant in place quickly.`}
                           {rent === rentMarket && " This is the sweet spot — competitive pricing with a solid applicant pool."}
                         </p>
                       </div>
@@ -365,7 +359,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                   <><strong>Extended vacancy likely.</strong> At ${rent.toLocaleString()}/mo, expect the unit to sit for over a month. That&apos;s ${rent.toLocaleString()}+ in lost rent. The applicant pool gets weaker at this level — fewer options means less leverage on screening.</>
                 )}
                 {metrics.rentability < 15 && (
-                  <><strong>Above what the market supports.</strong> This pricing will likely result in 6+ weeks of vacancy with a weak applicant pool. The math works against you here — at market rate (${rentMarket.toLocaleString()}) you&apos;d actually net <strong>${Math.round(metrics.marketNetAnnual - metrics.netAnnual).toLocaleString()} more per year</strong>.</>
+                  <><strong>Above what the market supports.</strong> At this level the applicant pool shrinks and vacancy time extends. Market rate gives you a bigger pool to screen from.</>
                 )}
               </motion.div>
             </AnimatePresence>

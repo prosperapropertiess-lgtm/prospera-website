@@ -127,6 +127,10 @@ export default function OnboardListPage() {
   const [serviceType,      setServiceType]       = useState<"placement" | "management">("placement");
   const [propertyCity,     setPropertyCity]       = useState("London");
   const [bedrooms,         setBedrooms]           = useState("2");
+  const [bathrooms,        setBathrooms]          = useState("1");
+  const [parkingSpots,     setParkingSpots]       = useState("0");
+  const [parkingType,      setParkingType]        = useState("none");
+  const [propertyCondition, setPropertyCondition] = useState("");
   const [rentLow,          setRentLow]            = useState("");
   const [rentMarket,       setRentMarket]         = useState("");
   const [rentPremium,      setRentPremium]        = useState("");
@@ -146,7 +150,8 @@ export default function OnboardListPage() {
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyType(""); setPropertyCity("London");
-    setBedrooms("2"); setRentLow(""); setRentMarket(""); setRentPremium("");
+    setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition("");
+    setRentLow(""); setRentMarket(""); setRentPremium("");
     setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError("");
   }
 
@@ -190,6 +195,10 @@ export default function OnboardListPage() {
           ...(serviceType === "placement" ? {
             property_city: propertyCity,
             bedrooms: Number(bedrooms) || 2,
+            bathrooms: bathrooms ? Number(bathrooms) : null,
+            parking_spots: parkingSpots ? Number(parkingSpots) : null,
+            parking_type: parkingType || null,
+            property_condition: propertyCondition || null,
             rent_low: Number(rentLow) || undefined,
             rent_market: Number(rentMarket) || undefined,
             rent_premium: Number(rentPremium) || undefined,
@@ -367,6 +376,28 @@ export default function OnboardListPage() {
                       </select>
                     </div>
                     <InputField label="Bedrooms" value={bedrooms} onChange={setBedrooms} type="number" placeholder="2" />
+                    <InputField label="Bathrooms" value={bathrooms} onChange={setBathrooms} type="number" placeholder="1" />
+                    <div>
+                      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>Parking Type</label>
+                      <select value={parkingType} onChange={e => setParkingType(e.target.value)} style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 14px", fontSize: 15, color: NAVY, fontFamily: "var(--font-poppins), -apple-system, sans-serif", outline: "none" }} onFocus={e => { e.target.style.borderColor = "rgba(139,32,48,0.40)"; }} onBlur={e => { e.target.style.borderColor = INPUT_BORDER; }}>
+                        <option value="none">No parking</option>
+                        <option value="driveway">Driveway</option>
+                        <option value="garage">Garage</option>
+                        <option value="street">Street parking</option>
+                      </select>
+                    </div>
+                    <InputField label="Parking Spots" value={parkingSpots} onChange={setParkingSpots} type="number" placeholder="0" />
+                    <div>
+                      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>Property Condition</label>
+                      <select value={propertyCondition} onChange={e => setPropertyCondition(e.target.value)} style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 14px", fontSize: 15, color: NAVY, fontFamily: "var(--font-poppins), -apple-system, sans-serif", outline: "none" }} onFocus={e => { e.target.style.borderColor = "rgba(139,32,48,0.40)"; }} onBlur={e => { e.target.style.borderColor = INPUT_BORDER; }}>
+                        <option value="">Select condition…</option>
+                        <option value="needs_work">Needs Work</option>
+                        <option value="fair">Fair</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                        <option value="move_in_ready">Move-In Ready</option>
+                      </select>
+                    </div>
                     <InputField label="Conservative Rent ($)" value={rentLow} onChange={setRentLow} type="number" placeholder="1600" />
                     <InputField label="Market Rate Rent ($)" value={rentMarket} onChange={setRentMarket} type="number" placeholder="1800" />
                     <InputField label="Premium Rent ($)" value={rentPremium} onChange={setRentPremium} type="number" placeholder="2000" />
