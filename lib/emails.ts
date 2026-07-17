@@ -2242,3 +2242,60 @@ export function placementWelcomeEmail(data: {
     <p style="margin:0;font-size:15px;color:${T};font-family:${F};line-height:1.9;">Questions? Reply to this email or call me. I'm happy to walk through every number in detail.<br><br>&#8212; Ebin &nbsp;&middot;&nbsp; (519) 697-1227</p>
   `);
 }
+
+// ── Placement Agreement Signed ────────────────────────────────
+
+export function placementAgreementSignedEmail(
+  ownerName: string,
+  propertyAddress: string,
+  signedAt: string,
+): string {
+  const firstName = ownerName.split(" ")[0];
+  const signedDate = new Date(signedAt).toLocaleDateString("en-CA", {
+    year: "numeric", month: "long", day: "numeric",
+  });
+
+  function stepRow(icon: string, heading: string, detail: string): string {
+    return `
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 4px;">
+        <tr>
+          <td style="padding:16px 0;border-bottom:1px solid ${BORDER};">
+            <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+              <tr>
+                <td style="width:32px;vertical-align:top;font-size:18px;padding-top:2px;">${icon}</td>
+                <td style="padding-left:12px;font-size:16px;color:${TEXT};font-family:${FONT};line-height:1.75;">
+                  <strong style="color:${NAVY};">${heading}</strong><br/>
+                  <span style="color:${MUTED};font-size:15px;">${detail}</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>`;
+  }
+
+  return wrapper(`
+    ${heroCard(`You're all set, ${firstName}.`, propertyAddress)}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Your placement agreement is signed and on file. We're already on it — here's exactly what happens from here.</p>
+
+    ${stepRow("✅", `Agreement signed — ${signedDate}`, "Locked in. Your file is open.")}
+    ${stepRow("📊", "Rental market analysis", "We confirm your pricing against current comparable listings before anything goes live.")}
+    ${stepRow("📋", "Your listing goes live within the hour", "Posted on our website, Kijiji, Facebook Marketplace, and everywhere tenants are looking.")}
+    ${stepRow("🪧", "Lawn sign up within 12–24 hours", "Placed at your property to catch local interest right away.")}
+    ${stepRow("📞", "Every inquiry gets a same-day response", "We pre-screen every caller before booking a showing — no wasted viewings.")}
+    ${stepRow("🔎", "Full background check on every applicant", "Employment, income, credit, references, and identity — before we bring anyone to you.")}
+    ${stepRow("📬", "Weekly updates from us", "You'll hear from us at least once a week throughout the process, even when things are quiet.")}
+    ${stepRow("✅", "You choose the tenant", "We bring you the top applicants with our recommendation. The final call is always yours.")}
+
+    <div style="height:28px;"></div>
+
+    ${noteBox("You don't need to do a single thing from here. We handle every inquiry, every showing, every application — and we keep you posted the whole way. <strong>Sit back and relax.</strong> Finding the right tenant is our job now.", "What this means for you")}
+
+    ${divider()}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Questions at any point? Just reply to this email or call me directly. I'm easy to reach.</p>
+
+    ${signoff()}
+  `);
+}
