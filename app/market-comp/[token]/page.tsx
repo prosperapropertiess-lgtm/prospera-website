@@ -58,7 +58,7 @@ async function parseInsights(ctx: PropertyContext): Promise<string[]> {
           role: "user",
           content: `You are a leasing strategist at Prospera Properties.
 
-Write 3–5 insight cards for the "How to command top rent" section of a market analysis report prepared for the property owner.
+Write exactly 4 insight cards for the "How to command top rent" section of a market analysis report for the property owner.
 
 Property: ${propertyDesc}
 ${conditionNote}
@@ -67,16 +67,19 @@ ${ctx.rentPremium ? `Premium rent: $${ctx.rentPremium}/mo` : ""}
 
 ${actionNote}
 
+Structure the 4 cards like this — in this order:
+1. ONE card about the owner action item if there is one (e.g. including utilities). If no action items, skip this and write 4 cards from the remaining topics.
+2. ONE card about the property condition and how it makes marketing easier (e.g. pristine = strong photos, faster fill, less objections from tenants)
+3. ONE card about responding to leads fast — the speed of the first response wins the best tenants. Mention in-person showings.
+4. ONE card about pricing strategy — price at market from day one to attract the strongest applicant pool and avoid vacancy weeks
+
 Rules:
-- Each card = one specific tactic + 1–2 sentences on WHY it works for THIS property
-- If the property is pristine, lead with that strength — focus on marketing, positioning, and tenant quality tactics
-- If there are action items, include those as the first cards
-- Professional, direct, no hype words
-- Always produce at least 3 cards, max 5
+- Each card = bold tactic title + 1–2 sentences explaining the benefit to the owner
+- Do NOT repeat the same topic twice
+- Do NOT write 4 cards all about utilities or any single theme
+- Direct, confident, no hype words
 
-Return ONLY a JSON array of strings. Each string starts with the tactic bolded in ** ** then an em dash and the explanation.
-Example: ["**Professional photography** — Listings with strong photos rent 30–50% faster. A pristine unit deserves a listing that matches.", "**Price at market from day one** — Overpricing on a well-maintained unit still delays your tenant. Starting at market rate attracts the strongest applicant pool immediately."]
-
+Return ONLY a JSON array of 4 strings. Each string: "**Tactic title** — explanation."
 Return only the JSON array, no other text.`,
         },
       ],
