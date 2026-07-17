@@ -20,8 +20,9 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isTenants = pathname?.startsWith("/tenants");
   const isOnboard = pathname?.startsWith("/onboard");
 
+  const isMarketComp = pathname?.startsWith("/market-comp");
   const isListingDetail = /^\/listings\/[^/]+/.test(pathname ?? "");
-  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isDemo;
+  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isDemo || isMarketComp;
 
   return (
     <>

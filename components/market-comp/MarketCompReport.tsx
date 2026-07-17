@@ -77,6 +77,7 @@ export interface MarketCompData {
   parking_type: string | null;
   property_condition: string | null;
   owner_action_items: string | null;
+  rent_insights: string[];
   rent_low: number | null;
   rent_market: number | null;
   rent_premium: number | null;
@@ -689,17 +690,18 @@ function ChartTooltip({ active, payload }: { active?: boolean; payload?: Array<{
 // ── Owner Action Plan ─────────────────────────────────────────────────────────
 
 function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | null; ownerActionItems: string | null }) {
-  const hasOwnerItems = ownerActionItems && ownerActionItems.trim().length > 0;
+  // Only the checkbox part (before "Agent notes:") goes in the owner column
+  const rawOwnerPart = ownerActionItems
+    ? ownerActionItems.split(/Agent notes:/i)[0]
+    : "";
 
-  // Split owner action items from agent notes (separated by "Agent notes:")
-  const [ownerPart, notesPart] = hasOwnerItems
-    ? ownerActionItems!.split(/Agent notes:/i)
-    : ["", ""];
-  const agentNotes = notesPart?.trim() || null;
+  // Parse checked items — only lines that look like bullet/dash items
+  const ownerLines = rawOwnerPart
+    .split(/\n/)
+    .map((s) => s.replace(/^[-•*]\s*/, "").trim())
+    .filter(Boolean);
 
-  // Parse checked items into bullet lines
-  const ownerLines = (ownerPart || "")
-    .split(/\n|•|-(?=\s)/).map(s => s.trim()).filter(Boolean);
+  const hasOwnerItems = ownerLines.length > 0;
 
   const prospераItems = [
     "Professional photography and a compelling listing",
@@ -769,12 +771,6 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
               </div>
             )}
 
-            {agentNotes && (
-              <div className="px-6 py-4" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(180,83,9,0.04)" }}>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: AMBER }}>Our read on the property</p>
-                <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{agentNotes}</p>
-              </div>
-            )}
             <div className="px-6 py-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: NAVY }}>
               <p className="text-sm font-semibold" style={{ color: "#FAF8F5" }}>
                 {hasOwnerItems
@@ -796,6 +792,7 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
   const {
     owner_name, property_address, property_city, property_type, service_type,
     approx_monthly_rent, bedrooms, bathrooms, parking_spots, parking_type, property_condition, owner_action_items,
+    rent_insights,
     rent_low, rent_market, rent_premium,
     comparables, created_at, token,
   } = data;
@@ -833,22 +830,27 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
     })),
   ];
 
-  // Suggestions
-  const suggestions: string[] = [];
-  if (comparables.length > 0) {
-    const subRent = approx_monthly_rent ?? derivedMarket ?? 0;
-    if (subRent < (derivedMarket ?? 0) * 0.95) {
-      suggestions.push(
-        "Your asking rent is below market rate. Pricing at market or premium typically reduces vacancy by attracting stronger applicants who see value and commit faster."
-      );
-    }
-  }
-  suggestions.push(
-    "Including utilities (water, heat) in the rent allows you to list at a higher rate — many tenants pay a premium for predictable monthly costs.",
-    "Professional photos of clean, staged rooms reduce days on market by 30–50% on average.",
-    "A freshly painted unit with updated fixtures signals a well-maintained property and supports top-of-range pricing.",
-    "Offering one month free on a 12-month lease is perceived as a better incentive than a lower monthly rent, while preserving your legal rental rate for future increases."
-  );
+  // Suggestions — prefer Claude-parsed insights from agent notes; fall back to defaults
+  const suggestions: string[] = rent_insights && rent_insights.length > 0
+    ? rent_insights
+    : (() => {
+        const fallback: string[] = [];
+        if (comparables.length > 0) {
+          const subRent = approx_monthly_rent ?? derivedMarket ?? 0;
+          if (subRent < (derivedMarket ?? 0) * 0.95) {
+            fallback.push(
+              "Your asking rent is below market rate. Pricing at market or premium typically reduces vacancy by attracting stronger applicants who see value and commit faster."
+            );
+          }
+        }
+        fallback.push(
+          "Including utilities (water, heat) in the rent allows you to list at a higher rate — many tenants pay a premium for predictable monthly costs.",
+          "Professional photos of clean, staged rooms reduce days on market by 30–50% on average.",
+          "A freshly painted unit with updated fixtures signals a well-maintained property and supports top-of-range pricing.",
+          "Offering one month free on a 12-month lease is perceived as a better incentive than a lower monthly rent, while preserving your legal rental rate for future increases."
+        );
+        return fallback;
+      })();
 
   return (
     <div style={{ background: WARM_BG, minHeight: "100vh", fontFamily: "var(--font-dm-sans)" }}>
@@ -1267,23 +1269,33 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
             </p>
 
             <div className="flex flex-col gap-4">
-              {suggestions.map((s, i) => (
-                <div
-                  key={i}
-                  className="flex gap-4 rounded-xl border bg-white p-6"
-                  style={{ borderColor: BORDER, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-                >
+              {suggestions.map((s, i) => {
+                // Render **bold** markdown inline
+                const parts = s.split(/(\*\*[^*]+\*\*)/g);
+                return (
                   <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
-                    style={{ background: "rgba(139,32,48,0.08)", color: BURGUNDY }}
+                    key={i}
+                    className="flex gap-4 rounded-xl border bg-white p-6"
+                    style={{ borderColor: BORDER, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
                   >
-                    {i + 1}
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(139,32,48,0.08)", color: BURGUNDY }}
+                    >
+                      {i + 1}
+                    </div>
+                    <p className="text-base leading-relaxed" style={{ color: "#333333" }}>
+                      {parts.map((part, j) =>
+                        part.startsWith("**") && part.endsWith("**") ? (
+                          <strong key={j} style={{ color: TEXT }}>{part.slice(2, -2)}</strong>
+                        ) : (
+                          part
+                        )
+                      )}
+                    </p>
                   </div>
-                  <p className="text-base leading-relaxed" style={{ color: "#333333" }}>
-                    {s}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </FadeIn>
         </div>
