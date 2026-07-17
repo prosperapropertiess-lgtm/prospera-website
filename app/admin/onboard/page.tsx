@@ -139,6 +139,8 @@ export default function OnboardListPage() {
   const [rentPremium,      setRentPremium]        = useState("");
   const [comps, setComps] = useState<Array<{ address: string; rent: string; days_on_market: string; ad_description: string; notes: string }>>([]);
   const [autoFilling, setAutoFilling] = useState(false);
+  const [parsing, setParsing]         = useState(false);
+  const [parseInsights, setParseInsights] = useState("");
   const [marketResearch, setMarketResearch] = useState("");
 
   useEffect(() => {
@@ -155,7 +157,7 @@ export default function OnboardListPage() {
     setPropertyAddress(""); setPropertyLat(null); setPropertyLng(null); setPropertyType(""); setPropertyCity("London");
     setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition("");
     setRentLow(""); setRentMarket(""); setRentPremium("");
-    setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError("");
+    setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError(""); setParseInsights("");
   }
 
   async function handleDelete(token: string, e: React.MouseEvent) {
@@ -550,21 +552,67 @@ export default function OnboardListPage() {
                     ))}
                   </div>
 
-                  {/* Your Market Research */}
+                  {/* Paste & Parse Research */}
                   <div style={{ marginTop: 20, background: "#fff", border: `1px solid ${INPUT_BORDER}`, borderRadius: 12, padding: "18px" }}>
-                    <p style={{ fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 8px", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
-                      Your Market Research
-                    </p>
-                    <p style={{ fontSize: 12, color: MUTED, margin: "0 0 10px" }}>
-                      Your own analysis — what you found, what you think, what the auto-fill missed. This is YOUR input, not the AI's.
-                    </p>
+                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8, gap: 12 }}>
+                      <div>
+                        <p style={{ fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 4px", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                          Paste Your Research
+                        </p>
+                        <p style={{ fontSize: 12, color: MUTED, margin: 0 }}>
+                          Dump everything — Kijiji links, listing descriptions, prices, your notes. Claude will parse it into structured comps and rent ranges.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={parsing || !marketResearch.trim()}
+                        onClick={async () => {
+                          setParsing(true);
+                          setParseInsights("");
+                          try {
+                            const res = await fetch("/api/admin/parse-comps", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json", "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET ?? "" },
+                              body: JSON.stringify({ rawText: marketResearch, bedrooms: Number(bedrooms), city: propertyCity }),
+                            });
+                            if (res.ok) {
+                              const data = await res.json();
+                              if (data.comps?.length) setComps(data.comps.map((c: { address: string; rent: number; days_on_market: string; ad_description: string; notes: string }) => ({ ...c, rent: String(c.rent) })));
+                              if (data.rentLow)    setRentLow(String(data.rentLow));
+                              if (data.rentMarket) setRentMarket(String(data.rentMarket));
+                              if (data.rentPremium) setRentPremium(String(data.rentPremium));
+                              if (data.insights) setParseInsights(data.insights);
+                            }
+                          } catch { /* ignore */ }
+                          setParsing(false);
+                        }}
+                        style={{
+                          flexShrink: 0, fontSize: 13, fontWeight: 600,
+                          color: "#fff", background: parsing ? "rgba(15,28,40,0.25)" : NAVY,
+                          border: "none", borderRadius: 8, padding: "8px 16px",
+                          cursor: parsing || !marketResearch.trim() ? "not-allowed" : "pointer",
+                          fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                          opacity: !marketResearch.trim() ? 0.4 : 1,
+                          transition: "all 0.15s", whiteSpace: "nowrap",
+                        }}
+                      >
+                        {parsing ? "Parsing…" : "✦ Parse with Claude"}
+                      </button>
+                    </div>
                     <textarea
                       value={marketResearch}
                       onChange={e => setMarketResearch(e.target.value)}
-                      placeholder={"e.g.\n• Checked 8 listings on Kijiji within 2km — most 2-beds asking $1,700-$1,900\n• The $2,100 listing at 45 Oxford has been sitting for 6 weeks — overpriced\n• Units with parking included are getting $100-150 more\n• This area has high student demand Sept-Apr, slower in summer\n• My recommendation: $1,800 market, could push $1,900 with parking included"}
-                      rows={6}
-                      style={{ width: "100%", background: "#f6f4f1", border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "12px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.7 }}
+                      placeholder={"Paste everything here — raw and unformatted is fine:\n\nhttps://www.kijiji.ca/v-apartments-condos/london/...\n2 bed 1 bath, $1,750/mo — 45 Oxford St, London\nBeen up for 3 weeks. Nice unit but no parking.\n\nhttps://rentals.ca/london/...\n2 bedroom, $1,900 includes water — Wortley Village area\n5 days on market, showing this weekend\n\nMy take: market is $1,750–$1,850 for standard. Anything with parking pushes $1,900+."}
+                      rows={8}
+                      style={{ width: "100%", background: "#f6f4f1", border: `1px solid ${INPUT_BORDER}`, borderRadius: 8, padding: "12px", fontSize: 13, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.7 }}
                     />
+                    {parseInsights && (
+                      <div style={{ marginTop: 10, background: "rgba(10,122,82,0.07)", border: "1px solid rgba(10,122,82,0.18)", borderRadius: 8, padding: "10px 14px" }}>
+                        <p style={{ margin: 0, fontSize: 13, color: "#0A7A52", lineHeight: 1.6, fontFamily: "var(--font-poppins), sans-serif" }}>
+                          <strong>Claude&apos;s read:</strong> {parseInsights}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   <p style={{ margin: "12px 0 0", fontSize: 12, color: MUTED, lineHeight: 1.5 }}>
