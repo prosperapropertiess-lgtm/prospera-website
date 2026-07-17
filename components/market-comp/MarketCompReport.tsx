@@ -731,52 +731,46 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="rounded-2xl border overflow-hidden" style={{ borderColor: BORDER }}>
+          <div className="grid sm:grid-cols-2 gap-8">
 
-            {hasOwnerItems ? (
-              // Two-column layout: owner items | Prospera items
-              <>
-                <div className="grid grid-cols-2 text-xs font-semibold uppercase tracking-wider" style={{ borderBottom: `1px solid ${BORDER}` }}>
-                  <div className="py-3 px-5" style={{ backgroundColor: "rgba(139,32,48,0.05)", color: BURGUNDY }}>Your side</div>
-                  <div className="py-3 px-5" style={{ backgroundColor: "rgba(31,47,58,0.03)", color: NAVY }}>Our side</div>
-                </div>
-                <div className="grid grid-cols-2">
-                  <div style={{ borderRight: `1px solid ${BORDER}` }}>
-                    {ownerLines.map((line, i) => (
-                      <div key={i} className="flex items-start gap-3 px-5 py-4" style={{ borderBottom: i < ownerLines.length - 1 ? `1px solid ${BORDER}` : undefined, backgroundColor: "rgba(139,32,48,0.02)" }}>
-                        <span className="text-sm flex-shrink-0 mt-0.5" style={{ color: BURGUNDY }}>→</span>
-                        <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{line}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    {prospераItems.map((item, i) => (
-                      <div key={i} className="flex items-start gap-3 px-5 py-4" style={{ borderBottom: i < prospераItems.length - 1 ? `1px solid ${BORDER}` : undefined, backgroundColor: "rgba(31,47,58,0.02)" }}>
-                        <span className="text-sm flex-shrink-0 mt-0.5" style={{ color: GREEN }}>✓</span>
-                        <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            ) : (
-              // Single column — everything is Prospera's
+            {/* Owner suggestions — only shown when there are items */}
+            {hasOwnerItems && (
               <div>
+                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: BURGUNDY }}>
+                  Your side
+                </p>
+                <div className="flex flex-col gap-3">
+                  {ownerLines.map((line, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 rounded-xl border p-4"
+                      style={{ borderColor: "rgba(139,32,48,0.15)", backgroundColor: "rgba(139,32,48,0.03)" }}
+                    >
+                      <span className="flex-shrink-0 mt-0.5 text-sm" style={{ color: BURGUNDY }}>→</span>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{line}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Prospera items */}
+            <div className={!hasOwnerItems ? "sm:col-span-2 max-w-2xl mx-auto w-full" : ""}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: NAVY }}>
+                Our side
+              </p>
+              <div className="flex flex-col gap-3">
                 {prospераItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 px-6 py-4" style={{ borderBottom: i < prospераItems.length - 1 ? `1px solid ${BORDER}` : undefined, backgroundColor: "rgba(31,47,58,0.02)" }}>
-                    <span className="text-sm mt-0.5 flex-shrink-0" style={{ color: GREEN }}>✓</span>
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 rounded-xl border p-4"
+                    style={{ borderColor: BORDER, backgroundColor: WARM_BG }}
+                  >
+                    <span className="flex-shrink-0 mt-0.5 text-sm" style={{ color: GREEN }}>✓</span>
                     <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{item}</p>
                   </div>
                 ))}
               </div>
-            )}
-
-            <div className="px-6 py-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: NAVY }}>
-              <p className="text-sm font-semibold" style={{ color: "#FAF8F5" }}>
-                {hasOwnerItems
-                  ? "Once your side is done, we take over completely. Listing, screening, lease \u2014 all handled."
-                  : "You\u2019ve done your part. The rest is on us \u2014 listing, screening, and getting the right tenant through the door."}
-              </p>
             </div>
 
           </div>
