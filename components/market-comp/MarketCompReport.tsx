@@ -971,54 +971,70 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
               Your property at a glance
             </h2>
 
-            <div
-              className="rounded-xl border p-7"
-              style={{ borderColor: BORDER, background: WARM_BG }}
-            >
-              <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                {[
-                  { label: "Address", value: property_address },
-                  { label: "City", value: property_city },
-                  { label: "Type", value: property_type },
-                  { label: "Service", value: service_type === "management" ? "Placement + Management" : "Tenant Placement" },
-                  { label: "Bedrooms", value: bedrooms != null ? String(bedrooms) : null },
-                  { label: "Bathrooms", value: bathrooms != null ? String(bathrooms) : null },
-                  { label: "Parking", value: parking_type && parking_type !== "none" ? `${parking_spots || 1} spot${(parking_spots || 1) > 1 ? "s" : ""} (${parking_type === "driveway" ? "Driveway" : parking_type === "garage" ? "Garage" : parking_type === "street" ? "Street" : parking_type})` : parking_spots ? `${parking_spots} spot${parking_spots > 1 ? "s" : ""}` : null },
-                  { label: "Condition", value: property_condition ? ({ needs_work: "Needs Work", fair: "Fair", good: "Good", great: "Great", move_in_ready: "Move-In Ready" }[property_condition] || property_condition) : null },
-                  { label: "Asking Rent", value: fmtDollar(approx_monthly_rent) },
-                ].filter((r) => r.value).map(({ label, value }) => (
-                  <div key={label}>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
-                      {label}
-                    </p>
-                    <p className="font-semibold text-base" style={{ color: TEXT }}>
-                      {value}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            {(() => {
+              const details = [
+                { label: "Address", value: property_address },
+                { label: "City", value: property_city },
+                { label: "Type", value: property_type },
+                { label: "Service", value: service_type === "management" ? "Placement + Management" : "Tenant Placement" },
+                { label: "Bedrooms", value: bedrooms != null ? `${bedrooms} bed${bedrooms !== 1 ? "s" : ""}` : null },
+                { label: "Bathrooms", value: bathrooms != null ? `${bathrooms} bath${bathrooms !== 1 ? "s" : ""}` : null },
+                { label: "Parking", value: parking_type && parking_type !== "none" ? `${parking_spots || 1} spot${(parking_spots || 1) > 1 ? "s" : ""} · ${parking_type === "driveway" ? "Driveway" : parking_type === "garage" ? "Garage" : parking_type === "street" ? "Street" : parking_type}` : parking_spots ? `${parking_spots} spot${parking_spots > 1 ? "s" : ""}` : null },
+                { label: "Condition", value: property_condition ? ({ needs_work: "Needs Work", fair: "Fair", good: "Good", great: "Great", move_in_ready: "Move-In Ready" }[property_condition] || property_condition) : null },
+              ].filter((r) => r.value);
+              const lastRowStart = details.length % 2 === 0 ? details.length - 2 : details.length - 1;
+              return (
+                <div className="rounded-2xl border overflow-hidden" style={{ borderColor: BORDER, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
+                  {/* Asking rent hero */}
+                  {approx_monthly_rent && (
+                    <div className="px-8 py-7 text-center" style={{ background: NAVY }}>
+                      <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(250,248,245,0.4)" }}>
+                        Asking Rent
+                      </p>
+                      <p className="text-4xl sm:text-5xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
+                        {fmtDollar(approx_monthly_rent)}<span className="text-xl font-normal" style={{ opacity: 0.45 }}>/mo</span>
+                      </p>
+                    </div>
+                  )}
 
-              {/* Score circles */}
-              {(subjectWalk > 0 || subjectTransit > 0 || subjectBike > 0) && (
-                <div>
-                  <div
-                    className="h-px mb-6"
-                    style={{ background: BORDER }}
-                  />
-                  <p
-                    className="text-xs font-semibold uppercase tracking-widest mb-5"
-                    style={{ color: MUTED }}
-                  >
-                    Walkability Scores
-                  </p>
-                  <div className="flex gap-8 flex-wrap">
-                    <ScoreCircle score={subjectWalk} label="Walk" color={NAVY} />
-                    <ScoreCircle score={subjectTransit} label="Transit" color={BURGUNDY} />
-                    <ScoreCircle score={subjectBike} label="Bike" color={GREEN} />
+                  {/* 2-column detail grid */}
+                  <div className="grid grid-cols-2">
+                    {details.map(({ label, value }, i) => (
+                      <div
+                        key={label}
+                        className="px-6 py-5"
+                        style={{
+                          borderRight: i % 2 === 0 ? `1px solid ${BORDER}` : undefined,
+                          borderBottom: i < lastRowStart ? `1px solid ${BORDER}` : undefined,
+                          background: Math.floor(i / 2) % 2 === 0 ? WHITE : WARM_BG,
+                        }}
+                      >
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
+                          {label}
+                        </p>
+                        <p className="font-semibold text-base" style={{ color: TEXT }}>
+                          {value}
+                        </p>
+                      </div>
+                    ))}
                   </div>
+
+                  {/* Walkability scores — only if available */}
+                  {(subjectWalk > 0 || subjectTransit > 0 || subjectBike > 0) && (
+                    <div className="px-7 py-6" style={{ borderTop: `1px solid ${BORDER}`, background: WARM_BG }}>
+                      <p className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: MUTED }}>
+                        Walkability Scores
+                      </p>
+                      <div className="flex gap-8 flex-wrap">
+                        <ScoreCircle score={subjectWalk} label="Walk" color={NAVY} />
+                        <ScoreCircle score={subjectTransit} label="Transit" color={BURGUNDY} />
+                        <ScoreCircle score={subjectBike} label="Bike" color={GREEN} />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()}
           </FadeIn>
         </div>
       </section>

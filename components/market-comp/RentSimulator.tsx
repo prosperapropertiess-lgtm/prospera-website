@@ -5,9 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 
 const NAVY = "#1F2F3A";
+const BURGUNDY = "#8B2030";
 const TEXT = "#222222";
 const MUTED = "#666666";
 const BORDER = "#D8D2C8";
+const GREEN = "#0A7A52";
+const WARM_BG = "#F7F5F2";
 
 interface Props {
   rentLow: number;
@@ -17,7 +20,7 @@ interface Props {
 }
 
 export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRents }: Props) {
-  const floor = Math.max(Math.round(rentLow * 0.85), 500);
+  const floor = Math.max(Math.round(rentLow * 0.9 / 25) * 25, 500);
   const ceiling = Math.round((rentPremium + 500) / 25) * 25;
   const [rent, setRent] = useState(rentMarket);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -28,50 +31,77 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
     : rentMarket;
 
   const metrics = useMemo(() => {
-    const range = ceiling - floor;
-    const pos = Math.max(0, Math.min(1, (rent - floor) / range));
+    // ── Rentability anchored to your thresholds, not slider position ──────────
+    // Below low → 95%, at market → 72%, at premium → 48%, above premium → drops fast
+    let rentability: number;
+    if (rent <= rentLow) {
+      rentability = 95;
+    } else if (rent <= rentMarket) {
+      const t = (rent - rentLow) / Math.max(1, rentMarket - rentLow);
+      rentability = Math.round(95 - t * 23); // 95 → 72
+    } else if (rent <= rentPremium) {
+      const t = (rent - rentMarket) / Math.max(1, rentPremium - rentMarket);
+      rentability = Math.round(72 - t * 24); // 72 → 48
+    } else {
+      const t = Math.min(1, (rent - rentPremium) / Math.max(1, 500));
+      rentability = Math.round(48 - t * 38); // 48 → 10
+    }
+    rentability = Math.max(10, Math.min(100, rentability));
 
-    const rentability = Math.max(0, Math.min(100, Math.round(100 * Math.pow(1 - pos, 1.5))));
+    // ── Days to fill: market rate = 4–5 weeks, as-expected ───────────────────
+    let daysToFill: number;
+    if (rent <= rentLow) {
+      daysToFill = 14; // 2 weeks
+    } else if (rent <= rentMarket) {
+      const t = (rent - rentLow) / Math.max(1, rentMarket - rentLow);
+      daysToFill = Math.round(14 + t * 16); // 14 → 30 days
+    } else if (rent <= rentPremium) {
+      const t = (rent - rentMarket) / Math.max(1, rentPremium - rentMarket);
+      daysToFill = Math.round(30 + t * 18); // 30 → 48 days
+    } else {
+      const t = Math.min(1, (rent - rentPremium) / Math.max(1, 500));
+      daysToFill = Math.round(48 + t * 42); // 48 → 90 days
+    }
 
-    const baseDays = 7;
-    const maxDays = 120;
-    const daysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(pos, 1.8));
+    // ── Applicant pool ────────────────────────────────────────────────────────
+    let pool: number;
+    if (rent <= rentLow) pool = 25;
+    else if (rent <= rentMarket) {
+      const t = (rent - rentLow) / Math.max(1, rentMarket - rentLow);
+      pool = Math.round(25 - t * 12); // 25 → 13
+    } else if (rent <= rentPremium) {
+      const t = (rent - rentMarket) / Math.max(1, rentPremium - rentMarket);
+      pool = Math.round(13 - t * 8); // 13 → 5
+    } else {
+      pool = Math.max(1, Math.round(5 - Math.floor((rent - rentPremium) / 100)));
+    }
 
-    const spread = rentPremium - rentLow;
-    const distFromMarket = spread > 0 ? Math.abs(rent - rentMarket) / spread : 0;
-    const appQuality = distFromMarket < 0.15 ? "Excellent" : distFromMarket < 0.35 ? "Good" : distFromMarket < 0.6 ? "Fair" : "Weak";
+    // ── App quality tied to market distance ───────────────────────────────────
+    const aboveMarket = rent - rentMarket;
+    const appQuality = aboveMarket <= 0 ? "Excellent" : aboveMarket < 200 ? "Good" : aboveMarket < 400 ? "Fair" : "Weak";
 
-    const poolBase = 25;
-    const pool = Math.max(1, Math.round(poolBase * Math.pow(1 - pos, 2)));
+    // ── Colour: green at/below market, amber at premium, red above ────────────
+    const pos = Math.max(0, Math.min(1, (rent - floor) / Math.max(1, ceiling - floor)));
+    const hue = Math.round(120 * Math.max(0, 1 - pos * 1.4));
+    const color = `hsl(${hue}, 70%, 38%)`;
+    const bgColor = `hsl(${hue}, 40%, 97%)`;
+    const barColor = `hsl(${hue}, 65%, 48%)`;
 
-    const hue = Math.round(120 * (1 - pos));
-    const color = `hsl(${hue}, 70%, 42%)`;
-    const bgColor = `hsl(${hue}, 50%, 97%)`;
-    const barColor = `hsl(${hue}, 65%, 50%)`;
+    // ── Zone ──────────────────────────────────────────────────────────────────
+    const zone = rent <= rentMarket ? "At Market" : rent <= rentPremium ? "Above Market" : "Above Premium";
 
-    const zone = pos < 0.3 ? "Sweet Spot" : pos < 0.55 ? "Competitive" : pos < 0.75 ? "Aggressive" : "Risky";
-    const zoneEmoji = pos < 0.3 ? "🟢" : pos < 0.55 ? "🟡" : pos < 0.75 ? "🟠" : "🔴";
+    // ── Vacancy cost math ─────────────────────────────────────────────────────
+    const vacancyCostPerWeek = Math.round(rent / 4.33);
+    const totalVacancyCost = Math.round((rent / 30) * daysToFill);
+    const weeksToFill = Math.round(daysToFill / 7);
 
-    // Vacancy cost = full daily rent × days empty
-    const dailyRent = rent / 30;
-    const vacancyCost = Math.round(dailyRent * daysToFill);
-    const grossAnnual = rent * 12;
-    const netAnnual = grossAnnual - vacancyCost;
-
-    // Market rate comparison
-    const marketPos = Math.max(0, Math.min(1, (rentMarket - floor) / range));
-    const marketDaysToFill = Math.round(baseDays + (maxDays - baseDays) * Math.pow(marketPos, 1.3));
-    const marketDailyRent = rentMarket / 30;
-    const marketVacancyCost = Math.round(marketDailyRent * marketDaysToFill);
-    const marketGrossAnnual = rentMarket * 12;
-    const marketNetAnnual = marketGrossAnnual - marketVacancyCost;
-
-    const netDiff = netAnnual - marketNetAnnual;
-
-    return { rentability, daysToFill, appQuality, pool, color, bgColor, barColor, zone, zoneEmoji, grossAnnual, vacancyCost, netAnnual, marketDaysToFill, marketVacancyCost, marketGrossAnnual, marketNetAnnual, netDiff, pos };
+    return {
+      rentability, daysToFill, weeksToFill, pool, appQuality,
+      color, bgColor, barColor, zone, pos,
+      vacancyCostPerWeek, totalVacancyCost,
+    };
   }, [rent, floor, ceiling, rentMarket, rentLow, rentPremium]);
 
-  // Drag-based slider for better touch/click support
   const updateFromPosition = useCallback((clientX: number) => {
     if (!trackRef.current) return;
     const rect = trackRef.current.getBoundingClientRect();
@@ -90,405 +120,260 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
   };
   const handlePointerUp = () => { dragging.current = false; };
 
+  const isAtMarket = rent <= rentMarket;
+  const isAboveMarket = rent > rentMarket && rent <= rentPremium;
+  const isAbovePremium = rent > rentPremium;
+
   return (
-    <section className="py-16 sm:py-20 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section className="py-16 sm:py-20 px-5 sm:px-8" style={{ backgroundColor: WARM_BG }}>
       <div className="max-w-4xl mx-auto">
         <FadeIn>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>
-            Interactive Tool
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-center" style={{ color: MUTED }}>
+            Rent Simulator
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
-            Rent Pricing Simulator
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-center" style={{ color: NAVY, fontFamily: "var(--font-dm-sans)" }}>
+            What happens at each price point
           </h2>
-          <p className="text-sm mb-10 max-w-xl" style={{ color: MUTED, lineHeight: 1.7 }}>
-            Drag the slider to see how pricing affects your vacancy risk, applicant quality, and annual income.
+          <p className="text-sm mb-10 text-center max-w-xl mx-auto" style={{ color: MUTED, lineHeight: 1.7 }}>
+            Move the slider to see how your asking rent affects fill time, applicant volume, and income.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.1}>
           <div
-            className="rounded-2xl border p-6 sm:p-8 transition-colors duration-500"
-            style={{ borderColor: BORDER, backgroundColor: metrics.bgColor }}
+            className="rounded-2xl border p-6 sm:p-8"
+            style={{ borderColor: BORDER, backgroundColor: "#FFFFFF" }}
           >
-
             {/* Big rent number */}
-            <div className="text-center mb-2">
+            <div className="text-center mb-6">
               <AnimatePresence mode="popLayout">
-                <motion.div
+                <motion.span
                   key={rent}
-                  initial={{ y: -10, opacity: 0 }}
+                  initial={{ y: -8, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 10, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
+                  exit={{ y: 8, opacity: 0 }}
+                  transition={{ duration: 0.13 }}
+                  className="text-5xl sm:text-6xl font-bold block"
+                  style={{ color: metrics.color, fontFamily: "var(--font-cormorant)", transition: "color 0.3s" }}
                 >
-                  <span className="text-5xl sm:text-7xl font-bold" style={{ color: metrics.color, fontFamily: "var(--font-cormorant)", transition: "color 0.3s" }}>
-                    ${rent.toLocaleString()}
-                  </span>
-                </motion.div>
+                  ${rent.toLocaleString()}
+                </motion.span>
               </AnimatePresence>
               <p className="text-sm mt-1" style={{ color: MUTED }}>/month</p>
-            </div>
 
-            {/* Zone badge */}
-            <div className="flex justify-center mb-8">
-              <motion.div
-                key={metrics.zone}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wider"
-                style={{ backgroundColor: metrics.color, color: "#fff", transition: "background-color 0.3s" }}
-              >
-                {metrics.zoneEmoji} {metrics.zone}
-              </motion.div>
+              <div className="flex justify-center mt-3">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={metrics.zone}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.15 }}
+                    className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider"
+                    style={{ backgroundColor: metrics.color, color: "#fff" }}
+                  >
+                    {metrics.zone}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Slider */}
-            <div className="mb-3">
+            <div className="mb-2">
               <div
                 ref={trackRef}
-                className="relative h-8 cursor-pointer select-none touch-none"
+                className="relative h-10 cursor-pointer select-none touch-none"
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
               >
-                {/* Track background */}
-                <div className="absolute top-3 left-0 right-0 h-3 rounded-full overflow-hidden" style={{ background: "linear-gradient(to right, #22c55e, #84cc16, #eab308, #f97316, #ef4444)" }} />
+                {/* Track */}
+                <div
+                  className="absolute top-4 left-0 right-0 h-2.5 rounded-full"
+                  style={{ background: "linear-gradient(to right, #22c55e, #84cc16, #eab308, #f97316, #ef4444)" }}
+                />
 
-                {/* Marker lines */}
+                {/* Threshold markers */}
                 {[
                   { val: rentLow, label: "Low", color: "#16a34a" },
-                  { val: rentMarket, label: "Market", color: "#1F2F3A" },
-                  { val: rentPremium, label: "High", color: "#d97706" },
-                  { val: avgComp, label: "Avg Comp", color: "#6366f1" },
-                ].map((m) => (
-                  <div key={m.label} className="absolute top-1" style={{ left: `${((m.val - floor) / (ceiling - floor)) * 100}%` }}>
-                    <div className="w-0.5 h-7 rounded" style={{ backgroundColor: m.color }} />
-                  </div>
-                ))}
+                  { val: rentMarket, label: "Market", color: NAVY },
+                  { val: rentPremium, label: "Premium", color: "#d97706" },
+                ].map((m) => {
+                  const pct = ((m.val - floor) / (ceiling - floor)) * 100;
+                  if (pct < 0 || pct > 100) return null;
+                  return (
+                    <div key={m.label} className="absolute" style={{ left: `${pct}%`, top: "0px" }}>
+                      <div className="w-0.5 h-4" style={{ backgroundColor: m.color, marginLeft: "-1px" }} />
+                      <div className="absolute -translate-x-1/2 mt-6 text-xs font-semibold whitespace-nowrap" style={{ color: m.color, top: 0 }}>
+                        {m.label}
+                      </div>
+                    </div>
+                  );
+                })}
 
-                {/* Draggable thumb */}
+                {/* Thumb */}
                 <div
-                  className="absolute top-0 -ml-4 w-8 h-8 rounded-full border-4 border-white shadow-lg transition-colors duration-300"
+                  className="absolute top-1 -ml-4 w-8 h-8 rounded-full border-[3px] border-white shadow-md"
                   style={{
                     left: `${metrics.pos * 100}%`,
                     backgroundColor: metrics.color,
-                    boxShadow: `0 0 0 4px ${metrics.color}33, 0 4px 12px rgba(0,0,0,0.2)`,
+                    transition: "background-color 0.3s",
+                    boxShadow: `0 0 0 3px ${metrics.color}30, 0 3px 10px rgba(0,0,0,0.18)`,
                   }}
                 />
               </div>
             </div>
 
-            {/* Slider labels */}
-            <div className="flex justify-between text-xs mb-8 px-1" style={{ color: MUTED }}>
+            {/* Range labels */}
+            <div className="flex justify-between text-xs mb-10 mt-6" style={{ color: MUTED }}>
               <span>${floor.toLocaleString()}</span>
-              <div className="hidden sm:flex gap-6">
-                <span style={{ color: "#16a34a" }}>● Low ${rentLow.toLocaleString()}</span>
-                <span style={{ color: NAVY, fontWeight: 600 }}>● Market ${rentMarket.toLocaleString()}</span>
-                <span style={{ color: "#d97706" }}>● Premium ${rentPremium.toLocaleString()}</span>
-                <span style={{ color: "#6366f1" }}>● Comp Avg ${avgComp.toLocaleString()}</span>
-              </div>
               <span>${ceiling.toLocaleString()}</span>
             </div>
 
-            {/* Metrics grid */}
+            {/* Metrics row */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-              <MetricCard
-                label="Rentability"
-                value={`${metrics.rentability}%`}
-                icon={metrics.rentability > 70 ? "🟢" : metrics.rentability > 40 ? "🟡" : "🔴"}
-                color={metrics.color}
-              />
-              <MetricCard
-                label="Days to Fill"
-                value={`~${metrics.daysToFill}`}
-                icon={metrics.daysToFill < 14 ? "⚡" : metrics.daysToFill < 30 ? "⏱️" : "🐌"}
-                color={metrics.color}
-              />
-              <MetricCard
-                label="Applicant Pool"
-                value={`~${metrics.pool}`}
-                icon={metrics.pool > 15 ? "👥" : metrics.pool > 5 ? "👤" : "😶"}
-                color={metrics.color}
-              />
-              <MetricCard
-                label="App Quality"
-                value={metrics.appQuality}
-                icon={metrics.appQuality === "Excellent" ? "⭐" : metrics.appQuality === "Good" ? "👍" : "⚠️"}
-                color={metrics.color}
-              />
+              {[
+                {
+                  label: "Rentability",
+                  value: `${metrics.rentability}%`,
+                  sub: metrics.rentability >= 70 ? "High demand" : metrics.rentability >= 50 ? "Moderate" : "Low demand",
+                },
+                {
+                  label: "Days to Fill",
+                  value: `${metrics.daysToFill}d`,
+                  sub: `≈ ${metrics.weeksToFill} week${metrics.weeksToFill !== 1 ? "s" : ""}`,
+                },
+                {
+                  label: "Applicant Pool",
+                  value: `${metrics.pool}+`,
+                  sub: metrics.pool >= 15 ? "Strong" : metrics.pool >= 7 ? "Moderate" : "Thin",
+                },
+                {
+                  label: "App Quality",
+                  value: metrics.appQuality,
+                  sub: rent <= rentMarket ? "At market" : rent <= rentPremium ? "Above market" : "Above premium",
+                },
+              ].map((m) => (
+                <div
+                  key={m.label}
+                  className="rounded-xl p-4 text-center"
+                  style={{ backgroundColor: WARM_BG, border: `1px solid ${BORDER}` }}
+                >
+                  <p className="text-xs uppercase tracking-wider mb-2" style={{ color: MUTED }}>{m.label}</p>
+                  <AnimatePresence mode="popLayout">
+                    <motion.p
+                      key={m.value}
+                      initial={{ y: -5, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 5, opacity: 0 }}
+                      transition={{ duration: 0.12 }}
+                      className="text-xl font-bold mb-0.5"
+                      style={{ color: metrics.color, fontFamily: "var(--font-cormorant)", transition: "color 0.3s" }}
+                    >
+                      {m.value}
+                    </motion.p>
+                  </AnimatePresence>
+                  <p className="text-xs" style={{ color: MUTED }}>{m.sub}</p>
+                </div>
+              ))}
             </div>
 
             {/* Rentability bar */}
             <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium" style={{ color: TEXT }}>Rentability Score</span>
-                <span className="text-sm font-bold" style={{ color: metrics.color }}>{metrics.rentability}%</span>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-medium" style={{ color: MUTED }}>Rentability</span>
+                <span className="text-xs font-bold" style={{ color: metrics.color }}>{metrics.rentability}%</span>
               </div>
-              <div className="h-5 rounded-full overflow-hidden" style={{ backgroundColor: "rgba(0,0,0,0.06)" }}>
+              <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "rgba(0,0,0,0.06)" }}>
                 <motion.div
-                  className="h-full rounded-full relative overflow-hidden"
+                  className="h-full rounded-full"
                   animate={{ width: `${metrics.rentability}%` }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                   style={{ backgroundColor: metrics.barColor, transition: "background-color 0.3s" }}
-                >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0" style={{
-                    background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)",
-                    animation: "shimmer 2s infinite",
-                  }} />
-                </motion.div>
+                />
               </div>
-              <style>{`@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }`}</style>
             </div>
 
-            {/* Analysis block — three honest zones */}
-            <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-              <AnimatePresence mode="popLayout">
-                <motion.div
-                  key={rent > rentPremium ? "above-premium" : rent > rentMarket ? "above-market" : rent < rentMarket ? "below" : "at"}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-
-                  {/* ZONE 1: Above premium — DO NOT GO HERE */}
-                  {rent > rentPremium && (() => {
-                    const abovePremium = rent - rentPremium;
-                    const aboveMarket = rent - rentMarket;
-                    const vacancyCostHere = Math.round((rent / 30) * metrics.daysToFill);
-                    const vacancyCostAtPremium = Math.round((rentPremium / 30) * 21);
-                    const netHere = rent * 12 - vacancyCostHere;
-                    const netAtPremium = rentPremium * 12 - vacancyCostAtPremium;
-                    const netDiff = netAtPremium - netHere;
-
-                    return (
-                      <div>
-                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(185,28,28,0.05)", borderBottom: `1px solid rgba(185,28,28,0.12)` }}>
-                          <p className="text-base font-semibold mb-1" style={{ color: "#B91C1C" }}>
-                            ${abovePremium.toLocaleString()}/mo above what this market supports
-                          </p>
-                          <p className="text-xs" style={{ color: MUTED }}>This is above our premium estimate. Here&apos;s what it actually costs you.</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2">
-                          <div className="p-5" style={{ backgroundColor: "rgba(185,28,28,0.03)", borderRight: `1px solid ${BORDER}` }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#B91C1C" }}>
-                              At ${rent.toLocaleString()} — the real math
-                            </p>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Expected vacancy</span>
-                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>~{metrics.daysToFill} days</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Lost rent while waiting</span>
-                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>–${vacancyCostHere.toLocaleString()}</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Applicant pool</span>
-                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>~{metrics.pool} people</span>
-                              </div>
-                              <div className="flex justify-between text-sm pt-1" style={{ borderTop: `1px solid ${BORDER}` }}>
-                                <span style={{ color: MUTED, fontWeight: 600 }}>Net year 1</span>
-                                <span style={{ color: "#B91C1C", fontWeight: 700 }}>${netHere.toLocaleString()}</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="p-5" style={{ backgroundColor: "rgba(31,47,58,0.02)" }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#d97706" }}>
-                              At premium (${rentPremium.toLocaleString()}) — what we recommend
-                            </p>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Expected vacancy</span>
-                                <span style={{ color: "#d97706", fontWeight: 600 }}>~21 days</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Lost rent while waiting</span>
-                                <span style={{ color: MUTED, fontWeight: 600 }}>–${vacancyCostAtPremium.toLocaleString()}</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Applicant pool</span>
-                                <span style={{ color: "#d97706", fontWeight: 600 }}>Strong</span>
-                              </div>
-                              <div className="flex justify-between text-sm pt-1" style={{ borderTop: `1px solid ${BORDER}` }}>
-                                <span style={{ color: MUTED, fontWeight: 600 }}>Net year 1</span>
-                                <span style={{ color: NAVY, fontWeight: 700 }}>${netAtPremium.toLocaleString()}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="p-5 text-center" style={{ borderTop: `1px solid rgba(185,28,28,0.12)`, backgroundColor: "rgba(185,28,28,0.04)" }}>
-                          <p className="text-base font-semibold mb-1" style={{ color: "#B91C1C" }}>
-                            {netDiff > 0
-                              ? `You net $${netDiff.toLocaleString()} more at premium — with a fraction of the wait.`
-                              : `The vacancy cost wipes out the gain. Don\u2019t go here.`}
-                          </p>
-                          <p className="text-sm" style={{ color: MUTED }}>
-                            Above ${rentPremium.toLocaleString()}, vacancy gets long and applicant quality drops. The math doesn&apos;t work.
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })()}
-
-                  {/* ZONE 2: Above market but within premium — scaled by rentability */}
-                  {rent > rentMarket && rent <= rentPremium && (() => {
-                    const diff = rent - rentMarket;
-                    const weeksToFill = Math.round(metrics.daysToFill / 7);
-
-                    const tone = metrics.rentability >= 50
-                      ? "possible"
-                      : metrics.rentability >= 30
-                        ? "risky"
-                        : "unlikely";
-
-                    return (
-                      <div>
-                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(31,47,58,0.03)", borderBottom: `1px solid ${BORDER}` }}>
-                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
-                            ${diff.toLocaleString()}/mo above market — {tone === "possible" ? "within reach" : tone === "risky" ? "pushing it" : "unlikely to fill"}
-                          </p>
-                          <p className="text-xs" style={{ color: MUTED }}>This is the high end of what comparable units are getting.</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2">
-                          <div className="p-5" style={{
-                            backgroundColor: tone === "possible" ? "rgba(180,83,9,0.04)" : "rgba(185,28,28,0.04)",
-                            borderRight: `1px solid ${BORDER}`
-                          }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: tone === "possible" ? "#d97706" : "#B91C1C" }}>
-                              At ${rent.toLocaleString()}
-                            </p>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Expected wait</span>
-                                <span style={{ color: tone === "possible" ? "#d97706" : "#B91C1C", fontWeight: 600 }}>~{weeksToFill} weeks</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Applicant pool</span>
-                                <span style={{ color: tone === "possible" ? "#d97706" : "#B91C1C", fontWeight: 600 }}>~{metrics.pool} people</span>
-                              </div>
-                              <div className="p-3 rounded-lg mt-2" style={{ backgroundColor: tone === "possible" ? "rgba(180,83,9,0.07)" : "rgba(185,28,28,0.07)" }}>
-                                <p className="text-sm" style={{ color: TEXT }}>
-                                  {tone === "possible" && "Possible if the unit shows well. Give it 2–3 weeks before reassessing."}
-                                  {tone === "risky" && "You'll likely wait over a month. Fewer applicants means less screening leverage."}
-                                  {tone === "unlikely" && "At this price, qualified applicants are rare. The unit may sit for 6+ weeks."}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="p-5" style={{ backgroundColor: "rgba(31,47,58,0.02)" }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: NAVY }}>
-                              Market rate — ${rentMarket.toLocaleString()}
-                            </p>
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Expected wait</span>
-                                <span style={{ color: "#16a34a", fontWeight: 600 }}>~{metrics.marketDaysToFill} days</span>
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span style={{ color: MUTED }}>Applicant pool</span>
-                                <span style={{ color: "#16a34a", fontWeight: 600 }}>Strong</span>
-                              </div>
-                              <div className="p-3 rounded-lg mt-2" style={{ backgroundColor: "rgba(31,47,58,0.04)" }}>
-                                <p className="text-sm" style={{ color: TEXT }}>
-                                  Fills fast, strong applicant pool, and you&apos;re done. Sometimes the certainty is worth the difference.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
-                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
-                            {tone === "possible" && `Try it for 2–3 weeks. If nothing moves, drop to market and you\u2019re done.`}
-                            {tone === "risky" && `We\u2019d price at market. The extra income rarely covers the weeks you wait.`}
-                            {tone === "unlikely" && `At this rentability, we don\u2019t recommend it. Drop to market and fill it fast.`}
-                          </p>
-                          <p className="text-sm" style={{ color: MUTED }}>
-                            You always have the final say — this is just the math.
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })()}
-
-                  {/* ZONE 3: At or below market — positive */}
-                  {rent <= rentMarket && (
-                    <div className="p-5">
-                      <div className="flex items-start gap-3">
-                        <span className="text-lg mt-0.5">✅</span>
-                        <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
-                          At <strong>${rent.toLocaleString()}/mo</strong>, you fill in ~{metrics.daysToFill} days with {metrics.pool}+ applicants.
-                          {rent < rentMarket && ` Strong pool, fast fill — great if you want a quality tenant in place with no drama.`}
-                          {rent === rentMarket && " This is the sweet spot. Competitive, fast, and you get to pick from a solid applicant pool."}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Dynamic insight message */}
+            {/* Single honest analysis block — one message, no contradictions */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={metrics.zone}
-                initial={{ opacity: 0, y: 10 }}
+                key={isAtMarket ? "at" : isAboveMarket ? "above" : "premium"}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="p-5 rounded-xl text-sm leading-relaxed"
-                style={{ backgroundColor: "rgba(255,255,255,0.8)", color: TEXT, border: `1px solid ${BORDER}` }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="rounded-xl p-5"
+                style={{
+                  border: `1px solid ${isAtMarket ? "rgba(10,122,82,0.2)" : isAboveMarket ? "rgba(180,83,9,0.2)" : "rgba(185,28,28,0.2)"}`,
+                  backgroundColor: isAtMarket ? "rgba(10,122,82,0.04)" : isAboveMarket ? "rgba(180,83,9,0.04)" : "rgba(185,28,28,0.04)",
+                }}
               >
-                <span className="text-lg mr-2">{metrics.zoneEmoji}</span>
-                {metrics.rentability >= 70 && (
-                  <><strong>Strong demand zone.</strong> At ${rent.toLocaleString()}/mo, you should see multiple qualified applicants within the first two weeks. This is where rent gets collected on time and tenants stay long-term.</>
+                {isAtMarket && (
+                  <>
+                    <p className="text-sm font-semibold mb-1" style={{ color: GREEN }}>
+                      Solid position. Expect to fill in {metrics.weeksToFill}–{metrics.weeksToFill + 1} weeks.
+                    </p>
+                    <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                      At <strong>${rent.toLocaleString()}/mo</strong> you&apos;re priced at or below market.{" "}
+                      {rent < rentMarket
+                        ? `You'll attract a strong pool of ${metrics.pool}+ applicants and fill quickly. Great if you want a reliable tenant in place with no drama.`
+                        : `This is the market sweet spot — ${metrics.pool}+ applicants, strong quality, and you get to be selective. Most units at market rate fill within 4–5 weeks.`}
+                    </p>
+                  </>
                 )}
-                {metrics.rentability >= 40 && metrics.rentability < 70 && (
-                  <><strong>Competitive but workable.</strong> The pool is smaller and it may take 3–4 weeks to fill. If the unit shows well and the listing is strong, this price can work. Each week empty costs you ${Math.round(rent / 4).toLocaleString()}.</>
-                )}
-                {metrics.rentability >= 15 && metrics.rentability < 40 && (
-                  <><strong>Extended vacancy likely.</strong> At ${rent.toLocaleString()}/mo, expect the unit to sit for 4–6 weeks. Every week empty costs you ${Math.round(rent / 4).toLocaleString()}. The applicant pool shrinks here — fewer options means less leverage on who you let in.</>
-                )}
-                {metrics.rentability < 15 && (
-                  <><strong>This price doesn&apos;t work in this market.</strong> Qualified applicants are rare above ${rentPremium.toLocaleString()}. The unit will sit, the pool will be thin, and you&apos;ll end up dropping the price anyway — after losing months of rent waiting.</>
-                )}
+
+                {isAboveMarket && (() => {
+                  const diff = rent - rentMarket;
+                  const isLow = metrics.rentability >= 60;
+                  return (
+                    <>
+                      <p className="text-sm font-semibold mb-1" style={{ color: "#d97706" }}>
+                        ${diff.toLocaleString()}/mo above market — {isLow ? "possible if the unit shows well" : "expect a longer wait"}.
+                      </p>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                        At <strong>${rent.toLocaleString()}/mo</strong>, you&apos;re asking above what comparable units are getting.
+                        Expect around <strong>{metrics.weeksToFill} weeks</strong> to fill, with a smaller applicant pool ({metrics.pool}+ people).
+                        {isLow
+                          ? " If the unit is in great condition and your listing stands out, this is achievable — but give it 2–3 weeks before reassessing."
+                          : " Every week empty costs you $" + metrics.vacancyCostPerWeek.toLocaleString() + ". Dropping to market rate closes that gap quickly."}
+                      </p>
+                    </>
+                  );
+                })()}
+
+                {isAbovePremium && (() => {
+                  const abovePremium = rent - rentPremium;
+                  return (
+                    <>
+                      <p className="text-sm font-semibold mb-1" style={{ color: "#B91C1C" }}>
+                        ${abovePremium.toLocaleString()}/mo above the market ceiling. The math doesn&apos;t work here.
+                      </p>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                        At <strong>${rent.toLocaleString()}/mo</strong>, you&apos;re above what this market supports.
+                        Expect the unit to sit for <strong>{metrics.weeksToFill}+ weeks</strong> — that&apos;s{" "}
+                        <strong>${metrics.totalVacancyCost.toLocaleString()}</strong> in lost rent while you wait.
+                        The applicant pool at this price is too thin to be selective.
+                        Pricing at premium (${rentPremium.toLocaleString()}) fills faster and nets you more in year one.
+                      </p>
+                    </>
+                  );
+                })()}
               </motion.div>
             </AnimatePresence>
+
           </div>
         </FadeIn>
+
+        {/* Comp average note */}
+        {compRents.length > 0 && (
+          <FadeIn delay={0.15}>
+            <p className="text-xs text-center mt-4" style={{ color: MUTED }}>
+              Comparable avg: <strong style={{ color: TEXT }}>${avgComp.toLocaleString()}/mo</strong> across {compRents.length} units in this market.
+            </p>
+          </FadeIn>
+        )}
       </div>
     </section>
-  );
-}
-
-function MetricCard({ label, value, icon, color }: { label: string; value: string; icon: string; color: string }) {
-  return (
-    <motion.div
-      className="text-center p-4 rounded-xl"
-      style={{ backgroundColor: "rgba(255,255,255,0.6)", border: `1px solid ${BORDER}` }}
-      whileHover={{ scale: 1.03 }}
-      transition={{ duration: 0.15 }}
-    >
-      <span className="text-2xl block mb-1">{icon}</span>
-      <p className="text-xs uppercase tracking-wider mb-1" style={{ color: MUTED }}>{label}</p>
-      <motion.p
-        key={value}
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        className="text-xl font-bold"
-        style={{ color, fontFamily: "var(--font-cormorant)", transition: "color 0.3s" }}
-      >
-        {value}
-      </motion.p>
-    </motion.div>
   );
 }
