@@ -215,3 +215,30 @@ input:focus, select:focus, textarea:focus {
 .prose-content tr:nth-child(even) td { background-color: #F7F5F2; }
 .prose-content strong { font-weight: 600; color: #222222; }
 .prose-content code { background-color: #F0EDE8; color: #8B2030; padding: 0.1em 0.4em; font-size: 0.875em; }
+
+/* ── Google Maps Places Autocomplete dropdown ──────────────────────────────── */
+/* Forces the pac-container above all card/modal stacking contexts */
+.pac-container {
+  z-index: 9999 !important;
+  border-radius: 10px;
+  border: 1px solid rgba(15,28,40,0.10);
+  box-shadow: 0 8px 24px rgba(15,28,40,0.12);
+  font-family: var(--font-dm-sans), -apple-system, sans-serif;
+  margin-top: 4px;
+}
+.pac-item {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #222222;
+  cursor: pointer;
+  border-top: 1px solid rgba(15,28,40,0.06);
+}
+.pac-item:hover, .pac-item-selected {
+  background-color: #F7F5F2;
+}
+.pac-item-query {
+  font-size: 14px;
+  color: #222222;
+}
+.pac-icon { display: none; }
+.pac-logo::after { display: none; }
