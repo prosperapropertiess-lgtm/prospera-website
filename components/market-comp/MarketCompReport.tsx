@@ -876,7 +876,7 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
       })();
 
   return (
-    <div style={{ background: WARM_BG, minHeight: "100vh", fontFamily: "var(--font-dm-sans)" }}>
+    <div style={{ background: WARM_BG, fontFamily: "var(--font-dm-sans)" }}>
 
       {/* ── A. Hero ────────────────────────────────────────────────────────── */}
       <section style={{ background: NAVY }} className="px-5 sm:px-8 py-20 sm:py-24">
