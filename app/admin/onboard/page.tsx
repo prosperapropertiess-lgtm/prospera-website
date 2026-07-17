@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 
 const BG          = "#F5F4F1";
 const CARD        = "#FFFFFF";
@@ -321,7 +322,29 @@ export default function OnboardListPage() {
                 <InputField label="Phone"            value={ownerPhone}      onChange={setOwnerPhone}      placeholder="(519) 555-0100" />
                 <InputField label="Property Type"    value={propertyType}    onChange={setPropertyType}    as="select" />
                 <div style={{ gridColumn: "1 / -1" }}>
-                  <InputField label="Property Address" value={propertyAddress} onChange={setPropertyAddress} placeholder="27 Horton Street, St. Thomas" required />
+                  <label style={{
+                    display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE,
+                    textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6,
+                    fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                  }}>
+                    Property Address <span style={{ color: BURGUNDY }}>*</span>
+                  </label>
+                  <AddressAutocomplete
+                    value={propertyAddress}
+                    onChange={setPropertyAddress}
+                    onPlaceSelect={(place) => {
+                      setPropertyAddress(place.street_address);
+                    }}
+                    placeholder="27 Horton Street, St. Thomas"
+                    country="ca"
+                    className=""
+                    style={{
+                      width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`,
+                      borderRadius: 10, padding: "10px 14px", fontSize: 15, color: NAVY,
+                      fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                      outline: "none", boxSizing: "border-box",
+                    }}
+                  />
                 </div>
               </div>
 
