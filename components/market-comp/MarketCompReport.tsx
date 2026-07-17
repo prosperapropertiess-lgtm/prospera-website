@@ -704,76 +704,99 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
   const hasOwnerItems = ownerLines.length > 0;
 
   const prospераItems = [
-    "Professional photography and a compelling listing",
-    "Syndicated across Kijiji, Rentals.ca, and social",
-    "Same-day responses to every inquiry",
-    "Full background, credit, and reference checks",
-    "Lease preparation and signing",
+    { title: "Professional photography", desc: "High-quality photos and a polished listing that stands out." },
+    { title: "Listed everywhere", desc: "Syndicated across Kijiji, Rentals.ca, Facebook, and social." },
+    { title: "Same-day responses", desc: "Every inquiry answered the same day — no one slips through." },
+    { title: "Full tenant screening", desc: "Background, credit, and reference checks on every applicant." },
+    { title: "Lease handled for you", desc: "We prepare and execute the lease. You just sign off." },
   ];
 
   return (
-    <section className="px-5 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: WHITE }}>
+    <section className="px-5 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: WARM_BG }}>
       <div className="max-w-4xl mx-auto">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-center" style={{ color: MUTED }}>
             Before We List
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center" style={{ color: NAVY, fontFamily: "var(--font-dm-sans)" }}>
-            {hasOwnerItems
-              ? "A few things from you — then we take over."
-              : "Your property is ready. Here\u2019s who does what."}
+            {hasOwnerItems ? "A few things from you — then we take over." : "Your property is ready."}
           </h2>
-          <p className="text-sm text-center mb-10 max-w-xl mx-auto" style={{ color: MUTED, lineHeight: 1.7 }}>
+          <p className="text-sm text-center mb-12 max-w-lg mx-auto" style={{ color: MUTED, lineHeight: 1.8 }}>
             {hasOwnerItems
-              ? "Based on what we saw at the property, there are a few things that will help it rent faster and at a stronger price."
-              : "This property is well-maintained and move-in ready. There\u2019s very little you need to do \u2014 the work from here is ours."}
+              ? "Not urgent — but these will help it rent faster and at a stronger price."
+              : "Move-in ready and well-maintained. The work from here is ours."}
           </p>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-12">
 
-            {/* Optional owner suggestions */}
+            {/* Owner suggestions */}
             {hasOwnerItems && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
-                  A few things that could help
-                </p>
-                <p className="text-sm mb-5" style={{ color: MUTED }}>
-                  Not required — but worth considering before we go live.
-                </p>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-px flex-1" style={{ background: BORDER }} />
+                  <span className="text-xs font-semibold uppercase tracking-widest px-3" style={{ color: BURGUNDY }}>
+                    A few suggestions
+                  </span>
+                  <div className="h-px flex-1" style={{ background: BORDER }} />
+                </div>
                 <div className="flex flex-col gap-3">
                   {ownerLines.map((line, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 rounded-xl border p-4"
-                      style={{ borderColor: "rgba(139,32,48,0.15)", backgroundColor: "rgba(139,32,48,0.03)" }}
+                      className="flex items-center gap-4 rounded-2xl p-5"
+                      style={{
+                        background: WHITE,
+                        border: `1px solid ${BORDER}`,
+                        boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                      }}
                     >
-                      <span className="flex-shrink-0 mt-0.5 text-sm" style={{ color: BURGUNDY }}>→</span>
-                      <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{line}</p>
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
+                        style={{ background: "rgba(139,32,48,0.08)", color: BURGUNDY }}
+                      >
+                        {i + 1}
+                      </div>
+                      <p className="text-sm font-medium leading-relaxed" style={{ color: TEXT }}>{line}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Prospera always-on items */}
+            {/* Prospera items */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
-                What we handle regardless
-              </p>
-              <p className="text-sm mb-5" style={{ color: MUTED }}>
-                This is what Prospera takes care of from day one — no matter what.
-              </p>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px flex-1" style={{ background: BORDER }} />
+                <span className="text-xs font-semibold uppercase tracking-widest px-3" style={{ color: NAVY }}>
+                  What Prospera handles
+                </span>
+                <div className="h-px flex-1" style={{ background: BORDER }} />
+              </div>
               <div className="flex flex-col gap-3">
                 {prospераItems.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 rounded-xl border p-4"
-                    style={{ borderColor: BORDER, backgroundColor: WARM_BG }}
+                    className="flex items-start gap-4 rounded-2xl p-5"
+                    style={{
+                      background: WHITE,
+                      border: `1px solid ${BORDER}`,
+                      boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                    }}
                   >
-                    <span className="flex-shrink-0 mt-0.5 text-sm" style={{ color: GREEN }}>✓</span>
-                    <p className="text-sm leading-relaxed" style={{ color: TEXT }}>{item}</p>
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(10,122,82,0.10)", color: GREEN }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M2 7L5.5 10.5L12 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold mb-0.5" style={{ color: TEXT }}>{item.title}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: MUTED }}>{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
