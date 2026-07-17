@@ -731,13 +731,16 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="grid sm:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-10">
 
-            {/* Owner suggestions — only shown when there are items */}
+            {/* Optional owner suggestions */}
             {hasOwnerItems && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: BURGUNDY }}>
-                  Your side
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
+                  A few things that could help
+                </p>
+                <p className="text-sm mb-5" style={{ color: MUTED }}>
+                  Not required — but worth considering before we go live.
                 </p>
                 <div className="flex flex-col gap-3">
                   {ownerLines.map((line, i) => (
@@ -754,10 +757,13 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
               </div>
             )}
 
-            {/* Prospera items */}
-            <div className={!hasOwnerItems ? "sm:col-span-2 max-w-2xl mx-auto w-full" : ""}>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: NAVY }}>
-                Our side
+            {/* Prospera always-on items */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>
+                What we handle regardless
+              </p>
+              <p className="text-sm mb-5" style={{ color: MUTED }}>
+                This is what Prospera takes care of from day one — no matter what.
               </p>
               <div className="flex flex-col gap-3">
                 {prospераItems.map((item, i) => (
