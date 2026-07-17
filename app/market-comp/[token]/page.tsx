@@ -14,36 +14,68 @@ interface PageProps {
 
 // ── Claude insight parser ─────────────────────────────────────────────────────
 
-async function parseInsights(
-  ownerActionItems: string,
-  bedrooms: number | null,
-  city: string | null
-): Promise<string[]> {
+interface PropertyContext {
+  ownerActionItems: string | null;
+  bedrooms: number | null;
+  city: string | null;
+  condition: string | null;
+  propertyType: string | null;
+  rentMarket: number | null;
+  rentPremium: number | null;
+}
+
+async function parseInsights(ctx: PropertyContext): Promise<string[]> {
   try {
     const client = new Anthropic();
+
+    const conditionLabel: Record<string, string> = {
+      needs_work: "needs work",
+      fair: "fair condition",
+      good: "good condition",
+      great: "great condition",
+      move_in_ready: "move-in ready / pristine",
+    };
+
+    const propertyDesc = [
+      ctx.bedrooms ? `${ctx.bedrooms}-bedroom` : null,
+      ctx.propertyType ?? null,
+      ctx.city ? `in ${ctx.city}` : "in Ontario",
+    ].filter(Boolean).join(" ");
+
+    const conditionNote = ctx.condition
+      ? `Condition: ${conditionLabel[ctx.condition] ?? ctx.condition}.`
+      : "";
+
+    const actionNote = ctx.ownerActionItems?.trim()
+      ? `Agent notes / suggested improvements:\n${ctx.ownerActionItems}`
+      : "The property is pristine and move-in ready. No owner action items were flagged.";
+
     const msg = await client.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1024,
       messages: [
         {
           role: "user",
-          content: `You are a property management specialist at Prospera Properties in ${city ?? "Ontario"}.
+          content: `You are a leasing strategist at Prospera Properties.
 
-Based on the agent's notes and owner action items below, write 3–5 numbered insight cards for a "How to command top rent" section in a market analysis report shown to the property owner.
+Write 3–5 insight cards for the "How to command top rent" section of a market analysis report prepared for the property owner.
 
-Each card should:
-- Start with a clear, specific tactic (e.g. "Including utilities in rent")
-- Follow with 1–2 sentences explaining WHY it helps command higher rent or attract better tenants
-- Be professional, direct, confident — no hype, no filler words
-- Be specific to this property based on the notes
+Property: ${propertyDesc}
+${conditionNote}
+${ctx.rentMarket ? `Market rent: $${ctx.rentMarket}/mo` : ""}
+${ctx.rentPremium ? `Premium rent: $${ctx.rentPremium}/mo` : ""}
 
-Property: ${bedrooms ?? "?"}-bedroom unit in ${city ?? "Ontario"}
+${actionNote}
 
-Agent notes / owner action items:
-${ownerActionItems}
+Rules:
+- Each card = one specific tactic + 1–2 sentences on WHY it works for THIS property
+- If the property is pristine, lead with that strength — focus on marketing, positioning, and tenant quality tactics
+- If there are action items, include those as the first cards
+- Professional, direct, no hype words
+- Always produce at least 3 cards, max 5
 
-Return ONLY a JSON array of strings — one string per insight card, starting with the tactic name bolded with ** then the explanation. Example:
-["**Including utilities in rent** — Tenants in this market pay a premium for predictable monthly costs. Bundling water and heat supports a higher asking price and widens your applicant pool.", "**Professional photography** — Listings with high-quality photos receive 3× more inquiries and rent faster in competitive markets."]
+Return ONLY a JSON array of strings. Each string starts with the tactic bolded in ** ** then an em dash and the explanation.
+Example: ["**Professional photography** — Listings with strong photos rent 30–50% faster. A pristine unit deserves a listing that matches.", "**Price at market from day one** — Overpricing on a well-maintained unit still delays your tenant. Starting at market rate attracts the strongest applicant pool immediately."]
 
 Return only the JSON array, no other text.`,
         },
@@ -51,7 +83,6 @@ Return only the JSON array, no other text.`,
     });
 
     const raw = (msg.content[0] as { type: string; text: string }).text.trim();
-    // Extract JSON array from response
     const match = raw.match(/\[[\s\S]*\]/);
     if (!match) return [];
     const parsed = JSON.parse(match[0]);
@@ -78,17 +109,21 @@ async function getReportData(token: string): Promise<MarketCompData | null> {
 
     const ownerActionItems = (data.owner_action_items as string | null) ?? null;
 
-    // Parse agent notes into insight cards (compute once, cache in Supabase)
+    // Generate insight cards via Claude — always, for every property (compute once, cache)
     let rentInsights = Array.isArray(data.rent_insights)
       ? (data.rent_insights as string[])
       : null;
 
-    if (ownerActionItems && ownerActionItems.trim().length > 0 && !rentInsights) {
-      rentInsights = await parseInsights(
+    if (!rentInsights) {
+      rentInsights = await parseInsights({
         ownerActionItems,
-        (data.bedrooms as number | null) ?? null,
-        (data.property_city as string | null) ?? null
-      );
+        bedrooms: (data.bedrooms as number | null) ?? null,
+        city: (data.property_city as string | null) ?? null,
+        condition: (data.property_condition as string | null) ?? null,
+        propertyType: (data.property_type as string | null) ?? null,
+        rentMarket: (data.rent_market as number | null) ?? null,
+        rentPremium: (data.rent_premium as number | null) ?? null,
+      });
       if (rentInsights.length > 0) {
         await sb
           .from("onboarding_sessions")

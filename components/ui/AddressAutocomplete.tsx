@@ -152,15 +152,20 @@ export default function AddressAutocomplete({
   }, [country, types, handlePlaceChanged]);
 
   return (
-    <input
-      ref={inputRef}
-      type="text"
-      defaultValue={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      className={className}
-      style={style}
-      autoComplete="off"
-    />
+    <div style={{ position: "relative" }}>
+      <input
+        ref={inputRef}
+        type="text"
+        defaultValue={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={className}
+        style={style}
+        autoComplete="off"
+      />
+      <p style={{ fontSize: "11px", color: "#999", marginTop: "4px" }}>
+        Select from the dropdown to capture the full address.
+      </p>
+    </div>
   );
 }
