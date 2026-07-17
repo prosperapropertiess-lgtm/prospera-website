@@ -738,7 +738,9 @@ export default function OnboardListPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {sessions.map(s => {
               const st = statusStyle(s.status);
-              const progress = Math.max(0, Math.min(100, ((s.current_step - 2) / 8) * 100));
+              const isPlacementOnly = s.service_type === "placement";
+              const totalSteps = isPlacementOnly ? 4 : 10;
+              const progress = Math.max(0, Math.min(100, ((s.current_step - 2) / (totalSteps - 2)) * 100));
               return (
                 <div
                   key={s.token}
@@ -774,7 +776,7 @@ export default function OnboardListPage() {
                       {s.owner_email && <p style={{ margin: "0 0 2px", fontSize: 14, color: MUTED }}>{s.owner_email}</p>}
                       {s.property_address && <p style={{ margin: "0 0 10px", fontSize: 14, color: MUTED }}>{s.property_address}</p>}
                       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <span style={{ fontSize: 12, color: SUBTLE, flexShrink: 0 }}>Step {s.current_step} of 10</span>
+                        <span style={{ fontSize: 12, color: SUBTLE, flexShrink: 0 }}>Step {Math.min(s.current_step, totalSteps)} of {totalSteps}</span>
                         <div style={{ flex: 1, height: 4, background: "rgba(15,28,40,0.08)", borderRadius: 3 }}>
                           <div style={{
                             height: "100%", width: `${progress}%`,
