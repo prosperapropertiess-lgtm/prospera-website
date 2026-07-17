@@ -134,6 +134,7 @@ export default function OnboardListPage() {
   const [parkingSpots,     setParkingSpots]       = useState("0");
   const [parkingType,      setParkingType]        = useState("none");
   const [propertyCondition, setPropertyCondition] = useState("");
+  const [ownerActionItems,  setOwnerActionItems]   = useState("");
   const [rentLow,          setRentLow]            = useState("");
   const [rentMarket,       setRentMarket]         = useState("");
   const [rentPremium,      setRentPremium]        = useState("");
@@ -155,7 +156,7 @@ export default function OnboardListPage() {
   function resetForm() {
     setOwnerName(""); setOwnerEmail(""); setOwnerPhone("");
     setPropertyAddress(""); setPropertyLat(null); setPropertyLng(null); setPropertyType(""); setPropertyCity("London");
-    setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition("");
+    setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition(""); setOwnerActionItems("");
     setRentLow(""); setRentMarket(""); setRentPremium("");
     setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError(""); setParseInsights("");
   }
@@ -206,6 +207,7 @@ export default function OnboardListPage() {
             parking_spots: parkingSpots ? Number(parkingSpots) : null,
             parking_type: parkingType || null,
             property_condition: propertyCondition || null,
+            owner_action_items: ownerActionItems.trim() || null,
             rent_low: Number(rentLow) || undefined,
             rent_market: Number(rentMarket) || undefined,
             rent_premium: Number(rentPremium) || undefined,
@@ -438,6 +440,23 @@ export default function OnboardListPage() {
                         <option value="great">Great</option>
                         <option value="move_in_ready">Move-In Ready</option>
                       </select>
+                    </div>
+                    <div style={{ gridColumn: "1 / -1" }}>
+                      <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6, fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}>
+                        What can the owner do?
+                      </label>
+                      <textarea
+                        value={ownerActionItems}
+                        onChange={e => setOwnerActionItems(e.target.value)}
+                        placeholder={"Leave blank if nothing — property is ready to list as-is.\n\nOtherwise describe what you saw:\ne.g. repaint the living room (peeling), fix the bathroom faucet drip, replace kitchen cabinet handles\nOptional: include utilities to widen the pool"}
+                        rows={3}
+                        style={{ width: "100%", background: CARD, border: `1px solid ${INPUT_BORDER}`, borderRadius: 10, padding: "10px 14px", fontSize: 14, color: NAVY, fontFamily: "var(--font-poppins), sans-serif", outline: "none", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }}
+                        onFocus={e => { e.target.style.borderColor = "rgba(139,32,48,0.40)"; }}
+                        onBlur={e => { e.target.style.borderColor = INPUT_BORDER; }}
+                      />
+                      <p style={{ margin: "4px 0 0", fontSize: 11, color: MUTED, fontFamily: "var(--font-poppins), sans-serif" }}>
+                        This shows up in the landlord&apos;s report as their action items before listing.
+                      </p>
                     </div>
                     <InputField label="Conservative Rent ($)" value={rentLow} onChange={setRentLow} type="number" placeholder="1600" />
                     <InputField label="Market Rate Rent ($)" value={rentMarket} onChange={setRentMarket} type="number" placeholder="1800" />

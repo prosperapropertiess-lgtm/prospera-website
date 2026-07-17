@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json().catch(() => ({}));
-  const { owner_name, owner_email, owner_phone, property_address, property_lat, property_lng, property_type, service_type, property_city, bedrooms, bathrooms, parking_spots, parking_type, property_condition, rent_low, rent_market, rent_premium, comparables, market_research } = body;
+  const { owner_name, owner_email, owner_phone, property_address, property_lat, property_lng, property_type, service_type, property_city, bedrooms, bathrooms, parking_spots, parking_type, property_condition, owner_action_items, rent_low, rent_market, rent_premium, comparables, market_research } = body;
 
   if (!owner_name || !owner_email || !property_address) {
     return NextResponse.json({ error: "owner_name, owner_email, and property_address are required" }, { status: 400 });
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
     parking_spots: parking_spots ? Number(parking_spots) : null,
     parking_type: parking_type || null,
     property_condition: property_condition || null,
+    owner_action_items: owner_action_items || null,
     rent_low: rent_low ? Number(rent_low) : null,
     rent_market: rent_market ? Number(rent_market) : null,
     rent_premium: rent_premium ? Number(rent_premium) : null,

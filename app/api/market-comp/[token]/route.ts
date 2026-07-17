@@ -152,7 +152,7 @@ export async function GET(
   const { data, error } = await sb
     .from("onboarding_sessions")
     .select(
-      "token, owner_name, property_address, property_city, property_type, service_type, approx_monthly_rent, bedrooms, bathrooms, parking_spots, parking_type, property_condition, rent_low, rent_market, rent_premium, comparables, created_at"
+      "token, owner_name, property_address, property_city, property_type, service_type, approx_monthly_rent, bedrooms, bathrooms, parking_spots, parking_type, property_condition, owner_action_items, rent_low, rent_market, rent_premium, comparables, created_at"
     )
     .eq("token", token)
     .single();
