@@ -17,8 +17,8 @@ interface Props {
 }
 
 export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRents }: Props) {
-  const floor = Math.max(Math.round(rentLow * 0.8), 500);
-  const ceiling = Math.round(rentPremium * 1.3);
+  const floor = Math.max(Math.round(rentLow * 0.85), 500);
+  const ceiling = Math.round((rentPremium + 500) / 25) * 25;
   const [rent, setRent] = useState(rentMarket);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -242,97 +242,197 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
               <style>{`@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }`}</style>
             </div>
 
-            {/* The simple math that kills the overpricing argument */}
+            {/* Analysis block — three honest zones */}
             <div className="rounded-xl mb-6 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
               <AnimatePresence mode="popLayout">
                 <motion.div
-                  key={rent > rentMarket ? "above" : rent < rentMarket ? "below" : "at"}
+                  key={rent > rentPremium ? "above-premium" : rent > rentMarket ? "above-market" : rent < rentMarket ? "below" : "at"}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {rent > rentMarket ? (() => {
-                    const diff = rent - rentMarket;
-                    const annualUpside = diff * 12;
-                    const monthsToBreakEven = Math.ceil(rent / diff);
+
+                  {/* ZONE 1: Above premium — DO NOT GO HERE */}
+                  {rent > rentPremium && (() => {
+                    const abovePremium = rent - rentPremium;
+                    const aboveMarket = rent - rentMarket;
+                    const vacancyCostHere = Math.round((rent / 30) * metrics.daysToFill);
+                    const vacancyCostAtPremium = Math.round((rentPremium / 30) * 21);
+                    const netHere = rent * 12 - vacancyCostHere;
+                    const netAtPremium = rentPremium * 12 - vacancyCostAtPremium;
+                    const netDiff = netAtPremium - netHere;
 
                     return (
                       <div>
-                        {/* The upside */}
-                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(31,47,58,0.03)" }}>
-                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
-                            Shooting for ${diff.toLocaleString()}/mo more than market
+                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(185,28,28,0.05)", borderBottom: `1px solid rgba(185,28,28,0.12)` }}>
+                          <p className="text-base font-semibold mb-1" style={{ color: "#B91C1C" }}>
+                            ${abovePremium.toLocaleString()}/mo above what this market supports
                           </p>
-                          <p className="text-xs" style={{ color: MUTED }}>Here&apos;s the picture.</p>
+                          <p className="text-xs" style={{ color: MUTED }}>This is above our premium estimate. Here&apos;s what it actually costs you.</p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2">
-                          {/* If it works */}
-                          <div className="p-5" style={{ backgroundColor: "rgba(22,163,74,0.03)", borderRight: `1px solid ${BORDER}` }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#16a34a" }}>
-                              If it fills at ${rent.toLocaleString()}
+                          <div className="p-5" style={{ backgroundColor: "rgba(185,28,28,0.03)", borderRight: `1px solid ${BORDER}` }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#B91C1C" }}>
+                              At ${rent.toLocaleString()} — the real math
                             </p>
-                            <div className="space-y-3">
-                              <div>
-                                <p className="text-sm" style={{ color: MUTED }}>Potential annual upside</p>
-                                <p className="text-2xl font-bold" style={{ color: "#16a34a", fontFamily: "var(--font-cormorant)" }}>
-                                  +${annualUpside.toLocaleString()}/yr
-                                </p>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Expected vacancy</span>
+                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>~{metrics.daysToFill} days</span>
                               </div>
-                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(22,163,74,0.06)" }}>
-                                <p className="text-sm" style={{ color: TEXT }}>
-                                  That&apos;s an extra <strong>${diff.toLocaleString()}/mo</strong> if the right tenant comes along. Totally possible.
-                                </p>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Lost rent while waiting</span>
+                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>–${vacancyCostHere.toLocaleString()}</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Applicant pool</span>
+                                <span style={{ color: "#B91C1C", fontWeight: 600 }}>~{metrics.pool} people</span>
+                              </div>
+                              <div className="flex justify-between text-sm pt-1" style={{ borderTop: `1px solid ${BORDER}` }}>
+                                <span style={{ color: MUTED, fontWeight: 600 }}>Net year 1</span>
+                                <span style={{ color: "#B91C1C", fontWeight: 700 }}>${netHere.toLocaleString()}</span>
                               </div>
                             </div>
                           </div>
 
-                          {/* Market rate safety net */}
                           <div className="p-5" style={{ backgroundColor: "rgba(31,47,58,0.02)" }}>
-                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: MUTED }}>
-                              Market rate — your safety net
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: "#d97706" }}>
+                              At premium (${rentPremium.toLocaleString()}) — what we recommend
                             </p>
-                            <div className="space-y-3">
-                              <div>
-                                <p className="text-sm" style={{ color: MUTED }}>If you adjust down to market</p>
-                                <p className="text-2xl font-bold" style={{ color: NAVY, fontFamily: "var(--font-cormorant)" }}>
-                                  ${rentMarket.toLocaleString()}/mo
-                                </p>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Expected vacancy</span>
+                                <span style={{ color: "#d97706", fontWeight: 600 }}>~21 days</span>
                               </div>
-                              <div className="p-3 rounded-lg" style={{ backgroundColor: "rgba(31,47,58,0.04)" }}>
-                                <p className="text-sm" style={{ color: TEXT }}>
-                                  Fills in ~{metrics.marketDaysToFill} days, stronger applicant pool, and you&apos;re done.
-                                  Sometimes the peace of mind is worth it.
-                                </p>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Lost rent while waiting</span>
+                                <span style={{ color: MUTED, fontWeight: 600 }}>–${vacancyCostAtPremium.toLocaleString()}</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Applicant pool</span>
+                                <span style={{ color: "#d97706", fontWeight: 600 }}>Strong</span>
+                              </div>
+                              <div className="flex justify-between text-sm pt-1" style={{ borderTop: `1px solid ${BORDER}` }}>
+                                <span style={{ color: MUTED, fontWeight: 600 }}>Net year 1</span>
+                                <span style={{ color: NAVY, fontWeight: 700 }}>${netAtPremium.toLocaleString()}</span>
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Bottom line — empowering */}
-                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
-                          <p className="text-base font-semibold mb-2" style={{ color: NAVY }}>
-                            Try it. If it doesn&apos;t move in {monthsToBreakEven} days, drop to market and move on.
+                        <div className="p-5 text-center" style={{ borderTop: `1px solid rgba(185,28,28,0.12)`, backgroundColor: "rgba(185,28,28,0.04)" }}>
+                          <p className="text-base font-semibold mb-1" style={{ color: "#B91C1C" }}>
+                            {netDiff > 0
+                              ? `You net $${netDiff.toLocaleString()} more at premium — with a fraction of the wait.`
+                              : `The vacancy cost wipes out the gain. Don\u2019t go here.`}
                           </p>
                           <p className="text-sm" style={{ color: MUTED }}>
-                            Either way, you&apos;re in control. Set your price, pick your tenant, be done with it.
+                            Above ${rentPremium.toLocaleString()}, vacancy gets long and applicant quality drops. The math doesn&apos;t work.
                           </p>
                         </div>
                       </div>
                     );
-                  })() : (
+                  })()}
+
+                  {/* ZONE 2: Above market but within premium — scaled by rentability */}
+                  {rent > rentMarket && rent <= rentPremium && (() => {
+                    const diff = rent - rentMarket;
+                    const weeksToFill = Math.round(metrics.daysToFill / 7);
+
+                    const tone = metrics.rentability >= 50
+                      ? "possible"
+                      : metrics.rentability >= 30
+                        ? "risky"
+                        : "unlikely";
+
+                    return (
+                      <div>
+                        <div className="p-5 text-center" style={{ backgroundColor: "rgba(31,47,58,0.03)", borderBottom: `1px solid ${BORDER}` }}>
+                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
+                            ${diff.toLocaleString()}/mo above market — {tone === "possible" ? "within reach" : tone === "risky" ? "pushing it" : "unlikely to fill"}
+                          </p>
+                          <p className="text-xs" style={{ color: MUTED }}>This is the high end of what comparable units are getting.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2">
+                          <div className="p-5" style={{
+                            backgroundColor: tone === "possible" ? "rgba(180,83,9,0.04)" : "rgba(185,28,28,0.04)",
+                            borderRight: `1px solid ${BORDER}`
+                          }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: tone === "possible" ? "#d97706" : "#B91C1C" }}>
+                              At ${rent.toLocaleString()}
+                            </p>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Expected wait</span>
+                                <span style={{ color: tone === "possible" ? "#d97706" : "#B91C1C", fontWeight: 600 }}>~{weeksToFill} weeks</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Applicant pool</span>
+                                <span style={{ color: tone === "possible" ? "#d97706" : "#B91C1C", fontWeight: 600 }}>~{metrics.pool} people</span>
+                              </div>
+                              <div className="p-3 rounded-lg mt-2" style={{ backgroundColor: tone === "possible" ? "rgba(180,83,9,0.07)" : "rgba(185,28,28,0.07)" }}>
+                                <p className="text-sm" style={{ color: TEXT }}>
+                                  {tone === "possible" && "Possible if the unit shows well. Give it 2–3 weeks before reassessing."}
+                                  {tone === "risky" && "You'll likely wait over a month. Fewer applicants means less screening leverage."}
+                                  {tone === "unlikely" && "At this price, qualified applicants are rare. The unit may sit for 6+ weeks."}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="p-5" style={{ backgroundColor: "rgba(31,47,58,0.02)" }}>
+                            <p className="text-xs uppercase tracking-wider font-semibold mb-3" style={{ color: NAVY }}>
+                              Market rate — ${rentMarket.toLocaleString()}
+                            </p>
+                            <div className="space-y-2">
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Expected wait</span>
+                                <span style={{ color: "#16a34a", fontWeight: 600 }}>~{metrics.marketDaysToFill} days</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span style={{ color: MUTED }}>Applicant pool</span>
+                                <span style={{ color: "#16a34a", fontWeight: 600 }}>Strong</span>
+                              </div>
+                              <div className="p-3 rounded-lg mt-2" style={{ backgroundColor: "rgba(31,47,58,0.04)" }}>
+                                <p className="text-sm" style={{ color: TEXT }}>
+                                  Fills fast, strong applicant pool, and you&apos;re done. Sometimes the certainty is worth the difference.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="p-5 text-center" style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: "rgba(31,47,58,0.02)" }}>
+                          <p className="text-base font-semibold mb-1" style={{ color: NAVY }}>
+                            {tone === "possible" && `Try it for 2–3 weeks. If nothing moves, drop to market and you\u2019re done.`}
+                            {tone === "risky" && `We\u2019d price at market. The extra income rarely covers the weeks you wait.`}
+                            {tone === "unlikely" && `At this rentability, we don\u2019t recommend it. Drop to market and fill it fast.`}
+                          </p>
+                          <p className="text-sm" style={{ color: MUTED }}>
+                            You always have the final say — this is just the math.
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* ZONE 3: At or below market — positive */}
+                  {rent <= rentMarket && (
                     <div className="p-5">
                       <div className="flex items-start gap-3">
                         <span className="text-lg mt-0.5">✅</span>
                         <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
                           At <strong>${rent.toLocaleString()}/mo</strong>, you fill in ~{metrics.daysToFill} days with {metrics.pool}+ applicants.
-                          {rent < rentMarket && ` At this price, expect a fast fill with a strong applicant pool — great if you want a quality tenant in place quickly.`}
-                          {rent === rentMarket && " This is the sweet spot — competitive pricing with a solid applicant pool."}
+                          {rent < rentMarket && ` Strong pool, fast fill — great if you want a quality tenant in place with no drama.`}
+                          {rent === rentMarket && " This is the sweet spot. Competitive, fast, and you get to pick from a solid applicant pool."}
                         </p>
                       </div>
                     </div>
                   )}
+
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -356,10 +456,10 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                   <><strong>Competitive but workable.</strong> The pool is smaller and it may take 3–4 weeks to fill. If the unit shows well and the listing is strong, this price can work. Each week empty costs you ${Math.round(rent / 4).toLocaleString()}.</>
                 )}
                 {metrics.rentability >= 15 && metrics.rentability < 40 && (
-                  <><strong>Extended vacancy likely.</strong> At ${rent.toLocaleString()}/mo, expect the unit to sit for over a month. That&apos;s ${rent.toLocaleString()}+ in lost rent. The applicant pool gets weaker at this level — fewer options means less leverage on screening.</>
+                  <><strong>Extended vacancy likely.</strong> At ${rent.toLocaleString()}/mo, expect the unit to sit for 4–6 weeks. Every week empty costs you ${Math.round(rent / 4).toLocaleString()}. The applicant pool shrinks here — fewer options means less leverage on who you let in.</>
                 )}
                 {metrics.rentability < 15 && (
-                  <><strong>Above what the market supports.</strong> At this level the applicant pool shrinks and vacancy time extends. Market rate gives you a bigger pool to screen from.</>
+                  <><strong>This price doesn&apos;t work in this market.</strong> Qualified applicants are rare above ${rentPremium.toLocaleString()}. The unit will sit, the pool will be thin, and you&apos;ll end up dropping the price anyway — after losing months of rent waiting.</>
                 )}
               </motion.div>
             </AnimatePresence>
