@@ -2232,7 +2232,10 @@ export function placementWelcomeEmail(data: {
 
     <!-- Big CTA -->
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 8px;"><tr><td align="center"><a href="${reportUrl}" style="display:inline-block;background:${C};color:#fff;font-family:${F};font-size:18px;font-weight:700;text-decoration:none;padding:18px 48px;border-radius:12px;">View Your Market Report</a></td></tr></table>
-    <p style="margin:0 0 28px;text-align:center;font-family:${F};font-size:13px;color:${M};">Takes 3 minutes to review. Includes an interactive pricing tool.</p>
+    <p style="margin:0 0 20px;text-align:center;font-family:${F};font-size:13px;color:${M};">Takes 3 minutes to review. Includes an interactive pricing tool.</p>
+
+    <!-- Secondary CTA — Placement Agreement -->
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;"><tr><td align="center"><a href="${data.dashboardUrl}/agreement" style="display:inline-block;background:#ffffff;color:${N};font-family:${F};font-size:16px;font-weight:700;text-decoration:none;padding:15px 40px;border-radius:12px;border:2px solid ${N};">Sign the Placement Agreement</a></td></tr></table>
 
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 6px;"><tr><td style="border-bottom:1px solid ${B};padding:0;height:1px;"></td></tr></table>
     <div style="height:24px;"></div>
