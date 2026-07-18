@@ -79,6 +79,18 @@ function Hero() {
       <div className="relative flex items-center justify-center min-h-screen px-5 sm:px-8" style={{ zIndex: 2 }}>
         <div className="max-w-3xl text-center py-32">
 
+          {/* Logo */}
+          <HeroFadeIn delay={0} duration={500}>
+            <div className="flex justify-center mb-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Prospera Properties"
+                style={{ height: "72px", width: "auto", filter: "brightness(0) invert(1)" }}
+              />
+            </div>
+          </HeroFadeIn>
+
           {/* Eyebrow */}
           <HeroFadeIn delay={0} duration={500}>
             <p

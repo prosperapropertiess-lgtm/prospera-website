@@ -43,9 +43,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -63,25 +64,12 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-[110]"
         style={{
-          backgroundColor: "#1F2F3A",
+          backgroundColor: isHome && !scrolled ? "transparent" : "#1F2F3A",
           boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.12)" : "none",
-          transition: "box-shadow 250ms cubic-bezier(0.23,1,0.32,1)",
+          transition: "background-color 300ms ease, box-shadow 300ms ease",
         }}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-20">
-
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0 relative z-50" onClick={() => setMenuOpen(false)}>
-            <Image
-              src="/logo.png"
-              alt="Prospera Properties"
-              width={120}
-              height={60}
-              priority
-              sizes="120px"
-              style={{ height: "60px", width: "auto", filter: "brightness(0) invert(1)" }}
-            />
-          </Link>
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16">
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8">
