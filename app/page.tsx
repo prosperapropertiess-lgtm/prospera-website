@@ -117,15 +117,6 @@ function Hero() {
                 Get Your Landlord Freedom Score
               </Link>
             </div>
-            <div className="flex justify-center mb-4">
-              <a
-                href="tel:5196971227"
-                className="text-sm font-medium transition-opacity hover:opacity-70"
-                style={{ color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)" }}
-              >
-                or call (519) 697-1227
-              </a>
-            </div>
             <div className="flex flex-col items-center gap-2">
               <div
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full"
