@@ -86,7 +86,7 @@ function Hero() {
               <img
                 src="/logo.png"
                 alt="Prospera Properties"
-                style={{ height: "72px", width: "auto", filter: "brightness(0) invert(1)" }}
+                style={{ height: "120px", width: "auto", filter: "brightness(0) invert(1)" }}
               />
             </div>
           </HeroFadeIn>
