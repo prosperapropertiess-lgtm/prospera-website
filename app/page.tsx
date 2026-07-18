@@ -85,7 +85,7 @@ function Hero() {
               className="text-xs font-semibold uppercase tracking-widest mb-6"
               style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
             >
-              Property Management · London, Ontario
+              Property Management · London, Ontario & Within 45 Minutes
             </p>
           </HeroFadeIn>
 
