@@ -77,7 +77,7 @@ function Hero() {
 
       {/* Content — centered over video */}
       <div className="relative flex items-center justify-center min-h-screen px-5 sm:px-8" style={{ zIndex: 2 }}>
-        <div className="max-w-3xl text-center py-32">
+        <div className="max-w-3xl text-center pt-16 pb-24">
 
           {/* Logo */}
           <HeroFadeIn delay={0} duration={500}>
