@@ -1278,3 +1278,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Large platform, national reach. Montreal-based, no local competitor conflict. Best angle: regional perspective guest post. May have editorial standards — professional pitch needed.
 
 ---
+
+## LendCity Mortgages
+- url: https://lendcity.ca/blog/
+- type: mortgage
+- why: Investor-focused Ontario mortgage brokerage with a dedicated London Ontario real estate investing guide — natural cross-promotion for Prospera as the property management partner for investors financing in SW Ontario.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: scott@lendcity.ca
+- site_focus: Cross-border investment property mortgage brokerage founded by Scott Dillingham, with $2B+ in financed deals. Blog covers London ON real estate investing, annual landlord checklists, and first-rental mortgage walkthroughs. Specific London, Ontario content with cap rate data and Western University student housing analysis.
+- hook: LendCity helps investors get mortgages for London ON properties — Prospera manages them once funded. The two services serve the same investor client at different stages, making a resource mention or guest post referral natural for both audiences.
+- specific_content: Their "London Ontario Real Estate Investing Guide" covers cap rates, vacancy trends, and rental strategy — Prospera can add a property management companion angle (what happens after the mortgage closes).
+- researcher_notes: Phone (226) 212-7200. Strong London ON angle. Founder-run brokerage, personal outreach to Scott would be best. Not a competitor — purely mortgage side.
+
+---
+
+## The Ontario Landlord Toolbox
+- url: https://www.theontariolandlordtoolbox.com
+- type: blog
+- why: Ontario-specific landlord education platform offering courses, books, and resources to small-scale investors — their audience is precisely the type of landlord who would benefit from or eventually hire Prospera.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: info@theontariolandlordtoolbox.com
+- site_focus: Educational platform for Ontario real estate investors providing courses, books (including "The Property Management Toolbox"), templates, and landlord resources. Covers LTB procedures, tenant screening, scaling a portfolio, and property management fundamentals. Membership-based model with free resources.
+- hook: Their DIY landlord audience is exactly who Prospera serves — a guest post or resource mention on "when to stop self-managing and hire a professional" would add value for their members while introducing Prospera.
+- specific_content: Their "Complete Property Management Course" and free resources section — Prospera can complement with a practical SW Ontario perspective on LTB filings and day-to-day management.
+- researcher_notes: Education-first platform. Best pitch angle: resource contribution or guest article for their members. Offer something educational, not promotional.
+
+---
+
+## Zensurance — Landlord Insurance Blog
+- url: https://www.zensurance.com/blog/
+- type: blog
+- why: Canada's major landlord insurance broker with an active blog covering Ontario landlord topics — a resource mention or guest contribution from Prospera on managing rental risk in SW Ontario would fit their educational content strategy.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: info@zensurance.com
+- site_focus: Canadian commercial and landlord insurance brokerage with 100,000+ clients. Their blog covers landlord insurance vs. home insurance, renters' rights in Canada, how much landlord insurance costs, and Ontario-specific compliance topics. Active educational blog with national reach.
+- hook: Prospera's property management service reduces the risk events that landlord insurance covers — a joint angle on "how professional PM reduces insurance claims" or a regional SW Ontario rental risk guide would serve their readership.
+- specific_content: Their "Landlord Insurance vs Home Insurance" and "Renters' Rights: What Landlords in Canada Need to Know" posts — Prospera can offer a complementary piece on risk management through professional oversight in London ON.
+- researcher_notes: Toronto-based. Large national platform — editorial standards will be higher than a small blog. Best pitch: a data-informed guest post. Phone: 1 (888) 654-6030.
+
+---
+
+## The LandLord Lens (landlord.net)
+- url: https://landlord.net/blog/
+- type: blog
+- why: Toronto-based full-service property management company with an active landlord blog — cross-market resource mention or expert contribution from a SW Ontario PM perspective would diversify their GTA-centric content.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: https://landlord.net/contact
+- site_focus: Toronto and GTA property management company with an editorial landlord blog ("The LandLord Lens") covering topics like avoiding real estate fraud, shared rental housing, foreign investment in Canadian real estate, and Toronto market trends. Team manages condo units, houses, and multiplex properties.
+- hook: They cover Toronto PM extensively; Prospera can offer a guest contribution on the London/SW Ontario rental market as a complementary perspective — different geography, no competitive conflict, adds value for their investor readers considering markets outside the GTA.
+- specific_content: Their blog content on Canadian landlord insights and Toronto market trends — a London ON counterpoint piece ("Investing outside the GTA: what landlords need to know about SW Ontario") would be a natural complement.
+- researcher_notes: Toronto-only PM company — zero competitive overlap with Prospera's London/St. Thomas/Strathroy territory. Contact via their contact form; no direct email found in search.
+
+---
+
+## Jennifer Gale Real Estate (Woodstock ON)
+- url: https://www.jennygsells.com/blog
+- type: blog
+- why: Woodstock, Ontario realtor with an active blog covering landlord topics, home buying, and investment property — serving the same SW Ontario corridor as Prospera, ideal for a mutual resource mention or co-authored investment piece.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: jennygsells@gmail.com
+- site_focus: Top-rated Woodstock, ON real estate team (RE/MAX Platinum and Hall of Fame award winner) with a blog covering home buying, selling, investing, rental property preparation, and neighbourhood guides. Serves Woodstock and Oxford County area — adjacent to London/St. Thomas market. Phone: (519) 536-7743.
+- hook: Jennifer's clients often buy investment properties and then need property management — a resource mention or reciprocal blog feature connecting buyers to Prospera as the SW Ontario PM partner would serve her investor clients directly.
+- specific_content: Her blog post on "rental property preparation" and investing tips — Prospera can add a companion piece on what to do after purchasing an investment property in SW Ontario.
+- researcher_notes: Small local team. Woodstock is 45 min from London — same regional market, no competitive conflict. Personal email found; direct friendly outreach from Ebin will work well given shared SW Ontario market.
+
+---
+
+## Ontario Landlord Courses (landlordcourse.ca)
+- url: https://landlordcourse.ca/
+- type: association
+- why: Ontario's dedicated landlord LTB training platform led by recognized educator Chris Seepe — their course audience is self-managing landlords who are prime candidates to eventually hire Prospera.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: https://landlordcourse.ca/contact
+- site_focus: Expert-led Ontario landlord courses covering LTB mastery, RHP certification, and legal templates, taught by Jordan Nieuwhof, Chris Seepe, and other leading Ontario landlord educators. Focused on small landlords learning to self-manage — covering LTB hearings, N4/N8 procedures, and RTA compliance.
+- hook: Their audience learns property management fundamentals — a guest resource or module contribution from Prospera on "when professional management makes more sense than DIY" would add practical perspective and introduce Prospera organically.
+- specific_content: Their LTB mastery course content and RHP certification materials — Prospera handles exactly what these courses teach, and a case-study contribution or resource mention fits naturally.
+- researcher_notes: No direct email found in search — contact via website form. Education-first pitch essential. Mention Ebin's hands-on SW Ontario experience as the credibility hook.
+
+---
+
+## Assetsoft — Property Management Tech Blog
+- url: https://www.assetsoft.biz/blogs/
+- type: blog
+- why: Markham, Ontario-based Yardi and MRI software consultancy with an active blog on Ontario landlord compliance and PM technology — Prospera fits as a local professional PM example in their Ontario-focused content.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: info@assetsoft.biz
+- site_focus: Yardi ICN Member and MRI Software consultancy headquartered in Markham, Ontario. Blog covers Ontario landlord rules, Bill 60 compliance, rent control updates, and property management technology. Content targets mid-size property management companies and landlords navigating Ontario regulations. Phone: +1 647 276 1616.
+- hook: Assetsoft writes about Ontario PM compliance and technology — Prospera can offer a ground-level perspective from a practising SW Ontario PM company as a case study, resource mention, or guest contribution on "what landlords actually need from their PM in 2026."
+- specific_content: Their "Ontario Landlord Rules 2026" and "Bill 60 FAQ" posts — Prospera navigates these rules daily in London, St. Thomas, and Strathroy, and can provide practitioner insight that software-focused content lacks.
+- researcher_notes: B2B software company — not a PM competitor. Toronto-area Markham, Ontario HQ. Professional email pitch to info@assetsoft.biz appropriate.
+
+---
+
+## ezLandlordForms — Ontario Landlord Forms & Directory
+- url: https://www.ezlandlordforms.com/links/ontario_landlord_tenant_information/
+- type: directory
+- why: National landlord forms platform with an Ontario-specific information links directory — Prospera as a recommended SW Ontario professional PM resource fits naturally alongside their existing Ontario landlord links.
+- researched: true
+- drafted: true
+- added: 2026-07-19
+- contact_email: support@ezlandlordforms.com
+- site_focus: Online landlord platform trusted by 300,000+ property managers, realtors, and landlords since 2006. Offers lease agreements, tenant screening, rent collection, Ontario-specific forms, LTB references, and an Ontario investor club directory. US-headquartered (Estero, FL) with substantial Canadian content.
+- hook: Their "Ontario Landlord/Tenant Information Links" page lists LTB, OLA, and other Ontario resources — adding Prospera as a recommended professional PM contact for SW Ontario landlords who want professional help would directly serve their Ontario user base.
+- specific_content: Their "Ontario Landlord/Tenant Information Links" resource page and Ontario Real Estate Investing Clubs Directory — both are natural places to mention Prospera as a local professional PM resource.
+- researcher_notes: US company but large Ontario user base. Best pitch: request a listing on their Ontario links page, positioning Prospera as a useful local resource for their Ontario readers. Keep pitch factual and resource-focused.
+
+---
