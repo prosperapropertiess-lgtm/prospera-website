@@ -119,11 +119,11 @@ const PLANS: Plan[] = [
     nonPaymentPolicy: {
       supportRate: "$99/month",
       weStillDo: [
-        "Keep all your records organized",
-        "Send you updates so you always know what is happening",
-        "Help prepare the required documents and next steps",
+        "Serve the N4 — the official notice that rent is late",
+        "Serve the N8 — notice to terminate at the end of the lease",
+        "Prepare the L1 application to file with the LTB",
       ],
-      ltbNote: "We help you prepare the L1 application. After that point, you handle the LTB process or hire a legal representative. We will guide you every step of the way.",
+      ltbNote: "Once the L1 is ready, the next steps are yours. You can file it yourself or hire a legal representative. We hand you everything you need, organized and ready to go.",
       returnNote: "Once your tenant is paying normally again, your plan goes back to the regular 10% fee.",
     },
   },
@@ -165,11 +165,13 @@ const PLANS: Plan[] = [
     nonPaymentPolicy: {
       supportRate: "$149/month",
       weStillDo: [
-        "Keep managing the process from start to finish",
-        "Coordinate all the required steps",
-        "Help move your file forward without you having to lift a finger",
+        "Serve all required notices — N4, N8, and any others needed",
+        "Prepare and file the L1 application with the LTB",
+        "Manage the LTB hearing process start to finish",
+        "Coordinate the eviction and work with the sheriff if it comes to that",
+        "Pursue arrears recovery through Small Claims Court if you choose — subject to a percentage of arrears successfully collected",
       ],
-      ltbNote: "Unlike our other plans, Hands-Free includes continued LTB process support. We stay involved through the entire process.",
+      ltbNote: "You do not have to show up, make calls, or deal with the process at all. We handle it. If you choose to pursue what you are owed through Small Claims Court, we can coordinate that too — we only take a cut if we actually recover the money.",
       returnNote: "Once your tenant is paying normally again, your plan goes back to the regular 15% fee.",
     },
   },
