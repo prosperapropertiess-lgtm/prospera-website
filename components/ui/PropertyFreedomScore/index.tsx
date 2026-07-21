@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { QUESTIONS, TOTAL, AnyQuestion, SingleQuestion, SliderQuestion } from "./questions";
-import { computeScoreResult, Answers, ScoreResult, getScoreColor } from "./scoring";
+import { computeScoreResult, Answers, ScoreResult } from "./scoring";
 
 // ─── Progress copy — changes with momentum ─────────────────────────────────
 
