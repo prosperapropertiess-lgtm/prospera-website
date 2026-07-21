@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+
 import { QUESTIONS, TOTAL, AnyQuestion, SingleQuestion, SliderQuestion } from "./questions";
 import { computeScoreResult, Answers, ScoreResult } from "./scoring";
 
@@ -34,7 +34,6 @@ function trackFreedom(event: string, metadata?: Record<string, unknown>) {
 // ─── Main component ─────────────────────────────────────────────────────────
 
 export default function PropertyFreedomScore() {
-  const router = useRouter();
   const [phase, setPhase] = useState<"welcome" | "quiz" | "calculating" | "lead" | "results">("welcome");
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -119,12 +118,12 @@ export default function PropertyFreedomScore() {
         email: leadEmail,
       });
     }
-    // Save to sessionStorage and redirect to trackable results URL
+    // Save to sessionStorage and hard-navigate to trackable results URL
     try {
       sessionStorage.setItem("freedom_score_result", JSON.stringify(result));
       sessionStorage.setItem("freedom_score_name", leadName);
     } catch {}
-    router.push("/freedom-score/results");
+    window.location.href = "/freedom-score/results";
   }
 
   const containerStyle: React.CSSProperties = {
