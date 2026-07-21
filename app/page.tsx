@@ -8,6 +8,7 @@ import CounterAnimation from "@/components/animations/CounterAnimation";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
 import BlogNudge from "@/components/ui/BlogNudge";
+import PortalPreview from "@/components/ui/PortalPreview";
 
 // ── Heading ───────────────────────────────────────────────────────────────────
 // SEO-safe: renders as plain, fully-visible h1 text.
@@ -823,6 +824,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Services />
+      <PortalPreview />
       <StatsBar />
       <PainPoints />
       <FeatureCards />

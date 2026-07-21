@@ -3,6 +3,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
 import BlogNudge from "@/components/ui/BlogNudge";
+import PortalPreview from "@/components/ui/PortalPreview";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -257,6 +258,9 @@ export default function LandlordsPage() {
           </div>
         </div>
       </section>
+
+      {/* Portal Preview */}
+      <PortalPreview />
 
       {/* FAQ */}
       <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
