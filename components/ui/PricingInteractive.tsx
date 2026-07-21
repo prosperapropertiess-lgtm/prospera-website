@@ -34,6 +34,12 @@ interface Plan {
     onboarding: string;
     maintenanceMarkup: string;
   };
+  nonPaymentPolicy?: {
+    supportRate: string;
+    weStillDo: string[];
+    ltbNote: string;
+    returnNote: string;
+  };
 }
 
 // ── Plan Data ──────────────────────────────────────────────────────────────
@@ -110,6 +116,16 @@ const PLANS: Plan[] = [
       onboarding: "$99.99 (one-time)",
       maintenanceMarkup: "10% coordination fee — still typically below market rate",
     },
+    nonPaymentPolicy: {
+      supportRate: "$99/month",
+      weStillDo: [
+        "Keep all your records organized",
+        "Send you updates so you always know what is happening",
+        "Help prepare the required documents and next steps",
+      ],
+      ltbNote: "We help you prepare the L1 application. After that point, you handle the LTB process or hire a legal representative. We will guide you every step of the way.",
+      returnNote: "Once your tenant is paying normally again, your plan goes back to the regular 10% fee.",
+    },
   },
   {
     id: "handsfree",
@@ -145,6 +161,16 @@ const PLANS: Plan[] = [
       placementWarranty: "12-month replacement warranty",
       onboarding: "Waived",
       maintenanceMarkup: "No markup — vendor costs at exact cost",
+    },
+    nonPaymentPolicy: {
+      supportRate: "$149/month",
+      weStillDo: [
+        "Keep managing the process from start to finish",
+        "Coordinate all the required steps",
+        "Help move your file forward without you having to lift a finger",
+      ],
+      ltbNote: "Unlike our other plans, Hands-Free includes continued LTB process support. We stay involved through the entire process.",
+      returnNote: "Once your tenant is paying normally again, your plan goes back to the regular 15% fee.",
     },
   },
 ];
@@ -400,6 +426,91 @@ function PlanCard({ plan, highlighted }: { plan: Plan; highlighted?: boolean }) 
             ))}
           </ul>
         </>
+      )}
+
+      {/* Non-payment policy */}
+      {plan.nonPaymentPolicy && (
+        <div
+          style={{
+            background: "rgba(31,47,58,0.04)",
+            border: "1px solid rgba(31,47,58,0.10)",
+            borderLeft: `3px solid ${NAVY}`,
+            borderRadius: "12px",
+            padding: "20px 20px 18px",
+            marginBottom: "20px",
+          }}
+        >
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "11px",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.10em",
+            color: MUTED,
+            marginBottom: "10px",
+          }}>
+            What happens if your tenant stops paying rent?
+          </p>
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "14px",
+            color: SUBTLE,
+            lineHeight: 1.7,
+            marginBottom: "12px",
+          }}>
+            Your plan changes to a support rate of <strong style={{ color: NAVY }}>{plan.nonPaymentPolicy.supportRate} / month</strong> while the issue is being resolved. We do not leave you alone.
+          </p>
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "12px",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            color: MUTED,
+            marginBottom: "8px",
+          }}>
+            During this time, we still:
+          </p>
+          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 14px" }}>
+            {plan.nonPaymentPolicy.weStillDo.map((item) => (
+              <li key={item} style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "14px",
+                color: SUBTLE,
+                padding: "5px 0",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "8px",
+                lineHeight: 1.5,
+              }}>
+                <span style={{ color: NAVY, fontWeight: 700, flexShrink: 0 }}>✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "13px",
+            color: SUBTLE,
+            lineHeight: 1.65,
+            marginBottom: "10px",
+            padding: "12px 14px",
+            background: "#FFFFFF",
+            borderRadius: "8px",
+            border: `1px solid ${BORDER}`,
+          }}>
+            {plan.nonPaymentPolicy.ltbNote}
+          </p>
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: "13px",
+            color: MUTED,
+            lineHeight: 1.6,
+            fontStyle: "italic",
+          }}>
+            {plan.nonPaymentPolicy.returnNote}
+          </p>
+        </div>
       )}
 
       {/* Fee disclosure toggle */}

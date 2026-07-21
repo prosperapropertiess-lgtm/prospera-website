@@ -575,6 +575,116 @@ export default function PricingPage() {
 
       <Divider />
 
+      {/* ── SHARED RISK PHILOSOPHY ── */}
+      <section
+        style={{
+          background: NAVY,
+          padding: "clamp(64px, 8vw, 100px) clamp(20px, 4vw, 60px)",
+        }}
+      >
+        <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
+          <FadeIn>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "11px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.13em",
+                color: "rgba(250,248,245,0.45)",
+                marginBottom: "16px",
+              }}
+            >
+              Why we price this way
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(30px, 5vw, 52px)",
+                fontWeight: 700,
+                color: "#FAF8F5",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                marginBottom: "20px",
+              }}
+            >
+              Problems do not happen when things are easy.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "clamp(16px, 2vw, 19px)",
+                color: "rgba(250,248,245,0.70)",
+                lineHeight: 1.8,
+                marginBottom: "44px",
+                maxWidth: "600px",
+                margin: "0 auto 44px",
+              }}
+            >
+              They happen when you need help the most. So instead of charging full price while you are already dealing with something hard, we lower our fee and stay by your side.
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gap: "12px",
+                textAlign: "left",
+              }}
+            >
+              {[
+                {
+                  icon: "📈",
+                  heading: "When things go well",
+                  body: "You pay a percentage of rent collected. We only earn more when you earn more. We grow together.",
+                },
+                {
+                  icon: "🛡️",
+                  heading: "When problems happen",
+                  body: "We lower our fee to a flat monthly rate instead of walking away. You are never alone with a hard situation.",
+                },
+                {
+                  icon: "✅",
+                  heading: "When things go back to normal",
+                  body: "Your plan returns to the regular rate. No penalty. No catch. Right back to where you were.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.heading}
+                  style={{
+                    background: "rgba(250,248,245,0.07)",
+                    border: "1px solid rgba(250,248,245,0.10)",
+                    borderRadius: "16px",
+                    padding: "24px 20px",
+                  }}
+                >
+                  <span style={{ fontSize: "24px", display: "block", marginBottom: "12px" }}>{item.icon}</span>
+                  <p style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "14px",
+                    fontWeight: 700,
+                    color: "#FAF8F5",
+                    marginBottom: "8px",
+                    lineHeight: 1.3,
+                  }}>
+                    {item.heading}
+                  </p>
+                  <p style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "14px",
+                    color: "rgba(250,248,245,0.60)",
+                    lineHeight: 1.7,
+                  }}>
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <Divider />
+
       {/* ── SIX GUARANTEES ── */}
       <section
         style={{
