@@ -134,12 +134,11 @@ const PLANS: Plan[] = [
     colour: NAVY,
     accentBg: "rgba(31,47,58,0.06)",
     description:
-      "Everything in Autopilot, plus full LTB legal coverage, Rent Shield (we cover up to 60 days if a tenant stops paying), portfolio strategy sessions with a dedicated mortgage agent, and end-to-end eviction support. Built for the investor who never wants to think about the building.",
+      "Everything in Autopilot, plus full LTB legal coverage, Rent Shield (we cover up to 60 days if a tenant stops paying), portfolio strategy sessions with a dedicated mortgage agent, and end-to-end eviction support including sheriff coordination. Built for the investor who never wants to think about the building.",
     includes: [
       "Everything in Autopilot",
       "Full LTB legal coverage — N4/N5/N12 prep, filing, and hearing representation",
       "End-to-end eviction management if it comes to that",
-      "LTB filing fees + licensed paralegal costs covered (up to $2,500 per tenancy)",
       "Rent Shield — if a Prospera-placed tenant stops paying, we cover your rent up to 60 days",
       "Quarterly portfolio strategy sessions with a dedicated mortgage agent",
       "Annual performance review — rent optimization, market analysis, capex planning",
@@ -794,7 +793,6 @@ const COMPARE_ROWS: Array<{
   { feature: "Annual rent benchmarking", essentials: false, autopilot: true, handsfree: true },
   { feature: "Full LTB legal coverage (N4/N5/N12)", essentials: false, autopilot: false, handsfree: true },
   { feature: "End-to-end eviction management", essentials: false, autopilot: false, handsfree: true },
-  { feature: "LTB + paralegal costs covered (to $2,500)", essentials: false, autopilot: false, handsfree: true },
   { feature: "Rent Shield — up to 60 days rent covered", essentials: false, autopilot: false, handsfree: true },
   { feature: "Portfolio strategy with mortgage agent", essentials: false, autopilot: false, handsfree: true },
   { feature: "Renovation & capex project management", essentials: false, autopilot: false, handsfree: true },
