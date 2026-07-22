@@ -20,6 +20,14 @@ interface PlaceCategory {
   places: PlaceItem[];
 }
 
+interface Highlight {
+  category: string;
+  emoji: string;
+  name: string;
+  time: string;
+  distance: string;
+}
+
 interface BusRoute {
   route?: string;
   name?: string;
@@ -42,6 +50,8 @@ const CATEGORY_CONFIG: Record<string, { emoji: string; color: string }> = {
   "Cafés":                { emoji: "☕", color: "#7A5A2D" },
   "Cafes":                { emoji: "☕", color: "#7A5A2D" },
   "Banks":                { emoji: "🏦", color: "#1F5FA6" },
+  "Shopping Mall":        { emoji: "🛍️", color: "#8B2030" },
+  "Shopping Malls":       { emoji: "🛍️", color: "#8B2030" },
 };
 
 function getConfig(name: string) {
@@ -63,34 +73,43 @@ function getConfig(name: string) {
 
 function getTransport(place: PlaceItem): { icon: string } {
   const timeStr = (place.walk_time || place.distance || "").toLowerCase();
-  const isDrive = timeStr.includes("drive");
-  if (isDrive) return { icon: "🚗" };
+  if (timeStr.includes("drive")) return { icon: "🚗" };
 
-  // Extract minutes from time string like "5 mins walk" or "15 min walk"
   const minMatch = timeStr.match(/(\d+)\s*min/);
   if (minMatch) {
-    const mins = parseInt(minMatch[1]);
-    return { icon: mins <= 20 ? "🚶" : "🚗" };
+    return { icon: parseInt(minMatch[1]) <= 20 ? "🚶" : "🚗" };
   }
 
-  // Fall back to numeric distance in metres
-  const dist = parseInt(place.distance || "1200");
-  return { icon: dist < 1200 ? "🚶" : "🚗" };
+  // Parse distance
+  let distMetres: number;
+  if (/[\d.]+\s*km/i.test(timeStr)) {
+    distMetres = parseFloat(timeStr) * 1000;
+  } else {
+    distMetres = parseInt(timeStr) || 1500;
+  }
+  return { icon: distMetres < 1500 ? "🚶" : "🚗" };
 }
 
 function formatTime(place: PlaceItem): string {
   const timeStr = place.walk_time || place.distance || "";
 
-  // If the string already contains time info, clean it up and return it
+  // Already contains time info (e.g. "15 mins walk", "8 min drive")
   if (/\d+\s*min/i.test(timeStr)) {
-    return timeStr.replace(/\s*walk\s*/i, "").trim();
+    return timeStr.replace(/\s*walk\s*/i, " walk").trim();
   }
 
-  // Numeric distance in metres — estimate
-  const dist = parseInt(timeStr || "1000");
-  return dist < 1200
-    ? `${Math.max(1, Math.round(dist / 80))} min walk`
-    : `${Math.max(1, Math.round(dist / 500))} min drive`;
+  // Parse distance string — handle "1.2 km", "350 m", "700m"
+  let distMetres: number;
+  if (/[\d.]+\s*km/i.test(timeStr)) {
+    distMetres = parseFloat(timeStr) * 1000;
+  } else {
+    distMetres = parseInt(timeStr) || 1000;
+  }
+
+  if (distMetres < 1500) {
+    return `${Math.max(1, Math.round(distMetres / 80))} min walk`;
+  }
+  return `${Math.max(2, Math.round(distMetres / 500))} min drive`;
 }
 
 // ── Score circle (unchanged) ──────────────────────────────────────────────────
@@ -261,6 +280,7 @@ export default function MicroLocation({ property }: Props) {
     : (neighbourhoodData ? buildCategoriesFromRaw(neighbourhoodData) : []);
 
   const hasScores = walkScore !== null || transitScore !== null || bikeScore !== null;
+  const highlights = (neighbourhoodData?.highlights as Highlight[] | undefined) ?? [];
 
   // Best one place per category, max 8 spots on the diagram
   const diagramSpots: SpotData[] = categories
@@ -297,6 +317,41 @@ export default function MicroLocation({ property }: Props) {
             {walkScore   !== null && <ScoreCircle score={walkScore}   label="Walk"    color="#2D7A4F" />}
             {transitScore !== null && <ScoreCircle score={transitScore} label="Transit" color="#1F5FA6" />}
             {bikeScore   !== null && <ScoreCircle score={bikeScore}   label="Bike"    color="#7A5A2D" />}
+          </div>
+        )}
+
+        {/* Main Highlights */}
+        {highlights.length > 0 && (
+          <div className="mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4 text-center"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              Main Highlights
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+              {highlights.map((h) => (
+                <div
+                  key={h.category}
+                  className="flex items-center gap-3 p-4 rounded-xl bg-white"
+                  style={{ border: "1px solid #D8D2C8", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+                >
+                  <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{h.emoji}</span>
+                  <div style={{ minWidth: 0 }}>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-0.5"
+                      style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                      {h.category}
+                    </p>
+                    <p className="text-sm font-semibold leading-tight truncate"
+                      style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                      {h.name}
+                    </p>
+                    <p className="text-xs mt-0.5 font-medium"
+                      style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
+                      {h.time}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

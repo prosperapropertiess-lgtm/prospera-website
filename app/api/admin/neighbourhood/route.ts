@@ -16,6 +16,7 @@ const PLACE_CATEGORIES = [
   { type: "restaurant", label: "Restaurants" },
   { type: "cafe", label: "Cafés" },
   { type: "bank", label: "Banks" },
+  { type: "shopping_mall", label: "Shopping Mall" },
 ];
 
 // Popular Canadian chains and landmarks tenants actually search for
@@ -64,6 +65,106 @@ function estimateWalkTime(distKm: number): string {
   const minutes = Math.round(walkingDistKm / 0.075);
   if (minutes <= 1) return "1 min walk";
   return `${minutes} min walk`;
+}
+
+interface Highlight {
+  category: string;
+  emoji: string;
+  name: string;
+  time: string;   // "8 min drive" or "4 min walk"
+  distance: string; // "1.2 km"
+}
+
+const BIG_BOX_KEYWORDS = ["costco", "walmart", "real canadian", "superstore", "zehrs", "loblaws", "sobeys", "freshco", "food basics", "no frills", "giant tiger", "t&t"];
+
+function walkTimeToDisplayTime(walkTimeStr: string, distanceStr: string): string {
+  // If it's already labelled as drive, keep it
+  if (/drive/i.test(walkTimeStr)) return walkTimeStr;
+  // Extract minutes
+  const match = walkTimeStr.match(/(\d+)/);
+  if (!match) return walkTimeStr;
+  const walkMins = parseInt(match[1]);
+  // Under 25 min walk: show as walk
+  if (walkMins <= 25) return walkTimeStr;
+  // Over 25 min: convert to estimated drive time
+  const driveMins = Math.max(2, Math.round(walkMins / 4));
+  return `${driveMins} min drive`;
+}
+
+function buildHighlights(places: Record<string, unknown[]>): Highlight[] {
+  const highlights: Highlight[] = [];
+
+  type PlaceEntry = { name: string; walk_time?: string; distance?: string };
+  const get = (key: string, idx = 0) => (places[key]?.[idx] as PlaceEntry | undefined);
+
+  // Big-box grocery: search popular_spots first, then grocery
+  const popular = (places["popular_spots"] || []) as PlaceEntry[];
+  const bigBox = popular.find((p) => BIG_BOX_KEYWORDS.some((k) => p.name.toLowerCase().includes(k)));
+  const grocery = bigBox || get("grocery_or_supermarket");
+  if (grocery?.name) {
+    const t = grocery.walk_time || grocery.distance || "";
+    highlights.push({
+      category: "Major Grocery",
+      emoji: "🛒",
+      name: grocery.name,
+      time: walkTimeToDisplayTime(t, grocery.distance || ""),
+      distance: grocery.distance || "",
+    });
+  }
+
+  // Shopping mall
+  const mall = get("shopping_mall");
+  if (mall?.name) {
+    const t = mall.walk_time || mall.distance || "";
+    highlights.push({
+      category: "Shopping",
+      emoji: "🛍️",
+      name: mall.name,
+      time: walkTimeToDisplayTime(t, mall.distance || ""),
+      distance: mall.distance || "",
+    });
+  }
+
+  // Hospital
+  const hosp = get("hospital");
+  if (hosp?.name) {
+    const t = hosp.walk_time || hosp.distance || "";
+    highlights.push({
+      category: "Hospital",
+      emoji: "🏥",
+      name: hosp.name,
+      time: walkTimeToDisplayTime(t, hosp.distance || ""),
+      distance: hosp.distance || "",
+    });
+  }
+
+  // Park
+  const park = get("park");
+  if (park?.name) {
+    const t = park.walk_time || park.distance || "";
+    highlights.push({
+      category: "Park",
+      emoji: "🌳",
+      name: park.name,
+      time: walkTimeToDisplayTime(t, park.distance || ""),
+      distance: park.distance || "",
+    });
+  }
+
+  // School
+  const school = get("school");
+  if (school?.name) {
+    const t = school.walk_time || school.distance || "";
+    highlights.push({
+      category: "School",
+      emoji: "🏫",
+      name: school.name,
+      time: walkTimeToDisplayTime(t, school.distance || ""),
+      distance: school.distance || "",
+    });
+  }
+
+  return highlights;
 }
 
 /**
@@ -330,7 +431,7 @@ export async function POST(req: NextRequest) {
           p.distance = real.distance;
           // If walking time > 30 min, show as drive instead
           const mins = parseInt(real.walk_time);
-          p.walk_time = mins > 30 ? `${Math.round(mins / 5)} min drive` : `${real.walk_time} walk`;
+          p.walk_time = mins > 30 ? `${Math.max(2, Math.round(mins / 4))} min drive` : `${real.walk_time} walk`;
         } else {
           const d = haversineDistance(latitude, longitude, p._lat, p._lng);
           p.distance = `${(d * 1400).toFixed(0)}m`;
@@ -494,8 +595,10 @@ export async function POST(req: NextRequest) {
       })),
     }));
 
+  const highlights = buildHighlights(places);
+
   // Include both raw places and formatted categories
-  const neighbourhoodData = { ...places, categories };
+  const neighbourhoodData = { ...places, categories, highlights };
 
   return NextResponse.json({
     latitude,
