@@ -14,15 +14,18 @@ const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-co
 
 const MAX_PHOTOS = 20;
 const PHOTO_LABELS = [
-  { value: "exterior", label: "Exterior" },
-  { value: "living", label: "Living Room" },
-  { value: "kitchen", label: "Kitchen" },
-  { value: "bedroom", label: "Bedroom" },
-  { value: "bathroom", label: "Bathroom" },
-  { value: "dining", label: "Dining" },
-  { value: "storage", label: "Storage" },
-  { value: "outdoor", label: "Outdoor" },
-  { value: "other", label: "Other" },
+  { value: "exterior",          label: "Exterior",           emoji: "🏠" },
+  { value: "living",            label: "Living Room",         emoji: "🛋️" },
+  { value: "kitchen",           label: "Kitchen",             emoji: "🍳" },
+  { value: "bedroom",           label: "Bedroom",             emoji: "🛏️" },
+  { value: "bathroom",          label: "Bathroom",            emoji: "🚿" },
+  { value: "attached_bathroom", label: "Attached Bathroom",   emoji: "🛁" },
+  { value: "dining",            label: "Dining",              emoji: "🍽️" },
+  { value: "basement",          label: "Basement",            emoji: "🏚️" },
+  { value: "storage",           label: "Storage",             emoji: "📦" },
+  { value: "common_area",       label: "Common Area",         emoji: "🚪" },
+  { value: "outdoor",           label: "Outdoor",             emoji: "🌿" },
+  { value: "other",             label: "Other",               emoji: "📷" },
 ];
 
 interface Props {
@@ -39,6 +42,9 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [fileStatuses, setFileStatuses] = useState<FileStatus[]>([]);
   const [selectedCount, setSelectedCount] = useState<number>(0);
+  const [editingIdx, setEditingIdx] = useState<number | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiLabeled, setAiLabeled] = useState<Set<string>>(new Set());
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files || []);
@@ -104,6 +110,16 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
     const newImages = data.images.filter((url) => url !== photo.url);
     onChange({ photo_labels: newLabels, images: newImages });
 
+    // Remove from aiLabeled if present
+    if (aiLabeled.has(photo.url)) {
+      const next = new Set(aiLabeled);
+      next.delete(photo.url);
+      setAiLabeled(next);
+    }
+
+    // If the removed photo was being edited, close the picker
+    if (editingIdx === idx) setEditingIdx(null);
+
     // Delete from storage
     await fetch("/api/admin/upload", {
       method: "DELETE",
@@ -120,6 +136,7 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
   // Drag-to-reorder handlers
   function handleDragStart(idx: number) {
     setDragIdx(idx);
+    setEditingIdx(null);
   }
 
   function handleDragOver(e: React.DragEvent, idx: number) {
@@ -142,6 +159,35 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
     setDragIdx(null);
   }
 
+  async function handleAiLabel() {
+    if (!data.photo_labels.length || aiLoading) return;
+    setAiLoading(true);
+    try {
+      const urls = data.photo_labels.map(p => p.url);
+      const res = await fetch("/api/admin/ai-photo-label", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ urls }),
+      });
+      const { labels } = await res.json() as { labels: { url: string; label: string }[] };
+
+      const labelMap = new Map(labels.map(l => [l.url, l.label]));
+      const updated = data.photo_labels.map(p => ({
+        ...p,
+        label: labelMap.get(p.url) ?? p.label,
+      }));
+      onChange({ photo_labels: updated });
+
+      const newAiLabeled = new Set(aiLabeled);
+      labels.forEach(l => newAiLabeled.add(l.url));
+      setAiLabeled(newAiLabeled);
+    } catch {
+      // silent fail
+    } finally {
+      setAiLoading(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -159,64 +205,139 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
           <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>
             Photos
           </h3>
-          <span className="text-xs" style={{ color: TEXT_MUT }}>
-            {data.photo_labels.length} / {MAX_PHOTOS}
-          </span>
+          <div className="flex items-center gap-3">
+            {data.photo_labels.length > 0 && (
+              <button
+                onClick={handleAiLabel}
+                disabled={aiLoading}
+                style={{
+                  fontSize: "12px", fontWeight: 600, padding: "6px 12px",
+                  borderRadius: "8px", border: "1px solid #D8D2C8",
+                  backgroundColor: aiLoading ? "#F7F5F2" : "#1F2F3A",
+                  color: aiLoading ? "#999" : "#FAF8F5",
+                  cursor: aiLoading ? "not-allowed" : "pointer",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
+                {aiLoading ? "Detecting rooms…" : "✨ Auto-Label with AI"}
+              </button>
+            )}
+            <span className="text-xs" style={{ color: TEXT_MUT }}>
+              {data.photo_labels.length} / {MAX_PHOTOS}
+            </span>
+          </div>
         </div>
 
         {data.photo_labels.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
-            {data.photo_labels.map((photo, i) => (
-              <div
-                key={photo.url}
-                draggable
-                onDragStart={() => handleDragStart(i)}
-                onDragOver={(e) => handleDragOver(e, i)}
-                onDragEnd={handleDragEnd}
-                className="relative group rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
-                style={{
-                  border: `2px solid ${dragIdx === i ? ACCENT : "transparent"}`,
-                  opacity: dragIdx === i ? 0.6 : 1,
-                }}
-              >
-                <div className="aspect-square relative">
-                  <Image src={photo.url} alt={`Photo ${i + 1}`} fill className="object-cover" unoptimized />
-
-                  {/* Cover badge */}
-                  {i === 0 && (
-                    <span className="absolute top-2 left-2 text-xs px-2 py-0.5 rounded text-white" style={{ backgroundColor: ACCENT }}>
-                      Cover
-                    </span>
-                  )}
-
-                  {/* Remove button */}
-                  <button
-                    onClick={() => removePhoto(i)}
-                    className="absolute top-2 right-2 w-6 h-6 rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
-                  >
-                    ×
-                  </button>
-
-                  {/* Drag handle */}
-                  <div className="absolute bottom-2 left-2 text-xs px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: "rgba(0,0,0,0.6)", color: "#fff" }}>
-                    ⋮⋮ drag
-                  </div>
-                </div>
-
-                {/* Label selector */}
-                <select
-                  value={photo.label}
-                  onChange={(e) => updateLabel(i, e.target.value)}
-                  className="w-full px-2 py-1.5 text-xs outline-none"
-                  style={{ backgroundColor: "#F7F5F2", color: TEXT_SEC, border: "none" }}
+            {data.photo_labels.map((photo, i) => {
+              const currentLabel = PHOTO_LABELS.find(l => l.value === photo.label);
+              return (
+                <div
+                  key={photo.url}
+                  draggable
+                  onDragStart={() => handleDragStart(i)}
+                  onDragOver={(e) => handleDragOver(e, i)}
+                  onDragEnd={handleDragEnd}
+                  className="relative group rounded-lg overflow-hidden cursor-grab active:cursor-grabbing"
+                  style={{
+                    border: `2px solid ${dragIdx === i ? ACCENT : "transparent"}`,
+                    opacity: dragIdx === i ? 0.6 : 1,
+                  }}
                 >
-                  {PHOTO_LABELS.map((l) => (
-                    <option key={l.value} value={l.value}>{l.label}</option>
-                  ))}
-                </select>
-              </div>
-            ))}
+                  {/* Image area */}
+                  <div className="aspect-square relative">
+                    <Image src={photo.url} alt={`Photo ${i + 1}`} fill className="object-cover" unoptimized />
+
+                    {/* Cover badge */}
+                    {i === 0 && (
+                      <span
+                        className="absolute top-2 left-2 text-xs px-2 py-0.5 rounded text-white"
+                        style={{ backgroundColor: ACCENT, fontFamily: "var(--font-dm-sans)", fontWeight: 700 }}
+                      >
+                        Cover
+                      </span>
+                    )}
+
+                    {/* AI badge */}
+                    {aiLabeled.has(photo.url) && (
+                      <span style={{
+                        position: "absolute", top: "8px", left: i === 0 ? "64px" : "8px",
+                        fontSize: "10px", fontWeight: 700, padding: "2px 6px",
+                        borderRadius: "4px", backgroundColor: "rgba(139,32,48,0.9)", color: "#fff",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}>
+                        ✨ AI
+                      </span>
+                    )}
+
+                    {/* Remove button */}
+                    <button
+                      onClick={() => removePhoto(i)}
+                      className="absolute top-2 right-2 w-6 h-6 rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
+                    >
+                      ×
+                    </button>
+
+                    {/* Drag handle */}
+                    <div className="absolute bottom-2 right-2 text-xs px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: "rgba(0,0,0,0.6)", color: "#fff" }}>
+                      ⋮⋮
+                    </div>
+
+                    {/* Label pill overlaid on image */}
+                    <button
+                      onClick={() => setEditingIdx(editingIdx === i ? null : i)}
+                      style={{
+                        position: "absolute", bottom: "8px", left: "8px", right: "8px",
+                        backgroundColor: "rgba(0,0,0,0.72)", color: "#fff",
+                        fontSize: "11px", fontWeight: 600, borderRadius: "6px",
+                        padding: "4px 8px", border: "none", cursor: "pointer",
+                        textAlign: "center", backdropFilter: "blur(4px)",
+                        fontFamily: "var(--font-dm-sans)",
+                      }}
+                    >
+                      {currentLabel?.emoji} {currentLabel?.label || "Label"}
+                    </button>
+                  </div>
+
+                  {/* Inline label picker — opens below image inside the card */}
+                  {editingIdx === i && (
+                    <div style={{
+                      backgroundColor: "#fff",
+                      padding: "8px",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, 1fr)",
+                      gap: "6px",
+                      borderTop: `1px solid ${BORDER}`,
+                    }}>
+                      {PHOTO_LABELS.map((l) => (
+                        <button
+                          key={l.value}
+                          onClick={() => { updateLabel(i, l.value); setEditingIdx(null); }}
+                          style={{
+                            padding: "6px 4px",
+                            borderRadius: "8px",
+                            fontSize: "11px",
+                            fontWeight: photo.label === l.value ? 700 : 500,
+                            backgroundColor: photo.label === l.value ? "#8B2030" : "#F7F5F2",
+                            color: photo.label === l.value ? "#fff" : "#333",
+                            border: `1px solid ${photo.label === l.value ? "#8B2030" : "#D8D2C8"}`,
+                            cursor: "pointer",
+                            textAlign: "center",
+                            lineHeight: 1.3,
+                            fontFamily: "var(--font-dm-sans)",
+                          }}
+                        >
+                          <span style={{ display: "block", fontSize: "16px", marginBottom: "2px" }}>{l.emoji}</span>
+                          {l.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
@@ -258,9 +379,9 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
             {/* Per-file upload status list */}
             {fileStatuses.length > 0 && (
               <ul className="space-y-1.5">
-                {fileStatuses.map((fs, i) => (
+                {fileStatuses.map((fs, idx) => (
                   <li
-                    key={i}
+                    key={idx}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs"
                     style={{
                       backgroundColor:
