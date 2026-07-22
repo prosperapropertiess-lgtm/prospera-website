@@ -266,10 +266,15 @@ export async function POST(req: NextRequest) {
   // Step 4: Fetch missing categories from Google Places
   const places: Record<string, unknown[]> = {};
 
-  // Pre-fill from reused nearby property data
+  // Pre-fill from reused nearby property data — only copy actual place-type keys,
+  // never meta keys like "categories" or "highlights" which would corrupt the build
+  const PLACE_TYPE_KEYS = new Set([
+    "university", "grocery_or_supermarket", "pharmacy", "gym", "transit_station",
+    "school", "hospital", "park", "restaurant", "cafe", "bank", "shopping_mall", "popular_spots",
+  ]);
   if (reusedData) {
     for (const [key, val] of Object.entries(reusedData)) {
-      if (Array.isArray(val) && val.length > 0) {
+      if (PLACE_TYPE_KEYS.has(key) && Array.isArray(val) && val.length > 0) {
         places[key] = val;
       }
     }
@@ -580,9 +585,9 @@ export async function POST(req: NextRequest) {
   };
 
   const categories = Object.entries(places)
-    .filter(([, list]) => Array.isArray(list) && list.length > 0)
+    .filter(([key, list]) => key in CATEGORY_LABELS && Array.isArray(list) && list.length > 0)
     .map(([key, list]) => ({
-      name: CATEGORY_LABELS[key] || key,
+      name: CATEGORY_LABELS[key],
       places: (list as { name: string; distance?: string; walk_time?: string; vicinity?: string }[]).slice(0, 8).map((p) => ({
         name: p.name,
         walk_time: p.walk_time || undefined,

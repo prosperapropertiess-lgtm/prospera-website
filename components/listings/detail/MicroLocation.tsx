@@ -99,7 +99,10 @@ function parseMinutes(place: PlaceItem): number | null {
 
 function getMode(place: PlaceItem): "walk" | "drive" {
   const timeStr = (place.walk_time || place.distance || "").toLowerCase();
+  // Explicit keyword wins — "14 min drive" → drive, "21 mins walk" → walk
   if (timeStr.includes("drive")) return "drive";
+  if (timeStr.includes("walk")) return "walk";
+  // No keyword — fall back to heuristics
   const minMatch = timeStr.match(/(\d+)\s*min/);
   if (minMatch && parseInt(minMatch[1]) > 20) return "drive";
   if (/[\d.]+\s*km/i.test(timeStr)) {
