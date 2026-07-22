@@ -9,6 +9,95 @@ const TEXT_MUT = "#666666";
 const INPUT_BG = "#F7F5F2";
 const ACCENT = "#8B2030";
 
+const TRANSPARENCY_FIELDS = [
+  {
+    key: "heating_reliability",
+    label: "Heating / Cooling",
+    placeholder: "Describe heating and cooling setup…",
+    options: [
+      "Gas furnace — serviced annually",
+      "Forced air — gas heat",
+      "Electric baseboard heat",
+      "Heat pump (heating + cooling)",
+      "Radiant in-floor heat",
+      "Boiler system",
+    ],
+  },
+  {
+    key: "internet_providers",
+    label: "Internet Providers Available",
+    placeholder: "List available ISPs…",
+    options: [
+      "Bell Fibe available",
+      "Rogers available",
+      "Bell + Rogers available",
+      "Start.ca available",
+      "Cogeco available",
+      "Bell + Rogers + Start.ca",
+    ],
+  },
+  {
+    key: "pest_control",
+    label: "Pest Control",
+    placeholder: "Describe pest control arrangement…",
+    options: [
+      "Quarterly treatment included",
+      "Annual inspection included",
+      "Orkin — quarterly service",
+      "Tenant responsibility",
+      "No history of issues",
+    ],
+  },
+  {
+    key: "maintenance_response",
+    label: "Maintenance Response Time",
+    placeholder: "Describe response time policy…",
+    options: [
+      "Emergency: same day. Non-emergency: 48 hrs",
+      "Emergency: 2 hrs. Non-emergency: 5 days",
+      "24/7 emergency line — no waiting",
+      "Emergency: 4 hrs. Regular: 72 hrs",
+    ],
+  },
+  {
+    key: "snow_removal",
+    label: "Snow Removal / Garbage",
+    placeholder: "Describe snow and garbage arrangements…",
+    options: [
+      "Snow removal included",
+      "Snow removal by tenant",
+      "Garbage — city pickup Tuesdays",
+      "Snow removal + garbage collection included",
+      "Snow removal included. Recycling biweekly",
+    ],
+  },
+  {
+    key: "parking_enforcement",
+    label: "Parking Notes",
+    placeholder: "Describe parking situation…",
+    options: [
+      "1 assigned spot included",
+      "2 spots included",
+      "Street parking only",
+      "Visitor parking available",
+      "Assigned + visitor parking",
+      "Garage included",
+    ],
+  },
+  {
+    key: "noise_notes",
+    label: "Noise / Quirks",
+    placeholder: "Anything worth mentioning about noise or quirks…",
+    options: [
+      "Quiet residential street",
+      "Near transit — some traffic noise",
+      "Near train tracks — occasional horn",
+      "Busy intersection — double-pane windows",
+      "No notable noise issues",
+    ],
+  },
+];
+
 const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
 interface Props {
@@ -206,23 +295,37 @@ export default function PreviewStep({ data, onChange, propertyId }: Props) {
       </div>
 
       {/* Transparency */}
-      <div className="rounded-xl border p-6 space-y-4" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
+      <div className="rounded-xl border p-6 space-y-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
         <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Transparency & Risk Removal</h3>
         <p className="text-xs" style={{ color: TEXT_MUT }}>
           Be honest about the property. This builds trust and reduces post-viewing objections.
         </p>
 
-        {[
-          { key: "heating_reliability", label: "Heating/Cooling Reliability", placeholder: "e.g. Gas furnace serviced annually, AC is window unit in bedroom" },
-          { key: "internet_providers", label: "Internet Providers Available", placeholder: "e.g. Bell Fibe, Rogers, Start.ca — all offer 100+ Mbps" },
-          { key: "pest_control", label: "Pest Control", placeholder: "e.g. Quarterly pest treatment by Orkin included" },
-          { key: "maintenance_response", label: "Maintenance Response Time", placeholder: "e.g. Emergency: same day. Regular: within 48 hours" },
-          { key: "snow_removal", label: "Snow Removal / Garbage", placeholder: "e.g. Snow removal included. Garbage pickup Tuesdays" },
-          { key: "parking_enforcement", label: "Parking Notes", placeholder: "e.g. 1 assigned spot. Street parking 2-hour limit weekdays" },
-          { key: "noise_notes", label: "Noise / Quirks", placeholder: "e.g. Near train tracks — occasional horn at night. Double-pane windows help" },
-        ].map((field) => (
+        {TRANSPARENCY_FIELDS.map((field) => (
           <div key={field.key}>
-            <label className="block text-xs uppercase tracking-widest mb-1.5 font-medium" style={{ color: TEXT_MUT }}>{field.label}</label>
+            <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: TEXT_MUT }}>{field.label}</label>
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {field.options.map((opt) => {
+                const current = (data.transparency[field.key] as string) || "";
+                const selected = current === opt;
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => onChange({ transparency: { ...data.transparency, [field.key]: selected ? "" : opt } })}
+                    className="px-3 py-1.5 rounded-lg text-xs transition-all"
+                    style={{
+                      backgroundColor: selected ? "rgba(139,32,48,0.08)" : INPUT_BG,
+                      border: `1px solid ${selected ? ACCENT : BORDER}`,
+                      color: selected ? ACCENT : TEXT_SEC,
+                    }}
+                  >
+                    {selected && <span className="mr-1">✓</span>}
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
             <input
               type="text"
               value={(data.transparency[field.key] as string) || ""}
