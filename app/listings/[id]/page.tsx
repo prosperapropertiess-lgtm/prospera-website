@@ -4,6 +4,8 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import ListingPage from "@/components/listings/detail/ListingPage";
 import JsonLd from "@/components/seo/JsonLd";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ id: string }>;
 }

@@ -182,7 +182,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   let { latitude, longitude } = body;
-  const { address, city, force } = body;
+  const { address, city, force, property_id } = body;
 
   if (!GOOGLE_API_KEY) {
     return NextResponse.json({ error: "Google Maps API key not configured. Add GOOGLE_MAPS_API_KEY to your environment variables." }, { status: 500 });
@@ -596,6 +596,33 @@ export async function POST(req: NextRequest) {
   // Include both raw places and formatted categories
   const neighbourhoodData = { ...places, categories, highlights };
 
+  const finalBusRoutes = bus_routes.length > 0 ? bus_routes : (reusedMeta?.bus_routes || []);
+
+  // If a property_id was provided, save directly to the property right now.
+  // This avoids relying on the wizard auto-save debounce.
+  if (property_id) {
+    const updatePayload: Record<string, unknown> = {
+      neighbourhood_data: neighbourhoodData,
+      bus_routes: finalBusRoutes,
+    };
+    if (finalWalkScore    !== null) updatePayload.walk_score    = finalWalkScore;
+    if (finalTransitScore !== null) updatePayload.transit_score = finalTransitScore;
+    if (finalBikeScore    !== null) updatePayload.bike_score    = finalBikeScore;
+    if (latitude)  updatePayload.latitude  = latitude;
+    if (longitude) updatePayload.longitude = longitude;
+
+    const { error: saveErr } = await supabase
+      .from("properties")
+      .update(updatePayload)
+      .eq("id", property_id);
+
+    if (saveErr) {
+      console.error("[neighbourhood] Failed to save to property:", saveErr.message);
+    } else {
+      console.log("[neighbourhood] Saved neighbourhood_data directly to property", property_id);
+    }
+  }
+
   return NextResponse.json({
     latitude,
     longitude,
@@ -603,7 +630,7 @@ export async function POST(req: NextRequest) {
     walk_score: finalWalkScore,
     transit_score: finalTransitScore,
     bike_score: finalBikeScore,
-    bus_routes: bus_routes.length > 0 ? bus_routes : (reusedMeta?.bus_routes || []),
+    bus_routes: finalBusRoutes,
     neighbourhood_vibe: reusedMeta?.neighbourhood_vibe || null,
     reused_from_nearby: !!reusedData,
   });
