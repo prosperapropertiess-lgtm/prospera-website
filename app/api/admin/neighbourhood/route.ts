@@ -300,13 +300,27 @@ export async function POST(req: NextRequest) {
           const key = `${p.geometry.location.lat},${p.geometry.location.lng}`;
           const real = realDistances.get(key);
           const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
+
+          let walkTime: string;
+          if (real?.walk_time) {
+            const walkMins = parseInt(real.walk_time);
+            // If walking takes > 20 min, show estimated driving time instead
+            if (walkMins > 20) {
+              walkTime = `${Math.max(2, Math.round(walkMins / 4))} min drive`;
+            } else {
+              walkTime = `${real.walk_time} walk`;
+            }
+          } else {
+            walkTime = estimateWalkTime(straightLineDist);
+          }
+
           return {
             name: p.name,
             vicinity: p.vicinity,
             rating: p.rating || null,
             place_id: p.place_id,
             distance: real?.distance || `${(straightLineDist * 1400).toFixed(0)}m`,
-            walk_time: real?.walk_time ? `${real.walk_time} walk` : estimateWalkTime(straightLineDist),
+            walk_time: walkTime,
           };
         });
 
@@ -558,9 +572,11 @@ export async function POST(req: NextRequest) {
     .filter(([, list]) => Array.isArray(list) && list.length > 0)
     .map(([key, list]) => ({
       name: CATEGORY_LABELS[key] || key,
-      places: (list as { name: string; distance?: string; walk_time?: string }[]).slice(0, 8).map((p) => ({
+      places: (list as { name: string; distance?: string; walk_time?: string; vicinity?: string }[]).slice(0, 8).map((p) => ({
         name: p.name,
-        distance: p.walk_time || p.distance || undefined,
+        walk_time: p.walk_time || undefined,
+        distance: p.distance || undefined,
+        vicinity: p.vicinity || undefined,
       })),
     }));
 

@@ -178,29 +178,40 @@ function buildCategoriesFromRaw(data: Record<string, unknown>): PlaceCategory[] 
 function ScoreCard({ score, label, type }: { score: number; label: string; type: "walk" | "transit" | "bike" }) {
   const color = scoreColor(score);
   const desc = scoreDescription(score, type);
-  const radius = 30;
+  const radius = 36;
+  const strokeWidth = 5;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference - (score / 100) * circumference;
   const modeIcon = type === "walk" ? "🚶" : type === "transit" ? "🚌" : "🚴";
+  const size = 88;
+  const center = size / 2;
 
   return (
     <div
-      className="flex flex-col items-center gap-3 flex-1 py-6 px-4 rounded-2xl"
+      className="flex flex-col items-center gap-3 flex-1 py-7 px-4 rounded-2xl"
       style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
     >
-      <svg width="72" height="72" viewBox="0 0 72 72">
-        <circle cx="36" cy="36" r={radius} fill="none" stroke="#E8E4DE" strokeWidth="5" />
-        <circle cx="36" cy="36" r={radius} fill="none" stroke={color} strokeWidth="5"
-          strokeDasharray={circumference} strokeDashoffset={dashOffset}
-          strokeLinecap="round" transform="rotate(-90 36 36)"
-          style={{ transition: "stroke-dashoffset 0.8s ease" }} />
-        <text x="36" y="40" textAnchor="middle" fontSize="16" fontWeight="700" fill="#1F2F3A">{score}</text>
-      </svg>
+      {/* Ring with number overlaid in HTML */}
+      <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ position: "absolute", top: 0, left: 0 }}>
+          <circle cx={center} cy={center} r={radius} fill="none" stroke="#E8E4DE" strokeWidth={strokeWidth} />
+          <circle cx={center} cy={center} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth}
+            strokeDasharray={circumference} strokeDashoffset={dashOffset}
+            strokeLinecap="round" transform={`rotate(-90 ${center} ${center})`}
+            style={{ transition: "stroke-dashoffset 0.8s ease" }} />
+        </svg>
+        <p
+          className="font-bold leading-none z-10"
+          style={{ fontSize: "2rem", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)", position: "relative" }}
+        >
+          {score}
+        </p>
+      </div>
       <div className="text-center">
-        <p className="text-[10px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: "#999" }}>
+        <p className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: "#999" }}>
           {modeIcon} {label}
         </p>
-        <p className="text-sm font-semibold" style={{ color }}>
+        <p className="text-sm font-bold" style={{ color }}>
           {desc}
         </p>
       </div>
