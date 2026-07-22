@@ -272,7 +272,7 @@ Generate ALL FIVE of these:
 
 2. "description" — 2-3 paragraphs. Professional but warm. Mention key features, neighbourhood appeal, and ideal tenant. Under 200 words. No exclamation marks.
 
-3. "highlights" — Array of exactly 5 strings. Each is one compelling selling point (1 sentence each). Focus on what makes daily life better here. Use REAL place names from the nearby places data if available.
+3. "highlights" — Array of exactly 5 strings. Each is one factual proximity statement (1 sentence). PRIORITY ORDER: (1) nearest university or college with distance/time, (2) nearest hospital with distance/time, (3) nearest major grocery store (Costco/Walmart/Superstore/Zehrs etc.) with distance/time, (4) nearest mall or shopping centre with distance/time, (5) nearest park or best remaining amenity with distance/time. Use REAL place names and REAL distances from the nearby places data. Format each as: "[Place Name] is [X min drive/walk] away." If university data is not available, use the next best amenity. Do NOT write about property features like bedrooms or furnishings — only location highlights.
 
 4. "life_simulation" — Object with 4 keys: "morning", "afternoon", "evening", "night". Each is 2-3 sentences painting a picture of what that time of day looks like living here. Use REAL nearby place names, real distances, real transit info. Make the reader imagine themselves living here. Keep each period under 60 words.
 

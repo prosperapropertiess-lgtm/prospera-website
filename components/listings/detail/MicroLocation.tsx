@@ -50,8 +50,9 @@ const CATEGORY_CONFIG: Record<string, { emoji: string; color: string }> = {
   "Cafés":                { emoji: "☕", color: "#7A5A2D" },
   "Cafes":                { emoji: "☕", color: "#7A5A2D" },
   "Banks":                { emoji: "🏦", color: "#1F5FA6" },
-  "Shopping Mall":        { emoji: "🛍️", color: "#8B2030" },
-  "Shopping Malls":       { emoji: "🛍️", color: "#8B2030" },
+  "Shopping Mall":           { emoji: "🛍️", color: "#8B2030" },
+  "Shopping Malls":          { emoji: "🛍️", color: "#8B2030" },
+  "Universities & Colleges": { emoji: "🎓", color: "#1F5FA6" },
 };
 
 function getConfig(name: string) {
@@ -62,6 +63,7 @@ function getConfig(name: string) {
   if (lower.includes("pharma"))  return { emoji: "💊", color: "#1F5FA6" };
   if (lower.includes("gym"))     return { emoji: "🏋️", color: "#7A5A2D" };
   if (lower.includes("transit") || lower.includes("bus")) return { emoji: "🚌", color: "#1F2F3A" };
+  if (lower.includes("universit") || lower.includes("college")) return { emoji: "🎓", color: "#1F5FA6" };
   if (lower.includes("school"))  return { emoji: "🏫", color: "#5A2D7A" };
   if (lower.includes("hospital") || lower.includes("clinic")) return { emoji: "🏥", color: "#C44040" };
   if (lower.includes("park"))    return { emoji: "🌳", color: "#2D7A4F" };

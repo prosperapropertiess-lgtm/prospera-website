@@ -6,6 +6,7 @@ const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY || "";
 const WALK_SCORE_API_KEY = process.env.WALK_SCORE_API_KEY || "";
 
 const PLACE_CATEGORIES = [
+  { type: "university", label: "Universities & Colleges" },
   { type: "grocery_or_supermarket", label: "Grocery Stores" },
   { type: "pharmacy", label: "Pharmacies" },
   { type: "gym", label: "Gyms" },
@@ -97,72 +98,38 @@ function buildHighlights(places: Record<string, unknown[]>): Highlight[] {
   type PlaceEntry = { name: string; walk_time?: string; distance?: string };
   const get = (key: string, idx = 0) => (places[key]?.[idx] as PlaceEntry | undefined);
 
-  // Big-box grocery: search popular_spots first, then grocery
+  function push(category: string, emoji: string, p: PlaceEntry) {
+    const t = p.walk_time || p.distance || "";
+    highlights.push({
+      category,
+      emoji,
+      name: p.name,
+      time: walkTimeToDisplayTime(t, p.distance || ""),
+      distance: p.distance || "",
+    });
+  }
+
+  // 1. University / College (most important for tenant demographics)
+  const uni = get("university");
+  if (uni?.name) push("University", "🎓", uni);
+
+  // 2. Hospital
+  const hosp = get("hospital");
+  if (hosp?.name) push("Hospital", "🏥", hosp);
+
+  // 3. Big-box grocery — search popular_spots first, then grocery
   const popular = (places["popular_spots"] || []) as PlaceEntry[];
   const bigBox = popular.find((p) => BIG_BOX_KEYWORDS.some((k) => p.name.toLowerCase().includes(k)));
   const grocery = bigBox || get("grocery_or_supermarket");
-  if (grocery?.name) {
-    const t = grocery.walk_time || grocery.distance || "";
-    highlights.push({
-      category: "Major Grocery",
-      emoji: "🛒",
-      name: grocery.name,
-      time: walkTimeToDisplayTime(t, grocery.distance || ""),
-      distance: grocery.distance || "",
-    });
-  }
+  if (grocery?.name) push("Major Grocery", "🛒", grocery);
 
-  // Shopping mall
+  // 4. Shopping mall
   const mall = get("shopping_mall");
-  if (mall?.name) {
-    const t = mall.walk_time || mall.distance || "";
-    highlights.push({
-      category: "Shopping",
-      emoji: "🛍️",
-      name: mall.name,
-      time: walkTimeToDisplayTime(t, mall.distance || ""),
-      distance: mall.distance || "",
-    });
-  }
+  if (mall?.name) push("Shopping", "🛍️", mall);
 
-  // Hospital
-  const hosp = get("hospital");
-  if (hosp?.name) {
-    const t = hosp.walk_time || hosp.distance || "";
-    highlights.push({
-      category: "Hospital",
-      emoji: "🏥",
-      name: hosp.name,
-      time: walkTimeToDisplayTime(t, hosp.distance || ""),
-      distance: hosp.distance || "",
-    });
-  }
-
-  // Park
+  // 5. Park
   const park = get("park");
-  if (park?.name) {
-    const t = park.walk_time || park.distance || "";
-    highlights.push({
-      category: "Park",
-      emoji: "🌳",
-      name: park.name,
-      time: walkTimeToDisplayTime(t, park.distance || ""),
-      distance: park.distance || "",
-    });
-  }
-
-  // School
-  const school = get("school");
-  if (school?.name) {
-    const t = school.walk_time || school.distance || "";
-    highlights.push({
-      category: "School",
-      emoji: "🏫",
-      name: school.name,
-      time: walkTimeToDisplayTime(t, school.distance || ""),
-      distance: school.distance || "",
-    });
-  }
+  if (park?.name) push("Park", "🌳", park);
 
   return highlights;
 }
@@ -572,6 +539,7 @@ export async function POST(req: NextRequest) {
 
   // Build categories array for listing page display
   const CATEGORY_LABELS: Record<string, string> = {
+    university: "Universities & Colleges",
     grocery_or_supermarket: "Grocery Stores",
     pharmacy: "Pharmacies",
     gym: "Gyms & Fitness",
@@ -583,6 +551,7 @@ export async function POST(req: NextRequest) {
     cafe: "Cafés",
     bank: "Banks",
     popular_spots: "Popular Spots",
+    shopping_mall: "Shopping Malls",
   };
 
   const categories = Object.entries(places)
