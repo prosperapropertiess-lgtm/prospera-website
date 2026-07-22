@@ -45,6 +45,18 @@ const OUTDOOR_TYPES = [
   { value: "deck", label: "Deck" },
 ];
 
+const OUTDOOR_RESPONSIBILITY_OPTIONS = [
+  { value: "landlord", label: "Landlord's Responsibility" },
+  { value: "tenant", label: "Tenant's Responsibility" },
+  { value: "equipment_provided", label: "Equipment Provided (Tenant Maintains)" },
+];
+
+const SNOW_RESPONSIBILITY_OPTIONS = [
+  { value: "landlord", label: "Landlord Handles" },
+  { value: "tenant", label: "Tenant's Responsibility" },
+  { value: "equipment_provided", label: "Equipment Provided" },
+];
+
 const APPLIANCE_OPTIONS = [
   "Stove/Oven", "Refrigerator", "Dishwasher", "Microwave",
   "Washer", "Dryer", "Garbage Disposal",
@@ -180,6 +192,43 @@ export default function FeaturesStep({ data, onChange }: Props) {
               );
             })}
           </div>
+
+          {/* Outdoor maintenance responsibility — only show when outdoor space is selected */}
+          {(data.outdoor_space && data.outdoor_space !== "none") && (
+            <div className="mt-4 space-y-3 pt-4" style={{ borderTop: `1px solid ${BORDER}` }}>
+              <div>
+                <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: TEXT_MUT }}>
+                  Yard / Outdoor Maintenance
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {OUTDOOR_RESPONSIBILITY_OPTIONS.map((o) => (
+                    <OptionButton
+                      key={o.value}
+                      label={o.label}
+                      selected={(data.transparency?.outdoor_responsibility as string) === o.value}
+                      onClick={() => onChange({ transparency: { ...data.transparency, outdoor_responsibility: o.value } })}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-widest mb-2 font-medium" style={{ color: TEXT_MUT }}>
+                  Snow Removal
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {SNOW_RESPONSIBILITY_OPTIONS.map((o) => (
+                    <OptionButton
+                      key={o.value}
+                      label={o.label}
+                      selected={(data.transparency?.snow_removal as string) === o.value}
+                      onClick={() => onChange({ transparency: { ...data.transparency, snow_removal: o.value } })}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </Field>
 
         <div className="space-y-3 pt-2">

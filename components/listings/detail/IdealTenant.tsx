@@ -51,15 +51,15 @@ export default function IdealTenant({ property }: Props) {
           })}
         </div>
 
-        {/* Desktop: card grid */}
-        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Desktop: card grid — items-stretch ensures equal heights */}
+        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {profiles.map((key) => {
             const profile = PROFILES[key];
             if (!profile) return null;
             return (
-              <div key={key}>
+              <div key={key} className="flex">
                 <div
-                  className="bg-white rounded-xl p-6 border transition-all hover:shadow-md"
+                  className="flex flex-col bg-white rounded-xl p-6 border transition-all hover:shadow-md w-full"
                   style={{ borderColor: "#D8D2C8" }}
                 >
                   <div className="flex items-center gap-3 mb-3">
