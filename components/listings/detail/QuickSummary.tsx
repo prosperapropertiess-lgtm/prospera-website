@@ -1,5 +1,6 @@
 "use client";
 
+import BookViewingButton from "./BookViewingButton";
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -55,19 +56,22 @@ export default function QuickSummary({ property }: Props) {
             </p>
           </div>
 
-          {property.available_date && (
-            <div
-              className="px-4 py-2 rounded-full text-xs font-semibold"
-              style={{
-                backgroundColor: "rgba(45,122,79,0.08)",
-                color: "#2D7A4F",
-                border: "1px solid rgba(45,122,79,0.2)",
-                fontFamily: "var(--font-dm-sans)",
-              }}
-            >
-              Available {formatAvailableDate(property.available_date)}
-            </div>
-          )}
+          <div className="flex items-center gap-3 flex-wrap">
+            {property.available_date && (
+              <div
+                className="px-4 py-2 rounded-full text-xs font-semibold"
+                style={{
+                  backgroundColor: "rgba(45,122,79,0.08)",
+                  color: "#2D7A4F",
+                  border: "1px solid rgba(45,122,79,0.2)",
+                  fontFamily: "var(--font-dm-sans)",
+                }}
+              >
+                Available {formatAvailableDate(property.available_date)}
+              </div>
+            )}
+            <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+          </div>
         </div>
 
         {/* Primary stats */}

@@ -26,7 +26,6 @@ function calcEstimatedMonthly(property: PropertyRecord): number {
 
 export default function CostsBreakdown({ property }: Props) {
   const deposit = property.deposit ?? property.price;
-  const moveInTotal = calcMoveIn(property);
   const estimatedMonthly = calcEstimatedMonthly(property);
   const includedUtils = property.utilities_list ?? [];
   const tenantUtils = (property.utilities_tenant_paid ?? []) as UtilityTenantPaid[];
@@ -50,58 +49,51 @@ export default function CostsBreakdown({ property }: Props) {
             className="text-4xl sm:text-5xl font-bold text-center mb-8 md:mb-14 leading-tight"
             style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
           >
-            Cost Breakdown
+            What You Pay
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
-          {/* Monthly rent */}
-          <div>
-            <div
-              className="rounded-xl p-8"
-              style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Monthly Rent
-              </p>
-              <p
-                className="text-4xl font-bold"
-                style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
-              >
-                ${property.price.toLocaleString()}
-              </p>
-              <p className="text-sm mt-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                per month
-              </p>
-            </div>
-          </div>
+        {/* Rent hero */}
+        <div
+          className="rounded-2xl p-8 sm:p-10 mb-4"
+          style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
+        >
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-3"
+            style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Monthly Rent
+          </p>
+          <p
+            className="text-5xl sm:text-6xl font-bold leading-none mb-2"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+          >
+            ${property.price.toLocaleString()}
+          </p>
+          <p className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+            per month, fixed for the term of your lease
+          </p>
 
-          {/* Move-in costs */}
-          <div>
+          {/* Deposit note — framed as refundable, not a cost */}
+          {deposit && (
             <div
-              className="rounded-xl p-8"
-              style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
+              className="mt-6 flex items-start gap-3 px-5 py-4 rounded-xl"
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
             >
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-              >
-                Move-In Total
-              </p>
-              <p
-                className="text-4xl font-bold"
-                style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
-              >
-                ${moveInTotal.toLocaleString()}
-              </p>
-              <p className="text-sm mt-1" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                First month + ${deposit?.toLocaleString()} deposit
-              </p>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-0.5 shrink-0">
+                <circle cx="8" cy="8" r="7" stroke="#2D7A4F" strokeWidth="1.5" />
+                <path d="M5 8l2 2 4-4" stroke="#2D7A4F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <div>
+                <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  Security deposit: ${deposit.toLocaleString()} — fully refundable
+                </p>
+                <p className="text-xs mt-0.5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                  Returned in full at move-out when the unit is left in good condition. This is your money held in trust, not a fee.
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Utilities table */}

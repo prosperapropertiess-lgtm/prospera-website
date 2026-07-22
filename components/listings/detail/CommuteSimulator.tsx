@@ -111,17 +111,39 @@ export default function CommuteSimulator({ property }: Props) {
 
         <div>
           <div
-            className="bg-white rounded-xl p-8"
+            className="bg-white rounded-2xl p-6 sm:p-8"
             style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
           >
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            {/* Destination badge */}
+            <div className="flex items-center gap-2 mb-5">
+              <div
+                className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                style={{ backgroundColor: "#1F2F3A" }}
+              >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <circle cx="6" cy="5" r="2.5" stroke="#FAF8F5" strokeWidth="1.3" />
+                  <path d="M6 12C6 12 1 7.5 1 5a5 5 0 0 1 10 0c0 2.5-5 7-5 7z" stroke="#FAF8F5" strokeWidth="1.3" fill="none" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                  Destination
+                </p>
+                <p className="text-sm font-medium" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                  {destination}
+                </p>
+              </div>
+            </div>
+
+            {/* Input row */}
+            <div className="mb-4">
               <AddressAutocomplete
                 value={origin}
                 onChange={(val) => setOrigin(val)}
                 onPlaceSelect={(place) => setOrigin(place.formatted_address)}
-                placeholder="Enter your workplace or address..."
+                placeholder="Type your workplace, school, or any address..."
                 types="establishment"
-                className="flex-1 px-4 py-3 text-sm outline-none border rounded-lg"
+                className="w-full px-4 py-3.5 text-sm outline-none border rounded-xl"
                 style={{
                   borderColor: "#D8D2C8",
                   backgroundColor: "#F7F5F2",
@@ -129,26 +151,24 @@ export default function CommuteSimulator({ property }: Props) {
                   fontFamily: "var(--font-dm-sans)",
                 }}
               />
-              <button
-                onClick={handleCalculate}
-                disabled={loading || !origin.trim()}
-                className="px-7 py-3 text-xs uppercase tracking-widest transition-opacity hover:opacity-80 rounded-lg disabled:opacity-50"
-                style={{
-                  backgroundColor: "#8B2030",
-                  color: "#FAF8F5",
-                  fontFamily: "var(--font-dm-sans)",
-                }}
-              >
-                {loading ? "Calculating..." : "Calculate"}
-              </button>
+              <p className="text-xs mt-1.5 pl-1" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                Select from the dropdown to get the most accurate result.
+              </p>
             </div>
 
-            <p
-              className="text-xs mb-6"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
+            <button
+              onClick={handleCalculate}
+              disabled={loading || !origin.trim()}
+              className="w-full sm:w-auto px-8 py-3.5 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded-xl disabled:opacity-40"
+              style={{
+                backgroundColor: "#8B2030",
+                color: "#FAF8F5",
+                fontFamily: "var(--font-dm-sans)",
+              }}
             >
-              Destination: {destination}
-            </p>
+              {loading ? "Calculating…" : "Calculate Commute"}
+            </button>
+
 
             <AnimatePresence mode="wait">
               {result?.error && (
