@@ -9,6 +9,7 @@
     { "path": "/api/cron/weekly-improvement", "schedule": "0 1 * * 1" },
     { "path": "/api/cron/intelligence", "schedule": "30 11 * * *" },
     { "path": "/api/cron/viewing-reminders", "schedule": "0 8 * * *" },
-    { "path": "/api/cron/nightly-intelligence", "schedule": "0 5 * * *" }
+    { "path": "/api/cron/nightly-intelligence", "schedule": "0 5 * * *" },
+    { "path": "/api/cron/archive-stale-listings", "schedule": "0 6 * * *" }
   ]
 }

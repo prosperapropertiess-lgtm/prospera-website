@@ -23,6 +23,7 @@ interface Property {
   property_type: string | null;
   available_date: string | null;
   status: string;
+  _rented?: boolean;
 }
 
 const CITIES = ["All Cities", "London", "St. Thomas", "Strathroy"];
@@ -41,7 +42,8 @@ function getImage(p: Property, i: number) {
 }
 
 export default function ListingsPage() {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [available, setAvailable] = useState<Property[]>([]);
+  const [rented, setRented] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [city, setCity] = useState("All Cities");
@@ -61,18 +63,18 @@ export default function ListingsPage() {
         params.set("maxPrice", String(maxPrice));
         const res = await fetch(`/api/listings?${params}`);
         const data = await res.json();
-        setProperties(data || []);
+        setAvailable(data.available || []);
+        setRented(data.rented || []);
       } catch {
         setError(true);
-        setProperties([]);
+        setAvailable([]);
+        setRented([]);
       } finally {
         setLoading(false);
       }
     }
     load();
   }, [city, beds, maxPrice, petFriendly]);
-
-  const filtered = properties;
 
   return (
     <div style={{ backgroundColor: "#F7F5F2" }}>
@@ -163,16 +165,16 @@ export default function ListingsPage() {
           </label>
 
           <div className="ml-auto text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            {loading ? "Loading..." : `${filtered.length} ${filtered.length === 1 ? "property" : "properties"}`}
+            {loading ? "Loading..." : `${available.length} ${available.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
       </div>
 
-      {/* Listings Grid */}
+      {/* Available Listings Grid */}
       <section className="py-16 px-6 min-h-[60vh]" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-6xl mx-auto">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse" style={{ border: "1px solid #D8D2C8" }}>
                   <div className="h-56" style={{ backgroundColor: "#E8E3DC" }} />
@@ -184,7 +186,7 @@ export default function ListingsPage() {
                 </div>
               ))}
             </div>
-          ) : error || filtered.length === 0 ? (
+          ) : error || available.length === 0 ? (
             <div className="text-center py-24">
               <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
               <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
@@ -194,11 +196,11 @@ export default function ListingsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-              {filtered.map((p, i) => (
-                <div key={p.id}>
+              {available.map((p, i) => (
+                <FadeIn key={p.id}>
                   <Link href={`/listings/${p.id}`} className="block">
                     <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-shadow duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-                      {/* Image with gradient overlay */}
+                      {/* Image */}
                       <div className="relative h-72 overflow-hidden">
                         <Image
                           src={getImage(p, i)}
@@ -207,39 +209,37 @@ export default function ListingsPage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-700"
                           unoptimized
                         />
-                        {/* Bottom gradient for price readability */}
                         <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
 
-                        {/* Price overlay on image */}
+                        {/* Price */}
                         <div className="absolute bottom-4 left-4">
                           <p className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)", textShadow: "0 1px 3px rgba(0,0,0,0.3)" }}>
                             ${p.price.toLocaleString()}<span className="text-sm font-normal opacity-80">/mo</span>
                           </p>
                         </div>
 
-                        {/* Badges top-left */}
+                        {/* Top-left badge */}
                         <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                          {p.available_date && (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                          {p.available_date ? (
+                            <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Available {new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
                             </span>
-                          )}
-                          {!p.available_date && (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                          ) : (
+                            <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Available Now
                             </span>
                           )}
                         </div>
 
-                        {/* Badges top-right */}
+                        {/* Top-right badges */}
                         <div className="absolute top-3 right-3 flex gap-1.5">
                           {p.pet_friendly && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               🐾 Pets OK
                             </span>
                           )}
                           {p.utilities_included && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium " style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
                               Utilities Incl.
                             </span>
                           )}
@@ -248,7 +248,6 @@ export default function ListingsPage() {
 
                       {/* Content */}
                       <div className="p-6">
-                        {/* Address first — it's what people scan for */}
                         <p className="text-base font-semibold mb-0.5" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                           📍 {p.address}, {p.city}, ON
                         </p>
@@ -256,7 +255,6 @@ export default function ListingsPage() {
                           {p.property_type ? p.property_type.charAt(0).toUpperCase() + p.property_type.slice(1) : "Rental"} · Managed by Prospera Properties
                         </p>
 
-                        {/* Specs row — clean dividers */}
                         <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
                           <span>🛏 {p.bedrooms} Bed{p.bedrooms !== 1 ? "s" : ""}</span>
                           <span>🚿 {p.bathrooms} Bath{p.bathrooms !== 1 ? "s" : ""}</span>
@@ -266,7 +264,6 @@ export default function ListingsPage() {
                           {p.utilities_included && <span>⚡ Utilities Incl.</span>}
                         </div>
 
-                        {/* CTA button — full width */}
                         <div
                           className="w-full py-3 text-center text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity group-hover:opacity-90"
                           style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
@@ -276,12 +273,71 @@ export default function ListingsPage() {
                       </div>
                     </div>
                   </Link>
-                </div>
+                </FadeIn>
               ))}
             </div>
           )}
         </div>
       </section>
+
+      {/* Recently Rented — social proof */}
+      {!loading && rented.length > 0 && (
+        <section className="py-16 px-6 border-t" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
+          <div className="max-w-6xl mx-auto">
+            <FadeIn>
+              <p className="text-xs font-semibold uppercase tracking-widest text-center mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                Recently Rented
+              </p>
+              <h2 className="text-3xl font-light text-center mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+                These homes found tenants quickly.
+              </h2>
+              <p className="text-sm text-center mb-10" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                High-demand properties in your area — new listings are added regularly.
+              </p>
+            </FadeIn>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {rented.map((p, i) => (
+                <div key={p.id} className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                  {/* Image */}
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={getImage(p, i)}
+                      alt={`${p.bedrooms} bedroom rental in ${p.city}`}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                    {/* Desaturate overlay */}
+                    <div className="absolute inset-0" style={{ backgroundColor: "rgba(31,47,58,0.55)" }} />
+
+                    {/* Rented badge */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span
+                        className="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full"
+                        style={{ backgroundColor: "#FAF8F5", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+                      >
+                        Rented
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5" style={{ backgroundColor: "#FFFFFF" }}>
+                    <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                      {p.address}, {p.city}
+                    </p>
+                    <div className="flex items-center gap-3 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                      <span>{p.bedrooms} Bed · {p.bathrooms} Bath</span>
+                      {p.sqft && <span>· {p.sqft.toLocaleString()} sqft</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Bottom CTA */}
       <section className="py-16 px-6 text-center border-t" style={{ backgroundColor: "#1F2F3A", borderColor: "#D8D2C8" }}>
