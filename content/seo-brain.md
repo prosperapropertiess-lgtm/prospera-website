@@ -5,7 +5,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-07-21
+2026-07-22
 
 ## Posts Written: 70 total
 
@@ -118,14 +118,14 @@ _(Oxford County geographic cluster now complete — all three posts published.)_
 
 ## Recommended Next Posts
 
-**Supporting cluster content (topical depth — LTB applications cluster now complete with L2):**
-1. l3-application-ontario-landlord-guide _(LTB eviction enforcement — Sheriff enforcement, L3 when tenant doesn't vacate after N11 or mutual agreement; strong internal link from L2, N11, and eviction posts)_
+**Supporting cluster content (topical depth — LTB applications cluster, L3 now complete):**
+1. ~~l3-application-ontario-landlord-guide~~ ✅ _(published 2026-07-22)_
 2. l4-application-ontario-landlord-guide _(LTB application for "Other" grounds not covered by L1/L2; niche but fills completeness gap)_
 3. t1-application-tenant-dispute-rent-increase-ontario _(Supporting rent-increase-ontario-guidelines cluster from the opposite angle — what to expect when tenant disputes your N1; helps landlords prepare counter-arguments)_
 4. l10-application-ontario-landlord-guide _(LTB application for damage recovery post-tenancy; supporting what-can-landlord-deduct-from-last-month-rent-ontario and tenant-damages-property-ontario clusters)_
 
 **Next priority after LTB cluster depth:**
-_(L2 published — completes the core L1/L2 applications dyad. L3, L4, L10, and T1 applications are supporting/niche posts. Consider moving to other cluster depth or monitoring for new urgent landlord pain signals.)_
+_(L3 published — covers the Section 77 no-hearing eviction pathway when tenant agreed to leave via N11 or N9. L4, L10, and T1 applications remain as supporting/niche posts.)_
 
 ---
 
@@ -151,3 +151,4 @@ _(L2 published — completes the core L1/L2 applications dyad. L3, L4, L10, and 
 
 ## Session Notes (continued)
 - 2026-07-21: Published l2-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; companion to l1-application-ontario-landlord-guide, covering eviction for behaviour/damage/illegal grounds). Covers when to use L2 vs L1, the N5/N6/N7 notice prerequisites, documentation requirements by ground type, step-by-step L2 completion with the online portal, filing fees ($170 online / $155 in-person), hearing preparation, Section 83 discretion considerations, enforcement via the Sheriff, and seven common landlord mistakes. Differentiates from tribunalsontario.ca PDF by being entirely landlord-process-focused, specific about documentation standards per ground, and actionable on countering Section 83 defences. Directly supports and links to N5, N6, N7, L1, RTA Section 83, landlord-record-keeping, ltb-hearing-preparation, and how-long-does-eviction-take posts. External links to tribunalsontario.ca LTB portal/instructions and ontario.ca RTA statute. Completes the core L1/L2 eviction applications dyad. ✅
+- 2026-07-22: Published l3-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; covers the Section 77 no-hearing eviction pathway when a tenant agreed to leave via N11 or gave notice via N9 but didn't vacate). Covers what an L3 is and when to use it, the two triggering scenarios (N11 mutual agreement, N9 tenant-served notice), the key advantage of the no-hearing pathway under RTA Section 77(2), step-by-step filing through the LTB online portal, the 30-day filing deadline, the 10-day tenant set-aside window under Section 77(6), Sheriff enforcement after the order, and five common landlord mistakes. Differentiates by explaining the no-hearing mechanism clearly — a nuance many landlords and even general legal guides gloss over. Links internally to N11, L1, L2, enforcing-eviction-order-ontario-sheriff, how-long-does-eviction-take, ltb-hearing-preparation, and landlord-record-keeping. External links to tribunalsontario.ca LTB portal and ontario.ca RTA Section 77. ✅
