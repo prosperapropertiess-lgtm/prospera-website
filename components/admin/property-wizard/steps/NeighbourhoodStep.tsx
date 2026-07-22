@@ -32,7 +32,7 @@ export default function NeighbourhoodStep({ data, onChange, propertyId }: Props)
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ address: data.address, city: data.city }),
+        body: JSON.stringify({ address: data.address, city: data.city, force: hasNeighbourhoodData }),
       });
 
       if (!res.ok) {

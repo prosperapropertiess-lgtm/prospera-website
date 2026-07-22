@@ -143,8 +143,8 @@ async function getRealWalkingDistances(
   originLng: number,
   places: { name: string; lat: number; lng: number }[],
   apiKey: string
-): Promise<Map<string, { distance: string; walk_time: string }>> {
-  const result = new Map<string, { distance: string; walk_time: string }>();
+): Promise<Map<string, { distance: string; walk_time: string; walk_seconds: number }>> {
+  const result = new Map<string, { distance: string; walk_time: string; walk_seconds: number }>();
   if (!places.length) return result;
 
   // Distance Matrix supports up to 25 destinations per call
@@ -161,8 +161,9 @@ async function getRealWalkingDistances(
         if (el.status === "OK" && el.distance && el.duration) {
           const key = `${batch[i].lat},${batch[i].lng}`;
           result.set(key, {
-            distance: el.distance.text, // "1.2 km" or "350 m"
-            walk_time: el.duration.text, // "15 mins" or "4 mins"
+            distance: el.distance.text,     // "1.2 km" or "350 m"
+            walk_time: el.duration.text,    // "1 hour 25 mins" etc — use walk_seconds instead of parsing this
+            walk_seconds: el.duration.value, // reliable integer seconds
           });
         }
       });
@@ -181,7 +182,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   let { latitude, longitude } = body;
-  const { address, city } = body;
+  const { address, city, force } = body;
 
   if (!GOOGLE_API_KEY) {
     return NextResponse.json({ error: "Google Maps API key not configured. Add GOOGLE_MAPS_API_KEY to your environment variables." }, { status: 500 });
@@ -239,7 +240,17 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Step 3: Check neighbourhood_cache
+  // Step 3: Check neighbourhood_cache (skip/clear if force=true)
+  if (force) {
+    // Delete all cache entries for this location so we get fresh data
+    await supabase
+      .from("neighbourhood_cache")
+      .delete()
+      .eq("lat_key", latKey)
+      .eq("lng_key", lngKey);
+    console.log("[neighbourhood] Force refresh — cleared cache for", latKey, lngKey);
+  }
+
   const { data: cached } = await supabase
     .from("neighbourhood_cache")
     .select("category, data")
@@ -302,13 +313,13 @@ export async function POST(req: NextRequest) {
           const straightLineDist = haversineDistance(latitude, longitude, p.geometry.location.lat, p.geometry.location.lng);
 
           let walkTime: string;
-          if (real?.walk_time) {
-            const walkMins = parseInt(real.walk_time);
+          if (real?.walk_seconds !== undefined) {
+            const walkMins = Math.round(real.walk_seconds / 60);
             // If walking takes > 20 min, show estimated driving time instead
             if (walkMins > 20) {
               walkTime = `${Math.max(2, Math.round(walkMins / 4))} min drive`;
             } else {
-              walkTime = `${real.walk_time} walk`;
+              walkTime = `${walkMins} min walk`;
             }
           } else {
             walkTime = estimateWalkTime(straightLineDist);
@@ -410,9 +421,9 @@ export async function POST(req: NextRequest) {
         const real = realPopDistances.get(key);
         if (real) {
           p.distance = real.distance;
-          // If walking time > 30 min, show as drive instead
-          const mins = parseInt(real.walk_time);
-          p.walk_time = mins > 30 ? `${Math.max(2, Math.round(mins / 4))} min drive` : `${real.walk_time} walk`;
+          // Use walk_seconds (reliable integer) — not parseInt on text like "1 hour 25 mins"
+          const walkMins = Math.round((real.walk_seconds ?? 0) / 60);
+          p.walk_time = walkMins > 20 ? `${Math.max(2, Math.round(walkMins / 4))} min drive` : `${walkMins} min walk`;
         } else {
           const d = haversineDistance(latitude, longitude, p._lat, p._lng);
           p.distance = `${(d * 1400).toFixed(0)}m`;
