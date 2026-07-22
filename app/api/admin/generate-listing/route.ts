@@ -55,15 +55,15 @@ export async function POST(req: NextRequest) {
         ).join(", ")
       : "none found";
 
-    const vibePrompt = `You're writing the full listing description for a rental at ${body.address}, ${body.city}, Ontario, managed by Prospera Properties. This gets published on prosperaproperties.co, then copy-pasted to Kijiji, Facebook Marketplace, and other listing sites.
+    const vibePrompt = `You're writing the neighbourhood and location description for a rental at ${body.address}, ${body.city}, Ontario, managed by Prospera Properties. This gets published on prosperaproperties.co, then copy-pasted to Kijiji, Facebook Marketplace, and other listing sites.
 
-Someone scrolling Kijiji at midnight on their phone should read this and think: "I need to see this place. And these people seem like they actually give a shit about their tenants."
+CRITICAL: You only have LOCATION DATA (what's nearby, transit scores, bus routes). You do NOT have details about the inside of the property. Do NOT describe bedrooms, bathrooms, finishes, furnishings, renovations, or any interior features — you don't know them. Do NOT describe the property as "luxury", "executive", "prestigious", "stunning", or any invented superlative. Stick 100% to location and neighbourhood facts.
 
-You're selling TWO things: the LOCATION and the EXPERIENCE of renting through Prospera.
+You're selling ONE thing: why this LOCATION is convenient to live in.
 
 Write it so a third grader could follow it. Short sentences. Simple words. Bullet points for anything that's a list. No big paragraphs. No fancy language. Break everything down.
 
-TARGET: ~800-1000 words across 6 sections.
+TARGET: ~600-800 words across 5 sections (skip the interior description).
 
 LOCATION DATA:
 Walk Score: ${body.walk_score || "unknown"}/100
@@ -77,13 +77,14 @@ OTHER AMENITIES:
 ${walkableAmenities.length ? walkableAmenities.join("\n") : "No data available"}
 
 WRITING RULES:
-- Write like you're texting a friend about why this spot is solid. Not a brochure. Not a sales pitch. Just real talk.
+- Write like you're texting a friend about why this neighbourhood is solid. Not a brochure. Not a sales pitch. Just real talk.
 - Short sentences. If a sentence has a comma, ask yourself if it should be two sentences instead.
-- No hype words: stunning, vibrant, must-see, breathtaking, nestled, boasts, pristine, charming, exquisite. None.
+- No hype words: stunning, vibrant, must-see, breathtaking, nestled, boasts, pristine, charming, exquisite, luxury, executive, prestigious, upscale. None.
 - No exclamation marks.
 - No AI tells: "nestled in the heart of," "stands as a testament," "rich tapestry," "Whether you're a..."
-- DO NOT describe who should live here (Ontario Human Rights Code). Describe the place only.
-- DO NOT invent facts. Only use the data above.
+- DO NOT describe who should live here (Ontario Human Rights Code). Describe the location only.
+- DO NOT mention bedrooms, bathrooms, finishes, appliances, or any interior features.
+- DO NOT invent facts. Only use the location data above. If a store isn't in the data, don't mention it.
 
 ===== STRUCTURE (follow this exactly) =====
 

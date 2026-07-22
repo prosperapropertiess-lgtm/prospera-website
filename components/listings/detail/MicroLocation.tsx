@@ -20,14 +20,6 @@ interface PlaceCategory {
   places: PlaceItem[];
 }
 
-interface Highlight {
-  category: string;
-  emoji: string;
-  name: string;
-  time: string;
-  distance: string;
-}
-
 interface BusRoute {
   route?: string;
   name?: string;
@@ -37,23 +29,33 @@ interface BusRoute {
   frequency?: string;
 }
 
+// ── Category config ────────────────────────────────────────────────────────────
+
 const CATEGORY_CONFIG: Record<string, { emoji: string; color: string }> = {
-  "Grocery Stores":       { emoji: "🛒", color: "#2D7A4F" },
-  "Popular Spots":        { emoji: "⭐", color: "#8B2030" },
-  "Pharmacies":           { emoji: "💊", color: "#1F5FA6" },
-  "Gyms & Fitness":       { emoji: "🏋️", color: "#7A5A2D" },
-  "Transit Stops":        { emoji: "🚌", color: "#1F2F3A" },
-  "Schools":              { emoji: "🏫", color: "#5A2D7A" },
-  "Hospitals & Clinics":  { emoji: "🏥", color: "#C44040" },
-  "Parks":                { emoji: "🌳", color: "#2D7A4F" },
-  "Restaurants":          { emoji: "🍽️", color: "#B45309" },
-  "Cafés":                { emoji: "☕", color: "#7A5A2D" },
-  "Cafes":                { emoji: "☕", color: "#7A5A2D" },
-  "Banks":                { emoji: "🏦", color: "#1F5FA6" },
-  "Shopping Mall":           { emoji: "🛍️", color: "#8B2030" },
-  "Shopping Malls":          { emoji: "🛍️", color: "#8B2030" },
+  "Grocery Stores":        { emoji: "🛒", color: "#2D7A4F" },
+  "Popular Spots":         { emoji: "⭐", color: "#8B2030" },
+  "Pharmacies":            { emoji: "💊", color: "#1F5FA6" },
+  "Gyms & Fitness":        { emoji: "🏋️", color: "#7A5A2D" },
+  "Transit Stops":         { emoji: "🚌", color: "#1F2F3A" },
+  "Schools":               { emoji: "🏫", color: "#5A2D7A" },
+  "Hospitals & Clinics":   { emoji: "🏥", color: "#C44040" },
+  "Parks":                 { emoji: "🌳", color: "#2D7A4F" },
+  "Restaurants":           { emoji: "🍽️", color: "#B45309" },
+  "Cafés":                 { emoji: "☕", color: "#7A5A2D" },
+  "Cafes":                 { emoji: "☕", color: "#7A5A2D" },
+  "Banks":                 { emoji: "🏦", color: "#1F5FA6" },
+  "Shopping Malls":        { emoji: "🛍️", color: "#8B2030" },
+  "Shopping Mall":         { emoji: "🛍️", color: "#8B2030" },
   "Universities & Colleges": { emoji: "🎓", color: "#1F5FA6" },
 };
+
+// Priority order for default tab selection
+const TAB_PRIORITY = [
+  "Grocery Stores", "Popular Spots", "Cafés", "Cafes", "Restaurants",
+  "Universities & Colleges", "Hospitals & Clinics", "Pharmacies",
+  "Transit Stops", "Parks", "Gyms & Fitness", "Schools", "Banks",
+  "Shopping Malls", "Shopping Mall",
+];
 
 function getConfig(name: string) {
   if (CATEGORY_CONFIG[name]) return CATEGORY_CONFIG[name];
@@ -70,168 +72,79 @@ function getConfig(name: string) {
   if (lower.includes("restaurant")) return { emoji: "🍽️", color: "#B45309" };
   if (lower.includes("café") || lower.includes("cafe") || lower.includes("coffee")) return { emoji: "☕", color: "#7A5A2D" };
   if (lower.includes("bank"))    return { emoji: "🏦", color: "#1F5FA6" };
+  if (lower.includes("mall") || lower.includes("shopping")) return { emoji: "🛍️", color: "#8B2030" };
   return { emoji: "📍", color: "#666666" };
 }
 
-function getTransport(place: PlaceItem): { icon: string } {
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function parseMinutes(place: PlaceItem): number | null {
   const timeStr = (place.walk_time || place.distance || "").toLowerCase();
-  if (timeStr.includes("drive")) return { icon: "🚗" };
 
+  // Already "X min"
   const minMatch = timeStr.match(/(\d+)\s*min/);
-  if (minMatch) {
-    return { icon: parseInt(minMatch[1]) <= 20 ? "🚶" : "🚗" };
-  }
+  if (minMatch) return parseInt(minMatch[1]);
 
-  // Parse distance
-  let distMetres: number;
+  // Distance string → estimate
+  let distMetres: number | null = null;
   if (/[\d.]+\s*km/i.test(timeStr)) {
     distMetres = parseFloat(timeStr) * 1000;
-  } else {
-    distMetres = parseInt(timeStr) || 1500;
+  } else if (/^\d+$/.test(timeStr.trim())) {
+    distMetres = parseInt(timeStr);
   }
-  return { icon: distMetres < 1500 ? "🚶" : "🚗" };
+  if (distMetres === null) return null;
+  if (distMetres < 1500) return Math.max(1, Math.round(distMetres / 80));
+  return Math.max(2, Math.round(distMetres / 500));
 }
 
-function formatTime(place: PlaceItem): string {
-  const timeStr = place.walk_time || place.distance || "";
-
-  // Already contains time info (e.g. "15 mins walk", "8 min drive")
-  if (/\d+\s*min/i.test(timeStr)) {
-    return timeStr.replace(/\s*walk\s*/i, " walk").trim();
-  }
-
-  // Parse distance string — handle "1.2 km", "350 m", "700m"
-  let distMetres: number;
+function getMode(place: PlaceItem): "walk" | "drive" {
+  const timeStr = (place.walk_time || place.distance || "").toLowerCase();
+  if (timeStr.includes("drive")) return "drive";
+  const minMatch = timeStr.match(/(\d+)\s*min/);
+  if (minMatch && parseInt(minMatch[1]) > 20) return "drive";
   if (/[\d.]+\s*km/i.test(timeStr)) {
-    distMetres = parseFloat(timeStr) * 1000;
-  } else {
-    distMetres = parseInt(timeStr) || 1000;
+    const km = parseFloat(timeStr);
+    return km >= 1.5 ? "drive" : "walk";
   }
+  return "walk";
+}
 
-  if (distMetres < 1500) {
-    return `${Math.max(1, Math.round(distMetres / 80))} min walk`;
+function formatDisplayTime(place: PlaceItem): string {
+  const mins = parseMinutes(place);
+  if (mins === null) return place.walk_time || place.distance || "—";
+  return `${mins}`;
+}
+
+function scoreDescription(score: number, type: "walk" | "transit" | "bike"): string {
+  if (type === "walk") {
+    if (score >= 90) return "Walker's Paradise";
+    if (score >= 70) return "Very Walkable";
+    if (score >= 50) return "Somewhat Walkable";
+    if (score >= 25) return "Car-Dependent";
+    return "Car Required";
   }
-  return `${Math.max(2, Math.round(distMetres / 500))} min drive`;
+  if (type === "transit") {
+    if (score >= 90) return "Rider's Paradise";
+    if (score >= 70) return "Excellent Transit";
+    if (score >= 50) return "Good Transit";
+    if (score >= 25) return "Some Transit";
+    return "Minimal Transit";
+  }
+  if (score >= 90) return "Biker's Paradise";
+  if (score >= 70) return "Very Bikeable";
+  if (score >= 50) return "Bikeable";
+  if (score >= 25) return "Bikeable with Care";
+  return "Minimal Bike Infra";
 }
 
-// ── Score circle (unchanged) ──────────────────────────────────────────────────
-
-function ScoreCircle({ score, label, color }: { score: number; label: string; color: string }) {
-  const radius = 26;
-  const circumference = 2 * Math.PI * radius;
-  const dashOffset = circumference - (score / 100) * circumference;
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <svg width="64" height="64" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r={radius} fill="none" stroke="#D8D2C8" strokeWidth="5" />
-        <circle cx="32" cy="32" r={radius} fill="none" stroke={color} strokeWidth="5"
-          strokeDasharray={circumference} strokeDashoffset={dashOffset}
-          strokeLinecap="round" transform="rotate(-90 32 32)"
-          style={{ transition: "stroke-dashoffset 0.8s ease" }} />
-        <text x="32" y="37" textAnchor="middle" fontSize="14" fontWeight="700" fill="#1F2F3A">{score}</text>
-      </svg>
-      <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-        {label}
-      </span>
-    </div>
-  );
+function scoreColor(score: number): string {
+  if (score >= 80) return "#2D7A4F";
+  if (score >= 60) return "#7A5A2D";
+  if (score >= 40) return "#B45309";
+  return "#888888";
 }
 
-// ── Proximity diagram (SVG hub-and-spoke) ─────────────────────────────────────
-
-interface SpotData {
-  name: string;
-  emoji: string;
-  color: string;
-  distance?: string;
-  walk_time?: string;
-}
-
-function ProximityDiagram({ spots }: { spots: SpotData[] }) {
-
-  const SIZE   = 500;
-  const CX     = SIZE / 2;
-  const CY     = SIZE / 2;
-  const RADIUS = 148;
-
-  return (
-    <svg
-      viewBox={`0 0 ${SIZE} ${SIZE}`}
-      className="w-full"
-      style={{ maxWidth: 500, margin: "0 auto", display: "block" }}
-      aria-hidden="true"
-    >
-      {/* ── Spokes ── */}
-      {spots.map((spot, i) => {
-        const angle = (i / spots.length) * 2 * Math.PI - Math.PI / 2;
-        const nx = CX + RADIUS * Math.cos(angle);
-        const ny = CY + RADIUS * Math.sin(angle);
-        const mx = CX + RADIUS * 0.50 * Math.cos(angle);
-        const my = CY + RADIUS * 0.50 * Math.sin(angle);
-        const { icon: transportIcon } = getTransport(spot as PlaceItem);
-        const timeLabel = formatTime(spot as PlaceItem);
-        const shortName = spot.name.length > 17 ? spot.name.slice(0, 15) + "…" : spot.name;
-
-        return (
-          <g key={i}>
-            {/* Dotted line */}
-            <line
-              x1={CX} y1={CY} x2={nx} y2={ny}
-              stroke="#D8D2C8" strokeWidth="1.5" strokeDasharray="5 5"
-            />
-
-            {/* Transport icon midpoint */}
-            <text x={mx} y={my} textAnchor="middle" dominantBaseline="middle" fontSize="13">
-              {transportIcon}
-            </text>
-
-            {/* Outer glow ring */}
-            <circle cx={nx} cy={ny} r="28" fill={spot.color} opacity="0.08" />
-            {/* Node circle */}
-            <circle cx={nx} cy={ny} r="23" fill="#FFFFFF" stroke={spot.color} strokeWidth="2.5" />
-            {/* Category emoji */}
-            <text x={nx} y={ny} textAnchor="middle" dominantBaseline="middle" fontSize="17">
-              {spot.emoji}
-            </text>
-
-            {/* Place name */}
-            <text x={nx} y={ny + 34} textAnchor="middle" fontSize="10" fontWeight="600"
-              fill="#222222" fontFamily="system-ui, sans-serif">
-              {shortName}
-            </text>
-            {/* Time label */}
-            <text x={nx} y={ny + 46} textAnchor="middle" fontSize="9"
-              fill="#888888" fontFamily="system-ui, sans-serif">
-              {timeLabel}
-            </text>
-          </g>
-        );
-      })}
-
-      {/* ── Centre node ── */}
-      <circle cx={CX} cy={CY} r="38" fill="#1F2F3A" />
-      <circle cx={CX} cy={CY} r="38" fill="none" stroke="rgba(250,248,245,0.12)" strokeWidth="2" />
-      <text x={CX} y={CY - 5} textAnchor="middle" dominantBaseline="middle" fontSize="22">🏠</text>
-      <text x={CX} y={CY + 14} textAnchor="middle" fontSize="8.5" fontWeight="700"
-        fill="rgba(250,248,245,0.65)" fontFamily="system-ui, sans-serif" letterSpacing="1">
-        YOUR HOME
-      </text>
-
-      {/* Empty state — dashed orbit ring with label */}
-      {spots.length === 0 && (
-        <>
-          <circle cx={CX} cy={CY} r={RADIUS} fill="none" stroke="#E8E4DE" strokeWidth="1" strokeDasharray="6 6" />
-          <text x={CX} y={CY - RADIUS - 14} textAnchor="middle" fontSize="11"
-            fill="#AAAAAA" fontFamily="system-ui, sans-serif">
-            Neighbourhood amenities coming soon
-          </text>
-        </>
-      )}
-    </svg>
-  );
-}
-
-// ── Build categories from raw Google-type keys (fallback for older data) ─────
+// ── Build categories from raw Google-type keys ────────────────────────────────
 
 const RAW_TYPE_LABELS: Record<string, string> = {
   grocery_or_supermarket: "Grocery Stores",
@@ -245,6 +158,8 @@ const RAW_TYPE_LABELS: Record<string, string> = {
   cafe: "Cafés",
   bank: "Banks",
   popular_spots: "Popular Spots",
+  shopping_mall: "Shopping Malls",
+  university: "Universities & Colleges",
 };
 
 function buildCategoriesFromRaw(data: Record<string, unknown>): PlaceCategory[] {
@@ -254,131 +169,170 @@ function buildCategoriesFromRaw(data: Record<string, unknown>): PlaceCategory[] 
       name: RAW_TYPE_LABELS[key],
       places: (val as { name: string; distance?: string; walk_time?: string; vicinity?: string; place_id?: string }[])
         .slice(0, 8)
-        .map((p) => ({
-          name: p.name,
-          distance: p.distance,
-          walk_time: p.walk_time,
-          vicinity: p.vicinity,
-          place_id: p.place_id,
-        })),
+        .map((p) => ({ name: p.name, distance: p.distance, walk_time: p.walk_time, vicinity: p.vicinity, place_id: p.place_id })),
     }));
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
+// ── Score card ─────────────────────────────────────────────────────────────────
+
+function ScoreCard({ score, label, type }: { score: number; label: string; type: "walk" | "transit" | "bike" }) {
+  const color = scoreColor(score);
+  const desc = scoreDescription(score, type);
+  const radius = 30;
+  const circumference = 2 * Math.PI * radius;
+  const dashOffset = circumference - (score / 100) * circumference;
+  const modeIcon = type === "walk" ? "🚶" : type === "transit" ? "🚌" : "🚴";
+
+  return (
+    <div
+      className="flex flex-col items-center gap-3 flex-1 py-6 px-4 rounded-2xl"
+      style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
+    >
+      <svg width="72" height="72" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r={radius} fill="none" stroke="#E8E4DE" strokeWidth="5" />
+        <circle cx="36" cy="36" r={radius} fill="none" stroke={color} strokeWidth="5"
+          strokeDasharray={circumference} strokeDashoffset={dashOffset}
+          strokeLinecap="round" transform="rotate(-90 36 36)"
+          style={{ transition: "stroke-dashoffset 0.8s ease" }} />
+        <text x="36" y="40" textAnchor="middle" fontSize="16" fontWeight="700" fill="#1F2F3A">{score}</text>
+      </svg>
+      <div className="text-center">
+        <p className="text-[10px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: "#999" }}>
+          {modeIcon} {label}
+        </p>
+        <p className="text-sm font-semibold" style={{ color }}>
+          {desc}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Place card ─────────────────────────────────────────────────────────────────
+
+function PlaceCard({ place, categoryName }: { place: PlaceItem; categoryName: string }) {
+  const mode = getMode(place);
+  const mins = formatDisplayTime(place);
+  const config = getConfig(categoryName);
+
+  return (
+    <div
+      className="rounded-xl p-5 flex flex-col gap-3 transition-shadow hover:shadow-md"
+      style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+    >
+      {/* Time hero */}
+      <div className="flex items-end gap-1">
+        <span
+          className="font-bold leading-none"
+          style={{ fontSize: "2.5rem", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)", lineHeight: 1 }}
+        >
+          {mins}
+        </span>
+        <span className="text-sm font-medium pb-1" style={{ color: "#666666" }}>min</span>
+      </div>
+
+      {/* Mode pill */}
+      <div
+        className="self-start px-2.5 py-1 rounded-full text-xs font-semibold"
+        style={{
+          backgroundColor: mode === "walk" ? "rgba(45,122,79,0.10)" : "rgba(31,47,58,0.08)",
+          color: mode === "walk" ? "#2D7A4F" : "#1F2F3A",
+        }}
+      >
+        {mode === "walk" ? "🚶 Walk" : "🚗 Drive"}
+      </div>
+
+      {/* Place name */}
+      <div>
+        <p className="text-xs mb-0.5" style={{ color: config.color, fontSize: "18px" }}>{config.emoji}</p>
+        <p className="text-sm font-semibold leading-snug" style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
+          {place.name}
+        </p>
+        {place.vicinity && (
+          <p className="text-xs mt-0.5 truncate" style={{ color: "#999999" }}>{place.vicinity}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Main component ─────────────────────────────────────────────────────────────
 
 export default function MicroLocation({ property }: Props) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
   const neighbourhoodData = property.neighbourhood_data as Record<string, unknown> | null;
   const busRoutes  = (property.bus_routes ?? []) as BusRoute[];
-  const walkScore  = property.walk_score   ?? null;
+  const walkScore    = property.walk_score    ?? null;
   const transitScore = property.transit_score ?? null;
-  const bikeScore  = property.bike_score   ?? null;
+  const bikeScore    = property.bike_score    ?? null;
 
-  // Try the formatted categories array first; fall back to building from raw place-type keys
   const storedCategories = (neighbourhoodData?.categories as PlaceCategory[] | undefined) ?? [];
   const categories: PlaceCategory[] = storedCategories.length > 0
     ? storedCategories
     : (neighbourhoodData ? buildCategoriesFromRaw(neighbourhoodData) : []);
 
+  // Sort categories by priority
+  const sortedCategories = [...categories].sort((a, b) => {
+    const ai = TAB_PRIORITY.indexOf(a.name);
+    const bi = TAB_PRIORITY.indexOf(b.name);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+  const [activeTab, setActiveTab] = useState<string>(sortedCategories[0]?.name ?? "");
+
   const hasScores = walkScore !== null || transitScore !== null || bikeScore !== null;
-  const highlights = (neighbourhoodData?.highlights as Highlight[] | undefined) ?? [];
+  const activePlaces = sortedCategories.find((c) => c.name === activeTab)?.places ?? [];
 
-  // Best one place per category, max 8 spots on the diagram
-  const diagramSpots: SpotData[] = categories
-    .flatMap((cat) => {
-      const config = getConfig(cat.name);
-      return cat.places.slice(0, 1).map((p) => ({
-        name: p.name,
-        emoji: config.emoji,
-        color: config.color,
-        distance: p.distance,
-        walk_time: p.walk_time,
-      }));
-    })
-    .slice(0, 8);
-
-  // Always render — show home pin + empty state when no data yet
+  if (!hasScores && !categories.length && !busRoutes.length) return null;
 
   return (
-    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>
       <div className="max-w-5xl mx-auto">
 
-        <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+        {/* Header */}
+        <p className="text-xs font-semibold uppercase tracking-widest text-center mb-3"
           style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
           Getting Around
         </p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 md:mb-12 leading-tight"
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-3 leading-tight"
           style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
           Location & Nearby
         </h2>
+        <p className="text-center text-sm mb-10 md:mb-14 max-w-md mx-auto"
+          style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+          See how far the things that matter are from your front door.
+        </p>
 
-        {/* Walk / transit / bike scores */}
+        {/* Score cards */}
         {hasScores && (
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
-            {walkScore   !== null && <ScoreCircle score={walkScore}   label="Walk"    color="#2D7A4F" />}
-            {transitScore !== null && <ScoreCircle score={transitScore} label="Transit" color="#1F5FA6" />}
-            {bikeScore   !== null && <ScoreCircle score={bikeScore}   label="Bike"    color="#7A5A2D" />}
+          <div className="flex gap-3 md:gap-5 mb-10 md:mb-14">
+            {walkScore    !== null && <ScoreCard score={walkScore}    label="Walk"    type="walk"    />}
+            {transitScore !== null && <ScoreCard score={transitScore} label="Transit" type="transit" />}
+            {bikeScore    !== null && <ScoreCard score={bikeScore}    label="Bike"    type="bike"    />}
           </div>
         )}
 
-        {/* Main Highlights */}
-        {highlights.length > 0 && (
-          <div className="mb-10">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4 text-center"
-              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-              Main Highlights
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
-              {highlights.map((h) => (
-                <div
-                  key={h.category}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-white"
-                  style={{ border: "1px solid #D8D2C8", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
-                >
-                  <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{h.emoji}</span>
-                  <div style={{ minWidth: 0 }}>
-                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-0.5"
-                      style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
-                      {h.category}
-                    </p>
-                    <p className="text-sm font-semibold leading-tight truncate"
-                      style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                      {h.name}
-                    </p>
-                    <p className="text-xs mt-0.5 font-medium"
-                      style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-                      {h.time}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Proximity diagram — always show when section renders */}
-        <div className="mb-10 px-2 sm:px-8">
-          <ProximityDiagram spots={diagramSpots} />
-        </div>
-
-        {/* Category filter chips */}
-        {categories.length > 0 && (
+        {/* Category tab explorer */}
+        {sortedCategories.length > 0 && (
           <div>
-            <div className="flex flex-wrap gap-2 justify-center mb-6">
-              {categories.map((cat) => {
+            {/* Tab strip */}
+            <div
+              className="flex gap-2 mb-6 overflow-x-auto pb-1"
+              style={{ scrollbarWidth: "none" }}
+            >
+              {sortedCategories.map((cat) => {
                 const config = getConfig(cat.name);
-                const isActive = activeCategory === cat.name;
+                const isActive = activeTab === cat.name;
                 return (
                   <button
                     key={cat.name}
-                    onClick={() => setActiveCategory(isActive ? null : cat.name)}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors"
+                    onClick={() => setActiveTab(cat.name)}
+                    className="shrink-0 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all"
                     style={{
-                      backgroundColor: isActive ? config.color : "#F7F5F2",
-                      color: isActive ? "white" : "#333333",
-                      border: `1px solid ${isActive ? config.color : "#D8D2C8"}`,
+                      backgroundColor: isActive ? "#1F2F3A" : "#FFFFFF",
+                      color: isActive ? "#FAF8F5" : "#333333",
+                      border: `1px solid ${isActive ? "#1F2F3A" : "#D8D2C8"}`,
                       fontFamily: "var(--font-dm-sans)",
+                      letterSpacing: "0.03em",
                     }}
                   >
                     {config.emoji} {cat.name}
@@ -387,28 +341,16 @@ export default function MicroLocation({ property }: Props) {
               })}
             </div>
 
-            {/* Place list */}
-            {activeCategory && (
-              <div className="rounded-xl overflow-hidden max-w-xl mx-auto"
-                style={{ border: "1px solid #D8D2C8" }}>
-                <div className="px-4 py-3" style={{ backgroundColor: "#1F2F3A" }}>
-                  <p className="text-xs font-semibold uppercase tracking-widest"
-                    style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                    {getConfig(activeCategory).emoji} {activeCategory}
-                  </p>
-                </div>
-                <div className="divide-y bg-white" style={{ borderColor: "#E8E4DE" }}>
-                  {categories.find((c) => c.name === activeCategory)?.places.slice(0, 6).map((place, i) => (
-                    <div key={i} className="flex justify-between items-center px-4 py-3">
-                      <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                        {place.name}
-                      </span>
-                      <span className="text-xs shrink-0 ml-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                        {place.walk_time || place.distance || ""}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+            {/* Place cards */}
+            {activePlaces.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
+                {activePlaces.slice(0, 9).map((place, i) => (
+                  <PlaceCard key={i} place={place} categoryName={activeTab} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-10 rounded-2xl" style={{ border: "1px dashed #D8D2C8", backgroundColor: "#FFFFFF" }}>
+                <p className="text-sm" style={{ color: "#999999" }}>No places listed for this category yet.</p>
               </div>
             )}
           </div>
@@ -416,29 +358,53 @@ export default function MicroLocation({ property }: Props) {
 
         {/* Bus routes */}
         {busRoutes.length > 0 && (
-          <div className="mt-6 max-w-xl mx-auto">
-            <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #D8D2C8" }}>
-              <div className="px-4 py-3" style={{ backgroundColor: "#1F2F3A" }}>
-                <p className="text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                  🚌 Bus Routes
-                </p>
-              </div>
-              <div className="divide-y bg-white" style={{ borderColor: "#E8E4DE" }}>
-                {busRoutes.slice(0, 5).map((route, i) => (
-                  <div key={i} className="flex justify-between items-center px-4 py-3">
-                    <span className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                      {route.stop_name || route.stop || route.name || "Bus Stop"}
-                    </span>
-                    <span className="text-xs shrink-0 ml-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                      {route.walk_time || ""}
-                    </span>
+          <div className="mt-8 md:mt-10">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              🚌 Bus Routes
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {busRoutes.slice(0, 6).map((route, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-4 px-5 py-4 rounded-xl"
+                  style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
+                >
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-sm font-bold"
+                    style={{ backgroundColor: "#1F2F3A", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {route.route || "?"}
                   </div>
-                ))}
-              </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold leading-tight truncate"
+                      style={{ color: "#222222", fontFamily: "var(--font-dm-sans)" }}>
+                      {route.stop_name || route.stop || route.name || "Bus Stop"}
+                    </p>
+                    {route.walk_time && (
+                      <p className="text-xs mt-0.5" style={{ color: "#666666" }}>
+                        🚶 {route.walk_time} from door
+                      </p>
+                    )}
+                    {route.frequency && (
+                      <p className="text-xs mt-0.5" style={{ color: "#999999" }}>
+                        Every {route.frequency}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}
+
+        {/* No data at all */}
+        {!hasScores && !categories.length && !busRoutes.length && (
+          <div className="text-center py-16">
+            <p className="text-sm" style={{ color: "#999999" }}>Neighbourhood data coming soon.</p>
+          </div>
+        )}
+
       </div>
     </section>
   );
