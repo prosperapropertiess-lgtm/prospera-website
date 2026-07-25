@@ -5,7 +5,7 @@ slug: "property-management-fees-ontario"
 excerpt: "Property management fees in Ontario range from 8–15% monthly plus hidden charges. Learn what's normal, what's excessive, and how to spot red flags."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You're about to sign a management agreement and hand over control of your most valuable asset. The fee structure looks reasonable on page one — but then you flip to page three and discover maintenance markups, vacancy charges, eviction fees, and lease renewal penalties you never expected.

@@ -4,7 +4,7 @@ date: "2026-07-21"
 slug: "property-management-woodstock-ontario"
 category: "Property Management"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Woodstock is Oxford County's largest city, and its rental market has been running hot for several years. A steady manufacturing economy anchored by Toyota Motor Manufacturing Canada, affordable prices relative to London and the GTA, and growing commuter demand have kept vacancy rates tight and landlord confidence high.

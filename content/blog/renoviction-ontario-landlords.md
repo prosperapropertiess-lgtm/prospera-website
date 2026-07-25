@@ -5,7 +5,7 @@ slug: "renoviction-ontario-landlords"
 excerpt: "Need to do major renovations to your rental? Ontario law allows it — but the process comes with significant tenant protections and legal obligations you need to understand first."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1596496050827-8299e0220de1?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 "Renoviction" is a term that's gotten a lot of attention in Ontario housing policy. It refers to landlords using renovation-related evictions — sometimes legitimately, sometimes as a pretext — to remove long-term tenants and re-rent at higher rates. The practice has attracted regulatory scrutiny, and the protections around it are considerably stronger than most landlords realize.

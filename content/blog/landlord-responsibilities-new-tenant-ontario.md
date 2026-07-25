@@ -5,7 +5,7 @@ slug: "landlord-responsibilities-new-tenant-ontario"
 excerpt: "Ontario landlords have specific legal obligations when a new tenant moves in. Here's exactly what you must do before and after handing over the keys."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The day you hand over keys is not the finish line — it's the starting line. Most landlord problems that end up at the Landlord and Tenant Board trace back to something that was skipped or mishandled at the very beginning of a tenancy. Wrong lease. No inspection report. Missing disclosure. A unit that wasn't properly ready.

@@ -5,7 +5,7 @@ slug: "residential-property-management-london-ontario"
 excerpt: "Residential property management in London, Ontario helps landlords protect their investment and avoid costly mistakes. Here's how it works."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You bought a rental property in London, Ontario. Maybe it's a house near Western University, a duplex in Byron, or a single unit in Old East Village. You had a plan: find a tenant, collect rent, build equity. Simple enough.

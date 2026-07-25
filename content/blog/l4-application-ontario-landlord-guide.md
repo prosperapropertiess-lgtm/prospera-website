@@ -5,7 +5,7 @@ slug: "l4-application-ontario-landlord-guide"
 excerpt: "Learn when and how to file an L4 application with Ontario's Landlord and Tenant Board to evict a tenant who broke an LTB settlement or order."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589578235003-8e0e3a03ef41?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 An L4 application is one of the least common LTB forms a landlord will file — but when you need it, there's no substitute. It's the tool you use when a tenant has broken a promise made in a settlement agreement with you, or violated an order issued by the Landlord and Tenant Board itself.

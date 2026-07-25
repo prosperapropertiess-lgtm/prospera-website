@@ -5,7 +5,7 @@ date: "2026-07-17"
 slug: "n7-notice-ontario"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N7 Notice to End a Tenancy Early for Causing Serious Problems is one of Ontario's most powerful landlord tools — and one of the most misunderstood. Unlike the [N5](/blog/n5-notice-ontario), which gives a tenant seven days to fix a problem before it sticks, the N7 carries no void period. Once you serve it, the tenant has 10 days to leave. There is no second chance built into the form.

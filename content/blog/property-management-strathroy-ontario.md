@@ -5,7 +5,7 @@ slug: "property-management-strathroy-ontario"
 excerpt: "Own a rental property in Strathroy, Ontario? This guide covers what local landlords need to know about professional property management, the Strathroy rental market, and how to protect your investment."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in Strathroy, Ontario: A Guide for Local Landlords

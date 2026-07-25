@@ -5,7 +5,7 @@ slug: "property-management-sarnia-ontario"
 excerpt: "Sarnia landlords face unique challenges — Chemical Valley turnover, student cycles, RTA rules. Here's your complete 2026 guide to managing Sarnia rentals profitably."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in Sarnia, Ontario: The 2026 Landlord Guide

@@ -5,7 +5,7 @@ slug: "property-management-london-ontario"
 excerpt: "Thinking about hiring a property manager in London, Ontario? Here's what to look for, what to expect, and how professional management can protect your investment."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in London, Ontario: What Landlords Need to Know

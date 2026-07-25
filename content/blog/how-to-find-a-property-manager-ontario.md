@@ -5,7 +5,7 @@ slug: "how-to-find-a-property-manager-ontario"
 excerpt: "Learn how to find a property manager in Ontario who actually knows the RTA, protects your investment, and isn't just collecting fees."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords who hire a bad property manager didn't know they were doing it at the time. The company had a professional-looking website, answered calls promptly, and quoted reasonable fees. Six months later, the landlord is dealing with a problem tenant who should have been screened out, a repair bill that was marked up 40%, and a property manager who has never filed an N4 in their life.

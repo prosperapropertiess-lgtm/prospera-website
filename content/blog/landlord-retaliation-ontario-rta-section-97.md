@@ -5,7 +5,7 @@ date: "2026-07-24"
 slug: "landlord-retaliation-ontario-rta-section-97"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You serve an N5 notice for damage. Three weeks later, the tenant tells the LTB the notice is retaliation for a repair request they made last month. The adjudicator looks at the timeline and puts the burden on you to prove otherwise.

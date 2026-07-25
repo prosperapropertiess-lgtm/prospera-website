@@ -5,7 +5,7 @@ date: "2026-07-20"
 slug: "l1-application-ontario-landlord-guide"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1553484771-047a44edb374?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When a tenant stops paying rent and doesn't leave after receiving an N4, the L1 application is your next step. This is the form Ontario landlords file at the Landlord Tenant Board (LTB) to apply for both an eviction order and an order for the tenant to pay what they owe — in a single application.
