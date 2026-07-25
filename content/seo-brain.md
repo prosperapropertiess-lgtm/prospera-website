@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-07-24
+2026-07-25
 
-## Posts Written: 73 total
+## Posts Written: 73 total (41 queued across 9 active clusters)
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -156,6 +156,45 @@ These are the exact phrases people type into ChatGPT, Perplexity, and Google. Ma
 - l10-application-ontario-landlord-guide _(damage recovery after tenancy ends — supporting tenant-damages and what-can-landlord-deduct clusters)_
 - t1-application-tenant-dispute-rent-increase-ontario _(the tenant side of the N1 — prepares landlords for what to expect when a tenant disputes their rent increase)_
 
+### LEGAL MISCONCEPTIONS cluster (0 of 5 — ZERO COMPETITION, HIGH SHAREABILITY)
+Every post here contradicts something most landlords believe. They get shared and linked because they surprise people.
+
+**Still missing:**
+- no-pets-clause-ontario-rental _(RTA s.14: no-pets clauses are 100% unenforceable. Most landlords don't know this. Probably the single highest-surprise post we can write.)_
+- vital-services-cutoff-ontario-landlords _(RTA s.21: cutting heat, hydro, or water to force a tenant out is illegal — even if the tenant owes rent. Landlords do this thinking it's allowed. Zero guides from any PM company.)_
+- last-month-rent-interest-ontario _(Landlords must pay annual interest on the last month's rent deposit, every year. Most have never done this. Very common LTB complaint.)_
+- overholding-tenant-ontario _(When the lease ends and the tenant just stays, the tenancy auto-converts to month-to-month under RTA s.38–39. Most landlords think the tenant is trespassing. They're not.)_
+- how-to-serve-notice-ontario-landlords _(RTA s.191 service rules: wrong person, wrong method = void eviction. No one has written a dedicated "how to serve an N-notice correctly" guide.)_
+
+### TAX / CRA cluster (0 of 3 — ZERO PM COMPANY COMPETITION)
+Accountants don't write SEO content. PM companies don't write tax content. We can own this entirely.
+
+**Still missing:**
+- cra-t776-rental-income-ontario _(The actual CRA form every Ontario landlord files — T776 Statement of Real Estate Rentals. Spikes every Feb–April. Zero PM company guides exist anywhere.)_
+- capital-cost-allowance-rental-property-ontario _(CCA depreciation for rental buildings — when to claim it, the recapture risk on sale. High-value landlords search this. No competition.)_
+- co-signer-guarantor-ontario-rental _(Can you legally require a co-signer? Is a guarantor agreement enforceable at the LTB if the tenant doesn't pay? Very common question, almost no guides.)_
+
+### PROPERTY-TYPE SPECIFIC cluster (0 of 4 — ZERO COMPETITION)
+**Still missing:**
+- ontario-rent-control-exempt-properties _(Units first occupied after Nov 15, 2018 are exempt from rent control — landlords can raise rent to any amount on lease renewal. MASSIVE misunderstanding. Zero PM companies have written a clear guide.)_
+- condo-rental-ontario-rta-vs-condo-rules _(When condo corp rules conflict with the RTA, the RTA wins. Condo boards and landlords both get this wrong. Nobody has written a dedicated guide.)_
+- basement-apartment-ontario-landlord-guide _(A complete guide for basement apartment landlords: City of London second-unit registration, fire code egress requirements, separate entrance rules, RTA application. Surprisingly thin coverage for the most common rental type in London.)_
+- london-ontario-rooming-house-licence _(City of London requires a separate licence for rooming houses — different from the rental unit licence. Zero guides exist. Small but very specific niche.)_
+
+### EMERGENCY SCENARIOS cluster (0 of 3 — ZERO COMPETITION, PANIC SEARCHES)
+High-urgency, low-volume, but zero competition — and builds trust when landlords are most vulnerable.
+
+**Still missing:**
+- death-of-tenant-ontario-landlord _(What happens legally when a tenant dies mid-tenancy. RTA s.91: the tenancy doesn't automatically end. Almost nobody has written this.)_
+- buying-property-with-existing-tenants-ontario _(What happens when you buy a tenanted property. The existing tenancy continues automatically. N12 timing rules for when you can give notice. Very common for new investors — no clear guide anywhere.)_
+- fire-damage-rental-unit-ontario-landlord _(Tenant stays or leaves, who pays rent during repairs, insurance obligations, LTB implications. High-panic search. Zero dedicated guides.)_
+
+### PROCEDURAL LTB DEEP DIVES (0 of 3 — NO COMPETITION)
+**Still missing:**
+- ltb-review-order-ontario _(How to ask the LTB to reconsider its own order under RTA s.209 — the "review" mechanism. Landlords who lose hearings search this immediately. Nobody has written a clear guide.)_
+- ltb-adjournment-request-ontario _(How to reschedule or postpone an LTB hearing. First thing a landlord Googles when they can't attend. Zero dedicated guides.)_
+- n9-notice-ontario _(Notice to terminate given by the tenant at end of fixed term or period. Landlords need to understand this to know their rights when a tenant wants to leave — and what happens if they don't give it in time.)_
+
 ---
 
 ## Recommended Next Posts
@@ -172,9 +211,18 @@ These are the exact phrases people type into ChatGPT, Perplexity, and Google. Ma
 7. ltb-default-order-ontario
 8. tenant-wont-leave-after-lease-ends-ontario
 
+**THEN — Legal misconceptions (highly shareable, zero competition):**
+9. no-pets-clause-ontario-rental ← Highest-surprise post we can write. Will get shared.
+10. overholding-tenant-ontario ← Very common situation, almost no guides anywhere.
+11. ontario-rent-control-exempt-properties ← Massive misunderstanding. High landlord value.
+
 **THEN — AI-targeted queries:**
-9. what-to-do-if-tenant-stops-paying-rent-ontario
-10. can-landlord-evict-tenant-ontario-2026
+12. what-to-do-if-tenant-stops-paying-rent-ontario
+13. can-landlord-evict-tenant-ontario-2026
+
+**THEN — Tax cluster (own before any accountant figures out SEO):**
+14. cra-t776-rental-income-ontario ← Publish in Jan for tax season traffic spike.
+15. capital-cost-allowance-rental-property-ontario
 
 ---
 
@@ -198,6 +246,7 @@ These are the exact phrases people type into ChatGPT, Perplexity, and Google. Ma
 - Google Indexing API integrated — new posts pinged to Google on publish
 - L1, L2, L3, L4 applications cluster now covers eviction for rent arrears, behaviour, damage, illegal acts, breach of settlement/order, and no-hearing pathways
 - 2026-07-25: Added 4 new keyword clusters (hyper-local, nobody-is-writing-about-this, AI-targeted, LTB remaining) — 23 new target slugs. Updated writer with plain language rules, retention hooks, hyper-local signals, and AI agent optimization.
+- 2026-07-25 (second pass): Added 5 more zero-competition clusters — legal misconceptions (5), tax/CRA (3), property-type specific (4), emergency scenarios (3), procedural LTB deep dives (3) — 18 additional target slugs. Total pipeline now: 73 published + 41 queued. No competitor PM company is writing in any of these categories.
 
 ## Session Notes (continued)
 - 2026-07-21: Published l2-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; companion to l1-application-ontario-landlord-guide). Covers grounds for behaviour/damage/illegal acts (N5/N6/N7 prerequisites), step-by-step L2 filing, documentation standards, hearing prep, Section 83 discretion, enforcement. ✅
