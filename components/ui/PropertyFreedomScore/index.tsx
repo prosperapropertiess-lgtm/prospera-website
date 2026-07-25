@@ -118,6 +118,12 @@ export default function PropertyFreedomScore() {
         email: leadEmail,
       });
     }
+    // Fire Google Ads conversion for "Landlord Freedom Test" lead form submit
+    if (typeof window !== "undefined" && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
+      (window as unknown as { gtag: (...a: unknown[]) => void }).gtag("event", "conversion", {
+        send_to: "AW-18098735149/vvujCOWSudYcEK2Qk7ZD",
+      });
+    }
     // Save to sessionStorage and hard-navigate to trackable results URL
     try {
       sessionStorage.setItem("freedom_score_result", JSON.stringify(result));
