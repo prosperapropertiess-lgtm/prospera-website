@@ -115,23 +115,74 @@ _(Oxford County geographic cluster complete.)_
 
 ---
 
+### HYPER-LOCAL cluster — London / St. Thomas / Strathroy (0 of 8 — ABSOLUTE TOP PRIORITY)
+No competitor is writing these. These are ours to own entirely. City-specific bylaws and licences that every local landlord needs but cannot find answers to anywhere.
+
+**Still missing:**
+- city-of-london-rental-unit-licence ← Start here. Required for ALL rental units in London. Zero guides exist.
+- city-of-london-rental-unit-licence-renewal ← Annual renewal process — landlords search for this every year.
+- london-ontario-property-standards-bylaw ← City bylaw ON TOP of RTA. Most landlords don't know it exists.
+- city-of-london-second-unit-registration ← How to legally register a basement apartment or ADU in London.
+- st-thomas-ontario-rental-bylaws-landlord-guide ← St. Thomas has its own property standards. No guide exists.
+- strathroy-landlord-guide-ontario ← Strathroy-Caradoc rules + RTA. Extremely underserved market.
+- london-ontario-zoning-rental-property ← What zones allow rentals, multi-unit, ADUs. Frequently searched.
+- oxford-county-landlord-rental-guide ← Woodstock/Ingersoll/Tillsonburg landlord rules. Completes our geographic cluster.
+
+### NOBODY IS WRITING ABOUT THIS cluster (0 of 8 — HIGH PRIORITY)
+Underserved search terms with real demand. No other Ontario PM company has posts on these.
+
+**Still missing:**
+- ltb-duty-counsel-ontario _(free legal help at LTB hearings — most landlords don't know this exists; searches spike before hearing dates)_
+- ltb-written-hearing-ontario _(written vs. oral vs. video hearings — landlords get blindsided by this. Zero dedicated guides.)_
+- ltb-default-order-ontario _(what happens when the tenant doesn't show up at the hearing — a very common situation)_
+- ltb-consent-order-ontario _(settlement orders explained — what they are, how they're enforced, when to use them)_
+- rta-section-20-maintenance-obligations-ontario _(the most-cited RTA section — landlord repair obligations. No dedicated post exists anywhere.)_
+- rta-section-22-interference-reasonable-enjoyment-ontario _(tenant's right to quiet enjoyment — basis of many T2 applications)_
+- tenant-wont-leave-after-lease-ends-ontario _(high-panic search, no clear guides exist; holdover tenancy rules)_
+- hst-residential-rental-property-ontario _(extremely common confusion — is rent HST-exempt? Most landlords don't know the rules.)_
+
+### AI-TARGETED conversational queries (0 of 5 — HIGH PRIORITY)
+These are the exact phrases people type into ChatGPT, Perplexity, and Google. Match the phrasing precisely.
+
+**Still missing:**
+- what-to-do-if-tenant-stops-paying-rent-ontario _(conversational — matches exactly how landlords ask this question)_
+- tenant-refuses-to-leave-ontario _(panic search — holdover tenancy and illegal occupancy)_
+- can-landlord-evict-tenant-ontario-2026 _(the broadest eviction question — massive search volume)_
+- how-much-rent-increase-allowed-ontario-2026 _(asked constantly — guideline amount changes yearly)_
+- landlord-rights-ontario-tenant-damages-property _(broad rights query — links to tenant-damages, L2, security-deposits cluster)_
+
+### LTB APPLICATIONS remaining (0 of 2)
+**Still missing:**
+- l10-application-ontario-landlord-guide _(damage recovery after tenancy ends — supporting tenant-damages and what-can-landlord-deduct clusters)_
+- t1-application-tenant-dispute-rent-increase-ontario _(the tenant side of the N1 — prepares landlords for what to expect when a tenant disputes their rent increase)_
+
+---
+
 ## Recommended Next Posts
 
-**Supporting cluster content (topical depth — LTB applications cluster completion):**
-1. l10-application-ontario-landlord-guide _(LTB application for damage recovery post-tenancy; supporting tenant-damages-property-ontario and what-can-landlord-deduct-from-last-month-rent-ontario clusters)_
-2. t1-application-tenant-dispute-rent-increase-ontario _(Supporting rent-increase-ontario-guidelines cluster from the opposite angle — what to expect when tenant disputes your N1 and how to prepare counter-arguments)_
+**IMMEDIATE — Hyper-local (own these before any competitor wakes up):**
+1. city-of-london-rental-unit-licence ← Required for all London rental units. Nobody has written this guide.
+2. city-of-london-rental-unit-licence-renewal
+3. london-ontario-property-standards-bylaw
+4. city-of-london-second-unit-registration
 
-**Post-L4 immediate priority: Operational/enforcement content**
-- l4-application-ontario-landlord-guide ✅ _(published 2026-07-23; completes core L1/L2/L3/L4 LTB applications dyad)_
-- enforcing-eviction-order-ontario-sheriff ✅ _(published 2026-05-20; previously untracked in seo-brain — PAIN keyword support, Sheriff enforcement process post-LTB order)_
-- landlord-retaliation-ontario-rta-section-97 ✅ _(published 2026-07-24; PAIN keyword support — RTA Section 97 retaliation prohibition, 6-month presumption, tenant T2/Section 83 defense strategies, how landlords protect legitimate notices with pre-dated documentation)_
+**THEN — Nobody is writing about these:**
+5. ltb-duty-counsel-ontario
+6. rta-section-20-maintenance-obligations-ontario
+7. ltb-default-order-ontario
+8. tenant-wont-leave-after-lease-ends-ontario
+
+**THEN — AI-targeted queries:**
+9. what-to-do-if-tenant-stops-paying-rent-ontario
+10. can-landlord-evict-tenant-ontario-2026
 
 ---
 
 ## Do More Of
-- Supporting cluster content (operational depth, enforcement, countermeasures)
-- LTB form/application process posts (L1–L4 now complete; L10, T1 remain as niche/supporting)
-- High-conversion decision-stage posts
+- Hyper-local content (city bylaws, licences, local compliance rules) — zero competition
+- "Nobody is writing about this" LTB process depth — builds authority on procedural questions
+- AI-targeted conversational phrasing — targets ChatGPT/Perplexity citations
+- RTA section deep-dives — builds section-level topical authority
 
 ## Do Less Of
 - New core PAIN posts — all 17 PAIN keywords published
@@ -143,9 +194,10 @@ _(Oxford County geographic cluster complete.)_
 ## Notes
 - Sitemap live at prosperaproperties.co/sitemap.xml
 - LocalBusiness schema added 2026-05-01
-- SEO writer cron runs Mon/Wed/Fri 8am EST via Vercel — fully autonomous
+- SEO writer cron runs Mon–Thu noon UTC (writing), Fri noon UTC (optimization-only) — fully autonomous. 4 new posts per week.
 - Google Indexing API integrated — new posts pinged to Google on publish
 - L1, L2, L3, L4 applications cluster now covers eviction for rent arrears, behaviour, damage, illegal acts, breach of settlement/order, and no-hearing pathways
+- 2026-07-25: Added 4 new keyword clusters (hyper-local, nobody-is-writing-about-this, AI-targeted, LTB remaining) — 23 new target slugs. Updated writer with plain language rules, retention hooks, hyper-local signals, and AI agent optimization.
 
 ## Session Notes (continued)
 - 2026-07-21: Published l2-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; companion to l1-application-ontario-landlord-guide). Covers grounds for behaviour/damage/illegal acts (N5/N6/N7 prerequisites), step-by-step L2 filing, documentation standards, hearing prep, Section 83 discretion, enforcement. ✅
