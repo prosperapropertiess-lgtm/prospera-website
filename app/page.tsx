@@ -151,6 +151,43 @@ function Hero() {
   );
 }
 
+// ── At Capacity Banner ────────────────────────────────────────────────────────
+
+function AtCapacityBanner() {
+  return (
+    <section className="py-5 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid rgba(250,248,245,0.08)" }}>
+      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="flex items-center gap-3">
+          <span
+            className="shrink-0 w-2 h-2 rounded-full"
+            style={{ backgroundColor: "#8B2030" }}
+          />
+          <p className="text-sm" style={{ color: "rgba(250,248,245,0.85)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
+            <span className="font-semibold" style={{ color: "#FAF8F5" }}>We&apos;re currently at capacity</span>
+            {" "}— not accepting new management clients at this time.
+          </p>
+        </div>
+        <div className="flex items-center gap-4 shrink-0">
+          <Link
+            href="/resources"
+            className="text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-70"
+            style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Free Resources
+          </Link>
+          <Link
+            href="/newsletter"
+            className="px-5 py-2 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-85"
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Join the Waitlist
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Stats Bar ─────────────────────────────────────────────────────────────────
 
 function StatsBar() {
@@ -823,6 +860,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <AtCapacityBanner />
       <Services />
       <PortalPreview />
       <StatsBar />
