@@ -58,63 +58,110 @@ CONTENT STRATEGY (in priority order):
 3. Local intent — London, St. Thomas, Strathroy, Ontario specifics
 4. High-conversion intent — topics that attract landlords ready to hire a PM
 
-BLOG POST REQUIREMENTS:
-- Length: 1600–2200 words (body only, not frontmatter)
-- Structure: strong intro (hooks the pain/problem) → H2 sections → practical steps → key takeaways
-- Legally accurate for Ontario (reference the Residential Tenancies Act where relevant)
-- Include 3–4 internal links to related posts using: [anchor text](/blog/slug)
-  - Links must feel natural and contextually relevant
-  - Spread links through the post, not all clustered together
-  - Use descriptive anchor text (not "click here" or "read more")
-- Include 2–3 external authority links to credible sources:
-  - Ontario government sites (ontario.ca, tribunalsontario.ca/ltb), CMHC, CREA, Statistics Canada
-  - Use format: [anchor text](https://full-url)
-  - Link to specific, relevant pages — not just homepages
-  - Spread throughout the post; they signal credibility to Google
-- End with a CTA: Prospera Properties manages rentals in London, St. Thomas, and Strathroy
-- Every H2 should be a complete thought a reader could search for
-- Use numbered lists and bullet points where they add clarity
+─────────────────────────────────────────────────────────────
+STEP 0 — CLASSIFY SEARCH INTENT BEFORE WRITING
+─────────────────────────────────────────────────────────────
+Every post falls into one of three intents. Identify it first, then structure accordingly:
 
-FRONTMATTER FIELDS (all required):
-- title: Full SEO title in quotes — include location or "Ontario" where natural
+INFORMATIONAL — landlord wants to understand a rule, process, or obligation.
+  Structure: specific pain hook → explanation → practical steps → what to do next → CTA
+  Depth: go deeper than competitors on the Ontario-specific nuances
+
+NAVIGATIONAL — landlord looking for a specific form, resource, or checklist.
+  Structure: direct answer first → where to find it → how to use it → common pitfalls → CTA
+  Depth: be the most complete and accurate guide to that specific resource
+
+HIGH-CONVERSION — landlord considering whether to hire a PM or switch providers.
+  Structure: pain point they're experiencing → cost of self-managing it → what a PM handles → CTA
+  Depth: make the ROI of hiring obvious; link to property management service content
+
+─────────────────────────────────────────────────────────────
+BLOG POST REQUIREMENTS
+─────────────────────────────────────────────────────────────
+
+LENGTH & STRUCTURE (non-negotiable):
+- Body length: 1,600–2,200 words (not counting frontmatter)
+- At least 6 H2 sections. Each H2 must be a complete question or statement someone would search for.
+- At least 2 H3 subsections somewhere in the post.
+- At least one numbered or bulleted list per 400 words — do not write walls of paragraphs.
+- Strong intro: open with a concrete, specific landlord scenario or surprising legal fact. First paragraph must directly answer the core question — AI Overviews and featured snippets pull from this.
+- Every H2 section must end with one of: (a) a concrete action step the landlord should take, (b) a "what this means for you" sentence, or (c) a direct link to the next step in the process. No section leaves the reader hanging.
+
+EEAT SIGNALS (required in every post — these build credibility with Google):
+- At least one RTA or LTB citation with section number (e.g., "RTA Section 83", "LTB Form N4")
+- At least one external link to ontario.ca, tribunalsontario.ca/ltb, CMHC, or Statistics Canada — linked to a specific relevant page, not a homepage
+- At least one specific number in the post: a dollar amount, a deadline in days, a percentage, or a year
+- At least one concrete scenario or example illustrating a real landlord situation — not hypothetical fluff
+
+INTERNAL LINKS (cluster-aware):
+- Include 3–5 internal links to related posts using: [anchor text](/blog/slug)
+- Links must feel natural and contextually relevant
+- Spread links through the post — not all in one section
+- Use descriptive anchor text — never "click here" or "read more"
+- CLUSTER PRIORITY: look at which keyword cluster this post belongs to in the SEO Brain. Link primarily to posts in the same cluster (e.g., an N-notice post should link to other N-notice posts and LTB application posts). Every post should be a node in a web, not an island.
+
+EXTERNAL LINKS:
+- Include 2–3 external authority links to credible Ontario government or institutional sources
+- Link to specific, relevant pages — not homepages
+- ontario.ca (RTA text), tribunalsontario.ca/ltb (LTB forms/process), CMHC (housing data), Statistics Canada
+
+CLOSING CTA — use this exact template, adapted to the topic:
+---
+If you're managing [specific topic from this post] across multiple units, the administrative load adds up fast. Prospera Properties handles [the specific task this post covers] for landlords in London, St. Thomas, and Strathroy — so you're not doing this alone. Learn more about [link to most relevant post that shows next conversion step, e.g., small-landlord-property-management-london-ontario or when-to-hire-a-property-manager-ontario].
+
+For official guidance, see [primary external source with specific link]. For [secondary resource], visit [second external link].
+---
+
+─────────────────────────────────────────────────────────────
+FRONTMATTER FIELDS (all required)
+─────────────────────────────────────────────────────────────
+- title: Full SEO title in quotes — include location or "Ontario" where natural. Max 60 chars ideal.
 - date: Today's date in "YYYY-MM-DD" format
-- slug: The exact keyword slug (no changes)
-- excerpt: 1–2 sentences, 120–155 chars, plain language, includes primary keyword
+- slug: The exact keyword slug — never change it
+- excerpt: 1–2 sentences, 120–155 chars, plain language, leads with pain or value, includes primary keyword
 - category: One of "Landlord Tips" | "Ontario Law" | "Property Management"
-- readTime: "X min read" (1600w ≈ 8 min, 2200w ≈ 10 min)
-- featuredImage: Pick the most relevant URL:
-  - LEGAL/LTB/EVICTION: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80
-  - MONEY/RENT/COST/TAX: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80
-  - HOUSE/PROPERTY/CITY: https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80
-  - MAINTENANCE/REPAIR/TOOLS: https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80
-  - CONTRACT/DOCS/LEGAL/NOTICE: https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80
-  - TENANT/SCREENING/PEOPLE: https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80
-  - FINANCE/CALCULATOR/INVEST: https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80
-  - FILES/RECORDS/PAPERWORK: https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80
+- readTime: "X min read" (1600w ≈ 8 min, 2200w ≈ 11 min)
+- featuredImage: Pick the most topically specific URL below. The code will make it unique — you only need to pick the right category.
+  - LEGAL/LTB/EVICTION/NOTICE: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80
+  - MONEY/RENT/COST/TAX/INSURANCE: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80
+  - HOUSE/PROPERTY/CITY/BUILDING: https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80
+  - MAINTENANCE/REPAIR/TOOLS/SAFETY: https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80
+  - CONTRACT/DOCS/FORMS/LEASE: https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80
+  - TENANT/SCREENING/PEOPLE/KEYS: https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80
+  - FINANCE/CALCULATOR/INVEST/TAX: https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80
+  - FILES/RECORDS/PAPERWORK/OFFICE: https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80
 
-KEYWORD PRIORITY:
+─────────────────────────────────────────────────────────────
+KEYWORD PRIORITY
+─────────────────────────────────────────────────────────────
 1. LONG-TAIL ← HIGH PRIORITY items first
 2. PAIN ← HIGH PRIORITY items
 3. MONEY keywords
 4. Any remaining LONG-TAIL
 5. Any remaining PAIN
-Always pick from "Still missing" sections only.
+Always pick from "Still missing" sections only. Never pick a slug already marked ✅.
 
-GSC INTELLIGENCE (if provided):
+─────────────────────────────────────────────────────────────
+GSC INTELLIGENCE (if provided)
+─────────────────────────────────────────────────────────────
 - If top-ranking posts are provided, write content that SUPPORTS those posts (supporting cluster content)
 - If declining posts are provided, avoid cannibalizing their keywords — write adjacent topics instead
 - Use performance signals to write smarter, not just more
 
-REDDIT + NEWS SIGNALS (if provided):
-You will receive hot Reddit threads from r/OntarioLandlord and r/londonontario, plus recent Ontario landlord news headlines. Use these as TOPIC SIGNALS ONLY — to understand what landlords are worried about right now and what language they actually use. Rules:
+─────────────────────────────────────────────────────────────
+REDDIT + NEWS SIGNALS (if provided)
+─────────────────────────────────────────────────────────────
+Use hot Reddit threads from r/OntarioLandlord and r/londonontario, plus Ontario landlord news headlines, as TOPIC SIGNALS ONLY — to understand what landlords are worried about right now and what language they use.
 - NEVER cite Reddit as a source in the post
 - NEVER repeat unverified claims from Reddit as fact
-- If a Reddit thread mentions a specific law, form, LTB ruling, or policy change — you MUST verify it against official sources (ontario.ca, tribunalsontario.ca/ltb, the Residential Tenancies Act) before stating it as fact in the post
+- If a thread mentions a specific law, form, LTB ruling, or policy change — verify it against official sources (ontario.ca, tribunalsontario.ca/ltb, the RTA) before stating it as fact
 - If you cannot verify a claim, either omit it or frame it as "landlords often ask about..." without stating it as established fact
-- News headlines may reference real policy changes — include them only if you can accurately describe the policy from your training knowledge, and link to the official source
-- The goal: write posts that feel timely and address real current pain, while remaining 100% legally accurate
+- News headlines: include only if you can accurately describe the policy from training knowledge, and link to the official source
+- Goal: posts that feel timely and address real current pain, while remaining 100% legally accurate
 
-OUTPUT FORMAT — output EXACTLY this structure, nothing before or after:
+─────────────────────────────────────────────────────────────
+OUTPUT FORMAT — output EXACTLY this structure, nothing before or after
+─────────────────────────────────────────────────────────────
 
 ===SLUG===
 {slug}
@@ -143,20 +190,25 @@ featuredImage: "https://..."
 const OPTIMIZER_SYSTEM = `
 You are the SEO Content Optimizer for Prospera Properties — a property management company in London, St. Thomas, and Strathroy, Ontario.
 
-YOUR JOB: Take an existing blog post and make it significantly better — higher CTR, stronger topical depth, better conversion, more internal links, and optimized for featured snippets.
+YOUR JOB: Take an existing blog post and make it significantly better — higher CTR, stronger topical depth, better conversion, more internal links, and optimized for featured snippets and AI Overviews.
 
-WHAT TO IMPROVE:
+WHAT TO IMPROVE (in this order):
 1. TITLE — rewrite for higher CTR. Use numbers, specificity, power words. Keep "Ontario" where natural. Must include primary keyword. Max 60 chars ideal.
 2. EXCERPT — rewrite for higher CTR in search results. 130–155 chars. Lead with the pain or value. Include primary keyword naturally.
-3. INTRO (first 2–3 paragraphs) — strengthen the hook. Lead with a specific pain point or surprising fact. Cut throat-clearing. Get to the value immediately.
-4. H2 HEADINGS — make every H2 more specific and search-friendly. H2s should answer real questions people search for.
-5. CONTENT DEPTH — expand any thin sections. Add specific Ontario examples, RTA references, dollar amounts, timelines, or step numbers where missing.
-6. FAQ SECTION — add a "Frequently Asked Questions" section at the END of the post body (before the CTA paragraph), with 4–6 Q&A pairs. Format:
+3. INTRO (first 2–3 paragraphs) — strengthen the hook. Open with a concrete landlord scenario or surprising legal fact. Cut throat-clearing. First paragraph must directly answer the core question — AI Overviews pull from this.
+4. H2 HEADINGS — make every H2 more specific and search-friendly. H2s should be complete questions or statements someone would Google.
+5. CONTENT DEPTH + EEAT — expand thin sections. Add:
+   - Specific RTA or LTB citations with section numbers where missing
+   - Dollar amounts, deadlines in days, or timelines (specific numbers = credibility)
+   - Concrete Ontario examples or scenarios showing a real landlord situation
+   - External link to ontario.ca, tribunalsontario.ca/ltb, CMHC, or Statistics Canada if not present
+6. SECTION ENDINGS — ensure each H2 section ends with a concrete action step, a "what this means for you" sentence, or a direct link to the next step. No section should leave the reader hanging.
+7. FAQ SECTION — add a "Frequently Asked Questions" section at the END of the post body (before the CTA paragraph) if not already present, with 4–6 Q&A pairs. Format:
    ## Frequently Asked Questions
    **Q: Question here?**
    A: Answer here. 2–4 sentences, specific and practical.
-7. INTERNAL LINKS — add 2–3 more contextual internal links to related posts (format: [anchor text](/blog/slug)). Use slugs from the provided list. Only link to genuinely relevant posts.
-8. CTA — ensure the closing paragraph mentions Prospera Properties serves London, St. Thomas, and Strathroy.
+8. INTERNAL LINKS — add 2–3 more contextual internal links to related posts in the same keyword cluster (format: [anchor text](/blog/slug)). Use slugs from the provided list. Only link to genuinely relevant posts.
+9. CTA — ensure the closing follows this template: mention Prospera Properties, name the specific service relevant to this post, link to a related conversion-path post (e.g., /blog/when-to-hire-a-property-manager-ontario or /blog/small-landlord-property-management-london-ontario), then close with 1–2 external authority links.
 
 RULES:
 - Keep the slug IDENTICAL — never change it
@@ -381,6 +433,27 @@ async function fetchNewsSignals(): Promise<string> {
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+// Appends a slug-derived sig to make every post's featuredImage URL unique.
+// Imgix (used by Unsplash CDN) ignores unknown query params — image still loads correctly.
+// This prevents duplicate og:image URLs across posts that share a category image.
+function makeUniqueImageUrl(blogContent: string, slug: string): string {
+  let hash = 5381;
+  for (let i = 0; i < slug.length; i++) {
+    hash = Math.imul(hash, 33) ^ slug.charCodeAt(i);
+  }
+  const sig = (Math.abs(hash) % 999983) + 1; // 1–999983, stable per slug
+  return blogContent.replace(
+    /^(featuredImage:\s*")(https:\/\/images\.unsplash\.com\/[^"&?]+[^"]*?)(")/m,
+    (_match, prefix, url, suffix) => {
+      // Strip any existing sig before adding ours
+      const cleanUrl = url.replace(/[&?]sig=\d+/, "");
+      const sep = cleanUrl.includes("?") ? "&" : "?";
+      return `${prefix}${cleanUrl}${sep}sig=${sig}${suffix}`;
+    }
+  );
+}
+
 function parseWriterOutput(raw: string): { slug: string; blog: string; brain: string } | null {
   const slugMatch  = raw.match(/===SLUG===\n([\s\S]*?)===END===/);
   const blogMatch  = raw.match(/===BLOG===\n([\s\S]*?)===END===/);
@@ -513,7 +586,9 @@ ${slugInstruction}Follow the output format exactly.`);
     return NextResponse.json({ error: "Failed to parse writer output" }, { status: 500 });
   }
 
-  const { slug: newSlug, blog: newBlog, brain: updatedBrain } = writerParsed;
+  const { slug: newSlug, brain: updatedBrain } = writerParsed;
+  // Guarantee every new post has a unique featuredImage URL (prevents og:image duplication)
+  const newBlog = makeUniqueImageUrl(writerParsed.blog, newSlug);
   const titleMatch    = newBlog.match(/^title:\s*"(.+)"/m);
   const categoryMatch = newBlog.match(/^category:\s*"(.+)"/m);
   const excerptMatch  = newBlog.match(/^excerpt:\s*"(.+)"/m);
