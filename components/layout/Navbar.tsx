@@ -21,6 +21,7 @@ const navLinks = [
   { label: "For Landlords", href: "/landlords" },
   { label: "For Tenants", href: "/tenants" },
   { label: "Listings", href: "/listings" },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
