@@ -1398,3 +1398,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: US company but large Ontario user base. Best pitch: request a listing on their Ontario links page, positioning Prospera as a useful local resource for their Ontario readers. Keep pitch factual and resource-focused.
 
 ---
+
+## Zolo.ca Blog — Canadian Real Estate Market Data
+- url: https://www.zolo.ca/blog/
+- type: blog
+- why: One of Canada's most-visited MLS listing platforms; their housing market blog covers Ontario rent trends and landlord tips — a "property management in London ON" resource mention or guest piece on SW Ontario rental market conditions would serve their Ontario readers.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: press@zolo.ca
+- site_focus: Canadian real estate listing portal (MLS data, market stats) with an editorial blog covering home buying, selling, renting, and market analysis. Strong Ontario/BC readership. Not a PM company.
+- hook: Zolo's blog covers Ontario rent prices and housing demand — Prospera can offer a practitioner's view of the SW Ontario rental market (London, St. Thomas, Strathroy supply/demand, vacancy, typical rents) that most listing-site content lacks.
+- specific_content: Their "Ontario Rental Market" and "London Ontario Real Estate" coverage — Prospera can contribute local intelligence or be cited as a source for SW Ontario property management data.
+- researcher_notes: Large national platform. Best angle: pitch a data-backed guest post or offer to be a quoted local expert source for their Ontario rental market coverage. Press/editorial contact likely best entry point.
+
+---
+
+## Ratehub.ca — Canadian Mortgage & Insurance Blog
+- url: https://www.ratehub.ca/blog/
+- type: blog
+- why: Canada's leading financial comparison site with a high-traffic blog covering mortgages, landlord insurance, and rental property tips — a guest post or resource mention on Ontario landlord insurance or tenant screening would reach a large Ontario landlord audience.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: editorial@ratehub.ca
+- site_focus: Canada's most-visited financial comparison platform (mortgages, insurance, credit cards). Blog covers landlord insurance guides, rental property financing, Ontario housing policy, and landlord how-tos. Very high domain authority. Not a PM competitor.
+- hook: Their Ontario landlord and rental property content reaches first-time landlords making decisions — Prospera's professional management expertise (specifically LTB compliance and tenant screening in SW Ontario) is exactly what those readers need next.
+- specific_content: Their "landlord insurance Ontario" and "rental property mortgage" blog posts — Prospera can offer a practical follow-up: "once you have the property financed and insured, here's how professional management removes the rest of the risk."
+- researcher_notes: High authority target. Best approach is a guest post pitch on a topic they haven't covered deeply: "LTB hearings in 2026 — what London landlords need to know." Pair with specific data from Prospera's caseload.
+
+---
+
+## Move Smartly — Ontario Real Estate Market Analysis
+- url: https://movesmartly.com/articles/
+- type: blog
+- why: Data-driven Ontario housing market platform (Toronto Star partnership); covers SW Ontario rent and ownership trends — a mention of Prospera as the local professional management resource in their London/St. Thomas market articles would be a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: info@realosophy.com
+- site_focus: Data analytics platform for Ontario real estate, run by Realosophy Realty (John Pasalis). Regular market reports and blog posts on Toronto and Ontario housing trends, investor activity, rental market conditions. Strong editorial reputation.
+- hook: Move Smartly covers investor activity in Ontario markets — Prospera can provide SW Ontario ground-truth on rental demand, vacancy rates, and landlord challenges that their typical Toronto-centric data doesn't capture.
+- specific_content: Their SW Ontario rental market analysis posts and investor-focused articles on cash flow and cap rates in mid-size Ontario cities.
+- researcher_notes: Run by Realosophy Realty — not a PM competitor (Toronto buyer's agent). Best contact is through Realosophy's editorial team. Pitch: offer to contribute London/Strathroy market data as a quoted expert in their next SW Ontario piece.
+
+---
+
+## Square One Insurance — Landlord Resource Blog
+- url: https://www.squareone.ca/resources/
+- type: blog
+- why: Canada's top-rated home and landlord insurance platform; their resource blog covers landlord insurance, tenant responsibilities, and Ontario rental law — a contributed article or resource mention positions Prospera alongside content their landlord customers read before insuring their first property.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: communications@squareone.ca
+- site_focus: Canadian digital-first property insurance company (home, condo, tenant, landlord policies). Resource blog covers landlord responsibilities, tenant damage claims, Ontario RTA basics, and property protection tips. Not a PM competitor.
+- hook: Square One's landlord customers are exactly Prospera's target — people who just bought their first rental property and are figuring out how to protect it. A guest post on "what landlord insurance doesn't cover — and why professional management fills the gap" would serve both audiences.
+- specific_content: Their "Ontario Landlord Insurance Guide" and "Tenant Damage" resource articles — Prospera can add the operational perspective that insurance articles usually skip.
+- researcher_notes: Well-funded Canadian insurtech with editorial content team. Communications email is public. Pitch should emphasize shared audience and educational value, not a commercial ask.
+
+---
+
+## Canadian Apartment Magazine
+- url: https://canadianapartment.com/
+- type: blog
+- why: Premier trade publication for Canadian multi-residential landlords and property managers; a contributed article from Prospera on LTB compliance or SW Ontario rental market trends would reach exactly the industry audience that influences referrals.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: editor@canadianapartment.com
+- site_focus: National trade magazine and website for the Canadian apartment/multi-residential industry. Covers landlord legislation, property management, building operations, tenant services, market trends. Accepts contributed articles from industry practitioners.
+- hook: Their readers are professional landlords and PM companies — Prospera's on-the-ground experience with LTB filings and tenant management in a mid-size Ontario market (London, St. Thomas, Strathroy) offers practitioner insight that trade readers value.
+- specific_content: Their Ontario landlord legislation coverage and property management operations articles — a 600-word piece from Ebin on "managing LTB risk for small landlords in SW Ontario" would fit their editorial mix.
+- researcher_notes: Established trade publication — contributor submissions are standard. Editor email is public. Pitch a specific contributed article tied to a current news hook (2026 LTB backlogs, Bill 60 impact in smaller markets).
+
+---
+
+## Landlord Credit Bureau (LCB)
+- url: https://www.lcb.org/blog/
+- type: blog
+- why: Canadian platform where landlords report tenant rent payment history; their blog educates landlords on screening and risk management — Prospera as a recommended SW Ontario PM resource aligns with their "professional management" content angle.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: info@lcb.org
+- site_focus: Canadian service that lets landlords report tenant rental history (positive and negative) to help other landlords screen applicants. Blog covers tenant screening, rent collection, and landlord risk management. Founded by Cory Wright. Not a PM competitor.
+- hook: LCB's audience is self-managing landlords looking for better screening tools — Prospera can show that professional management provides even stronger screening and compliance than any single tool, making a resource mention or guest post a natural value-add.
+- specific_content: Their "tenant screening red flags" and "how to use rental history reports Ontario" posts — Prospera manages this end-to-end for clients, a perspective their DIY landlord audience would find credible.
+- researcher_notes: Smaller Canadian platform, responsive to partnership outreach. Email is direct. Position Prospera as a complementary service (professional PM) rather than competing with their screening tool.
+
+---
+
+## Ontario Home Builders' Association (OHBA)
+- url: https://www.ohba.ca/news/
+- type: association
+- why: Provincial association for Ontario's residential construction industry; their news and resources touch on rental housing supply, government policy, and investor interest in new builds — a resource mention or contributed comment on professional management of newly built rental units fits their investor-member audience.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: info@ohba.ca
+- site_focus: Trade association representing 4,000+ member companies in Ontario residential construction and renovation. Covers housing supply policy, new construction statistics, government relations, and investor perspectives on purpose-built rental. Not a PM competitor.
+- hook: OHBA members building rental units in SW Ontario need professional management partners — Prospera is uniquely positioned to manage purpose-built rentals in London, St. Thomas, and Strathroy as they come to market.
+- specific_content: Their coverage of purpose-built rental construction and the 2026 Ontario housing affordability initiatives — Prospera can comment as the management partner for new SW Ontario rental supply.
+- researcher_notes: Large association — best approach is their editorial/communications team rather than a cold pitch. Angle: offer Ebin as a media source on "what professional management looks like for new Ontario rental units" tied to current housing supply news.
+
+---
+
+## CondoControl Central — Property Management Blog
+- url: https://www.condocontrolcentral.com/blog/
+- type: blog
+- why: Toronto-based property management technology company with an Ontario-focused educational blog covering condo governance, landlord responsibilities, and PM best practices — a link swap or guest post contribution fits naturally alongside their practitioner content.
+- researched: true
+- drafted: true
+- added: 2026-07-26
+- contact_email: info@condocontrolcentral.com
+- site_focus: Canadian property management software company. Blog covers Ontario condo legislation, strata/condo board governance, property manager responsibilities, LTB basics, and industry best practices. Not a competing PM service (software only). Toronto-based.
+- hook: Their blog serves property managers and condo boards — Prospera's hands-on experience managing residential rentals (not condo boards) in SW Ontario complements their software-focused perspective and would add practical field value to their audience.
+- specific_content: Their Ontario landlord legislation and LTB procedure posts — Prospera can contribute a practitioner's guide on "what residential PM actually looks like in a smaller Ontario market" to complement their Toronto/condo-heavy content.
+- researcher_notes: Software company, not a PM competitor. Tech companies often appreciate practitioner guest posts that add credibility to their editorial. Direct email pitch to info@ is appropriate; mention shared Ontario PM professional audience.
+
+---

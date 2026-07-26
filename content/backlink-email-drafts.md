@@ -1797,3 +1797,163 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## Zolo.ca Blog — 2026-07-26
+To: press@zolo.ca
+Subject: SW Ontario rental market data — source for your London coverage
+
+Hi,
+
+I read your recent coverage of Ontario rental market trends and noticed your London Ontario section is light on ground-level data.
+
+I'm Ebin Jaison, founder of Prospera Properties — we manage residential rentals across London, St. Thomas, and Strathroy, which gives us a close view of vacancy, demand, and typical rents in that corridor.
+
+Happy to be a quoted source for your next SW Ontario piece, or to contribute a short market snapshot if that's useful to your editorial team. No strings attached — just think it would add something your readers in that market don't often get.
+
+Let me know if that's of interest.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Ratehub.ca — 2026-07-26
+To: editorial@ratehub.ca
+Subject: Guest post idea — LTB hearings in 2026, what Ontario landlords need to know
+
+Hi,
+
+Your landlord insurance and rental property guides are some of the clearest I've seen for new Ontario landlords. I noticed there's a gap, though: what happens when a tenancy goes wrong and the LTB gets involved.
+
+I'm Ebin Jaison, founder of Prospera Properties in London, Ontario — we manage residential rentals in SW Ontario and handle LTB filings regularly.
+
+I'd like to contribute a practical 700-word guide on navigating an LTB hearing in 2026 — timelines, what to bring, common mistakes. It's the follow-up your insurance and financing content points toward.
+
+Happy to share a full outline first. Let me know.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Move Smartly — 2026-07-26
+To: info@realosophy.com
+Subject: London & St. Thomas data for your SW Ontario coverage
+
+Hi,
+
+I follow Move Smartly's market analysis closely — the rigour you bring to Toronto data is exactly what's missing for SW Ontario markets like London and St. Thomas.
+
+I'm Ebin Jaison, founder of Prospera Properties — we manage residential rentals across that corridor and track vacancy, turnover, and rent levels closely.
+
+If you're planning coverage of mid-size Ontario rental markets, I'm happy to share our on-the-ground numbers or be quoted as a local source. No ask beyond that — just think your readers would find SW Ontario data valuable.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Square One Insurance — 2026-07-26
+To: communications@squareone.ca
+Subject: Guest post idea — what landlord insurance doesn't cover
+
+Hi,
+
+Your Ontario landlord insurance guide does a great job explaining what policies cover. What it doesn't touch on is the operational risk that insurance can't fix: LTB delays, non-payment disputes, and the documentation gaps that cost landlords at hearings.
+
+I'm Ebin Jaison, founder of Prospera Properties in London, Ontario. We manage SW Ontario rental properties and handle the compliance side that insurance can't.
+
+I'd like to write a short piece — "What landlord insurance doesn't cover, and what actually protects you" — as a companion to your existing guide. It would add practical value for your landlord customers without competing with your core content.
+
+Happy to send an outline. Let me know.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Canadian Apartment Magazine — 2026-07-26
+To: editor@canadianapartment.com
+Subject: Contributed article — managing LTB risk for small landlords in SW Ontario
+
+Hi,
+
+Your recent coverage of LTB backlogs and Ontario landlord legislation has been sharp. One perspective I haven't seen covered: what LTB risk management looks like for small landlords in mid-size Ontario cities, outside the Toronto/Ottawa conversation.
+
+I'm Ebin Jaison, founder of Prospera Properties — we manage residential rentals in London, St. Thomas, and Strathroy, and deal with LTB filings as a regular part of our work.
+
+I'd like to contribute a 600-word piece on how small SW Ontario landlords are navigating 2026 LTB timelines — practical, data-informed, and grounded in what we see on the ground. Happy to send a draft.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Landlord Credit Bureau — 2026-07-26
+To: info@lcb.org
+Subject: Collaboration idea — professional management + LCB screening
+
+Hi,
+
+Your tenant screening content is some of the most practical I've found for self-managing Ontario landlords — especially the rental history reporting guides.
+
+I'm Ebin Jaison, founder of Prospera Properties in London, Ontario. We manage residential rentals across SW Ontario and use thorough screening as our first line of risk management.
+
+I'd love to explore a simple resource mention — we refer landlords to LCB as a screening tool, and you could mention Prospera as a recommended SW Ontario professional management option for landlords who want full-service support. Happy to discuss what that might look like.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Ontario Home Builders' Association (OHBA) — 2026-07-26
+To: info@ohba.ca
+Subject: Media source — professional management for new SW Ontario rental units
+
+Hi,
+
+Your coverage of Ontario's purpose-built rental push and housing supply initiatives is excellent. One piece that often gets missed: what happens after those units are built and need to be leased and managed professionally.
+
+I'm Ebin Jaison, founder of Prospera Properties — we manage residential rental properties in London, St. Thomas, and Strathroy, including newly built units coming to market.
+
+I'm available as a media source or contributor on the property management side of new rental development in SW Ontario — happy to comment for any upcoming pieces on the investor or operator perspective.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## CondoControl Central — 2026-07-26
+To: info@condocontrolcentral.com
+Subject: Guest post idea — residential PM in smaller Ontario markets
+
+Hi,
+
+Your blog covers Ontario property management thoroughly from a condo/software angle. I noticed you don't have much content on what residential rental management looks like outside Toronto — a gap your PM-focused readers might value.
+
+I'm Ebin Jaison, founder of Prospera Properties in London, Ontario. We manage residential rentals in SW Ontario and navigate the same LTB and RTA landscape your audience works in.
+
+I'd like to contribute a practical piece — "What residential property management actually looks like in a mid-size Ontario city" — that complements your existing content without overlapping with your software focus.
+
+Happy to send an outline first.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
