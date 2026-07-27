@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-07-25
+2026-07-27
 
-## Posts Written: 73 total (41 queued across 9 active clusters)
+## Posts Written: 74 total (40 queued across 9 active clusters)
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -115,11 +115,12 @@ _(Oxford County geographic cluster complete.)_
 
 ---
 
-### HYPER-LOCAL cluster — London / St. Thomas / Strathroy (0 of 8 — ABSOLUTE TOP PRIORITY)
+### HYPER-LOCAL cluster — London / St. Thomas / Strathroy (1 of 8 — ABSOLUTE TOP PRIORITY)
 No competitor is writing these. These are ours to own entirely. City-specific bylaws and licences that every local landlord needs but cannot find answers to anywhere.
 
+- city-of-london-rental-unit-licence ✅
+
 **Still missing:**
-- city-of-london-rental-unit-licence ← Start here. Required for ALL rental units in London. Zero guides exist.
 - city-of-london-rental-unit-licence-renewal ← Annual renewal process — landlords search for this every year.
 - london-ontario-property-standards-bylaw ← City bylaw ON TOP of RTA. Most landlords don't know it exists.
 - city-of-london-second-unit-registration ← How to legally register a basement apartment or ADU in London.
@@ -252,4 +253,5 @@ High-urgency, low-volume, but zero competition — and builds trust when landlor
 - 2026-07-21: Published l2-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; companion to l1-application-ontario-landlord-guide). Covers grounds for behaviour/damage/illegal acts (N5/N6/N7 prerequisites), step-by-step L2 filing, documentation standards, hearing prep, Section 83 discretion, enforcement. ✅
 - 2026-07-22: Published l3-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; Section 77 no-hearing eviction pathway). Covers N11/N9 trigger scenarios, the key Section 77(2) no-hearing advantage, step-by-step filing, 30-day filing deadline, 10-day set-aside window, Sheriff enforcement. ✅
 - 2026-07-23: Published l4-application-ontario-landlord-guide — SUPPORTING CLUSTER (LTB applications cluster; eviction for breach of settlement agreement or prior LTB order). Covers what an L4 is and when to use it, settlement agreement requirements, LTB order enforcement, L4 vs. L1/L2/L3 differentiation, step-by-step filing through LTB portal, filing fee ($170 online / $155 in-person), hearing preparation, Section 83 discretion, common dismissal reasons (lack of notice, vague terms, no proof of breach), and seven common mistakes. Differentiates by being entirely landlord-process-focused with emphasis on the critical prior-notice requirement under RTA Section 78. Links internally to N4, N5, N6, N7, L1, L2, L3, RTA Section 83, landlord-record-keeping, ltb-hearing-preparation, enforcing-eviction-order-ontario-sheriff, and how-long-does-eviction-take. External links to tribunalsontario.ca LTB portal/forms and ontario.ca RTA Section 78. Completes the core L1/L2/L3/L4 eviction applications suite. ✅
+- 2026-07-27: Published city-of-london-rental-unit-licence — HYPER-LOCAL cluster (first post in the zero-competition London municipal bylaws cluster). Covers the City of London's Rental Housing Licensing program: who needs a licence, step-by-step application process, what property standards inspectors assess, annual renewal obligations, consequences of operating without a licence, and how the city bylaw sits on top of the provincial RTA. Includes a dedicated section on secondary suites and basement apartments. Internal links to ontario-landlord-tenant-act-2026, rental-property-tax-deductions-ontario, fire-safety-ontario-landlords, landlord-maintenance-responsibilities-ontario, landlord-record-keeping-ontario, rental-property-insurance-ontario, first-time-landlord-tips-london-ontario, legal-basement-apartment-requirements-ontario. External link to london.ca Rental Housing Licensing section. Soft CTA to Prospera at end. ✅
 - 2026-07-24: Catalogued enforcing-eviction-order-ontario-sheriff (published 2026-05-20, previously untracked in seo-brain). Published landlord-retaliation-ontario-rta-section-97 — SUPPORTING CLUSTER (PAIN keyword support; LTB/eviction cluster). Covers RTA Section 97 prohibition on retaliatory evictions, the 6-month rebuttable presumption (RTA s.97(5)), how tenants raise retaliation via T2 applications, Section 82 claims at hearings, and Section 83 discretion arguments. Explains three common retaliation scenarios (N5 after repair complaint; N12 after maintenance dispute; N8 after bylaw complaint) with practical defense guidance. Core message: document legitimate grounds before serving any notice, respond to repairs promptly, log entry visits. Internal links to rta-section-83-ontario, ltb-hearing-preparation-ontario-landlords, landlord-entry-rights-ontario, n5-notice-ontario, l2-application-ontario-landlord-guide, landlord-record-keeping-ontario, small-landlord-property-management-london-ontario. External links to tribunalsontario.ca and ontario.ca (RTA s.97). ✅
