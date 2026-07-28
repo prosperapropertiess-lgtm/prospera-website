@@ -5,7 +5,7 @@ date: "2026-07-08"
 slug: "rta-section-83-ontario"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You proved your case. The tenant didn't pay rent. Or they damaged your unit. Or they violated the lease repeatedly. You filed the right form, served it properly, attended the Landlord and Tenant Board hearing — and the adjudicator still didn't grant the eviction.

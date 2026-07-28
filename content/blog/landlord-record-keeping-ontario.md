@@ -5,7 +5,7 @@ slug: "landlord-record-keeping-ontario"
 excerpt: "Good records protect you at the LTB, at tax time, and in any dispute with a tenant. Here's exactly what Ontario landlords should be keeping — and how to organize it."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlord disputes come down to one thing: documentation. The landlord who keeps records wins. The landlord who relies on memory loses — at the Landlord and Tenant Board, at tax time, and in any conversation with a tenant who has a different recollection of events.

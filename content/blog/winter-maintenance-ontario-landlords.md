@@ -5,7 +5,7 @@ slug: "winter-maintenance-ontario-landlords"
 excerpt: "Ontario winters are no joke. Here's what landlords are legally required to provide — and practical steps to avoid the most expensive cold-weather problems."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Ontario winters bring frozen pipes, heating breakdowns, and snowdrifts — and for landlords in London, St. Thomas, and Sarnia, they also bring a specific set of legal obligations. Getting these wrong isn't just expensive; it can trigger maintenance complaints to the Landlord and Tenant Board and, in serious cases, rent abatements.

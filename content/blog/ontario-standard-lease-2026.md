@@ -5,7 +5,7 @@ slug: "ontario-standard-lease-2026"
 excerpt: "Ontario's mandatory Standard Lease Form 2229E applies to virtually every new residential tenancy. Here's a section-by-section walkthrough of what you must include, which clauses are enforceable, and what happens if you skip the form entirely."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1596711439-b63c25b40c73?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Ontario Standard Lease 2026: What Every Landlord Must Include

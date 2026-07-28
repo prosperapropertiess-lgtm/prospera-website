@@ -5,7 +5,7 @@ slug: "how-to-handle-tenant-complaints-ontario"
 excerpt: "Not every complaint requires action — but some require it fast. Here's how to sort tenant complaints, document them properly, and avoid a T6 application at the LTB."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When a tenant sends you a complaint, your first instinct might be to respond immediately and fix everything they mention. That's not always the right move. Some complaints require urgent action. Others are maintenance requests you can schedule at a reasonable time. Some aren't your legal responsibility at all. Knowing the difference protects you from both liability and LTB applications — and it protects your relationship with your tenant.

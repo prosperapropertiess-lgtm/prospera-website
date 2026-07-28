@@ -5,7 +5,7 @@ slug: "when-to-hire-a-property-manager-ontario"
 excerpt: "Still self-managing your Ontario rental? These 10 signs show when the cost of NOT hiring a property manager exceeds the 8–12% management fee."
 category: "Property Management"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1459821512757-80b6a7e06218?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 One missed N4 deadline. One illegal rent increase. One tenant who figured out you wouldn't enforce the lease. Any one of these can cost an Ontario landlord more than an entire year of professional management fees — and they happen to self-managing landlords every single day.

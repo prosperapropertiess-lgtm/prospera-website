@@ -5,7 +5,7 @@ slug: "how-long-does-eviction-take-ontario"
 excerpt: "Evicting a tenant in Ontario takes longer than most landlords expect. Here's a realistic timeline and what affects how fast it moves."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The most common question landlords ask after a tenancy goes wrong is: *how long is this going to take?*

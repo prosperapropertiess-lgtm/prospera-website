@@ -4,7 +4,7 @@ excerpt: "Short-term rentals are a growing headache for Ontario landlords. Here'
 date: "2026-04-27"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You find out your tenant has been listing your rental on Airbnb. Strangers coming and going every few days. Reviews mentioning your property's address. No mention of it in the lease.

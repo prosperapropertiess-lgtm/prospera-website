@@ -5,7 +5,7 @@ slug: "landlord-tenant-communication-best-practices-ontario"
 excerpt: "Good communication keeps tenancies from escalating. Here's what Ontario law requires in writing, what channels actually work, and how to deliver difficult messages without creating problems."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlord-tenant disputes don't start with a legal problem — they start with a communication breakdown. A missed message, a verbal promise that was never confirmed, a tone that turned a manageable situation into a grievance. By the time the LTB gets involved, both parties are usually pointing to moments where the other person "should have known."

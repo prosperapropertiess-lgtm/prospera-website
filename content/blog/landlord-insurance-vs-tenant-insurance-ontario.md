@@ -5,7 +5,7 @@ slug: "landlord-insurance-vs-tenant-insurance-ontario"
 excerpt: "Landlord insurance and tenant insurance cover different things. Ontario landlords need to understand both policies — and why one doesn't replace the other."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1565945887714-d5139f4eb0ce?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A pipe bursts in your rental unit. Water damages the ceiling, ruins the flooring, and destroys your tenant's laptop and furniture. Here's the question most landlords can't answer without hesitation: who pays for what?

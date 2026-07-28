@@ -5,7 +5,7 @@ slug: "property-manager-london-ontario-cost"
 excerpt: "Wondering what a property manager costs in London, Ontario? This guide breaks down every fee structure so you know exactly what you're paying for."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords who contact a property management company ask the same first question: "What's this going to cost me?" It's the right question — but the answer is more nuanced than a single percentage. Property management fees in London, Ontario vary based on what's included, what's billed separately, and how each company structures its pricing. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer useful context on the broader Ontario rental market and what landlords can expect.

@@ -5,7 +5,7 @@ slug: "ontario-landlord-tenant-act-2026"
 excerpt: "Confused by Ontario's RTA in 2026? Get a plain-English breakdown of rent control, eviction forms, entry rules, and what landlords must do right now."
 category: "Landlord Tips"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1557804506-bec6d088dc98?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords don't lose sleep over the [*Residential Tenancies Act, 2006*](https://www.ontario.ca/laws/statute/06r17) — until something goes wrong. A missed notice deadline voids your eviction. An incorrect N12 form triggers a bad-faith complaint. Accepting a partial rent payment after serving an N4 means starting the whole process over.

@@ -5,7 +5,7 @@ slug: "n11-agreement-to-end-tenancy-ontario"
 excerpt: "The N11 lets landlords and tenants mutually end a tenancy without court. Learn when to use it, how to execute it safely, and the coercion mistakes that void agreements."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N11 is one of the most underused — and misunderstood — tools in Ontario landlord law. Unlike the N4, N5, or N12 (which are notices you serve on a tenant), the N11 is a **mutual agreement** that both you and your tenant sign. When executed correctly, it ends the tenancy cleanly, without a contested hearing at the Landlord and Tenant Board. When done wrong, it creates disputes the LTB can void entirely.

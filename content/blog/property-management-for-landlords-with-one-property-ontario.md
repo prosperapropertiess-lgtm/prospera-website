@@ -5,7 +5,7 @@ date: "2026-07-10"
 slug: "property-management-for-landlords-with-one-property-ontario"
 category: "Property Management"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1582407947304-fd86f28320c7?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most guides to property management assume you're running a portfolio. They talk about scaling, systems, and efficiency across dozens of doors.

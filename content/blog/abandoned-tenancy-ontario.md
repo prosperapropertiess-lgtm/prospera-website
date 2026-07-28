@@ -5,7 +5,7 @@ slug: "abandoned-tenancy-ontario"
 excerpt: "If your tenant has vanished and stopped paying rent, you can't just change the locks. Here's the legal process for handling an abandoned tenancy in Ontario."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You haven't heard from your tenant in weeks. Rent hasn't been paid, the lights are off, and the neighbour says they haven't seen anyone around. Their belongings might still be inside — or the unit might be completely empty.

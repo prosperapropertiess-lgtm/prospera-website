@@ -5,7 +5,7 @@ date: "2026-07-27"
 slug: "vital-services-cutoff-ontario-landlords"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If a tenant hasn't paid rent in two months and won't respond to your messages, the idea of cutting off the heat or the electricity can feel like a reasonable last resort. It isn't. Under Ontario's *Residential Tenancies Act*, cutting off vital services to pressure a tenant to leave is illegal — and it exposes you to immediate legal consequences that are typically far worse than the problem you were trying to solve.

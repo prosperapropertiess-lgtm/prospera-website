@@ -5,7 +5,7 @@ slug: "n1-form-ontario-landlord-guide"
 excerpt: "The N1 form is the only legal way to give a tenant written notice of a rent increase in Ontario. Here's how to complete and serve it correctly."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1558603140-4f11bf5b2c4e?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Rent increase season trips up a surprising number of Ontario landlords every year — not because they miss the deadline, but because they use the wrong form, fill it out incorrectly, or serve it the wrong way. Any one of those mistakes can invalidate the entire notice. Your tenant doesn't have to pay the increased rent. And you have to start the 90-day clock all over again.

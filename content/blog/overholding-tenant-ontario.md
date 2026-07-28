@@ -5,7 +5,7 @@ date: "2026-07-27"
 slug: "overholding-tenant-ontario"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your one-year lease ends July 31st. August 1st arrives. The tenant is still there, paying no attention to the fact that their "lease is up."

@@ -5,7 +5,7 @@ slug: "property-management-st-thomas-ontario"
 excerpt: "Thinking about hiring a property manager in St. Thomas, Ontario? Here's everything local landlords need to know about professional property management in the City of St. Thomas."
 category: "Landlord Tips"
 readTime: "6 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in St. Thomas, Ontario: What Landlords Need to Know

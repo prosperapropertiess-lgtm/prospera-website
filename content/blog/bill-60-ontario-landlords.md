@@ -5,7 +5,7 @@ slug: "bill-60-ontario-landlords"
 excerpt: "Bill 60 cut Ontario's N4 notice period to 7 days, ended automatic lease rollovers & more. Here's exactly what changed — and how to use it."
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Bill 60 Ontario: 5 Rule Changes Every Landlord Must Know (2026)
