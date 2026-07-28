@@ -227,6 +227,29 @@ High-urgency, low-volume, but zero competition — and builds trust when landlor
 
 ---
 
+## EDIT QUEUE — Thin Posts (expand to 1,800–2,500 words + simplify to Grade 3–5 reading level)
+
+Every post in this queue needs TWO things when edited:
+1. **Expand** — add missing sections (FAQ, common mistakes, local examples, step-by-step list)
+2. **Simplify** — rewrite any complex sentences. Short words. Short sentences. One idea per sentence. Read it out loud — if you stumble, rewrite it.
+
+Priority order (thinnest first):
+
+| Post | Current Words | Target | Status |
+|---|---|---|---|
+| tenant-screening-red-flags.md | ~1,157 | 1,800+ | ⬜ PENDING |
+| subletting-assignment-ontario.md | ~1,235 | 1,800+ | ⬜ PENDING |
+| late-rent-payments-ontario.md | ~1,251 | 1,800+ | ⬜ PENDING |
+| fire-safety-ontario-landlords.md | ~1,323 | 1,800+ | ⬜ PENDING |
+| landlord-entry-rights-ontario.md | ~1,345 | 1,800+ | ⬜ PENDING |
+| abandoned-tenancy-ontario.md | ~1,352 | 1,800+ | ⬜ PENDING |
+| pet-policies-ontario-rentals.md | ~1,353 | 1,800+ | ⬜ PENDING |
+
+**When editing:** Also add a FAQ section (6-8 questions) and a social caption block if missing.
+**Mark ✅ DONE when complete.** Re-run `wc -w` after to confirm word count.
+
+---
+
 ## Do More Of
 - Hyper-local content (city bylaws, licences, local compliance rules) — zero competition
 - "Nobody is writing about this" LTB process depth — builds authority on procedural questions
@@ -246,6 +269,7 @@ High-urgency, low-volume, but zero competition — and builds trust when landlor
 - SEO writer cron runs Mon–Thu noon UTC (writing), Fri noon UTC (optimization-only) — fully autonomous. 4 new posts per week.
 - Google Indexing API integrated — new posts pinged to Google on publish
 - L1, L2, L3, L4 applications cluster now covers eviction for rent arrears, behaviour, damage, illegal acts, breach of settlement/order, and no-hearing pathways
+- 2026-07-27: Reading level standard set to Grade 3–5 for all posts (new and edits). Updated growth-engine.md copywriting rules with plain-language swap table and sentence/paragraph structure rules. Added EDIT QUEUE to seo-brain.md — 7 thin posts (<1,357 words) queued for expansion (1,800-2,500 words) + simplification. Editing starts with tenant-screening-red-flags.md on next Friday optimization pass.
 - 2026-07-27: Created content/growth-engine.md — master growth system. Contains: audit findings (thin posts, missing FAQs, internal linking gaps), upgraded weekly workflow (Mon-Thu content + Fri optimization), content creation template (with mandatory FAQ + social caption), content cluster map (7 clusters), 30-day content calendar (Jul 28–Aug 26), topic scoring framework, repurposing system, optimization loop, and content database. Read growth-engine.md before any content session.
 - 2026-07-25: Added 4 new keyword clusters (hyper-local, nobody-is-writing-about-this, AI-targeted, LTB remaining) — 23 new target slugs. Updated writer with plain language rules, retention hooks, hyper-local signals, and AI agent optimization.
 - 2026-07-25 (second pass): Added 5 more zero-competition clusters — legal misconceptions (5), tax/CRA (3), property-type specific (4), emergency scenarios (3), procedural LTB deep dives (3) — 18 additional target slugs. Total pipeline now: 73 published + 41 queued. No competitor PM company is writing in any of these categories.

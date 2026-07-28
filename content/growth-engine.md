@@ -174,7 +174,45 @@ Need help with [topic]? Prospera Properties manages rental properties across Lon
 ```
 
 ### Copywriting rules (non-negotiable)
-- Voice: plain, direct, experienced. Like a property manager who has seen this before.
+
+**Reading level: Grade 3–5. Every post.**
+Write so a landlord can read while tired, distracted, on their phone. Short words. Short sentences. One idea per sentence. If a sentence is over 20 words, break it in two. If a paragraph is over 3 sentences, break it in two.
+
+Test: read the post out loud. If you stumble, rewrite. If a word has a simpler swap, use it:
+
+| Don't use | Use instead |
+|---|---|
+| pursuant to | under |
+| notwithstanding | even if |
+| aforementioned | above / this |
+| in the event that | if |
+| with respect to | about / for |
+| it is the case that | [just say the thing] |
+| at this point in time | now |
+| in order to | to |
+| utilize | use |
+| commence | start |
+| terminate | end |
+| remit | pay |
+| obligated | must |
+| residential premises | rental unit |
+| tenancy agreement | lease |
+
+**Legal terms: define them the first time, then use plain language.**
+Example: "The N4 Notice (the official form you file to start the eviction process for unpaid rent)..." — after that, just say "the N4."
+
+**Sentence structure:**
+- Active voice: "You must serve the N4" not "The N4 must be served"
+- Concrete over abstract: "14 days" not "a reasonable period"
+- Specific over vague: "heat, electricity, and water" not "vital services" (unless defined first)
+
+**Paragraph structure:**
+- 2-3 sentences max per paragraph
+- Each paragraph = one idea
+- Use bullet points for any list of 3+ items
+- Bold the key takeaway in every 3-4 paragraphs
+
+**Voice:** Like a property manager explaining something over coffee. Not a lawyer. Not a professor. Not a brochure.
 - No hype words: amazing, revolutionary, seamless, game-changing, comprehensive
 - No AI tells: "in today's landscape," "it's worth noting," "stands as a testament," "it's important to understand"
 - No negative parallelism: "not only X but also Y" — just say Y
