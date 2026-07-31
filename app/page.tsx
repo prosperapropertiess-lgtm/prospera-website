@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import type { Testimonial } from "@/components/ui/testimonials-columns-1";
-import BlogNudge from "@/components/ui/BlogNudge";
-import PortalPreview from "@/components/ui/PortalPreview";
+
+const TestimonialsColumn = dynamic(() => import("@/components/ui/testimonials-columns-1").then(m => ({ default: m.TestimonialsColumn })), { ssr: false });
+const BlogNudge = dynamic(() => import("@/components/ui/BlogNudge"), { ssr: false });
+const PortalPreview = dynamic(() => import("@/components/ui/PortalPreview"), { ssr: false });
 
 // ── Heading ───────────────────────────────────────────────────────────────────
 // SEO-safe: renders as plain, fully-visible h1 text.
@@ -765,33 +766,29 @@ function StickyCTA() {
   }, []);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 80, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4 pr-20 sm:pr-8"
-          style={{
-            backgroundColor: "#1F2F3A",
-            borderTop: "1px solid rgba(250,248,245,0.08)",
-          }}
-        >
-          <p className="text-xs sm:text-sm" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            <span className="sm:hidden">Stop managing it yourself</span>
-            <span className="hidden sm:inline">Find out what your property should be earning</span>
-          </p>
-          <Link
-            href="/rent-analysis"
-            className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest shrink-0 rounded"
-            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-          >
-            Get a Free Rental Analysis →
-          </Link>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className="fixed bottom-0 left-0 right-0 z-40 px-5 sm:px-8 py-3 flex items-center justify-between gap-4 pr-20 sm:pr-8"
+      style={{
+        backgroundColor: "#1F2F3A",
+        borderTop: "1px solid rgba(250,248,245,0.08)",
+        transform: visible ? "translateY(0)" : "translateY(100%)",
+        opacity: visible ? 1 : 0,
+        transition: "transform 0.3s ease, opacity 0.3s ease",
+        pointerEvents: visible ? "auto" : "none",
+      }}
+    >
+      <p className="text-xs sm:text-sm" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
+        <span className="sm:hidden">Stop managing it yourself</span>
+        <span className="hidden sm:inline">Find out what your property should be earning</span>
+      </p>
+      <Link
+        href="/rent-analysis"
+        className="ml-auto px-6 py-2.5 text-xs font-semibold uppercase tracking-widest shrink-0 rounded"
+        style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+      >
+        Get a Free Rental Analysis →
+      </Link>
+    </div>
   );
 }
 

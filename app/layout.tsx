@@ -9,15 +9,17 @@ import TrafficSourceTracker from "@/components/TrafficSourceTracker";
 const outfit = Outfit({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "600", "700"],
   display: "swap",
+  preload: true,
 });
 
 const inter = Inter({
   variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "600"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   Home,
   Building2,
@@ -118,7 +117,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Hamburger — 3 white stripes */}
+          {/* Hamburger */}
           <button
             className="lg:hidden relative z-50 flex flex-col justify-center items-center gap-[5px] w-10 h-10"
             onClick={() => setMenuOpen((o) => !o)}
@@ -150,95 +149,99 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ── Mobile overlay ─────────────────────────────────────────────────────── */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="fixed inset-0 z-[100] lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
-            style={{ backgroundColor: "rgba(15,22,30,0.82)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
-          >
-            {/* Nav items */}
-            <nav className="flex flex-col flex-1">
-              {mobileNavItems.map((item, i) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-                return (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04, duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-4 py-4 border-b transition-opacity hover:opacity-70"
-                      style={{
-                        borderColor: "rgba(250,248,245,0.08)",
-                        opacity: isActive ? 1 : 0.85,
-                      }}
-                    >
-                      <span
-                        className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{
-                          backgroundColor: item.accent
-                            ? "#8B2030"
-                            : isActive
-                              ? "rgba(250,248,245,0.12)"
-                              : "rgba(250,248,245,0.06)",
-                        }}
-                      >
-                        <Icon
-                          className="w-4 h-4"
-                          style={{ color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.7)" }}
-                        />
-                      </span>
-                      <span
-                        className="text-xl font-light"
-                        style={{
-                          fontFamily: "var(--font-cormorant)",
-                          color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.8)",
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                      {item.accent && (
-                        <span
-                          className="ml-auto text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: "rgba(139,32,48,0.2)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-                        >
-                          Waitlist
-                        </span>
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </nav>
-
-            {/* Bottom CTA */}
-            <motion.div
-              className="mt-8"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.38, duration: 0.3 }}
-            >
-              <Link
-                href="/freedom-score"
-                onClick={() => setMenuOpen(false)}
-                className="block w-full py-4 text-center text-sm font-semibold uppercase tracking-widest rounded"
-                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+      {/* ── Mobile overlay — pure CSS, no framer-motion ─────────────────────── */}
+      <div
+        className="fixed inset-0 z-[100] lg:hidden flex flex-col pt-24 pb-10 px-8 overflow-y-auto"
+        style={{
+          backgroundColor: "rgba(15,22,30,0.82)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          opacity: menuOpen ? 1 : 0,
+          transform: menuOpen ? "translateY(0)" : "translateY(-12px)",
+          transition: "opacity 0.22s ease, transform 0.22s ease",
+          pointerEvents: menuOpen ? "auto" : "none",
+        }}
+      >
+        {/* Nav items */}
+        <nav className="flex flex-col flex-1">
+          {mobileNavItems.map((item, i) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+            return (
+              <div
+                key={item.href}
+                style={{
+                  opacity: menuOpen ? 1 : 0,
+                  transform: menuOpen ? "translateX(0)" : "translateX(-10px)",
+                  transition: `opacity 0.25s ease ${i * 0.04}s, transform 0.25s ease ${i * 0.04}s`,
+                }}
               >
-                Landlord Freedom Test
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <Link
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-4 py-4 border-b transition-opacity hover:opacity-70"
+                  style={{
+                    borderColor: "rgba(250,248,245,0.08)",
+                    opacity: isActive ? 1 : 0.85,
+                  }}
+                >
+                  <span
+                    className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{
+                      backgroundColor: item.accent
+                        ? "#8B2030"
+                        : isActive
+                          ? "rgba(250,248,245,0.12)"
+                          : "rgba(250,248,245,0.06)",
+                    }}
+                  >
+                    <Icon
+                      className="w-4 h-4"
+                      style={{ color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.7)" }}
+                    />
+                  </span>
+                  <span
+                    className="text-xl font-light"
+                    style={{
+                      fontFamily: "var(--font-cormorant)",
+                      color: item.accent ? "#FAF8F5" : isActive ? "#FAF8F5" : "rgba(250,248,245,0.8)",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  {item.accent && (
+                    <span
+                      className="ml-auto text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                      style={{ backgroundColor: "rgba(139,32,48,0.2)", color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Waitlist
+                    </span>
+                  )}
+                </Link>
+              </div>
+            );
+          })}
+        </nav>
+
+        {/* Bottom CTA */}
+        <div
+          className="mt-8"
+          style={{
+            opacity: menuOpen ? 1 : 0,
+            transform: menuOpen ? "translateY(0)" : "translateY(8px)",
+            transition: "opacity 0.3s ease 0.38s, transform 0.3s ease 0.38s",
+          }}
+        >
+          <Link
+            href="/freedom-score"
+            onClick={() => setMenuOpen(false)}
+            className="block w-full py-4 text-center text-sm font-semibold uppercase tracking-widest rounded"
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Landlord Freedom Test
+          </Link>
+        </div>
+      </div>
     </>
   );
 }
