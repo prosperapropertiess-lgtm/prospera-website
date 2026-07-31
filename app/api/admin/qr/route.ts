@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 
   const db = getSupabaseAdmin();
   const slug = generateSlug();
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://prosperaproperties.ca";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://prosperaproperties.co";
   const redirect_url = `${baseUrl}/r/${slug}`;
 
   const { data, error } = await db
