@@ -25,7 +25,7 @@ function timeAgo(iso: string) {
 }
 
 function scanCount(code: QrCode): number {
-  return code.qr_scans?.[0]?.count ?? 0;
+  return parseInt(String(code.qr_scans?.[0]?.count ?? "0"), 10) || 0;
 }
 
 export default function QrCodesPage() {
