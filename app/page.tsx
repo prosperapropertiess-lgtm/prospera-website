@@ -45,24 +45,15 @@ function HeroFadeIn({ delay, duration = 600, children }: { delay: number; durati
 
 function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    // Only load video on desktop — saves 3.7MB on mobile
-    if (window.innerWidth >= 768) {
-      setShowVideo(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!showVideo) return;
     const v = videoRef.current;
     if (v) v.play().catch(() => {});
-  }, [showVideo]);
+  }, []);
 
   return (
     <section className="relative overflow-hidden" style={{ fontSize: "16px" }}>
-      {/* Poster image — always visible, replaces video on mobile */}
+      {/* Poster loads instantly via next/image while video downloads in background */}
       <Image
         src="/hero-poster.jpg"
         alt=""
@@ -72,21 +63,19 @@ function Hero() {
         className="object-cover"
         style={{ zIndex: 0 }}
       />
-      {/* Video background — desktop only, saves 3.7MB on mobile */}
-      {showVideo && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ zIndex: 0 }}
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-      )}
+      {/* Video plays over the poster once loaded — preload="none" means it never blocks page load */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
       {/* Dark overlay for text contrast */}
       <div
