@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/animations/FadeIn";
 import CounterAnimation from "@/components/animations/CounterAnimation";
@@ -44,31 +45,48 @@ function HeroFadeIn({ delay, duration = 600, children }: { delay: number; durati
 
 function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    // Ensure video plays on mount (autoplay can be finicky)
-    const v = videoRef.current;
-    if (v) {
-      v.play().catch(() => {});
+    // Only load video on desktop — saves 3.7MB on mobile
+    if (window.innerWidth >= 768) {
+      setShowVideo(true);
     }
   }, []);
 
+  useEffect(() => {
+    if (!showVideo) return;
+    const v = videoRef.current;
+    if (v) v.play().catch(() => {});
+  }, [showVideo]);
+
   return (
     <section className="relative overflow-hidden" style={{ fontSize: "16px" }}>
-      {/* Video background — fills entire hero */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        poster="/hero-poster.jpg"
-        className="absolute inset-0 w-full h-full object-cover"
+      {/* Poster image — always visible, replaces video on mobile */}
+      <Image
+        src="/hero-poster.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
         style={{ zIndex: 0 }}
-      >
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
+      />
+      {/* Video background — desktop only, saves 3.7MB on mobile */}
+      {showVideo && (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* Dark overlay for text contrast */}
       <div
@@ -83,10 +101,12 @@ function Hero() {
           {/* Logo */}
           <HeroFadeIn delay={0} duration={500}>
             <div className="flex justify-center mb-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/logo.png"
                 alt="Prospera Properties"
+                width={170}
+                height={170}
+                priority
                 style={{ height: "170px", width: "auto", filter: "brightness(0) invert(1)", position: "relative", top: "-48px" }}
               />
             </div>
