@@ -42,6 +42,7 @@ const SECTIONS = [
       { href: "/admin/dashboard", icon: "📊", label: "Outreach & CRM", desc: "Pipeline, ads, outreach logs" },
       { href: "/admin/intelligence", icon: "🧠", label: "Rent Intelligence", desc: "Market benchmarks, trends" },
       { href: "/admin/seo", icon: "🔍", label: "SEO", desc: "Search Console, rankings" },
+      { href: "/admin/qr-codes", icon: "⬛", label: "QR Codes", desc: "Dynamic codes, scan tracking" },
     ],
   },
 ];
