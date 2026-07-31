@@ -330,6 +330,24 @@ export function rentAnalysisLinkEmail({
 
 // ── RENT ANALYSIS — REPORT EMAIL ────────────────────────────
 
+interface ComparableItem {
+  city: string;
+  city_zone: string | null;
+  property_type: string | null;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  sqft: number | null;
+  rent_amount: number;
+  garage: string | null;
+  parking_spots: number | null;
+  utilities_included: string | null;
+  laundry: string | null;
+  furnished: string | null;
+  source_note: string | null;
+  source_url: string | null;
+  submitted_at: string;
+}
+
 export function rentAnalysisReportEmail({
   name,
   city,
@@ -338,6 +356,7 @@ export function rentAnalysisReportEmail({
   rentAmount,
   claudeAnalysis,
   marketData,
+  comparables,
 }: {
   name?: string | null;
   city: string;
@@ -346,6 +365,7 @@ export function rentAnalysisReportEmail({
   rentAmount: number;
   claudeAnalysis: string;
   marketData?: { p25_rent: number | null; median_rent: number | null; p75_rent: number | null; submission_count: number } | null;
+  comparables?: ComparableItem[];
 }): string {
   const bedsLabel = bedrooms ? `${bedrooms}-bedroom` : "rental";
   const typeLabel = unitType ? unitType.replace(/_/g, " ") : "unit";
@@ -400,6 +420,57 @@ export function rentAnalysisReportEmail({
   // ── Formatted analysis ──
   const analysisHtml = md(claudeAnalysis);
 
+  // ── Comparables block ──
+  const comparablesBlock = comparables && comparables.length > 0 ? (() => {
+    const cards = comparables.map((c) => {
+      const type = c.property_type ? c.property_type.charAt(0).toUpperCase() + c.property_type.slice(1).replace(/_/g, " ") : "Unit";
+      const area = c.city_zone ? c.city_zone.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) + ", " + c.city : c.city;
+      const tags: string[] = [];
+      if (c.sqft) tags.push(`${c.sqft.toLocaleString()} sqft`);
+      if (c.bathrooms) tags.push(`${c.bathrooms} bath`);
+      if (c.laundry && c.laundry !== "none") tags.push(c.laundry === "in_unit" ? "In-unit laundry" : c.laundry === "shared" ? "Shared laundry" : c.laundry.replace(/_/g, " "));
+      if (c.utilities_included && c.utilities_included !== "none") {
+        const util = c.utilities_included.replace(/_/g, "+").replace("water+hydro+gas", "all utilities").replace("water+hydro", "water+hydro");
+        tags.push(`${util} incl.`);
+      }
+      if (c.parking_spots && c.parking_spots > 0) tags.push(`${c.parking_spots} parking`);
+      if (c.garage && c.garage !== "none") tags.push(`${c.garage.replace(/_/g, " ")} garage`);
+
+      const tagHtml = tags.length > 0
+        ? `<p style="margin:6px 0 0;font-size:13px;color:${MUTED};font-family:${FONT};">${tags.join(" &middot; ")}</p>`
+        : "";
+
+      const sourceName = c.source_note || "Listing";
+      const linkHtml = c.source_url
+        ? `<a href="${c.source_url}" style="display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:${CRIMSON};font-family:${FONT};text-decoration:none;">View listing &rarr;</a>`
+        : `<p style="margin-top:12px;font-size:13px;color:${MUTED};font-family:${FONT};">${sourceName}</p>`;
+
+      return `
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 10px;background-color:${BG_SUBTLE};border:1px solid ${BORDER};border-radius:12px;overflow:hidden;">
+          <tr>
+            <td style="padding:16px 20px;">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td>
+                    <p style="margin:0;font-size:13px;color:${MUTED};font-family:${FONT};text-transform:uppercase;letter-spacing:1px;font-weight:700;">${type} &middot; ${area}</p>
+                    <p style="margin:4px 0 0;font-size:22px;font-weight:700;color:${NAVY};font-family:${FONT};">$${c.rent_amount.toLocaleString()}<span style="font-size:14px;font-weight:400;color:${MUTED};">/mo</span></p>
+                    ${tagHtml}
+                    ${linkHtml}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>`;
+    }).join("");
+
+    return `
+      <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">What similar units are renting for right now</p>
+      <p style="margin:0 0 16px;font-size:14px;color:${MUTED};font-family:${FONT};">These are real active listings we tracked in ${city} — same bedroom count, same area, last 60 days. Click through to see exactly what you're up against.</p>
+      ${cards}
+    `;
+  })() : "";
+
   return wrapper(`
     ${heroCard(`Hey ${name || "there"},`, `Your ${bedsLabel} ${typeLabel} rent analysis for ${city}`)}
 
@@ -425,6 +496,9 @@ export function rentAnalysisReportEmail({
 
     <!-- Market data -->
     ${marketBlock}
+
+    <!-- Comparables -->
+    ${comparablesBlock.length > 0 ? `${divider()}${comparablesBlock}` : ""}
 
     ${divider()}
 

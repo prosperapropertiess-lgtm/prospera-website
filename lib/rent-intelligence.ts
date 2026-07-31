@@ -76,6 +76,63 @@ export interface MarketData {
   trend_direction: string | null;
 }
 
+export interface Comparable {
+  city: string;
+  city_zone: string | null;
+  property_type: string | null;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  sqft: number | null;
+  rent_amount: number;
+  garage: string | null;
+  parking_spots: number | null;
+  utilities_included: string | null;
+  laundry: string | null;
+  furnished: string | null;
+  source_note: string | null;
+  source_url: string | null;
+  submitted_at: string;
+}
+
+export async function getComparables(submission: RentSubmission, limit = 5): Promise<Comparable[]> {
+  let query = supabaseAdmin
+    .from("rent_submissions")
+    .select("city, city_zone, property_type, bedrooms, bathrooms, sqft, rent_amount, garage, parking_spots, utilities_included, laundry, furnished, source_note, remarks, submitted_at")
+    .eq("submission_type", "scraped")
+    .eq("city", submission.city)
+    .gte("submitted_at", new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString())
+    .order("submitted_at", { ascending: false });
+
+  if (submission.bedrooms != null) {
+    query = query.eq("bedrooms", submission.bedrooms);
+  }
+
+  const { data } = await query.limit(limit * 3);
+  if (!data || data.length === 0) return [];
+
+  return data
+    .map((r) => ({
+      city: r.city,
+      city_zone: r.city_zone ?? null,
+      property_type: r.property_type ?? null,
+      bedrooms: r.bedrooms ?? null,
+      bathrooms: r.bathrooms ?? null,
+      sqft: r.sqft ?? null,
+      rent_amount: r.rent_amount,
+      garage: r.garage ?? null,
+      parking_spots: r.parking_spots ?? null,
+      utilities_included: r.utilities_included ?? null,
+      laundry: r.laundry ?? null,
+      furnished: r.furnished ?? null,
+      source_note: r.source_note ?? null,
+      source_url: typeof r.remarks === "string" && r.remarks.startsWith("Source: ")
+        ? r.remarks.replace("Source: ", "").trim()
+        : null,
+      submitted_at: r.submitted_at,
+    }))
+    .slice(0, limit);
+}
+
 export async function validateRentToken(token: string, allowUsed = false): Promise<RentToken | null> {
   let query = supabaseAdmin
     .from("rent_analysis_tokens")
@@ -110,7 +167,8 @@ function sanitize(val: string | null | undefined): string | null {
 
 export async function generatePropertyAnalysis(
   submission: RentSubmission,
-  marketData: MarketData | null
+  marketData: MarketData | null,
+  comparables?: Comparable[]
 ): Promise<string> {
   const bedsLabel = submission.bedrooms ? `${submission.bedrooms}-bedroom` : "rental";
 
@@ -197,7 +255,23 @@ Landlord style: ${submission.landlord_style?.replace(/_/g, " ") ?? "not specifie
 ${sanitize(submission.special_features) ? `Special features: ${sanitize(submission.special_features)}` : ""}
 ${sanitize(submission.remarks) ? `Landlord notes: ${sanitize(submission.remarks)}` : ""}
 
-${marketContext}`;
+${marketContext}
+
+${comparables && comparables.length > 0 ? `REAL COMPARABLE LISTINGS (active in the last 60 days — use these to make your analysis concrete):
+${comparables.map((c, i) => {
+  const type = c.property_type ? c.property_type.replace(/_/g, " ") : "unit";
+  const area = c.city_zone ? c.city_zone.replace(/_/g, " ") + " " + c.city : c.city;
+  const features = [
+    c.sqft ? `${c.sqft} sqft` : null,
+    c.laundry ? `laundry: ${c.laundry.replace(/_/g, " ")}` : null,
+    c.utilities_included && c.utilities_included !== "none" ? `utilities: ${c.utilities_included.replace(/_/g, "+")}` : null,
+    c.parking_spots ? `${c.parking_spots} parking` : null,
+    c.garage && c.garage !== "none" ? `${c.garage.replace(/_/g, " ")} garage` : null,
+  ].filter(Boolean).join(", ");
+  return `${i + 1}. $${c.rent_amount}/mo — ${c.bedrooms ?? "?"}bd/${c.bathrooms ?? "?"}ba ${type} in ${area}${features ? ` (${features})` : ""}`;
+}).join("\n")}
+
+When you reference these in your analysis, describe them naturally (e.g. "a similar 2-bedroom on the south side is asking $1,650") — do NOT paste the URLs in your text. The client will see the actual listing links in a separate section below your analysis.` : ""}`;
 
   const response = await anthropic.messages.create({
     model: "claude-sonnet-4-6",

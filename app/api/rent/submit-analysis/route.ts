@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
-import { validateRentToken, generatePropertyAnalysis, RentSubmission } from "@/lib/rent-intelligence";
+import { validateRentToken, generatePropertyAnalysis, getComparables, RentSubmission } from "@/lib/rent-intelligence";
 import { rentAnalysisReportEmail, rentSubmissionNotificationEmail } from "@/lib/emails";
 
 export async function POST(req: NextRequest) {
@@ -126,9 +126,11 @@ export async function POST(req: NextRequest) {
             .eq("is_published", true)
             .maybeSingle();
 
+          const comparables = await getComparables(submission, 5);
+
           let claudeAnalysis = "";
           try {
-            claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null);
+            claudeAnalysis = await generatePropertyAnalysis(submission, marketData ?? null, comparables);
           } catch (err) {
             console.error("[rent-analysis] Claude analysis failed:", err);
             claudeAnalysis = "We were unable to generate an automated analysis at this time. Ebin will personally review your submission and follow up within 24 hours.";
@@ -161,6 +163,7 @@ export async function POST(req: NextRequest) {
               rentAmount: submission.rent_amount,
               claudeAnalysis,
               marketData: marketData ?? null,
+              comparables,
             }),
           });
 
