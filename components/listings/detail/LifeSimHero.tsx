@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { PropertyRecord } from "./ListingPage";
 
@@ -7,11 +8,21 @@ interface Props {
   property: PropertyRecord;
 }
 
+function buildImageAlt(property: PropertyRecord): string {
+  const beds = property.bedrooms ? `${property.bedrooms}-bedroom ` : "";
+  const type = property.property_type
+    ? property.property_type.replace(/_/g, " ") + " "
+    : "rental ";
+  const city = property.city || "London";
+  return `${beds}${type}for rent in ${city}, Ontario — Prospera Properties`;
+}
+
 export default function LifeSimHero({ property }: Props) {
   const coverImage = property.images?.[0] ?? null;
   const aiLines = property.ai_life_intro
     ? property.ai_life_intro.split("\n").filter(Boolean)
     : [];
+  const imageAlt = buildImageAlt(property);
 
   return (
     <>
@@ -20,13 +31,15 @@ export default function LifeSimHero({ property }: Props) {
         className="relative flex flex-col"
         style={{ minHeight: "70vh", backgroundColor: "#1F2F3A" }}
       >
-        {/* Cover photo */}
+        {/* Cover photo — next/image for optimization + LCP */}
         {coverImage && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={coverImage}
-            alt={property.title}
-            className="absolute inset-0 w-full h-full object-cover"
+            alt={imageAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
         )}
 

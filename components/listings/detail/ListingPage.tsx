@@ -18,6 +18,9 @@ import SocialProof from "./SocialProof";
 import ProspaBenefits from "./ProspaBenefits";
 import StickyCTA from "./StickyCTA";
 import BookViewingButton from "./BookViewingButton";
+import FaqSection from "./FaqSection";
+import RentedBanner from "./RentedBanner";
+import type { FaqItem } from "@/app/listings/[slug]/page";
 
 export interface PropertyRecord extends Record<string, unknown> {
   id: string;
@@ -63,12 +66,18 @@ export interface PropertyRecord extends Record<string, unknown> {
 
 interface ListingPageProps {
   property: PropertyRecord;
+  faqs?: FaqItem[];
 }
 
-export default function ListingPage({ property }: ListingPageProps) {
+export default function ListingPage({ property, faqs }: ListingPageProps) {
+  const isRented = property.available === false;
+
   return (
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
       <LifeSimHero property={property} />
+
+      {/* Rented banner — keeps SEO traffic, captures rental alert leads */}
+      {isRented && <RentedBanner property={property} />}
 
       {/* Photos immediately after hero — highest conversion priority */}
       {(property.images?.length || property.photo_labels?.length) ? (
@@ -119,6 +128,8 @@ export default function ListingPage({ property }: ListingPageProps) {
       <PoliciesSection property={property} />
 
       <CommuteSimulator property={property} />
+
+      {faqs && faqs.length > 0 && <FaqSection faqs={faqs} />}
 
       <ProspaBenefits />
 
