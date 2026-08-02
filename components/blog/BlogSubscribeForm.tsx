@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
 
-export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
+const RENTER_CATEGORIES = ["Renter Guides", "Tenant Tips", "Renter Resources"];
+
+export default function BlogSubscribeForm({ midPost, category }: { midPost?: boolean; category?: string }) {
+  const isRenter = category ? RENTER_CATEGORIES.includes(category) : false;
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -30,15 +33,19 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
       >
         {status === "done" ? (
           <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-            You&apos;re in. We&apos;ll send practical landlord tips straight to your inbox.
+            {isRenter
+              ? "You're on the list. We'll email you when new rental guides come out."
+              : "You're in. We'll send practical landlord tips straight to your inbox."}
           </p>
         ) : (
           <>
             <p className="text-xs uppercase tracking-widest mb-1" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-              Landlord Insights
+              {isRenter ? "Renter Resources" : "Landlord Insights"}
             </p>
             <p className="text-lg font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              Get practical tips for Ontario landlords — delivered free.
+              {isRenter
+                ? "Get renter guides for Ontario — delivered free."
+                : "Get practical tips for Ontario landlords — delivered free."}
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
               <input
@@ -87,19 +94,23 @@ export default function BlogSubscribeForm({ midPost }: { midPost?: boolean }) {
               You&apos;re subscribed.
             </p>
             <p className="text-sm" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-              Practical landlord tips from Prospera Properties, straight to your inbox.
+              {isRenter
+                ? "Renter guides and tenant tips from Prospera Properties, straight to your inbox."
+                : "Practical landlord tips from Prospera Properties, straight to your inbox."}
             </p>
           </>
         ) : (
           <>
             <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
-              Free Landlord Newsletter
+              {isRenter ? "Free Renter Newsletter" : "Free Landlord Newsletter"}
             </p>
             <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
-              Stay ahead as an Ontario landlord.
+              {isRenter ? "Know your rights as an Ontario tenant." : "Stay ahead as an Ontario landlord."}
             </h2>
             <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-              New posts on Ontario law, eviction process, tenant screening, and more — no spam, unsubscribe anytime.
+              {isRenter
+                ? "Renter guides, tenant rights, and housing tips for Ontario — no spam, unsubscribe anytime."
+                : "New posts on Ontario law, eviction process, tenant screening, and more — no spam, unsubscribe anytime."}
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               <input
