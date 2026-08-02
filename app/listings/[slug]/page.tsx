@@ -190,7 +190,7 @@ export default async function PropertyDetailPage({ params }: Props) {
       <JsonLd data={propertySchema} />
       <JsonLd data={breadcrumbSchema} />
       {faqSchema && <JsonLd data={faqSchema} />}
-      <ListingPage property={property} faqs={faqs} />
+      <ListingPage key={property.id as string} property={property} faqs={faqs} />
     </>
   );
 }

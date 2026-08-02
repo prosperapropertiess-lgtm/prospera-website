@@ -23,10 +23,11 @@ function parseSections(text: string): ParsedSection[] {
     const line = raw.trim();
     if (!line) continue;
 
-    const headerMatch = line.match(/^\*\*(.+?)\*\*\s*$/);
+    // Match **Bold** headers OR ## Heading headers
+    const headerMatch = line.match(/^\*\*(.+?)\*\*\s*$/) || line.match(/^#{1,3}\s+(.+)$/);
     if (headerMatch) {
       if (current) sections.push(current);
-      current = { title: headerMatch[1], bullets: [], prose: [] };
+      current = { title: headerMatch[1].trim(), bullets: [], prose: [] };
       continue;
     }
 
@@ -34,8 +35,8 @@ function parseSections(text: string): ParsedSection[] {
       current = { title: "", bullets: [], prose: [] };
     }
 
-    if (line.startsWith("•") || line.startsWith("- ")) {
-      current.bullets.push(line.replace(/^[•\-]\s*/, "").trim());
+    if (line.startsWith("•") || line.startsWith("- ") || line.startsWith("* ")) {
+      current.bullets.push(line.replace(/^[•\-\*]\s*/, "").trim());
     } else {
       current.prose.push(line);
     }

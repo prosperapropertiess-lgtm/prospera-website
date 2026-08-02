@@ -13,27 +13,32 @@ interface FeatureCheck {
 
 function buildChecklist(property: PropertyRecord): FeatureCheck[] {
   const raw = property as Record<string, unknown>;
-  // utilities_detail is the canonical source: { heat: { included: bool }, hydro: { included: bool }, ... }
   const ud = (raw.utilities_detail as Record<string, { included?: boolean }> | null) ?? {};
+  const utilsList = (raw.utilities_list as string[] | null) ?? [];
+  const appliances = (raw.appliances as string[] | null) ?? [];
+  const laundryType = raw.laundry_type as string | null;
+  const outdoorSpace = (raw.outdoor_space as string | null)?.toLowerCase() ?? "";
+
+  const hasUtil = (key: string, aliases: string[]) =>
+    !!(ud[key]?.included ?? aliases.some(a => utilsList.map(u => u.toLowerCase()).includes(a)));
 
   const checks: { label: string; test: boolean; alwaysShow: boolean }[] = [
-    // Utilities — always show (tenants always want to know)
-    { label: "Heat",              test: !!(ud.heat?.included   || raw.heat_included),                  alwaysShow: true  },
-    { label: "Hydro",             test: !!(ud.hydro?.included  || raw.hydro_included || raw.electricity_included), alwaysShow: true  },
-    { label: "Water",             test: !!(ud.water?.included  || raw.water_included),                 alwaysShow: true  },
-    { label: "Internet",          test: !!(ud.internet?.included || raw.internet_included),            alwaysShow: false },
-    // Key amenities — only show "Not Included" for things renters expect
-    { label: "Air Conditioning",  test: !!(raw.ac || raw.air_conditioning),                            alwaysShow: true  },
-    { label: "In-Unit Laundry",   test: !!(raw.in_unit_laundry || raw.washer_dryer),                  alwaysShow: true  },
-    { label: "Shared Laundry",    test: !!(raw.laundry_shared && !raw.in_unit_laundry && !raw.washer_dryer), alwaysShow: false },
-    { label: "Parking",           test: !!(property.parking || raw.garage),                            alwaysShow: true  },
-    { label: "Dishwasher",        test: !!(raw.dishwasher),                                            alwaysShow: true  },
-    { label: "Storage Unit",      test: !!(raw.storage || raw.locker),                                 alwaysShow: false },
-    { label: "Balcony / Patio",   test: !!(raw.balcony || raw.patio || raw.deck),                     alwaysShow: false },
-    { label: "Backyard",          test: !!(raw.backyard),                                              alwaysShow: false },
-    { label: "Elevator",          test: !!(raw.elevator),                                              alwaysShow: false },
-    { label: "Gym / Fitness Room",test: !!(raw.gym),                                                   alwaysShow: false },
-    { label: "Pool",              test: !!(raw.pool),                                                   alwaysShow: false },
+    { label: "Heat",             test: hasUtil("heat", ["heat", "gas", "heating"]),                      alwaysShow: true  },
+    { label: "Hydro / Electricity", test: hasUtil("hydro", ["hydro", "electricity", "electric"]),       alwaysShow: true  },
+    { label: "Water",            test: hasUtil("water", ["water"]),                                     alwaysShow: true  },
+    { label: "Internet",         test: hasUtil("internet", ["internet", "wifi"]),                       alwaysShow: false },
+    { label: "Air Conditioning", test: !!(raw.ac),                                                      alwaysShow: true  },
+    { label: "In-Unit Laundry",  test: laundryType === "in_unit",                                      alwaysShow: true  },
+    { label: "Shared Laundry",   test: laundryType === "shared",                                       alwaysShow: false },
+    { label: "Parking",          test: !!(property.parking),                                            alwaysShow: true  },
+    { label: "Dishwasher",       test: appliances.map(a => a.toLowerCase()).includes("dishwasher"),     alwaysShow: true  },
+    { label: "Fridge",           test: appliances.map(a => a.toLowerCase()).some(a => a.includes("fridge") || a.includes("refrigerator")), alwaysShow: false },
+    { label: "Stove / Oven",     test: appliances.map(a => a.toLowerCase()).some(a => a.includes("stove") || a.includes("oven") || a.includes("range")), alwaysShow: false },
+    { label: "Storage Unit",     test: !!(raw.storage),                                                alwaysShow: false },
+    { label: "Backyard",         test: outdoorSpace.includes("backyard") || outdoorSpace.includes("yard"), alwaysShow: false },
+    { label: "Balcony / Patio",  test: outdoorSpace.includes("balcony") || outdoorSpace.includes("patio") || outdoorSpace.includes("deck"), alwaysShow: false },
+    { label: "Elevator",         test: !!(raw.elevator),                                               alwaysShow: false },
+    { label: "Furnished",        test: !!(raw.furnished),                                              alwaysShow: false },
   ];
 
   return checks

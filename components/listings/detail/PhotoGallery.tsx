@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { PropertyRecord } from "./ListingPage";
 
@@ -39,7 +38,7 @@ function buildPhotosByCategory(property: PropertyRecord): {
 
 export default function PhotoGallery({ property }: Props) {
   const { categories, byCategory, all } = buildPhotosByCategory(property);
-  const [activeCategory, setActiveCategory] = useState<string | null>(categories[0] ?? null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -128,25 +127,16 @@ export default function PhotoGallery({ property }: Props) {
         className="relative h-[340px] sm:h-[420px] md:h-[520px] overflow-hidden rounded-xl cursor-zoom-in mb-3"
         onClick={() => setLightboxOpen(true)}
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImage + safeIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={currentImage}
-              alt={`Property photo ${safeIndex + 1}`}
-              fill
-              className="object-cover"
-              unoptimized
-              priority={safeIndex === 0}
-            />
-          </motion.div>
-        </AnimatePresence>
+        <div className="absolute inset-0 transition-opacity duration-250">
+          <Image
+            src={currentImage}
+            alt={`Property photo ${safeIndex + 1}`}
+            fill
+            className="object-cover"
+            unoptimized
+            priority={safeIndex === 0}
+          />
+        </div>
 
         {/* Arrow navigation */}
         {displayImages.length > 1 && (
@@ -197,67 +187,56 @@ export default function PhotoGallery({ property }: Props) {
       )}
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            style={{ backgroundColor: "rgba(0,0,0,0.92)" }}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-200"
+          style={{ backgroundColor: "rgba(0,0,0,0.92)" }}
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
             onClick={() => setLightboxOpen(false)}
+            aria-label="Close lightbox"
           >
-            <button
-              className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
-              onClick={() => setLightboxOpen(false)}
-              aria-label="Close lightbox"
-            >
-              <X size={20} color="#FAF8F5" />
-            </button>
+            <X size={20} color="#FAF8F5" />
+          </button>
 
-            <motion.div
-              key={currentImage + safeIndex + "-lb"}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-4xl h-[70vh] mx-6"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={currentImage}
-                alt={`Property photo ${safeIndex + 1}`}
-                fill
-                className="object-contain"
-                unoptimized
-              />
-            </motion.div>
+          <div
+            className="relative w-full max-w-4xl h-[70vh] mx-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={currentImage}
+              alt={`Property photo ${safeIndex + 1}`}
+              fill
+              className="object-contain"
+              unoptimized
+            />
+          </div>
 
-            {displayImages.length > 1 && (
-              <>
-                <button
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  aria-label="Previous"
-                >
-                  <ChevronLeft size={22} color="#FAF8F5" />
-                </button>
-                <button
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  aria-label="Next"
-                >
-                  <ChevronRight size={22} color="#FAF8F5" />
-                </button>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {displayImages.length > 1 && (
+            <>
+              <button
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                aria-label="Previous"
+              >
+                <ChevronLeft size={22} color="#FAF8F5" />
+              </button>
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                aria-label="Next"
+              >
+                <ChevronRight size={22} color="#FAF8F5" />
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </section>
   );
 }

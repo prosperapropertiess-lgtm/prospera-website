@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Car, Bus, Footprints } from "lucide-react";
 
 import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
@@ -23,15 +22,11 @@ interface ResultCardProps {
   label: string;
   duration: string;
   distance: string;
-  delay: number;
 }
 
-function ResultCard({ icon, label, duration, distance, delay }: ResultCardProps) {
+function ResultCard({ icon, label, duration, distance }: ResultCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay, ease: [0.23, 1, 0.32, 1] }}
+    <div
       className="flex-1 rounded-xl p-6 text-center min-w-[120px]"
       style={{ backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8" }}
     >
@@ -54,7 +49,7 @@ function ResultCard({ icon, label, duration, distance, delay }: ResultCardProps)
       >
         {distance}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
@@ -169,59 +164,43 @@ export default function CommuteSimulator({ property }: Props) {
               {loading ? "Calculating…" : "Calculate Commute"}
             </button>
 
+            {result?.error && (
+              <p
+                className="text-sm text-center py-4"
+                style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+              >
+                {result.error}
+              </p>
+            )}
 
-            <AnimatePresence mode="wait">
-              {result?.error && (
-                <motion.p
-                  key="error"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-sm text-center py-4"
-                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  {result.error}
-                </motion.p>
-              )}
-
-              {result && !result.error && (
-                <motion.div
-                  key="results"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col sm:flex-row gap-4"
-                >
-                  {result.driving && (
-                    <ResultCard
-                      icon={<Car size={22} />}
-                      label="Driving"
-                      duration={result.driving.duration}
-                      distance={result.driving.distance}
-                      delay={0}
-                    />
-                  )}
-                  {result.transit && (
-                    <ResultCard
-                      icon={<Bus size={22} />}
-                      label="Transit"
-                      duration={result.transit.duration}
-                      distance={result.transit.distance}
-                      delay={0.08}
-                    />
-                  )}
-                  {result.walking && (
-                    <ResultCard
-                      icon={<Footprints size={22} />}
-                      label="Walking"
-                      duration={result.walking.duration}
-                      distance={result.walking.distance}
-                      delay={0.16}
-                    />
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {result && !result.error && (
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                {result.driving && (
+                  <ResultCard
+                    icon={<Car size={22} />}
+                    label="Driving"
+                    duration={result.driving.duration}
+                    distance={result.driving.distance}
+                  />
+                )}
+                {result.transit && (
+                  <ResultCard
+                    icon={<Bus size={22} />}
+                    label="Transit"
+                    duration={result.transit.duration}
+                    distance={result.transit.distance}
+                  />
+                )}
+                {result.walking && (
+                  <ResultCard
+                    icon={<Footprints size={22} />}
+                    label="Walking"
+                    duration={result.walking.duration}
+                    distance={result.walking.distance}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

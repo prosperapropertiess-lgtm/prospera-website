@@ -14,6 +14,7 @@ import CostsBreakdown from "./CostsBreakdown";
 import TransparencySection from "./TransparencySection";
 import PoliciesSection from "./PoliciesSection";
 import CommuteSimulator from "./CommuteSimulator";
+import ApplicationProcess from "./ApplicationProcess";
 import SocialProof from "./SocialProof";
 import ProspaBenefits from "./ProspaBenefits";
 import StickyCTA from "./StickyCTA";
@@ -128,6 +129,8 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
       <PoliciesSection property={property} />
 
       <CommuteSimulator property={property} />
+
+      <ApplicationProcess />
 
       {faqs && faqs.length > 0 && <FaqSection faqs={faqs} />}
 
