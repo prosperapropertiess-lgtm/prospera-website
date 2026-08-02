@@ -17,11 +17,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
     const { data } = await supabase
       .from("properties")
-      .select("id, created_at")
-      .eq("available", true);
+      .select("id, slug, created_at")
+      .eq("status", "published");
 
-    propertyRoutes = (data || []).map((p) => ({
-      url: `${BASE_URL}/listings/${p.id}`,
+    propertyRoutes = (data || []).filter(p => p.slug).map((p) => ({
+      url: `${BASE_URL}/listings/${p.slug}`,
       lastModified: new Date(p.created_at),
       changeFrequency: "weekly" as const,
       priority: 0.8,

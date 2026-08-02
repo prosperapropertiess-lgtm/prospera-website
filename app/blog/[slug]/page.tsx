@@ -6,6 +6,7 @@ import { getAllPosts, getPost } from "@/lib/blog";
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import BlogSubscribeForm from "@/components/blog/BlogSubscribeForm";
+import TenantLeadCTA from "@/components/blog/TenantLeadCTA";
 import ShareButtons from "@/components/blog/ShareButtons";
 import ViewCounter from "@/components/blog/ViewCounter";
 import TableOfContents from "@/components/blog/TableOfContents";
@@ -232,30 +233,14 @@ export default async function BlogPostPage({ params }: Props) {
         <TableOfContents headings={headings} />
       </div>
 
-      {/* End-of-post subscribe form */}
-      <BlogSubscribeForm category={post.category} />
-
-      {/* Bottom CTA */}
-      <section className="px-6 py-16" style={{ backgroundColor: "#1F2F3A" }}>
-        <div className="max-w-3xl mx-auto text-center">
-          {post.category === "Renter Guides" || post.category === "Tenant Tips" ? (
-            <>
-              <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
-                Looking for a rental in London, Ontario?
-              </h2>
-              <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-                Browse available units or get notified when something new comes open. Fast responses, professional management.
-              </p>
-              <Link
-                href="/listings"
-                className="inline-block px-8 py-3 text-xs uppercase tracking-widest rounded"
-                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
-              >
-                View Available Rentals
-              </Link>
-            </>
-          ) : (
-            <>
+      {/* End-of-post CTA — renter articles get lead capture form, landlord articles get subscribe + quote CTA */}
+      {post.category === "Renter Guides" || post.category === "Tenant Tips" ? (
+        <TenantLeadCTA />
+      ) : (
+        <>
+          <BlogSubscribeForm category={post.category} />
+          <section className="px-6 py-16" style={{ backgroundColor: "#1F2F3A" }}>
+            <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 Need Help With Your Property?
               </h2>
@@ -269,10 +254,10 @@ export default async function BlogPostPage({ params }: Props) {
               >
                 Get a Free Quote
               </Link>
-            </>
-          )}
-        </div>
-      </section>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* Related posts */}
       <RelatedPosts currentSlug={slug} />

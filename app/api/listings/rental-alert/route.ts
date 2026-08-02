@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, city, bedrooms, property_type, price_max } = await req.json();
+    const { email, name, phone, city, bedrooms, property_type, price_max, move_in_timeline, notes, source } = await req.json();
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
@@ -14,12 +14,18 @@ export async function POST(req: NextRequest) {
     await db.from("subscribers").upsert(
       {
         email: email.toLowerCase().trim(),
+        name: name || null,
+        phone: phone || null,
+        type: "tenant",
         rental_alert: true,
         rental_alert_city: city || null,
         rental_alert_bedrooms: bedrooms || null,
         rental_alert_type: property_type || null,
         rental_alert_price_max: price_max || null,
         rental_alert_at: new Date().toISOString(),
+        move_in_timeline: move_in_timeline || null,
+        notes: notes || null,
+        source: source || "rental-alert",
       },
       { onConflict: "email", ignoreDuplicates: false }
     );
