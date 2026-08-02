@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-07-26
+Last updated: 2026-08-02
 
 ## New Topic Opportunities
 
@@ -27,6 +27,20 @@ Last updated: 2026-07-26
 
 - landlord-liability-tenant-injury-ontario | Est. difficulty: MEDIUM | Vol: ~200/mo | Landlord's legal exposure when a tenant is injured on the property, maintenance duty-of-care standard, how insurance intersects with RTA obligations. Law firm blogs dominate nationally but no Ontario PM company has covered this from a property management angle. Informational intent only; pairs with rental-property-insurance-ontario.md and landlord-maintenance-responsibilities-ontario.md.
 
+- condo-owner-landlord-ontario | Est. difficulty: LOW | Vol: ~150/mo | Owning a condo unit as a rental: condo corporation restrictions on tenants, pet restrictions in condo leases, short-term rental bans, what happens when the condo corporation pursues the unit owner for tenant conduct. No comprehensive landlord guide exists from the condo-owner perspective — only condo board/tenant-focused content ranks. Natural internal links to pet-policies-ontario-rentals.md and airbnb-short-term-rentals-ontario.md.
+
+- ltb-backlog-ontario-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~200/mo | Practical landlord guide to the LTB hearing wait time crisis: current median wait times by application type, interim order options, documentation hygiene during long delays, and how professional management reduces exposure during backlogs. CBC and legal clinics own the news angle; no Ontario PM company has a landlord-specific operational guide. Timely and evergreen — backlog has been a top landlord concern since 2022 and is worsening.
+
+- t2-application-ontario-landlord | Est. difficulty: LOW | Vol: ~120/mo | Tenant application to the LTB for maintenance failures, harassment, or unlawful entry — what landlords need to know to avoid a T2 filing, what happens if one is received, response timelines and typical LTB remedies. Tribunals Ontario and paralegal Q&A sites rank; no Ontario PM company guide exists. Companion to ltb-hearing-preparation-ontario-landlords.md.
+
+- ontario-rent-receipt-requirements | Est. difficulty: LOW | Vol: ~120/mo | When Ontario landlords must provide rent receipts, what information must appear on them, the $20 penalty per receipt for non-compliance, and how to generate them. Only legal forum Q&A and paralegal sidebar content currently rank. Short, authoritative post earns the featured snippet for this query.
+
+- n12-bad-faith-compensation-ontario | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | Dedicated guide to N12 bad faith eviction findings: what LTB considers bad faith (property not used as stated, rented out again within 12 months), the $50,000 fine, compensation orders to tenants, and 2025-2026 LTB bad faith case examples. We have n12-notice-ontario.md and renoviction-ontario-landlords.md but neither covers the bad faith consequence side in depth. Small paralegal sites rank; CBC ranks for news events but no practical guide exists.
+
+- strathroy-ontario-rental-market-2026 | Est. difficulty: LOW | Vol: ~80/mo | Local rental market data guide for Strathroy: average rents, vacancy rates, what drives demand (proximity to London, lower acquisition costs, small-town retention). Near-zero competition — no other PM company has Strathroy-specific market content. Builds local topical authority and complements property-management-strathroy-ontario.md.
+
+- property-management-elgin-county-ontario | Est. difficulty: LOW | Vol: ~80/mo | Geographic long-tail for Elgin County (St. Thomas, Aylmer, Port Stanley area). Near-zero competition. St. Thomas's industrial growth and Elgin County's rural rental market are underserved by existing content. Complements property-management-st-thomas-ontario.md with a broader county-level page.
+
 ## SKIPPED (too competitive or wrong intent)
 
 - "Ontario landlord rights 2026" — Too broad; Ontario.ca and government pages dominate. Already covered generically by ontario-landlord-tenant-act-2026.md.
@@ -43,6 +57,8 @@ Last updated: 2026-07-26
 - "LTB Ontario eviction process landlord" — MEDIUM-HIGH difficulty; Tribunals Ontario and CBC dominate. Existing posts cover this angle.
 - "Ontario housing benefit landlord" — Government/MMAH pages rank #1-3; impossible to displace with informational content.
 - "rooming house Ontario regulations" — City-level bylaws vary; City of London bylaw pages dominate for local queries. Too fragmented for one province-wide post.
+- "Ontario landlord insurance guide" — Covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md. Insurance comparison aggregators (Ratehub, LowestRates) dominate cost-focused queries.
+- "tenant not paying rent Ontario" — Covered by late-rent-payments-ontario.md, n4-notice-ontario.md, and l1-application-ontario-landlord-guide.md.
 
 ## Topics to Expand
 
@@ -52,4 +68,6 @@ Last updated: 2026-07-26
 - ontario-standard-lease-2026.md — Add section on Bill 97 additions to the standard lease (new A/C installation schedule, updated pet addendum). The standard lease was revised mid-2026 and many landlords are still using the old version.
 - pest-control-ontario-rentals.md — Consider splitting bed bugs into a dedicated post (see bed-bugs-ontario-landlord-responsibilities above); expand remaining post to address cockroaches and rodents with N5 evidence steps.
 - property-management-london-ontario.md — Add 2026 local rental market data section; include a paragraph on Volkswagen EV plant spillover demand in St. Thomas/London corridor; link to new london-ontario-rental-market-2026 post once written.
+- n12-notice-ontario.md — Add dedicated bad faith consequences section (LTB fine, tenant compensation, 12-month re-rental lookback) to address the n12-bad-faith-compensation-ontario keyword gap without a full separate post; assess traffic after 60 days to decide on standalone post.
+- ltb-hearing-preparation-ontario-landlords.md — Add a section on T2 tenant applications and how landlords should prepare documentation to defend against one; cross-link to new t2-application-ontario-landlord post once written.
 ---
