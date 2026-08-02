@@ -1518,3 +1518,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Software company, not a PM competitor. Tech companies often appreciate practitioner guest posts that add credibility to their editorial. Direct email pitch to info@ is appropriate; mention shared Ontario PM professional audience.
 
 ---
+
+## Zoocasa — Ontario Real Estate Blog
+- url: https://www.zoocasa.com/blog
+- type: blog
+- why: One of Canada's major real estate search platforms with a high-traffic Ontario blog covering market outlooks, investment property guides, and buyer resources — a cited expert source or contributed piece on the London/SW Ontario rental market would reach a broad Ontario investor audience.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://www.zoocasa.com/contact (contact form)
+- site_focus: Zoocasa is a full-service Canadian real estate platform (backed by EXP Realty) that combines property search with buyer representation. Their blog covers Ontario and Canadian housing market conditions, investment property guides, neighbourhood analyses, first-time buyer advice, and rental property economics. Content is professionally produced and well-indexed; Ontario articles consistently rank for real estate research queries.
+- hook: Zoocasa's Ontario investor content covers the purchase decision but rarely addresses what comes after — specifically what property management looks like in secondary markets like London, St. Thomas, and Strathroy. Prospera can contribute a data-informed expert piece on "What London Ontario investors should know about property management costs and tenant economics in 2026" — grounded rental data that complements their existing purchase-side content.
+- specific_content: Their Ontario investment property guides and London market coverage — Zoocasa's London posts focus on sales prices and neighbourhood analysis; Prospera fills the rental operations gap their reader-investors also need.
+- researcher_notes: Large national platform with editorial team — pitch as a local expert contributor rather than a guest blogger. Frame Prospera as the SW Ontario rental market authority with ground-level data. Contact via website form. Not a PM competitor.
+
+---
+
+## Storeys — Canadian Real Estate Media
+- url: https://storeys.com
+- type: media
+- why: Canada's leading independent digital real estate media outlet covering Ontario market trends, development news, and investment content — a company profile or expert quote in their Ontario coverage reaches sophisticated investors and would generate a high-authority editorial backlink.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://storeys.com/contact/ (editorial contact form)
+- site_focus: Storeys is Canada's premier independent real estate news and analysis publication, covering residential and commercial real estate across Ontario and Canada. Their editorial covers new development launches, market statistics, investment property trends, Ontario housing policy, and local market snapshots. Storeys is read by developers, investors, realtors, and engaged homeowners — a sophisticated, data-hungry audience. Their Ontario coverage frequently extends to London, Hamilton, and other secondary markets.
+- hook: Prospera manages rental properties in three SW Ontario markets at a moment when London and St. Thomas are experiencing unusual economic tailwinds (Volkswagen battery plant, industrial expansion). A story angle on "what professional property management looks like in Ontario's emerging industrial-growth rental markets" positions Prospera at the centre of a newsworthy trend their editorial team is already tracking.
+- specific_content: Storeys' coverage of London Ontario's 2025-2026 housing market and any stories on Ontario secondary market rental demand — Prospera's operational perspective in St. Thomas (Volkswagen spillover) is directly news-relevant to their editorial focus.
+- researcher_notes: Editorial publication — outreach should go to their news desk or Ontario market reporter, not a generic contact form. Lead with the St. Thomas economic growth angle: it's genuinely newsy, not promotional. A press pitch framing Prospera as an expert source on SW Ontario rental dynamics is more likely to land than a guest post offer with this type of outlet.
+
+---
+
+## London Free Press — Real Estate & Business Coverage
+- url: https://www.lfpress.com/category/business/real-estate/
+- type: media
+- why: London Ontario's daily newspaper of record (Postmedia) with dedicated real estate and business coverage — an expert quote, company mention, or contributed business column in the LFP earns a high-authority local backlink and direct community visibility in Prospera's core market.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://www.lfpress.com/contact (newsroom contact; editorial pitch to business/real estate desk)
+- site_focus: The London Free Press is London Ontario's daily newspaper of record, owned by Postmedia. Their real estate and business sections cover London area home prices, commercial development, local business profiles, and economic news relevant to the London/Middlesex community. The LFP has a loyal local readership among homeowners, investors, and business owners throughout London and surrounding areas.
+- hook: The LFP frequently quotes local real estate experts and business operators in their property market coverage. Prospera's Ebin Jaison is well-positioned as an expert voice on London's rental market — vacancy rates, average rents, tenant demand — particularly given the current housing affordability story that the paper covers regularly. An expert source relationship with the business/real estate desk earns ongoing mentions and backlinks.
+- specific_content: Their real estate and business coverage of London's housing affordability challenge and rental market conditions — Prospera's operational data from London, St. Thomas, and Strathroy properties under management is exactly the kind of local, specific information LFP reporters need for depth in their market stories.
+- researcher_notes: Daily newspaper — outreach should go to the business or real estate reporter directly, not a general contact form. A brief media pitch (not a press release) positioning Ebin as a knowledgeable local property management source for rental market stories is the right approach. Phone-first or short email with a specific data hook works best with local newspaper reporters.
+
+---
+
+## CM Magazine — Ontario Property Management Publication
+- url: https://cmmagazine.ca
+- type: media
+- why: ACMO's official quarterly trade magazine for condominium managers in Ontario — a contributed article positioning Prospera alongside the province's certified property management professionals earns a high-authority industry backlink and visibility with the condominium management community.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: info@acmo.org (via ACMO; CM Magazine is ACMO's publication)
+- site_focus: CM Magazine is the official quarterly publication of the Association of Condominium Managers of Ontario (ACMO). It is distributed to ACMO's thousands of RCM-designated members and corporate associates across Ontario. Content covers condominium governance, Ontario condo legislation (Condo Act), property management best practices, insurance, maintenance, and reserve fund studies. The editorial is practitioner-focused — written for and by Ontario property management professionals.
+- hook: While CM Magazine primarily serves condominium managers, there is meaningful overlap with residential property management in areas like tenant communication, maintenance contractor relationships, and Ontario legislation compliance. Prospera can contribute a guest article on "how residential property management practices from the LTB side translate to the management profession broadly" — positioning Ebin as a credible SW Ontario operator among Ontario's property management professional community.
+- specific_content: Their editorial content on Ontario property management operations and legislation compliance — Prospera's RTA and LTB expertise is directly transferable to CM Magazine's readership, most of whom also deal with landlord-tenant issues in mixed-use condominiums.
+- researcher_notes: ACMO publication — outreach runs through ACMO directly (info@acmo.org). Note that Prospera already has an ACMO prospect entry for associate membership; this CM Magazine entry is specifically about editorial contribution as a separate avenue. If Prospera pursues ACMO membership, a CM Magazine article submission follows naturally as a member benefit.
+
+---
+
+## HomePapa — Canadian Landlord Platform Blog
+- url: https://www.homepapa.ca/blog
+- type: blog
+- why: Canadian property management software platform with an Ontario landlord blog covering lease management, tenant screening, and rent collection — a non-competing tech company whose self-managing landlord audience is precisely the market Prospera aims to convert to full-service management.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://www.homepapa.ca/contact (contact form)
+- site_focus: HomePapa is a Canadian landlord software platform helping self-managing property owners handle leases, maintenance requests, rent collection, and tenant communication online. Their blog targets Ontario and Canadian independent landlords with practical guidance on property management tasks, Ontario tenancy law, and tenant relations. Content is educational and how-to oriented — designed to help self-managers do their job more efficiently without hiring a professional manager.
+- hook: HomePapa's readers are self-managing Ontario landlords who have chosen software over a property manager — but many will eventually hit a threshold (problem tenants, LTB filings, portfolio growth) where DIY stops making sense. A guest post on "When your HomePapa dashboard can't help you: the case for professional management in Ontario" or a contributed piece on "Signs it's time to hire a property manager" positions Prospera as the natural next step for landlords who outgrow the software approach.
+- specific_content: Their blog posts on Ontario rental law compliance and tenant dispute management — the friction points where self-managing landlords most commonly decide professional management is worth the cost.
+- researcher_notes: Canadian SaaS platform, not a PM competitor (software vs. full-service). Guest post pitch is the right angle — frame Prospera as the complementary full-service option when software-based self-management is no longer sufficient. Ontario-specific content focus makes Prospera's LTB/RTA expertise directly relevant.
+
+---
+
+## Canadian Mortgage Professional (CMP) Magazine
+- url: https://www.canadianmortgageprofessional.ca
+- type: media
+- why: Canada's leading trade publication for mortgage brokers and lenders — an expert article or data contribution on London/SW Ontario rental investment economics reaches a national audience of brokers whose investor clients become Prospera's management prospects.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://www.canadianmortgageprofessional.ca/contact (editorial contact form; published by Key Media)
+- site_focus: Canadian Mortgage Professional is the leading trade publication for Canada's mortgage brokerage industry, published by Key Media. CMP covers mortgage market trends, rate analysis, regulatory changes, and expert opinion on Canadian real estate investment. Their audience of 30,000+ mortgage professionals regularly advises clients on investment property financing — making CMP's readership a key referral network for London-area rental property acquisitions.
+- hook: Every mortgage broker who reads CMP has investor clients who eventually need property management. A bylined article from Ebin Jaison on "What investment property buyers in Ontario's secondary markets need to understand about management costs" gives CMP's broker readership actionable information while positioning Prospera as the London-area management resource their Ontario investor clients can use. The SW Ontario angle (London, St. Thomas, Strathroy) is underrepresented in CMP's primarily GTA-centric Ontario coverage.
+- specific_content: CMP's Ontario investment property content and any articles on secondary market real estate economics — Prospera's cost and yield data from London, St. Thomas, and Strathroy would add geographic depth that CMP's Toronto-focused editorial team can't easily generate.
+- researcher_notes: Trade publication with formal contributor process — pitch as a subject-matter expert, not a brand. Lead with data: management fee structures, vacancy rates, LTB cost exposure for unmanaged SW Ontario properties. Key Media runs the publication; contact via editorial form. A bylined expert article earns a high-authority industry publication backlink.
+
+---
+
+## Real Estate Institute of Canada (REIC)
+- url: https://reic.com
+- type: association
+- why: Canada's national professional designation body for real estate management professionals (FRI, CLO, CRF designations) — an associate membership or contributed article in REIC's member publications positions Prospera alongside Canada's credentialed real estate management professionals.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: info@reic.com
+- site_focus: The Real Estate Institute of Canada is the national professional association granting the FRI (Fellow of the Real Estate Institute), CLO (Certified Leasing Officer), and CRF (Certified Reserve Fund Planner) designations to Canadian real estate professionals. REIC provides education, professional development, and networking for commercial and residential real estate professionals including property managers, asset managers, and leasing specialists. Their member base spans Canada's real estate management profession.
+- hook: REIC's designation programs and member publications reach property management professionals across Canada. A contributed article or interview in REIC's educational content on "professional property management best practices in Ontario's secondary markets" — framed for practitioners rather than landlords — would position Prospera as a credible peer-level operator and generate a backlink from a high-authority national professional association.
+- specific_content: REIC's educational content on Ontario property management standards and their member publications covering residential property management best practices — Prospera's SW Ontario operational experience adds regional depth to nationally scoped association content.
+- researcher_notes: Formal national professional association. Outreach should go to info@reic.com and frame Prospera as interested in professional engagement and educational contribution, not a direct sales pitch. The most achievable quick win is a member publication contribution; full designation pursuit is a longer-term credential play. Not a PM competitor — an industry body.
+
+---
+
+## RE/MAX Canada Blog
+- url: https://blog.remax.ca
+- type: blog
+- why: RE/MAX Canada's national real estate blog covers Ontario market trends and investment property guidance — a major franchise with hundreds of Ontario agents whose investor buyer clients become Prospera's management prospects; a resource mention or contributed post reaches a massive, high-intent audience.
+- researched: true
+- drafted: true
+- added: 2026-08-02
+- contact_email: https://www.remax.ca/contact (corporate contact; or approach local RE/MAX Centre City London agent directly)
+- site_focus: RE/MAX Canada's national blog covers Canadian real estate market conditions, investor guides, neighbourhood profiles, and homebuyer/seller education. The blog targets the full RE/MAX agent and client ecosystem — buyers, sellers, and investors across Canada. Ontario content is substantial given RE/MAX's market share in the province. The blog publishes market-specific content including London Ontario market snapshots.
+- hook: RE/MAX is London's largest real estate franchise — their London-area agents regularly work with investment property buyers who need property management post-closing. A resource contribution to RE/MAX Canada's blog on "What London Ontario investors need to know about property management in 2026" — or a relationship with a local RE/MAX agent who can facilitate a contributed post — would put Prospera in front of RE/MAX's significant investor buyer pipeline in the London market.
+- specific_content: RE/MAX Canada's Ontario investment property and London market content — Prospera is the operational answer for the investor buyers RE/MAX London agents represent; a resource mention or post turns the content into a referral mechanism.
+- researcher_notes: National franchise — direct corporate blog pitch is possible but a warm local approach (via RE/MAX Centre City London agents already in Prospera's network, or Paul Gardiner who is RE/MAX Centre City) is more effective. The local agent angle also creates a real referral relationship, not just a content link. Paul Gardiner (already a prospect) is at RE/MAX Centre City — coordinate outreach.
+
+---

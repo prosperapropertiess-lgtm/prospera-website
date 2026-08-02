@@ -1957,3 +1957,165 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## Zoocasa — Ontario Real Estate Blog — 2026-08-02
+To: (contact form at zoocasa.com/contact)
+Subject: London Ontario rental market piece — Prospera Properties
+
+Hi Zoocasa editorial team,
+
+Your London Ontario investment guides do a thorough job covering purchase decisions — average prices, neighbourhood comparisons, cap rate estimates. Where there's a gap is what actually happens after investors close, specifically what property management costs and tenant economics look like on the ground in 2026.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company operating in London, St. Thomas, and Strathroy. I manage dozens of residential units across all three markets and track vacancy rates, average rents, and LTB trends directly.
+
+I'd like to contribute a piece on London rental property management economics for your blog — data-grounded, written for investors who are already in the market or evaluating it.
+
+Would that fit your editorial calendar?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Storeys Magazine — 2026-08-02
+To: (editorial contact at storeys.com)
+Subject: St. Thomas rental market — expert source from Prospera Properties
+
+Hi Storeys team,
+
+Your coverage of Ontario's secondary markets has been sharp — the industrial growth story in St. Thomas and its housing ripple effects is exactly the kind of shift that's changing the rental landscape in ways that aggregate data doesn't yet capture.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing residential rentals in London, St. Thomas, and Strathroy. I have ground-level data on how the Volkswagen-driven industrial expansion has affected rental demand, vacancy rates, and tenant quality in St. Thomas specifically.
+
+If you're covering the St. Thomas or SW Ontario housing market in an upcoming piece, I'm happy to serve as an expert source with real operational numbers — no pitch, just data.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## London Free Press — Real Estate & Business Coverage — 2026-08-02
+To: (LFP business/real estate desk via lfpress.com/contact)
+Subject: London rental market source — Prospera Properties
+
+Hi,
+
+I follow the LFP's real estate coverage closely — particularly the pieces tracking London's rental affordability gap and what the current buyer market means for investors holding rental properties.
+
+I'm Ebin Jaison, principal of Prospera Properties, a London-based property management company operating across London, St. Thomas, and Strathroy. I'm a working source on vacancy rates, average rents by unit type, and LTB filing trends in this market.
+
+If you're working on a story touching the London rental market — tenant demand, landlord challenges, or how the St. Thomas industrial expansion is affecting rents — I'm available as a local, on-the-ground expert source.
+
+No press release, just a real conversation.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## CM Magazine — Ontario Property Management Publication — 2026-08-02
+To: info@acmo.org
+Subject: Contributed article for CM Magazine — SW Ontario residential PM perspective
+
+Hi ACMO team,
+
+CM Magazine consistently publishes strong operational content for Ontario's property management professionals — the pieces on condominium governance and Ontario Condo Act compliance are genuinely useful reading.
+
+I'm Ebin Jaison, principal of Prospera Properties, a residential property management company serving London, St. Thomas, and Strathroy. While my portfolio is RTA-governed rather than condo-board managed, the operational challenges — maintenance coordination, legislative compliance, tenant communication — overlap substantially.
+
+I'd like to submit a contributed article for CM Magazine on how RTA-based residential management practices translate to the broader property management profession, specifically from a SW Ontario secondary-market perspective. A practitioner's view from outside the GTA and condo sector that might be useful for your readership.
+
+Would that be appropriate for a submission?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## HomePapa — Canadian Landlord Platform Blog — 2026-08-02
+To: (contact form at homepapa.ca)
+Subject: Guest post offer — when landlords outgrow self-management
+
+Hi HomePapa team,
+
+Your blog covers the self-management workflow thoroughly — lease templates, maintenance tracking, rent reminders. It's genuinely useful for independent landlords who want to stay in control of their portfolio.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy, Ontario. I work with landlords who started self-managing and hit the moment where it stopped making sense — usually around an LTB filing, a problem tenant, or a second property.
+
+I'd like to contribute a guest post on the inflection point: "When self-management stops working — and what Ontario landlords do next." Practical, not a pitch — written for your audience of independent landlords who are managing their own units and might be approaching that threshold.
+
+Would that work for your editorial calendar?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Canadian Mortgage Professional (CMP) Magazine — 2026-08-02
+To: (editorial contact at canadianmortgageprofessional.ca)
+Subject: Bylined article pitch — SW Ontario investment property management economics
+
+Hi CMP editorial team,
+
+Your Ontario investment property coverage has tended to focus on GTA and Hamilton markets. London, St. Thomas, and Strathroy are producing meaningfully different numbers right now — lower acquisition costs, stronger yield spreads, and a specific demand dynamic driven by the Volkswagen plant construction in Elgin County.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing residential rental portfolios across those three SW Ontario markets. I can put together a concise, data-informed bylined piece on what investment property management actually costs in these secondary markets — the numbers your broker readers' clients need to underwrite deals accurately.
+
+Would you be open to a pitch on that angle for a future issue?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Real Estate Institute of Canada (REIC) — 2026-08-02
+To: info@reic.com
+Subject: Educational contribution interest — SW Ontario residential property management
+
+Hi REIC team,
+
+REIC's educational mandate for property management professionals is something I've followed for a while — the FRI and CRF programs represent a standard of rigour that's meaningful in this industry.
+
+I'm Ebin Jaison, principal of Prospera Properties, a residential property management firm operating in London, St. Thomas, and Strathroy, Ontario. I'm interested in contributing educational content for REIC's member publications on residential property management in Ontario's secondary markets — specifically how RTA compliance, LTB procedures, and tenant lifecycle management work for smaller-market operators outside the GTA.
+
+Whether that's a member publication article, a case study, or another format that fits your editorial programming, I'd welcome the conversation.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## RE/MAX Canada Blog — 2026-08-02
+To: (via remax.ca corporate contact or local RE/MAX Centre City agent)
+Subject: Contributed piece for RE/MAX blog — London investment property management
+
+Hi RE/MAX Canada team,
+
+Your blog's London Ontario coverage tracks the sales market well — the recent posts on London home price stabilization in 2026 and what it means for buyers are directly relevant to the investors in your agents' pipelines.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. London-area RE/MAX agents regularly work with investment buyers who need a management partner once they close.
+
+I'd like to contribute a practical piece to the RE/MAX Canada blog: "What to do in the first 90 days after buying a London Ontario investment property" — actionable for investor-buyers, and a natural next step after your agents help them close the deal.
+
+Would this be a fit?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
