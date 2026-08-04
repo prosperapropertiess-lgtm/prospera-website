@@ -1,5 +1,53 @@
 const HUBSPOT_API = "https://api.hubapi.com/crm/v3/objects/contacts";
 
+/**
+ * Fetch all notes for a HubSpot contact and return them as a single
+ * concatenated string, newest first. Returns "" if none found.
+ */
+export async function fetchContactNotes(hubspotId: string | number): Promise<string> {
+  const token = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
+  if (!token) return "";
+
+  try {
+    // Search for notes associated with this contact
+    const res = await fetch("https://api.hubapi.com/crm/v3/objects/notes/search", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        filterGroups: [
+          {
+            filters: [
+              {
+                propertyName: "associations.contact",
+                operator: "EQ",
+                value: String(hubspotId),
+              },
+            ],
+          },
+        ],
+        properties: ["hs_note_body", "hs_timestamp"],
+        sorts: [{ propertyName: "hs_timestamp", direction: "DESCENDING" }],
+        limit: 20,
+      }),
+    });
+
+    if (!res.ok) return "";
+    const data = await res.json();
+    const notes: string[] = (data.results ?? [])
+      .map((n: { properties: { hs_note_body?: string } }) =>
+        (n.properties.hs_note_body ?? "").trim()
+      )
+      .filter((t: string) => t.length > 0);
+
+    return notes.join("\n\n---\n\n");
+  } catch {
+    return "";
+  }
+}
+
 // Maps our internal "type" strings to the actual enum values configured on the
 // HubSpot "contact_type" property. Anything not in this map is left unset
 // rather than sent through (HubSpot rejects unknown enum values with a 400).
