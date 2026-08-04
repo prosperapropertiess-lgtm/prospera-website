@@ -3,11 +3,15 @@
  * HubSpot fires this endpoint when a contact is created OR when
  * contact_type is set/changed on a contact.
  *
- * Register this URL in your HubSpot app:
+ * Register this URL in HubSpot (include the token query param):
  *   HubSpot → Settings → Integrations → Private Apps → [your app]
  *   → Webhooks → Create subscription
  *   Event type: contact.creation  +  contact.propertyChange (property: contact_type)
- *   Target URL: https://www.prosperaproperties.co/api/crm/contact-webhook
+ *   Target URL: https://www.prosperaproperties.co/api/crm/contact-webhook?token=<HUBSPOT_WEBHOOK_SECRET>
+ *
+ * The HUBSPOT_WEBHOOK_SECRET value is in Vercel env vars.
+ * Run: vercel env ls production | grep HUBSPOT_WEBHOOK_SECRET
+ * Then pull the value: vercel env pull .env.local --yes && grep HUBSPOT_WEBHOOK_SECRET .env.local
  *
  * This immediately enrolls the contact in the right sequence —
  * no waiting for the hourly hubspot-sync cron.
@@ -16,27 +20,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { SEQUENCES } from "@/lib/email-sequences";
-import crypto from "crypto";
 
 const HUBSPOT_TOKEN = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
-const WEBHOOK_SECRET = process.env.HUBSPOT_WEBHOOK_SECRET; // set this in Vercel
 
-// Verify the webhook signature from HubSpot
-function verifySignature(req: NextRequest, body: string): boolean {
-  if (!WEBHOOK_SECRET) {
-    console.warn("[contact-webhook] HUBSPOT_WEBHOOK_SECRET not set — skipping signature check");
-    return true; // allow through in dev; tighten in prod
+// Verify the token query param matches our secret
+function verifyToken(req: NextRequest): boolean {
+  const secret = process.env.HUBSPOT_WEBHOOK_SECRET;
+  if (!secret) {
+    console.warn("[contact-webhook] HUBSPOT_WEBHOOK_SECRET not set");
+    return false;
   }
-  const signature = req.headers.get("x-hubspot-signature-v3") ?? "";
-  const timestamp = req.headers.get("x-hubspot-request-timestamp") ?? "";
-  const method = "POST";
-  const url = `https://www.prosperaproperties.co/api/crm/contact-webhook`;
-
-  // HubSpot v3: HMAC-SHA256 of method + url + body + timestamp
-  const sourceString = method + url + body + timestamp;
-  const expected = crypto.createHmac("sha256", WEBHOOK_SECRET).update(sourceString).digest("base64");
-
-  return signature === expected;
+  const token = req.nextUrl.searchParams.get("token");
+  return token === secret;
 }
 
 interface HubSpotWebhookEvent {
@@ -74,7 +69,7 @@ async function fetchContactFromHubSpot(hubspotId: number): Promise<{
 export async function POST(req: NextRequest) {
   const body = await req.text();
 
-  if (!verifySignature(req, body)) {
+  if (!verifyToken(req)) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
