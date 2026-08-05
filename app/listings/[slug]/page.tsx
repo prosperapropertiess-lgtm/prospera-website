@@ -251,13 +251,13 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
   } else {
     faqs.push({
       q: "Are pets allowed?",
-      a: `This property is listed as pet-free. Note that under Ontario's Residential Tenancies Act, a no-pets clause in a lease is not always enforceable — speak with us directly if this applies to you.`,
+      a: `This property does not permit pets. If you have questions about your specific situation, contact us directly at (519) 697-1227.`,
     });
   }
 
   faqs.push({
     q: "How do I apply for this property?",
-    a: `Book a viewing through this page or call (519) 697-1227. After viewing, we'll send you an application link. You'll need: photo ID, 6 months of bank statements, a credit check link we provide, a previous landlord reference, and proof of employment or income. Applications are reviewed within 24–48 hours.`,
+    a: `Book a viewing through this page or call (519) 697-1227. After viewing, we'll send you an application link. The process is straightforward — we verify your identity, income, and references. Applications are reviewed within 24–48 hours.`,
   });
 
   const leaseTerm = p.lease_term as string | null;

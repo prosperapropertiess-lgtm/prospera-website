@@ -96,13 +96,13 @@ export default function ListingsPage() {
       <section className="pt-32 pb-14 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
           <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
-            Available Now
+            London · St. Thomas · Strathroy
           </p>
           <h1 className="text-5xl md:text-6xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
-            Find Your Next Home.
+            Our Properties Don&apos;t Sit.
           </h1>
           <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
-            Quality rentals across London, St. Thomas, and Strathroy — professionally managed.
+            We manage a small number of units intentionally. When one becomes available, it moves fast — see for yourself.
           </p>
         </FadeIn>
       </section>
@@ -206,12 +206,15 @@ export default function ListingsPage() {
               ))}
             </div>
           ) : error || available.length === 0 ? (
-            <div className="text-center py-24">
-              <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-                No listings available right now.
+            <div className="text-center py-20">
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+                Fully Rented
               </p>
-              <p className="text-sm mb-8" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
-                New properties are added regularly. Send us your requirements and we'll reach out when something matches.
+              <p className="text-4xl font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+                Every unit is currently occupied.
+              </p>
+              <p className="text-sm max-w-sm mx-auto mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                That&apos;s the point — our properties don&apos;t sit. Tell us what you&apos;re looking for and you&apos;ll hear from us first when something opens up.
               </p>
               <Link
                 href="/tenants#find-your-place"

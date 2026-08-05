@@ -29,12 +29,9 @@ const STEPS = [
 ];
 
 const REQUIREMENTS = [
-  "Government-issued photo ID",
-  "3 most recent pay stubs OR letter of employment",
-  "6 months of bank statements",
-  "Soft credit check (link sent via email)",
-  "Previous landlord reference (name + phone)",
-  "First and last month's rent on approval",
+  "Identity verification — government-issued photo ID",
+  "Income verification — pay stubs, employment letter, or bank statements",
+  "References — previous landlord contact",
 ];
 
 export default function ApplicationProcess() {
