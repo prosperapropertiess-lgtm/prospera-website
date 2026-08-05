@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
 
 interface Property {
   id: string;
+  slug?: string | null;
   title: string;
   address: string;
   city: string;
@@ -27,65 +28,80 @@ interface Property {
 }
 
 const CITIES = ["All Cities", "London", "St. Thomas", "Strathroy"];
-const BEDS = ["Any", "1", "2", "3+"];
+const BEDS   = ["Any", "1", "2", "3+"];
 
-const placeholderImages = [
-  "https://picsum.photos/seed/prop1/800/500",
-  "https://picsum.photos/seed/prop2/800/500",
-  "https://picsum.photos/seed/prop3/800/500",
-  "https://picsum.photos/seed/prop4/800/500",
-  "https://picsum.photos/seed/prop5/800/500",
-];
+function propertyHref(p: Property) {
+  return `/listings/${p.slug || p.id}`;
+}
 
-function getImage(p: Property, i: number) {
-  return p.images?.[0] || placeholderImages[i % placeholderImages.length];
+function getImage(p: Property) {
+  return p.images?.[0] ?? null;
+}
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return debounced;
 }
 
 export default function ListingsPage() {
   const [available, setAvailable] = useState<Property[]>([]);
-  const [rented, setRented] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [city, setCity] = useState("All Cities");
-  const [beds, setBeds] = useState("Any");
-  const [maxPrice, setMaxPrice] = useState(5000);
+  const [rented,    setRented]    = useState<Property[]>([]);
+  const [loading,   setLoading]   = useState(true);
+  const [error,     setError]     = useState(false);
+  const [city,      setCity]      = useState("All Cities");
+  const [beds,      setBeds]      = useState("Any");
+  const [maxPrice,  setMaxPrice]  = useState(5000);
   const [petFriendly, setPetFriendly] = useState(false);
+  const debouncedPrice = useDebounce(maxPrice, 400);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    async function load() {
-      setLoading(true);
-      setError(false);
-      try {
-        const params = new URLSearchParams();
-        if (city !== "All Cities") params.set("city", city);
-        if (petFriendly) params.set("petFriendly", "true");
-        if (beds !== "Any") params.set("beds", beds);
-        params.set("maxPrice", String(maxPrice));
-        const res = await fetch(`/api/listings?${params}`);
-        const data = await res.json();
+    abortRef.current?.abort();
+    const ctrl = new AbortController();
+    abortRef.current = ctrl;
+
+    setLoading(true);
+    setError(false);
+
+    const params = new URLSearchParams();
+    if (city !== "All Cities") params.set("city", city);
+    if (petFriendly) params.set("petFriendly", "true");
+    if (beds !== "Any") params.set("beds", beds);
+    params.set("maxPrice", String(debouncedPrice));
+
+    fetch(`/api/listings?${params}`, { signal: ctrl.signal })
+      .then(r => r.json())
+      .then(data => {
         setAvailable(data.available || []);
         setRented(data.rented || []);
-      } catch {
-        setError(true);
-        setAvailable([]);
-        setRented([]);
-      } finally {
         setLoading(false);
-      }
-    }
-    load();
-  }, [city, beds, maxPrice, petFriendly]);
+      })
+      .catch(err => {
+        if (err.name === "AbortError") return;
+        setError(true);
+        setLoading(false);
+      });
+
+    return () => ctrl.abort();
+  }, [city, beds, debouncedPrice, petFriendly]);
 
   return (
     <div style={{ backgroundColor: "#F7F5F2" }}>
+
       {/* Hero */}
       <section className="pt-32 pb-14 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>Available Now</p>
+          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>
+            Available Now
+          </p>
           <h1 className="text-5xl md:text-6xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Find Your Next Home.
           </h1>
-          <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
+          <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
             Quality rentals across London, St. Thomas, and Strathroy — professionally managed.
           </p>
         </FadeIn>
@@ -94,7 +110,8 @@ export default function ListingsPage() {
       {/* Filter Bar */}
       <div className="sticky top-20 z-30 border-b shadow-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
-          {/* City */}
+
+          {/* City pills */}
           <div className="flex gap-2 flex-wrap">
             {CITIES.map((c) => (
               <button
@@ -103,8 +120,8 @@ export default function ListingsPage() {
                 className="px-4 py-2 text-xs rounded-full border transition-colors"
                 style={{
                   backgroundColor: city === c ? "#1F2F3A" : "transparent",
-                  borderColor: city === c ? "#1F2F3A" : "#D8D2C8",
-                  color: city === c ? "#FAF8F5" : "#333333",
+                  borderColor:     city === c ? "#1F2F3A" : "#D8D2C8",
+                  color:           city === c ? "#FAF8F5" : "#333333",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -125,8 +142,8 @@ export default function ListingsPage() {
                 className="px-3 py-1.5 text-xs rounded border transition-colors"
                 style={{
                   backgroundColor: beds === b ? "#8B2030" : "transparent",
-                  borderColor: beds === b ? "#8B2030" : "#D8D2C8",
-                  color: beds === b ? "#FAF8F5" : "#333333",
+                  borderColor:     beds === b ? "#8B2030" : "#D8D2C8",
+                  color:           beds === b ? "#FAF8F5" : "#333333",
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
@@ -137,9 +154,11 @@ export default function ListingsPage() {
 
           <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
 
-          {/* Max Price */}
+          {/* Price */}
           <div className="flex items-center gap-3">
-            <span className="text-xs whitespace-nowrap" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Max: ${maxPrice.toLocaleString()}/mo</span>
+            <span className="text-xs whitespace-nowrap" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+              Max: ${maxPrice.toLocaleString()}/mo
+            </span>
             <input
               type="range"
               min={800}
@@ -153,7 +172,7 @@ export default function ListingsPage() {
 
           <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
 
-          {/* Pet Friendly */}
+          {/* Pet friendly */}
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
@@ -165,113 +184,147 @@ export default function ListingsPage() {
           </label>
 
           <div className="ml-auto text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            {loading ? "Loading..." : `${available.length} ${available.length === 1 ? "property" : "properties"}`}
+            {loading ? "Loading…" : `${available.length} ${available.length === 1 ? "property" : "properties"}`}
           </div>
         </div>
       </div>
 
-      {/* Available Listings Grid */}
+      {/* Listings grid */}
       <section className="py-16 px-6 min-h-[60vh]" style={{ backgroundColor: "#F7F5F2" }}>
         <div className="max-w-6xl mx-auto">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse" style={{ border: "1px solid #D8D2C8" }}>
-                  <div className="h-56" style={{ backgroundColor: "#E8E3DC" }} />
+                <div key={i} className="bg-white rounded-xl overflow-hidden animate-pulse" style={{ border: "1px solid #D8D2C8" }}>
+                  <div className="h-64" style={{ backgroundColor: "#E8E3DC" }} />
                   <div className="p-6 space-y-3">
                     <div className="h-4 rounded w-3/4" style={{ backgroundColor: "#E8E3DC" }} />
                     <div className="h-3 rounded w-1/2" style={{ backgroundColor: "#E8E3DC" }} />
-                    <div className="h-3 rounded w-1/3" style={{ backgroundColor: "#E8E3DC" }} />
+                    <div className="h-9 rounded mt-4" style={{ backgroundColor: "#E8E3DC" }} />
                   </div>
                 </div>
               ))}
             </div>
           ) : error || available.length === 0 ? (
             <div className="text-center py-24">
-              <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>No listings available right now.</p>
-              <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>We&apos;re working on new properties — check back soon or send us your requirements.</p>
-              <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                Contact Us
+              <p className="text-3xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
+                No listings available right now.
+              </p>
+              <p className="text-sm mb-8" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
+                New properties are added regularly. Send us your requirements and we'll reach out when something matches.
+              </p>
+              <Link
+                href="/tenants#find-your-place"
+                className="inline-block px-8 py-3 text-xs font-semibold uppercase tracking-widest rounded hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Get Notified
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-              {available.map((p, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {available.map((p) => (
                 <FadeIn key={p.id}>
-                  <Link href={`/listings/${p.id}`} className="block">
-                    <div className="bg-white rounded-2xl overflow-hidden group hover:shadow-lg transition-shadow duration-300 cursor-pointer" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                  <Link href={propertyHref(p)} className="block group">
+                    <article
+                      className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                      style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}
+                    >
                       {/* Image */}
-                      <div className="relative h-72 overflow-hidden">
-                        <Image
-                          src={getImage(p, i)}
-                          alt={p.title || `${p.bedrooms} bedroom rental in ${p.city}`}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-700"
-                          unoptimized
-                        />
-                        <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
+                      <div className="relative h-64 overflow-hidden bg-[#E8E3DC]">
+                        {getImage(p) ? (
+                          <Image
+                            src={getImage(p)!}
+                            alt={`${p.bedrooms}-bedroom ${p.property_type ?? "rental"} in ${p.city}, Ontario`}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <p className="text-xs uppercase tracking-widest" style={{ color: "#B0A898", fontFamily: "var(--font-dm-sans)" }}>
+                              Photos coming soon
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Gradient for price readability */}
+                        <div className="absolute inset-x-0 bottom-0 h-24" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)" }} />
 
                         {/* Price */}
                         <div className="absolute bottom-4 left-4">
-                          <p className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)", textShadow: "0 1px 3px rgba(0,0,0,0.3)" }}>
-                            ${p.price.toLocaleString()}<span className="text-sm font-normal opacity-80">/mo</span>
+                          <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                            ${p.price.toLocaleString()}
+                            <span className="text-sm font-normal opacity-75 ml-0.5">/mo</span>
                           </p>
                         </div>
 
-                        {/* Top-left badge */}
+                        {/* Top badges */}
                         <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-                          {p.available_date ? (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
-                              Available {new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
-                            </span>
-                          ) : (
-                            <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
-                              Available Now
-                            </span>
-                          )}
+                          <span
+                            className="text-xs px-3 py-1 rounded-full font-semibold"
+                            style={{ backgroundColor: "rgba(255,255,255,0.93)", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
+                          >
+                            {p.available_date
+                              ? `Available ${new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}`
+                              : "Available Now"}
+                          </span>
                         </div>
 
-                        {/* Top-right badges */}
                         <div className="absolute top-3 right-3 flex gap-1.5">
-                          {p.pet_friendly && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
-                              🐾 Pets OK
-                            </span>
-                          )}
                           {p.utilities_included && (
-                            <span className="text-xs px-2.5 py-1 rounded-full font-medium" style={{ backgroundColor: "rgba(255,255,255,0.92)", color: "#1F2F3A" }}>
+                            <span className="text-xs px-2.5 py-1 rounded-full font-semibold" style={{ backgroundColor: "rgba(255,255,255,0.93)", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                               Utilities Incl.
                             </span>
                           )}
                         </div>
                       </div>
 
-                      {/* Content */}
+                      {/* Card body */}
                       <div className="p-6">
-                        <p className="text-base font-semibold mb-0.5" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                          📍 {p.address}, {p.city}, ON
+                        <p className="text-base font-semibold mb-1 truncate" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                          {p.address}, {p.city}
                         </p>
-                        <p className="text-xs mb-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                          {p.property_type ? p.property_type.charAt(0).toUpperCase() + p.property_type.slice(1) : "Rental"} · Managed by Prospera Properties
+                        <p className="text-xs mb-4" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
+                          {[
+                            p.property_type ? p.property_type.charAt(0).toUpperCase() + p.property_type.slice(1) : null,
+                            p.city + ", ON",
+                          ].filter(Boolean).join(" · ")}
                         </p>
 
-                        <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                          <span>🛏 {p.bedrooms} Bed{p.bedrooms !== 1 ? "s" : ""}</span>
-                          <span>🚿 {p.bathrooms} Bath{p.bathrooms !== 1 ? "s" : ""}</span>
-                          {p.sqft && <span>📐 {p.sqft.toLocaleString()} sqft</span>}
-                          {p.parking && <span>🚗 Parking</span>}
-                          {p.pet_friendly && <span>🐾 Pet Friendly</span>}
-                          {p.utilities_included && <span>⚡ Utilities Incl.</span>}
+                        {/* Stats row */}
+                        <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mb-5" style={{ color: "#444444", fontFamily: "var(--font-dm-sans)" }}>
+                          <span>{p.bedrooms} {p.bedrooms === 1 ? "Bed" : "Beds"}</span>
+                          <span style={{ color: "#D8D2C8" }}>·</span>
+                          <span>{p.bathrooms} {p.bathrooms === 1 ? "Bath" : "Baths"}</span>
+                          {p.sqft && (
+                            <>
+                              <span style={{ color: "#D8D2C8" }}>·</span>
+                              <span>{p.sqft.toLocaleString()} sqft</span>
+                            </>
+                          )}
+                          {p.parking && (
+                            <>
+                              <span style={{ color: "#D8D2C8" }}>·</span>
+                              <span>Parking</span>
+                            </>
+                          )}
+                          {p.pet_friendly && (
+                            <>
+                              <span style={{ color: "#D8D2C8" }}>·</span>
+                              <span>Pets OK</span>
+                            </>
+                          )}
                         </div>
 
                         <div
-                          className="w-full py-3 text-center text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity group-hover:opacity-90"
+                          className="w-full py-3 text-center text-xs font-semibold uppercase tracking-widest rounded-lg transition-opacity group-hover:opacity-80"
                           style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
                         >
-                          View Details & Pre-Qualify
+                          View Details
                         </div>
                       </div>
-                    </div>
+                    </article>
                   </Link>
                 </FadeIn>
               ))}
@@ -280,7 +333,7 @@ export default function ListingsPage() {
         </div>
       </section>
 
-      {/* Recently Rented — social proof */}
+      {/* Recently Rented */}
       {!loading && rented.length > 0 && (
         <section className="py-16 px-6 border-t" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
           <div className="max-w-6xl mx-auto">
@@ -292,45 +345,37 @@ export default function ListingsPage() {
                 These homes found tenants quickly.
               </h2>
               <p className="text-sm text-center mb-10" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                High-demand properties in your area — new listings are added regularly.
+                High-demand properties in your area — new listings added regularly.
               </p>
             </FadeIn>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {rented.map((p, i) => (
-                <div key={p.id} className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid #D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-                  {/* Image */}
-                  <div className="relative h-52 overflow-hidden">
-                    <Image
-                      src={getImage(p, i)}
-                      alt={`${p.bedrooms} bedroom rental in ${p.city}`}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                    {/* Desaturate overlay */}
-                    <div className="absolute inset-0" style={{ backgroundColor: "rgba(31,47,58,0.55)" }} />
-
-                    {/* Rented badge */}
+              {rented.map((p) => (
+                <div key={p.id} className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid #D8D2C8" }}>
+                  <div className="relative h-48 overflow-hidden bg-[#E8E3DC]">
+                    {getImage(p) && (
+                      <Image
+                        src={getImage(p)!}
+                        alt={`${p.bedrooms}-bed rental in ${p.city}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    )}
+                    <div className="absolute inset-0" style={{ backgroundColor: "rgba(31,47,58,0.5)" }} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span
-                        className="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full"
-                        style={{ backgroundColor: "#FAF8F5", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
-                      >
+                      <span className="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full" style={{ backgroundColor: "#FAF8F5", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                         Rented
                       </span>
                     </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-5" style={{ backgroundColor: "#FFFFFF" }}>
+                  <div className="p-5 bg-white">
                     <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                       {p.address}, {p.city}
                     </p>
-                    <div className="flex items-center gap-3 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                      <span>{p.bedrooms} Bed · {p.bathrooms} Bath</span>
-                      {p.sqft && <span>· {p.sqft.toLocaleString()} sqft</span>}
-                    </div>
+                    <p className="text-xs" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
+                      {p.bedrooms} Bed · {p.bathrooms} Bath{p.sqft ? ` · ${p.sqft.toLocaleString()} sqft` : ""}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -340,19 +385,24 @@ export default function ListingsPage() {
       )}
 
       {/* Bottom CTA */}
-      <section className="py-16 px-6 text-center border-t" style={{ backgroundColor: "#1F2F3A", borderColor: "#D8D2C8" }}>
+      <section className="py-16 px-6 text-center" style={{ backgroundColor: "#1F2F3A" }}>
         <FadeIn>
           <p className="text-3xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
             Don&apos;t see what you&apos;re looking for?
           </p>
-          <p className="text-sm mb-6" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            New listings are added regularly. Send us your requirements and we&apos;ll let you know when something matches.
+          <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
+            New listings are added regularly. Tell us what you need and we&apos;ll reach out when something matches.
           </p>
-          <Link href="/contact" className="inline-block px-8 py-3 text-sm rounded hover:opacity-80 transition-opacity" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-            Contact Us
+          <Link
+            href="/tenants#find-your-place"
+            className="inline-block px-8 py-3 text-xs font-semibold uppercase tracking-widest rounded hover:opacity-80 transition-opacity"
+            style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Get Notified
           </Link>
         </FadeIn>
       </section>
+
     </div>
   );
 }

@@ -63,21 +63,10 @@ export default function PhotoGallery({ property }: Props) {
   }, [activeCategory]);
 
   useEffect(() => {
-    if (!lightboxOpen) return;
     const handler = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "Escape") setLightboxOpen(false);
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [lightboxOpen, handlePrev, handleNext]);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (lightboxOpen) return;
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
+      else if (e.key === "ArrowRight") handleNext();
+      else if (e.key === "Escape" && lightboxOpen) setLightboxOpen(false);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -133,7 +122,7 @@ export default function PhotoGallery({ property }: Props) {
             alt={`Property photo ${safeIndex + 1}`}
             fill
             className="object-cover"
-            unoptimized
+            sizes="(max-width: 1024px) 100vw, 960px"
             priority={safeIndex === 0}
           />
         </div>
