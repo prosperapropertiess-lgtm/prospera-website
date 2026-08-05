@@ -1,26 +1,19 @@
 "use client";
 
-import LifeSimHero from "./LifeSimHero";
-import QuickSummary from "./QuickSummary";
-import ShareBar from "./ShareBar";
 import PhotoGallery from "./PhotoGallery";
+import QuickSummary from "./QuickSummary";
 import PropertyHighlights from "./PropertyHighlights";
-import IdealTenant from "./IdealTenant";
 import DetailedFeatures from "./DetailedFeatures";
-import DailyRoutine from "./DailyRoutine";
-import MicroLocation from "./MicroLocation";
-import NeighbourhoodVibe from "./NeighbourhoodVibe";
 import CostsBreakdown from "./CostsBreakdown";
-import TransparencySection from "./TransparencySection";
-import PoliciesSection from "./PoliciesSection";
-import CommuteSimulator from "./CommuteSimulator";
-import ApplicationProcess from "./ApplicationProcess";
 import SocialProof from "./SocialProof";
+import PoliciesSection from "./PoliciesSection";
+import ApplicationProcess from "./ApplicationProcess";
 import ProspaBenefits from "./ProspaBenefits";
 import StickyCTA from "./StickyCTA";
 import BookViewingButton from "./BookViewingButton";
 import FaqSection from "./FaqSection";
 import RentedBanner from "./RentedBanner";
+import LifeSimHero from "./LifeSimHero";
 import type { FaqItem } from "@/app/listings/[slug]/page";
 
 export interface PropertyRecord extends Record<string, unknown> {
@@ -72,99 +65,87 @@ interface ListingPageProps {
 
 export default function ListingPage({ property, faqs }: ListingPageProps) {
   const isRented = property.available === false;
+  const hasPhotos = !!(property.images?.length || property.photo_labels?.length);
 
   return (
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
+
+      {/* 1. Hero */}
       <LifeSimHero property={property} />
 
-      {/* Rented banner — keeps SEO traffic, captures rental alert leads */}
+      {/* 2. Rented banner — captures rental alert leads on rented properties */}
       {isRented && <RentedBanner property={property} />}
 
-      {/* Photos immediately after hero — highest conversion priority */}
-      {(property.images?.length || property.photo_labels?.length) ? (
-        <PhotoGallery property={property} />
-      ) : null}
+      {/* 3. Photos */}
+      {hasPhotos && <PhotoGallery property={property} />}
 
+      {/* 4. Price, CTA, quick stats */}
       <QuickSummary property={property} />
 
-      <ShareBar property={property} />
-
+      {/* 5. Inquiry count + virtual tour if available */}
       <SocialProof property={property} />
 
+      {/* 6. AI highlights — only when data exists */}
       {property.ai_highlights?.length ? (
         <PropertyHighlights property={property} />
       ) : null}
 
-      <IdealTenant property={property} />
-
+      {/* 7. What's included checklist */}
       <DetailedFeatures property={property} />
 
-      {property.life_simulation && Object.keys(property.life_simulation).length > 0 ? (
-        <DailyRoutine property={property} />
-      ) : null}
-
-      <MicroLocation property={property} />
-
-      {/* Mid-page CTA — after location, before neighbourhood copy */}
-      <div className="py-10 px-5 sm:px-8 text-center" style={{ backgroundColor: "#1F2F3A" }}>
-        <p className="text-sm mb-1 font-medium" style={{ color: "rgba(250,248,245,0.65)", fontFamily: "var(--font-dm-sans)" }}>
-          Like what you see?
-        </p>
-        <p className="text-xl font-bold mb-5" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-          Spots like this don&apos;t sit. Book before someone else does.
-        </p>
-        <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
-      </div>
-
-      {property.neighbourhood_vibe ? (
-        <NeighbourhoodVibe property={property} />
-      ) : null}
-
+      {/* 8. Cost breakdown — rent, deposit, utilities */}
       <CostsBreakdown property={property} />
 
-      {property.transparency && Object.keys(property.transparency).length > 0 ? (
-        <TransparencySection property={property} />
-      ) : null}
-
+      {/* 9. Pet, smoking, guest policies */}
       <PoliciesSection property={property} />
 
-      <CommuteSimulator property={property} />
+      {/* 10. Application process — only for available properties */}
+      {!isRented && <ApplicationProcess />}
 
-      <ApplicationProcess />
-
+      {/* 11. FAQ — SEO value + renter confidence */}
       {faqs && faqs.length > 0 && <FaqSection faqs={faqs} />}
 
+      {/* 12. Why Prospera */}
       <ProspaBenefits />
 
-      {/* Bottom CTA — static, above sticky bar */}
+      {/* 13. Bottom CTA */}
       <div className="py-14 px-5 sm:px-8 text-center" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
-        <p
-          className="text-xs font-semibold uppercase tracking-widest mb-3"
-          style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}
-        >
-          Ready to Move Forward?
+        <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+          {isRented ? "Similar Properties Available" : "Ready to Move Forward?"}
         </p>
-        <h2
-          className="text-2xl sm:text-3xl font-bold mb-2"
-          style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
-        >
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
           {property.address}, {property.city}
         </h2>
         <p className="text-sm mb-7" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-          ${property.price.toLocaleString()}/mo · Applications reviewed within 24 hours.
+          {isRented
+            ? "This property has been rented. New listings are added regularly."
+            : `$${property.price.toLocaleString()}/mo · Applications reviewed within 24 hours.`}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
-          <a
-            href="tel:5196971227"
-            className="px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-70"
-            style={{ border: "1px solid #D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-          >
-            (519) 697-1227
-          </a>
+          {isRented ? (
+            <a
+              href="/listings"
+              className="px-8 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
+              style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+            >
+              See Available Properties
+            </a>
+          ) : (
+            <>
+              <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+              <a
+                href="tel:5196971227"
+                className="px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-70"
+                style={{ border: "1px solid #D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+              >
+                (519) 697-1227
+              </a>
+            </>
+          )}
         </div>
       </div>
 
+      {/* Sticky bar */}
       <StickyCTA property={property} />
     </div>
   );

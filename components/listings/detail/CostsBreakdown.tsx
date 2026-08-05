@@ -36,7 +36,7 @@ export default function CostsBreakdown({ property }: Props) {
   ];
 
   return (
-    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section className="py-12 md:py-16 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-4xl mx-auto">
         <div>
           <p

@@ -68,7 +68,7 @@ export default function DetailedFeatures({ property }: Props) {
   if (!included.length && !notIncluded.length) return null;
 
   return (
-    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section className="py-12 md:py-16 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto">
         <p
           className="text-xs font-semibold uppercase tracking-widest text-center mb-4"

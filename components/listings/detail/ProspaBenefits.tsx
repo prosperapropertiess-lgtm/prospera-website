@@ -36,7 +36,7 @@ const BENEFITS = [
 
 export default function ProspaBenefits() {
   return (
-    <section className="py-12 md:py-24 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
+    <section className="py-12 md:py-16 px-5 sm:px-8" style={{ backgroundColor: "#1F2F3A" }}>
       <div className="max-w-5xl mx-auto">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-center mb-4" style={{ color: "rgba(250,248,245,0.5)" }}>
