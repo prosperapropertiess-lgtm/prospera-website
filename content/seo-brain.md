@@ -5,7 +5,7 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-08-03
+2026-08-05
 
 ## Posts Written: 78 total (36 queued across 9 active clusters)
 
@@ -125,7 +125,7 @@ No competitor is writing these. These are ours to own entirely. City-specific by
 
 **Still missing:**
 - city-of-london-second-unit-registration ✅
-- st-thomas-ontario-rental-bylaws-landlord-guide ← St. Thomas has its own property standards. No guide exists.
+- st-thomas-ontario-rental-bylaws-landlord-guide ✅
 - strathroy-landlord-guide-ontario ← Strathroy-Caradoc rules + RTA. Extremely underserved market.
 - london-ontario-zoning-rental-property ← What zones allow rentals, multi-unit, ADUs. Frequently searched.
 - oxford-county-landlord-rental-guide ← Woodstock/Ingersoll/Tillsonburg landlord rules. Completes our geographic cluster.
@@ -206,7 +206,7 @@ High-urgency, low-volume, but zero competition — and builds trust when landlor
 2. city-of-london-rental-unit-licence-renewal ✅
 3. london-ontario-property-standards-bylaw ✅
 4. city-of-london-second-unit-registration ✅
-5. st-thomas-ontario-rental-bylaws-landlord-guide ← NEXT
+5. st-thomas-ontario-rental-bylaws-landlord-guide ✅
 
 **THEN — Nobody is writing about these:**
 5. ltb-duty-counsel-ontario
@@ -287,3 +287,4 @@ Priority order (thinnest first):
 - 2026-07-31: Published london-ontario-property-standards-bylaw — HYPER-LOCAL cluster (third post; zero competition). Covers the City of London Property Standards By-law (By-law No. P.S.-1) as a parallel enforcement regime that sits on top of the RTA: what the bylaw covers (structural, heating, plumbing, electrical, fire safety, pest control, exterior), how Property Standards Officers enforce it (inspection process, 24-hour entry notice), how Orders to Comply work (deadlines, appeal process, fines up to $25k), how the bylaw interacts with the RTA and LTB proceedings, and how outstanding orders block rental unit licence renewal. Includes 6-question FAQ and social caption. Internal links to fire-safety-ontario-landlords, pest-control-ontario-rentals, landlord-record-keeping-ontario, landlord-maintenance-responsibilities-ontario, city-of-london-rental-unit-licence-renewal, city-of-london-rental-unit-licence, landlord-entry-rights-ontario. External reference to london.ca Property Standards. Soft CTA to Prospera at end. ✅
 - 2026-08-03: Published city-of-london-second-unit-registration — HYPER-LOCAL cluster (fourth post; zero competition). Covers the City of London's second unit registration program as a distinct step separate from both the building permit and the Rental Housing Licence: who needs to register, what qualifies as a second unit (basement apartments, garden suites, above-garage suites), step-by-step registration process (zoning check, building code compliance, municipal address assignment, application, city inspection, registration confirmation), what the city inspects (ceiling height, egress windows, fire separation, smoke/CO alarms, separate entrance, plumbing), how long registration takes (4–8 weeks typical), and consequences of non-registration (no rental licence, insurance exclusion risk, LTB complications, property standards enforcement). Includes 6-question FAQ and social caption. Internal links to city-of-london-rental-unit-licence, city-of-london-rental-unit-licence-renewal, london-ontario-property-standards-bylaw, legal-basement-apartment-requirements-ontario. Completes the London second-unit content cluster alongside the building permit post. ✅
 - 2026-07-24: Catalogued enforcing-eviction-order-ontario-sheriff (published 2026-05-20, previously untracked in seo-brain). Published landlord-retaliation-ontario-rta-section-97 — SUPPORTING CLUSTER (PAIN keyword support; LTB/eviction cluster). Covers RTA Section 97 prohibition on retaliatory evictions, the 6-month rebuttable presumption (RTA s.97(5)), how tenants raise retaliation via T2 applications, Section 82 claims at hearings, and Section 83 discretion arguments. Explains three common retaliation scenarios (N5 after repair complaint; N12 after maintenance dispute; N8 after bylaw complaint) with practical defense guidance. Core message: document legitimate grounds before serving any notice, respond to repairs promptly, log entry visits. Internal links to rta-section-83-ontario, ltb-hearing-preparation-ontario-landlords, landlord-entry-rights-ontario, n5-notice-ontario, l2-application-ontario-landlord-guide, landlord-record-keeping-ontario, small-landlord-property-management-london-ontario. External links to tribunalsontario.ca and ontario.ca (RTA s.97). ✅
+- 2026-08-05: Published st-thomas-ontario-rental-bylaws-landlord-guide — HYPER-LOCAL cluster (fifth post; zero competition). Key differentiator: leads with the fact St. Thomas has no rental licensing program (unlike London), then pivots to property standards compliance that still applies. Covers the City of St. Thomas Property Standards By-law: structural condition, heating (21°C minimum, Sep 1–Jun 15 season), plumbing, electrical, ventilation, pest control, fire safety, exterior/yards. Covers how enforcement works (complaint-driven model, inspection process, Orders to Comply, fines). Covers second units and basement apartments (zoning, Building Code, Fire Code obligations without a registration program). Covers the parallel operation of the bylaw alongside the RTA (T6 and T2 applications can run simultaneously with property standards process). Common mistakes section and 6-question FAQ. Internal links: city-of-london-rental-unit-licence (contrast London licensing), pest-control-ontario-rentals, fire-safety-ontario-landlords, landlord-maintenance-responsibilities-ontario, landlord-record-keeping-ontario. Soft CTA to Prospera at end. ✅
