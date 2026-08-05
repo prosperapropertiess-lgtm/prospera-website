@@ -109,15 +109,15 @@ export default function ListingsPage() {
 
       {/* Filter Bar */}
       <div className="sticky top-20 z-30 border-b shadow-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8" }}>
-        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap gap-4 items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3">
 
-          {/* City pills */}
-          <div className="flex gap-2 flex-wrap">
+          {/* Row 1: City pills — horizontal scroll on mobile, no wrap */}
+          <div className="flex gap-2 overflow-x-auto pb-2 mb-2 scrollbar-hide" style={{ borderBottom: "1px solid #F0EDE8" }}>
             {CITIES.map((c) => (
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className="px-4 py-2 text-xs rounded-full border transition-colors"
+                className="flex-shrink-0 px-4 py-1.5 text-xs rounded-full border transition-colors"
                 style={{
                   backgroundColor: city === c ? "#1F2F3A" : "transparent",
                   borderColor:     city === c ? "#1F2F3A" : "#D8D2C8",
@@ -130,62 +130,65 @@ export default function ListingsPage() {
             ))}
           </div>
 
-          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
+          {/* Row 2: Beds + Pet + Count on one line; Price below on mobile */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
 
-          {/* Bedrooms */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Beds:</span>
-            {BEDS.map((b) => (
-              <button
-                key={b}
-                onClick={() => setBeds(b)}
-                className="px-3 py-1.5 text-xs rounded border transition-colors"
-                style={{
-                  backgroundColor: beds === b ? "#8B2030" : "transparent",
-                  borderColor:     beds === b ? "#8B2030" : "#D8D2C8",
-                  color:           beds === b ? "#FAF8F5" : "#333333",
-                  fontFamily: "var(--font-dm-sans)",
-                }}
-              >
-                {b}
-              </button>
-            ))}
-          </div>
+            {/* Bedrooms */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>Beds:</span>
+              {BEDS.map((b) => (
+                <button
+                  key={b}
+                  onClick={() => setBeds(b)}
+                  className="px-2.5 py-1 text-xs rounded border transition-colors"
+                  style={{
+                    backgroundColor: beds === b ? "#8B2030" : "transparent",
+                    borderColor:     beds === b ? "#8B2030" : "#D8D2C8",
+                    color:           beds === b ? "#FAF8F5" : "#333333",
+                    fontFamily: "var(--font-dm-sans)",
+                  }}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
 
-          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
+            <div className="w-px h-4 hidden sm:block" style={{ backgroundColor: "#D8D2C8" }} />
 
-          {/* Price */}
-          <div className="flex items-center gap-3">
-            <span className="text-xs whitespace-nowrap" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-              Max: ${maxPrice.toLocaleString()}/mo
+            {/* Price slider */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs whitespace-nowrap" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                Max: ${maxPrice.toLocaleString()}
+              </span>
+              <input
+                type="range"
+                min={800}
+                max={5000}
+                step={50}
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                className="w-24 accent-[#8B2030]"
+              />
+            </div>
+
+            <div className="w-px h-4 hidden sm:block" style={{ backgroundColor: "#D8D2C8" }} />
+
+            {/* Pet friendly */}
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={petFriendly}
+                onChange={(e) => setPetFriendly(e.target.checked)}
+                className="accent-[#8B2030]"
+              />
+              <span className="text-xs" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Pets OK</span>
+            </label>
+
+            <span className="ml-auto text-xs" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
+              {loading ? "…" : `${available.length} available`}
             </span>
-            <input
-              type="range"
-              min={800}
-              max={5000}
-              step={50}
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-28 accent-[#8B2030]"
-            />
           </div>
 
-          <div className="w-px h-6 hidden md:block" style={{ backgroundColor: "#D8D2C8" }} />
-
-          {/* Pet friendly */}
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={petFriendly}
-              onChange={(e) => setPetFriendly(e.target.checked)}
-              className="accent-[#8B2030]"
-            />
-            <span className="text-xs" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>Pet Friendly</span>
-          </label>
-
-          <div className="ml-auto text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            {loading ? "Loading…" : `${available.length} ${available.length === 1 ? "property" : "properties"}`}
-          </div>
         </div>
       </div>
 
