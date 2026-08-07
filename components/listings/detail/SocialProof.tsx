@@ -16,7 +16,7 @@ export default function SocialProof({ property }: Props) {
   }, [property.inquiry_count]);
 
   const hasVideo = property.virtual_tour_url;
-  const hasInquiries = inquiries > 0;
+  const hasInquiries = inquiries >= 5; // Only show when count is meaningful social proof
 
   if (!hasVideo && !hasInquiries) return null;
 

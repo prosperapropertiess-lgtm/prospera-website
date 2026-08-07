@@ -6,7 +6,6 @@ interface Props {
   property: PropertyRecord;
 }
 
-const ICONS = ["🏠", "📍", "🚌", "🐾", "✅"];
 
 // Accent colors for top borders — one per card slot
 const BORDER_COLORS = [
@@ -62,13 +61,13 @@ export default function PropertyHighlights({ property }: Props) {
                 boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
               }}
             >
-              {/* Icon + Label */}
+              {/* Number + Label */}
               <div className="flex items-center gap-3 mb-4">
                 <span
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-2xl"
-                  style={{ backgroundColor: "#F7F5F2" }}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                  style={{ backgroundColor: "#F7F5F2", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
                 >
-                  {ICONS[i] || "✅"}
+                  {String(i + 1).padStart(2, "0")}
                 </span>
                 <span
                   className="text-xs font-semibold uppercase tracking-widest"

@@ -19,9 +19,6 @@ function buildImageAlt(property: PropertyRecord): string {
 
 export default function LifeSimHero({ property }: Props) {
   const coverImage = property.images?.[0] ?? null;
-  const aiLines = property.ai_life_intro
-    ? property.ai_life_intro.split("\n").filter(Boolean)
-    : [];
   const imageAlt = buildImageAlt(property);
 
   return (
@@ -95,25 +92,6 @@ export default function LifeSimHero({ property }: Props) {
         </div>
       </section>
 
-      {/* ── AI life intro — narrative block below the hero ────────────────────── */}
-      {aiLines.length > 0 && (
-        <section
-          className="px-5 sm:px-8 py-10"
-          style={{ backgroundColor: "#1F2F3A" }}
-        >
-          <div className="max-w-3xl mx-auto space-y-3">
-            {aiLines.map((line, i) => (
-              <p
-                key={i}
-                className="text-xl sm:text-2xl font-light leading-relaxed"
-                style={{ color: "rgba(250,248,245,0.82)", fontFamily: "var(--font-cormorant)" }}
-              >
-                {line}
-              </p>
-            ))}
-          </div>
-        </section>
-      )}
     </>
   );
 }

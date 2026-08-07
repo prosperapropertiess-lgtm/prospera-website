@@ -21,7 +21,7 @@ interface Chip {
 function buildChips(property: PropertyRecord): Chip[] {
   const chips: Chip[] = [];
 
-  // Utilities — always show status either way
+  // Utilities — only show when included (don't lead with a negative)
   if (property.utilities_included) {
     const list = property.utilities_list;
     chips.push({
@@ -29,8 +29,6 @@ function buildChips(property: PropertyRecord): Chip[] {
       icon: "✓",
       style: "green",
     });
-  } else {
-    chips.push({ label: "Utilities Not Included", icon: "−", style: "muted" });
   }
 
   if (property.parking)        chips.push({ label: "Parking Included",  icon: "✓", style: "green"   });
@@ -99,10 +97,6 @@ export default function QuickSummary({ property }: Props) {
                 /mo
               </span>
             </div>
-            {/* Per week helper */}
-            <p className="text-xs mt-1" style={{ color: "#AAAAAA", fontFamily: "var(--font-dm-sans)" }}>
-              ~${Math.round(property.price / 4.33).toLocaleString()}/week
-            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 flex-wrap">
