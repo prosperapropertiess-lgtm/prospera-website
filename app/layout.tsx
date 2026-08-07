@@ -24,16 +24,27 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Prospera Properties | Property Management Ontario",
+    default: "Prospera Properties | Property Management & Rental Agency — London, Ontario",
     template: "%s | Prospera Properties",
   },
   description:
-    "Prospera Properties offers professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
-  keywords: ["property management London Ontario", "property management St Thomas Ontario", "property management Strathroy Ontario", "rental property management Ontario", "landlord services Ontario"],
+    "Prospera Properties is a property management company and rental agency serving London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance, and full landlord services.",
+  keywords: [
+    "property management London Ontario",
+    "rental agency London Ontario",
+    "property management company London Ontario",
+    "rental property management London Ontario",
+    "property manager London Ontario",
+    "property management St Thomas Ontario",
+    "property management Strathroy Ontario",
+    "landlord services Ontario",
+    "rental management company Ontario",
+    "property rental agency London Ontario",
+  ],
   openGraph: {
-    title: "Prospera Properties — Property Management in Ontario",
+    title: "Prospera Properties — Property Management & Rental Agency in London, Ontario",
     description:
-      "Professional property management across London, St. Thomas, and Strathroy. Tenant screening, rent collection, and full maintenance coordination.",
+      "Property management and rental agency serving London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, and full maintenance coordination.",
     type: "website",
     url: "https://www.prosperaproperties.co",
     siteName: "Prospera Properties",
@@ -75,7 +86,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
         <JsonLd data={{
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@type": ["LocalBusiness", "RealEstateAgent"],
           "@id": "https://www.prosperaproperties.co",
           "name": "Prospera Properties",
           "description": "Professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",

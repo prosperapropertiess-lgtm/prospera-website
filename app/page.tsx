@@ -102,15 +102,13 @@ function Hero() {
             </div>
           </HeroFadeIn>
 
-          {/* Eyebrow */}
-          <HeroFadeIn delay={0} duration={500}>
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-6"
-              style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
-            >
-              Property Management · London, Ontario & Within 45 Minutes
-            </p>
-          </HeroFadeIn>
+          {/* Eyebrow — semantic h2 so Google reads geo keywords as page context */}
+          <h2
+            className="text-xs font-semibold uppercase tracking-widest mb-6"
+            style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Property Management &amp; Rental Agency · London, Ontario &amp; Surrounding Area
+          </h2>
 
           {/* Heading */}
           <AnimatedHeading
@@ -125,7 +123,7 @@ function Hero() {
               className="text-base md:text-lg mb-10 max-w-xl mx-auto"
               style={{ color: "rgba(250,248,245,0.9)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.8 }}
             >
-              You bought the property for freedom. Instead you got midnight calls, chasing rent, and tenants who treat your investment like it&apos;s disposable. We fix that.
+              London&apos;s rental agency for landlords who want out of the day-to-day. Tenant screening, rent collection, maintenance — handled.
             </p>
           </HeroFadeIn>
 
