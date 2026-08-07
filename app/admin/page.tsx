@@ -30,8 +30,9 @@ const SECTIONS: SectionGroup[] = [
     id: "leasing",
     title: "Leasing & Tenant Management",
     items: [
+      { href: "/admin/leasing", icon: "⚡", label: "Leasing Dashboard", desc: "Daily execution pipeline, portfolio tracking & conversions", badge: "Daily Focus", badgeType: "burgundy" },
       { href: "/admin/properties", icon: "🏠", label: "Properties & Listings", desc: "Manage rental units, publish listings & Notion sync", badge: "Notion Live", badgeType: "navy" },
-      { href: "/admin/applications", icon: "📋", label: "Tenant Applications", desc: "Background verification, credit checks & AI scoring", badge: "Action Required", badgeType: "burgundy" },
+      { href: "/admin/applications", icon: "📋", label: "Tenant Applications", desc: "Background verification, credit checks & AI scoring" },
       { href: "/admin/agents", icon: "👤", label: "Leasing Agents", desc: "Manage agent accounts, schedules & permissions" },
       { href: "/admin/tenants", icon: "🔑", label: "Tenant Portals", desc: "Manage tenant access, rent records & keyhandover" },
     ],
@@ -40,7 +41,7 @@ const SECTIONS: SectionGroup[] = [
     id: "ops",
     title: "Landlord Operations",
     items: [
-      { href: "/admin/onboard", icon: "🚀", label: "Landlord Onboarding", desc: "Add new 1–5 unit landlords & track setup workflow", badge: "Setup Active", badgeType: "burgundy" },
+      { href: "/admin/onboard", icon: "🚀", label: "Landlord Onboarding", desc: "Add new 1–5 unit landlords & track setup workflow" },
       { href: "/admin/messages", icon: "💬", label: "Owner Portal Messages", desc: "Post monthly updates & announcements to landlords" },
       { href: "/admin/documents", icon: "📄", label: "Legal & Documents", desc: "Standardized leases, CRA receipts & inspection reports" },
       { href: "/admin/schedules", icon: "📅", label: "Schedules & Reminders", desc: "Routine property inspections & seasonal maintenance" },
@@ -57,7 +58,7 @@ const SECTIONS: SectionGroup[] = [
     id: "growth",
     title: "Growth, CRM & Analytics",
     items: [
-      { href: "/admin/leads", icon: "📩", label: "Leads & Subscribers", desc: "Inbound landlord inquiries & lead magnet subscribers", badge: "New Inquiries", badgeType: "burgundy" },
+      { href: "/admin/leads", icon: "📩", label: "Leads & Subscribers", desc: "Inbound landlord inquiries & lead magnet subscribers" },
       { href: "/admin/dashboard", icon: "📊", label: "Outreach & CRM", desc: "HubSpot pipeline, Claude AI email sequences & ad logs" },
       { href: "/admin/intelligence", icon: "🧠", label: "Rent Intelligence", desc: "London, Strathroy & St. Thomas market benchmarks" },
       { href: "/admin/seo", icon: "🔍", label: "SEO & Search Console", desc: "Google index status, keyword rankings & crawl metrics" },
@@ -76,12 +77,44 @@ export default function AdminHome() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<string>("all");
-  const [kpiMetrics, setKpiMetrics] = useState({
-    activeListings: 12,
-    pendingApps: 3,
-    newLeads: 5,
-    sequencesActive: 28,
-  });
+
+  // Real DB Counts (100% Live from Supabase APIs)
+  const [realPropertiesCount, setRealPropertiesCount] = useState<number | null>(null);
+  const [realLeadsCount, setRealLeadsCount] = useState<number | null>(null);
+  const [loadingRealData, setLoadingRealData] = useState(true);
+
+  // Fetch real data on mount
+  useEffect(() => {
+    async function loadRealData() {
+      try {
+        setLoadingRealData(true);
+        const [propsRes, leadsRes] = await Promise.all([
+          fetch("/api/admin/properties/list"),
+          fetch("/api/admin/leads"),
+        ]);
+
+        if (propsRes.ok) {
+          const propsData = await propsRes.json();
+          if (Array.isArray(propsData)) {
+            setRealPropertiesCount(propsData.length);
+          }
+        }
+
+        if (leadsRes.ok) {
+          const leadsData = await leadsRes.json();
+          if (typeof leadsData.total === "number") {
+            setRealLeadsCount(leadsData.total);
+          }
+        }
+      } catch (err) {
+        console.error("Error loading real admin stats:", err);
+      } finally {
+        setLoadingRealData(false);
+      }
+    }
+
+    loadRealData();
+  }, []);
 
   // Handle Sign out
   async function handleLogout() {
@@ -199,26 +232,26 @@ export default function AdminHome() {
               className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all bg-white hover:bg-[#1F2F3A] hover:text-white shadow-sm"
               style={{ border: "1px solid #D8D2C8", color: "#1F2F3A" }}
             >
-              Review Apps ({kpiMetrics.pendingApps})
+              Review Applications
             </Link>
           </div>
         </div>
 
-        {/* Live Operational KPI Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        {/* Real Live Operational Stats Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
           <div
             className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
             style={{ borderColor: "#D8D2C8" }}
           >
             <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              Active Properties
+              Properties in Database
             </p>
             <div className="flex items-baseline justify-between">
               <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {kpiMetrics.activeListings}
+                {loadingRealData ? "..." : (realPropertiesCount ?? 0)}
               </span>
               <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                100% Occupied
+                Live Supabase
               </span>
             </div>
           </div>
@@ -228,51 +261,31 @@ export default function AdminHome() {
             style={{ borderColor: "#D8D2C8" }}
           >
             <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              Pending Apps
+              Total Leads & Subscribers
             </p>
             <div className="flex items-baseline justify-between">
               <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {kpiMetrics.pendingApps}
-              </span>
-              <span
-                className="text-xs font-semibold text-white px-2 py-0.5 rounded"
-                style={{ backgroundColor: "#8B2030" }}
-              >
-                Needs Review
-              </span>
-            </div>
-          </div>
-
-          <div
-            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
-            style={{ borderColor: "#D8D2C8" }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              New Landlord Leads
-            </p>
-            <div className="flex items-baseline justify-between">
-              <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {kpiMetrics.newLeads}
-              </span>
-              <span className="text-xs font-medium text-amber-800 bg-amber-50 px-2 py-0.5 rounded">
-                This Week
-              </span>
-            </div>
-          </div>
-
-          <div
-            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
-            style={{ borderColor: "#D8D2C8" }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              CRM Email Nurture
-            </p>
-            <div className="flex items-baseline justify-between">
-              <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {kpiMetrics.sequencesActive}
+                {loadingRealData ? "..." : (realLeadsCount ?? 0)}
               </span>
               <span className="text-xs font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
-                Claude AI Active
+                Inbound DB
+              </span>
+            </div>
+          </div>
+
+          <div
+            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
+            style={{ borderColor: "#D8D2C8" }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
+              System Integration
+            </p>
+            <div className="flex items-baseline justify-between">
+              <span className="text-base font-semibold" style={{ color: "#1F2F3A" }}>
+                Notion & HubSpot
+              </span>
+              <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                Active Sync
               </span>
             </div>
           </div>
