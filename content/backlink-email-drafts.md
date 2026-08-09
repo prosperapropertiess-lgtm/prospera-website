@@ -2119,3 +2119,165 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## LandlordEzy — 2026-08-09
+To: (via site contact form)
+Subject: Guest post idea for LandlordEzy — when software isn't enough
+
+Hi LandlordEzy team,
+
+Your article on Ontario's new LTB Order Catalogue is exactly the kind of practical landlord resource I've been sharing with clients — it covers the "what changed" side well.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy, Ontario. We handle tenant screening, N4 filings, LTB hearings, and ongoing management for landlords who've decided self-management no longer makes sense.
+
+I'd like to contribute a guest post for your articles section: "When LandlordEzy isn't enough: how Ontario landlords know it's time to hire a professional manager." It would be a practical, non-promotional read for your audience — and a natural companion to your existing compliance content.
+
+Would that be a fit for your blog?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Landlord First LLP — 2026-08-09
+To: (via site contact form)
+Subject: London landlord professionals — mutual referral idea
+
+Hi Landlord First team,
+
+I came across your London landlord paralegal page — it's one of the clearest explanations of LTB representation services I've seen aimed specifically at London-area landlords.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company operating in London, St. Thomas, and Strathroy. We handle screening, rent collection, and day-to-day management — the work that ideally prevents a London landlord from needing a paralegal in the first place.
+
+I think there's a clean referral relationship here: we send clients heading to the LTB your way, you mention Prospera to clients who want to avoid future filings. Would you be open to a quick call to explore whether a mutual referral makes sense?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Mortgages by Ahmet — 2026-08-09
+To: (via site contact form)
+Subject: London investment property clients — referral partnership idea
+
+Hi Ahmet,
+
+Your 2026 investment property mortgage guide is one of the most detailed I've come across — the DSCR breakdown for London specifically caught my attention, since London is one of the three markets we manage in.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. Your investor clients who finance London-area rentals through DSCR programs need a property manager immediately after closing — we're often that first call.
+
+A simple referral mention in your guide — or a mutual arrangement where you send post-close London investors our way and we send landlords who want to refinance to you — would serve both client bases well.
+
+Would you be open to a brief conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## La Framboise Mortgage — 2026-08-09
+To: (via site contact form)
+Subject: Property management resource for your Ontario landlord clients
+
+Hi Denise,
+
+Your blog post on Ontario LTB orders going public — and what it actually means for landlords — is the kind of practical breakdown Ontario rental property owners need right now.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. Your Ontario investor clients who close on rentals face the same LTB landscape your post covers — professional management reduces exactly that exposure on their behalf.
+
+I'd welcome a brief mention as a SW Ontario property management resource for your Ontario investor clients, or a short contributed paragraph in a future landlord-focused post. I'm also happy to reciprocate by recommending your brokerage to landlord-clients who ask about refinancing.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Aptekar Paralegal — 2026-08-09
+To: evgeny@aptekarparalegal.com
+Subject: Collaboration idea — London Ontario property management + LTB paralegal
+
+Hi Evgeny,
+
+Your LTB blog is one of the sharper practitioner resources for Ontario landlords — the Bill 60 procedural breakdowns in particular are exactly what London-area landlords need to understand before they file.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. We handle tenant compliance and LTB filings daily — when a situation escalates beyond what we can resolve through management, we refer clients to legal representation.
+
+I think there's a natural referral here: I send London-area landlords who need LTB representation your way; you mention Prospera to Ontario clients in our markets who want professional management to reduce future exposure. Worth a quick call?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Françoise Pollard & Keith Goldson — 2026-08-09
+To: (via site contact form)
+Subject: Guest post for your Ontario investing blog — SW Ontario property management
+
+Hi Françoise and Keith,
+
+Your 2026 Ontario real estate investing piece lays out the numbers case really well — the section on cash-flow modelling before an offer was particularly useful.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy, Ontario. Many of the investors your blog reaches eventually buy in London and SW Ontario — and need a local manager they can trust once they've closed.
+
+I'd like to contribute a guest post for your blog: "What Ontario investors should know about property management in London and SW Ontario before they buy." Practical operational content — management fees, what to look for in a PM, how LTB risk plays out locally — that would add useful depth for your readers at the research stage.
+
+Would you be open to it?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## LendSimpl — 2026-08-09
+To: (via site contact form)
+Subject: Ontario investment property clients — mutual referral idea
+
+Hi LendSimpl team,
+
+Your Ontario investment property mortgage guide covers the financing side comprehensively — the vacancy buffer and DSCR modelling sections are exactly what London-area investors need to see before they commit.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. Your Ontario investor clients who close on London-area rentals need a property manager immediately — we're often the first call once financing is in place.
+
+A mutual referral mention — your clients heading to SW Ontario knowing to call Prospera, and our landlord-clients who want to refinance or expand knowing to call LendSimpl — would be a clean, zero-cost fit for both businesses.
+
+Would you be open to a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Bridge Brokerage — 2026-08-09
+To: (via site contact form)
+Subject: Guest post idea — property management in London Ontario for your investor readers
+
+Hi Bridge team,
+
+Your "9 Smart Ontario Investment Cities for 2026" piece does a great job laying out the case for London — the cap rate and vacancy data are exactly what investor-buyers need at the research stage.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company in London, St. Thomas, and Strathroy. Once your investor readers close on a London property, the next question is always who manages it.
+
+I'd like to contribute a piece for your blog: "What to know about property management in London Ontario before you buy." Practical, numbers-grounded content — management costs, LTB risk, what professional management delivers — that fills the operational gap after your market analysis content.
+
+Would this be a fit for your blog?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---

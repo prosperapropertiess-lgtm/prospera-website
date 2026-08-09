@@ -1638,3 +1638,115 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: National franchise — direct corporate blog pitch is possible but a warm local approach (via RE/MAX Centre City London agents already in Prospera's network, or Paul Gardiner who is RE/MAX Centre City) is more effective. The local agent angle also creates a real referral relationship, not just a content link. Paul Gardiner (already a prospect) is at RE/MAX Centre City — coordinate outreach.
 
 ---
+
+## LandlordEzy — Ontario Landlord Platform Blog
+- url: https://landlordezy.ca
+- type: blog
+- why: Ontario landlord software platform with an active articles section covering LTB procedures, tenant screening, and the 2026 LTB Order Catalogue — a non-competing tech company whose self-managing Ontario landlord audience is exactly Prospera's conversion target.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site form; no direct public email found)
+- site_focus: LandlordEzy is an Ontario property management software platform (free to start) built for Ontario landlords and PM companies. Founded by Paul J. Rouillard, it handles rent collection, tenant screening (Equifax-powered AI checks from $29.99), LTB notices (N4, N1), lease management, and includes a members-only Landlord Reference Network for tenant intel. Their articles section publishes Ontario-specific landlord guides on the LTB Order Catalogue, tenant screening best practices, and rental law changes — well-indexed, actively maintained content.
+- hook: LandlordEzy's self-managing Ontario landlord users are exactly the audience that eventually decides software alone isn't enough and hires a professional manager. A guest post or contributed article on "When software isn't enough: how London SW Ontario landlords know it's time to hire a professional PM" positions Prospera as the natural full-service upgrade for their users who hit the complexity threshold.
+- specific_content: Their "Ontario LTB Order Catalogue 2026 — What Every Landlord Needs to Know" article and "Why Tenant Screening is Required in Ontario — 2026 Guide" — compliance-focused content for self-managing landlords who are exactly the audience Prospera aims to convert.
+- researcher_notes: Not a PM competitor — software and platform only. Founded by Paul J. Rouillard. Active articles section with regular Ontario-specific landlord content including LTB and screening topics. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## Landlord First LLP — London Ontario Landlord Paralegal
+- url: https://landlordfirst.ca
+- type: other
+- why: London-based landlord paralegal firm offering LTB representation and eviction services for London-area landlords — a natural professional referral partner whose London clients are Prospera's exact market; professional management prevents the LTB situations Landlord First resolves.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; dedicated London landlord paralegal firm)
+- site_focus: Landlord First LLP is an Ontario paralegal firm specializing exclusively in landlord-side LTB representation — evictions, N4/L1 filings, hearings, and post-order enforcement. They have dedicated service pages for London, Guelph, Hamilton, Windsor, Kitchener, and other Ontario cities. Their content educates Ontario landlords on their legal rights and procedural options before, during, and after LTB hearings. The London page at landlordfirst.ca/landlord-paralegal-london/ specifically targets London-area landlords navigating eviction proceedings.
+- hook: Landlord First handles the legal side of LTB filings for London landlords; Prospera handles the day-to-day management that prevents those filings in the first place. A mutual resource mention — Landlord First as Prospera's recommended paralegal partner for London-area LTB matters; Prospera as Landlord First's recommended management option for clients who want to avoid future hearings — creates a natural referral loop between two London-area landlord professionals.
+- specific_content: Their London landlord paralegal page at landlordfirst.ca/landlord-paralegal-london/ — the natural insertion point for Prospera as the recommended management partner for London landlords who want to prevent needing legal help in the first place.
+- researcher_notes: Not a PM company — exclusively paralegal/legal services. London-area presence makes this one of the most geographically targeted prospects on this list. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## Mortgages by Ahmet — Ontario Investment Property Mortgage
+- url: https://mortgagesbyahmet.ca
+- type: mortgage
+- why: Ontario investment property mortgage broker whose 2026 guide explicitly names London as a DSCR-viable rental market — investors he finances in London and SW Ontario are Prospera's direct management prospects the moment their closing is complete.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; Ontario-based investment property mortgage broker)
+- site_focus: Mortgages by Ahmet is an Ontario investment property mortgage brokerage publishing a comprehensive 2026 investor financing guide covering DSCR lending, 20%+ down payment rules, rental income qualification, portfolio financing past 4 properties, and BRRRR strategy. The guide specifically notes that DSCR lending performs well in London, Windsor, Hamilton, and Oshawa — markets where rent-to-price ratios support positive debt service coverage. Content is investor-focused and analytically rigorous, modelling property-level numbers for Ontario investors.
+- hook: Ahmet's investor clients who finance London-area rental properties through DSCR programs need a property manager immediately after closing — the property must be tenanted and generating rental income to satisfy debt service. A resource mention or mutual referral (Ahmet's London clients call Prospera post-close; Prospera's landlords who want to refinance or acquire more call Ahmet) creates a natural referral loop built around a shared investment property client base.
+- specific_content: His "Investment Property Mortgage Ontario 2026 — The Investor's Financing Guide" — which specifically names London as a DSCR-viable rental market, directly overlapping with Prospera's service geography.
+- researcher_notes: Ontario mortgage broker with investor-focused content. Not a PM company. Explicitly names London, Ontario as a DSCR-friendly rental market. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## La Framboise Mortgage — Ontario Investor Mortgage Blog
+- url: https://www.laframboisemortgage.ca
+- type: mortgage
+- why: Ontario mortgage brokerage with an active blog covering the 2026 LTB Order Catalogue changes alongside investment financing — a sign of editorial interest in landlord-facing content that Prospera can complement with a property management perspective.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; Whitby-based Ontario mortgage brokerage, BRX network)
+- site_focus: LaframboiseMortgage.ca is a Whitby-based Ontario mortgage brokerage (BRX Mortgage Brokerage network) founded by Denise Laframboise, working with 57 lenders across Canada. Services include purchase, renewal, refinance, equity take-out, and investment property financing across Ontario. Their blog covers both landlord-tenant law updates (including the 2026 LTB Order Catalogue going public) and investment property financing — indicating an investor and landlord-adjacent client base. Whitby Chamber of Commerce award winner.
+- hook: La Framboise's Ontario investor clients who close on rental properties province-wide eventually need a property manager — a resource mention or blog post naming Prospera as the recommended London/SW Ontario management option creates a referral pathway from their Ontario investor base to Prospera's services.
+- specific_content: Their blog post "Ontario LTB Orders Are Now Public. Here's What It Actually Means for Landlords" — an editorial signal that their audience includes active Ontario landlords, which is exactly the audience a Prospera resource mention would serve.
+- researcher_notes: Whitby-based, not a London PM company — no competitive conflict. BRX Mortgage Brokerage network. Founded by Denise Laframboise. Blog covers Ontario landlord-tenant law alongside mortgage content, making it a natural home for a Prospera resource mention. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## Aptekar Paralegal — Ontario LTB Landlord Blog
+- url: https://www.aptekarparalegal.com
+- type: other
+- why: Ontario LTB paralegal (Scarborough) ranked top-5 in Ontario for small-landlord LTB case volume; their active blog covering landlord-tenant law reaches exactly the detail-oriented Ontario landlord audience that Prospera serves — a resource mention is a natural fit between complementary professionals.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: evgeny@aptekarparalegal.com
+- site_focus: Aptekar Paralegal Professional Corporation is a Scarborough-based Ontario paralegal firm (incorporated 2022) founded by Evgeny Aptekar, focusing exclusively on LTB representation for both landlords and tenants. Recognized by Openroom as one of Ontario's top 5 small-landlord paralegals by case volume. Their blog at aptekarparalegal.com/blog covers Ontario landlord-tenant law, LTB case updates, Bill 60 changes, and procedural guidance — active, topically authoritative content for the Ontario landlord community.
+- hook: Aptekar represents Ontario landlords at the LTB — exactly the compliance situation that professional property management with Prospera reduces or prevents. A resource mention in their blog ("how professional property management in London and SW Ontario reduces LTB exposure") or a mutual referral (Prospera refers London LTB matters to Aptekar; Aptekar mentions Prospera to Ontario landlords who want to avoid future filings) creates a practical professional arrangement.
+- specific_content: Their Ontario LTB blog at aptekarparalegal.com/blog — active articles on landlord-tenant cases, Bill 60 procedural changes, and LTB hearing updates covering the same compliance territory Prospera navigates for clients daily.
+- researcher_notes: Not a PM company — exclusively LTB paralegal. Scarborough-based with province-wide Ontario practice. Evgeny Aptekar is named on site. Contact: evgeny@aptekarparalegal.com, phone 647-339-0996. Top-5 small-landlord paralegal in Ontario by Openroom case volume. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## Françoise Pollard & Keith Goldson — Ontario Income Property Blog
+- url: https://francoisepollard.com
+- type: blog
+- why: GTA and Niagara real estate team with an active Ontario income property investing blog — their investor content attracts buyers considering secondary Ontario markets like London, who are exactly the landlords Prospera would manage for once they acquire.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; GTA/Niagara Ontario real estate team)
+- site_focus: Françoise Pollard and Keith Goldson are a GTA and St. Catharines/Niagara real estate team who publish an active blog on Ontario income property investing. Content covers rental income evaluation, cash flow modelling, and investment property strategy across Ontario, aimed at investors building portfolios. Blog includes guides like "Real Estate Investing in Ontario: What the Numbers Actually Look Like in 2026," "Rental Income Properties in Ontario: What You Need to Know," and "Income Properties in Ontario: Building Steady Streams of Revenue."
+- hook: Their Ontario investor audience evaluates properties across the province — investors who identify London and SW Ontario as strong cap-rate markets need a trusted local property manager. A guest post — "What Ontario investors should know about property management in London and SW Ontario" — adds local operational depth to their province-wide investment coverage and serves their reader-investors directly.
+- specific_content: Their "Real Estate Investing in Ontario: What the Numbers Actually Look Like in 2026" post — content targeting the Ontario investor who might acquire a London rental and need Prospera for management, written at exactly the research stage when property management decisions happen.
+- researcher_notes: GTA/Niagara realtor team with investor-focused blog. Not a PM company — real estate sales and investor education only. No competitive conflict with Prospera's London/St. Thomas/Strathroy management territory. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## LendSimpl — Ontario Investment Property Mortgage Blog
+- url: https://lendsimpl.ca
+- type: mortgage
+- why: FSRA-licensed Ontario mortgage broker (50+ lenders) with an active blog on Ontario investment property financing — their investor mortgage clients who finance London-area rentals are Prospera's direct management prospects once they close.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; FSRA-licensed Ontario mortgage broker #13763)
+- site_focus: LendSimpl is an FSRA-licensed Ontario mortgage brokerage (#13763) based in Toronto, working with 50+ lenders for purchase, renewal, refinance, HELOC, and private mortgages across Ontario. Their blog covers investment property mortgage strategies — including a comprehensive guide on mortgages for real estate investing in Ontario covering qualification criteria, vacancy buffer modelling, portfolio scaling, and DSCR considerations. Content is investor-focused and analytical, targeting Ontario landlords building rental portfolios.
+- hook: LendSimpl's Ontario investment property mortgage clients who finance London-area rentals need a property manager as soon as financing closes. A resource mention or mutual referral (LendSimpl recommends Prospera for London/SW Ontario management; Prospera recommends LendSimpl to landlord-clients refinancing or expanding) creates a practical referral loop across a shared investment property client base.
+- specific_content: Their "Mortgages for Investing in Real Estate in Ontario: Your Comprehensive Guide" — an investor-facing mortgage guide reaching Ontario buyers at the exact moment before they need property management.
+- researcher_notes: Toronto-based FSRA-licensed mortgage brokerage (#13763). Not a PM company. Blog covers Ontario-wide investment property financing. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
+
+## Bridge Brokerage — Ontario Real Estate Investment Blog
+- url: https://bridge.broker
+- type: blog
+- why: Ontario real estate investment brokerage with an active insights blog covering rental strategy, Ontario market conditions, and investment city comparisons — their investor audience evaluating Ontario secondary markets for rental investment is a natural fit for a Prospera resource mention or contributed piece.
+- researched: true
+- drafted: true
+- added: 2026-08-09
+- contact_email: (contact via site; Ontario real estate investment brokerage)
+- site_focus: Bridge Brokerage (bridge.broker) is an Ontario real estate brokerage and investment advisory with over a decade in the Canadian housing market. Their blog at bridge.broker/real-estate-insights/ covers Ontario real estate investment strategies, market outlooks, long-term vs. short-term rental decisions, and Ontario investment city comparisons — including London as one of 9 smart picks for 2026. Content targets buyers and investors making property decisions across Ontario, with a focus on secondary markets alongside the GTA.
+- hook: Bridge Brokerage's blog explicitly highlights London Ontario as a top 2026 investment pick for cap rate and rental demand reasons — exactly the investor who needs professional management once they close. A contributed article on "What investors need to know about property management in London and SW Ontario" adds operational depth to their market-selection content and serves Bridge's reader-investors who have already identified London as a target.
+- specific_content: Their "Best Ontario Cities Real Estate Investment: 9 Smart Picks for 2026" — which names London explicitly, pointing directly to the geographic audience Prospera serves.
+- researcher_notes: Ontario real estate brokerage focused on investment properties. Not a PM company in London/St. Thomas/Strathroy — focus is acquisition and investment advisory, no property management overlap in Prospera's markets. Site access was blocked at network level; research drawn from search index results and WebSearch.
+---
