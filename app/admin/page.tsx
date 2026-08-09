@@ -55,6 +55,13 @@ const SECTIONS: SectionGroup[] = [
     ],
   },
   {
+    id: "executive",
+    title: "Executive",
+    items: [
+      { href: "/admin/ceo", icon: "📈", label: "CEO Dashboard", desc: "Unit economics, forecasts, scenario planning & monthly financials", badge: "New", badgeType: "burgundy" },
+    ],
+  },
+  {
     id: "growth",
     title: "Growth, CRM & Analytics",
     items: [
