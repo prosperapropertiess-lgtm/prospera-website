@@ -1,7 +1,17 @@
 ---
-Last updated: 2026-08-02
+Last updated: 2026-08-09
 
 ## New Topic Opportunities
+
+- carbon-monoxide-alarm-requirements-ontario-landlord | Est. difficulty: LOW | Vol: ~200/mo | January 1 2026 rule requires CO detectors in all Ontario rental units with a fuel-burning appliance or attached garage — many landlords unaware of the new requirement. Small home safety and insurance blogs rank; Ontario.ca addresses homeowners broadly but no standalone landlord compliance guide exists. Natural internal links to fire-safety-ontario-landlords.md.
+
+- n12-compensation-waiver-ontario-2026 | Est. difficulty: LOW | Vol: ~150/mo | Bill 60 change effective September 21 2026: if a landlord gives 120+ days notice on an N12, the tenant waives the right to one-month compensation. Landlords are actively searching how to structure N12 timelines to avoid the compensation requirement. Small PM and paralegal blogs just beginning to cover this; no large authority site has a dedicated guide. Companion to n12-notice-ontario.md and n12-bad-faith-compensation-ontario (planned).
+
+- fixed-term-lease-end-ontario-landlord-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | Bill 60 change effective September 21 2026: fixed-term leases no longer auto-convert to month-to-month when the term ends — landlords can choose not to renew. Significant change from prior RTA default; many landlords still believe conversion is automatic. Small PM law blogs cover it briefly; no comprehensive landlord guide exists. Natural internal link to ontario-standard-lease-2026.md.
+
+- ontario-ltb-fines-penalties-landlords | Est. difficulty: LOW | Vol: ~100/mo | LTB fine caps increased under Bill 60 to $100K (individuals) and $500K (corporations) for RTA violations. Specific queries like "LTB fine Ontario landlord 2026" return only paralegal sidebar content and news articles. A standalone guide covering what triggers fines, the fine schedule, and how to avoid violations would rank cleanly. Internal links to ltb-hearing-preparation-ontario-landlords.md and t2-application-ontario-landlord (planned).
+
+- ontario-property-management-agreement | Est. difficulty: LOW | Vol: ~120/mo | What an Ontario property management contract should include — fee structures, termination clauses, maintenance authority limits, reporting requirements, and red flags. Landlords searching this are evaluating PM companies; no government or large authority site dominates. A guide from a PM company positions Prospera at the exact moment of hire decision. Strong internal link to property-management-london-ontario.md.
 
 - air-conditioning-ontario-rentals-2026 | Est. difficulty: LOW | Vol: ~300/mo | Bill 97 took effect July 1 2026: tenants can now install window/portable A/C with written notice, landlords can charge actual electricity cost. Fresh topic, law firms and PM blogs just starting to cover it, zero competition from large authority sites.
 
@@ -43,6 +53,11 @@ Last updated: 2026-08-02
 
 ## SKIPPED (too competitive or wrong intent)
 
+- "carbon monoxide detector Ontario law" — General homeowner query; City of Toronto and Ontario.ca fire marshal pages dominate. Covered by planned carbon-monoxide-alarm-requirements-ontario-landlord post with landlord-specific angle.
+- "Bill 60 Ontario landlord changes" — HIGH difficulty; CBC, Toronto Star, and government/Tribunals Ontario dominate news-intent queries. Existing bill-60-ontario-landlords.md covers this; expanding it is in Topics to Expand below.
+- "property management fees Ontario" — MEDIUM-HIGH difficulty; comparison aggregators and national PM franchise sites dominate. Fee transparency without a local comparison angle is not winnable. Addressed in ontario-property-management-agreement post above.
+- "Ontario lease termination fixed-term" — MEDIUM difficulty; Tribunals Ontario guideline ranks #1-2. The landlord-specific angle (not renewing after Sept 21 2026) is covered by fixed-term-lease-end-ontario-landlord-2026 above.
+
 - "Ontario landlord rights 2026" — Too broad; Ontario.ca and government pages dominate. Already covered generically by ontario-landlord-tenant-act-2026.md.
 - "LTB eviction process Ontario" — HIGH difficulty; Tribunals Ontario, CBC, and legal clinics dominate. Covered by our evicting-tenant-ontario.md and how-long-does-eviction-take-ontario.md.
 - "Ontario standard lease requirements" — Covered by ontario-standard-lease-2026.md; Ontario.ca ranks #1 and is unbeatable.
@@ -70,4 +85,7 @@ Last updated: 2026-08-02
 - property-management-london-ontario.md — Add 2026 local rental market data section; include a paragraph on Volkswagen EV plant spillover demand in St. Thomas/London corridor; link to new london-ontario-rental-market-2026 post once written.
 - n12-notice-ontario.md — Add dedicated bad faith consequences section (LTB fine, tenant compensation, 12-month re-rental lookback) to address the n12-bad-faith-compensation-ontario keyword gap without a full separate post; assess traffic after 60 days to decide on standalone post.
 - ltb-hearing-preparation-ontario-landlords.md — Add a section on T2 tenant applications and how landlords should prepare documentation to defend against one; cross-link to new t2-application-ontario-landlord post once written.
+- n4-notice-ontario.md — Add September 21 2026 implementation note: the 7-day N4 notice period (Bill 60) is now in force; update any references to the old 14-day timeline and add a dated FAQ entry.
+- n12-notice-ontario.md — Add 120-day compensation waiver section effective September 21 2026; explain when the one-month compensation is waived and how landlords should time notice delivery; cross-link to planned n12-compensation-waiver-ontario-2026 post.
+- bill-60-ontario-landlords.md — Add September 21 2026 Phase 2 implementation section covering: 7-day N4 in force, N12 compensation waiver at 120 days, fixed-term lease non-renewal option, and increased LTB fines ($100K/$500K). Many landlords are now searching "what changed September 21" and the post is the natural destination.
 ---
