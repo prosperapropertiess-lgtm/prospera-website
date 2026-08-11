@@ -15,18 +15,27 @@ const GREEN = "#2D7A4F";
 const AMBER = "#B45309";
 
 // ── Types ──────────────────────────────────────────────────────────────────
-interface LeasingProperty {
+interface CampaignMetrics {
+  days_vacant: number;
+  vacancy_loss: number;
+  leads_count: number;
+  showings_count: number;
+  applications_count: number;
+  uncontacted_leads: number;
+  tasks_due_today: number;
+}
+
+interface Campaign {
   id: string;
+  stage: string;
   status: string;
   vacant_since: string | null;
   asking_rent: number | null;
-  target_rent: number | null;
-  notes: string | null;
-  property: { id: string; address: string; city: string; bedrooms: number; bathrooms: number; price: number; images: string[] | null; slug: string | null };
-  checklist: { id: string; completed: boolean }[];
-  leads: { id: string; stage: string }[];
-  showings: { id: string; status: string }[];
-  channels: { id: string; active: boolean }[];
+  campaign_name: string | null;
+  property: { id: string; address: string; city: string; bedrooms: number; bathrooms: number; images: string[] | null };
+  metrics: CampaignMetrics;
+  diagnostics: string[];
+  risk: "high" | "medium" | "low";
 }
 
 interface Task {
@@ -47,38 +56,19 @@ interface Property {
   bathrooms: number;
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────
-function daysVacant(since: string | null): number {
-  if (!since) return 0;
-  return Math.floor((Date.now() - new Date(since).getTime()) / 86400000);
-}
-
-function readinessScore(lp: LeasingProperty): number {
-  let score = 0;
-  const total = lp.checklist.length;
-  const done = lp.checklist.filter((c) => c.completed).length;
-  if (total > 0) score += Math.round((done / total) * 30); // 30pts
-  const hasPhotos = lp.property?.images && lp.property.images.length > 0;
-  if (hasPhotos) score += 15; // 15pts
-  const activeChannels = lp.channels.filter((c) => c.active).length;
-  score += Math.min(activeChannels * 5, 25); // 25pts max
-  const leadCount = lp.leads.length;
-  if (leadCount >= 1) score += 5;
-  if (leadCount >= 3) score += 5;
-  if (leadCount >= 6) score += 5; // 15pts max
-  const completedShowings = lp.showings.filter((s) => s.status === "completed").length;
-  if (completedShowings >= 1) score += 8;
-  if (completedShowings >= 3) score += 7; // 15pts max
-  return Math.min(score, 100);
-}
-
-function scoreColor(score: number): string {
-  if (score >= 70) return GREEN;
-  if (score >= 40) return AMBER;
-  return ACCENT;
-}
-
-const STATUS_LABELS: Record<string, string> = {
+// ── Stage display ──────────────────────────────────────────────────────────
+const STAGE_LABELS: Record<string, string> = {
+  PREPARATION: "Preparing",
+  MARKET_READY: "Market Ready",
+  ACTIVE_MARKETING: "Marketing",
+  LEADS_ACTIVE: "Leads Coming In",
+  SHOWINGS_ACTIVE: "Showings",
+  APPLICATIONS_REVIEW: "Reviewing Apps",
+  APPROVED: "Approved",
+  LEASE_SIGNING: "Lease Signing",
+  MOVE_IN: "Move-In",
+  CLOSED: "Leased",
+  // Legacy
   preparing: "Preparing",
   listed: "Listed",
   receiving_leads: "Receiving Leads",
@@ -89,42 +79,45 @@ const STATUS_LABELS: Record<string, string> = {
   problem: "Problem",
 };
 
-const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  preparing:               { bg: "#FEF3C7", text: "#92400E" },
-  listed:                  { bg: "#DBEAFE", text: "#1E40AF" },
-  receiving_leads:         { bg: "#D1FAE5", text: "#065F46" },
-  showing_scheduled:       { bg: "#EDE9FE", text: "#5B21B6" },
-  applications_reviewing:  { bg: "#FEE2E2", text: "#991B1B" },
-  approved:                { bg: "#D1FAE5", text: "#065F46" },
-  leased:                  { bg: "#F0FDF4", text: "#166534" },
-  problem:                 { bg: "#FEE2E2", text: "#991B1B" },
+const STAGE_COLORS: Record<string, { bg: string; text: string }> = {
+  PREPARATION:           { bg: "#FEF3C7", text: "#92400E" },
+  MARKET_READY:          { bg: "#DBEAFE", text: "#1E40AF" },
+  ACTIVE_MARKETING:      { bg: "#DBEAFE", text: "#1E40AF" },
+  LEADS_ACTIVE:          { bg: "#D1FAE5", text: "#065F46" },
+  SHOWINGS_ACTIVE:       { bg: "#EDE9FE", text: "#5B21B6" },
+  APPLICATIONS_REVIEW:   { bg: "#FEE2E2", text: "#991B1B" },
+  APPROVED:              { bg: "#D1FAE5", text: "#065F46" },
+  LEASE_SIGNING:         { bg: "#D1FAE5", text: "#065F46" },
+  MOVE_IN:               { bg: "#F0FDF4", text: "#166534" },
+  CLOSED:                { bg: "#F0FDF4", text: "#166534" },
+  // Legacy
+  preparing:             { bg: "#FEF3C7", text: "#92400E" },
+  listed:                { bg: "#DBEAFE", text: "#1E40AF" },
+  receiving_leads:       { bg: "#D1FAE5", text: "#065F46" },
+  showing_scheduled:     { bg: "#EDE9FE", text: "#5B21B6" },
+  applications_reviewing:{ bg: "#FEE2E2", text: "#991B1B" },
+  approved:              { bg: "#D1FAE5", text: "#065F46" },
+  leased:                { bg: "#F0FDF4", text: "#166534" },
+  problem:               { bg: "#FEE2E2", text: "#991B1B" },
+};
+
+const RISK_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
+  high:   { bg: "#FEF2F2", text: "#991B1B", dot: "#EF4444" },
+  medium: { bg: "#FFFBEB", text: "#92400E", dot: "#F59E0B" },
+  low:    { bg: "#F0FDF4", text: "#166534", dot: "#22C55E" },
 };
 
 const PRIORITY_COLORS: Record<string, string> = {
   urgent: ACCENT, high: AMBER, medium: "#2563EB", low: TEXT_MUT,
 };
 
-function diagnosisInsight(lp: LeasingProperty): string | null {
-  const leads = lp.leads.length;
-  const showings = lp.showings.filter((s) => s.status === "completed").length;
-  const apps = lp.leads.filter((l) => l.stage === "application_received" || l.stage === "approved" || l.stage === "leased").length;
-  const activeChannels = lp.channels.filter((c) => c.active).length;
-  const days = daysVacant(lp.vacant_since);
-
-  if (activeChannels === 0 && days > 3) return "No marketing channels active. List on Kijiji and Facebook today.";
-  if (leads === 0 && days > 7) return "No leads after 7 days. Review photos, description, and pricing.";
-  if (leads >= 5 && showings === 0) return "Leads coming in but no showings. Improve response speed.";
-  if (showings >= 3 && apps === 0) return "Showings done but no applications. Review pricing and objections.";
-  if (apps >= 1 && lp.status === "applications_reviewing") return "Application in review — make a decision.";
-  return null;
-}
-
 // ── Component ──────────────────────────────────────────────────────────────
-export default function LeasingDashboard() {
+export default function LeasingCommandCenter() {
   const router = useRouter();
-  const [lps, setLps] = useState<LeasingProperty[]>([]);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [allProperties, setAllProperties] = useState<Property[]>([]);
+  const [totals, setTotals] = useState({ active_campaigns: 0, total_vacancy_loss: 0, total_uncontacted: 0, total_tasks_today: 0 });
   const [loading, setLoading] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -132,12 +125,13 @@ export default function LeasingDashboard() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [lpsRes, tasksRes, propsRes] = await Promise.all([
-      fetch("/api/admin/leasing/properties").then((r) => r.json()).catch(() => []),
+    const [cmdRes, tasksRes, propsRes] = await Promise.all([
+      fetch("/api/admin/leasing/command").then((r) => r.json()).catch(() => ({ campaigns: [], totals: {} })),
       fetch("/api/admin/leasing/tasks?today=true").then((r) => r.json()).catch(() => []),
       fetch("/api/admin/properties").then((r) => r.json()).catch(() => []),
     ]);
-    setLps(Array.isArray(lpsRes) ? lpsRes : []);
+    setCampaigns(Array.isArray(cmdRes.campaigns) ? cmdRes.campaigns : []);
+    setTotals(cmdRes.totals ?? {});
     setTasks(Array.isArray(tasksRes) ? tasksRes : []);
     setAllProperties(Array.isArray(propsRes) ? propsRes : []);
     setLoading(false);
@@ -171,26 +165,28 @@ export default function LeasingDashboard() {
     setTasks((prev) => prev.filter((t) => t.id !== taskId));
   }
 
-  const activeVacancies = lps.filter((l) => l.status !== "leased");
-  const totalLeads = lps.reduce((s, l) => s + l.leads.length, 0);
-  const totalShowings = lps.reduce((s, l) => s + l.showings.filter((sh) => sh.status === "completed").length, 0);
-
   return (
-    <div style={{ backgroundColor: BG, minHeight: "100vh", fontFamily: "var(--font-poppins, sans-serif)" }}>
+    <div style={{ backgroundColor: BG, minHeight: "100vh", fontFamily: "var(--font-dm-sans, sans-serif)" }}>
       {/* Header */}
       <div style={{ backgroundColor: SURFACE, borderBottom: `1px solid ${BORDER}` }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/admin/dashboard" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Admin</Link>
+            <Link href="/admin" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Admin</Link>
             <span style={{ color: BORDER }}>·</span>
             <h1 style={{ fontSize: 18, fontWeight: 700, color: TEXT, margin: 0 }}>Leasing Command</h1>
           </div>
-          <button
-            onClick={() => setShowAdd(true)}
-            style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
-          >
-            + Add Vacant Property
-          </button>
+          <div style={{ display: "flex", gap: 10 }}>
+            <Link href="/admin/leasing/employees"
+              style={{ fontSize: 13, color: TEXT_MUT, textDecoration: "none", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 14px", backgroundColor: SURFACE }}>
+              Team
+            </Link>
+            <button
+              onClick={() => setShowAdd(true)}
+              style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "9px 18px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
+            >
+              + Add Vacancy
+            </button>
+          </div>
         </div>
       </div>
 
@@ -199,10 +195,25 @@ export default function LeasingDashboard() {
         {/* Stats row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 24 }}>
           {[
-            { label: "Vacant Properties", value: activeVacancies.length, sub: "actively tracking" },
-            { label: "Total Leads", value: totalLeads, sub: "across all properties" },
-            { label: "Showings Done", value: totalShowings, sub: "completed" },
-            { label: "Tasks Due Today", value: tasks.length, sub: "open items", accent: tasks.length > 0 },
+            { label: "Active Campaigns", value: totals.active_campaigns ?? campaigns.length, sub: "properties leasing now" },
+            {
+              label: "Vacancy Loss",
+              value: `$${((totals.total_vacancy_loss ?? 0) / 1000).toFixed(1)}k`,
+              sub: "estimated total cost",
+              accent: (totals.total_vacancy_loss ?? 0) > 5000,
+            },
+            {
+              label: "Uncontacted Leads",
+              value: totals.total_uncontacted ?? 0,
+              sub: "waiting 30+ min",
+              accent: (totals.total_uncontacted ?? 0) > 0,
+            },
+            {
+              label: "Tasks Due Today",
+              value: totals.total_tasks_today ?? tasks.length,
+              sub: "open items",
+              accent: (totals.total_tasks_today ?? tasks.length) > 0,
+            },
           ].map((stat) => (
             <div key={stat.label} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "16px 20px" }}>
               <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: TEXT_MUT, marginBottom: 6 }}>{stat.label}</p>
@@ -214,81 +225,102 @@ export default function LeasingDashboard() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 20 }}>
 
-          {/* Vacancy list */}
+          {/* Campaign list */}
           <div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
-              <h2 style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: 0 }}>Vacant Properties</h2>
-              <span style={{ fontSize: 12, color: TEXT_MUT }}>{activeVacancies.length} properties</span>
+              <h2 style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: 0 }}>Active Campaigns</h2>
+              <span style={{ fontSize: 12, color: TEXT_MUT }}>{campaigns.length} properties</span>
             </div>
 
             {loading ? (
-              <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 40, textAlign: "center", color: TEXT_MUT }}>Loading…</div>
-            ) : activeVacancies.length === 0 ? (
+              <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 40, textAlign: "center", color: TEXT_MUT }}>
+                Loading campaigns…
+              </div>
+            ) : campaigns.length === 0 ? (
               <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 40, textAlign: "center" }}>
-                <p style={{ color: TEXT_MUT, marginBottom: 12 }}>No vacant properties tracked.</p>
-                <button onClick={() => setShowAdd(true)} style={{ color: ACCENT, background: "none", border: "none", cursor: "pointer", fontWeight: 600, fontSize: 14 }}>Add first property →</button>
+                <p style={{ color: TEXT_MUT, marginBottom: 12 }}>No active campaigns.</p>
+                <button onClick={() => setShowAdd(true)} style={{ color: ACCENT, background: "none", border: "none", cursor: "pointer", fontWeight: 600, fontSize: 14 }}>
+                  Add first vacancy →
+                </button>
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {activeVacancies.map((lp) => {
-                  const score = readinessScore(lp);
-                  const days = daysVacant(lp.vacant_since);
-                  const st = STATUS_COLORS[lp.status] || STATUS_COLORS.preparing;
-                  const insight = diagnosisInsight(lp);
-                  const activeLeads = lp.leads.filter((l) => !["rejected", "leased"].includes(l.stage)).length;
+                {campaigns.map((c) => {
+                  const stage = c.stage ?? c.status;
+                  const sc = STAGE_COLORS[stage] ?? STAGE_COLORS.preparing;
+                  const rc = RISK_COLORS[c.risk] ?? RISK_COLORS.low;
+                  const m = c.metrics;
 
                   return (
-                    <Link key={lp.id} href={`/admin/leasing/${lp.id}`} style={{ textDecoration: "none" }}>
-                      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "18px 20px", cursor: "pointer", transition: "box-shadow 0.15s" }}
+                    <Link key={c.id} href={`/admin/leasing/${c.id}`} style={{ textDecoration: "none" }}>
+                      <div
+                        style={{ backgroundColor: SURFACE, border: `1px solid ${c.risk === "high" ? "#FECACA" : BORDER}`, borderRadius: 12, padding: "18px 20px", cursor: "pointer", transition: "box-shadow 0.15s" }}
                         onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.08)")}
                         onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
                       >
+                        {/* Top row */}
                         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 12 }}>
                           <div style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                              <span style={{ fontSize: 13, fontWeight: 700, color: TEXT, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                                {lp.property?.address}, {lp.property?.city}
+                            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
+                              <span style={{ fontSize: 13, fontWeight: 700, color: TEXT }}>
+                                {c.property?.address}, {c.property?.city}
                               </span>
-                              <span style={{ fontSize: 11, fontWeight: 600, borderRadius: 20, padding: "2px 10px", backgroundColor: st.bg, color: st.text, whiteSpace: "nowrap" }}>
-                                {STATUS_LABELS[lp.status]}
+                              <span style={{ fontSize: 11, fontWeight: 600, borderRadius: 20, padding: "2px 10px", backgroundColor: sc.bg, color: sc.text, whiteSpace: "nowrap" }}>
+                                {STAGE_LABELS[stage] ?? stage}
                               </span>
+                              {m.uncontacted_leads > 0 && (
+                                <span style={{ fontSize: 11, fontWeight: 700, backgroundColor: "#FEF2F2", color: "#991B1B", borderRadius: 20, padding: "2px 8px" }}>
+                                  {m.uncontacted_leads} uncontacted
+                                </span>
+                              )}
                             </div>
                             <p style={{ fontSize: 12, color: TEXT_SEC, margin: 0 }}>
-                              {lp.property?.bedrooms}bd · {lp.property?.bathrooms}ba
-                              {lp.asking_rent ? ` · $${lp.asking_rent.toLocaleString()}/mo` : ""}
-                              {days > 0 ? ` · ${days} day${days !== 1 ? "s" : ""} vacant` : ""}
+                              {c.property?.bedrooms}bd · {c.property?.bathrooms}ba
+                              {c.asking_rent ? ` · $${Number(c.asking_rent).toLocaleString()}/mo` : ""}
+                              {m.days_vacant > 0 ? ` · ${m.days_vacant}d vacant` : ""}
                             </p>
                           </div>
 
-                          {/* Readiness score */}
-                          <div style={{ textAlign: "center", minWidth: 52 }}>
-                            <div style={{ width: 52, height: 52, borderRadius: "50%", border: `3px solid ${scoreColor(score)}`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-                              <span style={{ fontSize: 15, fontWeight: 800, color: scoreColor(score) }}>{score}</span>
+                          {/* Risk + vacancy loss */}
+                          <div style={{ textAlign: "right", flexShrink: 0 }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4, justifyContent: "flex-end" }}>
+                              <span style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: rc.dot, display: "inline-block" }} />
+                              <span style={{ fontSize: 11, fontWeight: 600, color: rc.text, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                                {c.risk} risk
+                              </span>
                             </div>
-                            <p style={{ fontSize: 10, color: TEXT_MUT, marginTop: 2 }}>score</p>
+                            {m.vacancy_loss > 0 && (
+                              <p style={{ fontSize: 12, color: ACCENT, fontWeight: 600, margin: 0 }}>
+                                −${m.vacancy_loss.toLocaleString()}
+                              </p>
+                            )}
                           </div>
                         </div>
 
                         {/* Metrics row */}
-                        <div style={{ display: "flex", gap: 16, marginBottom: insight ? 12 : 0 }}>
+                        <div style={{ display: "flex", gap: 20, marginBottom: c.diagnostics.length > 0 ? 12 : 0 }}>
                           {[
-                            { label: "Leads", value: activeLeads },
-                            { label: "Showings", value: lp.showings.filter((s) => s.status === "completed").length },
-                            { label: "Channels", value: `${lp.channels.filter((c) => c.active).length}/${lp.channels.length}` },
-                            { label: "Checklist", value: `${lp.checklist.filter((c) => c.completed).length}/${lp.checklist.length}` },
-                          ].map((m) => (
-                            <div key={m.label} style={{ textAlign: "center" }}>
-                              <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>{m.value}</p>
-                              <p style={{ fontSize: 10, color: TEXT_MUT, margin: 0 }}>{m.label}</p>
+                            { label: "Leads", value: m.leads_count },
+                            { label: "Showings", value: m.showings_count },
+                            { label: "Applications", value: m.applications_count },
+                            { label: "Tasks Today", value: m.tasks_due_today, accent: m.tasks_due_today > 0 },
+                          ].map((metric) => (
+                            <div key={metric.label} style={{ textAlign: "center" }}>
+                              <p style={{ fontSize: 16, fontWeight: 700, color: metric.accent ? AMBER : TEXT, margin: 0 }}>{metric.value}</p>
+                              <p style={{ fontSize: 10, color: TEXT_MUT, margin: 0 }}>{metric.label}</p>
                             </div>
                           ))}
                         </div>
 
-                        {/* Diagnosis insight */}
-                        {insight && (
-                          <div style={{ backgroundColor: "#FFF9F0", border: "1px solid #FDE68A", borderRadius: 8, padding: "8px 12px", display: "flex", alignItems: "center", gap: 8 }}>
-                            <span style={{ fontSize: 14 }}>⚠</span>
-                            <p style={{ fontSize: 12, color: "#92400E", margin: 0, fontWeight: 500 }}>{insight}</p>
+                        {/* Diagnostics */}
+                        {c.diagnostics.length > 0 && (
+                          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                            {c.diagnostics.map((d, i) => (
+                              <div key={i} style={{ backgroundColor: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 7, padding: "6px 12px", display: "flex", alignItems: "center", gap: 7 }}>
+                                <span style={{ fontSize: 12 }}>⚠</span>
+                                <p style={{ fontSize: 12, color: "#92400E", margin: 0, fontWeight: 500 }}>{d}</p>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
@@ -344,7 +376,6 @@ export default function LeasingDashboard() {
         <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.45)", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
           <div style={{ backgroundColor: SURFACE, borderRadius: 16, padding: 28, width: "100%", maxWidth: 480 }}>
             <h2 style={{ fontSize: 17, fontWeight: 700, color: TEXT, marginBottom: 20 }}>Add Vacant Property</h2>
-
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div>
                 <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_SEC, display: "block", marginBottom: 5 }}>Property</label>
@@ -359,13 +390,11 @@ export default function LeasingDashboard() {
                   ))}
                 </select>
               </div>
-
               <div>
                 <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_SEC, display: "block", marginBottom: 5 }}>Vacant Since</label>
                 <input type="date" value={form.vacant_since} onChange={(e) => setForm((f) => ({ ...f, vacant_since: e.target.value }))}
                   style={{ width: "100%", padding: "10px 12px", border: `1px solid ${BORDER}`, borderRadius: 8, fontSize: 14, color: TEXT, backgroundColor: BG, boxSizing: "border-box" }} />
               </div>
-
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
                   <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_SEC, display: "block", marginBottom: 5 }}>Asking Rent ($)</label>
@@ -379,7 +408,6 @@ export default function LeasingDashboard() {
                 </div>
               </div>
             </div>
-
             <div style={{ display: "flex", gap: 10, marginTop: 22, justifyContent: "flex-end" }}>
               <button onClick={() => setShowAdd(false)} style={{ padding: "10px 18px", border: `1px solid ${BORDER}`, borderRadius: 8, backgroundColor: "transparent", color: TEXT_SEC, cursor: "pointer", fontSize: 13 }}>Cancel</button>
               <button onClick={handleAddProperty} disabled={saving || !form.property_id}
