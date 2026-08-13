@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 
 const SECTIONS = [
   {
-    heading: "Leasing",
+    heading: "Leasing & Tenants",
     items: [
-      { href: "/admin/leasing", label: "Command Center", desc: "Campaigns, leads & showings" },
+      { href: "/admin/leasing", label: "Leasing Command", desc: "Campaigns, leads & showings" },
       { href: "/admin/properties", label: "Properties", desc: "Units, listings & Notion sync" },
       { href: "/admin/applications", label: "Applications", desc: "Review & approve applicants" },
       { href: "/admin/agents", label: "Agents", desc: "Agent accounts & permissions" },
@@ -15,16 +15,17 @@ const SECTIONS = [
     ],
   },
   {
-    heading: "Landlords",
+    heading: "Landlord Operations",
     items: [
       { href: "/admin/onboard", label: "Onboard", desc: "New landlord setup workflow" },
       { href: "/admin/messages", label: "Portal Messages", desc: "Monthly updates to landlords" },
       { href: "/admin/documents", label: "Documents", desc: "Leases, receipts & reports" },
       { href: "/admin/schedules", label: "Schedules", desc: "Inspections & maintenance" },
+      { href: "/admin/home-guides", label: "Home Guides", desc: "Unit manuals for tenants" },
     ],
   },
   {
-    heading: "Growth",
+    heading: "Growth & Analytics",
     items: [
       { href: "/admin/leads", label: "Leads", desc: "Inbound inquiries & subscribers" },
       { href: "/admin/dashboard", label: "CRM & Outreach", desc: "Pipeline & email sequences" },
@@ -37,7 +38,6 @@ const SECTIONS = [
     heading: "Executive",
     items: [
       { href: "/admin/ceo", label: "CEO Dashboard", desc: "Financials & forecasts" },
-      { href: "/admin/home-guides", label: "Home Guides", desc: "Unit manuals for tenants" },
     ],
   },
 ];
@@ -93,30 +93,30 @@ export default function AdminHome() {
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 40px", height: 52,
-        backgroundColor: "#F7F5F2",
-        borderBottom: "1px solid #E0DBD4",
+        backgroundColor: "#1F2F3A",
       }}>
-        <span style={{ fontSize: 15, fontWeight: 700, color: "#1F2F3A", letterSpacing: "-0.02em" }}>
-          Prospera
-        </span>
+        <span style={{ fontSize: 15, fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.02em" }}>Prospera</span>
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <Link href="/" target="_blank" style={{ fontSize: 12, color: "#999999", textDecoration: "none" }}>
+          <Link href="/admin/properties/new" style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>
+            + Add Property
+          </Link>
+          <Link href="/" target="_blank" style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>
             Live site ↗
           </Link>
-          <button onClick={handleLogout} style={{ fontSize: 12, color: "#999999", background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+          <button onClick={handleLogout} style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}>
             Sign out
           </button>
         </div>
       </div>
 
-      <div style={{ maxWidth: 880, margin: "0 auto", padding: "44px 40px 80px" }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "44px 40px 80px" }}>
 
         {/* Page header */}
-        <div style={{ marginBottom: 40 }}>
+        <div style={{ marginBottom: 36 }}>
           <p style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.09em", margin: "0 0 6px" }}>
             {today}
           </p>
-          <h1 style={{ fontSize: 24, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>
             Admin
           </h1>
         </div>
@@ -128,7 +128,7 @@ export default function AdminHome() {
             { label: "Uncontacted leads", value: fmt(stats.uncontactedLeads), href: "/admin/leasing", alert: !loading && uncontacted > 0 },
             { label: "Properties", value: fmt(stats.properties), href: "/admin/properties", alert: false },
           ].map((s) => (
-            <Link key={s.href + s.label} href={s.href} style={{ textDecoration: "none" }}>
+            <Link key={s.label} href={s.href} style={{ textDecoration: "none" }}>
               <div style={{
                 backgroundColor: s.alert ? "#FEF2F2" : "#FFFFFF",
                 border: `1px solid ${s.alert ? "#FCA5A5" : "#E0DBD4"}`,
@@ -138,7 +138,7 @@ export default function AdminHome() {
                 <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: s.alert ? "#991B1B" : "#AAAAAA", margin: "0 0 8px" }}>
                   {s.label}
                 </p>
-                <p style={{ fontSize: 34, fontWeight: 700, color: s.alert ? "#8B2030" : "#1F2F3A", margin: 0, lineHeight: 1, letterSpacing: "-0.02em" }}>
+                <p style={{ fontSize: 32, fontWeight: 700, color: s.alert ? "#8B2030" : "#1F2F3A", margin: 0, lineHeight: 1, letterSpacing: "-0.02em" }}>
                   {s.value}
                 </p>
               </div>
@@ -146,71 +146,52 @@ export default function AdminHome() {
           ))}
         </div>
 
-        {/* Sections */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+        {/* Card sections */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
           {SECTIONS.map((section) => (
             <div key={section.heading}>
-              <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#BBBBBB", margin: "0 0 10px" }}>
+              <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#BBBBBB", margin: "0 0 12px" }}>
                 {section.heading}
               </p>
-              <div style={{
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #E0DBD4",
-                borderRadius: 10,
-                overflow: "hidden",
-              }}>
-                {section.items.map((item, i) => (
-                  <NavRow
-                    key={item.href}
-                    href={item.href}
-                    label={item.label}
-                    desc={item.desc}
-                    divider={i < section.items.length - 1}
-                  />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+                {section.items.map((item) => (
+                  <Card key={item.href} href={item.href} label={item.label} desc={item.desc} />
                 ))}
               </div>
             </div>
           ))}
         </div>
-
-        {/* Footer */}
-        {!loading && stats.leads !== null && (
-          <div style={{ marginTop: 48, paddingTop: 20, borderTop: "1px solid #E0DBD4" }}>
-            <Link href="/admin/leads" style={{ textDecoration: "none" }}>
-              <p style={{ fontSize: 12, color: "#AAAAAA", margin: 0 }}>
-                <span style={{ fontWeight: 600, color: "#666666" }}>{stats.leads}</span> leads & subscribers →
-              </p>
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-function NavRow({ href, label, desc, divider }: { href: string; label: string; desc: string; divider: boolean }) {
+function Card({ href, label, desc }: { href: string; label: string; desc: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
       href={href}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "13px 18px",
-        backgroundColor: hovered ? "#F7F5F2" : "#FFFFFF",
-        textDecoration: "none",
-        borderBottom: divider ? "1px solid #F0ECE6" : "none",
-        transition: "background-color 0.1s",
-      }}
+      style={{ textDecoration: "none" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-        <span style={{ fontSize: 14, fontWeight: 600, color: "#1F2F3A" }}>{label}</span>
-        <span style={{ fontSize: 12, color: "#AAAAAA" }}>{desc}</span>
+      <div style={{
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E0DBD4",
+        borderRadius: 10,
+        padding: "18px 20px",
+        boxShadow: hovered ? "0 2px 8px rgba(0,0,0,0.07)" : "0 1px 2px rgba(0,0,0,0.04)",
+        transform: hovered ? "translateY(-1px)" : "none",
+        transition: "box-shadow 0.15s, transform 0.15s",
+        cursor: "pointer",
+      }}>
+        <p style={{ fontSize: 14, fontWeight: 600, color: "#1F2F3A", margin: "0 0 4px" }}>
+          {label}
+        </p>
+        <p style={{ fontSize: 12, color: "#AAAAAA", margin: 0, lineHeight: 1.4 }}>
+          {desc}
+        </p>
       </div>
-      <span style={{ fontSize: 13, color: "#CCCCCC" }}>→</span>
     </Link>
   );
 }
