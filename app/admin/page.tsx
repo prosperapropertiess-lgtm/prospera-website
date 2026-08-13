@@ -92,37 +92,27 @@ export default function AdminHome() {
       <div style={{
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 40px", height: 52,
+        padding: "0 48px", height: 56,
         backgroundColor: "#1F2F3A",
       }}>
-        <span style={{ fontSize: 15, fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.02em" }}>Prospera</span>
-        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <Link href="/admin/properties/new" style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>
-            + Add Property
-          </Link>
-          <Link href="/" target="_blank" style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>
-            Live site ↗
-          </Link>
-          <button onClick={handleLogout} style={{ fontSize: 12, color: "rgba(250,248,245,0.6)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}>
-            Sign out
-          </button>
+        <span style={{ fontSize: 16, fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.02em" }}>Prospera</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <Link href="/admin/properties/new" style={{ fontSize: 13, color: "rgba(250,248,245,0.65)", textDecoration: "none" }}>+ Add Property</Link>
+          <Link href="/" target="_blank" style={{ fontSize: 13, color: "rgba(250,248,245,0.65)", textDecoration: "none" }}>Live site ↗</Link>
+          <button onClick={handleLogout} style={{ fontSize: 13, color: "rgba(250,248,245,0.65)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}>Sign out</button>
         </div>
       </div>
 
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "44px 40px 80px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "52px 48px 100px" }}>
 
         {/* Page header */}
-        <div style={{ marginBottom: 36 }}>
-          <p style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.09em", margin: "0 0 6px" }}>
-            {today}
-          </p>
-          <h1 style={{ fontSize: 26, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>
-            Admin
-          </h1>
+        <div style={{ marginBottom: 40 }}>
+          <p style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.09em", margin: "0 0 8px" }}>{today}</p>
+          <h1 style={{ fontSize: 28, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>Admin</h1>
         </div>
 
         {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 52 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 56 }}>
           {[
             { label: "Active campaigns", value: fmt(stats.activeCampaigns), href: "/admin/leasing", alert: false },
             { label: "Uncontacted leads", value: fmt(stats.uncontactedLeads), href: "/admin/leasing", alert: !loading && uncontacted > 0 },
@@ -132,30 +122,26 @@ export default function AdminHome() {
               <div style={{
                 backgroundColor: s.alert ? "#FEF2F2" : "#FFFFFF",
                 border: `1px solid ${s.alert ? "#FCA5A5" : "#E0DBD4"}`,
-                borderRadius: 10,
-                padding: "16px 18px",
+                borderRadius: 12,
+                padding: "20px 24px",
               }}>
-                <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: s.alert ? "#991B1B" : "#AAAAAA", margin: "0 0 8px" }}>
-                  {s.label}
-                </p>
-                <p style={{ fontSize: 32, fontWeight: 700, color: s.alert ? "#8B2030" : "#1F2F3A", margin: 0, lineHeight: 1, letterSpacing: "-0.02em" }}>
-                  {s.value}
-                </p>
+                <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: s.alert ? "#991B1B" : "#AAAAAA", margin: "0 0 10px" }}>{s.label}</p>
+                <p style={{ fontSize: 38, fontWeight: 700, color: s.alert ? "#8B2030" : "#1F2F3A", margin: 0, lineHeight: 1, letterSpacing: "-0.02em" }}>{s.value}</p>
               </div>
             </Link>
           ))}
         </div>
 
         {/* Card sections */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 44 }}>
           {SECTIONS.map((section) => (
             <div key={section.heading}>
-              <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#BBBBBB", margin: "0 0 12px" }}>
+              <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#BBBBBB", margin: "0 0 14px" }}>
                 {section.heading}
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
                 {section.items.map((item) => (
-                  <Card key={item.href} href={item.href} label={item.label} desc={item.desc} />
+                  <BigCard key={item.href} href={item.href} label={item.label} desc={item.desc} />
                 ))}
               </div>
             </div>
@@ -166,7 +152,7 @@ export default function AdminHome() {
   );
 }
 
-function Card({ href, label, desc }: { href: string; label: string; desc: string }) {
+function BigCard({ href, label, desc }: { href: string; label: string; desc: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
@@ -178,19 +164,30 @@ function Card({ href, label, desc }: { href: string; label: string; desc: string
       <div style={{
         backgroundColor: "#FFFFFF",
         border: "1px solid #E0DBD4",
-        borderRadius: 10,
-        padding: "18px 20px",
-        boxShadow: hovered ? "0 2px 8px rgba(0,0,0,0.07)" : "0 1px 2px rgba(0,0,0,0.04)",
-        transform: hovered ? "translateY(-1px)" : "none",
+        borderRadius: 14,
+        padding: "28px 28px 24px",
+        minHeight: 140,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        boxShadow: hovered ? "0 4px 16px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04)",
+        transform: hovered ? "translateY(-2px)" : "none",
         transition: "box-shadow 0.15s, transform 0.15s",
         cursor: "pointer",
       }}>
-        <p style={{ fontSize: 14, fontWeight: 600, color: "#1F2F3A", margin: "0 0 4px" }}>
-          {label}
-        </p>
-        <p style={{ fontSize: 12, color: "#AAAAAA", margin: 0, lineHeight: 1.4 }}>
-          {desc}
-        </p>
+        <div>
+          <p style={{ fontSize: 16, fontWeight: 700, color: "#1F2F3A", margin: "0 0 8px", letterSpacing: "-0.01em" }}>
+            {label}
+          </p>
+          <p style={{ fontSize: 13, color: "#AAAAAA", margin: 0, lineHeight: 1.45 }}>
+            {desc}
+          </p>
+        </div>
+        <div style={{ marginTop: 20 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: hovered ? "#8B2030" : "#CCCCCC", transition: "color 0.15s" }}>
+            Open →
+          </span>
+        </div>
       </div>
     </Link>
   );
