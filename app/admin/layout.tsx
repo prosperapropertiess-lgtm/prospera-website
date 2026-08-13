@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import React from "react";
 import { Poppins } from "next/font/google";
-import AdminSidebar from "./AdminSidebar";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
@@ -20,15 +19,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       style={{
         fontFamily: "var(--font-poppins), -apple-system, sans-serif",
         "--font-dm-sans": "var(--font-poppins)",
-        display: "flex",
-        minHeight: "100vh",
-        backgroundColor: "#F7F5F2",
       } as React.CSSProperties}
     >
-      <AdminSidebar />
-      <div style={{ flex: 1, minWidth: 0, overflowX: "hidden" }}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
