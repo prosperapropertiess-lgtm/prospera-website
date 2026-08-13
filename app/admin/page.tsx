@@ -1,439 +1,249 @@
 "use client";
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-function getGreeting() {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning, Ebin.";
-  if (hour < 17) return "Good afternoon, Ebin.";
-  return "Good evening, Ebin.";
-}
-
-type SectionItem = {
-  href: string;
-  icon: string;
-  label: string;
-  desc: string;
-  badge?: string;
-  badgeType?: "burgundy" | "navy" | "neutral";
-};
-
-type SectionGroup = {
-  id: string;
-  title: string;
-  items: SectionItem[];
-};
-
-const SECTIONS: SectionGroup[] = [
-  {
-    id: "leasing",
-    title: "Leasing & Tenant Management",
-    items: [
-      { href: "/admin/leasing", icon: "⚡", label: "Leasing Dashboard", desc: "Daily execution pipeline, portfolio tracking & conversions", badge: "Daily Focus", badgeType: "burgundy" },
-      { href: "/admin/properties", icon: "🏠", label: "Properties & Listings", desc: "Manage rental units, publish listings & Notion sync", badge: "Notion Live", badgeType: "navy" },
-      { href: "/admin/applications", icon: "📋", label: "Tenant Applications", desc: "Background verification, credit checks & AI scoring" },
-      { href: "/admin/agents", icon: "👤", label: "Leasing Agents", desc: "Manage agent accounts, schedules & permissions" },
-      { href: "/admin/tenants", icon: "🔑", label: "Tenant Portals", desc: "Manage tenant access, rent records & keyhandover" },
-    ],
-  },
-  {
-    id: "ops",
-    title: "Landlord Operations",
-    items: [
-      { href: "/admin/onboard", icon: "🚀", label: "Landlord Onboarding", desc: "Add new 1–5 unit landlords & track setup workflow" },
-      { href: "/admin/messages", icon: "💬", label: "Owner Portal Messages", desc: "Post monthly updates & announcements to landlords" },
-      { href: "/admin/documents", icon: "📄", label: "Legal & Documents", desc: "Standardized leases, CRA receipts & inspection reports" },
-      { href: "/admin/schedules", icon: "📅", label: "Schedules & Reminders", desc: "Routine property inspections & seasonal maintenance" },
-    ],
-  },
-  {
-    id: "details",
-    title: "Property Intel & Guides",
-    items: [
-      { href: "/admin/home-guides", icon: "📖", label: "Home Guides", desc: "Breaker locations, main shutoffs & garbage pickup rules" },
-    ],
-  },
-  {
-    id: "executive",
-    title: "Executive",
-    items: [
-      { href: "/admin/ceo", icon: "📈", label: "CEO Dashboard", desc: "Unit economics, forecasts, scenario planning & monthly financials", badge: "New", badgeType: "burgundy" },
-    ],
-  },
-  {
-    id: "growth",
-    title: "Growth, CRM & Analytics",
-    items: [
-      { href: "/admin/leads", icon: "📩", label: "Leads & Subscribers", desc: "Inbound landlord inquiries & lead magnet subscribers" },
-      { href: "/admin/dashboard", icon: "📊", label: "Outreach & CRM", desc: "HubSpot pipeline, Claude AI email sequences & ad logs" },
-      { href: "/admin/intelligence", icon: "🧠", label: "Rent Intelligence", desc: "London, Strathroy & St. Thomas market benchmarks" },
-      { href: "/admin/seo", icon: "🔍", label: "SEO & Search Console", desc: "Google index status, keyword rankings & crawl metrics" },
-      { href: "/admin/qr-codes", icon: "⬛", label: "Dynamic QR Codes", desc: "Tracked QR codes for signboards & flyers" },
-    ],
-  },
+const TOOLS = [
+  { href: "/admin/leasing", label: "Leasing Command", desc: "Active campaigns, leads & showings" },
+  { href: "/admin/properties", label: "Properties", desc: "Units, listings & Notion sync" },
+  { href: "/admin/applications", label: "Applications", desc: "Review & approve applicants" },
+  { href: "/admin/onboard", label: "Landlord Onboard", desc: "New client setup workflow" },
+  { href: "/admin/leads", label: "Leads & Subscribers", desc: "Inbound inquiries from the site" },
+  { href: "/admin/dashboard", label: "CRM & Outreach", desc: "HubSpot pipeline & email sequences" },
+  { href: "/admin/ceo", label: "CEO Dashboard", desc: "Financials, forecasts & unit economics" },
+  { href: "/admin/seo", label: "SEO", desc: "Google index, keywords & crawl status" },
 ];
 
+interface Stats {
+  properties: number | null;
+  leads: number | null;
+  activeCampaigns: number | null;
+  uncontactedLeads: number | null;
+}
+
 export default function AdminHome() {
-  const router = useRouter();
-  const greeting = useMemo(() => getGreeting(), []);
-  const today = useMemo(
-    () => new Date().toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric", year: "numeric" }),
-    []
-  );
+  const today = new Date().toLocaleDateString("en-CA", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [stats, setStats] = useState<Stats>({
+    properties: null,
+    leads: null,
+    activeCampaigns: null,
+    uncontactedLeads: null,
+  });
+  const [loading, setLoading] = useState(true);
 
-  // Real DB Counts (100% Live from Supabase APIs)
-  const [realPropertiesCount, setRealPropertiesCount] = useState<number | null>(null);
-  const [realLeadsCount, setRealLeadsCount] = useState<number | null>(null);
-  const [loadingRealData, setLoadingRealData] = useState(true);
-
-  // Fetch real data on mount
   useEffect(() => {
-    async function loadRealData() {
-      try {
-        setLoadingRealData(true);
-        const [propsRes, leadsRes] = await Promise.all([
-          fetch("/api/admin/properties/list"),
-          fetch("/api/admin/leads"),
-        ]);
+    async function load() {
+      const [propsRes, leadsRes, leasingRes] = await Promise.allSettled([
+        fetch("/api/admin/properties/list").then((r) => r.json()),
+        fetch("/api/admin/leads").then((r) => r.json()),
+        fetch("/api/admin/leasing/command").then((r) => r.json()),
+      ]);
 
-        if (propsRes.ok) {
-          const propsData = await propsRes.json();
-          if (Array.isArray(propsData)) {
-            setRealPropertiesCount(propsData.length);
-          }
-        }
-
-        if (leadsRes.ok) {
-          const leadsData = await leadsRes.json();
-          if (typeof leadsData.total === "number") {
-            setRealLeadsCount(leadsData.total);
-          }
-        }
-      } catch (err) {
-        console.error("Error loading real admin stats:", err);
-      } finally {
-        setLoadingRealData(false);
-      }
+      setStats({
+        properties:
+          propsRes.status === "fulfilled" && Array.isArray(propsRes.value)
+            ? propsRes.value.length
+            : null,
+        leads:
+          leadsRes.status === "fulfilled" && typeof leadsRes.value?.total === "number"
+            ? leadsRes.value.total
+            : null,
+        activeCampaigns:
+          leasingRes.status === "fulfilled"
+            ? (leasingRes.value?.metrics?.active_campaigns ?? leasingRes.value?.active_campaigns ?? null)
+            : null,
+        uncontactedLeads:
+          leasingRes.status === "fulfilled"
+            ? (leasingRes.value?.metrics?.uncontacted_leads ?? leasingRes.value?.uncontacted_leads ?? null)
+            : null,
+      });
+      setLoading(false);
     }
-
-    loadRealData();
+    load();
   }, []);
 
-  // Handle Sign out
-  async function handleLogout() {
-    await fetch("/api/admin/login", { method: "DELETE" });
-    router.push("/admin/login");
-    router.refresh();
-  }
-
-  // Filter sections based on search & active category tab
-  const filteredSections = useMemo(() => {
-    let list = SECTIONS;
-    if (activeTab !== "all") {
-      list = list.filter((s) => s.id === activeTab);
-    }
-
-    if (!searchQuery.trim()) return list;
-
-    const q = searchQuery.toLowerCase();
-    return list
-      .map((sec) => ({
-        ...sec,
-        items: sec.items.filter(
-          (item) =>
-            item.label.toLowerCase().includes(q) ||
-            item.desc.toLowerCase().includes(q)
-        ),
-      }))
-      .filter((sec) => sec.items.length > 0);
-  }, [searchQuery, activeTab]);
+  const fmt = (n: number | null) => (loading || n === null ? "—" : String(n));
+  const hasAlert = !loading && (stats.uncontactedLeads ?? 0) > 0;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2", color: "#222222" }}>
-      {/* Executive Navbar Header */}
-      <header
-        className="sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between shadow-sm"
-        style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-      >
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-3">
-            <span
-              className="font-[family-name:var(--font-cormorant)] text-2xl font-bold tracking-tight"
-              style={{ color: "#FAF8F5" }}
-            >
-              Prospera
-            </span>
-            <span
-              className="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest rounded"
-              style={{ backgroundColor: "rgba(250,248,245,0.12)", color: "rgba(250,248,245,0.75)" }}
-            >
-              Command Center
-            </span>
-          </div>
+    <div style={{ padding: "48px 52px", maxWidth: 900 }}>
 
-          <div className="hidden md:flex items-center gap-2 text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Notion & Supabase Connected</span>
-          </div>
+      {/* Header */}
+      <div style={{ marginBottom: 44 }}>
+        <p style={{
+          fontSize: 11,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: "#999999",
+          margin: "0 0 8px",
+        }}>
+          {today}
+        </p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>
+          Command Center
+        </h1>
+      </div>
+
+      {/* Priority stats */}
+      <section style={{ marginBottom: 52 }}>
+        <p style={{
+          fontSize: 10,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: "#BBBBBB",
+          margin: "0 0 12px",
+        }}>
+          Right now
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
+          <StatCard
+            label="Active campaigns"
+            value={fmt(stats.activeCampaigns)}
+            href="/admin/leasing"
+            alert={false}
+          />
+          <StatCard
+            label="Uncontacted leads"
+            value={fmt(stats.uncontactedLeads)}
+            href="/admin/leasing"
+            alert={hasAlert}
+          />
+          <StatCard
+            label="Properties"
+            value={fmt(stats.properties)}
+            href="/admin/properties"
+            alert={false}
+          />
         </div>
+      </section>
 
-        <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            target="_blank"
-            className="text-xs font-medium transition-opacity hover:opacity-100 flex items-center gap-1.5"
-            style={{ color: "rgba(250,248,245,0.65)" }}
-          >
-            <span>Live Website</span>
-            <span className="text-[10px]">↗</span>
-          </Link>
-          <div className="h-4 w-px bg-white/10" />
-          <button
-            onClick={handleLogout}
-            className="text-xs font-medium transition-opacity hover:opacity-100"
-            style={{ color: "rgba(250,248,245,0.65)" }}
-          >
-            Sign out
-          </button>
+      {/* Tools */}
+      <section style={{ marginBottom: 48 }}>
+        <p style={{
+          fontSize: 10,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: "#BBBBBB",
+          margin: "0 0 12px",
+        }}>
+          Tools
+        </p>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 1,
+          backgroundColor: "#D8D2C8",
+          border: "1px solid #D8D2C8",
+          borderRadius: 12,
+          overflow: "hidden",
+        }}>
+          {TOOLS.map((tool) => (
+            <ToolRow key={tool.href} href={tool.href} label={tool.label} desc={tool.desc} />
+          ))}
         </div>
-      </header>
+      </section>
 
-      {/* Main Container */}
-      <main className="max-w-6xl mx-auto px-6 py-10">
-        {/* Welcome Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-8 border-b" style={{ borderColor: "#D8D2C8" }}>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1.5" style={{ color: "#666666" }}>
-              {today}
-            </p>
-            <h1
-              className="font-[family-name:var(--font-cormorant)] text-4xl sm:text-5xl font-bold leading-tight"
-              style={{ color: "#1F2F3A" }}
-            >
-              {greeting}
-            </h1>
-          </div>
-
-          {/* Contextual Quick Actions */}
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/admin/properties/new"
-              className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg text-white shadow-sm transition-all hover:opacity-90 flex items-center gap-2"
-              style={{ backgroundColor: "#8B2030" }}
-            >
-              <span>+ Add Property</span>
-            </Link>
-            <Link
-              href="/admin/onboard"
-              className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all bg-white hover:bg-[#1F2F3A] hover:text-white shadow-sm"
-              style={{ border: "1px solid #D8D2C8", color: "#1F2F3A" }}
-            >
-              + Onboard Landlord
-            </Link>
-            <Link
-              href="/admin/applications"
-              className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all bg-white hover:bg-[#1F2F3A] hover:text-white shadow-sm"
-              style={{ border: "1px solid #D8D2C8", color: "#1F2F3A" }}
-            >
-              Review Applications
-            </Link>
-          </div>
-        </div>
-
-        {/* Real Live Operational Stats Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-          <div
-            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
-            style={{ borderColor: "#D8D2C8" }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              Properties in Database
-            </p>
-            <div className="flex items-baseline justify-between">
-              <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {loadingRealData ? "..." : (realPropertiesCount ?? 0)}
-              </span>
-              <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                Live Supabase
-              </span>
-            </div>
-          </div>
-
-          <div
-            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
-            style={{ borderColor: "#D8D2C8" }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              Total Leads & Subscribers
-            </p>
-            <div className="flex items-baseline justify-between">
-              <span className="text-3xl font-bold" style={{ color: "#1F2F3A" }}>
-                {loadingRealData ? "..." : (realLeadsCount ?? 0)}
-              </span>
-              <span className="text-xs font-medium text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
-                Inbound DB
-              </span>
-            </div>
-          </div>
-
-          <div
-            className="p-5 rounded-xl bg-white border transition-shadow hover:shadow-sm"
-            style={{ borderColor: "#D8D2C8" }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#666666" }}>
-              System Integration
-            </p>
-            <div className="flex items-baseline justify-between">
-              <span className="text-base font-semibold" style={{ color: "#1F2F3A" }}>
-                Notion & HubSpot
-              </span>
-              <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                Active Sync
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Search & Category Filter Toolbar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0">
-            {[
-              { id: "all", label: "All Tools" },
-              { id: "leasing", label: "Leasing & Tenants" },
-              { id: "ops", label: "Landlord Ops" },
-              { id: "growth", label: "Growth & CRM" },
-              { id: "details", label: "Guides" },
-            ].map((tab) => {
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className="px-4 py-2 text-xs font-semibold uppercase tracking-widest rounded-lg transition-all whitespace-nowrap"
-                  style={{
-                    backgroundColor: isActive ? "#1F2F3A" : "transparent",
-                    color: isActive ? "#FAF8F5" : "#666666",
-                    border: isActive ? "1px solid #1F2F3A" : "1px solid transparent",
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Quick Filter Search */}
-          <div className="relative min-w-[240px]">
-            <input
-              type="text"
-              placeholder="Search admin tools..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 text-xs rounded-lg border outline-none transition-colors"
-              style={{
-                backgroundColor: "#FFFFFF",
-                borderColor: "#D8D2C8",
-                color: "#222222",
-              }}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
+      {/* Footer stats */}
+      <div style={{ borderTop: "1px solid #D8D2C8", paddingTop: 20 }}>
+        <Link href="/admin/leads" style={{ textDecoration: "none" }}>
+          <p style={{ fontSize: 13, color: "#888888", margin: 0 }}>
+            {loading ? (
+              "Loading..."
+            ) : (
+              <>
+                <span style={{ fontWeight: 600, color: "#1F2F3A" }}>
+                  {stats.leads ?? 0}
+                </span>{" "}
+                total leads & subscribers in the database →
+              </>
             )}
-          </div>
-        </div>
-
-        {/* Grouped Admin Bento Cards */}
-        <div className="space-y-10">
-          {filteredSections.length === 0 ? (
-            <div
-              className="p-12 text-center rounded-xl bg-white border"
-              style={{ borderColor: "#D8D2C8" }}
-            >
-              <p className="text-sm font-medium" style={{ color: "#666666" }}>
-                No tools found matching &quot;{searchQuery}&quot;
-              </p>
-              <button
-                onClick={() => setSearchQuery("")}
-                className="mt-3 text-xs font-semibold uppercase tracking-widest underline"
-                style={{ color: "#8B2030" }}
-              >
-                Clear Search Filter
-              </button>
-            </div>
-          ) : (
-            filteredSections.map((section) => (
-              <div key={section.id}>
-                <div className="flex items-center gap-3 mb-4">
-                  <h2 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#666666" }}>
-                    {section.title}
-                  </h2>
-                  <div className="h-px flex-1 bg-[#D8D2C8]" />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                  {section.items.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="group relative flex flex-col justify-between p-6 rounded-xl bg-white border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-[#8B2030]/30"
-                      style={{ borderColor: "#D8D2C8", minHeight: "180px" }}
-                    >
-                      <div>
-                        <div className="flex items-start justify-between gap-2 mb-3">
-                          <span className="text-3xl p-2 rounded-lg bg-[#F7F5F2] border border-[#D8D2C8]/50">
-                            {item.icon}
-                          </span>
-                          {item.badge && (
-                            <span
-                              className="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest rounded"
-                              style={{
-                                backgroundColor:
-                                  item.badgeType === "burgundy"
-                                    ? "#8B2030"
-                                    : item.badgeType === "navy"
-                                    ? "#1F2F3A"
-                                    : "#D8D2C8",
-                                color: "#FAF8F5",
-                              }}
-                            >
-                              {item.badge}
-                            </span>
-                          )}
-                        </div>
-
-                        <h3
-                          className="text-base font-bold mb-1.5 group-hover:text-[#8B2030] transition-colors"
-                          style={{ color: "#1F2F3A" }}
-                        >
-                          {item.label}
-                        </h3>
-                        <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
-                          {item.desc}
-                        </p>
-                      </div>
-
-                      <div className="mt-4 pt-3 flex items-center justify-between text-xs font-semibold uppercase tracking-widest border-t border-[#D8D2C8]/40" style={{ color: "#666666" }}>
-                        <span className="group-hover:text-[#8B2030] transition-colors">Access Tool</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </main>
+          </p>
+        </Link>
+      </div>
     </div>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  href,
+  alert,
+}: {
+  label: string;
+  value: string;
+  href: string;
+  alert: boolean;
+}) {
+  return (
+    <Link href={href} style={{ textDecoration: "none" }}>
+      <div
+        style={{
+          backgroundColor: alert ? "#FEF2F2" : "#FFFFFF",
+          border: `1px solid ${alert ? "#FECACA" : "#D8D2C8"}`,
+          borderRadius: 10,
+          padding: "18px 20px",
+        }}
+      >
+        <p style={{
+          fontSize: 10,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          color: alert ? "#991B1B" : "#999999",
+          margin: "0 0 10px",
+        }}>
+          {label}
+        </p>
+        <p style={{
+          fontSize: 36,
+          fontWeight: 700,
+          color: alert ? "#8B2030" : "#1F2F3A",
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: "-0.02em",
+        }}>
+          {value}
+        </p>
+      </div>
+    </Link>
+  );
+}
+
+function ToolRow({ href, label, desc }: { href: string; label: string; desc: string }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href={href}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "16px 22px",
+        backgroundColor: hovered ? "#F7F5F2" : "#FFFFFF",
+        textDecoration: "none",
+        transition: "background-color 0.1s",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div>
+        <p style={{ fontSize: 14, fontWeight: 600, color: "#1F2F3A", margin: "0 0 2px" }}>
+          {label}
+        </p>
+        <p style={{ fontSize: 12, color: "#999999", margin: 0 }}>
+          {desc}
+        </p>
+      </div>
+      <span style={{ fontSize: 14, color: "#CCCCCC", marginLeft: 16 }}>→</span>
+    </Link>
   );
 }
