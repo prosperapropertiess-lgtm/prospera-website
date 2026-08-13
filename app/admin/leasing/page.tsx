@@ -128,7 +128,7 @@ export default function LeasingCommandCenter() {
     const [cmdRes, tasksRes, propsRes] = await Promise.all([
       fetch("/api/admin/leasing/command").then((r) => r.json()).catch(() => ({ campaigns: [], totals: {} })),
       fetch("/api/admin/leasing/tasks?today=true").then((r) => r.json()).catch(() => []),
-      fetch("/api/admin/properties").then((r) => r.json()).catch(() => []),
+      fetch("/api/admin/properties/list").then((r) => r.json()).catch(() => []),
     ]);
     setCampaigns(Array.isArray(cmdRes.campaigns) ? cmdRes.campaigns : []);
     setTotals(cmdRes.totals ?? {});
