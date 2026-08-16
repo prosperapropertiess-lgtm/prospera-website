@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-08-09
+Last updated: 2026-08-16
 
 ## New Topic Opportunities
 
@@ -51,6 +51,14 @@ Last updated: 2026-08-09
 
 - property-management-elgin-county-ontario | Est. difficulty: LOW | Vol: ~80/mo | Geographic long-tail for Elgin County (St. Thomas, Aylmer, Port Stanley area). Near-zero competition. St. Thomas's industrial growth and Elgin County's rural rental market are underserved by existing content. Complements property-management-st-thomas-ontario.md with a broader county-level page.
 
+- ontario-rent-increase-guideline-2027 | Est. difficulty: LOW | Vol: ~400/mo | **High urgency — serve now.** The 2027 rent increase guideline is 1.9% (down from 2.1% in 2026). Landlords who want a January 1, 2027 increase must serve the N1 by October 3, 2026 — 90-day notice window. Tenon10 and small PM sites (KEILTY, OntarioLandlord.ca) have 2027 guides but no large authority site dominates. Our existing rent-increase-ontario-guidelines.md covers the guideline concept and n1-form-ontario.md covers the form — a dedicated "2027 guideline + N1 timing" post targets the high-volume seasonal query before the Oct window closes. Strong internal links to both existing posts.
+
+- ltb-mandatory-payment-agreement-form-ontario | Est. difficulty: LOW | Vol: ~150/mo | Effective July 1, 2026: informal "handshake" rent repayment plans are no longer valid under s.206 of the RTA. Any rent arrears repayment agreement under an L1 or L9 application must now use the official LTB Payment Agreement Form and be sent to the regional LTB office. Small law firms (AJ Murray Law, Gobin & Leyenson LLP) and Marda Management cover it but no comprehensive PM company guide exists. Our rent-repayment-agreement-ontario.md is adjacent but does not address this specific new mandatory form. A standalone guide explaining what changed, how to complete the form, and what happens if landlords still use informal agreements would rank cleanly.
+
+- n12-60-day-occupancy-rule-ontario | Est. difficulty: LOW | Vol: ~120/mo | Effective September 21, 2026: after a tenant vacates under an N12, the intended occupant must move in within 60 days or the eviction is presumed bad faith, exposing the landlord to up to $50,000 in LTB compensation. This is separate from the N12 compensation waiver and N12 bad faith post already planned — it is specifically about the post-vacancy occupancy timeline obligation. glllp.ca, George Brown Professional Corporation, and small PM blogs cover it; no large authority site has a standalone guide. Natural internal links to n12-notice-ontario.md and n12-bad-faith-compensation-ontario (planned).
+
+- london-ontario-student-housing-landlord-guide | Est. difficulty: LOW | Vol: ~150/mo | Landlord-facing (not tenant-facing) guide on the Western University and Fanshawe College student rental market: 12-month vs. May-to-April lease cycles, co-signer/guarantor requirements, handling September turnover, managing multiple-occupant units, and rent-per-room pricing strategy. Our existing Western University and Fanshawe guides (western-university-off-campus-housing-guide.md, fanshawe-college-off-campus-housing-guide.md) target student renters, not landlords managing student units. Near-zero competition on the landlord-specific angle; small real estate blogs and LendCity cover London student housing but not from an operational management perspective.
+
 ## SKIPPED (too competitive or wrong intent)
 
 - "carbon monoxide detector Ontario law" — General homeowner query; City of Toronto and Ontario.ca fire marshal pages dominate. Covered by planned carbon-monoxide-alarm-requirements-ontario-landlord post with landlord-specific angle.
@@ -74,6 +82,11 @@ Last updated: 2026-08-09
 - "rooming house Ontario regulations" — City-level bylaws vary; City of London bylaw pages dominate for local queries. Too fragmented for one province-wide post.
 - "Ontario landlord insurance guide" — Covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md. Insurance comparison aggregators (Ratehub, LowestRates) dominate cost-focused queries.
 - "tenant not paying rent Ontario" — Covered by late-rent-payments-ontario.md, n4-notice-ontario.md, and l1-application-ontario-landlord-guide.md.
+- "Ontario N12 60 day rule" — Covered by new n12-60-day-occupancy-rule-ontario opportunity above; too narrow for standalone competitive assessment.
+- "2027 Ontario rent increase landlord" — Covered by ontario-rent-increase-guideline-2027 opportunity above.
+- "LTB payment agreement form 2026" — Covered by ltb-mandatory-payment-agreement-form-ontario opportunity above.
+- "Ontario property manager licensing" — MEDIUM difficulty; no RECO licensing requirement for residential PM creates ambiguous results; Ontario.ca and ACMO rank for credentialing questions. Too fragmented and misaligned with landlord-intent searches to warrant a standalone post.
+- "London Ontario student housing landlord" — Covered by new london-ontario-student-housing-landlord-guide opportunity above.
 
 ## Topics to Expand
 
@@ -88,4 +101,7 @@ Last updated: 2026-08-09
 - n4-notice-ontario.md — Add September 21 2026 implementation note: the 7-day N4 notice period (Bill 60) is now in force; update any references to the old 14-day timeline and add a dated FAQ entry.
 - n12-notice-ontario.md — Add 120-day compensation waiver section effective September 21 2026; explain when the one-month compensation is waived and how landlords should time notice delivery; cross-link to planned n12-compensation-waiver-ontario-2026 post.
 - bill-60-ontario-landlords.md — Add September 21 2026 Phase 2 implementation section covering: 7-day N4 in force, N12 compensation waiver at 120 days, fixed-term lease non-renewal option, and increased LTB fines ($100K/$500K). Many landlords are now searching "what changed September 21" and the post is the natural destination.
+- rent-increase-ontario-guidelines.md — Add a dedicated 2027 section: 1.9% guideline announced, N1 timing window for Jan 1, 2027 increases (serve by Oct 3, 2026), and how to round rent amounts correctly. High seasonal search volume right now; the existing post covers the concept but needs a dated 2027 section so it captures "2027 Ontario rent increase guideline" queries.
+- n12-notice-ontario.md — Add N12 60-day occupancy rule section (effective September 21, 2026): the intended occupant must move in within 60 days of the tenant's vacate date; failure creates a presumption of bad faith; up to $50,000 in compensation. Cross-link to planned n12-60-day-occupancy-rule-ontario post once written.
+- rent-repayment-agreement-ontario.md — Add mandatory LTB Payment Agreement Form notice (effective July 1, 2026): informal repayment agreements under s.206 are no longer sufficient; the official LTB form must be used and submitted to the regional LTB office. Cross-link to planned ltb-mandatory-payment-agreement-form-ontario post once written.
 ---
