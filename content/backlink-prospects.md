@@ -1750,3 +1750,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: Their "Best Ontario Cities Real Estate Investment: 9 Smart Picks for 2026" — which names London explicitly, pointing directly to the geographic audience Prospera serves.
 - researcher_notes: Ontario real estate brokerage focused on investment properties. Not a PM company in London/St. Thomas/Strathroy — focus is acquisition and investment advisory, no property management overlap in Prospera's markets. Site access was blocked at network level; research drawn from search index results and WebSearch.
 ---
+
+## House for Sale London Ontario — London Neighbourhood Blog
+- url: https://www.houseforsalelondonontario.com/
+- type: blog
+- why: Independent London Ontario real estate blog publishing detailed neighbourhood-level market analysis — investor-buyers who read their gap-by-neighbourhood reports are exactly who Prospera serves once they close on a London rental.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website form)
+- site_focus: An independent London Ontario real estate blog focused on neighbourhood-level market analysis rather than headline numbers. Their May 2026 post — "London's 2026 Real Estate Market Is Not One Market: Why Neighbourhood Gaps Matter More Than Headline Numbers" — digs into East London vs. South London price and demand divergence, specifically serving investors and buyers who need sub-market precision when evaluating rental property acquisitions.
+- hook: Prospera manages rental properties across London's neighbourhoods and can add the rental-side complement to their sales-side analysis: vacancy rates, average rents, and tenant demand by neighbourhood — giving their investor readers a complete picture before they buy.
+- specific_content: Their "London's 2026 Real Estate Market Is Not One Market" post — which focuses on neighbourhood-level buyer strategy; Prospera can add a rental-market parallel piece on which London neighbourhoods have the strongest tenant demand and lowest vacancy for investors.
+- researcher_notes: Independent London real estate blog, not a PM company. Likely run by a local realtor. Site access was blocked at network level; research drawn from search index results and WebSearch. Contact via website form. Guest post or expert data contribution is the right angle.
+
+---
+
+## Westwood Realty Team — London Ontario Market Blog
+- url: https://www.westwood.team/blog
+- type: blog
+- why: London Ontario real estate team with an active blog covering market reports, neighbourhood guides, buyer tips, and investment property analysis — their London investor-buyer clients are Prospera's direct management prospects post-closing.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Westwood Realty is a London Ontario real estate team publishing market reports, neighbourhood guides, buyer tips, and investment analysis for the London area. Content is locally focused and serves buyers and sellers across London's residential and investment property markets — a dual audience of owner-occupiers and investors who need guidance on local market conditions.
+- hook: Westwood's investor-buyer clients who close on London rentals need a trusted property manager — a mutual referral arrangement (Westwood recommends Prospera post-closing; Prospera recommends Westwood when owner-clients want to sell or buy) creates a low-friction referral loop. A co-authored blog post on "what to do in the 90 days after buying a London investment property" would serve their readers and earn a locally relevant backlink.
+- specific_content: Their investment analysis and buyer tips blog content — specifically any posts on investment properties in London where the operational "what next" question naturally follows the purchase decision.
+- researcher_notes: London Ontario real estate team, not a PM company. Site access was blocked at network level; research drawn from search index results and WebSearch. Referral partnership and co-authored content are both viable angles. Contact via website.
+
+---
+
+## Live in Oakridge — London Ontario Neighbourhood Blog
+- url: https://www.liveinoakridge.ca/blog/
+- type: blog
+- why: Hyper-local London Ontario neighbourhood blog publishing monthly real estate market updates — their engaged local readership of London homeowners and investors includes exactly the landlord demographic Prospera serves in the Oakridge and SW London area.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Live in Oakridge is a London Ontario neighbourhood-focused real estate blog producing monthly London market updates (including a July 2026 update) and local content for Oakridge and SW London area residents. The blog serves a local, community-rooted audience of homeowners and investors who follow London's monthly market pulse — exactly the engaged local readership where a Prospera mention reaches real landlords and rental property owners.
+- hook: A resource mention on their blog — "for landlords in the Oakridge and SW London area, Prospera Properties provides professional property management" — or a short contributed piece on "what rental property owners in SW London should know in 2026" would reach their engaged local audience at exactly the right level of specificity.
+- specific_content: Their July 2026 London market update — covering monthly price and demand data for the exact London neighbourhoods where Prospera manages properties. A landlord-focused perspective on that same data (rental vacancy, average rents, tenant demand) would complement their sales-side update naturally.
+- researcher_notes: Hyperlocal London Ontario neighbourhood blog, not a PM company. Site access was blocked at network level; research drawn from search index results and WebSearch. Community-rooted tone; outreach should be warm and local. Resource mention or short contributed content piece is the right angle.
+
+---
+
+## CMS Mortgages — London Ontario Investment Mortgage Broker
+- url: https://cmsmortgages.ca/mortgage-broker-london/
+- type: mortgage
+- why: London Ontario mortgage broker (Canadian Mortgage Services) with a 5.0★ / 210+ reviews specializing in investment property mortgages — their London investor clients who close on rental properties need professional management immediately, making a mutual referral arrangement natural.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Canadian Mortgage Services (CMS) is a London Ontario mortgage broker with top-rated reviews, explicitly specializing in structuring investment mortgages to optimize cash flow and build long-term wealth for clients. Their London landing page serves residential and investment property buyers across the city, with a client base that skews toward active real estate investors — exactly the audience who needs property management as soon as their mortgage closes.
+- hook: CMS's investment property clients close their London mortgages and immediately face the management decision — a mutual referral arrangement where CMS recommends Prospera for management and Prospera recommends CMS for financing creates a seamless investor client journey. A resources or partners page listing is the lowest-friction ask; a co-authored investor guide is the higher-value play.
+- specific_content: Their London Ontario mortgage broker landing page focused on investment property mortgages and cash flow optimization — Prospera's management fee structure and rental yield data are the natural complement to the mortgage numbers their clients have already run.
+- researcher_notes: London Ontario mortgage broker, not a PM company. 5.0★ / 210+ reviews indicates strong local reputation. Site access was blocked at network level; research drawn from search index results and WebSearch. Outreach should be brief, professional, and focused on the referral loop. Contact via website.
+
+---
+
+## Moffatt Mortgage — London Ontario Mortgage Broker
+- url: https://moffattmortgage.com/
+- type: mortgage
+- why: Established London Ontario mortgage brokerage serving the local home and investment property buyer market — their investor clients who close on London rentals are Prospera's direct management prospects once financing is complete.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Moffatt Mortgage is a London Ontario mortgage brokerage serving residential and investment property buyers across London and the surrounding area. Locally rooted, they help clients navigate home purchases, renewals, and investment property financing in the London market — creating a client base of London-area landlords who need management support immediately after their mortgage closes.
+- hook: Moffatt's London investment property clients are Prospera's ideal prospects — a mutual referral arrangement where Moffatt recommends Prospera as the trusted local property manager and Prospera recommends Moffatt to landlord-clients looking to refinance or acquire additional London properties creates value for both businesses and their shared client base.
+- specific_content: Their London Ontario mortgage brokerage offering and investment property financing services — the natural point of intersection where Prospera enters the client's journey immediately after Moffatt's work is done.
+- researcher_notes: London Ontario mortgage broker, not a PM company. Site access was blocked at network level; research drawn from search index results and WebSearch. Outreach should be warm, local, and peer-to-business. Contact via website. Mutual referral is the primary angle.
+
+---
+
+## Altrua Financial — London Ontario Mortgage Broker
+- url: https://altrua.ca/london-ontario-mortgage-brokers/
+- type: mortgage
+- why: London Ontario mortgage brokerage (Brent Richardson, 1,900+ mortgages personally closed) with an established local investor client base — their London-area investment property buyers are Prospera's direct management prospects the moment their mortgage closes.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website; Brent Richardson is principal)
+- site_focus: Altrua Financial is a London Ontario mortgage brokerage led by Brent Richardson, who has personally closed over 1,900 mortgages in 17+ years serving the London market. Altrua's London page serves homebuyers and investment property investors seeking financing in London and the surrounding SW Ontario area — a deep local client base that includes active real estate investors who become landlords and need management support post-closing.
+- hook: Brent's London investor clients close their mortgages and immediately need to decide how to manage their rental properties — a mutual referral arrangement (Altrua recommends Prospera; Prospera recommends Brent) serves both client bases with zero cost. A brief co-authored resource ("What London investors do in the first 30 days after closing") would be a natural addition to Altrua's client education content.
+- specific_content: Their London Ontario investment property financing expertise — 1,900+ mortgages closed means a substantial London investor client base that has a built-in need for property management after closing. Brent's name and tenure signal a warm, local peer-to-peer outreach approach will land well.
+- researcher_notes: London Ontario mortgage broker (principal: Brent Richardson). Not a PM company. 17+ years in the London market, 1,900+ mortgages — well-established local broker. Site access was blocked at network level; research drawn from search index results and WebSearch. Use Brent's name in outreach; warm peer-to-business tone. Contact via website.
+
+---
+
+## Sturino Walker Legal Services — Ontario Landlord Paralegal Blog
+- url: https://www.sturinowalker.com/landlord-legal-services-ontario/
+- type: other
+- why: Ontario landlord paralegal firm with a blog covering LTB eviction services, N4/N12 filings, and landlord-tenant law — their Ontario landlord clients facing LTB matters are exactly who Prospera's professional management prevents from reaching that point; a mutual resource mention between complementary professionals is natural.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Sturino Walker Legal Services is an Ontario paralegal firm providing licensed eviction representation for landlords at the LTB, handling every step from N4/N12 drafting through LTB hearing representation. Their blog was updated in May 2026 with content on landlord tenant services and covers the full Ontario eviction process from a legal-practitioner perspective — written for landlords who are already in or approaching a dispute situation.
+- hook: Sturino Walker handles the legal escalation; Prospera handles the professional management that prevents it. A mutual resource mention — Sturino Walker as Prospera's recommended paralegal for Ontario landlords facing LTB matters; Prospera as Sturino Walker's recommended management option for clients who want to avoid future filings — creates a practical professional arrangement with no competitive conflict.
+- specific_content: Their landlord legal services page and LTB eviction blog content — Prospera's professional management (tenant screening, rent collection, documentation) is exactly what prevents the situations Sturino Walker resolves. The complementary nature is explicit and makes the resource mention pitch easy to frame.
+- researcher_notes: Ontario paralegal firm, not a PM company. Not in Prospera's existing paralegal prospects (different firm from Landlord First, Legal Matters Toronto, and Aptekar Paralegal). Blog updated May 2026 — active content. Site access was blocked at network level; research drawn from search index results and WebSearch. Professional tone; outreach should emphasize complementary roles.
+
+---
+
+## Ontario Landlord Help Group — LTB Resources & Paralegal
+- url: https://olhgroup.ca/ontario-landlord-paralegal-help-free-legal-consultation/
+- type: other
+- why: Ontario landlord paralegal service offering free LTB consultations with an active blog covering Bill 60 changes, new LTB rules, and rental law — their audience of Ontario landlords seeking legal guidance is directly served by Prospera's professional management, which prevents many of the LTB situations they help resolve.
+- researched: true
+- drafted: true
+- added: 2026-08-16
+- contact_email: (contact via website)
+- site_focus: Ontario Landlord Help Group (OLH Group) is an Ontario paralegal service offering free LTB consultations and landlord-side representation for evictions, non-payment cases, and LTB hearings. Their blog covers the new LTB rules under Bill 60, the 7-day N4 notice change, and rental law updates for 2026 — active, compliance-focused content for Ontario landlords facing or trying to avoid LTB proceedings.
+- hook: OLH Group resolves LTB disputes; Prospera prevents them through professional management. A resource mention on their site — naming Prospera as a recommended property management option for Ontario landlords who want to reduce their LTB exposure — would serve their audience at the exact moment they're recognizing that reactive legal help isn't enough, and professional management is the structural solution.
+- specific_content: Their Ontario landlord paralegal page and Bill 60 blog content — Prospera handles the operational compliance that prevents non-payment filings, unauthorized entry complaints, and maintenance disputes before they become LTB applications. That complementary positioning is the hook.
+- researcher_notes: Ontario paralegal/landlord help service, not a PM company. Free consultation model means high volume of Ontario landlords in distress — that audience is highly motivated to consider professional management as a preventive solution. Site access was blocked at network level; research drawn from search index results and WebSearch. Professional but accessible outreach tone; contact via website.
+
+---

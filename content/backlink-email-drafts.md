@@ -2281,3 +2281,173 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## House for Sale London Ontario — 2026-08-16
+To: (via website contact form)
+Subject: A rental-market companion to your neighbourhood gap analysis
+
+Hi there,
+
+Your piece on how London's 2026 market isn't one market — the neighbourhood-by-neighbourhood price divergence you mapped — is exactly the kind of local depth investors actually need.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company operating in London, St. Thomas, and Strathroy.
+
+I'd like to contribute a companion piece for your blog: a rental-market parallel to your sales-side analysis — vacancy rates, average rents, and tenant demand by London neighbourhood. It fills the operational gap for the investor-buyers your content attracts, and would be original local data they can't find anywhere else.
+
+Would a guest piece along those lines fit what you're publishing?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Westwood Realty Team — 2026-08-16
+To: (via website contact)
+Subject: A guest post idea for your investment property readers
+
+Hi Westwood team,
+
+Your blog's investment analysis and buyer tips content serves a London audience that often becomes landlords — and I think there's a piece that would genuinely serve them at that transition.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing rental properties in London, St. Thomas, and Strathroy.
+
+I'd like to contribute a guest post: "What to do in the 90 days after buying a London investment property." Practical and specific — inspection reports, landlord insurance, tenant placement, LTB compliance — the operational steps your buyer-investors need but that a real estate blog doesn't typically cover.
+
+It's a natural follow-up to the purchase content you already publish, and I'll keep it useful rather than promotional.
+
+Would this be a fit?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Live in Oakridge — 2026-08-16
+To: (via website contact)
+Subject: A rental market angle for your July market update readers
+
+Hi,
+
+Your July 2026 London market update covers the sales-side numbers well — but many of your readers are landlords or considering becoming one, and the rental market data tells a different story than the resale data does.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing rental properties across London including SW London neighbourhoods.
+
+I'd like to contribute a short piece to your blog: "What London's rental market looks like for landlords in 2026." Local vacancy rates, average rents, and what professional management costs — the data point your investor readers need alongside your monthly market numbers.
+
+Happy to send a draft for your review. Would this be something you'd publish?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## CMS Mortgages — 2026-08-16
+To: (via website contact)
+Subject: Referral loop for your investment property clients
+
+Hi CMS team,
+
+Investors who close London mortgages through you face the same question the moment they have keys: who manages this property?
+
+I'm Ebin Jaison, principal of Prospera Properties — a full-service property management company in London, St. Thomas, and Strathroy with a track record of tenanting and managing local investment properties.
+
+I'd like to propose a simple referral arrangement: you mention Prospera to your investment property clients as the recommended management partner post-close, and I refer Prospera clients who want to refinance or grow their portfolio to you. Zero cost, same client base, complete investor journey.
+
+Worth a short conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Moffatt Mortgage — 2026-08-16
+To: (via website contact)
+Subject: A referral arrangement for your London investor clients
+
+Hi Moffatt Mortgage team,
+
+Your London investment property clients need a property manager as soon as their mortgage closes — and that's exactly what Prospera does in London, St. Thomas, and Strathroy.
+
+I'm Ebin Jaison, principal of Prospera Properties, a full-service property management company with deep roots in the London area rental market.
+
+I'd like to propose a mutual referral arrangement: Moffatt recommends Prospera to investor clients post-close; Prospera recommends Moffatt when our landlord clients want to refinance or add another property. Same clients, different stages, no conflict.
+
+This kind of arrangement has worked well for us with other London brokers — happy to explain what it typically looks like if you'd like to connect.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Altrua Financial — 2026-08-16
+To: (via website contact; attention Brent Richardson)
+Subject: Referral arrangement for your London investor clients
+
+Hi Brent,
+
+With 1,900+ London mortgages behind you, you've built a client base of local investors who all face the same question once they close: who manages the property?
+
+I'm Ebin Jaison, principal of Prospera Properties — London's full-service property management company serving London, St. Thomas, and Strathroy. I manage investment properties for local landlords day to day: tenant placement, rent collection, maintenance, and LTB compliance.
+
+I'd like to propose a simple mutual referral: you mention Prospera to your London investment property clients post-close; I refer Prospera clients looking to refinance or acquire additional properties to Altrua. Same client base, complementary services.
+
+Worth a quick call to see if it's a fit?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Sturino Walker Legal Services — 2026-08-16
+To: (via website contact)
+Subject: Mutual resource mention — complementary services for Ontario landlords
+
+Hi Sturino Walker team,
+
+Your firm resolves LTB disputes for Ontario landlords; Prospera Properties prevents them through professional management. It's a natural professional pairing.
+
+I'm Ebin Jaison, principal of Prospera Properties, a property management company operating in London, St. Thomas, and Strathroy. We handle tenant screening, rent collection, notice compliance, and documentation — the operational layer that keeps landlords out of LTB proceedings in the first place.
+
+I'd like to propose a mutual resource mention: Sturino Walker as Prospera's recommended legal resource when London-area landlords face an LTB matter; Prospera as your recommended management option for clients who want to reduce future exposure.
+
+No cost to either side, genuine value for both our clients. Interested?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Ontario Landlord Help Group — 2026-08-16
+To: (via website contact)
+Subject: Resource mention for your Ontario landlord readers
+
+Hi OLH Group team,
+
+Your Bill 60 and LTB guidance blog reaches Ontario landlords at a difficult moment — when they're already in or approaching a dispute. Many of those landlords would benefit from knowing that professional property management is the structural way to prevent it from happening again.
+
+I'm Ebin Jaison, principal of Prospera Properties, operating in London, St. Thomas, and Strathroy. We handle tenant screening, rent collection, N4/N8 documentation, and LTB compliance for local landlords — the operational work that reduces LTB exposure at the source.
+
+A resource mention on your site — Prospera as a recommended management option for SW Ontario landlords wanting to avoid future filings — would be a natural addition to your content and a genuine service to your readers.
+
+Happy to chat if this sounds like a fit.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
