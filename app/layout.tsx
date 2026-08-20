@@ -136,6 +136,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18098735149');
+            gtag('config', 'G-J4XDMZBV1R');
           `}
         </Script>
         {/* Meta Pixel */}
