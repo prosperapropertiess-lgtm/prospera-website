@@ -48,6 +48,7 @@ export default function AdminHome() {
         { href: "/admin/leasing", name: "Leads to Call", count: n(live.uncontactedLeads), countLabel: "waiting", alert: !loading && uncontacted > 0 },
         { href: "/admin/properties", name: "Properties", count: n(live.properties), countLabel: "homes", alert: false },
         { href: "/admin/applications", name: "Applications", count: null, countLabel: null, alert: false },
+        { href: "/admin/maintenance", name: "Maintenance", count: null, countLabel: null, alert: false },
         { href: "/admin/agents", name: "Agents", count: null, countLabel: null, alert: false },
         { href: "/admin/tenants", name: "Tenants", count: null, countLabel: null, alert: false },
       ],
