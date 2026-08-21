@@ -6,37 +6,45 @@ const NAV = [
   {
     label: "Leasing",
     items: [
-      { href: "/admin/leasing", label: "Command Center" },
+      { href: "/admin/leasing", label: "Rentals" },
       { href: "/admin/properties", label: "Properties" },
       { href: "/admin/applications", label: "Applications" },
       { href: "/admin/agents", label: "Agents" },
-      { href: "/admin/tenants", label: "Tenant Portals" },
+      { href: "/admin/tenants", label: "Tenants" },
     ],
   },
   {
     label: "Landlords",
     items: [
-      { href: "/admin/onboard", label: "Onboard" },
-      { href: "/admin/messages", label: "Portal Messages" },
+      { href: "/admin/onboard", label: "Add a Landlord" },
+      { href: "/admin/messages", label: "Messages" },
       { href: "/admin/documents", label: "Documents" },
-      { href: "/admin/schedules", label: "Schedules" },
+      { href: "/admin/schedules", label: "Reminders" },
+      { href: "/admin/home-guides", label: "Home Guides" },
     ],
   },
   {
     label: "Growth",
     items: [
       { href: "/admin/leads", label: "Leads" },
-      { href: "/admin/dashboard", label: "CRM & Outreach" },
-      { href: "/admin/intelligence", label: "Rent Intelligence" },
-      { href: "/admin/seo", label: "SEO" },
+      { href: "/admin/dashboard", label: "Outreach" },
+      { href: "/admin/intelligence", label: "Rent Prices" },
+      { href: "/admin/seo", label: "Search Rankings" },
       { href: "/admin/qr-codes", label: "QR Codes" },
     ],
   },
   {
-    label: "Executive",
+    label: "Business",
     items: [
-      { href: "/admin/ceo", label: "CEO Dashboard" },
-      { href: "/admin/home-guides", label: "Home Guides" },
+      { href: "/admin/ceo", label: "Business Numbers" },
+    ],
+  },
+  {
+    label: "Tools",
+    items: [
+      { href: "/admin/ops", label: "Automation Log" },
+      { href: "/admin/crm", label: "Email Sequences" },
+      { href: "/admin/invite", label: "Invite an Agent" },
     ],
   },
 ];
@@ -67,7 +75,7 @@ export default function AdminSidebar() {
   return (
     <aside
       style={{
-        width: 216,
+        width: 248,
         flexShrink: 0,
         backgroundColor: "#1F2F3A",
         minHeight: "100vh",
@@ -81,28 +89,28 @@ export default function AdminSidebar() {
       }}
     >
       {/* Brand */}
-      <div style={{ padding: "22px 20px 18px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <div style={{ padding: "26px 22px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <Link href="/admin" style={{ textDecoration: "none" }}>
-          <p style={{ fontSize: 17, fontWeight: 700, color: "#FAF8F5", margin: 0, letterSpacing: "-0.02em" }}>
+          <p style={{ fontSize: 19, fontWeight: 700, color: "#FAF8F5", margin: 0, letterSpacing: "-0.02em" }}>
             Prospera
           </p>
         </Link>
-        <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(250,248,245,0.35)", margin: "3px 0 0" }}>
+        <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(250,248,245,0.35)", margin: "3px 0 0" }}>
           Admin
         </p>
       </div>
 
       {/* Nav groups */}
-      <nav style={{ flex: 1, paddingTop: 12, paddingBottom: 12 }}>
+      <nav style={{ flex: 1, paddingTop: 14, paddingBottom: 14 }}>
         {NAV.map((group) => (
-          <div key={group.label} style={{ marginBottom: 4 }}>
+          <div key={group.label} style={{ marginBottom: 6 }}>
             <p style={{
-              fontSize: 10,
+              fontSize: 11,
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: "rgba(250,248,245,0.28)",
-              padding: "10px 20px 4px",
+              padding: "12px 22px 5px",
               margin: 0,
             }}>
               {group.label}
@@ -115,14 +123,14 @@ export default function AdminSidebar() {
                   href={item.href}
                   style={{
                     display: "block",
-                    padding: "6px 20px",
-                    fontSize: 13,
+                    padding: "10px 22px",
+                    fontSize: 15,
                     fontWeight: active ? 600 : 400,
-                    color: active ? "#FAF8F5" : "rgba(250,248,245,0.52)",
+                    color: active ? "#FAF8F5" : "rgba(250,248,245,0.58)",
                     textDecoration: "none",
-                    borderLeft: `2px solid ${active ? "#8B2030" : "transparent"}`,
-                    backgroundColor: active ? "rgba(250,248,245,0.05)" : "transparent",
-                    lineHeight: 1.5,
+                    borderLeft: `3px solid ${active ? "#8B2030" : "transparent"}`,
+                    backgroundColor: active ? "rgba(250,248,245,0.06)" : "transparent",
+                    lineHeight: 1.4,
                   }}
                 >
                   {item.label}
@@ -134,17 +142,17 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div style={{ padding: "14px 20px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+      <div style={{ padding: "16px 22px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
         <Link
           href="/"
           target="_blank"
-          style={{ display: "block", fontSize: 12, color: "rgba(250,248,245,0.38)", textDecoration: "none", marginBottom: 8 }}
+          style={{ display: "block", fontSize: 13, color: "rgba(250,248,245,0.4)", textDecoration: "none", marginBottom: 10 }}
         >
           ↗ Live website
         </Link>
         <button
           onClick={handleLogout}
-          style={{ fontSize: 12, color: "rgba(250,248,245,0.38)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}
+          style={{ fontSize: 13, color: "rgba(250,248,245,0.4)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}
         >
           Sign out
         </button>

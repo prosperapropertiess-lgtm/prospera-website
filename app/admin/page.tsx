@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface LiveData {
   properties: number | null;
@@ -11,7 +10,6 @@ interface LiveData {
 }
 
 export default function AdminHome() {
-  const router = useRouter();
   const today = new Date().toLocaleDateString("en-CA", {
     weekday: "long", month: "long", day: "numeric",
   });
@@ -39,12 +37,6 @@ export default function AdminHome() {
     load();
   }, []);
 
-  async function handleLogout() {
-    await fetch("/api/admin/login", { method: "DELETE" });
-    router.push("/admin/login");
-    router.refresh();
-  }
-
   const n = (v: number | null) => (loading || v === null ? null : v);
   const uncontacted = live.uncontactedLeads ?? 0;
 
@@ -52,21 +44,21 @@ export default function AdminHome() {
     {
       label: "Leasing",
       tiles: [
-        { href: "/admin/leasing", name: "Command Center", count: n(live.activeCampaigns), countLabel: "active", alert: false },
-        { href: "/admin/leasing", name: "Uncontacted Leads", count: n(live.uncontactedLeads), countLabel: "leads", alert: !loading && uncontacted > 0 },
-        { href: "/admin/properties", name: "Properties", count: n(live.properties), countLabel: "units", alert: false },
+        { href: "/admin/leasing", name: "Rentals", count: n(live.activeCampaigns), countLabel: "open now", alert: false },
+        { href: "/admin/leasing", name: "Leads to Call", count: n(live.uncontactedLeads), countLabel: "waiting", alert: !loading && uncontacted > 0 },
+        { href: "/admin/properties", name: "Properties", count: n(live.properties), countLabel: "homes", alert: false },
         { href: "/admin/applications", name: "Applications", count: null, countLabel: null, alert: false },
         { href: "/admin/agents", name: "Agents", count: null, countLabel: null, alert: false },
-        { href: "/admin/tenants", name: "Tenant Portals", count: null, countLabel: null, alert: false },
+        { href: "/admin/tenants", name: "Tenants", count: null, countLabel: null, alert: false },
       ],
     },
     {
       label: "Landlords",
       tiles: [
-        { href: "/admin/onboard", name: "Onboard", count: null, countLabel: null, alert: false },
-        { href: "/admin/messages", name: "Portal Messages", count: null, countLabel: null, alert: false },
+        { href: "/admin/onboard", name: "Add a Landlord", count: null, countLabel: null, alert: false },
+        { href: "/admin/messages", name: "Messages", count: null, countLabel: null, alert: false },
         { href: "/admin/documents", name: "Documents", count: null, countLabel: null, alert: false },
-        { href: "/admin/schedules", name: "Schedules", count: null, countLabel: null, alert: false },
+        { href: "/admin/schedules", name: "Reminders", count: null, countLabel: null, alert: false },
         { href: "/admin/home-guides", name: "Home Guides", count: null, countLabel: null, alert: false },
       ],
     },
@@ -74,43 +66,47 @@ export default function AdminHome() {
       label: "Growth",
       tiles: [
         { href: "/admin/leads", name: "Leads", count: n(live.leads), countLabel: "total", alert: false },
-        { href: "/admin/dashboard", name: "CRM & Outreach", count: null, countLabel: null, alert: false },
-        { href: "/admin/intelligence", name: "Rent Intelligence", count: null, countLabel: null, alert: false },
-        { href: "/admin/seo", name: "SEO", count: null, countLabel: null, alert: false },
+        { href: "/admin/dashboard", name: "Outreach", count: null, countLabel: null, alert: false },
+        { href: "/admin/intelligence", name: "Rent Prices", count: null, countLabel: null, alert: false },
+        { href: "/admin/seo", name: "Search Rankings", count: null, countLabel: null, alert: false },
         { href: "/admin/qr-codes", name: "QR Codes", count: null, countLabel: null, alert: false },
-        { href: "/admin/ceo", name: "CEO Dashboard", count: null, countLabel: null, alert: false },
+        { href: "/admin/ceo", name: "Business Numbers", count: null, countLabel: null, alert: false },
       ],
     },
   ];
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#F7F5F2", fontFamily: "var(--font-poppins, sans-serif)" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 40px 100px" }}>
 
-      {/* Top bar */}
-      <div style={{
-        position: "sticky", top: 0, zIndex: 50,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0 48px", height: 54,
-        backgroundColor: "#1F2F3A",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 16, fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.02em" }}>Prospera</span>
-          <span style={{ fontSize: 12, color: "rgba(250,248,245,0.35)", marginLeft: 4 }}>{today}</span>
+        {/* Header */}
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          marginBottom: 40, flexWrap: "wrap", gap: 16,
+        }}>
+          <div>
+            <h1 style={{ fontSize: 26, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>
+              Good day, Ebin
+            </h1>
+            <p style={{ fontSize: 14, color: "#666666", margin: "4px 0 0" }}>{today}</p>
+          </div>
+          <Link
+            href="/admin/properties/new"
+            style={{
+              backgroundColor: "#8B2030", color: "#FAF8F5", textDecoration: "none",
+              padding: "14px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600,
+            }}
+          >
+            + Add a Property
+          </Link>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <Link href="/admin/properties/new" style={{ fontSize: 13, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>+ Add Property</Link>
-          <Link href="/" target="_blank" style={{ fontSize: 13, color: "rgba(250,248,245,0.6)", textDecoration: "none" }}>Live site ↗</Link>
-          <button onClick={handleLogout} style={{ fontSize: 13, color: "rgba(250,248,245,0.6)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}>Sign out</button>
-        </div>
-      </div>
 
-      <div style={{ maxWidth: 1080, margin: "0 auto", padding: "52px 48px 100px" }}>
         {SECTIONS.map((section) => (
-          <div key={section.label} style={{ marginBottom: 48 }}>
-            <p style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "#BBBBBB", margin: "0 0 14px" }}>
+          <div key={section.label} style={{ marginBottom: 44 }}>
+            <p style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "#999999", margin: "0 0 16px" }}>
               {section.label}
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
               {section.tiles.map((tile) => (
                 <Tile key={tile.href + tile.name} {...tile} />
               ))}
@@ -137,49 +133,50 @@ function Tile({ href, name, count, countLabel, alert }: {
       onMouseLeave={() => setHovered(false)}
     >
       <div style={{
-        aspectRatio: "1",
+        minHeight: 180,
         backgroundColor: alert ? "#FEF2F2" : "#FFFFFF",
         border: `1.5px solid ${hovered ? (alert ? "#F87171" : "#1F2F3A") : (alert ? "#FCA5A5" : "#E0DBD4")}`,
-        borderRadius: 16,
-        padding: "20px",
+        borderRadius: 20,
+        padding: "28px 20px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.09)" : "0 1px 3px rgba(0,0,0,0.04)",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        gap: 10,
+        boxShadow: hovered ? "0 8px 24px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
         transform: hovered ? "translateY(-2px)" : "none",
         transition: "all 0.15s ease",
         cursor: "pointer",
         boxSizing: "border-box",
       }}>
-        {/* Count (top) */}
-        <div>
-          {count !== null ? (
-            <p style={{
-              fontSize: 38,
-              fontWeight: 700,
-              color: alert ? "#8B2030" : "#1F2F3A",
-              margin: 0,
-              lineHeight: 1,
-              letterSpacing: "-0.03em",
-            }}>
-              {count}
-              {countLabel && (
-                <span style={{ fontSize: 11, fontWeight: 500, color: alert ? "#DC2626" : "#BBBBBB", marginLeft: 5, letterSpacing: 0 }}>
-                  {countLabel}
-                </span>
-              )}
-            </p>
-          ) : (
-            <div style={{ height: 38 }} />
-          )}
-        </div>
+        {/* Count */}
+        {count !== null ? (
+          <p style={{
+            fontSize: 44,
+            fontWeight: 700,
+            color: alert ? "#8B2030" : "#1F2F3A",
+            margin: 0,
+            lineHeight: 1,
+            letterSpacing: "-0.03em",
+          }}>
+            {count}
+          </p>
+        ) : (
+          <div style={{ height: 44 }} />
+        )}
+        {count !== null && countLabel && (
+          <p style={{ fontSize: 12, fontWeight: 500, color: alert ? "#DC2626" : "#999999", margin: 0 }}>
+            {countLabel}
+          </p>
+        )}
 
-        {/* Name (bottom) */}
+        {/* Name */}
         <p style={{
-          fontSize: 13,
+          fontSize: 17,
           fontWeight: 700,
           color: alert ? "#991B1B" : "#1F2F3A",
-          margin: 0,
+          margin: count !== null ? "4px 0 0" : 0,
           lineHeight: 1.3,
           letterSpacing: "-0.01em",
         }}>
