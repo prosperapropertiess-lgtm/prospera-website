@@ -60,7 +60,6 @@ export default function AdminHome() {
         { href: "/admin/messages", name: "Messages", count: null, countLabel: null, alert: false },
         { href: "/admin/documents", name: "Documents", count: null, countLabel: null, alert: false },
         { href: "/admin/schedules", name: "Reminders", count: null, countLabel: null, alert: false },
-        { href: "/admin/home-guides", name: "Home Guides", count: null, countLabel: null, alert: false },
       ],
     },
     {

@@ -64,16 +64,6 @@ export interface TenantMessage {
   created_at: string;
 }
 
-export interface HomeGuideSection {
-  id: string;
-  property_id: string;
-  section: string;
-  title: string;
-  content: string;
-  sort_order: number;
-  updated_at: string;
-}
-
 export interface ScheduleEvent {
   id: string;
   property_id: string;
@@ -175,16 +165,6 @@ export async function getTenantMessages(token: string): Promise<TenantMessage[]>
     .order("created_at", { ascending: true })
     .limit(50);
   return (data ?? []) as TenantMessage[];
-}
-
-export async function getPropertyHomeGuide(propertyId: string): Promise<HomeGuideSection[]> {
-  const sb = getSupabaseAdmin();
-  const { data } = await sb
-    .from("property_home_guide")
-    .select("id, property_id, section, title, content, sort_order, updated_at")
-    .eq("property_id", propertyId)
-    .order("sort_order", { ascending: true });
-  return (data ?? []) as HomeGuideSection[];
 }
 
 export async function getPropertySchedule(propertyId: string): Promise<ScheduleEvent[]> {

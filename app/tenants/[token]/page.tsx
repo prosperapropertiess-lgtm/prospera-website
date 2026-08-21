@@ -110,14 +110,6 @@ export default async function TenantHomePage({ params }: Props) {
       chipBg: BLUE_BG,
     },
     {
-      icon: "menu_book",
-      label: "Home Guide",
-      subtitle: "How things work",
-      href: `/tenants/${token}/home-guide`,
-      iconColor: GREEN,
-      chipBg: GREEN_BG,
-    },
-    {
       icon: "calendar_today",
       label: "Schedule",
       subtitle: futureEvents.length > 0 ? `${futureEvents.length} upcoming` : "Nothing upcoming",

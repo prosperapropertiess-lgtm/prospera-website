@@ -11,6 +11,7 @@ const NAV = [
       { href: "/admin/applications", label: "Applications" },
       { href: "/admin/maintenance", label: "Maintenance" },
       { href: "/admin/agents", label: "Agents" },
+      { href: "/admin/invite", label: "Invite an Agent" },
       { href: "/admin/tenants", label: "Tenants" },
     ],
   },
@@ -21,7 +22,6 @@ const NAV = [
       { href: "/admin/messages", label: "Messages" },
       { href: "/admin/documents", label: "Documents" },
       { href: "/admin/schedules", label: "Reminders" },
-      { href: "/admin/home-guides", label: "Home Guides" },
     ],
   },
   {
@@ -38,14 +38,6 @@ const NAV = [
     label: "Business",
     items: [
       { href: "/admin/ceo", label: "Business Numbers" },
-    ],
-  },
-  {
-    label: "Tools",
-    items: [
-      { href: "/admin/ops", label: "Automation Log" },
-      { href: "/admin/crm", label: "Email Sequences" },
-      { href: "/admin/invite", label: "Invite an Agent" },
     ],
   },
 ];
