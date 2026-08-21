@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
 import {
   LineChart, Line, BarChart, Bar, ComposedChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -72,14 +71,14 @@ function StatCard({
   badge?: string;
 }) {
   return (
-    <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-        <p style={{ fontSize: 11, fontWeight: 600, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "0.08em", margin: 0 }}>{label}</p>
+    <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "22px 22px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+        <p style={{ fontSize: 12, fontWeight: 600, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "0.08em", margin: 0 }}>{label}</p>
         {badge && <span style={{ fontSize: 10, backgroundColor: "#FEF3C7", color: "#92400E", padding: "1px 6px", borderRadius: 4, fontWeight: 600 }}>{badge}</span>}
       </div>
-      <p style={{ fontSize: 26, fontWeight: 700, color: color ?? TEXT, margin: "0 0 4px", fontVariantNumeric: "tabular-nums" }}>{value}</p>
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {sub && <p style={{ fontSize: 12, color: TEXT_MUT, margin: 0 }}>{sub}</p>}
+      <p style={{ fontSize: 32, fontWeight: 700, color: color ?? TEXT, margin: "0 0 6px", fontVariantNumeric: "tabular-nums" }}>{value}</p>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+        {sub && <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>{sub}</p>}
         {pill && <Pill val={pill.val} good={pill.good} />}
       </div>
     </div>
@@ -128,37 +127,35 @@ export default function CEODashboard() {
 
       {/* Header */}
       <div style={{ backgroundColor: SURFACE, borderBottom: `1px solid ${BORDER}` }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "14px 24px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-            <Link href="/admin/dashboard" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Admin</Link>
-            <span style={{ color: BORDER }}>·</span>
-            <h1 style={{ fontSize: 18, fontWeight: 700, color: TEXT, margin: 0 }}>CEO Dashboard</h1>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 32px 0" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: TEXT, margin: 0 }}>Business Numbers</h1>
             {ue?.data_note && (
-              <span style={{ fontSize: 11, backgroundColor: "#FEF3C7", color: "#92400E", padding: "2px 10px", borderRadius: 4, fontWeight: 600 }}>
+              <span style={{ fontSize: 12, backgroundColor: "#FEF3C7", color: "#92400E", padding: "3px 12px", borderRadius: 20, fontWeight: 600 }}>
                 {ue.data_note}
               </span>
             )}
           </div>
-          <div style={{ display: "flex", gap: 0, borderBottom: `1px solid ${BORDER}`, marginBottom: -1 }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingBottom: 16 }}>
             {TABS.map((t) => (
               <button key={t.id} onClick={() => setTab(t.id)} style={{
-                padding: "8px 16px", fontSize: 13,
-                fontWeight: tab === t.id ? 600 : 400,
-                color: tab === t.id ? TEXT : TEXT_MUT,
-                background: "none", border: "none",
-                borderBottom: tab === t.id ? `2px solid ${ACCENT}` : "2px solid transparent",
-                cursor: "pointer", marginBottom: -1,
+                padding: "10px 18px", fontSize: 14, borderRadius: 20,
+                fontWeight: tab === t.id ? 600 : 500,
+                color: tab === t.id ? "#FAF8F5" : TEXT_SEC,
+                backgroundColor: tab === t.id ? TEXT : "transparent",
+                border: tab === t.id ? "none" : `1px solid ${BORDER}`,
+                cursor: "pointer",
               }}>{t.label}</button>
             ))}
           </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "28px 32px 60px" }}>
         {loading ? (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {[...Array(8)].map((_, i) => (
-              <div key={i} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, height: 90, opacity: 0.5 }} />
+              <div key={i} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, height: 110, opacity: 0.5 }} />
             ))}
           </div>
         ) : (
@@ -222,7 +219,7 @@ function OverviewTab({ actuals, ue, forecast }: { actuals: ActualsData | null; u
       {/* Top KPIs */}
       <div style={{ marginBottom: 20 }}>
         <SectionLabel text="Now" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           <StatCard label="Properties Under Mgmt" value={String(pum)} sub="Active managed units" />
           <StatCard label="Owner Count" value={String(owners)} sub="Active clients" />
           <StatCard label="MRR" value={fmtCurrency(mrr)} sub="This month revenue" />
@@ -233,7 +230,7 @@ function OverviewTab({ actuals, ue, forecast }: { actuals: ActualsData | null; u
       {/* Unit economics snapshot */}
       <div style={{ marginBottom: 20 }}>
         <SectionLabel text="Unit Economics" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           <StatCard
             label="LTV:CAC"
             value={fmtRatio(u?.ltv_cac_ratio ?? null)}
@@ -266,7 +263,7 @@ function OverviewTab({ actuals, ue, forecast }: { actuals: ActualsData | null; u
       {baselineForecast.length > 0 && (
         <div style={{ marginBottom: 20 }}>
           <SectionLabel text="12-Month Baseline Trajectory" />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 16 }}>
             <StatCard label="Forecast PUM (12m)" value={String(Math.round(forecastEnd?.pum_end ?? 0))} sub={`From ${pum} today`} color={GREEN} />
             <StatCard label="Forecast MRR (12m)" value={fmtCurrency(forecastEnd?.mrr ?? null)} sub="Baseline projection" color={GREEN} />
             <StatCard label="Forecast Op. Profit (12m)" value={fmtCurrency(forecastEnd?.operating_profit ?? null)} sub="Monthly at end of year"
@@ -498,14 +495,14 @@ function ForecastTab({ forecast }: { forecast: ForecastData | null }) {
   return (
     <div>
       {/* Metric selector */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+      <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
         {METRICS.map((m) => (
           <button key={m.key} onClick={() => setMetric(m.key as typeof metric)} style={{
-            padding: "7px 14px", fontSize: 12, fontWeight: metric === m.key ? 600 : 400,
+            padding: "10px 18px", fontSize: 14, fontWeight: metric === m.key ? 600 : 400,
             backgroundColor: metric === m.key ? ACCENT : SURFACE,
             color: metric === m.key ? "#fff" : TEXT_MUT,
             border: `1px solid ${metric === m.key ? ACCENT : BORDER}`,
-            borderRadius: 7, cursor: "pointer",
+            borderRadius: 20, cursor: "pointer",
           }}>{m.label}</button>
         ))}
       </div>
@@ -530,7 +527,7 @@ function ForecastTab({ forecast }: { forecast: ForecastData | null }) {
       {baselineEnd && (
         <div style={{ marginBottom: 20 }}>
           <SectionLabel text="12-Month Baseline End State" />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             <StatCard label="PUM" value={String(Math.round(baselineEnd.pum_end))} sub="End of period" />
             <StatCard label="MRR" value={fmtCurrency(baselineEnd.mrr)} sub="Monthly run rate" />
             <StatCard label="ARR" value={fmtCurrency(baselineEnd.arr)} sub="Annualized" />
@@ -716,30 +713,30 @@ function AssumptionsTab({ onSaved }: { onSaved: () => void }) {
   return (
     <div>
       {/* Scenario tabs */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+      <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
         {scenarios.map((s) => (
           <button key={s.id} onClick={() => setActiveScenario(s.id)} style={{
-            padding: "8px 16px", fontSize: 13, fontWeight: activeScenario === s.id ? 600 : 400,
+            padding: "10px 20px", fontSize: 14, fontWeight: activeScenario === s.id ? 600 : 400,
             backgroundColor: activeScenario === s.id ? TEXT : SURFACE,
             color: activeScenario === s.id ? "#fff" : TEXT_MUT,
-            border: `1px solid ${BORDER}`, borderRadius: 7, cursor: "pointer",
+            border: `1px solid ${BORDER}`, borderRadius: 20, cursor: "pointer",
           }}>{s.name}</button>
         ))}
       </div>
 
       {activeScenarioData && (
-        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: 0 }}>{activeScenarioData.name} Assumptions</h3>
+        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: TEXT, margin: 0 }}>{activeScenarioData.name} Assumptions</h3>
             <button onClick={save} disabled={saving} style={{
-              backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7,
-              padding: "8px 18px", fontSize: 13, fontWeight: 600, cursor: "pointer",
+              backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 10,
+              padding: "12px 22px", fontSize: 14, fontWeight: 600, cursor: "pointer",
             }}>{saving ? "Saving…" : "Save & Reforecast"}</button>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
             {FIELDS.map((f) => (
               <div key={f.key}>
-                <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 4 }}>{f.label}</label>
+                <label style={{ fontSize: 13, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 6 }}>{f.label}</label>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <input
                     type="number"
@@ -747,11 +744,11 @@ function AssumptionsTab({ onSaved }: { onSaved: () => void }) {
                     onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                     placeholder="Not set"
                     step="any"
-                    style={{ flex: 1, border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 10px", fontSize: 13, backgroundColor: BG, color: TEXT }}
+                    style={{ flex: 1, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px 14px", fontSize: 15, backgroundColor: BG, color: TEXT }}
                   />
-                  <span style={{ fontSize: 11, color: TEXT_MUT, whiteSpace: "nowrap" }}>{f.unit}</span>
+                  <span style={{ fontSize: 12, color: TEXT_MUT, whiteSpace: "nowrap" }}>{f.unit}</span>
                 </div>
-                <p style={{ fontSize: 11, color: TEXT_MUT, margin: "3px 0 0" }}>{f.hint}</p>
+                <p style={{ fontSize: 12, color: TEXT_MUT, margin: "4px 0 0" }}>{f.hint}</p>
               </div>
             ))}
           </div>
@@ -858,23 +855,23 @@ function DataEntryTab({ onSaved }: { onSaved: () => void }) {
 
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 16 }}>
         <div>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>Monthly Actuals Entry</h2>
-          <p style={{ fontSize: 13, color: TEXT_MUT, margin: "4px 0 0" }}>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: TEXT, margin: 0 }}>Monthly Actuals Entry</h2>
+          <p style={{ fontSize: 14, color: TEXT_MUT, margin: "6px 0 0" }}>
             Revenue and expenses pull automatically from Notion. Enter everything else here.
           </p>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 12 }}>
           <div>
-            <label style={{ fontSize: 11, color: TEXT_MUT, display: "block", marginBottom: 3 }}>Period</label>
+            <label style={{ fontSize: 12, color: TEXT_MUT, display: "block", marginBottom: 5 }}>Period</label>
             <input type="month" value={form.period.slice(0, 7)}
               onChange={(e) => setForm({ ...form, period: e.target.value + "-01" })}
-              style={{ border: `1px solid ${BORDER}`, borderRadius: 7, padding: "7px 10px", fontSize: 13, backgroundColor: BG }} />
+              style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "11px 14px", fontSize: 15, backgroundColor: BG }} />
           </div>
           <button onClick={save} disabled={saving} style={{
-            backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8,
-            padding: "10px 20px", fontSize: 13, fontWeight: 600, cursor: "pointer", marginTop: 18,
+            backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 10,
+            padding: "13px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer",
           }}>
             {saving ? "Saving…" : saved ? "Saved ✓" : "Save Actuals"}
           </button>
@@ -883,24 +880,24 @@ function DataEntryTab({ onSaved }: { onSaved: () => void }) {
 
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {SECTIONS.map((section) => (
-          <div key={section.title} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-            <div style={{ marginBottom: 16 }}>
-              <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 2px" }}>{section.title}</p>
-              <p style={{ fontSize: 12, color: TEXT_MUT, margin: 0 }}>{section.note}</p>
+          <div key={section.title} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24 }}>
+            <div style={{ marginBottom: 18 }}>
+              <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: "0 0 3px" }}>{section.title}</p>
+              <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>{section.note}</p>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18 }}>
               {section.fields.map((f) => (
                 <div key={f.key}>
-                  <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 4 }}>{f.label}</label>
+                  <label style={{ fontSize: 13, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 6 }}>{f.label}</label>
                   <input
                     type="number"
                     value={(form as Record<string, string>)[f.key]}
                     onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                     placeholder="0"
                     step="any"
-                    style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 10px", fontSize: 13, backgroundColor: BG, color: TEXT, boxSizing: "border-box" }}
+                    style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px 14px", fontSize: 15, backgroundColor: BG, color: TEXT, boxSizing: "border-box" }}
                   />
-                  <p style={{ fontSize: 11, color: TEXT_MUT, margin: "3px 0 0" }}>{f.hint}</p>
+                  <p style={{ fontSize: 12, color: TEXT_MUT, margin: "5px 0 0" }}>{f.hint}</p>
                 </div>
               ))}
             </div>
@@ -908,15 +905,31 @@ function DataEntryTab({ onSaved }: { onSaved: () => void }) {
         ))}
 
         {/* Notes */}
-        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-          <label style={{ fontSize: 12, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 4 }}>Notes</label>
+        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24 }}>
+          <label style={{ fontSize: 13, fontWeight: 600, color: TEXT_MUT, display: "block", marginBottom: 6 }}>Notes</label>
           <textarea
             value={form.notes}
             onChange={(e) => setForm({ ...form, notes: e.target.value })}
             rows={3}
             placeholder="Context, anomalies, or reasons for manual overrides…"
-            style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, backgroundColor: BG, color: TEXT, resize: "vertical", boxSizing: "border-box", fontFamily: "inherit" }}
+            style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px 14px", fontSize: 15, backgroundColor: BG, color: TEXT, resize: "vertical", boxSizing: "border-box", fontFamily: "inherit" }}
           />
+        </div>
+
+        {/* Sticky save bar so a long scroll never strands the button */}
+        <div style={{
+          position: "sticky", bottom: 20, alignSelf: "flex-end",
+          backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14,
+          padding: "12px 14px", boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+          display: "flex", alignItems: "center", gap: 12,
+        }}>
+          {saved && <span style={{ fontSize: 13, color: GREEN, fontWeight: 600 }}>Saved ✓</span>}
+          <button onClick={save} disabled={saving} style={{
+            backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 10,
+            padding: "13px 28px", fontSize: 14, fontWeight: 600, cursor: "pointer",
+          }}>
+            {saving ? "Saving…" : "Save Actuals"}
+          </button>
         </div>
       </div>
     </div>
