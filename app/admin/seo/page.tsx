@@ -1,16 +1,15 @@
 "use client";
 import { useState, useEffect, Suspense } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT = "#C4374A";
+const BG = "#F7F5F2";
+const NAV = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const TEXT_MUT = "#999999";
+const ACCENT = "#8B2030";
 
 interface Summary { clicks: number; impressions: number; ctr: number; position: number; prevClicks: number; prevImpressions: number; }
 interface PageRow { slug: string; clicks: number; impressions: number; ctr: number; position: number; }
@@ -104,12 +103,12 @@ function SeoInner() {
   return (
     <div>
       {searchParams.get("connected") === "1" && (
-        <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "#14532d", color: "#4ade80", fontFamily: "var(--font-dm-sans)" }}>
+        <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "#DCFCE7", color: "#166534", fontFamily: "var(--font-dm-sans)" }}>
           Connected! Google Search Console is now linked.
         </div>
       )}
       {searchParams.get("error") && (
-        <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "#450a0a", color: "#f87171", fontFamily: "var(--font-dm-sans)" }}>
+        <div className="mb-6 px-4 py-3 rounded-lg text-sm" style={{ backgroundColor: "#FEE2E2", color: "#991B1B", fontFamily: "var(--font-dm-sans)" }}>
           Connection failed — try again.
         </div>
       )}
@@ -268,13 +267,6 @@ function SeoInner() {
 export default function SeoPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
-        <div className="flex items-center gap-5">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/admin" className="text-xs" style={{ color: TEXT_SEC }}>← Home</Link>
-          <Link href="/" target="_blank" className="text-xs" style={{ color: TEXT_SEC }}>↗ View site</Link>
-        </div>
-      </div>
       <div className="max-w-5xl mx-auto px-6 py-10">
         <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light mb-10" style={{ color: TEXT }}>SEO Performance</h1>
         <Suspense fallback={null}>

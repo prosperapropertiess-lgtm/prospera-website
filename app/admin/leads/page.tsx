@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
 
-const BG      = "#0B1219";
-const SURFACE = "#111C27";
-const BORDER  = "rgba(255,255,255,0.08)";
-const TEXT     = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT   = "#C4374A";
+const BG      = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const BORDER  = "#D8D2C8";
+const TEXT     = "#222222";
+const TEXT_SEC = "#666666";
+const TEXT_MUT = "#999999";
+const ACCENT   = "#8B2030";
 const FONT     = "var(--font-dm-sans, sans-serif)";
 
 interface Lead {
@@ -54,10 +53,10 @@ function TypeBadge({ type }: { type: string | null }) {
   if (!type) return null;
   const colors: Record<string, [string, string]> = {
     landlord:   ["rgba(139,32,48,0.15)", "#8B2030"],
-    tenant:     ["rgba(31,47,58,0.3)",   "#EDE9E3"],
-    newsletter: ["rgba(100,74,12,0.2)",  "#D4A017"],
+    tenant:     ["#1F2F3A",              "#FAF8F5"],
+    newsletter: ["rgba(100,74,12,0.2)",  "#8A6212"],
   };
-  const [bg, color] = colors[type] ?? ["rgba(255,255,255,0.08)", "rgba(237,233,227,0.5)"];
+  const [bg, color] = colors[type] ?? ["#F7F5F2", "#999999"];
   return (
     <span style={{ fontSize: 10, padding: "2px 8px", borderRadius: 4, backgroundColor: bg, color, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.8px", fontFamily: FONT }}>
       {type}
@@ -131,7 +130,6 @@ export default function LeadsPage() {
       {/* Header */}
       <div style={{ padding: "20px 28px", borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <Link href="/admin" style={{ color: TEXT_MUT, textDecoration: "none", fontSize: 13 }}>← Admin</Link>
           <h1 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: TEXT }}>Leads</h1>
         </div>
         <div style={{ display: "flex", gap: 16, fontSize: 12, color: TEXT_MUT }}>
@@ -182,7 +180,7 @@ export default function LeadsPage() {
                 fontSize: 12,
                 border: filter === key ? "none" : `1px solid ${BORDER}`,
                 backgroundColor: filter === key ? "#1F2F3A" : "transparent",
-                color: filter === key ? TEXT : TEXT_SEC,
+                color: filter === key ? "#FAF8F5" : TEXT_SEC,
                 cursor: "pointer",
                 fontFamily: FONT,
               }}
@@ -231,7 +229,7 @@ export default function LeadsPage() {
                       key={lead.id}
                       onClick={() => setExpanded(expanded === lead.id ? null : lead.id)}
                       style={{ borderBottom: `1px solid ${BORDER}`, cursor: "pointer", transition: "background 0.15s" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.03)")}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F7F5F2")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                     >
                       <td style={{ padding: "14px 16px", fontSize: 13, color: TEXT, fontWeight: 500 }}>
@@ -257,7 +255,7 @@ export default function LeadsPage() {
                             <button
                               onClick={() => removeLead(lead)}
                               disabled={removing === lead.id}
-                              style={{ fontSize: 11, padding: "4px 10px", backgroundColor: "rgba(196,55,74,0.15)", color: "#C4374A", border: "1px solid rgba(196,55,74,0.3)", borderRadius: 5, cursor: "pointer", fontFamily: FONT, whiteSpace: "nowrap" }}
+                              style={{ fontSize: 11, padding: "4px 10px", backgroundColor: "rgba(139,32,48,0.1)", color: "#8B2030", border: "1px solid rgba(139,32,48,0.3)", borderRadius: 5, cursor: "pointer", fontFamily: FONT, whiteSpace: "nowrap" }}
                             >
                               {removing === lead.id ? "Removing…" : "Confirm"}
                             </button>
@@ -279,7 +277,7 @@ export default function LeadsPage() {
                       </td>
                     </tr>
                     {expanded === lead.id && (
-                      <tr key={`${lead.id}-detail`} style={{ backgroundColor: "rgba(255,255,255,0.02)", borderBottom: `1px solid ${BORDER}` }}>
+                      <tr key={`${lead.id}-detail`} style={{ backgroundColor: "#FAF9F7", borderBottom: `1px solid ${BORDER}` }}>
                         <td colSpan={8} style={{ padding: "16px 20px" }}>
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                             {lead.phone && (
@@ -297,7 +295,7 @@ export default function LeadsPage() {
                             {lead.message && (
                               <div style={{ gridColumn: "1 / -1" }}>
                                 <p style={{ margin: "0 0 4px", fontSize: 10, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "1px" }}>Message</p>
-                                <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC, lineHeight: 1.6, background: "rgba(0,0,0,0.2)", padding: "10px 14px", borderRadius: 6 }}>{lead.message}</p>
+                                <p style={{ margin: 0, fontSize: 13, color: TEXT_SEC, lineHeight: 1.6, background: "#F7F5F2", padding: "10px 14px", borderRadius: 6 }}>{lead.message}</p>
                               </div>
                             )}
                             <div>

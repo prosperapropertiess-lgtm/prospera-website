@@ -1,15 +1,13 @@
 "use client";
 import { useState, useCallback } from "react";
-import Link from "next/link";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const ACCENT = "#C4374A";
-const INPUT_BG = "#0D1825";
+const BG = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const ACCENT = "#8B2030";
+const INPUT_BG = "#F7F5F2";
 
 const SECTIONS = [
   "Breaker Panel",
@@ -111,12 +109,6 @@ export function HomeGuidesClient({ adminSecret }: Props) {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: BG }}>
-      <div style={{ padding: "16px 24px", backgroundColor: NAV, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", gap: "16px" }}>
-        <Link href="/admin" style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none" }}>← Admin</Link>
-        <span style={{ color: BORDER }}>|</span>
-        <span style={{ color: TEXT, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>Home Guides</span>
-      </div>
-
       <div style={{ maxWidth: "860px", margin: "0 auto", padding: "40px 24px" }}>
         <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "48px", fontWeight: 300, color: TEXT, marginBottom: "8px" }}>
           Home Guides
@@ -150,7 +142,7 @@ export function HomeGuidesClient({ adminSecret }: Props) {
               disabled={loading || !propertyId.trim()}
               style={{
                 background: ACCENT,
-                color: TEXT,
+                color: "#FAF8F5",
                 border: "none",
                 borderRadius: "8px",
                 padding: "10px 20px",
@@ -229,11 +221,11 @@ export function HomeGuidesClient({ adminSecret }: Props) {
                     onClick={() => handleSave(section)}
                     disabled={s.saving}
                     style={{
-                      background: s.saved ? "rgba(52,211,153,0.15)" : "rgba(255,255,255,0.08)",
-                      border: `1px solid ${s.saved ? "rgba(52,211,153,0.3)" : BORDER}`,
+                      background: s.saved ? "rgba(5,150,105,0.1)" : "#F7F5F2",
+                      border: `1px solid ${s.saved ? "rgba(5,150,105,0.3)" : BORDER}`,
                       borderRadius: "8px",
                       padding: "8px 18px",
-                      color: s.saved ? "#34d399" : TEXT,
+                      color: s.saved ? "#059669" : TEXT,
                       fontSize: "13px",
                       fontFamily: "var(--font-dm-sans)",
                       fontWeight: 500,

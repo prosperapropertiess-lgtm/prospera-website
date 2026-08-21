@@ -53,7 +53,6 @@ export interface PropertyRecord extends Record<string, unknown> {
   transit_score?: number | null;
   bike_score?: number | null;
   parking?: boolean;
-  ideal_tenant_profile?: string[] | null;
   inquiry_count?: number | null;
   virtual_tour_url?: string | null;
 }

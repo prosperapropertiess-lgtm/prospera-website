@@ -9,18 +9,6 @@ const INPUT_BG = "#F7F5F2";
 
 const inputCls = "w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors focus:ring-1 focus:ring-[#8B2030]/40";
 
-const TENANT_PROFILES = [
-  { value: "young_professional", label: "Young Professionals", icon: "💼" },
-  { value: "couple", label: "Couples", icon: "💑" },
-  { value: "small_family", label: "Small Families", icon: "👨‍👩‍👧" },
-  { value: "student", label: "Students", icon: "🎓" },
-  { value: "retiree", label: "Retirees", icon: "🏡" },
-  { value: "roommates", label: "Roommates", icon: "🤝" },
-  { value: "remote_worker", label: "Remote Workers", icon: "💻" },
-  { value: "pet_owner", label: "Pet Owners", icon: "🐾" },
-  { value: "newcomer", label: "New to Canada", icon: "🌍" },
-];
-
 interface Props {
   data: WizardData;
   onChange: (partial: Partial<WizardData>) => void;
@@ -124,38 +112,6 @@ export default function PoliciesStep({ data, onChange }: Props) {
         </Field>
       </div>
 
-      {/* Ideal Tenant */}
-      <div className="rounded-xl border p-6 space-y-5" style={{ backgroundColor: SURFACE, borderColor: BORDER }}>
-        <h3 className="text-sm font-medium uppercase tracking-widest" style={{ color: TEXT_MUT }}>Ideal Tenant Profile</h3>
-        <p className="text-xs" style={{ color: TEXT_MUT }}>Who is this property perfect for? Select all that apply.</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {TENANT_PROFILES.map((p) => {
-            const selected = data.ideal_tenant_profile.includes(p.value);
-            return (
-              <button
-                key={p.value}
-                type="button"
-                onClick={() => {
-                  const updated = selected
-                    ? data.ideal_tenant_profile.filter((v) => v !== p.value)
-                    : [...data.ideal_tenant_profile, p.value];
-                  onChange({ ideal_tenant_profile: updated });
-                }}
-                className="px-3 py-2.5 rounded-lg text-xs text-left transition-all flex items-center gap-2"
-                style={{
-                  backgroundColor: selected ? "rgba(139,32,48,0.08)" : INPUT_BG,
-                  border: `1px solid ${selected ? "#8B2030" : BORDER}`,
-                  color: selected ? "#8B2030" : TEXT_SEC,
-                }}
-              >
-                <span>{p.icon}</span>
-                {selected && <span>✓</span>}
-                {p.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
     </div>
   );
 }

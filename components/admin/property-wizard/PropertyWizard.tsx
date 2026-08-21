@@ -55,7 +55,6 @@ export interface WizardData {
   guest_policy: string;
   quiet_hours: string;
   max_occupants: number | "";
-  ideal_tenant_profile: string[];
   // Step 5: Utilities
   utilities_included: boolean;
   utilities_list: string[];
@@ -91,7 +90,7 @@ const BLANK: WizardData = {
   title: "", address: "", city: "London", property_type: "", price: "", bedrooms: "", bathrooms: "", sqft: "", available_date: "",
   lease_term: "", deposit: "", first_month_required: true, last_month_required: true, move_in_costs: { "Key Deposit": 100 },
   parking: false, parking_type: "none", laundry_type: "none", ac: false, heating_type: "", appliances: [], outdoor_space: "none", furnished: false, storage: false, elevator: false, wheelchair_accessible: false,
-  pet_friendly: false, pet_policy: { cats: false, dogs: false, other: false, deposit: "", restrictions: "" }, smoking_allowed: false, guest_policy: "", quiet_hours: "", max_occupants: "", ideal_tenant_profile: [],
+  pet_friendly: false, pet_policy: { cats: false, dogs: false, other: false, deposit: "", restrictions: "" }, smoking_allowed: false, guest_policy: "", quiet_hours: "", max_occupants: "",
   utilities_included: false, utilities_list: [],
   utilities_detail: { heat: { included: false, avg_cost: "" }, water: { included: false, avg_cost: "" }, hydro: { included: false, avg_cost: "" }, internet: { included: false, avg_cost: "" }, gas: { included: false, avg_cost: "" } },
   latitude: null, longitude: null, neighbourhood_data: {}, walk_score: "", transit_score: "", bike_score: "", bus_routes: [], neighbourhood_vibe: "",
@@ -155,7 +154,6 @@ export default function PropertyWizard({ initial }: Props) {
       guest_policy: d.guest_policy || null,
       quiet_hours: d.quiet_hours || null,
       max_occupants: d.max_occupants !== "" ? Number(d.max_occupants) : null,
-      ideal_tenant_profile: d.ideal_tenant_profile,
       utilities_included: d.utilities_included,
       utilities_list: d.utilities_list,
       utilities_detail: d.utilities_detail,

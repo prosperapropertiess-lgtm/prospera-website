@@ -1,17 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const SURFACE_HI = "#172234";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT = "#C4374A";
+const BG = "#F7F5F2";
+const NAV = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const SURFACE_HI = "#F7F5F2";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const TEXT_MUT = "#999999";
+const ACCENT = "#8B2030";
 
 interface ZohoStats { totalContacts: number; closedWon: number; inPipeline: number; }
 interface MetaStats { connected: boolean; spend: number; impressions: number; reach: number; }
@@ -37,7 +36,6 @@ function Skeleton() {
 }
 
 export default function DashboardPage() {
-  const router = useRouter();
   const [zoho, setZoho] = useState<ZohoStats | null>(null);
   const [meta, setMeta] = useState<MetaStats | null>(null);
   const [outreach, setOutreach] = useState<OutreachEntry[]>([]);
@@ -61,12 +59,6 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
-
-  async function handleLogout() {
-    await fetch("/api/admin/login", { method: "DELETE" });
-    router.push("/admin/login");
-    router.refresh();
-  }
 
   async function logOutreach() {
     if (!form.contact_name.trim()) return;
@@ -105,16 +97,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
-        <div className="flex items-center gap-5">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/admin" className="text-xs" style={{ color: TEXT_SEC }}>← Home</Link>
-          <Link href="/admin/intelligence" className="text-xs" style={{ color: TEXT_SEC }}>Intelligence</Link>
-          <Link href="/" target="_blank" className="text-xs" style={{ color: TEXT_SEC }}>↗ View site</Link>
-        </div>
-        <button onClick={handleLogout} className="text-xs" style={{ color: TEXT_SEC }}>Sign out</button>
-      </div>
-
       <div className="max-w-5xl mx-auto px-6 py-10">
         <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light mb-10" style={{ color: TEXT }}>Outreach & CRM</h1>
 
@@ -318,7 +300,7 @@ export default function DashboardPage() {
       {/* Log Outreach Modal */}
       {modal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 px-4" style={{ backgroundColor: "rgba(0,0,0,0.7)" }}>
-          <div className="rounded-xl p-6 w-full max-w-md shadow-2xl border" style={{ backgroundColor: SURFACE_HI, borderColor: BORDER }}>
+          <div className="rounded-xl p-6 w-full max-w-md shadow-2xl border" style={{ backgroundColor: "#FFFFFF", borderColor: BORDER }}>
             <h2 className="font-[family-name:var(--font-cormorant)] text-2xl mb-5" style={{ color: TEXT }}>Log Outreach</h2>
             <div className="space-y-4">
               <div>

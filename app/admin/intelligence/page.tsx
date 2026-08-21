@@ -1,17 +1,16 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const SURFACE_HI = "#172234";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const TEXT_MUT = "rgba(237,233,227,0.28)";
-const ACCENT = "#C4374A";
+const BG = "#F7F5F2";
+const NAV = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const SURFACE_HI = "#F7F5F2";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const TEXT_MUT = "#999999";
+const ACCENT = "#8B2030";
 
 interface CityStats { total: number; week: number; scraped: number; landlord: number; manual: number; }
 interface MarketRow { city: string; bedrooms: number; median_rent: number | null; p25_rent: number | null; p75_rent: number | null; submission_count: number; computed_at: string; trend_direction: string | null; }
@@ -50,7 +49,7 @@ function SparkBar({ data, max }: { data: TrendPoint[]; max: number }) {
         const isLast = i === data.length - 1;
         return (
           <div key={i} className="flex-1 flex flex-col items-center" title={`${pt.label}: ${pt.count}`}>
-            <div className="w-full rounded-sm transition-all" style={{ height: `${Math.max(pct, 4)}%`, backgroundColor: isLast ? ACCENT : "rgba(255,255,255,0.12)", minHeight: "2px" }} />
+            <div className="w-full rounded-sm transition-all" style={{ height: `${Math.max(pct, 4)}%`, backgroundColor: isLast ? ACCENT : "rgba(31,47,58,0.12)", minHeight: "2px" }} />
           </div>
         );
       })}
@@ -63,7 +62,6 @@ const sectionLabel = (text: string) => (
 );
 
 export default function IntelligencePage() {
-  const router = useRouter();
   const [data, setData] = useState<IntelData | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -77,12 +75,6 @@ export default function IntelligencePage() {
 
   useEffect(() => { load(); }, [load]);
 
-  async function handleLogout() {
-    await fetch("/api/admin/login", { method: "DELETE" });
-    router.push("/admin/login");
-    router.refresh();
-  }
-
   async function handleRecompute() {
     setRefreshing(true);
     const res = await fetch("/api/admin/rent-intelligence/refresh", { method: "POST" });
@@ -94,16 +86,6 @@ export default function IntelligencePage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: BG }}>
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: NAV, borderBottom: `1px solid ${BORDER}` }}>
-        <div className="flex items-center gap-5">
-          <span className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: TEXT }}>Prospera</span>
-          <Link href="/admin" className="text-xs" style={{ color: TEXT_SEC }}>← Home</Link>
-          <Link href="/admin/dashboard" className="text-xs" style={{ color: TEXT_SEC }}>Dashboard</Link>
-          <Link href="/" target="_blank" className="text-xs" style={{ color: TEXT_SEC }}>↗ View site</Link>
-        </div>
-        <button onClick={handleLogout} className="text-xs" style={{ color: TEXT_SEC }}>Sign out</button>
-      </div>
-
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex items-start justify-between mb-10">
           <div>
@@ -272,7 +254,7 @@ export default function IntelligencePage() {
               {data.recentAnalysisRequests.map((req, i) => (
                 <div key={i} className="px-5 py-3 flex items-center justify-between" style={{ borderTop: i > 0 ? `1px solid ${BORDER}` : undefined }}>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: req.used ? "#4ade80" : "rgba(255,255,255,0.15)" }} />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: req.used ? "#4ade80" : "rgba(31,47,58,0.15)" }} />
                     <p className="text-sm" style={{ color: TEXT, fontFamily: "var(--font-dm-sans)" }}>{req.city} · {req.bedrooms}bd</p>
                   </div>
                   <div className="flex items-center gap-3 text-xs" style={{ fontFamily: "var(--font-dm-sans)" }}>

@@ -1,18 +1,17 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
 
-const BG      = "#0B1219";
-const NAV     = "#070D13";
-const SURFACE = "#111C27";
-const CARD    = "#141E2B";
-const BORDER  = "rgba(255,255,255,0.07)";
-const TEXT    = "#EDE9E3";
-const MUTED   = "rgba(237,233,227,0.45)";
-const HINT    = "rgba(237,233,227,0.22)";
-const ACCENT  = "#C4374A";
-const GREEN   = "#34D399";
-const AMBER   = "#FBBF24";
+const BG      = "#F7F5F2";
+const NAV     = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const CARD    = "#FFFFFF";
+const BORDER  = "#D8D2C8";
+const TEXT    = "#222222";
+const MUTED   = "#666666";
+const HINT    = "#999999";
+const ACCENT  = "#8B2030";
+const GREEN   = "#059669";
+const AMBER   = "#B45309";
 const FONT    = "var(--font-dm-sans, sans-serif)";
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -160,12 +159,12 @@ function AgentCard({ agent, onTrigger }: { agent: Agent; onTrigger: (id: string)
           onClick={() => onTrigger(agent.id)}
           style={{
             fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-            color: TEXT, background: "rgba(255,255,255,0.06)", border: `1px solid ${BORDER}`,
+            color: TEXT, background: "#F7F5F2", border: `1px solid ${BORDER}`,
             borderRadius: 6, padding: "6px 14px", cursor: "pointer", fontFamily: FONT,
             transition: "background 0.15s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#EFEBE4")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "#F7F5F2")}
         >
           Run now ›
         </button>
@@ -227,28 +226,22 @@ export default function OpsPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: BG, color: TEXT, fontFamily: FONT }}>
-
-      {/* Nav */}
-      <div style={{ background: NAV, borderBottom: `1px solid ${BORDER}`, padding: "0 24px", display: "flex", alignItems: "center", height: 56 }}>
-        <Link href="/admin/dashboard" style={{ color: MUTED, fontSize: 12, textDecoration: "none", marginRight: 20 }}>← Dashboard</Link>
-        <span style={{ color: HINT, marginRight: 20, fontSize: 12 }}>/</span>
-        <span style={{ color: TEXT, fontSize: 13, fontWeight: 600 }}>Automations</span>
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{
-            width: 7, height: 7, borderRadius: "50%", background: GREEN,
-            display: "inline-block", boxShadow: `0 0 6px ${GREEN}`,
-          }} />
-          <span style={{ fontSize: 11, color: MUTED }}>Live · refreshes every 30s</span>
-        </div>
-      </div>
-
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "36px 24px" }}>
 
         {/* Header */}
-        <div style={{ marginBottom: 32 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: MUTED, margin: "0 0 6px" }}>Prospera</p>
-          <h1 style={{ fontSize: 36, fontWeight: 300, color: TEXT, margin: 0, fontFamily: "var(--font-cormorant, serif)" }}>Automations</h1>
-          <p style={{ fontSize: 13, color: MUTED, margin: "6px 0 0" }}>All active agents, cron jobs, and their live status</p>
+        <div style={{ marginBottom: 32, display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: MUTED, margin: "0 0 6px" }}>Prospera</p>
+            <h1 style={{ fontSize: 36, fontWeight: 300, color: TEXT, margin: 0, fontFamily: "var(--font-cormorant, serif)" }}>Automations</h1>
+            <p style={{ fontSize: 13, color: MUTED, margin: "6px 0 0" }}>All active agents, cron jobs, and their live status</p>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
+            <span style={{
+              width: 7, height: 7, borderRadius: "50%", background: GREEN,
+              display: "inline-block", boxShadow: `0 0 6px ${GREEN}`,
+            }} />
+            <span style={{ fontSize: 11, color: MUTED }}>Live · refreshes every 30s</span>
+          </div>
         </div>
 
         {loading ? (
@@ -275,7 +268,7 @@ export default function OpsPage() {
                 position: "fixed", bottom: 24, right: 24, background: SURFACE,
                 border: `1px solid ${BORDER}`, borderRadius: 10, padding: "12px 20px",
                 fontSize: 13, color: TEXT, fontFamily: FONT, zIndex: 999,
-                boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
               }}>
                 {triggerMsg.msg}
               </div>

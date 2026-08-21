@@ -1,15 +1,13 @@
 "use client";
 import { useState, useCallback } from "react";
-import Link from "next/link";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const ACCENT = "#C4374A";
-const INPUT_BG = "#0D1825";
+const BG = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const ACCENT = "#8B2030";
+const INPUT_BG = "#F7F5F2";
 
 const EVENT_TYPES = ["inspection", "maintenance", "reminder", "garbage", "other"] as const;
 type EventType = typeof EVENT_TYPES[number];
@@ -61,11 +59,11 @@ function InputField({ value, onChange, placeholder, type = "text" }: { value: st
 }
 
 const EVENT_TYPE_COLORS: Record<EventType, string> = {
-  inspection: "#60a5fa",
-  maintenance: "#fbbf24",
-  reminder: "#a78bfa",
-  garbage: "#34d399",
-  other: "rgba(237,233,227,0.3)",
+  inspection: "#2563eb",
+  maintenance: "#B45309",
+  reminder: "#7c3aed",
+  garbage: "#059669",
+  other: "#999999",
 };
 
 export function SchedulesClient({ adminSecret }: Props) {
@@ -155,12 +153,6 @@ export function SchedulesClient({ adminSecret }: Props) {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: BG }}>
-      <div style={{ padding: "16px 24px", backgroundColor: NAV, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", gap: "16px" }}>
-        <Link href="/admin" style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none" }}>← Admin</Link>
-        <span style={{ color: BORDER }}>|</span>
-        <span style={{ color: TEXT, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>Schedules</span>
-      </div>
-
       <div style={{ maxWidth: "860px", margin: "0 auto", padding: "40px 24px" }}>
         <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "48px", fontWeight: 300, color: TEXT, marginBottom: "8px" }}>
           Schedules
@@ -194,7 +186,7 @@ export function SchedulesClient({ adminSecret }: Props) {
               disabled={loading || !propertyId.trim()}
               style={{
                 background: ACCENT,
-                color: TEXT,
+                color: "#FAF8F5",
                 border: "none",
                 borderRadius: "8px",
                 padding: "10px 20px",
@@ -239,7 +231,7 @@ export function SchedulesClient({ adminSecret }: Props) {
                       }}
                     >
                       {EVENT_TYPES.map((t) => (
-                        <option key={t} value={t} style={{ background: "#0B1219" }}>
+                        <option key={t} value={t} style={{ background: "#FFFFFF" }}>
                           {t.charAt(0).toUpperCase() + t.slice(1)}
                         </option>
                       ))}
@@ -275,7 +267,7 @@ export function SchedulesClient({ adminSecret }: Props) {
                   disabled={submitting || !title.trim()}
                   style={{
                     background: ACCENT,
-                    color: TEXT,
+                    color: "#FAF8F5",
                     border: "none",
                     borderRadius: "8px",
                     padding: "12px 24px",
@@ -337,11 +329,11 @@ export function SchedulesClient({ adminSecret }: Props) {
                       <button
                         onClick={() => handleDelete(ev.id)}
                         style={{
-                          background: "rgba(196,55,74,0.12)",
-                          border: "1px solid rgba(196,55,74,0.2)",
+                          background: "rgba(139,32,48,0.1)",
+                          border: "1px solid rgba(139,32,48,0.25)",
                           borderRadius: "6px",
                           padding: "5px 12px",
-                          color: "#f87171",
+                          color: "#8B2030",
                           fontSize: "12px",
                           fontFamily: "var(--font-dm-sans)",
                           cursor: "pointer",

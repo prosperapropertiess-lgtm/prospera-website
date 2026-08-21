@@ -1,15 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
-const BG = "#0B1219";
-const NAV = "#070D13";
-const SURFACE = "#111C27";
-const BORDER = "rgba(255,255,255,0.08)";
-const TEXT = "#EDE9E3";
-const TEXT_SEC = "rgba(237,233,227,0.5)";
-const ACCENT = "#C4374A";
-const INPUT_BG = "#0D1825";
+const BG = "#F7F5F2";
+const SURFACE = "#FFFFFF";
+const BORDER = "#D8D2C8";
+const TEXT = "#222222";
+const TEXT_SEC = "#666666";
+const ACCENT = "#8B2030";
+const INPUT_BG = "#F7F5F2";
 
 interface TokenRecord {
   id: string;
@@ -166,12 +164,6 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: BG }}>
-      <div style={{ padding: "16px 24px", backgroundColor: NAV, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", gap: "16px" }}>
-        <Link href="/admin" style={{ color: TEXT_SEC, fontSize: "13px", textDecoration: "none" }}>← Admin</Link>
-        <span style={{ color: BORDER }}>|</span>
-        <span style={{ color: TEXT, fontSize: "14px", fontFamily: "var(--font-dm-sans)" }}>Tenant Portals</span>
-      </div>
-
       <div style={{ maxWidth: "800px", margin: "0 auto", padding: "40px 24px" }}>
         <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "48px", fontWeight: 300, color: TEXT, marginBottom: "8px" }}>
           Tenant Portals
@@ -251,7 +243,7 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
               disabled={!canSubmit}
               style={{
                 background: ACCENT,
-                color: TEXT,
+                color: "#FAF8F5",
                 border: "none",
                 borderRadius: "8px",
                 padding: "12px 24px",
@@ -274,8 +266,8 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
           )}
 
           {result && (
-            <div style={{ marginTop: "24px", background: INPUT_BG, border: "1px solid rgba(52,211,153,0.2)", borderRadius: "12px", padding: "20px" }}>
-              <p style={{ color: "#34d399", fontSize: "12px", fontFamily: "var(--font-dm-sans)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "12px" }}>
+            <div style={{ marginTop: "24px", background: "#F0FDF4", border: "1px solid rgba(5,150,105,0.25)", borderRadius: "12px", padding: "20px" }}>
+              <p style={{ color: "#059669", fontSize: "12px", fontFamily: "var(--font-dm-sans)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "12px" }}>
                 Portal created {result.emailSent ? "· Welcome email sent ✓" : ""}
               </p>
               <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", marginBottom: "4px" }}>Token</p>
@@ -290,11 +282,11 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
                 <button
                   onClick={() => handleCopy(result.portalUrl, "new")}
                   style={{
-                    background: "rgba(255,255,255,0.08)",
+                    background: "#F7F5F2",
                     border: `1px solid ${BORDER}`,
                     borderRadius: "6px",
                     padding: "6px 14px",
-                    color: copied === "new" ? "#34d399" : TEXT,
+                    color: copied === "new" ? "#059669" : TEXT,
                     fontSize: "12px",
                     fontFamily: "var(--font-dm-sans)",
                     cursor: "pointer",
@@ -346,11 +338,11 @@ export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
                     <button
                       onClick={() => handleCopy(`https://prosperaproperties.co/tenants/${t.token}`, t.id)}
                       style={{
-                        background: "rgba(255,255,255,0.06)",
+                        background: "#F7F5F2",
                         border: `1px solid ${BORDER}`,
                         borderRadius: "6px",
                         padding: "4px 10px",
-                        color: copied === t.id ? "#34d399" : TEXT_SEC,
+                        color: copied === t.id ? "#059669" : TEXT_SEC,
                         fontSize: "11px",
                         fontFamily: "var(--font-dm-sans)",
                         cursor: "pointer",
