@@ -44,33 +44,33 @@ export default function AdminHome() {
     {
       label: "Leasing",
       tiles: [
-        { href: "/admin/leasing", name: "Rentals", count: n(live.activeCampaigns), countLabel: "open now", alert: false },
-        { href: "/admin/leasing", name: "Leads to Call", count: n(live.uncontactedLeads), countLabel: "waiting", alert: !loading && uncontacted > 0 },
-        { href: "/admin/properties", name: "Properties", count: n(live.properties), countLabel: "homes", alert: false },
-        { href: "/admin/applications", name: "Applications", count: null, countLabel: null, alert: false },
-        { href: "/admin/maintenance", name: "Maintenance", count: null, countLabel: null, alert: false },
-        { href: "/admin/agents", name: "Agents", count: null, countLabel: null, alert: false },
-        { href: "/admin/tenants", name: "Tenants", count: null, countLabel: null, alert: false },
+        { href: "/admin/leasing", name: "Rentals", icon: "home_work", count: n(live.activeCampaigns), countLabel: "open now", alert: false },
+        { href: "/admin/leasing", name: "Leads to Call", icon: "call", count: n(live.uncontactedLeads), countLabel: "waiting", alert: !loading && uncontacted > 0 },
+        { href: "/admin/properties", name: "Properties", icon: "villa", count: n(live.properties), countLabel: "homes", alert: false },
+        { href: "/admin/applications", name: "Applications", icon: "assignment", count: null, countLabel: null, alert: false },
+        { href: "/admin/maintenance", name: "Maintenance", icon: "handyman", count: null, countLabel: null, alert: false },
+        { href: "/admin/agents", name: "Agents", icon: "support_agent", count: null, countLabel: null, alert: false },
+        { href: "/admin/tenants", name: "Tenants", icon: "key", count: null, countLabel: null, alert: false },
       ],
     },
     {
       label: "Landlords",
       tiles: [
-        { href: "/admin/onboard", name: "Add a Landlord", count: null, countLabel: null, alert: false },
-        { href: "/admin/messages", name: "Messages", count: null, countLabel: null, alert: false },
-        { href: "/admin/documents", name: "Documents", count: null, countLabel: null, alert: false },
-        { href: "/admin/schedules", name: "Reminders", count: null, countLabel: null, alert: false },
+        { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business", count: null, countLabel: null, alert: false },
+        { href: "/admin/messages", name: "Messages", icon: "forum", count: null, countLabel: null, alert: false },
+        { href: "/admin/documents", name: "Documents", icon: "folder", count: null, countLabel: null, alert: false },
+        { href: "/admin/schedules", name: "Reminders", icon: "event", count: null, countLabel: null, alert: false },
       ],
     },
     {
       label: "Growth",
       tiles: [
-        { href: "/admin/leads", name: "Leads", count: n(live.leads), countLabel: "total", alert: false },
-        { href: "/admin/dashboard", name: "Outreach", count: null, countLabel: null, alert: false },
-        { href: "/admin/intelligence", name: "Rent Prices", count: null, countLabel: null, alert: false },
-        { href: "/admin/seo", name: "Search Rankings", count: null, countLabel: null, alert: false },
-        { href: "/admin/qr-codes", name: "QR Codes", count: null, countLabel: null, alert: false },
-        { href: "/admin/ceo", name: "Business Numbers", count: null, countLabel: null, alert: false },
+        { href: "/admin/leads", name: "Leads", icon: "person_search", count: n(live.leads), countLabel: "total", alert: false },
+        { href: "/admin/dashboard", name: "Outreach", icon: "campaign", count: null, countLabel: null, alert: false },
+        { href: "/admin/intelligence", name: "Rent Prices", icon: "payments", count: null, countLabel: null, alert: false },
+        { href: "/admin/seo", name: "Search Rankings", icon: "query_stats", count: null, countLabel: null, alert: false },
+        { href: "/admin/qr-codes", name: "QR Codes", icon: "qr_code", count: null, countLabel: null, alert: false },
+        { href: "/admin/ceo", name: "Business Numbers", icon: "monitoring", count: null, countLabel: null, alert: false },
       ],
     },
   ];
@@ -95,6 +95,7 @@ export default function AdminHome() {
             style={{
               backgroundColor: "#8B2030", color: "#FAF8F5", textDecoration: "none",
               padding: "14px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600,
+              transition: "opacity 0.15s ease, transform 0.15s ease",
             }}
           >
             + Add a Property
@@ -118,9 +119,10 @@ export default function AdminHome() {
   );
 }
 
-function Tile({ href, name, count, countLabel, alert }: {
+function Tile({ href, name, icon, count, countLabel, alert }: {
   href: string;
   name: string;
+  icon: string;
   count: number | null;
   countLabel: string | null;
   alert: boolean;
@@ -133,27 +135,49 @@ function Tile({ href, name, count, countLabel, alert }: {
       onMouseLeave={() => setHovered(false)}
     >
       <div style={{
-        minHeight: 180,
+        minHeight: 190,
         backgroundColor: alert ? "#FEF2F2" : "#FFFFFF",
         border: `1.5px solid ${hovered ? (alert ? "#F87171" : "#1F2F3A") : (alert ? "#FCA5A5" : "#E0DBD4")}`,
         borderRadius: 20,
-        padding: "28px 20px",
+        padding: "26px 20px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
         gap: 10,
-        boxShadow: hovered ? "0 8px 24px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
-        transform: hovered ? "translateY(-2px)" : "none",
-        transition: "all 0.15s ease",
+        boxShadow: hovered ? "0 10px 28px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
+        transform: hovered ? "translateY(-3px) scale(1.015)" : "none",
+        transition: "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.15s ease",
         cursor: "pointer",
         boxSizing: "border-box",
       }}>
+        {/* Icon */}
+        <div style={{
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: alert ? "rgba(220,38,38,0.1)" : hovered ? "rgba(139,32,48,0.1)" : "rgba(31,47,58,0.06)",
+          transition: "background-color 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)",
+          transform: hovered ? "scale(1.08)" : "scale(1)",
+          marginBottom: 2,
+        }}>
+          <span className="material-symbols-outlined" style={{
+            fontSize: 20,
+            color: alert ? "#DC2626" : hovered ? "#8B2030" : "#1F2F3A",
+            transition: "color 0.2s ease",
+          }}>
+            {icon}
+          </span>
+        </div>
+
         {/* Count */}
         {count !== null ? (
           <p style={{
-            fontSize: 44,
+            fontSize: 40,
             fontWeight: 700,
             color: alert ? "#8B2030" : "#1F2F3A",
             margin: 0,
@@ -162,9 +186,7 @@ function Tile({ href, name, count, countLabel, alert }: {
           }}>
             {count}
           </p>
-        ) : (
-          <div style={{ height: 44 }} />
-        )}
+        ) : null}
         {count !== null && countLabel && (
           <p style={{ fontSize: 12, fontWeight: 500, color: alert ? "#DC2626" : "#999999", margin: 0 }}>
             {countLabel}
@@ -176,7 +198,7 @@ function Tile({ href, name, count, countLabel, alert }: {
           fontSize: 17,
           fontWeight: 700,
           color: alert ? "#991B1B" : "#1F2F3A",
-          margin: count !== null ? "4px 0 0" : 0,
+          margin: count !== null ? "2px 0 0" : 0,
           lineHeight: 1.3,
           letterSpacing: "-0.01em",
         }}>

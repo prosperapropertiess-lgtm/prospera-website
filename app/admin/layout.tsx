@@ -23,6 +23,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         "--font-dm-sans": "var(--font-poppins)",
       } as React.CSSProperties}
     >
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
       <AdminSidebar />
       <main style={{ flex: 1, minWidth: 0 }}>{children}</main>
     </div>

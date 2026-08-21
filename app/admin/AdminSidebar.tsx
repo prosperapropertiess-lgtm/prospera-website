@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -6,47 +7,59 @@ const NAV = [
   {
     label: "Leasing",
     items: [
-      { href: "/admin/leasing", label: "Rentals" },
-      { href: "/admin/properties", label: "Properties" },
-      { href: "/admin/applications", label: "Applications" },
-      { href: "/admin/maintenance", label: "Maintenance" },
-      { href: "/admin/agents", label: "Agents" },
-      { href: "/admin/invite", label: "Invite an Agent" },
-      { href: "/admin/tenants", label: "Tenants" },
+      { href: "/admin/leasing", label: "Rentals", icon: "home_work" },
+      { href: "/admin/properties", label: "Properties", icon: "villa" },
+      { href: "/admin/applications", label: "Applications", icon: "assignment" },
+      { href: "/admin/maintenance", label: "Maintenance", icon: "handyman" },
+      { href: "/admin/agents", label: "Agents", icon: "support_agent" },
+      { href: "/admin/invite", label: "Invite an Agent", icon: "person_add" },
+      { href: "/admin/tenants", label: "Tenants", icon: "key" },
     ],
   },
   {
     label: "Landlords",
     items: [
-      { href: "/admin/onboard", label: "Add a Landlord" },
-      { href: "/admin/messages", label: "Messages" },
-      { href: "/admin/documents", label: "Documents" },
-      { href: "/admin/schedules", label: "Reminders" },
+      { href: "/admin/onboard", label: "Add a Landlord", icon: "add_business" },
+      { href: "/admin/messages", label: "Messages", icon: "forum" },
+      { href: "/admin/documents", label: "Documents", icon: "folder" },
+      { href: "/admin/schedules", label: "Reminders", icon: "event" },
     ],
   },
   {
     label: "Growth",
     items: [
-      { href: "/admin/leads", label: "Leads" },
-      { href: "/admin/dashboard", label: "Outreach" },
-      { href: "/admin/intelligence", label: "Rent Prices" },
-      { href: "/admin/seo", label: "Search Rankings" },
-      { href: "/admin/qr-codes", label: "QR Codes" },
+      { href: "/admin/leads", label: "Leads", icon: "person_search" },
+      { href: "/admin/dashboard", label: "Outreach", icon: "campaign" },
+      { href: "/admin/intelligence", label: "Rent Prices", icon: "payments" },
+      { href: "/admin/seo", label: "Search Rankings", icon: "query_stats" },
+      { href: "/admin/qr-codes", label: "QR Codes", icon: "qr_code" },
     ],
   },
   {
     label: "Business",
     items: [
-      { href: "/admin/ceo", label: "Business Numbers" },
+      { href: "/admin/ceo", label: "Business Numbers", icon: "monitoring" },
     ],
   },
 ];
 
 const HIDE_ON = ["/admin/login", "/admin/leasing/login"];
 
+function Icon({ name, size = 20 }: { name: string; size?: number }) {
+  return (
+    <span
+      className="material-symbols-outlined"
+      style={{ fontSize: size, lineHeight: 1, flexShrink: 0 }}
+    >
+      {name}
+    </span>
+  );
+}
+
 export default function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [hovered, setHovered] = useState<string | null>(null);
 
   if (HIDE_ON.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
     return null;
@@ -68,7 +81,7 @@ export default function AdminSidebar() {
   return (
     <aside
       style={{
-        width: 248,
+        width: 252,
         flexShrink: 0,
         backgroundColor: "#1F2F3A",
         minHeight: "100vh",
@@ -110,23 +123,31 @@ export default function AdminSidebar() {
             </p>
             {group.items.map((item) => {
               const active = isActive(item.href);
+              const isHovered = hovered === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
+                  onMouseEnter={() => setHovered(item.href)}
+                  onMouseLeave={() => setHovered(null)}
                   style={{
-                    display: "block",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
                     padding: "10px 22px",
                     fontSize: 15,
                     fontWeight: active ? 600 : 400,
                     color: active ? "#FAF8F5" : "rgba(250,248,245,0.58)",
                     textDecoration: "none",
                     borderLeft: `3px solid ${active ? "#8B2030" : "transparent"}`,
-                    backgroundColor: active ? "rgba(250,248,245,0.06)" : "transparent",
+                    backgroundColor: active ? "rgba(250,248,245,0.07)" : isHovered ? "rgba(250,248,245,0.04)" : "transparent",
                     lineHeight: 1.4,
+                    transition: "background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease",
+                    paddingLeft: isHovered && !active ? 25 : 22,
                   }}
                 >
-                  {item.label}
+                  <Icon name={item.icon} />
+                  <span>{item.label}</span>
                 </Link>
               );
             })}
@@ -139,14 +160,16 @@ export default function AdminSidebar() {
         <Link
           href="/"
           target="_blank"
-          style={{ display: "block", fontSize: 13, color: "rgba(250,248,245,0.4)", textDecoration: "none", marginBottom: 10 }}
+          style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "rgba(250,248,245,0.4)", textDecoration: "none", marginBottom: 10 }}
         >
-          ↗ Live website
+          <Icon name="open_in_new" size={16} />
+          Live website
         </Link>
         <button
           onClick={handleLogout}
-          style={{ fontSize: 13, color: "rgba(250,248,245,0.4)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}
+          style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "rgba(250,248,245,0.4)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "inherit" }}
         >
+          <Icon name="logout" size={16} />
           Sign out
         </button>
       </div>
