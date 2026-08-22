@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import React from "react";
 import { Poppins } from "next/font/google";
-import AdminSidebar from "./AdminSidebar";
+import AdminTopBar from "./AdminTopBar";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
@@ -18,7 +18,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <div
       className={poppins.variable}
       style={{
-        display: "flex",
         fontFamily: "var(--font-poppins), -apple-system, sans-serif",
         "--font-dm-sans": "var(--font-poppins)",
       } as React.CSSProperties}
@@ -27,8 +26,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
-      <AdminSidebar />
-      <main style={{ flex: 1, minWidth: 0 }}>{children}</main>
+      <AdminTopBar />
+      <main>{children}</main>
     </div>
   );
 }
