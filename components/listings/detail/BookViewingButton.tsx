@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PrequalifyForm from "./PrequalifyForm";
+import BookingModal from "./BookingModal";
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
@@ -27,7 +27,7 @@ export default function BookViewingButton({ property, variant = "primary", class
         className={`inline-flex items-center gap-2 px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded ${className}`}
         style={{ backgroundColor: "rgba(45,122,79,0.10)", color: "#2D7A4F", border: "1px solid rgba(45,122,79,0.2)" }}
       >
-        ✓ Viewing Requested
+        ✓ Viewing Booked
       </span>
     );
   }
@@ -42,7 +42,7 @@ export default function BookViewingButton({ property, variant = "primary", class
   return (
     <>
       {open && (
-        <PrequalifyForm
+        <BookingModal
           property={property}
           onClose={() => setOpen(false)}
           onSuccess={handleSuccess}

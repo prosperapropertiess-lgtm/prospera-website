@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PropertyRecord } from "./ListingPage";
-import PrequalifyForm from "./PrequalifyForm";
+import BookViewingButton from "./BookViewingButton";
 
 interface Props {
   property: PropertyRecord;
@@ -10,8 +10,6 @@ interface Props {
 
 export default function StickyCTA({ property }: Props) {
   const [visible, setVisible] = useState(false);
-  const [showPrequalify, setShowPrequalify] = useState(false);
-  const [prequalified, setPrequalified] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,31 +27,10 @@ export default function StickyCTA({ property }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  // Check if already prequalified (localStorage)
-  useEffect(() => {
-    const key = `prequalified:${property.id}`;
-    if (localStorage.getItem(key)) setPrequalified(true);
-  }, [property.id]);
-
-  function handlePrequalSuccess() {
-    localStorage.setItem(`prequalified:${property.id}`, "true");
-    setPrequalified(true);
-    setShowPrequalify(false);
-  }
-
   return (
     <>
       {/* Sentinel placed right after the hero */}
       <div ref={sentinelRef} className="absolute top-[60vh] left-0 w-px h-px pointer-events-none" aria-hidden />
-
-      {/* Pre-qualification modal */}
-      {showPrequalify && (
-        <PrequalifyForm
-          property={property}
-          onClose={() => setShowPrequalify(false)}
-          onSuccess={handlePrequalSuccess}
-        />
-      )}
 
       <div
         className={[
@@ -64,14 +41,10 @@ export default function StickyCTA({ property }: Props) {
         style={{ backgroundColor: "#1F2F3A", boxShadow: "0 -2px 16px rgba(0,0,0,0.18)" }}
       >
         <div className="max-w-5xl mx-auto">
-          {/* Mobile layout: price row + full-width buttons stacked */}
+          {/* Mobile layout: price row + full-width button */}
           <div className="flex items-center justify-between gap-3 sm:hidden">
-            {/* Price */}
             <div className="shrink-0">
-              <span
-                className="text-xl font-bold"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
+              <span className="text-xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 ${property.price.toLocaleString()}
               </span>
               <span className="text-xs ml-1" style={{ color: "rgba(250,248,245,0.5)" }}>/mo</span>
@@ -79,36 +52,13 @@ export default function StickyCTA({ property }: Props) {
                 {property.bedrooms}bd · {property.bathrooms}ba
               </p>
             </div>
-
-            {/* Mobile CTAs: side by side, compact */}
-            <div className="flex items-center gap-2 flex-1 justify-end">
-              {prequalified ? (
-                <span
-                  className="px-3 py-2.5 text-xs font-semibold uppercase tracking-wide rounded flex items-center gap-1"
-                  style={{ backgroundColor: "rgba(250,248,245,0.15)", color: "#FAF8F5" }}
-                >
-                  ✓ Booked
-                </span>
-              ) : (
-                <button
-                  onClick={() => setShowPrequalify(true)}
-                  className="px-4 py-2.5 text-xs font-semibold uppercase tracking-wide transition-opacity hover:opacity-90 rounded"
-                  style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
-                >
-                  Book a Viewing
-                </button>
-              )}
-            </div>
+            <BookViewingButton property={property} variant="primary" label="Book a Viewing" className="!px-4 !py-2.5" />
           </div>
 
-          {/* Desktop layout: original flex row */}
+          {/* Desktop layout */}
           <div className="hidden sm:flex items-center justify-between gap-4">
-            {/* Price */}
             <div>
-              <span
-                className="text-2xl font-bold"
-                style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
-              >
+              <span className="text-2xl font-bold" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
                 ${property.price.toLocaleString()}
               </span>
               <span className="text-sm ml-1" style={{ color: "rgba(250,248,245,0.5)" }}>/mo</span>
@@ -117,35 +67,7 @@ export default function StickyCTA({ property }: Props) {
                 {property.city ? ` · ${property.city}` : ""}
               </p>
             </div>
-
-            {/* CTAs */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              {prequalified ? (
-                <span
-                  className="px-5 py-3 text-xs font-semibold uppercase tracking-widest rounded flex items-center gap-2"
-                  style={{ backgroundColor: "rgba(250,248,245,0.15)", color: "#FAF8F5" }}
-                >
-                  ✓ Viewing Requested
-                </span>
-              ) : (
-                <>
-                  <button
-                    onClick={() => setShowPrequalify(true)}
-                    className="px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-80 rounded border"
-                    style={{ borderColor: "rgba(250,248,245,0.3)", color: "#FAF8F5" }}
-                  >
-                    Book a Viewing
-                  </button>
-                  <button
-                    onClick={() => setShowPrequalify(true)}
-                    className="px-6 py-3 text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-90 rounded"
-                    style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}
-                  >
-                    Pre-Qualify Now
-                  </button>
-                </>
-              )}
-            </div>
+            <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
           </div>
         </div>
       </div>

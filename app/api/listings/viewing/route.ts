@@ -1,6 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
+// GET /api/listings/viewing?property_id=xxx&date=YYYY-MM-DD — already-booked times for that property/day
+export async function GET(req: NextRequest) {
+  const propertyId = req.nextUrl.searchParams.get("property_id");
+  const date = req.nextUrl.searchParams.get("date");
+  if (!propertyId || !date) {
+    return NextResponse.json({ error: "property_id and date are required" }, { status: 400 });
+  }
+
+  const dayStart = new Date(`${date}T00:00:00`);
+  const dayEnd = new Date(`${date}T23:59:59`);
+
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("viewings")
+    .select("viewing_date")
+    .eq("property_id", propertyId)
+    .neq("status", "cancelled")
+    .gte("viewing_date", dayStart.toISOString())
+    .lte("viewing_date", dayEnd.toISOString());
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  return NextResponse.json({ booked: (data ?? []).map((v) => v.viewing_date) });
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { property_id, prequalification_id, tenant_name, tenant_email, tenant_phone, viewing_date, viewing_notes } = body;
@@ -20,6 +45,19 @@ export async function POST(req: NextRequest) {
 
   if (!property) {
     return NextResponse.json({ error: "Property not found" }, { status: 404 });
+  }
+
+  // Guard against double-booking the same property/slot (race condition on a stale picker)
+  const { data: conflict } = await supabase
+    .from("viewings")
+    .select("id")
+    .eq("property_id", property_id)
+    .eq("viewing_date", viewing_date)
+    .neq("status", "cancelled")
+    .maybeSingle();
+
+  if (conflict) {
+    return NextResponse.json({ error: "That time was just booked by someone else — pick another slot." }, { status: 409 });
   }
 
   // Create viewing

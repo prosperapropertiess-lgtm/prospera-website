@@ -11,6 +11,7 @@ import ApplicationProcess from "./ApplicationProcess";
 import ProspaBenefits from "./ProspaBenefits";
 import StickyCTA from "./StickyCTA";
 import BookViewingButton from "./BookViewingButton";
+import ViewTracker from "./ViewTracker";
 import FaqSection from "./FaqSection";
 import RentedBanner from "./RentedBanner";
 import LifeSimHero from "./LifeSimHero";
@@ -68,6 +69,7 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
 
   return (
     <div style={{ backgroundColor: "#F7F5F2" }} className="min-h-screen">
+      <ViewTracker propertyId={property.id} />
 
       {/* 1. Hero */}
       <LifeSimHero property={property} />
