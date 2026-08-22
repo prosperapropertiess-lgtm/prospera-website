@@ -48,6 +48,18 @@ interface Verdict {
   ai_concerns: string[];
 }
 
+interface Highlight {
+  category: string;
+  emoji: string;
+  name: string;
+  time: string;
+}
+
+interface TalkingPoints {
+  walkScore: number | null;
+  highlights: Highlight[];
+}
+
 function Script({ children }: { children: React.ReactNode }) {
   return (
     <p style={{ fontSize: 15, color: TEXT_SEC, fontStyle: "italic", margin: "0 0 14px", lineHeight: 1.5 }}>
@@ -114,7 +126,28 @@ export default function NewDiscoveryCallPage() {
   const [gettingVerdict, setGettingVerdict] = useState(false);
   const [acting, setActing] = useState<"reject" | "convert" | null>(null);
   const [error, setError] = useState("");
+  const [talkingPoints, setTalkingPoints] = useState<TalkingPoints | null>(null);
+  const [lookingUp, setLookingUp] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  async function lookUpAddress(lat: number, lng: number) {
+    setLookingUp(true);
+    setTalkingPoints(null);
+    try {
+      const res = await fetch("/api/admin/neighbourhood", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ latitude: lat, longitude: lng }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setTalkingPoints({ walkScore: data.walk_score ?? null, highlights: (data.places?.highlights ?? []) as Highlight[] });
+      }
+    } catch {
+      // Non-blocking — this is a nice-to-have during the call, not required
+    }
+    setLookingUp(false);
+  }
 
   // Start the draft record once on mount
   useEffect(() => {
@@ -243,6 +276,7 @@ export default function NewDiscoveryCallPage() {
                     if (saveTimer.current) clearTimeout(saveTimer.current);
                     saveTimer.current = setTimeout(() => save(next, id), 300);
                   }
+                  lookUpAddress(place.lat, place.lng);
                 }}
                 placeholder="Start typing an address..."
                 className={inputCls}
@@ -251,6 +285,32 @@ export default function NewDiscoveryCallPage() {
             </Field>
             <Field label="City"><input className={inputCls} style={inputStyle} value={form.property_city} onChange={(e) => set("property_city", e.target.value)} placeholder="London" /></Field>
           </div>
+
+          {(lookingUp || talkingPoints) && (
+            <div className="rounded-xl p-4" style={{ backgroundColor: "rgba(139,32,48,0.05)", border: "1px solid rgba(139,32,48,0.15)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: ACCENT }}>
+                💬 Talking points — say something like &ldquo;I can see you&apos;re close to...&rdquo;
+              </p>
+              {lookingUp ? (
+                <p style={{ fontSize: 13, color: TEXT_MUT }}>Looking up the area…</p>
+              ) : talkingPoints && (talkingPoints.highlights.length > 0 || talkingPoints.walkScore) ? (
+                <div className="flex flex-wrap gap-2">
+                  {talkingPoints.walkScore !== null && (
+                    <span className="px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: SURFACE, color: TEXT, border: `1px solid ${BORDER}` }}>
+                      🚶 Walk Score {talkingPoints.walkScore}
+                    </span>
+                  )}
+                  {talkingPoints.highlights.map((h, i) => (
+                    <span key={i} className="px-3 py-1.5 rounded-full text-xs font-medium" style={{ backgroundColor: SURFACE, color: TEXT, border: `1px solid ${BORDER}` }}>
+                      {h.emoji} {h.name}{h.time ? ` — ${h.time}` : ""}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p style={{ fontSize: 13, color: TEXT_MUT }}>Nothing notable nearby — no problem, keep going.</p>
+              )}
+            </div>
+          )}
           <Field label="Property type">
             <Chips options={["House", "Townhouse", "Apartment", "Duplex", "Basement Unit", "Other"]} value={form.property_type} onChange={(v) => set("property_type", v)} />
           </Field>
