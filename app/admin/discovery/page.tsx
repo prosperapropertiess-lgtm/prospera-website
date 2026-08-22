@@ -37,6 +37,8 @@ export default function DiscoveryPage() {
   const [criteria, setCriteria] = useState("");
   const [criteriaLoaded, setCriteriaLoaded] = useState(false);
   const [savingCriteria, setSavingCriteria] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -65,6 +67,16 @@ export default function DiscoveryPage() {
     });
     setSavingCriteria(false);
     setShowCriteria(false);
+  }
+
+  async function deleteCall(id: string) {
+    setDeleting(id);
+    const res = await fetch(`/api/admin/discovery/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setCalls((prev) => prev.filter((c) => c.id !== id));
+    }
+    setConfirmDeleteId(null);
+    setDeleting(null);
   }
 
   return (
@@ -118,7 +130,31 @@ export default function DiscoveryPage() {
                         {c.property_address || "No address yet"}{c.property_city ? `, ${c.property_city}` : ""}
                       </p>
                     </div>
-                    <span style={{ fontSize: 12, color: TEXT_MUT }}>{timeAgo(c.created_at)}</span>
+                    <div className="flex items-center gap-3">
+                      <span style={{ fontSize: 12, color: TEXT_MUT }}>{timeAgo(c.created_at)}</span>
+                      {confirmDeleteId === c.id ? (
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => deleteCall(c.id)}
+                            disabled={deleting === c.id}
+                            className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                            style={{ backgroundColor: "rgba(139,32,48,0.1)", color: ACCENT, border: "1px solid rgba(139,32,48,0.3)" }}
+                          >
+                            {deleting === c.id ? "Deleting…" : "Confirm delete"}
+                          </button>
+                          <button onClick={() => setConfirmDeleteId(null)} className="text-xs" style={{ color: TEXT_MUT }}>Cancel</button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setConfirmDeleteId(c.id)}
+                          className="flex items-center justify-center"
+                          style={{ width: 30, height: 30, borderRadius: "50%", border: `1px solid ${BORDER}`, background: "none", cursor: "pointer" }}
+                          aria-label="Delete call"
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: 16, color: TEXT_MUT }}>delete</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               );

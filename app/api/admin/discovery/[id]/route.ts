@@ -44,3 +44,15 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (error || !data) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json({ call: data });
 }
+
+// DELETE /api/admin/discovery/[id] — remove a call record
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!await isAdminAuthenticated(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { id } = await params;
+  const db = getSupabaseAdmin();
+  const { error } = await db.from("discovery_calls").delete().eq("id", id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ success: true });
+}

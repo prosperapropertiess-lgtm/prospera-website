@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 
 const BG = "#F7F5F2";
 const SURFACE = "#FFFFFF";
@@ -231,7 +232,23 @@ export default function NewDiscoveryCallPage() {
 
         <Section num="2" title="About the property">
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Address"><input className={inputCls} style={inputStyle} value={form.property_address} onChange={(e) => set("property_address", e.target.value)} placeholder="Street address" /></Field>
+            <Field label="Address">
+              <AddressAutocomplete
+                value={form.property_address}
+                onChange={(v) => set("property_address", v)}
+                onPlaceSelect={(place) => {
+                  const next = { ...form, property_address: place.street_address, property_city: place.city || form.property_city };
+                  setForm(next);
+                  if (id) {
+                    if (saveTimer.current) clearTimeout(saveTimer.current);
+                    saveTimer.current = setTimeout(() => save(next, id), 300);
+                  }
+                }}
+                placeholder="Start typing an address..."
+                className={inputCls}
+                style={inputStyle}
+              />
+            </Field>
             <Field label="City"><input className={inputCls} style={inputStyle} value={form.property_city} onChange={(e) => set("property_city", e.target.value)} placeholder="London" /></Field>
           </div>
           <Field label="Property type">
@@ -260,7 +277,11 @@ export default function NewDiscoveryCallPage() {
             <textarea className={inputCls} style={inputStyle} rows={2} value={form.reason_for_call} onChange={(e) => set("reason_for_call", e.target.value)} placeholder="What they said..." />
           </Field>
           <Field label="Are they looking for full management or just tenant placement?">
-            <Chips options={["Full Management", "Placement Only"]} value={form.service_type} onChange={(v) => set("service_type", v === "Full Management" ? "management" : "placement")} />
+            <Chips
+              options={["Full Management", "Placement Only"]}
+              value={form.service_type === "management" ? "Full Management" : form.service_type === "placement" ? "Placement Only" : ""}
+              onChange={(v) => set("service_type", v === "Full Management" ? "management" : "placement")}
+            />
           </Field>
           <Field label="Ask: how involved do you want to stay in day-to-day decisions?">
             <Chips options={["Fully hands-off", "Some involvement", "Wants to approve everything"]} value={form.involvement_level} onChange={(v) => set("involvement_level", v)} />
