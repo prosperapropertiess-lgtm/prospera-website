@@ -31,9 +31,12 @@ async function getNotionActualsForMonth(
     let recurring = 0;
     for (const entry of rentEntries) {
       if (entry.month === monthName && entry.year === year) {
-        const paid = entry.amountPaid ?? 0;
-        revenue += paid;
-        recurring += paid; // Management fees = recurring revenue
+        // MRR = rent billed (amountDue), not just what's been marked "Paid" in
+        // Notion so far — using amountPaid silently drops unpaid/un-updated
+        // units to $0 and makes the figure shrink whenever bookkeeping lags.
+        const billed = entry.amountDue ?? entry.amountPaid ?? 0;
+        revenue += billed;
+        recurring += billed;
       }
     }
 

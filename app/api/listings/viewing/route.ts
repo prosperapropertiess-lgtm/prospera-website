@@ -163,12 +163,7 @@ function viewingConfirmationEmail(firstName: string, property: string, date: str
         <tr><td style="padding:8px 0;font-size:14px;color:#5a6068;">Meet</td><td style="padding:8px 0;font-size:14px;color:#1a1a1a;">Ebin from Prospera Properties</td></tr>
       </table>
     </div>
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5a6068;margin:36px 0 10px;">WHAT TO BRING</p>
-    <ul style="margin:16px 0 28px;padding-left:24px;">
-      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;">Photo ID</li>
-      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;">Proof of income (recent pay stubs)</li>
-      <li style="margin:0 0 12px;font-size:17px;line-height:1.9;">Any questions about the property</li>
-    </ul>
+    <p style="font-size:17px;line-height:2.0;margin:0 0 28px;">Just bring yourself and any questions about the property — nothing else needed for the viewing. If it's a fit, we'll walk you through the application afterward.</p>
     <p style="font-size:17px;line-height:2.0;margin:0 0 28px;">A calendar invite is attached. Need to reschedule? Just reply to this email.</p>
     <p style="font-size:17px;line-height:2.0;margin:0 0 8px;">See you there,</p>
     <p style="font-size:17px;line-height:2.0;margin:0 0 28px;font-weight:600;">Ebin — (519) 697-1227</p>
