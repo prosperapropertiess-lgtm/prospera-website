@@ -6,30 +6,21 @@ interface Props {
   property: PropertyRecord;
 }
 
-
-// Accent colors for top borders — one per card slot
-const BORDER_COLORS = [
-  "#8B2030",
-  "#1F5FA6",
-  "#2D7A4F",
-  "#7A5A2D",
-  "#1F2F3A",
-];
-
-function deriveLabel(text: string): string {
+function deriveCategory(text: string): { label: string; icon: string } {
   const lower = text.toLowerCase();
-  if (/bedroom|bathroom|sqft|space|room/.test(lower)) return "Lots of Room";
-  if (/walk|minute|close|nearby|steps/.test(lower)) return "Steps Away";
-  if (/bus|transit|route|commute|car/.test(lower)) return "Easy Commute";
-  if (/pet|dog|cat|yard|balcony/.test(lower)) return "Pet Friendly";
-  if (/managed|prospera|24\/7|maintenance|emergency/.test(lower)) return "Pro Managed";
-  if (/laundry|parking|garage|appliance/.test(lower)) return "Move-In Ready";
-  if (/park|trail|green/.test(lower)) return "Near Green Space";
-  return "Key Feature";
+  if (/bedroom|bathroom|sqft|space|room|floor|level/.test(lower)) return { label: "Lots of Room", icon: "square_foot" };
+  if (/walk|minute|close|nearby|steps/.test(lower)) return { label: "Steps Away", icon: "directions_walk" };
+  if (/bus|transit|route|commute|car|walk score/.test(lower)) return { label: "Easy Commute", icon: "directions_bus" };
+  if (/pet|dog|cat|yard|balcony/.test(lower)) return { label: "Pet Friendly", icon: "pets" };
+  if (/managed|prospera|24\/7|maintenance|emergency|portal|review/.test(lower)) return { label: "Pro Managed", icon: "verified" };
+  if (/laundry|parking|garage|appliance|furnished|turnkey/.test(lower)) return { label: "Move-In Ready", icon: "key" };
+  if (/park|trail|green/.test(lower)) return { label: "Near Green Space", icon: "park" };
+  return { label: "Key Feature", icon: "star" };
 }
 
 export default function PropertyHighlights({ property }: Props) {
-  const highlights = property.ai_highlights ?? [];
+  // Some AI-generated highlight slots can come back blank — never render an empty card
+  const highlights = (property.ai_highlights ?? []).filter((h) => h && h.trim().length > 0);
   if (!highlights.length) return null;
 
   return (
@@ -51,39 +42,43 @@ export default function PropertyHighlights({ property }: Props) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {highlights.slice(0, 5).map((highlight, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-7 h-full"
-              style={{
-                border: "1px solid #D8D2C8",
-                borderTop: `3px solid ${BORDER_COLORS[i % BORDER_COLORS.length]}`,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-              }}
-            >
-              {/* Number + Label */}
-              <div className="flex items-center gap-3 mb-4">
-                <span
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                  style={{ backgroundColor: "#F7F5F2", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
-                >
-                  {deriveLabel(highlight)}
-                </span>
-              </div>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
+          {highlights.slice(0, 5).map((highlight, i) => {
+            const { label, icon } = deriveCategory(highlight);
+            return (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-7 h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+                style={{
+                  border: "1px solid #D8D2C8",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                }}
               >
-                {highlight}
-              </p>
-            </div>
-          ))}
+                {/* Icon + Label */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span
+                    className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "rgba(139,32,48,0.08)" }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 20, color: "#8B2030" }}>
+                      {icon}
+                    </span>
+                  </span>
+                  <span
+                    className="text-xs font-semibold uppercase tracking-widest"
+                    style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {label}
+                  </span>
+                </div>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
+                >
+                  {highlight}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

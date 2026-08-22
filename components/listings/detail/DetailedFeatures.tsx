@@ -11,6 +11,25 @@ interface FeatureCheck {
   included: boolean;
 }
 
+const AMENITY_ICONS: Record<string, string> = {
+  "Heat": "local_fire_department",
+  "Hydro / Electricity": "bolt",
+  "Water": "water_drop",
+  "Internet": "wifi",
+  "Air Conditioning": "ac_unit",
+  "In-Unit Laundry": "local_laundry_service",
+  "Shared Laundry": "local_laundry_service",
+  "Parking": "local_parking",
+  "Dishwasher": "countertops",
+  "Fridge": "kitchen",
+  "Stove / Oven": "countertops",
+  "Storage Unit": "inventory_2",
+  "Backyard": "yard",
+  "Balcony / Patio": "balcony",
+  "Elevator": "elevator",
+  "Furnished": "chair",
+};
+
 function buildChecklist(property: PropertyRecord): FeatureCheck[] {
   const raw = property as Record<string, unknown>;
   const ud = (raw.utilities_detail as Record<string, { included?: boolean }> | null) ?? {};
@@ -108,6 +127,9 @@ export default function DetailedFeatures({ property }: Props) {
                 {included.map((item) => (
                   <li key={item.label} className="flex items-center gap-3">
                     {CHECK_ICON}
+                    <span className="material-symbols-outlined" style={{ fontSize: 17, color: "#2D7A4F", opacity: 0.8 }}>
+                      {AMENITY_ICONS[item.label] ?? "check"}
+                    </span>
                     <span className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
                       {item.label}
                     </span>
@@ -140,6 +162,9 @@ export default function DetailedFeatures({ property }: Props) {
                 {notIncluded.map((item) => (
                   <li key={item.label} className="flex items-center gap-3">
                     {X_ICON}
+                    <span className="material-symbols-outlined" style={{ fontSize: 17, color: "#B43F3F", opacity: 0.6 }}>
+                      {AMENITY_ICONS[item.label] ?? "close"}
+                    </span>
                     <span className="text-sm" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       {item.label}
                     </span>
