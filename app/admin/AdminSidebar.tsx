@@ -19,6 +19,7 @@ const NAV = [
   {
     label: "Landlords",
     items: [
+      { href: "/admin/discovery", label: "Discovery Calls", icon: "call" },
       { href: "/admin/onboard", label: "Add a Landlord", icon: "add_business" },
       { href: "/admin/messages", label: "Messages", icon: "forum" },
       { href: "/admin/documents", label: "Documents", icon: "folder" },

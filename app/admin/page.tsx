@@ -56,6 +56,7 @@ export default function AdminHome() {
     {
       label: "Landlords",
       tiles: [
+        { href: "/admin/discovery", name: "Discovery Calls", icon: "call", count: null, countLabel: null, alert: false },
         { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business", count: null, countLabel: null, alert: false },
         { href: "/admin/messages", name: "Messages", icon: "forum", count: null, countLabel: null, alert: false },
         { href: "/admin/documents", name: "Documents", icon: "folder", count: null, countLabel: null, alert: false },
