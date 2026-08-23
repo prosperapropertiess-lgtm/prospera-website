@@ -1,5 +1,25 @@
 ---
-Last updated: 2026-08-16
+Last updated: 2026-08-23
+
+## New Topic Opportunities — 2026-08-23
+
+- ontario-property-manager-license-requirements | Est. difficulty: LOW | Vol: ~200/mo | Do Ontario property managers need a license? Under REBBA 2002, residential PM for individual units does not require a real estate license — but landlords frequently search this when vetting managers. A clear, authoritative guide from a licensed-context PM company would rank cleanly for this decision-stage query. Strong internal link to how-to-find-a-property-manager-ontario.md and property-management-fees-ontario.md.
+
+- how-to-evict-a-family-member-ontario | Est. difficulty: LOW/MEDIUM | Vol: ~300/mo | Family member living with the landlord under a license vs. a tenancy — the distinction determines whether the RTA applies at all. LTB and paralegal Q&A sites dominate; no PM company has a standalone guide covering the license-vs-tenancy distinction, the N11/eviction process, and practical steps. High search volume, underserved by authoritative content.
+
+- ontario-rent-deposit-interest-2026 | Est. difficulty: LOW | Vol: ~180/mo | The annual interest rate Ontario landlords must pay on last-month's-rent deposits changes each year per the rent increase guideline (2.5% for 2026). Landlords search this every year; only LTB.ca and paralegal Q&A sites currently rank. A short, annually-updated guide with a clear table of rates by year would earn the featured snippet and drive consistent seasonal traffic. Natural companion to security-deposits-ontario.md.
+
+- l6-application-ontario-landlord | Est. difficulty: LOW | Vol: ~100/mo | The LTB L6 application (Review of an Agreement to Terminate) is the least-covered LTB application type. We have L1–L4 and L9 guides but L5, L6, L7, and L8 are missing from the blog. A short standalone guide on the L6 fills the gap and completes the LTB application series. LTB.ca is the only substantive result today.
+
+- ontario-landlord-water-heater-responsibilities | Est. difficulty: LOW | Vol: ~150/mo | Who maintains the water heater in Ontario rentals — landlord vs. tenant responsibility, owned vs. rental water heater units (Enercare, EnerCare), what happens if the rental heater company charges the tenant directly, and how to handle HVAC equipment in a lease. No Ontario PM company has a guide; landlord forums and one-line Q&A posts dominate. Internal links to landlord-maintenance-responsibilities-ontario.md and utilities-ontario-rentals.md.
+
+- e-transfer-rent-ontario-landlord | Est. difficulty: LOW | Vol: ~200/mo | Can Ontario landlords require rent paid by e-transfer? What payment methods landlords can mandate under the RTA, record-keeping requirements for e-transfer payments, and best practices for documenting receipt. Quick practical query — forum posts and paralegal Q&A rank; no authoritative PM company guide exists. Short post, strong featured-snippet potential.
+
+- airbnb-london-ontario-landlord-bylaw | Est. difficulty: LOW | Vol: ~120/mo | London Ontario-specific short-term rental licensing and zoning bylaw requirements for landlords — distinct from our existing airbnb-short-term-rentals-ontario.md which covers the provincial RTA angle. London passed short-term rental licensing in 2023 (licence required for non-primary residence STRs); no comprehensive landlord guide covers the London bylaw specifically. Strong local SEO value and a natural companion post.
+
+- london-ontario-property-tax-landlord | Est. difficulty: LOW/MEDIUM | Vol: ~120/mo | London Ontario property tax rates for rental properties, how to calculate annual tax exposure when underwriting an investment, MPAC assessment class for rental vs. owner-occupied, and how tax factors into pricing decisions. Locally specific; no London PM company covers this. Internal links to how-to-price-rental-property-london-ontario.md and rental-property-tax-deductions-ontario.md.
+
+- l5-application-ontario-landlord | Est. difficulty: LOW | Vol: ~100/mo | The LTB L5 application (Application to Terminate the Tenancy — Unauthorized Pet). Complement to l6-application-ontario-landlord above. Fills the remaining gap in the LTB application series; only LTB.ca ranks substantively today.
 
 ## New Topic Opportunities
 
@@ -88,6 +108,14 @@ Last updated: 2026-08-16
 - "Ontario property manager licensing" — MEDIUM difficulty; no RECO licensing requirement for residential PM creates ambiguous results; Ontario.ca and ACMO rank for credentialing questions. Too fragmented and misaligned with landlord-intent searches to warrant a standalone post.
 - "London Ontario student housing landlord" — Covered by new london-ontario-student-housing-landlord-guide opportunity above.
 
+## SKIPPED — 2026-08-23
+
+- "Ontario property manager licensing" — Already flagged in prior week. Also note: ontario-property-manager-license-requirements above is the LANDLORD-intent version ("do I need to check if my PM is licensed?") — distinct from the RECO/credentialing query that government pages dominate. Keeping it in New Opportunities.
+- "London Airbnb rules" — Covered by our existing airbnb-short-term-rentals-ontario.md at a provincial level; City of London bylaw angle tracked as airbnb-london-ontario-landlord-bylaw above.
+- "how to evict Ontario 2026" — HIGH difficulty; Tribunals Ontario, CBC, and major legal clinics dominate. Existing evicting-tenant-ontario.md covers this. The family-member variant tracked above is a LOW-competition sub-angle.
+- "CMHC rental market report London" — Government/CMHC source dominates; informational content can't compete for the raw data query. Prospera can contribute local intel to third-party sites (Ratehub, Zolo, STEEDC) instead.
+- "ltb-default-order-ontario-landlord" — NOTE: this keyword appears in the prior New Topic Opportunities list but ltb-default-order-ontario.md already exists in the blog. Review the existing post for completeness before creating a duplicate.
+
 ## Topics to Expand
 
 - bill-60-ontario-landlords.md — Add section on Bill 97 changes and the specific July 1 + September 21 2026 in-force dates; many landlords now searching for "what changed on July 1" and the post may predate these implementation details.
@@ -104,4 +132,10 @@ Last updated: 2026-08-16
 - rent-increase-ontario-guidelines.md — Add a dedicated 2027 section: 1.9% guideline announced, N1 timing window for Jan 1, 2027 increases (serve by Oct 3, 2026), and how to round rent amounts correctly. High seasonal search volume right now; the existing post covers the concept but needs a dated 2027 section so it captures "2027 Ontario rent increase guideline" queries.
 - n12-notice-ontario.md — Add N12 60-day occupancy rule section (effective September 21, 2026): the intended occupant must move in within 60 days of the tenant's vacate date; failure creates a presumption of bad faith; up to $50,000 in compensation. Cross-link to planned n12-60-day-occupancy-rule-ontario post once written.
 - rent-repayment-agreement-ontario.md — Add mandatory LTB Payment Agreement Form notice (effective July 1, 2026): informal repayment agreements under s.206 are no longer sufficient; the official LTB form must be used and submitted to the regional LTB office. Cross-link to planned ltb-mandatory-payment-agreement-form-ontario post once written.
+
+### Topics to Expand — 2026-08-23
+- ltb-default-order-ontario.md — **CONFLICT FLAG:** ltb-default-order-ontario-landlord was listed as a New Topic Opportunity in the 2026-08-16 batch but the post already exists. Review the existing post: add section on how to enforce a default order via the sheriff (cross-link enforcing-eviction-order-ontario-sheriff.md), and add FAQ on what happens if the tenant reappears and requests a review. Update date to avoid it appearing stale.
+- security-deposits-ontario.md — Add a dedicated subsection on the 2026 LMR interest rate (2.5%, per the 2026 rent increase guideline) and a simple table showing rates by year (2023–2026). This update targets the ontario-rent-deposit-interest-2026 keyword gap identified above; the existing post covers the concept but lacks the year-specific rate table that earns the featured snippet.
+- ontario-standard-lease-2026.md — Verify that the N3 / rent amount disclosure requirement and the new pet addendum (Bill 97, mid-2026 revision) are reflected; many landlords are still using the pre-July 2026 form. Add a "Last updated" note at the top with today's date.
+- landlord-maintenance-responsibilities-ontario.md — Add a paragraph on water heater maintenance obligations, cross-linking to the planned ontario-landlord-water-heater-responsibilities post. The existing post covers HVAC broadly but not water heaters as a standalone item, which is the specific search term landlords use.
 ---
