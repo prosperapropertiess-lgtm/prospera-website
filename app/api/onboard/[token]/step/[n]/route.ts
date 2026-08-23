@@ -12,6 +12,7 @@ import {
   onboardEmail8Welcome,
   onboardTenantIntroEmail,
   placementAgreementSignedEmail,
+  placementOnboardingReadyEmail,
 } from "@/lib/emails";
 import { updateNotionPage } from "@/lib/notion";
 
@@ -179,6 +180,11 @@ export async function POST(
       console.error("Notion property create failed:", e);
     }
 
+    const isPlacement = session.service_type === "placement";
+    // Placement has no lease to upload — skip step 5 (lease upload) straight to
+    // step 6 (access & showing instructions), the real next placement-track step.
+    const nextStep = isPlacement ? 6 : 5;
+
     await sb.from("onboarding_sessions").update({
       property_address,
       property_city: property_city || null,
@@ -189,12 +195,14 @@ export async function POST(
       fee_amount: fee_amount || null,
       property_notes: property_notes || null,
       notion_property_id: notionPropertyId,
-      current_step: 5,
+      current_step: nextStep,
       step3_completed_at: new Date().toISOString(),
     }).eq("token", token);
 
-    // Send Email 1 to owner (lease upload link — now that Notion property exists)
-    if (session.owner_email) {
+    // Send Email 1 to owner (lease upload link) — management only. Placement
+    // owners already got the full "what happens next" rundown at Step 3 and
+    // have nothing to upload, so no email fires here for them.
+    if (session.owner_email && !isPlacement) {
       try {
         const html = onboardEmail1Welcome({
           ownerName: session.owner_name || "there",
@@ -212,7 +220,7 @@ export async function POST(
       }
     }
 
-    return NextResponse.json({ ok: true, next_step: 5, notion_property_id: notionPropertyId });
+    return NextResponse.json({ ok: true, next_step: nextStep, notion_property_id: notionPropertyId });
   }
 
   // ── Step 5: Owner Lease + Details Form (owner-submitted) ─────────────
@@ -280,6 +288,21 @@ export async function POST(
     }
 
     return NextResponse.json({ ok: true, next_step: 7 });
+  }
+
+  // ── Step 7 (placement): Pricing Authority & Readiness ──────────
+  // No lease/tenants exist yet for a placement-only assignment, so this skips
+  // the inspection report, tenant-intro auto-logic, and Step 9 (financial
+  // setup — that's for recurring rent collection, which doesn't apply until
+  // a tenant is placed) entirely, going straight to Step 10 handover.
+  if (step === 7 && session.service_type === "placement") {
+    await sb.from("onboarding_sessions").update({
+      step7_data: { ...body, _completed_at: new Date().toISOString() },
+      current_step: 10,
+      step8_completed_at: new Date().toISOString(),
+    }).eq("token", token);
+
+    return NextResponse.json({ ok: true, next_step: 10 });
   }
 
   // ── Step 7: Inspection ────────────────────────────────────────
@@ -426,24 +449,39 @@ export async function POST(
       } catch (e) { console.error("Notion owner status update failed:", e); }
     }
 
-    // Email 8 — welcome + dashboard link
+    // Email 8 — welcome + dashboard link (placement gets a version that
+    // doesn't claim a tenant/rent date exist yet — none does at this point)
     if (session.owner_email) {
       try {
-        const parsedLease = session.lease_parsed_data ?? {};
-        const tenants: Array<Record<string, unknown>> = Array.isArray(parsedLease.tenants) ? parsedLease.tenants : [];
-        const leaseStart = parsedLease.leaseStart;
-        const rentDate = leaseStart
-          ? new Date(String(leaseStart)).toLocaleDateString("en-CA", { month: "long", day: "numeric" })
-          : "the 1st";
-
-        const html = onboardEmail8Welcome({
-          ownerName: session.owner_name || "there",
-          propertyAddress: session.property_address || "your property",
-          tenantCount: tenants.length,
-          rentCollectionDate: rentDate,
-          dashboardUrl: `${BASE_URL}/owners/${accessToken}`,
-        });
-        await sendEmail(session.owner_email, "You're officially with Prospera Properties 🎉", html, ["prosperapropertiess@gmail.com"]);
+        const isPlacement = session.service_type === "placement";
+        const html = isPlacement
+          ? placementOnboardingReadyEmail({
+              ownerName: session.owner_name || "there",
+              propertyAddress: session.property_address || "your property",
+              dashboardUrl: `${BASE_URL}/owners/${accessToken}`,
+            })
+          : onboardEmail8Welcome({
+              ownerName: session.owner_name || "there",
+              propertyAddress: session.property_address || "your property",
+              tenantCount: (() => {
+                const parsedLease = session.lease_parsed_data ?? {};
+                const tenants = Array.isArray(parsedLease.tenants) ? parsedLease.tenants : [];
+                return tenants.length;
+              })(),
+              rentCollectionDate: (() => {
+                const leaseStart = session.lease_parsed_data?.leaseStart;
+                return leaseStart
+                  ? new Date(String(leaseStart)).toLocaleDateString("en-CA", { month: "long", day: "numeric" })
+                  : "the 1st";
+              })(),
+              dashboardUrl: `${BASE_URL}/owners/${accessToken}`,
+            });
+        await sendEmail(
+          session.owner_email,
+          isPlacement ? "Your intake is complete — you're set up with Prospera" : "You're officially with Prospera Properties 🎉",
+          html,
+          ["prosperapropertiess@gmail.com"]
+        );
       } catch (e) { console.error("Email 8 failed:", e); }
     }
 

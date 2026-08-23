@@ -442,6 +442,103 @@ function Step3Form({ token, onComplete, initialAddress, initialType }: {
   );
 }
 
+// ── Step 6 (placement): Access & Showing Instructions ────────────
+
+function Step6PlacementForm({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [form, setForm] = useState({
+    num_keys: "", front_door_code: "", garage_code: "", mailbox_notes: "",
+    showing_hours: "", notice_required: "", showing_restrictions: "",
+  });
+  const [saving, setSaving] = useState(false);
+  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    await fetch(`/api/onboard/${token}/step/6`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(form),
+    });
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+        <Input label="Number of Keys" name="num_keys" value={form.num_keys} onChange={set("num_keys")} type="number" placeholder="2" />
+        <Input label="Lockbox / Front Door Code" name="front_door_code" value={form.front_door_code} onChange={set("front_door_code")} placeholder="Optional" />
+        <Input label="Garage Code" name="garage_code" value={form.garage_code} onChange={set("garage_code")} placeholder="Optional" />
+        <Input label="Mailbox / Entry Notes" name="mailbox_notes" value={form.mailbox_notes} onChange={set("mailbox_notes")} placeholder="Key in lockbox at door" />
+        <Input label="Preferred Showing Hours" name="showing_hours" value={form.showing_hours} onChange={set("showing_hours")} placeholder="Weekdays 4–7pm, weekends anytime" />
+        <Input label="Notice Required" name="notice_required" value={form.notice_required} onChange={set("notice_required")} placeholder="24 hours — currently tenant-occupied" />
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Textarea label="Showing Restrictions" name="showing_restrictions" value={form.showing_restrictions} onChange={set("showing_restrictions")} placeholder="No showings during specific windows, no pets shown together, etc." rows={2} />
+        </div>
+      </div>
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Save Access & Showing Instructions →"}</PrimaryBtn>
+    </form>
+  );
+}
+
+// ── Step 7 (placement): Pricing Authority & Readiness ────────────
+
+function Step7PlacementForm({ token, onComplete }: { token: string; onComplete: () => void }) {
+  const [form, setForm] = useState({
+    desired_rent: "", authorized_rent_floor: "", pricing_flexibility: "", incentive_authority: "", known_defects: "",
+  });
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const set = (k: keyof typeof form) => (v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.desired_rent.trim() || !form.authorized_rent_floor.trim()) {
+      setError("Desired rent and authorized rent floor are required.");
+      return;
+    }
+    setSaving(true); setError("");
+    const r = await fetch(`/api/onboard/${token}/step/7`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...ADMIN_HEADER },
+      body: JSON.stringify(form),
+    });
+    const d = await r.json();
+    if (!r.ok) { setError(d.error || "Failed"); setSaving(false); return; }
+    onComplete();
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+        <Input label="Desired Rent ($)" name="desired_rent" value={form.desired_rent} onChange={set("desired_rent")} type="number" placeholder="2100" required />
+        <Input label="Authorized Rent Floor ($)" name="authorized_rent_floor" value={form.authorized_rent_floor} onChange={set("authorized_rent_floor")} type="number" placeholder="1950" required />
+        <Select label="Pricing Flexibility" name="pricing_flexibility" value={form.pricing_flexibility} onChange={set("pricing_flexibility")}
+          options={[
+            { value: "", label: "Select…" },
+            { value: "flexible", label: "Flexible — trusts our recommendation" },
+            { value: "conditional", label: "Conditional — wants to be consulted first" },
+            { value: "firm", label: "Firm — will not move off desired rent" },
+          ]}
+        />
+        <Select label="Incentive Authority" name="incentive_authority" value={form.incentive_authority} onChange={set("incentive_authority")}
+          options={[
+            { value: "", label: "Select…" },
+            { value: "preauthorized", label: "Pre-authorized — can offer without asking" },
+            { value: "approval_required", label: "Approval required every time" },
+            { value: "no_incentives", label: "No incentives" },
+          ]}
+        />
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Textarea label="Known Defects / Maintenance Items" name="known_defects" value={form.known_defects} onChange={set("known_defects")} placeholder="Anything needing disclosure or repair before rent-ready…" rows={3} />
+        </div>
+      </div>
+      <ErrorMsg msg={error} />
+      <PrimaryBtn disabled={saving}>{saving ? "Saving…" : "Save Pricing Authority →"}</PrimaryBtn>
+    </form>
+  );
+}
+
 // ── Step 6: Keys & Access ────────────────────────────────────────
 
 function Step6Form({ token, onComplete }: { token: string; onComplete: () => void }) {
@@ -791,26 +888,97 @@ export default function OnboardChecklist() {
             </div>
           </StepCard>
 
-          {/* ── Placement: after agreement, redirect to add property ── */}
+          {/* ── Placement track: distinct intake, not the management steps ──
+              Real placement-only checklist per docs/tenant-placement-os/05_OWNER_ONBOARDING.md —
+              property details, access/showing instructions, and pricing authority
+              (rent floor, flexibility, incentive authority) instead of the
+              recurring-management fields (lease upload, tenant records, financial
+              setup) that don't apply until a tenant is actually placed. */}
           {session.service_type === "placement" && step >= 3 && (
+          <>
             <StepCard
-              num={4} title="Add Property & Find Tenant"
-              status={session.completed_at ? "complete" : "active"}
-              completedAt={session.completed_at}
-              summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Property listed and tenant placement in progress</p>}
+              num={4} title="Property Details"
+              status={stepStatus(4)}
+              completedAt={session.step3_completed_at}
+              summary={
+                <div>
+                  <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: NAVY }}>
+                    {session.property_address}{session.property_city ? `, ${session.property_city}` : ""}
+                  </p>
+                  <p style={{ margin: "3px 0 0", fontSize: 14, color: MUTED }}>
+                    {session.property_type || "—"}
+                    {session.num_units ? ` · ${session.num_units} unit${session.num_units > 1 ? "s" : ""}` : ""}
+                    {session.approx_monthly_rent ? ` · $${Number(session.approx_monthly_rent).toLocaleString()}/mo asking` : ""}
+                  </p>
+                  {session.notion_property_id && (
+                    <p style={{ margin: "4px 0 0", fontSize: 12, color: GREEN, fontWeight: 500 }}>✓ Notion property record created</p>
+                  )}
+                </div>
+              }
             >
-              <div>
-                <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
-                  Agreement signed. Next: add the property to start finding a tenant.
-                </p>
-                <Link
-                  href="/admin/properties/new"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 6, background: BURGUNDY, borderRadius: 10, padding: "10px 18px", fontSize: 14, color: "#fff", textDecoration: "none", fontWeight: 600 }}
-                >
-                  Add Property →
-                </Link>
-              </div>
+              <Step3Form token={token} onComplete={load} initialAddress={session.property_address} initialType={session.property_type} />
             </StepCard>
+
+            <StepCard
+              num={6} title="Access & Showing Instructions"
+              status={stepStatus(6)}
+              completedAt={null}
+              summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Keys, entry, and showing instructions recorded</p>}
+            >
+              <Step6PlacementForm token={token} onComplete={load} />
+            </StepCard>
+
+            <StepCard
+              num={7} title="Pricing Authority & Readiness"
+              status={stepStatus(7)}
+              completedAt={null}
+              summary={<p style={{ margin: 0, fontSize: 14, color: MUTED }}>Rent floor, pricing flexibility, and incentive authority on file</p>}
+            >
+              <Step7PlacementForm token={token} onComplete={load} />
+            </StepCard>
+
+            <StepCard
+              num={10} title="Welcome & Handover"
+              status={stepStatus(10)}
+              completedAt={session.completed_at}
+              summary={
+                <div>
+                  <p style={{ margin: 0, fontSize: 15, fontWeight: 700, color: GREEN }}>Intake complete</p>
+                  {session.owner_access_token && (
+                    <a
+                      href={`/owners/${session.owner_access_token}`}
+                      target="_blank" rel="noreferrer"
+                      style={{ fontSize: 14, color: BURGUNDY, textDecoration: "none", display: "inline-block", marginTop: 6, fontWeight: 600 }}
+                    >
+                      View owner portal: /owners/{session.owner_access_token} ↗
+                    </a>
+                  )}
+                </div>
+              }
+            >
+              <Step10Form token={token} onComplete={load} />
+            </StepCard>
+
+            {session.status === "complete" && (
+              <StepCard
+                num={11} title="Add Property & Find Tenant"
+                status="active"
+                summary={undefined}
+              >
+                <div>
+                  <p style={{ margin: "4px 0 12px", fontSize: 14, color: MUTED, lineHeight: 1.6 }}>
+                    Intake complete. Next: run pricing and add the listing to start finding a tenant — see <code>04_RENT_PRICING.md</code> and <code>07_MARKETING_PREPARATION.md</code>.
+                  </p>
+                  <Link
+                    href="/admin/properties/new"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 6, background: BURGUNDY, borderRadius: 10, padding: "10px 18px", fontSize: 14, color: "#fff", textDecoration: "none", fontWeight: 600 }}
+                  >
+                    Add Property →
+                  </Link>
+                </div>
+              </StepCard>
+            )}
+          </>
           )}
 
           {/* ── Management-only steps (4-10) ── */}

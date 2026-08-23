@@ -2376,3 +2376,31 @@ export function placementAgreementSignedEmail(
     ${signoff()}
   `);
 }
+
+// Placement — intake complete, ready to prep for launch
+export function placementOnboardingReadyEmail(data: {
+  ownerName: string;
+  propertyAddress: string;
+  dashboardUrl: string;
+}): string {
+  const firstName = data.ownerName.split(" ")[0];
+  return wrapper(`
+    ${heroCard("Your intake is complete.", `${data.propertyAddress} is ready for pricing and prep.`)}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Hi ${firstName}, we've got everything we need — property details, access, and your pricing preferences are all on file. Next, we run the market analysis and get your listing ready to launch.</p>
+
+    ${onboardChecklist([
+      { label: "Property details on file", done: true },
+      { label: "Access & showing instructions on file", done: true },
+      { label: "Pricing authority on file", done: true },
+      { label: "Market analysis & listing prep", done: false },
+    ])}
+
+    ${cta("Open Your Dashboard →", data.dashboardUrl)}
+
+    <p style="margin:24px 0 0;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Nothing else needed from you right now — we'll be in touch with pricing and the launch date.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
