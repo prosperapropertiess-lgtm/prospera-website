@@ -1870,3 +1870,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Ontario paralegal/landlord help service, not a PM company. Free consultation model means high volume of Ontario landlords in distress — that audience is highly motivated to consider professional management as a preventive solution. Site access was blocked at network level; research drawn from search index results and WebSearch. Professional but accessible outreach tone; contact via website.
 
 ---
+
+## St. Thomas & District Chamber of Commerce
+- url: https://stthomaschamber.on.ca/
+- type: association
+- why: The local business chamber for St. Thomas — one of Prospera's three core markets — whose member directory earns a .on.ca backlink and connects Prospera with local realtors, mortgage brokers, and investors at community networking events.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: info@stthomaschamber.on.ca
+- site_focus: The St. Thomas & District Chamber of Commerce serves the business community in St. Thomas and Elgin County with membership programs, a public business directory, networking events, and advocacy. Member listings appear on a publicly indexed directory. The Chamber runs member spotlights and actively promotes local economic development alongside STEEDC; given the Volkswagen-PowerCo and Amazon investment in the city, they are especially active in connecting workforce housing stakeholders.
+- hook: Prospera manages rental properties in St. Thomas, making them a legitimate local business serving the community's growing workforce housing need. A Chamber membership earns a directory backlink and opens access to realtor and mortgage broker members who are Prospera's direct referral network. The city's industrial growth is a timely, newsworthy hook for any member spotlight.
+- specific_content: The Chamber's public business directory under professional services or real estate — Prospera belongs alongside the local realtors and property professionals who are already listed.
+- researcher_notes: Local chamber with strong community ties. Outreach should be framed as membership participation, not a content pitch. The St. Thomas growth angle (VW, Amazon) gives the conversation immediate relevance. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Libro Credit Union — SW Ontario Investment Resources
+- url: https://www.libro.ca/
+- type: blog
+- why: Libro Credit Union is SW Ontario's largest community credit union serving London, St. Thomas, Strathroy, and 30+ surrounding communities — their members include local landlords and investors who are Prospera's core clientele; a resource mention in Libro's investment content reaches a trusted, locally-rooted SW Ontario audience.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: libro@libro.ca
+- site_focus: Libro Credit Union is Southwestern Ontario's largest community credit union, serving over 100,000 members across London, St. Thomas, Strathroy, and dozens of surrounding communities. They offer personal and business banking, investment, and mortgage products including investment property financing. Their online financial literacy resources include guidance on investment property, business planning, and community investment. Libro's brand is built entirely on being a local community partner — not a national bank.
+- hook: Libro's members in London, St. Thomas, and Strathroy include the small landlords and investors who are Prospera's direct clientele. A resource mention in Libro's investment or real estate content — or a community member spotlight — would reach a trusted SW Ontario audience with the same geographic footprint as Prospera. Libro's community-first brand aligns naturally with Prospera's local operator positioning.
+- specific_content: Libro's investment property and financial planning resource sections — Prospera as a recommended next step for members who have financed a rental property and now need professional management.
+- researcher_notes: Community credit union with deep SW Ontario roots and exact geographic overlap with Prospera's markets. Outreach should be framed as community partnership and member benefit. Libro's local trust is an asset — Prospera as part of the same SW Ontario community is the shared ground. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## RentSeeker.ca — Canadian Rental Platform Landlord Resources
+- url: https://www.rentseeker.ca/
+- type: blog
+- why: Canadian rental listing platform and landlord resource hub publishing Ontario-specific landlord guides — a non-competing technology platform whose Ontario landlord readership is the exact audience Prospera targets for professional management conversion.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: support@rentseeker.ca
+- site_focus: RentSeeker.ca is a Canadian rental marketplace and landlord resource platform serving landlords and renters across Canada. Their landlord resources section covers tenant screening, lease management, Ontario rental law, rent collection, and property maintenance best practices. The site serves a broad national audience of Canadian landlords — from first-timers to experienced multi-unit operators — with practical, how-to content aimed at improving rental management outcomes.
+- hook: RentSeeker's landlord resource section reaches active Ontario self-managers who are researching how to improve their operations. A guest post from Prospera on "When Ontario landlords should stop self-managing: a SW Ontario investor's guide" positions Prospera as the expert alternative for London/St. Thomas landlords at the exact decision point — and earns a backlink from an established national rental platform.
+- specific_content: Their Ontario landlord resources and tenant screening guides — the compliance and procedural content that covers what Prospera handles professionally for London-area clients every day.
+- researcher_notes: National rental marketplace, not a property management competitor. Guest post is the right angle; pitch should emphasize Prospera's SW Ontario operational expertise as useful content for their Ontario landlord readership. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## STEEDC — St. Thomas Economic Development Corporation
+- url: https://steedco.ca/
+- type: association
+- why: The economic development agency for St. Thomas and Elgin County — actively promoting the city's industrial growth story — whose business directory and investment attraction content make a listing and editorial data contribution a hyper-local, high-credibility backlink in one of Prospera's three core markets.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: steedc@steedco.ca
+- site_focus: STEEDC (St. Thomas & Elgin Economic Development Corporation) is the economic development agency for the City of St. Thomas and Elgin County, focused on attracting business investment, supporting local business growth, and promoting St. Thomas as a place to invest. Their website features a local business directory, investment attraction content, and economic resources. St. Thomas is in a high-profile growth phase following the Volkswagen-PowerCo EV battery plant announcement and Amazon distribution centre expansion, and STEEDC is the lead agency promoting the city's development story nationally.
+- hook: Prospera actively manages rental properties in St. Thomas during the city's most significant growth period in decades. As the rental market responds to new industrial jobs and population inflow, Prospera has ground-level data on vacancy rates, average rents, and unit demand that directly supports STEEDC's workforce housing narrative for incoming businesses. A business directory listing and a data contribution to their investment attraction materials positions Prospera as part of St. Thomas's business infrastructure.
+- specific_content: STEEDC's local business directory and investment attraction content — particularly any workforce housing or residential infrastructure sections where rental market data and a trusted local property manager are relevant.
+- researcher_notes: Economic development agency, not editorial. Outreach should go to the business development team and frame Prospera's rental market data as a community contribution to STEEDC's investment attraction work. The VW/Amazon growth story is the current hook. A directory listing is the baseline ask; rental data contribution is the value-added pitch. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Ratehub.ca — Ontario Investment Property Blog
+- url: https://www.ratehub.ca/
+- type: blog
+- why: Canada's largest financial comparison platform with a high-authority mortgage and real estate blog covering Ontario investment property — a cited expert source relationship on their Ontario landlord or rental income content would earn a high-domain-authority backlink from one of Canada's most-visited financial sites.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: https://www.ratehub.ca/contact (contact form; large editorial team)
+- site_focus: Ratehub.ca is Canada's largest financial comparison platform, connecting consumers with mortgage rates, insurance, and financial products. Their blog and editorial team publish extensive guides on Ontario investment property financing, rental income tax, property management costs, and landlord operations — aimed at first-time investors and experienced buyers making financial decisions. Ratehub's domain authority is very high given their national traffic and editorial standards.
+- hook: Ratehub's Ontario investment property content covers financing and tax comprehensively, but their landlord cost guides often lack ground-level operational data from professional property managers. Prospera can provide SW Ontario management fee benchmarks, vacancy data, and cost-per-unit figures for London and St. Thomas that would strengthen their Ontario rental property guides for readers evaluating investments outside the GTA. An expert source relationship — Ebin cited as a SW Ontario PM expert — is the most achievable pitch for a platform of this scale.
+- specific_content: Ratehub's Ontario investment property guides and rental income cost breakdowns — particularly any guides on property management fees and what Ontario landlords should budget, where SW Ontario data from Prospera would add real credibility.
+- researcher_notes: Very large national platform with formal editorial standards. A direct guest post pitch is unlikely; lead with an expert source offer and specific cost data from the SW Ontario market. Any backlink from Ratehub.ca carries significant domain authority. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Zolo.ca — London Ontario Real Estate Market
+- url: https://www.zolo.ca/
+- type: blog
+- why: Major Canadian real estate search and data platform with dedicated London Ontario market pages — a data contribution or expert citation on their London rental market content earns a backlink from a high-authority Canadian real estate platform actively covering Prospera's primary market.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: support@zolo.ca
+- site_focus: Zolo.ca is a Canadian real estate search platform and market data resource covering property listings, sold prices, neighbourhood data, and market statistics across Canada. Their London Ontario pages include average sold prices, neighbourhood breakdowns, and investment property data. Zolo publishes regularly updated market summaries and editorial content on Canadian cities including London, appealing to both local buyers and out-of-province investors evaluating the London market.
+- hook: Zolo's London Ontario market content covers the sales side well but lacks the rental income and management cost data investors need to model returns. Prospera can contribute vacancy rates, average rents by unit type, and property management cost benchmarks for London, St. Thomas, and Strathroy — ground-level rental data that would deepen Zolo's London investment property coverage for the out-of-province investor audience actively researching the market.
+- specific_content: Their London Ontario market data pages and any investment property or rental income editorial content — Prospera's SW Ontario operational data fills the rental-side gap in their London market coverage.
+- researcher_notes: Large national platform with editorial and data teams. Lead with a data contribution angle rather than a guest post pitch. Contact via support form. A citation on their London Ontario pages would be contextually relevant and carry meaningful domain authority. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## PropertyGuys.com — Ontario Private Sale Real Estate
+- url: https://www.propertyguys.com/
+- type: blog
+- why: Canada's largest private sale real estate network with Ontario operations — their investor client segment actively researches property management after private sale transactions in London and SW Ontario, making a resource mention in their Ontario investor content a direct prospect reach.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: info@propertyguys.com
+- site_focus: PropertyGuys.com is Canada's largest private sale real estate platform, helping property owners sell without a traditional brokerage. They serve a broad Canadian audience including investors selling or purchasing tenanted rental properties through the private sale channel. Their website and associated content target private sale buyers and sellers with educational resources on pricing, tenant rights during a sale, and transferring rental properties — investor-oriented content at the moment of property transaction.
+- hook: PropertyGuys.com's Ontario investor clients frequently purchase private sale rentals and immediately need property management after acquisition. A resource mention in their Ontario investor content — or a contributed piece on "managing your property after a private sale in SW Ontario" — would serve their audience at the exact moment they've acquired a property and need to decide how to operate it. Prospera as a recommended management partner for Ontario private sale buyers in the London/SW Ontario market is a natural, non-competing fit.
+- specific_content: Their Ontario investor resources and content on buying or selling tenanted properties — the transition point where a new owner needs a property manager is the insertion point for a Prospera mention.
+- researcher_notes: National private sale platform, not a property management competitor. Outreach should focus on the post-acquisition management need for their Ontario investor clients in London and SW Ontario. A resource page mention or a contributed guest post is achievable. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Landlord Web Solutions — Ontario Property Management Blog
+- url: https://landlordwebsolutions.com/
+- type: blog
+- why: Canadian property management software company with a well-indexed Ontario landlord blog covering tenant screening, rent collection, and compliance operations — a non-competing tech platform whose self-managing Ontario landlord readership is Prospera's exact target audience for professional management conversion.
+- researched: true
+- drafted: true
+- added: 2026-08-23
+- contact_email: info@landlordwebsolutions.com
+- site_focus: Landlord Web Solutions is a Canadian property management software company offering residential PM software for independent landlords and small PM companies across Canada. Their Ontario-focused blog covers tenant screening, rent collection, lease management, and landlord compliance topics — practical how-to content targeting self-managing Ontario landlords who want to modernize their operations with software tools.
+- hook: Landlord Web Solutions reaches self-managing Ontario landlords at the moment they're deciding how to upgrade their operations. A guest post from Prospera on "When Ontario landlords should move from property management software to a full-service property manager" gives their audience a complete decision framework — use software if you want to stay in control, hire Prospera if you want to step back entirely. The platforms are complementary: their software serves the DIY manager; Prospera serves the landlord who wants to hand it off.
+- specific_content: Their Ontario landlord blog posts on tenant screening, rent collection, and property management operations — the DIY management pain points that eventually push landlords toward full-service management.
+- researcher_notes: Canadian PM software company, not a competitor in Ontario PM services. Contact: info@landlordwebsolutions.com. Guest post is the right approach — frame Prospera as the full-service alternative for landlords who want to offload management entirely. Practical, software-forward tone. Site access blocked at network level; research drawn from known organizational profile.
+
+---
