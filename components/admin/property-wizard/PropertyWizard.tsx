@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import WizardProgress from "./WizardProgress";
 import { useWizardAutoSave } from "./useWizardAutoSave";
@@ -102,9 +102,69 @@ const BLANK: WizardData = {
 
 interface Props {
   initial?: Partial<WizardData> & { id?: string };
+  // Set when this property is being added as the final step of a placement
+  // onboarding (see docs/tenant-placement-os/05_OWNER_ONBOARDING.md). When
+  // present, prefills from the onboarding intake and, on publish, creates
+  // the leasing pipeline campaign automatically instead of requiring a
+  // separate manual "+ Add Vacancy" click in /admin/leasing.
+  onboardToken?: string;
 }
 
-export default function PropertyWizard({ initial }: Props) {
+// Turns the pricing authority + access data already collected during
+// placement onboarding (see docs/tenant-placement-os/05_OWNER_ONBOARDING.md)
+// into a leasing_properties campaign, reusing the same creation endpoint
+// as the manual "+ Add Vacancy" flow (default checklist/channels/task).
+async function createCampaignFromOnboarding(
+  token: string,
+  propertyId: string,
+  fallbackPrice: number | ""
+): Promise<string | null> {
+  const statusRes = await fetch(`/api/onboard/${token}/status`).catch(() => null);
+  if (!statusRes?.ok) return null;
+  const session = await statusRes.json();
+  const step6 = (session.step6_data ?? {}) as Record<string, unknown>;
+  const step7 = (session.step7_data ?? {}) as Record<string, unknown>;
+
+  const desiredRent = step7.desired_rent
+    ? Number(step7.desired_rent)
+    : fallbackPrice !== "" ? Number(fallbackPrice) : null;
+  const rentFloor = step7.authorized_rent_floor ? Number(step7.authorized_rent_floor) : null;
+
+  const incentiveMap: Record<string, string> = {
+    preauthorized: "Pre-authorized by owner — can offer without asking",
+    approval_required: "Owner approval required before offering any incentive",
+    no_incentives: "No incentives authorized",
+  };
+  const incentiveDescription = step7.incentive_authority
+    ? incentiveMap[String(step7.incentive_authority)] ?? null
+    : null;
+
+  const noteLines: string[] = [];
+  if (step7.known_defects) noteLines.push(`Known defects: ${step7.known_defects}`);
+  if (step7.pricing_flexibility) noteLines.push(`Pricing flexibility: ${step7.pricing_flexibility}`);
+  if (step6.showing_hours) noteLines.push(`Showing hours: ${step6.showing_hours}`);
+  if (step6.notice_required) noteLines.push(`Notice required: ${step6.notice_required}`);
+  if (step6.showing_restrictions) noteLines.push(`Showing restrictions: ${step6.showing_restrictions}`);
+
+  const createRes = await fetch("/api/admin/leasing/properties", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      property_id: propertyId,
+      vacant_since: new Date().toISOString().split("T")[0],
+      asking_rent: desiredRent,
+      target_rent: desiredRent,
+      min_authorized_rent: rentFloor,
+      incentive_description: incentiveDescription,
+      notes: noteLines.length ? noteLines.join("\n") : null,
+    }),
+  });
+  if (!createRes.ok) return null;
+  const lp = await createRes.json().catch(() => null);
+  return lp?.id ?? null;
+}
+
+export default function PropertyWizard({ initial, onboardToken }: Props) {
   const router = useRouter();
   const [data, setData] = useState<WizardData>(() => ({ ...BLANK, ...initial }));
   const [currentStep, setCurrentStep] = useState(() => initial?.wizard_step || 1);
@@ -113,6 +173,28 @@ export default function PropertyWizard({ initial }: Props) {
   const [error, setError] = useState("");
   const dataRef = useRef(data);
   dataRef.current = data;
+
+  // Prefill from the onboarding session's already-collected intake data
+  useEffect(() => {
+    if (!onboardToken || initial?.id) return;
+    (async () => {
+      const res = await fetch(`/api/onboard/${onboardToken}/status`).catch(() => null);
+      if (!res?.ok) return;
+      const session = await res.json();
+      const step7 = (session.step7_data ?? {}) as Record<string, unknown>;
+      const desiredRent = step7.desired_rent ? Number(step7.desired_rent) : null;
+      setData((prev) => ({
+        ...prev,
+        address: session.property_address || "",
+        city: session.property_city || "London",
+        property_type: session.property_type || "",
+        bedrooms: session.bedrooms ?? "",
+        bathrooms: session.bathrooms ?? "",
+        price: desiredRent ?? (session.approx_monthly_rent ? Number(session.approx_monthly_rent) : ""),
+      }));
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onboardToken, initial?.id]);
 
   // Update a field or set of fields
   const update = useCallback((partial: Partial<WizardData>) => {
@@ -363,6 +445,18 @@ export default function PropertyWizard({ initial }: Props) {
                       return;
                     }
                     update({ status: "published" });
+
+                    // Placement onboarding → auto-create the leasing pipeline
+                    // campaign instead of requiring a manual "+ Add Vacancy"
+                    // click, so the flow really is click-to-close.
+                    if (onboardToken) {
+                      const campaignId = await createCampaignFromOnboarding(onboardToken, propertyId, dataRef.current.price);
+                      if (campaignId) {
+                        router.push(`/admin/leasing/${campaignId}`);
+                        return;
+                      }
+                    }
+
                     router.push("/admin/properties");
                   }}
                   disabled={saving}

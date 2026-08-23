@@ -970,7 +970,7 @@ export default function OnboardChecklist() {
                     Intake complete. Next: run pricing and add the listing to start finding a tenant — see <code>04_RENT_PRICING.md</code> and <code>07_MARKETING_PREPARATION.md</code>.
                   </p>
                   <Link
-                    href="/admin/properties/new"
+                    href={`/admin/properties/new?onboard_token=${token}`}
                     style={{ display: "inline-flex", alignItems: "center", gap: 6, background: BURGUNDY, borderRadius: 10, padding: "10px 18px", fontSize: 14, color: "#fff", textDecoration: "none", fontWeight: 600 }}
                   >
                     Add Property →

@@ -64,6 +64,9 @@ export async function POST(req: NextRequest) {
       vacant_since: body.vacant_since || new Date().toISOString().split("T")[0],
       asking_rent: body.asking_rent,
       target_rent: body.target_rent,
+      min_authorized_rent: body.min_authorized_rent ?? null,
+      incentive_description: body.incentive_description || null,
+      incentive_value: body.incentive_value ?? null,
       notes: body.notes || null,
     })
     .select()
