@@ -187,7 +187,7 @@ export default function PropertyWizard({ initial, onboardToken }: Props) {
         ...prev,
         address: session.property_address || "",
         city: session.property_city || "London",
-        property_type: session.property_type || "",
+        property_type: session.property_type ? String(session.property_type).toLowerCase() : "",
         bedrooms: session.bedrooms ?? "",
         bathrooms: session.bathrooms ?? "",
         price: desiredRent ?? (session.approx_monthly_rent ? Number(session.approx_monthly_rent) : ""),
