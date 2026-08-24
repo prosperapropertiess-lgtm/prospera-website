@@ -73,12 +73,11 @@ interface Showing {
 
 interface Channel {
   id: string;
-  channel_name: string;
+  channel: string;
   url: string | null;
   active: boolean;
-  views_today: number;
-  views_total: number;
-  leads_from_channel: number;
+  views: number;
+  leads_generated: number;
 }
 
 interface Comp {
@@ -1862,7 +1861,7 @@ function MoveInTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }) 
 function MarketingTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }) {
   const [editId, setEditId] = useState<string | null>(null);
   const [editData, setEditData] = useState<Partial<Channel>>({});
-  const [newChannel, setNewChannel] = useState({ channel_name: "", url: "" });
+  const [newChannel, setNewChannel] = useState({ channel: "", url: "" });
   const [showAdd, setShowAdd] = useState(false);
 
   async function toggleActive(channel: Channel) {
@@ -1885,19 +1884,19 @@ function MarketingTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void 
   }
 
   async function addChannel() {
-    if (!newChannel.channel_name.trim()) return;
+    if (!newChannel.channel.trim()) return;
     await fetch(`/api/admin/leasing/properties/${lp.id}/channels`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newChannel),
     });
-    setNewChannel({ channel_name: "", url: "" });
+    setNewChannel({ channel: "", url: "" });
     setShowAdd(false);
     onEdit();
   }
 
-  const totalViews = lp.channels.reduce((s, c) => s + c.views_total, 0);
-  const totalLeadsFromChannels = lp.channels.reduce((s, c) => s + c.leads_from_channel, 0);
+  const totalViews = lp.channels.reduce((s, c) => s + c.views, 0);
+  const totalLeadsFromChannels = lp.channels.reduce((s, c) => s + c.leads_generated, 0);
   const activeCount = lp.channels.filter((c) => c.active).length;
 
   return (
@@ -1923,7 +1922,7 @@ function MarketingTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void 
       {showAdd && (
         <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 16, marginBottom: 12 }}>
           <div style={{ display: "flex", gap: 10 }}>
-            <input value={newChannel.channel_name} onChange={(e) => setNewChannel({ ...newChannel, channel_name: e.target.value })} placeholder="Channel name" style={{ ...inputStyle, flex: 1 }} />
+            <input value={newChannel.channel} onChange={(e) => setNewChannel({ ...newChannel, channel: e.target.value })} placeholder="Channel name" style={{ ...inputStyle, flex: 1 }} />
             <input value={newChannel.url} onChange={(e) => setNewChannel({ ...newChannel, url: e.target.value })} placeholder="URL (optional)" style={{ ...inputStyle, flex: 2 }} />
             <button onClick={addChannel} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Add</button>
           </div>
@@ -1936,8 +1935,8 @@ function MarketingTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void 
             {editId === ch.id ? (
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <input value={editData.url ?? ch.url ?? ""} onChange={(e) => setEditData({ ...editData, url: e.target.value })} placeholder="Listing URL" style={{ ...inputStyle, flex: 2, minWidth: 200 }} />
-                <input type="number" value={editData.views_today ?? ch.views_today} onChange={(e) => setEditData({ ...editData, views_today: Number(e.target.value) })} placeholder="Views today" style={{ ...inputStyle, width: 120 }} />
-                <input type="number" value={editData.leads_from_channel ?? ch.leads_from_channel} onChange={(e) => setEditData({ ...editData, leads_from_channel: Number(e.target.value) })} placeholder="Leads" style={{ ...inputStyle, width: 100 }} />
+                <input type="number" value={editData.views ?? ch.views} onChange={(e) => setEditData({ ...editData, views: Number(e.target.value) })} placeholder="Views" style={{ ...inputStyle, width: 120 }} />
+                <input type="number" value={editData.leads_generated ?? ch.leads_generated} onChange={(e) => setEditData({ ...editData, leads_generated: Number(e.target.value) })} placeholder="Leads" style={{ ...inputStyle, width: 100 }} />
                 <button onClick={() => saveEdit(ch.id)} style={{ backgroundColor: GREEN, color: "#fff", border: "none", borderRadius: 7, padding: "8px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Save</button>
                 <button onClick={() => setEditId(null)} style={{ background: "none", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 12px", fontSize: 13, cursor: "pointer", color: TEXT_MUT }}>Cancel</button>
               </div>
@@ -1948,17 +1947,17 @@ function MarketingTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void 
                     <span style={{ position: "absolute", top: 2, left: ch.active ? 18 : 2, width: 16, height: 16, borderRadius: "50%", backgroundColor: "#fff", transition: "left 0.2s" }} />
                   </button>
                   <div>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: ch.active ? TEXT : TEXT_MUT, margin: 0 }}>{ch.channel_name}</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: ch.active ? TEXT : TEXT_MUT, margin: 0 }}>{ch.channel}</p>
                     {ch.url && <a href={ch.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: ACCENT, textDecoration: "none" }}>View listing →</a>}
                   </div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
                   <div style={{ textAlign: "center" }}>
-                    <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>{ch.views_total}</p>
+                    <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>{ch.views}</p>
                     <p style={{ fontSize: 11, color: TEXT_MUT, margin: 0 }}>total views</p>
                   </div>
                   <div style={{ textAlign: "center" }}>
-                    <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>{ch.leads_from_channel}</p>
+                    <p style={{ fontSize: 16, fontWeight: 700, color: TEXT, margin: 0 }}>{ch.leads_generated}</p>
                     <p style={{ fontSize: 11, color: TEXT_MUT, margin: 0 }}>leads</p>
                   </div>
                   <button onClick={() => { setEditId(ch.id); setEditData({}); }} style={{ fontSize: 12, color: TEXT_MUT, background: "none", border: "none", cursor: "pointer" }}>Edit</button>

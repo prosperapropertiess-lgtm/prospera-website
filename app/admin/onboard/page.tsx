@@ -116,6 +116,13 @@ export default function OnboardListPage() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading]   = useState(true);
   const [showForm, setShowForm] = useState(false);
+
+  // /admin/onboard/new redirects here with ?new=1 to auto-open the form
+  useEffect(() => {
+    if (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("new") === "1") {
+      setShowForm(true);
+    }
+  }, []);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError]   = useState("");
   const [deleting, setDeleting]     = useState<string | null>(null);
