@@ -100,6 +100,14 @@ interface LeasingEvent {
   metadata: Record<string, unknown> | null;
 }
 
+interface CoTenant {
+  name: string;
+  phone: string;
+  email: string;
+  emergency_contact_name: string;
+  emergency_contact_phone: string;
+}
+
 interface Application {
   id: string;
   token: string;
@@ -113,10 +121,54 @@ interface Application {
   has_pets: boolean;
   num_occupants: number | null;
   preliminary_submitted_at: string | null;
+  documents_requested_at: string | null;
+  documents_complete_at: string | null;
   recommendation: string | null;
   decision_notes: string | null;
+  verification_checklist: Record<string, boolean> | null;
+  documents_url: string | null;
+  co_tenants: CoTenant[] | null;
+  emergency_contact_name: string | null;
+  emergency_contact_phone: string | null;
   lead?: { name: string; email: string | null } | null;
 }
+
+const VERIFICATION_CHECKLIST_ITEMS: { key: string; label: string }[] = [
+  { key: "photo_id", label: "2 government-issued photo ID (per applicant)" },
+  { key: "employment_letter", label: "Proof of employment / employment letter" },
+  { key: "pay_stubs", label: "6 recent pay stubs" },
+  { key: "bank_statements", label: "6 months of bank statements" },
+  { key: "landlord_reference", label: "Previous landlord contact (if applicable)" },
+  { key: "screening_report", label: "Screening / credit report reviewed" },
+  { key: "reference_confirmed", label: "Previous landlord reference contacted & confirmed" },
+];
+
+// Keys must match MOVE_IN_ITEM_LABELS in api/.../closeout/route.ts
+const MOVE_IN_CHECKLIST_ITEMS: { key: string; label: string }[] = [
+  { key: "lease_signed", label: "Lease agreement signed" },
+  { key: "move_in_inspection", label: "Move-in inspection completed" },
+  { key: "utilities_transferred", label: "Utilities account transferred to the tenant's name" },
+  { key: "first_month_rent_collected", label: "First month's rent collected" },
+  { key: "walkthrough_completed", label: "Walk-through completed with tenant" },
+  { key: "garbage_instructions_provided", label: "Garbage disposal instructions provided" },
+  { key: "rent_instructions_provided", label: "Rent and e-transfer instructions provided to the tenant" },
+  { key: "keys_handed_over", label: "Keys handed over" },
+  { key: "lockbox_removed", label: "Lock-box removed" },
+];
+
+// Keys must match DOCUMENT_LABELS in api/.../closeout/route.ts
+const CLOSEOUT_DOCUMENT_ITEMS: { key: string; label: string }[] = [
+  { key: "doc_gov_id", label: "Government tenant ID verification" },
+  { key: "doc_emergency_contact", label: "Emergency contact details" },
+  { key: "doc_contact_info", label: "Full contact information" },
+  { key: "doc_screening_report", label: "Tenant screening / report" },
+  { key: "doc_signed_lease", label: "Signed lease agreement" },
+  { key: "doc_receipt", label: "Receipt showing all the numbers" },
+  { key: "doc_n_forms", label: "Applicable N forms" },
+  { key: "doc_utilities_screenshot", label: "Screenshot of the utilities transfer" },
+  { key: "doc_inspection_report", label: "Full inspection report" },
+  { key: "doc_move_in_photos", label: "Condition of the unit post move-in photos" },
+];
 
 interface LeasingProperty {
   id: string;
@@ -130,6 +182,10 @@ interface LeasingProperty {
   incentive_value: number | null;
   campaign_name: string | null;
   positioning_statement: string | null;
+  owner_name: string | null;
+  owner_email: string | null;
+  final_rent: number | null;
+  move_in_data: Record<string, unknown> | null;
   notes: string | null;
   property: {
     id: string;
@@ -257,7 +313,7 @@ const EVENT_ICONS: Record<string, string> = {
 };
 
 // ── Tab type ───────────────────────────────────────────────────────────────
-type Tab = "overview" | "checklist" | "leads" | "showings" | "applications" | "marketing" | "comps" | "activity";
+type Tab = "overview" | "checklist" | "leads" | "showings" | "applications" | "move-in" | "marketing" | "comps" | "activity";
 
 // ── Main Component ─────────────────────────────────────────────────────────
 export default function LeasingPropertyHub() {
@@ -326,7 +382,8 @@ export default function LeasingPropertyHub() {
     { id: "checklist", label: "Checklist" },
     { id: "leads", label: `Leads (${lp.leads.length})` },
     { id: "showings", label: `Showings (${lp.showings.length})` },
-    { id: "applications", label: "Applications" },
+    { id: "applications", label: "Tenant Verification" },
+    { id: "move-in", label: "Move-In & Closeout" },
     { id: "marketing", label: "Marketing" },
     { id: "comps", label: "Comps" },
     { id: "activity", label: "Activity" },
@@ -460,6 +517,7 @@ export default function LeasingPropertyHub() {
         {tab === "leads" && <LeadsTab lp={lp} onEdit={load} />}
         {tab === "showings" && <ShowingsTab lp={lp} onEdit={load} />}
         {tab === "applications" && <ApplicationsTab lp={lp} onEdit={load} />}
+        {tab === "move-in" && <MoveInTab lp={lp} onEdit={load} />}
         {tab === "marketing" && <MarketingTab lp={lp} onEdit={load} />}
         {tab === "comps" && <CompsTab lp={lp} onEdit={load} />}
         {tab === "activity" && <ActivityTab lpId={lp.id} />}
@@ -476,6 +534,9 @@ function OverviewTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }
   const [notes, setNotes] = useState(lp.notes ?? "");
   const [savingNotes, setSavingNotes] = useState(false);
   const [metrics, setMetrics] = useState<Record<string, unknown> | null>(null);
+  const [editOwner, setEditOwner] = useState(false);
+  const [ownerName, setOwnerName] = useState(lp.owner_name ?? "");
+  const [ownerEmail, setOwnerEmail] = useState(lp.owner_email ?? "");
 
   useEffect(() => {
     fetch(`/api/admin/leasing/properties/${lp.id}/metrics`)
@@ -497,6 +558,16 @@ function OverviewTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }
       body: JSON.stringify({ asking_rent: Number(asking) || null, target_rent: Number(target) || null }),
     });
     setEditRent(false);
+    onEdit();
+  }
+
+  async function saveOwner() {
+    await fetch(`/api/admin/leasing/properties/${lp.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ owner_name: ownerName || null, owner_email: ownerEmail || null }),
+    });
+    setEditOwner(false);
     onEdit();
   }
 
@@ -603,6 +674,40 @@ function OverviewTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }
 
       {/* Right column */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+
+        {/* Owner contact — used by tenant-verification & closeout emails */}
+        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: 0 }}>Owner</h3>
+            <button onClick={() => setEditOwner(!editOwner)} style={{ fontSize: 12, color: ACCENT, background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>
+              {editOwner ? "Cancel" : "Edit"}
+            </button>
+          </div>
+          {editOwner ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div>
+                <label style={{ fontSize: 11, color: TEXT_MUT, display: "block", marginBottom: 4 }}>Name</label>
+                <input value={ownerName} onChange={(e) => setOwnerName(e.target.value)}
+                  style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 10px", fontSize: 14, backgroundColor: BG, boxSizing: "border-box" }} />
+              </div>
+              <div>
+                <label style={{ fontSize: 11, color: TEXT_MUT, display: "block", marginBottom: 4 }}>Email</label>
+                <input value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)}
+                  style={{ width: "100%", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 10px", fontSize: 14, backgroundColor: BG, boxSizing: "border-box" }} />
+              </div>
+              <button onClick={saveOwner} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7, padding: "9px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+                Save
+              </button>
+            </div>
+          ) : lp.owner_name || lp.owner_email ? (
+            <div>
+              <p style={{ fontSize: 14, fontWeight: 600, color: TEXT, margin: 0 }}>{lp.owner_name || "—"}</p>
+              <p style={{ fontSize: 13, color: TEXT_MUT, margin: "2px 0 0" }}>{lp.owner_email || "—"}</p>
+            </div>
+          ) : (
+            <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>Not set — needed to send owner updates.</p>
+          )}
+        </div>
 
         {/* Rent */}
         <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
@@ -1258,10 +1363,15 @@ function ShowingsTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }
   );
 }
 
-// ── Applications Tab ───────────────────────────────────────────────────────
+// ── Applications Tab (Tenant Verification) ──────────────────────────────────
 function ApplicationsTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }) {
   const [apps, setApps] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [editLink, setEditLink] = useState(false);
+  const [appLink, setAppLink] = useState("");
+  const [savingLink, setSavingLink] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   const fetchApps = useCallback(async () => {
     setLoading(true);
@@ -1272,103 +1382,478 @@ function ApplicationsTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => vo
 
   useEffect(() => { fetchApps(); }, [fetchApps]);
 
+  useEffect(() => {
+    fetch(`/api/admin/leasing/verification-link`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d?.link) setAppLink(d.link); })
+      .catch(() => {});
+  }, []);
+
   const STAGE_LABELS_APP: Record<string, { label: string; bg: string; text: string }> = {
     LINK_SENT:              { label: "Link Sent", bg: "#FEF3C7", text: "#92400E" },
     PRELIMINARY_SUBMITTED:  { label: "Submitted", bg: "#DBEAFE", text: "#1E40AF" },
     UNDER_REVIEW:           { label: "Under Review", bg: "#EDE9FE", text: "#5B21B6" },
+    AWAITING_DOCUMENTS:     { label: "Awaiting Documents", bg: "#FEF3C7", text: "#92400E" },
+    VERIFIED:               { label: "Verified", bg: "#DBEAFE", text: "#1E40AF" },
     APPROVED:               { label: "Approved", bg: "#D1FAE5", text: "#065F46" },
     DECLINED:               { label: "Declined", bg: "#FEE2E2", text: "#991B1B" },
     WITHDRAWN:              { label: "Withdrawn", bg: "#F3F4F6", text: "#6B7280" },
   };
 
   async function updateApp(appId: string, updates: Record<string, unknown>) {
+    setBusyId(appId);
     await fetch(`/api/admin/leasing/properties/${lp.id}/applications`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: appId, ...updates }),
+      body: JSON.stringify({ application_id: appId, ...updates }),
     });
-    fetchApps();
+    await fetchApps();
     onEdit();
+    setBusyId(null);
+  }
+
+  async function runAction(appId: string, action: string, extra: Record<string, unknown> = {}) {
+    setBusyId(appId);
+    await fetch(`/api/admin/leasing/properties/${lp.id}/applications`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _action: action, application_id: appId, ...extra }),
+    });
+    await fetchApps();
+    onEdit();
+    setBusyId(null);
+  }
+
+  async function saveLink() {
+    setSavingLink(true);
+    await fetch(`/api/admin/leasing/verification-link`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ link: appLink }),
+    });
+    setSavingLink(false);
+    setEditLink(false);
   }
 
   if (loading) return <p style={{ color: TEXT_MUT, fontSize: 14 }}>Loading…</p>;
 
-  if (apps.length === 0) {
-    return (
-      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 40, textAlign: "center" }}>
-        <p style={{ fontSize: 14, color: TEXT_MUT, margin: "0 0 8px" }}>No applications yet.</p>
-        <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>Send Quick Apply links from the Showings tab after interested prospects complete their tour.</p>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      {apps.map((app) => {
-        const st = STAGE_LABELS_APP[app.stage] ?? { label: app.stage, bg: BG, text: TEXT_MUT };
-        return (
-          <div key={app.id} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 12 }}>
-              <div>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                  <span style={{ fontSize: 15, fontWeight: 700, color: TEXT }}>{app.legal_name ?? app.lead?.name ?? "—"}</span>
-                  <span style={{ fontSize: 11, fontWeight: 600, borderRadius: 20, padding: "2px 10px", backgroundColor: st.bg, color: st.text }}>{st.label}</span>
+    <div>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 14 }}>
+        <button onClick={() => setEditLink(!editLink)} style={{ fontSize: 12, color: TEXT_MUT, background: "none", border: "none", cursor: "pointer" }}>
+          {editLink ? "Cancel" : "Edit application link"}
+        </button>
+      </div>
+      {editLink && (
+        <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
+          <input value={appLink} onChange={(e) => setAppLink(e.target.value)} placeholder="https://form.jotform.com/…" style={{ ...inputStyle, flex: 1 }} />
+          <button onClick={saveLink} disabled={savingLink} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+            {savingLink ? "Saving…" : "Save"}
+          </button>
+        </div>
+      )}
+
+      {apps.length === 0 ? (
+        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 40, textAlign: "center" }}>
+          <p style={{ fontSize: 14, color: TEXT_MUT, margin: "0 0 8px" }}>No applications yet.</p>
+          <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0 }}>Send Quick Apply links from the Showings tab after interested prospects complete their tour.</p>
+        </div>
+      ) : (
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {apps.map((app) => {
+          const st = STAGE_LABELS_APP[app.stage] ?? { label: app.stage, bg: BG, text: TEXT_MUT };
+          const busy = busyId === app.id;
+          const isOpen = expanded === app.id;
+          const checklist = app.verification_checklist ?? {};
+          const checklistDone = VERIFICATION_CHECKLIST_ITEMS.filter((i) => checklist[i.key]).length;
+          return (
+            <div key={app.id} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 12 }}>
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: TEXT }}>{app.legal_name ?? app.lead?.name ?? "—"}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, borderRadius: 20, padding: "2px 10px", backgroundColor: st.bg, color: st.text }}>{st.label}</span>
+                  </div>
+                  <p style={{ fontSize: 12, color: TEXT_MUT, margin: 0 }}>
+                    {app.email}
+                    {app.phone && ` · ${app.phone}`}
+                    {app.preliminary_submitted_at && ` · Submitted ${fmtDate(app.preliminary_submitted_at)}`}
+                  </p>
                 </div>
-                <p style={{ fontSize: 12, color: TEXT_MUT, margin: 0 }}>
-                  {app.email}
-                  {app.phone && ` · ${app.phone}`}
-                  {app.preliminary_submitted_at && ` · Submitted ${fmtDate(app.preliminary_submitted_at)}`}
-                </p>
+
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+                  {app.stage === "PRELIMINARY_SUBMITTED" && (
+                    <button disabled={busy} onClick={() => updateApp(app.id, { stage: "UNDER_REVIEW" })}
+                      style={{ fontSize: 12, backgroundColor: "#1F2F3A", color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600, opacity: busy ? 0.6 : 1 }}>
+                      Start Review
+                    </button>
+                  )}
+                  {app.stage === "UNDER_REVIEW" && (
+                    <>
+                      <button disabled={busy || !app.email} onClick={() => runAction(app.id, "request_documents")}
+                        style={{ fontSize: 12, backgroundColor: "#1F2F3A", color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600, opacity: busy ? 0.6 : 1 }}>
+                        {busy ? "Sending…" : "Request Documents →"}
+                      </button>
+                      <button disabled={busy} onClick={() => updateApp(app.id, { stage: "APPROVED", recommendation: "approve" })}
+                        style={{ fontSize: 12, backgroundColor: GREEN, color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600 }}>
+                        Approve
+                      </button>
+                      <button disabled={busy} onClick={() => updateApp(app.id, { stage: "DECLINED", recommendation: "decline" })}
+                        style={{ fontSize: 12, background: "none", border: `1px solid ${BORDER}`, borderRadius: 6, padding: "6px 12px", cursor: "pointer", color: ACCENT }}>
+                        Decline
+                      </button>
+                    </>
+                  )}
+                  {(app.stage === "AWAITING_DOCUMENTS" || app.stage === "VERIFIED") && (
+                    <>
+                      <button onClick={() => setExpanded(isOpen ? null : app.id)}
+                        style={{ fontSize: 12, background: "none", border: `1px solid ${BORDER}`, borderRadius: 6, padding: "6px 12px", cursor: "pointer", color: TEXT }}>
+                        {isOpen ? "Hide checklist" : `Checklist (${checklistDone}/${VERIFICATION_CHECKLIST_ITEMS.length})`}
+                      </button>
+                      {app.stage === "AWAITING_DOCUMENTS" && (
+                        <button disabled={busy} onClick={() => runAction(app.id, "documents_complete")}
+                          style={{ fontSize: 12, backgroundColor: "#1F2F3A", color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600, opacity: busy ? 0.6 : 1 }}>
+                          Mark Documents Complete
+                        </button>
+                      )}
+                      {app.stage === "VERIFIED" && (
+                        <>
+                          <button disabled={busy} onClick={() => updateApp(app.id, { stage: "APPROVED", recommendation: "approve" })}
+                            style={{ fontSize: 12, backgroundColor: GREEN, color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600 }}>
+                            Approve
+                          </button>
+                          <button disabled={busy} onClick={() => updateApp(app.id, { stage: "DECLINED", recommendation: "decline" })}
+                            style={{ fontSize: 12, background: "none", border: `1px solid ${BORDER}`, borderRadius: 6, padding: "6px 12px", cursor: "pointer", color: ACCENT }}>
+                            Decline
+                          </button>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
 
-              {app.stage === "PRELIMINARY_SUBMITTED" && (
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button onClick={() => updateApp(app.id, { stage: "UNDER_REVIEW" })}
-                    style={{ fontSize: 12, backgroundColor: "#1F2F3A", color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600 }}>
-                    Start Review
-                  </button>
+              {/* Key metrics from application */}
+              {app.stage !== "LINK_SENT" && (
+                <div style={{ display: "flex", gap: 16, padding: "10px 14px", backgroundColor: BG, borderRadius: 8 }}>
+                  {[
+                    { label: "Employment", value: app.employment_status?.replace("_", " ") ?? "—" },
+                    { label: "Monthly Income", value: app.approx_monthly_income ? `$${Number(app.approx_monthly_income).toLocaleString()}` : "—" },
+                    { label: "Income Ratio", value: app.income_ratio ? `${app.income_ratio}x` : "—" },
+                    { label: "Occupants", value: String(app.num_occupants ?? "—") },
+                    { label: "Pets", value: app.has_pets ? "Yes" : "No" },
+                  ].map(({ label, value }) => (
+                    <div key={label} style={{ textAlign: "center" }}>
+                      <p style={{ fontSize: 11, color: TEXT_MUT, margin: 0 }}>{label}</p>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: app.income_ratio && label === "Income Ratio" ? (app.income_ratio >= 3 ? GREEN : app.income_ratio >= 2.5 ? AMBER : ACCENT) : TEXT, margin: "2px 0 0" }}>{value}</p>
+                    </div>
+                  ))}
                 </div>
               )}
-              {app.stage === "UNDER_REVIEW" && (
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button onClick={() => updateApp(app.id, { stage: "APPROVED", recommendation: "approve" })}
-                    style={{ fontSize: 12, backgroundColor: GREEN, color: "#fff", border: "none", borderRadius: 6, padding: "6px 12px", cursor: "pointer", fontWeight: 600 }}>
-                    Approve
-                  </button>
-                  <button onClick={() => updateApp(app.id, { stage: "DECLINED", recommendation: "decline" })}
-                    style={{ fontSize: 12, background: "none", border: `1px solid ${BORDER}`, borderRadius: 6, padding: "6px 12px", cursor: "pointer", color: ACCENT }}>
-                    Decline
-                  </button>
-                </div>
+
+              {app.stage === "LINK_SENT" && (
+                <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0, fontStyle: "italic" }}>
+                  Apply link sent — waiting for applicant to fill out the form.
+                </p>
+              )}
+
+              {/* Verification checklist + tenant contacts */}
+              {isOpen && (app.stage === "AWAITING_DOCUMENTS" || app.stage === "VERIFIED") && (
+                <VerificationPanel app={app} campaignId={lp.id} onSaved={fetchApps} />
               )}
             </div>
+          );
+        })}
+      </div>
+      )}
+    </div>
+  );
+}
 
-            {/* Key metrics from application */}
-            {app.stage !== "LINK_SENT" && (
-              <div style={{ display: "flex", gap: 16, padding: "10px 14px", backgroundColor: BG, borderRadius: 8 }}>
-                {[
-                  { label: "Employment", value: app.employment_status?.replace("_", " ") ?? "—" },
-                  { label: "Monthly Income", value: app.approx_monthly_income ? `$${Number(app.approx_monthly_income).toLocaleString()}` : "—" },
-                  { label: "Income Ratio", value: app.income_ratio ? `${app.income_ratio}x` : "—" },
-                  { label: "Occupants", value: String(app.num_occupants ?? "—") },
-                  { label: "Pets", value: app.has_pets ? "Yes" : "No" },
-                ].map(({ label, value }) => (
-                  <div key={label} style={{ textAlign: "center" }}>
-                    <p style={{ fontSize: 11, color: TEXT_MUT, margin: 0 }}>{label}</p>
-                    <p style={{ fontSize: 13, fontWeight: 600, color: app.income_ratio && label === "Income Ratio" ? (app.income_ratio >= 3 ? GREEN : app.income_ratio >= 2.5 ? AMBER : ACCENT) : TEXT, margin: "2px 0 0" }}>{value}</p>
-                  </div>
-                ))}
-              </div>
-            )}
+// ── Verification checklist + tenant contact editor ──────────────────────────
+function VerificationPanel({ app, campaignId, onSaved }: { app: Application; campaignId: string; onSaved: () => void }) {
+  const [docsUrl, setDocsUrl] = useState(app.documents_url ?? "");
+  const [emergencyName, setEmergencyName] = useState(app.emergency_contact_name ?? "");
+  const [emergencyPhone, setEmergencyPhone] = useState(app.emergency_contact_phone ?? "");
+  const [coTenants, setCoTenants] = useState<CoTenant[]>(app.co_tenants ?? []);
+  const [saving, setSaving] = useState(false);
 
-            {app.stage === "LINK_SENT" && (
-              <p style={{ fontSize: 13, color: TEXT_MUT, margin: 0, fontStyle: "italic" }}>
-                Apply link sent — waiting for applicant to fill out the form.
-              </p>
-            )}
+  async function toggleItem(key: string, checked: boolean) {
+    await fetch(`/api/admin/leasing/properties/${campaignId}/applications`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _action: "toggle_checklist", application_id: app.id, key, checked }),
+    });
+    onSaved();
+  }
+
+  async function saveContacts() {
+    setSaving(true);
+    await fetch(`/api/admin/leasing/properties/${campaignId}/applications`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        application_id: app.id,
+        documents_url: docsUrl || null,
+        emergency_contact_name: emergencyName || null,
+        emergency_contact_phone: emergencyPhone || null,
+        co_tenants: coTenants.filter((t) => t.name.trim()),
+      }),
+    });
+    setSaving(false);
+    onSaved();
+  }
+
+  function updateCoTenant(i: number, field: keyof CoTenant, value: string) {
+    setCoTenants((prev) => prev.map((t, idx) => (idx === i ? { ...t, [field]: value } : t)));
+  }
+
+  const checklist = app.verification_checklist ?? {};
+
+  return (
+    <div style={{ marginTop: 14, padding: 16, border: `1px solid ${BORDER}`, borderRadius: 8, backgroundColor: BG }}>
+      <p style={{ fontSize: 12, fontWeight: 700, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 10px" }}>Verification Checklist</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 18 }}>
+        {VERIFICATION_CHECKLIST_ITEMS.map((item) => (
+          <label key={item.key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+            <input type="checkbox" checked={!!checklist[item.key]} onChange={(e) => toggleItem(item.key, e.target.checked)}
+              style={{ width: 16, height: 16, accentColor: ACCENT, cursor: "pointer" }} />
+            <span style={{ fontSize: 13, color: TEXT }}>{item.label}</span>
+          </label>
+        ))}
+      </div>
+
+      <p style={{ fontSize: 12, fontWeight: 700, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 10px" }}>Documents & Contacts</p>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
+        <input value={docsUrl} onChange={(e) => setDocsUrl(e.target.value)} placeholder="Documents folder link (Drive, etc.)" style={{ ...inputStyle, gridColumn: "1 / -1" }} />
+        <input value={emergencyName} onChange={(e) => setEmergencyName(e.target.value)} placeholder="Emergency contact name" style={inputStyle} />
+        <input value={emergencyPhone} onChange={(e) => setEmergencyPhone(e.target.value)} placeholder="Emergency contact phone" style={inputStyle} />
+      </div>
+
+      {coTenants.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 8 }}>
+          <input value={t.name} onChange={(e) => updateCoTenant(i, "name", e.target.value)} placeholder="Co-tenant name" style={inputStyle} />
+          <input value={t.phone} onChange={(e) => updateCoTenant(i, "phone", e.target.value)} placeholder="Phone" style={inputStyle} />
+          <input value={t.email} onChange={(e) => updateCoTenant(i, "email", e.target.value)} placeholder="Email" style={inputStyle} />
+          <input value={t.emergency_contact_name} onChange={(e) => updateCoTenant(i, "emergency_contact_name", e.target.value)} placeholder="Emergency contact name" style={inputStyle} />
+          <input value={t.emergency_contact_phone} onChange={(e) => updateCoTenant(i, "emergency_contact_phone", e.target.value)} placeholder="Emergency contact phone" style={{ ...inputStyle, gridColumn: "span 2" }} />
+        </div>
+      ))}
+      <button onClick={() => setCoTenants((prev) => [...prev, { name: "", phone: "", email: "", emergency_contact_name: "", emergency_contact_phone: "" }])}
+        style={{ fontSize: 12, color: ACCENT, background: "none", border: "none", cursor: "pointer", fontWeight: 600, marginBottom: 12 }}>
+        + Add co-tenant
+      </button>
+
+      <div>
+        <button onClick={saveContacts} disabled={saving} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+          {saving ? "Saving…" : "Save"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Move-In & Closeout Tab ───────────────────────────────────────────────────
+// Modeled directly on the placement-complete email Ebin sends today —
+// finalized-items checklist, financial breakdown, documentation packet,
+// tenant contacts, and next steps, ending in one email to the owner.
+function MoveInTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }) {
+  const md = (lp.move_in_data ?? {}) as Record<string, unknown>;
+  const [data, setData] = useState<Record<string, string | boolean>>(() => {
+    const init: Record<string, string | boolean> = {};
+    for (const item of [...MOVE_IN_CHECKLIST_ITEMS, ...CLOSEOUT_DOCUMENT_ITEMS]) init[item.key] = !!md[item.key];
+    init.additional_finalized_note = (md.additional_finalized_note as string) ?? "";
+    init.rent_collected = md.rent_collected != null ? String(md.rent_collected) : "";
+    init.placement_fee = md.placement_fee != null ? String(md.placement_fee) : "";
+    init.documents_url = (md.documents_url as string) ?? "";
+    init.market_context_note = (md.market_context_note as string) ?? "";
+    init.move_in_date = (md.move_in_date as string) ?? "";
+    init.deposit_amount = md.deposit_amount != null ? String(md.deposit_amount) : "";
+    init.deposit_send_date = (md.deposit_send_date as string) ?? "";
+    init.rent_destination_email = (md.rent_destination_email as string) ?? lp.owner_email ?? "";
+    init.additional_next_steps = (md.additional_next_steps as string) ?? "";
+    return init;
+  });
+  const [finalRent, setFinalRent] = useState(String(lp.final_rent ?? ""));
+  const [saving, setSaving] = useState(false);
+  const [notifyingLease, setNotifyingLease] = useState(false);
+  const [confirmSend, setConfirmSend] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
+
+  function set(key: string, value: string | boolean) {
+    setData((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function save() {
+    setSaving(true);
+    await fetch(`/api/admin/leasing/properties/${lp.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ move_in_data: data, final_rent: finalRent ? Number(finalRent) : null }),
+    });
+    setSaving(false);
+    onEdit();
+  }
+
+  async function notifyLeaseSigned() {
+    setNotifyingLease(true);
+    await save();
+    const res = await fetch(`/api/admin/leasing/properties/${lp.id}/lease-signed-update`, { method: "POST" });
+    setNotifyingLease(false);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert(err.error || "Failed to send — check the owner's email is set on Overview.");
+    }
+  }
+
+  async function sendCloseout() {
+    setSending(true);
+    setSendError("");
+    await save();
+    const res = await fetch(`/api/admin/leasing/properties/${lp.id}/closeout`, { method: "POST" });
+    setSending(false);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      setSendError(err.error || "Failed to send.");
+      return;
+    }
+    setConfirmSend(false);
+    onEdit();
+  }
+
+  const rentCollected = Number(data.rent_collected) || 0;
+  const placementFee = Number(data.placement_fee) || 0;
+  const net = rentCollected - placementFee;
+  const alreadyClosed = lp.stage === "CLOSED";
+
+  return (
+    <div style={{ maxWidth: 760, display: "flex", flexDirection: "column", gap: 20 }}>
+      {alreadyClosed && (
+        <div style={{ backgroundColor: "#D1FAE5", border: "1px solid #A7F3D0", borderRadius: 10, padding: "12px 16px" }}>
+          <p style={{ fontSize: 13, color: "#065F46", margin: 0, fontWeight: 600 }}>✓ Closeout report sent — this campaign is closed.</p>
+        </div>
+      )}
+
+      {/* Checklist */}
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 14px" }}>What's Been Finalized</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
+          {MOVE_IN_CHECKLIST_ITEMS.map((item) => (
+            <label key={item.key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+              <input type="checkbox" checked={!!data[item.key]} onChange={(e) => set(item.key, e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: ACCENT, cursor: "pointer" }} />
+              <span style={{ fontSize: 13, color: TEXT }}>{item.label}</span>
+            </label>
+          ))}
+        </div>
+        <input value={data.additional_finalized_note as string} onChange={(e) => set("additional_finalized_note", e.target.value)}
+          placeholder="Other finalized item (e.g. Microwave purchased and receipt handed over)" style={{ ...inputStyle, width: "100%", boxSizing: "border-box" }} />
+
+        <div style={{ marginTop: 16 }}>
+          <label style={labelStyle}>Move-in date</label>
+          <input type="date" value={data.move_in_date as string} onChange={(e) => set("move_in_date", e.target.value)} style={inputStyle} />
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <button onClick={notifyLeaseSigned} disabled={notifyingLease || !data.lease_signed}
+            style={{ fontSize: 13, backgroundColor: "#1F2F3A", color: "#fff", border: "none", borderRadius: 7, padding: "9px 18px", cursor: data.lease_signed ? "pointer" : "not-allowed", fontWeight: 600, opacity: data.lease_signed ? 1 : 0.4 }}>
+            {notifyingLease ? "Sending…" : "Notify Owner — Lease Signed"}
+          </button>
+          {md.lease_signed_update_sent_at ? (
+            <span style={{ fontSize: 12, color: GREEN, marginLeft: 10 }}>✓ Sent {fmtDate(md.lease_signed_update_sent_at as string)}</span>
+          ) : null}
+        </div>
+      </div>
+
+      {/* Financials */}
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 14px" }}>Financial Breakdown</p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+          <div>
+            <label style={labelStyle}>Final Rent</label>
+            <input type="number" value={finalRent} onChange={(e) => setFinalRent(e.target.value)} placeholder={String(lp.asking_rent ?? "")} style={inputStyle} />
           </div>
-        );
-      })}
+          <div>
+            <label style={labelStyle}>Rent Collected ($)</label>
+            <input type="number" value={data.rent_collected as string} onChange={(e) => set("rent_collected", e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>Placement Fee ($)</label>
+            <input type="number" value={data.placement_fee as string} onChange={(e) => set("placement_fee", e.target.value)} style={inputStyle} />
+          </div>
+        </div>
+        {(rentCollected > 0 || placementFee > 0) && (
+          <p style={{ fontSize: 13, color: TEXT_SEC, margin: "12px 0 0" }}>
+            ${rentCollected.toLocaleString()} − ${placementFee.toLocaleString()} = <strong>${net.toLocaleString()}</strong> net to owner
+          </p>
+        )}
+        <div style={{ marginTop: 14 }}>
+          <label style={labelStyle}>Market context note (optional)</label>
+          <input value={data.market_context_note as string} onChange={(e) => set("market_context_note", e.target.value)}
+            placeholder="e.g. A similar property nearby remains on the market, reinforcing a strong placement" style={{ ...inputStyle, width: "100%", boxSizing: "border-box" }} />
+        </div>
+      </div>
+
+      {/* Documents */}
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 14px" }}>Documentation</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
+          {CLOSEOUT_DOCUMENT_ITEMS.map((item) => (
+            <label key={item.key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+              <input type="checkbox" checked={!!data[item.key]} onChange={(e) => set(item.key, e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: ACCENT, cursor: "pointer" }} />
+              <span style={{ fontSize: 13, color: TEXT }}>{item.label}</span>
+            </label>
+          ))}
+        </div>
+        <input value={data.documents_url as string} onChange={(e) => set("documents_url", e.target.value)}
+          placeholder="Documents folder link (Google Drive, etc.)" style={{ ...inputStyle, width: "100%", boxSizing: "border-box" }} />
+      </div>
+
+      {/* Next steps */}
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 14px" }}>Next Steps</p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div>
+            <label style={labelStyle}>Deposit Amount ($)</label>
+            <input type="number" value={data.deposit_amount as string} onChange={(e) => set("deposit_amount", e.target.value)} style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>Deposit Send Date</label>
+            <input type="date" value={data.deposit_send_date as string} onChange={(e) => set("deposit_send_date", e.target.value)} style={inputStyle} />
+          </div>
+        </div>
+        <label style={labelStyle}>Rent Destination Email</label>
+        <input value={data.rent_destination_email as string} onChange={(e) => set("rent_destination_email", e.target.value)}
+          placeholder="owner@email.com" style={{ ...inputStyle, width: "100%", boxSizing: "border-box", marginBottom: 12 }} />
+        <label style={labelStyle}>Anything else</label>
+        <textarea value={data.additional_next_steps as string} onChange={(e) => set("additional_next_steps", e.target.value)}
+          rows={2} style={{ ...inputStyle, width: "100%", boxSizing: "border-box", resize: "vertical" }} />
+      </div>
+
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <button onClick={save} disabled={saving} style={{ background: "none", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 600, color: TEXT_SEC, cursor: "pointer" }}>
+          {saving ? "Saving…" : "Save Progress"}
+        </button>
+
+        {!confirmSend ? (
+          <button onClick={() => setConfirmSend(true)} disabled={!lp.owner_email}
+            style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 700, cursor: lp.owner_email ? "pointer" : "not-allowed", opacity: lp.owner_email ? 1 : 0.4 }}>
+            Send Closeout Report to Owner →
+          </button>
+        ) : (
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <span style={{ fontSize: 13, color: TEXT_SEC }}>Send final report to {lp.owner_email} and close this campaign?</span>
+            <button onClick={sendCloseout} disabled={sending} style={{ backgroundColor: ACCENT, color: "#fff", border: "none", borderRadius: 7, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+              {sending ? "Sending…" : "Confirm & Send"}
+            </button>
+            <button onClick={() => setConfirmSend(false)} style={{ background: "none", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "8px 14px", fontSize: 13, cursor: "pointer", color: TEXT_MUT }}>Cancel</button>
+          </div>
+        )}
+        {!lp.owner_email && <span style={{ fontSize: 12, color: ACCENT }}>Set owner email on Overview first</span>}
+      </div>
+      {sendError && <p style={{ fontSize: 13, color: ACCENT, margin: 0 }}>{sendError}</p>}
     </div>
   );
 }

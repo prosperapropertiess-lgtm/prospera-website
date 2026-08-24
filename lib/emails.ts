@@ -2404,3 +2404,202 @@ export function placementOnboardingReadyEmail(data: {
     ${signoff()}
   `);
 }
+
+// ── TENANT VERIFICATION ───────────────────────────────────────
+
+// Sent to a prospective tenant once they're moving into document verification —
+// mirrors the exact doc-prep email Ebin sends today ahead of the screening form.
+export function tenantDocumentRequestEmail(data: {
+  tenantName: string;
+  propertyAddress: string;
+  applicationLink: string;
+}): string {
+  const firstName = data.tenantName.split(" ")[0];
+  return wrapper(`
+    ${heroCard(`Hi ${firstName},`, `Thanks for your interest in ${data.propertyAddress}.`)}
+
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      To make the application process faster and smoother, please prepare the required documents before starting the tenant screening form. Having everything ready will save you time while completing the application.
+    </p>
+
+    ${noteBox(
+      `For each primary applicant (up to 4 primary applicants), we require the following:<br><br>
+      &bull; 2 government-issued photo ID<br>
+      &bull; Proof of employment or employment letter<br>
+      &bull; Six (6) recent pay stubs (preferably combined into one PDF file)<br>
+      &bull; Six (6) months of bank statements (preferably combined into one PDF file)<br>
+      &bull; Previous landlord contact information (if applicable)`,
+      "Required Documents"
+    )}
+
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Please make sure the documents are clear and readable. If there are multiple applicants, we require the complete information and documents for each applicant.
+    </p>
+    <p style="margin:0 0 8px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      The application usually takes approximately 15&ndash;30 minutes to complete, depending on how prepared the documents are. Having everything ready beforehand will help make the process quick and efficient.
+    </p>
+
+    ${cta("Start Your Application", data.applicationLink)}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Thank you, and we look forward to reviewing your application.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// ── OWNER UPDATES — TENANT VERIFICATION ─────────────────────────
+
+// Sent the moment Ebin approves an applicant — informs, doesn't gate. Matches
+// the placement-agreement promise: "we bring you the top applicants with our
+// recommendation. The final call is always yours."
+export function ownerStrongApplicantEmail(data: {
+  ownerName: string;
+  propertyAddress: string;
+  applicantName: string;
+  employmentStatus: string | null;
+  monthlyIncome: number | null;
+  incomeRatio: number | null;
+  occupants: number | null;
+  hasPets: boolean;
+}): string {
+  const firstName = data.ownerName.split(" ")[0];
+  return wrapper(`
+    ${heroCard("We found a strong applicant.", data.propertyAddress)}
+
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Hi ${firstName}, ${data.applicantName} has cleared our screening for ${data.propertyAddress} and we're recommending them.</p>
+
+    ${onboardChecklist([
+      { label: `Employment: ${data.employmentStatus ?? "verified"}`, done: true },
+      { label: data.monthlyIncome ? `Monthly income: $${data.monthlyIncome.toLocaleString()}` : "Income verified", done: true },
+      { label: data.incomeRatio ? `Income-to-rent ratio: ${data.incomeRatio}x` : "Income ratio calculated", done: true },
+      { label: `Occupants: ${data.occupants ?? "—"}${data.hasPets ? " · has pets" : ""}`, done: true },
+      { label: "Screening and references complete", done: true },
+    ])}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">We're moving ahead with lease preparation. Reply here if you'd like to discuss before we finalize — otherwise no action needed from you.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// Sent when the lease is marked signed in the move-in checklist.
+export function ownerLeaseSignedEmail(data: {
+  ownerName: string;
+  propertyAddress: string;
+  tenantNames: string[];
+  moveInDate: string | null;
+}): string {
+  const firstName = data.ownerName.split(" ")[0];
+  return wrapper(`
+    ${heroCard("Lease signed. ✅", data.propertyAddress)}
+
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Hi ${firstName}, the lease is signed with ${data.tenantNames.join(" and ")}${data.moveInDate ? ` — move-in is set for ${data.moveInDate}` : ""}.
+    </p>
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Next: move-in inspection, key handover, and utility transfer. You'll get the full placement report once that's wrapped up.
+    </p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+// ── OWNER UPDATE — PLACEMENT CLOSEOUT ───────────────────────────
+// The full report sent once move-in is complete — modeled directly on the
+// closeout email Ebin actually sends today.
+
+export interface CloseoutTenant {
+  name: string;
+  phone?: string;
+  email?: string;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
+}
+
+export function ownerPlacementCloseoutEmail(data: {
+  ownerName: string;
+  propertyAddress: string;
+  totalViews: number;
+  showingsCount: number;
+  marketFeedback: string[];
+  initialPrice: number | null;
+  finalRent: number | null;
+  marketContextNote?: string;
+  finalizedItems: string[];
+  financialLine?: string;
+  documentTypes: string[];
+  documentsUrl?: string;
+  tenants: CloseoutTenant[];
+  depositAmount?: number | null;
+  depositSendDate?: string | null;
+  rentDestinationEmail?: string | null;
+  additionalNextSteps?: string;
+}): string {
+  return wrapper(`
+    ${heroCard("Placement complete.", data.propertyAddress)}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Dear ${data.ownerName},<br><br>
+      The tenant placement process for your property at ${data.propertyAddress} is now fully complete.
+    </p>
+
+    <p style="margin:0 0 14px;font-size:19px;font-weight:700;color:${NAVY};font-family:${FONT};">Leasing &amp; Market Insights</p>
+
+    ${darkStats([
+      { value: String(data.totalViews), label: "Views / Clicks" },
+      { value: String(data.showingsCount), label: "Showings" },
+    ])}
+
+    ${data.marketFeedback.length > 0 ? noteBox(
+      data.marketFeedback.map((f) => `&bull; ${f}`).join("<br>"),
+      "Market Feedback Observed"
+    ) : ""}
+
+    <p style="margin:0 0 8px;font-size:16px;color:${TEXT};font-family:${FONT};line-height:1.9;"><strong>Pricing Strategy &amp; Outcome</strong></p>
+    <p style="margin:0 0 24px;font-size:16px;color:${MUTED};font-family:${FONT};line-height:1.9;">
+      ${data.initialPrice ? `Initial listing price: $${data.initialPrice.toLocaleString()}/month<br>` : ""}
+      ${data.finalRent ? `Final rent: $${data.finalRent.toLocaleString()}/month` : ""}
+      ${data.marketContextNote ? `<br>${data.marketContextNote}` : ""}
+    </p>
+
+    ${divider()}
+
+    <p style="margin:0 0 14px;font-size:19px;font-weight:700;color:${NAVY};font-family:${FONT};">Summary — What's Been Finalized</p>
+    ${onboardChecklist(data.finalizedItems.map((label) => ({ label, done: true })))}
+
+    ${data.financialLine ? noteBox(data.financialLine, "Funds Transferred") : ""}
+
+    ${divider()}
+
+    <p style="margin:0 0 14px;font-size:19px;font-weight:700;color:${NAVY};font-family:${FONT};">Documentation</p>
+    ${onboardChecklist(data.documentTypes.map((label) => ({ label, done: true })))}
+    ${data.documentsUrl ? cta("Access All Documents", data.documentsUrl) : ""}
+
+    ${divider()}
+
+    <p style="margin:0 0 14px;font-size:19px;font-weight:700;color:${NAVY};font-family:${FONT};">Contact Information</p>
+    ${data.tenants.map((t) => `
+      <p style="margin:0 0 4px;font-size:16px;color:${TEXT};font-family:${FONT};line-height:1.8;"><strong>${t.name}</strong>${t.phone ? ` — ${t.phone}` : ""}${t.email ? ` | ${t.email}` : ""}</p>
+      ${t.emergencyContactName ? `<p style="margin:0 0 16px;font-size:14px;color:${MUTED};font-family:${FONT};">Emergency Contact — ${t.emergencyContactName}${t.emergencyContactPhone ? ` — ${t.emergencyContactPhone}` : ""}</p>` : `<div style="margin-bottom:16px;"></div>`}
+    `).join("")}
+
+    ${divider()}
+
+    <p style="margin:0 0 14px;font-size:19px;font-weight:700;color:${NAVY};font-family:${FONT};">Next Steps</p>
+    <p style="margin:0 0 28px;font-size:16px;color:${TEXT};font-family:${FONT};line-height:1.9;">
+      ${data.depositAmount && data.depositSendDate ? `&bull; Deposit ($${data.depositAmount.toLocaleString()}) will be sent to ${data.rentDestinationEmail ?? "you"} on ${data.depositSendDate}<br>` : ""}
+      ${data.rentDestinationEmail ? `&bull; Rent will be sent to ${data.rentDestinationEmail} moving forward<br>` : ""}
+      &bull; Point of contact has been updated to be the owner with the tenant<br>
+      &bull; Hard copies of all documents will also be sent to your residential address on file
+      ${data.additionalNextSteps ? `<br>&bull; ${data.additionalNextSteps}` : ""}
+    </p>
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">If you need anything further or have any questions as the tenancy begins, feel free to reach out.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}

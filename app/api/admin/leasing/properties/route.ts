@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
       min_authorized_rent: body.min_authorized_rent ?? null,
       incentive_description: body.incentive_description || null,
       incentive_value: body.incentive_value ?? null,
+      owner_name: body.owner_name || null,
+      owner_email: body.owner_email || null,
       notes: body.notes || null,
     })
     .select()

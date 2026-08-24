@@ -156,6 +156,8 @@ async function createCampaignFromOnboarding(
       target_rent: desiredRent,
       min_authorized_rent: rentFloor,
       incentive_description: incentiveDescription,
+      owner_name: session.owner_name || null,
+      owner_email: session.owner_email || null,
       notes: noteLines.length ? noteLines.join("\n") : null,
     }),
   });
