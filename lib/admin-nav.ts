@@ -10,6 +10,7 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/discovery", name: "Discovery Calls", icon: "call" },
   { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business" },
   { href: "/admin/leasing", name: "Rentals", icon: "home_work" },
+  { href: "/admin/leasing/verification", name: "Tenant Verification", icon: "fact_check" },
   { href: "/admin/properties", name: "Properties", icon: "villa" },
   { href: "/admin/applications", name: "Applications", icon: "assignment" },
   { href: "/admin/agents", name: "Agents", icon: "support_agent" },

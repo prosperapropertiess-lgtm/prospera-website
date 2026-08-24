@@ -323,6 +323,14 @@ export default function LeasingPropertyHub() {
   const [advancingStage, setAdvancingStage] = useState(false);
   const [stageBlockers, setStageBlockers] = useState<string[]>([]);
 
+  // Deep-link support, e.g. /admin/leasing/[id]?tab=applications from the
+  // top-level Tenant Verification list
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const requested = new URLSearchParams(window.location.search).get("tab") as Tab | null;
+    if (requested) setTab(requested);
+  }, []);
+
   const load = useCallback(async () => {
     setLoading(true);
     const res = await fetch(`/api/admin/leasing/properties/${id}`).catch(() => null);

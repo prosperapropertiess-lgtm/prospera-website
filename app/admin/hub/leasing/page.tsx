@@ -8,30 +8,38 @@ interface LiveData {
   leads: number | null;
   activeCampaigns: number | null;
   uncontactedLeads: number | null;
+  applicationsAwaitingDecision: number | null;
 }
+
+const IN_PROGRESS_APP_STAGES = ["LINK_SENT", "PRELIMINARY_SUBMITTED", "UNDER_REVIEW", "AWAITING_DOCUMENTS", "VERIFIED"];
 
 const COUNTS: Record<string, (live: LiveData) => { count: number | null; countLabel: string | null; alert?: boolean }> = {
   "/admin/leasing": (l) => ({ count: l.activeCampaigns, countLabel: "open now" }),
+  "/admin/leasing/verification": (l) => ({ count: l.applicationsAwaitingDecision, countLabel: "in progress", alert: (l.applicationsAwaitingDecision ?? 0) > 0 }),
   "/admin/properties": (l) => ({ count: l.properties, countLabel: "homes" }),
   "/admin/leads": (l) => ({ count: l.leads, countLabel: "total" }),
 };
 
 export default function LeasingHub() {
-  const [live, setLive] = useState<LiveData>({ properties: null, leads: null, activeCampaigns: null, uncontactedLeads: null });
+  const [live, setLive] = useState<LiveData>({ properties: null, leads: null, activeCampaigns: null, uncontactedLeads: null, applicationsAwaitingDecision: null });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
-      const [propsRes, leadsRes, leasingRes] = await Promise.allSettled([
+      const [propsRes, leadsRes, leasingRes, appsRes] = await Promise.allSettled([
         fetch("/api/admin/properties/list").then((r) => r.json()),
         fetch("/api/admin/leads").then((r) => r.json()),
         fetch("/api/admin/leasing/command").then((r) => r.json()),
+        fetch("/api/admin/leasing/applications").then((r) => r.json()),
       ]);
       setLive({
         properties: propsRes.status === "fulfilled" && Array.isArray(propsRes.value) ? propsRes.value.length : null,
         leads: leadsRes.status === "fulfilled" && typeof leadsRes.value?.total === "number" ? leadsRes.value.total : null,
         activeCampaigns: leasingRes.status === "fulfilled" ? (leasingRes.value?.metrics?.active_campaigns ?? leasingRes.value?.active_campaigns ?? null) : null,
         uncontactedLeads: leasingRes.status === "fulfilled" ? (leasingRes.value?.metrics?.uncontacted_leads ?? leasingRes.value?.uncontacted_leads ?? null) : null,
+        applicationsAwaitingDecision: appsRes.status === "fulfilled" && Array.isArray(appsRes.value)
+          ? appsRes.value.filter((a: { stage: string }) => IN_PROGRESS_APP_STAGES.includes(a.stage)).length
+          : null,
       });
       setLoading(false);
     }
