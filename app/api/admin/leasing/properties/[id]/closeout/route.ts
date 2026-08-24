@@ -76,7 +76,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     feedback_layout: boolean; feedback_utilities: boolean;
   };
   const showings = (lp.showings ?? []) as ShowingRow[];
-  const channels = (lp.channels ?? []) as { views_total: number }[];
+  const channels = (lp.channels ?? []) as { views: number }[];
 
   // Aggregate unique market feedback across all showings
   const feedbackSet = new Set<string>();
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       html: ownerPlacementCloseoutEmail({
         ownerName: lp.owner_name || "there",
         propertyAddress,
-        totalViews: channels.reduce((s, c) => s + (c.views_total ?? 0), 0),
+        totalViews: channels.reduce((s, c) => s + (c.views ?? 0), 0),
         showingsCount: showings.length,
         marketFeedback: Array.from(feedbackSet),
         initialPrice: lp.asking_rent,
