@@ -44,13 +44,13 @@ export default function Footer() {
               className="text-xs uppercase tracking-widest mb-2 footer-link"
               style={{ fontFamily: "var(--font-dm-sans)", color: "rgba(250,248,245,0.35)" }}
             >
-              For landlords with 1–5 doors.
+              For landlords with 4–15 doors.
             </p>
             <p
               className="text-sm leading-relaxed mb-5 footer-link"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              Property management built for small landlords across London, St. Thomas, and Strathroy.
+              Property management built for growing landlords across London, St. Thomas, and Strathroy.
             </p>
             <div className="flex items-center gap-4">
               {/* YouTube */}

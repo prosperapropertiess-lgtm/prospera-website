@@ -115,7 +115,7 @@ const RECOMMENDATIONS: Record<string, RecommendationItem> = {
   maintenance: {
     title: "Create a Maintenance Request Template",
     problem: "No structured way for tenants to report issues.",
-    whyItMatters: "A simple form captures the right details upfront — preventing the back-and-forth to understand what's broken.",
+    whyItMatters: "A simple form captures the right details upfront, preventing the back-and-forth to understand what's broken.",
     timeToImplement: "2–3 hours",
     difficulty: "Easy",
     impact: "High",
@@ -133,7 +133,7 @@ const RECOMMENDATIONS: Record<string, RecommendationItem> = {
   operational: {
     title: "Centralize Your Documents in the Cloud",
     problem: "Scattered leases slow down every decision.",
-    whyItMatters: "A 30-second cloud search beats a 30-minute hunt through email — every time.",
+    whyItMatters: "A 30-second cloud search beats a 30-minute hunt through email, every time.",
     timeToImplement: "Half a day",
     difficulty: "Easy",
     impact: "Medium",

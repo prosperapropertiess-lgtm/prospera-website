@@ -252,7 +252,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
         <textarea
           value={description}
           onChange={e => setDescription(e.target.value)}
-          placeholder="Describe the issue in detail — when did it start, what have you noticed, any prior attempts to fix it…"
+          placeholder="Describe the issue in detail: when did it start, what have you noticed, any prior attempts to fix it…"
           rows={5}
           style={{
             width: "100%",
@@ -530,7 +530,7 @@ export default function MaintenanceWizard({ token, tenantId, propertyId }: Props
               transition: "background 0.15s",
             }}
           >
-            Still need help — Request Dispatch
+            Still need help, request dispatch
           </button>
         </div>
       </div>

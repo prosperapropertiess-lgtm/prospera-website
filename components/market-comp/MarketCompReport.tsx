@@ -439,7 +439,7 @@ function ComparableCard({
                 style={{ background: "rgba(31,47,58,0.07)", color: NAVY }}
               >
                 <Bus size={11} />
-                Route {r.route} — {r.stop_name}
+                Route {r.route}, {r.stop_name}
               </span>
             ))}
           </div>
@@ -706,7 +706,7 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
   const prospераItems = [
     { title: "Professional photography", desc: "High-quality photos and a polished listing that stands out." },
     { title: "Listed everywhere", desc: "Syndicated across Kijiji, Rentals.ca, Facebook, and social." },
-    { title: "Same-day responses", desc: "Every inquiry answered the same day — no one slips through." },
+    { title: "Same-day responses", desc: "Every inquiry answered the same day. No one slips through." },
     { title: "Full tenant screening", desc: "Background, credit, and reference checks on every applicant." },
     { title: "Lease handled for you", desc: "We prepare and execute the lease. You just sign off." },
   ];
@@ -719,11 +719,11 @@ function OwnerActionPlan({ condition, ownerActionItems }: { condition: string | 
             Before We List
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center" style={{ color: NAVY, fontFamily: "var(--font-dm-sans)" }}>
-            {hasOwnerItems ? "A few things from you — then we take over." : "Your property is ready."}
+            {hasOwnerItems ? "A few things from you, then we take over." : "Your property is ready."}
           </h2>
           <p className="text-sm text-center mb-12 max-w-lg mx-auto" style={{ color: MUTED, lineHeight: 1.8 }}>
             {hasOwnerItems
-              ? "Not urgent — but these will help it rent faster and at a stronger price."
+              ? "Not urgent, but these will help it rent faster and at a stronger price."
               : "Move-in ready and well-maintained. The work from here is ours."}
           </p>
         </FadeIn>
@@ -867,7 +867,7 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
           }
         }
         fallback.push(
-          "Including utilities (water, heat) in the rent allows you to list at a higher rate — many tenants pay a premium for predictable monthly costs.",
+          "Including utilities (water, heat) in the rent allows you to list at a higher rate. Many tenants pay a premium for predictable monthly costs.",
           "Professional photos of clean, staged rooms reduce days on market by 30–50% on average.",
           "A freshly painted unit with updated fixtures signals a well-maintained property and supports top-of-range pricing.",
           "Offering one month free on a 12-month lease is perceived as a better incentive than a lower monthly rent, while preserving your legal rental rate for future increases."
@@ -1383,7 +1383,7 @@ export default function MarketCompReport({ data }: { data: MarketCompData }) {
                   className="text-xs font-medium uppercase tracking-widest pb-px transition-opacity hover:opacity-60"
                   style={{ color: "rgba(250,248,245,0.55)", borderBottom: "1px solid rgba(250,248,245,0.20)" }}
                 >
-                  Questions? Call Ebin — (519) 697-1227
+                  Questions? Call Ebin, (519) 697-1227
                 </a>
               </div>
             </div>

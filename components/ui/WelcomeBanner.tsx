@@ -19,7 +19,7 @@ export default function WelcomeBanner() {
               className="text-sm font-medium leading-snug"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
             >
-              You&apos;re in — full resource centre access unlocked.
+              You&apos;re in. Full resource centre access is open.
             </p>
             <p
               className="text-xs mt-0.5 leading-relaxed"

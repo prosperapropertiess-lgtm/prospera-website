@@ -82,7 +82,7 @@ export default function DemoShell({ children, mode, name, initials }: Props) {
               Demo
             </span>
             <span style={{ fontSize: "13px", color: "rgba(250,248,245,0.75)" }}>
-              This is a sample {mode === "owner" ? "owner" : "tenant"} portal — explore freely.
+              This is a sample {mode === "owner" ? "owner" : "tenant"} portal. Explore freely.
             </span>
           </div>
           <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>

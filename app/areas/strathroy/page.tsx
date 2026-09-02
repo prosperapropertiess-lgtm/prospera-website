@@ -17,13 +17,13 @@ const stats = [
 ];
 
 const neighbourhoods = [
-  { name: "Downtown Strathroy", desc: "The walkable core — affordable rents, shops, and hospital. Strong demand from families and trades workers year-round." },
+  { name: "Downtown Strathroy", desc: "The walkable core, with affordable rents, shops, and the hospital nearby. Strong demand from families and trades workers year-round." },
   { name: "West Strathroy", desc: "Newer subdivisions, great schools, and family tenants who stay for years. Ideal for landlords who want low turnover." },
   { name: "Caradoc / Rural", desc: "Larger properties and acreages with growing appeal from remote workers and retirees seeking space at an affordable price." },
 ];
 
 const services = [
-  { icon: "🔍", title: "Tenant Screening", desc: "Credit checks, income verification, criminal background, and landlord references — every time." },
+  { icon: "🔍", title: "Tenant Screening", desc: "Credit checks, income verification, criminal background, and landlord references, every time." },
   { icon: "💰", title: "Rent Collection", desc: "Online payments, monthly statements, and immediate follow-up on any late payments." },
   { icon: "🔧", title: "Maintenance Coordination", desc: "Trusted local contractors, 24/7 emergency line, and zero markup on repairs." },
   { icon: "📋", title: "Lease Management", desc: "Ontario-compliant leases, renewals, and rent increases handled correctly and on time." },
@@ -62,7 +62,7 @@ export default function StroathroyPage() {
             Property Management in Strathroy, Ontario
           </h1>
           <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            Strathroy offers what London can&apos;t — affordability, stability, and strong cash flow. We handle the day-to-day so you don&apos;t have to.
+            Strathroy offers what London can&apos;t: affordability, stability, and strong cash flow. We handle the day-to-day so you don&apos;t have to.
           </p>
           <Link
             href="/contact"
@@ -143,7 +143,7 @@ export default function StroathroyPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              Strathroy Rental Market — 2026 Snapshot
+              Strathroy Rental Market: 2026 Snapshot
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -184,7 +184,7 @@ export default function StroathroyPage() {
           <BlogNudge
             hook="Small town, big landlord mistakes. Here's how to avoid them."
             title="First-Time Landlord Tips in London, Ontario"
-            excerpt="The same principles apply in Strathroy — but with a tighter tenant pool, getting screening right is even more important."
+            excerpt="The same principles apply in Strathroy, but with a tighter tenant pool, getting screening right matters even more."
             slug="first-time-landlord-tips-london-ontario"
             label="Landlord Guide"
           />

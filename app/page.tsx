@@ -148,7 +148,7 @@ function Hero() {
                 </span>
               </div>
               <p className="text-xs text-center" style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}>
-                Built for landlords self-managing 2–5 units in London & surrounding areas within 45 min
+                Built for landlords self-managing 4–15 units in London & surrounding areas within 45 min
               </p>
             </div>
           </HeroFadeIn>
@@ -803,7 +803,7 @@ function Services() {
             For Self-Managing Landlords
           </p>
           <h2 className="text-4xl sm:text-5xl font-light text-center mb-12 leading-tight" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-            Still doing it yourself with 2–5 units?
+            Still doing it yourself with 4–15 units?
           </h2>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

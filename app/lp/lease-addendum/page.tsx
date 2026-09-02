@@ -5,28 +5,28 @@ import Link from "next/link";
 import Image from "next/image";
 
 const CLAUSES = [
-  { n: "01", title: "Unauthorized Occupants", body: "Who is and isn't permitted to live in the unit — including limits on long-term guests." },
+  { n: "01", title: "Unauthorized Occupants", body: "Who is and isn't permitted to live in the unit, including limits on long-term guests." },
   { n: "02", title: "Pet Damage Liability", body: "Specific financial responsibility clauses that survive move-out, regardless of deposit." },
-  { n: "03", title: "Move-In & Move-Out Condition", body: "Standards for property condition at both ends of tenancy — enforceable at the LTB." },
+  { n: "03", title: "Move-In & Move-Out Condition", body: "Standards for property condition at both ends of tenancy, enforceable at the LTB." },
   { n: "04", title: "Early Termination Penalties", body: "Conditions and costs when a tenant breaks the lease before the agreed end date." },
   { n: "05", title: "Appliance & Utility Responsibilities", body: "Who maintains what, and what happens when an appliance provided by the landlord fails." },
-  { n: "06", title: "Notice Requirements for Access", body: "Repair access, inspections, and showings — what's required and what qualifies as proper notice." },
-  { n: "07", title: "No Smoking Policy", body: "Covers the unit, balcony, and common areas — with defined consequences for violations." },
+  { n: "06", title: "Notice Requirements for Access", body: "Repair access, inspections, and showings: what's required and what qualifies as proper notice." },
+  { n: "07", title: "No Smoking Policy", body: "Covers the unit, balcony, and common areas, with defined consequences for violations." },
   { n: "08", title: "Subletting & Airbnb Restrictions", body: "Explicit prohibition of unauthorized subletting and short-term rental platforms." },
   { n: "09", title: "Parking Rules & Guest Vehicles", body: "Assigned spaces, visitor limits, and unauthorized vehicle removal rights." },
   { n: "10", title: "Garbage & Recycling Obligations", body: "Tenant responsibilities for waste disposal, including large-item removal." },
-  { n: "11", title: "Noise & Nuisance Standards", body: "Defined thresholds and complaint process — strengthens N5 notices if needed." },
+  { n: "11", title: "Noise & Nuisance Standards", body: "Defined thresholds and complaint process, strengthens N5 notices if needed." },
   { n: "12", title: "Tenant Insurance Requirement", body: "Written confirmation that the tenant carries their own content and liability insurance." },
   { n: "13", title: "Lock & Key Policy", body: "Unauthorized lock changes, key duplication, and lockout procedures." },
-  { n: "14", title: "Snow Removal & Exterior Maintenance", body: "Responsibilities for single-family and semi-detached properties — clearly assigned." },
+  { n: "14", title: "Snow Removal & Exterior Maintenance", body: "Responsibilities for single-family and semi-detached properties, clearly assigned." },
   { n: "15", title: "Damage Beyond Normal Wear & Tear", body: "Defines what qualifies and establishes the landlord's right to recover costs." },
-  { n: "16", title: "Communication & Notice Methods", body: "Email and written notice standards — what counts as proper legal communication." },
+  { n: "16", title: "Communication & Notice Methods", body: "Email and written notice standards: what counts as proper legal communication." },
   { n: "17", title: "Illegal Activity Clause", body: "Grounds for N6 notice and immediate LTB application, documented in writing from day one." },
 ];
 
 const PROOF = [
   "Used across rental properties managed in London, Strathroy, and St. Thomas",
-  "Written specifically for Ontario's Residential Tenancies Act — not adapted from another province",
+  "Written specifically for Ontario's Residential Tenancies Act, not adapted from another province",
   "Tested against real tenant dispute scenarios, not hypothetical situations",
 ];
 
@@ -126,7 +126,7 @@ export default function LeaseAddendumLP() {
               className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
               style={{ backgroundColor: "rgba(250,248,245,0.12)", color: "#FAF8F5", border: "1px solid rgba(250,248,245,0.25)", fontFamily: "var(--font-dm-sans)" }}
             >
-              Free Download — Ontario Landlords
+              Free Download: Ontario Landlords
             </span>
             <h1
               className="text-4xl sm:text-5xl font-light leading-tight mb-5"
@@ -136,7 +136,7 @@ export default function LeaseAddendumLP() {
               <em style={{ color: "rgba(250,248,245,0.75)" }}>Not You.</em>
             </h1>
             <p className="text-base leading-relaxed max-w-2xl" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-              Download the free 17-point lease addendum used across rental properties in London, Strathroy, and St. Thomas — tested against real Ontario tenant scenarios. Attach it to any standard lease in minutes.
+              Download the free 17-point lease addendum used across rental properties in London, Strathroy, and St. Thomas, tested against real Ontario tenant scenarios. Attach it to any standard lease in minutes.
             </p>
           </div>
 
@@ -170,7 +170,7 @@ export default function LeaseAddendumLP() {
                 {[
                   "Closes the gaps experienced tenants exploit",
                   "Written specifically for Ontario's RTA",
-                  "Attaches to any standard lease — no lawyer needed",
+                  "Attaches to any standard lease, no lawyer needed",
                 ].map(t => (
                   <div key={t} className="flex items-center gap-3">
                     <span style={{ color: "#8B2030", fontSize: 16 }}>✓</span>
@@ -202,7 +202,7 @@ export default function LeaseAddendumLP() {
             { v: "London · Strathroy · St. Thomas", l: "Markets served" },
             { v: "5.0 ★", l: "Google rating" },
             { v: "21 days", l: "Average days to fill a vacancy" },
-            { v: "Zero", l: "LTB filings — we screen before they sign" },
+            { v: "Zero", l: "LTB filings, we screen before they sign" },
           ].map(t => (
             <div key={t.l} className="text-center">
               <p className="text-lg font-light" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{t.v}</p>
@@ -223,10 +223,10 @@ export default function LeaseAddendumLP() {
           </h2>
           <div className="space-y-5 text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             <p>
-              The standard Ontario lease is the minimum. It was written to be fair to both sides — which means it leaves room for tenants to push back on pet damage, unauthorized occupants, early termination, and property condition disputes.
+              The standard Ontario lease is the minimum. It was written to be fair to both sides, which means it leaves room for tenants to push back on pet damage, unauthorized occupants, early termination, and property condition disputes.
             </p>
             <p>
-              Experienced tenants — and their paralegals — know exactly where those gaps are.
+              Experienced tenants, and their paralegals, know exactly where those gaps are.
             </p>
             <p style={{ color: "#1F2F3A", fontWeight: 500 }}>
               By the time you find out, you're filing with the LTB, waiting months for a hearing, and absorbing costs that a better lease would have prevented on day one.
@@ -246,7 +246,7 @@ export default function LeaseAddendumLP() {
           </h2>
           <div className="space-y-5 text-base leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
             <p>
-              We built a 17-point addendum — tested against real Ontario tenant scenarios — that attaches directly to your standard lease. It closes the gaps before a tenant ever signs.
+              We built a 17-point addendum, tested against real Ontario tenant scenarios, that attaches directly to your standard lease. It closes the gaps before a tenant ever signs.
             </p>
             <p>
               No legal jargon. No complicated process. Just 17 clauses that have already been tested in the situations you hope never happen to you.
@@ -345,7 +345,7 @@ export default function LeaseAddendumLP() {
             style={{ borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.04)" }}
           >
             <p className="text-sm italic mb-3" style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}>
-              "I used Prospera's addendum before signing my last tenant. Six months in — zero disputes."
+              "I used Prospera's addendum before signing my last tenant. Six months in, zero disputes."
             </p>
             <p className="text-xs font-semibold" style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}>
               — London, ON landlord
@@ -361,7 +361,7 @@ export default function LeaseAddendumLP() {
             Protect your property before the next lease is signed.
           </h2>
           <p className="text-sm text-center mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-            Enter your name and email below. We'll send the addendum directly to your inbox — free, no strings attached.
+            Enter your name and email below. We'll send the addendum directly to your inbox, free, no strings attached.
           </p>
           <div className="rounded-2xl p-8 border" style={{ backgroundColor: "#FFFFFF", borderColor: "#E8E4DF", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
             {form}

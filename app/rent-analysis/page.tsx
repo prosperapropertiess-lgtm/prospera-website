@@ -73,7 +73,7 @@ export default function RentAnalysisPage() {
           Your analysis link is on its way.
         </p>
         <p style={{ color: "#333333", fontFamily: "var(--font-dm-sans)", fontSize: 16, maxWidth: 400, lineHeight: 1.7, marginBottom: 32 }}>
-          We sent a personalized link to {form.email}. Click it and tell us about your property — we&apos;ll do the rest.
+          We sent a personalized link to {form.email}. Click it and tell us about your property, and we&apos;ll do the rest.
         </p>
         <Link
           href="/"
@@ -105,7 +105,7 @@ export default function RentAnalysisPage() {
             className="leading-relaxed mb-8 max-w-lg mx-auto"
             style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)", fontSize: 17 }}
           >
-            We track hundreds of active rentals across Southwest Ontario every week — and use that data to tell you exactly what your property should be earning right now.
+            We track hundreds of active rentals across Southwest Ontario every week, and use that data to tell you exactly what your property should be earning right now.
           </p>
 
           {/* Live data badge */}
@@ -167,7 +167,7 @@ export default function RentAnalysisPage() {
               {
                 num: "02",
                 title: "What makes your unit worth more (or less)",
-                desc: "Garage, laundry, utilities, location, condition — we look at the things that actually change what tenants will pay. Your unit is scored on its own, not lumped into a city average.",
+                desc: "Garage, laundry, utilities, location, condition: we look at the things that actually change what tenants will pay. Your unit is scored on its own, not lumped into a city average.",
               },
               {
                 num: "03",
@@ -212,10 +212,10 @@ export default function RentAnalysisPage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { label: "Scraped weekly from 4 sources", sub: "Kijiji, Realtor.ca, Rentals.ca, and Zumper — every active listing in London, St. Thomas, and Strathroy, pulled fresh every Sunday." },
+              { label: "Scraped weekly from 4 sources", sub: "Kijiji, Realtor.ca, Rentals.ca, and Zumper: every active listing in London, St. Thomas, and Strathroy, pulled fresh every Sunday." },
               { label: "300+ data points and growing", sub: "Every analysis a landlord submits adds to the pool. The more landlords use it, the more accurate the numbers get." },
-              { label: "Matched to your unit specifically", sub: "Bedrooms, bathrooms, parking, laundry, utilities, neighbourhood — we compare your place to listings that actually look like yours, not just the same city." },
-              { label: "Written by AI, grounded in real data", sub: "The analysis is written by AI trained on Southwest Ontario rental patterns — and checked against real current listings before it hits your inbox." },
+              { label: "Matched to your unit specifically", sub: "Bedrooms, bathrooms, parking, laundry, utilities, neighbourhood: we compare your place to listings that actually look like yours, not just the same city." },
+              { label: "Written by AI, grounded in real data", sub: "The analysis is written by AI trained on Southwest Ontario rental patterns, and checked against real current listings before it hits your inbox." },
             ].map((item, i) => (
               <div
                 key={i}

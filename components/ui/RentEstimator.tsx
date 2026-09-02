@@ -200,14 +200,14 @@ export default function RentEstimator() {
                 That ${spread.toLocaleString()}/month spread is ${(spread * 12).toLocaleString()}/year.
               </p>
               <p className="text-sm leading-relaxed mb-5" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                This range doesn&apos;t account for your city zone, garage, finishes, inclusions, transit access, or 15 other factors that actually move rent. Your unit could sit at either end — or outside it entirely. A precise number takes 3 minutes.
+                This range doesn&apos;t account for your city zone, garage, finishes, inclusions, transit access, or 15 other factors that actually move rent. Your unit could sit at either end, or outside it entirely. A precise number takes 3 minutes.
               </p>
               <button
                 onClick={() => setShowLeadForm(true)}
                 className="w-full py-4 text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-80"
                 style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
               >
-                Get My Precise Estimate — Free →
+                Get My Precise Estimate, Free →
               </button>
               <p className="text-xs text-center mt-3" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                 Personalized analysis emailed within the hour. No obligation.

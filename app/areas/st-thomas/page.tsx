@@ -89,7 +89,7 @@ export default function StThomasPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <h2 className="text-3xl font-light text-center mb-10" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              St. Thomas Rental Market — 2026
+              St. Thomas Rental Market: 2026
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -127,7 +127,7 @@ export default function StThomasPage() {
               What&apos;s Included in Our Management
             </h2>
             <p className="text-sm mb-12 max-w-xl mx-auto" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-              One simple fee covers everything — no hidden charges, no per-repair markups.
+              One simple fee covers everything: no hidden charges, no per-repair markups.
             </p>
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-left">
@@ -153,14 +153,14 @@ export default function StThomasPage() {
           <BlogNudge
             hook="St. Thomas rents are rising fast. Are you keeping up?"
             title="How Much to Charge for Rent in London, Ontario"
-            excerpt="Market data across Southwest Ontario — see how St. Thomas stacks up and where your rent should be in 2026."
+            excerpt="Market data across Southwest Ontario shows how St. Thomas stacks up and where your rent should be in 2026."
             slug="how-much-charge-rent-london-ontario"
             label="Market Data"
           />
           <BlogNudge
             hook="First rental property? Here's what most landlords wish they knew."
             title="First-Time Landlord Tips in London, Ontario"
-            excerpt="The 10 things experienced landlords do differently — from screening tenants to setting rent to handling maintenance calls."
+            excerpt="The 10 things experienced landlords do differently, from screening tenants to setting rent to handling maintenance calls."
             slug="first-time-landlord-tips-london-ontario"
             label="For New Landlords"
           />

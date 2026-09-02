@@ -115,7 +115,7 @@ export default function TenantLeadCTA() {
               className="text-sm text-center mb-10"
               style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
             >
-              We&apos;ll match you with available units — or alert you the moment something opens up.
+              We&apos;ll match you with available units, or alert you the moment something opens up.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -280,7 +280,7 @@ export default function TenantLeadCTA() {
                 <textarea
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
-                  placeholder="Optional — any specific requirements"
+                  placeholder="Optional: any specific requirements"
                   rows={2}
                   className="w-full px-4 py-3 text-sm rounded focus:outline-none resize-none"
                   style={{

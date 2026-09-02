@@ -14,7 +14,7 @@ function buildImageAlt(property: PropertyRecord): string {
     ? property.property_type.replace(/_/g, " ") + " "
     : "rental ";
   const city = property.city || "London";
-  return `${beds}${type}for rent in ${city}, Ontario — Prospera Properties`;
+  return `${beds}${type}for rent in ${city}, Ontario, Prospera Properties`;
 }
 
 export default function LifeSimHero({ property }: Props) {

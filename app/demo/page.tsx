@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Try the Portal Demo",
-  description: "Explore the Prospera Properties owner and tenant portals — no login required.",
+  description: "Explore the Prospera Properties owner and tenant portals, no login required.",
   robots: { index: false, follow: false },
 };
 
@@ -26,7 +26,7 @@ export default function DemoLandingPage() {
           See what your clients<br />actually experience.
         </h1>
         <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "16px", color: MUTED, lineHeight: 1.65, marginBottom: "40px" }}>
-          Real portals. Fictional data. Explore both sides — what your tenants see
+          Real portals. Fictional data. Explore both sides: what your tenants see
           and what you see as the owner. No login required.
         </p>
 

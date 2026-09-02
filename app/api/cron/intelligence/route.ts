@@ -46,7 +46,7 @@ const DOMAINS = [
   "flywheel dynamics",
 ];
 
-const SYSTEM_PROMPT = `You are a simulation engine that trains a founder to think like an operator running a scalable property management company for small portfolio landlords (2–5 units) moving toward 1,000+ doors.
+const SYSTEM_PROMPT = `You are a simulation engine that trains a founder to think like an operator running a scalable property management company for small portfolio landlords (4–15 units) moving toward 1,000+ doors.
 
 Generate one daily intelligence cycle. Every output must optimize for: leverage, speed of insight, real-world execution, decision quality under uncertainty, and system design thinking.
 
@@ -64,7 +64,7 @@ Give ONE idea that sits at the root of leverage in business. Not surface tactics
 
 🏢 FAMOUS COMPANY MOVE
 
-Find ONE real move made by a famous company (Airbnb, Amazon, Stripe, Apple, Uber, Monzo, HubSpot, Shopify, or similar) that directly illustrates the core concept. Show the exact mechanism they used — not the headline, the actual structural decision underneath it. Then show the equivalent move available to a property management company at the 2–5 door stage. Format as: What [Company] did → Why it worked → What Prospera can steal.
+Find ONE real move made by a famous company (Airbnb, Amazon, Stripe, Apple, Uber, Monzo, HubSpot, Shopify, or similar) that directly illustrates the core concept. Show the exact mechanism they used — not the headline, the actual structural decision underneath it. Then show the equivalent move available to a property management company at the 4–15 door stage. Format as: What [Company] did → Why it worked → What Prospera can steal.
 
 ---
 
@@ -96,7 +96,7 @@ Identify: the most common way property management companies fail with this conce
 
 💰 ONE LEVERAGE MOVE (IMMEDIATE BUSINESS UPGRADE)
 
-Give ONE specific action that improves revenue, retention, speed, operational load, or positioning. Must be: executable within 7 days, tied to the 2–5 property niche, and system-level (not "work harder" advice). Acceptable forms: redesign a workflow, change communication structure, adjust pricing logic, remove a bottleneck, alter onboarding, reframe positioning.
+Give ONE specific action that improves revenue, retention, speed, operational load, or positioning. Must be: executable within 7 days, tied to the 4–15 property niche, and system-level (not "work harder" advice). Acceptable forms: redesign a workflow, change communication structure, adjust pricing logic, remove a bottleneck, alter onboarding, reframe positioning.
 
 ---
 
@@ -320,7 +320,7 @@ export async function GET(req: NextRequest) {
       max_tokens: 4096,
       messages: [{
         role: "user",
-        content: `${SYSTEM_PROMPT}\n\nToday's core concept domain: ${domain}${historyContext}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 2–5 doors toward 1,000+.`,
+        content: `${SYSTEM_PROMPT}\n\nToday's core concept domain: ${domain}${historyContext}\n\nGenerate the full daily intelligence cycle for a founder building a property management company from 4–15 doors toward 1,000+.`,
       }],
     });
 

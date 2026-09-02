@@ -176,7 +176,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .join(", ");
 
   return {
-    title: `Market Analysis — ${address} | Prospera Properties`,
+    title: `Market Analysis: ${address} | Prospera Properties`,
     description: `Rent comparable analysis for ${address}. Prepared by Prospera Properties.`,
     robots: { index: false, follow: false },
   };

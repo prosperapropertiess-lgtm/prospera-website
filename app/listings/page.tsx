@@ -102,7 +102,7 @@ export default function ListingsPage() {
             Our Properties Don&apos;t Sit.
           </h1>
           <p className="text-sm max-w-md mx-auto" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
-            We manage a small number of units intentionally. When one becomes available, it moves fast — see for yourself.
+            We manage a small number of units intentionally. When one becomes available, it moves fast. See for yourself.
           </p>
         </FadeIn>
       </section>
@@ -217,7 +217,7 @@ export default function ListingsPage() {
                 Every unit is currently occupied.
               </p>
               <p className="text-sm max-w-sm mx-auto mb-8" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                That&apos;s the point — our properties don&apos;t sit. Tell us what you&apos;re looking for and you&apos;ll hear from us first when something opens up.
+                That&apos;s the point: our properties don&apos;t sit. Tell us what you&apos;re looking for and you&apos;ll hear from us first when something opens up.
               </p>
               <Link
                 href="/tenants#find-your-place"
@@ -351,7 +351,7 @@ export default function ListingsPage() {
                 These homes found tenants quickly.
               </h2>
               <p className="text-sm text-center mb-10" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                High-demand properties in your area — new listings added regularly.
+                High-demand properties in your area. New listings added regularly.
               </p>
             </FadeIn>
 

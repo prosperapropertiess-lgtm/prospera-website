@@ -7,9 +7,9 @@ import PortalPreview from "@/components/ui/PortalPreview";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Management for Landlords with 2–5 Doors",
+  title: "Property Management for Landlords with 4–15 Doors",
   description:
-    "Prospera Properties manages your London, St. Thomas, or Strathroy rental — tenant screening, rent collection, maintenance, zero markups. Built for small landlords.",
+    "Prospera Properties manages your London, St. Thomas, or Strathroy rental portfolio — tenant screening, rent collection, maintenance, zero markups. Built for growing landlords whose portfolio has outgrown self-management.",
 };
 
 const painPoints = [
@@ -20,8 +20,8 @@ const painPoints = [
   },
   {
     icon: "⚠",
-    label: "One bad tenant ruins the whole year",
-    desc: "When you only have 1–3 units, a single bad placement doesn't just cost money. It costs sleep, time, and sometimes the mortgage.",
+    label: "One bad month compounds into the next",
+    desc: "Across four, eight, twelve units, problems don't stay contained. A late payment here, a maintenance call there — it stacks up until you're firefighting full time instead of running an investment.",
   },
   {
     icon: "?",

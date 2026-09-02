@@ -9,7 +9,7 @@ const milestones = [
     location: "India",
     icon: "01",
     title: "First Business",
-    desc: "Started a business from nothing. Built it. Sold it. The real lesson wasn't the money — it was learning that you figure things out by doing them, not by waiting until you feel ready.",
+    desc: "Started a business from nothing. Built it. Sold it. The real lesson wasn't the money. It was learning that you figure things out by doing them, not by waiting until you feel ready.",
   },
   {
     era: "Age 18",
@@ -37,28 +37,28 @@ const milestones = [
     location: "Ontario",
     icon: "05",
     title: "Department Manager",
-    desc: "Got hired at the highest-volume grocery store in Ontario. 600+ labour hours a week — people, pressure, logistics all at once. Still do it. Taught me that systems are what separate good from bad.",
+    desc: "Got hired at the highest-volume grocery store in Ontario. 600+ labour hours a week: people, pressure, logistics all at once. Still do it. Taught me that systems are what separate good from bad.",
   },
   {
     era: "March 2025",
     location: "London, ON",
     icon: "06",
     title: "Started Prospera",
-    desc: "No big launch, no press release. Started slow — deliberately. I wanted to learn how to do this right before growing. Took on 10 properties. Started building the system.",
+    desc: "No big launch, no press release. Started slow, deliberately. I wanted to learn how to do this right before growing. Took on 10 properties. Started building the system.",
   },
   {
     era: "2025",
     location: "The Honest Pivot",
     icon: "07",
     title: "Fired 7 Properties",
-    desc: "Not every fit is right. Cut the portfolio to 3 I could manage exceptionally well. It wasn't comfortable. But I'm not trying to build something big fast — I'm trying to build something good.",
+    desc: "Not every fit is right. Cut the portfolio to 3 I could manage exceptionally well. It wasn't comfortable. But I'm not trying to build something big fast. I'm trying to build something good.",
   },
   {
     era: "Today",
     location: "Still Building",
     icon: "08",
     title: "Learning Every Day",
-    desc: "25+ tenant placements, all paying rent. 0 LTB cases so far — not because I got lucky, but because I take screening seriously. Building the contractor network. Putting my face on the work. That's the plan.",
+    desc: "25+ tenant placements, all paying rent. 0 LTB cases so far, not because I got lucky, but because I take screening seriously. Building the contractor network. Putting my face on the work. That's the plan.",
   },
 ];
 

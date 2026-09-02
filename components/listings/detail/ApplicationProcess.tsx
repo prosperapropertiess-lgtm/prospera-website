@@ -31,9 +31,9 @@ const STEPS = [
 ];
 
 const REQUIREMENTS = [
-  { icon: "badge", text: "Identity verification — government-issued photo ID" },
-  { icon: "payments", text: "Income verification — pay stubs, employment letter, or bank statements" },
-  { icon: "contact_phone", text: "References — previous landlord contact" },
+  { icon: "badge", text: "Identity verification: government-issued photo ID" },
+  { icon: "payments", text: "Income verification: pay stubs, employment letter, or bank statements" },
+  { icon: "contact_phone", text: "References: previous landlord contact" },
 ];
 
 export default function ApplicationProcess() {

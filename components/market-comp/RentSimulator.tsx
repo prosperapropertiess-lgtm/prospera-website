@@ -318,7 +318,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                       At <strong>${rent.toLocaleString()}/mo</strong> you&apos;re priced at or below market.{" "}
                       {rent < rentMarket
                         ? `You'll attract a strong pool of ${metrics.pool}+ applicants and fill quickly. Great if you want a reliable tenant in place with no drama.`
-                        : `This is the market sweet spot — ${metrics.pool}+ applicants, strong quality, and you get to be selective. Most units at market rate fill within 4–5 weeks.`}
+                        : `This is the market sweet spot: ${metrics.pool}+ applicants, strong quality, and you get to be selective. Most units at market rate fill within 4–5 weeks.`}
                     </p>
                   </>
                 )}
@@ -329,13 +329,13 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                   return (
                     <>
                       <p className="text-sm font-semibold mb-1" style={{ color: "#d97706" }}>
-                        ${diff.toLocaleString()}/mo above market — {isLow ? "possible if the unit shows well" : "expect a longer wait"}.
+                        ${diff.toLocaleString()}/mo above market. {isLow ? "Possible if the unit shows well" : "Expect a longer wait"}.
                       </p>
                       <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
                         At <strong>${rent.toLocaleString()}/mo</strong>, you&apos;re asking above what comparable units are getting.
                         Expect around <strong>{metrics.weeksToFill} weeks</strong> to fill, with a smaller applicant pool ({metrics.pool}+ people).
                         {isLow
-                          ? " If the unit is in great condition and your listing stands out, this is achievable — but give it 2–3 weeks before reassessing."
+                          ? " If the unit is in great condition and your listing stands out, this is achievable, but give it 2–3 weeks before reassessing."
                           : " Every week empty costs you $" + metrics.vacancyCostPerWeek.toLocaleString() + ". Dropping to market rate closes that gap quickly."}
                       </p>
                     </>
@@ -351,7 +351,7 @@ export default function RentSimulator({ rentLow, rentMarket, rentPremium, compRe
                       </p>
                       <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
                         At <strong>${rent.toLocaleString()}/mo</strong>, you&apos;re above what this market supports.
-                        Expect the unit to sit for <strong>{metrics.weeksToFill}+ weeks</strong> — that&apos;s{" "}
+                        Expect the unit to sit for <strong>{metrics.weeksToFill}+ weeks</strong>, that&apos;s{" "}
                         <strong>${metrics.totalVacancyCost.toLocaleString()}</strong> in lost rent while you wait.
                         The applicant pool at this price is too thin to be selective.
                         Pricing at premium (${rentPremium.toLocaleString()}) fills faster and nets you more in year one.

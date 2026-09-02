@@ -9,7 +9,7 @@ interface Props {
 export default function ShareBar({ property }: Props) {
   const [copied, setCopied] = useState(false);
   const url = typeof window !== "undefined" ? window.location.href : `https://www.prosperaproperties.co/listings/${property.id}`;
-  const title = `${property.title} — ${property.city}, ON | $${property.price?.toLocaleString()}/mo`;
+  const title = `${property.title}, ${property.city}, ON | $${property.price?.toLocaleString()}/mo`;
   const text = `Check out this ${property.bedrooms} bed, ${property.bathrooms} bath rental in ${property.city} for $${property.price?.toLocaleString()}/mo`;
 
   async function copyLink() {

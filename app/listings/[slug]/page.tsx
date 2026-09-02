@@ -216,7 +216,7 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
     });
     faqs.push({
       q: "When is this property available?",
-      a: `This property is available starting ${formatted}. We recommend booking a viewing as soon as possible — similar units in ${city} typically receive multiple applications within the first week of listing.`,
+      a: `This property is available starting ${formatted}. We recommend booking a viewing as soon as possible: similar units in ${city} typically receive multiple applications within the first week of listing.`,
     });
   }
 
@@ -231,14 +231,14 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
   } else {
     faqs.push({
       q: "Are utilities included in the rent?",
-      a: `Utilities are not included. Budget an additional $150–$300/month for hydro, water, and heat — typical for a ${beds || ""}-bedroom unit in ${city} depending on season and usage.`,
+      a: `Utilities are not included. Budget an additional $150–$300/month for hydro, water, and heat, typical for a ${beds || ""}-bedroom unit in ${city} depending on season and usage.`,
     });
   }
 
   faqs.push({
     q: "Is parking available?",
     a: p.parking
-      ? `Yes, parking is included with this property. Details are confirmed at the viewing — contact us if you have specific requirements.`
+      ? `Yes, parking is included with this property. Details are confirmed at the viewing; contact us if you have specific requirements.`
       : `Parking is not included with this unit. Street parking may be available nearby. Contact us to discuss options.`,
   });
 
@@ -257,7 +257,7 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
 
   faqs.push({
     q: "How do I apply for this property?",
-    a: `Book a viewing through this page or call (519) 697-1227. After viewing, we'll send you an application link. The process is straightforward — we verify your identity, income, and references. Applications are reviewed within 24–48 hours.`,
+    a: `Book a viewing through this page or call (519) 697-1227. After viewing, we'll send you an application link. The process is straightforward: we verify your identity, income, and references. Applications are reviewed within 24–48 hours.`,
   });
 
   const leaseTerm = p.lease_term as string | null;

@@ -577,7 +577,7 @@ export default function RentAnalysisForm() {
                   Parking & outdoor space
                 </h2>
                 <p style={{ color: "#777777", fontFamily: "var(--font-dm-sans)", fontSize: 15, margin: 0 }}>
-                  These add real dollars — parking alone can swing rent by $100+/month.
+                  These add real dollars. Parking alone can swing rent by $100+/month.
                 </p>
               </div>
 
@@ -624,8 +624,8 @@ export default function RentAnalysisForm() {
                 <label style={lbl}>Who handles the lawn?</label>
                 <Toggle field="lawn_care" cols={1} options={[
                   { value: "tenant_self", label: "Tenant does it themselves" },
-                  { value: "equipment_provided", label: "Tenant does it — equipment provided" },
-                  { value: "included", label: "Included — we handle it" },
+                  { value: "equipment_provided", label: "Tenant does it, equipment provided" },
+                  { value: "included", label: "Included, we handle it" },
                 ]} />
               </div>
             </div>
@@ -695,7 +695,7 @@ export default function RentAnalysisForm() {
               <div>
                 <label style={lbl}>What&apos;s included in the rent?</label>
                 <Toggle field="utilities_included" cols={2} options={[
-                  { value: "none", label: "Nothing — tenant pays all" },
+                  { value: "none", label: "Nothing, tenant pays all" },
                   { value: "water", label: "Water only" },
                   { value: "hydro", label: "Hydro (electricity)" },
                   { value: "water_hydro", label: "Water + Hydro" },
@@ -735,7 +735,7 @@ export default function RentAnalysisForm() {
                   style={{ width: "100%", accentColor: "#8B2030", marginTop: 4, height: 6 }}
                 />
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "#888888", fontFamily: "var(--font-dm-sans)", marginTop: 6 }}>
-                  <span>1 — Needs work</span><span>10 — Move-in ready</span>
+                  <span>1: Needs work</span><span>10: Move-in ready</span>
                 </div>
               </div>
 
@@ -840,8 +840,8 @@ export default function RentAnalysisForm() {
               <div>
                 <label style={lbl}>Your approach as a landlord</label>
                 <Toggle field="landlord_style" cols={1} options={[
-                  { value: "hands_on", label: "Hands-on — I take care of the property myself" },
-                  { value: "investment", label: "Investment — I manage costs and keep it running smoothly" },
+                  { value: "hands_on", label: "Hands-on: I take care of the property myself" },
+                  { value: "investment", label: "Investment: I manage costs and keep it running smoothly" },
                 ]} />
               </div>
 
@@ -871,7 +871,7 @@ export default function RentAnalysisForm() {
                     {form.monthly_optin === "true" && "✓"}
                   </div>
                   <span style={{ fontSize: 15, color: "#333333", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
-                    Email me monthly market updates — how rents are moving in my city. Once a month, unsubscribe anytime.
+                    Email me monthly market updates on how rents are moving in my city. Once a month, unsubscribe anytime.
                   </span>
                 </div>
               </div>

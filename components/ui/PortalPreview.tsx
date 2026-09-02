@@ -115,7 +115,7 @@ export default function PortalPreview() {
             lineHeight: 1.7,
             maxWidth: "520px",
           }}>
-            This is a live preview of your owner dashboard. Real numbers, real layout — no login required.
+            This is a live preview of your owner dashboard. Real numbers, real layout. No login required.
           </p>
         </div>
 

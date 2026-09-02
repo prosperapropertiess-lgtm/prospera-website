@@ -27,7 +27,7 @@ const situations = [
     situation: "My tenant is damaging the unit or disturbing neighbours",
     formName: "N5",
     plain:
-      "The N5 gives your tenant a chance to fix the problem. They have 7 days to stop the behaviour. If they do — the notice is void. If they don't — you can apply to the Board.",
+      "The N5 gives your tenant a chance to fix the problem. They have 7 days to stop the behaviour. If they do, the notice is void. If they don't, you can apply to the Board.",
     when: "Use this for damage, excessive noise, overcrowding, or harassment of other tenants.",
     hasBuilder: false,
   },
@@ -93,7 +93,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
             className="text-base max-w-xl mx-auto leading-relaxed mb-10"
             style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
           >
-            Every Ontario LTB form you&apos;ll ever need — explained in plain English,
+            Every Ontario LTB form you&apos;ll ever need, explained in plain English,
             pre-filled in under 2 minutes, ready to serve. Free. No account. No PDF editor.
           </p>
 
@@ -341,7 +341,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
             style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}
           >
             That&apos;s what Prospera is for. We handle the forms, the notices, the follow-up, everything.
-            Free consultation — no pressure.
+            Free consultation, no pressure.
           </p>
           <Link
             href="/contact"

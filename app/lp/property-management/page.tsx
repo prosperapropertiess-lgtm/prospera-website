@@ -131,7 +131,7 @@ export default function PropertyManagementLP() {
 
           <p className="text-base leading-relaxed mb-3 max-w-xl mx-auto" style={{ color: "rgba(250,248,245,0.6)", fontFamily: FONT }}>
             Tenant screening, rent collection, maintenance, monthly reports — completely off your plate.
-            Built for small landlords in London, St. Thomas, Strathroy &amp; Sarnia.
+            Built for growing landlords in London, St. Thomas, Strathroy &amp; Sarnia.
           </p>
           <p className="text-sm font-medium mb-10" style={{ color: "rgba(250,248,245,0.3)", fontFamily: FONT }}>
             Start with 60 days free. No lock-in.

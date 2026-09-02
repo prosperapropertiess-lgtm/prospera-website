@@ -167,7 +167,7 @@ export default function N4FormBuilder() {
           className="mt-3 text-sm leading-relaxed"
           style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
         >
-          Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly — no PDF editor needed.
+          Fill in the details below. We&apos;ll generate a completed, ready-to-serve N4 form you can download instantly. No PDF editor needed.
         </p>
       </div>
 
@@ -263,7 +263,7 @@ export default function N4FormBuilder() {
                       onChange={(e) => setTerminationDate(e.target.value)}
                       className={inputClass}
                       style={inputStyle}
-                      placeholder="DD/MM/YYYY — auto-filled (14 days)"
+                      placeholder="DD/MM/YYYY, auto-filled (14 days)"
                     />
                     <p className="mt-1 text-xs" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                       Auto-set to 14 days. Adjust if adding mail delivery days.
@@ -486,7 +486,7 @@ export default function N4FormBuilder() {
                 className="text-sm mb-6 leading-relaxed"
                 style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}
               >
-                Enter your email to download. We&apos;ll occasionally send you useful landlord tips — no spam, unsubscribe anytime.
+                Enter your email to download. We&apos;ll occasionally send you useful landlord tips. No spam, unsubscribe anytime.
               </p>
 
               {/* Hot lead checkbox */}
@@ -508,7 +508,7 @@ export default function N4FormBuilder() {
                     I&apos;d like Prospera to handle this for me
                   </p>
                   <p className="text-xs mt-0.5 text-left" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                    Ebin will reach out within 24 hours — free consultation, no pressure.
+                    Ebin will reach out within 24 hours, free consultation, no pressure.
                   </p>
                 </div>
               </label>

@@ -50,7 +50,7 @@ function isPast(date: Date, time: string): boolean {
   return slot.getTime() < Date.now() + 2 * 60 * 60 * 1000;
 }
 
-// Pulls 1-3 dealbreaker questions from what's actually true about this property —
+// Pulls 1-3 dealbreaker questions from what's actually true about this property,
 // the same fields that drive the "What's Included" section on the listing page.
 function getDealbreakerQuestions(property: PropertyRecord): DealbreakerQ[] {
   const raw = property as Record<string, unknown>;
@@ -58,16 +58,16 @@ function getDealbreakerQuestions(property: PropertyRecord): DealbreakerQ[] {
   const qs: DealbreakerQ[] = [];
 
   if (laundryType && laundryType !== "in_unit") {
-    qs.push({ key: "laundry", question: laundryType === "shared" ? "This home has shared laundry, not in-unit — is that OK?" : "This home doesn't have laundry on site — is that OK?" });
+    qs.push({ key: "laundry", question: laundryType === "shared" ? "This home has shared laundry, not in-unit. Is that OK?" : "This home doesn't have laundry on site. Is that OK?" });
   }
   if (property.parking === false) {
-    qs.push({ key: "parking", question: "There's no dedicated parking here — is that OK?" });
+    qs.push({ key: "parking", question: "There's no dedicated parking here. Is that OK?" });
   }
   if (raw.pet_friendly === false) {
-    qs.push({ key: "pets", question: "This home isn't pet-friendly — any pets in your household?" });
+    qs.push({ key: "pets", question: "This home isn't pet-friendly. Any pets in your household?" });
   }
   if (raw.utilities_included === false && qs.length < 3) {
-    qs.push({ key: "utilities", question: "Heat, hydro, and water are tenant-paid here — does that work for you?" });
+    qs.push({ key: "utilities", question: "Heat, hydro, and water are tenant-paid here. Does that work for you?" });
   }
 
   return qs.slice(0, 3);
@@ -200,7 +200,7 @@ export default function BookingModal({ property, onClose, onSuccess }: Props) {
       onSuccess();
     } else {
       const data = await res.json().catch(() => ({}));
-      setError(data.error || "That didn't go through — please try again.");
+      setError(data.error || "That didn't go through, please try again.");
       if (res.status === 409) setStep("pick");
     }
     setSubmitting(false);
@@ -255,7 +255,7 @@ export default function BookingModal({ property, onClose, onSuccess }: Props) {
               </div>
 
               <p className="text-xs font-semibold uppercase tracking-widest mb-3 mt-6" style={{ color: "#999999" }}>
-                Available times — {dateLabel}
+                Available times, {dateLabel}
               </p>
               {loadingSlots ? (
                 <div className="grid grid-cols-3 gap-2.5">
@@ -322,7 +322,7 @@ export default function BookingModal({ property, onClose, onSuccess }: Props) {
                 />
               ))}
               <YesNo
-                label="Every applicant goes through a soft credit check, income verification, and a landlord reference — OK with that?"
+                label="Every applicant goes through a soft credit check, income verification, and a landlord reference. OK with that?"
                 value={verificationOk}
                 onChange={setVerificationOk}
               />
@@ -339,7 +339,7 @@ export default function BookingModal({ property, onClose, onSuccess }: Props) {
                   {feeAcknowledged && <span style={{ color: "#FAF8F5", fontSize: 12, lineHeight: 1 }}>✓</span>}
                 </div>
                 <p className="text-sm" style={{ color: "#333333", lineHeight: 1.5 }}>
-                  If you decide to apply, there&apos;s a <strong>$99 application fee</strong> — it goes toward your first month&apos;s rent if you&apos;re approved, and isn&apos;t refundable if you&apos;re not. Nothing is charged just for booking a viewing.
+                  If you decide to apply, there&apos;s a <strong>$99 application fee</strong>. It goes toward your first month&apos;s rent if you&apos;re approved, and isn&apos;t refundable if you&apos;re not. Nothing is charged just for booking a viewing.
                 </p>
               </div>
             </div>
@@ -365,7 +365,7 @@ export default function BookingModal({ property, onClose, onSuccess }: Props) {
               No worries
             </h2>
             <p className="text-sm leading-relaxed max-w-xs mx-auto" style={{ color: "#333333" }}>
-              Sounds like this one might not be the right budget fit. Take a look at our other available homes — there may be a better match.
+              Sounds like this one might not be the right budget fit. Take a look at our other available homes, there may be a better match.
             </p>
             <div className="flex gap-3 justify-center">
               <button onClick={() => setStep("prequalify")} className="px-6 py-3 text-xs font-semibold uppercase tracking-widest rounded-lg" style={{ border: "1px solid #D8D2C8", color: "#666666" }}>

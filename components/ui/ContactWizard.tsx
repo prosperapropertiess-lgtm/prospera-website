@@ -160,10 +160,10 @@ export default function ContactWizard() {
 
     const helpText =
       data.service === "tenant-placement"
-        ? `Previously rented: ${data.rentedBefore === "yes" ? `Yes — last rent was ${data.lastRent || "not specified"}` : "No, first time listing"}.`
+        ? `Previously rented: ${data.rentedBefore === "yes" ? `Yes, last rent was ${data.lastRent || "not specified"}` : "No, first time listing"}.`
         : data.service === "property-management"
         ? `Help level wanted: ${HELP_LABELS[data.helpLevel - 1]} (${data.helpLevel}/5).`
-        : `Previously rented: ${data.rentedBefore === "yes" ? `Yes — last rent was ${data.lastRent || "not specified"}` : "No"}. Help level: ${HELP_LABELS[data.helpLevel - 1]} (${data.helpLevel}/5).`;
+        : `Previously rented: ${data.rentedBefore === "yes" ? `Yes, last rent was ${data.lastRent || "not specified"}` : "No"}. Help level: ${HELP_LABELS[data.helpLevel - 1]} (${data.helpLevel}/5).`;
 
     const message = [
       `Service needed: ${data.service === "tenant-placement" ? "Tenant Placement" : data.service === "property-management" ? "Property Management" : "Tenant Placement + Property Management"}.`,
@@ -220,7 +220,7 @@ export default function ContactWizard() {
             {/* What happens next — card style */}
             <div className="text-left space-y-3 max-w-sm mx-auto mb-8">
               {[
-                { emoji: "📬", step: "Within 4 hours", desc: "We review your request personally — no bots." },
+                { emoji: "📬", step: "Within 4 hours", desc: "We review your request personally. No bots." },
                 { emoji: "📞", step: "You hear from us directly", desc: "A real call or email, not an automated response." },
                 { emoji: "📊", step: "Free rental analysis", desc: "We come prepared with real local market data." },
               ].map((item, i) => (
@@ -305,11 +305,11 @@ export default function ContactWizard() {
               What can we help you with?
             </h2>
             <p className="text-sm mb-6" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
-              We&apos;ll prepare the right info before we call — no generic scripts.
+              We&apos;ll prepare the right info before we call, no generic scripts.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
               <ServiceCard emoji="🔍" label="Find Me a Tenant" sublabel="Quality placement, lease signed, full process handled." selected={data.service === "tenant-placement"} onClick={() => setData({ ...data, service: "tenant-placement" })} />
-              <ServiceCard emoji="🏠" label="Manage My Property" sublabel="Rent, maintenance, communication — fully hands-off." selected={data.service === "property-management"} onClick={() => setData({ ...data, service: "property-management" })} />
+              <ServiceCard emoji="🏠" label="Manage My Property" sublabel="Rent, maintenance, communication, fully hands-off." selected={data.service === "property-management"} onClick={() => setData({ ...data, service: "property-management" })} />
               <ServiceCard emoji="⚡" label="Both" sublabel="Place a tenant, then keep managing long-term." selected={data.service === "both"} onClick={() => setData({ ...data, service: "both" })} />
             </div>
             <button type="button" onClick={next} disabled={!data.service} className={`w-full ${btnNext}`} style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
@@ -339,7 +339,7 @@ export default function ContactWizard() {
               style={inputStyle}
             />
             <p className="text-xs mt-2 mb-8" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>
-              London · St. Thomas · Strathroy — we cover all three.
+              London · St. Thomas · Strathroy. We cover all three.
             </p>
             <div className="flex gap-3">
               <button type="button" onClick={back} className={btnBack} style={{ borderColor: "#D8D2C8", color: "#666666", fontFamily: "var(--font-dm-sans)" }}>← Back</button>
@@ -358,7 +358,7 @@ export default function ContactWizard() {
               Tell us about the unit.
             </h2>
             <p className="text-sm mb-6" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
-              Specs affect demand and pricing — this helps us give you real numbers.
+              Specs affect demand and pricing, this helps us give you real numbers.
             </p>
 
             {/* Property type */}
@@ -424,7 +424,7 @@ export default function ContactWizard() {
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium" style={{ color: "#999999" }}>$</span>
                       <input type="text" value={data.lastRent} onChange={(e) => setData({ ...data, lastRent: e.target.value })} className={`${inputClass} pl-8`} style={inputStyle} placeholder="1,800 / month" />
                     </div>
-                    <p className="text-xs mt-1.5" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>Approximate is fine — we&apos;ll check current market rates.</p>
+                    <p className="text-xs mt-1.5" style={{ color: "#BBBBBB", fontFamily: "var(--font-dm-sans)" }}>Approximate is fine, we&apos;ll check current market rates.</p>
                   </div>
                 )}
               </>
@@ -502,7 +502,7 @@ export default function ContactWizard() {
               How do we reach you?
             </h2>
             <p className="text-sm mb-7" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
-              The owner responds personally — not a call centre or automated reply.
+              The owner responds personally, not a call centre or automated reply.
             </p>
 
             <div className="space-y-4 mb-6">

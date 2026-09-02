@@ -106,7 +106,7 @@ export default function StatementPreview() {
             maxWidth: "560px",
           }}
         >
-          By the 10th of every month, owners receive a statement like this one — rent collected,
+          By the 10th of every month, owners receive a statement like this one: rent collected,
           expenses itemized, net income, and a 6-month trend. Enter your email and we&apos;ll show you
           a real example with dummy data.
         </p>
@@ -169,7 +169,7 @@ export default function StatementPreview() {
               </p>
             )}
             <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED, marginTop: "10px" }}>
-              No spam. Unsubscribe anytime. This is dummy data — not a real property.
+              No spam. Unsubscribe anytime. This is dummy data, not a real property.
             </p>
           </form>
         )}
@@ -195,7 +195,7 @@ export default function StatementPreview() {
               }}
             >
               <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: WHITE }}>
-                ⚠ Sample statement · Dummy data only — not a real property or owner
+                ⚠ Sample statement · Dummy data only, not a real property or owner
               </span>
             </div>
 
@@ -317,7 +317,7 @@ export default function StatementPreview() {
 
               {/* Bottom note */}
               <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: MUTED, textAlign: "center", marginTop: "20px", lineHeight: 1.6 }}>
-                This is a sample statement using fictional data. Every real owner statement includes the same format —
+                This is a sample statement using fictional data. Every real owner statement includes the same format:
                 rent collected, expenses itemized with receipts, and net transferred to your account.
               </p>
             </div>

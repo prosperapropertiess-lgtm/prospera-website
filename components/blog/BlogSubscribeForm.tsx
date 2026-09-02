@@ -44,8 +44,8 @@ export default function BlogSubscribeForm({ midPost, category }: { midPost?: boo
             </p>
             <p className="text-lg font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
               {isRenter
-                ? "Get renter guides for Ontario — delivered free."
-                : "Get practical tips for Ontario landlords — delivered free."}
+                ? "Get renter guides for Ontario, delivered free."
+                : "Get practical tips for Ontario landlords, delivered free."}
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
               <input
@@ -109,8 +109,8 @@ export default function BlogSubscribeForm({ midPost, category }: { midPost?: boo
             </h2>
             <p className="text-sm mb-8" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
               {isRenter
-                ? "Renter guides, tenant rights, and housing tips for Ontario — no spam, unsubscribe anytime."
-                : "New posts on Ontario law, eviction process, tenant screening, and more — no spam, unsubscribe anytime."}
+                ? "Renter guides, tenant rights, and housing tips for Ontario. No spam, unsubscribe anytime."
+                : "New posts on Ontario law, eviction process, tenant screening, and more. No spam, unsubscribe anytime."}
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
               <input

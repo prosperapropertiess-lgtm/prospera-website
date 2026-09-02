@@ -15,7 +15,7 @@ export default function ContactPage() {
             Let&apos;s Talk.
           </h1>
           <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: "rgba(250,248,245,0.7)", fontFamily: "var(--font-dm-sans)" }}>
-            Takes 2 minutes. Ebin responds personally — no scripts, no call centre.
+            Takes 2 minutes. Ebin responds personally, no scripts, no call centre.
           </p>
         </FadeIn>
       </section>

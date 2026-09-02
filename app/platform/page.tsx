@@ -112,7 +112,7 @@ const painMoments = [
   { num: "05", headline: "Your phone vibrates at 11:42pm.", sub: "Hot water heater. Making a noise. It's your tenant. You're the helpdesk now.", weight: "high" },
   { num: "06", headline: "You tried the big PM software once.", sub: "$200/month. 40 features built for someone with 200 units. You closed the tab.", weight: "medium" },
   { num: "07", headline: "Tax time. Where are the receipts?", sub: "Gmail. Notes. A spreadsheet you stopped updating in February. Good luck.", weight: "medium" },
-  { num: "08", headline: "You have 2 properties. Every tool was built for 20.", sub: "There is nothing on the market made for the landlord trying to build quiet wealth.", weight: "high" },
+  { num: "08", headline: "You have 6 properties. Every tool was built for 60.", sub: "There is nothing on the market made for the landlord trying to build quiet wealth.", weight: "high" },
 ];
 
 // ── PainCard ──────────────────────────────────────────────────────────────────
@@ -199,7 +199,7 @@ const comparisons = [
   { label: "Rent collection", diy: "Manual texting", bigpm: "✓", prospera: "✓ Automated" },
   { label: "N4 / legal notices", diy: "Google it", bigpm: "✓ (with help)", prospera: "✓ Auto-generated" },
   { label: "Maintenance workflow", diy: "Phone calls", bigpm: "✓ (you coordinate)", prospera: "✓ AI-triaged" },
-  { label: "Built for 2–5 units", diy: "✓ (barely)", bigpm: "✗ Built for 20+", prospera: "✓ Designed for you" },
+  { label: "Built for 4–15 units", diy: "✓ (barely)", bigpm: "✗ Built for 20+", prospera: "✓ Designed for you" },
   { label: "You stay in control", diy: "✓", bigpm: "✗ You hand it over", prospera: "✓ Always" },
   { label: "Contracts required", diy: "—", bigpm: "✓ Often 1–2 year", prospera: "✗ None. Ever." },
   { label: "Money-back guarantee", diy: "—", bigpm: "✗", prospera: "✓ 90 days" },
@@ -347,7 +347,7 @@ export default function PlatformPage() {
             className="text-base sm:text-lg mb-8 max-w-lg"
             style={{ color: "rgba(250,248,245,0.4)", fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}
           >
-            Built for Ontario landlords with 1 to 5 properties. All the automation, none of the overhead.
+            Built for Ontario landlords with 4 to 15 properties. All the automation, none of the overhead.
           </p>
 
           {/* Waitlist form */}
@@ -519,7 +519,7 @@ export default function PlatformPage() {
               className="text-base text-center mb-14 max-w-xl mx-auto"
               style={{ color: TEXT_2, fontFamily: "var(--font-dm-sans)" }}
             >
-              If you manage 2–5 properties in Ontario, at least 5 of these are your Tuesday.
+              If you manage 4–15 properties in Ontario, at least 5 of these are your Tuesday.
             </p>
           </FadeIn>
 

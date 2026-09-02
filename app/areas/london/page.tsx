@@ -17,9 +17,9 @@ const stats = [
 
 const neighbourhoods = [
   { name: "Old North / Wortley Village", desc: "Premium rentals, mature trees, walkable to Richmond Row. Strong demand from professionals and families." },
-  { name: "Byron / Lambeth", desc: "Southwest London's family-friendly corridor. Tenants here stay longer — great for stability-focused landlords." },
+  { name: "Byron / Lambeth", desc: "Southwest London's family-friendly corridor. Tenants here stay longer, which is great for stability-focused landlords." },
   { name: "East London", desc: "Affordable entry point with strong tenant demand from Fanshawe College students and young professionals." },
-  { name: "Masonville / Medway", desc: "North London's prime area. Close to Western University and University Hospital — almost zero vacancy for well-priced units." },
+  { name: "Masonville / Medway", desc: "North London's prime area. Close to Western University and University Hospital, so well-priced units see almost zero vacancy." },
   { name: "Downtown Core", desc: "Growing condo and apartment stock. Young professionals and remote workers are driving demand here." },
   { name: "White Oaks / South London", desc: "Diverse, affordable, close to transit. Consistent tenant demand year-round." },
 ];
@@ -46,7 +46,7 @@ export default function LondonPage() {
             Property Management in London, Ontario
           </h1>
           <p className="text-lg max-w-xl mx-auto mb-10" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-            Hands-on management for London landlords — from tenant screening to rent collection to 24/7 maintenance. We handle everything so you don&apos;t have to.
+            Hands-on management for London landlords, from tenant screening to rent collection to 24/7 maintenance. We handle everything so you don&apos;t have to.
           </p>
           <Link
             href="/contact"
@@ -127,7 +127,7 @@ export default function LondonPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <h2 className="text-3xl font-light text-center mb-12" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              London Rental Market — 2026 Snapshot
+              London Rental Market: 2026 Snapshot
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>

@@ -86,7 +86,7 @@ export default function CostsBreakdown({ property }: Props) {
               </svg>
               <div>
                 <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                  Security deposit: ${deposit.toLocaleString()} — fully refundable
+                  Security deposit: ${deposit.toLocaleString()}, fully refundable
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
                   Returned in full at move-out when the unit is left in good condition. This is your money held in trust, not a fee.

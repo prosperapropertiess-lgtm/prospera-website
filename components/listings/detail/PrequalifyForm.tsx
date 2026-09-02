@@ -148,7 +148,7 @@ export default function PrequalifyForm({ property, onClose, onSuccess }: Props) 
                 Pre-Qualify for a Viewing
               </h2>
               <p className="text-xs mt-1" style={{ color: "#666666" }}>
-                Step {stepNum} of {totalSteps} — Takes under 2 minutes
+                Step {stepNum} of {totalSteps}. Takes under 2 minutes
               </p>
             </div>
             <button onClick={onClose} className="text-xl leading-none" style={{ color: "#666666" }}>×</button>
@@ -331,7 +331,7 @@ export default function PrequalifyForm({ property, onClose, onSuccess }: Props) 
                 You&apos;re on our list
               </h2>
               <p className="text-sm leading-relaxed max-w-xs mx-auto" style={{ color: "#333333" }}>
-                There&apos;s strong interest for the {availableDateStr} move-in date. If it doesn&apos;t fill, we&apos;ll reach out to you first. We also have new listings coming regularly — we&apos;ll keep you posted.
+                There&apos;s strong interest for the {availableDateStr} move-in date. If it doesn&apos;t fill, we&apos;ll reach out to you first. We also have new listings coming regularly, we&apos;ll keep you posted.
               </p>
               <p className="text-xs" style={{ color: "#666666" }}>We&apos;ll email you at <strong>{form.email}</strong></p>
             </div>

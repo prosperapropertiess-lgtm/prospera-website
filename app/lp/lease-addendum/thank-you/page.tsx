@@ -49,7 +49,7 @@ export default function LeaseAddendumThankYou() {
               Your lease addendum is on its way.
             </h1>
             <p className="text-base leading-relaxed" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
-              Check your inbox — it should arrive within 5 minutes.<br />
+              Check your inbox, it should arrive within 5 minutes.<br />
               Check your spam folder if you don't see it.
             </p>
           </div>
@@ -89,10 +89,10 @@ export default function LeaseAddendumThankYou() {
                 className="text-2xl sm:text-3xl font-light mb-4 leading-snug"
                 style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
               >
-                If you'd rather hand off the entire tenant process — that's what I do.
+                If you'd rather hand off the entire tenant process, that's what I do.
               </h2>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
-                Screening, placement, rent collection, maintenance, LTB situations. I manage 2–5 unit properties across London, Strathroy, and St. Thomas — and I answer my phone.
+                Screening, placement, rent collection, maintenance, LTB situations. I manage 4–15 unit portfolios across London, Strathroy, and St. Thomas, and I answer my phone.
               </p>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#555555", fontFamily: "var(--font-dm-sans)" }}>
                 I offer a free 20-minute portfolio review. No pitch. Just honest advice on protecting your rental income.

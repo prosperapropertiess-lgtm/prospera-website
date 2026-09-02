@@ -14,15 +14,15 @@ interface Resource {
 
 const RESOURCES: Resource[] = [
   { id: "ontario-standard-lease", title: "Ontario Standard Lease Agreement", description: "The official Ontario standard lease form, ready to fill in for any residential tenancy.", category: "forms", icon: "📄" },
-  { id: "lease-addendum", title: "Lease Addendum Template (Prospera Edition)", description: "Our custom addendum that adds critical protections beyond the standard Ontario lease — covering utilities, maintenance, and tenant obligations.", category: "templates", icon: "📝" },
+  { id: "lease-addendum", title: "Lease Addendum Template (Prospera Edition)", description: "Our custom addendum that adds protections beyond the standard Ontario lease, covering utilities, maintenance, and tenant obligations.", category: "templates", icon: "📝" },
   { id: "tenant-screening-checklist", title: "Tenant Screening Checklist", description: "Step-by-step checklist: credit check, income verification, reference calls, and what to look for at each stage.", category: "checklists", icon: "✅" },
-  { id: "rent-increase-n1", title: "Rent Increase Notice Template (N1 Guide)", description: "Plain-English guide to Ontario's N1 form — how to fill it out correctly, serve it on time, and avoid common mistakes.", category: "templates", icon: "📈" },
+  { id: "rent-increase-n1", title: "Rent Increase Notice Template (N1 Guide)", description: "Plain-English guide to Ontario's N1 form: how to fill it out correctly, serve it on time, and avoid common mistakes.", category: "templates", icon: "📈" },
   { id: "eviction-notices", title: "Eviction Notice Templates (N4, N5, N12)", description: "The three most commonly needed Ontario eviction forms, with plain-English explanations of when and how to use each one.", category: "forms", icon: "⚖️" },
   { id: "property-inspection-checklist", title: "Property Inspection Checklist", description: "Move-in and move-out inspection form with photo documentation guide. Protects both landlord and tenant.", category: "checklists", icon: "🔍" },
-  { id: "landlord-tax-guide", title: "Ontario Landlord Tax Deduction Guide", description: "What you can and cannot write off as a rental property owner in Ontario — mortgage interest, repairs, management fees, and more.", category: "guides", icon: "💼" },
-  { id: "maintenance-request-form", title: "Maintenance Request Form Template", description: "A simple form for tenants to submit maintenance requests in writing — creates a paper trail and keeps both sides accountable.", category: "forms", icon: "🔧" },
+  { id: "landlord-tax-guide", title: "Ontario Landlord Tax Deduction Guide", description: "What you can and cannot write off as a rental property owner in Ontario: mortgage interest, repairs, management fees, and more.", category: "guides", icon: "💼" },
+  { id: "maintenance-request-form", title: "Maintenance Request Form Template", description: "A simple form for tenants to submit maintenance requests in writing. Creates a paper trail and keeps both sides accountable.", category: "forms", icon: "🔧" },
   { id: "rental-application", title: "Rental Application Template", description: "Comprehensive tenant application form covering employment, income, rental history, references, and consent to credit check.", category: "forms", icon: "📋" },
-  { id: "landlord-rights-guide", title: "Ontario Landlord Rights Quick Reference", description: "One-page summary of your key rights under the Residential Tenancies Act — entry, rent increases, evictions, and more.", category: "guides", icon: "🏠" },
+  { id: "landlord-rights-guide", title: "Ontario Landlord Rights Quick Reference", description: "One-page summary of your key rights under the Residential Tenancies Act: entry, rent increases, evictions, and more.", category: "guides", icon: "🏠" },
 ];
 
 const CATEGORY_LABELS = { forms: "Forms", guides: "Guides", templates: "Templates", checklists: "Checklists" };
@@ -80,7 +80,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
               <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
               <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
               <p className="text-sm mb-6 leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                Enter your email and we&apos;ll send it instantly. No spam — just the occasional landlord tip.
+                Enter your email and we&apos;ll send it instantly. No spam, just the occasional landlord tip.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />

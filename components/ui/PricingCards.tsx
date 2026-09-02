@@ -50,7 +50,7 @@ const plans = [
       "Full tenant screening & placement",
       "Rent collection & disbursement",
       "Maintenance coordination",
-      "8% maintenance markup — transparent, no surprises",
+      "8% maintenance markup, transparent, no surprises",
       "Lease management & renewals",
       "Move-in / move-out inspection",
       "Monthly financial statements",
@@ -94,11 +94,11 @@ const plans = [
     placementNote: "Placement: FREE every single time ($2,000 value)",
     placementHighlight: true,
     description:
-      "True passive income — backed by our 90-Day Happiness Guarantee. Not happy? Walk away free.",
+      "True passive income, backed by our 90-Day Happiness Guarantee. Not happy? Walk away free.",
     features: [
       "Everything in Optimized",
-      "FREE placement — saves $2,000 every vacancy",
-      "90-Day Happiness Guarantee — no questions asked",
+      "FREE placement, saves $2,000 every vacancy",
+      "90-Day Happiness Guarantee, no questions asked",
       "Pre-vacancy marketing before tenant leaves",
       "Quarterly property inspections",
       "Annual landlord strategy call",

@@ -4,7 +4,7 @@ import PropertyFreedomScore from "@/components/ui/PropertyFreedomScore";
 export const metadata: Metadata = {
   title: "Property Freedom Score™ | Prospera Properties",
   description:
-    "Free 3-minute assessment for Ontario landlords. Discover how dependent your rental portfolio is on your personal involvement — and get a personalized action plan.",
+    "Free 3-minute assessment for Ontario landlords. Discover how dependent your rental portfolio is on your personal involvement, and get a personalized action plan.",
 };
 
 export default function FreedomScorePage() {

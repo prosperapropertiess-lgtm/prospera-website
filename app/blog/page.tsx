@@ -4,7 +4,7 @@ import BlogGrid from "@/components/blog/BlogGrid";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog — Landlord Tips, Ontario Law & Market Updates",
+  title: "Blog: Landlord Tips, Ontario Law & Market Updates",
   description: "Landlord tips, tenant resources, Ontario market updates, and property management guides from Prospera Properties.",
 };
 
@@ -38,7 +38,7 @@ export default function BlogPage() {
                 className="text-sm mt-3 max-w-xl"
                 style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
               >
-                Practical guides for Ontario landlords — from eviction law to current market rents.
+                Practical guides for Ontario landlords, from eviction law to current market rents.
               </p>
             </div>
             <Link
@@ -74,7 +74,7 @@ export default function BlogPage() {
             className="text-sm mb-8"
             style={{ color: "rgba(250,248,245,0.60)", fontFamily: "var(--font-dm-sans)" }}
           >
-            Ontario landlord tips, market updates, and legal guides — no spam.
+            Ontario landlord tips, market updates, and legal guides. No spam.
           </p>
           <form className="flex gap-3 max-w-sm mx-auto">
             <input

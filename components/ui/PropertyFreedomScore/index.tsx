@@ -12,7 +12,7 @@ function progressCopy(pct: number): string {
   if (pct < 25) return "Good start. Keep going.";
   if (pct < 50) return "You're building a clear picture.";
   if (pct < 65) return "Halfway. Your score is taking shape.";
-  if (pct < 80) return "Almost there — just a few left.";
+  if (pct < 80) return "Almost there, just a few left.";
   if (pct < 100) return "Last questions. Your report is nearly ready.";
   return "Done! Calculating your score…";
 }
@@ -275,7 +275,7 @@ export default function PropertyFreedomScore() {
               </div>
               <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.8125rem", color: "#666666", marginBottom: "1.5rem", fontStyle: "italic" }}>
                 {sliderVal === 0
-                  ? "Lucky you — or maybe not tracking it yet."
+                  ? "Lucky you, or maybe not tracking it yet."
                   : sliderVal <= 8
                   ? "That's well-managed. Most landlords are above this."
                   : sliderVal <= 20
@@ -345,7 +345,7 @@ export default function PropertyFreedomScore() {
           {/* Score teaser */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem", backgroundColor: "#F7F5F2", border: "1px solid #D8D2C8", borderRadius: "2rem", padding: "0.625rem 1.25rem", marginBottom: "1.25rem" }}>
             <span style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 700, fontSize: "1.5rem", color: previewColor }}>{preview}</span>
-            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.875rem", color: "#666666" }}>/ 100 — your score is ready</span>
+            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.875rem", color: "#666666" }}>/ 100, your score is ready</span>
           </div>
           <h2 style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 700, fontSize: "1.75rem", color: "#1F2F3A", margin: "0 0 0.625rem" }}>
             Where should we send your report?

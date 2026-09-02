@@ -5,7 +5,7 @@ import JsonLd from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Property Management London Ontario | Prospera Properties",
   description:
-    "Prospera Properties is a property management company and rental agency in London, Ontario. We handle tenant screening, rent collection, maintenance, and leasing — so you don't have to.",
+    "Prospera Properties is a property management company and rental agency in London, Ontario. We handle tenant screening, rent collection, maintenance, and leasing, so you don't have to.",
   openGraph: {
     title: "Property Management London Ontario | Prospera Properties",
     description:
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const SERVICES = [
   {
     title: "Tenant Screening",
-    desc: "Credit checks, income verification, rental history, and reference calls — every applicant vetted before they step through your door.",
+    desc: "Credit checks, income verification, rental history, and reference calls. Every applicant vetted before they step through your door.",
   },
   {
     title: "Rent Collection",
@@ -118,7 +118,7 @@ export default function PropertyManagementLondonPage() {
               Property Management<br />in London, Ontario
             </h1>
             <p style={{ fontSize: 18, color: "rgba(250,248,245,0.75)", lineHeight: 1.7, marginBottom: 32, maxWidth: 580, fontFamily: "var(--font-dm-sans)" }}>
-              We manage rental properties in London and the surrounding area so landlords can stop dealing with the day-to-day. Tenant screening, rent collection, maintenance — all of it.
+              We manage rental properties in London and the surrounding area so landlords can stop dealing with the day-to-day. Tenant screening, rent collection, maintenance, all of it.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <Link

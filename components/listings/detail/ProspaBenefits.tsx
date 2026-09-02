@@ -4,7 +4,7 @@ import Link from "next/link";
 const BENEFITS = [
   {
     title: "24-Hour Response",
-    desc: "Every maintenance request, every question — acknowledged within 24 hours. No voicemail black holes.",
+    desc: "Every maintenance request, every question, acknowledged within 24 hours. No voicemail black holes.",
   },
   {
     title: "Online Rent Payment",

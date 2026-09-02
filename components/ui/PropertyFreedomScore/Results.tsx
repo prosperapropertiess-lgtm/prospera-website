@@ -84,7 +84,7 @@ export default function FreedomScoreResults() {
         </div>
         <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.9375rem", color: "#333333", maxWidth: "420px", margin: "0 auto" }}>
           {result.overall < 40
-            ? "Your rental is running you — not the other way around. The good news: it's all fixable."
+            ? "Your rental is running you, not the other way around. The good news: it's all fixable."
             : result.overall < 60
             ? "You have some systems, but significant time is still being left on the table."
             : result.overall < 75
@@ -109,7 +109,7 @@ export default function FreedomScoreResults() {
           Your time cost
         </p>
         <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.9375rem", color: "#555555", margin: 0 }}>
-          You&apos;re spending roughly <strong style={{ color: NAVY }}>{result.yearlyHours} hours per year</strong> — that&apos;s {workWeeks} work weeks — managing your rentals.
+          You&apos;re spending roughly <strong style={{ color: NAVY }}>{result.yearlyHours} hours per year</strong>, that&apos;s {workWeeks} work weeks, managing your rentals.
         </p>
       </div>
 
@@ -128,7 +128,7 @@ export default function FreedomScoreResults() {
           Want help implementing this?
         </h3>
         <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.9375rem", color: "rgba(250,248,245,0.75)", lineHeight: 1.7, margin: "0 auto 1.5rem", maxWidth: "420px" }}>
-          Your action plan is clear. The question is whether you want to do it yourself — or have someone do it for you.
+          Your action plan is clear. The question is whether you want to do it yourself, or have someone do it for you.
         </p>
         <a
           href="/contact"

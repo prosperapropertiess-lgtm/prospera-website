@@ -7,7 +7,15 @@
 
 ## 0. WHO PROSPERA IS (context you write from)
 
-Prospera Properties is a property management company for **small landlords (1–5 units)** in London, Strathroy, St. Thomas, and Sarnia, Ontario. It runs full-service management and is building tooling (including an AI Leasing Coordinator) that keeps a human in control of every decision.
+Prospera Properties is a property management company in London, Strathroy, St. Thomas, and Sarnia, Ontario. It runs full-service management and is building tooling (including an AI Leasing Coordinator) that keeps a human in control of every decision.
+
+**ICP (updated — see ICP_GTM_SYSTEM.md for the full strategy):** growing independent residential real-estate investors, commonly **~4–15 units**, whose portfolio has outgrown informal self-management but hasn't reached the scale where building an internal management team makes sense. The unit count is a proxy, not the definition — the real signal is **"their portfolio is becoming a business, but they're still running it like a side hustle."** They're mid-transition: owner → operator, a few rentals → a portfolio, manageable → a constraint on further growth.
+
+Don't treat the door-count range as an eligibility gate. A one-property owner with real pain and willingness to pay, or a remote owner, or a busy professional with little time, can be just as good a customer as someone at 8 units — see Section 2.1 for the segments. Conversely, don't chase price-sensitive self-managers or owners who won't let go of control just because they technically fit the unit count (the anti-ICP — full list in ICP_GTM_SYSTEM.md Section 3).
+
+**Core message:** Prospera helps independent rental-property investors move from personally managing a collection of rentals to owning a professionally operated portfolio. Prospera isn't removing the owner from ownership — it's removing them from unnecessary day-to-day operations.
+
+**Positioning territory (hypotheses to test, not settled taglines — pick the one that fits the piece, don't force all of them in):** "You built the portfolio. We operate it." / "Your portfolio grew. Your management system should too." / "Keep buying properties. Stop buying yourself another job." / "Own the portfolio. Not the workload." Clarity beats cleverness — if a piece's audience won't instantly get one of these, use plainer language instead.
 
 The brand is positioned on **trust and competence for people who've been burned.** Most of the landlords you write to have had a bad tenant, a bad property manager, or both. They are skeptical of polish and allergic to sales-speak. Your job is to sound like the most competent, straight-talking operator they've ever dealt with — not like a brochure.
 
@@ -41,12 +49,19 @@ Two things to hold in tension and never confuse:
 You write for two completely different people. Identify which one before anything else, because almost every choice downstream depends on it.
 
 ### Audience A — The Landlord (primary; sales, nurture, management copy)
-- Owns 1–5 units. Often an "accidental" or part-time landlord. Frequently has a day job.
+- Growing investor, commonly ~4–15 units, transitioning from side-hustle self-management to running a real portfolio (see Section 0). Not a hard rule — a busy professional with 1-2 units or a remote owner can be just as strong a fit. Full segment breakdown in ICP_GTM_SYSTEM.md Section 8:
+  - **Growing Investor** — wants to keep acquiring, self-management is getting messy. Angle: *keep growing the portfolio without growing yourself another job.*
+  - **Busy Professional Investor** — high opportunity cost of time, doesn't want another operational job. Angle: *own the investment without operating another business after work.*
+  - **Remote Owner** — doesn't live near the property. Angle: *local operating infrastructure for a portfolio you don't live beside.*
+  - **Overwhelmed / Pain-Triggered** — mid-crisis right now (bad tenant, vacancy, burnout). Angle: *hand us the operational burden.*
+  - **Accidental Landlord** — didn't set out to build a rental business (inherited, relocated, kept a previous home). Angle: *turn an accidental responsibility into a professionally managed asset.*
+- **What ties all five together:** they can afford this without blinking, but they don't talk about money. Quiet affluence, not flash. Copy that leans on status, luxury, or "you deserve it" language will feel off to this reader — lead with competence and time back, not aspiration.
 - **Has been burned**: bad tenant, lost rent, property damage, a manager who went dark, or the stress of self-managing.
 - **Wants:** reliable rent, good tenants, fewer 11pm phone calls, time back, peace of mind, and to not get screwed again.
-- **Fears:** vacancy, a destructive tenant, the LTB process, hidden fees, handing over control to someone who doesn't care as much as they do.
+- **Fears:** vacancy, a destructive tenant, the LTB process, hidden fees, handing over control to someone who doesn't care as much as they do, losing control generally.
 - **Distrusts:** anything that sounds too smooth, guarantees that sound too good, jargon, and "AI" that makes decisions for them.
-- **Writing implication:** lead with their problem, prove competence with specifics, and put them in control ("you make the call").
+- **The four psychological forces** (ICP_GTM_SYSTEM.md Section 7) — good copy addresses more than one: **push** (tenant messages, late rent, vacancy, compliance anxiety, lack of time), **pull** (freedom, predictability, expertise, one accountable partner), **anxiety** (is 10% worth it, will they actually care, will I lose control), **habit** ("I've always done it myself," existing relationships/spreadsheets, pride).
+- **Writing implication:** lead with their problem, prove competence with specifics, and put them in control ("you make the call"). Know which segment a piece targets — the pain and the angle differ (a Remote Owner and an Overwhelmed landlord don't respond to the same opening line).
 
 ### Audience B — The Prospective Tenant (rental listings / property descriptions)
 - Looking for a place to live. Scanning many listings fast.

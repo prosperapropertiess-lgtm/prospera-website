@@ -34,7 +34,7 @@ export const QUESTIONS: AnyQuestion[] = [
     type: "single",
     category: "communication",
     options: [
-      { label: "My personal cell — calls and texts", value: "personal_cell", score: 0 },
+      { label: "My personal cell: calls and texts", value: "personal_cell", score: 0 },
       { label: "A dedicated business number", value: "work_phone", score: 3 },
       { label: "Email only", value: "email_only", score: 2 },
       { label: "A tenant portal or app", value: "portal", score: 4 },
@@ -73,7 +73,7 @@ export const QUESTIONS: AnyQuestion[] = [
     type: "single",
     category: "maintenance",
     options: [
-      { label: "No — I search each time", value: "none", score: 0 },
+      { label: "No, I search each time", value: "none", score: 0 },
       { label: "A few numbers in my phone", value: "few", score: 1 },
       { label: "A short trusted list", value: "list", score: 2 },
       { label: "Full vetted list with backups", value: "full_list", score: 4 },
@@ -125,7 +125,7 @@ export const QUESTIONS: AnyQuestion[] = [
     type: "single",
     category: "operational",
     options: [
-      { label: "I remember — or the tenant reminds me", value: "memory", score: 0 },
+      { label: "I remember, or the tenant reminds me", value: "memory", score: 0 },
       { label: "Calendar reminders I set manually", value: "calendar", score: 2 },
       { label: "Systematic process with templates", value: "systematic", score: 4 },
     ],
@@ -149,10 +149,10 @@ export const QUESTIONS: AnyQuestion[] = [
     type: "single",
     category: "stress",
     options: [
-      { label: "Rarely — I barely think about it", value: "1", score: 4 },
+      { label: "Rarely, I barely think about it", value: "1", score: 4 },
       { label: "Occasionally", value: "2", score: 3 },
-      { label: "Often — it's usually somewhere in my head", value: "3", score: 1 },
-      { label: "Constantly — it's always with me", value: "4", score: 0 },
+      { label: "Often, it's usually somewhere in my head", value: "3", score: 1 },
+      { label: "Constantly, it's always with me", value: "4", score: 0 },
     ],
     milestone: "Stress: done ✓",
   },
@@ -163,9 +163,9 @@ export const QUESTIONS: AnyQuestion[] = [
     category: "stress",
     options: [
       { label: "Not prepared at all", value: "1", score: 0 },
-      { label: "Somewhat — I'd figure it out", value: "2", score: 1 },
+      { label: "Somewhat, I'd figure it out", value: "2", score: 1 },
       { label: "Fairly prepared", value: "3", score: 3 },
-      { label: "Fully prepared — I know the exact steps", value: "4", score: 4 },
+      { label: "Fully prepared, I know the exact steps", value: "4", score: 4 },
     ],
   },
   // ── Bonus (one big picture) ────────────────────────────────────────────────
@@ -177,8 +177,8 @@ export const QUESTIONS: AnyQuestion[] = [
     options: [
       { label: "Multiple times a week", value: "weekly", score: 0 },
       { label: "A few times a month", value: "monthly", score: 1 },
-      { label: "Rarely — a few times a year", value: "rarely", score: 3 },
-      { label: "Almost never — I have clear protocols", value: "never", score: 4 },
+      { label: "Rarely, a few times a year", value: "rarely", score: 3 },
+      { label: "Almost never, I have clear protocols", value: "never", score: 4 },
     ],
   },
 ];

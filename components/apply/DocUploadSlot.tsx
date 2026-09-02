@@ -144,7 +144,7 @@ export default function DocUploadSlot({ label, docType, count = 1, onUploaded }:
               textAlign: "center",
             }}
           >
-            {uploading ? "Uploading..." : `+ Upload${count > 1 ? ` (${needed} more needed)` : ""} — PDF or image, max 5MB`}
+            {uploading ? "Uploading..." : `+ Upload${count > 1 ? ` (${needed} more needed)` : ""}, PDF or image, max 5MB`}
           </button>
         </>
       )}
