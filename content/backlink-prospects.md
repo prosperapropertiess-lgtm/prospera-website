@@ -1990,3 +1990,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Canadian PM software company, not a competitor in Ontario PM services. Contact: info@landlordwebsolutions.com. Guest post is the right approach — frame Prospera as the full-service alternative for landlords who want to offload management entirely. Practical, software-forward tone. Site access blocked at network level; research drawn from known organizational profile.
 
 ---
+
+## De Palma Paralegal — Ontario LTB Landlord-Tenant Blog
+- url: https://www.depalmaparalegal.ca
+- type: blog
+- why: Licensed Ontario paralegal who published "Navigating Landlord-Tenant Issues in Ontario: The Paralegal Advantage" — directly targeting the LTB-facing landlord audience that Prospera serves daily; a resource mention or mutual referral piece would reach active landlords at their most stressed moment.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://www.depalmaparalegal.ca/contact/
+- site_focus: Licensed Ontario paralegal practice focused on representing landlords and tenants before the Landlord and Tenant Board. The site offers practical LTB guidance including how paralegals help landlords navigate hearings, notices, and enforcement — squarely aimed at Ontario landlords dealing with problem tenancies.
+- hook: Prospera handles the property management side of what De Palma Paralegal handles on the legal side — landlords who engage professional PM are less likely to end up in LTB hearings, but when they do, having a paralegal matters. A resource mention ("when to hire a property manager vs. when to call a paralegal") or a mutual referral relationship serves both audiences.
+- specific_content: Their blog post "Navigating Landlord-Tenant Issues in Ontario: The Paralegal Advantage" — the exact decision point where Prospera's PM services and De Palma's legal services are complementary, not competing.
+- researcher_notes: Small paralegal practice, not a PM competitor. Tone: collegial professional peer, not a sales pitch. Mutual referral angle is strongest — Prospera sends landlords who need legal help, De Palma sends landlords who need professional management. Contact via form. Site access blocked at proxy; research from web search results.
+
+---
+
+## Ontario Legal Pool — Landlord-Tenant Board Paralegal Blog
+- url: https://ontariolegalpool.com/blog/
+- type: blog
+- why: Paralegal firm in Oakville/Toronto blogging about LTB landlord-tenant procedures — their landlord-facing Ontario audience is precisely Prospera's target market; a resource page mention or guest contribution on proactive PM as LTB prevention fits their editorial angle.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://ontariolegalpool.com/contact/
+- site_focus: Licensed paralegal firm blogging about Landlord and Tenant Board procedures, hearings, and tenant-related legal issues in Ontario. Content serves landlords who are already in or approaching LTB proceedings, as well as those researching their rights before problems escalate.
+- hook: Ontario Legal Pool's readers are landlords either dealing with or trying to avoid LTB filings. Prospera's professional management reduces the risk of ever reaching that point — a resource piece on "how London Ontario landlords prevent LTB issues with professional management" gives their audience a proactive option before legal action becomes necessary.
+- specific_content: Their LTB-focused blog posts on landlord representation and board procedures — the context where Prospera's "LTB-avoidance through professional management" angle is most relevant.
+- researcher_notes: Non-competing paralegal firm. Audience overlap is high — their LTB-stressed landlord readers are exactly who Prospera wants to reach. Collegial outreach tone; mutual referral angle is viable. Contact via site form. Site access blocked at proxy; research from web search results.
+
+---
+
+## Act Now Legal Services — Ontario Landlord-Tenant Law Blog
+- url: https://www.actnowlegalservices.com/blog
+- type: blog
+- why: Licensed Ontario paralegals with 12 years of experience writing plain-English guides to landlord-tenant law and LTB procedures — their informational blog audience of self-managing Ontario landlords is Prospera's exact conversion target.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://www.actnowlegalservices.com/contact/
+- site_focus: Licensed Ontario paralegal practice offering plain-English blog guides on landlord-tenant law, LTB filings, traffic, and small claims court. The blog is particularly strong on Ontario landlord rights and LTB process — written accessibly for self-managing landlords navigating the system without legal representation.
+- hook: Act Now's blog readers are learning Ontario tenancy law themselves, which means they're currently self-managing. A guest post or resource mention — "10 Ontario landlord situations that call for professional property management" — reaches them at the learning stage, before a problem forces the decision.
+- specific_content: Their plain-English Ontario landlord-tenant law guides and LTB procedure posts — the content that positions self-managing landlords as the exact audience for a Prospera resource mention.
+- researcher_notes: Non-competing paralegal blog. 12 years of experience lends credibility — the tone should be peer-level, not educational. A guest post is the strongest angle; they're content-focused and the blog is active. Contact via site. Site access blocked at proxy; research from web search results.
+
+---
+
+## Jeff Krieger — Mortgage Broker London Ontario Blog
+- url: https://jeffkrieger.ca/blogfull.aspx
+- type: mortgage
+- why: London Ontario mortgage broker (OMAC Division) with an active blog — investment property buyers in London who use Jeff need property management next; a resource mention or contributed post reaches them at the mortgage approval stage, right before they need a PM.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://jeffkrieger.ca/contact.aspx
+- site_focus: London Ontario mortgage broker operating under the OMAC Division, serving local homebuyers and investment property purchasers. The blog covers mortgage topics relevant to London homeowners and real estate investors — rates, financing strategies, and investment property considerations for the London market.
+- hook: Jeff's investor clients secure financing for London rental properties and immediately face the question of how to manage them. A resource mention or brief contributed piece — "What to do after your investment property mortgage closes in London" — points his audience to Prospera at the exact moment they need a PM.
+- specific_content: Jeff's London Ontario investment property mortgage blog posts — the audience is active London investors who just secured or are seeking financing for rental properties, and will need property management next.
+- researcher_notes: Local London mortgage broker, not a competitor. Natural referral partner — investors who buy through Jeff need a PM; Ebin's clients who need refinancing benefit from a trusted local broker referral. Collegial, peer-to-peer tone. Contact via site. Site access blocked at proxy; research from web search results.
+
+---
+
+## Team Arora — Ontario Real Estate Investor Blog
+- url: https://www.teamarora.com
+- type: blog
+- why: Ontario real estate investment team that published "Best Ontario Cities for Real Estate Investment in 2026" naming London — their investor-focused audience researching London is looking for exactly the local support Prospera provides.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://www.teamarora.com/contact/
+- site_focus: Ontario-wide real estate investment team publishing market analysis content for investors, including the "Best Ontario Cities for Real Estate Investment in 2026" article that highlights London as a strong market based on cap rates, price points, and tenant demand. Their content targets active Ontario real estate investors deciding where and how to build a portfolio.
+- hook: Their article names London as a top Ontario investment market — adding a resource link to Prospera as the local property management option in London and SW Ontario turns their market analysis into an actionable guide for out-of-area investors who need local ground support.
+- specific_content: "Best Ontario Cities for Real Estate Investment in 2026" — London highlighted as a strong market, with no local PM resource linked; Prospera is the obvious addition.
+- researcher_notes: Investment-focused realtor team, not a property management competitor. The article is indexed and likely to rank for London investor searches. A resource link ask is low-friction — they benefit from making the article more useful; Prospera gets a high-relevance inbound link. Contact via site. Site access blocked at proxy; research from web search results.
+
+---
+
+## Realtor Coburn — London Ontario Real Estate Blog
+- url: https://realtorcoburn.com/Blogs
+- type: blog
+- why: London Ontario realtor with an active blog — local investor clients who buy rentals through this brokerage need property management, and a resource mention or referral relationship converts their buyers into Prospera's clients.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://realtorcoburn.com/Contact
+- site_focus: London Ontario realtor blog covering local market analysis and investor resources for buyers and sellers in the London area. Content appears aimed at London-area buyers, sellers, and real estate investors navigating the local market in 2026.
+- hook: London-area investors who buy rental properties through Realtor Coburn immediately need property management — a resource mention or referral partnership means their investor clients have a trusted local PM from day one of ownership.
+- specific_content: London Ontario real estate market analysis blog — investor-oriented content whose readers will need property management after acquisition.
+- researcher_notes: Local London realtor, not a PM company. A mutual referral angle is strongest — Ebin sends landlords who want to sell, they send buyers who need a PM. Short, peer-level outreach tone. Contact via site. Site access blocked at proxy; research from web search results.
+
+---
+
+## Real Value Home — Ontario Real Estate Investor Education Blog
+- url: https://realvaluehome.ca
+- type: blog
+- why: Ontario investor education blog publishing "Essential Tips for First-Time Real Estate Investors in Ontario" — their first-time landlord audience is exactly the segment most likely to hire professional property management in London and SW Ontario.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://realvaluehome.ca/contact/
+- site_focus: Ontario real estate investor education website covering first-time landlord tips, landlord responsibilities, tenant screening, legal requirements, and investment property strategy for Ontario investors. Content is practical and educational, targeting new Ontario landlords learning to navigate the rental market.
+- hook: Their first-time investor audience is reading about landlord responsibilities and tenant management because they're deciding whether to self-manage — a resource mention or contributed post ("when London Ontario first-time landlords should hire a property manager") speaks to them at the right decision moment.
+- specific_content: "Essential Tips for First-Time Real Estate Investors in Ontario" — their core content targets the segment most likely to benefit from and hire Prospera's services.
+- researcher_notes: Investor education site, not a PM competitor. Content-first approach — a guest post or resource mention is the right pitch. The audience is new to landlording and open to professional management. Contact via site form. Site access blocked at proxy; research from web search results.
+
+---
+
+## Krystal Lee Moore — London Ontario Realtor & Investor Blog
+- url: https://krystalleemoore.ca/blog/
+- type: blog
+- why: London Ontario realtor with an investor-focused blog including "The Savvy Investor's Guide to Investment Properties in London Ontario" — their local investor readership is Prospera's direct target audience, buying London rentals that need professional management.
+- researched: true
+- drafted: true
+- added: 2026-08-30
+- contact_email: https://krystalleemoore.ca/contact/
+- site_focus: London Ontario realtor blogging about investment properties, local market conditions, and buyer guidance specific to the London area. The blog covers investor-relevant content including property evaluation, London neighbourhood analysis, and first-time investor guidance in the London market.
+- hook: Investors who read Krystal's London investor guide buy London rentals and then need a local property manager — a resource mention of Prospera as the trusted London PM for investor clients completes the landlord journey her content starts.
+- specific_content: "The Savvy Investor's Guide to Investment Properties in London Ontario" — Prospera as a recommended local PM resource is the natural follow-on to buying guidance.
+- researcher_notes: Local London realtor, not a PM competitor. Same audience, complementary service. Peer-to-peer tone; mutual referral angle is strong. Contact via site. Site access blocked at proxy; research from web search results.
+
+---
