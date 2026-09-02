@@ -196,6 +196,82 @@ function AtCapacityBanner() {
   );
 }
 
+// ── Is This You ───────────────────────────────────────────────────────────────
+
+function IsThisYou() {
+  const scenarios = [
+    {
+      label: "You're adding properties faster than you can manage them.",
+      sub: "More doors should mean more freedom. Right now it means more calls, more admin, more of your evenings gone.",
+    },
+    {
+      label: "Your job doesn't leave room for a second one.",
+      sub: "You built a career. Being on call for a broken furnace at 11pm was never part of the plan.",
+    },
+    {
+      label: "You don't live near the property anymore.",
+      sub: "A tenant problem you can't just drive over and fix isn't one you can manage from a distance.",
+    },
+    {
+      label: "One bad experience was enough.",
+      sub: "A tenant who stopped paying, a 3am call, a repair that spiraled. You already know you're done doing it this way.",
+    },
+    {
+      label: "You inherited a property you didn't ask to manage.",
+      sub: "It came with real responsibility. You just want it handled properly, not turned into a second job.",
+    },
+  ];
+
+  return (
+    <section className="py-24 px-5 sm:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+      <div className="max-w-4xl mx-auto">
+        <FadeIn>
+          <p
+            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Who This Is For
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl font-light text-center mb-4 leading-tight"
+            style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
+          >
+            Which one of these is you?
+          </h2>
+          <p
+            className="text-sm text-center mb-14 max-w-md mx-auto"
+            style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}
+          >
+            Different situations, same outcome: you want it handled, not managed by you.
+          </p>
+        </FadeIn>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {scenarios.map((s, i) => (
+            <FadeIn
+              key={i}
+              delay={i * 0.08}
+              className={i === scenarios.length - 1 ? "sm:col-span-2 h-full" : "h-full"}
+            >
+              <div
+                className="p-7 border rounded-xl overflow-hidden relative h-full"
+                style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: "#8B2030" }} />
+                <p className="font-semibold text-base leading-snug mb-2" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
+                  {s.label}
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+                  {s.sub}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Stats Bar ─────────────────────────────────────────────────────────────────
 
 function StatsBar() {
@@ -865,6 +941,7 @@ export default function HomePage() {
     <>
       <Hero />
       <AtCapacityBanner />
+      <IsThisYou />
       <Services />
       <PortalPreview />
       <StatsBar />

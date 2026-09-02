@@ -9,7 +9,7 @@ const milestones = [
     location: "India",
     icon: "01",
     title: "First Business",
-    desc: "Started a business from nothing. Built it. Sold it. The real lesson wasn't the money. It was learning that you figure things out by doing them, not by waiting until you feel ready.",
+    desc: "Started a business from nothing. Built it. It didn't work out, but the real lesson wasn't the failure. It was learning that you figure things out by doing them, not by waiting until you feel ready.",
   },
   {
     era: "Age 18",
