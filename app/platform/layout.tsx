@@ -1,31 +1,31 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Prospera Platform — Landlording on Autopilot",
+  title: "The Prospera App — Built by a Landlord, for Landlords",
   description:
-    "Rent collected. N4s filed. Maintenance handled. You didn't lift a finger. The app Ontario landlords with 4–15 properties have been waiting for. 90 days free — no contracts.",
+    "Rent reminders in one tap. The right LTB notice, picked for you. Maintenance tracked start to finish. Built for Ontario landlords with 4–15 properties by someone who runs his own.",
   openGraph: {
-    title: "Prospera Platform — Landlording on Autopilot",
+    title: "The Prospera App — Built by a Landlord, for Landlords",
     description:
-      "Rent collected automatically. N4s filed the moment rent is late. Maintenance triaged by AI. Built by an Ontario landlord, for Ontario landlords with 4–15 properties. 90 days free.",
+      "Rent reminders in one tap. The right LTB notice, picked for you. Maintenance tracked start to finish. Built for Ontario landlords with 4–15 properties by someone who runs his own.",
     type: "website",
     url: "https://www.prosperaproperties.co/platform",
     siteName: "Prospera Properties",
     images: [
       {
-        url: "https://www.prosperaproperties.co/app-screens/landlord_dashboard_1.png",
-        width: 390,
-        height: 844,
-        alt: "Prospera Platform — landlord dashboard showing rent collected and property overview",
+        url: "https://www.prosperaproperties.co/app-screens/command-dashboard.png",
+        width: 1206,
+        height: 2622,
+        alt: "The Prospera app — Command dashboard showing rent collected and portfolio status",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Prospera Platform — Landlording on Autopilot",
+    title: "The Prospera App — Built by a Landlord, for Landlords",
     description:
-      "Rent collected. N4s filed. Maintenance handled. 90 days free. No contracts.",
-    images: ["https://www.prosperaproperties.co/app-screens/landlord_dashboard_1.png"],
+      "Rent reminders in one tap. The right LTB notice, picked for you. Maintenance tracked start to finish.",
+    images: ["https://www.prosperaproperties.co/app-screens/command-dashboard.png"],
   },
 };
 
