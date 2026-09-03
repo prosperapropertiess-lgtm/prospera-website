@@ -206,12 +206,21 @@ export default function Footer() {
           >
             &copy; {new Date().getFullYear()} Prospera Properties. All rights reserved.
           </p>
-          <p
-            className="text-xs footer-link"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
-          >
-            Built with care in Ontario
-          </p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/privacy"
+              className="text-xs footer-link"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              Privacy Policy
+            </Link>
+            <p
+              className="text-xs footer-link"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              Built with care in Ontario
+            </p>
+          </div>
         </div>
       </div>
     </footer>

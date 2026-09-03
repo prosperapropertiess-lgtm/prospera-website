@@ -293,6 +293,15 @@ export default function SupportPage() {
             >
               Learn more about Prospera Properties →
             </Link>
+            <p className="mt-10">
+              <Link
+                href="/privacy"
+                className="text-xs font-medium uppercase tracking-widest transition-opacity hover:opacity-70"
+                style={{ color: "rgba(250,248,245,0.5)", fontFamily: "var(--font-dm-sans)" }}
+              >
+                Privacy Policy
+              </Link>
+            </p>
           </FadeIn>
         </div>
       </section>
