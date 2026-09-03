@@ -9,6 +9,7 @@ const quickLinks = [
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "App Support", href: "/support" },
 ];
 
 const landlordLinks = [
