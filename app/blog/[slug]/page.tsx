@@ -98,30 +98,57 @@ export default async function BlogPostPage({ params }: Props) {
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    dateModified: post.date,
-    image: post.featuredImage
-      ? { "@type": "ImageObject", url: post.featuredImage }
-      : undefined,
-    author: {
-      "@type": "Person",
-      name: "Ebin Jaison",
-      url: "https://www.prosperaproperties.co/about",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Prospera Properties",
-      url: "https://www.prosperaproperties.co",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.prosperaproperties.co/icon.png",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${postUrl}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        dateModified: post.date,
+        articleSection: post.category,
+        inLanguage: "en-CA",
+        image: post.featuredImage
+          ? { "@type": "ImageObject", url: post.featuredImage }
+          : undefined,
+        author: {
+          "@type": "Person",
+          "@id": "https://www.prosperaproperties.co/about#ebin-jaison",
+          name: "Ebin Jaison",
+          url: "https://www.prosperaproperties.co/about",
+        },
+        publisher: {
+          "@type": "Organization",
+          "@id": "https://www.prosperaproperties.co/#organization",
+          name: "Prospera Properties",
+          url: "https://www.prosperaproperties.co",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.prosperaproperties.co/logo.png",
+          },
+        },
+        url: postUrl,
+        mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", "h2", ".prose-content p"],
+        },
+        isPartOf: {
+          "@type": "Blog",
+          "@id": "https://www.prosperaproperties.co/blog#blog",
+          name: "Prospera Properties — Ontario Landlord Law & Property Management Blog",
+          publisher: { "@id": "https://www.prosperaproperties.co/#organization" },
+        },
       },
-    },
-    url: postUrl,
-    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prosperaproperties.co" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.prosperaproperties.co/blog" },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+        ],
+      },
+    ],
   };
 
   return (

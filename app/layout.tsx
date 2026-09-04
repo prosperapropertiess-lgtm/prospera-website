@@ -80,6 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable} min-h-full`}>
       <head>
+        <link rel="alternate" type="text/plain" title="AI-readable site index" href="https://www.prosperaproperties.co/llms.txt" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://hwaroazxbzgmjjasgtdb.supabase.co" />
@@ -90,42 +91,124 @@ export default function RootLayout({
         />
         <JsonLd data={{
           "@context": "https://schema.org",
-          "@type": ["LocalBusiness", "RealEstateAgent"],
-          "@id": "https://www.prosperaproperties.co",
-          "name": "Prospera Properties",
-          "description": "Professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and more.",
-          "url": "https://www.prosperaproperties.co",
-          "telephone": "+15196971227",
-          "email": "hello@prosperaproperties.co",
-          "logo": { "@type": "ImageObject", "url": "https://www.prosperaproperties.co/logo.png" },
-          "image": "https://www.prosperaproperties.co/ebin-founder.jpg",
-          "priceRange": "$$",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "London",
-            "addressRegion": "ON",
-            "addressCountry": "CA"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 42.9849,
-            "longitude": -81.2453
-          },
-          "areaServed": [
-            { "@type": "City", "name": "London", "sameAs": "https://en.wikipedia.org/wiki/London,_Ontario" },
-            { "@type": "City", "name": "St. Thomas", "sameAs": "https://en.wikipedia.org/wiki/St._Thomas,_Ontario" },
-            { "@type": "City", "name": "Strathroy", "sameAs": "https://en.wikipedia.org/wiki/Strathroy-Caradoc" }
-          ],
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 5.0,
-            "reviewCount": 20,
-            "bestRating": 5,
-            "worstRating": 1
-          },
-          "sameAs": [
-            "https://www.facebook.com/prosperaproperties",
-            "https://www.youtube.com/@prosperaproperties"
+          "@graph": [
+            {
+              "@type": ["LocalBusiness", "RealEstateAgent"],
+              "@id": "https://www.prosperaproperties.co/#organization",
+              "name": "Prospera Properties",
+              "description": "Professional property management in London, St. Thomas, and Strathroy, Ontario. Tenant screening, rent collection, maintenance coordination, and full landlord services for 1–5 unit owners.",
+              "url": "https://www.prosperaproperties.co",
+              "telephone": "+15196971227",
+              "email": "hello@prosperaproperties.co",
+              "foundingDate": "2021",
+              "logo": { "@type": "ImageObject", "url": "https://www.prosperaproperties.co/logo.png" },
+              "image": "https://www.prosperaproperties.co/ebin-founder.jpg",
+              "priceRange": "$$",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "London",
+                "addressRegion": "ON",
+                "addressCountry": "CA"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 42.9849,
+                "longitude": -81.2453
+              },
+              "areaServed": [
+                { "@type": "City", "name": "London", "sameAs": "https://en.wikipedia.org/wiki/London,_Ontario" },
+                { "@type": "City", "name": "St. Thomas", "sameAs": "https://en.wikipedia.org/wiki/St._Thomas,_Ontario" },
+                { "@type": "City", "name": "Strathroy", "sameAs": "https://en.wikipedia.org/wiki/Strathroy-Caradoc" },
+                { "@type": "City", "name": "Woodstock", "sameAs": "https://en.wikipedia.org/wiki/Woodstock,_Ontario" },
+                { "@type": "City", "name": "Tillsonburg", "sameAs": "https://en.wikipedia.org/wiki/Tillsonburg" },
+                { "@type": "City", "name": "Ingersoll", "sameAs": "https://en.wikipedia.org/wiki/Ingersoll,_Ontario" }
+              ],
+              "knowsAbout": [
+                "Residential Tenancies Act Ontario",
+                "Landlord and Tenant Board Ontario",
+                "Property management London Ontario",
+                "Tenant screening Ontario",
+                "Rent collection Ontario",
+                "N4 notice Ontario",
+                "N12 notice Ontario",
+                "L1 application Ontario",
+                "LTB eviction process Ontario",
+                "Rent increase Ontario",
+                "Ontario landlord law",
+                "City of London rental unit licence",
+                "Maintenance responsibilities Ontario landlord",
+                "Security deposits Ontario",
+                "Lease agreements Ontario",
+                "Small landlord property management"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Property Management Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Full-Service Property Management", "description": "End-to-end management including tenant communication, rent collection, maintenance coordination, monthly statements, lease renewals, and rent increase notices." }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Tenant Placement", "description": "Full tenant screening including credit checks, criminal background checks, income verification (2.5–3x rent), employment verification, and reference checks." }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Rent Collection", "description": "Monthly rent collection, arrears management, N4 notices, and LTB application support for non-paying tenants." }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Maintenance Coordination", "description": "Coordinating repairs with trusted contractors. No markup on invoices. 24/7 emergency line for tenants." }
+                  }
+                ]
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": 5.0,
+                "reviewCount": 20,
+                "bestRating": 5,
+                "worstRating": 1
+              },
+              "sameAs": [
+                "https://www.facebook.com/prosperaproperties",
+                "https://www.youtube.com/@prosperaproperties"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://www.prosperaproperties.co/#website",
+              "url": "https://www.prosperaproperties.co",
+              "name": "Prospera Properties",
+              "description": "Ontario landlord law guides, property management resources, and professional property management services in London, St. Thomas, and Strathroy.",
+              "publisher": { "@id": "https://www.prosperaproperties.co/#organization" },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://www.prosperaproperties.co/blog?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://www.prosperaproperties.co/about#ebin-jaison",
+              "name": "Ebin Jaison",
+              "jobTitle": "Founder & Property Manager",
+              "worksFor": { "@id": "https://www.prosperaproperties.co/#organization" },
+              "url": "https://www.prosperaproperties.co/about",
+              "image": "https://www.prosperaproperties.co/ebin-founder.jpg",
+              "description": "Founder of Prospera Properties. Manages all landlord and tenant relationships personally. Specializes in Ontario landlord-tenant law and property management for small landlords.",
+              "knowsAbout": [
+                "Ontario Residential Tenancies Act",
+                "Landlord and Tenant Board",
+                "Property management London Ontario",
+                "Ontario landlord rights",
+                "LTB eviction process",
+                "Tenant screening Ontario"
+              ]
+            }
           ]
         }} />
       </head>
