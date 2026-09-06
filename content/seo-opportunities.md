@@ -166,3 +166,29 @@ Last updated: 2026-08-30
 - n4-notice-ontario.md — **URGENT (3 weeks):** Add a prominent callout at the top: "Bill 60 Update — Effective September 21, 2026: The N4 notice period changes from 14 days to 7 days for monthly and yearly tenancies. Update any saved notice templates before September 21." Include a dated FAQ entry explaining how to handle N4s already served under the 14-day rule.
 - bill-60-ontario-landlords.md — Add Phase 2 section header "What Changes September 21, 2026" and cover: (1) 7-day N4 notice period in force, (2) fixed-term leases no longer auto-converting to month-to-month, (3) N12 compensation waiver at 120 days, (4) increased fine levels now in effect ($100K/$500K for individuals/corps). This is the highest-traffic update the blog needs in Q3 2026.
 - security-deposits-ontario.md — Add the Ontario rent deposit interest rate table with 2024–2026 guideline rates (2.2%, 2.5%, 2.1%) and the exact interest calculation for a $2,000 deposit in 2026 ($42.00). This targets the featured snippet for "Ontario LMR deposit interest 2026" queries without requiring a new post. The opportunity ontario-rent-deposit-interest-2026 is already tracked; this is the faster option.
+
+---
+Last updated: 2026-09-06
+
+## New Topic Opportunities — 2026-09-06
+
+- vacancy-management-ontario-landlord | Est. difficulty: LOW | Vol: ~150/mo | How to minimize vacancy between tenants: proactive tenant renewal outreach, pre-listing timelines, showing strategy, and pricing accuracy during the search period. Royal York PM has a standalone guide; no large authority site (CBC, tribunals, government) ranks for this query. Practical, operational angle that fits a PM company's voice. Internal links to tenant-turnover-checklist-ontario.md and marketing-rental-property-ontario.md.
+
+- ontario-t776-rental-income-form-guide | Est. difficulty: MEDIUM | Vol: ~180/mo | Step-by-step guide to completing CRA Form T776 (Statement of Real Estate Rentals) for Ontario landlords: which expenses go where, how to handle shared-use properties, how to decide whether to claim CCA, and 2026 Ontario combined tax rates on net rental income. liv.rent and silaws.com rank with general overviews; no Ontario PM company has a landlord-first T776 walkthrough. Pairs with rental-property-tax-deductions-ontario.md.
+
+## SKIPPED — 2026-09-06
+- "Ontario landlord rights 2026" — Too broad; Ontario.ca and government pages dominate. Already covered by ontario-landlord-tenant-act-2026.md.
+- "LTB eviction process step by step 2026" — Covered by evicting-tenant-ontario.md and how-long-does-eviction-take-ontario.md. Tribunals Ontario ranks #1.
+- "rent deposit rules Ontario last month rent" — Covered by security-deposits-ontario.md. Interest rate tracking covered by ontario-rent-deposit-interest-2026 in prior week's list.
+- "tenant screening Ontario background check" — Covered by tenant-credit-check-ontario-landlords.md and tenant-screening-red-flags.md.
+- "can landlord enter Ontario 24 hours" — Covered by landlord-entry-rights-ontario.md. Tribunals Ontario guideline ranks #1.
+- "Ontario landlord insurance guide 2026" — Covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md.
+- "how to choose property management company Ontario" — Medium-high difficulty; Royal York PM, Buttonwood, Tenon10 dominate. Covered by how-to-find-a-property-manager-ontario.md.
+
+## Topics to Expand — 2026-09-06
+
+- seo-opportunities.md (this file) — CORRECTION: The "ontario-rent-deposit-interest-2026" entry lists the 2026 rate as 2.5%. The actual 2026 rent increase guideline (and therefore LMR deposit interest rate) is 2.1%, not 2.5%. Update the post draft and any N1 form content that references this figure before publish.
+
+- property-management-london-ontario.md — Add current 2026 local market data: vacancy rate ~4% (up from 2.9% in 2024, per CMHC Dec 2025 data), median 2-bedroom asking rent $1,925/mo (down 1.3% YoY per July 2026 Door Insight data). Note that London's softening market makes professional tenant placement and competitive pricing more important, not less — positions Prospera's services against the backdrop of current conditions.
+
+- rental-property-tax-deductions-ontario.md — Add section on T776 filing basics: what the form is, when it must be filed (even at a net loss), CCA decision (why many Ontario landlords skip CCA to avoid recapture at sale), and 2026 Ontario combined marginal rates on net rental income (20.05%–53.53% depending on total income). Links naturally to a future standalone T776 guide.
