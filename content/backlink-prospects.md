@@ -2110,3 +2110,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Local London realtor, not a PM competitor. Same audience, complementary service. Peer-to-peer tone; mutual referral angle is strong. Contact via site. Site access blocked at proxy; research from web search results.
 
 ---
+
+## LendCity Mortgages
+- url: https://lendcity.ca/blog/
+- type: blog
+- why: Ontario's largest investor-focused mortgage brokerage runs a deep blog on buying rental properties in London and Ontario — their reader is actively acquiring rentals and will need professional management.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: scott@lendcity.ca
+- site_focus: Windsor-based mortgage brokerage specializing exclusively in real estate investors across Canada. Blog covers rental financing, portfolio growth, CMHC MLI Select, and Ontario-specific investment guides including a dedicated London Ontario real estate investing guide.
+- hook: Prospera manages the properties LendCity's investor clients buy — a resource mention or guest post on "what to do with your rental after financing closes" is a natural complement to their financing content.
+- specific_content: "London Ontario Real Estate Investing Guide" and "How to Buy Unlimited Rental Properties in Canada" — content that ends at the purchase stage, where Prospera's management story begins.
+- researcher_notes: Not a competitor. Investor-focused mortgage broker, complementary audience. Founder Scott Dillingham is the main contact. Direct email available. Site access blocked at proxy; research from web search results.
+
+---
+
+## Chris Russell — London Ontario Realtor
+- url: https://realtorchrisrussell.com/blog/
+- type: blog
+- why: London Ontario realtor with 40+ years of experience who runs an investment-focused blog — their reader base is acquiring London investment properties that need property management.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: realtorchrisrussell@gmail.com
+- site_focus: London Ontario real estate services site positioned as "London, Ontario's Premier Real Estate Investment Resource." Blog covers investment strategy, marketing for sellers, and buyer guidance in the London market.
+- hook: Investors who buy through Chris's guidance are Prospera's target clients — a resource mention or referral arrangement for property management is a natural complement to his investment buyer content.
+- specific_content: "Your Guide to Successful Real Estate Investment" — readers who act on that guide will need a local PM for the properties they acquire.
+- researcher_notes: Not a competitor (realtor, not PM). 40+ years in London market. Gmail contact is direct. Mutual referral angle is strong — his investor buyers need PM, Prospera's landlord clients may want to sell. Site access blocked at proxy; research from web search results.
+
+---
+
+## The Mortgage Firm — London ON
+- url: https://www.themortgagefirm.ca/index.php/blog
+- type: blog
+- why: London-based mortgage brokerage covering London, St. Thomas, and SW Ontario — the same geography as Prospera, serving landlords and investors at the financing stage.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: https://www.themortgagefirm.ca/index.php/contact-london-ontario-mortgage-broker
+- site_focus: Full-service mortgage brokerage in London Ontario serving London, St. Thomas, and SW Ontario. Blog covers first-time buyer advice, investment property mortgages, reverse mortgages, private lending, and local homeowner topics.
+- hook: Landlords who finance through The Mortgage Firm and then need to self-manage are exactly the audience Prospera serves — a resource mention or guest post on "when to hire a property manager after buying" is a natural follow-on to their investor mortgage content.
+- specific_content: Blog post on "Top London, Ontario Mortgage Broker — 2026" and series on investment property mortgages in London and St. Thomas — geographic overlap is exact.
+- researcher_notes: Not a competitor. Same geography (London, St. Thomas, SW Ontario) makes this a strong local partnership angle. No direct email found; contact via form. Phone: 226-785-0495. Site access blocked at proxy; research from web search results.
+
+---
+
+## Sean Prosser Mortgage
+- url: https://www.seanprosser.com/blog/
+- type: blog
+- why: London Ontario mortgage broker specializing in investor and first-time buyer clients — Prospera's landlord clients overlap strongly with his investor mortgage audience.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: https://www.seanprosser.com/contact-us/
+- site_focus: Independent mortgage broker in London Ontario with 14 years of experience. Blog covers mortgage tips, market updates, and first-time buyer guidance. Access to 100+ lenders. Member of Mortgage Alliance.
+- hook: London investors who arrange financing through Sean often self-manage initially — a resource mention positioning Prospera as the local PM for Sean's investor clients completes the post-purchase story.
+- specific_content: Blog posts on mortgage tips and London Ontario market updates — readership is actively buying London properties that need management.
+- researcher_notes: Not a competitor. London-based mortgage broker, strong mutual referral angle. Contact via form; phone (519) 639-5414. Address: 470 Colborne St, London ON. Site access blocked at proxy; research from web search results.
+
+---
+
+## The LandLord Lens
+- url: https://landlord.net/blog/
+- type: blog
+- why: Toronto-based property management company that runs Ontario's most active landlord education blog — their readership covers all of Ontario including SW Ontario landlords seeking educational content.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: info@landlord.net
+- site_focus: Full-service Toronto PM company with a prolific blog ("The LandLord Lens") covering Ontario landlord education, LTB guides, tenant screening, maintenance, and compliance. Blog targets Ontario landlords across the province, not just Toronto.
+- hook: A guest post or resource mention from Prospera's London/SW Ontario perspective adds geographic depth to their Ontario coverage — they serve Toronto, Prospera serves London and surrounding communities.
+- specific_content: Ontario landlord education blog covering LTB, lease management, tenant screening — topics Prospera covers for SW Ontario landlords specifically.
+- researcher_notes: Not a direct competitor (Toronto/GTA market vs. London/St. Thomas/Strathroy). Peer PM company in a non-overlapping market. Guest post collaboration is a natural fit — complementary regional expertise. Site access blocked at proxy; research from web search results.
+
+---
+
+## Rent In Ottawa
+- url: https://www.rentinottawa.com/blogs
+- type: blog
+- why: Ottawa-based PM company with a well-maintained landlord education blog covering Ontario rental laws — non-competing PM in a different city, with a peer collaboration opportunity.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: info@rentinottawa.com
+- site_focus: Ottawa property management company with a blog covering Ottawa rental market, Ontario landlord responsibilities, tenant communication, and maintenance best practices. Blog content is Ontario-wide in scope.
+- hook: A mutual guest post exchange between Rent In Ottawa (Ottawa market) and Prospera (London/SW Ontario market) gives both audiences regional coverage — peer PM companies with no geographic overlap.
+- specific_content: "Ottawa Landlord Responsibilities Guide" and "How to Manage Rental Maintenance" — parallel content that Prospera produces for SW Ontario, creating a guest post angle.
+- researcher_notes: Not a competitor (Ottawa vs. London/St. Thomas/Strathroy). Peer PM company. Direct email: info@rentinottawa.com. Phone: (613) 612-7368. Ottawa ON K2E 7J6. Site access blocked at proxy; research from web search results.
+
+---
+
+## liv.rent Landlord Blog
+- url: https://liv.rent/blog/landlords/
+- type: blog
+- why: National rental listing platform with a high-traffic landlord blog covering Ontario landlord laws, tenant screening, and lease templates — a resource mention or contributed article would reach a large Ontario audience.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: support@liv.rent
+- site_focus: All-in-one Canadian rental platform (listing, applications, leases, verification) with a prolific blog targeting landlords and tenants across Ontario and Canada. Blog covers Ontario RTA, tenant verification, digital leases, LTB guides, and rental market reports. High domain authority.
+- hook: A contributed article from Prospera on SW Ontario rental management — London, St. Thomas, or Strathroy-specific market insights — provides local depth their national platform audience rarely gets.
+- specific_content: Their Ontario landlord series and tenant rights guides — Prospera's SW Ontario expertise provides a local case-study angle their editorial team would value.
+- researcher_notes: Not a competitor (tech platform, not a PM service). Large national audience. Support email is the main contact; editorial pitch may need a different angle. High-value target if they'll accept a contributed piece. Site access blocked at proxy; research from web search results.
+
+---
+
+## Buttonwood Property Management Blog
+- url: https://buttonwood.ca/blog/
+- type: blog
+- why: Toronto-area PM company with a real estate investing blog covering Ontario landlord education — non-competing geographically, peer collaboration opportunity.
+- researched: true
+- drafted: true
+- added: 2026-09-06
+- contact_email: info@buttonwood.ca
+- site_focus: Toronto/GTA property management company (Burlington to Oshawa) specializing in real estate investors. Blog covers Ontario landlord tips, investment property strategy, and property management guidance targeted at GTA investors.
+- hook: A guest post from Prospera on London/SW Ontario as an investment market gives their GTA investor readers actionable diversification content — and positions Prospera as the London-area PM for Buttonwood's clients who invest outside the GTA.
+- specific_content: Blog posts on Ontario property management tips and investment property strategy — Prospera can contribute a London Ontario investor perspective their GTA audience doesn't get elsewhere.
+- researcher_notes: Not a direct competitor (Toronto/GTA vs. London/SW Ontario). Investor-focused PM company. Direct email: info@buttonwood.ca. Phone: (416) 835-7191. Site access blocked at proxy; research from web search results.
+
+---

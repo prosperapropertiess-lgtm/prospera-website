@@ -2771,3 +2771,155 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## LendCity Mortgages — 2026-09-06
+To: scott@lendcity.ca
+Subject: Guest post idea for your London Ontario investor readers
+
+Hi Scott,
+
+Your London Ontario Real Estate Investing Guide is one of the better local market breakdowns I've come across — accurate numbers and a practical investor lens.
+
+I'm Ebin Jaison with Prospera Properties. We manage residential rentals in London, St. Thomas, and Strathroy for local investors. A lot of our clients came to us right after financing closed, unsure how to handle tenant selection and LTB compliance.
+
+Would you be open to a short contributed piece for your blog on what to do with a London rental after the mortgage is arranged? I can write it — practical, no fluff, useful for your readers. No strings attached.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Chris Russell — London Ontario Realtor — 2026-09-06
+To: realtorchrisrussell@gmail.com
+Subject: Resource addition for your investment guide readers
+
+Hi Chris,
+
+Your Guide to Successful Real Estate Investment is a solid piece — you cover the acquisition side well and the London market context is accurate.
+
+I'm Ebin Jaison with Prospera Properties. We manage rentals in London, St. Thomas, and Strathroy. Many of our clients started with exactly the kind of London investment property purchase you guide buyers through — and then needed professional management once the deal closed.
+
+Would you consider adding Prospera as a recommended property management resource for your London investor readers? I'd also be open to a mutual referral arrangement — your investor buyers who need a PM, our landlord clients who may want to sell.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## The Mortgage Firm — London ON — 2026-09-06
+To: https://www.themortgagefirm.ca/index.php/contact-london-ontario-mortgage-broker
+Subject: Collaboration idea — London landlords who need a PM after financing
+
+Hi,
+
+I came across your mortgage blog while looking for London-area resources for new landlords — you cover the London and St. Thomas market well, and your investment property mortgage content is clearly written.
+
+I'm Ebin Jaison with Prospera Properties. We manage residential rentals across London, St. Thomas, and Strathroy. We often speak with landlords who financed through a local broker and then found self-managing harder than expected.
+
+I'd love to explore a mutual resource mention — your clients who close on a London investment property, our landlord clients who may need to refinance. Would that conversation be worth a few minutes?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Sean Prosser Mortgage — 2026-09-06
+To: https://www.seanprosser.com/contact-us/
+Subject: Resource idea for your London investor clients
+
+Hi Sean,
+
+Your blog consistently covers the London Ontario market with practical advice — the mortgage renewal content and first-time buyer guidance stands out as genuinely useful rather than generic.
+
+I'm Ebin Jaison with Prospera Properties. We handle property management for landlords in London, St. Thomas, and Strathroy. A number of our clients originally came to us after arranging their first investor mortgage and discovering the day-to-day management side was more than they expected.
+
+Would you be open to a mutual resource mention? Your investor clients who close on a London rental, our landlord clients who may need financing or a refinance — complementary services, no overlap.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## The LandLord Lens — 2026-09-06
+To: info@landlord.net
+Subject: SW Ontario perspective for your landlord blog readers
+
+Hi,
+
+The LandLord Lens has become a genuine resource for Ontario landlords — the LTB guides and tenant screening content are practical and well-maintained.
+
+I'm Ebin Jaison with Prospera Properties, a property management company serving London, St. Thomas, and Strathroy in SW Ontario. Your blog covers Ontario broadly, and there's a real gap in landlord education specific to smaller Southwestern Ontario markets — different vacancy rates, different tenant pools, different LTB wait times than Toronto.
+
+Would you consider a contributed piece from me on the SW Ontario rental market? I can write to your editorial standards — practical, compliant, no marketing language. Happy to discuss angle and format if you're interested.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Rent In Ottawa — 2026-09-06
+To: info@rentinottawa.com
+Subject: Peer collaboration idea — guest post exchange
+
+Hi,
+
+Your blog is one of the better regional PM company blogs in Ontario — the Ottawa Landlord Responsibilities Guide is thorough and well-organized.
+
+I'm Ebin Jaison with Prospera Properties in London, Ontario. We manage rentals in London, St. Thomas, and Strathroy — different market, no geographic overlap with your Ottawa coverage.
+
+Would you be open to a guest post exchange? I'd write a piece for your blog on SW Ontario rental market specifics (LTB timelines, London vacancy rates, Bill 60 impact on smaller markets) and you could contribute an Ottawa-focused piece for ours. Peer companies covering different regions — both audiences get broader Ontario context.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## liv.rent Landlord Blog — 2026-09-06
+To: support@liv.rent
+Subject: London Ontario landlord perspective for your blog
+
+Hi,
+
+The liv.rent blog covers Ontario landlord topics thoroughly — your coverage of the Ontario standard lease and LTB process is accurate and clearly written.
+
+I'm Ebin Jaison with Prospera Properties, a property management company in London, St. Thomas, and Strathroy. Your Ontario landlord content tends to focus on Toronto-area dynamics. The SW Ontario rental market — London, Strathroy, St. Thomas — has meaningfully different vacancy rates, LTB timelines, and tenant profiles that your landlord readers outside the GTA would find useful.
+
+Would you be open to a contributed piece covering the London/SW Ontario rental market from a property manager's perspective? I can match your editorial tone and keep it informational throughout.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Buttonwood Property Management Blog — 2026-09-06
+To: info@buttonwood.ca
+Subject: London Ontario market piece for your investor readers
+
+Hi,
+
+Your blog does a good job covering Ontario property management from an investor's lens — the content on building a rental portfolio is practical and GTA-aware.
+
+I'm Ebin Jaison with Prospera Properties in London, Ontario. We manage rentals in London, St. Thomas, and Strathroy. A number of GTA investors are looking at London as a lower-entry, higher-cap-rate alternative to the Toronto market — and your investor readers are exactly that audience.
+
+Would you consider a guest post from me on investing in London Ontario as a GTA investor? I'd cover what to expect on cap rates, vacancy, and local LTB realities — useful content for your readers who are thinking beyond the 905. No competing overlap with your market.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
