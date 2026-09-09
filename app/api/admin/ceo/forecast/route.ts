@@ -11,7 +11,7 @@ import { runForecast, type ForecastAssumptions } from "@/lib/ceo-engine";
 import { fetchAllOwners, fetchAllProperties } from "@/lib/notion";
 
 export async function GET(req: NextRequest) {
-  if (!isAdminAuthenticated(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!(await isAdminAuthenticated(req))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const db = getSupabaseAdmin();
   const { searchParams } = new URL(req.url);

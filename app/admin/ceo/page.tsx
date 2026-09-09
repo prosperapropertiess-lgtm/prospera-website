@@ -4,8 +4,33 @@ import {
   LineChart, Line, BarChart, Bar, ComposedChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from "recharts";
-import type { UnitEconomics, ForecastMonth, ExecutiveAlert } from "@/lib/ceo-engine";
+import type { UnitEconomics, ForecastMonth, ExecutiveAlert, PnL, MonthlyActual } from "@/lib/ceo-engine";
 import { fmtCurrency, fmtPct, fmtRatio, fmtMonths } from "@/lib/ceo-engine";
+
+// ── Snapshot payload (from /api/admin/ceo/snapshot) ────────────────────────
+interface MonthSnap {
+  period: string;
+  actual: MonthlyActual;
+  pnl: PnL;
+  pum: number;
+  owner_count: number;
+}
+interface OwnerFee {
+  id: string; name: string; feeType: "percent" | "flat" | null;
+  feeAmount: number | null; status: string; offboarding: boolean; propertyIds: string[];
+}
+interface SnapshotData {
+  months: MonthSnap[];
+  current: MonthSnap | null;
+  unit_economics: UnitEconomics | null;
+  alerts: ExecutiveAlert[];
+  owners: OwnerFee[];
+  config: Record<string, number> | null;
+  finances_configured: boolean;
+  brief: string | null;
+  snapshot_date: string | null;
+  stale: boolean;
+}
 
 // ── Theme (light admin) ────────────────────────────────────────────────────
 const BG = "#F7F5F2";
@@ -43,7 +68,7 @@ interface UEData {
   data_note: string | null;
 }
 
-type Tab = "overview" | "unit-economics" | "financials" | "forecast" | "scenarios" | "assumptions" | "data-entry";
+type Tab = "overview" | "expenses" | "unit-economics" | "financials" | "forecast" | "scenarios" | "assumptions" | "data-entry";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 function fmtMonth(period: string): string {
@@ -92,28 +117,47 @@ function SectionLabel({ text }: { text: string }) {
 // ── Main Component ─────────────────────────────────────────────────────────
 export default function CEODashboard() {
   const [tab, setTab] = useState<Tab>("overview");
+  const [snapshot, setSnapshot] = useState<SnapshotData | null>(null);
   const [actuals, setActuals] = useState<ActualsData | null>(null);
   const [forecast, setForecast] = useState<ForecastData | null>(null);
   const [ue, setUE] = useState<UEData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [a, f, u] = await Promise.all([
+    const [s, a, f, u] = await Promise.all([
+      fetch("/api/admin/ceo/snapshot").then((r) => r.json()).catch(() => null),
       fetch("/api/admin/ceo/actuals?months=12").then((r) => r.json()).catch(() => null),
       fetch("/api/admin/ceo/forecast").then((r) => r.json()).catch(() => null),
       fetch("/api/admin/ceo/unit-economics").then((r) => r.json()).catch(() => null),
     ]);
+    setSnapshot(s);
     setActuals(a);
     setForecast(f);
     setUE(u);
     setLoading(false);
   }, []);
 
+  const refresh = useCallback(async () => {
+    setRefreshing(true);
+    const s = await fetch("/api/admin/ceo/snapshot", { method: "POST" }).then((r) => r.json()).catch(() => null);
+    if (s) setSnapshot(s);
+    // pull the other tabs' data back in sync too
+    const [a, u] = await Promise.all([
+      fetch("/api/admin/ceo/actuals?months=12").then((r) => r.json()).catch(() => null),
+      fetch("/api/admin/ceo/unit-economics").then((r) => r.json()).catch(() => null),
+    ]);
+    if (a) setActuals(a);
+    if (u) setUE(u);
+    setRefreshing(false);
+  }, []);
+
   useEffect(() => { load(); }, [load]);
 
   const TABS: { id: Tab; label: string }[] = [
     { id: "overview", label: "Overview" },
+    { id: "expenses", label: "Expenses" },
     { id: "unit-economics", label: "Unit Economics" },
     { id: "financials", label: "Financials" },
     { id: "forecast", label: "Forecast" },
@@ -135,6 +179,19 @@ export default function CEODashboard() {
                 {ue.data_note}
               </span>
             )}
+            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 10 }}>
+              {snapshot?.snapshot_date && (
+                <span style={{ fontSize: 12, color: snapshot.stale ? AMBER : TEXT_MUT }}>
+                  {snapshot.stale ? "Last updated " : "Updated "}
+                  {new Date(snapshot.snapshot_date + "T12:00:00").toLocaleDateString("en-CA", { month: "short", day: "numeric" })}
+                </span>
+              )}
+              <button onClick={refresh} disabled={refreshing} style={{
+                fontSize: 13, fontWeight: 600, padding: "8px 16px", borderRadius: 20,
+                border: `1px solid ${BORDER}`, backgroundColor: SURFACE, color: TEXT_SEC,
+                cursor: refreshing ? "default" : "pointer", opacity: refreshing ? 0.6 : 1,
+              }}>{refreshing ? "Refreshing…" : "Refresh numbers"}</button>
+            </div>
           </div>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingBottom: 16 }}>
             {TABS.map((t) => (
@@ -160,7 +217,8 @@ export default function CEODashboard() {
           </div>
         ) : (
           <>
-            {tab === "overview" && <OverviewTab actuals={actuals} ue={ue} forecast={forecast} />}
+            {tab === "overview" && <OverviewTab snapshot={snapshot} />}
+            {tab === "expenses" && <ExpensesTab snapshot={snapshot} />}
             {tab === "unit-economics" && <UnitEconomicsTab ue={ue} />}
             {tab === "financials" && <FinancialsTab actuals={actuals} />}
             {tab === "forecast" && <ForecastTab forecast={forecast} />}
@@ -175,119 +233,240 @@ export default function CEODashboard() {
 }
 
 // ── Overview Tab ───────────────────────────────────────────────────────────
-function OverviewTab({ actuals, ue, forecast }: { actuals: ActualsData | null; ue: UEData | null; forecast: ForecastData | null }) {
-  const u = ue?.unit_economics;
-  const pum = ue?.pum ?? 0;
-  const owners = ue?.owner_count ?? 0;
+function deltaPill(
+  cur: number,
+  prev: number | undefined | null,
+  opts: { moreIsGood?: boolean; money?: boolean } = {}
+): { val: string; good: boolean | null } | undefined {
+  if (prev === undefined || prev === null || !isFinite(prev)) return undefined;
+  const diff = cur - prev;
+  if (Math.abs(diff) < 1) return undefined;
+  const moreIsGood = opts.moreIsGood ?? true;
+  const good = moreIsGood ? diff > 0 : diff < 0;
+  const mag = opts.money ? fmtCurrency(Math.abs(diff)) : Math.abs(diff).toFixed(1);
+  return { val: `${diff > 0 ? "+" : "−"}${mag} vs last mo`, good };
+}
 
-  // MRR from most recent actual
-  const latestActual = actuals?.actuals?.[0];
-  const mrr = latestActual?.revenue ?? 0;
-  const arr = mrr * 12;
+function OverviewTab({ snapshot }: { snapshot: SnapshotData | null }) {
+  if (!snapshot || !snapshot.current) {
+    return <p style={{ color: TEXT_MUT, fontSize: 14 }}>No numbers yet — hit &ldquo;Refresh numbers&rdquo; above.</p>;
+  }
+  const { months, current, unit_economics: u, alerts, owners, finances_configured, brief } = snapshot;
+  const pnl = current.pnl;
+  const prev = months.length >= 2 ? months[months.length - 2].pnl : undefined;
+  const offboarding = owners.filter((o) => o.offboarding);
 
-  // 12m forecast end state
-  const baselineForecast = forecast?.forecasts?.baseline ?? [];
-  const forecastEnd = baselineForecast[baselineForecast.length - 1];
+  const trend = months.map((m) => ({
+    period: m.period,
+    revenue: m.pnl.revenue,
+    net_profit: m.pnl.net_profit,
+    cash: m.pnl.cash_closing ?? 0,
+  }));
+
+  const waterfall = [
+    { label: "Revenue (management fees)", val: pnl.revenue, kind: "in" as const },
+    { label: "− Cost of delivering the service", val: -pnl.cogs, kind: "out" as const },
+    { label: "= Gross profit", val: pnl.gross_profit, kind: "sub" as const },
+    { label: "− Fixed costs", val: -pnl.opex_fixed, kind: "out" as const },
+    { label: "− Variable costs", val: -pnl.opex_variable, kind: "out" as const },
+    { label: "= Net profit", val: pnl.net_profit, kind: "total" as const },
+  ];
 
   return (
-    <div>
-      {/* Alerts */}
-      {(ue?.alerts?.length ?? 0) > 0 && (
-        <div style={{ marginBottom: 20 }}>
-          <SectionLabel text="Executive Alerts" />
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {ue!.alerts.map((a) => (
-              <div key={a.metric} style={{
-                backgroundColor: SURFACE, border: `1px solid ${a.severity === "critical" ? ACCENT : AMBER}`,
-                borderLeft: `4px solid ${a.severity === "critical" ? ACCENT : AMBER}`,
-                borderRadius: 8, padding: "12px 16px",
-                display: "flex", alignItems: "flex-start", justifyContent: "space-between",
-              }}>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: TEXT, margin: 0 }}>{a.message}</p>
-                  <p style={{ fontSize: 12, color: TEXT_MUT, margin: "4px 0 0" }}>{a.driver}</p>
-                </div>
-                <span style={{ fontSize: 11, fontWeight: 700, color: a.severity === "critical" ? ACCENT : AMBER, whiteSpace: "nowrap", marginLeft: 12 }}>
-                  {a.severity.toUpperCase()}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+    <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
 
-      {/* Top KPIs */}
-      <div style={{ marginBottom: 20 }}>
-        <SectionLabel text="Now" />
+      {/* CFO's Take */}
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 22px" }}>
+        <SectionLabel text="CFO's Take" />
+        {brief ? (
+          <div style={{ fontSize: 14, lineHeight: 1.65, color: TEXT }}>
+            {brief.split("\n").filter(Boolean).map((line, i) =>
+              line.startsWith("- ")
+                ? <p key={i} style={{ margin: "2px 0 2px 4px", color: TEXT_SEC }}>•&nbsp;{line.slice(2)}</p>
+                : line.endsWith(":") && line.length < 16
+                ? <p key={i} style={{ margin: "10px 0 2px", fontWeight: 700 }}>{line}</p>
+                : <p key={i} style={{ margin: "0 0 8px" }}>{line}</p>
+            )}
+          </div>
+        ) : (
+          <p style={{ fontSize: 14, color: TEXT_MUT, margin: 0 }}>
+            Not written yet. Hit &ldquo;Refresh numbers&rdquo; — it&rsquo;s most useful once the expense sheet is filled in.
+          </p>
+        )}
+      </div>
+
+      {(() => {
+        const noCosts = pnl.cogs + pnl.opex_fixed + pnl.opex_variable === 0 && pnl.cash_closing === null;
+        if (finances_configured && !noCosts) return null;
+        return (
+          <div style={{ backgroundColor: "#FEF3C7", border: `1px solid ${AMBER}`, borderRadius: 10, padding: "12px 16px" }}>
+            <p style={{ fontSize: 13, color: "#92400E", margin: 0, fontWeight: 600 }}>
+              {finances_configured ? "No costs entered yet." : "Company expense sheet not connected."}
+            </p>
+            <p style={{ fontSize: 12, color: "#92400E", margin: "3px 0 0", lineHeight: 1.55 }}>
+              Revenue is live from Notion. Costs, cash and net profit stay at zero until you add rows to the
+              &ldquo;Prospera — Company Finances&rdquo; database in Notion. See the Expenses tab for how.
+            </p>
+          </div>
+        );
+      })()}
+
+      {/* This month */}
+      <div>
+        <SectionLabel text={`This Month — ${fmtMonth(pnl.period)}`} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-          <StatCard label="Properties Under Mgmt" value={String(pum)} sub="Active managed units" />
-          <StatCard label="Owner Count" value={String(owners)} sub="Active clients" />
-          <StatCard label="MRR" value={fmtCurrency(mrr)} sub="This month revenue" />
-          <StatCard label="ARR" value={fmtCurrency(arr)} sub="Annualized run rate" />
+          <StatCard label="Revenue" value={fmtCurrency(pnl.revenue)}
+            sub={`${fmtCurrency(pnl.recurring_revenue)} fees${pnl.transactional_revenue ? ` + ${fmtCurrency(pnl.transactional_revenue)} one-off` : ""}`}
+            pill={deltaPill(pnl.revenue, prev?.revenue, { money: true })} />
+          <StatCard label="Gross Profit" value={fmtCurrency(pnl.gross_profit)}
+            sub={`${fmtPct(pnl.gross_margin_pct)} margin`}
+            color={pnl.gross_profit >= 0 ? TEXT : ACCENT} />
+          <StatCard label="Net Profit" value={fmtCurrency(pnl.net_profit)}
+            sub={`${fmtPct(pnl.operating_margin_pct)} margin`}
+            color={pnl.net_profit >= 0 ? GREEN : ACCENT}
+            pill={deltaPill(pnl.net_profit, prev?.net_profit, { money: true })} />
+          <StatCard label="Cash in Bank" value={fmtCurrency(pnl.cash_closing)}
+            sub={pnl.runway_months === null
+              ? (pnl.net_profit >= 0 ? "Profitable — no burn" : "Enter bank balance in Notion")
+              : `${pnl.runway_months.toFixed(1)} mo runway at this burn`}
+            color={pnl.runway_months !== null && pnl.runway_months < 6 ? ACCENT : TEXT} />
         </div>
       </div>
 
-      {/* Unit economics snapshot */}
-      <div style={{ marginBottom: 20 }}>
-        <SectionLabel text="Unit Economics" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-          <StatCard
-            label="LTV:CAC"
-            value={fmtRatio(u?.ltv_cac_ratio ?? null)}
-            sub={`Target ${fmtRatio(ue?.config?.target_ltv_cac_ratio ?? null)}`}
-            color={(u?.ltv_cac_ratio ?? 0) >= (ue?.config?.target_ltv_cac_ratio ?? 3) ? GREEN : ACCENT}
-            badge={u?.ltv_source === "estimated" ? "Estimated" : undefined}
-          />
-          <StatCard
-            label="CAC Payback"
-            value={fmtMonths(u?.cac_payback_months ?? null)}
-            sub={`Target ${fmtMonths(ue?.config?.target_cac_payback_months ?? null)}`}
-            color={(u?.cac_payback_months ?? Infinity) <= (ue?.config?.target_cac_payback_months ?? 12) ? GREEN : AMBER}
-          />
-          <StatCard
-            label="Contribution Margin"
-            value={fmtPct(u?.contribution_margin_pct ?? null)}
-            sub="Direct margin %"
-            color={(u?.contribution_margin_pct ?? 0) >= (ue?.config?.target_contribution_margin_pct ?? 0.65) ? GREEN : AMBER}
-          />
-          <StatCard
-            label="Owner Churn"
-            value={fmtPct(u?.owner_churn_rate ?? null)}
-            sub="Monthly rate"
-            color={(u?.owner_churn_rate ?? Infinity) <= (ue?.config?.target_owner_churn_monthly ?? 0.02) ? GREEN : ACCENT}
-          />
+      {/* Waterfall */}
+      <div>
+        <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
+          {waterfall.map((r, i) => (
+            <div key={i} style={{
+              display: "flex", justifyContent: "space-between", padding: "12px 18px",
+              borderBottom: i < waterfall.length - 1 ? `1px solid ${BORDER}` : "none",
+              backgroundColor: r.kind === "total" ? BG : SURFACE,
+            }}>
+              <span style={{ fontSize: 14, fontWeight: r.kind === "sub" || r.kind === "total" ? 700 : 400,
+                color: r.kind === "sub" || r.kind === "total" ? TEXT : TEXT_SEC }}>{r.label}</span>
+              <span style={{ fontSize: 14, fontWeight: r.kind === "sub" || r.kind === "total" ? 700 : 500, fontVariantNumeric: "tabular-nums",
+                color: r.kind === "total" ? (r.val >= 0 ? GREEN : ACCENT) : r.kind === "out" ? TEXT_MUT : TEXT }}>
+                {r.val < 0 ? `(${fmtCurrency(Math.abs(r.val))})` : fmtCurrency(r.val)}
+              </span>
+            </div>
+          ))}
         </div>
+        <p style={{ fontSize: 12, color: TEXT_MUT, margin: "8px 0 0" }}>{pnl.net_profit_note}</p>
       </div>
 
-      {/* 12-month trajectory */}
-      {baselineForecast.length > 0 && (
-        <div style={{ marginBottom: 20 }}>
-          <SectionLabel text="12-Month Baseline Trajectory" />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 16 }}>
-            <StatCard label="Forecast PUM (12m)" value={String(Math.round(forecastEnd?.pum_end ?? 0))} sub={`From ${pum} today`} color={GREEN} />
-            <StatCard label="Forecast MRR (12m)" value={fmtCurrency(forecastEnd?.mrr ?? null)} sub="Baseline projection" color={GREEN} />
-            <StatCard label="Forecast Op. Profit (12m)" value={fmtCurrency(forecastEnd?.operating_profit ?? null)} sub="Monthly at end of year"
-              color={(forecastEnd?.operating_profit ?? 0) >= 0 ? GREEN : ACCENT} />
-          </div>
+      {/* Trend */}
+      {trend.length > 1 && (
+        <div>
+          <SectionLabel text="Last 12 Months" />
           <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-            <ResponsiveContainer width="100%" height={220}>
-              <ComposedChart data={baselineForecast}>
+            <ResponsiveContainer width="100%" height={240}>
+              <ComposedChart data={trend}>
                 <CartesianGrid strokeDasharray="3 3" stroke={BORDER} />
                 <XAxis dataKey="period" tickFormatter={fmtMonth} style={{ fontSize: 11 }} />
-                <YAxis yAxisId="left" tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} style={{ fontSize: 11 }} />
-                <YAxis yAxisId="right" orientation="right" style={{ fontSize: 11 }} />
-                <Tooltip formatter={((v: number, name: string) => [
-                  name === "pum_end" ? Math.round(v) : `$${Math.round(v).toLocaleString()}`, name
-                ]) as any} labelFormatter={fmtMonth as any} />
+                <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} style={{ fontSize: 11 }} />
+                <Tooltip formatter={((v: number) => `$${Math.round(v).toLocaleString()}`) as any} labelFormatter={fmtMonth as any} />
                 <Legend />
-                <Area yAxisId="left" type="monotone" dataKey="total_revenue" fill="#F0EDE8" stroke={ACCENT} name="Revenue" strokeWidth={2} />
-                <Line yAxisId="left" type="monotone" dataKey="operating_profit" stroke={GREEN} name="Op. Profit" strokeWidth={2} dot={false} />
-                <Bar yAxisId="right" dataKey="pum_end" fill={BLUE} name="PUM" opacity={0.2} />
+                <Bar dataKey="cash" fill={BLUE} name="Cash" opacity={0.18} />
+                <Area type="monotone" dataKey="revenue" fill="#F0EDE8" stroke={TEXT} name="Revenue" strokeWidth={2} />
+                <Line type="monotone" dataKey="net_profit" stroke={GREEN} name="Net Profit" strokeWidth={2} dot={false} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
         </div>
       )}
+
+      {/* Growth & unit economics */}
+      <div>
+        <SectionLabel text="Growth & Unit Economics" />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+          <StatCard label="Doors Managed" value={String(current.pum)} sub="Occupied + vacant" />
+          <StatCard label="Clients" value={String(current.owner_count)}
+            sub={offboarding.length ? `${offboarding.length} flagged leaving` : "Active owners"}
+            color={offboarding.length ? AMBER : TEXT} />
+          <StatCard label="Revenue / Door" value={fmtCurrency(u?.revenue_per_property ?? null)} sub="Monthly" />
+          <StatCard label="Revenue / Client" value={fmtCurrency(u?.revenue_per_owner ?? null)} sub="Monthly" />
+          <StatCard label="LTV : CAC" value={fmtRatio(u?.ltv_cac_ratio ?? null)} badge="Estimated" sub="Needs 6+ mo history" />
+        </div>
+      </div>
+
+      {/* Watch list */}
+      {alerts.length > 0 && (
+        <div>
+          <SectionLabel text="Watch List" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {alerts.map((a) => (
+              <div key={a.metric} style={{
+                backgroundColor: SURFACE, border: `1px solid ${a.severity === "critical" ? ACCENT : AMBER}`,
+                borderLeft: `4px solid ${a.severity === "critical" ? ACCENT : AMBER}`,
+                borderRadius: 8, padding: "12px 16px",
+              }}>
+                <p style={{ fontSize: 13, fontWeight: 600, color: TEXT, margin: 0 }}>{a.message}</p>
+                <p style={{ fontSize: 12, color: TEXT_MUT, margin: "4px 0 0" }}>{a.driver}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Expenses Tab ───────────────────────────────────────────────────────────
+function ExpensesTab({ snapshot }: { snapshot: SnapshotData | null }) {
+  if (!snapshot?.current) return <p style={{ color: TEXT_MUT, fontSize: 14 }}>No numbers yet — hit &ldquo;Refresh numbers&rdquo;.</p>;
+  const { current, finances_configured, months } = snapshot;
+  const a = current.actual;
+  const byCat = Object.entries(a.expenses_by_category ?? {}).sort((x, y) => y[1] - x[1]);
+  const total = a.cogs + a.opex_fixed + a.opex_variable;
+  const trailing = months.slice(-3);
+  const avgTotal = trailing.length
+    ? trailing.reduce((s, m) => s + m.actual.cogs + m.actual.opex_fixed + m.actual.opex_variable, 0) / trailing.length
+    : 0;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+      {!finances_configured && (
+        <div style={{ backgroundColor: "#FEF3C7", border: `1px solid ${AMBER}`, borderRadius: 10, padding: "14px 16px" }}>
+          <p style={{ fontSize: 13, color: "#92400E", margin: 0, fontWeight: 600 }}>Connect the Notion expense sheet</p>
+          <p style={{ fontSize: 12.5, color: "#92400E", margin: "5px 0 0", lineHeight: 1.6 }}>
+            Add rows to the <strong>Prospera — Company Finances</strong> database in Notion — one per cost, each tagged
+            <strong> Fixed</strong> or <strong>Variable</strong>, and <strong>COGS</strong> if it&rsquo;s a direct cost of
+            managing properties. Put the month&rsquo;s bank balance in as a <strong>Bank Balance</strong> row. Then hit
+            &ldquo;Refresh numbers&rdquo;.
+          </p>
+        </div>
+      )}
+
+      <div>
+        <SectionLabel text={`This Month — ${fmtMonth(current.period)}`} />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+          <StatCard label="Total Costs" value={fmtCurrency(total)} sub={`3-mo avg ${fmtCurrency(avgTotal)}`} />
+          <StatCard label="Fixed" value={fmtCurrency(a.opex_fixed)} sub="Doesn't scale with doors" />
+          <StatCard label="Variable" value={fmtCurrency(a.opex_variable)} sub="Scales with activity" />
+          <StatCard label="Cost of Delivery" value={fmtCurrency(a.cogs)} sub="Direct service cost (COGS)" />
+        </div>
+      </div>
+
+      <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+          <thead>
+            <tr style={{ backgroundColor: BG }}>
+              <th style={{ padding: "10px 16px", textAlign: "left", fontSize: 11, fontWeight: 600, color: TEXT_MUT, textTransform: "uppercase" }}>Category</th>
+              <th style={{ padding: "10px 16px", textAlign: "right", fontSize: 11, fontWeight: 600, color: TEXT_MUT, textTransform: "uppercase" }}>This Month</th>
+            </tr>
+          </thead>
+          <tbody>
+            {byCat.length === 0 ? (
+              <tr><td colSpan={2} style={{ padding: "20px 16px", textAlign: "center", color: TEXT_MUT }}>No expense rows for this month.</td></tr>
+            ) : byCat.map(([cat, amt], i) => (
+              <tr key={cat} style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: i % 2 ? BG : SURFACE }}>
+                <td style={{ padding: "10px 16px", color: TEXT }}>{cat}</td>
+                <td style={{ padding: "10px 16px", textAlign: "right", color: TEXT_SEC, fontVariantNumeric: "tabular-nums" }}>{fmtCurrency(amt)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -394,21 +573,24 @@ function FinancialsTab({ actuals }: { actuals: ActualsData | null }) {
     );
   }
 
-  const chartData = data.map((a) => ({
-    period: a.period,
-    revenue: a.revenue,
-    payroll: a.payroll,
-    marketing: a.marketing_spend,
-    opex: a.operating_expenses,
-    contribution: a.revenue - a.payroll - a.operating_expenses,
-    cash: a.cash_closing,
-  }));
+  const chartData = data.map((a) => {
+    const opex = a.opex_fixed + a.opex_variable;
+    return {
+      period: a.period,
+      revenue: a.revenue,
+      cogs: a.cogs,
+      fixed: a.opex_fixed,
+      variable: a.opex_variable,
+      net: a.revenue - a.cogs - opex,
+      cash: a.cash_closing,
+    };
+  });
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       {/* Revenue & expenses chart */}
       <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
-        <SectionLabel text="Revenue vs Expenses" />
+        <SectionLabel text="Revenue vs Costs" />
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" stroke={BORDER} />
@@ -417,9 +599,9 @@ function FinancialsTab({ actuals }: { actuals: ActualsData | null }) {
             <Tooltip formatter={((v: number) => [`$${Math.round(v).toLocaleString()}`, ""]) as any} labelFormatter={fmtMonth as any} />
             <Legend />
             <Bar dataKey="revenue" fill={GREEN} name="Revenue" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="payroll" fill={ACCENT} name="Payroll" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="marketing" fill={AMBER} name="Marketing" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="opex" fill={TEXT_MUT} name="OpEx" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="cogs" fill={ACCENT} name="Delivery cost" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="fixed" fill={AMBER} name="Fixed" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="variable" fill={TEXT_MUT} name="Variable" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -429,7 +611,7 @@ function FinancialsTab({ actuals }: { actuals: ActualsData | null }) {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ backgroundColor: BG }}>
-              {["Month", "Revenue", "Payroll", "Marketing", "OpEx", "Contribution", "Cash"].map((h) => (
+              {["Month", "Revenue", "Delivery", "Fixed", "Variable", "Net Profit", "Cash"].map((h) => (
                 <th key={h} style={{ padding: "10px 14px", textAlign: "right", fontSize: 11, fontWeight: 600, color: TEXT_MUT, textTransform: "uppercase", letterSpacing: "0.06em" }}>
                   {h === "Month" ? <span style={{ textAlign: "left", display: "block" }}>{h}</span> : h}
                 </th>
@@ -438,15 +620,15 @@ function FinancialsTab({ actuals }: { actuals: ActualsData | null }) {
           </thead>
           <tbody>
             {[...chartData].reverse().map((row, i) => {
-              const isPositive = row.contribution >= 0;
+              const isPositive = row.net >= 0;
               return (
                 <tr key={row.period} style={{ borderTop: `1px solid ${BORDER}`, backgroundColor: i % 2 === 0 ? SURFACE : BG }}>
                   <td style={{ padding: "10px 14px", fontWeight: 600, color: TEXT }}>{fmtMonth(row.period)}</td>
                   <td style={{ padding: "10px 14px", textAlign: "right", color: GREEN, fontWeight: 600 }}>{fmtCurrency(row.revenue)}</td>
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.payroll)}</td>
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.marketing)}</td>
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.opex)}</td>
-                  <td style={{ padding: "10px 14px", textAlign: "right", color: isPositive ? GREEN : ACCENT, fontWeight: 600 }}>{fmtCurrency(row.contribution)}</td>
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.cogs)}</td>
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.fixed)}</td>
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.variable)}</td>
+                  <td style={{ padding: "10px 14px", textAlign: "right", color: isPositive ? GREEN : ACCENT, fontWeight: 600 }}>{fmtCurrency(row.net)}</td>
                   <td style={{ padding: "10px 14px", textAlign: "right", color: TEXT_SEC }}>{fmtCurrency(row.cash)}</td>
                 </tr>
               );

@@ -13,6 +13,9 @@ export const DB = {
   maintenance: "c08108457c77484a9bb2b60c8f85b486",
   expenses:    "eee5c2d657d84a489709d24eaffb0409",
   tenants:     "6b02fb56874b45538925cae39bbcb4e2",
+  // Prospera's own P&L inputs (fixed/variable costs, other revenue, bank balance,
+  // headcount). "Prospera — Company Finances", child of the Prospera HQ page.
+  companyFinances: process.env.NOTION_COMPANY_FINANCES_DB ?? "05310cceb49743b1984d6edca184d62c",
 };
 
 function headers() {
@@ -71,6 +74,10 @@ function text(page: any, name: string): string {
 
 function num(page: any, name: string): number | null {
   return prop(page, name)?.number ?? null;
+}
+
+function checkbox(page: any, name: string): boolean {
+  return prop(page, name)?.checkbox ?? false;
 }
 
 function dateStart(page: any, name: string): string | null {
@@ -136,6 +143,31 @@ export interface Owner {
   phone: string;
   notes: string;
   propertyIds: string[];
+  /** How Prospera bills this owner. "percent" = feeAmount is a fraction of rent
+   *  collected (0.10 = 10%). "flat" = feeAmount is a fixed $/month.
+   *  Optional so demo/mock Owner literals elsewhere don't need updating. */
+  feeType?: "percent" | "flat" | null;
+  feeAmount?: number | null;
+  /** Notion "Status" — used to flag owners who are offboarding / at risk. */
+  status?: string;
+}
+
+export interface CompanyFinanceRow {
+  id: string;
+  item: string;
+  /** First day of the month this row applies to (YYYY-MM-01). */
+  month: string | null;
+  amount: number;
+  /** Expense | Other Revenue | Bank Balance | Headcount */
+  kind: string;
+  /** Fixed | Variable (expenses only) */
+  costType: string;
+  /** direct cost of delivering the service vs. overhead */
+  isCogs: boolean;
+  /** CAC-attributable subset of spend */
+  isAcquisition: boolean;
+  category: string;
+  notes: string;
 }
 
 export interface Property {
@@ -228,14 +260,70 @@ export interface OwnerBundle {
 
 export async function fetchAllOwners(): Promise<Owner[]> {
   const pages = await queryDatabase(DB.owners);
-  return pages.map(p => ({
-    id: pageId(p),
-    name: text(p, "Owner Name"),
-    email: text(p, "Email"),
-    phone: text(p, "Phone"),
-    notes: text(p, "Notes"),
-    propertyIds: relations(p, "Properties"),
-  }));
+  return pages.map(p => {
+    // Owners DB already has "Management Fee" (percent). "Flat Fee" ($/month) is
+    // added for owners billed a fixed amount instead. "Fee Type" (select) can
+    // override the inference if both are set.
+    const mgmtFeeRaw = num(p, "Management Fee");        // Notion percent: 0.10 for 10%
+    const flatFee = num(p, "Flat Fee");
+    const feeTypeRaw = text(p, "Fee Type").toLowerCase();
+
+    let feeType: Owner["feeType"] = null;
+    let feeAmount: number | null = null;
+    if (feeTypeRaw.startsWith("flat") || (feeTypeRaw === "" && flatFee != null && flatFee > 0)) {
+      feeType = "flat";
+      feeAmount = flatFee;
+    } else if (feeTypeRaw.startsWith("percent") || (feeTypeRaw === "" && mgmtFeeRaw != null && mgmtFeeRaw > 0)) {
+      feeType = "percent";
+      // tolerate "10" meaning 10% as well as "0.10"
+      feeAmount = mgmtFeeRaw != null && mgmtFeeRaw > 1 ? mgmtFeeRaw / 100 : mgmtFeeRaw;
+    }
+
+    return {
+      id: pageId(p),
+      name: text(p, "Owner Name"),
+      email: text(p, "Email"),
+      phone: text(p, "Phone"),
+      notes: text(p, "Notes"),
+      propertyIds: relations(p, "Properties"),
+      feeType,
+      feeAmount,
+      status: text(p, "Status"),
+    };
+  });
+}
+
+/**
+ * Prospera's own company finances (fixed/variable costs, non-recurring revenue,
+ * bank balance, headcount) — one row per line item per month. Returns [] when the
+ * Notion DB has not been configured yet (NOTION_COMPANY_FINANCES_DB unset).
+ */
+export async function fetchCompanyFinances(
+  startDate: string,
+  endDate: string
+): Promise<CompanyFinanceRow[]> {
+  if (!DB.companyFinances) return [];
+  const pages = await queryDatabase(DB.companyFinances, {
+    and: [
+      { property: "Month", date: { on_or_after: startDate } },
+      { property: "Month", date: { on_or_before: endDate } },
+    ],
+  });
+  return pages.map(p => {
+    const rawMonth = dateStart(p, "Month");
+    return {
+      id: pageId(p),
+      item: text(p, "Item") || "(no label)",
+      month: rawMonth ? `${rawMonth.slice(0, 7)}-01` : null,
+      amount: num(p, "Amount") ?? 0,
+      kind: text(p, "Kind") || "Expense",
+      costType: text(p, "Cost Type"),
+      isCogs: checkbox(p, "COGS?"),
+      isAcquisition: checkbox(p, "Acquisition spend?"),
+      category: text(p, "Category") || "Uncategorized",
+      notes: text(p, "Notes"),
+    };
+  });
 }
 
 export async function fetchAllProperties(): Promise<Property[]> {
