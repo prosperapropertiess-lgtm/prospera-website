@@ -118,15 +118,18 @@ export async function buildMonthlyActuals(months = 12): Promise<ActualsResult> {
   }
 
   const rentByMonth = new Map<string, RentEntry[]>();
-  await Promise.all(
-    periods.map(async (p) => {
-      try {
-        rentByMonth.set(p.key, await fetchRentForMonth(MONTHS[p.month0], p.year));
-      } catch {
-        rentByMonth.set(p.key, []);
-      }
-    })
-  );
+  // Fetch in small batches — 12 parallel Notion queries can trip the rate limit.
+  for (let i = 0; i < periods.length; i += 3) {
+    await Promise.all(
+      periods.slice(i, i + 3).map(async (p) => {
+        try {
+          rentByMonth.set(p.key, await fetchRentForMonth(MONTHS[p.month0], p.year));
+        } catch {
+          rentByMonth.set(p.key, []);
+        }
+      })
+    );
+  }
 
   // ── 5. Assemble MonthlyActual per period ─────────────────────────────────
   const actuals: MonthlyActual[] = periods.map((p) => {
