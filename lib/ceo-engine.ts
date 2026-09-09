@@ -19,6 +19,10 @@ export interface MonthlyActual {
   expenses_by_category: Record<string, number>;
   pum: number;                       // properties under management (end of period)
   owner_count: number;
+  // Company expense breakdown (from Notion "Company Finances" DB)
+  cogs: number;                      // direct cost of delivering the service
+  opex_fixed: number;                // overhead that doesn't scale with the book
+  opex_variable: number;             // overhead that scales with doors / activity
   // From ceo_monthly_actuals (manual)
   properties_added: number;
   properties_lost: number;
@@ -203,6 +207,71 @@ export function calcGrossProfit(revenue: number, cogs: number): number {
 export function calcGrossMarginPct(gross_profit: number, revenue: number): number | null {
   if (revenue === 0) return null;
   return gross_profit / revenue;
+}
+
+// ── MONTHLY P&L ────────────────────────────────────────────────────────────
+
+export interface PnL {
+  period: string;
+  revenue: number;
+  recurring_revenue: number;         // management fees
+  transactional_revenue: number;     // leasing / placement / one-off fees
+  cogs: number;
+  gross_profit: number;
+  gross_margin_pct: number | null;
+  opex_fixed: number;
+  opex_variable: number;
+  opex_total: number;
+  operating_profit: number;          // revenue − cogs − opex  (before tax/interest)
+  operating_margin_pct: number | null;
+  net_profit: number;                // == operating_profit for now (see net_profit_note)
+  net_profit_note: string;
+  expenses_total: number;
+  cash_closing: number | null;
+  monthly_burn: number;              // cash lost per month (0 if profitable)
+  runway_months: number | null;      // null when profitable or cash unknown
+}
+
+/**
+ * Builds a single month's P&L from a MonthlyActual.
+ * Revenue is management-fee income (NOT the rent roll). Expenses are Prospera's
+ * own costs (NOT owner property pass-throughs).
+ */
+export function buildPnL(a: MonthlyActual): PnL {
+  const revenue = a.revenue;
+  const cogs = a.cogs;
+  const gross_profit = revenue - cogs;
+  const opex_fixed = a.opex_fixed;
+  const opex_variable = a.opex_variable;
+  const opex_total = opex_fixed + opex_variable;
+  const operating_profit = gross_profit - opex_total;
+  const expenses_total = cogs + opex_total;
+  const monthly_burn = operating_profit < 0 ? Math.abs(operating_profit) : 0;
+  const runway_months =
+    monthly_burn > 0 && a.cash_closing !== null && a.cash_closing > 0
+      ? a.cash_closing / monthly_burn
+      : null;
+
+  return {
+    period: a.period,
+    revenue,
+    recurring_revenue: a.recurring_revenue,
+    transactional_revenue: a.transactional_revenue,
+    cogs,
+    gross_profit,
+    gross_margin_pct: revenue > 0 ? gross_profit / revenue : null,
+    opex_fixed,
+    opex_variable,
+    opex_total,
+    operating_profit,
+    operating_margin_pct: revenue > 0 ? operating_profit / revenue : null,
+    net_profit: operating_profit,
+    net_profit_note: "Before income tax and any owner's draw not entered as payroll.",
+    expenses_total,
+    cash_closing: a.cash_closing,
+    monthly_burn,
+    runway_months,
+  };
 }
 
 // ── REVENUE PER UNIT ───────────────────────────────────────────────────────
