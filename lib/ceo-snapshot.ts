@@ -85,7 +85,9 @@ export async function computeSnapshot(opts: { withBrief?: boolean } = {}): Promi
         ue,
         pum,
         owner_count,
-        offboardingOwners: owners.filter((o) => o.offboarding),
+        offboardingOwners: owners
+          .filter((o) => o.offboarding)
+          .map((o) => ({ name: o.name, monthlyFee: o.monthlyFee })),
         financesConfigured: finances_configured,
       });
     } catch {

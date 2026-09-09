@@ -17,7 +17,8 @@ interface MonthSnap {
 }
 interface OwnerFee {
   id: string; name: string; feeType: "percent" | "flat" | null;
-  feeAmount: number | null; status: string; offboarding: boolean; propertyIds: string[];
+  feeAmount: number | null; status: string; offboarding: boolean;
+  propertyIds: string[]; monthlyFee: number;
 }
 interface SnapshotData {
   months: MonthSnap[];

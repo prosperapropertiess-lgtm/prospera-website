@@ -47,6 +47,8 @@ export interface OwnerFeeSummary {
   propertyIds: string[];
   /** true when Status looks like the owner is leaving */
   offboarding: boolean;
+  /** this owner's management-fee contribution for the current month */
+  monthlyFee: number;
 }
 
 export interface ActualsResult {
@@ -132,6 +134,7 @@ export async function buildMonthlyActuals(months = 12): Promise<ActualsResult> {
   }
 
   // ── 5. Assemble MonthlyActual per period ─────────────────────────────────
+  const feeByOwner = new Map<string, number>(); // current-month fee per owner id
   const actuals: MonthlyActual[] = periods.map((p) => {
     const manual = manualByMonth.get(p.key) ?? {};
     const mNum = (k: string): number | null => {
@@ -157,11 +160,14 @@ export async function buildMonthlyActuals(months = 12): Promise<ActualsResult> {
       const claim = o.propertyIds.filter((pid) => !billedProps.has(pid));
       if (claim.length === 0) continue;
       claim.forEach((pid) => billedProps.add(pid));
+      let fee = 0;
       if (o.feeType === "percent") {
-        recurring += claim.reduce((s, pid) => s + (collectedByProperty.get(pid) ?? 0), 0) * o.feeAmount;
+        fee = claim.reduce((s, pid) => s + (collectedByProperty.get(pid) ?? 0), 0) * o.feeAmount;
       } else if (claim.some((pid) => managedIds.has(pid))) {
-        recurring += o.feeAmount; // flat fee while the household has a managed property
+        fee = o.feeAmount; // flat fee while the household has a managed property
       }
+      recurring += fee;
+      if (p.key === periods[0].key) feeByOwner.set(o.id, fee);
     }
 
     // -- company costs for this month --
@@ -259,6 +265,7 @@ export async function buildMonthlyActuals(months = 12): Promise<ActualsResult> {
       status: o.status ?? "",
       propertyIds: o.propertyIds,
       offboarding: isOffboarding(o.status ?? ""),
+      monthlyFee: Math.round((feeByOwner.get(o.id) ?? 0) * 100) / 100,
     })),
   };
 }

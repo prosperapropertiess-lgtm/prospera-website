@@ -12,7 +12,7 @@ export interface BriefInput {
   ue: UnitEconomics;
   pum: number;
   owner_count: number;
-  offboardingOwners: { name: string; feeType: string | null; feeAmount: number | null }[];
+  offboardingOwners: { name: string; monthlyFee: number }[];
   financesConfigured: boolean;
 }
 
@@ -62,20 +62,16 @@ export async function generateBrief(input: BriefInput): Promise<string | null> {
     `  Revenue per owner: ${money(ue.revenue_per_owner)}`,
     `  LTV:CAC:           ${ue.ltv_cac_ratio === null ? "n/a" : ue.ltv_cac_ratio.toFixed(1) + "x"}`,
     ``,
-    offboardingOwners.length
-      ? `PENDING CHURN: ${offboardingOwners
-          .map(
-            (o) =>
-              `${o.name} (${
-                o.feeType === "percent"
-                  ? `${((o.feeAmount ?? 0) * 100).toFixed(0)}% fee`
-                  : o.feeType === "flat"
-                  ? `${money(o.feeAmount)}/mo flat`
-                  : "fee unknown"
-              })`
-          )
-          .join(", ")} — flagged as leaving. Say what revenue and net profit look like once they're gone.`
-      : `PENDING CHURN: none flagged.`,
+    (() => {
+      if (!offboardingOwners.length) return `PENDING CHURN: none flagged.`;
+      const atRisk = offboardingOwners.reduce((s, o) => s + o.monthlyFee, 0);
+      const names = [...new Set(offboardingOwners.map((o) => o.name))].join(" & ");
+      const after = pnl.recurring_revenue - atRisk;
+      return `PENDING CHURN: ${names} flagged as leaving. Their combined management fee is ${money(atRisk)}/month. ` +
+        `Recurring revenue would drop from ${money(pnl.recurring_revenue)} to ${money(after)} once they're gone` +
+        (pnl.net_profit_note ? `. Net profit after that (costs unchanged): ${money(pnl.net_profit - atRisk)}.` : ".") +
+        ` Say this plainly.`;
+    })(),
     financesConfigured
       ? ``
       : `NOTE: the company expense sheet in Notion is not wired up yet, so costs above are incomplete.`,
