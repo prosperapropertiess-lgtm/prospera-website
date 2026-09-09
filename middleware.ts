@@ -59,7 +59,9 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/admin") &&
     !pathname.startsWith("/admin/login") &&
-    !pathname.startsWith("/admin/leasing/login")
+    !pathname.startsWith("/admin/leasing/login") &&
+    // PWA manifest for the Business Numbers app must be publicly fetchable
+    pathname !== "/admin/ceo/manifest.json"
   ) {
     // /admin/leasing/* also accepts leasing_session cookie
     if (pathname.startsWith("/admin/leasing")) {
