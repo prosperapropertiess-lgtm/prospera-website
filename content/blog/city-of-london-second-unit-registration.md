@@ -1,208 +1,270 @@
 ---
-title: "City of London Second Unit Registration: How to Legally Register Your Basement Apartment"
-excerpt: "London landlords with a basement apartment or ADU must register the unit with the city — separate from building permits and rental licences. Here's the full process."
-date: "2026-08-03"
+title: "London Second Unit Registration: 6-Step Compliance Guide for Landlords"
+date: "2026-09-11"
 slug: "city-of-london-second-unit-registration"
 category: "Landlord Guide"
-readTime: "9 min read"
+readTime: "10 min read"
 featuredImage: "/blog-images/default.jpg"
 ---
 
-You built a basement apartment. You pulled the building permit. You passed the final inspection. Now you think you are done.
+Your basement apartment passed inspection. You have the building permit. You think you're ready to rent.
 
-You might not be.
+Then the City of London stops you: the unit isn't registered.
 
-The City of London has a second-unit registration requirement that catches many landlords off guard. It applies to basement apartments, above-garage suites, and other accessory dwelling units (ADUs) throughout the city. It is separate from the building permit process. It is also separate from the [Rental Housing Licensing program](/blog/city-of-london-rental-unit-licence).
+This catches landlords off guard because building permits and second unit registration are two separate municipal processes. Many landlords assume the permit covers everything. It doesn't. Without registration, your [rental unit licence](/blog/city-of-london-rental-unit-licence) can't be issued, your insurance may deny claims, and you're operating outside the law.
 
-Miss it, and you may be operating an unregistered unit — which creates problems with your rental unit licence, your insurance, and the city's property standards enforcement.
-
-This guide explains what the registration program is, who needs to register, and exactly how to do it.
+This guide walks you through London's second unit registration requirement step by step — what it is, who needs it, how to apply, and what happens if you skip it.
 
 ---
 
-## What Is the City of London Second Unit Registration Program?
+## What Is London's Second Unit Registration Program?
 
-The City of London's second unit registration program is a municipal process that formally records the existence of a second residential unit on a property.
+The City of London's second unit registration program is a formal municipal process that records the legal existence of a second residential dwelling on a property.
 
-Under London's Zoning By-law (ZBL-1) and its Official Plan, most residential properties in London are now permitted to have one second dwelling unit — a basement apartment, a garage conversion, a coach house, or an above-garage suite. This is the result of provincial legislation (Bill 23, the More Homes Built Faster Act) that required Ontario municipalities to allow second units as of right in most residential zones.
+Under London's Zoning By-law (ZBL-1) and its Official Plan — updated to comply with provincial legislation (Bill 23, the More Homes Built Faster Act) — most residential properties can now have one second dwelling unit as of right. That means a basement apartment, above-garage suite, coach house, or garden suite is legally permitted.
 
-But "permitted as of right" does not mean "automatically legal to rent." The city still needs to know the unit exists, confirm it meets minimum standards, and assign it a proper municipal address before you can legally rent it as a dwelling.
+But "permitted" doesn't mean "automatically rentable." The city must:
 
-That is what registration does.
+- Assign the unit its own municipal address (e.g., "45 Main Street, Unit B")
+- Confirm it meets Ontario Building Code and fire safety minimums
+- Link it to the Rental Housing Licensing system so you can secure your rental licence
 
-Registration is how the city:
-
-- Creates an official address for the second unit (e.g., "45 Main Street, Unit B")
-- Confirms the unit meets minimum Ontario Building Code and fire safety standards
-- Links the unit to the Rental Housing Licensing system so you can get (or keep) your rental unit licence
+That's registration.
 
 ---
 
-## Who Needs to Register a Second Unit in London?
+## Who Must Register a Second Unit in London?
 
-You need to register if you have a self-contained residential unit inside or attached to your primary dwelling that you rent — or plan to rent — to a tenant.
+You must register if you own a self-contained residential unit inside or attached to your primary home that you rent — or plan to rent — to a tenant.
 
 This includes:
 
-- **Basement apartments** — a finished basement with its own kitchen, bathroom, and separate entrance
-- **Above-garage suites** — a living unit built above a detached or attached garage
-- **Garden suites / coach houses** — a separate small dwelling on the same lot as the primary home
-- **Side-door suites** — a portion of a house converted into a separate dwelling with its own entrance
+- **Basement apartments** — finished basement with separate kitchen, bathroom, and exterior entrance
+- **Above-garage suites** — self-contained living unit built over a detached or attached garage
+- **Garden suites / coach houses** — separate small dwelling on the same lot as the primary residence
+- **Side-door suites** — portion of a house converted to separate dwelling with independent entrance
 
-If your second unit was built before the current registration requirement existed — and many were — you still need to register it. The age of the unit does not exempt it. If you are renting it out, it needs to be registered.
-
----
-
-## Second Unit Registration vs. Building Permit vs. Rental Unit Licence
-
-These are three separate requirements. Many landlords confuse them or assume one covers the others.
-
-| Step | What It Is | Who Issues It |
-|---|---|---|
-| Building Permit | Approval to build or convert a space into a unit | City of London Building Division |
-| Second Unit Registration | Official city record that the unit exists and meets standards | City of London Planning & Development |
-| Rental Unit Licence | Annual licence to rent a residential dwelling | City of London Municipal Compliance |
-
-You need all three for a new second unit. If your unit was built with permits years ago, you may already have the first covered — but you still need the second and third.
-
-The [rental unit licence](/blog/city-of-london-rental-unit-licence) cannot be issued for a second unit until that unit is registered. Registration comes first.
+**Important:** Age doesn't exempt you. If your basement apartment was built 10 years ago and you're renting it, it still needs to be registered under current rules. The requirement applies to existing units already in use, not just new builds.
 
 ---
 
-## Step-by-Step: How to Register a Second Unit in London
+## Registration vs. Permit vs. Rental Licence — What's the Difference?
 
-### Step 1: Confirm Your Zoning
+Three separate municipal processes govern second units in London. Confusing them is the #1 landlord mistake.
 
-Before anything else, confirm that your property is in a zone that permits a second unit. Most R1 through R6 zones in London now allow one second unit as of right under ZBL-1.
+| Process | Purpose | Issued By | Timing |
+|---|---|---|---|
+| **Building Permit** | Approves construction or conversion of the dwelling unit | City of London Building Division | Before construction begins |
+| **Second Unit Registration** | Creates official city record; assigns municipal address; confirms code compliance | City of London Planning & Development | After construction completed; before rental |
+| **Rental Unit Licence** | Annual operating licence to rent a residential unit | City of London Municipal Compliance | After registration confirmed |
 
-You can check your zone using the City of London's interactive mapping tool on london.ca. If you are not in a permitted zone, you would need a zoning amendment before proceeding — a more involved process.
+You need all three. Registration must come before your rental licence application.
 
-### Step 2: Ensure the Unit Meets Building Code Standards
+For basement apartments built before the registration requirement existed, you may need a retroactive building permit as well. Check with the Building Division.
 
-A second unit registration triggers an inspection. Before you apply, the unit should meet the following Ontario Building Code and fire code requirements:
+---
+
+## 6 Steps to Register a Second Unit in London
+
+### Step 1: Confirm Your Zoning Allows a Second Unit
+
+Most R1 through R6 zones in London now permit one second unit under ZBL-1. Some zones have restrictions based on lot size or density.
+
+Check your property's zoning using the City of London's interactive mapping tool at [london.ca](https://london.ca). Search your address and confirm the zoning designation.
+
+If your property is not in a permitted zone, you'll need a formal zoning amendment — a longer, more expensive process. Don't skip this step.
+
+### Step 2: Verify Your Unit Meets Building Code Standards
+
+Registration triggers a city inspection. Before you apply, ensure the unit meets these Ontario Building Code and fire code requirements:
 
 **Ceiling height:**
-- Minimum 1.95 metres (about 6'5") in all habitable rooms
-- Bathrooms and hallways can be slightly lower
+- Minimum 1.95 metres (6'5") in all habitable rooms
+- Bathrooms and hallways can be lower
 
-**Egress windows:**
-- Every sleeping room must have a window large enough to escape through in an emergency
-- Minimum opening: 0.35 square metres, with no dimension less than 380mm
+**Egress windows (sleeping rooms only):**
+- Minimum opening: 0.35 square metres
+- No single dimension less than 380mm
+- Must allow emergency escape without tools
 
 **Fire separation:**
-- The second unit must be separated from the primary dwelling by a fire-rated assembly (typically drywall on both sides of the separation wall)
-- The separation must provide minimum 30-minute fire resistance
+- Minimum 30-minute fire-rated assembly between units (typically drywall both sides)
+- No shared walls without proper fire rating
 
 **Smoke and CO alarms:**
-- Interconnected smoke alarms in every bedroom, hallway outside each sleeping area, and on every storey
+- Interconnected smoke alarms in all bedrooms, hallways outside sleeping areas, and every storey
 - Carbon monoxide alarms on each storey
 
 **Separate entrance:**
-- The second unit must have its own exterior entrance that does not pass through the primary dwelling
+- Independent exterior entrance that does not pass through primary dwelling
+- Must be directly accessible from outside
 
-**Plumbing:**
-- Kitchen and bathroom with functioning plumbing
-- Hot and cold water supply
+**Plumbing and utilities:**
+- Functioning kitchen and bathroom with separate hot and cold water supply
+- Separate electrical panel (or clearly designated circuits)
 
-If your unit was built with permits and passed its final building inspection, it likely meets these standards. If it was built without permits — a common situation in London — you may need a retroactive permit and inspection before registration is possible.
+If your unit was built and passed final inspection with permits, it likely meets these standards. If it was built without permits — common in older London properties — you may need retrofits or a retroactive permit inspection before registration can proceed.
 
-### Step 3: Apply for a Municipal Address
+### Step 3: Request a Municipal Address
 
-If the second unit does not already have its own address, you need to get one assigned before registration is complete. Contact the City of London Addressing Department (part of Development Services) to request a civic address for the unit.
+The second unit cannot be registered without its own civic address. Contact the City of London Addressing Department (part of Development Services):
 
-Address assignment is straightforward: the city assigns a unit identifier (Unit A/Unit B, or a suffix like "½" or "lower") and issues a formal address confirmation. This address is what goes on your tenant's lease, on utility accounts, and on the rental unit licence application.
+**Phone:** Check [london.ca](https://london.ca) for current contact
+**What to provide:** Your property address and confirmation that this is for a second unit registration
 
-### Step 4: Submit the Second Unit Registration Application
+The city assigns a unit identifier (Unit A/B, "½", "lower", etc.) and issues formal address confirmation. This address goes on your lease, utility accounts, and rental licence application.
 
-The second unit registration application is filed through the City of London. Applications are submitted to the Planning and Development department or through the building permit portal, depending on whether the unit is newly constructed or existing.
+This step is quick — typically 1–2 weeks.
 
-Required documents typically include:
+### Step 4: Gather Documents and Submit Your Registration Application
 
-- Proof of property ownership (title or recent tax assessment)
-- The municipal address assigned to the unit
-- A basic floor plan or sketch showing the layout, room sizes, and location of fire separations, smoke alarms, egress windows, and entrances
-- If applicable: copies of the building permit and final inspection records
+Submit your application to the City of London Planning and Development department via the building permit portal or in person.
 
-Application fees vary and are set annually. Contact the city directly or check london.ca for the current fee schedule.
+**Required documents:**
+- Proof of property ownership (title or recent property tax assessment)
+- The newly assigned municipal address
+- Scaled floor plan showing:
+  - Room dimensions
+  - Kitchen and bathroom locations
+  - Egress window locations and sizes
+  - Fire separation walls
+  - Smoke and CO alarm locations
+  - Separate entrance location
+- Building permit and final inspection records (if the unit was built with permits)
 
-### Step 5: City Inspection
+**Application fee:** Varies annually; check london.ca for current rates (typically $200–$500).
 
-After you apply, the city schedules an inspection of the second unit. The inspector confirms:
+**Processing time:** Initial review takes 1–2 weeks. The city then schedules an inspection.
 
-- The unit meets minimum building code and fire code standards
+### Step 5: Pass the City Inspection
+
+A city inspector will visit to verify:
+
+- Unit meets minimum building code and fire code standards
 - Egress windows are present and correctly sized in all sleeping rooms
 - Smoke and CO alarms are installed and interconnected
-- Fire separation between the units meets minimum requirements
-- The unit has a separate, working entrance
-- Kitchen and bathroom are functional
+- Fire separation meets minimum 30-minute rating
+- Separate entrance is functional and independent
+- Kitchen and bathroom are operational
 
-This is not a building permit inspection — it is a zoning compliance and habitability check. If you have a building permit history for the unit, bring those records. They will speed things up.
+**Inspection typically takes 30–45 minutes.** Bring:
+- Your building permit paperwork (if applicable)
+- Photos of egress windows, fire separation, and alarm installations
+- Proof of separate electrical service (if applicable)
 
-If the inspector identifies deficiencies, they will issue a list. You fix the deficiencies and request a re-inspection.
+If the inspector identifies deficiencies, you'll receive a written list. Common issues:
 
-### Step 6: Registration Confirmed — Then Apply for Your Rental Unit Licence
+- Egress window too small
+- Smoke alarms not interconnected
+- Fire separation incomplete or missing
+- Entrance not properly independent
 
-Once the city is satisfied the unit meets standards, the second unit is registered. The city updates its records, the unit appears in the municipal address database, and you are cleared to apply for a [Rental Housing Licence](/blog/city-of-london-rental-unit-licence) for the unit.
+Fix these issues and request a re-inspection (usually 1–2 weeks later). Re-inspection fees apply.
 
-Operating a second unit as a rental before registration and licensing is complete puts you offside with the city. Fines under the Municipal Act can reach $25,000. More practically: it creates problems with your insurance, with the LTB if you ever need to file an application, and with any property standards complaints your tenant files.
+### Step 6: Registration Confirmed — Apply for Your Rental Unit Licence
+
+Once registration is approved, the city updates its records and the unit appears in the municipal address database. You can then apply for your [Rental Housing Licence](/blog/city-of-london-rental-unit-licence).
+
+Your rental licence cannot be issued without proof of registration. Once you have both, you're legally cleared to rent.
 
 ---
 
-## How Long Does Registration Take?
+## Timeline: How Long Does Registration Take?
 
-Allow 4–8 weeks from application to confirmed registration, assuming no significant deficiencies are found.
+**Best case (unit built with permits, no deficiencies):** 4–6 weeks
+- Address assignment: 1–2 weeks
+- Application processing: 1–2 weeks
+- Inspection and approval: 2–4 weeks
 
-Inspection scheduling is the main variable. The city's inspection queue fluctuates with demand. If your unit has obvious deficiencies that need repair, add time for the repair work and the re-inspection.
+**More typical case (minor deficiencies requiring repair):** 8–12 weeks
+- Add 2–4 weeks for repairs
+- Add 1–2 weeks for re-inspection
 
-Plan ahead. If you intend to rent the unit, start the registration process before your prospective tenant's move-in date — not after.
+**Worst case (unit built without permits, major code issues):** 12–20+ weeks
+- Retroactive permit process adds substantial time
+- Multiple inspections and repairs
+
+**Plan ahead.** Start registration 3–4 months before your intended tenant move-in. Don't wait until a tenant is signed and ready to occupy.
+
+---
+
+## What the City Inspects — Checklist
+
+Use this checklist before your inspection to avoid deficiencies:
+
+- [ ] All sleeping rooms have egress windows ≥0.35 sq m
+- [ ] Egress windows open freely without tools
+- [ ] Fire separation wall(s) between units are complete on both sides
+- [ ] Smoke alarms in all bedrooms, hallway outside sleeping area, all storeys
+- [ ] CO alarm(s) on each storey
+- [ ] All alarms are interconnected (wired or wireless)
+- [ ] Separate entrance exists and is independent (doesn't pass through primary unit)
+- [ ] Kitchen has functioning sink, hot and cold water
+- [ ] Bathroom has functioning toilet, tub/shower, sink with hot and cold water
+- [ ] Ceiling height ≥1.95m in all habitable rooms
+- [ ] No shared utilities (separate electrical panel preferred)
+
+If you're uncertain about any of these, hire a building inspector to pre-inspect before your city inspection. The $300–$500 cost is worth avoiding deficiency delays.
 
 ---
 
 ## What Happens If You Don't Register?
 
-Several things can go wrong if you skip registration:
+Operating a second unit without registration creates legal, financial, and insurance problems:
 
-**No rental unit licence.** The city will not issue a Rental Housing Licence for a second unit that is not registered. If a bylaw officer investigates — triggered by a complaint, a property standards inspection, or a licence audit — you are operating without a licence. That is a bylaw violation with fines attached.
+**Municipal bylaw violations**
+The city won't issue your rental licence without registration. Operating without a licence violates the Municipal Code. Fines start at $500 and can reach $25,000 under the Municipal Act. Bylaw officers investigate when they receive complaints or during property standards inspections.
 
-**Insurance risk.** Many homeowner and landlord insurance policies exclude rental income from unregistered, unpermitted units. A fire or liability claim in an unregistered unit can result in a denied claim. Review your policy carefully.
+**Insurance denial**
+Most homeowner and rental insurance policies explicitly exclude rental income from unregistered, unpermitted units. A fire, liability claim, or damage claim in an unregistered unit can result in a denied claim — leaving you personally liable. Review your policy now; don't find out during a claim.
 
-**LTB complications.** The LTB does not technically require a rental licence to hear your application — but if a tenant raises the unregistered status of the unit in a proceeding, it can affect remedies and complicate your position. Keep your paperwork clean.
+**Rental Housing Licensing audit**
+The city conducts periodic audits of registered rental units. If you don't have a licence for a unit you're renting, the audit flags it. You'll be ordered to register and licence retroactively, and fines apply.
 
-**Property standards enforcement.** If the city opens a [property standards file](/blog/london-ontario-property-standards-bylaw) on your property and discovers an unregistered second unit, they will require registration before closing the file — and may issue orders in the meantime.
+**LTB complications**
+If you ever file an N4 notice, L1 application, or other Landlord and Tenant Board proceeding against your tenant, an unregistered unit status can weaken your position. Tenants raise it as a defence, and the LTB may refuse to hear your case on grounds of illegality.
+
+**Property standards enforcement**
+If the city opens a [property standards file](/blog/london-ontario-property-standards-bylaw) on your property and discovers an unregistered second unit, they'll require immediate registration before closing the file. You'll also face potential orders for other deficiencies discovered during inspection.
+
+**Retroactive fines and back licence fees**
+The city can assess retroactive rental licence fees covering years of unregistered rental activity, plus penalties.
 
 ---
 
 ## Frequently Asked Questions
 
-**Does every basement apartment in London need to be registered, even old ones?**
-Yes. If you are renting it, it needs to be registered regardless of when it was built. The registration requirement is tied to current use, not construction date.
+**Q: Does a building permit automatically count as registration?**
+A: No. The building permit approves construction. Registration is a separate municipal process through Planning and Development that creates an official city record and assigns an address. You need both.
 
-**I have a building permit for my basement apartment. Is that the same as registration?**
-No. The building permit covers the construction. Registration is a separate step through the Planning and Development department that creates the official city record of the unit and assigns it an address.
+**Q: I built my basement apartment 15 years ago without getting a building permit. Can I still register it?**
+A: Possibly. You'll likely need a retroactive building permit first. Contact the City of London Building Division to discuss options. Some older units can be inspected and grandfathered in; others require code upgrades. Start with the Building Division — don't go straight to registration.
 
-**What if my basement apartment was built without permits?**
-You will likely need a retroactive building permit before registration is possible. Contact the City of London Building Division to discuss the retroactive permit process. Some older units can be inspected and permitted after the fact; others require more substantial upgrades.
+**Q: What if I can't afford the repairs the inspector identifies?**
+A: You have options: complete the repairs yourself, hire a contractor, or pause the registration process until you can address the issues. The city will not issue registration without compliance. If repairs are extensive, get quotes from contractors before deciding to proceed.
 
-**Can I have two second units on one property?**
-Under the current ZBL-1, most residential properties in London are permitted one second unit. Properties in certain zones or on larger lots may be permitted additional units. Check your specific zone before assuming two units are allowed.
+**Q: Can I register a second unit before I have a tenant lined up?**
+A: Yes. Registration is separate from renting. You can register the unit, keep it empty, and rent it later. The licence comes after registration and is tied to when the unit is occupied.
 
-**How much does second unit registration cost?**
-City fees change annually. Check london.ca or contact the Planning and Development department for the current fee schedule. Budget for the application fee, any permit fees if you need a retroactive permit, and re-inspection fees if deficiencies are found.
+**Q: Will registering my second unit trigger a property tax reassessment?**
+A: Possibly. MPAC (Municipal Property Assessment Corporation) reassesses properties on a four-year cycle. A registered second unit changes your property classification, which may affect your assessment. This is not a reason to avoid registration — but consult a property tax advisor if you're concerned about the timing.
 
-**Will registering my second unit trigger a property tax reassessment?**
-Possibly. MPAC reassesses properties on a four-year cycle, and a registered second unit changes the classification of the property. This is not a reason to avoid registration — but it is worth knowing. Contact MPAC or a property tax consultant if this is a concern.
+**Q: How much does the entire second unit registration process cost?**
+A: Budget $500–$1,500 total: application fee (~$250–$500), address assignment (usually free), inspection (~$0–$200), and potential re-inspection fees ($100–$200 if deficiencies are found). If you need a retroactive building permit, add $500–$2,000. If repairs are required, costs depend on the scope.
 
 ---
 
-## The Bottom Line
+## Second Unit Registration in London: Next Steps
 
-Registering a second unit in London involves three layers: the building permit (construction approval), the second unit registration (municipal record and address), and the rental unit licence (annual operating permit). All three need to be in place before you rent the unit legally.
+Registering a second unit in London requires navigating three separate municipal processes in sequence: the building permit (already issued or retroactive), the second unit registration (Planning and Development), and the rental licence (Municipal Compliance).
 
-The registration process is not complicated, but it takes time and requires an inspection. Start early. Get the address assigned. Have your unit in good condition before you apply.
+The good news: it's straightforward if you plan ahead and ensure your unit is code-compliant before you apply.
 
-If you are managing multiple London properties — or want to add a second unit and are unsure where to start — Prospera Properties handles the compliance legwork so you do not have to track three separate municipal processes across multiple files. [Reach out to see how we work](/contact).
+The bad news: many London landlords skip registration or delay it, exposing themselves to fines, insurance denial, and LTB complications.
+
+If you're adding a second unit to your London property or managing multiple rental units and want to ensure all registrations are current and correct, Prospera Properties handles municipal compliance, inspections, and licensing across London, St. Thomas, and Strathroy. [Contact us](/contact) to discuss your rental property compliance.
 
 ---
 
 _Social caption:_
-London landlords — building a basement apartment is step one. Getting it registered is step two. Many landlords skip it and don't find out until there's a problem. Here's exactly how the City of London's second unit registration process works, what the city inspects, and what happens if you're not registered. Link in bio.
+London landlords: your basement apartment needs 3 separate registrations. Building permit. Municipal registration. Rental licence. Miss step 2 and you're fined $500+. Here's exactly what the city inspects and how long it takes. Full guide in bio.
