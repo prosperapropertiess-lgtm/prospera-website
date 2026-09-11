@@ -4,6 +4,7 @@ import FAQAccordion from "@/components/ui/FAQAccordion";
 import RentEstimator from "@/components/ui/RentEstimator";
 import BlogNudge from "@/components/ui/BlogNudge";
 import PortalPreview from "@/components/ui/PortalPreview";
+import AlmostPassiveSignup from "@/components/blog/AlmostPassiveSignup";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -300,6 +301,9 @@ export default function LandlordsPage() {
           </p>
         </FadeIn>
       </section>
+
+      {/* Not ready to talk yet? Soft secondary offer — one CTA above stays primary */}
+      <AlmostPassiveSignup variant="end" />
 
       {/* Blog nudges */}
       <section className="py-12 px-5 sm:px-8" style={{ backgroundColor: "#F7F5F2" }}>

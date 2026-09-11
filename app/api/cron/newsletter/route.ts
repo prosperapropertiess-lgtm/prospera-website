@@ -9,6 +9,11 @@
  *   5. Logs the send to newsletter_log
  *
  * 62 blogs = 62 weeks of automated nurture already banked.
+ *
+ * SUPERSEDED 2026-09-11: replaced by "Almost Passive" on Beehiiv
+ * (https://prospera-properties-newsletter.beehiiv.com). Removed from
+ * vercel.json so it no longer fires automatically; left in place (disabled
+ * below) in case the auto-generated-digest approach is wanted again later.
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -85,6 +90,17 @@ export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Disabled — superseded by Almost Passive on Beehiiv. See file header.
+  // (Read from env, not a literal, so TS doesn't mark the rest of this
+  // function unreachable and drop null-narrowing on the code below.)
+  const enabled = process.env.LEGACY_NEWSLETTER_CRON_ENABLED === "true";
+  if (!enabled) {
+    return NextResponse.json({
+      disabled: true,
+      reason: "Replaced by Almost Passive (Beehiiv). See file header comment.",
+    });
   }
 
   // 1. Get all blog files from GitHub, sorted by date (oldest first for drip)

@@ -6,7 +6,9 @@ import { getAllPosts, getPost } from "@/lib/blog";
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import BlogSubscribeForm from "@/components/blog/BlogSubscribeForm";
+import AlmostPassiveSignup from "@/components/blog/AlmostPassiveSignup";
 import TenantLeadCTA from "@/components/blog/TenantLeadCTA";
+import { isLandlordPost } from "@/lib/blog-audience";
 import ShareButtons from "@/components/blog/ShareButtons";
 import ViewCounter from "@/components/blog/ViewCounter";
 import TableOfContents from "@/components/blog/TableOfContents";
@@ -90,6 +92,7 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPost(slug);
   if (!post) notFound();
 
+  const landlordPost = isLandlordPost(post.category, slug);
   const headings = extractHeadings(post.content);
   const rawHtml = await marked(post.content);
   const htmlContent = addHeadingIds(rawHtml);
@@ -235,13 +238,18 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Content + ToC sidebar */}
       <div className="max-w-5xl mx-auto px-6 py-16 xl:grid xl:grid-cols-[1fr_220px] xl:gap-12" style={{ backgroundColor: "#F7F5F2" }}>
         <article>
+          {landlordPost && <AlmostPassiveSignup variant="top" />}
+
           <div
             className="prose-content"
             style={{ fontFamily: "var(--font-dm-sans)", color: "#333333" }}
             dangerouslySetInnerHTML={{ __html: firstHalf }}
           />
 
-          {secondHalf && <BlogSubscribeForm midPost category={post.category} />}
+          {secondHalf && (landlordPost
+            ? <AlmostPassiveSignup variant="mid" />
+            : <BlogSubscribeForm midPost category={post.category} />
+          )}
 
           {secondHalf && (
             <div
@@ -260,12 +268,12 @@ export default async function BlogPostPage({ params }: Props) {
         <TableOfContents headings={headings} />
       </div>
 
-      {/* End-of-post CTA — renter articles get lead capture form, landlord articles get subscribe + quote CTA */}
-      {post.category === "Renter Guides" || post.category === "Tenant Tips" ? (
+      {/* End-of-post CTA — tenant-facing posts get lead capture, landlord posts get Almost Passive + quote CTA */}
+      {!landlordPost ? (
         <TenantLeadCTA />
       ) : (
         <>
-          <BlogSubscribeForm category={post.category} />
+          <AlmostPassiveSignup variant="end" />
           <section className="px-6 py-16" style={{ backgroundColor: "#1F2F3A" }}>
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
