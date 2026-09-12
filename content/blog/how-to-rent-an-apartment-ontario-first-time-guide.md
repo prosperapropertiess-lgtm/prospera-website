@@ -5,7 +5,7 @@ slug: "how-to-rent-an-apartment-ontario-first-time-guide"
 excerpt: "Renting your first apartment in Ontario? This step-by-step guide covers applications, documents, lease signing, and your rights — written for London, Ontario renters."
 category: "Renter Guides"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=630&fit=crop&auto=format&q=80"
 seoTitle: "How to Rent an Apartment in Ontario: First-Timer's Guide"
 primaryKeyword: "how to rent an apartment Ontario"
 secondaryKeywords: ["first time renter guide Ontario", "rental application Ontario", "what do I need to rent an apartment Ontario", "how to apply for a rental London Ontario", "tenant rights Ontario renters"]

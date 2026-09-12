@@ -5,7 +5,7 @@ newsletterHook: "Ontario landlords have strict rules about entering their rental
 date: "2026-04-27"
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 It feels counterintuitive: you own the property, but you can't just walk in whenever you want. Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) gives tenants a right to "quiet enjoyment" of their home — and that means your right of entry comes with real restrictions. Getting this wrong can expose you to complaints, LTB applications, and damaged tenant relationships.

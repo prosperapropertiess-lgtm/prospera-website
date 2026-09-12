@@ -6,7 +6,7 @@ excerpt: "Sarnia landlords face unique challenges — Chemical Valley turnover, 
 newsletterHook: "Sarnia landlords face unique challenges — Chemical Valley turnover, student cycles, RTA rules. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in Sarnia, Ontario: The 2026 Landlord Guide

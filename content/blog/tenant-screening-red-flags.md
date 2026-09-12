@@ -5,7 +5,7 @@ newsletterHook: "A bad tenant in Ontario can cost you $20,000 and 12 months of L
 date: "2026-08-11"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A bad tenant in Ontario doesn't just skip rent — they're difficult and expensive to remove. The LTB process averages 6 to 18 months from filing to possession. At $2,000/month that's $12,000–$36,000 in exposure, plus legal fees, plus repairs. The province's tenant protections are strong by design, and that's not changing.

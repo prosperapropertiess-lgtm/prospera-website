@@ -6,7 +6,7 @@ date: "2026-08-19"
 slug: "strathroy-landlord-guide-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Strathroy sits about 35 kilometres west of London on the Highway 402 corridor. It's a small city — population around 25,000 in the Township of Strathroy-Caradoc — with a mix of single-family homes, duplexes, and basement apartments. If you're renting a property here, the rules are different from London in one important way: there is no rental housing licensing program.

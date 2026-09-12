@@ -5,7 +5,7 @@ slug: "fanshawe-college-off-campus-housing-guide"
 excerpt: "Moving to Fanshawe College in London, Ontario? This guide covers the best neighbourhoods, average rents, transit tips, and how to apply for a rental safely."
 category: "Renter Guides"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=630&fit=crop&auto=format&q=80"
 seoTitle: "Fanshawe College Off-Campus Housing Guide 2026"
 primaryKeyword: "Fanshawe College off-campus housing"
 secondaryKeywords: ["student rentals London Ontario", "apartments for rent London Ontario students", "where to live near Fanshawe College", "London Ontario housing for international students"]

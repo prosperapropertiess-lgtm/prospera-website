@@ -6,7 +6,7 @@ excerpt: "Ontario law is clear that landlords must keep rental properties in a g
 newsletterHook: "Ontario law is clear that landlords must keep rental properties in a good state of repair — but not every repair falls to you. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 One of the most common sources of conflict between landlords and tenants in Ontario is maintenance. Who fixes the leaky faucet? Who pays when the furnace dies? What happens if a tenant breaks something? Ontario's *Residential Tenancies Act* and local property standards bylaws set out the rules — and understanding them protects both your investment and your relationship with your tenant.

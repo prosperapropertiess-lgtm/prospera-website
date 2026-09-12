@@ -5,7 +5,7 @@ newsletterHook: "Your regular home insurance policy almost certainly doesn't cov
 date: "2026-04-27"
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A lot of landlords find out the hard way that their home insurance policy doesn't cover rental properties. A tenant floods the bathroom, a fire breaks out, someone slips on the front steps — and suddenly they're learning about policy exclusions at the worst possible moment. [CMHC's rental housing resources](https://www.cmhc-schl.gc.ca/consumers/renting) offer broader context on financial planning and risk for rental property owners in Ontario.

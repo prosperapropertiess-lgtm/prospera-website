@@ -6,7 +6,7 @@ date: "2026-08-10"
 slug: "rta-section-20-maintenance-obligations-ontario"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own a rental property in Ontario, one section of the *Residential Tenancies Act* governs more landlord-tenant disputes than almost any other. That section is **Section 20**.

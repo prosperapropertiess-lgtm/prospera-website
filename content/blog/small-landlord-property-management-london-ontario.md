@@ -6,7 +6,7 @@ excerpt: "Managing 1–5 rentals in London, Ontario? Discover the 7 costly mista
 newsletterHook: "Managing 1–5 rentals in London, Ontario? Almost Passive exists so you catch things like this before they cost you."
 category: "Property Management"
 readTime: "12 min read"
-featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You own one rental property. Maybe two. You didn't set out to become a landlord — maybe you inherited a property, kept a house when you moved, or bought a second unit as a long-term investment. Either way, you're now responsible for a tenant, a lease, a building, and a web of Ontario regulations you didn't fully read before signing up.

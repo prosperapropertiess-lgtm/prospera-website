@@ -6,7 +6,7 @@ excerpt: "Unhappy with your property manager in Ontario? Here's how to switch pr
 newsletterHook: "Unhappy with your property manager in Ontario? Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Property Management"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords who hire a property management company do it once and hope they never have to think about it again. But bad property managers exist — and staying with one because switching feels complicated is one of the costliest mistakes a landlord can make.

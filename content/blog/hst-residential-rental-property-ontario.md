@@ -6,7 +6,7 @@ date: "2026-08-28"
 slug: "hst-residential-rental-property-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you rent a residential unit in Ontario, you probably never thought to charge HST on the rent. That instinct is correct — but most landlords have no idea *why*, and that gap causes real problems.

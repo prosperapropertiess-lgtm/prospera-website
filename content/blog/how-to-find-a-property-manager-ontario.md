@@ -6,7 +6,7 @@ excerpt: "Learn how to find a property manager in Ontario who actually knows the
 newsletterHook: "Learn how to find a property manager in Ontario who actually knows the RTA, protects your investment, and isn't just collecting fees. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords who hire a bad property manager didn't know they were doing it at the time. The company had a professional-looking website, answered calls promptly, and quoted reasonable fees. Six months later, the landlord is dealing with a problem tenant who should have been screened out, a repair bill that was marked up 40%, and a property manager who has never filed an N4 in their life.

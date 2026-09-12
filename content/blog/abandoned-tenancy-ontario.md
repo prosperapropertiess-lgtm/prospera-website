@@ -6,7 +6,7 @@ excerpt: "If your tenant has vanished and stopped paying rent, you can't just ch
 newsletterHook: "If your tenant has vanished and stopped paying rent, you can't just change the locks. That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You haven't heard from your tenant in weeks. Rent hasn't been paid, the lights are off, and the neighbour says they haven't seen anyone around. Their belongings might still be inside — or the unit might be completely empty.

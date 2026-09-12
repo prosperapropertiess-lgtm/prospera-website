@@ -6,7 +6,7 @@ excerpt: "A practical guide for Ontario landlords on running tenant credit check
 newsletterHook: "A practical guide for Ontario landlords on running tenant credit checks the right way — covering written consent, SIN rules, Human Rights Code obligations for thin-file applicants, and PIPEDA data retention. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # How to Legally Run a Credit Check on Tenants in Ontario

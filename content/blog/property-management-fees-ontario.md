@@ -6,7 +6,7 @@ excerpt: "Ontario property management fees range 8–15% monthly plus hidden pla
 newsletterHook: "Ontario property management fees range 8–15% monthly plus hidden placement, maintenance, and renewal charges. Almost Passive is where I cover exactly this stuff — free, once a week."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You're about to hand a property manager the keys to your most valuable asset. The agreement looks clean: 10% monthly fee, straightforward. Then you read page three and discover tenant placement markups, maintenance mark-ups, vacancy charges, renewal penalties, and early termination clauses you never anticipated.
