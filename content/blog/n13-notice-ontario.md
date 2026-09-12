@@ -6,7 +6,7 @@ excerpt: "The N13 notice lets Ontario landlords end a tenancy for demolition, co
 newsletterHook: "The N13 notice lets Ontario landlords end a tenancy for demolition, conversion, or major repairs. Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Of all the eviction notices in Ontario's toolkit, the N13 is one of the least understood — and one of the most misused. Landlords sometimes reach for it when they want a tenant out and figure "major repairs" sounds like a reasonable excuse. That almost always ends badly.

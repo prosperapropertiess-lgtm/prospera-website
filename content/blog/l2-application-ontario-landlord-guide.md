@@ -6,7 +6,7 @@ excerpt: "Step-by-step guide to filing an L2 application with the Ontario LTB. L
 newsletterHook: "Step-by-step guide to filing an L2 application with the Ontario LTB. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1573164574511-73c773193279?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 An L2 application is how Ontario landlords evict a tenant for reasons other than non-payment of rent. If your tenant is causing damage, behaving dangerously, breaching the lease, or threatening the safety of others, the L2 is your path to the Landlord and Tenant Board (LTB) and, if you win, to eviction.

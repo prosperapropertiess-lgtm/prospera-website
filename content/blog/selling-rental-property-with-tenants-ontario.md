@@ -4,7 +4,7 @@ date: "2026-04-29"
 slug: "selling-rental-property-with-tenants-ontario"
 excerpt: "Selling a tenanted property in Ontario comes with rules most landlords don't know until they're in the middle of a deal. Here's how to handle it correctly."
 newsletterHook: "Selling a tenanted property in Ontario comes with rules most landlords don't know until they're in the middle of a deal. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1519337265831-281ec6cc8514?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Selling a Rental Property With Tenants in Ontario: What Tenants Need to Know

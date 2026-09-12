@@ -20,10 +20,12 @@ POOLS = {
         "1589829545856-d10d557cf95f",  # Lady Justice statue
         "1589391886645-d51941baf7fb",  # gavel
         "1436450412740-6b988f486c6b",  # courthouse columns
+        "1573164574511-73c773193279",  # large table hearing-prep style meeting
     ],
     "notice_signing": [
         "1450101499163-c8848c66ca85",  # signing a document
         "1521791055366-0d553872125f",  # pen signing paper
+        "1519337265831-281ec6cc8514",  # typing on a document, laptop
     ],
     "money_rent_tax": [
         "1554224155-6726b3ff858f",     # tax forms + calculator

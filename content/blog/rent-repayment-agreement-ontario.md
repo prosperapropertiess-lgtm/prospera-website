@@ -6,7 +6,7 @@ excerpt: "When a tenant falls behind on rent, a written repayment agreement can 
 newsletterHook: "When a tenant falls behind on rent, a written repayment agreement can resolve arrears faster than a full LTB hearing — but only if you structure it correctly. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Rent Repayment Agreements in Ontario: What Every Landlord Needs to Know
