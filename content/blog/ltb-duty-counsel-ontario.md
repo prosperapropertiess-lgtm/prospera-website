@@ -1,6 +1,7 @@
 ---
 title: "LTB Duty Counsel in Ontario: Free Legal Help at Hearings — What Landlords Need to Know"
 excerpt: "Most Ontario landlords don't know free legal help exists at LTB hearings — or that their tenant may arrive with a free lawyer. Here's what duty counsel is and where landlords can get help."
+newsletterHook: "Most Ontario landlords don't know free legal help exists at LTB hearings — or that their tenant may arrive with a free lawyer. Almost Passive is where I cover exactly this stuff — free, once a week."
 date: "2026-08-07"
 slug: "ltb-duty-counsel-ontario"
 category: "Ontario Law"

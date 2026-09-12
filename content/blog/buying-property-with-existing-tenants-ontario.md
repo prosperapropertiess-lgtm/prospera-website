@@ -1,11 +1,12 @@
 ---
 title: "Buying a Property With Existing Tenants in Ontario: What You Need to Know"
 excerpt: "When you buy a tenanted property in Ontario, the existing tenancy continues automatically. Here's what that means for you as the new landlord."
+newsletterHook: "When you buy a tenanted property in Ontario, the existing tenancy continues automatically. That's the kind of local, practical detail that goes in Almost Passive every week."
 date: "2026-09-11"
 slug: "buying-property-with-existing-tenants-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Buying a property with tenants already in it sounds convenient. Someone is already paying rent on day one. But the legal reality catches many new landlords off guard.

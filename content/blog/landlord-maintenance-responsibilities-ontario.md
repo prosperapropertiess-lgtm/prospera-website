@@ -3,9 +3,10 @@ title: "Maintenance Responsibilities in Ontario: What Landlords Must Fix (and Wh
 date: "2026-04-26"
 slug: "landlord-maintenance-responsibilities-ontario"
 excerpt: "Ontario law is clear that landlords must keep rental properties in a good state of repair — but not every repair falls to you. Here's how to sort out who's responsible for what."
+newsletterHook: "Ontario law is clear that landlords must keep rental properties in a good state of repair — but not every repair falls to you. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 One of the most common sources of conflict between landlords and tenants in Ontario is maintenance. Who fixes the leaky faucet? Who pays when the furnace dies? What happens if a tenant breaks something? Ontario's *Residential Tenancies Act* and local property standards bylaws set out the rules — and understanding them protects both your investment and your relationship with your tenant.

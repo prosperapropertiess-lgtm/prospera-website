@@ -1,10 +1,11 @@
 ---
 title: "7 Red Flags When Screening Tenants in Ontario (And How to Handle Each One)"
 excerpt: "A bad tenant in Ontario can cost you $20,000 and 12 months of LTB hearings. Most of them announce themselves during the application — here's exactly what to watch for."
+newsletterHook: "A bad tenant in Ontario can cost you $20,000 and 12 months of LTB hearings. Almost Passive exists so you catch things like this before they cost you."
 date: "2026-08-11"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A bad tenant in Ontario doesn't just skip rent — they're difficult and expensive to remove. The LTB process averages 6 to 18 months from filing to possession. At $2,000/month that's $12,000–$36,000 in exposure, plus legal fees, plus repairs. The province's tenant protections are strong by design, and that's not changing.

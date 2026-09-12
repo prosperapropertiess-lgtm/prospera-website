@@ -1,6 +1,7 @@
 ---
 title: "Overholding Tenants in Ontario: What Happens When the Lease Ends and the Tenant Stays"
 excerpt: "When a lease expires and the tenant doesn't leave, most landlords think the tenant is trespassing. They're not. Ontario law automatically converts the tenancy to month-to-month."
+newsletterHook: "When a lease expires and the tenant doesn't leave, most landlords think the tenant is trespassing. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 date: "2026-07-27"
 slug: "overholding-tenant-ontario"
 category: "Ontario Law"

@@ -3,9 +3,10 @@ title: "How to Prepare for Your LTB Hearing: A Landlord's Evidence Guide (Ontari
 date: "2026-05-11"
 slug: "ltb-hearing-preparation-ontario-landlords"
 excerpt: "Heading to an LTB hearing in Ontario? This step-by-step evidence guide walks landlords through disclosure rules, exhibit organization, videoconference hearings, and what adjudicators actually look for."
+newsletterHook: "Heading to an LTB hearing in Ontario? That's exactly the kind of thing Almost Passive covers every week."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # How to Prepare for Your LTB Hearing: A Landlord's Evidence Guide (Ontario 2026)

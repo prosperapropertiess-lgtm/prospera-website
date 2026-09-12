@@ -1,6 +1,7 @@
 ---
 title: "RTA Section 20: Ontario Landlord Maintenance Obligations Explained"
 excerpt: "RTA Section 20 is the most-cited provision in landlord-tenant law. Here's what it requires, what happens when you breach it, and how to stay protected."
+newsletterHook: "RTA Section 20 is the most-cited provision in landlord-tenant law. That's exactly the kind of thing Almost Passive covers every week."
 date: "2026-08-10"
 slug: "rta-section-20-maintenance-obligations-ontario"
 category: "Ontario Law"

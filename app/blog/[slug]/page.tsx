@@ -238,7 +238,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Content + ToC sidebar */}
       <div className="max-w-5xl mx-auto px-6 py-16 xl:grid xl:grid-cols-[1fr_220px] xl:gap-12" style={{ backgroundColor: "#F7F5F2" }}>
         <article>
-          {landlordPost && <AlmostPassiveSignup variant="top" />}
+          {landlordPost && <AlmostPassiveSignup variant="top" customHook={post.newsletterHook} />}
 
           <div
             className="prose-content"
@@ -247,7 +247,7 @@ export default async function BlogPostPage({ params }: Props) {
           />
 
           {secondHalf && (landlordPost
-            ? <AlmostPassiveSignup variant="mid" />
+            ? <AlmostPassiveSignup variant="mid" customHook={post.newsletterHook} />
             : <BlogSubscribeForm midPost category={post.category} />
           )}
 
@@ -273,7 +273,7 @@ export default async function BlogPostPage({ params }: Props) {
         <TenantLeadCTA />
       ) : (
         <>
-          <AlmostPassiveSignup variant="end" />
+          <AlmostPassiveSignup variant="end" customHook={post.newsletterHook} />
           <section className="px-6 py-16" style={{ backgroundColor: "#1F2F3A" }}>
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-light mb-4" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>

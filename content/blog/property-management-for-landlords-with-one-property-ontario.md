@@ -1,11 +1,12 @@
 ---
 title: "Property Management for Landlords With One Rental Property in Ontario"
 excerpt: "Own one rental property in Ontario? Learn when professional property management makes sense, what it costs, and what to look for in a PM."
+newsletterHook: "Own one rental property in Ontario? That's exactly the kind of thing Almost Passive covers every week."
 date: "2026-07-10"
 slug: "property-management-for-landlords-with-one-property-ontario"
 category: "Property Management"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most guides to property management assume you're running a portfolio. They talk about scaling, systems, and efficiency across dozens of doors.

@@ -3,9 +3,10 @@ title: "Legal Basement Apartment Requirements in Ontario (2026 Complete Guide)"
 date: "2026-05-27"
 slug: "legal-basement-apartment-requirements-ontario"
 excerpt: "Thinking about adding a basement suite in London, St. Thomas, or Strathroy? Here's every Ontario Building Code requirement—ceiling height, egress windows, fire separation, permits—and the $25,000 fine risk of skipping any step."
+newsletterHook: "Thinking about adding a basement suite in London, St. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Legal Basement Apartment Requirements in Ontario (2026 Complete Guide)

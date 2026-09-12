@@ -2,9 +2,11 @@
 title: "Property Management Woodstock, Ontario: 2026 Landlord Guide"
 date: "2026-07-21"
 slug: "property-management-woodstock-ontario"
+excerpt: "Woodstock's rental market is running hot, but the Residential Tenancies Act still applies in full. Here's what property management costs and covers in Oxford County."
+newsletterHook: "Woodstock's rental market is running hot, but the Residential Tenancies Act still applies in full. Almost Passive is where I cover exactly this stuff — free, once a week."
 category: "Property Management"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Woodstock is Oxford County's largest city, and its rental market has been running hot for several years. A steady manufacturing economy anchored by Toyota Motor Manufacturing Canada, affordable prices relative to London and the GTA, and growing commuter demand have kept vacancy rates tight and landlord confidence high.

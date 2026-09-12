@@ -3,10 +3,11 @@ title: "Tips for First-Time Landlords in London, Ontario"
 date: "2026-08-05"
 slug: "first-time-landlord-tips-london-ontario"
 excerpt: "First-time landlord in London, Ontario? Avoid the mistakes that cost new landlords thousands — screening, leases, inspections, and London's rental licensing rules explained."
+newsletterHook: "First-time landlord in London, Ontario? That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "10 min read"
 keywords: ["first time landlord London Ontario", "landlord tips Ontario", "renting out property London Ontario", "Ontario Residential Tenancies Act", "London Ontario rental unit licence", "tenant screening Ontario", "property management London Ontario"]
-featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most new landlords in London, Ontario don't lose money because of bad luck — they lose it because of avoidable mistakes made in the first 90 days. A skipped inspection report, an unverified reference, or a missed City licensing requirement can cost more than a year of rent. Here's what experienced landlords in southwestern Ontario wish they'd known before their first tenant moved in.

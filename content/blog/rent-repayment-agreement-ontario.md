@@ -3,9 +3,10 @@ title: "Rent Repayment Agreements in Ontario: What Every Landlord Needs to Know"
 date: "2026-05-22"
 slug: "rent-repayment-agreement-ontario"
 excerpt: "When a tenant falls behind on rent, a written repayment agreement can resolve arrears faster than a full LTB hearing — but only if you structure it correctly. Here's how Ontario landlords do it right."
+newsletterHook: "When a tenant falls behind on rent, a written repayment agreement can resolve arrears faster than a full LTB hearing — but only if you structure it correctly. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Rent Repayment Agreements in Ontario: What Every Landlord Needs to Know

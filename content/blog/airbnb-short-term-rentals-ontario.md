@@ -1,10 +1,11 @@
 ---
 title: "Can Your Tenant List Your Property on Airbnb? Short-Term Rentals in Ontario"
 excerpt: "Short-term rentals are a growing headache for Ontario landlords. Here's what the law says about subletting, what you can do about unauthorized Airbnbs, and how to protect yourself."
+newsletterHook: "Short-term rentals are a growing headache for Ontario landlords. I write about exactly this kind of thing in Almost Passive, every week."
 date: "2026-04-27"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You find out your tenant has been listing your rental on Airbnb. Strangers coming and going every few days. Reviews mentioning your property's address. No mention of it in the lease.

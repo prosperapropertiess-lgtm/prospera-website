@@ -1,11 +1,12 @@
 ---
 title: "City of London Rental Unit Licence Renewal: A Step-by-Step Guide for London Landlords"
 excerpt: "Your City of London rental unit licence expires every year. Here's how renewal works, what triggers a re-inspection, and what to do if your licence has lapsed."
+newsletterHook: "Your City of London rental unit licence expires every year. Almost Passive tracks changes like this before they cost you a month's rent."
 date: "2026-07-29"
 slug: "city-of-london-rental-unit-licence-renewal"
 category: "Landlord Guide"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Getting the initial City of London rental unit licence is the hard part — or so most landlords think. The truth is, renewal is where things quietly go wrong.

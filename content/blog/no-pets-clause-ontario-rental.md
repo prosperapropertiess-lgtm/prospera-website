@@ -1,11 +1,12 @@
 ---
 title: "No-Pets Clauses in Ontario Are Unenforceable: What Landlords Need to Know"
 excerpt: "RTA Section 14 voids any lease provision that prohibits or restricts animals. Your no-pets clause has no legal force — here's what you can do instead."
+newsletterHook: "RTA Section 14 voids any lease provision that prohibits or restricts animals. Almost Passive is where I cover exactly this stuff — free, once a week."
 date: "2026-08-12"
 slug: "no-pets-clause-ontario-rental"
 category: "Ontario Law"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords include a no-pets clause in their lease. Most of those clauses are worthless.

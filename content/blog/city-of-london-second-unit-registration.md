@@ -2,9 +2,11 @@
 title: "London Second Unit Registration: 6-Step Compliance Guide for Landlords"
 date: "2026-09-11"
 slug: "city-of-london-second-unit-registration"
+excerpt: "Your basement apartment has a building permit and passed inspection. The City of London still won't let you rent it without separate second unit registration."
+newsletterHook: "Your basement apartment has a building permit and passed inspection. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Landlord Guide"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your basement apartment passed inspection. You have the building permit. You think you're ready to rent.

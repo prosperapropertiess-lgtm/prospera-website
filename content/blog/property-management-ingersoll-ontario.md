@@ -1,11 +1,12 @@
 ---
 title: "Property Management in Ingersoll, Ontario: A Guide for Local Landlords"
 excerpt: "Owning a rental in Ingersoll, Ontario? Here's what Oxford County landlords need to know about property management, fees, and the local rental market."
+newsletterHook: "Owning a rental in Ingersoll, Ontario? Almost Passive tracks changes like this before they cost you a month's rent."
 date: "2026-07-06"
 slug: "property-management-ingersoll-ontario"
 category: "Property Management"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Ingersoll is a small manufacturing and agricultural town in Oxford County, about 20 minutes east of Woodstock and 45 minutes east of London along the 401 corridor. With a population around 13,000, it doesn't attract much attention from the province's larger property management companies — and that gap is exactly where local landlords tend to run into trouble.

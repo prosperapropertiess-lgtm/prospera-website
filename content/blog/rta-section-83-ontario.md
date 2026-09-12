@@ -1,6 +1,7 @@
 ---
 title: "RTA Section 83 Ontario: What Landlords Need to Know About LTB Eviction Discretion"
 excerpt: "Section 83 of Ontario's RTA gives the LTB power to deny or delay eviction even after a landlord proves their case. Here's what that means for you."
+newsletterHook: "Section 83 of Ontario's RTA gives the LTB power to deny or delay eviction even after a landlord proves their case. I write about exactly this kind of thing in Almost Passive, every week."
 date: "2026-07-08"
 slug: "rta-section-83-ontario"
 category: "Ontario Law"

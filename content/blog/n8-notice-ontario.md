@@ -3,9 +3,10 @@ title: "N8 Notice Ontario: How to End a Tenancy for Persistent Late Rent Payment
 date: "2026-05-08"
 slug: "n8-notice-ontario"
 excerpt: "The N8 notice lets Ontario landlords end a tenancy when a tenant repeatedly pays rent late — even if the rent eventually gets paid. Here's when to use it, what evidence you need, and how to file an L2 application."
+newsletterHook: "The N8 notice lets Ontario landlords end a tenancy when a tenant repeatedly pays rent late — even if the rent eventually gets paid. That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # N8 Notice Ontario: How to End a Tenancy for Persistent Late Rent Payment

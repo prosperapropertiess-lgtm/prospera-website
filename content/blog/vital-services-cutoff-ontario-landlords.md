@@ -1,6 +1,7 @@
 ---
 title: "Cutting Off Utilities to Force a Tenant Out Is Illegal in Ontario — Even If They Owe Rent"
 excerpt: "Ontario's RTA Section 21 makes it illegal to cut heat, electricity, water, or gas to pressure a tenant to leave — regardless of unpaid rent. The penalties are severe."
+newsletterHook: "Ontario's RTA Section 21 makes it illegal to cut heat, electricity, water, or gas to pressure a tenant to leave — regardless of unpaid rent. Almost Passive tracks changes like this before they cost you a month's rent."
 date: "2026-07-27"
 slug: "vital-services-cutoff-ontario-landlords"
 category: "Ontario Law"

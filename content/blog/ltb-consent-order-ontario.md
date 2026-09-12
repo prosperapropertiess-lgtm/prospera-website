@@ -1,6 +1,7 @@
 ---
 title: "LTB Consent Orders in Ontario: What Landlords Need to Know Before Agreeing to a Settlement"
 excerpt: "A consent order at the LTB has the same legal force as a litigated ruling — but only if you draft it correctly. Here's what Ontario landlords need to know."
+newsletterHook: "A consent order at the LTB has the same legal force as a litigated ruling — but only if you draft it correctly. Almost Passive exists so you catch things like this before they cost you."
 date: "2026-08-21"
 slug: "ltb-consent-order-ontario"
 category: "Ontario Law"

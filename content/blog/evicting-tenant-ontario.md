@@ -3,9 +3,10 @@ title: "How to Evict a Tenant in Ontario: The Full Process"
 date: "2026-04-25"
 slug: "evicting-tenant-ontario"
 excerpt: "Ontario's eviction process is slow and procedurally strict. Here's how it works step by step, and what mistakes can set you back months."
+newsletterHook: "Ontario's eviction process is slow and procedurally strict. Almost Passive exists so you catch things like this before they cost you."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Evicting a tenant in Ontario is one of the most challenging things a landlord will face. The [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) heavily favours tenant protections — which is fine — but it means a single procedural misstep can void your notice and force you to start over from scratch.

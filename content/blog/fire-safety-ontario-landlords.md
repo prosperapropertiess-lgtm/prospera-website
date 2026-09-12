@@ -3,9 +3,10 @@ title: "Fire and Carbon Monoxide Safety Requirements for Ontario Landlords"
 date: "2026-04-14"
 slug: "fire-safety-ontario-landlords"
 excerpt: "Ontario's Fire Code has specific requirements for smoke alarms and CO detectors. Here's what every landlord must have in place to stay compliant — and keep tenants safe."
+newsletterHook: "Ontario's Fire Code has specific requirements for smoke alarms and CO detectors. Almost Passive is where I cover exactly this stuff — free, once a week."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Fire safety is one area where Ontario landlords have clear, non-negotiable legal obligations — and the penalties for non-compliance aren't just fines. If a tenant is injured because a required smoke alarm wasn't installed or maintained, the legal and personal consequences can be severe.

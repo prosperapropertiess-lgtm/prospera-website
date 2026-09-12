@@ -1,6 +1,7 @@
 ---
 title: "N7 Notice Ontario: Serious Damage and Safety Impairment Explained"
 excerpt: "The N7 is Ontario's eviction notice for undue damage and serious safety threats — no void period, 10 days to vacate. Here's how landlords use it correctly."
+newsletterHook: "The N7 is Ontario's eviction notice for undue damage and serious safety threats — no void period, 10 days to vacate. Almost Passive exists so you catch things like this before they cost you."
 date: "2026-07-17"
 slug: "n7-notice-ontario"
 category: "Ontario Law"

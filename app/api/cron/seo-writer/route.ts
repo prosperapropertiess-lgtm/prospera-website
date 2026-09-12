@@ -184,17 +184,33 @@ FRONTMATTER FIELDS (all required)
 - date: Today's date in "YYYY-MM-DD" format
 - slug: The exact keyword slug — never change it
 - excerpt: 1–2 sentences, 120–155 chars, plain language, leads with pain or value, includes primary keyword
+- newsletterHook: ONE sentence (under 220 characters) connecting THIS post's specific topic to "Almost
+  Passive" — Ebin's free weekly newsletter for Ontario landlords (local market news, RTA/LTB updates,
+  real lessons from managing rentals). Ground it in a real, specific fact from THIS post — reuse the
+  sharpest fact from the excerpt if it fits. Never generic, never fabricated, no hype words ("amazing",
+  "revolutionary", "unlock", etc.), no guarantees. Say it the way a sharp property manager would say it
+  out loud. Example (N4 notice post): "Miss one detail on an N4 and you restart the whole eviction clock
+  — Almost Passive flags rule changes like this before they cost you a month's rent."
 - category: One of "Landlord Tips" | "Ontario Law" | "Property Management"
 - readTime: "X min read" (1600w ≈ 8 min, 2200w ≈ 11 min)
-- featuredImage: Pick the most topically specific URL below. The code will make it unique — you only need to pick the right category.
-  - LEGAL/LTB/EVICTION/NOTICE: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80
-  - MONEY/RENT/COST/TAX/INSURANCE: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80
-  - HOUSE/PROPERTY/CITY/BUILDING: https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80
-  - MAINTENANCE/REPAIR/TOOLS/SAFETY: https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80
-  - CONTRACT/DOCS/FORMS/LEASE: https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80
-  - TENANT/SCREENING/PEOPLE/KEYS: https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80
-  - FINANCE/CALCULATOR/INVEST/TAX: https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80
-  - FILES/RECORDS/PAPERWORK/OFFICE: https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80
+- featuredImage: Pick the MOST SPECIFIC matching URL below (never the same one two posts in a row —
+  each bucket below has 2-6 options specifically so you rotate within it). The code appends a stable
+  per-post signature so URLs never collide even when two posts share a photo, but visual repetition
+  still matters for readers — spread your picks across every option in the matching bucket.
+  - LEGAL / LTB HEARING / COURT: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80
+  - NOTICE / CONTRACT SIGNING / LEASE / FORMS: https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80
+  - MONEY / RENT / TAX / DEAL: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80
+  - MAINTENANCE / REPAIR: https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80
+  - BATHROOM / RENOVATION / CAPITAL IMPROVEMENT: https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1200&h=630&fit=crop&auto=format&q=80
+  - CONSTRUCTION / CAPITAL WORK: https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80
+  - HOUSE EXTERIOR / GENERIC PROPERTY: https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80
+  - KEYS / MOVE-IN / BUYING A PROPERTY: https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80
+  - APARTMENT BUILDING / COMMERCIAL BUILDING / CITY: https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80
+  - INTERIOR / LIVING ROOM / STAGED UNIT: https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1554995207-c18c203602cb?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1200&h=630&fit=crop&auto=format&q=80
+  - KITCHEN: https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&h=630&fit=crop&auto=format&q=80
+  - PETS: https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1200&h=630&fit=crop&auto=format&q=80
+  - TENANT SCREENING / MEETING / INTERVIEW: https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1200&h=630&fit=crop&auto=format&q=80
+  - ADMIN / PAPERWORK / PLANNING / RECORDS: https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=1200&h=630&fit=crop&auto=format&q=80 OR https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?w=1200&h=630&fit=crop&auto=format&q=80
 
 ─────────────────────────────────────────────────────────────
 KEYWORD PRIORITY
@@ -239,6 +255,7 @@ title: "..."
 date: "YYYY-MM-DD"
 slug: "..."
 excerpt: "..."
+newsletterHook: "..."
 category: "..."
 readTime: "... min read"
 featuredImage: "https://..."
@@ -280,6 +297,10 @@ RULES:
 - Keep the slug IDENTICAL — never change it
 - Keep the date field as-is or update to today if content is significantly refreshed
 - Keep the category and featuredImage as-is unless clearly wrong
+- Keep newsletterHook as-is if present. If missing, add one: ONE sentence (under 220 characters)
+  grounding this post's specific topic in "Almost Passive" (Ebin's free weekly landlord newsletter —
+  local market news, RTA/LTB updates, real lessons from managing rentals). Reuse a real fact from the
+  excerpt or post body — never generic, never fabricated, no hype words, no guarantees.
 - Preserve all existing internal links (add more, don't remove existing ones)
 - Do NOT add placeholder text or notes like "[add example here]"
 - Write in the same voice: direct, practical, expert, no fluff
@@ -293,6 +314,7 @@ title: "..."
 date: "YYYY-MM-DD"
 slug: "..."
 excerpt: "..."
+newsletterHook: "..."
 category: "..."
 readTime: "... min read"
 featuredImage: "https://..."

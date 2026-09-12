@@ -3,9 +3,10 @@ title: "Tenant Onboarding Checklist Ontario: What to Do Before, During, and Afte
 date: "2026-06-10"
 slug: "tenant-onboarding-checklist-ontario"
 excerpt: "A complete tenant onboarding checklist for Ontario landlords — covering lease signing, inspections, key handover, and the first 30 days of tenancy."
+newsletterHook: "A complete tenant onboarding checklist for Ontario landlords — covering lease signing, inspections, key handover, and the first 30 days of tenancy. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The first two weeks of a tenancy set the tone for everything that follows. Landlords who have a structured onboarding process get fewer midnight texts, fewer rent disputes, and fewer problems at move-out. Landlords who wing it often end up answering the same questions repeatedly — or worse, discovering months in that something critical was never documented or disclosed.
