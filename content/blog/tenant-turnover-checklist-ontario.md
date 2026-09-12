@@ -6,7 +6,7 @@ excerpt: "The gap between one tenant leaving and the next moving in is your wind
 newsletterHook: "The gap between one tenant leaving and the next moving in is your window to reset the property. That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Tenant turnover is one of the most operationally demanding parts of owning a rental property. Done poorly, you rush to fill a unit that isn't quite ready — and start a new tenancy on the wrong foot. Done well, it's a chance to get the property into genuinely good shape, protect your investment, and set up a positive relationship with the incoming tenant from day one. Ontario's [Residential Tenancies Act](https://www.ontario.ca/laws/statute/06r17) sets out both landlord and tenant obligations during this process.

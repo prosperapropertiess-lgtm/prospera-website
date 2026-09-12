@@ -6,7 +6,7 @@ excerpt: "Ontario's mandatory Standard Lease Form 2229E applies to virtually eve
 newsletterHook: "Ontario's mandatory Standard Lease Form 2229E applies to virtually every new residential tenancy. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Ontario Standard Lease 2026: What Every Landlord Must Include

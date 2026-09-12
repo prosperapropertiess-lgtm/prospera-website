@@ -6,7 +6,7 @@ date: "2026-08-24"
 slug: "rta-section-22-interference-reasonable-enjoyment-ontario"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords know they can't cut off heat or change the locks. But a far more common source of LTB applications — one that catches landlords off guard — comes from a quieter part of the Residential Tenancies Act.

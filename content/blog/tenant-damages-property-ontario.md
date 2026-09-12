@@ -6,7 +6,7 @@ excerpt: "Discovering damage after a tenant leaves — or worse, while they're s
 newsletterHook: "Discovering damage after a tenant leaves — or worse, while they're still there — is every landlord's nightmare. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You do your move-out inspection and find holes in the walls, a destroyed carpet, a broken window, and a kitchen that looks like it survived a small disaster. Or maybe a tenant is still living there and you've discovered significant damage during a routine visit. Either way, you need to know what your options are — and what the process looks like under Ontario law. The [Landlord and Tenant Board](https://tribunalsontario.ca/ltb/) is the primary forum for resolving these disputes.

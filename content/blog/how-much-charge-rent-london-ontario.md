@@ -6,7 +6,7 @@ excerpt: "Overpriced units sit vacant for weeks. Here are 2026 average rents for
 newsletterHook: "Overpriced units sit vacant for weeks. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Market Updates"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Six weeks of vacancy on a $1,900/month unit costs you $2,850 in lost income. That loss takes over two years of a $100/month premium just to recover — yet this is exactly the trap landlords fall into when they guess at their rental price instead of checking the market.

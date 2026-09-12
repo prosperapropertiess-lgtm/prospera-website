@@ -6,7 +6,7 @@ excerpt: "Evicting a tenant in Ontario takes longer than most landlords expect. 
 newsletterHook: "Evicting a tenant in Ontario takes longer than most landlords expect. Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The most common question landlords ask after a tenancy goes wrong is: *how long is this going to take?*

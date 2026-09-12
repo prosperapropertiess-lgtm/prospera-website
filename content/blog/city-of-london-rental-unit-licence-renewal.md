@@ -6,7 +6,7 @@ date: "2026-07-29"
 slug: "city-of-london-rental-unit-licence-renewal"
 category: "Landlord Guide"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Getting the initial City of London rental unit licence is the hard part — or so most landlords think. The truth is, renewal is where things quietly go wrong.

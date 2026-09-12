@@ -6,7 +6,7 @@ date: "2026-08-26"
 slug: "tenant-wont-leave-after-lease-ends-ontario"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your one-year lease has expired. The tenant is still there. They're not paying differently, they're not causing problems — they just have not left. You assumed the end date on the lease meant something.

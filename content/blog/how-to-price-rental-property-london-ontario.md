@@ -6,7 +6,7 @@ excerpt: "Setting the wrong rent costs you money whether it's too high or too lo
 newsletterHook: "Setting the wrong rent costs you money whether it's too high or too low. That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Pricing a rental unit is one of the decisions that most affects your return — and most landlords make it by checking a few listings on Kijiji and picking a number that feels right. That works sometimes. It also leaves money on the table, or leaves your unit vacant for weeks, both of which cost you.

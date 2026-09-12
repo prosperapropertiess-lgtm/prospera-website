@@ -6,7 +6,7 @@ date: "2026-07-22"
 slug: "l3-application-ontario-landlord-guide"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You and your tenant signed an N11 Agreement to End the Tenancy. The termination date came and went. The tenant is still in your unit, and they're not returning your calls.

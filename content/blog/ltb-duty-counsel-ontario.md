@@ -6,7 +6,7 @@ date: "2026-08-07"
 slug: "ltb-duty-counsel-ontario"
 category: "Ontario Law"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you've ever searched "duty counsel LTB Ontario" the night before a hearing, you're not alone. Most Ontario landlords don't know this service exists. Many assume legal help at the Landlord and Tenant Board is something both parties get equally — or that nobody gets it at all. Neither assumption is right, and walking into a hearing without understanding how duty counsel works can put you at a real disadvantage.

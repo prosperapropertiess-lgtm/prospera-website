@@ -6,7 +6,7 @@ date: "2026-08-21"
 slug: "ltb-consent-order-ontario"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When a landlord files an L1 application and both parties show up to the hearing, the case doesn't always go to a full adjudicated decision. Often, the landlord and tenant reach an agreement — a repayment plan, a move-out date, a behavioural commitment — and the adjudicator formalizes it as a consent order.

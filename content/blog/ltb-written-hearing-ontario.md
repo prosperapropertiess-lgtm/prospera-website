@@ -6,7 +6,7 @@ date: "2026-08-14"
 slug: "ltb-written-hearing-ontario"
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When the Landlord and Tenant Board schedules your case, it picks the format. You don't choose. And if it assigns a written hearing, you will never speak a word — not to a member, not on a video call, not in a room. The entire case plays out on paper.
