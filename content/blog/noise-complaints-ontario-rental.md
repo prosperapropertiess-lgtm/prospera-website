@@ -6,7 +6,7 @@ excerpt: "Noise disputes are one of the most common landlord headaches. Here's y
 newsletterHook: "Noise disputes are one of the most common landlord headaches. That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own a multi-unit property — or even a single-family rental in a dense neighbourhood — you've probably received a noise complaint at some point. A tenant plays music too loud, a dog barks all day, parties run past midnight, or a shift worker complains that their upstairs neighbour's normal daytime activity is disturbing their sleep.

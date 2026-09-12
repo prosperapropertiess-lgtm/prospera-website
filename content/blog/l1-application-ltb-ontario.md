@@ -6,7 +6,7 @@ excerpt: "Served your N4 but the tenant still hasn't paid? Here's exactly how to
 newsletterHook: "Served your N4 but the tenant still hasn't paid? I write about exactly this kind of thing in Almost Passive, every week."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # How to File an L1 Application with the LTB After Serving an N4 in Ontario

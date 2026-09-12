@@ -6,7 +6,7 @@ excerpt: "Ontario landlords must maintain 20°C heat, clear snow, and prevent fr
 newsletterHook: "Ontario landlords must maintain 20°C heat, clear snow, and prevent frozen pipes. That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Ontario winters don't just test your heating system—they test your legal obligations as a landlord. From September through June, you're responsible for maintaining heat, clearing snow and ice, preventing frozen pipes, and ensuring your tenants can actually live in their homes safely. Get it wrong, and you're looking at Landlord and Tenant Board complaints, rent abatements, and emergency repair bills in the thousands.

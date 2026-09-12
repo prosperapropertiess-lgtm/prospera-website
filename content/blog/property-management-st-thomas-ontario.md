@@ -6,7 +6,7 @@ excerpt: "Thinking about hiring a property manager in St. Thomas, Ontario? Here'
 newsletterHook: "Thinking about hiring a property manager in St. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Landlord Tips"
 readTime: "6 min read"
-featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in St. Thomas, Ontario: What Landlords Need to Know

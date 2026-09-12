@@ -6,7 +6,7 @@ excerpt: "Woodstock's rental market is running hot, but the Residential Tenancie
 newsletterHook: "Woodstock's rental market is running hot, but the Residential Tenancies Act still applies in full. Almost Passive is where I cover exactly this stuff — free, once a week."
 category: "Property Management"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Woodstock is Oxford County's largest city, and its rental market has been running hot for several years. A steady manufacturing economy anchored by Toyota Motor Manufacturing Canada, affordable prices relative to London and the GTA, and growing commuter demand have kept vacancy rates tight and landlord confidence high.

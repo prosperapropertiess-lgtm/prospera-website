@@ -6,7 +6,7 @@ excerpt: "The N5 is Ontario's legal notice for tenant behaviour problems — noi
 newsletterHook: "The N5 is Ontario's legal notice for tenant behaviour problems — noise, property damage, interference with others, and more. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N5 Notice to End a Tenancy Early for Interfering with Others, Damage or Overcrowding is the Ontario LTB form landlords use when a tenant's behaviour is causing problems — noise complaints, property damage, harassment of neighbours, overcrowding, or similar issues. Unlike the [N4](/blog/n4-notice-ontario) (which is for non-payment of rent), the N5 addresses conduct that violates the tenant's obligations under Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17).

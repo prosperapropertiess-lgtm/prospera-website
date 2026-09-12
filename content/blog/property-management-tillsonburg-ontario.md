@@ -6,7 +6,7 @@ excerpt: "Looking for property management in Tillsonburg, Ontario? Here's what l
 newsletterHook: "Looking for property management in Tillsonburg, Ontario? That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Tillsonburg is a growing town — and its rental market reflects that. Oxford County has been attracting new residents priced out of larger Ontario cities, manufacturing and agricultural employment is steady, and housing supply hasn't kept pace with demand. For landlords who own rental properties in Tillsonburg, that's good news on the vacancy side.

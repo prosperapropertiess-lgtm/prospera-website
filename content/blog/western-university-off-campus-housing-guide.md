@@ -5,7 +5,7 @@ slug: "western-university-off-campus-housing-guide"
 excerpt: "Moving to Western University in London, Ontario? This guide covers the best neighbourhoods, 2026 rent ranges, transit options, and how to apply for a rental safely."
 category: "Renter Guides"
 readTime: "12 min read"
-featuredImage: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=630&fit=crop&auto=format&q=80"
 seoTitle: "Western University Off-Campus Housing Guide 2026"
 primaryKeyword: "Western University off-campus housing"
 secondaryKeywords: ["student rentals London Ontario Western", "apartments near Western University London Ontario", "where to live near Western University", "London Ontario housing international students Western"]

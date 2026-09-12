@@ -87,7 +87,57 @@ POOLS = {
     "admin_paperwork": [
         "1554415707-6e8cfc93fe23",     # laptop + planner, overhead
         "1518481612222-68bbe828ecd1",  # journal + coffee
+        "1520607162513-77705c0f0d4a",  # desk, laptop, phone, coffee
+        "1497215728101-856f4ea42174",  # standing desk, plants, city view
     ],
+}
+
+# Explicit overrides — the regex RULES below are too broad for these; listing
+# them here beats writing an ever-more-fragile regex. Splits the two mega
+# clusters ("generic landlord advice" and "LTB/eviction process") across more
+# of the buckets above instead of dumping ~80 posts into just two pools.
+OVERRIDES = {
+    # Notice-serving posts (N-forms, L-applications) — signing/serving a
+    # specific form, not a courtroom appearance. Distinct from legal_court.
+    "n1-form-ontario": "notice_signing", "n1-form-ontario-landlord-guide": "notice_signing",
+    "n4-notice-ontario": "notice_signing", "n5-notice-ontario": "notice_signing",
+    "n6-notice-ontario": "notice_signing", "n7-notice-ontario": "notice_signing",
+    "n8-notice-ontario": "notice_signing", "n11-agreement-to-end-tenancy-ontario": "notice_signing",
+    "n12-notice-ontario": "notice_signing", "n13-notice-ontario": "notice_signing",
+    "l1-application-ltb-ontario": "legal_court", "l1-application-ontario-landlord-guide": "legal_court",
+    "l2-application-ontario-landlord-guide": "legal_court", "l3-application-ontario-landlord-guide": "legal_court",
+    "l4-application-ontario-landlord-guide": "legal_court", "l9-application-ontario": "legal_court",
+    "how-to-write-lease-agreement-ontario": "notice_signing",
+    "move-in-move-out-inspection-ontario": "notice_signing",
+    "subletting-assignment-ontario": "notice_signing",
+    "selling-rental-property-with-tenants-ontario": "notice_signing",
+    # Money / cost / insurance — reroute out of the generic house bucket
+    "landlord-insurance-vs-tenant-insurance-ontario": "money_rent_tax",
+    "rental-property-insurance-ontario": "money_rent_tax",
+    "security-deposits-ontario": "money_rent_tax",
+    "property-management-fees-ontario": "money_rent_tax",
+    "property-manager-london-ontario-cost": "money_rent_tax",
+    "late-rent-payments-ontario": "money_rent_tax",
+    "capital-gains-rental-property-ontario": "money_rent_tax",
+    "how-to-price-rental-property-london-ontario": "money_rent_tax",
+    # Admin / records / process
+    "landlord-record-keeping-ontario": "admin_paperwork",
+    "utilities-ontario-rentals": "admin_paperwork",
+    # Screening / onboarding / communication / hiring a PM — people talking
+    "how-to-handle-tenant-complaints-ontario": "screening_meeting",
+    "landlord-tenant-communication-best-practices-ontario": "screening_meeting",
+    "tenant-onboarding-checklist-ontario": "screening_meeting",
+    "tenant-turnover-checklist-ontario": "screening_meeting",
+    "landlord-responsibilities-new-tenant-ontario": "screening_meeting",
+    "how-to-find-a-property-manager-ontario": "screening_meeting",
+    "when-to-hire-a-property-manager-ontario": "screening_meeting",
+    "switching-property-management-companies-ontario": "screening_meeting",
+    # Maintenance-adjacent
+    "fire-safety-ontario-landlords": "maintenance_repair",
+    "pest-control-ontario-rentals": "maintenance_repair",
+    "noise-complaints-ontario-rental": "maintenance_repair",
+    # Marketing a unit — showing off the space
+    "marketing-rental-property-ontario": "interior_living",
 }
 
 # Ordered rules: first matching pattern (against slug) wins.
@@ -116,6 +166,8 @@ CATEGORY_FALLBACK = {
 
 
 def bucket_for(slug: str, category: str) -> str:
+    if slug in OVERRIDES:
+        return OVERRIDES[slug]
     for pattern, name in RULES:
         if re.search(pattern, slug):
             return name

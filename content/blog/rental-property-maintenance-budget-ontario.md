@@ -6,7 +6,7 @@ excerpt: "Most small landlords underfund maintenance until something expensive b
 newsletterHook: "Most small landlords underfund maintenance until something expensive breaks. Almost Passive exists so you catch things like this before they cost you."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Maintenance is the expense most small landlords underestimate. Rent deposits and monthly cash flow get plenty of attention — but the furnace that fails in February, the roof that starts leaking in April, the water heater that dies on a Saturday morning: these costs don't announce themselves in advance. If you haven't planned for them, they come straight out of pocket at the worst possible time.

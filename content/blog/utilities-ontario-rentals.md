@@ -6,7 +6,7 @@ excerpt: "Electricity, heat, water — here's how to structure utility responsib
 newsletterHook: "Electricity, heat, water — here's how to structure utility responsibilities in your Ontario lease and what the law says about each. That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 One of the first questions prospective tenants ask is: "What's included?" Your answer directly affects how you price the unit and who applies. Getting utility arrangements right — and documenting them properly — is one of the most practical things you can do as an Ontario landlord.

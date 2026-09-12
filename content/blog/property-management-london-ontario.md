@@ -6,7 +6,7 @@ excerpt: "Thinking about hiring a property manager in London, Ontario? Here's wh
 newsletterHook: "Thinking about hiring a property manager in London, Ontario? I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in London, Ontario: What Landlords Need to Know
