@@ -5,7 +5,7 @@ date: "2026-07-31"
 slug: "london-ontario-property-standards-bylaw"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most London landlords know the Residential Tenancies Act sets the rules between landlords and tenants. Fewer know there is a second layer of rules sitting on top of it.

@@ -5,7 +5,7 @@ date: "2026-09-11"
 slug: "buying-property-with-existing-tenants-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Buying a property with tenants already in it sounds convenient. Someone is already paying rent on day one. But the legal reality catches many new landlords off guard.
