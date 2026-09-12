@@ -5,7 +5,7 @@ date: "2026-09-07"
 slug: "can-landlord-evict-tenant-ontario-2026"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Yes, a landlord can evict a tenant in Ontario — but only for specific reasons listed in the *Residential Tenancies Act* (RTA). You cannot evict because the lease expired, because you changed your mind, or because you want the unit back for an unlisted reason. Every eviction must go through the Landlord and Tenant Board (LTB), and every step must follow the RTA precisely.

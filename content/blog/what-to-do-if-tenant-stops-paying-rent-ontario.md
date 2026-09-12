@@ -5,7 +5,7 @@ date: "2026-09-02"
 slug: "what-to-do-if-tenant-stops-paying-rent-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your tenant hasn't paid rent. A week has passed. They're not responding to texts. You're wondering what you can legally do — and what you can't.

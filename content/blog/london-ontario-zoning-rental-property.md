@@ -5,7 +5,7 @@ date: "2026-09-04"
 slug: "london-ontario-zoning-rental-property"
 category: "Landlord Guide"
 readTime: "8 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own a property in London, Ontario and want to add a rental unit — or if you're buying a property and want to know whether you can legally rent it out — zoning is where you start.

@@ -4,7 +4,7 @@ date: "2026-09-11"
 slug: "city-of-london-second-unit-registration"
 category: "Landlord Guide"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your basement apartment passed inspection. You have the building permit. You think you're ready to rent.

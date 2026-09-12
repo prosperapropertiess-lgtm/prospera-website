@@ -5,7 +5,7 @@ date: "2026-08-17"
 slug: "ltb-default-order-ontario"
 category: "Ontario Law"
 readTime: "7 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You filed your L1 application. You served the notice correctly. The hearing date arrived. You showed up — and your tenant didn't.
