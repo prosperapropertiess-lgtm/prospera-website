@@ -77,7 +77,7 @@ export default function AlmostPassiveSignup({
           ))}
         </ul>
         <div className="border-t pt-6" style={{ borderColor: "#E8E4DF" }}>
-          <BeehiivEmbed />
+          <BeehiivEmbed instanceId={variant} />
         </div>
       </div>
     );
@@ -97,7 +97,7 @@ export default function AlmostPassiveSignup({
             {body}
           </p>
           <div className="max-w-lg mx-auto text-left">
-            <BeehiivEmbed />
+            <BeehiivEmbed instanceId={variant} />
           </div>
         </div>
       </section>
@@ -116,7 +116,7 @@ export default function AlmostPassiveSignup({
       <p className="text-sm mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
         {body}
       </p>
-      <BeehiivEmbed />
+      <BeehiivEmbed instanceId={variant} />
     </div>
   );
 }
