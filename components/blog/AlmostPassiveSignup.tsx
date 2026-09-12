@@ -1,5 +1,6 @@
 "use client";
 import { useState, useId } from "react";
+import BeehiivEmbed from "./BeehiivEmbed";
 
 /**
  * Landlord-only newsletter CTA — "Almost Passive" (Beehiiv).
@@ -140,46 +141,26 @@ export default function AlmostPassiveSignup({
   const sharedIframe = <iframe name={iframeName} title="" style={{ display: "none" }} />;
 
   if (variant === "page") {
+    // Beehiiv's own Web Embed widget manages its own submit/success state,
+    // so this variant doesn't need the status tracking the other variants use.
     return (
       <div className="bg-white rounded-xl p-8 border" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-        {sharedIframe}
-        {status === "done" ? (
-          <div className="text-center py-4">
-            <p className="text-4xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-              You&apos;re in.
-            </p>
-            <p className="text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-              Welcome to Almost Passive — first issue lands next week.
-            </p>
-          </div>
-        ) : (
-          <>
-            <p className="text-xs uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-              {c.eyebrow}
-            </p>
-            <ul className="space-y-3 mb-8">
-              {PAGE_ITEMS.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                  <svg className="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B2030" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="border-t pt-6" style={{ borderColor: "#E8E4DF" }}>
-              <SignupFields email={email} setEmail={setEmail} status={status} iframeName={iframeName} onSubmit={handleSubmit} dark={false} buttonLabel={c.button} />
-            </div>
-            {status === "error" && (
-              <p className="text-sm mt-3" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-                Something went wrong. Please try again.
-              </p>
-            )}
-            <p className="text-xs text-center mt-4" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-              No spam. Unsubscribe any time.
-            </p>
-          </>
-        )}
+        <p className="text-xs uppercase tracking-widest mb-6" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+          {c.eyebrow}
+        </p>
+        <ul className="space-y-3 mb-8">
+          {PAGE_ITEMS.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
+              <svg className="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B2030" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div className="border-t pt-6" style={{ borderColor: "#E8E4DF" }}>
+          <BeehiivEmbed />
+        </div>
       </div>
     );
   }
