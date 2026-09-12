@@ -6,7 +6,7 @@ date: "2026-07-27"
 slug: "city-of-london-rental-unit-licence"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you rent out a property in London, Ontario, you need a rental unit licence. Not a nice-to-have. A legal requirement under the City of London's Rental Housing Licensing By-law.

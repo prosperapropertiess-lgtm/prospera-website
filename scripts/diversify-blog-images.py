@@ -19,6 +19,7 @@ POOLS = {
     "legal_court": [
         "1589829545856-d10d557cf95f",  # Lady Justice statue
         "1589391886645-d51941baf7fb",  # gavel
+        "1436450412740-6b988f486c6b",  # courthouse columns
     ],
     "notice_signing": [
         "1450101499163-c8848c66ca85",  # signing a document
@@ -28,6 +29,8 @@ POOLS = {
         "1554224155-6726b3ff858f",     # tax forms + calculator
         "1554224154-26032ffc0d07",     # tax forms + coffee
         "1521791136064-7986c2920216",  # handshake (deal/agreement)
+        "1526304640581-d334cdbbf45e",  # cash / dollar bills
+        "1600880292203-757bb62b4baf",  # business people high-fiving
     ],
     "maintenance_repair": [
         "1581578731548-c64695cc6952",  # cleaning a window
@@ -46,6 +49,8 @@ POOLS = {
         "1523217582562-09d0def993a6",  # white modern house
         "1600585154340-be6161a56a0c",  # modern house with tree
         "1449844908441-8829872d2607",  # suburban house at dawn
+        "1494526585095-c41746248156",  # green modern house at dusk
+        "1600607688969-a5bfcd646154",  # modern house, backyard patio
     ],
     "keys_movein": [
         "1560518883-ce09059eeffa",     # keys + model house
@@ -62,6 +67,7 @@ POOLS = {
         "1616486338812-3dadae4b4ace",  # staged living room
         "1554995207-c18c203602cb",     # orange-couch living room
         "1493809842364-78817add7ffb",  # living room, TV + blue sofa
+        "1502005229762-cf1b2da7c5d6",  # interior staircase
     ],
     "kitchen": [
         "1484154218962-a197022b5858",  # modern kitchen
@@ -73,6 +79,10 @@ POOLS = {
         "1454165804606-c3d57bc86b40",  # two people at laptops
         "1573497491208-6b1acb260507",  # two people talking at a table
         "1517245386807-bb43f82c33c4",  # meeting/discussion at desk
+        "1568992687947-868a62a9f521",  # team meeting around a table
+        "1517048676732-d65bc937f952",  # business meeting, notes
+        "1521737604893-d14cc237f11d",  # group meeting, cabin-style room
+        "1531973576160-7125cd663d86",  # modern open office
     ],
     "admin_paperwork": [
         "1554415707-6e8cfc93fe23",     # laptop + planner, overhead
@@ -117,26 +127,29 @@ def url_for(photo_id: str) -> str:
 
 
 def main():
-    posts = []  # (slug, path, category)
+    posts = []  # (slug, date, path, category)
     for path in sorted(BLOG_DIR.glob("*.md")):
         text = path.read_text(encoding="utf-8")
         m = re.match(r"^---\n(.*?)\n---", text, re.S)
         if not m:
             continue
         cat_m = re.search(r'^category:\s*"(.+)"', m.group(1), re.M)
-        posts.append((path.stem, path, cat_m.group(1) if cat_m else ""))
+        date_m = re.search(r'^date:\s*"(.+)"', m.group(1), re.M)
+        posts.append((path.stem, date_m.group(1) if date_m else "0000-00-00", path, cat_m.group(1) if cat_m else ""))
 
-    # Group by bucket, then assign round-robin in sorted-slug order so each
-    # bucket's pool is spread as evenly as possible (deterministic, stable).
-    by_bucket: dict[str, list[tuple[str, pathlib.Path]]] = {}
-    for slug, path, category in posts:
+    # Group by bucket, then assign round-robin in DATE order (newest posts on
+    # /blog are listed together) so two posts near each other on the listing
+    # page never land on the same photo — spreading by slug alone left
+    # chronologically-adjacent posts free to repeat, which is what's visible.
+    by_bucket: dict[str, list[tuple[str, str, pathlib.Path]]] = {}
+    for slug, date, path, category in posts:
         bucket = bucket_for(slug, category)
-        by_bucket.setdefault(bucket, []).append((slug, path))
+        by_bucket.setdefault(bucket, []).append((date, slug, path))
 
     changed = 0
     for bucket, items in by_bucket.items():
         pool = POOLS[bucket]
-        for i, (slug, path) in enumerate(sorted(items)):
+        for i, (date, slug, path) in enumerate(sorted(items)):
             new_url = url_for(pool[i % len(pool)])
             text = path.read_text(encoding="utf-8")
             new_text, n = re.subn(

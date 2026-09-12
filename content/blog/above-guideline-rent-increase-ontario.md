@@ -6,7 +6,7 @@ excerpt: "Spent $40K+ on capital improvements but capped at 2.5%? Learn exactly 
 newsletterHook: "Spent $40K+ on capital improvements but capped at 2.5%? Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Landlord Tips"
 readTime: "13 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You replaced the roof for $60,000. The boiler gave out and cost another $40,000. Your property taxes jumped 18% in two years. And Ontario's rent increase guideline gives you 2.5%.

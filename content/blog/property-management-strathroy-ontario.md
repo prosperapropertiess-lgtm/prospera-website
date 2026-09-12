@@ -6,7 +6,7 @@ excerpt: "Own a rental property in Strathroy, Ontario? This guide covers what lo
 newsletterHook: "Own a rental property in Strathroy, Ontario? Almost Passive exists so you catch things like this before they cost you."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Property Management in Strathroy, Ontario: A Guide for Local Landlords

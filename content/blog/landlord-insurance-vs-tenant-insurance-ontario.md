@@ -6,7 +6,7 @@ excerpt: "Landlord insurance and tenant insurance cover different things. Ontari
 newsletterHook: "Landlord insurance and tenant insurance cover different things. Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A pipe bursts in your rental unit. Water damages the ceiling, ruins the flooring, and destroys your tenant's laptop and furniture. Here's the question most landlords can't answer without hesitation: who pays for what?

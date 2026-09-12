@@ -6,7 +6,7 @@ excerpt: "Good records protect you at the LTB, at tax time, and in any dispute w
 newsletterHook: "Good records protect you at the LTB, at tax time, and in any dispute with a tenant. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlord disputes come down to one thing: documentation. The landlord who keeps records wins. The landlord who relies on memory loses — at the Landlord and Tenant Board, at tax time, and in any conversation with a tenant who has a different recollection of events.

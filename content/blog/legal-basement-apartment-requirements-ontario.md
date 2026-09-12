@@ -6,7 +6,7 @@ excerpt: "Thinking about adding a basement suite in London, St. Thomas, or Strat
 newsletterHook: "Thinking about adding a basement suite in London, St. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Legal Basement Apartment Requirements in Ontario (2026 Complete Guide)

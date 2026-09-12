@@ -6,7 +6,7 @@ excerpt: "Good communication keeps tenancies from escalating. Here's what Ontari
 newsletterHook: "Good communication keeps tenancies from escalating. Almost Passive is where I cover exactly this stuff — free, once a week."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlord-tenant disputes don't start with a legal problem — they start with a communication breakdown. A missed message, a verbal promise that was never confirmed, a tone that turned a manageable situation into a grievance. By the time the LTB gets involved, both parties are usually pointing to moments where the other person "should have known."

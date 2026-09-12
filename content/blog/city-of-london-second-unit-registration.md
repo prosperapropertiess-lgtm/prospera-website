@@ -6,7 +6,7 @@ excerpt: "Your basement apartment has a building permit and passed inspection. T
 newsletterHook: "Your basement apartment has a building permit and passed inspection. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Landlord Guide"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your basement apartment passed inspection. You have the building permit. You think you're ready to rent.

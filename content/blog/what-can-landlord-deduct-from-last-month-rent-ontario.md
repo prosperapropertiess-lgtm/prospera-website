@@ -6,7 +6,7 @@ excerpt: "Ontario landlords cannot freely deduct from last month's rent. Learn e
 newsletterHook: "Ontario landlords cannot freely deduct from last month's rent. This is the kind of rule Almost Passive flags before it becomes a problem."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Last month's rent is probably sitting in your bank account right now. Maybe it's been there for years. And when your tenant finally moves out — leaving a hole in the wall, an unpaid hydro bill, or a fridge full of mystery leftovers — your first instinct is to deduct those costs from that deposit.

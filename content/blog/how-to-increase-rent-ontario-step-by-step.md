@@ -6,7 +6,7 @@ excerpt: "Learn exactly how to increase rent in Ontario — the right notice, fo
 newsletterHook: "Learn exactly how to increase rent in Ontario — the right notice, forms, timing, and guideline rules landlords must follow under the RTA. Almost Passive exists so you catch things like this before they cost you."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Raising rent in Ontario isn't as simple as sending a text message or adding a line to next month's invoice. Get the process wrong — wrong form, wrong notice period, wrong timing — and the rent increase is void. Your tenant can keep paying the old amount, and you'll have to start over from scratch.

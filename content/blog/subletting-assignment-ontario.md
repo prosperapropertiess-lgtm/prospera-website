@@ -6,7 +6,7 @@ excerpt: "Your tenant wants to sublet or transfer their lease — what are your 
 newsletterHook: "Your tenant wants to sublet or transfer their lease — what are your rights? That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 It's more common than you might think: a tenant reaches out to say they want to move out early and asks if someone else can take over the unit. Sometimes they say "sublet," sometimes "transfer the lease." The distinction matters — legally and practically — and your rights in each case are different.

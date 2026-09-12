@@ -6,7 +6,7 @@ excerpt: "Heading to an LTB hearing in Ontario? This step-by-step evidence guide
 newsletterHook: "Heading to an LTB hearing in Ontario? That's exactly the kind of thing Almost Passive covers every week."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # How to Prepare for Your LTB Hearing: A Landlord's Evidence Guide (Ontario 2026)
