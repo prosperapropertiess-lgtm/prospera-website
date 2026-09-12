@@ -3,9 +3,10 @@ title: "Ontario Rent Control Exemptions: Is Your Unit Exempt from the 2.1% Guide
 date: "2026-05-29"
 slug: "ontario-rent-control-exemptions-2026"
 excerpt: "Not all Ontario rental units are subject to the annual rent increase guideline. Find out if your property qualifies for the rent control exemption — and what that means for your rental income."
+newsletterHook: "Not all Ontario rental units are subject to the annual rent increase guideline. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Ontario Rent Control Exemptions: Is Your Unit Exempt from the 2.1% Guideline?

@@ -1,10 +1,11 @@
 ---
 title: "Pet Policies in Ontario Rentals: What Landlords Can (and Can't) Enforce"
 excerpt: "No-pet clauses in Ontario leases are largely unenforceable — but that doesn't mean you have no options. Here's what the law actually says."
+newsletterHook: "No-pet clauses in Ontario leases are largely unenforceable — but that doesn't mean you have no options. That's the kind of local, practical detail that goes in Almost Passive every week."
 date: "2026-04-27"
 category: "Landlord Tips"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you've ever written "no pets" into a lease and assumed that settled it, you're not alone — and you're also not quite right. Ontario's [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) has a specific provision that trips up landlords who haven't read it carefully. Understanding it upfront will save you frustration and protect you from making claims you can't actually enforce.

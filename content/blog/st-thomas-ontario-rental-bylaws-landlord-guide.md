@@ -1,11 +1,12 @@
 ---
 title: "St. Thomas Ontario Rental Bylaws: A Landlord's Complete Guide"
 excerpt: "St. Thomas landlords face fewer hoops than London — no rental licensing — but property standards still apply. Here's what the City of St. Thomas requires and how enforcement works."
+newsletterHook: "St. That's the kind of local, practical detail that goes in Almost Passive every week."
 date: "2026-08-05"
 slug: "st-thomas-ontario-rental-bylaws-landlord-guide"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own rental property in St. Thomas, you operate in a different regulatory environment than London landlords just 30 minutes to the north.

@@ -3,9 +3,10 @@ title: "Ontario Lease Agreement: How to Write One That Holds Up (2026)"
 date: "2026-06-05"
 slug: "how-to-write-lease-agreement-ontario"
 excerpt: "Most Ontario landlords make costly lease mistakes in the additional terms section. Here's how to write a legally sound lease agreement — and what clauses will get you burned."
+newsletterHook: "Most Ontario landlords make costly lease mistakes in the additional terms section. That's exactly the kind of thing Almost Passive covers every week."
 category: "Landlord Tips"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A poorly written lease agreement doesn't protect you — it exposes you. In Ontario, landlords face a specific problem: the government mandates a Standard Lease form for most residential tenancies, but the additional terms section gives just enough rope to hang yourself. Clauses that sound reasonable — mandatory professional carpet cleaning, automatic lease termination at year-end, entry without notice — are legally void under the *Residential Tenancies Act, 2006* (RTA). You can write them in, tenants can sign them, and you still can't enforce them.

@@ -3,9 +3,10 @@ title: "Rental Property Tax Deductions Ontario Landlords Can't Afford to Miss"
 date: "2026-06-03"
 slug: "rental-property-tax-deductions-ontario"
 excerpt: "Missing rental tax deductions costs Ontario landlords hundreds every year. Here's exactly what you can write off — with CRA rules, amounts, and records to keep."
+newsletterHook: "Missing rental tax deductions costs Ontario landlords hundreds every year. That's the kind of local, practical detail that goes in Almost Passive every week."
 category: "Landlord Tips"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The average Ontario landlord with one rental property has $8,000–$15,000 in legitimate deductible expenses each year. Most don't claim all of them — not because they're ineligible, but because they didn't track them.

@@ -3,7 +3,8 @@ title: "Navigating the Landlord and Tenant Board in Ontario: A Practical Guide"
 date: "2026-04-29"
 slug: "landlord-tenant-board-ontario-guide"
 excerpt: "The LTB is how Ontario landlords and tenants resolve disputes — but many landlords don't know how it works until they're already in it. Here's what you need to know."
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+newsletterHook: "The LTB is how Ontario landlords and tenants resolve disputes — but many landlords don't know how it works until they're already in it. That's the kind of local, practical detail that goes in Almost Passive every week."
+featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Navigating the Landlord and Tenant Board in Ontario: A Practical Guide

@@ -1,6 +1,7 @@
 ---
 title: "L3 Application Ontario: How to Evict a Tenant Who Agreed to Leave But Won't Go"
 excerpt: "The L3 application lets Ontario landlords get an eviction order without a full hearing when a tenant signed an N11 or gave notice but refused to vacate on the agreed date."
+newsletterHook: "The L3 application lets Ontario landlords get an eviction order without a full hearing when a tenant signed an N11 or gave notice but refused to vacate on the agreed date. Almost Passive exists so you catch things like this before they cost you."
 date: "2026-07-22"
 slug: "l3-application-ontario-landlord-guide"
 category: "Ontario Law"

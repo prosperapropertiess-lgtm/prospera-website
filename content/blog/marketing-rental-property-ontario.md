@@ -3,9 +3,10 @@ title: "How to Market Your Ontario Rental & Fill It Fast"
 date: "2026-06-09"
 slug: "marketing-rental-property-ontario"
 excerpt: "Vacant unit costing you money? Learn exactly where to list, how to write ads that convert, and how to attract quality tenants in Ontario fast."
+newsletterHook: "Vacant unit costing you money? I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Every day your unit sits vacant costs you money. In London, Ontario, the average two-bedroom rents for $1,800–$2,100/month — that's $60–$70 a day going uncollected while a listing with bad photos and a vague description sits ignored on Kijiji. The difference between a unit that rents in 10 days and one that drags on for six weeks usually isn't the property itself. It's how the property is presented.

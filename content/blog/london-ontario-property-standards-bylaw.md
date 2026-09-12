@@ -1,6 +1,7 @@
 ---
 title: "City of London Property Standards By-law: What Every London Landlord Needs to Know"
 excerpt: "London landlords must comply with both the RTA and the city's Property Standards By-law. Here's what the bylaw requires, how it's enforced, and what an Order to Comply means for you."
+newsletterHook: "London landlords must comply with both the RTA and the city's Property Standards By-law. This is the kind of rule Almost Passive flags before it becomes a problem."
 date: "2026-07-31"
 slug: "london-ontario-property-standards-bylaw"
 category: "Landlord Guide"

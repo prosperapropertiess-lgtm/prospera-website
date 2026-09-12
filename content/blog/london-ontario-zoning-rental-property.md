@@ -1,11 +1,12 @@
 ---
 title: "London Ontario Zoning for Rental Properties: What Landlords Need to Know"
 excerpt: "Which zones allow rentals, basement apartments, and garden suites in London, Ontario — and how provincial rules changed the game for small landlords."
+newsletterHook: "Which zones allow rentals, basement apartments, and garden suites in London, Ontario — and how provincial rules changed the game for small landlords. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 date: "2026-09-04"
 slug: "london-ontario-zoning-rental-property"
 category: "Landlord Guide"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own a property in London, Ontario and want to add a rental unit — or if you're buying a property and want to know whether you can legally rent it out — zoning is where you start.

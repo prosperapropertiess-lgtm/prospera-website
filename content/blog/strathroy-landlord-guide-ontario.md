@@ -1,11 +1,12 @@
 ---
 title: "Strathroy, Ontario Landlord Guide: Property Standards, Bylaws, and the RTA"
 excerpt: "Renting property in Strathroy-Caradoc? Here's what local bylaws, property standards enforcement, and the RTA mean for small landlords in this Middlesex Township."
+newsletterHook: "Renting property in Strathroy-Caradoc? Almost Passive is where I cover exactly this stuff — free, once a week."
 date: "2026-08-19"
 slug: "strathroy-landlord-guide-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Strathroy sits about 35 kilometres west of London on the Highway 402 corridor. It's a small city — population around 25,000 in the Township of Strathroy-Caradoc — with a mix of single-family homes, duplexes, and basement apartments. If you're renting a property here, the rules are different from London in one important way: there is no rental housing licensing program.

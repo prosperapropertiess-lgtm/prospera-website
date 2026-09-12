@@ -3,9 +3,10 @@ title: "Pest Control in Ontario Rentals: Who Is Responsible?"
 date: "2026-04-07"
 slug: "pest-control-ontario-rentals"
 excerpt: "Bedbugs, mice, cockroaches — Ontario law is clear about who must deal with infestations. Here's what landlords need to know and how to handle it properly."
+newsletterHook: "Bedbugs, mice, cockroaches — Ontario law is clear about who must deal with infestations. Almost Passive exists so you catch things like this before they cost you."
 category: "Landlord Tips"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A tenant calls to say there are mice in the kitchen. Or bedbugs. Or cockroaches. Your stomach drops — not just because of the cost, but because you're not sure whose problem this is and how bad it might get.

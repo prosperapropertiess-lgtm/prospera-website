@@ -12,6 +12,8 @@ export interface PostMeta {
   category: string;
   readTime: string;
   featuredImage?: string;
+  /** Post-specific Almost Passive newsletter hook — see components/blog/AlmostPassiveSignup.tsx */
+  newsletterHook?: string;
 }
 
 export interface Post extends PostMeta {

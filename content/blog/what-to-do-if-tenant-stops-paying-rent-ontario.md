@@ -1,11 +1,12 @@
 ---
 title: "What To Do If Your Tenant Stops Paying Rent in Ontario"
 excerpt: "Tenant stopped paying rent? Here's the exact legal process — N4, L1, LTB hearing, Sheriff enforcement — step by step for Ontario landlords."
+newsletterHook: "Tenant stopped paying rent? Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 date: "2026-09-02"
 slug: "what-to-do-if-tenant-stops-paying-rent-ontario"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Your tenant hasn't paid rent. A week has passed. They're not responding to texts. You're wondering what you can legally do — and what you can't.

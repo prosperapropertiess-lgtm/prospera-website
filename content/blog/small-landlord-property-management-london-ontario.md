@@ -3,9 +3,10 @@ title: "Small Landlord Property Management: 7 Mistakes Costing London Landlords 
 date: "2026-08-21"
 slug: "small-landlord-property-management-london-ontario"
 excerpt: "Managing 1–5 rentals in London, Ontario? Discover the 7 costly mistakes small landlords make—and how to avoid them. Complete guide to self-manage vs. hire help."
+newsletterHook: "Managing 1–5 rentals in London, Ontario? Almost Passive exists so you catch things like this before they cost you."
 category: "Property Management"
 readTime: "12 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You own one rental property. Maybe two. You didn't set out to become a landlord — maybe you inherited a property, kept a house when you moved, or bought a second unit as a long-term investment. Either way, you're now responsible for a tenant, a lease, a building, and a web of Ontario regulations you didn't fully read before signing up.

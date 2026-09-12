@@ -1,11 +1,12 @@
 ---
 title: "Landlord Retaliation Ontario: What RTA Section 97 Means for Evictions"
 excerpt: "RTA Section 97 bans retaliatory evictions in Ontario. Learn what counts as retaliation, the 6-month presumption, and how to protect legitimate notices."
+newsletterHook: "RTA Section 97 bans retaliatory evictions in Ontario. Almost Passive exists so you catch things like this before they cost you."
 date: "2026-07-24"
 slug: "landlord-retaliation-ontario-rta-section-97"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You serve an N5 notice for damage. Three weeks later, the tenant tells the LTB the notice is retaliation for a repair request they made last month. The adjudicator looks at the timeline and puts the burden on you to prove otherwise.

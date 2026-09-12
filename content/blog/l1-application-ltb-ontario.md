@@ -3,9 +3,10 @@ title: "How to File an L1 Application with the LTB After Serving an N4 in Ontari
 date: "2026-05-18"
 slug: "l1-application-ltb-ontario"
 excerpt: "Served your N4 but the tenant still hasn't paid? Here's exactly how to file an L1 application with the Landlord and Tenant Board — step by step, with the right documents and no costly mistakes."
+newsletterHook: "Served your N4 but the tenant still hasn't paid? I write about exactly this kind of thing in Almost Passive, every week."
 category: "Ontario Law"
 readTime: "8 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # How to File an L1 Application with the LTB After Serving an N4 in Ontario

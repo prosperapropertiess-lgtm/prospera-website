@@ -3,9 +3,10 @@ title: "How to Find the Best Property Management Company in London, Ontario"
 date: "2026-05-03"
 slug: "best-property-management-company-london-ontario"
 excerpt: "The best property management company in London, Ontario combines local market knowledge, Ontario landlord-tenant law expertise, and transparent fees — here's how to evaluate your options and choose with confidence."
+newsletterHook: "The best property management company in London, Ontario combines local market knowledge, Ontario landlord-tenant law expertise, and transparent fees — here's how to evaluate your options and choose with confidence. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Landlord Tips"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The best property management company in London, Ontario is one that knows the local rental market deeply, stays on top of Ontario's *Residential Tenancies Act*, responds to tenants and landlords quickly, and charges fees that are fair and clearly disclosed upfront. For a full breakdown of what's normal to pay, see our guide to [property management fees in Ontario](/blog/property-management-fees-ontario). If a company can't demonstrate all four of these things, keep looking.

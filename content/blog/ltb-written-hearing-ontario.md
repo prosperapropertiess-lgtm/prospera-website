@@ -1,6 +1,7 @@
 ---
 title: "LTB Written Hearings in Ontario: What Landlords Need to Know Before the Deadline"
 excerpt: "The LTB uses three hearing formats. Written hearings are entirely on paper — no video call, no speaking. Miss the submission deadline and your case proceeds without you."
+newsletterHook: "The LTB uses three hearing formats. Almost Passive tracks changes like this before they cost you a month's rent."
 date: "2026-08-14"
 slug: "ltb-written-hearing-ontario"
 category: "Ontario Law"

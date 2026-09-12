@@ -3,9 +3,10 @@ title: "Ontario N6 Notice: How to End a Tenancy for Illegal Acts"
 date: "2026-07-15"
 slug: "n6-notice-ontario"
 excerpt: "The N6 is Ontario's eviction notice for illegal activity in your rental — no fix period, no second chances. Here's how landlords use it correctly."
+newsletterHook: "The N6 is Ontario's eviction notice for illegal activity in your rental — no fix period, no second chances. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The N6 Notice to End a Tenancy Early for Illegal Acts or Misrepresentation of Income is one of the few Ontario LTB notices that gives a tenant no chance to fix the problem. There is no void period. There is no second notice. If you can establish the grounds, you serve the N6, wait for the notice period to expire, and file an L2 application at the Landlord and Tenant Board if the tenant stays.

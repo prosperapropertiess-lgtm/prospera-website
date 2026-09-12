@@ -1,6 +1,7 @@
 ---
 title: "L1 Application Ontario: How to File for Eviction and Rent Arrears at the LTB"
 excerpt: "Step-by-step guide to filing the L1 application at the Landlord Tenant Board — what it covers, how to complete it, and what to expect at the hearing."
+newsletterHook: "Step-by-step guide to filing the L1 application at the Landlord Tenant Board — what it covers, how to complete it, and what to expect at the hearing. This is the kind of rule Almost Passive flags before it becomes a problem."
 date: "2026-07-20"
 slug: "l1-application-ontario-landlord-guide"
 category: "Ontario Law"

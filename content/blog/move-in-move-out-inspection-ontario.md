@@ -3,7 +3,8 @@ title: "Move-In and Move-Out Inspections in Ontario: A Landlord's Guide"
 date: "2026-04-29"
 slug: "move-in-move-out-inspection-ontario"
 excerpt: "A thorough inspection at the start and end of every tenancy is one of the most important things a landlord can do. Here's how to do it right under Ontario law."
-featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
+newsletterHook: "A thorough inspection at the start and end of every tenancy is one of the most important things a landlord can do. This is the kind of rule Almost Passive flags before it becomes a problem."
+featuredImage: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Move-In and Move-Out Inspections in Ontario: A Landlord's Guide

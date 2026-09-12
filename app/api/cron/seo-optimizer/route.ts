@@ -42,6 +42,11 @@ RULES:
 - Keep the slug IDENTICAL — never change it
 - Keep the date field as-is or update to today if content is significantly refreshed
 - Keep the category and featuredImage as-is unless clearly wrong
+- newsletterHook: if present and the excerpt didn't change meaningfully, keep it as-is. If missing, or
+  if you rewrote the excerpt enough that the old hook no longer matches, write ONE sentence (under 220
+  characters) grounding this post's specific topic in "Almost Passive" (Ebin's free weekly landlord
+  newsletter — local market news, RTA/LTB updates, real lessons from managing rentals). Reuse a real
+  fact from the excerpt or body — never generic, never fabricated, no hype words, no guarantees.
 - Preserve all existing internal links (add more, don't remove existing ones)
 - Do NOT add placeholder text or notes like "[add example here]"
 - Write in the same voice: direct, practical, expert, no fluff
@@ -55,6 +60,7 @@ title: "..."
 date: "YYYY-MM-DD"
 slug: "..."
 excerpt: "..."
+newsletterHook: "..."
 category: "..."
 readTime: "... min read"
 featuredImage: "https://..."

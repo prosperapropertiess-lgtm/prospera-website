@@ -101,11 +101,29 @@ function SignupFields({
   );
 }
 
-export default function AlmostPassiveSignup({ variant }: { variant: Variant }) {
+// Shown under a post-specific hook instead of the generic body copy — the
+// hook itself already carries the value prop, this just supports the ask.
+const SHORT_BODY: Record<Variant, string> = {
+  top: "Free. Weekly. London & Southwestern Ontario.",
+  mid: "One short email, no fluff.",
+  end: "Free, unsubscribe anytime.",
+  page: "",
+};
+
+export default function AlmostPassiveSignup({
+  variant,
+  customHook,
+}: {
+  variant: Variant;
+  /** Post-specific hook (post.newsletterHook) — replaces the generic headline when given. */
+  customHook?: string;
+}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const iframeName = useId().replace(/[^a-zA-Z0-9]/g, "");
   const c = COPY[variant];
+  const headline = customHook || c.headline;
+  const body = customHook ? SHORT_BODY[variant] : c.body;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (!email) {
@@ -186,10 +204,10 @@ export default function AlmostPassiveSignup({ variant }: { variant: Variant }) {
                 {c.eyebrow}
               </p>
               <h2 className="text-3xl md:text-4xl font-light mb-3" style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}>
-                {c.headline}
+                {headline}
               </h2>
               <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "rgba(250,248,245,0.8)", fontFamily: "var(--font-dm-sans)" }}>
-                {c.body}
+                {body}
               </p>
               <div className="max-w-lg mx-auto">
                 <SignupFields email={email} setEmail={setEmail} status={status} iframeName={iframeName} onSubmit={handleSubmit} dark buttonLabel={c.button} />
@@ -220,10 +238,10 @@ export default function AlmostPassiveSignup({ variant }: { variant: Variant }) {
             {c.eyebrow}
           </p>
           <p className="text-lg font-light mb-4" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>
-            {c.headline}
+            {headline}
           </p>
           <p className="text-sm mb-4" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-            {c.body}
+            {body}
           </p>
           <SignupFields email={email} setEmail={setEmail} status={status} iframeName={iframeName} onSubmit={handleSubmit} dark={false} buttonLabel={c.button} />
           {status === "error" && (

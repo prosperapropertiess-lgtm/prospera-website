@@ -3,9 +3,10 @@ title: "Ontario Rent Increase Rules 2026: Amounts, Notice & N1 Form"
 date: "2026-06-04"
 slug: "rent-increase-ontario-guidelines"
 excerpt: "Miss the 90-day window or use the wrong form and your rent increase is void. Here's exactly how to raise rent legally in Ontario in 2026."
+newsletterHook: "Miss the 90-day window or use the wrong form and your rent increase is void. I write about exactly this kind of thing in Almost Passive, every week."
 category: "Landlord Tips"
 readTime: "10 min read"
-featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords who lose a rent increase don't lose it because the amount was wrong. They lose it because they served the N1 four days late, used the wrong form, or forgot that 90 days means 90 days — not "about three months." The Residential Tenancies Act is unforgiving on procedure: get the paperwork wrong and the increase is void, full stop.

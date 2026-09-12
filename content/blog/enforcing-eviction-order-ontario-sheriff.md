@@ -3,9 +3,10 @@ title: "Enforcing an Eviction Order in Ontario: How to Work with the Sheriff"
 date: "2026-05-20"
 slug: "enforcing-eviction-order-ontario-sheriff"
 excerpt: "Getting an LTB eviction order is only half the battle. Learn how to file with the Court Enforcement Office, what the Sheriff process looks like, and the costly mistakes landlords make after the order is issued."
+newsletterHook: "Getting an LTB eviction order is only half the battle. Almost Passive covers exactly this — what's actually changing for Ontario landlords."
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # Enforcing an Eviction Order in Ontario: How to Work with the Sheriff

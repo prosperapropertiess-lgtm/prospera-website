@@ -5,7 +5,7 @@ slug: "best-neighbourhoods-london-ontario-renters"
 excerpt: "Not sure where to live in London, Ontario? This guide breaks down the best neighbourhoods for renters in 2026 — rent ranges, vibe, transit, and who each area suits."
 category: "Neighbourhood Guides"
 readTime: "13 min read"
-featuredImage: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&h=630&fit=crop&auto=format&q=80"
 seoTitle: "Best Neighbourhoods in London Ontario for Renters 2026"
 primaryKeyword: "best neighbourhoods London Ontario renters"
 secondaryKeywords: ["where to live in London Ontario", "best areas to rent London Ontario", "safe neighbourhoods London Ontario", "moving to London Ontario guide"]

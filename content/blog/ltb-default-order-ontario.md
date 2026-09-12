@@ -1,11 +1,12 @@
 ---
 title: "LTB Default Order Ontario: What Happens When Your Tenant Doesn't Show Up"
 excerpt: "When a tenant misses an LTB hearing, the board can proceed without them — but a default order isn't automatic. Here's exactly what happens and how to protect it."
+newsletterHook: "When a tenant misses an LTB hearing, the board can proceed without them — but a default order isn't automatic. That's the kind of local, practical detail that goes in Almost Passive every week."
 date: "2026-08-17"
 slug: "ltb-default-order-ontario"
 category: "Ontario Law"
 readTime: "7 min read"
-featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You filed your L1 application. You served the notice correctly. The hearing date arrived. You showed up — and your tenant didn't.

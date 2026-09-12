@@ -5,7 +5,7 @@ slug: "moving-to-london-ontario-newcomer-rental-guide"
 excerpt: "New to London, Ontario? This guide covers how to rent as a newcomer — no Canadian credit, scam avoidance, documents, tenant rights, and neighbourhoods explained."
 category: "Newcomers"
 readTime: "11 min read"
-featuredImage: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&h=630&fit=crop&auto=format&q=80"
+featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
 seoTitle: "Newcomer Rental Guide: Moving to London Ontario 2026"
 primaryKeyword: "moving to London Ontario newcomer rental"
 secondaryKeywords: ["newcomer housing London Ontario", "renting in London Ontario guide", "international student housing London Ontario", "how to rent in Ontario no credit history", "rental scams London Ontario"]

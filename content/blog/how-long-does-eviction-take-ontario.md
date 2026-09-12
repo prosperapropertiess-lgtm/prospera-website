@@ -3,6 +3,7 @@ title: "How Long Does Eviction Take in Ontario? A Realistic Timeline for Landlor
 date: "2026-05-16"
 slug: "how-long-does-eviction-take-ontario"
 excerpt: "Evicting a tenant in Ontario takes longer than most landlords expect. Here's a realistic timeline and what affects how fast it moves."
+newsletterHook: "Evicting a tenant in Ontario takes longer than most landlords expect. Almost Passive tracks changes like this before they cost you a month's rent."
 category: "Ontario Law"
 readTime: "9 min read"
 featuredImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=630&fit=crop&auto=format&q=80"
