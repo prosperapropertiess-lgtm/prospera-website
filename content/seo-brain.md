@@ -287,6 +287,145 @@ Priority order (thinnest first):
 
 ---
 
+---
+
+## Operating Mode: Content Portfolio Management
+
+**Updated 2026-09-13. This is the correct operating mode.**
+
+With 107+ articles published, the site is no longer in "fill gaps" mode. It is in **portfolio management mode**. This changes every decision:
+
+| Old Mode (Content Factory) | Current Mode (Portfolio Management) |
+|---|---|
+| Write new articles to fill gaps | Improve existing rankings first |
+| Publish on a fixed schedule | Publish only when a genuine gap is confirmed |
+| Track word count and post count | Track impressions, clicks, and conversions |
+| Optimize for breadth | Optimize for depth and commercial adjacency |
+
+**The #1 job is making Prospera's existing money keywords rank.** New articles are Priority 7, not Priority 1.
+
+---
+
+## Real Performance Data (as of Sep 2026)
+
+### Top 5 Most-Viewed Blog Posts
+1. enforcing-eviction-order-ontario-sheriff — 93 views
+2. utilities-ontario-rentals — 85 views
+3. how-much-charge-rent-london-ontario — 76 views
+4. tenant-damages-property-ontario — 74 views
+5. security-deposits-ontario — 70 views
+
+**Implication:** Eviction enforcement, utility rules, pricing, and tenant damage are proven high-traffic topics. These clusters should get internal links to commercial pages, FAQ expansions, and related posts before new topics are opened.
+
+### Google Search Console — Commercial Queries (Prospera appears in results)
+Prospera is already showing up for these money keywords — these are striking-distance opportunities:
+- "property management companies London Ontario"
+- "property manager London Ontario"
+- "property management companies in London Ontario"
+- "rental companies London Ontario"
+- "rental property management"
+- "property management London Ontario"
+- "property management"
+
+**Implication:** These are not gaps — they are improvement projects. The commercial pages (/property-management-london-ontario, /pricing, /services/tenant-placement) need on-page optimization and internal link boosts, not new competing articles.
+
+---
+
+## Three-Tier Content Model
+
+Every piece of content on the site fits one tier. Each tier has different KPIs and different optimization goals.
+
+### Tier 1 — Money Pages (Commercial Intent)
+Pages where a visitor is ready to hire a property manager.
+
+**Pages:** /property-management-london-ontario, /property-management-st-thomas-ontario, /property-management-strathroy-ontario, /pricing, /services/tenant-placement, /landlords, /, /freedom-score, /contact
+
+**KPIs:** Qualified lead form submissions, /pricing visits, /contact visits
+**Optimization goal:** #1–3 Google ranking for commercial queries + conversion rate
+**Action:** These pages get on-page optimization and internal link builds. Do not publish blog posts that directly compete with these pages' exact queries.
+
+### Tier 2 — Pain/Problem Pages (High Traffic, Conversion Adjacent)
+Posts where landlords arrive mid-crisis. High urgency. Already converting at low rates — linkable to Tier 1 pages.
+
+**Examples:** evicting-tenant-ontario, utilities-ontario-rentals, tenant-damages-property-ontario, security-deposits-ontario, enforcing-eviction-order-ontario-sheriff, what-to-do-if-tenant-stops-paying-rent-ontario, n4-notice-ontario, late-rent-payments-ontario
+
+**KPIs:** Time on page, scroll depth, click-through to /pricing or /contact
+**Optimization goal:** Strong internal links to Tier 1 pages + FAQ expansion + high-quality content
+**Action:** Every top Tier 2 post should have at least one visible link to a Tier 1 page. Add soft CTAs.
+
+### Tier 3 — Educational/Authority Pages (Low Conversion, High Topical Authority)
+Informational posts that build credibility and topical authority. These rarely convert directly but support Tier 1 rankings through internal link equity.
+
+**Examples:** LTB procedure posts, bylaw guides, N-form deep dives, RTA section explainers, CRA/tax posts
+**KPIs:** Backlinks earned, Google topical authority signal, impressions
+**Optimization goal:** Comprehensive coverage + internal links to Tier 2 and Tier 1 pages
+
+---
+
+## Priority Order (Sep 2026 — in this order, no exceptions)
+
+1. **Improve rankings for existing London property-management money keywords** — /pricing meta title fix, /property-management-london-ontario on-page audit, internal link builds from Tier 2/3 posts to Tier 1 pages. No new blog posts solve this.
+
+2. **Indexing/status audit of all 100+ articles** — Before creating any new posts, confirm which articles are indexed, which have impressions, which have zero Google visibility. Use Google Search Console. Unindexed posts are invisible; improving them beats writing new ones.
+
+3. **Exploit proven landlord-problem clusters** — Evictions, Utilities, Tenant damage, Deposits are confirmed traffic drivers. Expand thin posts in these clusters, add commercial CTAs, build internal links to /pricing and /contact.
+
+4. **Develop the London rental-pricing and rental-market cluster** — how-much-charge-rent-london-ontario is top-5 traffic. Build around it: a London Rental Market Report (uses Prospera's real data), a rental pricing calculator, vacancy rate posts. This cluster targets investors and new landlords — highest-value audience.
+
+5. **Build internal links from informational content to commercial pages** — The 107 blog posts are not working hard enough for /pricing and /services/tenant-placement. An internal linking audit with 15+ targeted links added is higher ROI than any new article.
+
+6. **Original local data, case studies, video** — Content that competitors cannot replicate: Prospera's actual fill times, vacancy rates, neighbourhood data, and anonymized landlord outcomes. This earns backlinks and builds trust signals.
+
+7. **New articles only where genuine keyword/search-intent gaps remain** — See the New Content Gate below. All 7 priority questions must be answered before writing.
+
+---
+
+## Monthly SEO Decision System
+
+Every month, classify each page (using GSC + analytics) into one of these categories and take the prescribed action:
+
+| Classification | Criteria | Action |
+|---|---|---|
+| **Winner** | Top 3 ranking + traffic + conversions | Protect: maintain freshness, add internal links, don't publish competing posts |
+| **Striking Distance** | Positions 4–20 in GSC with impressions | Act: on-page optimization, title/H1 refinement, internal link boost. These are the highest-ROI opportunities. |
+| **High Impressions / Low CTR** | Lots of impressions, few clicks | Fix title tag and meta description to be more click-worthy. The content ranks but the listing doesn't compel clicks. |
+| **Traffic / Low Conversion** | Gets visits but no /pricing or /contact clicks | Add CTA, check internal links to Tier 1, improve or add commercial framing |
+| **No Impressions** | Indexed, zero GSC impressions after 90+ days | Diagnose: thin content, wrong keyword, needs external links. Consider merging with a stronger post. |
+| **Cannibalizing** | Two+ pages competing for the same query | Pick one canonical, redirect the weaker, update internal links |
+| **Dead** | Not indexed, no impressions after 180 days | Audit: improve and resubmit, or redirect to a related post |
+
+### Current Striking-Distance Targets (act on these immediately)
+Based on GSC data showing Prospera appearing for commercial PM queries without ranking top 3:
+- /property-management-london-ontario — optimize title, H1, meta description; build internal links from 20+ relevant posts
+- /pricing — fix meta title from "Pricing" → "Property Management Pricing London Ontario | Prospera Properties"
+- /services/tenant-placement — add 15+ internal links from relevant blog posts; optimize meta title and description
+
+### Current Cannibalization Queue (resolve before adding new posts)
+- "property management London Ontario": 5 competing pages — /property-management-london-ontario is canonical; redirect residential-property-management-london-ontario blog post; differentiate or merge property-management-london-ontario blog post
+- "N1 form Ontario": n1-form-ontario.md + n1-form-ontario-landlord-guide.md — merge to one, 301 the weaker
+- "L1 application Ontario": l1-application-ltb-ontario.md + l1-application-ontario-landlord-guide.md — 301 ltb version → landlord-guide version
+
+---
+
+## New Content Gate — 12 Questions Before Publishing Any New Article
+
+Before writing any new SEO article, answer all 12 questions. If any cannot be answered, do not publish.
+
+1. **What is the exact target keyword or search query?** (Must be specific — "property management" is not a target; "property management companies London Ontario" is.)
+2. **What is the estimated monthly search volume?** (Even a rough range: <100 / 100–500 / 500–2,000 / 2,000+)
+3. **What is the current content gap?** (What does Google show for this query? Is there a Prospera post that already covers this? If yes, stop.)
+4. **Which tier does this article serve?** (Tier 1/2/3 — if Tier 3, confirm it links to at least one Tier 2 or Tier 1 page)
+5. **Which existing article does this support or link to?** (New articles must strengthen an existing cluster, not float alone)
+6. **What commercial page does this ultimately funnel to?** (/pricing, /services/tenant-placement, /freedom-score, /contact — if none, reconsider the post)
+7. **Why can Prospera rank for this?** (What makes this post better or more authoritative than what already exists?)
+8. **Is there a better ROI action instead?** (Could the same time be spent expanding an existing Tier 2 post, fixing a striking-distance technical issue, or adding internal links? If yes, do that first.)
+9. **What is the word count target and can it be hit with real substance?** (Minimum 1,500 words. If the topic can't support that with useful content, it's not a post — it's an FAQ addition to an existing post.)
+10. **What is the primary internal link destination?** (Every new post must link to at least one Tier 1 page)
+11. **Does publishing this create a new cannibalization risk?** (Run a GSC + site search before publishing)
+12. **What will make this post distinctly better than the current top-ranking page for this query?** (More depth, more local specificity, original data, better structure — if the answer is "it'll be about the same," do not publish)
+
+---
+
 ## Do More Of
 - **Investor/portfolio content** — entirely uncovered, highest-value audience, zero PM company competition
 - **Tenant placement funnel content** — service page exists but blog traffic is near-zero
@@ -347,5 +486,6 @@ Pages currently competing for the same query — do not add new blog posts targe
 - 2026-08-26: Published tenant-wont-leave-after-lease-ends-ontario — NOBODY IS WRITING ABOUT THIS cluster (seventh post; zero PM company competition). Targets the high-panic search "tenant won't leave after lease ends Ontario" / "holdover tenancy Ontario." Core insight: in Ontario, a fixed-term lease expiry does NOT end the tenancy — it automatically converts to month-to-month under RTA s.38, and the tenant has the legal right to stay. Post busts the most common landlord misconceptions (changing locks, calling police, ignoring maintenance) and explains what illegal actions expose the landlord to (T2, rent abatement, $25k fines, illegal lockout). Legal options covered: N11 mutual agreement, N12 own-use (60-day notice + one month compensation), N8 for persistent late payment, N4/L1 for rent arrears. Quick-reference table of scenarios vs. remedies. Seven common mistakes. 7-question FAQ including lease-end conversion rule, sale/purchaser own-use N12, renovation N13, and post-order enforcement. Social caption included. Internal links: overholding-tenant-ontario, lease-renewal-ontario-landlord-guide, n8-notice-ontario, n12-notice-ontario, n11-agreement-to-end-tenancy-ontario, vital-services-cutoff-ontario-landlords, landlord-entry-rights-ontario, n4-notice-ontario, l1-application-ontario-landlord-guide, how-long-does-eviction-take-ontario, landlord-record-keeping-ontario. Soft CTA to Prospera at end. ✅
 - 2026-09-07: Published can-landlord-evict-tenant-ontario-2026 — AI-TARGETED conversational queries cluster (second post; matches exactly how landlords phrase this in ChatGPT/Perplexity/Google). Core insight: Ontario has no no-fault eviction — every eviction requires an RTA-authorized ground, and a fixed-term lease expiry does not end the tenancy. Covers all major eviction grounds (N4/non-payment, N8/persistent late, N5/N7/damage, N6/illegal acts, N12/own-use, N13/renovations), the scenarios where eviction is illegal (expired lease, retaliation, utility cutoff, lockout), the full LTB pipeline, London/Middlesex timelines (8–14 weeks L1 hearing + 4–8 weeks Sheriff), common mistakes (incorrect notice, accepting partial rent, verbal agreements, missed filing windows). 7-question FAQ. Soft CTA to Prospera at end. Internal links: n4-notice-ontario, l1-application-ontario-landlord-guide, n12-notice-ontario, overholding-tenant-ontario, vital-services-cutoff-ontario-landlords, n11-agreement-to-end-tenancy-ontario, evicting-tenant-ontario, how-long-does-eviction-take-ontario, ltb-hearing-preparation-ontario-landlords, landlord-record-keeping-ontario. External links: ontario.ca (RTA), tribunalsontario.ca/ltb. ✅
 - 2026-09-04: Published london-ontario-zoning-rental-property — HYPER-LOCAL cluster (seventh post; completes the london-ontario-zoning-rental-property gap; zero PM company competition). Targets "London Ontario zoning rental property," "can I add a basement apartment in London Ontario," "London Ontario R1 zone rental." Core insight: the province's More Homes Built Faster Act requires municipalities to permit up to 3 residential units as-of-right on lots with municipal services — including R1 zones — but zoning is still the starting point and private services, conservation areas, parking requirements, and heritage designations can all block the provincial rule. Covers: London Zoning By-law Z.-1 overview, residential zones R1–R6 and what each permits, the "3-unit as-of-right" provincial rule and its exceptions, basement apartments (second units) as-of-right with Second Unit Registration + Rental Housing Licence chain, garden suites/detached ADUs under the provincial framework, multi-unit buildings in R3+, multi-tenant houses/rooming houses (R3+ only; separate Rooming House Licence), short-term rentals (link to Airbnb post), five common zoning mistakes (private services assumption, unpermitted construction, buying on seller's word, parking, licence confusion), 6-question FAQ. Internal links: city-of-london-second-unit-registration, city-of-london-rental-unit-licence, city-of-london-rental-unit-licence-renewal, london-ontario-property-standards-bylaw, airbnb-short-term-rentals-ontario. External link: london.ca/living-london/building-renovating/zoning. Soft CTA to Prospera at end. ✅
+- 2026-09-13 (strategy update): Operating mode shifted from Content Factory to Content Portfolio Management. Added real performance data (top 5 viewed posts, GSC commercial queries). Added Three-Tier Content Model (Tier 1 money pages / Tier 2 pain pages / Tier 3 authority pages). Added Monthly SEO Decision System (Winner / Striking Distance / High Impressions Low CTR / Traffic Low Conversion / No Impressions / Cannibalizing / Dead). Added 12-question New Content Gate that must be passed before any new article is published. Updated priority order: (1) improve existing money keyword rankings, (2) indexing audit, (3) pain cluster expansion, (4) rental pricing/market cluster, (5) internal linking, (6) original data/case studies, (7) new articles only for confirmed gaps. Striking-distance targets identified: /property-management-london-ontario, /pricing, /services/tenant-placement.
 - 2026-09-13: Full-site SEO audit completed. Audited all 107 blog posts + 18 commercial pages across the site. Key findings: (1) CRITICAL — /pricing meta title is "Pricing" — invisible to Google, fix immediately; (2) CRITICAL — "At Capacity" home page banner is turning away purchase-intent organic traffic, replace with waitlist CTA; (3) CRITICAL — keyword cannibalization on "property management London Ontario" across 5 pages — /property-management-london-ontario should be the canonical, blog post targeting same keyword should be redirected; (4) CRITICAL — investor/portfolio content cluster entirely absent — 0 posts on rental investing, buying multi-family, cash flow, portfolio scaling — highest-value audience with zero coverage; (5) N1 form and L1 application both have duplicate posts — merge each pair; (6) /services/tenant-placement receives almost zero internal links from the 106 blog posts — internal linking pass needed; (7) /pricing page never linked from fee/cost posts — CTA gap; (8) Tenant placement blog cluster entirely missing (4 posts needed to support service page). Three new clusters added to brain: INVESTOR/PORTFOLIO (6 slugs), PORTFOLIO SCALING (4 slugs), TENANT PLACEMENT BLOG (4 slugs). Recommended next posts list updated to reflect new priorities. Cannibalization Watchlist added. Full audit artifact at: https://claude.ai/code/artifact/33431fba-9722-4caa-bb5c-7d7a36c38701
 - 2026-09-11: Published buying-property-with-existing-tenants-ontario — EMERGENCY SCENARIOS cluster (first post; zero PM company competition). Targets "buying property with existing tenants Ontario" and "what happens to tenants when you buy a property Ontario." Core insight: a sale does not terminate a tenancy — the tenancy transfers to the new owner automatically under the RTA, and the previous landlord's obligations (repair, rent deposit, deposit interest) transfer too. Covers: what transfers on closing (lease terms, rent amount, last month's rent deposit plus accumulated interest), due diligence checklist before closing (confirm rent amount and deposit, get the lease, check for open maintenance issues, verify London rental licence obligation), the deposit credit on the statement of adjustments, introducing yourself as the new landlord, N12 own-use eviction (60 days, one month compensation, must actually move in, cannot serve before ownership), the restriction on immediate rent increases (12-month cycle, N1 notice, guideline limits), rent control exemption for post-November 15 2018 units, insurance obligation, six common mistakes (assuming vacant possession, missing deposit credit, renegotiating rent on day one, ignoring London licence requirement, serving N12 before ownership), and 7-question FAQ (tenancy continuity, new lease, N12 refusal, unpaid deposit interest, no written lease, bad-faith N12 risk, LTB timelines). Internal links: n12-notice-ontario, how-to-write-lease-agreement-ontario, landlord-record-keeping-ontario, rental-property-insurance-ontario, city-of-london-rental-unit-licence. External link: ontario.ca (RTA). Soft CTA to Prospera at end. ✅
