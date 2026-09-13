@@ -1,5 +1,46 @@
 ---
-Last updated: 2026-08-30
+Last updated: 2026-09-13
+
+## New Topic Opportunities — 2026-09-13
+
+- l7-application-ontario-landlord | Est. difficulty: LOW | Vol: ~80/mo | The LTB L7 application (Replace a Superintendent) is the last unguided application in the common landlord series. We have L1–L4, L6, L8, and L9 guides; L7 is a gap. Short standalone guide — LTB.ca is the only substantive result today. Completes the L-series for internal linking and topical authority.
+
+- l8-application-ontario-landlord | Est. difficulty: LOW | Vol: ~70/mo | The LTB L8 application (Obtain an Abandoned Property Order) — when a tenant has clearly abandoned the unit but the landlord needs a formal LTB order to change locks and reclaim possession. Abandoned-tenancy scenarios are common enough to generate consistent search volume; no PM company has a guide. Internal links to tenant-abandonment-ontario.md and l1-application-ontario.md.
+
+- joint-tenancy-ontario-landlord | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | How joint tenancy works in Ontario rentals — all tenants on one lease, what happens when one tenant wants to leave, how an N9 works in a joint tenancy, can a landlord remove one name. Landlord forums and paralegal Q&A dominate. A landlord-perspective guide covering the practical scenarios (one roommate leaving, one non-paying, adding a name) would rank cleanly. Internal links to n9-notice-ontario.md and security-deposits-ontario.md.
+
+- parking-spot-rental-ontario-rta | Est. difficulty: LOW | Vol: ~100/mo | Is a parking spot covered by the RTA in Ontario? Does rent control apply to parking? Can a landlord charge separately for parking, increase the parking fee, or terminate parking as a service? A niche but underserved operational topic — only LTB adjudication summaries and paralegal Q&A appear in results. Short guide with strong featured-snippet potential.
+
+- ontario-landlord-property-tax-assessment-appeal | Est. difficulty: LOW | Vol: ~100/mo | How Ontario landlords can appeal an MPAC assessment they believe is too high — the ARB process, deadlines, comparable evidence, and what a successful appeal means for property tax in subsequent years. Locally useful for London/Elgin/Middlesex County landlords. No PM company in Ontario has a guide; accountant and paralegal sites dominate. Internal link to rental-property-tax-deductions-ontario.md.
+
+- rooming-house-london-ontario-landlord-guide | Est. difficulty: LOW | Vol: ~100/mo | London Ontario's rooming house licensing requirements under the Residential Rental Licensing by-law — who needs a licence, what fire and property standards apply, inspection requirements, and how RTA obligations interact with rooming house status. London-specific, high local SEO value. No PM company or local landlord site has a standalone guide. Internal links to landlord-entry-rights-ontario.md and maintenance-obligations-ontario.md.
+
+## SKIPPED — 2026-09-13
+
+Standard keyword queries for this run were cross-checked against the existing blog directory. The following queries are already fully covered by published posts:
+
+- "ontario eviction notice" → n4-notice-ontario.md, n8-notice-ontario.md, n12-notice-ontario.md — full coverage
+- "landlord tenant act ontario" → ontario-landlord-tenant-act-2026.md — covers current RTA
+- "rent increase ontario 2026" → above-guideline-rent-increase-ontario.md + ontario-landlord-tenant-act-2026.md
+- "landlord rights ontario" → landlord-entry-rights-ontario.md, security-deposits-ontario.md, full coverage
+- "ltb ontario application" → l1-application-ontario.md through l4, l9 — series substantially complete
+- "ontario lease agreement" → ontario-standard-lease-guide.md — existing post
+- "property management london ontario" → london-ontario-property-management.md — local page exists
+- "eviction process ontario" → how-long-does-eviction-take-ontario.md — full guide
+- "ontario landlord maintenance" → landlord-maintenance-responsibilities-ontario.md — exists
+- "bill 60 ontario" → bill-60-ontario-landlords.md — exists (needs Sept 21 update — see Topics to Expand)
+- "ltb default order" → ltb-default-order-ontario.md — exists
+- "n4 notice ontario" → n4-notice-ontario.md — exists (needs Sept 21 update — see Topics to Expand)
+
+## Topics to Expand — 2026-09-13
+
+**URGENT — Sept 21, 2026 is 8 days away:**
+
+- ontario-landlord-september-21-2026-checklist | **STILL UNPUBLISHED — URGENT** | Bill 60 Phase 2 provisions take effect September 21, 2026 (expanded N13 grounds, revised AGI cap calculation, mandatory disclosure on N12). A practical checklist post — what landlords in London and across Ontario need to have in order before Sept 21 — would be the highest-value piece we could publish this week. Strong time-sensitive search volume. If this post does not exist by Sept 18, the window closes.
+
+- bill-60-ontario-landlords.md | Add a dedicated Phase 2 section covering what changes September 21, 2026: expanded demolition/conversion N13 grounds, revised AGI cap (new 3% hard cap on combined rent + above-guideline), and mandatory N12 disclosure requirements. Current post covers Phase 1 only. Update the post and re-date before Sept 18.
+
+- n4-notice-ontario.md | Update the N4 guide to reflect the Bill 60 change to the N4 cure period (effective Sept 21, 2026): the cure window changes from 14 days (annual lease) to a uniform 14 days for all tenancy types. Add a clear callout box noting the Sept 21 effective date so landlords serving N4s after that date use the correct window.
 
 ## New Topic Opportunities — 2026-08-23
 
