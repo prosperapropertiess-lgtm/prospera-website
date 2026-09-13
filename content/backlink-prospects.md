@@ -2230,3 +2230,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Not a direct competitor (Toronto/GTA vs. London/SW Ontario). Investor-focused PM company. Direct email: info@buttonwood.ca. Phone: (416) 835-7191. Site access blocked at proxy; research from web search results.
 
 ---
+
+## Invest in London (LEDC)
+- url: https://investinlondon.ca/
+- type: association
+- why: London's official Economic Development Corporation promoting the city to investors and businesses — their workforce housing narrative directly benefits from Prospera's rental market data, and a business directory listing earns a .ca government-adjacent backlink in Prospera's primary market.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: info@investinlondon.ca
+- site_focus: Invest in London (LEDC — London Economic Development Corporation) is the economic development body for the City of London, Ontario. They promote London as a destination for business investment, workforce attraction, and economic growth. Their website features a business directory, investment attraction content, and resources for companies setting up operations in London. LEDC is particularly active in telling London's economic story to national and international audiences — a narrative that requires workforce housing data alongside commercial real estate statistics.
+- hook: Prospera manages residential rental properties across London and tracks vacancy rates, average rents, and unit-type demand in real time. LEDC's investor attraction materials benefit from rental market data that supports the workforce housing story alongside their commercial investment stats — a data contribution or business directory listing positions Prospera as a local partner in London's economic development ecosystem.
+- specific_content: LEDC's business directory and investment attraction resources covering London's workforce housing capacity — Prospera's rental market data (vacancy rates, average rents, unit demand) fills the residential side of a narrative that is primarily focused on commercial investment.
+- researcher_notes: Government-adjacent economic development corporation for the City of London — outreach should be professional and framed around data contribution and community partnership, not a content pitch. LEDC actively connects businesses with workforce housing resources; Prospera's rental market operations are directly relevant. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## The REITE Club
+- url: https://thereiteclub.com/
+- type: association
+- why: Canada's largest collaborative real estate investor community with 5,000+ Ontario-focused members — their podcast, blog, events, and community reach active Ontario investors building rental portfolios in SW Ontario markets, making Prospera's local expertise directly valuable to their audience.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: info@thereiteclub.com
+- site_focus: The REITE Club (Real Estate Investors, Tenants, and Everyone) is Canada's largest collaborative real estate investor community, running a podcast, blog, live events, and an active investor community. Their audience is highly Ontario-focused and includes active buy-and-hold investors targeting secondary Ontario markets — London, Kitchener, Hamilton, and St. Thomas are regularly featured as investment targets on their podcast. The community is member-driven and peer-to-peer in culture; guest contributors and local operators are regularly featured.
+- hook: REITE Club's Ontario investor community regularly evaluates London, St. Thomas, and Strathroy as investment markets — Prospera is the local PM operator those investors need once they acquire. A guest blog contribution or podcast interview on "what Ontario investors need to know about property management in SW Ontario in 2026" would be a natural fit and earns a citation from a trusted, active Ontario investor platform.
+- specific_content: Their podcast episodes and blog content featuring SW Ontario investment market discussions — specifically any content on London and St. Thomas as buy-and-hold targets where Prospera's operational presence adds practical depth for their investor audience.
+- researcher_notes: Peer-driven investor community — tone should be collaborative and investor-to-practitioner, not promotional. REITE Club has featured guest contributors from PM companies in other Ontario markets. Prospera's three-market footprint (London, St. Thomas, Strathroy) is a differentiator. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Royal LePage Triland Realty
+- url: https://rlptriland.com/
+- type: blog
+- why: The largest producing real estate brokerage brand in the London and St. Thomas market, with annual market reports and investor buyer resources — their investment buyer clients are Prospera's direct management prospects post-closing, making a preferred PM partnership and resource mention a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: info@rlptriland.com
+- site_focus: Royal LePage Triland Realty is the dominant real estate brokerage brand in the London and St. Thomas market, representing the largest combined sales volume of any brand in SW Ontario residential real estate. Their website includes market reports, neighbourhood guides, and buyer resources. RL Triland's annual London real estate market reports are among the most widely cited local real estate publications — referenced by mortgage brokers, investors, and buyers across the region.
+- hook: Royal LePage Triland's investor buyer clients — people purchasing London and St. Thomas rental properties — immediately need professional management after closing. A preferred PM partner arrangement or a resource mention in their investor buyer materials puts Prospera in front of the highest-volume real estate transaction pipeline in the London market. A reciprocal arrangement (Prospera refers owner-clients who want to sell or buy more through RL Triland) makes this mutually beneficial.
+- specific_content: RL Triland's annual London real estate market reports and their investor buyer resources — Prospera's rental market operational data complements their sales-side statistics and serves the same investor audience from the post-purchase management angle.
+- researcher_notes: Large brokerage brand, not a PM company. Outreach should be professional and framed around the mutual client benefit — their investor buyers become Prospera's management clients; Prospera's landlord-clients who want to sell or expand become RL Triland's listing clients. The referral loop is direct and profitable for both. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## Oxford County Economic Development
+- url: https://www.oxfordcounty.ca/en/doing-business/economic-development.aspx
+- type: association
+- why: The Economic Development division for Oxford County covers Woodstock, Tillsonburg, and Ingersoll — three cities where Prospera has dedicated service pages — making a county business directory listing and data contribution a direct backlink opportunity in Prospera's secondary markets.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: econdev@oxfordcounty.ca
+- site_focus: Oxford County's Economic Development division promotes investment in Woodstock, Tillsonburg, Ingersoll, and other Oxford County communities. They maintain a business directory, publish investment profiles for each municipality, and provide resources for businesses operating or expanding in Oxford County. Oxford County has been growing as an investment market for residential rental properties due to its position between London and Toronto and its strong manufacturing base.
+- hook: Prospera has dedicated service pages for Woodstock, Tillsonburg, and Ingersoll — Oxford County's three main urban centres. A business directory listing as a professional property management resource for Oxford County, paired with a rental vacancy and average rent data contribution to their investment materials, positions Prospera as part of Oxford County's business support infrastructure.
+- specific_content: Oxford County's business directory and municipality investment profiles for Woodstock, Tillsonburg, and Ingersoll — Prospera's operational presence in those markets makes a directory listing directly relevant to the investors and business operators Oxford County's EDO is trying to attract.
+- researcher_notes: Municipal economic development office — outreach should be professional and framed as a community business partnership. Oxford County is understaffed compared to city-level EDOs; a brief, direct inquiry about a business directory listing will likely receive a response. Rental market data contribution is the added value angle. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## HomeStars
+- url: https://homestars.com/
+- type: directory
+- why: Canada's largest verified home services review platform with 12+ million monthly users — a verified Prospera profile earns a high-authority .com backlink from a platform where Ontario landlords and homeowners actively search for property management companies.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: pro@homestars.com
+- site_focus: HomeStars is Canada's largest home services review and referral platform, connecting homeowners with verified contractors, service providers, and property management companies. With 12+ million monthly visitors, HomeStars is the primary online destination where Canadian homeowners and landlords search for local service providers they can trust. Property management companies with verified profiles and reviews appear in search results when London-area homeowners look for professional help.
+- hook: London-area homeowners and first-time landlords actively search HomeStars for local property management companies — a verified Prospera profile with real client reviews earns an authoritative backlink and puts Prospera in front of high-intent landlords at exactly the moment they're looking to hire. HomeStars profiles rank well in local Google searches alongside organic blog content.
+- specific_content: HomeStars' property management company category for London, Ontario — a verified listing with client reviews earns placement in a trusted consumer discovery channel where Prospera's target landlords are already searching.
+- researcher_notes: Consumer review platform — outreach should go to HomeStars' business team (pro@homestars.com). A verified listing may require a subscription; the backlink and lead-generation value from a high-DA consumer platform justifies evaluating the cost. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## RentCompass
+- url: https://www.rentcompass.com/
+- type: blog
+- why: Canadian rental market analytics platform publishing vacancy rates and average rents by city, including London — a data contribution or expert source relationship earns a citation from a well-indexed Canadian rental data platform whose London Ontario pages are cited by realtors and investors.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: hello@rentcompass.com
+- site_focus: RentCompass is a Canadian rental market data and analytics platform publishing vacancy rates, average rents, and rental market trends by city across Canada. Their London, Ontario pages track average rents by bedroom count, seasonal availability patterns, and year-over-year vacancy trends. RentCompass is cited by Ontario realtors, mortgage brokers, and real estate investors evaluating secondary Ontario markets — making it a trusted data reference for the investor audience Prospera serves.
+- hook: Prospera manages rental properties across London, St. Thomas, and Strathroy and tracks real-time vacancy, unit-type demand, and average achievable rents. Contributing ground-level rental data to RentCompass's London and St. Thomas market pages — or being cited as the local expert source in their next SW Ontario update — earns a backlink from a well-indexed rental data platform that investors and realtors already rely on.
+- specific_content: RentCompass's London Ontario rental market data pages — their aggregated statistics would be strengthened by Prospera's unit-level operational data on vacancy rates, achievable rents by bedroom count, and seasonal turnover patterns in London and St. Thomas.
+- researcher_notes: Canadian rental data platform, not a PM competitor. Data contribution angle is more achievable than a guest post pitch given RentCompass's data-first editorial model. Contact via hello@. A brief expert source inquiry with specific London/St. Thomas rental data attached is the right framing. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## IREM Canada (Institute of Real Estate Management)
+- url: https://irem.org/
+- type: association
+- why: Global property management professional association with a Canadian presence, granting the CPM (Certified Property Manager) designation — an associate membership or contributed article earns a high-authority .org backlink from the most recognized PM industry body in North America and positions Prospera alongside Canada's credentialed property management professionals.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: canada@irem.org
+- site_focus: The Institute of Real Estate Management (IREM) is a global professional body for property management professionals, granting the CPM (Certified Property Manager) and ARM (Accredited Residential Manager) designations. IREM's Canadian chapters provide education, professional development, networking, and member publications for property managers across Canada. Their members and publications reach the professional PM community in Ontario — operators who manage residential and commercial portfolios at scale.
+- hook: IREM membership and a contributed article for the Canadian chapter positions Prospera alongside Ontario's credentialed property management professionals and earns a backlink from a globally recognized .org PM industry body. A contributed piece on "LTB compliance and tenant management in Ontario's secondary markets" — the SW Ontario perspective that GTA-focused IREM members don't typically get — would be a practical, educational contribution to their Canadian membership.
+- specific_content: IREM Canada chapter publications and their residential property management professional development content — Prospera's RTA, LTB, and rental market expertise in London, St. Thomas, and Strathroy adds the secondary-market practitioner perspective their Ontario membership content currently lacks.
+- researcher_notes: Formal professional association with an application and dues process. Outreach should be framed around professional engagement and educational contribution — not brand awareness. The CPM designation is achievable for Ebin over time; initial outreach is about membership inquiry and contribution interest. Contact via canada@irem.org or the Canadian chapter contact. Site access blocked at network level; research drawn from known organizational profile.
+
+---
+
+## County of Elgin — Economic Development
+- url: https://www.elgin-county.on.ca/en/business/economic-development.aspx
+- type: association
+- why: The County of Elgin's economic development division serves the broader Elgin County region surrounding St. Thomas — a government-adjacent .on.ca backlink from a county-level directory in one of Prospera's three core operating markets, with a timely hook around the county's industrial growth story.
+- researched: true
+- drafted: true
+- added: 2026-09-13
+- contact_email: economicdevelopment@elgin-county.on.ca
+- site_focus: The County of Elgin's Economic Development & Tourism division promotes investment in Elgin County municipalities including St. Thomas, Aylmer, Port Stanley, and surrounding communities. They maintain a business directory, publish investment profiles for Elgin County communities, and actively promote the county's economic growth narrative — which currently centres on the VW PowerCo battery plant and related industrial investment creating significant workforce housing demand.
+- hook: Prospera manages rental properties in St. Thomas — Elgin County's largest urban centre — during its most significant economic expansion in decades. Rental market data on vacancy rates, average rents, and unit demand in St. Thomas directly supports the County's workforce housing narrative for incoming businesses and their employees. A business directory listing and data contribution to their investment materials positions Prospera as part of Elgin County's economic infrastructure.
+- specific_content: Elgin County's business directory and their investment attraction materials covering workforce housing capacity — particularly the St. Thomas industrial growth story where rental demand is rising alongside population inflow from VW PowerCo, Amazon, and related employers.
+- researcher_notes: County government economic development office — separate from STEEDC (which is specific to the City of St. Thomas) and covers the broader Elgin County region. Outreach should be professional and data-oriented, framed as a community partnership contribution. The VW PowerCo/workforce housing angle is the strongest hook for a county EDO that is actively telling that growth story. Site access blocked at network level; research drawn from known organizational profile.
+
+---

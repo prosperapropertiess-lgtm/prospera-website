@@ -2923,3 +2923,156 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+## Invest in London (LEDC) — 2026-09-13
+To: info@investinlondon.ca
+Subject: London rental market data for your workforce housing resources
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties, a property management company in London, St. Thomas, and Strathroy. We manage residential rentals across the region and track local vacancy rates, average rents, and unit turnover regularly.
+
+I noticed your site covers workforce housing and economic development resources for London. We'd be glad to contribute current rental market data — vacancy trends, rent ranges by unit type, and neighbourhood-level supply observations — for use in your reports or resource pages.
+
+In return, a directory listing under London housing providers or property management resources would be a natural fit.
+
+Happy to connect and share what we have.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## The REITE Club — 2026-09-13
+To: info@thereiteclub.com
+Subject: London Ontario PM resource for your SW Ontario investor members
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy and work with investors ranging from single-unit landlords to multi-property portfolio holders.
+
+Your SW Ontario investor community is a natural fit for a guest post on what property management actually looks like in London — LTB timelines, local vacancy conditions, what investors consistently get wrong about the London market. I've seen enough portfolios in this area to make it grounded rather than generic.
+
+Would you consider a contributed piece for your member blog or newsletter? No sales angle — purely the operational view from a local PM.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Royal LePage Triland Realty — 2026-09-13
+To: info@rlptriland.com
+Subject: Property management resource for your London investor clients
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties, a property management company based in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy.
+
+Many of your investor clients — especially those buying buy-and-hold properties in the London area — are looking for a trusted PM partner after closing. We handle the full management cycle: tenant placement, rent collection, maintenance coordination, and LTB compliance.
+
+I'd welcome the chance to be a resource you feel comfortable referring to your clients when the question comes up. A listing in your partner or preferred vendors section would also be useful — happy to reciprocate where it makes sense.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## Oxford County Economic Development — 2026-09-13
+To: econdev@oxfordcounty.ca
+Subject: Prospera Properties — property management resource for Oxford County landlords
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties. We manage residential rentals in London, St. Thomas, and Strathroy, and work with landlords across Middlesex and Elgin Counties as well.
+
+As Oxford County sees continued residential development and population growth, landlords in the Woodstock and Ingersoll areas are navigating the same RTA compliance questions that we deal with daily. We'd be glad to contribute to any landlord resources or housing provider directories you maintain.
+
+We can also share vacancy and rent data from the Strathroy corridor if that's useful context for your housing planning work.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## HomeStars — 2026-09-13
+To: pro@homestars.com
+Subject: Prospera Properties — London Ontario property management listing
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties, a property management company serving London, St. Thomas, and Strathroy, Ontario. We manage residential rentals including single-family homes, duplexes, and small multi-unit buildings.
+
+I'd like to inquire about listing Prospera Properties on HomeStars under property management for the London Ontario area. Our work includes tenant placement, ongoing property maintenance coordination, and full RTA compliance — the kind of service your homeowner users would search for when transitioning to being landlords or expanding a rental portfolio.
+
+Could you point me to the right process for a verified business listing?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## RentCompass — 2026-09-13
+To: hello@rentcompass.com
+Subject: SW Ontario rental market data for your London and St. Thomas pages
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy and track local vacancy conditions and rent trends as part of our regular operations.
+
+Your London and St. Thomas market pages would benefit from ground-level data contributions from an active local operator. We see unit turnover, current asking rents, and neighbourhood-level demand shifts that aggregate sources often miss. We'd be glad to contribute that data to improve your SW Ontario coverage.
+
+In exchange, a listing for Prospera Properties under London property management would be a fair trade. Happy to discuss what a data contribution arrangement would look like.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## IREM Canada — 2026-09-13
+To: canada@irem.org
+Subject: Associate membership and potential contribution from a SW Ontario property manager
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties, a residential property management company in London, Ontario serving the London, St. Thomas, and Strathroy markets.
+
+I'm interested in learning more about IREM Canada associate membership and what it offers for smaller regional operators. I'd also like to explore whether there's room to contribute to any Ontario-specific resources — LTB process guides, SW Ontario market commentary, or practical RTA compliance content for IREM members managing outside the GTA.
+
+Could you point me toward the right contact for membership or contribution opportunities?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
+
+## County of Elgin Economic Development — 2026-09-13
+To: economicdevelopment@elgin-county.on.ca
+Subject: Rental market data from Elgin County's growing rental sector
+
+Hi,
+
+I'm Ebin Jaison with Prospera Properties. We manage residential rentals in St. Thomas and Strathroy, and work with landlords throughout Elgin County.
+
+As Volkswagen's St. Thomas plant drives workforce housing demand in the region, we're seeing firsthand what the rental market looks like on the ground — vacancy movement, rent pressure, and the types of units workers are seeking. That's data we're happy to share with your economic development and housing planning work.
+
+We'd also welcome a listing in any housing provider or property management resources you maintain for Elgin County landlords and incoming workers.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+
+---
