@@ -5,9 +5,9 @@ _This file is updated by the SEO agent every time a post is published. It tracks
 ---
 
 ## Last Updated
-2026-09-07
+2026-09-13
 
-## Posts Written: 82 total (32 queued across 9 active clusters)
+## Posts Written: 107 total
 
 ### MONEY keywords (8)
 - property-management-london-ontario ✅
@@ -198,35 +198,69 @@ High-urgency, low-volume, but zero competition — and builds trust when landlor
 - ltb-adjournment-request-ontario _(How to reschedule or postpone an LTB hearing. First thing a landlord Googles when they can't attend. Zero dedicated guides.)_
 - n9-notice-ontario _(Notice to terminate given by the tenant at end of fixed term or period. Landlords need to understand this to know their rights when a tenant wants to leave — and what happens if they don't give it in time.)_
 
+### INVESTOR / PORTFOLIO cluster (0 of 6 — ENTIRELY MISSING, HIGHEST-VALUE AUDIENCE)
+Full-site audit (Sep 2026) found this cluster is completely absent. These readers — landlords with 4+ doors actively building portfolios — are Prospera's primary management customers. No Ontario PM company has written seriously in this space. First mover owns it.
+
+**Still missing:**
+- rental-property-investing-london-ontario _(Pillar page: why London, vacancy rates, cash flow analysis, neighbourhood picks by yield, multi-family vs. single unit, working with a PM from day one. Targets "rental property investing London Ontario," "investment properties London Ontario," "buying rental property London Ontario." 2,500+ words.)_
+- buying-duplex-triplex-london-ontario _(How to analyze and buy a multi-family property in London: what to look for, cash flow math, zoning considerations, tenanted-purchase rules. Links to buying-property-with-existing-tenants-ontario, london-ontario-zoning-rental-property. Targets "buying duplex London Ontario," "buying triplex London Ontario.")_
+- best-neighbourhoods-rental-investment-london-ontario _(Investor version — distinct from the existing renter-focused neighbourhoods post. Covers Old North/Wortley premium, East London student yield, South London family stability, Byron/Lambeth long tenancies. Must use Prospera's real fill-time and inquiry data.)_
+- cash-flow-rental-property-london-ontario _(How to calculate cash flow, cap rate, and gross yield for a London property. London-specific expense and rent defaults. Could also become an interactive calculator tool.)_
+- london-ontario-rental-market-report-q3-2026 _(Recurring market report using Prospera's actual leasing data: days-on-market, inquiry volume, asking vs. achieved rent, seasonal patterns. Earns backlinks from realtors/investors/newsletters. Publish quarterly.)_
+- multiplex-property-management-london-ontario _(Full-service management specifically for duplex/triplex/fourplex owners in London. Addresses the operational complexity of multi-unit that single-unit guides ignore.)_
+
+### PORTFOLIO SCALING cluster (0 of 4 — MISSING, HIGH CONVERSION INTENT)
+These readers are already past the tipping point — they own enough properties that self-management is becoming a problem. This is the highest-conversion informational audience on the site.
+
+**Still missing:**
+- managing-multiple-rental-properties-ontario _(When self-managing stops working. Covers what changes between 1 and 4+ properties, common breaking points, what gets missed without systems. Targets "managing multiple rental properties Ontario," "landlord burnout," "property management for investors Ontario." Strong CTA to /freedom-score.)_
+- property-management-for-real-estate-investors-ontario _(How professional management functions as operational infrastructure for portfolio growth — not just tenant-finding. Investor-specific framing. Targets portfolio landlords considering outsourcing.)_
+- out-of-town-landlord-ontario _(Remote landlord challenges: entry rights, maintenance coordination, rent collection, inspections. How PM solves the distance problem. Targets "out of town investor Ontario," "remote landlord Ontario.")_
+- how-to-rent-out-your-house-london-ontario _(Step-by-step guide for first-time landlords with a vacancy: pricing, photography, listing, showings, screening, lease. Targets "how to rent my house London Ontario." Primary funnel for /services/tenant-placement.)_
+
+### TENANT PLACEMENT BLOG cluster (0 of 4 — MISSING, DIRECT FUNNEL TO SERVICE PAGE)
+The /services/tenant-placement service page exists but has almost zero incoming blog traffic. These posts each link to it as the commercial endpoint.
+
+**Still missing:**
+- how-long-does-it-take-to-find-tenant-london-ontario _(Real fill-time data: Prospera's average 2–4 weeks vs. typical DIY timeline. Covers what slows placement down and what speeds it up. Targets "how long to find a tenant London Ontario.")_
+- tenant-placement-vs-property-management-ontario _(Which service fits which landlord. When you only need placement vs. when full management makes sense. Comparison post that moves readers to the right Prospera service.)_
+- how-much-does-tenant-placement-cost-ontario _(Transparent breakdown: flat fee vs. percentage models, what's included, Prospera's 90-day replacement guarantee. Links to /pricing.)_
+- property-manager-vs-self-managing-ontario _(Deep comparison: real cost-of-self-managing table with London rent averages, time estimates, LTB error risk. Most thorough treatment of this comparison query in the Ontario market. Hard CTA to /pricing.)_
+
 ---
 
 ## Recommended Next Posts
 
-**IMMEDIATE — Hyper-local (own these before any competitor wakes up):**
-1. city-of-london-rental-unit-licence ✅
-2. city-of-london-rental-unit-licence-renewal ✅
-3. london-ontario-property-standards-bylaw ✅
-4. city-of-london-second-unit-registration ✅
-5. st-thomas-ontario-rental-bylaws-landlord-guide ✅
+**IMMEDIATE — Technical fixes (no new content, highest SEO impact per hour):**
+These are site-level issues identified in the Sep 2026 full audit. Do these before writing anything new.
+1. Fix /pricing page meta title from "Pricing" → "Property Management Pricing London Ontario | Prospera Properties"
+2. Redirect residential-property-management-london-ontario → /property-management-london-ontario (301)
+3. Merge N1 duplicates: pick stronger of n1-form-ontario.md vs n1-form-ontario-landlord-guide.md, 301 the weaker
+4. Merge L1 duplicates: 301 l1-application-ltb-ontario → l1-application-ontario-landlord-guide
+5. Internal linking pass: add /services/tenant-placement links to 15+ relevant blog posts
+6. Internal linking pass: add /pricing or /freedom-score soft CTAs to top-performing pain posts
+7. Fix "At Capacity" home page banner — replace with waitlist CTA that captures leads
 
-**THEN — Nobody is writing about these:**
-5. ltb-duty-counsel-ontario
-6. rta-section-20-maintenance-obligations-ontario
-7. ltb-default-order-ontario
-8. tenant-wont-leave-after-lease-ends-ontario
+**THEN — Investor + market data (new highest-priority content cluster):**
+8. rental-property-investing-london-ontario ← Investor pillar. Needs Ebin's neighbourhood yield data.
+9. london-ontario-rental-market-report-q3-2026 ← Original data. Needs Ebin's actual leasing numbers.
+10. best-neighbourhoods-rental-investment-london-ontario ← Investor neighbourhood guide with real data.
 
-**THEN — Legal misconceptions (highly shareable, zero competition):**
-9. no-pets-clause-ontario-rental ← Highest-surprise post we can write. Will get shared.
-10. overholding-tenant-ontario ← Very common situation, almost no guides anywhere.
-11. ontario-rent-control-exempt-properties ← Massive misunderstanding. High landlord value.
+**THEN — Tenant placement funnel (feeds /services/tenant-placement):**
+11. how-to-rent-out-your-house-london-ontario
+12. tenant-placement-vs-property-management-ontario
+13. how-long-does-it-take-to-find-tenant-london-ontario
 
-**THEN — AI-targeted queries:**
-12. what-to-do-if-tenant-stops-paying-rent-ontario
-13. can-landlord-evict-tenant-ontario-2026
+**THEN — Portfolio scaling (high conversion intent):**
+14. managing-multiple-rental-properties-ontario
+15. property-manager-vs-self-managing-ontario ← Most commercially valuable comparison post on the site.
 
-**THEN — Tax cluster (own before any accountant figures out SEO):**
-14. cra-t776-rental-income-ontario ← Publish in Jan for tax season traffic spike.
-15. capital-cost-allowance-rental-property-ontario
+**THEN — Remaining existing clusters:**
+16. cra-t776-rental-income-ontario ← Publish Jan for tax season spike.
+17. ltb-review-order-ontario
+18. ltb-adjournment-request-ontario
+19. last-month-rent-interest-ontario
+20. how-to-serve-notice-ontario-landlords
 
 ---
 
@@ -254,15 +288,26 @@ Priority order (thinnest first):
 ---
 
 ## Do More Of
+- **Investor/portfolio content** — entirely uncovered, highest-value audience, zero PM company competition
+- **Tenant placement funnel content** — service page exists but blog traffic is near-zero
+- **London rental market data** — original Prospera leasing numbers nobody else can replicate
+- **Portfolio scaling + "when to stop self-managing" content** — highest commercial conversion intent
+- **Case studies** — real anonymized Prospera outcomes (vacancy to filled, portfolio onboarding)
 - Hyper-local content (city bylaws, licences, local compliance rules) — zero competition
 - "Nobody is writing about this" LTB process depth — builds authority on procedural questions
 - AI-targeted conversational phrasing — targets ChatGPT/Perplexity citations
-- RTA section deep-dives — builds section-level topical authority
 
 ## Do Less Of
 - New core PAIN posts — all 17 PAIN keywords published
 - New core LONG-TAIL posts — all 30 gaps closed
 - New core MONEY posts — all gaps closed
+- New Ontario law posts without checking for existing coverage — topical authority is strong, marginal posts now cost more in cannibalization risk than they gain
+
+## Cannibalization Watchlist
+Pages currently competing for the same query — do not add new blog posts targeting these until the conflict is resolved:
+- "property management London Ontario": /property-management-london-ontario (canonical), /landlords, /, /blog/property-management-london-ontario, /blog/residential-property-management-london-ontario → redirect residential post; differentiate blog post or merge
+- "N1 form Ontario": n1-form-ontario.md + n1-form-ontario-landlord-guide.md → merge to one
+- "L1 application Ontario": l1-application-ltb-ontario.md + l1-application-ontario-landlord-guide.md → 301 ltb version → landlord-guide version
 
 ---
 
@@ -302,4 +347,5 @@ Priority order (thinnest first):
 - 2026-08-26: Published tenant-wont-leave-after-lease-ends-ontario — NOBODY IS WRITING ABOUT THIS cluster (seventh post; zero PM company competition). Targets the high-panic search "tenant won't leave after lease ends Ontario" / "holdover tenancy Ontario." Core insight: in Ontario, a fixed-term lease expiry does NOT end the tenancy — it automatically converts to month-to-month under RTA s.38, and the tenant has the legal right to stay. Post busts the most common landlord misconceptions (changing locks, calling police, ignoring maintenance) and explains what illegal actions expose the landlord to (T2, rent abatement, $25k fines, illegal lockout). Legal options covered: N11 mutual agreement, N12 own-use (60-day notice + one month compensation), N8 for persistent late payment, N4/L1 for rent arrears. Quick-reference table of scenarios vs. remedies. Seven common mistakes. 7-question FAQ including lease-end conversion rule, sale/purchaser own-use N12, renovation N13, and post-order enforcement. Social caption included. Internal links: overholding-tenant-ontario, lease-renewal-ontario-landlord-guide, n8-notice-ontario, n12-notice-ontario, n11-agreement-to-end-tenancy-ontario, vital-services-cutoff-ontario-landlords, landlord-entry-rights-ontario, n4-notice-ontario, l1-application-ontario-landlord-guide, how-long-does-eviction-take-ontario, landlord-record-keeping-ontario. Soft CTA to Prospera at end. ✅
 - 2026-09-07: Published can-landlord-evict-tenant-ontario-2026 — AI-TARGETED conversational queries cluster (second post; matches exactly how landlords phrase this in ChatGPT/Perplexity/Google). Core insight: Ontario has no no-fault eviction — every eviction requires an RTA-authorized ground, and a fixed-term lease expiry does not end the tenancy. Covers all major eviction grounds (N4/non-payment, N8/persistent late, N5/N7/damage, N6/illegal acts, N12/own-use, N13/renovations), the scenarios where eviction is illegal (expired lease, retaliation, utility cutoff, lockout), the full LTB pipeline, London/Middlesex timelines (8–14 weeks L1 hearing + 4–8 weeks Sheriff), common mistakes (incorrect notice, accepting partial rent, verbal agreements, missed filing windows). 7-question FAQ. Soft CTA to Prospera at end. Internal links: n4-notice-ontario, l1-application-ontario-landlord-guide, n12-notice-ontario, overholding-tenant-ontario, vital-services-cutoff-ontario-landlords, n11-agreement-to-end-tenancy-ontario, evicting-tenant-ontario, how-long-does-eviction-take-ontario, ltb-hearing-preparation-ontario-landlords, landlord-record-keeping-ontario. External links: ontario.ca (RTA), tribunalsontario.ca/ltb. ✅
 - 2026-09-04: Published london-ontario-zoning-rental-property — HYPER-LOCAL cluster (seventh post; completes the london-ontario-zoning-rental-property gap; zero PM company competition). Targets "London Ontario zoning rental property," "can I add a basement apartment in London Ontario," "London Ontario R1 zone rental." Core insight: the province's More Homes Built Faster Act requires municipalities to permit up to 3 residential units as-of-right on lots with municipal services — including R1 zones — but zoning is still the starting point and private services, conservation areas, parking requirements, and heritage designations can all block the provincial rule. Covers: London Zoning By-law Z.-1 overview, residential zones R1–R6 and what each permits, the "3-unit as-of-right" provincial rule and its exceptions, basement apartments (second units) as-of-right with Second Unit Registration + Rental Housing Licence chain, garden suites/detached ADUs under the provincial framework, multi-unit buildings in R3+, multi-tenant houses/rooming houses (R3+ only; separate Rooming House Licence), short-term rentals (link to Airbnb post), five common zoning mistakes (private services assumption, unpermitted construction, buying on seller's word, parking, licence confusion), 6-question FAQ. Internal links: city-of-london-second-unit-registration, city-of-london-rental-unit-licence, city-of-london-rental-unit-licence-renewal, london-ontario-property-standards-bylaw, airbnb-short-term-rentals-ontario. External link: london.ca/living-london/building-renovating/zoning. Soft CTA to Prospera at end. ✅
+- 2026-09-13: Full-site SEO audit completed. Audited all 107 blog posts + 18 commercial pages across the site. Key findings: (1) CRITICAL — /pricing meta title is "Pricing" — invisible to Google, fix immediately; (2) CRITICAL — "At Capacity" home page banner is turning away purchase-intent organic traffic, replace with waitlist CTA; (3) CRITICAL — keyword cannibalization on "property management London Ontario" across 5 pages — /property-management-london-ontario should be the canonical, blog post targeting same keyword should be redirected; (4) CRITICAL — investor/portfolio content cluster entirely absent — 0 posts on rental investing, buying multi-family, cash flow, portfolio scaling — highest-value audience with zero coverage; (5) N1 form and L1 application both have duplicate posts — merge each pair; (6) /services/tenant-placement receives almost zero internal links from the 106 blog posts — internal linking pass needed; (7) /pricing page never linked from fee/cost posts — CTA gap; (8) Tenant placement blog cluster entirely missing (4 posts needed to support service page). Three new clusters added to brain: INVESTOR/PORTFOLIO (6 slugs), PORTFOLIO SCALING (4 slugs), TENANT PLACEMENT BLOG (4 slugs). Recommended next posts list updated to reflect new priorities. Cannibalization Watchlist added. Full audit artifact at: https://claude.ai/code/artifact/33431fba-9722-4caa-bb5c-7d7a36c38701
 - 2026-09-11: Published buying-property-with-existing-tenants-ontario — EMERGENCY SCENARIOS cluster (first post; zero PM company competition). Targets "buying property with existing tenants Ontario" and "what happens to tenants when you buy a property Ontario." Core insight: a sale does not terminate a tenancy — the tenancy transfers to the new owner automatically under the RTA, and the previous landlord's obligations (repair, rent deposit, deposit interest) transfer too. Covers: what transfers on closing (lease terms, rent amount, last month's rent deposit plus accumulated interest), due diligence checklist before closing (confirm rent amount and deposit, get the lease, check for open maintenance issues, verify London rental licence obligation), the deposit credit on the statement of adjustments, introducing yourself as the new landlord, N12 own-use eviction (60 days, one month compensation, must actually move in, cannot serve before ownership), the restriction on immediate rent increases (12-month cycle, N1 notice, guideline limits), rent control exemption for post-November 15 2018 units, insurance obligation, six common mistakes (assuming vacant possession, missing deposit credit, renegotiating rent on day one, ignoring London licence requirement, serving N12 before ownership), and 7-question FAQ (tenancy continuity, new lease, N12 refusal, unpaid deposit interest, no written lease, bad-faith N12 risk, LTB timelines). Internal links: n12-notice-ontario, how-to-write-lease-agreement-ontario, landlord-record-keeping-ontario, rental-property-insurance-ontario, city-of-london-rental-unit-licence. External link: ontario.ca (RTA). Soft CTA to Prospera at end. ✅
