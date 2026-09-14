@@ -289,6 +289,20 @@ Priority order (thinnest first):
 
 ---
 
+## Word Count Standard (updated 2026-09-14)
+
+**Minimum 2,000 words per post. Target 2,500+.**
+
+Every new post must include:
+- A time/effort table or comparison table where relevant
+- A "Common Mistakes" section (5–7 items)
+- A FAQ section (7–8 questions minimum)
+- Specific London/SW Ontario context in at least two sections
+
+Posts under 2,000 words will not rank competitively. The edit queue target is 2,500 words.
+
+---
+
 ## Operating Mode: Content Portfolio Management
 
 **Updated 2026-09-13. This is the correct operating mode.**
