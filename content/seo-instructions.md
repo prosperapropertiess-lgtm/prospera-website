@@ -75,7 +75,7 @@ TENANT:
 ## STEP 5 — Write 3 in-depth posts
 
 Each post MUST:
-- Be 1500-2000 words
+- Be 2500+ words minimum (longer is better — aim for 2,800)
 - H1 matches the target keyword exactly or very closely
 - First paragraph answers the question directly (AI tools pull this for citations)
 - Use ## and ### headings containing secondary keywords

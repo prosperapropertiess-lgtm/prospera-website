@@ -157,4 +157,4 @@ Winning at the LTB is a significant step — but the eviction isn't complete unt
 
 Take the time to file correctly with the Court Enforcement Office, plan for the 72-hour retrieval window, and don't take any shortcuts. One illegal lockout can wipe out months of legitimate legal work and cost you far more than the original arrears.
 
-If you'd rather have experienced professionals manage this entire process — from serving the first notice through to turnover — [reach out to Prospera Properties](/contact). We handle the paperwork, the scheduling, and the documentation so you don't have to.
+If you'd rather have experienced professionals manage this entire process — from serving the first notice through to Sheriff enforcement — [see what full-service property management costs in London](/pricing), or [reach out to Prospera Properties](/contact) directly. We handle the paperwork, the scheduling, and the documentation so you don't have to.
