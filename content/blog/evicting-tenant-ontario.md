@@ -113,9 +113,19 @@ Roughly 3–5 months from first missed rent to vacant unit. For other eviction t
 - **Keep up with repairs.** A landlord who ignores maintenance requests is at a disadvantage at any LTB hearing.
 - **Stay calm.** Emotional landlords often say or do things that hurt their case.
 
+## The Real Cost of a Procedural Error
+
+A single mistake — wrong termination date, incorrect amount on the N4, serving by the wrong method — voids the notice. You restart from scratch. That means another 14-day N4 period, another 6–10 weeks to an LTB hearing, and potentially another 3–4 weeks for Sheriff enforcement.
+
+In practical terms: one error can add 3–4 months to the eviction timeline. At London's average rent of $1,500–$2,000 per month, that's $4,500–$8,000 in additional lost income.
+
+Most errors happen because landlords file their own paperwork without knowing the procedural rules in detail. The N4 is voided if the rent amount is off by even one cent — not the claimed amount, but the exact legal rent. The L1 is dismissed if the N4 wasn't served correctly. The eviction order is set aside if the tenant claims they never received proper notice.
+
 ## When It Makes Sense to Get Help
 
 The LTB process has a lot of moving parts, and a procedural error at any stage can cost you months of additional time and lost rent. Many London and St. Thomas landlords — especially those managing a handful of properties — find that having someone handle this process for them is well worth the cost.
+
+If you want to take the process entirely off your plate — notices, documentation, LTB filing, and hearing preparation — see [what full-service property management costs in London](/pricing). For landlords who need a tenant found and placed correctly before a vacancy turns into a problem, [Prospera's tenant placement service](/services/tenant-placement) covers screening, lease execution, and move-in documentation.
 
 ## Frequently Asked Questions
 

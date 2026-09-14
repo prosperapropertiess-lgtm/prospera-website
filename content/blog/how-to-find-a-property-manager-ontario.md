@@ -161,4 +161,4 @@ That's the baseline. It shouldn't be exceptional — it should be standard.
 
 ---
 
-**Prospera Properties manages residential rentals in London, St. Thomas, and Strathroy, Ontario.** We know the RTA, we know the local markets, and we treat your property like it's our own. If you're looking for a property manager you can actually trust, [contact us](/contact) to start the conversation.
+**Prospera Properties manages residential rentals in London, St. Thomas, and Strathroy, Ontario.** We know the RTA, we know the local markets, and we treat your property like it's our own. [See what our service costs](/pricing) and [contact us](/contact) to start the conversation.

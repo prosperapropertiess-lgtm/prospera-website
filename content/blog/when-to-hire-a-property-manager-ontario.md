@@ -185,4 +185,4 @@ A: No — you retain full ownership and ultimate decision-making authority. A ma
 
 ---
 
-**Prospera Properties manages residential rentals across London, St. Thomas, and Strathroy, Ontario.** If you're weighing whether professional management makes sense for your situation, we're happy to walk through your specific property — no pressure, no obligation. Reach out to find out what our service would look like for you.
+**Prospera Properties manages residential rentals across London, St. Thomas, and Strathroy, Ontario.** If you're weighing whether professional management makes sense for your situation, we're happy to walk through your specific property — no pressure, no obligation. [See exactly what our service costs](/pricing), or [reach out directly](/contact) to talk through your situation.

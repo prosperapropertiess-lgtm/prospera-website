@@ -94,7 +94,9 @@ This is frustrating. Many landlords write off modest damage amounts because the 
 
 The best protection remains upfront prevention: good screening, good documentation at move-in, and regular communication throughout the tenancy. When problems are caught early, they're usually easier and cheaper to resolve.
 
-If you're currently dealing with a damage situation and aren't sure how to proceed, Prospera Properties can walk you through your options. We've handled everything from minor move-out disputes to serious damage cases at the LTB, and we're happy to offer honest advice on the best path forward.
+If you're currently dealing with a damage situation and aren't sure how to proceed, Prospera Properties can walk you through your options. We've handled everything from minor move-out disputes to serious damage cases at the LTB, and we're happy to offer honest advice on the best path forward. You can also [see what full-service property management costs in London](/pricing) — consistent documentation, inspections, and tenant communication handled for you across every unit means fewer damage disputes in the first place.
+
+If you need a quality tenant placed from the start — with a signed condition report, professional lease, and move-in photography — [Prospera's tenant placement service](/services/tenant-placement) covers everything before the tenancy begins.
 
 ## Frequently Asked Questions
 

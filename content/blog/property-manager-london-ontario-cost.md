@@ -203,4 +203,4 @@ If you're a [first-time landlord in London, Ontario](/blog/first-time-landlord-t
 
 ---
 
-Prospera Properties manages residential rentals in London, St. Thomas, and Strathroy, Ontario. We're transparent about our fees, responsive to our landlords, and focused on keeping your units filled with reliable tenants. If you want a straight answer on what management would cost for your property, reach out — no obligation, no runaround.
+Prospera Properties manages residential rentals in London, St. Thomas, and Strathroy, Ontario. We're transparent about our fees, responsive to our landlords, and focused on keeping your units filled with reliable tenants. [See our full pricing here](/pricing) — no obligation, no runaround.

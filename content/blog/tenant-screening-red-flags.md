@@ -119,4 +119,4 @@ From filing an N4 notice to receiving an order from the LTB and having the Sheri
 
 The two hours you spend screening a tenant today is what prevents you from spending six months at the LTB. A thorough screening process combined with a [solid lease agreement](/blog/how-to-write-lease-agreement-ontario) and a careful [move-in inspection](/blog/move-in-move-out-inspection-ontario) is the most reliable protection a landlord in Ontario has.
 
-If you'd rather not manage tenant screening yourself — or you want a second opinion on a specific applicant — [we handle the entire process](/landlords) and we stand behind every tenant we place.
+If you'd rather not manage tenant screening yourself — or you want a second opinion on a specific applicant — [Prospera's tenant placement service](/services/tenant-placement) handles the entire process: listing, screening, lease execution, and move-in documentation. We stand behind every tenant we place. [See what it costs](/pricing).

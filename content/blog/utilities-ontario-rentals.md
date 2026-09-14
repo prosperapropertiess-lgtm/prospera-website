@@ -73,11 +73,39 @@ When utilities are included, tenants are often willing to pay a premium — and 
 
 A property manager like Prospera Properties can help you model utility costs based on the property type and help you set a rent that protects your margins while staying competitive in the local market.
 
+## What Happens If the Tenant Stops Paying Utilities They're Responsible For
+
+When a tenant pays utilities directly and falls behind, the utility company will eventually disconnect service. That creates a problem for you.
+
+For heat: even if the lease assigns heat costs to the tenant, Ontario law requires landlords to maintain a minimum indoor temperature of 20°C from September 1 to June 15. If the tenant's gas gets cut off and the unit drops below 20°C, you are still in breach of the RTA — regardless of who pays the bill.
+
+**Your options when a tenant is behind on utilities they pay:**
+
+1. **Serve an N5** if the situation constitutes interference with reasonable enjoyment of the building (for instance, if other tenants are affected by loss of shared utilities)
+2. **Step in and pay the utility** to restore service, then pursue repayment — document everything in writing
+3. **Negotiate** — many utility companies will work with landlords when a tenant is in arrears and the landlord demonstrates awareness of the situation
+4. **Consider the structure for future tenancies** — landlords who have been burned by non-payment of heat often switch to including heat in the rent for the next tenant
+
+The vital services cutoff rules in the RTA apply in reverse too: if *you* stop paying utilities that you've agreed to cover, the tenant has a T2 application right against you. See [vital services cutoff rules for Ontario landlords](/blog/vital-services-cutoff-ontario-landlords) for the full picture.
+
+## Utility Structures by Property Type: What Actually Works in London
+
+The right utility structure depends heavily on the property.
+
+**Basement apartments and secondary suites:** Heat and hydro are almost always shared systems in older London homes. Sub-metering adds cost and complexity. Most basement apartment landlords include all utilities and price accordingly.
+
+**Single-family detached rentals:** In London's R1 and R2 zones, tenant pays heat and hydro directly is the norm for full-house rentals. London Hydro (central London) and Hydro One (east/south edges) each have their own account transfer processes — confirm which provider covers the address before the lease is signed.
+
+**Duplexes and triplexes:** Separate meters per unit are the ideal. If there's a single meter, you're paying hydro and building the cost into rent. Combining utility costs into rent on a multi-unit building adds predictability for tenants but exposes you to high-usage variability between units.
+
+**Student rentals (near Western, Fanshawe, Brescia):** All-inclusive is the market norm. Tenants in the student market compare all-in prices and often won't consider utilities-out listings. Price accordingly and budget for above-average utility consumption.
+
 ## A Few Practical Tips
 
 - **Read the meter at move-in and move-out** — document readings with photos and include them in your move-in/move-out inspection report
 - **Know who to call for emergencies** — keep the contact number for the local gas company and hydro provider in your records; tenants may not know who to call if there's an outage or gas smell
 - **Inform tenants about utility providers upfront** — if they need to set up their own accounts, give them the provider name and a timeline; delays in account setup can create billing confusion
+- **Confirm the utility accounts are transferred on the tenant's move-in date** — a gap in the account transfer means the bill reverts to you for that period; track it
 
 ## Frequently Asked Questions
 
@@ -97,3 +125,5 @@ In most Ontario municipalities, water and sewer charges are billed by the munici
 Sub-metering is a system where a licensed company installs individual electricity meters per unit, allowing tenants to pay for their own consumption directly. Ontario law permits sub-metering for new tenancies, but switching an existing tenant from included hydro to sub-metered requires a rent reduction equal to the amount previously attributable to electricity, following a specific regulatory process. Don't implement sub-metering without proper documentation and tenant notification.
 
 Getting your utility structure right at the start of a tenancy saves a lot of confusion — and potential disputes — down the road. For your broader obligations under Ontario law, see our guide to [landlord maintenance responsibilities in Ontario](/blog/landlord-maintenance-responsibilities-ontario).
+
+If figuring out utility structures, pricing, and tenant agreements across multiple properties is taking more time than it should, [see what property management costs in London](/pricing) — a manager who handles this daily brings a pricing and structuring perspective that most individual landlords build slowly through trial and error.

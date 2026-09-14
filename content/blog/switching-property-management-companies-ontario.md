@@ -168,4 +168,4 @@ A second switch within a year or two is demoralizing and expensive. Take the ext
 
 ---
 
-Prospera Properties manages residential rental properties in London, St. Thomas, and Strathroy, Ontario. If you're unhappy with your current property manager and want to talk through what a transition would look like — or just want to understand whether what you're experiencing is normal — we're straightforward to deal with and easy to reach. No pressure, just answers.
+Prospera Properties manages residential rental properties in London, St. Thomas, and Strathroy, Ontario. If you're unhappy with your current property manager and want to talk through what a transition would look like — or just want to understand whether what you're experiencing is normal — we're straightforward to deal with and easy to reach. [See what our service costs](/pricing) before you reach out — no pressure, just answers.

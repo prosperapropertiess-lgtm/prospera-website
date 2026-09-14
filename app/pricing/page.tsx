@@ -11,7 +11,7 @@ import StatementPreview from "@/components/ui/StatementPreview";
 import ScrollToPlans from "@/components/ui/ScrollToPlans";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Property Management Pricing London Ontario | Prospera Properties",
   description:
     "Transparent property management pricing for London, St. Thomas, and Strathroy landlords. Three plans — 7%, 10%, or 15% — with clear fees and six written guarantees.",
 };
