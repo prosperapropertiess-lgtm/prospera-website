@@ -129,16 +129,16 @@ async function getPriorSessions(): Promise<Array<{ date: string; domain: string;
     const sb = getSupabaseAdmin();
     const { data } = await sb
       .from("agent_runs")
-      .select("summary, created_at")
+      .select("summary, ran_at")
       .eq("agent", "intelligence")
       .eq("status", "success")
-      .order("created_at", { ascending: false })
+      .order("ran_at", { ascending: false })
       .limit(7);
 
     if (!data || data.length === 0) return [];
 
     return data.map((row, i) => ({
-      date: new Date(row.created_at).toLocaleDateString("en-CA", {
+      date: new Date(row.ran_at).toLocaleDateString("en-CA", {
         weekday: "short",
         month: "short",
         day: "numeric",
