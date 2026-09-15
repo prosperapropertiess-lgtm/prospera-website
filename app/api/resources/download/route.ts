@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     const FILE_URLS: Record<string, string> = {
       "lease-addendum": "https://www.prosperaproperties.co/forms/lease-addendum.pdf",
       "eviction-notices": "https://www.prosperaproperties.co/forms/N4-clean.pdf",
-      "ontario-standard-lease": "https://www.ontario.ca/laws/statute/06r17",
+      "ontario-standard-lease": "https://www.prosperaproperties.co/forms/ontario-standard-lease.pdf",
     };
 
     // Send download email
