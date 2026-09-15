@@ -10,14 +10,17 @@ interface Resource {
   description: string;
   category: "forms" | "guides" | "templates" | "checklists";
   icon: string;
+  /** Present only for resources that have a real PDF — these skip the email
+   * step entirely and download on click. No file yet = email-a-guide flow. */
+  fileUrl?: string;
 }
 
 const RESOURCES: Resource[] = [
-  { id: "ontario-standard-lease", title: "Ontario Standard Lease Agreement", description: "The official Ontario standard lease form, ready to fill in for any residential tenancy.", category: "forms", icon: "📄" },
-  { id: "lease-addendum", title: "Lease Addendum Template (Prospera Edition)", description: "Our custom addendum that adds protections beyond the standard Ontario lease, covering utilities, maintenance, and tenant obligations.", category: "templates", icon: "📝" },
+  { id: "ontario-standard-lease", title: "Ontario Standard Lease Agreement", description: "The official Ontario standard lease form, ready to fill in for any residential tenancy.", category: "forms", icon: "📄", fileUrl: "https://www.prosperaproperties.co/forms/ontario-standard-lease.pdf" },
+  { id: "lease-addendum", title: "Lease Addendum Template (Prospera Edition)", description: "Our custom addendum that adds protections beyond the standard Ontario lease, covering utilities, maintenance, and tenant obligations.", category: "templates", icon: "📝", fileUrl: "https://www.prosperaproperties.co/forms/lease-addendum.pdf" },
+  { id: "eviction-notices", title: "Eviction Notice Templates (N4, N5, N12)", description: "The three most commonly needed Ontario eviction forms, with plain-English explanations of when and how to use each one.", category: "forms", icon: "⚖️", fileUrl: "https://www.prosperaproperties.co/forms/N4-clean.pdf" },
   { id: "tenant-screening-checklist", title: "Tenant Screening Checklist", description: "Step-by-step checklist: credit check, income verification, reference calls, and what to look for at each stage.", category: "checklists", icon: "✅" },
   { id: "rent-increase-n1", title: "Rent Increase Notice Template (N1 Guide)", description: "Plain-English guide to Ontario's N1 form: how to fill it out correctly, serve it on time, and avoid common mistakes.", category: "templates", icon: "📈" },
-  { id: "eviction-notices", title: "Eviction Notice Templates (N4, N5, N12)", description: "The three most commonly needed Ontario eviction forms, with plain-English explanations of when and how to use each one.", category: "forms", icon: "⚖️" },
   { id: "property-inspection-checklist", title: "Property Inspection Checklist", description: "Move-in and move-out inspection form with photo documentation guide. Protects both landlord and tenant.", category: "checklists", icon: "🔍" },
   { id: "landlord-tax-guide", title: "Ontario Landlord Tax Deduction Guide", description: "What you can and cannot write off as a rental property owner in Ontario: mortgage interest, repairs, management fees, and more.", category: "guides", icon: "💼" },
   { id: "maintenance-request-form", title: "Maintenance Request Form Template", description: "A simple form for tenants to submit maintenance requests in writing. Creates a paper trail and keeps both sides accountable.", category: "forms", icon: "🔧" },
@@ -27,13 +30,15 @@ const RESOURCES: Resource[] = [
 
 const CATEGORY_LABELS = { forms: "Forms", guides: "Guides", templates: "Templates", checklists: "Checklists" };
 
-interface DownloadModalProps {
+interface EmailModalProps {
   resource: Resource;
   onClose: () => void;
 }
 
-function DownloadModal({ resource, onClose }: DownloadModalProps) {
-  const [name, setName] = useState("");
+// Only used for the guide-only resources — there's no file yet, so this is
+// genuinely an "email it to me" flow, not a download gate. One field, honest
+// copy about what happens.
+function EmailModal({ resource, onClose }: EmailModalProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -44,7 +49,7 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
       const res = await fetch("/api/resources/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, resourceId: resource.id, resourceTitle: resource.title }),
+        body: JSON.stringify({ email, resourceId: resource.id, resourceTitle: resource.title }),
       });
       setStatus(res.ok ? "success" : "error");
     } catch {
@@ -60,34 +65,33 @@ function DownloadModal({ resource, onClose }: DownloadModalProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 10 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[480px] shadow-2xl rounded-xl overflow-hidden"
+        className="fixed z-[100] inset-x-4 top-1/2 -translate-y-1/2 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:w-[440px] shadow-2xl rounded-xl overflow-hidden"
         style={{ backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8" }}
       >
         <div className="h-1 w-full" style={{ backgroundColor: "#8B2030" }} />
-        <div className="p-8">
+        <div className="p-8 relative">
           <button onClick={onClose} className="absolute top-4 right-5 text-[#666666] hover:text-[#222222] text-xl leading-none">×</button>
           {status === "success" ? (
             <div className="text-center py-6">
               <p className="text-4xl mb-2">📬</p>
-              <h3 className="text-2xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Check your inbox.</h3>
+              <h3 className="text-2xl font-light mb-3" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>On its way.</h3>
               <p className="text-sm mb-6" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                We&apos;ve sent <strong>{resource.title}</strong> to {email}.
+                We&apos;ve emailed <strong>{resource.title}</strong> to {email}.
               </p>
               <button onClick={onClose} className="text-xs uppercase tracking-widest underline" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Close</button>
             </div>
           ) : (
             <>
-              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Free Download</p>
-              <h3 className="text-2xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>{resource.title}</h3>
+              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>{resource.title}</p>
+              <h3 className="text-xl font-light mb-2 leading-snug" style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}>Where should we send it?</h3>
               <p className="text-sm mb-6 leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                Enter your email and we&apos;ll send it instantly. No spam, just the occasional landlord tip.
+                Enter your email — this one&apos;s a guide, not a file, so we email it straight to you.
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your first name" className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required autoFocus className="px-4 py-3 text-sm outline-none border rounded" style={{ borderColor: "#D8D2C8", backgroundColor: "#F7F5F2", color: "#222222", fontFamily: "var(--font-dm-sans)" }} />
                 {status === "error" && <p className="text-xs" style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>Something went wrong. Please try again.</p>}
                 <button type="submit" disabled={status === "loading"} className="py-3 text-xs uppercase tracking-widest mt-1 transition-opacity hover:opacity-80 disabled:opacity-50 rounded" style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>
-                  {status === "loading" ? "Sending..." : "Send Me the Download"}
+                  {status === "loading" ? "Sending..." : "Email It to Me"}
                 </button>
               </form>
             </>
@@ -119,13 +123,27 @@ export default function ResourcesGrid() {
                   <p className="text-sm leading-relaxed" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>{resource.description}</p>
                 </div>
                 <div className="px-6 pb-6">
-                  <button
-                    onClick={() => setActiveResource(resource)}
-                    className="w-full py-3 text-xs uppercase tracking-widest border rounded transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
-                    style={{ borderColor: "#D8D2C8", color: "#333333", fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    Download Free
-                  </button>
+                  {resource.fileUrl ? (
+                    // Real file — one click, opens immediately. No modal, no
+                    // email, nothing to fill in.
+                    <a
+                      href={resource.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center py-3 text-xs uppercase tracking-widest rounded transition-opacity hover:opacity-85"
+                      style={{ backgroundColor: "#8B2030", color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Download PDF →
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => setActiveResource(resource)}
+                      className="w-full py-3 text-xs uppercase tracking-widest border rounded transition-colors hover:border-[#1F2F3A] hover:text-[#1F2F3A]"
+                      style={{ borderColor: "#D8D2C8", color: "#333333", fontFamily: "var(--font-dm-sans)" }}
+                    >
+                      Email Me This Guide
+                    </button>
+                  )}
                 </div>
               </div>
             </FadeIn>
@@ -134,7 +152,7 @@ export default function ResourcesGrid() {
       </section>
 
       <AnimatePresence>
-        {activeResource && <DownloadModal resource={activeResource} onClose={() => setActiveResource(null)} />}
+        {activeResource && <EmailModal resource={activeResource} onClose={() => setActiveResource(null)} />}
       </AnimatePresence>
     </>
   );
