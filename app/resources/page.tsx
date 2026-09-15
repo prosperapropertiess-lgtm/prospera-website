@@ -1,6 +1,6 @@
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
-import N4FormBuilder from "@/components/ui/N4FormBuilder";
+import N4BuilderSection from "@/components/ui/N4BuilderSection";
 import ResourcesGrid from "@/components/ui/ResourcesGrid";
 import WelcomeBanner from "@/components/ui/WelcomeBanner";
 import type { Metadata } from "next";
@@ -286,25 +286,7 @@ export default async function ResourcesPage({ searchParams }: Props) {
       </section>
 
       {/* ── N4 Form Builder ── */}
-      <section id="n4-builder" className="py-20 px-6" style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #D8D2C8" }}>
-        <div className="max-w-3xl mx-auto">
-          <FadeIn>
-            <p
-              className="text-xs font-semibold uppercase tracking-widest text-center mb-3"
-              style={{ color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}
-            >
-              Live Tool
-            </p>
-            <h2
-              className="text-4xl font-light text-center mb-10 leading-tight"
-              style={{ color: "#1F2F3A", fontFamily: "var(--font-cormorant)" }}
-            >
-              N4 Form Builder
-            </h2>
-            <N4FormBuilder />
-          </FadeIn>
-        </div>
-      </section>
+      <N4BuilderSection />
 
       {/* ── Other downloads ── */}
       <section className="py-4 px-6" style={{ backgroundColor: "#F7F5F2" }}>
