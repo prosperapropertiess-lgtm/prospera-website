@@ -15,11 +15,13 @@ import {
 } from "../lib/owner-report-email";
 import type { OwnerBundle } from "../lib/notion";
 
-const RESEND_API_KEY =
-  process.env.RESEND_API_KEY ?? "re_D2njYrm1_8fh7gQGBStkpcGg4EKTG38e6";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+if (!RESEND_API_KEY) {
+  throw new Error("RESEND_API_KEY env var is required to run this script.");
+}
 
 const FILE_URLS: Record<string, string> = {
-  "ontario-standard-lease": "https://www.ontario.ca/laws/statute/06r17",
+  "ontario-standard-lease": "https://www.prosperaproperties.co/forms/ontario-standard-lease.pdf",
   "lease-addendum": "https://www.prosperaproperties.co/forms/lease-addendum.pdf",
   "eviction-notices": "https://www.prosperaproperties.co/forms/N4-clean.pdf",
   "tenant-screening-checklist": null,
