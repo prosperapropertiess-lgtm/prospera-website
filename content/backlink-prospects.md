@@ -2350,3 +2350,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: County government economic development office — separate from STEEDC (which is specific to the City of St. Thomas) and covers the broader Elgin County region. Outreach should be professional and data-oriented, framed as a community partnership contribution. The VW PowerCo/workforce housing angle is the strongest hook for a county EDO that is actively telling that growth story. Site access blocked at network level; research drawn from known organizational profile.
 
 ---
+
+## Tenon10 — Ontario Landlord Platform Blog
+- url: https://www.tenon10.com/blog
+- type: blog
+- why: Ontario landlord software platform with comprehensive RTA guides (N4, lease agreements, first-timer guides) — audience is exactly the small landlord Prospera serves; a resource mention or contributed piece positions Prospera as the professional complement to DIY landlord tools.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: https://www.tenon10.com/contact
+- site_focus: Free property management software platform for Ontario landlords with an extensive educational blog covering N4 forms, Bill 60 changes, standard lease requirements, and first-timer guides. Content is practical, Ontario-specific, and aimed at landlords managing their own properties.
+- hook: Prospera handles everything Tenon10's readers are trying to learn to do themselves — a guest piece on "when the DIY approach stops making sense" would serve their audience and put Prospera in front of landlords at exactly the moment they're considering professional help.
+- specific_content: Their post "Got an N4 Notice? Here's What to Do (Don't Panic)" and the "Becoming a Landlord in Ontario: 2026 First-Timer's Guide" — both address issues Prospera handles day-to-day for clients.
+- researcher_notes: Site is a software platform, not a PM company — complementary, not competitive. High content quality, Ontario-specific, active blog. No direct email found; contact form at tenon10.com/contact is the outreach route.
+
+---
+
+## LendCity Mortgages — Ontario Investor Mortgage Blog
+- url: https://lendcity.ca/blog/
+- type: blog
+- why: Investor-focused Canadian mortgage brokerage with a dedicated London Ontario investing guide — their audience are the same buyers who eventually need a property manager once they close; a resource mention or contributed piece plants Prospera in front of new investors at the right moment.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: scott@lendcity.ca
+- site_focus: Mortgage brokerage specializing in investment property financing across Canada, with detailed Ontario sub-market guides covering London, Windsor, Hamilton, and Brantford. Most agents are active investors themselves. Strong blog on Ontario real estate investment strategy.
+- hook: Their London Ontario investing guide covers the market fundamentals but stops at the purchase — a contributed piece on what to expect in property management (costs, LTB realities, tenant screening) fills the natural next question their readers have.
+- specific_content: "London Ontario Real Estate Investing Guide" — covers cap rates (6–7%), student housing near Western, affordable entry points. Prospera's operations experience adds the landlord side of that story.
+- researcher_notes: Direct email confirmed: scott@lendcity.ca. Phone: (226) 212-7200. Professional site, highly relevant audience, no competitive overlap.
+
+---
+
+## Chris Russell — London Ontario Realtor Investment Blog
+- url: https://realtorchrisrussell.com/blog/
+- type: blog
+- why: London Ontario realtor with 40+ years of experience and a dedicated investment property blog — their investor clients need property management after purchase, making Prospera a natural resource mention or referral partner.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: realtorchrisrussell@gmail.com
+- site_focus: London Ontario real estate agent (Century 21 First Canadian Corp) running an investor-oriented blog covering successful real estate investment strategies, marketing, and the London market. Explicitly targets new and seasoned investment property buyers in London.
+- hook: Chris's blog walks investors through the purchase side; Prospera handles what comes after. A co-written piece or resource mention on managing a London investment property would serve his clients directly.
+- specific_content: "Your Guide to Successful Real Estate Investment" post — covers buying strategy but not post-purchase management, which is exactly where Prospera operates.
+- researcher_notes: Email confirmed: realtorchrisrussell@gmail.com. Phone: (519) 870-9824. Address: 420 York St, London ON. Very local, highly relevant. Good candidate for referral relationship too.
+
+---
+
+## The Mortgage Firm — London & SW Ontario Mortgage Broker Blog
+- url: https://www.themortgagefirm.ca/index.php/blog
+- type: blog
+- why: London-based mortgage broker serving London, St. Thomas, and SW Ontario with an active blog — their clients who finance investment properties in Prospera's exact service area are a primary audience; a resource mention or contributed piece reaches investors immediately post-close.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: https://www.themortgagefirm.ca/index.php/contact-london-ontario-mortgage-broker
+- site_focus: Mortgage brokerage based in London Ontario covering residential, investment, commercial, and alternative financing. Serves London, St. Thomas, and Southwestern Ontario — exactly Prospera's territory. Active blog with practical mortgage and investment content.
+- hook: Their clients are financing investment properties in the same cities Prospera manages — a resource mention ("what to do after you close") or a guest post on London investor property management costs would be directly useful to their readership.
+- specific_content: Blog post "Top London, Ontario Mortgage Broker - 2026: What to Look For" — discusses client-first advice and local expertise. Same positioning Prospera uses in property management.
+- researcher_notes: Phone: 226-785-0495. Serves London, St. Thomas, and SW Ontario — perfect geographic match. Contact form available; no direct email found but phone outreach also viable.
+
+---
+
+## Sean Prosser — London Ontario Mortgage Agent Blog
+- url: https://www.seanprosser.com/blog/
+- type: blog
+- why: London Ontario mortgage agent with an active blog covering the local market — investment property clients in his pipeline need property management, and a resource mention or guest post keeps Prospera top of mind for his referrals.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: mortgages@seanprosser.com
+- site_focus: London Ontario mortgage agent (Mortgage Alliance / Y Mortgage) with blog covering credit scores, mortgage renewals, and market updates. Based at 470 Colborne St, London ON. Serves clients Canada-wide but local practice in London.
+- hook: Sean's clients buying investment properties in London need property management within months of closing — a guest piece on the real costs of being a London landlord (LTB, maintenance, vacancy) would serve his audience and establish a mutual referral path.
+- specific_content: Blog covering mortgage renewal and market update content — Prospera can complement with the landlord side of the same market.
+- researcher_notes: Direct email confirmed: mortgages@seanprosser.com. Phone: (519) 639-5414. Address: 470 Colborne St, London ON N6B 2T3. Highly local, ideal referral partner profile.
+
+---
+
+## LendingHub — Canadian Mortgage Broker, London Ontario Content
+- url: https://lendinghub.ca/blog/
+- type: blog
+- why: Canadian mortgage broker with a first-time buyer guide specifically for London Ontario — their readers becoming landlords for the first time are the exact audience Prospera targets with its "first-time landlord" content.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: https://lendinghub.ca/contact/
+- site_focus: Canadian mortgage brokerage offering fixed/variable, private, and second mortgages. Strong educational blog content including a first-time buyer guide specific to London Ontario. Covers affordability, market conditions, and buyer steps.
+- hook: Their London first-time buyer guide ends at the mortgage — a resource mention or contributed piece on what happens when that London buyer decides to rent out the property would fill the next question naturally.
+- specific_content: "First-Time Buyer's Guide in London, Ontario" — positions London as affordable and high-growth; Prospera can add the landlord/investor angle as a follow-up resource.
+- researcher_notes: Contact form at lendinghub.ca/contact. No direct email found. National brand with London-specific content — relevant audience even if not exclusively London-focused.
+
+---
+
+## The Golfi Team — Ontario Real Estate Investment Blog
+- url: https://www.robgolfi.com/blog/
+- type: blog
+- why: Southern Ontario's top-producing RE/MAX team with an active investment blog covering Ontario neighborhoods, market conditions, and investment strategy — a contributed piece on property management realities in SW Ontario fills a gap in their content.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: https://www.robgolfi.com/contact/
+- site_focus: RE/MAX Golfi Team (Hamilton-Burlington-Niagara) with a high-traffic investment blog covering Ontario neighborhoods for investment, market shifts, and buying/selling strategy. Active podcast "The Golfi Real Estate Show." Covers Ontario broadly including London area.
+- hook: Their "Top 10 Ontario Neighborhoods for Real Estate Investment" content attracts buyers considering markets like London and SW Ontario; a contributed piece on what property management actually looks like in those markets adds practical depth their investors want.
+- specific_content: "Top 10 Ontario Neighborhoods for Real Estate Investment in 2025" — London area is cited; Prospera's on-the-ground experience managing there is the obvious next piece.
+- researcher_notes: Phone: (905) 575-7700. Hamilton-based but Ontario-wide content. Contact form on site. High-traffic site, well-established brand — a resource mention or guest post could drive meaningful referral traffic.
+
+---
+
+## ViewHomes.ca — London Ontario Real Estate Blog
+- url: https://www.viewhomes.ca/blog/
+- type: blog
+- why: London Ontario real estate brokerage with a London-specific blog covering the local market — their reader base of London home buyers and investors are a natural audience for Prospera's property management services.
+- researched: true
+- drafted: true
+- added: 2026-09-20
+- contact_email: admin@viewhomes.ca
+- site_focus: London Ontario real estate brokerage (Forster Team, Nu-Vista Pinnacle Realty) with an active Ontario real estate blog covering London specifically. Topics include London market conditions, rental properties, and investment opportunities. Address: 805 Adelaide St N, London ON.
+- hook: Their blog reaches London home buyers and investors who may become landlords — a resource mention or guest post on London property management would serve their readership and add content they don't currently produce.
+- specific_content: London Ontario blog category covering market conditions and investment properties — Prospera's management expertise fills the practical "what happens after you buy" gap.
+- researcher_notes: Direct email confirmed: admin@viewhomes.ca. Phone: (519) 851-2844. Highly local, same city, no competitive overlap. Strong geographic fit.
+
+---
