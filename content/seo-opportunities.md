@@ -1,5 +1,33 @@
 ---
-Last updated: 2026-09-13
+Last updated: 2026-09-20
+
+## ⚠️ CRITICAL — September 21 is TOMORROW (2026-09-20)
+The Bill 60 Phase 2 provisions take effect September 21, 2026. The following three items from last week's "Topics to Expand" are still urgent — they need to be published or updated today:
+1. **ontario-landlord-september-21-2026-checklist** — still unpublished; search volume for this will peak Sept 20–22. Publish immediately.
+2. **bill-60-ontario-landlords.md** — Phase 2 section (expanded N13 grounds, revised AGI cap, mandatory N12 disclosure) still needs to be added.
+3. **n4-notice-ontario.md** — Bill 60 cure period change (uniform 14 days for all tenancy types effective Sept 21) needs a callout box.
+
+---
+
+## New Topic Opportunities — 2026-09-20
+
+- mold-in-rental-ontario-landlord | Est. difficulty: MEDIUM | Vol: ~400/mo | Who pays for mold remediation in Ontario rentals, landlord's RTA duty to maintain habitability, repair timelines (24-48h for severe/active leaks, 5-7 business days for surface mold), when tenant negligence shifts responsibility, and how tenants can file a T6 if landlord doesn't act. Marda Management (a PM competitor) and mold-remediation companies rank but no authoritative Ontario PM company guide covers the landlord's full obligations and defences. Higher search volume than most maintenance topics. Natural internal links to landlord-maintenance-responsibilities-ontario.md, rta-section-20-maintenance-obligations-ontario.md, and pest-control-ontario-rentals.md.
+
+- guarantor-co-signer-rental-ontario | Est. difficulty: LOW | Vol: ~175/mo | Can Ontario landlords require a guarantor, how to draft an enforceable guarantee, what the Ontario Human Rights Code limits (must apply same standard to all applicants, cannot target protected grounds), and whether a guarantee survives automatic month-to-month conversion. Settlement.org, therentalmarket.ca, and paralegal Q&A sites rank — no authoritative Ontario PM company guide exists. Landlords with student tenants or lower-income applicants search this constantly. Short standalone post with strong featured-snippet potential. Internal links to tenant-credit-check-ontario-landlords.md and how-to-write-lease-agreement-ontario.md.
+
+- ev-charging-rental-property-ontario-landlord | Est. difficulty: LOW | Vol: ~150/mo | EV charging at Ontario rental properties: no legal obligation exists as of 2026, practical approaches for landlords receiving tenant requests (separate metered outlet, cost-sharing agreement, lease addendum), insurance implications, and condo-specific considerations under the Condominium Act. CBC News and US government pages rank for the general query; no Ontario PM company has a landlord-specific practical guide. Emerging topic with rising search volume as EV adoption grows. Internal links to utilities-ontario-rentals.md and condo-owner-landlord-ontario (planned).
+
+## SKIPPED — 2026-09-20
+
+All 12 standard keyword queries for this run are already covered by existing posts or were already listed in prior SKIPPED sections. No new additions needed.
+
+## Topics to Expand — 2026-09-20
+
+- how-long-does-eviction-take-ontario.md | Add a 2026 LTB wait time table by application type: L1/L9 ~3-6 months, L2 ~6-9 months, other applications 9-12+ months. Current backlog: ~41,000 active files (down from 53,000 at peak). Source: Tribunals Ontario and ltbtrack.ca as of September 2026. The post ranks for the right queries but will lose freshness signals without a 2026 data update.
+
+- security-deposits-ontario.md | Add a dedicated subsection on the annual interest obligation: rate for 2026 is 2.1% (matches rent guideline), so $2,000 deposit → $42 interest owed on anniversary. Example calculation, the top-up-instead-of-cash-payment option, and what happens if a landlord forgets to pay. The standalone ontario-rent-deposit-interest-2026 opportunity (from 2026-08-23) hasn't been published yet — if still unpublished, the faster move is adding this as a section here.
+
+---
 
 ## New Topic Opportunities — 2026-09-13
 
