@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isLeasingOrAdminAuthenticated } from "@/lib/leasing-auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-const DEFAULT_ROOMS = ["Entrance", "Living Room", "Kitchen", "Bedroom", "Bathroom", "Laundry", "Basement", "Exterior"];
+const DEFAULT_ROOMS = ["Entrance", "Living Room", "Kitchen", "Bedroom 1", "Bathroom 1", "Laundry", "Basement", "Exterior"];
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!await isLeasingOrAdminAuthenticated(req)) {

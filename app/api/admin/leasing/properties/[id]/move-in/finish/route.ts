@@ -17,7 +17,10 @@ import { generateInspectionReportPdf, generateWelcomeGuidePdf } from "@/lib/move
 import { moveInTenantEmail, moveInOwnerEmail } from "@/lib/emails";
 import { Resend } from "resend";
 
-const BUCKET = "tenant-inspection";
+// Separate bucket from photos (tenant-inspection) — that bucket's
+// allowed_mime_types is images only (jpeg/png/webp/heic), which is exactly
+// why PDF uploads were failing with a MIME type error.
+const BUCKET = "move-in-documents";
 const SIGNED_URL_TTL = 60 * 60 * 24 * 365;
 
 interface CoTenant { name?: string; first_name?: string; last_name?: string; email?: string }

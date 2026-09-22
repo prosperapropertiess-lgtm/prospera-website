@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     .single();
   if (sessionErr) return NextResponse.json({ error: `Move-in session failed: ${sessionErr.message}` }, { status: 500 });
 
-  const DEFAULT_ROOMS = ["Entrance", "Living Room", "Kitchen", "Bedroom", "Bathroom", "Laundry", "Basement", "Exterior"];
+  const DEFAULT_ROOMS = ["Entrance", "Living Room", "Kitchen", "Bedroom 1", "Bathroom 1", "Laundry", "Basement", "Exterior"];
   await db.from("move_in_rooms").insert(DEFAULT_ROOMS.map((name, i) => ({ session_id: session.id, name, sort_order: i })));
 
   return NextResponse.json({ campaignId: campaign.id }, { status: 201 });

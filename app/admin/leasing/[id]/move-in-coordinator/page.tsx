@@ -23,6 +23,72 @@ const CONDITIONS: { value: Condition; label: string; color: string }[] = [
   { value: "not_applicable", label: "N/A", color: TEXT_MUT },
 ];
 
+// Guides the walkthrough instead of leaving "what room comes next" and
+// "what goes in this room" as blank text boxes. Numbered rooms (Bedroom,
+// Bathroom) auto-increment — suggests Bedroom 2 once Bedroom 1 exists,
+// instead of only ever offering one bedroom.
+const ROOM_WALK_ORDER = ["Entrance", "Living Room", "Dining Room", "Kitchen", "Bedroom", "Bathroom", "Laundry", "Basement", "Exterior"];
+const NUMBERED_ROOMS = new Set(["Bedroom", "Bathroom"]);
+const MAX_NUMBERED = 6;
+
+function suggestedNextRooms(existing: { name: string }[], count = 4): string[] {
+  const names = new Set(existing.map((r) => r.name.trim().toLowerCase()));
+  const out: string[] = [];
+  for (const base of ROOM_WALK_ORDER) {
+    if (out.length >= count) break;
+    if (NUMBERED_ROOMS.has(base)) {
+      for (let i = 1; i <= MAX_NUMBERED; i++) {
+        const label = `${base} ${i}`;
+        if (!names.has(label.toLowerCase())) { out.push(label); break; }
+      }
+    } else if (!names.has(base.toLowerCase())) {
+      out.push(base);
+    }
+  }
+  return out;
+}
+
+const DEFAULT_ITEMS = ["Walls", "Flooring", "Ceiling", "Windows", "Doors", "Light Fixtures", "Outlets & Switches"];
+const ROOM_EXTRA_ITEMS: Record<string, string[]> = {
+  kitchen: ["Countertops", "Cabinets", "Sink & Faucet", "Backsplash"],
+  bathroom: ["Toilet", "Tub / Shower", "Vanity & Sink", "Exhaust Fan"],
+  laundry: ["Washer Hookup", "Dryer Vent"],
+  exterior: ["Siding / Exterior Walls", "Deck / Porch", "Yard / Landscaping"],
+};
+function suggestedItems(roomName: string): string[] {
+  const key = Object.keys(ROOM_EXTRA_ITEMS).find((k) => roomName.toLowerCase().includes(k));
+  return [...DEFAULT_ITEMS, ...(key ? ROOM_EXTRA_ITEMS[key] : [])];
+}
+
+// Burns a visible timestamp (and what it's a photo of) onto the image
+// itself before upload — not just EXIF, which is invisible unless someone
+// goes looking for it and gets stripped by a lot of sharing/export paths.
+// Also downsizes to a sane max width, since full phone-camera resolution
+// was the real driver of storage cost, not photo count.
+async function stampAndResizePhoto(file: File, label: string): Promise<Blob> {
+  const bitmap = await createImageBitmap(file);
+  const MAX_W = 1600;
+  const scale = Math.min(1, MAX_W / bitmap.width);
+  const w = Math.round(bitmap.width * scale);
+  const h = Math.round(bitmap.height * scale);
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d")!;
+  ctx.drawImage(bitmap, 0, 0, w, h);
+
+  const stamp = `${label} — ${new Date().toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}`;
+  const barHeight = Math.max(26, Math.round(h * 0.045));
+  ctx.fillStyle = "rgba(0,0,0,0.55)";
+  ctx.fillRect(0, h - barHeight, w, barHeight);
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = `${Math.round(barHeight * 0.5)}px sans-serif`;
+  ctx.textBaseline = "middle";
+  ctx.fillText(stamp, 10, h - barHeight / 2);
+
+  return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob!), "image/jpeg", 0.85));
+}
+
 interface Photo { url: string; path: string }
 interface Item { id: string; room_id: string; label: string; condition: Condition; notes: string | null; repair_needed: boolean; photos: Photo[] }
 interface Room { id: string; session_id: string; name: string; sort_order: number; items: Item[] }
@@ -83,6 +149,16 @@ export default function MoveInCoordinatorPage() {
     setTimeout(() => setSaveTag("idle"), 1800);
   };
 
+  // Narrows setState to non-null State for the step components below —
+  // they're only ever rendered once `state` is confirmed non-null, but
+  // TypeScript can't see that through the setter's own type on its own.
+  const updateState = useCallback((updater: State | ((prev: State) => State)) => {
+    setState((prev) => {
+      if (!prev) return prev;
+      return typeof updater === "function" ? (updater as (p: State) => State)(prev) : updater;
+    });
+  }, []);
+
   if (!state) {
     return <div style={{ minHeight: "100vh", backgroundColor: BG, display: "flex", alignItems: "center", justifyContent: "center", color: TEXT_MUT }}>Loading…</div>;
   }
@@ -126,10 +202,10 @@ export default function MoveInCoordinatorPage() {
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px" }}>
         {step === "start" && <StartStep state={state} onSaved={(s) => { setState({ ...state, session: s }); flash(); }} onNext={() => setStep("rooms")} />}
-        {step === "rooms" && <RoomsStep campaignId={campaignId} state={state} setState={setState} onSaved={flash} onNext={() => setStep("appliances")} />}
-        {step === "appliances" && <AppliancesStep campaignId={campaignId} state={state} setState={setState} onSaved={flash} onNext={() => setStep("guide")} />}
-        {step === "guide" && <GuideStep campaignId={campaignId} state={state} setState={setState} onSaved={flash} onNext={() => setStep("review")} />}
-        {step === "review" && <ReviewStep campaignId={campaignId} state={state} setState={setState} onFinished={() => setStep("done")} />}
+        {step === "rooms" && <RoomsStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("appliances")} />}
+        {step === "appliances" && <AppliancesStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("guide")} />}
+        {step === "guide" && <GuideStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("review")} />}
+        {step === "review" && <ReviewStep campaignId={campaignId} state={state} setState={updateState} onFinished={() => setStep("done")} />}
         {step === "done" && <DoneStep state={state} campaignId={campaignId} />}
       </div>
     </div>
@@ -184,45 +260,62 @@ function StartStep({ state, onSaved, onNext }: { state: State; onSaved: (s: Sess
 }
 
 // ── Step 2: Rooms ────────────────────────────────────────────────────────
-function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (s: State) => void; onSaved: () => void; onNext: () => void }) {
+let tempIdCounter = 0;
+const tempId = () => `temp-${Date.now()}-${tempIdCounter++}`;
+
+function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void }) {
   const [activeRoom, setActiveRoom] = useState(state.rooms[0]?.id ?? null);
+  const [customRoomOpen, setCustomRoomOpen] = useState(false);
   const [newRoomName, setNewRoomName] = useState("");
+  const [customItemOpen, setCustomItemOpen] = useState(false);
   const [newItemLabel, setNewItemLabel] = useState("");
   const room = state.rooms.find((r) => r.id === activeRoom) ?? null;
 
-  async function addRoom() {
-    if (!newRoomName.trim()) return;
+  // Adds immediately with a temp id (no waiting on the network to see it
+  // appear), then swaps in the real row once the server confirms — this is
+  // what was causing the "adding an item takes too much lag" complaint.
+  async function addRoom(name: string) {
+    if (!name.trim()) return;
+    const temp: Room = { id: tempId(), session_id: state.session.id, name: name.trim(), sort_order: state.rooms.length, items: [] };
+    setState({ ...state, rooms: [...state.rooms, temp] });
+    setActiveRoom(temp.id);
+    setNewRoomName("");
+    setCustomRoomOpen(false);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/rooms`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: state.session.id, name: newRoomName }),
+      body: JSON.stringify({ sessionId: state.session.id, name: name.trim() }),
     });
     if (res.ok) {
       const created = await res.json();
-      setState({ ...state, rooms: [...state.rooms, created] });
-      setActiveRoom(created.id);
-      setNewRoomName("");
+      setState((prev) => ({ ...prev, rooms: prev.rooms.map((r) => r.id === temp.id ? created : r) }));
+      setActiveRoom((cur) => cur === temp.id ? created.id : cur);
     }
+    onSaved();
   }
 
   async function removeRoom(roomId: string) {
     if (!confirm("Remove this room and all its items?")) return;
-    await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/rooms/${roomId}`, { method: "DELETE" });
     const rooms = state.rooms.filter((r) => r.id !== roomId);
     setState({ ...state, rooms });
     if (activeRoom === roomId) setActiveRoom(rooms[0]?.id ?? null);
+    if (!roomId.startsWith("temp-")) await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/rooms/${roomId}`, { method: "DELETE" });
   }
 
-  async function addItem() {
-    if (!room || !newItemLabel.trim()) return;
+  async function addItem(roomId: string, label: string) {
+    if (!label.trim()) return;
+    const temp: Item = { id: tempId(), room_id: roomId, label: label.trim(), condition: "not_inspected", notes: null, repair_needed: false, photos: [] };
+    setState((prev) => ({ ...prev, rooms: prev.rooms.map((r) => r.id === roomId ? { ...r, items: [...r.items, temp] } : r) }));
+    setNewItemLabel("");
+    setCustomItemOpen(false);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ roomId: room.id, label: newItemLabel }),
+      body: JSON.stringify({ roomId, label: label.trim() }),
     });
     if (res.ok) {
       const item = await res.json();
-      setState({ ...state, rooms: state.rooms.map((r) => r.id === room.id ? { ...r, items: [...r.items, item] } : r) });
-      setNewItemLabel("");
+      setState((prev) => ({ ...prev, rooms: prev.rooms.map((r) => r.id === roomId ? { ...r, items: r.items.map((it) => it.id === temp.id ? item : it) } : r) }));
     }
+    onSaved();
   }
 
   function updateItemLocal(itemId: string, patch: Partial<Item>) {
@@ -234,20 +327,22 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
 
   async function saveItem(itemId: string, patch: Partial<Item>) {
     updateItemLocal(itemId, patch);
+    if (itemId.startsWith("temp-")) return; // still waiting on the create — the eventual swap-in already carries this state's starting values; condition taps that land before the create resolves are rare and self-correct on next tap
     await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items/${itemId}`, {
       method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch),
     });
     onSaved();
   }
 
-  async function removeItem(itemId: string) {
-    await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items/${itemId}`, { method: "DELETE" });
-    setState({ ...state, rooms: state.rooms.map((r) => ({ ...r, items: r.items.filter((it) => it.id !== itemId) })) });
+  async function removeItem(roomId: string, itemId: string) {
+    setState({ ...state, rooms: state.rooms.map((r) => r.id === roomId ? { ...r, items: r.items.filter((it) => it.id !== itemId) } : r) });
+    if (!itemId.startsWith("temp-")) await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items/${itemId}`, { method: "DELETE" });
   }
 
-  async function uploadPhoto(itemId: string, file: File) {
+  async function uploadPhoto(itemId: string, file: File, itemLabel: string) {
+    const stamped = await stampAndResizePhoto(file, `${room?.name ?? ""} — ${itemLabel}`);
     const fd = new FormData();
-    fd.append("photo", file);
+    fd.append("photo", stamped, "photo.jpg");
     fd.append("targetType", "item");
     fd.append("targetId", itemId);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/photos`, { method: "POST", body: fd });
@@ -258,10 +353,14 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
     }
   }
 
+  const roomSuggestions = suggestedNextRooms(state.rooms);
+  const roomComplete = room && room.items.length > 0 && room.items.every((it) => it.condition !== "not_inspected");
+  const itemSuggestions = room ? suggestedItems(room.name).filter((s) => !room.items.some((it) => it.label.toLowerCase() === s.toLowerCase())) : [];
+
   return (
     <div>
       {/* Room tabs — current room always obvious */}
-      <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 10, marginBottom: 16 }}>
+      <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 10, marginBottom: 10 }}>
         {state.rooms.map((r) => {
           const done = r.items.length > 0 && r.items.every((it) => it.condition !== "not_inspected");
           return (
@@ -274,24 +373,41 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
             </button>
           );
         })}
-        <div style={{ display: "flex", gap: 6, alignItems: "center", flexShrink: 0 }}>
-          <input value={newRoomName} onChange={(e) => setNewRoomName(e.target.value)} placeholder="New room…" style={{ ...inputStyle, width: 130, padding: "10px 12px" }} />
-          <button onClick={addRoom} style={{ ...smallGhostButton }}>+ Add</button>
-        </div>
+      </div>
+
+      {/* Suggested next room — this is "the flow": tap to add + jump straight in */}
+      <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", marginBottom: 20 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: TEXT_MUT, textTransform: "uppercase", marginRight: 2 }}>Add Room:</span>
+        {roomSuggestions.map((name) => (
+          <button key={name} onClick={() => addRoom(name)} style={{ ...smallGhostButton }}>+ {name}</button>
+        ))}
+        {!customRoomOpen ? (
+          <button onClick={() => setCustomRoomOpen(true)} style={{ ...smallGhostButton, color: TEXT_MUT }}>+ Other…</button>
+        ) : (
+          <>
+            <input autoFocus value={newRoomName} onChange={(e) => setNewRoomName(e.target.value)} placeholder="Room name…"
+              onKeyDown={(e) => e.key === "Enter" && addRoom(newRoomName)} style={{ ...inputStyle, width: 130, padding: "10px 12px" }} />
+            <button onClick={() => addRoom(newRoomName)} style={{ ...smallGhostButton }}>Add</button>
+          </>
+        )}
       </div>
 
       {room ? (
         <Card>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
             <SectionTitle>{room.name}</SectionTitle>
             <button onClick={() => removeRoom(room.id)} style={{ fontSize: 12, color: ACCENT, background: "none", border: "none", cursor: "pointer" }}>Remove Room</button>
           </div>
+
+          {room.items.length === 0 && (
+            <p style={{ fontSize: 13, color: TEXT_SEC, margin: "0 0 14px" }}>What goes here? Tap the usual things to check in a {room.name.toLowerCase()}, or add your own below.</p>
+          )}
 
           {room.items.map((item) => (
             <div key={item.id} style={{ borderTop: `1px solid ${BORDER}`, padding: "16px 0" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                 <span style={{ fontSize: 15, fontWeight: 700, color: TEXT }}>{item.label}</span>
-                <button onClick={() => removeItem(item.id)} style={{ background: "none", border: "none", color: TEXT_MUT, cursor: "pointer", fontSize: 13 }}>✕</button>
+                <button onClick={() => removeItem(room.id, item.id)} style={{ background: "none", border: "none", color: TEXT_MUT, cursor: "pointer", fontSize: 13 }}>✕</button>
               </div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
                 {CONDITIONS.map((c) => (
@@ -314,20 +430,46 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
                 <input type="checkbox" checked={item.repair_needed} onChange={(e) => saveItem(item.id, { repair_needed: e.target.checked })} style={{ width: 16, height: 16, accentColor: ACCENT }} />
                 <span style={{ fontSize: 13, color: TEXT }}>Repair needed</span>
               </label>
-              <PhotoStrip photos={item.photos} onAdd={(file) => uploadPhoto(item.id, file)} />
+              <PhotoStrip photos={item.photos} onAdd={(file) => uploadPhoto(item.id, file, item.label)} />
             </div>
           ))}
 
-          <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-            <input value={newItemLabel} onChange={(e) => setNewItemLabel(e.target.value)} placeholder="e.g. Walls, Flooring, Windows…" style={{ ...inputStyle, flex: 1 }} onKeyDown={(e) => e.key === "Enter" && addItem()} />
-            <button onClick={addItem} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>+ Add Item</button>
+          {/* Suggested items — answers "what goes in the text box" by not having a blank text box */}
+          {itemSuggestions.length > 0 && (
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 16 }}>
+              {itemSuggestions.map((label) => (
+                <button key={label} onClick={() => addItem(room.id, label)} style={{ ...smallGhostButton }}>+ {label}</button>
+              ))}
+            </div>
+          )}
+          <div style={{ marginTop: 10 }}>
+            {!customItemOpen ? (
+              <button onClick={() => setCustomItemOpen(true)} style={{ ...smallGhostButton, color: TEXT_MUT }}>+ Add a custom item…</button>
+            ) : (
+              <div style={{ display: "flex", gap: 8 }}>
+                <input autoFocus value={newItemLabel} onChange={(e) => setNewItemLabel(e.target.value)} placeholder="e.g. Ceiling fan, Closet doors…"
+                  style={{ ...inputStyle, flex: 1 }} onKeyDown={(e) => e.key === "Enter" && addItem(room.id, newItemLabel)} />
+                <button onClick={() => addItem(room.id, newItemLabel)} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>Add</button>
+              </div>
+            )}
           </div>
+
+          {roomComplete && (
+            <div style={{ marginTop: 20, backgroundColor: "#E5EDE8", borderRadius: 12, padding: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
+              <span style={{ fontSize: 13, fontWeight: 700, color: GREEN }}>✓ {room.name} done.</span>
+              {roomSuggestions[0] && (
+                <button onClick={() => addRoom(roomSuggestions[0])} style={{ ...bigButton(GREEN), padding: "10px 18px", fontSize: 13 }}>
+                  Next: {roomSuggestions[0]} →
+                </button>
+              )}
+            </div>
+          )}
         </Card>
       ) : (
-        <Card><p style={{ color: TEXT_MUT }}>Add a room to get started.</p></Card>
+        <Card><p style={{ color: TEXT_MUT }}>Add a room above to get started — Living Room and Kitchen are a good place to begin the walk.</p></Card>
       )}
 
-      <button onClick={onNext} style={{ ...bigButton(ACCENT), width: "100%", marginTop: 20 }}>Continue to Appliances & Keys →</button>
+      <button onClick={onNext} style={{ ...bigButton(ACCENT), width: "100%", marginTop: 20 }}>I'm Done With Rooms — Continue →</button>
     </div>
   );
 }
@@ -350,17 +492,28 @@ function PhotoStrip({ photos, onAdd }: { photos: Photo[]; onAdd: (file: File) =>
 }
 
 // ── Step 3: Appliances & Keys ────────────────────────────────────────────
-function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (s: State) => void; onSaved: () => void; onNext: () => void }) {
+const APPLIANCE_SUGGESTIONS = ["Fridge", "Stove / Oven", "Microwave", "Dishwasher", "Washer", "Dryer", "Water Heater", "Furnace / HVAC", "Air Conditioner"];
+
+function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void }) {
+  const [customApplianceOpen, setCustomApplianceOpen] = useState(false);
   const [newAppliance, setNewAppliance] = useState("");
   const [newKey, setNewKey] = useState("");
   const [newKeyQty, setNewKeyQty] = useState("1");
 
-  async function addAppliance() {
-    if (!newAppliance.trim()) return;
+  async function addAppliance(name: string) {
+    if (!name.trim()) return;
+    const temp: Appliance = { id: tempId(), session_id: state.session.id, name: name.trim(), location: null, cosmetic_condition: "good", test_status: "not_tested", brand: null, model: null, serial_number: null, photos: [] };
+    setState((prev) => ({ ...prev, appliances: [...prev.appliances, temp] }));
+    setNewAppliance("");
+    setCustomApplianceOpen(false);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/appliances`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: state.session.id, name: newAppliance }),
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: state.session.id, name: name.trim() }),
     });
-    if (res.ok) { setState({ ...state, appliances: [...state.appliances, await res.json()] }); setNewAppliance(""); }
+    if (res.ok) {
+      const created = await res.json();
+      setState((prev) => ({ ...prev, appliances: prev.appliances.map((a) => a.id === temp.id ? created : a) }));
+    }
+    onSaved();
   }
 
   function updateApplianceLocal(id: string, patch: Partial<Appliance>) {
@@ -368,31 +521,42 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
   }
   async function saveAppliance(id: string, patch: Partial<Appliance>) {
     updateApplianceLocal(id, patch);
+    if (id.startsWith("temp-")) return;
     await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/appliances/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch) });
     onSaved();
   }
   async function removeAppliance(id: string) {
-    await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/appliances/${id}`, { method: "DELETE" });
     setState({ ...state, appliances: state.appliances.filter((a) => a.id !== id) });
+    if (!id.startsWith("temp-")) await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/appliances/${id}`, { method: "DELETE" });
   }
-  async function uploadAppliancePhoto(id: string, file: File) {
+  async function uploadAppliancePhoto(id: string, file: File, name: string) {
+    const stamped = await stampAndResizePhoto(file, name);
     const fd = new FormData();
-    fd.append("photo", file); fd.append("targetType", "appliance"); fd.append("targetId", id);
+    fd.append("photo", stamped, "photo.jpg"); fd.append("targetType", "appliance"); fd.append("targetId", id);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/photos`, { method: "POST", body: fd });
     if (res.ok) { const { photos } = await res.json(); updateApplianceLocal(id, { photos }); onSaved(); }
   }
 
   async function addKey() {
     if (!newKey.trim()) return;
+    const temp: KeyRow = { id: tempId(), session_id: state.session.id, item_name: newKey.trim(), quantity: Number(newKeyQty) || 1 };
+    setState((prev) => ({ ...prev, keys: [...prev.keys, temp] }));
+    setNewKey(""); setNewKeyQty("1");
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/keys`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: state.session.id, item_name: newKey, quantity: Number(newKeyQty) || 1 }),
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: state.session.id, item_name: temp.item_name, quantity: temp.quantity }),
     });
-    if (res.ok) { setState({ ...state, keys: [...state.keys, await res.json()] }); setNewKey(""); setNewKeyQty("1"); }
+    if (res.ok) {
+      const created = await res.json();
+      setState((prev) => ({ ...prev, keys: prev.keys.map((k) => k.id === temp.id ? created : k) }));
+    }
+    onSaved();
   }
   async function removeKey(id: string) {
-    await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/keys/${id}`, { method: "DELETE" });
     setState({ ...state, keys: state.keys.filter((k) => k.id !== id) });
+    if (!id.startsWith("temp-")) await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/keys/${id}`, { method: "DELETE" });
   }
+
+  const applianceSuggestions = APPLIANCE_SUGGESTIONS.filter((s) => !state.appliances.some((a) => a.name.toLowerCase() === s.toLowerCase()));
 
   return (
     <div>
@@ -422,12 +586,26 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
                 }}>{t === "not_tested" ? "Not Tested" : t === "working" ? "Working" : "Issue Observed"}</button>
               ))}
             </div>
-            <PhotoStrip photos={a.photos} onAdd={(f) => uploadAppliancePhoto(a.id, f)} />
+            <PhotoStrip photos={a.photos} onAdd={(f) => uploadAppliancePhoto(a.id, f, a.name)} />
           </div>
         ))}
-        <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-          <input value={newAppliance} onChange={(e) => setNewAppliance(e.target.value)} placeholder="e.g. Fridge, Stove, Dishwasher…" style={{ ...inputStyle, flex: 1 }} onKeyDown={(e) => e.key === "Enter" && addAppliance()} />
-          <button onClick={addAppliance} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>+ Add</button>
+        {applianceSuggestions.length > 0 && (
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 16 }}>
+            {applianceSuggestions.map((name) => (
+              <button key={name} onClick={() => addAppliance(name)} style={{ ...smallGhostButton }}>+ {name}</button>
+            ))}
+          </div>
+        )}
+        <div style={{ marginTop: 10 }}>
+          {!customApplianceOpen ? (
+            <button onClick={() => setCustomApplianceOpen(true)} style={{ ...smallGhostButton, color: TEXT_MUT }}>+ Add a custom appliance…</button>
+          ) : (
+            <div style={{ display: "flex", gap: 8 }}>
+              <input autoFocus value={newAppliance} onChange={(e) => setNewAppliance(e.target.value)} placeholder="e.g. Wine fridge, Garburator…"
+                style={{ ...inputStyle, flex: 1 }} onKeyDown={(e) => e.key === "Enter" && addAppliance(newAppliance)} />
+              <button onClick={() => addAppliance(newAppliance)} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>Add</button>
+            </div>
+          )}
         </div>
       </Card>
 
@@ -462,7 +640,7 @@ const GUIDE_FIELDS: { key: keyof WelcomeGuide; label: string; placeholder: strin
   { key: "other_notes", label: "Other Notes (shared with tenant)", placeholder: "" },
 ];
 
-function GuideStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (s: State) => void; onSaved: () => void; onNext: () => void }) {
+function GuideStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void }) {
   const [guide, setGuide] = useState<Partial<WelcomeGuide>>(state.welcomeGuide ?? {});
   const [saving, setSaving] = useState(false);
   const propertyId = state.session.property_id;
@@ -499,7 +677,7 @@ function GuideStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
 }
 
 // ── Step 5: Review & Sign ────────────────────────────────────────────────
-function ReviewStep({ campaignId, state, setState, onFinished }: { campaignId: string; state: State; setState: (s: State) => void; onFinished: () => void }) {
+function ReviewStep({ campaignId, state, setState, onFinished }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onFinished: () => void }) {
   const [inspectorSig, setInspectorSig] = useState<string | null>(null);
   const [inspectorName, setInspectorName] = useState(state.session.inspector_name ?? "");
   const [tenantSig, setTenantSig] = useState<string | null>(null);
