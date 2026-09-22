@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const BG = "#F7F5F2";
 const SURFACE = "#FFFFFF";
@@ -40,6 +41,7 @@ export default function MoveInCoordinatorDashboard() {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | SessionRow["status"]>("all");
+  const [showStartFresh, setShowStartFresh] = useState(false);
 
   useEffect(() => {
     fetch("/api/admin/move-in-coordinator")
@@ -78,8 +80,15 @@ export default function MoveInCoordinatorDashboard() {
             <h1 style={{ fontSize: 28, fontWeight: 700, color: NAVY, margin: "0 0 6px" }}>Move-In Coordinator</h1>
             <p style={{ fontSize: 14, color: TEXT_SEC, margin: "0 0 28px" }}>Room-by-room inspections, signatures, and handover documents — search, resume, or start a new one.</p>
           </div>
-          <Link href="/admin/move-in-coordinator/settings" style={{ fontSize: 13, color: TEXT_SEC, textDecoration: "none", whiteSpace: "nowrap" }}>⚙ Review Settings</Link>
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+            <Link href="/admin/move-in-coordinator/settings" style={{ fontSize: 13, color: TEXT_SEC, textDecoration: "none", whiteSpace: "nowrap" }}>⚙ Review Settings</Link>
+            <button onClick={() => setShowStartFresh((s) => !s)} style={{ backgroundColor: ACCENT, color: "#FFFFFF", fontSize: 13, fontWeight: 700, padding: "10px 18px", borderRadius: 10, border: "none", cursor: "pointer", whiteSpace: "nowrap" }}>
+              + Start Fresh Move-In
+            </button>
+          </div>
         </div>
+
+        {showStartFresh && <StartFreshPanel onClose={() => setShowStartFresh(false)} />}
 
         <input
           value={query} onChange={(e) => setQuery(e.target.value)}
@@ -159,6 +168,89 @@ function EmptyNote({ text }: { text: string }) {
   return (
     <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24, textAlign: "center" }}>
       <p style={{ color: TEXT_MUT, fontSize: 13, margin: 0 }}>{text}</p>
+    </div>
+  );
+}
+
+const freshInputStyle: React.CSSProperties = { fontSize: 14, padding: "11px 13px", borderRadius: 9, border: `1px solid ${BORDER}`, backgroundColor: BG, color: TEXT, fontFamily: "inherit", width: "100%", boxSizing: "border-box" };
+
+// For placement-only jobs with no leasing campaign yet — creates one
+// behind the scenes (see /api/admin/move-in-coordinator/start-fresh) so
+// every other part of the system keeps working unchanged.
+function StartFreshPanel({ onClose }: { onClose: () => void }) {
+  const router = useRouter();
+  const [address, setAddress] = useState("");
+  const [unit, setUnit] = useState("");
+  const [city, setCity] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerEmail, setOwnerEmail] = useState("");
+  const [tenants, setTenants] = useState([{ name: "", email: "" }]);
+  const [moveInDate, setMoveInDate] = useState(new Date().toISOString().split("T")[0]);
+  const [inspectorName, setInspectorName] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  async function submit() {
+    setError("");
+    if (!address.trim()) return setError("Property address is required.");
+    if (!tenants.some((t) => t.name.trim())) return setError("At least one tenant name is required.");
+    setSaving(true);
+    const res = await fetch("/api/admin/move-in-coordinator/start-fresh", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ propertyAddress: address, unitNumber: unit, city, ownerName, ownerEmail, tenants, moveInDate, inspectorName }),
+    });
+    const body = await res.json().catch(() => ({}));
+    setSaving(false);
+    if (!res.ok) return setError(body.error || "Something went wrong.");
+    router.push(`/admin/leasing/${body.campaignId}/move-in-coordinator`);
+  }
+
+  return (
+    <div style={{ backgroundColor: SURFACE, border: `1.5px solid ${NAVY}`, borderRadius: 14, padding: 22, marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <p style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: 0 }}>Start Fresh — No Existing Campaign</p>
+        <button onClick={onClose} style={{ background: "none", border: "none", color: TEXT_MUT, cursor: "pointer", fontSize: 18 }}>✕</button>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10, marginBottom: 10 }}>
+        <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Property address*" style={freshInputStyle} />
+        <input value={unit} onChange={(e) => setUnit(e.target.value)} placeholder="Unit (optional)" style={freshInputStyle} />
+      </div>
+      <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" style={{ ...freshInputStyle, marginBottom: 10 }} />
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
+        <input value={ownerName} onChange={(e) => setOwnerName(e.target.value)} placeholder="Owner's name" style={freshInputStyle} />
+        <input value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} placeholder="Owner's email" style={freshInputStyle} />
+      </div>
+
+      <p style={{ fontSize: 12, fontWeight: 700, color: TEXT_MUT, textTransform: "uppercase", margin: "0 0 8px" }}>Tenant(s)*</p>
+      {tenants.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: 10, marginBottom: 8 }}>
+          <input value={t.name} onChange={(e) => setTenants(tenants.map((x, j) => j === i ? { ...x, name: e.target.value } : x))} placeholder="Full name" style={freshInputStyle} />
+          <input value={t.email} onChange={(e) => setTenants(tenants.map((x, j) => j === i ? { ...x, email: e.target.value } : x))} placeholder="Email" style={freshInputStyle} />
+          {tenants.length > 1 && <button onClick={() => setTenants(tenants.filter((_, j) => j !== i))} style={{ background: "none", border: "none", color: ACCENT, cursor: "pointer" }}>✕</button>}
+        </div>
+      ))}
+      <button onClick={() => setTenants([...tenants, { name: "", email: "" }])} style={{ fontSize: 12, fontWeight: 700, color: NAVY, background: "none", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "8px 12px", cursor: "pointer", marginBottom: 16 }}>
+        + Add Co-Tenant
+      </button>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
+        <div>
+          <p style={{ fontSize: 11, color: TEXT_MUT, margin: "0 0 6px" }}>Move-In Date</p>
+          <input type="date" value={moveInDate} onChange={(e) => setMoveInDate(e.target.value)} style={freshInputStyle} />
+        </div>
+        <div>
+          <p style={{ fontSize: 11, color: TEXT_MUT, margin: "0 0 6px" }}>Inspector Name</p>
+          <input value={inspectorName} onChange={(e) => setInspectorName(e.target.value)} style={freshInputStyle} />
+        </div>
+      </div>
+
+      {error && <p style={{ color: ACCENT, fontSize: 13, marginBottom: 12 }}>{error}</p>}
+
+      <button onClick={submit} disabled={saving} style={{ backgroundColor: ACCENT, color: "#FFFFFF", fontSize: 14, fontWeight: 700, padding: "13px 24px", borderRadius: 10, border: "none", cursor: "pointer", width: "100%" }}>
+        {saving ? "Creating…" : "Create & Open Move-In →"}
+      </button>
     </div>
   );
 }
