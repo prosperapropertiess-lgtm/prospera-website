@@ -2,6 +2,7 @@
   "crons": [
     { "path": "/api/cron/monthly-owner-report", "schedule": "0 13 3 * *" },
     { "path": "/api/cron/owner-cache-refresh", "schedule": "0 13 * * 1" },
-    { "path": "/api/cron/intelligence", "schedule": "30 11 * * *" }
+    { "path": "/api/cron/intelligence", "schedule": "30 11 * * *" },
+    { "path": "/api/cron/move-in-review-requests", "schedule": "0 15 * * *" }
   ]
 }

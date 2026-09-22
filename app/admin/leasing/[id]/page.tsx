@@ -1742,6 +1742,19 @@ function MoveInTab({ lp, onEdit }: { lp: LeasingProperty; onEdit: () => void }) 
         </div>
       )}
 
+      {/* Full room-by-room inspection tool — tablet walkthrough, photos,
+          signatures, PDF + email. This checklist below stays as the quick
+          closeout summary; the coordinator is the actual walkthrough. */}
+      <Link
+        href={`/admin/leasing/${lp.id}/move-in-coordinator`}
+        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: TEXT, borderRadius: 10, padding: "16px 20px", textDecoration: "none" }}
+      >
+        <div>
+          <p style={{ fontSize: 14, fontWeight: 700, color: "#FFFFFF", margin: 0 }}>Move-In Inspection Tool →</p>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", margin: "3px 0 0" }}>Room-by-room walkthrough, photos, signatures, and the branded report — built for the tablet.</p>
+        </div>
+      </Link>
+
       {/* Checklist */}
       <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 20 }}>
         <p style={{ fontSize: 14, fontWeight: 700, color: TEXT, margin: "0 0 14px" }}>What's Been Finalized</p>

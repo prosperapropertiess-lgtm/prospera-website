@@ -2603,3 +2603,63 @@ export function ownerPlacementCloseoutEmail(data: {
     ${signoff()}
   `);
 }
+
+// ─────────────────────────────────────────────────────────────
+// MOVE-IN COORDINATOR EMAILS
+// ─────────────────────────────────────────────────────────────
+
+export function moveInTenantEmail(
+  tenantName: string,
+  propertyAddress: string,
+  reportUrl: string,
+  guideUrl: string | null
+): { subject: string; html: string } {
+  const html = wrapper(`
+    ${heroCard(`Welcome home, ${tenantName || "there"}.`, `Your signed move-in inspection for ${propertyAddress} is attached below.`)}
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      This report documents the condition of the unit as of your move-in date — everything on it is what both
+      you and the inspector signed off on. Keep it somewhere you can find it; it's your record too.
+    </p>
+    ${cta("View Signed Inspection Report", reportUrl)}
+    ${guideUrl ? cta("View Welcome Guide", guideUrl) : ""}
+    ${divider()}
+    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Questions about the unit or anything on the report? Just reply to this email.</p>
+    ${divider()}
+    ${signoff()}
+  `);
+  return { subject: `Your Signed Move-In Report — ${propertyAddress}`, html };
+}
+
+export function moveInOwnerEmail(
+  ownerName: string,
+  propertyAddress: string,
+  tenantNames: string[],
+  reportUrl: string
+): { subject: string; html: string } {
+  const html = wrapper(`
+    ${heroCard(`Move-in complete, ${ownerName || "there"}.`, `${propertyAddress} — signed inspection report attached.`)}
+    <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      ${tenantNames.join(", ") || "Your tenant"} has moved in. The full room-by-room inspection, appliance
+      condition, keys handed over, and everyone's signatures are in the attached report.
+    </p>
+    ${cta("View Signed Inspection Report", reportUrl)}
+    ${divider()}
+    ${signoff()}
+  `);
+  return { subject: `Move-In Complete — ${propertyAddress}`, html };
+}
+
+export function moveInReviewRequestEmail(
+  tenantName: string,
+  message: string,
+  reviewLink: string
+): { subject: string; html: string } {
+  const html = wrapper(`
+    ${heroCard(`Hey ${tenantName || "there"},`, `Hope the move-in went smoothly.`)}
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">${message}</p>
+    ${cta("Leave a Quick Review", reviewLink)}
+    ${divider()}
+    ${signoff()}
+  `);
+  return { subject: "How did we do?", html };
+}
