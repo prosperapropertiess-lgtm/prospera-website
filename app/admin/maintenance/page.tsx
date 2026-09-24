@@ -167,7 +167,7 @@ export default function MaintenancePage() {
           </div>
           <button
             onClick={() => setShowAddVendor(true)}
-            style={{ backgroundColor: NAVY, color: "#FAF8F5", border: "none", padding: "12px 20px", borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: "pointer" }}
+            style={{ backgroundColor: NAVY, color: "#FAF8F5", border: "none", padding: "14px 24px", borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}
           >
             + Add Vendor
           </button>
@@ -189,13 +189,13 @@ export default function MaintenancePage() {
         </div>
 
         {/* Filter tabs */}
-        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 10, marginBottom: 24, flexWrap: "wrap" }}>
           {["all", ...STATUSES].map((s) => (
             <button
               key={s}
               onClick={() => setFilter(s)}
               style={{
-                padding: "6px 14px", borderRadius: 20, fontSize: 12, fontWeight: 500,
+                padding: "12px 20px", borderRadius: 20, fontSize: 14, fontWeight: 600, minHeight: 44,
                 border: filter === s ? "none" : `1px solid ${BORDER}`,
                 backgroundColor: filter === s ? NAVY : "#FFFFFF",
                 color: filter === s ? "#FAF8F5" : TEXT_SEC,
@@ -230,37 +230,37 @@ export default function MaintenancePage() {
                 <div key={r.id} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, overflow: "hidden" }}>
                   <div
                     onClick={() => setExpandedId(expanded ? null : r.id)}
-                    style={{ padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, cursor: "pointer", flexWrap: "wrap" }}
+                    style={{ padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, cursor: "pointer", flexWrap: "wrap", minHeight: 48 }}
                   >
                     <div style={{ flex: 1, minWidth: 220 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                        <span style={{ fontSize: 14, fontWeight: 600, color: NAVY }}>{r.category}</span>
-                        <span style={{ fontSize: 11, fontWeight: 600, padding: "2px 10px", borderRadius: 20, backgroundColor: colors.bg, color: colors.text, textTransform: "capitalize" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+                        <span style={{ fontSize: 16, fontWeight: 600, color: NAVY }}>{r.category}</span>
+                        <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 12px", borderRadius: 20, backgroundColor: colors.bg, color: colors.text, textTransform: "capitalize" }}>
                           {STATUS_LABELS[r.status]}
                         </span>
                       </div>
-                      <p style={{ fontSize: 13, color: TEXT_SEC, margin: 0 }}>{r.property_address} · {r.tenant_name}</p>
+                      <p style={{ fontSize: 14, color: TEXT_SEC, margin: 0 }}>{r.property_address} · {r.tenant_name}</p>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      {r.vendors && <span style={{ fontSize: 12, color: TEXT_MUT }}>{r.vendors.name}</span>}
-                      <span style={{ fontSize: 12, color: TEXT_MUT, whiteSpace: "nowrap" }}>{timeAgo(r.created_at)}</span>
+                      {r.vendors && <span style={{ fontSize: 13, color: TEXT_MUT }}>{r.vendors.name}</span>}
+                      <span style={{ fontSize: 13, color: TEXT_MUT, whiteSpace: "nowrap" }}>{timeAgo(r.created_at)}</span>
                     </div>
                   </div>
 
                   {expanded && (
-                    <div style={{ padding: "0 20px 20px", borderTop: `1px solid ${BORDER}` }}>
-                      <p style={{ fontSize: 13, color: TEXT, lineHeight: 1.6, margin: "16px 0" }}>{r.description}</p>
+                    <div style={{ padding: "0 24px 24px", borderTop: `1px solid ${BORDER}` }}>
+                      <p style={{ fontSize: 15, color: TEXT, lineHeight: 1.7, margin: "20px 0" }}>{r.description}</p>
 
                       {r.tenant_phone && (
-                        <p style={{ fontSize: 12, color: TEXT_MUT, marginBottom: 16 }}>Tenant phone: {r.tenant_phone}</p>
+                        <p style={{ fontSize: 14, color: TEXT_MUT, marginBottom: 20 }}>Tenant phone: {r.tenant_phone}</p>
                       )}
 
                       {/* Vendor assignment */}
-                      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 16, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 20, flexWrap: "wrap" }}>
                         <select
                           value={vendorPick[r.id] ?? r.vendors?.id ?? ""}
                           onChange={(e) => setVendorPick((p) => ({ ...p, [r.id]: e.target.value }))}
-                          style={{ padding: "8px 12px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: BG, color: TEXT, fontSize: 13 }}
+                          style={{ padding: "13px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, color: TEXT, fontSize: 15, minHeight: 48 }}
                         >
                           <option value="">Select a vendor…</option>
                           {vendors.filter((v) => v.active).map((v) => (
@@ -270,19 +270,19 @@ export default function MaintenancePage() {
                         <button
                           onClick={() => assignVendor(r.id)}
                           disabled={busyId === r.id || !vendorPick[r.id]}
-                          style={{ padding: "8px 16px", borderRadius: 8, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 13, fontWeight: 600, cursor: "pointer", opacity: !vendorPick[r.id] ? 0.5 : 1 }}
+                          style={{ padding: "13px 20px", borderRadius: 10, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", opacity: !vendorPick[r.id] ? 0.5 : 1, minHeight: 48 }}
                         >
                           {r.vendors ? "Reassign & copy link" : "Assign & copy link"}
                         </button>
                       </div>
 
                       {/* Status controls */}
-                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                         {nextStatus && (
                           <button
                             onClick={() => updateStatus(r.id, nextStatus)}
                             disabled={busyId === r.id}
-                            style={{ padding: "8px 16px", borderRadius: 8, border: "none", backgroundColor: NAVY, color: "#FAF8F5", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
+                            style={{ padding: "13px 20px", borderRadius: 10, border: "none", backgroundColor: NAVY, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}
                           >
                             Mark {STATUS_LABELS[nextStatus]}
                           </button>
@@ -291,7 +291,7 @@ export default function MaintenancePage() {
                           <button
                             onClick={() => updateStatus(r.id, "cancelled")}
                             disabled={busyId === r.id}
-                            style={{ padding: "8px 16px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 13, cursor: "pointer" }}
+                            style={{ padding: "13px 20px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 15, cursor: "pointer", minHeight: 48 }}
                           >
                             Cancel request
                           </button>
@@ -309,20 +309,20 @@ export default function MaintenancePage() {
       {/* Add vendor modal */}
       {showAddVendor && (
         <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 16 }}>
-          <div style={{ backgroundColor: "#FFFFFF", borderRadius: 16, padding: 28, width: "100%", maxWidth: 420 }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: NAVY, marginBottom: 20 }}>Add Vendor</h2>
-            <form onSubmit={addVendor} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style={{ backgroundColor: "#FFFFFF", borderRadius: 18, padding: 32, width: "100%", maxWidth: 460 }}>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: NAVY, marginBottom: 24 }}>Add Vendor</h2>
+            <form onSubmit={addVendor} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <input placeholder="Name" value={vendorForm.name} onChange={(e) => setVendorForm((f) => ({ ...f, name: e.target.value }))}
-                style={{ padding: "10px 14px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 14 }} />
+                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
               <input placeholder="Trade (e.g. Plumber, Electrician)" value={vendorForm.trade} onChange={(e) => setVendorForm((f) => ({ ...f, trade: e.target.value }))}
-                style={{ padding: "10px 14px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 14 }} />
+                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
               <input placeholder="Phone (optional)" value={vendorForm.phone} onChange={(e) => setVendorForm((f) => ({ ...f, phone: e.target.value }))}
-                style={{ padding: "10px 14px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 14 }} />
+                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
               <input placeholder="Email (optional)" value={vendorForm.email} onChange={(e) => setVendorForm((f) => ({ ...f, email: e.target.value }))}
-                style={{ padding: "10px 14px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 14 }} />
-              <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
-                <button type="button" onClick={() => setShowAddVendor(false)} style={{ flex: 1, padding: "10px", borderRadius: 8, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 14, cursor: "pointer" }}>Cancel</button>
-                <button type="submit" style={{ flex: 1, padding: "10px", borderRadius: 8, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Save vendor</button>
+                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
+              <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+                <button type="button" onClick={() => setShowAddVendor(false)} style={{ flex: 1, padding: "14px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 15, cursor: "pointer", minHeight: 48 }}>Cancel</button>
+                <button type="submit" style={{ flex: 1, padding: "14px", borderRadius: 10, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}>Save vendor</button>
               </div>
             </form>
           </div>
