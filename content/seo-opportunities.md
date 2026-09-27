@@ -1,5 +1,51 @@
 ---
-Last updated: 2026-09-20
+Last updated: 2026-09-27
+
+## ⚠️ STILL URGENT — September 21 changes are now IN FORCE (2026-09-27)
+Bill 60 Phase 2 provisions took effect September 21, 2026. The following posts must be updated immediately — search volume is peaking:
+1. **n4-notice-ontario.md** — The cure period is now 7 days (not 14) for all monthly tenancies. Bill 60 form N4 (2026/09) is the mandatory form. Update callout box urgently.
+2. **bill-60-ontario-landlords.md** — Add Phase 2 changes: N4 7-day cure, N12 compensation waiver with 120+ days notice, LTB review period shortened 30→15 days, fines doubled ($100K individual / $500K corp). Already flagged; still needs this content.
+3. **ontario-landlord-september-21-2026-checklist** — Still unpublished. Publish this week; it has the highest short-term traffic potential of any unfilled gap.
+
+---
+
+## New Topic Opportunities — 2026-09-27
+
+- ontario-rta-changes-september-21-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~500/mo | What specifically changed for Ontario landlords on September 21, 2026: N4 cure period 14→7 days, N12 compensation waiver at 120+ days notice, LTB order review window 30→15 days, persistent late payment definition (3 late payments in 6 months), fines doubled. Multiple PM companies and legal services posted this guide in late September and are ranking — but our bill-60-ontario-landlords.md doesn't yet cover the specific implementation details. A standalone "what changed September 21" post or a heavy expansion of the existing Bill 60 post would both work. HIGH priority given recency and search volume. Internal links to bill-60-ontario-landlords.md, n4-notice-ontario.md, n12-notice-ontario.md, evicting-tenant-ontario.md.
+
+- ontario-landlord-rights-complete-guide | Est. difficulty: MEDIUM | Vol: ~600/mo | A comprehensive "what Ontario landlords can (and cannot) do" parent page covering: rent increases, deposits, entry rules, maintenance obligations, repair timelines, eviction rights, and prohibited actions — in one authoritative guide. We cover each component individually but have no parent overview page. The query is dominated by tenant-focused sites (tenantrights.ca, ACTO) and general legal info sites — a landlord-perspective parent guide with internal links to all component posts would rank well and anchor the topical cluster. Internal links to landlord-entry-rights-ontario.md, n4-notice-ontario.md, rent-increase-ontario-guidelines.md, security-deposits-ontario.md, landlord-maintenance-responsibilities-ontario.md.
+
+- n-forms-ontario-landlord-complete-guide | Est. difficulty: MEDIUM | Vol: ~350/mo | A parent/directory page covering all Ontario N forms (N1–N13): what each one is for, when to use it, notice period, and links to each individual guide. We have standalone posts for N1, N4, N5, N6, N7, N8, N11, N12, N13 — but no parent comparison page. Marda Management and GTAHomesFinder rank for this query with exactly this kind of page; we have stronger individual posts but no umbrella. A structured table format with one row per form and internal links to each individual post would be a featured-snippet target. Internal links to all N-form individual posts.
+
+- ltb-online-video-hearing-ontario | Est. difficulty: LOW | Vol: ~150/mo | How LTB Zoom hearings actually work: the Tribunals Ontario portal, scheduling, evidence submission deadlines (7 days in advance), what to expect in a video hearing room, mediator role, and tips for self-represented landlords. Our ltb-hearing-preparation-ontario-landlords.md covers preparation generally but not the specific mechanics of video/online hearings. Paralegal Q&A sites dominate; a PM company's practical guide would stand out. Internal links to ltb-hearing-preparation-ontario-landlords.md and landlord-tenant-board-ontario-guide.md.
+
+- ontario-landlord-record-keeping-obligations | Est. difficulty: LOW | Vol: ~150/mo | What records Ontario landlords are legally required to keep: signed leases, rent receipts, N-form service records, inspection reports, repair requests/responses, LTB correspondence. The RTA requires landlords to provide rent receipts on request; many don't know what else they need. Our landlord-record-keeping-ontario.md may already cover this — if so, needs expansion with 2026 Bill 60 documentation requirements (written late payment records, N12 compensation receipts). Check before publishing separately.
+
+## SKIPPED — 2026-09-27
+
+- "LTB Ontario eviction process landlord" → evicting-tenant-ontario.md + how-long-does-eviction-take-ontario.md — full coverage
+- "tenant not paying rent Ontario" → what-to-do-if-tenant-stops-paying-rent-ontario.md — fully covered
+- "rent increase Ontario landlord guide" → rent-increase-ontario-guidelines.md + how-to-increase-rent-ontario-step-by-step.md — fully covered
+- "tenant screening Ontario" → tenant-screening-red-flags.md + tenant-credit-check-ontario-landlords.md — fully covered
+- "N4 N8 N12 notice Ontario landlord" → individual posts exist for each; covered but no parent guide (see opportunities above)
+- "eviction notice Ontario how long does it take" → how-long-does-eviction-take-ontario.md — covered
+- "can landlord enter property Ontario notice" → landlord-entry-rights-ontario.md — covered
+- "Ontario standard lease requirements" → ontario-standard-lease-2026.md + how-to-write-lease-agreement-ontario.md — covered
+- "rent deposit rules Ontario landlord" → security-deposits-ontario.md + last-month-rent-interest-ontario.md — covered
+- "above guideline rent increase Ontario" → above-guideline-rent-increase-ontario.md — covered
+- "Ontario landlord insurance guide" → landlord-insurance-vs-tenant-insurance-ontario.md + rental-property-insurance-ontario.md — covered
+
+## Topics to Expand — 2026-09-27
+
+- bill-60-ontario-landlords.md — Add Phase 2 September 21 implementation: (1) N4 cure period now 7 days for monthly tenancies, (2) N12 compensation waived when 120+ days notice given, (3) LTB order review window shortened from 30 to 15 days, (4) persistent late payment defined as 3 late payments within 6 months, (5) LTB fines doubled to $100K/individual and $500K/corporation. Flagged urgent for two weeks — needs this content now.
+
+- n4-notice-ontario.md — Callout box: "Bill 60 Change: Effective September 21, 2026, the cure period on the N4 notice is now 7 days (reduced from 14 days) for monthly tenancies. Use the new N4 form (2026/09) — the old form is no longer valid." This is a ranking signal issue: landlords searching for current N4 rules will see the 14-day period and receive incorrect guidance.
+
+- how-long-does-eviction-take-ontario.md — Update wait time table with current 2026 data: L1/L9 average 4–6 months; L2 average 6–9 months; other applications 5–9 months; 80% of cases heard within 3.2–14.1 months. Backlog reduced from 53,000 to ~41,000 active files. Most orders issued within 30 days of hearing. Source: Tribunals Ontario operational update, September 2026.
+
+- ltb-hearing-preparation-ontario-landlords.md — Add section on online/Zoom hearing mechanics: Tribunals Ontario portal login, evidence upload deadline (7 days before hearing), what the Zoom interface looks like, how to raise objections in a video format, and what happens if tech fails. Many landlords searching for hearing prep are now attending video hearings, not in-person.
+
+---
 
 ## ⚠️ CRITICAL — September 21 is TOMORROW (2026-09-20)
 The Bill 60 Phase 2 provisions take effect September 21, 2026. The following three items from last week's "Topics to Expand" are still urgent — they need to be published or updated today:
