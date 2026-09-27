@@ -2470,3 +2470,115 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Direct email confirmed: admin@viewhomes.ca. Phone: (519) 851-2844. Highly local, same city, no competitive overlap. Strong geographic fit.
 
 ---
+
+## LendCity Mortgages
+- url: https://lendcity.ca/
+- type: mortgage
+- why: Canadian investment mortgage broker serving London Ontario with a dedicated blog on real estate investing, CMHC MLI Select, and DSCR — their landlord audience maps directly to Prospera's clients; a resource mention or link swap on our respective guides is a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: scott@lendcity.ca
+- site_focus: Licensed Canadian mortgage brokerage for real estate investors in Canada, the US, and Mexico. Founder Scott Dillingham publishes guides on investment financing strategies, DSCR loans, and CMHC MLI Select multifamily programs. Their London Ontario real estate investing guide covers cap rates, vacancy, and entry-point strategy.
+- hook: Prospera manages properties for exactly the landlord-investors that LendCity finances — a resource cross-link ("need a property manager after your mortgage closes?") serves both audiences with zero audience overlap.
+- specific_content: Their London Ontario Real Estate Investing Guide covering cap rates (~6-7%), vacancy trends, and student housing near Western University.
+- researcher_notes: Small but authoritative blog; Scott is the primary author and point of contact. Tone is investor-focused, pragmatic. Best angle: resource mention in their London guide pointing to Prospera as the property management solution after acquisition.
+---
+
+## Chris Russell — London Ontario Realtor Blog
+- url: https://realtorchrisrussell.com/
+- type: blog
+- why: 40+ year London Ontario realtor with an investment-oriented blog — a guest post on "what to look for in a property manager after closing" would serve his investor buyer audience and earn a natural backlink.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: realtorchrisrussell@gmail.com
+- site_focus: Independent London Ontario realtor blog operated by Chris Russell and his wife Kristina Bradley. Content covers buying, selling, investment strategy, and neighbourhood guides for the London market, with strong emphasis on serving investor clients.
+- hook: Chris's investor buyer clients often close on a property and immediately face the question of self-managing vs. hiring a manager — a short guest post or resource mention fills that gap and keeps his blog useful to readers post-sale.
+- specific_content: Their "Your Guide to Successful Real Estate Investment" post and neighbourhood-level inventory pages.
+- researcher_notes: Personal, approachable tone. Phone: (519) 870-9824. Low-volume but active blog; high topical alignment with Prospera's landlord audience. Guest post angle is the strongest play here.
+---
+
+## Westwood Realty Team Blog
+- url: https://www.westwood.team/blog
+- type: blog
+- why: Active London Ontario real estate team (15+ agents) with a blog covering market reports, neighbourhood guides, and investment analysis — audience directly overlaps with new landlords who need property management after purchase.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: info@westwood.team
+- site_focus: London and Southern Ontario realty team backed by Oak and Key Real Estate Brokerage. Their blog covers London market data, neighbourhood breakdowns, buyer tips, and investment property analysis updated regularly.
+- hook: Westwood's investor-buyer audience becomes landlords the moment they close — a resource mention on their investment blog or a cross-linked guide on "next steps after closing on a rental" is a direct value-add for their readers.
+- specific_content: Their investment property analysis posts and London Ontario market update articles.
+- researcher_notes: Team format (not solo agent) means there's likely an admin or marketing person to contact. Email format is [first]@westwood.team. Blog is active and professionally produced.
+---
+
+## REMI Network — Canadian Property Management Magazine
+- url: https://www.reminetwork.com/canadian-property-management/home/
+- type: association
+- why: National B2B trade publication for Canadian property managers — a contributed article or expert quote from Ebin on Ontario landlord compliance, LTB trends, or small-landlord operations would earn a do-follow citation.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: barbara.carss@reminetwork.com
+- site_focus: Canadian Property Management is a trade magazine and digital publication under the REMI Network covering industry news, regulatory changes, management best practices, and technology for property managers and landlords across Canada. Editor-in-Chief is Barbara Carss.
+- hook: Barbara publishes Ontario regulatory content regularly; Ebin as an active London-area PM dealing with LTB filings, Bill 60 changes, and small-landlord compliance offers a practitioner angle that differs from their usual corporate/REIT coverage.
+- specific_content: Their property management and industry news sections covering Ontario RTA changes and LTB updates.
+- researcher_notes: National publication — harder win but high authority. Best play is a contributed article pitch or expert comment on a current Ontario story. Phone: 416-512-8186 ext. 236.
+---
+
+## LendingHub — Ontario Mortgage Blog
+- url: https://lendinghub.ca/blog/
+- type: mortgage
+- why: Canadian mortgage broker platform with a growing Ontario blog including a London Ontario first-time buyer guide — their readers who become landlords need a property manager recommendation, making a resource link or co-authored guide a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: info@lendinghub.ca
+- site_focus: Canadian mortgage broker platform with access to 50+ lenders. Blog covers first-time buying, Ontario mortgage rates, land financing, and London Ontario market guides. Strong local London content with growing readership.
+- hook: LendingHub's London Ontario first-time buyer and investor guides end at the purchase — Prospera picks up exactly where their content stops, making a "finding a property manager" resource mention or link in their investor-focused posts a seamless next step for their readers.
+- specific_content: Their "First-Time Buyer's Guide in London, Ontario" and Ontario mortgage rate articles.
+- researcher_notes: Info@ email is likely a sales/support address; may need to find a content or marketing contact. However, broker platforms often welcome partnership mentions. Medium difficulty outreach.
+---
+
+## Yardi Breeze Canada Blog
+- url: https://www.yardibreeze.ca/blog/
+- type: other
+- why: Property management software platform with an active Canadian blog covering Ontario landlord law, RTA compliance, and industry trends — Prospera as a real-world operator could be featured in a case study or quoted as a local PM practitioner.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: marketing@yardi.com
+- site_focus: Canadian arm of Yardi Breeze Premier property management software. Blog covers Canadian PM associations, RTA compliance, rental market data (including Ontario multifamily quarterly reports), and tenant management topics. Publishes Canadian-specific content monthly.
+- hook: Yardi Breeze publishes Ontario landlord law and compliance content but lacks local practitioner voices — positioning Ebin as an expert source for a feature piece on how small London-area PMs navigate LTB and Bill 60 changes would give their blog a unique local angle.
+- specific_content: Their September 2026 Canadian rental market Q3 report and "Canadian Property Management Associations" guide.
+- researcher_notes: Corporate blog — outreach should go to a content/marketing contact rather than general support. Case study or expert quote pitch is the most realistic play for a company of this size. High authority domain if earned.
+---
+
+## Assetsoft — Ontario Property Management Tech Blog
+- url: https://assetsoft.biz/blogs/
+- type: other
+- why: Ontario-based Yardi consultancy with a technically detailed blog on Ontario landlord rules and RTA compliance — their B2B PM audience and Prospera's operational experience make a cross-link or guest contribution mutually credible.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: info@assetsoft.biz
+- site_focus: Yardi ICN Member consultancy headquartered in Markham, Ontario. Blog covers Ontario landlord rules (Bill 60, rent control, RTA changes), Yardi Voyager configuration for Ontario compliance, and PropTech 2026 trends. Audience is mid-to-large PM firms and real estate operators.
+- hook: Assetsoft publishes "Ontario Landlord Rules 2026" guides read by property managers — a cross-link to Prospera's practitioner blog on the same topics would serve their readers who want real-world perspective alongside the technical compliance content.
+- specific_content: Their "Ontario Landlord Rules 2026: Rent Control & Bill 60 FAQ" and "Why Ontario Expertise Matters in Yardi Implementation" posts.
+- researcher_notes: B2B audience skews larger operators, but Ontario landlord law content has broad overlap with Prospera's blog. Info@ is the right first contact. Medium difficulty; credibility-based pitch works best.
+---
+
+## Live In Oakridge — London Ontario Realtor Blog
+- url: https://www.liveinoakridge.ca/blog/
+- type: blog
+- why: Active London Ontario broker blog (Justin Skrypnyk, Sutton Group) covering first-time buying, market updates, and selling guides — investor-buyer audience needs property management guidance post-purchase, making a resource mention or link in his investment content a natural fit.
+- researched: true
+- drafted: true
+- added: 2026-09-27
+- contact_email: info@homeswithjustin.ca
+- site_focus: Justin Skrypnyk's real estate broker blog focused on Oakridge and West London Ontario. Regular market updates (tracked monthly sales data), first-time buyer guides, selling guides, and neighbourhood content. Active blog with 2026 posts. Phone: 519.639.5176.
+- hook: Justin's investor and first-time buyer readers who purchase a London rental property immediately need a property manager — a short mention in his "buying a rental" or market update posts linking to Prospera closes that gap for his audience.
+- specific_content: His July 2026 London Ontario market update (537 homes sold, $560K median) and First-Time Home Buyer Guide.
+- researcher_notes: Solo broker; direct outreach to Justin via email is the right play. Tone on his site is personable and community-focused. Short, direct email referencing a specific post will work well.
+---

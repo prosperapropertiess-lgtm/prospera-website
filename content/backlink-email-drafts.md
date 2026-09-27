@@ -3244,3 +3244,147 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## LendCity Mortgages — 2026-09-27
+To: scott@lendcity.ca
+Subject: Quick note from a London property manager
+
+Hi Scott,
+
+I came across your London Ontario Real Estate Investing Guide — the breakdown of cap rates and student housing demand near Western was spot on for what we see on the ground.
+
+I'm Ebin Jaison, owner of Prospera Properties. We manage single-family and small multi-unit rentals across London, St. Thomas, and Strathroy — exactly the properties your investor clients are financing.
+
+Your guide covers the acquisition side well. I'd love to add a short section on property management from a local operator's perspective, or we could simply cross-link our respective guides for readers who want the full picture. Happy to chat or swap links if it makes sense.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Chris Russell London Ontario Realtor — 2026-09-27
+To: realtorchrisrussell@gmail.com
+Subject: Collaboration idea — your investor buyer content
+
+Hi Chris,
+
+Your "Guide to Successful Real Estate Investment" caught my attention — solid, practical advice for London buyers that actually works in this market.
+
+I'm Ebin Jaison of Prospera Properties. We handle property management for landlords in London, St. Thomas, and Strathroy, and we work with a lot of clients who closed with a local realtor and then needed someone to manage the property.
+
+Would you be open to a brief cross-mention in your investor guide, or a short guest post from me on "What to look for in a property manager after closing"? It fills a natural gap for your readers and I'm happy to return the mention on our blog.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Westwood Realty Team — 2026-09-27
+To: info@westwood.team
+Subject: Resource idea for your London investment content
+
+Hi Westwood team,
+
+Your market reports and investment analysis posts are genuinely useful — the depth of coverage for London and the surrounding area is better than most I've seen.
+
+I'm Ebin Jaison, owner of Prospera Properties. We manage rental properties in London, St. Thomas, and Strathroy, and your investor-buyer audience is exactly who ends up becoming our clients once they've closed.
+
+I'd love to discuss adding a "next steps" resource mention in your investment content pointing to professional property management, or explore a mutual link between our sites. Would a short conversation make sense?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## REMI Network — Canadian Property Management — 2026-09-27
+To: barbara.carss@reminetwork.com
+Subject: Practitioner perspective on London-area LTB trends
+
+Hi Barbara,
+
+Your coverage of Ontario RTA changes and LTB operations is consistently the clearest in the industry — I refer colleagues to your property management section regularly.
+
+I'm Ebin Jaison, owner of Prospera Properties in London, Ontario. We manage residential rentals across London, St. Thomas, and Strathroy, which means we're filing N-forms, attending LTB hearings, and navigating Bill 60 changes in real time.
+
+If you're looking for a practitioner voice for a piece on how the September 2026 RTA changes are landing for small Ontario operators, I'd be glad to contribute. Happy to write a short article or be quoted — whatever serves your readers best.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## LendingHub — 2026-09-27
+To: info@lendinghub.ca
+Subject: Adding value to your London Ontario buyer guide
+
+Hi LendingHub team,
+
+Your First-Time Buyer's Guide for London Ontario is thorough — it walks readers through every step of the purchase, which is exactly the kind of content that builds trust.
+
+I'm Ebin Jaison, owner of Prospera Properties. We manage rental properties in London, St. Thomas, and Strathroy, and many of our clients came to us right after closing on their first investment property.
+
+Would you be open to adding a brief "what to do after closing on a rental" resource section, with a mention of professional property management? Or I could write a short companion piece. Either way, it closes a real gap for your readers.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Yardi Breeze Canada Blog — 2026-09-27
+To: marketing@yardi.com
+Subject: Prospera Properties — London Ontario PM case study idea
+
+Hi Yardi Breeze Canada team,
+
+Your Canadian rental market Q3 report and Ontario landlord compliance content are genuinely useful — I share them with clients regularly.
+
+I'm Ebin Jaison, owner of Prospera Properties in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy, and we deal with the operational side of RTA compliance, LTB filings, and Bill 60 changes daily.
+
+If you're ever looking for a real-world London-area operator perspective for a blog piece, case study, or expert quote, I'd be glad to contribute. Happy to share what it looks like navigating Ontario compliance for a small-to-mid PM operation.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Assetsoft — Ontario Property Management Tech Blog — 2026-09-27
+To: info@assetsoft.biz
+Subject: Cross-link idea — your Ontario landlord compliance guides
+
+Hi Assetsoft team,
+
+Your "Ontario Landlord Rules 2026" series is exactly the kind of technical content Ontario property managers need right now — the Bill 60 FAQ and the Yardi Voyager RTA compliance guide are well done.
+
+I'm Ebin Jaison, owner of Prospera Properties in London, Ontario. We publish practical landlord guides on our own blog — LTB processes, N-form walkthroughs, maintenance obligations — that complement your technical compliance content from an operator's perspective.
+
+Would a cross-link between our respective Ontario content pages make sense? We're happy to link to your compliance guides from ours if you'd consider a return mention.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Live In Oakridge — London Ontario Realtor Blog — 2026-09-27
+To: info@homeswithjustin.ca
+Subject: Your July market update — quick collaboration idea
+
+Hi Justin,
+
+Your July 2026 London market update was well done — 537 sales and $560K median in one snapshot is exactly what buyers need to see.
+
+I'm Ebin Jaison, owner of Prospera Properties. We manage rental properties in London, St. Thomas, and Strathroy, and I've noticed your investor and first-time buyer content stops at the purchase — which is exactly where property management questions start for a lot of people.
+
+Would you be open to a brief resource mention in your investment or market content, or a short guest post on property management after closing? Happy to return the mention on our blog as well.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
