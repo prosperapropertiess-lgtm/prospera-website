@@ -1,309 +1,35 @@
 ---
-Last updated: 2026-09-27
-
-## ⚠️ STILL URGENT — September 21 changes are now IN FORCE (2026-09-27)
-Bill 60 Phase 2 provisions took effect September 21, 2026. The following posts must be updated immediately — search volume is peaking:
-1. **n4-notice-ontario.md** — The cure period is now 7 days (not 14) for all monthly tenancies. Bill 60 form N4 (2026/09) is the mandatory form. Update callout box urgently.
-2. **bill-60-ontario-landlords.md** — Add Phase 2 changes: N4 7-day cure, N12 compensation waiver with 120+ days notice, LTB review period shortened 30→15 days, fines doubled ($100K individual / $500K corp). Already flagged; still needs this content.
-3. **ontario-landlord-september-21-2026-checklist** — Still unpublished. Publish this week; it has the highest short-term traffic potential of any unfilled gap.
-
----
-
-## New Topic Opportunities — 2026-09-27
-
-- ontario-rta-changes-september-21-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~500/mo | What specifically changed for Ontario landlords on September 21, 2026: N4 cure period 14→7 days, N12 compensation waiver at 120+ days notice, LTB order review window 30→15 days, persistent late payment definition (3 late payments in 6 months), fines doubled. Multiple PM companies and legal services posted this guide in late September and are ranking — but our bill-60-ontario-landlords.md doesn't yet cover the specific implementation details. A standalone "what changed September 21" post or a heavy expansion of the existing Bill 60 post would both work. HIGH priority given recency and search volume. Internal links to bill-60-ontario-landlords.md, n4-notice-ontario.md, n12-notice-ontario.md, evicting-tenant-ontario.md.
-
-- ontario-landlord-rights-complete-guide | Est. difficulty: MEDIUM | Vol: ~600/mo | A comprehensive "what Ontario landlords can (and cannot) do" parent page covering: rent increases, deposits, entry rules, maintenance obligations, repair timelines, eviction rights, and prohibited actions — in one authoritative guide. We cover each component individually but have no parent overview page. The query is dominated by tenant-focused sites (tenantrights.ca, ACTO) and general legal info sites — a landlord-perspective parent guide with internal links to all component posts would rank well and anchor the topical cluster. Internal links to landlord-entry-rights-ontario.md, n4-notice-ontario.md, rent-increase-ontario-guidelines.md, security-deposits-ontario.md, landlord-maintenance-responsibilities-ontario.md.
-
-- n-forms-ontario-landlord-complete-guide | Est. difficulty: MEDIUM | Vol: ~350/mo | A parent/directory page covering all Ontario N forms (N1–N13): what each one is for, when to use it, notice period, and links to each individual guide. We have standalone posts for N1, N4, N5, N6, N7, N8, N11, N12, N13 — but no parent comparison page. Marda Management and GTAHomesFinder rank for this query with exactly this kind of page; we have stronger individual posts but no umbrella. A structured table format with one row per form and internal links to each individual post would be a featured-snippet target. Internal links to all N-form individual posts.
-
-- ltb-online-video-hearing-ontario | Est. difficulty: LOW | Vol: ~150/mo | How LTB Zoom hearings actually work: the Tribunals Ontario portal, scheduling, evidence submission deadlines (7 days in advance), what to expect in a video hearing room, mediator role, and tips for self-represented landlords. Our ltb-hearing-preparation-ontario-landlords.md covers preparation generally but not the specific mechanics of video/online hearings. Paralegal Q&A sites dominate; a PM company's practical guide would stand out. Internal links to ltb-hearing-preparation-ontario-landlords.md and landlord-tenant-board-ontario-guide.md.
-
-- ontario-landlord-record-keeping-obligations | Est. difficulty: LOW | Vol: ~150/mo | What records Ontario landlords are legally required to keep: signed leases, rent receipts, N-form service records, inspection reports, repair requests/responses, LTB correspondence. The RTA requires landlords to provide rent receipts on request; many don't know what else they need. Our landlord-record-keeping-ontario.md may already cover this — if so, needs expansion with 2026 Bill 60 documentation requirements (written late payment records, N12 compensation receipts). Check before publishing separately.
-
-## SKIPPED — 2026-09-27
-
-- "LTB Ontario eviction process landlord" → evicting-tenant-ontario.md + how-long-does-eviction-take-ontario.md — full coverage
-- "tenant not paying rent Ontario" → what-to-do-if-tenant-stops-paying-rent-ontario.md — fully covered
-- "rent increase Ontario landlord guide" → rent-increase-ontario-guidelines.md + how-to-increase-rent-ontario-step-by-step.md — fully covered
-- "tenant screening Ontario" → tenant-screening-red-flags.md + tenant-credit-check-ontario-landlords.md — fully covered
-- "N4 N8 N12 notice Ontario landlord" → individual posts exist for each; covered but no parent guide (see opportunities above)
-- "eviction notice Ontario how long does it take" → how-long-does-eviction-take-ontario.md — covered
-- "can landlord enter property Ontario notice" → landlord-entry-rights-ontario.md — covered
-- "Ontario standard lease requirements" → ontario-standard-lease-2026.md + how-to-write-lease-agreement-ontario.md — covered
-- "rent deposit rules Ontario landlord" → security-deposits-ontario.md + last-month-rent-interest-ontario.md — covered
-- "above guideline rent increase Ontario" → above-guideline-rent-increase-ontario.md — covered
-- "Ontario landlord insurance guide" → landlord-insurance-vs-tenant-insurance-ontario.md + rental-property-insurance-ontario.md — covered
-
-## Topics to Expand — 2026-09-27
-
-- bill-60-ontario-landlords.md — Add Phase 2 September 21 implementation: (1) N4 cure period now 7 days for monthly tenancies, (2) N12 compensation waived when 120+ days notice given, (3) LTB order review window shortened from 30 to 15 days, (4) persistent late payment defined as 3 late payments within 6 months, (5) LTB fines doubled to $100K/individual and $500K/corporation. Flagged urgent for two weeks — needs this content now.
-
-- n4-notice-ontario.md — Callout box: "Bill 60 Change: Effective September 21, 2026, the cure period on the N4 notice is now 7 days (reduced from 14 days) for monthly tenancies. Use the new N4 form (2026/09) — the old form is no longer valid." This is a ranking signal issue: landlords searching for current N4 rules will see the 14-day period and receive incorrect guidance.
-
-- how-long-does-eviction-take-ontario.md — Update wait time table with current 2026 data: L1/L9 average 4–6 months; L2 average 6–9 months; other applications 5–9 months; 80% of cases heard within 3.2–14.1 months. Backlog reduced from 53,000 to ~41,000 active files. Most orders issued within 30 days of hearing. Source: Tribunals Ontario operational update, September 2026.
-
-- ltb-hearing-preparation-ontario-landlords.md — Add section on online/Zoom hearing mechanics: Tribunals Ontario portal login, evidence upload deadline (7 days before hearing), what the Zoom interface looks like, how to raise objections in a video format, and what happens if tech fails. Many landlords searching for hearing prep are now attending video hearings, not in-person.
-
----
-
-## ⚠️ CRITICAL — September 21 is TOMORROW (2026-09-20)
-The Bill 60 Phase 2 provisions take effect September 21, 2026. The following three items from last week's "Topics to Expand" are still urgent — they need to be published or updated today:
-1. **ontario-landlord-september-21-2026-checklist** — still unpublished; search volume for this will peak Sept 20–22. Publish immediately.
-2. **bill-60-ontario-landlords.md** — Phase 2 section (expanded N13 grounds, revised AGI cap, mandatory N12 disclosure) still needs to be added.
-3. **n4-notice-ontario.md** — Bill 60 cure period change (uniform 14 days for all tenancy types effective Sept 21) needs a callout box.
-
----
-
-## New Topic Opportunities — 2026-09-20
-
-- mold-in-rental-ontario-landlord | Est. difficulty: MEDIUM | Vol: ~400/mo | Who pays for mold remediation in Ontario rentals, landlord's RTA duty to maintain habitability, repair timelines (24-48h for severe/active leaks, 5-7 business days for surface mold), when tenant negligence shifts responsibility, and how tenants can file a T6 if landlord doesn't act. Marda Management (a PM competitor) and mold-remediation companies rank but no authoritative Ontario PM company guide covers the landlord's full obligations and defences. Higher search volume than most maintenance topics. Natural internal links to landlord-maintenance-responsibilities-ontario.md, rta-section-20-maintenance-obligations-ontario.md, and pest-control-ontario-rentals.md.
-
-- guarantor-co-signer-rental-ontario | Est. difficulty: LOW | Vol: ~175/mo | Can Ontario landlords require a guarantor, how to draft an enforceable guarantee, what the Ontario Human Rights Code limits (must apply same standard to all applicants, cannot target protected grounds), and whether a guarantee survives automatic month-to-month conversion. Settlement.org, therentalmarket.ca, and paralegal Q&A sites rank — no authoritative Ontario PM company guide exists. Landlords with student tenants or lower-income applicants search this constantly. Short standalone post with strong featured-snippet potential. Internal links to tenant-credit-check-ontario-landlords.md and how-to-write-lease-agreement-ontario.md.
-
-- ev-charging-rental-property-ontario-landlord | Est. difficulty: LOW | Vol: ~150/mo | EV charging at Ontario rental properties: no legal obligation exists as of 2026, practical approaches for landlords receiving tenant requests (separate metered outlet, cost-sharing agreement, lease addendum), insurance implications, and condo-specific considerations under the Condominium Act. CBC News and US government pages rank for the general query; no Ontario PM company has a landlord-specific practical guide. Emerging topic with rising search volume as EV adoption grows. Internal links to utilities-ontario-rentals.md and condo-owner-landlord-ontario (planned).
-
-## SKIPPED — 2026-09-20
-
-All 12 standard keyword queries for this run are already covered by existing posts or were already listed in prior SKIPPED sections. No new additions needed.
-
-## Topics to Expand — 2026-09-20
-
-- how-long-does-eviction-take-ontario.md | Add a 2026 LTB wait time table by application type: L1/L9 ~3-6 months, L2 ~6-9 months, other applications 9-12+ months. Current backlog: ~41,000 active files (down from 53,000 at peak). Source: Tribunals Ontario and ltbtrack.ca as of September 2026. The post ranks for the right queries but will lose freshness signals without a 2026 data update.
-
-- security-deposits-ontario.md | Add a dedicated subsection on the annual interest obligation: rate for 2026 is 2.1% (matches rent guideline), so $2,000 deposit → $42 interest owed on anniversary. Example calculation, the top-up-instead-of-cash-payment option, and what happens if a landlord forgets to pay. The standalone ontario-rent-deposit-interest-2026 opportunity (from 2026-08-23) hasn't been published yet — if still unpublished, the faster move is adding this as a section here.
-
----
-
-## New Topic Opportunities — 2026-09-13
-
-- l7-application-ontario-landlord | Est. difficulty: LOW | Vol: ~80/mo | The LTB L7 application (Replace a Superintendent) is the last unguided application in the common landlord series. We have L1–L4, L6, L8, and L9 guides; L7 is a gap. Short standalone guide — LTB.ca is the only substantive result today. Completes the L-series for internal linking and topical authority.
-
-- l8-application-ontario-landlord | Est. difficulty: LOW | Vol: ~70/mo | The LTB L8 application (Obtain an Abandoned Property Order) — when a tenant has clearly abandoned the unit but the landlord needs a formal LTB order to change locks and reclaim possession. Abandoned-tenancy scenarios are common enough to generate consistent search volume; no PM company has a guide. Internal links to tenant-abandonment-ontario.md and l1-application-ontario.md.
-
-- joint-tenancy-ontario-landlord | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | How joint tenancy works in Ontario rentals — all tenants on one lease, what happens when one tenant wants to leave, how an N9 works in a joint tenancy, can a landlord remove one name. Landlord forums and paralegal Q&A dominate. A landlord-perspective guide covering the practical scenarios (one roommate leaving, one non-paying, adding a name) would rank cleanly. Internal links to n9-notice-ontario.md and security-deposits-ontario.md.
-
-- parking-spot-rental-ontario-rta | Est. difficulty: LOW | Vol: ~100/mo | Is a parking spot covered by the RTA in Ontario? Does rent control apply to parking? Can a landlord charge separately for parking, increase the parking fee, or terminate parking as a service? A niche but underserved operational topic — only LTB adjudication summaries and paralegal Q&A appear in results. Short guide with strong featured-snippet potential.
-
-- ontario-landlord-property-tax-assessment-appeal | Est. difficulty: LOW | Vol: ~100/mo | How Ontario landlords can appeal an MPAC assessment they believe is too high — the ARB process, deadlines, comparable evidence, and what a successful appeal means for property tax in subsequent years. Locally useful for London/Elgin/Middlesex County landlords. No PM company in Ontario has a guide; accountant and paralegal sites dominate. Internal link to rental-property-tax-deductions-ontario.md.
-
-- rooming-house-london-ontario-landlord-guide | Est. difficulty: LOW | Vol: ~100/mo | London Ontario's rooming house licensing requirements under the Residential Rental Licensing by-law — who needs a licence, what fire and property standards apply, inspection requirements, and how RTA obligations interact with rooming house status. London-specific, high local SEO value. No PM company or local landlord site has a standalone guide. Internal links to landlord-entry-rights-ontario.md and maintenance-obligations-ontario.md.
-
-## SKIPPED — 2026-09-13
-
-Standard keyword queries for this run were cross-checked against the existing blog directory. The following queries are already fully covered by published posts:
-
-- "ontario eviction notice" → n4-notice-ontario.md, n8-notice-ontario.md, n12-notice-ontario.md — full coverage
-- "landlord tenant act ontario" → ontario-landlord-tenant-act-2026.md — covers current RTA
-- "rent increase ontario 2026" → above-guideline-rent-increase-ontario.md + ontario-landlord-tenant-act-2026.md
-- "landlord rights ontario" → landlord-entry-rights-ontario.md, security-deposits-ontario.md, full coverage
-- "ltb ontario application" → l1-application-ontario.md through l4, l9 — series substantially complete
-- "ontario lease agreement" → ontario-standard-lease-guide.md — existing post
-- "property management london ontario" → london-ontario-property-management.md — local page exists
-- "eviction process ontario" → how-long-does-eviction-take-ontario.md — full guide
-- "ontario landlord maintenance" → landlord-maintenance-responsibilities-ontario.md — exists
-- "bill 60 ontario" → bill-60-ontario-landlords.md — exists (needs Sept 21 update — see Topics to Expand)
-- "ltb default order" → ltb-default-order-ontario.md — exists
-- "n4 notice ontario" → n4-notice-ontario.md — exists (needs Sept 21 update — see Topics to Expand)
-
-## Topics to Expand — 2026-09-13
-
-**URGENT — Sept 21, 2026 is 8 days away:**
-
-- ontario-landlord-september-21-2026-checklist | **STILL UNPUBLISHED — URGENT** | Bill 60 Phase 2 provisions take effect September 21, 2026 (expanded N13 grounds, revised AGI cap calculation, mandatory disclosure on N12). A practical checklist post — what landlords in London and across Ontario need to have in order before Sept 21 — would be the highest-value piece we could publish this week. Strong time-sensitive search volume. If this post does not exist by Sept 18, the window closes.
-
-- bill-60-ontario-landlords.md | Add a dedicated Phase 2 section covering what changes September 21, 2026: expanded demolition/conversion N13 grounds, revised AGI cap (new 3% hard cap on combined rent + above-guideline), and mandatory N12 disclosure requirements. Current post covers Phase 1 only. Update the post and re-date before Sept 18.
-
-- n4-notice-ontario.md | Update the N4 guide to reflect the Bill 60 change to the N4 cure period (effective Sept 21, 2026): the cure window changes from 14 days (annual lease) to a uniform 14 days for all tenancy types. Add a clear callout box noting the Sept 21 effective date so landlords serving N4s after that date use the correct window.
-
-## New Topic Opportunities — 2026-08-23
-
-- ontario-property-manager-license-requirements | Est. difficulty: LOW | Vol: ~200/mo | Do Ontario property managers need a license? Under REBBA 2002, residential PM for individual units does not require a real estate license — but landlords frequently search this when vetting managers. A clear, authoritative guide from a licensed-context PM company would rank cleanly for this decision-stage query. Strong internal link to how-to-find-a-property-manager-ontario.md and property-management-fees-ontario.md.
-
-- how-to-evict-a-family-member-ontario | Est. difficulty: LOW/MEDIUM | Vol: ~300/mo | Family member living with the landlord under a license vs. a tenancy — the distinction determines whether the RTA applies at all. LTB and paralegal Q&A sites dominate; no PM company has a standalone guide covering the license-vs-tenancy distinction, the N11/eviction process, and practical steps. High search volume, underserved by authoritative content.
-
-- ontario-rent-deposit-interest-2026 | Est. difficulty: LOW | Vol: ~180/mo | The annual interest rate Ontario landlords must pay on last-month's-rent deposits changes each year per the rent increase guideline (2.5% for 2026). Landlords search this every year; only LTB.ca and paralegal Q&A sites currently rank. A short, annually-updated guide with a clear table of rates by year would earn the featured snippet and drive consistent seasonal traffic. Natural companion to security-deposits-ontario.md.
-
-- l6-application-ontario-landlord | Est. difficulty: LOW | Vol: ~100/mo | The LTB L6 application (Review of an Agreement to Terminate) is the least-covered LTB application type. We have L1–L4 and L9 guides but L5, L6, L7, and L8 are missing from the blog. A short standalone guide on the L6 fills the gap and completes the LTB application series. LTB.ca is the only substantive result today.
-
-- ontario-landlord-water-heater-responsibilities | Est. difficulty: LOW | Vol: ~150/mo | Who maintains the water heater in Ontario rentals — landlord vs. tenant responsibility, owned vs. rental water heater units (Enercare, EnerCare), what happens if the rental heater company charges the tenant directly, and how to handle HVAC equipment in a lease. No Ontario PM company has a guide; landlord forums and one-line Q&A posts dominate. Internal links to landlord-maintenance-responsibilities-ontario.md and utilities-ontario-rentals.md.
-
-- e-transfer-rent-ontario-landlord | Est. difficulty: LOW | Vol: ~200/mo | Can Ontario landlords require rent paid by e-transfer? What payment methods landlords can mandate under the RTA, record-keeping requirements for e-transfer payments, and best practices for documenting receipt. Quick practical query — forum posts and paralegal Q&A rank; no authoritative PM company guide exists. Short post, strong featured-snippet potential.
-
-- airbnb-london-ontario-landlord-bylaw | Est. difficulty: LOW | Vol: ~120/mo | London Ontario-specific short-term rental licensing and zoning bylaw requirements for landlords — distinct from our existing airbnb-short-term-rentals-ontario.md which covers the provincial RTA angle. London passed short-term rental licensing in 2023 (licence required for non-primary residence STRs); no comprehensive landlord guide covers the London bylaw specifically. Strong local SEO value and a natural companion post.
-
-- london-ontario-property-tax-landlord | Est. difficulty: LOW/MEDIUM | Vol: ~120/mo | London Ontario property tax rates for rental properties, how to calculate annual tax exposure when underwriting an investment, MPAC assessment class for rental vs. owner-occupied, and how tax factors into pricing decisions. Locally specific; no London PM company covers this. Internal links to how-to-price-rental-property-london-ontario.md and rental-property-tax-deductions-ontario.md.
-
-- l5-application-ontario-landlord | Est. difficulty: LOW | Vol: ~100/mo | The LTB L5 application (Application to Terminate the Tenancy — Unauthorized Pet). Complement to l6-application-ontario-landlord above. Fills the remaining gap in the LTB application series; only LTB.ca ranks substantively today.
+Last updated: 2026-10-04
 
 ## New Topic Opportunities
 
-- carbon-monoxide-alarm-requirements-ontario-landlord | Est. difficulty: LOW | Vol: ~200/mo | January 1 2026 rule requires CO detectors in all Ontario rental units with a fuel-burning appliance or attached garage — many landlords unaware of the new requirement. Small home safety and insurance blogs rank; Ontario.ca addresses homeowners broadly but no standalone landlord compliance guide exists. Natural internal links to fire-safety-ontario-landlords.md.
+- `how-much-rent-increase-allowed-ontario-2027` | Est. difficulty: LOW | Vol: ~400/mo | **URGENT — time-sensitive** The 2027 Ontario rent increase guideline is 1.9% (down from 2.1% in 2026). The deadline to serve a Form N1 for a January 1, 2027 increase was October 3, 2026 — this is peak search intent right now. No competing PM company has a dedicated 2027 post yet. Angle: "Ontario Rent Increase Guideline 2027: What Landlords Need to Know" — cover the 1.9% cap, how to serve the N1 notice correctly, timing rules, units exempt from guideline, AGI options. First-mover advantage; liv.rent and storeys.com will update their pages but likely haven't yet.
 
-- n12-compensation-waiver-ontario-2026 | Est. difficulty: LOW | Vol: ~150/mo | Bill 60 change effective September 21 2026: if a landlord gives 120+ days notice on an N12, the tenant waives the right to one-month compensation. Landlords are actively searching how to structure N12 timelines to avoid the compensation requirement. Small PM and paralegal blogs just beginning to cover this; no large authority site has a dedicated guide. Companion to n12-notice-ontario.md and n12-bad-faith-compensation-ontario (planned).
+- `ltb-hearing-wait-times-london-ontario` | Est. difficulty: LOW | Vol: ~200/mo | Local informational with high intent. lawyerinfo.ca ranks for "how long does it take to schedule an LTB hearing in London" but no PM company has this content. Current data: 4–8 months for standard London-area L1 hearing. Angle: "LTB Hearing Wait Times in London Ontario: What Landlords Should Expect in 2026" — cover local timeline data, what happens while you wait (rights preserved, rent still owed), when to hire a PM vs. self-represent, how professional PM speeds the documentation process.
 
-- fixed-term-lease-end-ontario-landlord-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | Bill 60 change effective September 21 2026: fixed-term leases no longer auto-convert to month-to-month when the term ends — landlords can choose not to renew. Significant change from prior RTA default; many landlords still believe conversion is automatic. Small PM law blogs cover it briefly; no comprehensive landlord guide exists. Natural internal link to ontario-standard-lease-2026.md.
+- `does-property-manager-need-a-licence-ontario` | Est. difficulty: LOW | Vol: ~200/mo | High commercial intent — people asking this are evaluating whether to hire a PM. No dedicated landlord-facing content found in search; only CCI's condo manager licensing page appears. Answer: residential PMs don't require a provincial licence (unlike condo managers under the CMRAO). Angle: "Does a Property Manager Need a Licence in Ontario?" — explain the distinction between condo management (licensed) and residential PM (unlicensed but regulated via the RTA), what qualifications and experience matter most, how to vet a PM, red flags to avoid. Natural funnel into Prospera's services.
 
-- ontario-ltb-fines-penalties-landlords | Est. difficulty: LOW | Vol: ~100/mo | LTB fine caps increased under Bill 60 to $100K (individuals) and $500K (corporations) for RTA violations. Specific queries like "LTB fine Ontario landlord 2026" return only paralegal sidebar content and news articles. A standalone guide covering what triggers fines, the fine schedule, and how to avoid violations would rank cleanly. Internal links to ltb-hearing-preparation-ontario-landlords.md and t2-application-ontario-landlord (planned).
+- `ltb-mediation-ontario-landlord-guide` | Est. difficulty: LOW | Vol: ~150/mo | Almost no competing landlord-facing content; tribunalsontario.ca and stepstojustice.ca have procedural pages but nothing practical for landlords. Angle: "How LTB Mediation Works for Ontario Landlords" — what a Dispute Resolution Officer (DRO) does, same-day mediation at hearings, Online Dispute Resolution (ODR) before hearing, when a consent order is worth accepting vs. going to adjudication, how mediated agreements differ from LTB orders. Useful companion to our existing ltb-consent-order-ontario.md.
 
-- ontario-property-management-agreement | Est. difficulty: LOW | Vol: ~120/mo | What an Ontario property management contract should include — fee structures, termination clauses, maintenance authority limits, reporting requirements, and red flags. Landlords searching this are evaluating PM companies; no government or large authority site dominates. A guide from a PM company positions Prospera at the exact moment of hire decision. Strong internal link to property-management-london-ontario.md.
-
-- air-conditioning-ontario-rentals-2026 | Est. difficulty: LOW | Vol: ~300/mo | Bill 97 took effect July 1 2026: tenants can now install window/portable A/C with written notice, landlords can charge actual electricity cost. Fresh topic, law firms and PM blogs just starting to cover it, zero competition from large authority sites.
-
-- n9-notice-ontario-landlord-guide | Est. difficulty: LOW | Vol: ~200/mo | Every landlord-notice series (N4-N13) is covered in our blog but the N9 (tenant's notice to end tenancy) is missing — landlords receiving an N9 search this constantly. Small law firm and paralegal sites dominate; no large authority site ranks.
-
-- ltb-default-order-ontario-landlord | Est. difficulty: LOW | Vol: ~150/mo | What happens when the tenant doesn't appear at the LTB hearing — default order process, how to request one, timelines. Practical and specific; only Q&A sites and minor blogs currently rank. Clean informational gap.
-
-- duplex-triplex-landlord-rights-ontario | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | N12 personal-use eviction rules differ for properties with 4+ units — critical for the London area investor market. Small real estate blogs cover this; Wikipedia and government don't dominate. Good fit for our investor audience.
-
-- ltb-mediation-ontario-landlords | Est. difficulty: LOW | Vol: ~120/mo | LTB mediation as an alternative to a full hearing — many landlords don't know this option exists. Tribunals Ontario explains it briefly; no standalone landlord guide exists from a PM perspective.
-
-- ontario-landlord-bill-97-changes-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~250/mo | Bill 97 changes (A/C rights, AGI tweaks, tenant application changes) specifically — distinct from our existing bill-60-ontario-landlords.md. Multiple implementation dates (July 1 and Sept 21 2026) create ongoing search demand. Small PM blogs and law firms rank; no Wikipedia or CBC dominance.
-
-- smoke-free-rental-clause-ontario | Est. difficulty: LOW | Vol: ~200/mo | How to add a no-smoking clause in an Ontario lease, whether it's enforceable under the RTA, and how to document violations for an N5. Ontario.ca addresses smoke-free common areas only; no large authority site covers private unit clauses. Landlord forums rank for this now — a proper guide would displace them. Natural internal links to how-to-write-lease-agreement-ontario.md and n5-notice-ontario.md.
-
-- bed-bugs-ontario-landlord-responsibilities | Est. difficulty: LOW/MEDIUM | Vol: ~250/mo | Who pays for bed bug treatment, how to document infestation for an N5, MFIPPA inspection requests, and timelines. City of Toronto public health pages rank for Toronto-specific queries; no London/SW Ontario guide exists. Our pest-control-ontario-rentals.md is general — a dedicated bed bug post would rank independently and signal topical depth.
-
-- first-time-landlord-checklist-ontario-2026 | Est. difficulty: LOW | Vol: ~400/mo | Comprehensive pre-tenancy checklist: lease execution, inspection report, insurance, LMR deposit, smoke/CO alarm compliance, entry notice rules, HVAC service records. Our existing first-time-landlord-tips-london-ontario.md is London-specific; this is a broader Ontario keyword that finance and lifestyle blogs currently occupy. A checklist-format post from a PM company outranks them.
-
-- london-ontario-rental-market-2026 | Est. difficulty: LOW | Vol: ~200/mo | London Ontario vacancy rates, average rents, turnover trends for 2026. CMHC publishes raw data; no local PM company publishes a readable annual summary. Positions Prospera as a market authority, earns citations from realtors and mortgage brokers. Natural internal links to property-management-london-ontario.md.
-
-- st-thomas-ontario-real-estate-investment | Est. difficulty: LOW | Vol: ~150/mo | Why St. Thomas is attracting investors (Volkswagen EV plant, infrastructure growth, below-London prices), average cap rates, rental demand indicators. Near-zero competition — a St. Thomas PM company has first-mover advantage on this query. Internal link to property-management-st-thomas-ontario.md.
-
-- landlord-liability-tenant-injury-ontario | Est. difficulty: MEDIUM | Vol: ~200/mo | Landlord's legal exposure when a tenant is injured on the property, maintenance duty-of-care standard, how insurance intersects with RTA obligations. Law firm blogs dominate nationally but no Ontario PM company has covered this from a property management angle. Informational intent only; pairs with rental-property-insurance-ontario.md and landlord-maintenance-responsibilities-ontario.md.
-
-- condo-owner-landlord-ontario | Est. difficulty: LOW | Vol: ~150/mo | Owning a condo unit as a rental: condo corporation restrictions on tenants, pet restrictions in condo leases, short-term rental bans, what happens when the condo corporation pursues the unit owner for tenant conduct. No comprehensive landlord guide exists from the condo-owner perspective — only condo board/tenant-focused content ranks. Natural internal links to pet-policies-ontario-rentals.md and airbnb-short-term-rentals-ontario.md.
-
-- ltb-backlog-ontario-2026 | Est. difficulty: LOW/MEDIUM | Vol: ~200/mo | Practical landlord guide to the LTB hearing wait time crisis: current median wait times by application type, interim order options, documentation hygiene during long delays, and how professional management reduces exposure during backlogs. CBC and legal clinics own the news angle; no Ontario PM company has a landlord-specific operational guide. Timely and evergreen — backlog has been a top landlord concern since 2022 and is worsening.
-
-- t2-application-ontario-landlord | Est. difficulty: LOW | Vol: ~120/mo | Tenant application to the LTB for maintenance failures, harassment, or unlawful entry — what landlords need to know to avoid a T2 filing, what happens if one is received, response timelines and typical LTB remedies. Tribunals Ontario and paralegal Q&A sites rank; no Ontario PM company guide exists. Companion to ltb-hearing-preparation-ontario-landlords.md.
-
-- ontario-rent-receipt-requirements | Est. difficulty: LOW | Vol: ~120/mo | When Ontario landlords must provide rent receipts, what information must appear on them, the $20 penalty per receipt for non-compliance, and how to generate them. Only legal forum Q&A and paralegal sidebar content currently rank. Short, authoritative post earns the featured snippet for this query.
-
-- n12-bad-faith-compensation-ontario | Est. difficulty: LOW/MEDIUM | Vol: ~150/mo | Dedicated guide to N12 bad faith eviction findings: what LTB considers bad faith (property not used as stated, rented out again within 12 months), the $50,000 fine, compensation orders to tenants, and 2025-2026 LTB bad faith case examples. We have n12-notice-ontario.md and renoviction-ontario-landlords.md but neither covers the bad faith consequence side in depth. Small paralegal sites rank; CBC ranks for news events but no practical guide exists.
-
-- strathroy-ontario-rental-market-2026 | Est. difficulty: LOW | Vol: ~80/mo | Local rental market data guide for Strathroy: average rents, vacancy rates, what drives demand (proximity to London, lower acquisition costs, small-town retention). Near-zero competition — no other PM company has Strathroy-specific market content. Builds local topical authority and complements property-management-strathroy-ontario.md.
-
-- property-management-elgin-county-ontario | Est. difficulty: LOW | Vol: ~80/mo | Geographic long-tail for Elgin County (St. Thomas, Aylmer, Port Stanley area). Near-zero competition. St. Thomas's industrial growth and Elgin County's rural rental market are underserved by existing content. Complements property-management-st-thomas-ontario.md with a broader county-level page.
-
-- ontario-rent-increase-guideline-2027 | Est. difficulty: LOW | Vol: ~400/mo | **High urgency — serve now.** The 2027 rent increase guideline is 1.9% (down from 2.1% in 2026). Landlords who want a January 1, 2027 increase must serve the N1 by October 3, 2026 — 90-day notice window. Tenon10 and small PM sites (KEILTY, OntarioLandlord.ca) have 2027 guides but no large authority site dominates. Our existing rent-increase-ontario-guidelines.md covers the guideline concept and n1-form-ontario.md covers the form — a dedicated "2027 guideline + N1 timing" post targets the high-volume seasonal query before the Oct window closes. Strong internal links to both existing posts.
-
-- ltb-mandatory-payment-agreement-form-ontario | Est. difficulty: LOW | Vol: ~150/mo | Effective July 1, 2026: informal "handshake" rent repayment plans are no longer valid under s.206 of the RTA. Any rent arrears repayment agreement under an L1 or L9 application must now use the official LTB Payment Agreement Form and be sent to the regional LTB office. Small law firms (AJ Murray Law, Gobin & Leyenson LLP) and Marda Management cover it but no comprehensive PM company guide exists. Our rent-repayment-agreement-ontario.md is adjacent but does not address this specific new mandatory form. A standalone guide explaining what changed, how to complete the form, and what happens if landlords still use informal agreements would rank cleanly.
-
-- n12-60-day-occupancy-rule-ontario | Est. difficulty: LOW | Vol: ~120/mo | Effective September 21, 2026: after a tenant vacates under an N12, the intended occupant must move in within 60 days or the eviction is presumed bad faith, exposing the landlord to up to $50,000 in LTB compensation. This is separate from the N12 compensation waiver and N12 bad faith post already planned — it is specifically about the post-vacancy occupancy timeline obligation. glllp.ca, George Brown Professional Corporation, and small PM blogs cover it; no large authority site has a standalone guide. Natural internal links to n12-notice-ontario.md and n12-bad-faith-compensation-ontario (planned).
-
-- london-ontario-student-housing-landlord-guide | Est. difficulty: LOW | Vol: ~150/mo | Landlord-facing (not tenant-facing) guide on the Western University and Fanshawe College student rental market: 12-month vs. May-to-April lease cycles, co-signer/guarantor requirements, handling September turnover, managing multiple-occupant units, and rent-per-room pricing strategy. Our existing Western University and Fanshawe guides (western-university-off-campus-housing-guide.md, fanshawe-college-off-campus-housing-guide.md) target student renters, not landlords managing student units. Near-zero competition on the landlord-specific angle; small real estate blogs and LendCity cover London student housing but not from an operational management perspective.
+- `ontario-new-rental-rules-september-2026` | Est. difficulty: MEDIUM | Vol: ~500/mo | High current interest post-September 21. nowtoronto.com and liv.rent are covering it from a tenant angle — no dedicated landlord-focused breakdown exists yet. Angle: "Ontario's New Rental Rules for Landlords: September 21, 2026 Changes Explained" — cover all five key changes: N4 now 7 days (was 14 for monthly), N12 120-day no-compensation rule, persistent late payment definition (3x in 7 days within 6 months), tenant 50% prepayment rule at hearings, appeal period now 15 days (was 30). Strong freshness signal for Google.
 
 ## SKIPPED (too competitive or wrong intent)
 
-- "carbon monoxide detector Ontario law" — General homeowner query; City of Toronto and Ontario.ca fire marshal pages dominate. Covered by planned carbon-monoxide-alarm-requirements-ontario-landlord post with landlord-specific angle.
-- "Bill 60 Ontario landlord changes" — HIGH difficulty; CBC, Toronto Star, and government/Tribunals Ontario dominate news-intent queries. Existing bill-60-ontario-landlords.md covers this; expanding it is in Topics to Expand below.
-- "property management fees Ontario" — MEDIUM-HIGH difficulty; comparison aggregators and national PM franchise sites dominate. Fee transparency without a local comparison angle is not winnable. Addressed in ontario-property-management-agreement post above.
-- "Ontario lease termination fixed-term" — MEDIUM difficulty; Tribunals Ontario guideline ranks #1-2. The landlord-specific angle (not renewing after Sept 21 2026) is covered by fixed-term-lease-end-ontario-landlord-2026 above.
-
-- "Ontario landlord rights 2026" — Too broad; Ontario.ca and government pages dominate. Already covered generically by ontario-landlord-tenant-act-2026.md.
-- "LTB eviction process Ontario" — HIGH difficulty; Tribunals Ontario, CBC, and legal clinics dominate. Covered by our evicting-tenant-ontario.md and how-long-does-eviction-take-ontario.md.
-- "Ontario standard lease requirements" — Covered by ontario-standard-lease-2026.md; Ontario.ca ranks #1 and is unbeatable.
-- "above guideline rent increase Ontario" — Covered by above-guideline-rent-increase-ontario.md; Toronto Tenants Association + Don Valley Legal rank high.
-- "tenant screening Ontario" — Covered by tenant-credit-check-ontario-landlords.md and tenant-screening-red-flags.md. Medium-high competition from Royal York PM and FRPO.
-- "rent increase Ontario landlord" — Covered by rent-increase-ontario-guidelines.md and n1-form-ontario.md. CBC/government dominate.
-- "can landlord enter property Ontario" — Covered by landlord-entry-rights-ontario.md. Tribunals Ontario guideline ranks #1.
-- "rent deposit rules Ontario" — Covered by security-deposits-ontario.md and what-can-landlord-deduct-from-last-month-rent-ontario.md.
-- "N4 N8 N12 Ontario guide" — All individual posts exist. Covered.
-- "tenant not paying rent Ontario" — Covered by late-rent-payments-ontario.md and n4-notice-ontario.md.
-- "eviction notice Ontario how long" — Covered by how-long-does-eviction-take-ontario.md. CBC/Tribunals Ontario dominate.
-- "LTB Ontario eviction process landlord" — MEDIUM-HIGH difficulty; Tribunals Ontario and CBC dominate. Existing posts cover this angle.
-- "Ontario housing benefit landlord" — Government/MMAH pages rank #1-3; impossible to displace with informational content.
-- "rooming house Ontario regulations" — City-level bylaws vary; City of London bylaw pages dominate for local queries. Too fragmented for one province-wide post.
-- "Ontario landlord insurance guide" — Covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md. Insurance comparison aggregators (Ratehub, LowestRates) dominate cost-focused queries.
-- "tenant not paying rent Ontario" — Covered by late-rent-payments-ontario.md, n4-notice-ontario.md, and l1-application-ontario-landlord-guide.md.
-- "Ontario N12 60 day rule" — Covered by new n12-60-day-occupancy-rule-ontario opportunity above; too narrow for standalone competitive assessment.
-- "2027 Ontario rent increase landlord" — Covered by ontario-rent-increase-guideline-2027 opportunity above.
-- "LTB payment agreement form 2026" — Covered by ltb-mandatory-payment-agreement-form-ontario opportunity above.
-- "Ontario property manager licensing" — MEDIUM difficulty; no RECO licensing requirement for residential PM creates ambiguous results; Ontario.ca and ACMO rank for credentialing questions. Too fragmented and misaligned with landlord-intent searches to warrant a standalone post.
-- "London Ontario student housing landlord" — Covered by new london-ontario-student-housing-landlord-guide opportunity above.
-
-## SKIPPED — 2026-08-23
-
-- "Ontario property manager licensing" — Already flagged in prior week. Also note: ontario-property-manager-license-requirements above is the LANDLORD-intent version ("do I need to check if my PM is licensed?") — distinct from the RECO/credentialing query that government pages dominate. Keeping it in New Opportunities.
-- "London Airbnb rules" — Covered by our existing airbnb-short-term-rentals-ontario.md at a provincial level; City of London bylaw angle tracked as airbnb-london-ontario-landlord-bylaw above.
-- "how to evict Ontario 2026" — HIGH difficulty; Tribunals Ontario, CBC, and major legal clinics dominate. Existing evicting-tenant-ontario.md covers this. The family-member variant tracked above is a LOW-competition sub-angle.
-- "CMHC rental market report London" — Government/CMHC source dominates; informational content can't compete for the raw data query. Prospera can contribute local intel to third-party sites (Ratehub, Zolo, STEEDC) instead.
-- "ltb-default-order-ontario-landlord" — NOTE: this keyword appears in the prior New Topic Opportunities list but ltb-default-order-ontario.md already exists in the blog. Review the existing post for completeness before creating a duplicate.
+- "Ontario landlord rights 2026" — dominated by liv.rent, neobanc.com, and ontario.ca; covered by our ontario-landlord-tenant-act-2026.md. No incremental value from a second post.
+- "tenant not paying rent Ontario" — covered by what-to-do-if-tenant-stops-paying-rent-ontario.md; HIGH competition (liv.rent, frontlobby.com, mipropertyportal.com). Duplicate would split authority.
+- "Ontario standard lease requirements" — covered by ontario-standard-lease-2026.md; ontario.ca and liv.rent dominate. Government source always outranks.
+- "tenant screening Ontario" — covered by tenant-screening-red-flags.md and tenant-credit-check-ontario-landlords.md; HIGH competition (fsresidential.com, royalyorkpropertymanagement.ca, liv.rent).
+- "can landlord enter property Ontario" — covered by landlord-entry-rights-ontario.md; MEDIUM competition. No gap.
+- "Ontario landlord insurance guide" — covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md; buttonwood.ca and mipropertyportal.com dominate.
+- "Ontario property manager licence" (commercial) — included as informational topic above; commercial search intent doesn't fit well here.
+- "LTB eviction process Ontario" — covered by multiple posts; HIGH competition. lawyerinfo.ca and landager.com dominate.
 
 ## Topics to Expand
 
-- bill-60-ontario-landlords.md — Add section on Bill 97 changes and the specific July 1 + September 21 2026 in-force dates; many landlords now searching for "what changed on July 1" and the post may predate these implementation details.
-- landlord-entry-rights-ontario.md — Add 2026 clarification on email delivery of notice (valid if tenant has consented in writing), which is increasingly how landlords serve notices; add FAQ on photo/text evidence of delivery.
-- rent-repayment-agreement-ontario.md — Update with Bill 60 changes to how rent arrears repayment agreements are structured at LTB hearings, including new timelines and documentation requirements effective 2026.
-- ontario-standard-lease-2026.md — Add section on Bill 97 additions to the standard lease (new A/C installation schedule, updated pet addendum). The standard lease was revised mid-2026 and many landlords are still using the old version.
-- pest-control-ontario-rentals.md — Consider splitting bed bugs into a dedicated post (see bed-bugs-ontario-landlord-responsibilities above); expand remaining post to address cockroaches and rodents with N5 evidence steps.
-- property-management-london-ontario.md — Add 2026 local rental market data section; include a paragraph on Volkswagen EV plant spillover demand in St. Thomas/London corridor; link to new london-ontario-rental-market-2026 post once written.
-- n12-notice-ontario.md — Add dedicated bad faith consequences section (LTB fine, tenant compensation, 12-month re-rental lookback) to address the n12-bad-faith-compensation-ontario keyword gap without a full separate post; assess traffic after 60 days to decide on standalone post.
-- ltb-hearing-preparation-ontario-landlords.md — Add a section on T2 tenant applications and how landlords should prepare documentation to defend against one; cross-link to new t2-application-ontario-landlord post once written.
-- n4-notice-ontario.md — Add September 21 2026 implementation note: the 7-day N4 notice period (Bill 60) is now in force; update any references to the old 14-day timeline and add a dated FAQ entry.
-- n12-notice-ontario.md — Add 120-day compensation waiver section effective September 21 2026; explain when the one-month compensation is waived and how landlords should time notice delivery; cross-link to planned n12-compensation-waiver-ontario-2026 post.
-- bill-60-ontario-landlords.md — Add September 21 2026 Phase 2 implementation section covering: 7-day N4 in force, N12 compensation waiver at 120 days, fixed-term lease non-renewal option, and increased LTB fines ($100K/$500K). Many landlords are now searching "what changed September 21" and the post is the natural destination.
-- rent-increase-ontario-guidelines.md — Add a dedicated 2027 section: 1.9% guideline announced, N1 timing window for Jan 1, 2027 increases (serve by Oct 3, 2026), and how to round rent amounts correctly. High seasonal search volume right now; the existing post covers the concept but needs a dated 2027 section so it captures "2027 Ontario rent increase guideline" queries.
-- n12-notice-ontario.md — Add N12 60-day occupancy rule section (effective September 21, 2026): the intended occupant must move in within 60 days of the tenant's vacate date; failure creates a presumption of bad faith; up to $50,000 in compensation. Cross-link to planned n12-60-day-occupancy-rule-ontario post once written.
-- rent-repayment-agreement-ontario.md — Add mandatory LTB Payment Agreement Form notice (effective July 1, 2026): informal repayment agreements under s.206 are no longer sufficient; the official LTB form must be used and submitted to the regional LTB office. Cross-link to planned ltb-mandatory-payment-agreement-form-ontario post once written.
+- `bill-60-ontario-landlords.md` — Add a dedicated section on the September 21, 2026 changes: N4 notice reduced from 14 to 7 days for monthly tenants, N12 120-day no-compensation rule, persistent late payment threshold (3x in 7 days), tenant 50% prepayment rule at hearings, appeal period reduced from 30 to 15 days. Current post covers original Bill 60 passage only.
 
-### Topics to Expand — 2026-08-23
-- ltb-default-order-ontario.md — **CONFLICT FLAG:** ltb-default-order-ontario-landlord was listed as a New Topic Opportunity in the 2026-08-16 batch but the post already exists. Review the existing post: add section on how to enforce a default order via the sheriff (cross-link enforcing-eviction-order-ontario-sheriff.md), and add FAQ on what happens if the tenant reappears and requests a review. Update date to avoid it appearing stale.
-- security-deposits-ontario.md — Add a dedicated subsection on the 2026 LMR interest rate (2.5%, per the 2026 rent increase guideline) and a simple table showing rates by year (2023–2026). This update targets the ontario-rent-deposit-interest-2026 keyword gap identified above; the existing post covers the concept but lacks the year-specific rate table that earns the featured snippet.
-- ontario-standard-lease-2026.md — Verify that the N3 / rent amount disclosure requirement and the new pet addendum (Bill 97, mid-2026 revision) are reflected; many landlords are still using the pre-July 2026 form. Add a "Last updated" note at the top with today's date.
-- landlord-maintenance-responsibilities-ontario.md — Add a paragraph on water heater maintenance obligations, cross-linking to the planned ontario-landlord-water-heater-responsibilities post. The existing post covers HVAC broadly but not water heaters as a standalone item, which is the specific search term landlords use.
----
+- `n4-notice-ontario.md` — Update to reflect the September 21, 2026 change: N4 notice period is now 7 days for ALL residential tenancies (was 14 days for monthly/yearly). Urgent — landlords serving N4s after Sept 21 need the correct deadline.
 
-## New Topic Opportunities — 2026-08-30
+- `n12-notice-ontario.md` — Update with new September 21, 2026 rule: landlords who give at least 120 days' notice for own-use eviction are no longer required to pay one month's compensation. If less than 120 days given, old compensation rules still apply.
 
-- ltb-motion-to-void-order-ontario | Est. difficulty: LOW | Vol: ~150/mo | When a tenant applies to have an LTB eviction order voided — what triggers it, what landlords must prove, and how to prepare documentation. Many landlords assume an eviction order ends the matter; a void motion restarts the process and catches them off guard. georgebrown.biz published a 2025 guide on motions to void; no Ontario PM company has a comprehensive landlord-facing guide. Natural internal links to l1-application-ontario-landlord-guide.md and enforcing-eviction-order-ontario-sheriff.md.
-
-- partial-rent-payment-ontario-landlord | Est. difficulty: LOW | Vol: ~180/mo | What happens when a tenant pays only part of the rent — does it void an N4? How partial payments are applied in arrears calculations during L1 hearings. LTB.ca and paralegal forums answer this in one paragraph; no authoritative PM company guide exists. High search intent from landlords facing real-time rent arrears situations. Natural companion to n4-notice-ontario.md and l1-application-ltb-ontario.md.
-
-- ontario-notice-service-email-text-valid | Est. difficulty: LOW | Vol: ~200/mo | Can Ontario landlords legally serve RTA notices (N4, N5, entry notices) by email or text message? Requirements under the Electronic Commerce Act and RTA — tenant consent needed, format rules, proof of delivery. Forum posts and one-off paralegal Q&As rank; no comprehensive PM company guide covers this operational detail. An actionable guide would win the featured snippet and address a frequent landlord workflow question.
-
-- ontario-landlord-september-21-2026-checklist | Est. difficulty: LOW | Vol: ~300/mo | **Time-sensitive — September 21 is 3 weeks away.** Checklist guide: what Ontario landlords must do before September 21, 2026 — update N4 template from 14-day to 7-day window, review any fixed-term leases expiring after Sept 21, understand the N12 120-day compensation waiver option, note the new LTB fine levels ($100K/$500K). No province-wide PM company has published a landlord action checklist for the Sept 21 implementation. High seasonal volume right now; organic traffic window is brief but high-intent. Companion to bill-60-ontario-landlords.md.
-
-## SKIPPED — 2026-08-30
-
-- "Ontario landlord rights 2026 guide" — Already flagged in prior weeks. Ontario.ca and Tribunals Ontario dominate. Existing ontario-landlord-tenant-act-2026.md covers this.
-- "LTB Ontario eviction process landlord guide" — Covered by evicting-tenant-ontario.md and how-long-does-eviction-take-ontario.md. Tribunals Ontario and CBC rank above the fold.
-- "rent deposit rules Ontario landlord" — Covered by security-deposits-ontario.md. ontario-rent-deposit-interest-2026 opportunity already tracked from prior week.
-- "above guideline rent increase Ontario" — Covered by above-guideline-rent-increase-ontario.md. Toronto Tenants Association dominates top positions.
-- "Ontario standard lease 2026 requirements" — Covered by ontario-standard-lease-2026.md. Ontario.ca (#1, unbeatable). Already flagged for expand.
-- "LTB notice review 15 days Ontario" — Niche procedural query; LTB.ca and georgebrown.biz rank cleanly. Not enough standalone volume to justify a post; note is better placed in bill-60-ontario-landlords.md expand task.
-- "Ontario tenant AC installation notice rules" — Covered by air-conditioning-ontario-rentals-2026 opportunity from prior week.
-- "Bill 60 Ontario September 21 changes" — Covered by bill-60-ontario-landlords.md Topics to Expand note and new ontario-landlord-september-21-2026-checklist opportunity above.
-
-## Topics to Expand — 2026-08-30
-
-- n4-notice-ontario.md — **URGENT (3 weeks):** Add a prominent callout at the top: "Bill 60 Update — Effective September 21, 2026: The N4 notice period changes from 14 days to 7 days for monthly and yearly tenancies. Update any saved notice templates before September 21." Include a dated FAQ entry explaining how to handle N4s already served under the 14-day rule.
-- bill-60-ontario-landlords.md — Add Phase 2 section header "What Changes September 21, 2026" and cover: (1) 7-day N4 notice period in force, (2) fixed-term leases no longer auto-converting to month-to-month, (3) N12 compensation waiver at 120 days, (4) increased fine levels now in effect ($100K/$500K for individuals/corps). This is the highest-traffic update the blog needs in Q3 2026.
-- security-deposits-ontario.md — Add the Ontario rent deposit interest rate table with 2024–2026 guideline rates (2.2%, 2.5%, 2.1%) and the exact interest calculation for a $2,000 deposit in 2026 ($42.00). This targets the featured snippet for "Ontario LMR deposit interest 2026" queries without requiring a new post. The opportunity ontario-rent-deposit-interest-2026 is already tracked; this is the faster option.
-
----
-Last updated: 2026-09-06
-
-## New Topic Opportunities — 2026-09-06
-
-- vacancy-management-ontario-landlord | Est. difficulty: LOW | Vol: ~150/mo | How to minimize vacancy between tenants: proactive tenant renewal outreach, pre-listing timelines, showing strategy, and pricing accuracy during the search period. Royal York PM has a standalone guide; no large authority site (CBC, tribunals, government) ranks for this query. Practical, operational angle that fits a PM company's voice. Internal links to tenant-turnover-checklist-ontario.md and marketing-rental-property-ontario.md.
-
-- ontario-t776-rental-income-form-guide | Est. difficulty: MEDIUM | Vol: ~180/mo | Step-by-step guide to completing CRA Form T776 (Statement of Real Estate Rentals) for Ontario landlords: which expenses go where, how to handle shared-use properties, how to decide whether to claim CCA, and 2026 Ontario combined tax rates on net rental income. liv.rent and silaws.com rank with general overviews; no Ontario PM company has a landlord-first T776 walkthrough. Pairs with rental-property-tax-deductions-ontario.md.
-
-## SKIPPED — 2026-09-06
-- "Ontario landlord rights 2026" — Too broad; Ontario.ca and government pages dominate. Already covered by ontario-landlord-tenant-act-2026.md.
-- "LTB eviction process step by step 2026" — Covered by evicting-tenant-ontario.md and how-long-does-eviction-take-ontario.md. Tribunals Ontario ranks #1.
-- "rent deposit rules Ontario last month rent" — Covered by security-deposits-ontario.md. Interest rate tracking covered by ontario-rent-deposit-interest-2026 in prior week's list.
-- "tenant screening Ontario background check" — Covered by tenant-credit-check-ontario-landlords.md and tenant-screening-red-flags.md.
-- "can landlord enter Ontario 24 hours" — Covered by landlord-entry-rights-ontario.md. Tribunals Ontario guideline ranks #1.
-- "Ontario landlord insurance guide 2026" — Covered by rental-property-insurance-ontario.md and landlord-insurance-vs-tenant-insurance-ontario.md.
-- "how to choose property management company Ontario" — Medium-high difficulty; Royal York PM, Buttonwood, Tenon10 dominate. Covered by how-to-find-a-property-manager-ontario.md.
-
-## Topics to Expand — 2026-09-06
-
-- seo-opportunities.md (this file) — CORRECTION: The "ontario-rent-deposit-interest-2026" entry lists the 2026 rate as 2.5%. The actual 2026 rent increase guideline (and therefore LMR deposit interest rate) is 2.1%, not 2.5%. Update the post draft and any N1 form content that references this figure before publish.
-
-- property-management-london-ontario.md — Add current 2026 local market data: vacancy rate ~4% (up from 2.9% in 2024, per CMHC Dec 2025 data), median 2-bedroom asking rent $1,925/mo (down 1.3% YoY per July 2026 Door Insight data). Note that London's softening market makes professional tenant placement and competitive pricing more important, not less — positions Prospera's services against the backdrop of current conditions.
-
-- rental-property-tax-deductions-ontario.md — Add section on T776 filing basics: what the form is, when it must be filed (even at a net loss), CCA decision (why many Ontario landlords skip CCA to avoid recapture at sale), and 2026 Ontario combined marginal rates on net rental income (20.05%–53.53% depending on total income). Links naturally to a future standalone T776 guide.
+- `how-much-rent-increase-allowed-ontario-2026.md` — Add a note that the 2027 guideline is 1.9% and link to the new 2027 post. Serves landlords who land on the 2026 post and need the next year's number.
