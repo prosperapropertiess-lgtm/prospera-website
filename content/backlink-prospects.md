@@ -2582,3 +2582,115 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: His July 2026 London Ontario market update (537 homes sold, $560K median) and First-Time Home Buyer Guide.
 - researcher_notes: Solo broker; direct outreach to Justin via email is the right play. Tone on his site is personable and community-focused. Short, direct email referencing a specific post will work well.
 ---
+
+## CLEO — Community Legal Education Ontario
+- url: https://www.cleo.on.ca
+- type: association
+- why: Province-wide Ontario non-profit with 50 years of plain-language legal guides on landlord and tenant law — a resource mention or guest piece from a London-area PM firm complements their self-help content for small landlords.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: info@cleo.on.ca
+- site_focus: Ontario non-profit providing plain-language legal information on housing law, landlord and tenant rights, rent increases, lease agreements, and LTB processes. Extensive publication library at cleo.on.ca plus the companion Steps to Justice Q&A site. Funded by Legal Aid Ontario and the Law Foundation of Ontario.
+- hook: Prospera handles the real-world LTB process that CLEO's guides walk landlords through on paper — a resource mention ("when to hire a property manager vs. represent yourself at the LTB") directly serves the small landlords reading their housing law section.
+- specific_content: Housing law publications section at cleo.on.ca/en/resources-and-publications/housing-law/ covering rent increases, rental agreements, eviction processes, and tenant rights.
+- researcher_notes: Non-profit organization; best outreach angle is a contributed educational resource or a "local professional" link rather than a sales pitch. Tone should be educational and public-interest-focused. Contact hours Mon–Fri 9am–5pm. Located at 180 Dundas St W, Toronto.
+---
+
+## Phil Bailey — London Ontario Real Estate Blog
+- url: https://philbailey.ca
+- type: blog
+- why: Local London Ontario Sales Rep and host of The London Ontario Real Estate Podcast, writing about investment property tips and market trends — a guest post on property management for first-time London investors fits his audience directly.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: (226) 977-2348 / contact form at philbailey.ca
+- site_focus: Sales Representative at HouseSigma Inc. Brokerage in London Ontario. Blog and podcast covering local market updates, investment property buying, first-time buyer guides, and neighbourhood tips for London, St. Thomas, Komoka, Kilworth, Thorndale, and Port Stanley. Active since at least 2022 with regular posts.
+- hook: Phil's investor readers who buy a London rental property immediately need a property manager — a guest post or podcast episode on what to expect from professional PM in London fills the post-purchase gap for his audience and gives Phil helpful content for his investor clients.
+- specific_content: Podcast Episode 21 "Tips for buying your first investment property in London Ontario" and blog posts on market updates (multiple offers, interest rate impacts) and neighbourhood guides.
+- researcher_notes: Personable and community-focused tone. Best approach: pitch a guest podcast episode specifically on property management for first-time investors. Can reach via (226) 977-2348 or philbailey.ca contact form. No public email found — phone or web form preferred.
+---
+
+## Steps to Justice — Ontario Legal Q&A Platform
+- url: https://stepstojustice.ca
+- type: association
+- why: CLEO-backed searchable Ontario legal Q&A site with detailed landlord/tenant topics used by thousands of Ontarians — a link from their "find professional help" or "hiring a property manager" content would drive targeted traffic.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: info@cleo.on.ca
+- site_focus: CLEO's companion searchable platform providing step-by-step Ontario legal guidance on housing law (evictions, rent increases, LTB processes), with practical tools, forms checklists, and referral information for legal and social services. Separate from cleo.on.ca but managed by the same organization.
+- hook: Steps to Justice readers are self-representing landlords learning their legal rights and looking for next steps — a "find a property manager" resource link or local professional mention moves them from self-help research to taking action.
+- specific_content: Housing law section covering LTB application processes, eviction steps, rent increase rules, and referral resources for landlords in Ontario.
+- researcher_notes: Same parent organization as CLEO (cleo.on.ca) — route outreach through info@cleo.on.ca mentioning both sites. Best angle: asking to be listed as a local professional resource under their referral/help section for southwestern Ontario landlords.
+---
+
+## Invest in Middlesex — Middlesex County Economic Development
+- url: https://www.investinmiddlesex.ca
+- type: directory
+- why: Middlesex County's official economic development resource listing businesses and investors in the region (including London and Strathroy) — Prospera's coverage of those exact markets is a natural fit for their business directory or investor resources section.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: Contact via investinmiddlesex.ca (Kelly Hunt — Marketing & Communications Officer; main line 519-434-7321)
+- site_focus: Middlesex County's official economic development website covering business attraction, investment opportunities, available properties, sectors (manufacturing, agrifood, tourism), and investor resources across all 8 municipalities including London and Strathroy. Run by the County's Economic Development and Tourism department.
+- hook: Prospera provides professional property management across Middlesex County's key rental markets (London, Strathroy) — a listing in their business directory or mention in their investor resources section directly serves property investors relocating to or investing in Middlesex.
+- specific_content: Property listings section (investinmiddlesex.ca/property-listing/) and investor resources for businesses and investors setting up in Middlesex County.
+- researcher_notes: Government-adjacent economic development organization at the county level. Contact Kelly Hunt (Marketing and Communications Officer) or use the general economic development team contact. Pitch angle: local professional services resource for real estate investors moving to or buying in Middlesex County. Address: 399 Ridout Street North, London ON N6A 2P1.
+---
+
+## Ideal Toronto Condos — Ontario Investor Blog
+- url: https://idealtorontocondos.com
+- type: blog
+- why: Ontario property investor blog with posts specifically on LTB challenges and the investor reality in Ontario — a guest article or resource mention from a southwestern Ontario PM firm adds geographic breadth to their content.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: (contact via idealtorontocondos.com contact page; no direct email confirmed)
+- site_focus: Ontario real estate brokerage (iDEALtoronto) offering property management, buying, selling, and leasing services with an active blog covering condo investment, Ontario investor challenges, LTB delays, and financing pressures. Blog contributors include Rod Limoochi.
+- hook: Prospera's on-the-ground southwestern Ontario perspective on the challenges their blog describes (LTB delays, documentation, vacancy management, financing) would make a strong guest article adding regional depth beyond their Toronto focus.
+- specific_content: July 2026 post "How Ontario Landlords Lose Tens of Thousands of Dollars: The New Investor Reality in Ontario 2026" by Rod Limoochi — directly covers LTB delays and documentation failures that Prospera solves for its clients.
+- researcher_notes: Toronto-based brokerage blog. Note: they also offer property management services, so position Prospera as complementary (southwestern Ontario coverage) rather than competitive. Pitch via website contact form referencing their investor reality post specifically.
+---
+
+## LawyerInfo.ca — London Ontario Legal Guides
+- url: https://lawyerinfo.ca
+- type: other
+- why: Publishes city-specific Ontario legal information including a dedicated page on eviction legal fees in London Ontario — linking to Prospera's eviction process and LTB guides would complement their cost-focused content.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: (contact via lawyerinfo.ca; no public email confirmed)
+- site_focus: City-specific Canadian legal information guide with detailed pages about eviction processes, legal fees, and property law in London Ontario. Multiple London-specific guides covering LTB enforcement, paralegal costs ($800–$1,500 for evictions), N12 personal use rules, and Sheriff enforcement of LTB orders.
+- hook: LawyerInfo's London Ontario eviction cost guides are exactly what landlords read before deciding to hire help — a "find a local property manager" resource link from those pages would convert researching landlords into Prospera leads at the moment of peak intent.
+- specific_content: London Ontario eviction guides at lawyerinfo.ca/guides/ontario/london/ — specifically "How much are the legal fees to evict a tenant in London" and "How to enforce an LTB eviction order using the Sheriff in London" and "What are the legal rules for evicting a tenant for personal use in London."
+- researcher_notes: Information website, not a law firm. A link exchange or resource mention is the right ask — position Prospera's blog posts as complementary detailed resources. Strong local content alignment with our eviction process guides. Contact via website contact form.
+---
+
+## The London Ontario Real Estate Podcast
+- url: https://thelondonontariorealestatepodcast.buzzsprout.com
+- type: other
+- why: Podcast with 25+ episodes about buying, investing, and managing property in London Ontario — a guest interview episode on professional property management would earn a backlink from the show notes page.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: (226) 977-2348 / philbailey.ca contact form (same person as Phil Bailey blog prospect)
+- site_focus: Podcast hosted by Phil Bailey (Sales Rep, HouseSigma Inc. Brokerage London). 25+ episodes covering London Ontario real estate market updates, investment property tips, multiple offer strategies, and professional interviews with local mortgage brokers, insurance agents, and real estate professionals serving London buyers and investors.
+- hook: The podcast has featured mortgage brokers, insurance agents, and pest control professionals as guests — a "property management" episode with Ebin would fill a clear content gap while earning a backlink from the episode's show notes page on Buzzsprout and philbailey.ca.
+- specific_content: Episode 21 on "Tips for buying your first investment property in London Ontario" and recent episodes on insurance for home buyers (indicating appetite for professional interviews) and London Ontario market updates.
+- researcher_notes: Same contact as Phil Bailey blog (philbailey.ca). Recommend pitching the podcast guest appearance specifically — it's a higher-value ask than a blog post but more natural for this host. Mention Episode 21 as evidence of his investor content. Phone: (226) 977-2348.
+---
+
+## CLEO Connect — Community Legal Resource Platform
+- url: https://cleoconnect.ca
+- type: association
+- why: Platform used by frontline community workers across Ontario to access and share legal education resources including landlord/tenant information — getting Prospera referenced as a local professional resource would reach housing workers who refer clients.
+- researched: true
+- drafted: true
+- added: 2026-10-04
+- contact_email: info@cleo.on.ca
+- site_focus: CLEO's dedicated platform for frontline community workers (social workers, legal clinic staff, settlement workers) providing training, tools, webinars, and resources to help their clients with legal problems including housing and landlord/tenant issues. Free training and ESL resources for teachers also available.
+- hook: Community workers who support tenants also work with small landlords looking for referrals — getting Prospera listed as a London/southwestern Ontario professional property management resource in their training materials or resources directory would reach a professional referral network that handles housing cases.
+- specific_content: CLEO launched CLEOConnect with dedicated training and tools for community workers, including housing law resources and landlord/tenant guides relevant to their client populations.
+- researcher_notes: Same parent organization as CLEO (cleo.on.ca) — all contact routes through info@cleo.on.ca at 416-408-4420. Best angle: asking to be listed in their local professional resources section for community workers in southwestern Ontario who refer clients to housing professionals. Coordinate CLEO and CLEOConnect outreach in one email.
+---

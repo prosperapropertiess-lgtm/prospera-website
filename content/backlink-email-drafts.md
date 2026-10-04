@@ -3388,3 +3388,159 @@ Prospera Properties
 (519) 697-1227
 prosperaproperties.co
 ---
+
+## CLEO — Community Legal Education Ontario — 2026-10-04
+To: info@cleo.on.ca
+Subject: Local property management resource for your housing law readers
+
+Hi CLEO team,
+
+I came across your housing law publications section — the rent increase and LTB application guides are genuinely useful for small landlords navigating Ontario tenancy law.
+
+I run Prospera Properties, a property management company serving landlords in London, St. Thomas, and Strathroy, Ontario. We handle LTB filings, eviction proceedings, and lease compliance on behalf of small landlords who've often turned to resources like yours first.
+
+I'd like to explore whether Prospera could be listed as a local professional resource for southwestern Ontario landlords who need hands-on help beyond self-help guides. Happy to contribute a short article on "when to hire a property manager vs. handle the LTB yourself" if that would serve your readers.
+
+Would you be open to a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Phil Bailey — London Ontario Real Estate Blog — 2026-10-04
+To: (via philbailey.ca contact form / (226) 977-2348)
+Subject: Guest episode idea — property management for first-time London investors
+
+Hi Phil,
+
+I listened to your Episode 21 on buying your first investment property in London — great practical breakdown for new investors in the market.
+
+I'm Ebin Jaison, I run Prospera Properties, a property management company based in London serving landlords across London, St. Thomas, and Strathroy. A lot of first-time investors we work with found a property first and figured out management second — which is exactly the gap your episode sets up.
+
+Would you be open to having me on the podcast to walk through what property management actually looks like for a London investor in 2026 — LTB timelines, tenant screening, what to expect in year one?
+
+Happy to chat by phone first if that's easier.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Steps to Justice — Ontario Legal Q&A Platform — 2026-10-04
+To: info@cleo.on.ca
+Subject: Local professional resource for southwestern Ontario landlords
+
+Hi CLEO/Steps to Justice team,
+
+I've been impressed by how thoroughly Steps to Justice covers the practical steps for Ontario landlords — the eviction process guides and LTB application walkthroughs are exactly what small landlords need.
+
+I'm Ebin Jaison, owner of Prospera Properties, a professional property management company in London, St. Thomas, and Strathroy, Ontario. Many of our clients found us after working through the LTB process themselves once and deciding they needed professional help.
+
+I'd love to explore whether Prospera could be listed as a local professional resource under your referral or "find help" sections for landlords in southwestern Ontario who need hands-on support beyond self-service guides.
+
+Let me know if that's something worth discussing.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Invest in Middlesex — Middlesex County Economic Development — 2026-10-04
+To: (via investinmiddlesex.ca contact form — Kelly Hunt, Marketing & Communications)
+Subject: Prospera Properties — property management resource for Middlesex County investors
+
+Hi,
+
+I was exploring the Invest in Middlesex site and noticed the resources available for businesses and investors in the county — impressive range of information for anyone looking at Middlesex.
+
+I'm Ebin Jaison, owner of Prospera Properties. We provide professional property management services for landlords and rental property investors across Middlesex County — specifically London, Strathroy, and St. Thomas. We work with investors at every stage, from preparing a unit for rental to handling the LTB if needed.
+
+I'd like to explore whether Prospera could be listed in your business directory or investor resources section as a professional services provider for property investors in the region.
+
+Happy to provide more details about our services or connect with the right person on your team.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Ideal Toronto Condos — Ontario Investor Blog — 2026-10-04
+To: (via idealtorontocondos.com contact form)
+Subject: Guest post — southwestern Ontario take on the landlord reality you wrote about
+
+Hi,
+
+I read Rod's post on how Ontario landlords are losing money in 2026 — the section on LTB delays and documentation failures matched almost exactly what I see with new clients in London.
+
+I'm Ebin Jaison, owner of Prospera Properties, a property management company in London, St. Thomas, and Strathroy, Ontario. We handle LTB filings, tenant screening, and day-to-day management for landlords who want to stop losing money on the issues your post describes.
+
+I'd be happy to contribute a guest post offering a southwestern Ontario landlord's perspective on the same challenges — market-specific numbers, real LTB timelines from London, and what actually works. Would add geographic depth to your Ontario investor content.
+
+Interested?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## LawyerInfo.ca — London Ontario Legal Guides — 2026-10-04
+To: (via lawyerinfo.ca contact form)
+Subject: Resource link suggestion for your London Ontario eviction guides
+
+Hi,
+
+I came across your London Ontario eviction guides — the pages on legal fees and Sheriff enforcement are exactly what London landlords search for before deciding whether to hire help.
+
+I'm Ebin Jaison, owner of Prospera Properties, a property management company based in London. We handle LTB filings and eviction proceedings for landlords across London, St. Thomas, and Strathroy, and I've published detailed guides on these same topics on our site.
+
+Would you be open to adding a resource link to Prospera's eviction process guides from your London Ontario pages? I'm happy to link back to your guides as well. Our readers and yours are the same people at different stages of the same decision.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## The London Ontario Real Estate Podcast — 2026-10-04
+To: (via philbailey.ca contact form / (226) 977-2348)
+Subject: Property management episode — guest pitch for the podcast
+
+Hi Phil,
+
+Your podcast is a great resource for London investors — Episode 21 on buying a first investment property stands out as exactly the kind of practical content local buyers need.
+
+I'm Ebin Jaison, I run Prospera Properties, a property management company serving landlords in London, St. Thomas, and Strathroy. You've had mortgage brokers and insurance professionals on the show — property management is the natural next step in that investor journey, and I think a candid conversation about what landlords should actually expect (LTB timelines, tenant screening, year-one surprises) would resonate with your audience.
+
+Would you be open to a short episode on property management for London investors?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## CLEO Connect — Community Legal Resource Platform — 2026-10-04
+To: info@cleo.on.ca
+Subject: Local property management resource for community workers in southwestern Ontario
+
+Hi CLEO Connect team,
+
+I found CLEOConnect while researching resources for Ontario landlords and community workers dealing with housing issues — the platform looks genuinely useful for frontline workers navigating tenant and landlord situations.
+
+I'm Ebin Jaison, owner of Prospera Properties, a professional property management company serving London, St. Thomas, and Strathroy, Ontario. Community workers in our area often connect small landlords with professional help when LTB issues become too complex to manage alone.
+
+I'd like to explore whether Prospera could be listed as a local professional resource for community workers in southwestern Ontario who need to refer landlords to qualified property management help.
+
+Happy to provide more details or connect with whoever manages your resources directory.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
