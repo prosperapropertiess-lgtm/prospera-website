@@ -91,7 +91,7 @@ export default async function AdminMessagesPage() {
         </div>
 
         <p style={{ marginTop: "24px", fontSize: "12px", color: "#C8BFB5" }}>
-          Messages are visible to the owner immediately. Email notifications are sent to the owner on their reply; Ebin gets a copy when owners write back.
+          Messages are visible to the owner immediately. Email notifications are sent to the owner on their reply; the Prospera team gets a copy when owners write back.
         </p>
       </div>
     </div>

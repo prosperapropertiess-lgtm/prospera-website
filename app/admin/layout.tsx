@@ -4,7 +4,10 @@ import React from "react";
 import { Poppins } from "next/font/google";
 import AdminTopBar from "./AdminTopBar";
 
-export const metadata: Metadata = { robots: { index: false, follow: false } };
+// Fallback title for any admin route without its own more specific
+// layout.tsx (e.g. the homepage, and deep dynamic detail pages that
+// inherit their section's title rather than needing their own).
+export const metadata: Metadata = { title: "Prospera Admin", robots: { index: false, follow: false } };
 
 const poppins = Poppins({
   variable: "--font-poppins",

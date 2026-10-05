@@ -46,7 +46,7 @@ export default function AdminHome() {
     <div style={{ minHeight: "calc(100vh - 60px)", backgroundColor: "#F7F5F2", fontFamily: "var(--font-poppins, sans-serif)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 60px" }}>
         <div style={{ marginBottom: 40 }}>
-          <h1 style={{ fontSize: 30, fontWeight: 700, color: NAVY, margin: 0, letterSpacing: "-0.02em" }}>Good day, Ebin</h1>
+          <h1 style={{ fontSize: 30, fontWeight: 700, color: NAVY, margin: 0, letterSpacing: "-0.02em" }}>Good day</h1>
           <p style={{ fontSize: 15, color: "#666666", margin: "5px 0 0" }}>{today}</p>
         </div>
 

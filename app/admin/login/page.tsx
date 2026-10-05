@@ -55,11 +55,14 @@ export default function AdminLogin() {
       style={{ backgroundColor: "#F7F5F2", fontFamily: "var(--font-dm-sans, sans-serif)" }}
       onClick={() => hiddenInputRef.current?.focus()}
     >
-      {/* Invisible input to capture a physical keyboard */}
+      {/* Invisible input to capture a physical keyboard. inputMode="none"
+          tells the browser not to raise the on-screen keyboard for it —
+          the custom numeric keypad below is the touch input; this is only
+          for a physical/external keyboard, which still types into it fine. */}
       <input
         ref={hiddenInputRef}
         type="tel"
-        inputMode="numeric"
+        inputMode="none"
         value={pin}
         onChange={(e) => {
           const digits = e.target.value.replace(/\D/g, "").slice(0, PIN_LENGTH);
