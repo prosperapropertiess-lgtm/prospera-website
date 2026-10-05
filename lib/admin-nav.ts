@@ -17,6 +17,7 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/agents", name: "Agents", icon: "support_agent" },
   { href: "/admin/invite", name: "Invite an Agent", icon: "person_add" },
   { href: "/admin/leads", name: "Leads", icon: "person_search" },
+  { href: "/admin/rental-profiles", name: "Renter Profiles", icon: "groups" },
   { href: "/admin/dashboard", name: "Outreach", icon: "campaign" },
   { href: "/admin/intelligence", name: "Rent Prices", icon: "payments" },
   { href: "/admin/seo", name: "Search Rankings", icon: "query_stats" },
