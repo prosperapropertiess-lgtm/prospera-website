@@ -41,7 +41,7 @@ export function ProgressBar({ pct, label }: Props) {
         <motion.div
           initial={false}
           animate={{ left: `${pct}%` }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           style={{
             position: "absolute",
             top: "50%",
@@ -49,15 +49,29 @@ export function ProgressBar({ pct, label }: Props) {
             marginLeft: -15,
             width: 30,
             height: 30,
-            borderRadius: "50%",
-            backgroundColor: BURGUNDY,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 2px 8px rgba(139,32,48,0.35)",
           }}
         >
-          <Home size={15} color="#FFFFFF" strokeWidth={2.5} />
+          {/* Keyed by pct so this remounts and re-bounces on every step
+              advance, per spec's "tiny bounce on completion" — travels
+              alongside the smooth left-position glide above it. */}
+          <motion.div
+            key={pct}
+            initial={{ scale: 0.6 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 420, damping: 12 }}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              backgroundColor: BURGUNDY,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 8px rgba(139,32,48,0.35)",
+            }}
+          >
+            <Home size={15} color="#FFFFFF" strokeWidth={2.5} />
+          </motion.div>
         </motion.div>
       </div>
     </div>
