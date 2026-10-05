@@ -158,7 +158,7 @@ export default function RentalProfilesPage() {
         <div style={{ marginBottom: 32 }}>
           <h1 style={{ fontSize: 26, fontWeight: 700, color: NAVY, margin: 0, letterSpacing: "-0.02em" }}>Renter Profiles</h1>
           <p style={{ fontSize: 14, color: TEXT_SEC, margin: "4px 0 0" }}>
-            Everyone who's started a rental match at /rent — not just the ones who finish.
+            Everyone who&apos;s started a rental match at /rent — not just the ones who finish.
           </p>
         </div>
 

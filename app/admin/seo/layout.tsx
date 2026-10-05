@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-export const metadata: Metadata = { title: "Search Rankings — Prospera" };
+export const metadata: Metadata = { title: { absolute: "Search Rankings — Prospera" } };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return <>{children}</>;

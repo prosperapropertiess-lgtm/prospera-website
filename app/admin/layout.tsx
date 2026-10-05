@@ -7,7 +7,7 @@ import AdminTopBar from "./AdminTopBar";
 // Fallback title for any admin route without its own more specific
 // layout.tsx (e.g. the homepage, and deep dynamic detail pages that
 // inherit their section's title rather than needing their own).
-export const metadata: Metadata = { title: "Prospera Admin", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: { absolute: "Prospera Admin" }, robots: { index: false, follow: false } };
 
 const poppins = Poppins({
   variable: "--font-poppins",

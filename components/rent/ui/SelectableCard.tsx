@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { NAVY, BURGUNDY, BG, WHITE, BORDER, SUBTLE, BODY_FONT } from "../tokens";
+import { NAVY, BURGUNDY, WHITE, BORDER, BODY_FONT } from "../tokens";
 
 interface Props {
   label: string;
