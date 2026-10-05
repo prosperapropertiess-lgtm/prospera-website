@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Landing } from "@/components/rent/Landing";
@@ -23,7 +23,7 @@ import { ContactStep } from "@/components/rent/steps/ContactStep";
 import { NotesStep } from "@/components/rent/steps/NotesStep";
 import type { StepProps } from "@/components/rent/steps/types";
 import type { RentalProfileDraft } from "@/lib/rent/types";
-import { loadDraft, saveDraft, loadStepIndex, saveStepIndex, clearDraft } from "@/lib/rent/storage";
+import { loadDraft, saveDraft, loadStepIndex, saveStepIndex, clearDraft, getSessionId } from "@/lib/rent/storage";
 import { trackRentEvent } from "@/lib/rent/analytics";
 
 const STEPS: ComponentType<StepProps>[] = [
@@ -44,6 +44,11 @@ const STEPS: ComponentType<StepProps>[] = [
   SearchIntensityStep,
   ContactStep,
 ];
+const STEP_NAMES = [
+  "move_timing", "household_type", "household_size", "location", "property_type",
+  "bedrooms", "bathrooms", "budget", "parking", "pets", "must_haves",
+  "deal_breakers", "proximity", "current_situation", "search_intensity", "contact",
+];
 // NotesStep renders separately below — it needs submitting/submitError,
 // which the shared StepProps contract above doesn't carry.
 const TOTAL_UNITS = STEPS.length + 1; // +1 for the notes/submit step
@@ -57,6 +62,7 @@ export function RentFlow() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [sessionId, setSessionId] = useState("");
 
   // Resume a saved-in-progress profile after mount (localStorage isn't
   // available during SSR, so the very first render always matches the
@@ -64,6 +70,7 @@ export function RentFlow() {
   useEffect(() => {
     const savedDraft = loadDraft();
     const savedStep = loadStepIndex();
+    setSessionId(getSessionId());
     if (Object.keys(savedDraft).length > 0) {
       setDraft(savedDraft);
       setStepIndex(Math.min(savedStep, STEPS.length));
@@ -91,6 +98,49 @@ export function RentFlow() {
 
   const pct = useMemo(() => Math.min(100, ((stepIndex + 1) / TOTAL_UNITS) * 100), [stepIndex]);
 
+  // Kept in sync so the pagehide listener below (added once, on mount)
+  // always sees the latest answers rather than a stale mount-time closure.
+  const draftRef = useRef(draft);
+  const sessionIdRef = useRef(sessionId);
+  useEffect(() => { draftRef.current = draft; }, [draft]);
+  useEffect(() => { sessionIdRef.current = sessionId; }, [sessionId]);
+
+  // The real point of this table (per Ebin): every enquiry gets kept, not
+  // just the one that converts. This fires on every step advance (so
+  // progress is captured incrementally, not just at the very end) — silent,
+  // fire-and-forget, never blocks the UI waiting on a response.
+  function saveProgress(stepName: string) {
+    if (!sessionId) return;
+    fetch("/api/rent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...draft, sessionId, lastStep: stepName, completed: false }),
+      keepalive: true,
+    }).catch(() => {
+      // Best-effort — losing one progress ping isn't worth surfacing to
+      // the visitor, the next step advance will try again.
+    });
+  }
+
+  // Safety net for someone who answers a question but closes the tab
+  // before ever tapping to the next step — sendBeacon survives page
+  // teardown in a way a normal fetch() doesn't.
+  useEffect(() => {
+    function onHide() {
+      const d = draftRef.current;
+      const sid = sessionIdRef.current;
+      if (!sid || Object.keys(d).length === 0) return;
+      try {
+        const blob = new Blob([JSON.stringify({ ...d, sessionId: sid, completed: false })], { type: "application/json" });
+        navigator.sendBeacon("/api/rent", blob);
+      } catch {
+        // ignore
+      }
+    }
+    document.addEventListener("pagehide", onHide);
+    return () => document.removeEventListener("pagehide", onHide);
+  }, []);
+
   function begin() {
     setPhase("step");
     setStepIndex(0);
@@ -100,6 +150,7 @@ export function RentFlow() {
 
   function goNext() {
     trackRentEvent("rent_step_completed", { step: stepIndex });
+    saveProgress(STEP_NAMES[stepIndex] ?? String(stepIndex));
     const next = stepIndex + 1;
     setStepIndex(next);
     saveStepIndex(next);
@@ -122,7 +173,7 @@ export function RentFlow() {
       const res = await fetch("/api/rent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
+        body: JSON.stringify({ ...draft, sessionId, lastStep: "notes", completed: true }),
       });
       const data = await res.json();
       if (!res.ok) {
