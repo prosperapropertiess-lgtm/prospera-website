@@ -2663,3 +2663,103 @@ export function moveInReviewRequestEmail(
   `);
   return { subject: "How did we do?", html };
 }
+
+// ── /rent — RENTAL MATCHING PROFILE ──────────────────────────
+
+export function rentalProfileConfirmationEmail(firstName: string): string {
+  return wrapper(`
+    ${heroCard(`You're on the list, ${firstName || "there"}.`, `We'll use what you told us to send you rentals that actually fit.`)}
+    <p style="margin:0 0 20px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      No endless scrolling, no repeating yourself to twenty landlords — as soon as something in London matches
+      what you're looking for, you'll hear from us first.
+    </p>
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Plans change — if what you're looking for shifts, just fill out the form again and we'll update your profile.
+    </p>
+    ${cta("See Current Rentals", `${BASE_URL}/listings`)}
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
+export function rentalProfileNotificationEmail({
+  profileId,
+  leadScore,
+  profile,
+}: {
+  profileId: string;
+  leadScore: string;
+  profile: Record<string, unknown>;
+}): string {
+  const p = profile;
+
+  function row(label: string, value: unknown): string {
+    if (value === null || value === undefined || value === "" || (Array.isArray(value) && value.length === 0)) return "";
+    const display = Array.isArray(value) ? value.join(", ") : String(value);
+    return `<tr>
+      <td style="padding:6px 16px 6px 0;font-size:13px;color:${MUTED};white-space:nowrap;vertical-align:top;font-family:${FONT};">${label}</td>
+      <td style="padding:6px 0;font-size:13px;color:${TEXT};font-weight:600;font-family:${FONT};">${display}</td>
+    </tr>`;
+  }
+
+  function section(title: string, rows: string): string {
+    const content = rows.replace(/\n/g, "").trim();
+    if (!content) return "";
+    return `
+      <p style="margin:24px 0 8px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};font-family:${FONT};">${title}</p>
+      <table cellpadding="0" cellspacing="0" role="presentation" style="width:100%;margin-bottom:4px;">${content}</table>
+    `;
+  }
+
+  const scoreColor = leadScore === "hot" ? "#B91C1C" : leadScore === "warm" ? "#B45309" : MUTED;
+
+  return wrapper(`
+    <p style="margin:0 0 4px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">New Rental Profile</p>
+    <p style="margin:0 0 28px;font-size:13px;color:${MUTED};font-family:${FONT};">
+      ID: ${profileId} &middot; <span style="color:${scoreColor};font-weight:700;text-transform:uppercase;">${leadScore}</span>
+    </p>
+
+    ${section("Contact", `
+      ${row("Name", `${p.first_name ?? ""} ${p.last_name ?? ""}`.trim() || "Not given")}
+      ${row("Email", p.email)}
+      ${row("Phone", p.phone || "Not given")}
+    `)}
+
+    ${section("Household", `
+      ${row("Move timing", p.move_timing)}
+      ${row("Household", p.household_type)}
+      ${row("Size", p.household_size)}
+      ${row("Children", p.children_present ? (p.children_count || "Yes") : null)}
+    `)}
+
+    ${section("What they want", `
+      ${row("Areas", p.preferred_areas)}
+      ${row("Other location", p.other_location)}
+      ${row("Property type", p.property_types)}
+      ${row("Bedrooms", p.bedrooms)}
+      ${row("Bathrooms", p.bathrooms)}
+      ${row("Budget", p.budget_range)}
+      ${row("Max budget", p.max_budget ? `$${Number(p.max_budget).toLocaleString()}/mo` : null)}
+    `)}
+
+    ${section("Details", `
+      ${row("Parking", p.parking)}
+      ${row("Pets", p.pets)}
+      ${row("Pet note", p.pets_note)}
+      ${row("Top priorities", p.top_priorities)}
+      ${row("Must-haves", p.must_haves)}
+      ${row("Deal-breakers", p.deal_breakers)}
+      ${row("Wants to be near", p.proximity_preferences)}
+      ${row("Proximity detail", p.proximity_detail)}
+    `)}
+
+    ${section("Context", `
+      ${row("Current situation", p.current_situation)}
+      ${row("Search intensity", p.search_intensity)}
+      ${row("Notes", p.notes)}
+    `)}
+
+    ${divider()}
+    <p style="margin:0;font-size:13px;color:${MUTED};font-family:${FONT};">Source: ${p.source ?? "/rent"}</p>
+  `);
+}
