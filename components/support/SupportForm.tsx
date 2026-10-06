@@ -17,6 +17,7 @@ export default function SupportForm() {
   const [topic, setTopic] = useState(TOPICS[0]);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [website, setWebsite] = useState(""); // honeypot — real visitors never see or fill this
 
   const inputStyle = {
     backgroundColor: "#F7F5F2",
@@ -39,6 +40,7 @@ export default function SupportForm() {
           property: property || null,
           type: "app_support",
           message: `Topic: ${topic}\n\n${message}`,
+          website,
         }),
       });
       setStatus(res.ok ? "success" : "error");
@@ -65,6 +67,18 @@ export default function SupportForm() {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white border rounded-2xl p-7 sm:p-8" style={{ borderColor: "#D8D2C8", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+      {/* Honeypot — off-screen, never focusable/visible to a real person;
+          a bot that blindly fills every input on the page trips it. */}
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-xs uppercase tracking-widest font-semibold mb-2" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>

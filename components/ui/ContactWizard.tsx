@@ -23,6 +23,7 @@ interface WizardData {
   name: string;
   phone: string;
   email: string;
+  website: string; // honeypot — real visitors never see or fill this
 }
 
 const INITIAL: WizardData = {
@@ -39,6 +40,7 @@ const INITIAL: WizardData = {
   name: "",
   phone: "",
   email: "",
+  website: "",
 };
 
 const HELP_LABELS = [
@@ -185,6 +187,7 @@ export default function ContactWizard() {
           property: data.address,
           message,
           traffic_source: trafficSource,
+          website: data.website,
         }),
       });
       setStatus(res.ok ? "success" : "error");
@@ -274,6 +277,18 @@ export default function ContactWizard() {
       className="rounded-2xl border overflow-hidden"
       style={{ backgroundColor: "#FFFFFF", borderColor: "#D8D2C8", boxShadow: "0 2px 16px rgba(0,0,0,0.07)" }}
     >
+      {/* Honeypot — off-screen, never visible/focusable to a real person;
+          a bot that blindly fills every input on the page trips it. */}
+      <input
+        type="text"
+        name="website"
+        value={data.website}
+        onChange={(e) => setData({ ...data, website: e.target.value })}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       {/* Progress */}
       <div style={{ backgroundColor: "#F7F5F2", padding: "16px 28px 0" }}>
         <div className="flex items-center justify-between mb-2">

@@ -7,12 +7,57 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function getClientIp(req: NextRequest): string | null {
+  // Vercel sets x-forwarded-for; first entry is the real client.
+  const fwd = req.headers.get("x-forwarded-for");
+  if (fwd) return fwd.split(",")[0].trim();
+  return req.headers.get("x-real-ip");
+}
+
+// Real human names are never literally "n/a", "na", "test", etc. — this
+// exact pattern showed up in a real spam wave hitting this route directly
+// (bypassing the rendered forms, which all require a real name client-side).
+const BOT_NAME_PATTERN = /^(n\/?a|test|asdf+|none|null|undefined|xxx+)$/i;
+
+const FAKE_SUCCESS = NextResponse.json({ success: true }, { status: 200 });
+
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone, city, message, type, property, traffic_source } = await req.json();
+    const body = await req.json();
+    const { name, email, phone, city, message, type, property, traffic_source, website } = body;
+
+    // Honeypot — a field no real visitor sees or fills (not rendered in the
+    // real forms' visible UI), so a non-empty value only ever comes from a
+    // bot that blindly fills every field it finds, including hidden ones.
+    if (website) {
+      return FAKE_SUCCESS;
+    }
 
     if (!email || !email.includes("@") || !name || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    // Known bot-submitted name pattern — silently swallow rather than
+    // reject, so an automated sender doesn't get a clear "blocked" signal
+    // to adapt against.
+    if (BOT_NAME_PATTERN.test(String(name).trim())) {
+      return FAKE_SUCCESS;
+    }
+
+    const ip = getClientIp(req);
+
+    // IP rate limit: a real visitor submits this form once, maybe twice.
+    // More than 3 from the same IP in an hour is a bot, not an eager lead.
+    if (ip) {
+      const since = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+      const { count } = await supabase
+        .from("leads")
+        .select("id", { count: "exact", head: true })
+        .eq("ip_address", ip)
+        .gte("created_at", since);
+      if ((count ?? 0) >= 3) {
+        return FAKE_SUCCESS;
+      }
     }
 
     const { error } = await supabase.from("leads").insert([
@@ -25,6 +70,7 @@ export async function POST(req: NextRequest) {
         type: type || "other",
         property: property || null,
         source: traffic_source ?? "direct",
+        ip_address: ip,
       },
     ]);
 
