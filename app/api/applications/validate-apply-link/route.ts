@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
       .maybeSingle(),
     supabaseAdmin
       .from("properties")
-      .select("id, address, city, price, beds, baths, sqft")
+      .select("id, address, city, price, bedrooms, bathrooms, sqft")
       .eq("id", propertyId)
       .eq("is_managed", true)
       .eq("available", true)
