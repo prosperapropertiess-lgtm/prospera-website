@@ -35,7 +35,11 @@ function buildChecklist(property: PropertyRecord): FeatureCheck[] {
   const ud = (raw.utilities_detail as Record<string, { included?: boolean }> | null) ?? {};
   const utilsList = (raw.utilities_list as string[] | null) ?? [];
   const appliances = (raw.appliances as string[] | null) ?? [];
-  const laundryType = raw.laundry_type as string | null;
+  // Normalize "in-unit" vs "in_unit" — the upload wizard saves hyphenated
+  // values (laundry_type: "in-unit" / "coin-op"), but this was being compared
+  // against underscored strings, so in-unit laundry never matched and always
+  // showed as "Not Included" even when the owner set it correctly.
+  const laundryType = ((raw.laundry_type as string | null) ?? "").replace(/_/g, "-");
   const outdoorSpace = (raw.outdoor_space as string | null)?.toLowerCase() ?? "";
 
   const hasUtil = (key: string, aliases: string[]) =>
@@ -47,8 +51,8 @@ function buildChecklist(property: PropertyRecord): FeatureCheck[] {
     { label: "Water",            test: hasUtil("water", ["water"]),                                     alwaysShow: true  },
     { label: "Internet",         test: hasUtil("internet", ["internet", "wifi"]),                       alwaysShow: false },
     { label: "Air Conditioning", test: !!(raw.ac),                                                      alwaysShow: true  },
-    { label: "In-Unit Laundry",  test: laundryType === "in_unit",                                      alwaysShow: true  },
-    { label: "Shared Laundry",   test: laundryType === "shared",                                       alwaysShow: false },
+    { label: "In-Unit Laundry",  test: laundryType === "in-unit",                                      alwaysShow: true  },
+    { label: "Shared Laundry",   test: laundryType === "shared" || laundryType === "coin-op",          alwaysShow: false },
     { label: "Parking",          test: !!(property.parking),                                            alwaysShow: true  },
     { label: "Dishwasher",       test: appliances.map(a => a.toLowerCase()).includes("dishwasher"),     alwaysShow: true  },
     { label: "Fridge",           test: appliances.map(a => a.toLowerCase()).some(a => a.includes("fridge") || a.includes("refrigerator")), alwaysShow: false },

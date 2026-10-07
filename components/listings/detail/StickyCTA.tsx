@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { PropertyRecord } from "./ListingPage";
 import BookViewingButton from "./BookViewingButton";
+import ApplyButton from "./ApplyButton";
 
 interface Props {
   property: PropertyRecord;
@@ -52,7 +53,10 @@ export default function StickyCTA({ property }: Props) {
                 {property.bedrooms}bd · {property.bathrooms}ba
               </p>
             </div>
-            <BookViewingButton property={property} variant="primary" label="Book a Viewing" className="!px-4 !py-2.5" />
+            <div className="flex items-center gap-2 shrink-0">
+              <ApplyButton property={property} variant="primary" label="Apply" className="!px-4 !py-2.5" />
+              <BookViewingButton property={property} variant="outline-light" label="View" className="!px-4 !py-2.5" />
+            </div>
           </div>
 
           {/* Desktop layout */}
@@ -67,7 +71,10 @@ export default function StickyCTA({ property }: Props) {
                 {property.city ? ` · ${property.city}` : ""}
               </p>
             </div>
-            <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+            <div className="flex items-center gap-3">
+              <ApplyButton property={property} variant="primary" label="Apply Now" />
+              <BookViewingButton property={property} variant="outline-light" label="Book a Viewing" />
+            </div>
           </div>
         </div>
       </div>

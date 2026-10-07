@@ -1,20 +1,25 @@
 
 import Link from "next/link";
+import { Clock, CreditCard, Phone, FileText } from "lucide-react";
 
 const BENEFITS = [
   {
+    icon: Clock,
     title: "24-Hour Response",
     desc: "Every maintenance request, every question, acknowledged within 24 hours. No voicemail black holes.",
   },
   {
+    icon: CreditCard,
     title: "Online Rent Payment",
     desc: "Pay rent from your phone. No cheques, no e-transfers, no chasing anyone.",
   },
   {
+    icon: Phone,
     title: "Direct Line to Ebin",
     desc: "You get a real person, not a ticket queue. Call or text (519) 697-1227 any time something comes up.",
   },
   {
+    icon: FileText,
     title: "Simple Lease Process",
     desc: "We walk you through the lease before you sign. No surprises, no fine print you weren't told about.",
   },
@@ -41,22 +46,25 @@ export default function ProspaBenefits() {
 
         {/* Responsive grid — 1 col mobile, 2 col desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          {BENEFITS.map((b, i) => (
-            <div
-              key={b.title}
-              className="rounded-xl p-6"
-              style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
-            >
-              <p
-                className="text-[10px] font-bold uppercase tracking-widest mb-2"
-                style={{ color: "rgba(250,248,245,0.35)", fontFamily: "var(--font-dm-sans)" }}
+          {BENEFITS.map((b) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={b.title}
+                className="rounded-xl p-6 transition-all duration-200 hover:-translate-y-0.5"
+                style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
               >
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="text-sm font-semibold mb-1.5" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{b.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>{b.desc}</p>
-            </div>
-          ))}
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
+                  style={{ backgroundColor: "rgba(139,32,48,0.15)" }}
+                >
+                  <Icon size={18} strokeWidth={1.75} style={{ color: "#FAF8F5" }} />
+                </div>
+                <h3 className="text-sm font-semibold mb-1.5" style={{ color: "#FAF8F5", fontFamily: "var(--font-dm-sans)" }}>{b.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,245,0.6)", fontFamily: "var(--font-dm-sans)" }}>{b.desc}</p>
+              </div>
+            );
+          })}
         </div>
 
         <div>

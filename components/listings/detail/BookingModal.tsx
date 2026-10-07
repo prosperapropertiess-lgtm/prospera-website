@@ -54,11 +54,14 @@ function isPast(date: Date, time: string): boolean {
 // the same fields that drive the "What's Included" section on the listing page.
 function getDealbreakerQuestions(property: PropertyRecord): DealbreakerQ[] {
   const raw = property as Record<string, unknown>;
-  const laundryType = raw.laundry_type as string | null;
+  // Normalize "in_unit" vs "in-unit" — laundry_type is saved hyphenated by the
+  // upload wizard ("in-unit" / "coin-op"), so comparing against underscored
+  // strings meant in-unit laundry properties always failed this check.
+  const laundryType = ((raw.laundry_type as string | null) ?? "").replace(/_/g, "-");
   const qs: DealbreakerQ[] = [];
 
-  if (laundryType && laundryType !== "in_unit") {
-    qs.push({ key: "laundry", question: laundryType === "shared" ? "This home has shared laundry, not in-unit. Is that OK?" : "This home doesn't have laundry on site. Is that OK?" });
+  if (laundryType && laundryType !== "in-unit") {
+    qs.push({ key: "laundry", question: laundryType === "shared" || laundryType === "coin-op" ? "This home has shared laundry, not in-unit. Is that OK?" : "This home doesn't have laundry on site. Is that OK?" });
   }
   if (property.parking === false) {
     qs.push({ key: "parking", question: "There's no dedicated parking here. Is that OK?" });

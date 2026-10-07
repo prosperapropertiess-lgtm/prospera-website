@@ -169,7 +169,7 @@ export default function PhotoGallery({ property }: Props) {
               style={{ opacity: safeIndex === i ? 1 : 0.45, outline: safeIndex === i ? "2px solid #1F2F3A" : "none" }}
               aria-label={`Photo ${i + 1}`}
             >
-              <Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" unoptimized />
+              <Image src={img} alt={`Thumbnail ${i + 1}`} fill sizes="96px" className="object-cover" loading="lazy" />
             </button>
           ))}
         </div>
@@ -199,8 +199,9 @@ export default function PhotoGallery({ property }: Props) {
               src={currentImage}
               alt={`Property photo ${safeIndex + 1}`}
               fill
+              sizes="(max-width: 896px) 100vw, 896px"
               className="object-contain"
-              unoptimized
+              quality={90}
             />
           </div>
 

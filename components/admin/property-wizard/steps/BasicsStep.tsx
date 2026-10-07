@@ -69,10 +69,11 @@ export default function BasicsStep({ data, onChange }: Props) {
         <Field label="Street Address" required>
           <AddressAutocomplete
             value={data.address}
-            onChange={(val) => onChange({ address: val })}
+            onChange={(val) => onChange({ address: val, address_confirmed: false })}
             onPlaceSelect={(place) => {
               const updates: Partial<WizardData> = {
                 address: place.street_address,
+                address_confirmed: true,
                 latitude: place.lat,
                 longitude: place.lng,
               };
@@ -84,8 +85,19 @@ export default function BasicsStep({ data, onChange }: Props) {
             }}
             placeholder="Start typing an address..."
             className={inputCls}
-            style={{ backgroundColor: INPUT_BG, color: TEXT, borderColor: BORDER, border: `1px solid ${BORDER}` }}
+            style={{
+              backgroundColor: INPUT_BG,
+              color: TEXT,
+              borderColor: !data.address_confirmed && data.address ? "#8B2030" : BORDER,
+              border: `1px solid ${!data.address_confirmed && data.address ? "#8B2030" : BORDER}`,
+            }}
           />
+          {!data.address_confirmed && data.address && (
+            <p className="text-xs mt-1.5" style={{ color: "#8B2030" }}>
+              ⚠ Not confirmed yet — pick the matching suggestion from the dropdown so the full address
+              (including the street type, e.g. &quot;St&quot; or &quot;Ave&quot;) actually gets saved.
+            </p>
+          )}
         </Field>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

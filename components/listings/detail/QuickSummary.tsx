@@ -1,10 +1,21 @@
 "use client";
 
+import { BedDouble, Bath, Maximize, Home } from "lucide-react";
 import BookViewingButton from "./BookViewingButton";
+import ApplyButton from "./ApplyButton";
 import type { PropertyRecord } from "./ListingPage";
 
 interface Props {
   property: PropertyRecord;
+}
+
+// One honest line next to the rent number — never invent a claim the data
+// doesn't support. Only speak when we actually know the utilities situation.
+function rentClarityLine(property: PropertyRecord): string | null {
+  if (property.utilities_included) return "Utilities included";
+  const tenantUtils = property.utilities_tenant_paid ?? [];
+  if (tenantUtils.length > 0) return "+ utilities";
+  return null;
 }
 
 function formatAvailableDate(dateStr: string): string {
@@ -60,15 +71,38 @@ const CHIP_STYLES: Record<Chip["style"], React.CSSProperties> = {
   },
 };
 
+interface StatItem {
+  icon: typeof BedDouble;
+  value: string;
+  label: string;
+}
+
 export default function QuickSummary({ property }: Props) {
-  const stats = [
-    property.bedrooms  != null && `${property.bedrooms} ${property.bedrooms === 1 ? "Bed" : "Beds"}`,
-    property.bathrooms != null && `${property.bathrooms} ${property.bathrooms === 1 ? "Bath" : "Baths"}`,
-    property.sqft               && `${property.sqft.toLocaleString()} sqft`,
-    property.property_type      && property.property_type.charAt(0).toUpperCase() + property.property_type.slice(1),
-  ].filter(Boolean) as string[];
+  const stats: StatItem[] = [
+    property.bedrooms != null && {
+      icon: BedDouble,
+      value: String(property.bedrooms),
+      label: property.bedrooms === 1 ? "Bed" : "Beds",
+    },
+    property.bathrooms != null && {
+      icon: Bath,
+      value: String(property.bathrooms),
+      label: property.bathrooms === 1 ? "Bath" : "Baths",
+    },
+    property.sqft && {
+      icon: Maximize,
+      value: property.sqft.toLocaleString(),
+      label: "sqft",
+    },
+    property.property_type && {
+      icon: Home,
+      value: property.property_type.charAt(0).toUpperCase() + property.property_type.slice(1),
+      label: "",
+    },
+  ].filter(Boolean) as StatItem[];
 
   const chips = buildChips(property);
+  const clarity = rentClarityLine(property);
 
   return (
     <section
@@ -96,6 +130,11 @@ export default function QuickSummary({ property }: Props) {
               <span className="text-base font-normal" style={{ color: "#888888", fontFamily: "var(--font-dm-sans)" }}>
                 /mo
               </span>
+              {clarity && (
+                <span className="text-sm font-medium" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
+                  {clarity}
+                </span>
+              )}
             </div>
           </div>
 
@@ -113,23 +152,26 @@ export default function QuickSummary({ property }: Props) {
                 Available {formatAvailableDate(property.available_date)}
               </div>
             )}
-            <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+            <ApplyButton property={property} variant="primary" label="Apply Now" />
+            <BookViewingButton property={property} variant="outline" label="Book a Viewing" />
           </div>
         </div>
 
-        {/* Row 2: Property stats */}
+        {/* Row 2: Property stats — icon-led, scannable at a glance */}
         {stats.length > 0 && (
-          <div className="flex flex-wrap items-center gap-0 mb-4 pb-4" style={{ borderBottom: "1px solid #F0EDE8" }}>
-            {stats.map((s, i) => (
-              <span key={s} className="flex items-center">
-                <span className="text-sm font-medium" style={{ color: "#333333", fontFamily: "var(--font-dm-sans)" }}>
-                  {s}
-                </span>
-                {i < stats.length - 1 && (
-                  <span className="mx-3" style={{ color: "#D8D2C8" }}>·</span>
-                )}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3 mb-4 pb-4" style={{ borderBottom: "1px solid #F0EDE8" }}>
+            {stats.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <Icon size={18} strokeWidth={1.75} style={{ color: "#999999" }} />
+                  <span className="text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    <span className="font-bold" style={{ color: "#1F2F3A" }}>{s.value}</span>
+                    {s.label && <span className="font-medium ml-1" style={{ color: "#666666" }}>{s.label}</span>}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         )}
 

@@ -18,11 +18,37 @@ const BORDER = "#D8D2C8";
 const TEXT = "#222222";
 const TEXT_SEC = "#333333";
 
+// Canadian street addresses virtually always end in a recognizable
+// street-type word. Used only to avoid retroactively flagging an
+// already-good, already-published address as "unconfirmed" the next time
+// someone opens it for editing — every one of the real truncated
+// addresses this was built to catch ("190 wych", "969 batterry") is both
+// short AND missing any of these.
+const STREET_SUFFIXES = [
+  "street", "st", "avenue", "ave", "road", "rd", "drive", "dr", "boulevard", "blvd",
+  "crescent", "cres", "court", "ct", "lane", "ln", "way", "place", "pl", "terrace",
+  "circle", "cir", "trail", "grove", "gate", "walk", "row", "square", "close", "line",
+];
+function looksLikeCompleteAddress(address: string): boolean {
+  const trimmed = address.trim();
+  if (trimmed.length < 10) return false;
+  const lastWord = trimmed.toLowerCase().split(/\s+/).pop() ?? "";
+  return STREET_SUFFIXES.includes(lastWord.replace(/[.,]/g, ""));
+}
+
 // ─── Full property data shape ───────────────────────────────
 export interface WizardData {
   // Step 1: Basics
   title: string;
   address: string;
+  // True only once a real Google Places suggestion has been selected for
+  // the CURRENT address value — false the instant the text is hand-typed
+  // or edited, even if it looks plausible. This is what goNext()/Publish
+  // actually gate on; never persisted (not a real DB column, see
+  // getPayload() below) — purely an in-session guard against the exact
+  // bug that shipped 4 truncated live addresses: someone types a partial
+  // address and tabs/clicks away before ever picking a suggestion.
+  address_confirmed: boolean;
   city: string;
   property_type: string;
   price: number | "";
@@ -87,7 +113,7 @@ export interface WizardData {
 }
 
 const BLANK: WizardData = {
-  title: "", address: "", city: "London", property_type: "", price: "", bedrooms: "", bathrooms: "", sqft: "", available_date: "",
+  title: "", address: "", address_confirmed: false, city: "London", property_type: "", price: "", bedrooms: "", bathrooms: "", sqft: "", available_date: "",
   lease_term: "", deposit: "", first_month_required: true, last_month_required: true, move_in_costs: { "Key Deposit": 100 },
   parking: false, parking_type: "none", laundry_type: "none", ac: false, heating_type: "", appliances: [], outdoor_space: "none", furnished: false, storage: false, elevator: false, wheelchair_accessible: false,
   pet_friendly: false, pet_policy: { cats: false, dogs: false, other: false, deposit: "", restrictions: "" }, smoking_allowed: false, guest_policy: "", quiet_hours: "", max_occupants: "",
@@ -168,7 +194,11 @@ async function createCampaignFromOnboarding(
 
 export default function PropertyWizard({ initial, onboardToken }: Props) {
   const router = useRouter();
-  const [data, setData] = useState<WizardData>(() => ({ ...BLANK, ...initial }));
+  const [data, setData] = useState<WizardData>(() => ({
+    ...BLANK,
+    ...initial,
+    address_confirmed: initial?.address ? looksLikeCompleteAddress(initial.address) : false,
+  }));
   const [currentStep, setCurrentStep] = useState(() => initial?.wizard_step || 1);
   const [propertyId, setPropertyId] = useState<string | null>(initial?.id || null);
   const [saving, setSaving] = useState(false);
@@ -295,6 +325,12 @@ export default function PropertyWizard({ initial, onboardToken }: Props) {
   async function goNext() {
     const nextStep = currentStep + 1;
     if (nextStep > 8) return;
+    setError("");
+
+    if (currentStep === 1 && dataRef.current.address.trim() && !dataRef.current.address_confirmed) {
+      setError("Please select the address from the dropdown suggestions so we capture the complete street address — this is what's been causing addresses to save truncated.");
+      return;
+    }
 
     // Create property on first step if new
     if (!propertyId && currentStep === 1) {
@@ -437,6 +473,11 @@ export default function PropertyWizard({ initial, onboardToken }: Props) {
                 <button
                   onClick={async () => {
                     if (!propertyId) return;
+                    if (dataRef.current.address.trim() && !dataRef.current.address_confirmed) {
+                      setError("The address hasn't been confirmed from the dropdown — go back to Basics and re-select it before publishing, so this listing doesn't go live with a truncated address.");
+                      setCurrentStep(1);
+                      return;
+                    }
                     setSaving(true);
                     await saveNow();
                     const pubRes = await fetch(`/api/admin/properties/${propertyId}/publish`, { method: "POST" });

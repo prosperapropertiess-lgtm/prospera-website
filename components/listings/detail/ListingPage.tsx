@@ -11,6 +11,7 @@ import ApplicationProcess from "./ApplicationProcess";
 import ProspaBenefits from "./ProspaBenefits";
 import StickyCTA from "./StickyCTA";
 import BookViewingButton from "./BookViewingButton";
+import ApplyButton from "./ApplyButton";
 import ViewTracker from "./ViewTracker";
 import FaqSection from "./FaqSection";
 import RentedBanner from "./RentedBanner";
@@ -56,6 +57,7 @@ export interface PropertyRecord extends Record<string, unknown> {
   parking?: boolean;
   inquiry_count?: number | null;
   virtual_tour_url?: string | null;
+  agent_id?: string | null;
 }
 
 interface ListingPageProps {
@@ -133,7 +135,8 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
             </a>
           ) : (
             <>
-              <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+              <ApplyButton property={property} variant="primary" label="Apply Now" />
+              <BookViewingButton property={property} variant="outline" label="Book a Viewing" />
               <a
                 href="tel:5196971227"
                 className="px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-70"
