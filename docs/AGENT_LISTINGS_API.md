@@ -1,0 +1,179 @@
+# Agent Listings API
+
+A small, API-key-authenticated API that lets an external AI agent (ChatGPT
+Custom GPT, or anything else that can make HTTP requests) create, edit, and
+remove property listings on prosperaproperties.co — no browser, no admin
+login, no session cookie.
+
+## Getting a key
+
+Go to `/admin/api-keys` while logged into the admin panel, give the key a
+label (e.g. "ChatGPT listings agent"), and click **Generate Key**. The full
+key is shown exactly once — copy it immediately. You can revoke a key any
+time from the same page; revoking takes effect immediately and can't be
+undone (generate a new one if you need it back).
+
+## Auth
+
+Every endpoint below (except the public `GET /api/listings`) requires:
+
+```
+Authorization: Bearer pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+A missing, malformed, or revoked key returns `401`.
+
+## Base URL
+
+```
+https://www.prosperaproperties.co
+```
+
+(Use `www` — the bare domain 301-redirects there, which breaks POST/PATCH/DELETE.)
+
+---
+
+## `POST /api/listings` — create a listing
+
+Required fields: `address`, `city`, `price`, `bedrooms`, `bathrooms`.
+Everything else is optional and defaults sensibly. New listings are created
+as **private drafts** (`status: "draft"`) unless you explicitly pass
+`"status": "published"` — a draft never appears on the public site or
+`/listings`, but still gets a real, working apply link.
+
+```bash
+curl -X POST https://www.prosperaproperties.co/api/listings \
+  -H "Authorization: Bearer pk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "address": "148 Elm St",
+    "city": "London",
+    "price": 2100,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "property_type": "house",
+    "sqft": 1400,
+    "available_date": "2026-12-01",
+    "description": "A bright, updated 3-bedroom home close to downtown...",
+    "ai_highlights": ["Freshly renovated kitchen", "Fenced backyard", "2 minutes from transit"],
+    "laundry_type": "in-unit",
+    "parking_type": "driveway",
+    "pet_friendly": true,
+    "utilities_included": false,
+    "image_urls": ["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"],
+    "status": "draft"
+  }'
+```
+
+`image_urls` — any externally-hosted photo URLs. The server downloads each
+one and re-hosts it in Prospera's own storage (external URLs aren't
+permanent, so listings never depend on them staying online). Response
+includes `image_errors` if any individual photo failed to download — the
+listing itself is still created either way.
+
+Response: the created property row (same shape as `GET /api/listings`),
+plus `id` — you'll need it for the next calls.
+
+### Full field reference
+
+| Field | Type | Default |
+|---|---|---|
+| `address` | string | **required** |
+| `city` | string | **required** |
+| `price` | number | **required** |
+| `bedrooms` | number | **required** |
+| `bathrooms` | number | **required** |
+| `property_type` | `house`\|`apartment`\|`condo`\|`townhouse`\|`duplex`\|`triplex`\|`other` | `null` |
+| `sqft` | number | `null` |
+| `available_date` | `"YYYY-MM-DD"` | `null` |
+| `deposit` | number | equal to `price` |
+| `parking_type` | `none`\|`street`\|`driveway`\|`garage`\|`underground`\|`lot` | `none` |
+| `laundry_type` | `none`\|`in-unit`\|`shared`\|`coin-op` | `none` |
+| `ac` | boolean | `false` |
+| `heating_type` | string | `null` |
+| `appliances` | string[] | `[]` |
+| `outdoor_space` | `none`\|`balcony`\|`patio`\|`yard`\|`rooftop`\|`deck` | `none` |
+| `furnished` | boolean | `false` |
+| `pet_friendly` | boolean | `false` |
+| `utilities_included` | boolean | `false` |
+| `utilities_list` | string[] | `[]` |
+| `description` | string | `null` |
+| `ai_highlights` | string[] | `[]` |
+| `image_urls` | string[] | — (download + re-host) |
+| `images` | string[] | — (already-hosted URLs, used as-is) |
+| `status` | `draft`\|`published` | `draft` |
+
+---
+
+## `GET /api/listings/:id` — fetch one listing
+
+Returns every column, regardless of status (the public `GET /api/listings`
+only returns published/available properties — this one doesn't filter).
+
+```bash
+curl https://www.prosperaproperties.co/api/listings/<id> \
+  -H "Authorization: Bearer pk_live_..."
+```
+
+---
+
+## `PATCH /api/listings/:id` — edit a listing
+
+Same fields as create, all optional — only what you send gets changed.
+Send `"status": "published"` here to publish a draft (runs the same publish
+logic as the admin wizard, including the Notion sync and agent-notify
+emails that fire on a real publish).
+
+```bash
+curl -X PATCH https://www.prosperaproperties.co/api/listings/<id> \
+  -H "Authorization: Bearer pk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{"price": 2050, "status": "published"}'
+```
+
+`image_urls` on PATCH *appends* to existing photos (download + re-host,
+same as create). Pass `images` instead if you want to replace the full
+photo list yourself.
+
+---
+
+## `DELETE /api/listings/:id` — remove a listing
+
+Deletes the property row and its stored photos. Not recoverable.
+
+```bash
+curl -X DELETE https://www.prosperaproperties.co/api/listings/<id> \
+  -H "Authorization: Bearer pk_live_..."
+```
+
+---
+
+## `POST /api/uploads` — upload a photo directly
+
+Use this instead of `image_urls` when the agent has raw image bytes rather
+than a hosted URL (e.g. an image attached directly in a chat).
+
+```bash
+curl -X POST https://www.prosperaproperties.co/api/uploads \
+  -H "Authorization: Bearer pk_live_..." \
+  -F "file=@photo.jpg" \
+  -F "propertyId=<id>"
+```
+
+Response: `{"url": "https://.../property-images/properties/<id>/....jpg"}`.
+Add the returned URL(s) to `images` on a follow-up `PATCH`.
+
+---
+
+## Apply link
+
+Every property gets a tenant application link once it exists (draft or
+published — the apply flow only checks `is_managed`/`available`, not
+publish status):
+
+```
+https://www.prosperaproperties.co/apply/08e1618d-562a-4227-a6d7-fb5c981f52bb/<property id>
+```
+
+(`08e1618d-...` is Ebin's agent id — the only active agent. This isn't
+returned by the API yet; construct it from the property id you get back.)
