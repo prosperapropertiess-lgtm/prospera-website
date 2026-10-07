@@ -42,7 +42,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
     async function validate() {
       const { data: prop } = await (await fetch(`/api/agents/properties`)).json().catch(() => ({ data: null }));
       // Simple approach: fetch public property info
-      const res = await fetch(`/api/applications/validate-apply-link?agentId=${agentId}&propertyId=${propertyId}`);
+      const res = await fetch(`/api/applications/validate-apply-link?agent_id=${agentId}&property_id=${propertyId}`);
       const json = await res.json();
       if (!res.ok || !json.property) {
         setLoadError(json.error ?? "This link is no longer valid.");
