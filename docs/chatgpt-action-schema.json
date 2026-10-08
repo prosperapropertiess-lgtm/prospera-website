@@ -1,0 +1,77 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Prospera Properties — Listings",
+    "version": "1.0.0",
+    "description": "Create, edit, and remove rental property listings."
+  },
+  "servers": [{ "url": "https://www.prosperaproperties.co" }],
+  "paths": {
+    "/api/listings": {
+      "post": {
+        "operationId": "createListing",
+        "summary": "Create a new property listing. Lands as a private draft unless status is set to published.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["address", "city", "price", "bedrooms", "bathrooms"],
+                "properties": {
+                  "address": { "type": "string" },
+                  "city": { "type": "string" },
+                  "price": { "type": "number" },
+                  "bedrooms": { "type": "number" },
+                  "bathrooms": { "type": "number" },
+                  "property_type": { "type": "string", "enum": ["house", "apartment", "condo", "townhouse", "duplex", "triplex", "other"] },
+                  "sqft": { "type": "number" },
+                  "available_date": { "type": "string", "description": "YYYY-MM-DD" },
+                  "description": { "type": "string" },
+                  "ai_highlights": { "type": "array", "items": { "type": "string" } },
+                  "laundry_type": { "type": "string", "enum": ["none", "in-unit", "shared", "coin-op"] },
+                  "parking_type": { "type": "string", "enum": ["none", "street", "driveway", "garage", "underground", "lot"] },
+                  "pet_friendly": { "type": "boolean" },
+                  "utilities_included": { "type": "boolean" },
+                  "image_urls": { "type": "array", "items": { "type": "string" }, "description": "Publicly accessible photo URLs — the server downloads and re-hosts each one." },
+                  "status": { "type": "string", "enum": ["draft", "published"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/listings/{id}": {
+      "get": {
+        "operationId": "getListing",
+        "summary": "Fetch one listing by id.",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "patch": {
+        "operationId": "updateListing",
+        "summary": "Edit a listing. Send status: published to publish a draft.",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object" } } }
+        },
+        "responses": { "200": { "description": "Updated" } }
+      },
+      "delete": {
+        "operationId": "deleteListing",
+        "summary": "Permanently remove a listing and its photos.",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Deleted" } }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer" }
+    }
+  },
+  "security": [{ "bearerAuth": [] }]
+}
