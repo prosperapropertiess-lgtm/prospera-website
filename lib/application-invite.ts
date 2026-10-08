@@ -21,22 +21,24 @@ export async function sendApplicationInvite(
 ): Promise<SendInviteResult> {
   const supabase = getSupabaseAdmin();
 
-  const { data: property } = await supabase
+  const { data: property, error: propErr } = await supabase
     .from("properties")
     .select("id, address, city, price, is_managed, available")
     .eq("id", propertyId)
     .maybeSingle();
+  if (propErr) throw new Error(`Property lookup failed: ${propErr.message}`);
   if (!property) throw new Error("Property not found");
   if (!property.is_managed || !property.available) {
     throw new Error("This property isn't set up to accept applications right now (is_managed/available must both be true)");
   }
 
-  const { data: agent } = await supabase
+  const { data: agents, error: agentErr } = await supabase
     .from("agents")
     .select("id, name")
     .eq("is_active", true)
-    .limit(1)
-    .maybeSingle();
+    .limit(1);
+  if (agentErr) throw new Error(`Agent lookup failed: ${agentErr.message}`);
+  const agent = agents?.[0];
   if (!agent) throw new Error("No active agent found to attach this application link to");
 
   const applyUrl = `https://www.prosperaproperties.co/apply/${agent.id}/${property.id}`;
