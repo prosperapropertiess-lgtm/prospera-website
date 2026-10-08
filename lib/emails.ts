@@ -1016,6 +1016,34 @@ export function newPropertyAgentEmail({
 }
 
 // Application received → sent to agent when tenant submits
+// Invite to apply → sent to a prospective tenant from the admin "send application link" action
+export function applicationInviteEmail({
+  tenantName,
+  propertyAddress,
+  propertyCity,
+  price,
+  applyUrl,
+}: {
+  tenantName: string;
+  propertyAddress: string;
+  propertyCity: string;
+  price: number;
+  applyUrl: string;
+}): string {
+  return wrapper(`
+    ${heroCard(`Hi ${tenantName},`, `Your application for ${propertyAddress} is ready to start.`)}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Thanks for your interest in <strong>${propertyAddress}, ${propertyCity}</strong> — $${price.toLocaleString()}/mo. Click below to start your application. It takes about 10 minutes, and you'll need a government ID, your last 4 pay stubs, and 6 months of bank statements.</p>
+
+    ${cta("Start My Application", applyUrl)}
+
+    ${noteBox("This link is just for you. If you have any trouble, just reply to this email.", "Quick note")}
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
 export function applicationReceivedAgentEmail({
   agentName,
   tenantName,

@@ -192,6 +192,25 @@ Add the returned URL(s) to `images` on a follow-up `PATCH`.
 
 ---
 
+## `POST /api/listings/:id/invite` — email a prospect their application link
+
+Sends a branded "start your application" email straight to a prospective
+tenant, linking into the real application flow for that property.
+
+```bash
+curl -X POST https://www.prosperaproperties.co/api/listings/<property id>/invite \
+  -H "Authorization: Bearer pk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{"tenant_name": "Jane Smith", "tenant_email": "jane@email.com"}'
+```
+
+Response: `{"success": true, "applyUrl": "...", "agentId": "...", "propertyAddress": "..."}`.
+Fails with a clear message if the property doesn't exist, isn't currently
+set up to accept applications (`is_managed`/`available`), or email sending
+isn't configured.
+
+---
+
 ## Apply link
 
 Every property gets a tenant application link once it exists (draft or

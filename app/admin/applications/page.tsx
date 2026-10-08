@@ -23,10 +23,23 @@ interface Application {
   agents: { name: string } | null;
 }
 
+interface PropertyOption {
+  id: string;
+  address: string;
+  city: string;
+  price: number;
+}
+
 export default function AdminApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+
+  const [properties, setProperties] = useState<PropertyOption[]>([]);
+  const [inviteForm, setInviteForm] = useState({ tenant_name: "", tenant_email: "", property_id: "" });
+  const [sending, setSending] = useState(false);
+  const [inviteError, setInviteError] = useState("");
+  const [inviteSuccess, setInviteSuccess] = useState("");
 
   useEffect(() => {
     const url = filter === "all"
@@ -41,7 +54,50 @@ export default function AdminApplicationsPage() {
       .catch(() => setLoading(false));
   }, [filter]);
 
+  useEffect(() => {
+    fetch("/api/listings")
+      .then((r) => r.json())
+      .then((data) => setProperties(data.available ?? []))
+      .catch(() => {});
+  }, []);
+
+  async function sendInvite(e: React.FormEvent) {
+    e.preventDefault();
+    setInviteError("");
+    setInviteSuccess("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/admin/applications/invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(inviteForm),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setInviteError(json.error ?? "Failed to send");
+      } else {
+        setInviteSuccess(`Sent to ${inviteForm.tenant_email} — ${json.propertyAddress}`);
+        setInviteForm({ tenant_name: "", tenant_email: "", property_id: "" });
+      }
+    } catch {
+      setInviteError("Request failed. Check your connection.");
+    } finally {
+      setSending(false);
+    }
+  }
+
   const FONT = "var(--font-dm-sans, sans-serif)";
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "10px 12px",
+    border: "1px solid #D8D2C8",
+    borderRadius: 8,
+    fontSize: 13,
+    color: "#1F2F3A",
+    fontFamily: FONT,
+    boxSizing: "border-box",
+    outline: "none",
+  };
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#F7F5F2", fontFamily: FONT }}>
@@ -51,6 +107,81 @@ export default function AdminApplicationsPage() {
             <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#1F2F3A" }}>Applications</h1>
             <p style={{ margin: "4px 0 0", fontSize: 13, color: "#666666" }}>All tenant rental applications</p>
           </div>
+        </div>
+
+        {/* Send Application Link */}
+        <div style={{
+          backgroundColor: "#FFFFFF",
+          border: "1px solid #D8D2C8",
+          borderRadius: 12,
+          padding: "24px",
+          marginBottom: 28,
+        }}>
+          <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 700, color: "#1F2F3A" }}>Send Application Link</h3>
+          <p style={{ margin: "0 0 18px", fontSize: 12, color: "#666666" }}>
+            They get a branded email with a button straight into the application form.
+          </p>
+          <form onSubmit={sendInvite}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.4fr auto", gap: 12, alignItems: "flex-end" }}>
+              <div>
+                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Name</label>
+                <input
+                  style={inputStyle}
+                  value={inviteForm.tenant_name}
+                  onChange={(e) => setInviteForm((f) => ({ ...f, tenant_name: e.target.value }))}
+                  placeholder="Jane Smith"
+                  required
+                />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Email</label>
+                <input
+                  style={inputStyle}
+                  type="email"
+                  value={inviteForm.tenant_email}
+                  onChange={(e) => setInviteForm((f) => ({ ...f, tenant_email: e.target.value }))}
+                  placeholder="jane@email.com"
+                  required
+                />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Property</label>
+                <select
+                  style={{ ...inputStyle, cursor: "pointer" }}
+                  value={inviteForm.property_id}
+                  onChange={(e) => setInviteForm((f) => ({ ...f, property_id: e.target.value }))}
+                  required
+                >
+                  <option value="">Select a property...</option>
+                  {properties.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.address}, {p.city} — ${p.price.toLocaleString()}/mo
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="submit"
+                disabled={sending}
+                style={{
+                  padding: "10px 22px",
+                  backgroundColor: sending ? "#94A3B8" : "#8B2030",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: 8,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: sending ? "not-allowed" : "pointer",
+                  fontFamily: FONT,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {sending ? "Sending..." : "Send"}
+              </button>
+            </div>
+            {inviteError && <p style={{ margin: "10px 0 0", fontSize: 12, color: "#DC2626" }}>{inviteError}</p>}
+            {inviteSuccess && <p style={{ margin: "10px 0 0", fontSize: 12, color: "#065F46" }}>✓ {inviteSuccess}</p>}
+          </form>
         </div>
 
         {/* Filter tabs */}

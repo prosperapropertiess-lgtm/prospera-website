@@ -66,6 +66,29 @@
         "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
         "responses": { "200": { "description": "Deleted" } }
       }
+    },
+    "/api/listings/{id}/invite": {
+      "post": {
+        "operationId": "sendApplicationInvite",
+        "summary": "Email a prospective tenant a branded link to start their rental application for this property.",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["tenant_name", "tenant_email"],
+                "properties": {
+                  "tenant_name": { "type": "string" },
+                  "tenant_email": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Sent" } }
+      }
     }
   },
   "components": {
