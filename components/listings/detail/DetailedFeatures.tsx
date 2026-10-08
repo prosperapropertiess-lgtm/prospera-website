@@ -42,8 +42,14 @@ function buildChecklist(property: PropertyRecord): FeatureCheck[] {
   const laundryType = ((raw.laundry_type as string | null) ?? "").replace(/_/g, "-");
   const outdoorSpace = (raw.outdoor_space as string | null)?.toLowerCase() ?? "";
 
+  // The wizard's real utility labels are "Heat (Gas Furnace)", "Water & Sewer",
+  // "Hydro (Electricity)" — not bare words. Exact-matching against ["heat"],
+  // ["water"], ["hydro"] never matched any real label, so Heat/Water/Hydro
+  // showed as "Not Included" on every property regardless of the truth.
+  // Substring matching actually catches the real stored label strings.
+  const utilsListLower = utilsList.map((u) => u.toLowerCase());
   const hasUtil = (key: string, aliases: string[]) =>
-    !!(ud[key]?.included ?? aliases.some(a => utilsList.map(u => u.toLowerCase()).includes(a)));
+    !!(ud[key]?.included ?? aliases.some((a) => utilsListLower.some((u) => u.includes(a))));
 
   const checks: { label: string; test: boolean; alwaysShow: boolean }[] = [
     { label: "Heat",             test: hasUtil("heat", ["heat", "gas", "heating"]),                      alwaysShow: true  },

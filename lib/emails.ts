@@ -199,6 +199,44 @@ function darkStats(items: { value: string; label: string }[]): string {
   </table>`;
 }
 
+// Numbered step row — "01  Title  description" repeated, like a simple process timeline
+function stepsList(steps: { title: string; desc: string }[]): string {
+  const rows = steps.map((s, i) => `
+    <tr>
+      <td style="padding:${i === 0 ? "0" : "18px"} 0 0;vertical-align:top;width:40px;">
+        <p style="margin:0;font-family:${FONT};font-size:22px;font-weight:700;color:rgba(139,32,48,0.35);line-height:1.3;">${String(i + 1).padStart(2, "0")}</p>
+      </td>
+      <td style="padding:${i === 0 ? "0" : "18px"} 0 0 14px;vertical-align:top;">
+        <p style="margin:0 0 2px;font-family:${FONT};font-size:15px;font-weight:700;color:${NAVY};">${s.title}</p>
+        <p style="margin:0;font-family:${FONT};font-size:14px;color:${MUTED};line-height:1.6;">${s.desc}</p>
+      </td>
+    </tr>
+  `).join("");
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 32px;background:${BG_SUBTLE};border-radius:14px;padding:24px 24px;">
+    <tr><td><table width="100%" cellpadding="0" cellspacing="0" role="presentation">${rows}</table></td></tr>
+  </table>`;
+}
+
+// Checklist with a solid check mark per line — for "what you'll need" style lists
+function checklist(label: string, items: string[]): string {
+  const rows = items.map((item) => `
+    <tr>
+      <td style="padding:0 0 10px;vertical-align:top;width:22px;">
+        <span style="display:inline-block;width:18px;height:18px;line-height:18px;border-radius:99px;background:rgba(45,122,79,0.12);color:#2D7A4F;font-size:12px;font-weight:700;text-align:center;font-family:${FONT};">&#10003;</span>
+      </td>
+      <td style="padding:0 0 10px 10px;vertical-align:top;">
+        <p style="margin:0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.5;">${item}</p>
+      </td>
+    </tr>
+  `).join("");
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:0 0 28px;">
+    <tr><td>
+      <p style="margin:0 0 14px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${MUTED};">${label}</p>
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">${rows}</table>
+    </td></tr>
+  </table>`;
+}
+
 // ── LANDLORD WELCOME ─────────────────────────────────────────
 
 export function landlordWelcomeEmail(name: string): string {
@@ -1022,20 +1060,43 @@ export function applicationInviteEmail({
   propertyAddress,
   propertyCity,
   price,
+  bedrooms,
+  bathrooms,
   applyUrl,
 }: {
   tenantName: string;
   propertyAddress: string;
   propertyCity: string;
   price: number;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
   applyUrl: string;
 }): string {
   return wrapper(`
-    ${heroCard(`Hi ${tenantName},`, `Your application for ${propertyAddress} is ready to start.`)}
+    ${heroCard(`Hi ${tenantName},`, `Your application for ${propertyAddress}, ${propertyCity} is ready to start.`)}
 
-    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Thanks for your interest in <strong>${propertyAddress}, ${propertyCity}</strong> — $${price.toLocaleString()}/mo. Click below to start your application. It takes about 10 minutes, and you'll need a government ID, your last 4 pay stubs, and 6 months of bank statements.</p>
+    ${darkStats([
+      { value: `$${price.toLocaleString()}`, label: "Per Month" },
+      ...(bedrooms != null ? [{ value: String(bedrooms), label: bedrooms === 1 ? "Bedroom" : "Bedrooms" }] : []),
+      ...(bathrooms != null ? [{ value: String(bathrooms), label: bathrooms === 1 ? "Bathroom" : "Bathrooms" }] : []),
+    ])}
+
+    <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Takes about 10 minutes. Here's what you'll need on hand:</p>
+
+    ${checklist("What You'll Need", [
+      "Government-issued ID",
+      "Your last 4 pay stubs",
+      "6 months of bank statements",
+      "An employment letter, if you have one",
+    ])}
 
     ${cta("Start My Application", applyUrl)}
+
+    ${stepsList([
+      { title: "You apply", desc: "Fill in your info and upload your documents — takes about 10 minutes." },
+      { title: "We review", desc: "Our team reviews everything, usually within 24 hours." },
+      { title: "You move in", desc: "Approved applicants get a lease and move-in details right away." },
+    ])}
 
     ${noteBox("This link is just for you. If you have any trouble, just reply to this email.", "Quick note")}
 

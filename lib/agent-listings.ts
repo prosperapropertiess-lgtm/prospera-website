@@ -154,7 +154,12 @@ export function normalizePropertyPayload(rawBody: Record<string, unknown>, isCre
   if (body.available_date !== undefined || isCreate) set("available_date", d("available_date", null));
   if (body.deposit !== undefined) set("deposit", body.deposit);
   else if (isCreate) set("deposit", body.price ?? null);
-  if (body.parking_type !== undefined || isCreate) set("parking_type", d("parking_type", "none"));
+  // A bare `parking: true` with no parking_type used to default parking_type
+  // to "none" — contradicting the boolean (McLarenwood: parking true,
+  // parking_type "none"). If the caller says there's parking but doesn't say
+  // what kind, "lot" is a safer unspecified-but-not-contradictory default.
+  if (body.parking_type !== undefined) set("parking_type", body.parking_type);
+  else if (isCreate) set("parking_type", body.parking === true ? "lot" : "none");
   if (body.parking !== undefined) set("parking", body.parking);
   else if (isCreate) set("parking", body.parking_type ? body.parking_type !== "none" : false);
   if (body.laundry_type !== undefined || isCreate) set("laundry_type", d("laundry_type", "none"));

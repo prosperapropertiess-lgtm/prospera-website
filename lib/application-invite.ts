@@ -23,7 +23,7 @@ export async function sendApplicationInvite(
 
   const { data: property, error: propErr } = await supabase
     .from("properties")
-    .select("id, address, city, price, is_managed, available")
+    .select("id, address, city, price, bedrooms, bathrooms, is_managed, available")
     .eq("id", propertyId)
     .maybeSingle();
   if (propErr) throw new Error(`Property lookup failed: ${propErr.message}`);
@@ -57,6 +57,8 @@ export async function sendApplicationInvite(
       propertyAddress: property.address,
       propertyCity: property.city,
       price: property.price,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
       applyUrl,
     }),
   });
