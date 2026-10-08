@@ -103,6 +103,33 @@ plus `id` — you'll need it for the next calls.
 | `images` | string[] | — (already-hosted URLs, used as-is) |
 | `status` | `draft`\|`published` | `draft` |
 
+### Accepted aliases (in case your agent guesses a different name)
+
+These all get mapped onto the canonical field above automatically — no need
+to use them, but they won't be silently dropped if your agent does:
+
+| You send | Mapped to |
+|---|---|
+| `pets_allowed`, `pet_allowed`, `petFriendly`, `pets`, `allows_pets` | `pet_friendly` |
+| `laundry`, `laundryType` | `laundry_type` |
+| `availability_date`, `availableDate`, `available_from`, `move_in_date`, `moveInDate` | `available_date` |
+| `outdoorSpace` | `outdoor_space` |
+| `backyard: true`, `yard: true`, `balcony: true`, `patio: true`, `deck: true`, `rooftop: true` | adds to `outdoor_space` |
+| `appliances: {dishwasher: true, fridge: true, ...}` (object instead of array) | converted to `appliances: ["Dishwasher", "Refrigerator", ...]` |
+
+### Anything else you send that isn't recognized
+
+The response includes an `unrecognized_fields` object listing any top-level
+field that didn't match a known name or alias — so a typo or a guessed field
+name shows up immediately instead of silently doing nothing:
+
+```json
+"unrecognized_fields": {
+  "fields": ["pet_allowd"],
+  "note": "These fields were not recognized and were ignored. See docs/AGENT_LISTINGS_API.md for exact field names."
+}
+```
+
 ---
 
 ## `GET /api/listings/:id` — fetch one listing

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { verifyApiKey } from "@/lib/api-key-auth";
-import { normalizePropertyPayload, downloadAndStoreImage } from "@/lib/agent-listings";
+import { normalizePropertyPayload, downloadAndStoreImage, findUnrecognizedFields } from "@/lib/agent-listings";
 
 export async function GET(req: NextRequest) {
   const supabase = getSupabaseAdmin();
@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
 
   const supabase = getSupabaseAdmin();
   const payload = normalizePropertyPayload(body, true);
+  const unrecognizedFields = findUnrecognizedFields(body);
 
   const { data: created, error } = await supabase.from("properties").insert([payload]).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -106,5 +107,14 @@ export async function POST(req: NextRequest) {
     if (updated) Object.assign(created, updated);
   }
 
-  return NextResponse.json({ ...created, image_errors: imageErrors.length ? imageErrors : undefined }, { status: 201 });
+  return NextResponse.json(
+    {
+      ...created,
+      image_errors: imageErrors.length ? imageErrors : undefined,
+      unrecognized_fields: unrecognizedFields.length
+        ? { fields: unrecognizedFields, note: "These fields were not recognized and were ignored. See docs/AGENT_LISTINGS_API.md for exact field names." }
+        : undefined,
+    },
+    { status: 201 }
+  );
 }

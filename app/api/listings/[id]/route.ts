@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { verifyApiKey } from "@/lib/api-key-auth";
-import { normalizePropertyPayload, downloadAndStoreImage } from "@/lib/agent-listings";
+import { normalizePropertyPayload, downloadAndStoreImage, findUnrecognizedFields } from "@/lib/agent-listings";
 
 // GET a single listing — API-key gated (unlike the public /api/listings
 // index, this can return a listing regardless of status, which is why it
@@ -27,6 +27,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (!body) return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
 
   const supabase = getSupabaseAdmin();
+  const unrecognizedFields = findUnrecognizedFields(body);
 
   // image_urls on PATCH — download, re-host, and append to whatever images
   // already exist (rather than replacing) unless the caller explicitly
@@ -53,7 +54,13 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  return NextResponse.json({ ...data, image_errors: imageErrors.length ? imageErrors : undefined });
+  return NextResponse.json({
+    ...data,
+    image_errors: imageErrors.length ? imageErrors : undefined,
+    unrecognized_fields: unrecognizedFields.length
+      ? { fields: unrecognizedFields, note: "These fields were not recognized and were ignored. See docs/AGENT_LISTINGS_API.md for exact field names." }
+      : undefined,
+  });
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {

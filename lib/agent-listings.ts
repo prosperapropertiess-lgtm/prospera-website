@@ -36,6 +36,97 @@ export async function downloadAndStoreImage(url: string, propertyId: string): Pr
   return data.publicUrl;
 }
 
+// AI agents reliably guess at reasonable-sounding field names that don't
+// exactly match our schema (pets_allowed vs pet_friendly, laundry vs
+// laundry_type, etc). Rather than silently dropping those — which is what
+// happened to Muse's McLarenwood listing — accept the common variants.
+const SIMPLE_ALIASES: Record<string, string> = {
+  pets_allowed: "pet_friendly",
+  pet_allowed: "pet_friendly",
+  petFriendly: "pet_friendly",
+  pets: "pet_friendly",
+  allows_pets: "pet_friendly",
+  laundry: "laundry_type",
+  laundryType: "laundry_type",
+  availability_date: "available_date",
+  availableDate: "available_date",
+  available_from: "available_date",
+  move_in_date: "available_date",
+  moveInDate: "available_date",
+  outdoorSpace: "outdoor_space",
+};
+
+// Boolean convenience flags for outdoor space — "backyard: true" should mean
+// the same thing as outdoor_space: "yard", not get silently ignored.
+const OUTDOOR_FLAGS: Record<string, string> = {
+  backyard: "yard",
+  yard: "yard",
+  balcony: "balcony",
+  patio: "patio",
+  deck: "deck",
+  rooftop: "rooftop",
+};
+
+// Same idea for appliances — accept either an array of names (the
+// documented shape) or individual booleans / a {name: true} object.
+const APPLIANCE_FLAGS: Record<string, string> = {
+  dishwasher: "Dishwasher",
+  fridge: "Refrigerator",
+  refrigerator: "Refrigerator",
+  stove: "Stove/Oven",
+  oven: "Stove/Oven",
+  stove_oven: "Stove/Oven",
+  microwave: "Microwave",
+  washer: "Washer",
+  dryer: "Dryer",
+  garbage_disposal: "Garbage Disposal",
+};
+
+const KNOWN_KEYS = new Set([
+  "address", "city", "property_type", "price", "bedrooms", "bathrooms", "sqft",
+  "available_date", "deposit", "parking_type", "parking", "laundry_type", "ac",
+  "heating_type", "appliances", "outdoor_space", "furnished", "pet_friendly",
+  "utilities_included", "utilities_list", "description", "ai_highlights",
+  "images", "image_urls", "available", "status", "title",
+  ...Object.keys(SIMPLE_ALIASES),
+  ...Object.keys(OUTDOOR_FLAGS),
+  ...Object.keys(APPLIANCE_FLAGS),
+]);
+
+/** Renames/reshapes known alias fields onto their canonical names in-place on a copy. */
+function applyAliases(body: Record<string, unknown>): Record<string, unknown> {
+  const b: Record<string, unknown> = { ...body };
+
+  for (const [alias, canonical] of Object.entries(SIMPLE_ALIASES)) {
+    if (b[alias] !== undefined && b[canonical] === undefined) b[canonical] = b[alias];
+  }
+
+  if (b.outdoor_space === undefined) {
+    const active = Object.entries(OUTDOOR_FLAGS)
+      .filter(([flag]) => b[flag] === true)
+      .map(([, value]) => value);
+    if (active.length) b.outdoor_space = [...new Set(active)].join(",");
+  }
+
+  if (b.appliances === undefined) {
+    const active = Object.entries(APPLIANCE_FLAGS)
+      .filter(([flag]) => b[flag] === true)
+      .map(([, label]) => label);
+    if (active.length) b.appliances = [...new Set(active)];
+  } else if (b.appliances && typeof b.appliances === "object" && !Array.isArray(b.appliances)) {
+    b.appliances = Object.entries(b.appliances as Record<string, unknown>)
+      .filter(([, v]) => v === true)
+      .map(([k]) => APPLIANCE_FLAGS[k.toLowerCase()] || k);
+  }
+
+  return b;
+}
+
+/** Any top-level key the caller sent that we don't recognize at all — surfaced in the response so a mistake is visible immediately instead of silently dropped. */
+export function findUnrecognizedFields(body: Record<string, unknown>): string[] {
+  return Object.keys(body).filter((k) => !KNOWN_KEYS.has(k));
+}
+
 /**
  * Normalizes an inbound create/update payload to the real `properties`
  * columns, with the same defaults the PropertyWizard uses, so a minimal
@@ -44,7 +135,8 @@ export async function downloadAndStoreImage(url: string, propertyId: string): Pr
  * included on update (so PATCH doesn't clobber untouched fields); on create,
  * defaults fill in anything missing.
  */
-export function normalizePropertyPayload(body: Record<string, unknown>, isCreate: boolean): Record<string, unknown> {
+export function normalizePropertyPayload(rawBody: Record<string, unknown>, isCreate: boolean): Record<string, unknown> {
+  const body = applyAliases(rawBody);
   const out: Record<string, unknown> = {};
   const set = (key: string, value: unknown) => {
     if (isCreate || value !== undefined) out[key] = value;
