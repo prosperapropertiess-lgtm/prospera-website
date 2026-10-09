@@ -62,6 +62,23 @@ function buildMetaDescription(p: Record<string, unknown>): string {
     return `This ${beds || ""}bd/${baths || ""}ba unit in ${city}, ON has been rented. Join our rental alerts to be first to know about similar properties from Prospera Properties.`;
   }
 
+  // Prefer the real, hyperlocal description — it names the actual
+  // neighbourhood, nearby landmarks, specific features. Every listing
+  // was getting the exact same generic sentence here regardless of what
+  // made it distinct, which wastes the one differentiating SEO signal a
+  // property page actually has across a city with 10+ listings.
+  const desc = (p.description as string | null)?.trim();
+  if (desc) {
+    const sentences = desc.split(/(?<=[.!?])\s+/).filter(Boolean);
+    let snippet = "";
+    for (const s of sentences) {
+      const candidate = (snippet + " " + s).trim();
+      if (candidate.length > 155) break;
+      snippet = candidate;
+    }
+    if (snippet.length >= 60) return snippet.slice(0, 160);
+  }
+
   const intro = (p.ai_life_intro as string | null)?.split(/[.\n]/)[0]?.trim();
   if (intro && intro.length >= 60 && intro.length <= 140) return intro + ".";
 
