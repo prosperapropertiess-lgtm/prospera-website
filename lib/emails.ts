@@ -237,6 +237,21 @@ function checklist(label: string, items: string[]): string {
   </table>`;
 }
 
+// ── SYSTEM ALERT ──────────────────────────────────────────────
+
+export function systemAlertEmail({ title, issues }: { title: string; issues: string[] }): string {
+  return wrapper(`
+    ${heroCard(title, "Automated integrity check — not something a tenant or prospect will see, just you.")}
+
+    ${issues.map((issue) => noteBox(issue, "Issue")).join("")}
+
+    <p style="margin:0 0 28px;font-size:15px;color:${MUTED};font-family:${FONT};line-height:1.8;">This runs automatically every few hours. You'll only get this email when something actually looks wrong.</p>
+
+    ${divider()}
+    ${signoff()}
+  `);
+}
+
 // ── LANDLORD WELCOME ─────────────────────────────────────────
 
 export function landlordWelcomeEmail(name: string): string {
