@@ -37,17 +37,20 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
   const { data: application } = await supabaseAdmin
     .from("applications")
-    .select("tenant_name, property_id, properties(address, city)")
+    .select("tenant_name, property_id")
     .eq("id", id)
     .maybeSingle();
+
+  const property = application?.property_id
+    ? (await supabaseAdmin.from("properties").select("address, city").eq("id", application.property_id).maybeSingle()).data
+    : null;
 
   const result = await decideApplication(id, decision);
   if (!result.ok) {
     return page("Something went wrong", `<p style="font-size:16px;color:${CRIMSON};">${result.error}</p>`);
   }
 
-  const propRow = application?.properties as unknown as { address?: string; city?: string } | null;
-  const propertyLabel = propRow?.address ? `${propRow.address}, ${propRow.city}` : "the property";
+  const propertyLabel = property?.address ? `${property.address}, ${property.city}` : "the property";
   const verb = decision === "approved" ? "Approved" : "Declined";
   const color = decision === "approved" ? "#2D7A4F" : CRIMSON;
 
