@@ -27,6 +27,8 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
   const [submitting, setSubmitting] = useState(false);
   const [stepError, setStepError] = useState("");
 
+  const DRAFT_KEY = `apply_draft_${agentId}_${propertyId}`;
+
   const [form, setForm] = useState({
     tenant_name: "", tenant_email: "", tenant_phone: "", tenant_dob: "", current_address: "",
     employer_name: "", employer_position: "", monthly_income: "", employment_start: "", employment_type: "",
@@ -38,6 +40,8 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
     paystubs: string[]; bank_statements: string[]; employment_letter: string[]; id_doc: string[];
   }>({ paystubs: [], bank_statements: [], employment_letter: [], id_doc: [] });
 
+  const [resumed, setResumed] = useState(false);
+
   function set(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
     setStepError("");
@@ -46,8 +50,6 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
   // Validate agent + property on load
   useEffect(() => {
     async function validate() {
-      const { data: prop } = await (await fetch(`/api/agents/properties`)).json().catch(() => ({ data: null }));
-      // Simple approach: fetch public property info
       const res = await fetch(`/api/applications/validate-apply-link?agent_id=${agentId}&property_id=${propertyId}`);
       const json = await res.json();
       if (!res.ok || !json.property) {
@@ -58,6 +60,33 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
     }
     validate();
   }, [agentId, propertyId]);
+
+  // Resume a saved draft, if this exact link was started before and the tab
+  // got closed — don't make someone re-type and re-upload everything.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(DRAFT_KEY);
+      if (!saved) return;
+      const draft = JSON.parse(saved);
+      if (draft.form) setForm(draft.form);
+      if (draft.docs) setDocs(draft.docs);
+      if (draft.step) setStep(draft.step);
+      setResumed(true);
+    } catch {
+      // Private browsing or corrupted draft — just start fresh.
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Autosave on every change.
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ form, docs, step }));
+    } catch {
+      // Storage full or unavailable — not worth interrupting the applicant over.
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form, docs, step]);
 
   function validateStep(): boolean {
     if (step === 1) {
@@ -106,6 +135,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
       });
       const json = await res.json();
       if (!res.ok) { setStepError(json.error ?? "Submission failed."); setSubmitting(false); return; }
+      try { localStorage.removeItem(DRAFT_KEY); } catch { /* not critical */ }
       router.push(`/apply/${agentId}/${propertyId}/submitted${json.application_id ? `?id=${json.application_id}` : ""}`);
     } catch {
       setStepError("Something went wrong. Please try again.");
@@ -187,6 +217,33 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
 
       {/* Form */}
       <div style={{ maxWidth: 560, margin: "0 auto", padding: "32px 20px 60px" }}>
+
+        {resumed && (
+          <div
+            style={{
+              backgroundColor: "rgba(45,122,79,0.06)",
+              border: "1px solid rgba(45,122,79,0.18)",
+              borderRadius: 8,
+              padding: "10px 16px",
+              marginBottom: 20,
+              fontSize: 13,
+              color: "#2D7A4F",
+              fontFamily: "var(--font-dm-sans)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>Picked up right where you left off.</span>
+            <button
+              onClick={() => setResumed(false)}
+              style={{ background: "none", border: "none", color: "#2D7A4F", cursor: "pointer", fontSize: 16, lineHeight: 1, padding: 0 }}
+              aria-label="Dismiss"
+            >
+              ×
+            </button>
+          </div>
+        )}
 
         {/* Step 1 — Personal + Employment */}
         {step === 1 && (

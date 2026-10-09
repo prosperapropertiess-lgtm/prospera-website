@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
 import { applicationReceivedAgentEmail, applicationEbinReviewEmail } from "@/lib/emails";
+import { createQuickActionToken } from "@/lib/application-quick-action-token";
 import { processAndScoreApplication } from "@/lib/application-ai";
 
 interface DocEntry {
@@ -187,6 +188,8 @@ export async function POST(req: NextRequest) {
               agentName: agent.name,
               aiScore: finalApp.ai_score,
               applicationId: application.id,
+              approveUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "approved")}`,
+              rejectUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "rejected")}`,
             }),
           }).catch((err: unknown) => console.error("[submit] Ebin review email failed:", err));
         }

@@ -1168,12 +1168,16 @@ export function applicationEbinReviewEmail({
   agentName,
   aiScore,
   applicationId,
+  approveUrl,
+  rejectUrl,
 }: {
   tenantName: string;
   propertyAddress: string;
   agentName: string;
   aiScore: number;
   applicationId: string;
+  approveUrl?: string;
+  rejectUrl?: string;
 }): string {
   const scoreColor = aiScore >= 7 ? "#0D6E5A" : aiScore >= 5 ? "#B45309" : "#B91C1C";
 
@@ -1190,7 +1194,21 @@ export function applicationEbinReviewEmail({
       </td></tr>
     </table>
 
-    ${cta("Review Application", `${BASE_URL}/admin/applications/${applicationId}`)}
+    ${cta("Read the Full Report", `${BASE_URL}/admin/applications/${applicationId}`)}
+
+    ${approveUrl && rejectUrl ? `
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0 32px;">
+      <tr>
+        <td width="50%" style="padding-right:8px;">
+          <a href="${approveUrl}" style="display:block;text-align:center;padding:14px;background:#2D7A4F;color:#fff;text-decoration:none;font-size:15px;font-weight:700;border-radius:10px;font-family:${FONT};">Approve</a>
+        </td>
+        <td width="50%" style="padding-left:8px;">
+          <a href="${rejectUrl}" style="display:block;text-align:center;padding:14px;background:transparent;color:${CRIMSON};text-decoration:none;font-size:15px;font-weight:700;border-radius:10px;border:1px solid ${CRIMSON};font-family:${FONT};">Decline</a>
+        </td>
+      </tr>
+    </table>
+    ${noteBox("These buttons act immediately — no login needed. Only use them once you're ready to decide.", "One-tap decision")}
+    ` : ""}
 
     ${divider()}
     ${signoff()}
