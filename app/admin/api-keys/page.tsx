@@ -52,7 +52,7 @@ export default function ApiKeysPage() {
   }
 
   function loadActivity() {
-    fetch("/api/admin/api-keys/activity")
+    fetch("/api/admin/api-key-activity")
       .then((r) => r.json())
       .then((data) => {
         setActivity(data.activity ?? []);
