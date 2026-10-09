@@ -158,6 +158,12 @@ curl -X PATCH https://www.prosperaproperties.co/api/listings/<id> \
   -d '{"price": 2050, "status": "published"}'
 ```
 
+**Un-publishing a live listing requires confirmation.** If the listing is
+currently `published` and you send a `status` other than `published`
+(e.g. back to `draft`), this returns `409` unless you also include
+`"confirm_unpublish": true`. Publishing (`status: "published"`) never
+needs this — only taking something live back down does.
+
 `image_urls` on PATCH *appends* to existing photos (download + re-host,
 same as create). Pass `images` instead if you want to replace the full
 photo list yourself.
@@ -172,6 +178,10 @@ Deletes the property row and its stored photos. Not recoverable.
 curl -X DELETE https://www.prosperaproperties.co/api/listings/<id> \
   -H "Authorization: Bearer pk_live_..."
 ```
+
+**Deleting a live listing requires confirmation.** If the listing is
+currently `published`, this returns `409` unless you add
+`?confirm_delete=true` to the URL. Deleting a draft never needs this.
 
 ---
 

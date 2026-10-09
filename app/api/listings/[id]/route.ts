@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { verifyApiKey } from "@/lib/api-key-auth";
+import { verifyApiKey, logApiKeyActivity } from "@/lib/api-key-auth";
 import { normalizePropertyPayload, downloadAndStoreImage, findUnrecognizedFields } from "@/lib/agent-listings";
 
 // GET a single listing — API-key gated (unlike the public /api/listings
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { valid } = await verifyApiKey(req);
+  const { valid, keyId } = await verifyApiKey(req);
   if (!valid) return NextResponse.json({ error: "Unauthorized — missing or invalid API key" }, { status: 401 });
 
   const { id } = await params;
@@ -28,6 +28,21 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const supabase = getSupabaseAdmin();
   const unrecognizedFields = findUnrecognizedFields(body);
+
+  // Un-publishing a live listing is high-stakes and near-invisible when it
+  // happens by accident — it silently kills the public listing AND the
+  // apply link with no obvious signal to anyone. Require an explicit
+  // confirmation rather than letting it happen as a side effect of a
+  // routine edit that happens to include status.
+  if (body.status !== undefined && body.status !== "published") {
+    const { data: existing } = await supabase.from("properties").select("status").eq("id", id).maybeSingle();
+    if (existing?.status === "published" && body.confirm_unpublish !== true) {
+      return NextResponse.json(
+        { error: `This listing is currently published. To change its status to "${body.status}", resend the request with "confirm_unpublish": true.` },
+        { status: 409 }
+      );
+    }
+  }
 
   // image_urls on PATCH — download, re-host, and append to whatever images
   // already exist (rather than replacing) unless the caller explicitly
@@ -54,6 +69,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
+  await logApiKeyActivity(keyId, "update_listing", `Updated ${data.address}, ${data.city}${body.status !== undefined ? ` (status → ${data.status})` : ""}`, data.id);
+
   return NextResponse.json({
     ...data,
     image_errors: imageErrors.length ? imageErrors : undefined,
@@ -64,21 +81,36 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { valid } = await verifyApiKey(req);
+  const { valid, keyId } = await verifyApiKey(req);
   if (!valid) return NextResponse.json({ error: "Unauthorized — missing or invalid API key" }, { status: 401 });
 
   const { id } = await params;
   const supabase = getSupabaseAdmin();
 
-  const { data: property } = await supabase.from("properties").select("images").eq("id", id).maybeSingle();
+  const { data: property } = await supabase.from("properties").select("status, address, city, images").eq("id", id).maybeSingle();
+
+  // Same reasoning as the unpublish guardrail above — deleting a live
+  // listing is a lot more consequential than deleting a draft, so it gets
+  // a real confirmation step instead of being one accidental call away.
+  const url = new URL(req.url);
+  if (property?.status === "published" && url.searchParams.get("confirm_delete") !== "true") {
+    return NextResponse.json(
+      { error: `This listing is currently published. Resend the request with ?confirm_delete=true to delete it anyway.` },
+      { status: 409 }
+    );
+  }
+
   if (property?.images?.length) {
     const paths = (property.images as string[])
-      .map((url) => url.split("/property-images/")[1])
+      .map((u) => u.split("/property-images/")[1])
       .filter(Boolean) as string[];
     if (paths.length) await supabase.storage.from("property-images").remove(paths);
   }
 
   const { error } = await supabase.from("properties").delete().eq("id", id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logApiKeyActivity(keyId, "delete_listing", `Deleted ${property?.address ?? id}${property?.city ? `, ${property.city}` : ""}`, id);
+
   return NextResponse.json({ success: true });
 }

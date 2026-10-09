@@ -12,6 +12,21 @@ interface ApiKeyRow {
   revoked_at: string | null;
 }
 
+interface ActivityRow {
+  id: string;
+  action: string;
+  summary: string;
+  created_at: string;
+  api_keys: { label: string } | null;
+}
+
+const ACTION_LABELS: Record<string, string> = {
+  create_listing: "Created listing",
+  update_listing: "Updated listing",
+  delete_listing: "Deleted listing",
+  send_invite: "Sent invite",
+};
+
 export default function ApiKeysPage() {
   const FONT = "var(--font-dm-sans, sans-serif)";
 
@@ -23,6 +38,9 @@ export default function ApiKeysPage() {
   const [newKey, setNewKey] = useState<string | null>(null);
   const [revokingId, setRevokingId] = useState<string | null>(null);
 
+  const [activity, setActivity] = useState<ActivityRow[]>([]);
+  const [activityLoading, setActivityLoading] = useState(true);
+
   function loadKeys() {
     fetch("/api/admin/api-keys")
       .then((r) => r.json())
@@ -33,7 +51,17 @@ export default function ApiKeysPage() {
       .catch(() => setLoading(false));
   }
 
-  useEffect(() => { loadKeys(); }, []);
+  function loadActivity() {
+    fetch("/api/admin/api-keys/activity")
+      .then((r) => r.json())
+      .then((data) => {
+        setActivity(data.activity ?? []);
+        setActivityLoading(false);
+      })
+      .catch(() => setActivityLoading(false));
+  }
+
+  useEffect(() => { loadKeys(); loadActivity(); }, []);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
@@ -256,6 +284,48 @@ export default function ApiKeysPage() {
                   {revokingId === k.id ? "Revoking..." : "Revoke"}
                 </button>
               )}
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Recent Activity */}
+      <div style={{
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #D8D2C8",
+        borderRadius: 12,
+        overflow: "hidden",
+        marginTop: 28,
+      }}>
+        <div style={{ padding: "16px 24px", borderBottom: "1px solid #F1F5F9" }}>
+          <h3 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "#1F2F3A" }}>Recent Agent Activity</h3>
+          <p style={{ margin: "4px 0 0", fontSize: 12, color: "#666666" }}>Exactly what's been created, changed, or sent through these keys — last 50 actions.</p>
+        </div>
+        {activityLoading ? (
+          <p style={{ padding: 24, fontSize: 13, color: "#64748B" }}>Loading...</p>
+        ) : activity.length === 0 ? (
+          <p style={{ padding: 24, fontSize: 13, color: "#64748B" }}>No agent activity yet.</p>
+        ) : (
+          activity.map((a) => (
+            <div key={a.id} style={{ padding: "14px 24px", borderBottom: "1px solid #F1F5F9" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
+                <span style={{
+                  padding: "2px 8px",
+                  borderRadius: 20,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  backgroundColor: a.action === "delete_listing" ? "#FEE2E2" : "#F0FDF4",
+                  color: a.action === "delete_listing" ? "#991B1B" : "#065F46",
+                }}>
+                  {ACTION_LABELS[a.action] ?? a.action}
+                </span>
+                <span style={{ fontSize: 11, color: "#94A3B8" }}>{a.api_keys?.label ?? "Unknown key"}</span>
+                <span style={{ fontSize: 11, color: "#CBD5E1" }}>·</span>
+                <span style={{ fontSize: 11, color: "#94A3B8" }}>{new Date(a.created_at).toLocaleString()}</span>
+              </div>
+              <p style={{ margin: 0, fontSize: 13, color: "#333333" }}>{a.summary}</p>
             </div>
           ))
         )}

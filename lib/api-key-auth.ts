@@ -43,3 +43,18 @@ export async function verifyApiKey(req: NextRequest): Promise<{ valid: boolean; 
 
   return { valid: true, keyId: data.id };
 }
+
+/**
+ * Logs one agent action for visibility in /admin/api-keys — so "what has
+ * Muse actually been doing with this key" has a real answer instead of
+ * just a last-used timestamp. Never blocks or fails the caller's request.
+ */
+export async function logApiKeyActivity(keyId: string | undefined, action: string, summary: string, propertyId?: string) {
+  if (!keyId) return;
+  try {
+    const supabase = getSupabaseAdmin();
+    await supabase.from("api_key_activity").insert([{ key_id: keyId, action, summary, property_id: propertyId ?? null }]);
+  } catch (err) {
+    console.error("[logApiKeyActivity] failed:", err);
+  }
+}

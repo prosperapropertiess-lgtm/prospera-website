@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { verifyApiKey } from "@/lib/api-key-auth";
+import { verifyApiKey, logApiKeyActivity } from "@/lib/api-key-auth";
 import { normalizePropertyPayload, downloadAndStoreImage, findUnrecognizedFields } from "@/lib/agent-listings";
 
 export async function GET(req: NextRequest) {
@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
 // uses, so an external AI agent can create listings without ever touching
 // a browser session.
 export async function POST(req: NextRequest) {
-  const { valid } = await verifyApiKey(req);
+  const { valid, keyId } = await verifyApiKey(req);
   if (!valid) return NextResponse.json({ error: "Unauthorized — missing or invalid API key" }, { status: 401 });
 
   const body = await req.json().catch(() => null);
@@ -106,6 +106,8 @@ export async function POST(req: NextRequest) {
       .single();
     if (updated) Object.assign(created, updated);
   }
+
+  await logApiKeyActivity(keyId, "create_listing", `Created ${created.address}, ${created.city} ($${created.price}/mo, status: ${created.status})`, created.id);
 
   return NextResponse.json(
     {
