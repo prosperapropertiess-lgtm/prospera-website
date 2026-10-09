@@ -14,6 +14,7 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/move-in-coordinator", name: "Move-In Coordinator", icon: "inventory_2" },
   { href: "/admin/properties", name: "Properties", icon: "villa" },
   { href: "/admin/api-keys", name: "AI Agent Access", icon: "smart_toy" },
+  { href: "/admin/health", name: "System Health", icon: "monitor_heart" },
   { href: "/admin/applications", name: "Applications", icon: "assignment" },
   { href: "/admin/agents", name: "Agents", icon: "support_agent" },
   { href: "/admin/invite", name: "Invite an Agent", icon: "person_add" },
