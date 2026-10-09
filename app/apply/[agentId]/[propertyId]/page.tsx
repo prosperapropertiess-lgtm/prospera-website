@@ -9,6 +9,12 @@ const TOTAL = STEPS.length;
 
 interface Property {
   address: string; city: string; price: number; bedrooms: number; bathrooms: number;
+  utilities_included?: boolean; available_date?: string | null;
+}
+
+function formatMoveIn(dateStr?: string | null): string {
+  if (!dateStr) return "Flexible";
+  return new Date(dateStr + "T00:00:00").toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" });
 }
 
 export default function ApplyPage({ params }: { params: Promise<{ agentId: string; propertyId: string }> }) {
@@ -61,7 +67,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
     }
     if (step === 3) {
       if (docs.paystubs.length < 4) { setStepError("Please upload all 4 pay stubs."); return false; }
-      if (docs.bank_statements.length < 6) { setStepError("Please upload all 6 bank statements."); return false; }
+      if (docs.bank_statements.length < 3) { setStepError("Please upload all 3 bank statements."); return false; }
       if (docs.id_doc.length < 1) { setStepError("Government-issued ID is required."); return false; }
     }
     return true;
@@ -150,7 +156,7 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
           {property.address}
         </h1>
         <p style={{ margin: 0, fontSize: 13, color: "rgba(250,248,245,0.75)", fontFamily: "var(--font-dm-sans)" }}>
-          {property.city} &nbsp;·&nbsp; {property.bedrooms}bd / {property.bathrooms}ba &nbsp;·&nbsp; <strong style={{ color: "rgba(250,248,245,0.8)" }}>${property.price.toLocaleString()}/mo</strong>
+          {property.city} &nbsp;·&nbsp; <strong style={{ color: "rgba(250,248,245,0.8)" }}>${property.price.toLocaleString()}/mo{property.utilities_included ? " · utilities incl." : " + utilities"}</strong> &nbsp;·&nbsp; Move-in: {formatMoveIn(property.available_date)}
         </p>
       </div>
 
@@ -304,9 +310,9 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
               onUploaded={(paths) => setDocs((d) => ({ ...d, paystubs: paths }))}
             />
             <DocUploadSlot
-              label="6 Months Bank Statements"
+              label="3 Months Bank Statements"
               docType="bank_statement"
-              count={6}
+              count={3}
               onUploaded={(paths) => setDocs((d) => ({ ...d, bank_statements: paths }))}
             />
             <DocUploadSlot

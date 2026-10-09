@@ -1060,25 +1060,28 @@ export function applicationInviteEmail({
   propertyAddress,
   propertyCity,
   price,
-  bedrooms,
-  bathrooms,
+  utilitiesIncluded,
+  availableDate,
   applyUrl,
 }: {
   tenantName: string;
   propertyAddress: string;
   propertyCity: string;
   price: number;
-  bedrooms?: number | null;
-  bathrooms?: number | null;
+  utilitiesIncluded?: boolean;
+  availableDate?: string | null;
   applyUrl: string;
 }): string {
+  const moveIn = availableDate
+    ? new Date(availableDate + "T00:00:00").toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })
+    : "Flexible";
+
   return wrapper(`
     ${heroCard(`Hi ${tenantName},`, `Your application for ${propertyAddress}, ${propertyCity} is ready to start.`)}
 
     ${darkStats([
-      { value: `$${price.toLocaleString()}`, label: "Per Month" },
-      ...(bedrooms != null ? [{ value: String(bedrooms), label: bedrooms === 1 ? "Bedroom" : "Bedrooms" }] : []),
-      ...(bathrooms != null ? [{ value: String(bathrooms), label: bathrooms === 1 ? "Bathroom" : "Bathrooms" }] : []),
+      { value: `$${price.toLocaleString()}`, label: utilitiesIncluded ? "Per Month · Utilities Incl." : "Per Month + Utilities" },
+      { value: moveIn, label: "Proposed Move-In" },
     ])}
 
     <p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Takes about 10 minutes. Here's what you'll need on hand:</p>
@@ -1086,7 +1089,7 @@ export function applicationInviteEmail({
     ${checklist("What You'll Need", [
       "Government-issued ID",
       "Your last 4 pay stubs",
-      "6 months of bank statements",
+      "3 months of bank statements",
       "An employment letter, if you have one",
     ])}
 

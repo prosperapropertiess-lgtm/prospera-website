@@ -217,7 +217,7 @@ APPLICANT: ${application.tenant_name}
 DOCUMENT ANALYSIS RESULTS:
 - OCR status: ${ocrData.status}
 - Gross monthly income (from pay stubs): $${ocrData.income?.gross_monthly_avg ?? "N/A"}
-- Average bank deposits (6 months): $${ocrData.income?.bank_deposit_avg ?? "N/A"}
+- Average bank deposits (3 months): $${ocrData.income?.bank_deposit_avg ?? "N/A"}
 - Income-to-rent ratio: ${incomeToRent}x (minimum acceptable: 2.5x)
 - Average bank balance: $${ocrData.banking?.avg_balance ?? "N/A"}
 - NSF/overdraft incidents: ${ocrData.banking?.nsf_count ?? 0}

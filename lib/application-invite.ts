@@ -23,7 +23,7 @@ export async function sendApplicationInvite(
 
   const { data: property, error: propErr } = await supabase
     .from("properties")
-    .select("id, address, city, price, bedrooms, bathrooms, is_managed, available")
+    .select("id, address, city, price, utilities_included, available_date, is_managed, available")
     .eq("id", propertyId)
     .maybeSingle();
   if (propErr) throw new Error(`Property lookup failed: ${propErr.message}`);
@@ -48,7 +48,7 @@ export async function sendApplicationInvite(
 
   const { Resend } = await import("resend");
   const resend = new Resend(resendKey);
-  const { error: sendErr } = await resend.emails.send({
+  const { data: sendData, error: sendErr } = await resend.emails.send({
     from: "Prospera Properties <hello@prosperaproperties.co>",
     to: tenantEmail,
     subject: `Your application for ${property.address} is ready`,
@@ -57,12 +57,16 @@ export async function sendApplicationInvite(
       propertyAddress: property.address,
       propertyCity: property.city,
       price: property.price,
-      bedrooms: property.bedrooms,
-      bathrooms: property.bathrooms,
+      utilitiesIncluded: property.utilities_included,
+      availableDate: property.available_date,
       applyUrl,
     }),
   });
-  if (sendErr) throw new Error(`Email failed to send: ${sendErr.message}`);
+  if (sendErr) {
+    console.error("[sendApplicationInvite] Resend error:", JSON.stringify(sendErr));
+    throw new Error(`Email failed to send: ${sendErr.message}`);
+  }
+  console.log(`[sendApplicationInvite] Sent, Resend id: ${sendData?.id}`);
 
   return { applyUrl, agentId: agent.id, propertyAddress: property.address };
 }
