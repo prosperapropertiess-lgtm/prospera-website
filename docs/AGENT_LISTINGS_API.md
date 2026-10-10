@@ -26,10 +26,15 @@ A missing, malformed, or revoked key returns `401`.
 ## Base URL
 
 ```
-https://www.prosperaproperties.co
+https://api.prosperaproperties.co
 ```
 
-(Use `www` — the bare domain 301-redirects there, which breaks POST/PATCH/DELETE.)
+**Use exactly this.** Not `prosperaproperties.co`, not `www.prosperaproperties.co` —
+both of those redirect to the canonical site domain, and that redirect drops
+the `Authorization` header on many HTTP clients, which looks exactly like an
+invalid API key (it isn't — the key never reaches the server at all). This
+dedicated subdomain exists specifically so there's no wrong version to
+accidentally configure — it has no redirect attached to it.
 
 ---
 
@@ -42,7 +47,7 @@ as **private drafts** (`status: "draft"`) unless you explicitly pass
 `/listings`, but still gets a real, working apply link.
 
 ```bash
-curl -X POST https://www.prosperaproperties.co/api/listings \
+curl -X POST https://api.prosperaproperties.co/api/listings \
   -H "Authorization: Bearer pk_live_..." \
   -H "Content-Type: application/json" \
   -d '{
@@ -138,7 +143,7 @@ Returns every column, regardless of status (the public `GET /api/listings`
 only returns published/available properties — this one doesn't filter).
 
 ```bash
-curl https://www.prosperaproperties.co/api/listings/<id> \
+curl https://api.prosperaproperties.co/api/listings/<id> \
   -H "Authorization: Bearer pk_live_..."
 ```
 
@@ -152,7 +157,7 @@ logic as the admin wizard, including the Notion sync and agent-notify
 emails that fire on a real publish).
 
 ```bash
-curl -X PATCH https://www.prosperaproperties.co/api/listings/<id> \
+curl -X PATCH https://api.prosperaproperties.co/api/listings/<id> \
   -H "Authorization: Bearer pk_live_..." \
   -H "Content-Type: application/json" \
   -d '{"price": 2050, "status": "published"}'
@@ -175,7 +180,7 @@ photo list yourself.
 Deletes the property row and its stored photos. Not recoverable.
 
 ```bash
-curl -X DELETE https://www.prosperaproperties.co/api/listings/<id> \
+curl -X DELETE https://api.prosperaproperties.co/api/listings/<id> \
   -H "Authorization: Bearer pk_live_..."
 ```
 
@@ -191,7 +196,7 @@ Use this instead of `image_urls` when the agent has raw image bytes rather
 than a hosted URL (e.g. an image attached directly in a chat).
 
 ```bash
-curl -X POST https://www.prosperaproperties.co/api/uploads \
+curl -X POST https://api.prosperaproperties.co/api/uploads \
   -H "Authorization: Bearer pk_live_..." \
   -F "file=@photo.jpg" \
   -F "propertyId=<id>"
@@ -208,7 +213,7 @@ Sends a branded "start your application" email straight to a prospective
 tenant, linking into the real application flow for that property.
 
 ```bash
-curl -X POST https://www.prosperaproperties.co/api/listings/<property id>/invite \
+curl -X POST https://api.prosperaproperties.co/api/listings/<property id>/invite \
   -H "Authorization: Bearer pk_live_..." \
   -H "Content-Type: application/json" \
   -d '{"tenant_name": "Jane Smith", "tenant_email": "jane@email.com"}'

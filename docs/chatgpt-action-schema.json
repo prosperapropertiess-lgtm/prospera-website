@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": "Create, edit, and remove rental property listings."
   },
-  "servers": [{ "url": "https://www.prosperaproperties.co" }],
+  "servers": [{ "url": "https://api.prosperaproperties.co" }],
   "paths": {
     "/api/listings": {
       "post": {
