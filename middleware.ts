@@ -30,8 +30,14 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // ── www redirect — enforce canonical domain ───────────────────────────────
+  // Skip this for API routes: a 301 silently drops the Authorization header
+  // on many HTTP clients when they follow the redirect, so any API caller
+  // hitting the bare domain gets a mysterious 401 no matter how valid their
+  // key is (confirmed live — this was the real cause behind Muse's "every
+  // key is dead" reports, not the keys themselves). API routes just serve
+  // directly regardless of which domain they came in on instead.
   const host = req.headers.get("host") ?? "";
-  if (host === "prosperaproperties.co") {
+  if (host === "prosperaproperties.co" && !pathname.startsWith("/api/")) {
     const url = `https://www.prosperaproperties.co${pathname}${req.nextUrl.search}`;
     return NextResponse.redirect(url, { status: 301 });
   }
