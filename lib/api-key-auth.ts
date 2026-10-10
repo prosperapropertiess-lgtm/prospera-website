@@ -19,12 +19,36 @@ export function generateApiKey(): { fullKey: string; keyHash: string; keyPrefix:
   };
 }
 
+// Safe diagnostic for a failed auth attempt — never logs the full secret,
+// just enough to compare against a real key (hash, length, partial value,
+// same style as how Stripe/GitHub show "pk_live_...1234" in their own UI).
+function logAuthFailure(reason: string, authHeader: string | null) {
+  if (!authHeader) {
+    console.error(`[verifyApiKey] REJECTED — ${reason} — no Authorization header at all`);
+    return;
+  }
+  const hasBearer = authHeader.startsWith("Bearer ");
+  const token = hasBearer ? authHeader.slice(7).trim() : authHeader;
+  console.error(
+    `[verifyApiKey] REJECTED — ${reason} — ` +
+    `hasBearerPrefix=${hasBearer} length=${token.length} ` +
+    `preview="${token.slice(0, 12)}...${token.slice(-4)}" ` +
+    `hash=${token ? hashKey(token) : "n/a"}`
+  );
+}
+
 /** Verifies the Authorization: Bearer <key> header against the api_keys table. */
 export async function verifyApiKey(req: NextRequest): Promise<{ valid: boolean; keyId?: string }> {
   const authHeader = req.headers.get("authorization");
-  if (!authHeader?.startsWith("Bearer ")) return { valid: false };
+  if (!authHeader?.startsWith("Bearer ")) {
+    logAuthFailure("missing or malformed Authorization header", authHeader);
+    return { valid: false };
+  }
   const key = authHeader.slice(7).trim();
-  if (!key) return { valid: false };
+  if (!key) {
+    logAuthFailure("empty token after Bearer", authHeader);
+    return { valid: false };
+  }
 
   const supabase = getSupabaseAdmin();
   const { data } = await supabase
@@ -33,7 +57,14 @@ export async function verifyApiKey(req: NextRequest): Promise<{ valid: boolean; 
     .eq("key_hash", hashKey(key))
     .maybeSingle();
 
-  if (!data || data.revoked_at) return { valid: false };
+  if (!data) {
+    logAuthFailure("no api_keys row matches this hash (key doesn't exist in the table at all)", authHeader);
+    return { valid: false };
+  }
+  if (data.revoked_at) {
+    logAuthFailure(`key matched but is revoked (id=${data.id}, revoked_at=${data.revoked_at})`, authHeader);
+    return { valid: false };
+  }
 
   // Non-blocking — don't make the caller wait on this write.
   supabase.from("api_keys").update({ last_used_at: new Date().toISOString() }).eq("id", data.id).then(
