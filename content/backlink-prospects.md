@@ -2694,3 +2694,115 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: CLEO launched CLEOConnect with dedicated training and tools for community workers, including housing law resources and landlord/tenant guides relevant to their client populations.
 - researcher_notes: Same parent organization as CLEO (cleo.on.ca) — all contact routes through info@cleo.on.ca at 416-408-4420. Best angle: asking to be listed in their local professional resources section for community workers in southwestern Ontario who refer clients to housing professionals. Coordinate CLEO and CLEOConnect outreach in one email.
 ---
+
+## WealthNorth — Small Landlord Tax & Real Estate Investing Blog
+- url: https://wealthnorth.ca
+- type: blog
+- why: Canadian real estate and personal finance blog covering BRRRR strategy and a dedicated small landlord tax guide — their audience is exactly the Ontario investor who hires a property manager once they scale past one unit.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via contact form at wealthnorth.ca/contact
+- site_focus: Canadian personal finance and real estate investing blog. Covers BRRRR strategy (Canadian mechanics, refinancing limits, seasoning periods), small landlord tax guide (CCA deductions, rental income reporting), and best real estate apps for Canadian investors. Content is educational, not promotional.
+- hook: Their small landlord tax guide notes that property management fees are tax-deductible — a natural anchor for mentioning Prospera as a local SW Ontario management resource for landlords who are ready to stop self-managing.
+- specific_content: "Small Landlord Tax Guide" (wealthnorth.ca/taxes/real-estate/small-landlord-tax-guide/) and "BRRRR Strategy in Canada" post covering Ontario-specific refinancing mechanics.
+- researcher_notes: Independent blog with practical content. Best angle: resource mention in the tax guide ("if you hire a property manager, fees are deductible — here's what London landlords look for") or a short guest post on SW Ontario market conditions. Contact via site form since no direct email found.
+---
+
+## Broker It! — Ontario Mortgage Broker Blog
+- url: https://brokerit.ca
+- type: mortgage
+- why: Independent Ontario mortgage broker (FSRA #13336) with a how-to blog for homebuyers and investors — post-mortgage clients buying investment properties need a trusted property manager as the next step.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via contact form; phone (289) 212-7676; broker Peter Fabry, licence M08003151
+- site_focus: Ontario mortgage broker educational blog by Peter Fabry. Posts cover finding the best mortgage broker, getting pre-approved, and navigating the Ontario mortgage process. Audience is homebuyers and property investors.
+- hook: A resource mention or short guest piece on "what to do after you close on your investment property" — from the property management side — rounds out the financing content his readers came for.
+- specific_content: Post "Finding the Best Mortgage Broker in Ontario" on brokerit.ca — the site's main educational piece for pre-purchase planning.
+- researcher_notes: Small independent broker blog. Lower outreach volume means less inbox competition than corporate sites. Best ask: a resource link or short guest post contribution. Phone hours Mon–Fri 9am–8pm.
+---
+
+## Shannon Valente — Momentum Realty Ontario Investment Blog
+- url: https://svalente.momentumrealty.ca
+- type: blog
+- why: Niagara/Haldimand Ontario realtor specializing in investment properties whose blog covers Ontario rental regulations and cash flow — her clients buy rental properties and then need a manager; some expand into SW Ontario where Prospera operates.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via Coldwell Banker Momentum Realty, 353 Lake St, St. Catharines; phone 905-356-5556
+- site_focus: Ontario real estate investment blog by Shannon Valente (Coldwell Banker Momentum Realty). Covers investment strategy, cash flow basics, Ontario rental regulations, financing options, and long-term wealth planning for Niagara and Haldimand buyers.
+- hook: Her investor clients expanding into SW Ontario need a local property manager — Prospera is that resource for London, St. Thomas, and Strathroy; a cross-regional resource mention would serve her growing investor audience.
+- specific_content: Blog landing page at svalente.momentumrealty.ca/blog-landing-page covering Ontario cash flow and rental regulations content.
+- researcher_notes: Geographic complement. Shannon's focus is Niagara; Prospera's is SW Ontario. Pitch as a regional resource for her clients buying in our area. Coldwell Banker Momentum office number confirmed via third-party listing.
+---
+
+## MPA Magazine Canada — Mortgage Professional Publication
+- url: https://www.mpamag.com/ca
+- type: blog
+- why: Canadian mortgage industry trade publication that writes about Ontario LTB backlog and landlord conversion trends — the editorial team actively covers the regulatory issues Prospera manages for clients and needs local practitioner voices.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via editorial contact form at mpamag.com/ca/contact (no direct email confirmed)
+- site_focus: Canadian edition of Mortgage Professional America. Covers Ontario rental market trends, LTB backlog, landlord regulatory challenges, investment property financing, and mortgage industry news. Read by brokers, investors, and real estate professionals.
+- hook: Their 2026 article on Ontario landlords considering rental unit conversions "amid the regulatory logjam" cited no SW Ontario property managers — Ebin can provide local expert perspective for future coverage.
+- specific_content: 2026 article "Ontario Landlords Contemplating Rental Unit Conversions Amid Regulatory Logjam" covering LTB delays and landlord decision-making in Ontario.
+- researcher_notes: Pitch as an expert source, not a guest blogger — MPA is more likely to quote a practitioner than run contributed content. Offer to be their go-to London/SW Ontario property management voice for future Ontario rental market articles.
+---
+
+## Refdesk.ca — Canadian Rental Market News Blog
+- url: https://refdesk.ca
+- type: blog
+- why: Canadian rental market analysis blog that synthesizes Rentals.ca data and covers declining rent trends for Ontario landlords — readers are landlords and investors navigating a softening market who may need professional management support.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via contact form at refdesk.ca
+- site_focus: Canadian rental market news aggregator and analysis blog. Covers monthly Rentals.ca rent data, market trends across Canadian cities, and landlord/tenant guidance. June 2026 post: 20 consecutive months of Canadian rent decline (national average asking rent -4.7% YoY to $2,029).
+- hook: A local SW Ontario perspective on "what London landlords are doing while rents soften" — pricing, retention, vacancy reduction — would add on-the-ground context to their data-driven market coverage.
+- specific_content: June 2026 post on 20 consecutive months of Canadian rent decline, with Rentals.ca data on rent trajectory and landlord strategy implications.
+- researcher_notes: Independent analysis site, not a corporate platform. Smaller audience but highly relevant. Best angle: contributed local market commentary or a resource mention for Ontario landlords seeking professional management in a challenging market.
+---
+
+## Rhenti Blog — Canadian Landlord Platform
+- url: https://blog.rhenti.com
+- type: blog
+- why: Canadian property management platform blog with Ontario-specific landlord guides — their audience is active Ontario landlords managing their own properties, which is the exact pool Prospera converts into management clients.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: info@rhenti.com (standard platform contact; confirm on site)
+- site_focus: Blog for Rhenti's property management platform targeting Canadian (especially Ontario) landlords. Posts cover: 9 things every new landlord should know, finding the right renter, Ontario standard lease compliance, rental deposits, and landlord responsibilities. Content is practical and compliance-focused for self-managing Ontario landlords.
+- hook: Their interview with a 35-unit Toronto landlord and their "9 landlord tips" posts serve landlords at exactly the inflection point where professional management starts to make sense — Prospera is a natural resource mention for SW Ontario readers considering the switch.
+- specific_content: "9 landlord tips" post and landlord interview series at blog.rhenti.com — specifically the content on keeping written records and tracking maintenance, which is where Prospera's management systems add the most visible value.
+- researcher_notes: Platform blog, not a personal site — outreach may need to go through their marketing/content team. Best ask: a guest post or resource mention targeting SW Ontario landlords considering professional management. Good topical alignment.
+---
+
+## iSure Insurance — Investment Property Blog
+- url: https://isure.ca/inews
+- type: blog
+- why: Canadian insurance broker with a blog covering first-time investment property tips — landlord insurance and property management go hand in hand; Prospera can be the "next step" resource for their rental investor audience.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via contact form at isure.ca/contact
+- site_focus: Canadian insurance broker's blog (iSure) covering home insurance, landlord insurance, and first-time investment property advice for Ontario property owners. Content targets buyers of rental properties who need insurance guidance alongside their investment decision.
+- hook: Their first-time investment property guide covers insurance but not day-to-day management — Prospera is the natural "now manage it" complement to their insurance content.
+- specific_content: "First Time Investment Property" post at isure.ca/inews covering what new rental investors need to know before buying.
+- researcher_notes: Insurance and property management are complementary services, not competitors. Good angle: offer to contribute a short piece on what Ontario landlords should look for in a property manager (as a companion to their insurance guide), or request a resource mention in their investment property content.
+---
+
+## Hardbacon — Canadian Personal Finance & Real Estate Blog
+- url: https://hardbacon.ca
+- type: blog
+- why: Popular Canadian personal finance site with Ontario real estate coverage — their reviews of tools like HouseSigma and articles on rental investing reach the exact audience of Canadian landlords and investors Prospera wants to reach.
+- researched: true
+- drafted: true
+- added: 2026-10-11
+- contact_email: via contact form at hardbacon.ca/en/contact
+- site_focus: Canadian personal finance blog and tool comparison platform. Covers mortgage tools, real estate investment basics, and Ontario real estate topics for DIY investors. The HouseSigma review article drew Ontario landlord readers actively researching market data tools.
+- hook: A resource mention in their real estate investment content (or a contributed expert piece on SW Ontario rental market conditions for investors) would place Prospera in front of Hardbacon's engaged Canadian investor readership.
+- specific_content: "HouseSigma Review: Is It Just Zillow for Canadians?" article (hardbacon.ca/en/mortgage/housesigma-review/) — targets Ontario investors researching market data, who are likely also researching property management.
+- researcher_notes: High-traffic personal finance site (Alexa rank suggests significant Canadian readership). Content team may accept contributed expert pieces. Best angle: pitch as an Ontario property management expert for a "how to manage a rental property in Ontario" guide or a resource mention in existing investor content.
+---

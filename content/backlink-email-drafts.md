@@ -3544,3 +3544,149 @@ Prospera Properties
 (519) 697-1227
 prosperaproperties.co
 ---
+
+## WealthNorth — 2026-10-11
+To: via contact form at wealthnorth.ca/contact
+Subject: A note on your small landlord tax guide
+
+Hi,
+
+Your small landlord tax guide is one of the clearest plain-English breakdowns of CCA and rental deductions I've come across — it's the kind of resource I'd point new clients to.
+
+Worth mentioning: property management fees are fully deductible, something many Ontario landlords don't realize until they hire us. I'm Ebin Jaison; I run Prospera Properties, a property management company serving London, St. Thomas, and Strathroy.
+
+I'd be happy to contribute a short piece on what Ontario landlords should know before self-managing — or simply be listed as a resource for your Ontario readers considering the switch to professional management.
+
+Let me know if that fits.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Broker It! — 2026-10-11
+To: via contact form at brokerit.ca; phone (289) 212-7676
+Subject: A resource for your investment property clients
+
+Hi Peter,
+
+Your piece on finding the best mortgage broker in Ontario walks clients through the financing decision clearly. I run Prospera Properties — property management in London, St. Thomas, and Strathroy, Ontario.
+
+A lot of investors close on their first rental and then immediately need a property manager. I'd love to be the name you mention for SW Ontario clients — or contribute a short piece for your blog on what landlords should look for in a property manager once the mortgage is signed.
+
+Open to a quick call?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Shannon Valente — Momentum Realty — 2026-10-11
+To: via Coldwell Banker Momentum Realty; phone 905-356-5556
+Subject: A London-area resource for your expanding investor clients
+
+Hi Shannon,
+
+Your blog's breakdown of Ontario rental regulations and cash flow is exactly what new investors need before they commit. I'm Ebin Jaison; I run Prospera Properties, managing rental properties in London, St. Thomas, and Strathroy, Ontario.
+
+Some of your Niagara investors may be eyeing SW Ontario properties as well. I'd be glad to be a listed resource for clients expanding into our region, or to contribute a short piece on what the London-area rental market looks like right now from a management perspective.
+
+Worth a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## MPA Magazine Canada — 2026-10-11
+To: via editorial contact at mpamag.com/ca
+Subject: SW Ontario perspective on your LTB backlog piece
+
+Hi,
+
+Your piece on Ontario landlords considering rental conversions amid the regulatory logjam was accurate to what I see daily in London, St. Thomas, and Strathroy. I'm Ebin Jaison, founder of Prospera Properties, a property management company in SW Ontario.
+
+I'm available as a local expert source for future coverage of the Ontario rental market, LTB timelines, and what smaller landlords outside the GTA are actually doing. Happy to provide quotes, portfolio data, or a full contributed piece on how professional management changes the LTB calculus for SW Ontario landlords.
+
+Would that be useful for your editorial team?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Refdesk.ca — 2026-10-11
+To: via contact form at refdesk.ca
+Subject: A London landlord perspective for your rent-decline coverage
+
+Hi,
+
+Your June piece tracking 20 consecutive months of declining Canadian rents — and what that means for landlords — is exactly the kind of analysis I refer clients to when they're questioning their pricing.
+
+I'm Ebin Jaison; I manage rental properties in London, St. Thomas, and Strathroy with Prospera Properties. I'd be happy to contribute a short local angle — what London-area landlords are doing to protect occupancy as rents soften — or simply be noted as a management resource for Ontario landlords navigating the current market.
+
+Worth a quick conversation?
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Rhenti Blog — 2026-10-11
+To: info@rhenti.com
+Subject: A SW Ontario voice for your landlord content
+
+Hi Rhenti team,
+
+Your "9 landlord tips" post and the interview with the 35-unit Toronto landlord cover the exact moment most landlords start seriously thinking about professional management. I'm Ebin Jaison; I run Prospera Properties, managing rentals in London, St. Thomas, and Strathroy, Ontario.
+
+I'd love to contribute a short piece aimed at SW Ontario self-managing landlords — the specific LTB procedures, N4 timelines, and documentation requirements that differ from self-managing in a major city — or be mentioned as a recommended local resource for Ontario readers in our region.
+
+Happy to connect.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## iSure Insurance — 2026-10-11
+To: via contact form at isure.ca/contact
+Subject: A companion resource to your investment property guide
+
+Hi,
+
+Your first-time investment property guide covers the insurance side well — it's one of the clearer Canadian resources on that topic. I'm Ebin Jaison; I run Prospera Properties, a property management company serving London, St. Thomas, and Strathroy, Ontario.
+
+I'd be happy to contribute a short companion piece on the management side — what new Ontario landlords should set up in the first 90 days — or simply be mentioned as a SW Ontario management resource for your readers who've just bought their first rental.
+
+Let me know if that would add value.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
+
+## Hardbacon — 2026-10-11
+To: via contact form at hardbacon.ca/en/contact
+Subject: Ontario property management resource for your investor readers
+
+Hi,
+
+Your HouseSigma review does a great job covering the data side of Ontario real estate investing. I'm Ebin Jaison, founder of Prospera Properties, a property management company in London, St. Thomas, and Strathroy, Ontario.
+
+The gap between "I found a property" and "I have a well-run rental" is where most investors struggle. I'd be glad to contribute a short guide — what Ontario landlords need to know about managing a rental property — for your real estate investing readers, or to be listed as a recommended resource in your investor content.
+
+Happy to connect.
+
+Ebin Jaison
+Prospera Properties
+(519) 697-1227
+prosperaproperties.co
+---
