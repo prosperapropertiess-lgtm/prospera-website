@@ -10,12 +10,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const to = req.nextUrl.searchParams.get("to") ?? "ebinjaison02@gmail.com";
+  const hasTenant = req.nextUrl.searchParams.get("hasTenant") !== "false";
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   const html = onboardEmail1Welcome({
     ownerName: "Randy Lahey",
     propertyAddress: "27 Horton Street, St. Thomas",
     dashboardUrl: "https://www.prosperaproperties.co/onboard/demo",
+    hasTenant,
+    ...(hasTenant ? {} : { rentLow: 1750, rentMarket: 1850, rentPremium: 1950 }),
   });
 
   const { error } = await resend.emails.send({
