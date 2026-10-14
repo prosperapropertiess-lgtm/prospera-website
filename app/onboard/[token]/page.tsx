@@ -25,6 +25,7 @@ interface Session {
   current_step: number;
   status: string;
   service_type: string;
+  has_tenant: boolean | null;
   owner_name: string | null;
   owner_email: string | null;
   owner_phone: string | null;
@@ -48,6 +49,7 @@ interface Session {
   rent_low: number | null;
   rent_market: number | null;
   rent_premium: number | null;
+  placement_completed_at: string | null;
 }
 
 interface LiveStats {
@@ -641,6 +643,171 @@ function ManagementSteps({ s, token }: { s: Session; token: string }) {
   ), pct, doneCount, totalSteps: 6 };
 }
 
+// ── Vacant management steps (Placement + Management, no tenant yet) ──────
+// Hybrid of PlacementSteps (find a tenant) and ManagementSteps (ongoing care),
+// with no "upload your lease" step — there's no lease until we place one.
+
+function VacantManagementSteps({ s, token, stats }: { s: Session; token: string; stats: LiveStats | null }) {
+  const hasComparables = Array.isArray(s.comparables) && s.comparables.length > 0;
+  const agreementDone  = !!s.agreement_signed_at;
+  const listed         = !!s.property_id;
+  const tenantPlaced    = !!s.placement_completed_at || (stats?.approved ?? false);
+  const detailsDone    = !!s.step4_completed_at;
+  const ebinDone        = !!s.step9_data;
+  const live            = !!s.completed_at;
+
+  const compStepStatus: StepStatus   = agreementDone ? "done" : (hasComparables ? "active" : "locked");
+  const agreementStatus: StepStatus  = agreementDone ? "done" : (hasComparables ? (compStepStatus === "active" ? "locked" : "active") : "active");
+  const listedStatus: StepStatus     = listed ? "done" : (agreementDone ? "active" : "locked");
+  const findingStatus: StepStatus    = tenantPlaced ? "done" : (listed ? "active" : "locked");
+  const placedStatus: StepStatus     = tenantPlaced ? "done" : "locked";
+  const detailsStatus: StepStatus    = detailsDone ? "done" : (tenantPlaced ? "active" : "locked");
+  const ebinStatus: StepStatus       = ebinDone ? "done" : (detailsDone ? "ebin" : "locked");
+  const liveStatus: StepStatus       = live ? "done" : (ebinDone ? "active" : "locked");
+
+  const totalSteps = (hasComparables ? 8 : 7);
+  const doneCount = [
+    true,
+    hasComparables ? agreementDone : null,
+    agreementDone,
+    listed,
+    tenantPlaced,
+    detailsDone,
+    ebinDone,
+    live,
+  ].filter(Boolean).length;
+  const pct = Math.round((doneCount / totalSteps) * 100);
+
+  let n = 1;
+  return { steps: (
+    <>
+      <StepCard
+        num={n++}
+        title="You're in our system"
+        subtitle="Ebin added your property to Prospera's system."
+        status="done"
+        date={fmt(s.created_at)}
+      >
+        <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+          {s.owner_email && <span style={{ fontSize: 13, color: MUTED }}>{s.owner_email}</span>}
+          {s.property_type && <span style={{ fontSize: 13, color: MUTED }}>{s.property_type}</span>}
+          <span style={{ fontSize: 12, fontWeight: 600, color: GREEN, background: GREEN_BG, padding: "2px 8px", borderRadius: 6 }}>
+            Placement + Management
+          </span>
+        </div>
+      </StepCard>
+
+      {hasComparables && (
+        <StepCard
+          num={n++}
+          title="Review your market report"
+          subtitle={agreementDone ? "Market report reviewed." : "We've analysed comparable rentals near your property. Review your market report before signing."}
+          status={compStepStatus}
+          date={agreementDone ? fmt(s.agreement_signed_at) : null}
+        >
+          <MarketCompCard token={token} rentLow={s.rent_low} rentMarket={s.rent_market} rentPremium={s.rent_premium} done={agreementDone} />
+        </StepCard>
+      )}
+
+      <StepCard
+        num={n++}
+        title="Sign your management agreement"
+        subtitle={agreementDone
+          ? "Signed and on file."
+          : "Covers placement and ongoing management. Written in plain English — takes about 2 minutes."}
+        status={agreementStatus}
+        date={agreementDone ? fmt(s.agreement_signed_at) : null}
+        cta="Sign Agreement"
+        ctaHref={`/onboard/${token}/agreement`}
+      />
+
+      <StepCard
+        num={n++}
+        title="Your property is being listed"
+        subtitle={listed
+          ? `Listed on ${fmt(s.step3_completed_at)}.`
+          : agreementDone
+          ? "We're preparing your listing now. It goes live within the hour."
+          : "Once your agreement is signed, we'll prepare and publish your listing."}
+        status={listedStatus}
+        date={listed ? fmt(s.step3_completed_at) : null}
+      >
+        {listed && s.property_id && (
+          <Link
+            href={`/listings/${s.property_id}`}
+            style={{ display: "inline-block", background: GREEN, color: "#fff", borderRadius: 10, padding: "10px 22px", fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+          >
+            View Your Listing →
+          </Link>
+        )}
+      </StepCard>
+
+      {listed && (
+        <StepCard
+          num={n++}
+          title="Finding your tenant"
+          subtitle={tenantPlaced ? "A tenant has been approved for your property." : "We're actively marketing your property and screening applicants."}
+          status={findingStatus}
+        >
+          <LiveStatsPanel stats={stats} />
+        </StepCard>
+      )}
+
+      <StepCard
+        num={n++}
+        title="Tenant placed"
+        subtitle={tenantPlaced
+          ? "Lease signed. No upload needed from you, we handled it."
+          : "Once a tenant is approved, we sign the lease and there's nothing for you to upload."}
+        status={placedStatus}
+        date={tenantPlaced ? fmt(s.placement_completed_at) : null}
+      />
+
+      <StepCard
+        num={n++}
+        title="Fill in your property details"
+        subtitle={detailsDone
+          ? "Access codes, payment preferences, and all key details saved."
+          : "Takes about 5 minutes. Access codes, rent payment preferences, contractors, and anything else we should know. You can do this while we're finding your tenant."}
+        status={detailsStatus}
+        date={detailsDone ? fmt(s.step4_completed_at) : null}
+        cta="Fill In Details"
+        ctaHref={`/onboard/${token}/details`}
+      />
+
+      <StepCard
+        num={n++}
+        title={ebinDone ? "Keys and inspection complete" : "Keys, inspection and setup"}
+        subtitle={ebinDone
+          ? "Initial inspection done, keys received, financial setup confirmed."
+          : detailsDone
+          ? "Ebin will reach out to arrange key handover and the initial walkthrough. Nothing needed from you right now."
+          : "Once your tenant is placed and you've filled in your details, Ebin handles the rest of this step."}
+        status={ebinStatus}
+      />
+
+      <StepCard
+        num={n++}
+        title="You're live"
+        subtitle={live
+          ? "Your property is fully under management. Your owner dashboard is ready."
+          : "Once setup is complete, you'll get your owner dashboard link and first monthly report on the 3rd."}
+        status={liveStatus}
+        date={live ? fmt(s.completed_at) : null}
+      >
+        {live && s.owner_access_token && (
+          <Link
+            href={`/owners/${s.owner_access_token}`}
+            style={{ display: "inline-block", background: GREEN, color: "#fff", borderRadius: 10, padding: "10px 22px", fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "var(--font-poppins), -apple-system, sans-serif" }}
+          >
+            Open Owner Dashboard →
+          </Link>
+        )}
+      </StepCard>
+    </>
+  ), pct, doneCount, totalSteps };
+}
+
 // ── Main page ────────────────────────────────────────────────────
 
 export default function OnboardPortal() {
@@ -674,12 +841,14 @@ export default function OnboardPortal() {
   }, [loadSession]);
 
   useEffect(() => {
-    if (session?.property_id && session.service_type === "placement") {
+    const needsStats = session?.service_type === "placement"
+      || (session?.service_type === "management" && session.has_tenant === false);
+    if (session?.property_id && needsStats) {
       loadStats(session.property_id);
       const interval = setInterval(() => loadStats(session.property_id), 30000);
       return () => clearInterval(interval);
     }
-  }, [session?.property_id, session?.service_type, loadStats]);
+  }, [session?.property_id, session?.service_type, session?.has_tenant, loadStats]);
 
   // ── Loading state ────────────────────────────────────────────
   if (loading) {
@@ -701,13 +870,16 @@ export default function OnboardPortal() {
 
   const name = firstName(session.owner_name);
   const isPlacement = session.service_type === "placement";
+  const isVacantManagement = session.service_type === "management" && session.has_tenant === false;
+  const placementLike = isPlacement || isVacantManagement; // shares copy: no existing lease, needs a tenant found
   const live = !!session.completed_at;
 
   // Build steps for the correct flow
-  const placementResult = isPlacement ? PlacementSteps({ s: session, token, stats }) : null;
-  const managementResult = !isPlacement ? ManagementSteps({ s: session, token }) : null;
-
-  const { steps, pct, doneCount, totalSteps } = (placementResult ?? managementResult)!;
+  const { steps, pct, doneCount, totalSteps } = isPlacement
+    ? PlacementSteps({ s: session, token, stats })
+    : isVacantManagement
+    ? VacantManagementSteps({ s: session, token, stats })
+    : ManagementSteps({ s: session, token });
 
   // Build email timeline
   interface EmailEntry { subject: string; date: string; preview: string; tag: string; sent: boolean; }
@@ -720,32 +892,41 @@ export default function OnboardPortal() {
       sent: true,
     },
     {
-      subject: isPlacement ? "Your market report is ready" : "Next step: upload your lease",
+      subject: placementLike ? "Your market report is ready" : "Next step: upload your lease",
       date: fmtShort(session.step2_completed_at ?? session.created_at),
-      preview: isPlacement
+      preview: placementLike
         ? "Your market comp report is live. Review the rental range for your property before signing."
         : "Your agreement is signed. Please upload your existing lease so we can pull the details automatically.",
       tag: "Action required",
-      sent: isPlacement ? (Array.isArray(session.comparables) && session.comparables.length > 0) : !!session.agreement_signed_at,
+      sent: placementLike ? (Array.isArray(session.comparables) && session.comparables.length > 0) : !!session.agreement_signed_at,
     },
     {
-      subject: isPlacement ? "Agreement signed — listing in progress" : "Agreement signed — we're setting things up",
+      subject: placementLike ? "Agreement signed — listing in progress" : "Agreement signed — we're setting things up",
       date: fmtShort(session.agreement_signed_at),
       preview: isPlacement
         ? "Your placement agreement is signed. We're preparing your listing now."
+        : isVacantManagement
+        ? "Your management agreement is signed. We're preparing your listing now, there's no lease to upload since there's no tenant yet."
         : "Your management agreement is signed. Ebin will be in touch to arrange key handover.",
       tag: "Confirmation",
       sent: !!session.agreement_signed_at,
     },
     {
-      subject: isPlacement ? "Your property is live" : "Inspection complete",
+      subject: placementLike ? "Your property is live" : "Inspection complete",
       date: fmtShort(session.step3_completed_at ?? session.step7_data ? session.created_at : null),
-      preview: isPlacement
+      preview: placementLike
         ? "Your listing is published. We're actively marketing and screening applicants."
         : "We've completed the initial inspection. Everything is documented.",
       tag: "Update",
-      sent: isPlacement ? !!session.property_id : !!session.step7_data,
+      sent: placementLike ? !!session.property_id : !!session.step7_data,
     },
+    ...(isVacantManagement ? [{
+      subject: "Tenant placed — now setting up ongoing management",
+      date: fmtShort(session.placement_completed_at),
+      preview: "A tenant has been approved and the lease is signed. Next, we finish the details to bring your property fully under management.",
+      tag: "Placed",
+      sent: !!session.placement_completed_at,
+    }] : []),
     {
       subject: isPlacement ? "Tenant placed" : "You're live — welcome to Prospera",
       date: fmtShort(session.completed_at),

@@ -1346,19 +1346,41 @@ export function onboardEmail1Welcome(data: {
   ownerName: string;
   propertyAddress: string;
   dashboardUrl: string;
+  // Placement + Management only: whether there's already a tenant/lease in place.
+  // Defaults to true (existing behaviour) so pure-management signups are unaffected.
+  hasTenant?: boolean;
+  rentLow?: number;
+  rentMarket?: number;
+  rentPremium?: number;
 }): string {
   const firstName = data.ownerName.split(" ")[0];
   const GREEN = "#0A7A52";
+  const hasTenant = data.hasTenant ?? true;
+  const hasRentRange = data.rentLow != null && data.rentPremium != null;
 
-  const steps = [
-    { done: true,  label: "We met and talked about your property",      detail: "" },
-    { done: true,  label: "Your property was added to our system",       detail: "" },
-    { done: true,  label: "Welcome email sent, you're reading it now",  detail: "" },
-    { done: false, label: "Upload your current lease",                   detail: "If you already have tenants, upload the lease you signed with them. We'll read it and pull all the details automatically, you won't need to type anything." },
-    { done: false, label: "Answer a few quick questions",                detail: "Things like how many units, roughly how much rent, anything else we should know. Takes about 3 minutes." },
-    { done: false, label: "Sign the management agreement",               detail: "A short, plain-English agreement that explains exactly what we do and what it costs. No confusing legal language." },
-    { done: false, label: "Hand over the keys, we take it from here",   detail: "We'll do the first inspection, introduce ourselves to your tenants, and set everything up. After this, the day-to-day is ours to handle." },
-  ];
+  // Step order matches the live dashboard (app/onboard/[token]/page.tsx): agreement
+  // first, then the lease-or-placement step, then details, then keys. Keeping these
+  // in sync matters, the owner reads this email and then lands on the dashboard.
+  const steps = hasTenant
+    ? [
+        { done: true,  label: "We met and talked about your property",      detail: "" },
+        { done: true,  label: "Your property was added to our system",       detail: "" },
+        { done: true,  label: "Welcome email sent, you're reading it now",  detail: "" },
+        { done: false, label: "Sign the management agreement",               detail: "A short, plain-English agreement that explains exactly what we do and what it costs. No confusing legal language." },
+        { done: false, label: "Upload your current lease",                   detail: "Upload the lease you signed with your current tenant. We'll read it and pull all the details automatically, you won't need to type anything." },
+        { done: false, label: "Answer a few quick questions",                detail: "Things like access codes, rent payment preferences, and anything else we should know. Takes about 5 minutes." },
+        { done: false, label: "Hand over the keys, we take it from here",   detail: "We'll do the first inspection, introduce ourselves to your tenant, and set everything up. After this, the day-to-day is ours to handle." },
+      ]
+    : [
+        { done: true,  label: "We met and talked about your property",      detail: "" },
+        { done: true,  label: "Your property was added to our system",       detail: "" },
+        { done: true,  label: "Welcome email sent, you're reading it now",  detail: "" },
+        ...(hasRentRange ? [{ done: false, label: "Review your market report",  detail: "We've priced your property against comparable rentals nearby. Review the range before signing." }] : []),
+        { done: false, label: "Sign the management agreement",               detail: "A short, plain-English agreement that covers placement and ongoing management, what we do and what it costs. No confusing legal language." },
+        { done: false, label: "We list your property and screen applicants", detail: "Nothing needed from you here, there's no lease to upload since there's no tenant yet. We market the listing and handle every applicant, credit, income, and reference checks included." },
+        { done: false, label: "Answer a few quick questions",                detail: "Access codes, rent payment preferences, and anything else we should know. Takes about 5 minutes, you can do this while we're finding your tenant." },
+        { done: false, label: "Tenant placed, we take it from here",         detail: "Once a tenant is approved and the lease is signed, the day-to-day is ours to handle." },
+      ];
 
   const doneCount = steps.filter(s => s.done).length;
   const totalCount = steps.length;
@@ -1411,13 +1433,14 @@ export function onboardEmail1Welcome(data: {
           <p style="margin:0 0 12px;font-family:${FONT};font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${MUTED};">Before you start, set aside 30 minutes</p>
           <p style="margin:0 0 16px;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.8;">This is the only time you'll ever fill this in. Once it's done, you hand it off and never think about it again. Here's what you'll need handy:</p>
           <table cellpadding="0" cellspacing="0" role="presentation" width="100%">
-            <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">📄 &nbsp;Your current lease (PDF or a photo is fine)</td></tr>
+            ${hasTenant ? `<tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">📄 &nbsp;Your current lease (PDF or a photo is fine)</td></tr>` : ""}
             <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">💳 &nbsp;Banking details for receiving your rent</td></tr>
             <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🔑 &nbsp;Access codes: front door, garage, alarm (if any)</td></tr>
             <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🛡️ &nbsp;Your insurance provider name (optional but helpful)</td></tr>
             <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🔧 &nbsp;Names of any contractors you already trust</td></tr>
             <tr><td style="padding:5px 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.7;">🗑️ &nbsp;Garbage pickup day and where the bins go</td></tr>
           </table>
+          ${!hasTenant ? `<p style="margin:14px 0 0;font-family:${FONT};font-size:15px;color:${TEXT};line-height:1.8;">No lease to worry about, there's no tenant yet. That's on us, we'll list the property and screen applicants.</p>` : ""}
           <p style="margin:16px 0 0;font-family:${FONT};font-size:15px;color:${MUTED};line-height:1.8;">Thirty minutes now saves you hours of phone calls, back-and-forth, and late-night stress down the road. That's the whole point.</p>
         </td>
       </tr>

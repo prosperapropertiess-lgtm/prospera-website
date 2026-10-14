@@ -135,6 +135,7 @@ export default function OnboardListPage() {
   const [propertyLng,      setPropertyLng]       = useState<number | null>(null);
   const [propertyType,     setPropertyType]      = useState("");
   const [serviceType,      setServiceType]       = useState<"placement" | "management">("placement");
+  const [hasTenant,        setHasTenant]         = useState(true);
   const [propertyCity,     setPropertyCity]       = useState("London");
   const [bedrooms,         setBedrooms]           = useState("2");
   const [bathrooms,        setBathrooms]          = useState("1");
@@ -167,7 +168,7 @@ export default function OnboardListPage() {
     setPropertyAddress(""); setPropertyLat(null); setPropertyLng(null); setPropertyType(""); setPropertyCity("London");
     setBedrooms("2"); setBathrooms("1"); setParkingSpots("0"); setParkingType("none"); setPropertyCondition(""); setOwnerChecks([]); setAgentNotes(""); setOwnerActionItems("");
     setRentLow(""); setRentMarket(""); setRentPremium("");
-    setComps([]); setMarketResearch(""); setServiceType("placement"); setFormError(""); setParseInsights("");
+    setComps([]); setMarketResearch(""); setServiceType("placement"); setHasTenant(true); setFormError(""); setParseInsights("");
   }
 
   async function handleDelete(token: string, e: React.MouseEvent) {
@@ -209,7 +210,8 @@ export default function OnboardListPage() {
           property_lng: propertyLng ?? undefined,
           property_type: propertyType || undefined,
           service_type: serviceType,
-          ...(serviceType === "placement" ? {
+          has_tenant: serviceType === "management" ? hasTenant : undefined,
+          ...((serviceType === "placement" || (serviceType === "management" && !hasTenant)) ? {
             property_city: propertyCity,
             bedrooms: Number(bedrooms) || 2,
             bathrooms: bathrooms ? Number(bathrooms) : null,
@@ -415,8 +417,41 @@ export default function OnboardListPage() {
                 </div>
               </div>
 
-              {/* Placement-specific: market comp fields */}
-              {serviceType === "placement" && (
+              {/* Management-specific: does the property already have a tenant? */}
+              {serviceType === "management" && (
+                <div style={{ marginBottom: 20, animation: "slideDown 0.2s ease" }}>
+                  <p style={{
+                    fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase",
+                    letterSpacing: "0.07em", marginBottom: 10,
+                    fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                  }}>Does this property already have a tenant?</p>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                    {([true, false] as const).map(val => (
+                      <button
+                        key={String(val)}
+                        type="button"
+                        onClick={() => setHasTenant(val)}
+                        style={{
+                          padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left",
+                          border: `2px solid ${hasTenant === val ? BURGUNDY : CARD_BORDER}`,
+                          background: hasTenant === val ? "rgba(139,32,48,0.04)" : CARD,
+                          transition: "all 0.15s", fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+                        }}
+                      >
+                        <p style={{ margin: "0 0 3px", fontSize: 14, fontWeight: 700, color: hasTenant === val ? BURGUNDY : NAVY }}>
+                          {val ? "Yes, occupied" : "No, vacant"}
+                        </p>
+                        <p style={{ margin: 0, fontSize: 12, color: MUTED }}>
+                          {val ? "Existing tenant and lease to hand over." : "We need to find a tenant first, then manage ongoing."}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Placement-specific: market comp fields (also used for vacant management, since we need to price and list before we can manage) */}
+              {(serviceType === "placement" || (serviceType === "management" && !hasTenant)) && (
                 <div style={{ marginBottom: 20, animation: "slideDown 0.2s ease" }}>
                   <p style={{
                     fontSize: 12, fontWeight: 600, color: SUBTLE, textTransform: "uppercase",

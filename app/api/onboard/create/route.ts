@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json().catch(() => ({}));
-  const { owner_name, owner_email, owner_phone, property_address, property_lat, property_lng, property_type, service_type, property_city, bedrooms, bathrooms, parking_spots, parking_type, property_condition, owner_action_items, rent_low, rent_market, rent_premium, comparables, market_research } = body;
+  const { owner_name, owner_email, owner_phone, property_address, property_lat, property_lng, property_type, service_type, has_tenant, property_city, bedrooms, bathrooms, parking_spots, parking_type, property_condition, owner_action_items, rent_low, rent_market, rent_premium, comparables, market_research } = body;
 
   if (!owner_name || !owner_email || !property_address) {
     return NextResponse.json({ error: "owner_name, owner_email, and property_address are required" }, { status: 400 });
@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     current_step: 3,
     status: "in_progress",
     service_type: service_type === "management" ? "management" : "placement",
+    has_tenant: service_type === "management" ? (has_tenant !== false) : false,
     owner_name,
     owner_email,
     owner_phone: owner_phone || null,
@@ -83,6 +84,10 @@ export async function POST(req: NextRequest) {
         ownerName: owner_name,
         propertyAddress: property_address,
         dashboardUrl,
+        hasTenant: has_tenant !== false,
+        rentLow: rent_low ? Number(rent_low) : undefined,
+        rentMarket: rent_market ? Number(rent_market) : undefined,
+        rentPremium: rent_premium ? Number(rent_premium) : undefined,
       });
       subject = `Welcome to Prospera, ${owner_name.split(" ")[0]} — let's get started`;
     }
