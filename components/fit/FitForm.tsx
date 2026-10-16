@@ -424,7 +424,7 @@ export default function FitForm({ token }: { token?: string }) {
       </header>
 
       {/* Step body */}
-      <main style={{ flex: 1, maxWidth: 600, width: "100%", margin: "0 auto", padding: "32px 20px 140px", position: "relative", overflowX: "hidden" }}>
+      <div style={{ flex: 1, maxWidth: 600, width: "100%", margin: "0 auto", padding: "32px 20px 140px", position: "relative", overflowX: "hidden" }}>
         <AnimatePresence mode="wait" custom={dir} initial={false}>
           <motion.div key={key} custom={dir}
             variants={{ enter: (d: number) => ({ opacity: 0, x: 40 * d }), center: { opacity: 1, x: 0 }, exit: (d: number) => ({ opacity: 0, x: -40 * d }) }}
@@ -432,7 +432,7 @@ export default function FitForm({ token }: { token?: string }) {
             {body[key]}
           </motion.div>
         </AnimatePresence>
-      </main>
+      </div>
 
       {/* Sticky action bar */}
       {(showContinue || step === last) && (
