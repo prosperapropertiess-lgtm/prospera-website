@@ -286,7 +286,7 @@ export default function FitForm({ token }: { token?: string }) {
             Ebin will look over your details personally and email you the next steps.
           </p>
           <motion.ol initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.18, delayChildren: 0.9 } } }}
-            style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left", backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 18, padding: "8px 20px" }}>
+            style={{ listStyle: "none", margin: 0, textAlign: "left", backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 18, padding: "8px 20px" }}>
             {[["Ebin reviews your property", "Usually within one business day"], ["You get an email", "Either way, with clear next steps"], ["We take it from there", "Agreement, listing, tenant search"]].map(([t, s], i) => (
               <motion.li key={t} variants={{ hidden: { opacity: 0, x: -12 }, show: { opacity: 1, x: 0 } }} className="flex gap-4 items-center" style={{ padding: "14px 0", borderBottom: i < 2 ? `1px solid ${BORDER}` : "none" }}>
                 <span style={{ width: 30, height: 30, borderRadius: "50%", backgroundColor: "#F0EDE8", color: NAVY, fontWeight: 700, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{i + 1}</span>
