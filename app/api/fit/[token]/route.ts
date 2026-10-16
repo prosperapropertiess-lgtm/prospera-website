@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import { notifyFitSubmitted } from "@/lib/fit-notify";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { rateLimit } from "@/lib/rate-limit";
 import { FIT_WRITABLE_FIELDS, cityFromArea } from "@/lib/fit-form";
-
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.prosperaproperties.co";
 
 // Public, capability-URL access: the fit_token is the only credential. Exposes just what the form needs.
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
@@ -54,20 +52,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
     .eq("id", call.id);
   if (error) return NextResponse.json({ error: "Couldn't save, try again" }, { status: 500 });
 
-  // Tell Ebin there's something to review.
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const name = (patch.landlord_name as string) || call.landlord_name || "A landlord";
-    await resend.emails.send({
-      from: "Prospera <hello@prosperaproperties.co>",
-      to: [process.env.EBIN_EMAIL ?? "prosperapropertiess@gmail.com"],
-      subject: `${name} filled in the fit form`,
-      html: `<p style="font-family:Arial,sans-serif;font-size:16px;">${name} submitted their property details.</p>
-             <p><a href="${BASE}/admin/discovery/review/${call.id}" style="font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Review and decide →</a></p>`,
-    });
-  } catch (err) {
-    console.error("[fit] notify email failed:", err);
-  }
+  await notifyFitSubmitted(call.id, (patch.landlord_name as string) || call.landlord_name || "A landlord");
 
   return NextResponse.json({ ok: true });
 }

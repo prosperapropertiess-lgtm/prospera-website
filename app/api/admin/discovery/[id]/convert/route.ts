@@ -73,13 +73,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       ? `Market analysis for ${call.property_address} — Prospera Properties`
       : `Welcome to Prospera, ${call.landlord_name.split(" ")[0]} — let's get started`;
 
-    await resend.emails.send({
+    const sent = await resend.emails.send({
       from: "Ebin at Prospera <hello@prosperaproperties.co>",
       to: [call.landlord_email],
       cc: [process.env.EBIN_EMAIL ?? "prosperapropertiess@gmail.com"],
       subject,
       html,
     });
+    if (sent.error) throw new Error(sent.error.message);
   } catch (emailErr) {
     console.error("[discovery/convert] Welcome email failed:", emailErr);
   }

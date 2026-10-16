@@ -43,13 +43,14 @@ export async function POST(req: NextRequest) {
   if (sendEmail) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
+      const sent = await resend.emails.send({
         from: "Ebin at Prospera <hello@prosperaproperties.co>",
         to: [email],
         cc: [process.env.EBIN_EMAIL ?? "prosperapropertiess@gmail.com"],
         subject: "A few quick questions about your property",
         html: fitLinkEmail(name, url),
       });
+      if (sent.error) throw new Error(sent.error.message);
     } catch (err) {
       console.error("[discovery/send-link] email failed:", err);
       return NextResponse.json({ id: data.id, url, emailed: false, error: "Saved, but the email didn't send. Copy the link instead." }, { status: 207 });

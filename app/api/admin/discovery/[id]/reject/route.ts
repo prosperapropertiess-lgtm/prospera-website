@@ -19,12 +19,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     try {
       const { Resend } = await import("resend");
       const resend = new Resend(resendKey);
-      await resend.emails.send({
+      const sent = await resend.emails.send({
         from: "Prospera Properties <hello@prosperaproperties.co>",
         to: call.landlord_email,
         subject: "About your property, plus our free landlord kit",
         html: notAFitWithKitEmail(call.landlord_name ?? "there"),
       });
+      if (sent.error) throw new Error(sent.error.message);
     } catch (err) {
       console.error("[discovery/reject] Email failed:", err);
       return NextResponse.json({ error: "Couldn't send the email — try again" }, { status: 502 });

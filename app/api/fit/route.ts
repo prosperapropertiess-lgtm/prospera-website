@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { randomBytes } from "crypto";
-import { Resend } from "resend";
+import { notifyFitSubmitted } from "@/lib/fit-notify";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { rateLimit } from "@/lib/rate-limit";
 import { FIT_WRITABLE_FIELDS, cityFromArea } from "@/lib/fit-form";
-
-const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.prosperaproperties.co";
 
 // Evergreen entry point: anyone can submit, each submission becomes its own discovery row.
 export async function POST(req: NextRequest) {
@@ -49,18 +47,7 @@ export async function POST(req: NextRequest) {
     .single();
   if (error) return NextResponse.json({ error: "Couldn't save, try again" }, { status: 500 });
 
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: "Prospera <hello@prosperaproperties.co>",
-      to: [process.env.EBIN_EMAIL ?? "prosperapropertiess@gmail.com"],
-      subject: `${name} filled in the fit form`,
-      html: `<p style="font-family:Arial,sans-serif;font-size:16px;">${name.replace(/</g, "&lt;")} submitted their property details.</p>
-             <p><a href="${BASE}/admin/discovery/review/${data.id}" style="font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Review and decide →</a></p>`,
-    });
-  } catch (err) {
-    console.error("[fit] notify email failed:", err);
-  }
+  await notifyFitSubmitted(data.id, name);
 
   return NextResponse.json({ ok: true });
 }
