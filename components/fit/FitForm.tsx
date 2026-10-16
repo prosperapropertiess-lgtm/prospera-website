@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Balloons, BalloonsRef } from "@/components/ui/balloons";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AREAS, RENT_RANGES, RENT_BASIS, RENT_FLEXIBILITY, MAINTENANCE_LEVELS, CONDITIONS,
@@ -175,6 +176,8 @@ export default function FitForm({ token }: { token?: string }) {
   const [website, setWebsite] = useState(""); // honeypot
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const balloonsRef = useRef<BalloonsRef>(null);
+  const [celebrate, setCelebrate] = useState(false); // only after a fresh submit, not on a revisit
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const draftKey = `${DRAFT_KEY}:${token ?? "open"}`;
 
@@ -200,6 +203,12 @@ export default function FitForm({ token }: { token?: string }) {
     if (state !== "form") return;
     try { localStorage.setItem(draftKey, JSON.stringify(a)); } catch {}
   }, [a, state, draftKey]);
+
+  useEffect(() => {
+    if (state !== "done" || !celebrate) return;
+    const t = setTimeout(() => balloonsRef.current?.launch(), 700);
+    return () => clearTimeout(t);
+  }, [state, celebrate]);
 
   const steps = useMemo(() => [
     { key: "you", valid: !!a.name.trim() && (!!token || /\S+@\S+\.\S+/.test(a.email)) },
@@ -260,7 +269,7 @@ export default function FitForm({ token }: { token?: string }) {
           involvement_level: a.involvement, timeline: a.timeline,
         }),
       });
-      if (res.ok) { try { localStorage.removeItem(draftKey); } catch {} setState("done"); }
+      if (res.ok) { try { localStorage.removeItem(draftKey); } catch {} setCelebrate(true); setState("done"); }
       else setError((await res.json().catch(() => ({}))).error ?? "Something went wrong, please try again.");
     } catch { setError("No connection. Please try again."); }
     setSaving(false);
@@ -279,6 +288,7 @@ export default function FitForm({ token }: { token?: string }) {
   if (state === "done") {
     return (
       <div style={{ minHeight: "100vh", backgroundColor: BG, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <Balloons ref={balloonsRef} />
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ maxWidth: 460, textAlign: "center" }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}><AnimatedCheck /></div>
           <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 700, color: NAVY, margin: "0 0 12px" }}>Got it, thank you.</h1>
