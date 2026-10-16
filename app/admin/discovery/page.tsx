@@ -39,6 +39,11 @@ export default function DiscoveryPage() {
   const [savingCriteria, setSavingCriteria] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [showLink, setShowLink] = useState(false);
+  const [linkForm, setLinkForm] = useState({ name: "", email: "", phone: "" });
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkResult, setLinkResult] = useState<{ url: string; emailed: boolean } | null>(null);
+  const [linkError, setLinkError] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -69,6 +74,30 @@ export default function DiscoveryPage() {
     setShowCriteria(false);
   }
 
+  async function createLink(sendEmail: boolean) {
+    setLinkBusy(true);
+    setLinkError("");
+    const res = await fetch("/api/admin/discovery/send-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...linkForm, sendEmail }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setLinkBusy(false);
+    if (d.url) {
+      setLinkResult({ url: d.url, emailed: !!d.emailed });
+      if (d.error) setLinkError(d.error);
+      load();
+    } else setLinkError(d.error ?? "Something went wrong");
+  }
+
+  function closeLink() {
+    setShowLink(false);
+    setLinkResult(null);
+    setLinkError("");
+    setLinkForm({ name: "", email: "", phone: "" });
+  }
+
   async function deleteCall(id: string) {
     setDeleting(id);
     const res = await fetch(`/api/admin/discovery/${id}`, { method: "DELETE" });
@@ -95,6 +124,13 @@ export default function DiscoveryPage() {
               style={{ border: `1px solid ${BORDER}`, color: TEXT_SEC, backgroundColor: SURFACE }}
             >
               Edit Fit Criteria
+            </button>
+            <button
+              onClick={() => setShowLink(true)}
+              className="px-5 py-3 rounded-xl text-sm font-medium"
+              style={{ border: `1px solid ${BORDER}`, color: NAVY, backgroundColor: SURFACE }}
+            >
+              Send Fit Link
             </button>
             <Link
               href="/admin/discovery/new"
@@ -123,15 +159,20 @@ export default function DiscoveryPage() {
                       <div className="flex items-center gap-2 mb-1">
                         <span style={{ fontSize: 15, fontWeight: 700, color: NAVY }}>{c.landlord_name || "Unnamed call"}</span>
                         <span style={{ fontSize: 11, fontWeight: 700, padding: "2px 10px", borderRadius: 20, backgroundColor: colors.bg, color: colors.fg }}>
-                          {OUTCOME_LABELS[c.outcome]}
+                          {c.source === "link" && !c.fit_submitted_at ? "Waiting on landlord" : OUTCOME_LABELS[c.outcome]}
                         </span>
                       </div>
                       <p style={{ fontSize: 13, color: TEXT_SEC, margin: 0 }}>
-                        {c.property_address || "No address yet"}{c.property_city ? `, ${c.property_city}` : ""}
+                        {c.property_address ? `${c.property_address}${c.property_city ? `, ${c.property_city}` : ""}` : c.area || "No address yet"}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
                       <span style={{ fontSize: 12, color: TEXT_MUT }}>{timeAgo(c.created_at)}</span>
+                      {c.source === "link" && (
+                        <Link href={`/admin/discovery/review/${c.id}`} className="px-3 py-1.5 rounded-lg text-xs font-semibold" style={{ border: `1px solid ${BORDER}`, color: NAVY }}>
+                          {c.fit_submitted_at && c.outcome === "pending_decision" ? "Review" : "Open"}
+                        </Link>
+                      )}
                       {confirmDeleteId === c.id ? (
                         <div className="flex items-center gap-2">
                           <button
@@ -162,6 +203,49 @@ export default function DiscoveryPage() {
           </div>
         )}
       </div>
+
+
+      {showLink && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.5)" }} onClick={closeLink}>
+          <div className="rounded-2xl w-full max-w-md" style={{ backgroundColor: SURFACE, padding: 26 }} onClick={(e) => e.stopPropagation()}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: NAVY, margin: "0 0 4px" }}>Send a fit link</h2>
+            <p style={{ fontSize: 13, color: TEXT_MUT, margin: "0 0 18px" }}>They fill in the property details. You decide what happens next.</p>
+            {linkResult ? (
+              <div>
+                <p style={{ fontSize: 14, color: TEXT, margin: "0 0 10px" }}>{linkResult.emailed ? "Emailed. Here is the link too:" : "Link ready:"}</p>
+                <input readOnly value={linkResult.url} onFocus={(e) => e.target.select()} className="w-full px-4 py-3 rounded-xl text-sm" style={{ border: `1.5px solid ${BORDER}`, backgroundColor: BG, color: TEXT }} />
+                {linkError && <p style={{ color: ACCENT, fontSize: 13, marginTop: 10 }}>{linkError}</p>}
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: 12, marginTop: 18 }}>
+                  <button onClick={() => navigator.clipboard?.writeText(linkResult.url)} className="px-4 py-2.5 text-sm" style={{ color: TEXT_SEC }}>Copy</button>
+                  <button onClick={closeLink} className="px-6 py-2.5 rounded-lg text-sm font-semibold" style={{ backgroundColor: ACCENT, color: "#FAF8F5" }}>Done</button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {(["name", "email", "phone"] as const).map((f) => (
+                  <input
+                    key={f}
+                    value={linkForm[f]}
+                    onChange={(e) => setLinkForm({ ...linkForm, [f]: e.target.value })}
+                    placeholder={f === "name" ? "Landlord name" : f === "email" ? "Email" : "Phone (optional)"}
+                    className="w-full px-4 py-3 rounded-xl text-base outline-none"
+                    style={{ border: `1.5px solid ${BORDER}`, backgroundColor: BG, color: TEXT }}
+                  />
+                ))}
+                {linkError && <p style={{ color: ACCENT, fontSize: 13 }}>{linkError}</p>}
+                <button onClick={() => createLink(true)} disabled={linkBusy || !linkForm.name.trim() || !linkForm.email.trim()} className="w-full px-6 py-3 rounded-lg text-sm font-semibold" style={{ backgroundColor: ACCENT, color: "#FAF8F5", opacity: linkBusy || !linkForm.name.trim() || !linkForm.email.trim() ? 0.5 : 1 }}>
+                  {linkBusy ? "Sending…" : "Email the link"}
+                </button>
+                <div style={{ textAlign: "center" }}>
+                  <button onClick={() => createLink(false)} disabled={linkBusy || !linkForm.name.trim()} className="text-xs font-medium uppercase tracking-widest" style={{ color: TEXT_SEC, borderBottom: `1px solid ${BORDER}` }}>
+                    Just give me the link →
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Criteria editor modal */}
       {showCriteria && (

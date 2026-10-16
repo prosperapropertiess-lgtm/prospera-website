@@ -23,6 +23,17 @@ export interface DiscoveryCall {
   outcome: "in_progress" | "pending_decision" | "rejected" | "converted";
   onboarding_token: string | null;
   rejection_sent_at: string | null;
+  fit_token: string | null;
+  source: "call" | "link";
+  fit_sent_at: string | null;
+  fit_submitted_at: string | null;
+  area: string | null;
+  address_disclosed: boolean | null;
+  rent_expectation: string | null;
+  rent_basis: string | null;
+  rent_flexibility: string | null;
+  maintenance_level: string | null;
+  resources_sent_at: string | null;
   created_at: string;
   updated_at: string;
 }

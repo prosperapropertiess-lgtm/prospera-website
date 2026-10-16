@@ -7,6 +7,7 @@ const ALLOWED_FIELDS = [
   "property_address", "property_city", "property_type", "bedrooms", "bathrooms",
   "occupancy_status", "approx_monthly_rent", "property_condition", "condition_notes",
   "reason_for_call", "service_type", "involvement_level", "timeline",
+  "area", "address_disclosed", "rent_expectation", "rent_basis", "rent_flexibility", "maintenance_level",
 ];
 
 // PATCH /api/admin/discovery/[id] — autosave call answers as the call happens

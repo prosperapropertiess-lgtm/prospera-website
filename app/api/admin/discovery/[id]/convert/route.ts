@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { data: call, error: callErr } = await db.from("discovery_calls").select("*").eq("id", id).single();
   if (callErr || !call) return NextResponse.json({ error: "Call not found" }, { status: 404 });
   if (!call.landlord_name || !call.landlord_email || !call.property_address) {
-    return NextResponse.json({ error: "Name, email, and property address are required before converting" }, { status: 400 });
+    return NextResponse.json({ error: "Name, email, and property address are required before converting. If they only gave an area, add the address first." }, { status: 400 });
   }
 
   const token = generateToken();

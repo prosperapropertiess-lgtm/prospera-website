@@ -41,6 +41,9 @@ CALL ANSWERS:
 - Landlord owns ${call.num_properties_owned ?? "unknown"} propert(y/ies) total
 - Property: ${call.property_address ?? "?"}, ${call.property_city ?? "?"} — ${call.property_type ?? "unknown type"}, ${call.bedrooms ?? "?"}bd/${call.bathrooms ?? "?"}ba
 - Occupancy: ${call.occupancy_status ?? "not stated"}
+- Area: ${call.area ?? "not stated"}${call.address_disclosed === false ? " (landlord chose not to share the address yet)" : ""}
+- Maintenance history: ${call.maintenance_level ?? "not stated"}
+- Rent expectation: ${call.rent_expectation ?? "not stated"} (basis: ${call.rent_basis ?? "not stated"}; flexibility: ${call.rent_flexibility ?? "not stated"})
 - Approx rent: ${call.approx_monthly_rent ? `$${call.approx_monthly_rent}/mo` : "not stated"}
 - Condition: ${call.property_condition ?? "not stated"}${call.condition_notes ? ` — ${call.condition_notes}` : ""}
 - Why they're calling now: ${call.reason_for_call ?? "not stated"}
