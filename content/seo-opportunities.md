@@ -1,7 +1,19 @@
 ---
-Last updated: 2026-10-11
+Last updated: 2026-10-18
 
 ## New Topic Opportunities
+
+- `ontario-landlord-privacy-pipeda-tenant-data` | Est. difficulty: LOW | Vol: ~300/mo | rentzen.ca and greeneconomylaw.com are ranking but no PM company has a dedicated landlord-facing guide. Ontario has no provincial privacy law so federal PIPEDA governs all for-profit landlords. High search intent from landlords confused about credit checks, SINs, cameras, and tenant info consent. Angle: "Ontario Landlord Privacy Rules: PIPEDA, Security Cameras, and Tenant Data Guide" — cover consent requirements for credit checks (written consent required), SIN rules (cannot be required without legal basis per OPC), common-area vs. in-unit security cameras (in-unit cameras not permitted), tenant data access rights (30-day response window), what happens when a tenant requests their own data. Companion to tenant-credit-check-ontario-landlords.md and landlord-entry-rights-ontario.md.
+
+- `ontario-landlord-duty-to-accommodate-disability` | Est. difficulty: MEDIUM | Vol: ~200/mo | Tenantrights.ca and endthewaitontario.com rank, but no PM company has this from the landlord's perspective. The duty flows from the Human Rights Code (not RTA), and the LTB must weigh it in eviction cases. Angle: "Ontario Landlord Duty to Accommodate Tenants with Disabilities" — what the duty is, undue hardship test (cost + health/safety), why disability-related behaviour can't be the sole eviction basis (LTB Guideline 17), accessibility modifications and who pays, when the accommodation duty is triggered vs. exhausted, what constitutes undue hardship. Companion to landlord-maintenance-responsibilities-ontario.md and rta-section-83-ontario.md.
+
+- `ontario-landlord-hoarding-tenant-guide` | Est. difficulty: LOW | Vol: ~150/mo | Torontohoardingnetwork.ca and tenantrights.ca rank; no PM company has this. Hoarding is a disability under the Human Rights Code, so self-help eviction is off-limits and the path is N5 (unit condition/safety) → LTB. Angle: "What Ontario Landlords Can Do When a Tenant Is Hoarding" — hoarding as a potential disability (accommodation must come first), N5 vs. N7 notice paths, what evidence is needed (fire inspection orders, photos), the 20-day void period on N5, typical LTB timeline (4–8 months, adjudicators often grant extra clean-up time), why you cannot remove belongings without an order. Companion to n5-notice-ontario.md and n7-notice-ontario.md.
+
+- `ontario-bill-60-ltb-payment-agreement-form` | Est. difficulty: LOW | Vol: ~150/mo | Very current (new September 21, 2026 rule). No PM company or paralegal has a standalone guide yet. The new LTB Payment Agreement Form is required to document rent repayment plans between landlord and tenant; a failure to use it and request a consent order can undermine a landlord's position at hearing. Angle: "Ontario LTB Payment Agreement Form: What Landlords Need to Know (Bill 60, 2026)" — what the form is, when it's required, how it differs from an informal repayment agreement, how to request a consent order from the form, why a documented plan protects the landlord if the tenant defaults again, the new 50% arrears prepayment rule at hearings. Companion to n4-notice-ontario.md, l1-application-ontario-landlord-guide.md, and ltb-consent-order-ontario.md.
+
+- `student-rental-landlord-guide-london-ontario` | Est. difficulty: LOW | Vol: ~150/mo (local) | Existing fanshawe-college-off-campus-housing-guide.md and western-university-off-campus-housing-guide.md are tenant-facing. No landlord-focused guide to managing student rentals in London exists in the blog. lsrentals.ca and exclusiverental.ca rank for student rental terms but from a tenant/operator perspective. Angle: "London Ontario Student Rental Landlord Guide: Western, Fanshawe, and What to Know" — per-room pricing vs. whole-unit ($600–900/bedroom near campus), separate leases vs. joint tenancy (liability differences), managing multiple unrelated tenants, academic-year turnover strategy, neighbourhoods (Old North/Western Road for Western, Huron Heights/East London for Fanshawe), and the case for professional management on high-turnover student properties. Targets investor-landlords who bought near campus.
+
+
 
 - `how-much-rent-increase-allowed-ontario-2027` | Est. difficulty: LOW | Vol: ~400/mo | **URGENT — time-sensitive** The 2027 Ontario rent increase guideline is 1.9% (down from 2.1% in 2026). The deadline to serve a Form N1 for a January 1, 2027 increase was October 3, 2026 — this is peak search intent right now. No competing PM company has a dedicated 2027 post yet. Angle: "Ontario Rent Increase Guideline 2027: What Landlords Need to Know" — cover the 1.9% cap, how to serve the N1 notice correctly, timing rules, units exempt from guideline, AGI options. First-mover advantage; liv.rent and storeys.com will update their pages but likely haven't yet.
 
@@ -32,6 +44,12 @@ Last updated: 2026-10-11
 - "cash for keys landlord Ontario" (commercial angle) — informational intent only; the commercial angle ("hire a PM to handle cash for keys negotiations") is secondary. Kept as new topic above with informational frame.
 - "L5 application Ontario" — tribunalsontario.ca PDF dominates first result; government source cannot be outranked. above-guideline-rent-increase-ontario.md already covers the topic; expand that post instead of creating a standalone L5 guide.
 - "unauthorized sublet Ontario tenant" (tenant-intent variant) — covered from tenant angle by subletting-assignment-ontario.md; separate landlord guide added as new topic above.
+- "LTB Ontario eviction process step by step 2026" — multiple posts already cover this (evicting-tenant-ontario.md, how-long-does-eviction-take-ontario.md, ltb-hearing-preparation-ontario-landlords.md). HIGH competition from lawyerinfo.ca, landager.ca, openroom. No gap.
+- "rent increase Ontario landlord guide" — covered by how-to-increase-rent-ontario-step-by-step.md and rent-increase-ontario-guidelines.md. HIGH competition. No gap.
+- "N4 N8 N12 notice Ontario" — covered by standalone posts for each form. No gap.
+- "Ontario landlord insurance" — already in blog + already in last week's SKIPPED list. Adding for completeness.
+- "renting out condo Ontario" — added as `renting-out-condo-ontario` new topic last week (2026-10-11). Already in queue. Not duplicating.
+- "Ontario condo landlord guide" — same topic as renting-out-condo-ontario above; not creating a duplicate.
 
 ## Topics to Expand
 
@@ -46,3 +64,9 @@ Last updated: 2026-10-11
 - `above-guideline-rent-increase-ontario.md` — Update with November 1, 2025 procedural change: L5 applications must now be filed electronically by email (no longer in-person or mail). Also note new mandatory Rental Unit Information (RUI) form required with every L5 filing. These are compliance details landlords need to act correctly.
 
 - `lease-renewal-ontario-landlord-guide.md` — Expand with Bill 60 fixed-term lease change: under the new rules, fixed-term leases NO LONGER automatically convert to month-to-month at expiry (changed from the previous RTA default). Clarify current rules for what happens at end of a fixed term under the amended Act.
+
+- `how-long-does-eviction-take-ontario.md` — Update with Bill 60 timeline impact: the N4 notice is now 7 days (was 14), compressing the early stage of the non-payment path. Re-benchmark the overall timeline estimate (3–5 months) to reflect the September 21, 2026 changes, and note the new 15-day order review window (was 30 days).
+
+- `ontario-landlord-tenant-act-2026.md` — Comprehensive update needed with September 21, 2026 Bill 60 changes: new 7-day N4, 50% arrears prepayment rule for hearings, N12 120-day no-compensation option, persistent late payment redefined (3x late in 7 days within 6 months), LTB Payment Agreement Form now mandatory for repayment plans. This is the main RTA reference post and needs to reflect current law.
+
+- `what-to-do-if-tenant-stops-paying-rent-ontario.md` — Update with September 21, 2026 N4 change (7 days now), and add section on the new LTB Payment Agreement Form requirement. Searches on this topic are spiking post-Bill 60 as landlords look for current guidance on the correct N4 timeline.
