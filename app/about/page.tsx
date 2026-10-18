@@ -284,9 +284,9 @@ export default function AboutPage() {
                 That&apos;s not marketing copy. That&apos;s the actual business model.
               </p>
               <p>
-                We managed 10 properties. I cut it to 3. Not because the others were bad —
-                because not every fit is right, and I&apos;d rather manage fewer things
-                exceptionally than more things adequately.
+                I don&apos;t take on every property that comes my way. If it&apos;s not a good
+                fit for both of us, I&apos;ll tell you straight. I&apos;d rather do a great job
+                for fewer landlords than an okay job for a lot of them.
               </p>
             </div>
             <div className="mt-10 flex items-center gap-4">
