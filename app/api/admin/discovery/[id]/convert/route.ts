@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { data: call, error: callErr } = await db.from("discovery_calls").select("*").eq("id", id).single();
   if (callErr || !call) return NextResponse.json({ error: "Call not found" }, { status: 404 });
   if (!call.landlord_name || !call.landlord_email || !call.property_address) {
-    return NextResponse.json({ error: "Name, email, and property address are required before converting" }, { status: 400 });
+    return NextResponse.json({ error: "Name, email, and property address are required before converting. If they only gave an area, add the address first." }, { status: 400 });
   }
 
   const token = generateToken();
@@ -73,13 +73,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       ? `Market analysis for ${call.property_address} — Prospera Properties`
       : `Welcome to Prospera, ${call.landlord_name.split(" ")[0]} — let's get started`;
 
-    await resend.emails.send({
+    const sent = await resend.emails.send({
       from: "Ebin at Prospera <hello@prosperaproperties.co>",
       to: [call.landlord_email],
       cc: [process.env.EBIN_EMAIL ?? "prosperapropertiess@gmail.com"],
       subject,
       html,
     });
+    if (sent.error) throw new Error(sent.error.message);
   } catch (emailErr) {
     console.error("[discovery/convert] Welcome email failed:", emailErr);
   }

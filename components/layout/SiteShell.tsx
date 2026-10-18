@@ -19,13 +19,14 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isDemo = pathname?.startsWith("/demo");
   const isTenants = pathname?.startsWith("/tenants");
   const isOnboard = pathname?.startsWith("/onboard");
+  const isFit = pathname === "/fit" || pathname?.startsWith("/fit/");
   // Exact-match + trailing-slash only -- a plain startsWith("/rent") would
   // also swallow the unrelated, pre-existing /rent-analysis tool.
   const isRent = pathname === "/rent" || pathname?.startsWith("/rent/");
 
   const isMarketComp = pathname?.startsWith("/market-comp");
   const isListingDetail = /^\/listings\/[^/]+/.test(pathname ?? "");
-  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isDemo || isMarketComp || isRent;
+  const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isFit || isDemo || isMarketComp || isRent;
 
   return (
     <>
