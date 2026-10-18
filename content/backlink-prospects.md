@@ -2806,3 +2806,115 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: "HouseSigma Review: Is It Just Zillow for Canadians?" article (hardbacon.ca/en/mortgage/housesigma-review/) — targets Ontario investors researching market data, who are likely also researching property management.
 - researcher_notes: High-traffic personal finance site (Alexa rank suggests significant Canadian readership). Content team may accept contributed expert pieces. Best angle: pitch as an Ontario property management expert for a "how to manage a rental property in Ontario" guide or a resource mention in existing investor content.
 ---
+
+## Ontario Home Intel — Becoming a Landlord in Ontario Blog
+- url: https://ontariohomeintel.ca
+- type: blog
+- why: Independent Ontario landlord guide site with a 2026 "Becoming a Landlord in Ontario" startup checklist covering zoning, deposits, and screening — readers are first-time landlords who are the exact prospects Prospera converts into management clients.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at ontariohomeintel.ca/contact
+- site_focus: Ontario landlord how-to blog covering the full checklist for new rental property owners: zoning compliance, deposits, standard lease, tenant screening, and the 2026 rent guideline. Content appears aimed at first-time landlords in Ontario.
+- hook: Their "Becoming a Landlord in Ontario" checklist walks readers through setup but doesn't cover ongoing management — Prospera is the natural next-step resource for owners in London, St. Thomas, and Strathroy who decide professional management makes more sense.
+- specific_content: "Becoming a Landlord in Ontario: 2026 Guide" at ontariohomeintel.ca — a startup checklist covering zoning, rent deposits, tenant screening, and the standard lease; the place where a mention of professional property management as an alternative would land naturally.
+- researcher_notes: Independent guide site, not a corporate platform. Highly relevant audience (first-time landlords) and topical alignment with Prospera's onboarding funnel. Best ask: a resource mention in the guide or a short contributed section on when to hire a property manager.
+---
+
+## Kevin Sharpe — Ontario Rent Rules Blog
+- url: https://kevinsharpe.ca
+- type: blog
+- why: Ontario real estate professional blogging about landlord regulatory changes — his 2026 post on Ontario's new rent rules covers the exact issues (shorter arrears notice, documentation requirements) that make professional management more valuable.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at kevinsharpe.ca
+- site_focus: Ontario real estate professional blog. Covers Ontario landlord and tenant legislation, including 2026 rent rule changes (shorter arrears notice period, landlord documentation advice), aimed at active Ontario landlords and investors.
+- hook: Kevin's post on Ontario's September 2026 rent rules explains why documentation and notice timelines just got harder — Prospera's management service removes exactly that operational burden for London-area landlords.
+- specific_content: "Ontario's New Rent Rules Taking Effect in September 2026: What Landlords and Tenants Need to Know" at kevinsharpe.ca/blog — covers the shorter arrears notice period and landlord documentation advice, where a note on professional management as a compliance solution fits naturally.
+- researcher_notes: Individual professional blog with current Ontario regulatory content. Lower inbox competition than corporate sites. Best ask: resource mention in the 2026 rent rules post, or a contributed follow-up post on how London landlords are responding to the new rules.
+---
+
+## AGI Paralegal — Above-Guideline Rent Increase Blog
+- url: https://agiparalegal.ca
+- type: blog
+- why: Ontario paralegal firm specializing in above-guideline rent increase (AGI) applications with a dedicated blog — their clients are active landlords pursuing rent increases who also need reliable ongoing management between AGI hearings.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at agiparalegal.ca/contact
+- site_focus: Ontario paralegal firm blog focused on above-guideline rent increase (AGI) applications at the Landlord and Tenant Board. Covers AGI process steps, timelines (12–18 month LTB decisions), grounds for applications, and landlord strategy during the waiting period.
+- hook: Their landlord clients pursuing AGI applications at the LTB still need reliable day-to-day management while waiting 12–18 months for a decision — Prospera handles exactly that operational layer in SW Ontario.
+- specific_content: AGI blog content at agiparalegal.ca/blog covering LTB application timelines and landlord strategy — specifically the post-application waiting period where property management quality directly affects outcome.
+- researcher_notes: Niche paralegal practice with a clearly landlord-aligned blog. Non-competing service (legal representation vs. property management). Complementary referral potential. Best ask: a resource mention for SW Ontario clients needing management during the AGI waiting period, or a brief contributed section on what landlords can do operationally while the LTB processes their file.
+---
+
+## Openroom — Ontario LTB Order Registry
+- url: https://openroom.ca/learn/landlord/
+- type: other
+- why: Ontario's landlord-facing LTB order registry and learn hub, used by thousands of Ontario landlords for tenant screening — a resource mention in their landlord section places Prospera in front of active landlords who are already thinking carefully about tenant selection.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at openroom.ca
+- site_focus: Openroom is a searchable registry of Ontario Landlord and Tenant Board orders, founded by Weiting Bollu. The learn/landlord section covers eviction, LTB forms, and rent control. Used by approximately 120,000 users who have made over 2 million LTB searches. Audience: Ontario landlords doing tenant background checks and researching LTB processes.
+- hook: Openroom's landlord users are the highest-intent landlords in Ontario — already researching LTB history means they're managing the property themselves and feel the pain. A resource mention for SW Ontario professional management serves their audience directly.
+- specific_content: "Landlord" learn section at openroom.ca/learn/landlord/ covering eviction, LTB, and rent control — a natural place to link a trusted SW Ontario property management resource for landlords who want help rather than more DIY research.
+- researcher_notes: High-traffic platform (2M+ searches) with an engaged Ontario landlord audience. Openroom is a neutral platform, not a competitor. Founder Weiting Bollu is contactable via the platform. Best ask: a resource mention or a contributed guide in their learn section for SW Ontario landlords considering professional management.
+---
+
+## Francoise Pollard — Ontario Real Estate Investing Blog
+- url: https://francoisepollard.com
+- type: blog
+- why: Ontario real estate investing blog with a 2026 guide covering updated OSFI mortgage rules and landlord-tenant risks — readers are active Ontario property investors who need a trusted property manager after they close on their investment.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at francoisepollard.com
+- site_focus: Ontario real estate investment blog. The 2026 guide covers OSFI mortgage rule updates, landlord-tenant risks, and investor strategy for Ontario sub-markets. Aimed at Ontario property investors at the acquisition and management decision stage.
+- hook: Francoise's Ontario investing guide covers financing and risk assessment but not day-to-day management — Prospera is the operational answer for SW Ontario investors who've done the numbers and decided to buy.
+- specific_content: "Real Estate Investing in Ontario: What the Numbers Actually Look Like in 2026" at francoisepollard.com — covers OSFI rules and landlord-tenant risks, where a resource mention for professional management in London, St. Thomas, and Strathroy would serve investor readers.
+- researcher_notes: Independent investment blog with current 2026 content. Non-competing (no management service). Best ask: a resource mention for SW Ontario property management in the investing guide, or a contributed short section on what investors should look for in a property manager before closing.
+---
+
+## Team Arora — Ontario Real Estate Investment Blog (RE/MAX)
+- url: https://teamarora.com
+- type: blog
+- why: RE/MAX real estate team in Brampton with an Ontario city investment rankings blog — their investor clients comparing London, St. Thomas, and Strathroy as buy targets need a trusted local property manager as their next step after choosing a market.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at teamarora.com; office 268 Derry Rd W Unit 101, Mississauga ON L5W 0H6
+- site_focus: RE/MAX real estate team (Team Arora) blog focused on Ontario investment city rankings and cash-flow analysis. Posts cover the best Ontario cities for real estate investment in 2026, GTA and SW Ontario sub-market analysis, and investor acquisition strategy. London is cited among their top SW Ontario markets.
+- hook: Team Arora's clients buying in London specifically cite management costs as a key risk factor — Prospera is the trusted local operator for investor-buyers who choose London based on Team Arora's analysis.
+- specific_content: "Best Ontario Cities for Real Estate Investment in 2026" at teamarora.com — names London as a top SW Ontario market and cites management fees (8–12% of rent) as a cost variable investors must model; a natural place to mention Prospera as the local management resource.
+- researcher_notes: Active RE/MAX team with a Brampton and GTA focus but SW Ontario investment content. Non-competing on management. Great referral potential for investors buying in London. Best ask: resource mention in the London investment analysis, or a short contributed expert piece from Ebin on "what London investors should know about local property management."
+---
+
+## Boniferro Mortgages — London Ontario Investment Property Mortgages
+- url: https://boniferromortgages.ca
+- type: mortgage
+- why: London Ontario mortgage broker (Dominion Lending Centres) specializing in rental and investment property financing — post-close clients buying their first investment property in London, St. Thomas, or Strathroy need a trusted local property manager as the immediate next step.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via site contact form; phone 519-851-4590; Mike Boniferro, 152 Albert St, London ON N6A 1M1
+- site_focus: Mike Boniferro is a London Ontario mortgage broker with Dominion Lending Centres / TLC Mortgage Group. Specializes in rental and investment property mortgages in London and SW Ontario. Content covers down payment rules (20% minimum for investment), DSCR lending, rental income treatment (50% offset at A-lenders), and buyer strategy for SW Ontario markets.
+- hook: Mike's investment clients close on London rental properties and then need a property manager — Prospera is the natural local referral for his post-close investor clients in London, St. Thomas, and Strathroy.
+- specific_content: Rental/investment property mortgage page at boniferromortgages.ca/mortgages/rental-investment/ — covers investment financing for SW Ontario buyers, where a resource link to local property management would complete the post-purchase picture for new investors.
+- researcher_notes: Local London broker with confirmed investment property specialization. Geographic match is exact. Phone number (519-851-4590) confirmed via third-party directory. Best angle: referral partnership or resource mention on the investment mortgage page. Ebin can offer the same in return — mutual referral is a natural ask.
+---
+
+## My Home Today — Ontario Landlord Resources Blog
+- url: https://myhometoday.ca
+- type: blog
+- why: Ontario landlord resource and property management software comparison blog — their audience of self-managing Ontario landlords researching tools is the same pool Prospera converts into management clients when DIY proves harder than expected.
+- researched: true
+- drafted: true
+- added: 2026-10-18
+- contact_email: via contact form at myhometoday.ca/contact
+- site_focus: Canadian landlord resource site with Ontario-specific content. Key piece: "Best Property Management Software in Ontario (2026 Guide)" comparing DIY tools for Ontario landlords. Audience is self-managing landlords who are actively researching how to manage more efficiently — the inflection point where professional management becomes the better answer.
+- hook: Their Ontario software guide serves landlords who are still managing themselves; a natural companion resource is Prospera for SW Ontario landlords who conclude that professional management beats any software for their situation.
+- specific_content: "Best Property Management Software in Ontario (2026 Guide)" at myhometoday.ca/landlord-resources/best-property-management-software-ontario — compares DIY tools; an ideal place for a mention of professional management as the alternative for landlords who want full hands-off service in London, St. Thomas, or Strathroy.
+- researcher_notes: Independent resource site, not a management company. Topically well-matched to Prospera's conversion funnel (DIY landlords considering the switch). Best ask: a contributed expert section on "when software isn't enough" and professional management makes sense, or a resource mention at the end of their software comparison for landlords in SW Ontario.
+---
