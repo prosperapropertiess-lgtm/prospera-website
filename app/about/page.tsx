@@ -284,9 +284,17 @@ export default function AboutPage() {
                 That&apos;s not marketing copy. That&apos;s the actual business model.
               </p>
               <p>
-                I don&apos;t take on every property that comes my way. If it&apos;s not a good
-                fit for both of us, I&apos;ll tell you straight. I&apos;d rather do a great job
-                for fewer landlords than an okay job for a lot of them.
+                We mainly work with investors who own 2 to 15 rental properties and need
+                real operating support. We don&apos;t work with every landlord, and we don&apos;t
+                take on every property. If that sounds like you,{" "}
+                <Link
+                  href="/contact"
+                  className="font-medium border-b pb-px transition-opacity hover:opacity-60"
+                  style={{ color: "#1F2F3A", borderColor: "#1F2F3A" }}
+                >
+                  book a call with me
+                </Link>
+                .
               </p>
             </div>
             <div className="mt-10 flex items-center gap-4">
