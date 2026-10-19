@@ -25,7 +25,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   const token = generateToken();
   const BASE = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.prosperaproperties.co";
-  const isPlacement = call.service_type === "placement";
+  // Older calls stored the chip label ("Placement Only") instead of the value,
+  // which silently turned placement-only landlords into full management.
+  const isPlacement = /placement/i.test(call.service_type ?? "") && !/management/i.test(call.service_type ?? "");
 
   const { error } = await db.from("onboarding_sessions").insert({
     token,
