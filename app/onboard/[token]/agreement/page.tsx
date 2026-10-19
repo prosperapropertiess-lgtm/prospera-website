@@ -64,7 +64,7 @@ const PLACEMENT_SECTIONS = [
   },
   {
     title: "How the money works",
-    body: "Our placement fee is 75% of the first month's rent. Here's exactly how it flows:\n\n• We collect the first month's rent and last month's rent deposit from the tenant before move-in\n• We keep 75% of the first month's rent as our fee\n• We send you the remaining 25% of first month's rent\n• We send you the full last month's rent deposit — every dollar — before keys are handed over\n• You hold the last month's deposit for the tenancy, as required by Ontario law\n\nYou don't write us a cheque. If we don't place a tenant, you don't pay us anything.",
+    body: "Our placement fee is one month's rent. Here's exactly how it flows:\n\n• We collect the first month's rent and last month's rent deposit from the tenant before move-in\n• We keep the first month's rent as our fee\n• We send you the full last month's rent deposit — every dollar — before keys are handed over\n• You hold the last month's deposit for the tenancy, as required by Ontario law\n\nYou don't write us a cheque. If we don't place a tenant, you don't pay us anything.",
   },
   {
     title: "We keep you informed the whole way",
