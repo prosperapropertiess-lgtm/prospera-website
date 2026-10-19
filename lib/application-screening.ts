@@ -132,11 +132,13 @@ export async function screenApplication(applicationId: string): Promise<Screenin
       started: app.employment_start,
       stated_monthly_income_before_tax: app.monthly_income != null ? Number(app.monthly_income) : null,
       income_notes: app.income_notes,
-      work_reference_given: Boolean(app.employer_ref_name),
+      work_reference: app.employer_ref_name ? `${app.employer_ref_name} (not yet contacted)` : "none given",
       current_address: app.current_address,
       time_at_current_address: TIME_AT_ADDRESS[app.time_at_address] ?? app.time_at_address,
       currently_pays_rent: app.current_rent != null ? Number(app.current_rent) : null,
-      landlord_reference_given: Boolean(app.landlord_ref_name),
+      current_landlord_reference: app.landlord_ref_name
+        ? `${app.landlord_ref_name} (${[app.landlord_ref_phone && "phone given", app.landlord_ref_email && "email given"].filter(Boolean).join(", ") || "no contact info"}). Not yet contacted.`
+        : "none given",
       reason_for_moving: app.reason_for_moving,
       documents_not_included: skipped,
     };

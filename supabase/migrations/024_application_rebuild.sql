@@ -25,3 +25,15 @@ alter table application_documents add constraint application_documents_doc_type_
     'paystub', 'bank_statement', 'employment_letter', 'id',
     'notice_of_assessment', 'income_proof'
   ));
+
+-- The code has always used an "applications" bucket, but only "Application"
+-- existed, so every document upload failed. Create the one the code expects.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('applications', 'applications', false, 15728640, array['application/pdf','image/jpeg','image/png','image/webp'])
+on conflict (id) do nothing;
+
+-- applications.property_id had no foreign key, so every PostgREST embed like
+-- properties(address, city) failed ("Could not find a relationship").
+alter table applications
+  add constraint applications_property_id_fkey
+  foreign key (property_id) references properties(id) on delete restrict;
