@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 interface Property {
   id: string;
+  title: string | null;
   address: string;
   city: string;
   price: number;
@@ -91,8 +92,8 @@ export default function ApplyPickPropertyPage({ params }: { params: Promise<{ ag
                 onClick={() => router.push(`/apply/${agentId}/${p.id}`)}
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  gap: 16,
+                  alignItems: "flex-start",
+                  gap: 14,
                   textAlign: "left",
                   backgroundColor: "#FFFFFF",
                   border: "1px solid #D8D2C8",
@@ -115,12 +116,17 @@ export default function ApplyPickPropertyPage({ params }: { params: Promise<{ ag
                   }}
                 />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ margin: "0 0 2px", fontSize: 16, fontWeight: 600, color: "#1F2F3A", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {p.address}
+                  <p style={{ margin: "0 0 2px", fontSize: 16, fontWeight: 600, color: "#1F2F3A", lineHeight: 1.35, overflowWrap: "anywhere" }}>
+                    {p.title || p.address}
                   </p>
-                  <p style={{ margin: 0, fontSize: 13, color: "#64748B" }}>
-                    {p.city} &nbsp;·&nbsp; {p.bedrooms}bd / {p.bathrooms}ba &nbsp;·&nbsp;{" "}
-                    <strong style={{ color: "#8B2030" }}>${p.price.toLocaleString()}/mo</strong>
+                  {p.title && (
+                    <p style={{ margin: "0 0 2px", fontSize: 14, color: "#333333", lineHeight: 1.4, overflowWrap: "anywhere" }}>
+                      {p.address}, {p.city}
+                    </p>
+                  )}
+                  <p style={{ margin: 0, fontSize: 14, color: "#666666", lineHeight: 1.4 }}>
+                    {!p.title && <>{p.city} · </>}{p.bedrooms} bed · {p.bathrooms} bath ·{" "}
+                    <strong style={{ color: "#1F2F3A" }}>${p.price.toLocaleString()}/mo</strong>
                   </p>
                 </div>
               </button>
