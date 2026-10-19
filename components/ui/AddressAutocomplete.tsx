@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 declare global {
   interface Window {
     google: typeof google;
     initGooglePlaces?: () => void;
+    gm_authFailure?: () => void;
   }
 }
 
@@ -20,6 +21,9 @@ interface Props {
     province?: string;
     postal_code?: string;
   }) => void;
+  // Called when Google can't be used (no key, billing off, bad key, script blocked),
+  // so the page can offer typing the address by hand instead.
+  onUnavailable?: () => void;
   placeholder?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -29,7 +33,14 @@ interface Props {
 
 let googleScriptLoaded = false;
 let googleScriptLoading = false;
+let googleFailed = false;
 const loadCallbacks: (() => void)[] = [];
+const failureCallbacks = new Set<() => void>();
+
+function markGoogleFailed() {
+  googleFailed = true;
+  failureCallbacks.forEach((cb) => cb());
+}
 
 function loadGoogleScript() {
   if (googleScriptLoaded) return Promise.resolve();
@@ -46,6 +57,7 @@ function loadGoogleScript() {
     if (!apiKey) {
       console.warn("[AddressAutocomplete] NEXT_PUBLIC_GOOGLE_MAPS_API_KEY not set");
       googleScriptLoading = false;
+      markGoogleFailed();
       resolve();
       return;
     }
@@ -58,10 +70,18 @@ function loadGoogleScript() {
       loadCallbacks.length = 0;
     };
 
+    // Google calls this when the key is rejected (billing off, bad key, wrong domain).
+    window.gm_authFailure = markGoogleFailed;
+
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGooglePlaces`;
     script.async = true;
     script.defer = true;
+    script.onerror = () => {
+      googleScriptLoading = false;
+      markGoogleFailed();
+      resolve();
+    };
     document.head.appendChild(script);
   });
 }
@@ -70,6 +90,7 @@ export default function AddressAutocomplete({
   value,
   onChange,
   onPlaceSelect,
+  onUnavailable,
   placeholder = "Start typing an address...",
   className = "",
   style = {},
@@ -79,6 +100,18 @@ export default function AddressAutocomplete({
   const inputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const isInitialMount = useRef(true);
+  const [unavailable, setUnavailable] = useState(false);
+  // Parents pass fresh inline callbacks every render. Keep the latest in refs so
+  // the Google listener (attached once) always calls the current version —
+  // re-attaching per render used to drop the listener after the first keystroke.
+  const onChangeRef = useRef(onChange);
+  const onPlaceSelectRef = useRef(onPlaceSelect);
+  const onUnavailableRef = useRef(onUnavailable);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+    onPlaceSelectRef.current = onPlaceSelect;
+    onUnavailableRef.current = onUnavailable;
+  });
 
   // Set initial value only on mount — after that, the input is uncontrolled
   useEffect(() => {
@@ -114,10 +147,10 @@ export default function AddressAutocomplete({
     if (inputRef.current) {
       inputRef.current.value = streetAddress;
     }
-    onChange(streetAddress);
+    onChangeRef.current(streetAddress);
 
-    if (onPlaceSelect) {
-      onPlaceSelect({
+    if (onPlaceSelectRef.current) {
+      onPlaceSelectRef.current({
         formatted_address: place.formatted_address || "",
         street_address: streetAddress,
         lat: place.geometry.location.lat(),
@@ -127,12 +160,16 @@ export default function AddressAutocomplete({
         postal_code: postal_code || undefined,
       });
     }
-  }, [onChange, onPlaceSelect]);
+  }, []);
 
   useEffect(() => {
+    const notify = () => { setUnavailable(true); onUnavailableRef.current?.(); };
+    failureCallbacks.add(notify);
+    if (googleFailed) notify();
+
     loadGoogleScript().then(() => {
-      if (!window.google?.maps?.places || !inputRef.current) return;
-      if (autocompleteRef.current) return;
+      if (!window.google?.maps?.places) { markGoogleFailed(); return; }
+      if (!inputRef.current || autocompleteRef.current) return;
 
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
         componentRestrictions: { country },
@@ -145,8 +182,10 @@ export default function AddressAutocomplete({
     });
 
     return () => {
+      failureCallbacks.delete(notify);
       if (autocompleteRef.current) {
         google.maps.event.clearInstanceListeners(autocompleteRef.current);
+        autocompleteRef.current = null;
       }
     };
   }, [country, types, handlePlaceChanged]);
@@ -163,9 +202,11 @@ export default function AddressAutocomplete({
         style={style}
         autoComplete="off"
       />
-      <p style={{ fontSize: "11px", color: "#999", marginTop: "4px" }}>
-        Select from the dropdown to capture the full address.
-      </p>
+      {!unavailable && (
+        <p style={{ fontSize: "12px", color: "#666666", marginTop: "4px" }}>
+          Select from the dropdown to capture the full address.
+        </p>
+      )}
     </div>
   );
 }

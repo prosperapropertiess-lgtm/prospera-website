@@ -28,9 +28,16 @@ const STREET_SUFFIXES = [
   "street", "st", "avenue", "ave", "road", "rd", "drive", "dr", "boulevard", "blvd",
   "crescent", "cres", "court", "ct", "lane", "ln", "way", "place", "pl", "terrace",
   "circle", "cir", "trail", "grove", "gate", "walk", "row", "square", "close", "line",
+  "parkway", "pkwy", "highway", "hwy", "heights", "hts", "gardens", "path", "mews", "park",
+  "point", "ridge", "hill", "common", "green", "glen", "landing", "run", "bay", "view",
+  "sideroad", "concession", "cove", "link", "heath", "hollow", "wood", "woods", "ter", "crt",
 ];
-function looksLikeCompleteAddress(address: string): boolean {
-  const trimmed = address.trim();
+export function looksLikeCompleteAddress(address: string): boolean {
+  // Ignore a trailing unit ("Unit 3", "Apt B", "#2") or direction ("N", "East").
+  const trimmed = address
+    .trim()
+    .replace(/,?\s*(unit|apt|apartment|suite|ste|#)\s*[\w-]+$/i, "")
+    .replace(/,?\s+(n|s|e|w|north|south|east|west)\.?$/i, "");
   if (trimmed.length < 10) return false;
   const lastWord = trimmed.toLowerCase().split(/\s+/).pop() ?? "";
   return STREET_SUFFIXES.includes(lastWord.replace(/[.,]/g, ""));

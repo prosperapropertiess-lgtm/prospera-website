@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import type { WizardData } from "../PropertyWizard";
+import { looksLikeCompleteAddress, type WizardData } from "../PropertyWizard";
 import AddressAutocomplete from "@/components/ui/AddressAutocomplete";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
@@ -33,6 +33,19 @@ interface Props {
 
 export default function BasicsStep({ data, onChange }: Props) {
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [googleDown, setGoogleDown] = useState(false);
+  const [manualError, setManualError] = useState("");
+
+  // For when Google's lookup is down or doesn't know the address yet (e.g. a
+  // new build). Still refuses obviously cut-off addresses like "190 wych".
+  function confirmTypedAddress() {
+    if (looksLikeCompleteAddress(data.address)) {
+      setManualError("");
+      onChange({ address: data.address.trim(), address_confirmed: true });
+    } else {
+      setManualError("Type the full street address, ending with the street type, like \"1581 Hansel St\" or \"12 Oak Cres\".");
+    }
+  }
   const calendarRef = useRef<HTMLDivElement>(null);
 
   // Close calendar on click outside
@@ -69,7 +82,8 @@ export default function BasicsStep({ data, onChange }: Props) {
         <Field label="Street Address" required>
           <AddressAutocomplete
             value={data.address}
-            onChange={(val) => onChange({ address: val, address_confirmed: false })}
+            onChange={(val) => { setManualError(""); onChange({ address: val, address_confirmed: false }); }}
+            onUnavailable={() => setGoogleDown(true)}
             onPlaceSelect={(place) => {
               const updates: Partial<WizardData> = {
                 address: place.street_address,
@@ -92,11 +106,33 @@ export default function BasicsStep({ data, onChange }: Props) {
               border: `1px solid ${!data.address_confirmed && data.address ? "#8B2030" : BORDER}`,
             }}
           />
-          {!data.address_confirmed && data.address && (
-            <p className="text-xs mt-1.5" style={{ color: "#8B2030" }}>
-              ⚠ Not confirmed yet — pick the matching suggestion from the dropdown so the full address
-              (including the street type, e.g. &quot;St&quot; or &quot;Ave&quot;) actually gets saved.
+          {googleDown && !data.address && (
+            <p className="text-sm mt-1.5" style={{ color: TEXT_MUT }}>
+              Address lookup isn&apos;t working right now. Type the full address, then tap &quot;Use this address&quot;.
             </p>
+          )}
+          {!data.address_confirmed && data.address && (
+            <div className="mt-2">
+              <p className="text-sm" style={{ color: "#8B2030" }}>
+                {googleDown
+                  ? "Address lookup isn't working right now. Check the address is complete, then use it as typed."
+                  : "Not confirmed yet. Pick the matching address from the dropdown. Not in the list? Use it as typed."}
+              </p>
+              <button
+                type="button"
+                onClick={confirmTypedAddress}
+                className="mt-2 px-4 py-2 rounded-lg text-sm font-semibold"
+                style={{ backgroundColor: SURFACE, color: TEXT, border: `1px solid ${BORDER}` }}
+              >
+                Use this address as typed
+              </button>
+              {manualError && (
+                <p className="text-sm mt-1.5" style={{ color: "#8B2030" }}>{manualError}</p>
+              )}
+            </div>
+          )}
+          {data.address_confirmed && data.address && (
+            <p className="text-sm mt-1.5" style={{ color: "#2D7A4F" }}>✓ Address confirmed</p>
           )}
         </Field>
 
