@@ -3,44 +3,63 @@ import { waitUntil } from "@vercel/functions";
 import { supabaseAdmin } from "@/lib/supabase";
 import { applicationReceivedAgentEmail, applicationEbinReviewEmail } from "@/lib/emails";
 import { createQuickActionToken } from "@/lib/application-quick-action-token";
-import { processAndScoreApplication } from "@/lib/application-ai";
+import { screenAndSave, VERDICTS } from "@/lib/application-screening";
+import { ALL_DOC_TYPES, missingDocs, type IncomeSource } from "@/lib/application-requirements";
+
+// The AI review runs after the response is sent; give it room to read every document.
+export const maxDuration = 300;
+
+const INCOME_SOURCES: IncomeSource[] = ["employed", "self_employed", "student", "retired", "other"];
+const EMPLOYMENT_TYPES = ["full_time", "part_time", "contract"];
+const TIMES_AT_ADDRESS = ["under_1", "1_2", "2_5", "5_plus"];
 
 interface DocEntry {
   doc_type: string;
   storage_path: string;
 }
 
+const text = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
+const num = (v: unknown) => (v !== "" && v != null && Number.isFinite(Number(v)) ? Number(v) : null);
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const {
-      agent_id, property_id,
-      tenant_name, tenant_email, tenant_phone, tenant_dob, current_address,
-      employer_name, employer_position, monthly_income, employment_start, employment_type,
-      landlord_ref_name, landlord_ref_phone, landlord_ref_email,
-      employer_ref_name, employer_ref_phone, employer_ref_email,
-      documents,
-    } = body;
+    const { agent_id, property_id, documents, consent } = body;
+    const tenant_name = text(body.tenant_name);
+    const tenant_email = text(body.tenant_email)?.toLowerCase() ?? null;
+    const tenant_phone = text(body.tenant_phone);
+    const income_source = INCOME_SOURCES.includes(body.income_source) ? (body.income_source as IncomeSource) : null;
 
-    // Basic validation
     if (!agent_id || !property_id) {
       return NextResponse.json({ error: "Invalid application link" }, { status: 400 });
     }
     if (!tenant_name || !tenant_email || !tenant_phone) {
       return NextResponse.json({ error: "Name, email, and phone are required" }, { status: 400 });
     }
+    if (!income_source) {
+      return NextResponse.json({ error: "Please tell us how you earn your income." }, { status: 400 });
+    }
+    if (consent !== true) {
+      return NextResponse.json({ error: "Please check the box to confirm and give permission." }, { status: 400 });
+    }
 
-    // Validate agent
+    const docEntries: DocEntry[] = (Array.isArray(documents) ? documents : []).filter(
+      (d: DocEntry) =>
+        ALL_DOC_TYPES.includes(d?.doc_type as never) &&
+        typeof d?.storage_path === "string" &&
+        /^temp\/[\w.-]+$/.test(d.storage_path),
+    );
+    const missing = missingDocs(income_source, docEntries);
+    if (missing) return NextResponse.json({ error: missing }, { status: 400 });
+
     const { data: agent } = await supabaseAdmin
       .from("agents")
       .select("id, name, email, is_active")
       .eq("id", agent_id)
       .eq("is_active", true)
       .maybeSingle();
-
     if (!agent) return NextResponse.json({ error: "Invalid application link" }, { status: 400 });
 
-    // Validate property
     const { data: property } = await supabaseAdmin
       .from("properties")
       .select("id, address, city, price")
@@ -48,42 +67,57 @@ export async function POST(req: NextRequest) {
       .eq("is_managed", true)
       .eq("available", true)
       .maybeSingle();
-
     if (!property) return NextResponse.json({ error: "This property is no longer available" }, { status: 400 });
 
-    // Prevent duplicate applications
     const { data: existing } = await supabaseAdmin
       .from("applications")
       .select("id")
-      .eq("tenant_email", tenant_email.toLowerCase().trim())
+      .eq("tenant_email", tenant_email)
       .eq("property_id", property_id)
       .maybeSingle();
     if (existing) {
       return NextResponse.json({ error: "You have already applied for this property." }, { status: 409 });
     }
 
-    // Insert application
+    const coApplicants = (Array.isArray(body.co_applicants) ? body.co_applicants : [])
+      .slice(0, 5)
+      .map((c: Record<string, unknown>) => ({ name: text(c?.name), email: text(c?.email), phone: text(c?.phone) }))
+      .filter((c: { name: string | null }) => c.name);
+
     const { data: application, error: appErr } = await supabaseAdmin
       .from("applications")
       .insert([{
         agent_id,
         property_id,
-        tenant_name: tenant_name.trim(),
-        tenant_email: tenant_email.toLowerCase().trim(),
-        tenant_phone: tenant_phone.trim(),
-        tenant_dob: tenant_dob || null,
-        current_address: current_address || null,
-        employer_name: employer_name || null,
-        employer_position: employer_position || null,
-        monthly_income: monthly_income ? Number(monthly_income) : null,
-        employment_start: employment_start || null,
-        employment_type: employment_type || null,
-        landlord_ref_name: landlord_ref_name || null,
-        landlord_ref_phone: landlord_ref_phone || null,
-        landlord_ref_email: landlord_ref_email || null,
-        employer_ref_name: employer_ref_name || null,
-        employer_ref_phone: employer_ref_phone || null,
-        employer_ref_email: employer_ref_email || null,
+        tenant_name,
+        tenant_email,
+        tenant_phone,
+        move_in_date: text(body.move_in_date),
+        occupants: num(body.occupants),
+        co_applicants: coApplicants,
+        pets: body.has_pets === "yes" ? text(body.pets) : null,
+        smokes: body.smokes === "yes" ? true : body.smokes === "no" ? false : null,
+        vehicles: num(body.vehicles),
+        income_source,
+        income_notes: text(body.income_notes),
+        employer_name: text(body.employer_name),
+        employer_position: text(body.employer_position),
+        employment_type:
+          income_source === "self_employed" ? "self_employed"
+          : income_source === "employed" && EMPLOYMENT_TYPES.includes(body.employment_type) ? body.employment_type
+          : null,
+        employment_start: text(body.employment_start),
+        monthly_income: num(body.monthly_income),
+        employer_ref_name: text(body.employer_ref_name),
+        employer_ref_phone: text(body.employer_ref_phone),
+        current_address: text(body.current_address),
+        time_at_address: TIMES_AT_ADDRESS.includes(body.time_at_address) ? body.time_at_address : null,
+        current_rent: body.rents_now === "yes" ? num(body.current_rent) : null,
+        landlord_ref_name: body.rents_now === "yes" ? text(body.landlord_ref_name) : null,
+        landlord_ref_phone: body.rents_now === "yes" ? text(body.landlord_ref_phone) : null,
+        landlord_ref_email: body.rents_now === "yes" ? text(body.landlord_ref_email) : null,
+        reason_for_moving: text(body.reason_for_moving),
+        consent_at: new Date().toISOString(),
         monthly_rent: Number(property.price),
         status: "pending",
       }])
@@ -95,45 +129,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to save application" }, { status: 500 });
     }
 
-    // Move documents from temp/ → applications/{id}/ and insert document rows
-    const docEntries: DocEntry[] = Array.isArray(documents) ? documents : [];
-    const movedDocs: { doc_type: string; storage_path: string }[] = [];
-
+    // Move documents from temp/ → applications/{id}/ and record them.
     for (const doc of docEntries) {
-      if (!doc.storage_path || !doc.doc_type) continue;
-
-      const newPath = doc.storage_path.replace(
-        /^temp\//,
-        `applications/${application.id}/`
-      );
-
-      const { error: moveErr } = await supabaseAdmin.storage
-        .from("applications")
-        .move(doc.storage_path, newPath);
-
-      const finalPath = moveErr ? doc.storage_path : newPath;
-
+      const newPath = doc.storage_path.replace(/^temp\//, `applications/${application.id}/`);
+      const { error: moveErr } = await supabaseAdmin.storage.from("applications").move(doc.storage_path, newPath);
       await supabaseAdmin.from("application_documents").insert([{
         application_id: application.id,
         doc_type: doc.doc_type,
-        storage_path: finalPath,
+        storage_path: moveErr ? doc.storage_path : newPath,
       }]);
-
-      movedDocs.push({ doc_type: doc.doc_type, storage_path: finalPath });
     }
 
-    // Mark as processing
-    await supabaseAdmin
-      .from("applications")
-      .update({ status: "processing" })
-      .eq("id", application.id);
+    await supabaseAdmin.from("applications").update({ status: "processing" }).eq("id", application.id);
 
-    // Email agent immediately (non-blocking)
     const resendKey = process.env.RESEND_API_KEY;
+    const propertyAddress = `${property.address}, ${property.city}`;
+
     if (resendKey) {
       const { Resend } = await import("resend");
-      const resend = new Resend(resendKey);
-      resend.emails.send({
+      new Resend(resendKey).emails.send({
         from: "Prospera Properties <hello@prosperaproperties.co>",
         to: agent.email,
         cc: ["prosperapropertiess@gmail.com"],
@@ -143,57 +157,42 @@ export async function POST(req: NextRequest) {
           tenantName: tenant_name,
           tenantEmail: tenant_email,
           tenantPhone: tenant_phone,
-          propertyAddress: `${property.address}, ${property.city}`,
+          propertyAddress,
           applicationId: application.id,
         }),
       }).catch((err: unknown) => console.error("[submit] Agent email failed:", err));
     }
 
-    // Process documents + generate AI report in background
+    // AI review in the background, then always tell Ebin — with the summary if
+    // it worked, or a "look at this by hand" note if it didn't.
     waitUntil(
       (async () => {
-        await processAndScoreApplication(
-          application.id,
-          movedDocs,
-          {
-            tenant_name: tenant_name.trim(),
-            tenant_email: tenant_email.toLowerCase().trim(),
-            monthly_rent: Number(property.price),
-            monthly_income: monthly_income ? Number(monthly_income) : null,
-            employer_name: employer_name || null,
-            employer_position: employer_position || null,
-            employment_type: employment_type || null,
-            employment_start: employment_start || null,
-            current_address: current_address || null,
-          }
-        );
+        const { summary } = await screenAndSave(application.id);
+        if (!resendKey) return;
 
-        // After processing — fetch final score and email Ebin
-        const { data: finalApp } = await supabaseAdmin
-          .from("applications")
-          .select("ai_score, ai_report")
-          .eq("id", application.id)
-          .maybeSingle();
-
-        if (resendKey && finalApp?.ai_score != null) {
-          const { Resend } = await import("resend");
-          const resend = new Resend(resendKey);
-          resend.emails.send({
-            from: "Prospera Properties <hello@prosperaproperties.co>",
-            to: "prosperapropertiess@gmail.com",
-            subject: `Application ready for review — ${tenant_name} (Score: ${finalApp.ai_score}/10)`,
-            html: applicationEbinReviewEmail({
-              tenantName: tenant_name,
-              propertyAddress: `${property.address}, ${property.city}`,
-              agentName: agent.name,
-              aiScore: finalApp.ai_score,
-              applicationId: application.id,
-              approveUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "approved")}`,
-              rejectUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "rejected")}`,
-            }),
-          }).catch((err: unknown) => console.error("[submit] Ebin review email failed:", err));
-        }
-      })()
+        const { Resend } = await import("resend");
+        const subject = summary
+          ? `${VERDICTS[summary.verdict]}: ${tenant_name} for ${property.address}`
+          : `Needs a manual look: ${tenant_name} for ${property.address}`;
+        await new Resend(resendKey).emails.send({
+          from: "Prospera Properties <hello@prosperaproperties.co>",
+          to: "prosperapropertiess@gmail.com",
+          subject,
+          html: applicationEbinReviewEmail({
+            tenantName: tenant_name,
+            propertyAddress,
+            agentName: agent.name,
+            aiScore: summary?.score ?? null,
+            verdict: summary ? VERDICTS[summary.verdict] : undefined,
+            headline: summary?.headline,
+            questions: summary?.questions_to_ask,
+            aiFailed: !summary,
+            applicationId: application.id,
+            approveUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "approved")}`,
+            rejectUrl: `https://www.prosperaproperties.co/api/admin/applications/${application.id}/quick-action?token=${createQuickActionToken(application.id, "rejected")}`,
+          }),
+        }).catch((err: unknown) => console.error("[submit] Ebin review email failed:", err));
+      })(),
     );
 
     return NextResponse.json({ success: true, application_id: application.id });

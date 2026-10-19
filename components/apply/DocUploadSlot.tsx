@@ -2,176 +2,142 @@
 
 import { useRef, useState } from "react";
 import { Upload, FileCheck2, X } from "lucide-react";
+import { getSupabase } from "@/lib/supabase";
+import type { DocSlot } from "@/lib/application-requirements";
 
-const MAX_SIZE = 5 * 1024 * 1024;
-
-interface Props {
-  label: string;
-  docType: string;
-  count?: number; // how many files to collect (e.g. 4 for paystubs)
-  onUploaded: (paths: string[]) => void;
+export interface UploadedFile {
+  name: string;
+  path: string;
 }
 
-export default function DocUploadSlot({ label, docType, count = 1, onUploaded }: Props) {
+interface Props {
+  slot: DocSlot;
+  files: UploadedFile[];
+  onChange: (files: UploadedFile[]) => void;
+}
+
+const FONT = "var(--font-dm-sans)";
+const MAX_EDGE = 2000; // px — plenty for reading a document, keeps photos small
+
+// Phone photos are often 3–8MB. Shrink them to a readable JPEG before upload so
+// uploads are fast on mobile data and the AI can read them.
+async function prepareFile(file: File): Promise<File> {
+  if (file.type === "application/pdf") return file;
+  if (!file.type.startsWith("image/")) throw new Error("Please upload a PDF or a photo.");
+
+  let bitmap: ImageBitmap;
+  try {
+    bitmap = await createImageBitmap(file);
+  } catch {
+    throw new Error(`We couldn't open ${file.name}. Try taking a screenshot of it, or save it as a PDF.`);
+  }
+
+  const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+  const needsWork = scale < 1 || file.size > 1.5 * 1024 * 1024 || !["image/jpeg", "image/png", "image/webp"].includes(file.type);
+  if (!needsWork) return file;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(bitmap.width * scale);
+  canvas.height = Math.round(bitmap.height * scale);
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/jpeg", 0.85));
+  if (!blob) return file;
+  return new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" });
+}
+
+async function uploadOne(file: File, docType: string): Promise<UploadedFile> {
+  const prepared = await prepareFile(file);
+
+  const res = await fetch("/api/applications/upload-doc", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ doc_type: docType, content_type: prepared.type, size: prepared.size }),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error ?? "Upload failed");
+
+  const { error } = await getSupabase().storage
+    .from("applications")
+    .uploadToSignedUrl(json.storage_path, json.token, prepared, { contentType: prepared.type });
+  if (error) throw new Error("Upload failed. Check your connection and try again.");
+
+  return { name: file.name, path: json.storage_path };
+}
+
+export default function DocUploadSlot({ slot, files, onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<{ name: string; size: string; path: string }[]>([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
 
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const selected = Array.from(e.target.files ?? []).slice(0, count - files.length);
+    const selected = Array.from(e.target.files ?? []).slice(0, slot.max - files.length);
+    if (inputRef.current) inputRef.current.value = "";
     if (selected.length === 0) return;
 
     setError("");
     setUploading(true);
-
-    const newFiles: { name: string; size: string; path: string }[] = [];
-
+    let current = files;
     for (const file of selected) {
-      if (file.size > MAX_SIZE) {
-        setError(`${file.name} exceeds the 5MB limit. Please compress or use a smaller file.`);
-        setUploading(false);
-        if (newFiles.length) {
-          const combined = [...files, ...newFiles];
-          setFiles(combined);
-          onUploaded(combined.map((f) => f.path));
-        }
-        return;
-      }
-
-      const fd = new FormData();
-      fd.append("file", file);
-      fd.append("doc_type", docType);
-
       try {
-        const res = await fetch("/api/applications/upload-doc", { method: "POST", body: fd });
-        const json = await res.json();
-
-        if (!res.ok) {
-          setError(json.error ?? "Upload failed");
-          setUploading(false);
-          if (newFiles.length) {
-            const combined = [...files, ...newFiles];
-            setFiles(combined);
-            onUploaded(combined.map((f) => f.path));
-          }
-          return;
-        }
-
-        newFiles.push({
-          name: file.name,
-          size: `${(file.size / 1024).toFixed(0)} KB`,
-          path: json.storage_path,
-        });
-      } catch {
-        setError("Upload failed. Check your connection and try again.");
-        setUploading(false);
-        if (newFiles.length) {
-          const combined = [...files, ...newFiles];
-          setFiles(combined);
-          onUploaded(combined.map((f) => f.path));
-        }
-        return;
+        const uploaded = await uploadOne(file, slot.type);
+        current = [...current, uploaded];
+        onChange(current);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Upload failed");
+        break;
       }
     }
-
-    const combined = [...files, ...newFiles];
-    setFiles(combined);
-    onUploaded(combined.map((f) => f.path));
     setUploading(false);
-
-    // Reset input so same file can be re-selected
-    if (inputRef.current) inputRef.current.value = "";
   }
 
-  function removeFile(index: number) {
-    const updated = files.filter((_, i) => i !== index);
-    setFiles(updated);
-    onUploaded(updated.map((f) => f.path));
-  }
-
-  const needed = count - files.length;
-  const complete = needed <= 0;
+  const done = files.length >= Math.max(slot.min, 1);
+  const canAddMore = files.length < slot.max;
 
   return (
-    <div style={{ marginBottom: 20 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-        <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-          {label}
-          <span style={{ color: "#8B2030", marginLeft: 4 }}>*</span>
-        </p>
-        {count > 1 && (
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              color: complete ? "#2D7A4F" : "#8B8378",
-              fontFamily: "var(--font-dm-sans)",
-            }}
-          >
-            {files.length}/{count}
+    <div style={{ marginBottom: 24 }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 4 }}>
+        <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "#1F2F3A", fontFamily: FONT }}>{slot.label}</p>
+        {slot.max > 1 && (
+          <span style={{ fontSize: 13, fontWeight: 600, color: done ? "#2D7A4F" : "#666666", fontFamily: FONT, flexShrink: 0 }}>
+            {files.length}{slot.min > 1 ? ` of ${slot.min}` : ""}
           </span>
         )}
       </div>
+      <p style={{ margin: "0 0 10px", fontSize: 14, color: "#666666", fontFamily: FONT, lineHeight: 1.5 }}>{slot.hint}</p>
 
-      {/* Uploaded files */}
       {files.map((f, i) => (
         <div
-          key={i}
+          key={f.path}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: "rgba(45,122,79,0.06)",
-            border: "1px solid rgba(45,122,79,0.18)",
-            borderRadius: 10,
-            padding: "10px 14px",
-            marginBottom: 8,
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            backgroundColor: "rgba(45,122,79,0.06)", border: "1px solid rgba(45,122,79,0.18)",
+            borderRadius: 10, padding: "10px 14px", marginBottom: 8,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
             <FileCheck2 size={16} color="#2D7A4F" strokeWidth={2} style={{ flexShrink: 0 }} />
-            <span
-              style={{
-                fontSize: 13,
-                color: "#1F2F3A",
-                fontFamily: "var(--font-dm-sans)",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
+            <span style={{ fontSize: 14, color: "#1F2F3A", fontFamily: FONT, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {f.name}
             </span>
-            <span style={{ fontSize: 11, color: "#8B8378", fontFamily: "var(--font-dm-sans)", flexShrink: 0 }}>({f.size})</span>
           </div>
           <button
-            onClick={() => removeFile(i)}
+            type="button"
+            onClick={() => onChange(files.filter((_, j) => j !== i))}
             aria-label={`Remove ${f.name}`}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#8B2030",
-              cursor: "pointer",
-              padding: 4,
-              display: "flex",
-              flexShrink: 0,
-              marginLeft: 8,
-            }}
+            style={{ background: "none", border: "none", color: "#666666", cursor: "pointer", padding: 4, display: "flex", flexShrink: 0, marginLeft: 8 }}
           >
-            <X size={15} strokeWidth={2} />
+            <X size={16} strokeWidth={2} />
           </button>
         </div>
       ))}
 
-      {/* Upload button */}
-      {needed > 0 && (
+      {canAddMore && (
         <>
           <input
             ref={inputRef}
             type="file"
-            accept=".pdf,.jpg,.jpeg,.png,.webp"
-            multiple={count > 1}
+            accept="application/pdf,image/*"
+            multiple={slot.max > 1}
             onChange={handleChange}
             style={{ display: "none" }}
           />
@@ -180,38 +146,21 @@ export default function DocUploadSlot({ label, docType, count = 1, onUploaded }:
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
             style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              padding: "14px",
-              backgroundColor: uploading ? "#F7F5F2" : "#FFFFFF",
-              border: `1px solid ${uploading ? "#D8D2C8" : "#D8D2C8"}`,
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: 500,
-              color: uploading ? "#8B8378" : "#1F2F3A",
-              fontFamily: "var(--font-dm-sans)",
+              width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              padding: "14px", backgroundColor: uploading ? "#F7F5F2" : "#FFFFFF",
+              border: "1px dashed #D8D2C8", borderRadius: 10, fontSize: 14, fontWeight: 500,
+              color: uploading ? "#666666" : "#1F2F3A", fontFamily: FONT,
               cursor: uploading ? "not-allowed" : "pointer",
-              transition: "border-color 0.15s, background-color 0.15s",
             }}
-            onMouseEnter={(e) => { if (!uploading) e.currentTarget.style.borderColor = "#8B2030"; }}
-            onMouseLeave={(e) => { if (!uploading) e.currentTarget.style.borderColor = "#D8D2C8"; }}
           >
-            <Upload size={15} strokeWidth={2} color={uploading ? "#8B8378" : "#8B2030"} />
-            {uploading ? "Uploading..." : count > 1 ? `Upload ${needed} more` : "Upload file"}
+            <Upload size={16} strokeWidth={2} color="#1F2F3A" />
+            {uploading ? "Uploading..." : files.length ? "Add another" : "Upload or take a photo"}
           </button>
-          <p style={{ margin: "6px 0 0", fontSize: 11, color: "#8B8378", fontFamily: "var(--font-dm-sans)" }}>
-            PDF, JPG, or PNG — max 5MB each
-          </p>
         </>
       )}
 
       {error && (
-        <p style={{ margin: "8px 0 0", fontSize: 12, color: "#8B2030", fontFamily: "var(--font-dm-sans)" }}>
-          {error}
-        </p>
+        <p style={{ margin: "8px 0 0", fontSize: 14, color: "#8B2030", fontFamily: FONT }}>{error}</p>
       )}
     </div>
   );

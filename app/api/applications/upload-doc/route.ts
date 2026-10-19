@@ -1,48 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { ALL_DOC_TYPES } from "@/lib/application-requirements";
 import crypto from "crypto";
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5MB
-const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
-const VALID_DOC_TYPES = ["paystub", "bank_statement", "employment_letter", "id"];
+// Hands the browser a one-time signed upload URL so the file goes straight to
+// Supabase Storage. Posting files through this route instead would hit
+// Vercel's 4.5MB request body limit on ordinary bank-statement PDFs.
+
+const MAX_SIZE = 15 * 1024 * 1024; // 15MB
+const EXT: Record<string, string> = {
+  "application/pdf": "pdf",
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
-    const file = formData.get("file") as File | null;
-    const docType = formData.get("doc_type") as string | null;
+    const { doc_type, content_type, size } = await req.json();
 
-    if (!file) return NextResponse.json({ error: "No file provided" }, { status: 400 });
-    if (!docType || !VALID_DOC_TYPES.includes(docType)) {
+    if (!ALL_DOC_TYPES.includes(doc_type)) {
       return NextResponse.json({ error: "Invalid document type" }, { status: 400 });
     }
-
-    if (file.size > MAX_SIZE) {
-      return NextResponse.json({ error: "File exceeds 5MB limit" }, { status: 400 });
+    if (!EXT[content_type]) {
+      return NextResponse.json({ error: "Please upload a PDF or a photo (JPG or PNG)." }, { status: 400 });
+    }
+    if (typeof size !== "number" || size <= 0 || size > MAX_SIZE) {
+      return NextResponse.json({ error: "That file is over 15MB. Try a smaller scan or a phone photo." }, { status: 400 });
     }
 
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      return NextResponse.json({ error: "Only PDF, JPG, PNG files are accepted" }, { status: 400 });
-    }
-
-    const ext = file.type === "application/pdf" ? "pdf"
-      : file.type === "image/png" ? "png"
-      : file.type === "image/webp" ? "webp"
-      : "jpg";
-
-    const filename = `temp/${Date.now()}-${crypto.randomBytes(8).toString("hex")}-${docType}.${ext}`;
-    const buffer = await file.arrayBuffer();
-
-    const { error: uploadErr } = await supabaseAdmin.storage
+    const path = `temp/${Date.now()}-${crypto.randomBytes(8).toString("hex")}-${doc_type}.${EXT[content_type]}`;
+    const { data, error } = await supabaseAdmin.storage
       .from("applications")
-      .upload(filename, buffer, { contentType: file.type, upsert: false });
+      .createSignedUploadUrl(path);
 
-    if (uploadErr) {
-      console.error("Document upload error:", uploadErr);
+    if (error || !data) {
+      console.error("Signed upload URL error:", error);
       return NextResponse.json({ error: "Upload failed" }, { status: 500 });
     }
 
-    return NextResponse.json({ storage_path: filename });
+    return NextResponse.json({ storage_path: data.path, token: data.token });
   } catch (err) {
     console.error("upload-doc error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });

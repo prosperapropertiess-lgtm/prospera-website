@@ -1167,6 +1167,10 @@ export function applicationEbinReviewEmail({
   propertyAddress,
   agentName,
   aiScore,
+  verdict,
+  headline,
+  questions,
+  aiFailed,
   applicationId,
   approveUrl,
   rejectUrl,
@@ -1174,25 +1178,37 @@ export function applicationEbinReviewEmail({
   tenantName: string;
   propertyAddress: string;
   agentName: string;
-  aiScore: number;
+  aiScore: number | null;
+  verdict?: string;
+  headline?: string;
+  questions?: string[];
+  aiFailed?: boolean;
   applicationId: string;
   approveUrl?: string;
   rejectUrl?: string;
 }): string {
-  const scoreColor = aiScore >= 7 ? "#0D6E5A" : aiScore >= 5 ? "#B45309" : "#B91C1C";
+  const scoreColor = aiScore == null ? MUTED : aiScore >= 7 ? "#0D6E5A" : aiScore >= 5 ? "#B45309" : "#B91C1C";
 
   return wrapper(`
     <p style="margin:0 0 8px;font-size:24px;font-weight:700;color:${NAVY};font-family:${FONT};">Application ready for review</p>
-    <p style="margin:0 0 28px;font-size:17px;color:${MUTED};font-family:${FONT};">A screening report has been generated. Your decision is needed.</p>
+    <p style="margin:0 0 28px;font-size:17px;color:${MUTED};font-family:${FONT};">${aiFailed
+      ? "The AI couldn't finish reading this one, so it needs a look by hand. Everything they sent is in the admin."
+      : headline ? escapeHtml(headline) : "A screening report has been generated. Your decision is needed."}</p>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG_CARD};border:1px solid ${BORDER};border-radius:20px;margin:0 0 24px;">
       <tr><td style="padding:24px 28px;">
         <p style="margin:0 0 12px;font-size:17px;color:${TEXT};font-family:${FONT};"><strong>Applicant:</strong> ${tenantName}</p>
         <p style="margin:0 0 12px;font-size:17px;color:${TEXT};font-family:${FONT};"><strong>Property:</strong> ${propertyAddress}</p>
         <p style="margin:0 0 12px;font-size:17px;color:${TEXT};font-family:${FONT};"><strong>Referred by:</strong> ${agentName}</p>
-        <p style="margin:0;font-size:17px;color:${TEXT};font-family:${FONT};"><strong>AI Score:</strong> <span style="color:${scoreColor};font-weight:700;">${aiScore}/10</span></p>
+        <p style="margin:0;font-size:17px;color:${TEXT};font-family:${FONT};"><strong>AI read:</strong> <span style="color:${scoreColor};font-weight:700;">${aiScore == null ? "Needs a manual look" : `${verdict ? `${escapeHtml(verdict)} · ` : ""}${aiScore}/10`}</span></p>
       </td></tr>
     </table>
+
+    ${questions?.length ? `
+    <p style="margin:0 0 8px;font-size:17px;font-weight:700;color:${NAVY};font-family:${FONT};">Ask them</p>
+    <ul style="margin:0 0 24px;padding-left:20px;">
+      ${questions.map((q) => `<li style="margin:0 0 6px;font-size:16px;color:${TEXT};font-family:${FONT};">${escapeHtml(q)}</li>`).join("")}
+    </ul>` : ""}
 
     ${cta("Read the Full Report", `${BASE_URL}/admin/applications/${applicationId}`)}
 
@@ -1213,6 +1229,11 @@ export function applicationEbinReviewEmail({
     ${divider()}
     ${signoff()}
   `);
+}
+
+// AI text is built from applicant-supplied documents, so never trust it as HTML.
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 // Approval → sent to tenant

@@ -42,7 +42,24 @@ export async function GET(
       status,
       ai_score,
       ai_report,
+      ai_summary,
+      ai_error,
+      ai_completed_at,
       ocr_data,
+      admin_notes,
+      property_id,
+      income_source,
+      income_notes,
+      move_in_date,
+      occupants,
+      co_applicants,
+      pets,
+      smokes,
+      vehicles,
+      time_at_address,
+      current_rent,
+      reason_for_moving,
+      consent_at,
       created_at,
       updated_at,
       properties(address, city, price),
@@ -70,7 +87,15 @@ export async function GET(
     })
   );
 
-  return NextResponse.json({ ...application, documents: docsWithUrls });
+  // Everyone else who applied for the same unit, so Ebin can compare.
+  const { data: others } = await supabaseAdmin
+    .from("applications")
+    .select("id, tenant_name, ai_score, status, created_at")
+    .eq("property_id", application.property_id)
+    .neq("id", id)
+    .order("ai_score", { ascending: false, nullsFirst: false });
+
+  return NextResponse.json({ ...application, documents: docsWithUrls, other_applicants: others ?? [] });
 }
 
 export async function PATCH(
