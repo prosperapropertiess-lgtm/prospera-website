@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-10-18
+Last updated: 2026-10-25
 
 ## New Topic Opportunities
 
@@ -31,6 +31,16 @@ Last updated: 2026-10-18
 
 - `unauthorized-occupants-ontario-landlord` | Est. difficulty: LOW | Vol: ~200/mo | lawyerinfo.ca and mipropertyportal.com rank but no PM company has a practical guide. Angle: "Unauthorized Occupants in Ontario Rentals: A Landlord's Guide" — distinguish subtenant vs. unauthorized occupant, when to use A2 application vs. N5+L2, the 60-day filing window (RTA s.100(1)), why accepting rent from an unauthorized person creates implied tenancy, what to do when tenant moves a partner/family member in without consent. Companion to subletting-assignment-ontario.md and l2-application-ontario-landlord-guide.md.
 
+- `n11-agreement-to-end-tenancy-ontario` | Est. difficulty: LOW | Vol: ~400/mo | No PM company has a dedicated guide to the N11 form. Openroom and stepstojustice.ca have brief procedural pages, but no practical landlord walkthrough. Angle: "Ontario N11 Agreement to End Tenancy: A Landlord's Guide" — what the N11 is, when to use it (mutual agreement to terminate, cash-for-keys exits, early lease break), how it differs from N9 (tenant-initiated) and N12 (own-use), the written agreement requirement, what to do if tenant reneges after signing, and how an LTB enforces a signed N11. Natural companion to cash-for-keys-ontario.md and subletting-assignment-ontario.md.
+
+- `l2-application-ontario-landlord-guide` | Est. difficulty: LOW-MEDIUM | Vol: ~300/mo | Tribunalsontario.ca has a brief procedural page; no PM company or landlord-focused site has a comprehensive guide. The L2 is the LTB application to terminate a tenancy and evict a tenant where the landlord already served an N5, N6, N7, or N8 and the tenant didn't remedy or vacate. Angle: "How to File an L2 Application at the LTB in Ontario" — when the L2 applies vs. L1 (arrears), the N5/N7/N8 prerequisite, filing timeline after void period expires, required attachments, hearing process, what a remedial vs. termination order means, and sheriff enforcement. Fills a genuine content gap between "notice" posts and "eviction enforcement" posts already in the blog.
+
+- `new-landlord-checklist-ontario-2026` | Est. difficulty: LOW | Vol: ~250/mo | No PM company has a setup checklist for landlords who just closed on their first rental property. RentFaster and HireAHelper have generic Canadian versions; nothing Ontario-specific. Angle: "New Ontario Landlord Checklist: What to Do in the First 30 Days After You Close" — order insurance, set up a separate bank account, register with the city if required (London rental licence), install required safety equipment (CO detectors, smoke alarms), create a written lease (standard form + Schedule A clauses), collect last month's rent deposit, document the unit's condition, and consider professional management. Direct funnel into Prospera's new-owner management onboarding.
+
+- `property-management-chatham-kent-ontario` | Est. difficulty: LOW | Vol: ~150/mo | No dedicated PM company page ranks for Chatham-Kent — only generic aggregators (propertymanager.com, helpfulhomes.ca) and a few individual operators. Chatham-Kent is adjacent to SW Ontario and a growing secondary market. Angle: "Property Management in Chatham-Kent, Ontario" — city-specific guide covering Chatham-Kent rental market conditions, landlord licence requirements, local LTB hearing access (Windsor or London offices), and why professional management makes sense in a market where most operators are GTA-based and unfamiliar with local conditions. Expands Prospera's geographic authority footprint.
+
+- `ontario-standard-lease-schedule-a-clauses` | Est. difficulty: LOW | Vol: ~200/mo | Ontario landlords are required to use the standard lease form but often don't know what optional Schedule A clauses they can legally add. No PM company has a guide. ontario.ca has the form but no clause guidance. Angle: "Ontario Standard Lease Schedule A: Clauses Landlords Can (and Cannot) Add" — walk through which additional terms are enforceable (pest control responsibility, carpet cleaning on move-out, noise curfews, snow removal, parking rules), which are void under the RTA even if signed (no-pet clauses in most units, liability waiver for landlord negligence, prohibition on guests), and how a well-drafted Schedule A reduces disputes and LTB risk. High practical value for new and experienced landlords alike.
+
 ## SKIPPED (too competitive or wrong intent)
 
 - "Ontario landlord rights 2026" — dominated by liv.rent, neobanc.com, and ontario.ca; covered by our ontario-landlord-tenant-act-2026.md. No incremental value from a second post.
@@ -50,6 +60,10 @@ Last updated: 2026-10-18
 - "Ontario landlord insurance" — already in blog + already in last week's SKIPPED list. Adding for completeness.
 - "renting out condo Ontario" — added as `renting-out-condo-ontario` new topic last week (2026-10-11). Already in queue. Not duplicating.
 - "Ontario condo landlord guide" — same topic as renting-out-condo-ontario above; not creating a duplicate.
+- "how to screen tenants Ontario 2026" — covered by tenant-screening-red-flags.md and tenant-credit-check-ontario-landlords.md; a third screening post would split authority between the existing two. No gap.
+- "tenant lease renewal Ontario" — covered by lease-renewal-ontario-landlord-guide.md; lawyerinfo.ca and ontario.ca dominate for generic queries. Expand existing post instead.
+- "Ontario rental income tax 2026" — covered by rental-property-tax-deductions-ontario.md; CRA website and turbotax.ca dominate for tax queries. Government/financial brand authority too high to compete directly.
+- "property management Chatham-Kent" (commercial intent variant) — informational city guide added as new topic above; commercial variant ("hire a PM in Chatham-Kent") has too low volume (~50/mo) to justify a separate post.
 
 ## Topics to Expand
 
@@ -70,3 +84,9 @@ Last updated: 2026-10-18
 - `ontario-landlord-tenant-act-2026.md` — Comprehensive update needed with September 21, 2026 Bill 60 changes: new 7-day N4, 50% arrears prepayment rule for hearings, N12 120-day no-compensation option, persistent late payment redefined (3x late in 7 days within 6 months), LTB Payment Agreement Form now mandatory for repayment plans. This is the main RTA reference post and needs to reflect current law.
 
 - `what-to-do-if-tenant-stops-paying-rent-ontario.md` — Update with September 21, 2026 N4 change (7 days now), and add section on the new LTB Payment Agreement Form requirement. Searches on this topic are spiking post-Bill 60 as landlords look for current guidance on the correct N4 timeline.
+
+- `evicting-tenant-ontario.md` — Add a new section on the September 21, 2026 changes to the eviction process: 7-day N4 (was 14 days), 15-day order review window (was 30 days), and the 50% arrears prepayment rule at hearings. This post ranks well and needs to stay current as the single most-visited guide on the site.
+
+- `tenant-screening-red-flags.md` — Expand with a section on newcomer tenant documentation — what Ontario landlords can legally ask for from new Canadians (proof of employment, credit alternative like rental history letter, guarantor options), and what constitutes discrimination under the Ontario Human Rights Code. High demand in London given newcomer settlement volumes post-2024.
+
+- `security-deposits-ontario.md` — Add a section clarifying the September 21, 2026 change: tenants at LTB hearings on rent arrears may now be required to prepay 50% of outstanding arrears before the hearing proceeds. This directly affects how landlords think about the last-month deposit and arrears strategy going into an L1 hearing.
