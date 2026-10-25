@@ -2918,3 +2918,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: "Best Property Management Software in Ontario (2026 Guide)" at myhometoday.ca/landlord-resources/best-property-management-software-ontario — compares DIY tools; an ideal place for a mention of professional management as the alternative for landlords who want full hands-off service in London, St. Thomas, or Strathroy.
 - researcher_notes: Independent resource site, not a management company. Topically well-matched to Prospera's conversion funnel (DIY landlords considering the switch). Best ask: a contributed expert section on "when software isn't enough" and professional management makes sense, or a resource mention at the end of their software comparison for landlords in SW Ontario.
 ---
+
+## London Free Press — Real Estate Section
+- url: https://lfpress.com/category/news/local-news/real-estate/
+- type: media
+- why: London's daily newspaper of record (Postmedia) with a dedicated real estate section read by London homeowners, landlords, and investors — earned media placement here produces a high-authority local backlink and direct audience exposure in Prospera's primary market.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: via lfpress.com/contact (real estate desk / editorial submissions)
+- site_focus: The London Free Press is Postmedia's daily newspaper for London, Ontario, covering local news, business, and real estate. Their real estate section runs market data, neighbourhood features, landlord-tenant news, and housing affordability coverage. Widely read by London homeowners, landlords, and investors who follow the local property market.
+- hook: Prospera manages rentals across London and St. Thomas and tracks local rental market conditions in real time — vacancy rates, average rents, and tenant demand — making Ebin a credible source for real estate journalists looking for a ground-level expert quote or contributed perspective on London's rental market.
+- specific_content: LFP's local real estate market coverage and business section — particularly housing affordability and rental supply stories where a professional property manager in London is a natural expert source.
+- researcher_notes: Postmedia publication — editorial contact via newsroom. Best angle is an expert source relationship (journalist quotes Ebin on London rental market) rather than a guest post. A submitted op-ed on "What London's rental market looks like from the ground in 2026" could also work through their editorial submission process. Earned media from LFP would have strong local credibility.
+
+---
+
+## Landlord Credit Bureau
+- url: https://landlordcreditbureau.com/blog/
+- type: blog
+- why: Canadian tenant credit-reporting and screening platform with an active landlord education blog covering Ontario tenant risk, screening, and payment history — their self-managing Ontario landlord audience is a direct conversion target for Prospera's professional management services.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: info@landlordcreditbureau.com
+- site_focus: Landlord Credit Bureau is a Canadian fintech platform that lets landlords report tenant rent-payment behaviour to credit bureaus, creating incentives for on-time rent and a searchable payment history for prospective landlords. Their blog covers Ontario tenant screening best practices, credit-check guides, LTB arrears management, and landlord risk reduction. Audience is active Canadian landlords managing their own properties.
+- hook: Prospera screens tenants professionally for London, St. Thomas, and Strathroy landlords using credit checks, payment history, and employment verification — a guest post on "How professional property managers approach tenant risk in Ontario" adds practitioner depth to the Landlord Credit Bureau's existing screening content.
+- specific_content: Their blog posts on Ontario tenant screening and credit check best practices — Prospera handles this end-to-end and can speak to the practical difference between DIY screening and professional vetting in SW Ontario.
+- researcher_notes: Tech company with educational content strategy aimed at independent landlords — not a competitor. Guest post angle works well: frame Prospera as the expert operator behind the screening process their platform supports. Tone is practical and compliance-aware. Email to info@landlordcreditbureau.com is confirmed public contact.
+
+---
+
+## Canadian Real Estate Wealth Magazine (CREW)
+- url: https://canadianrealestatewealth.com/
+- type: media
+- why: Canada's most-read real estate investment magazine (80,000+ investor readers) that publishes bylined expert columns from property management operators across Canada — a contributed piece from Prospera on managing rentals in Ontario's secondary markets would reach the most active property investor audience in the country.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: editorial@canadianrealestatewealth.com
+- site_focus: Canadian Real Estate Wealth (CREW) is Canada's leading real estate investment media brand with 80,000+ readers. Publishes digital and print editorial covering Ontario investor strategy, property management operations, market analysis, and LTB/policy updates. Expert contributors include landlords, operators, and legal specialists across Canada. Not to be confused with Canadian Real Estate Magazine (candidanrealestatemagazine.ca) — CREW is the larger, investor-facing publication.
+- hook: CREW's Ontario investor readers are buying rental properties in London and secondary Ontario markets and need local management expertise — a bylined column from Ebin on "Managing rentals in Ontario's secondary cities: what London, St. Thomas, and Strathroy look like in 2026" offers ground-level SW Ontario data that the magazine's GTA-centric editorial mix lacks.
+- specific_content: CREW's property management and Ontario investment content stream — particularly any editorial on secondary Ontario markets where Prospera's ground-level operational data adds genuine value for their investor readership.
+- researcher_notes: Editorial publication with formal contributor process. Email editorial@canadianrealestatewealth.com with a pitch letter. Lead with credentials and a specific angle with data — SW Ontario secondary market operational insights are the differentiator. Bylined articles carry permanent indexed backlinks from a high-authority investment media domain.
+
+---
+
+## Zoocasa Blog — Ontario Market Data
+- url: https://zoocasa.com/blog/
+- type: blog
+- why: High-traffic Canadian real estate platform with well-indexed Ontario market reports and rental data guides — a resource mention or contributed data point in their London or SW Ontario market coverage would reach a large audience of Ontario homebuyers and investors.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: press@zoocasa.com
+- site_focus: Zoocasa is a Canadian real estate search platform and brokerage (owned by Storey1) with a widely-read Ontario market data blog. They publish rental market reports, city investment guides, neighbourhood analyses, and buyer resources with strong SEO reach across Ontario. Their London, Ontario market posts rank well for local search terms.
+- hook: Zoocasa's Ontario rental market reports cite Toronto, Hamilton, and Ottawa data extensively but lack granular data on SW Ontario secondary markets — Prospera's operational rental data for London, St. Thomas, and Strathroy (average rents, vacancy rates, demand signals) fills a geographic gap in their Ontario coverage and positions Prospera as a cited local expert source.
+- specific_content: Their London, Ontario market overview and Ontario rental market posts — natural placements for Prospera as the cited SW Ontario rental market data source.
+- researcher_notes: Storey1-owned media platform with strong editorial team. Contact: press@zoocasa.com for media/data partnerships. Best approach is a data contribution offer — Prospera provides ground-level SW Ontario rental market benchmarks that Zoocasa can cite in future market reports. An expert source relationship is more achievable here than a guest post given their scale.
+
+---
+
+## Move Smartly — Ontario Real Estate Data Blog
+- url: https://movesmartly.com/
+- type: blog
+- why: High-authority Toronto real estate analysis blog frequently cited by CBC, Globe and Mail, and BNN Bloomberg — expert quotes or cited data from Prospera in their Ontario secondary market coverage would earn a nationally visible, high-domain-authority backlink.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: via contact form at movesmartly.com (Realosophy Realty)
+- site_focus: Move Smartly is a data-driven Ontario real estate market analysis blog run by Realosophy Realty (Toronto). They publish in-depth market reports, investment ROI analysis, rental yield data, and housing policy commentary across Ontario. Content is analytical, data-heavy, and frequently cited by national financial media. They increasingly cover Ontario secondary markets like London as investor interest shifts post-2024.
+- hook: Move Smartly covers Ontario housing market conditions with an analytical, investor-focused lens but lacks boots-on-ground data from London and SW Ontario — Prospera's operational rental market intelligence (actual vacancy rates, rent-to-price ratios, tenant demand) in London and St. Thomas fills a specific data gap their analytical readers would value.
+- specific_content: Their Ontario secondary market coverage and rental yield analysis posts — a cited data contribution from Prospera in a London/SW Ontario market update would be the appropriate angle given Move Smartly's journalistic, data-first editorial approach.
+- researcher_notes: High-authority publication — outreach should be framed as a data source offer, not a content pitch. Prospera's ground-level London rental data is the value proposition. Contact via Realosophy Realty's website form. Tone must be analytical and factual — any promotional element will kill the pitch.
+
+---
+
+## CFAA — Canadian Federation of Apartment Associations
+- url: https://cfaa-fcapi.org/
+- type: association
+- why: Canada's national apartment industry association representing apartment building owners and managers coast to coast — membership earns a high-authority .org backlink from the most senior body in Canadian residential property management, positioning Prospera alongside national operators.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: cfaa@cfaa-fcapi.org
+- site_focus: The CFAA (Canadian Federation of Apartment Associations) is the national advocacy and industry association representing apartment building owners and managers across Canada. Members include provincial associations (FRPO in Ontario), building operators, and suppliers. CFAA advocates federally on rental housing policy, publishes national market research, and maintains a member supplier and service provider directory.
+- hook: CFAA's supplier/service-provider member directory earns a high-authority .org directory backlink from Canada's national apartment industry body. Membership positions Prospera alongside the country's most recognized residential property management operators and opens access to CFAA's national member network — a secondary business development opportunity on top of the SEO value.
+- specific_content: CFAA's member supplier directory and their annual National Apartment Finance and Investment Conference resources — both natural placements for a registered member company like Prospera to earn indexed, high-authority .org backlinks.
+- researcher_notes: Formal national association — outreach should go to the membership team at cfaa@cfaa-fcapi.org and frame Prospera's application around industry contribution and national apartment market growth. Membership dues are the cost of entry; the directory backlink and national network access are the return. Higher tier than provincial FRPO membership alone.
+
+---
+
+## Storeys — Canadian Real Estate News
+- url: https://storeys.com/
+- type: media
+- why: Canada's leading real estate news publication covering Ontario landlord law changes, housing policy, and investment market trends — expert quotes or a contributed piece from Prospera on SW Ontario rental market conditions would reach Storeys' large national audience of investors and property professionals.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: editorial@storeys.com
+- site_focus: Storeys is Canada's leading real estate news publication covering housing policy, investment market analysis, and property management topics. Their Ontario coverage includes LTB reform analysis, landlord law changes (Bill 60, September 2026 rules), and secondary market investment trends. Their audience spans investors, realtors, property managers, and policy observers. They regularly quote industry experts and professionals in market coverage.
+- hook: Storeys has published extensively on the September 21, 2026 Ontario rental rule changes (N4 now 7 days, N12 120-day no-compensation option, persistent late payment redefined) — Prospera is navigating these changes operationally for clients in London, St. Thomas, and Strathroy right now, making Ebin a credible on-the-ground expert source for their ongoing coverage.
+- specific_content: Their coverage of the September 21, 2026 Ontario rental rule changes and SW Ontario rental market conditions — Prospera's operational experience with the new N4 timeline and N12 rules in London provides the practitioner's perspective Storeys' journalistic coverage lacks.
+- researcher_notes: Major national publication — best approach is an expert source relationship (journalist quotes Ebin) rather than a guest post. Email editorial@storeys.com with a brief expert source offer: Ebin as the SW Ontario property management practitioner navigating the 2026 rule changes on the ground. Data-driven media pitches land better here than company overviews.
+
+---
+
+## Square One Insurance — Landlord Resources Blog
+- url: https://squareone.ca/resources/
+- type: blog
+- why: Canadian home and rental property insurance provider with well-indexed Ontario landlord insurance guides — a resource mention or contributed section in their Ontario rental property coverage guide would reach landlords at the insurance-purchase decision point, a natural moment to consider professional property management.
+- researched: true
+- drafted: true
+- added: 2026-10-25
+- contact_email: via squareone.ca/contact or communications@squareone.ca
+- site_focus: Square One Insurance is a Canadian digital insurance company offering home, condo, and rental property coverage. Their resources section includes Ontario landlord insurance guides, rental property coverage explanations, and risk management content for Canadian landlords. Their content targets homeowners and landlords shopping for insurance coverage — a motivated, property-owning audience.
+- hook: Insurance and professional property management reduce the same landlord risks — tenant damage, non-payment, and liability. Prospera's property management services for London, St. Thomas, and Strathroy landlords directly reduce the insurance claim events Square One's clients face, making Prospera a natural expert resource for their landlord audience looking to reduce overall risk exposure.
+- specific_content: Their Ontario rental property insurance guide and landlord coverage resources — a natural mention for Prospera as the professional management solution that reduces the underlying risks the guide addresses (tenant damage, missed rent, maintenance liability).
+- researcher_notes: Digital-first insurance company with a content marketing focus. Not a competitor — complementary service provider. Contact via communications@squareone.ca or website contact form. Best ask: a resource mention in their Ontario landlord guide, or a contributed expert section on how professional property management reduces insurance claim frequency. Tone is practical and consumer-friendly.
+
+---
