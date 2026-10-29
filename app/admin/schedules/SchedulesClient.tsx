@@ -1,5 +1,6 @@
 "use client";
-import { useState, useCallback } from "react";
+import { Field, inputStyle } from "@/components/admin/kit";
+import { useState, useCallback, useEffect } from "react";
 
 const BG = "#F7F5F2";
 const SURFACE = "#FFFFFF";
@@ -80,20 +81,32 @@ export function SchedulesClient({ adminSecret }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleLoad = useCallback(async () => {
-    if (!propertyId.trim()) return;
+  const [properties, setProperties] = useState<{ id: string; address: string }[] | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/notion-tenants", { headers: { Authorization: `Bearer ${adminSecret}` } })
+      .then((r) => r.json())
+      .then((d) => setProperties(d.properties ?? []))
+      .catch(() => setProperties([]));
+  }, [adminSecret]);
+
+  const handleLoad = useCallback(async (id: string) => {
+    setPropertyId(id);
+    setEvents([]);
+    setLoadedPropertyId("");
+    if (!id) return;
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/schedules?propertyId=${encodeURIComponent(propertyId)}`);
+      const res = await fetch(`/api/admin/schedules?propertyId=${encodeURIComponent(id)}`);
       if (res.ok) {
         const data: { events: ScheduleEvent[] } = await res.json();
         setEvents(data.events ?? []);
-        setLoadedPropertyId(propertyId);
+        setLoadedPropertyId(id);
       }
     } finally {
       setLoading(false);
     }
-  }, [propertyId]);
+  }, []);
 
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault();
@@ -161,44 +174,18 @@ export function SchedulesClient({ adminSecret }: Props) {
 
         {/* Property selector */}
         <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: "16px", padding: "24px", marginBottom: "32px" }}>
-          <Label>Property ID (Notion)</Label>
-          <div style={{ display: "flex", gap: "12px" }}>
-            <input
+          <Field label="Home">
+            <select
               value={propertyId}
-              onChange={(e) => setPropertyId(e.target.value)}
-              placeholder="e.g. 19d44116874346b3981f527950b85817"
-              style={{
-                flex: 1,
-                background: INPUT_BG,
-                border: `1px solid ${BORDER}`,
-                borderRadius: "8px",
-                padding: "10px 14px",
-                color: TEXT,
-                fontSize: "14px",
-                fontFamily: "var(--font-dm-sans)",
-                outline: "none",
-              }}
-            />
-            <button
-              onClick={handleLoad}
-              disabled={loading || !propertyId.trim()}
-              style={{
-                background: ACCENT,
-                color: "#FAF8F5",
-                border: "none",
-                borderRadius: "8px",
-                padding: "10px 20px",
-                fontSize: "14px",
-                fontFamily: "var(--font-dm-sans)",
-                fontWeight: 600,
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.6 : 1,
-                whiteSpace: "nowrap",
-              }}
+              onChange={(e) => handleLoad(e.target.value)}
+              disabled={properties === null}
+              style={inputStyle}
             >
-              {loading ? "Loading..." : "Load schedule"}
-            </button>
-          </div>
+              <option value="">{properties === null ? "Loading homes from Notion…" : "Pick a home…"}</option>
+              {(properties ?? []).map((p) => <option key={p.id} value={p.id}>{p.address}</option>)}
+            </select>
+          </Field>
+          {loading && <p style={{ fontSize: 14, color: "#666666", margin: "12px 0 0" }}>Loading reminders…</p>}
         </div>
 
         {loadedPropertyId && (

@@ -266,10 +266,10 @@ function OverviewTab({ snapshot }: { snapshot: SnapshotData | null }) {
 
   const waterfall = [
     { label: "Revenue (management fees)", val: pnl.revenue, kind: "in" as const },
-    { label: "− Cost of delivering the service", val: -pnl.cogs, kind: "out" as const },
+    { label: "− Cost of delivering the service", val: -pnl.cogs || 0, kind: "out" as const },
     { label: "= Gross profit", val: pnl.gross_profit, kind: "sub" as const },
-    { label: "− Fixed costs", val: -pnl.opex_fixed, kind: "out" as const },
-    { label: "− Variable costs", val: -pnl.opex_variable, kind: "out" as const },
+    { label: "− Fixed costs", val: -pnl.opex_fixed || 0, kind: "out" as const },
+    { label: "− Variable costs", val: -pnl.opex_variable || 0, kind: "out" as const },
     { label: "= Net profit", val: pnl.net_profit, kind: "total" as const },
   ];
 
