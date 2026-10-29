@@ -5,8 +5,7 @@ import {
   Field, inputStyle, C, ago, type Tone,
 } from "@/components/admin/kit";
 
-const STATUSES = ["submitted", "acknowledged", "triage", "vendor_assigned", "scheduled", "work_complete", "verified", "closed", "cancelled"] as const;
-type Status = typeof STATUSES[number];
+type Status = "submitted" | "acknowledged" | "triage" | "vendor_assigned" | "scheduled" | "work_complete" | "verified" | "closed" | "cancelled";
 
 const LABEL: Record<Status, string> = {
   submitted: "New",
@@ -74,7 +73,11 @@ export default function RepairsPage() {
     setVendors(res.vendors ?? []);
   }, []);
 
-  useEffect(() => { load(); loadVendors(); }, [load, loadVendors]);
+  // Deferred a tick so the first load isn't a synchronous state update inside the effect.
+  useEffect(() => {
+    const t = setTimeout(() => { load(); loadVendors(); }, 0);
+    return () => clearTimeout(t);
+  }, [load, loadVendors]);
 
   async function setStatus(id: string, status: Status) {
     setBusy(id);
