@@ -1,15 +1,10 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
-const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  pending:    { bg: "#FEF3C7", text: "#92400E" },
-  processing: { bg: "#DBEAFE", text: "#1E40AF" },
-  reviewed:   { bg: "#EDE9FE", text: "#5B21B6" },
-  approved:   { bg: "#D1FAE5", text: "#065F46" },
-  rejected:   { bg: "#FEE2E2", text: "#991B1B" },
-};
+import {
+  Page, PageHeader, SectionTitle, Card, Tabs, Table, td, Badge, Button, EmptyState, Loading, ErrorNote, SuccessNote,
+  Field, inputStyle, C, money, ago, titleCaseAddress, type Tone,
+} from "@/components/admin/kit";
 
 interface Application {
   id: string;
@@ -17,272 +12,148 @@ interface Application {
   tenant_email: string;
   monthly_rent: number;
   ai_score: number | null;
+  ai_summary: { verdict?: string; headline?: string } | null;
   status: string;
   created_at: string;
   properties: { address: string; city: string } | null;
-  agents: { name: string } | null;
 }
 
-interface PropertyOption {
-  id: string;
-  address: string;
-  city: string;
-  price: number;
-}
+interface Listing { id: string; address: string; city: string; price: number }
 
-export default function AdminApplicationsPage() {
-  const [applications, setApplications] = useState<Application[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("all");
+const VERDICT: Record<string, { label: string; tone: Tone }> = {
+  strong: { label: "Strong", tone: "green" },
+  worth_a_call: { label: "Worth a call", tone: "blue" },
+  needs_more_info: { label: "Needs more info", tone: "amber" },
+  not_a_fit: { label: "Probably not a fit", tone: "red" },
+};
 
-  const [properties, setProperties] = useState<PropertyOption[]>([]);
-  const [inviteForm, setInviteForm] = useState({ tenant_name: "", tenant_email: "", property_id: "" });
+const OPEN = ["pending", "processing", "reviewed"];
+type Filter = "open" | "approved" | "rejected" | "all";
+
+export default function ApplicationsPage() {
+  const [apps, setApps] = useState<Application[] | null>(null);
+  const [error, setError] = useState(false);
+  const [filter, setFilter] = useState<Filter>("open");
+
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [form, setForm] = useState({ tenant_name: "", tenant_email: "", property_id: "" });
   const [sending, setSending] = useState(false);
-  const [inviteError, setInviteError] = useState("");
-  const [inviteSuccess, setInviteSuccess] = useState("");
+  const [sendError, setSendError] = useState("");
+  const [sent, setSent] = useState("");
 
   useEffect(() => {
-    const url = filter === "all"
-      ? "/api/admin/applications"
-      : `/api/admin/applications?status=${filter}`;
-    fetch(url)
-      .then((r) => r.json())
-      .then((data) => {
-        setApplications(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [filter]);
-
-  useEffect(() => {
-    fetch("/api/listings")
-      .then((r) => r.json())
-      .then((data) => setProperties(data.available ?? []))
-      .catch(() => {});
+    fetch("/api/admin/applications")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => setApps(Array.isArray(d) ? d : []))
+      .catch(() => { setApps([]); setError(true); });
+    fetch("/api/listings").then((r) => r.json()).then((d) => setListings(d.available ?? [])).catch(() => {});
   }, []);
 
-  async function sendInvite(e: React.FormEvent) {
+  async function sendLink(e: React.FormEvent) {
     e.preventDefault();
-    setInviteError("");
-    setInviteSuccess("");
-    setSending(true);
+    setSendError(""); setSent(""); setSending(true);
     try {
       const res = await fetch("/api/admin/applications/invite", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(inviteForm),
+        body: JSON.stringify(form),
       });
       const json = await res.json();
-      if (!res.ok) {
-        setInviteError(json.error ?? "Failed to send");
-      } else {
-        setInviteSuccess(`Sent to ${inviteForm.tenant_email} — ${json.propertyAddress}`);
-        setInviteForm({ tenant_name: "", tenant_email: "", property_id: "" });
+      if (!res.ok) setSendError(json.error ?? "Couldn't send. Try again.");
+      else {
+        setSent(`Sent to ${form.tenant_email} for ${json.propertyAddress}.`);
+        setForm({ tenant_name: "", tenant_email: "", property_id: "" });
       }
     } catch {
-      setInviteError("Request failed. Check your connection.");
+      setSendError("Couldn't send. Check your connection.");
     } finally {
       setSending(false);
     }
   }
 
-  const FONT = "var(--font-dm-sans, sans-serif)";
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "10px 12px",
-    border: "1px solid #D8D2C8",
-    borderRadius: 8,
-    fontSize: 13,
-    color: "#1F2F3A",
-    fontFamily: FONT,
-    boxSizing: "border-box",
-    outline: "none",
-  };
+  const all = apps ?? [];
+  const shown = all.filter((a) => filter === "all" || (filter === "open" ? OPEN.includes(a.status) : a.status === filter));
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#F7F5F2", fontFamily: FONT }}>
-      <div style={{ padding: "32px 24px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
-          <div>
-            <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#1F2F3A" }}>Applications</h1>
-            <p style={{ margin: "4px 0 0", fontSize: 13, color: "#666666" }}>All tenant rental applications</p>
-          </div>
-        </div>
+    <Page>
+      <PageHeader title="Applications" subtitle="Each one comes with an AI summary. You make the call." />
+      {error && <ErrorNote>Couldn&apos;t load applications. Refresh to try again.</ErrorNote>}
 
-        {/* Send Application Link */}
-        <div style={{
-          backgroundColor: "#FFFFFF",
-          border: "1px solid #D8D2C8",
-          borderRadius: 12,
-          padding: "24px",
-          marginBottom: 28,
-        }}>
-          <h3 style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 700, color: "#1F2F3A" }}>Send Application Link</h3>
-          <p style={{ margin: "0 0 18px", fontSize: 12, color: "#666666" }}>
-            They get a branded email with a button straight into the application form.
-          </p>
-          <form onSubmit={sendInvite}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.4fr auto", gap: 12, alignItems: "flex-end" }}>
-              <div>
-                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Name</label>
-                <input
-                  style={inputStyle}
-                  value={inviteForm.tenant_name}
-                  onChange={(e) => setInviteForm((f) => ({ ...f, tenant_name: e.target.value }))}
-                  placeholder="Jane Smith"
-                  required
-                />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Email</label>
-                <input
-                  style={inputStyle}
-                  type="email"
-                  value={inviteForm.tenant_email}
-                  onChange={(e) => setInviteForm((f) => ({ ...f, tenant_email: e.target.value }))}
-                  placeholder="jane@email.com"
-                  required
-                />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: 12, color: "#64748B", marginBottom: 5, fontWeight: 500 }}>Property</label>
-                <select
-                  style={{ ...inputStyle, cursor: "pointer" }}
-                  value={inviteForm.property_id}
-                  onChange={(e) => setInviteForm((f) => ({ ...f, property_id: e.target.value }))}
-                  required
-                >
-                  <option value="">Select a property...</option>
-                  {properties.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.address}, {p.city} — ${p.price.toLocaleString()}/mo
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <button
-                type="submit"
-                disabled={sending}
-                style={{
-                  padding: "10px 22px",
-                  backgroundColor: sending ? "#94A3B8" : "#8B2030",
-                  color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: 8,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  cursor: sending ? "not-allowed" : "pointer",
-                  fontFamily: FONT,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {sending ? "Sending..." : "Send"}
-              </button>
-            </div>
-            {inviteError && <p style={{ margin: "10px 0 0", fontSize: 12, color: "#DC2626" }}>{inviteError}</p>}
-            {inviteSuccess && <p style={{ margin: "10px 0 0", fontSize: 12, color: "#065F46" }}>✓ {inviteSuccess}</p>}
-          </form>
-        </div>
+      {!apps ? <Loading /> : (
+        <>
+          <Tabs
+            value={filter}
+            onChange={setFilter}
+            options={[
+              { value: "open", label: "To review", count: all.filter((a) => OPEN.includes(a.status)).length },
+              { value: "approved", label: "Approved", count: all.filter((a) => a.status === "approved").length },
+              { value: "rejected", label: "Declined", count: all.filter((a) => a.status === "rejected").length },
+              { value: "all", label: "All", count: all.length },
+            ]}
+          />
+          {shown.length === 0 ? (
+            <EmptyState title={filter === "open" ? "Nothing to review" : "No applications here"} body="New applications land here a minute after they're submitted." />
+          ) : (
+            <Table head={["Applicant", "Home", "AI summary", "Applied", ""]}>
+              {shown.map((a) => {
+                const v = a.ai_summary?.verdict ? VERDICT[a.ai_summary.verdict] : null;
+                return (
+                  <tr key={a.id}>
+                    <td style={td}>
+                      <div style={{ fontWeight: 600 }}>{a.tenant_name}</div>
+                      <div style={{ fontSize: 14, color: C.muted }}>{a.tenant_email}</div>
+                    </td>
+                    <td style={td}>
+                      <div>{titleCaseAddress(a.properties?.address)}</div>
+                      <div style={{ fontSize: 14, color: C.muted }}>{money(a.monthly_rent)}/mo</div>
+                    </td>
+                    <td style={{ ...td, maxWidth: 380 }}>
+                      {a.status === "approved" ? <Badge tone="green">Approved</Badge>
+                        : a.status === "rejected" ? <Badge>Declined</Badge>
+                        : v ? <Badge tone={v.tone}>{v.label}{a.ai_score ? ` · ${a.ai_score}/10` : ""}</Badge>
+                        : <Badge>Being read</Badge>}
+                      {a.ai_summary?.headline && <div style={{ fontSize: 14, color: C.muted, marginTop: 6 }}>{a.ai_summary.headline}</div>}
+                    </td>
+                    <td style={{ ...td, whiteSpace: "nowrap", color: C.muted }}>{ago(a.created_at)}</td>
+                    <td style={{ ...td, textAlign: "right" }}>
+                      <Button href={`/admin/applications/${a.id}`} size="sm" variant={OPEN.includes(a.status) ? "primary" : "secondary"}>
+                        {OPEN.includes(a.status) ? "Review" : "Open"}
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </Table>
+          )}
+        </>
+      )}
 
-        {/* Filter tabs */}
-        <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
-          {["all", "pending", "processing", "reviewed", "approved", "rejected"].map((s) => (
-            <button
-              key={s}
-              onClick={() => { setFilter(s); setLoading(true); }}
-              style={{
-                padding: "6px 14px",
-                borderRadius: 20,
-                fontSize: 12,
-                fontWeight: 500,
-                border: filter === s ? "none" : "1px solid #D8D2C8",
-                backgroundColor: filter === s ? "#1F2F3A" : "#FFFFFF",
-                color: filter === s ? "#FAF8F5" : "#333333",
-                cursor: "pointer",
-                fontFamily: FONT,
-                textTransform: "capitalize",
-              }}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-
-        {loading ? (
-          <p style={{ color: "#999999", fontSize: 14 }}>Loading...</p>
-        ) : applications.length === 0 ? (
-          <p style={{ color: "#999999", fontSize: 14 }}>No applications found.</p>
-        ) : (
-          <div style={{ overflowX: "auto", backgroundColor: "#FFFFFF", border: "1px solid #D8D2C8", borderRadius: 12 }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-              <thead>
-                <tr style={{ borderBottom: "2px solid #D8D2C8" }}>
-                  {["Tenant", "Property", "Agent", "Rent", "AI Score", "Status", "Date", ""].map((h) => (
-                    <th key={h} style={{ padding: "10px 12px", textAlign: "left", color: "#666666", fontWeight: 600, whiteSpace: "nowrap" }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {applications.map((app) => {
-                  const colors = STATUS_COLORS[app.status] ?? { bg: "#F7F5F2", text: "#333333" };
-                  const scoreColor = app.ai_score == null ? "#999999"
-                    : app.ai_score >= 7 ? "#065F46"
-                    : app.ai_score >= 5 ? "#92400E"
-                    : "#991B1B";
-                  return (
-                    <tr key={app.id} style={{ borderBottom: "1px solid #F7F5F2" }}>
-                      <td style={{ padding: "12px" }}>
-                        <div style={{ fontWeight: 600, color: "#1F2F3A" }}>{app.tenant_name}</div>
-                        <div style={{ color: "#999999", fontSize: 11 }}>{app.tenant_email}</div>
-                      </td>
-                      <td style={{ padding: "12px", color: "#333333" }}>
-                        {app.properties ? `${app.properties.address}, ${app.properties.city}` : "—"}
-                      </td>
-                      <td style={{ padding: "12px", color: "#333333" }}>{app.agents?.name ?? "—"}</td>
-                      <td style={{ padding: "12px", color: "#333333" }}>${app.monthly_rent?.toLocaleString()}/mo</td>
-                      <td style={{ padding: "12px", fontWeight: 700, color: scoreColor }}>
-                        {app.ai_score != null ? `${app.ai_score}/10` : "—"}
-                      </td>
-                      <td style={{ padding: "12px" }}>
-                        <span style={{
-                          padding: "3px 10px",
-                          borderRadius: 20,
-                          fontSize: 11,
-                          fontWeight: 600,
-                          backgroundColor: colors.bg,
-                          color: colors.text,
-                          textTransform: "capitalize",
-                        }}>
-                          {app.status}
-                        </span>
-                      </td>
-                      <td style={{ padding: "12px", color: "#999999", whiteSpace: "nowrap" }}>
-                        {new Date(app.created_at).toLocaleDateString("en-CA")}
-                      </td>
-                      <td style={{ padding: "12px" }}>
-                        <Link
-                          href={`/admin/applications/${app.id}`}
-                          style={{
-                            padding: "5px 12px",
-                            backgroundColor: "#1F2F3A",
-                            color: "#FAF8F5",
-                            borderRadius: 6,
-                            fontSize: 12,
-                            textDecoration: "none",
-                            fontWeight: 500,
-                          }}
-                        >
-                          Review
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
+      <SectionTitle>Send someone the application</SectionTitle>
+      <Card>
+        <p style={{ margin: "0 0 18px", fontSize: 15, color: C.muted }}>
+          They get an email with a button straight into the form for that home. Or share{" "}
+          <Link href="/apply" target="_blank" style={{ color: C.navy, fontWeight: 600 }}>prosperaproperties.co/apply</Link>.
+        </p>
+        <form onSubmit={sendLink} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 14, alignItems: "end" }}>
+          <Field label="Name">
+            <input style={inputStyle} value={form.tenant_name} onChange={(e) => setForm((f) => ({ ...f, tenant_name: e.target.value }))} required />
+          </Field>
+          <Field label="Email">
+            <input style={inputStyle} type="email" value={form.tenant_email} onChange={(e) => setForm((f) => ({ ...f, tenant_email: e.target.value }))} required />
+          </Field>
+          <Field label="Home">
+            <select style={inputStyle} value={form.property_id} onChange={(e) => setForm((f) => ({ ...f, property_id: e.target.value }))} required>
+              <option value="">Pick a home…</option>
+              {listings.map((l) => (
+                <option key={l.id} value={l.id}>{titleCaseAddress(l.address)} · {money(l.price)}/mo</option>
+              ))}
+            </select>
+          </Field>
+          <Button type="submit" variant="primary" disabled={sending}>{sending ? "Sending…" : "Send"}</Button>
+        </form>
+        {sendError && <div style={{ marginTop: 12 }}><ErrorNote>{sendError}</ErrorNote></div>}
+        {sent && <SuccessNote>{sent}</SuccessNote>}
+      </Card>
+    </Page>
   );
 }

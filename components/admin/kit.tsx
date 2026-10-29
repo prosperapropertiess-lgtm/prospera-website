@@ -229,3 +229,27 @@ export function money(n: number | null | undefined): string {
   if (n == null || isNaN(n)) return "—";
   return n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
 }
+
+// Forms
+export const inputStyle: CSSProperties = {
+  width: "100%", boxSizing: "border-box", padding: "11px 14px", fontSize: 15, fontFamily: font,
+  color: C.text, background: C.surface, border: `1px solid ${C.borderStrong}`, borderRadius: 10, outline: "none",
+};
+
+export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: ReactNode }) {
+  return (
+    <label style={{ display: "block" }}>
+      <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: C.navy, marginBottom: 6 }}>{label}</span>
+      {children}
+      {hint && <span style={{ display: "block", fontSize: 13, color: C.faint, marginTop: 4 }}>{hint}</span>}
+    </label>
+  );
+}
+
+export function SuccessNote({ children }: { children: ReactNode }) {
+  return (
+    <div style={{ background: C.greenBg, color: C.green, border: "1px solid #CFE3D4", borderRadius: 10, padding: "12px 16px", fontSize: 14, marginTop: 12 }}>
+      {children}
+    </div>
+  );
+}

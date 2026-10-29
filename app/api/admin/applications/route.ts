@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
       monthly_income,
       status,
       ai_score,
+      ai_summary,
       created_at,
       properties(address, city),
       agents(name, email)
