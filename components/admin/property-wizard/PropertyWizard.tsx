@@ -139,7 +139,7 @@ interface Props {
   // onboarding (see docs/tenant-placement-os/05_OWNER_ONBOARDING.md). When
   // present, prefills from the onboarding intake and, on publish, creates
   // the leasing pipeline campaign automatically instead of requiring a
-  // separate manual "+ Add Vacancy" click in /admin/leasing.
+  // separate manual step.
   onboardToken?: string;
 }
 
@@ -499,12 +499,9 @@ export default function PropertyWizard({ initial, onboardToken }: Props) {
                     // Placement onboarding → auto-create the leasing pipeline
                     // campaign instead of requiring a manual "+ Add Vacancy"
                     // click, so the flow really is click-to-close.
+                    // The campaign record is what Move-ins builds on later.
                     if (onboardToken) {
-                      const campaignId = await createCampaignFromOnboarding(onboardToken, propertyId, dataRef.current.price);
-                      if (campaignId) {
-                        router.push(`/admin/leasing/${campaignId}`);
-                        return;
-                      }
+                      await createCampaignFromOnboarding(onboardToken, propertyId, dataRef.current.price);
                     }
 
                     router.push("/admin/properties");

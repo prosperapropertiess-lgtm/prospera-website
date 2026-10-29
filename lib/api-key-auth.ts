@@ -76,7 +76,7 @@ export async function verifyApiKey(req: NextRequest): Promise<{ valid: boolean; 
 }
 
 /**
- * Logs one agent action for visibility in /admin/api-keys — so "what has
+ * Logs one agent action for visibility in the api_key_activity table — so "what has
  * Muse actually been doing with this key" has a real answer instead of
  * just a last-used timestamp. Never blocks or fails the caller's request.
  */

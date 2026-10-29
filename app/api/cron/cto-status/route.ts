@@ -156,7 +156,7 @@ export async function GET(req: NextRequest) {
 
         <!-- Action links -->
         <div style="border-top:1px solid #E8E4DF;padding-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="https://www.prosperaproperties.co/admin/dashboard" style="display:inline-block;padding:12px 24px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">
+          <a href="https://www.prosperaproperties.co/admin" style="display:inline-block;padding:12px 24px;background:#1F2F3A;color:#FAF8F5;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">
             Admin Dashboard
           </a>
           <a href="https://www.prosperaproperties.co" style="display:inline-block;padding:12px 20px;border:1px solid #D8D2C8;color:#444;text-decoration:none;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">

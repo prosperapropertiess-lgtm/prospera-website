@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import React from "react";
 import { Poppins } from "next/font/google";
-import AdminTopBar from "./AdminTopBar";
+import AdminShell from "./AdminShell";
 
 // Fallback title for any admin route without its own more specific
 // layout.tsx (e.g. the homepage, and deep dynamic detail pages that
@@ -22,15 +22,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       className={poppins.variable}
       style={{
         fontFamily: "var(--font-poppins), -apple-system, sans-serif",
+        // One font across the admin, whatever an older page asks for.
         "--font-dm-sans": "var(--font-poppins)",
+        "--font-cormorant": "var(--font-poppins)",
+        "--font-outfit": "var(--font-poppins)",
       } as React.CSSProperties}
     >
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
-      <AdminTopBar />
-      <main>{children}</main>
+      <AdminShell>{children}</AdminShell>
     </div>
   );
 }

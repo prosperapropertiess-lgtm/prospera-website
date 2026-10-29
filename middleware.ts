@@ -65,34 +65,13 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/admin") &&
     !pathname.startsWith("/admin/login") &&
-    !pathname.startsWith("/admin/leasing/login") &&
     // PWA manifest for the Business Numbers app must be publicly fetchable
     pathname !== "/admin/ceo/manifest.json"
   ) {
-    // /admin/leasing/* also accepts leasing_session cookie
-    if (pathname.startsWith("/admin/leasing")) {
-      const leasingToken = req.cookies.get("leasing_session")?.value ?? "";
-      let isLeasingSession = false;
-      if (leasingToken) {
-        try {
-          const parts = leasingToken.split("|");
-          if (parts.length === 3) {
-            const [, expiresStr] = parts;
-            isLeasingSession = Date.now() < Number(expiresStr);
-          }
-        } catch { /* ignore */ }
-      }
-      if (!isAdminSession && !isLeasingSession) {
-        const loginUrl = req.nextUrl.clone();
-        loginUrl.pathname = "/admin/leasing/login";
-        return NextResponse.redirect(loginUrl);
-      }
-    } else {
-      if (!isAdminSession) {
-        const loginUrl = req.nextUrl.clone();
-        loginUrl.pathname = "/admin/login";
-        return NextResponse.redirect(loginUrl);
-      }
+    if (!isAdminSession) {
+      const loginUrl = req.nextUrl.clone();
+      loginUrl.pathname = "/admin/login";
+      return NextResponse.redirect(loginUrl);
     }
   }
 

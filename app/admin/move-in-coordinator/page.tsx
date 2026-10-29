@@ -122,7 +122,7 @@ export default function MoveInCoordinatorDashboard() {
               {filtered.map((s) => {
                 const meta = STATUS_META[s.status];
                 return (
-                  <Link key={s.id} href={`/admin/leasing/${s.campaign_id}/move-in-coordinator`} style={{ textDecoration: "none" }}>
+                  <Link key={s.id} href={`/admin/move-in-coordinator/${s.campaign_id}`} style={{ textDecoration: "none" }}>
                     <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
                       <div>
                         <p style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: "0 0 3px" }}>{addressOf(s.campaign?.property)}</p>
@@ -144,7 +144,7 @@ export default function MoveInCoordinatorDashboard() {
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {notStartedFiltered.length === 0 && <EmptyNote text="No campaigns at lease-pending/signed/move-in stage without a move-in started." />}
                   {notStartedFiltered.map((c) => (
-                    <Link key={c.id} href={`/admin/leasing/${c.id}/move-in-coordinator`} style={{ textDecoration: "none" }}>
+                    <Link key={c.id} href={`/admin/move-in-coordinator/${c.id}`} style={{ textDecoration: "none" }}>
                       <div style={{ backgroundColor: SURFACE, border: `1px dashed ${BORDER}`, borderRadius: 14, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
                         <div>
                           <p style={{ fontSize: 15, fontWeight: 700, color: TEXT, margin: "0 0 3px" }}>{addressOf(c.property)}</p>
@@ -202,7 +202,7 @@ function StartFreshPanel({ onClose }: { onClose: () => void }) {
     const body = await res.json().catch(() => ({}));
     setSaving(false);
     if (!res.ok) return setError(body.error || "Something went wrong.");
-    router.push(`/admin/leasing/${body.campaignId}/move-in-coordinator`);
+    router.push(`/admin/move-in-coordinator/${body.campaignId}`);
   }
 
   return (

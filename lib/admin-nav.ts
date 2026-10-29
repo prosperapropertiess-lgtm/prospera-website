@@ -1,63 +1,67 @@
-export type AdminSection = "leasing" | "property-management";
+// The admin sidebar, grouped by the five parts of the business.
 
-export interface AdminDestination {
+export interface AdminLink {
   href: string;
   name: string;
   icon: string;
 }
 
-export const LEASING_DESTINATIONS: AdminDestination[] = [
-  { href: "/admin/discovery", name: "Discovery Calls", icon: "call" },
-  { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business" },
-  { href: "/admin/leasing", name: "Rentals", icon: "home_work" },
-  { href: "/admin/leasing/verification", name: "Tenant Verification", icon: "fact_check" },
-  { href: "/admin/move-in-coordinator", name: "Move-In Coordinator", icon: "inventory_2" },
-  { href: "/admin/properties", name: "Properties", icon: "villa" },
-  { href: "/admin/api-keys", name: "AI Agent Access", icon: "smart_toy" },
-  { href: "/admin/health", name: "System Health", icon: "monitor_heart" },
-  { href: "/admin/applications", name: "Applications", icon: "assignment" },
-  { href: "/admin/agents", name: "Agents", icon: "support_agent" },
-  { href: "/admin/invite", name: "Invite an Agent", icon: "person_add" },
-  { href: "/admin/leads", name: "Leads", icon: "person_search" },
-  { href: "/admin/rental-profiles", name: "Renter Profiles", icon: "groups" },
-  { href: "/admin/dashboard", name: "Outreach", icon: "campaign" },
-  { href: "/admin/intelligence", name: "Rent Prices", icon: "payments" },
-  { href: "/admin/seo", name: "Search Rankings", icon: "query_stats" },
-  { href: "/admin/qr-codes", name: "QR Codes", icon: "qr_code" },
+export interface AdminGroup {
+  label: string;
+  links: AdminLink[];
+}
+
+export const ADMIN_NAV: AdminGroup[] = [
+  {
+    label: "Vacancies",
+    links: [
+      { href: "/admin/properties", name: "Listings", icon: "villa" },
+      { href: "/admin/applications", name: "Applications", icon: "assignment" },
+      { href: "/admin/leads", name: "Leads", icon: "person_search" },
+      { href: "/admin/qr-codes", name: "QR codes", icon: "qr_code" },
+    ],
+  },
+  {
+    label: "Owners",
+    links: [
+      { href: "/admin/onboard", name: "Landlords", icon: "add_business" },
+    ],
+  },
+  {
+    label: "Tenants",
+    links: [
+      { href: "/admin/tenants", name: "Tenant portals", icon: "key" },
+      { href: "/admin/messages", name: "Messages", icon: "forum" },
+      { href: "/admin/documents", name: "Documents", icon: "folder" },
+    ],
+  },
+  {
+    label: "Maintenance",
+    links: [
+      { href: "/admin/maintenance", name: "Repairs", icon: "handyman" },
+    ],
+  },
+  {
+    label: "Move-in and out",
+    links: [
+      { href: "/admin/move-in-coordinator", name: "Move-ins", icon: "inventory_2" },
+      { href: "/admin/schedules", name: "Reminders", icon: "event" },
+    ],
+  },
+  {
+    label: "Money",
+    links: [
+      { href: "/admin/ceo", name: "Business numbers", icon: "monitoring" },
+    ],
+  },
+  {
+    label: "Behind the scenes",
+    links: [
+      { href: "/admin/ops", name: "Automations", icon: "bolt" },
+    ],
+  },
 ];
 
-export const PROPERTY_MGMT_DESTINATIONS: AdminDestination[] = [
-  { href: "/admin/tenants", name: "Tenants", icon: "key" },
-  { href: "/admin/maintenance", name: "Maintenance", icon: "handyman" },
-  { href: "/admin/messages", name: "Messages", icon: "forum" },
-  { href: "/admin/documents", name: "Documents", icon: "folder" },
-  { href: "/admin/schedules", name: "Reminders", icon: "event" },
-  { href: "/admin/ceo", name: "Business Numbers", icon: "monitoring" },
-];
-
-export const SECTION_META: Record<AdminSection, { label: string; href: string; icon: string; description: string }> = {
-  leasing: {
-    label: "Leasing",
-    href: "/admin/hub/leasing",
-    icon: "home_work",
-    description: "Fill vacancies — leads, showings, applications, and new landlords",
-  },
-  "property-management": {
-    label: "Property Management",
-    href: "/admin/hub/property-management",
-    icon: "apartment",
-    description: "Tenants, maintenance, and the money",
-  },
-};
-
-// Which section a given admin path belongs to, for the top bar's back-link. Longest-prefix match.
-export function sectionForPath(pathname: string): AdminSection | null {
-  const all = [
-    ...LEASING_DESTINATIONS.map((d) => ({ ...d, section: "leasing" as AdminSection })),
-    ...PROPERTY_MGMT_DESTINATIONS.map((d) => ({ ...d, section: "property-management" as AdminSection })),
-  ];
-  const match = all
-    .filter((d) => pathname === d.href || pathname.startsWith(d.href + "/"))
-    .sort((a, b) => b.href.length - a.href.length)[0];
-  return match?.section ?? null;
+export function isActive(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(href + "/");
 }
