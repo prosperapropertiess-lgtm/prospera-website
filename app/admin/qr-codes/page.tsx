@@ -1,7 +1,7 @@
 "use client";
 
+import { buttonStyle } from "@/components/admin/kit";
 import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
 
 interface QrCode {
   id: string;
@@ -156,33 +156,20 @@ export default function QrCodesPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2" }}>
-      {/* Top bar */}
-      <div className="px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1F2F3A", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="flex items-center gap-5">
-          <Link href="/admin" className="font-[family-name:var(--font-cormorant)] text-2xl font-light" style={{ color: "#FAF8F5" }}>Prospera</Link>
-          <span className="text-xs" style={{ color: "rgba(250,248,245,0.4)" }}>/</span>
-          <span className="text-xs" style={{ color: "rgba(250,248,245,0.6)" }}>QR Codes</span>
-        </div>
-        <Link href="/admin" className="text-xs transition-colors" style={{ color: "rgba(250,248,245,0.55)" }}>← Back</Link>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px 80px" }}>
         {/* Header */}
         <div className="flex items-start justify-between mb-10">
           <div>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-light mb-1" style={{ color: "#1F2F3A" }}>
-              QR Codes
-            </h1>
-            <p className="text-sm" style={{ color: "#666666" }}>
-              Dynamic codes — change the destination anytime without reprinting.
+            <h1 style={{ fontSize: 30, fontWeight: 700, color: "#1F2F3A", letterSpacing: "-0.02em", margin: 0 }}>QR codes</h1>
+            <p style={{ fontSize: 15, color: "#666666", margin: "6px 0 0" }}>
+              Change where a code points anytime, without reprinting it.
             </p>
           </div>
           <button
             onClick={() => { setCreating(true); setTimeout(() => nameRef.current?.focus(), 50); }}
-            className="px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-lg text-white transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#8B2030" }}
+            style={buttonStyle("primary")}
           >
-            + New Code
+            + New code
           </button>
         </div>
 

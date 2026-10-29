@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
-const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET;
 const BUCKET = "tenant-inspection";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const secret = req.headers.get("x-admin-secret");
-  if (!ADMIN_SECRET || secret !== ADMIN_SECRET) {
+  // Was a header secret that was never configured, so every upload got a 401.
+  if (!await isAdminAuthenticated(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

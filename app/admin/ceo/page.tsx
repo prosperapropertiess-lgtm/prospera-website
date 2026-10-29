@@ -174,7 +174,7 @@ export default function CEODashboard() {
       <div style={{ backgroundColor: SURFACE, borderBottom: `1px solid ${BORDER}` }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 32px 0" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: TEXT, margin: 0 }}>Business Numbers</h1>
+            <h1 style={{ fontSize: 30, fontWeight: 700, color: "#1F2F3A", letterSpacing: "-0.02em", margin: 0 }}>Business numbers</h1>
             {ue?.data_note && (
               <span style={{ fontSize: 12, backgroundColor: "#FEF3C7", color: "#92400E", padding: "3px 12px", borderRadius: 20, fontWeight: 600 }}>
                 {ue.data_note}

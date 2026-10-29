@@ -190,7 +190,7 @@ export default function TenantOnboardListPage() {
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em" }}>
+            <h1 style={{ margin: 0, fontSize: 30, fontWeight: 700, color: NAVY, letterSpacing: "-0.02em" }}>
               Tenant Onboarding
             </h1>
             <p style={{ margin: "4px 0 0", fontSize: 14, color: MUTED }}>

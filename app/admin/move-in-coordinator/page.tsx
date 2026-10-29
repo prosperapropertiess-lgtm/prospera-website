@@ -74,10 +74,10 @@ export default function MoveInCoordinatorDashboard() {
 
   return (
     <div style={{ backgroundColor: BG, minHeight: "100vh", fontFamily: "var(--font-poppins, sans-serif)" }}>
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px 60px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 32px 80px" }}>
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 28, fontWeight: 700, color: NAVY, margin: "0 0 6px" }}>Move-In Coordinator</h1>
+            <h1 style={{ fontSize: 30, fontWeight: 700, color: NAVY, letterSpacing: "-0.02em", margin: "0 0 6px" }}>Move-ins</h1>
             <p style={{ fontSize: 14, color: TEXT_SEC, margin: "0 0 28px" }}>Room-by-room inspections, signatures, and handover documents — search, resume, or start a new one.</p>
           </div>
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>

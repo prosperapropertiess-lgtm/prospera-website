@@ -257,13 +257,13 @@ export default function OnboardListPage() {
         @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
       `}</style>
 
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 28px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 32px 80px" }}>
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 28, fontWeight: 800, color: NAVY, letterSpacing: "-0.02em" }}>
-              Onboarding
+            <h1 style={{ margin: 0, fontSize: 30, fontWeight: 700, color: NAVY, letterSpacing: "-0.02em" }}>
+              Landlords
             </h1>
             <p style={{ margin: "4px 0 0", fontSize: 14, color: MUTED }}>
               {sessions.length > 0 ? `${sessions.length} session${sessions.length > 1 ? "s" : ""}` : "No sessions yet"}

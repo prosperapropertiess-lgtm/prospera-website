@@ -153,12 +153,10 @@ export function SchedulesClient({ adminSecret }: Props) {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: BG }}>
-      <div style={{ maxWidth: "860px", margin: "0 auto", padding: "40px 24px" }}>
-        <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "48px", fontWeight: 300, color: TEXT, marginBottom: "8px" }}>
-          Schedules
-        </h1>
-        <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)", marginBottom: "40px" }}>
-          Manage property events, inspections, and tenant reminders.
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 32px 80px" }}>
+        <h1 style={{ fontSize: 30, fontWeight: 700, color: "#1F2F3A", letterSpacing: "-0.02em", margin: "0 0 6px" }}>Reminders</h1>
+        <p style={{ color: "#666666", fontSize: 15, margin: "0 0 28px" }}>
+          Inspections, lease dates and other things to remember for each home.
         </p>
 
         {/* Property selector */}
@@ -207,7 +205,7 @@ export function SchedulesClient({ adminSecret }: Props) {
           <>
             {/* Add event form */}
             <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: "16px", padding: "28px", marginBottom: "32px" }}>
-              <p style={{ color: TEXT, fontSize: "18px", fontFamily: "var(--font-cormorant)", fontWeight: 300, marginBottom: "24px" }}>
+              <p style={{ color: TEXT, fontSize: "18px", fontWeight: 600, marginBottom: "24px" }}>
                 Add event
               </p>
 

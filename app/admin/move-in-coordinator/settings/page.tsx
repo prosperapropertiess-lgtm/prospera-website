@@ -41,7 +41,7 @@ export default function MoveInReviewSettingsPage() {
     <div style={{ backgroundColor: BG, minHeight: "100vh", fontFamily: "var(--font-poppins, sans-serif)" }}>
       <div style={{ maxWidth: 640, margin: "0 auto", padding: "40px 24px 60px" }}>
         <Link href="/admin/move-in-coordinator" style={{ color: TEXT_MUT, fontSize: 13, textDecoration: "none" }}>← Move-In Coordinator</Link>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: NAVY, margin: "10px 0 24px" }}>Review Request Settings</h1>
+        <h1 style={{ fontSize: 30, fontWeight: 700, color: NAVY, letterSpacing: "-0.02em", margin: "10px 0 24px" }}>Review requests</h1>
 
         <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24 }}>
           <p style={{ fontSize: 12, fontWeight: 700, color: TEXT_MUT, textTransform: "uppercase", margin: "0 0 8px" }}>Google Review Link</p>

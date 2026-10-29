@@ -48,6 +48,11 @@ export default function AdminShell({ children }: { children: ReactNode }) {
         .adm-main { margin-left: ${SIDEBAR}px; }
         .adm-top { display: none; }
         .adm-scrim { display: none; }
+        /* Older pages still use small all-caps labels; read them as normal text. */
+        .adm-main .uppercase { text-transform: none; }
+        .adm-main .tracking-widest, .adm-main .tracking-wider, .adm-main .tracking-wide { letter-spacing: 0; }
+        .adm-main .text-xs { font-size: 13px; }
+        .adm-main .font-light { font-weight: 400; }
         @media (max-width: 960px) {
           .adm-side { transform: translateX(-100%); }
           .adm-side.open { transform: none; box-shadow: 0 0 40px rgba(0,0,0,.25); }
