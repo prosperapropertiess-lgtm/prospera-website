@@ -36,7 +36,6 @@ export default function Tile({ href, name, icon, count = null, countLabel = null
         boxShadow: hovered ? "0 10px 28px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
         transition: "box-shadow 0.22s ease, border-color 0.15s ease",
         cursor: "pointer",
-        boxSizing: "border-box",
       }}>
         <div style={{
           width: 40,
