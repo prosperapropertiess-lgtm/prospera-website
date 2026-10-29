@@ -69,7 +69,7 @@ function HomeCard({ href, label, icon, description, signal, alert }: {
   return (
     <Link
       href={href}
-      style={{ textDecoration: "none" }}
+      style={{ textDecoration: "none", display: "block", height: "100%" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -79,14 +79,15 @@ function HomeCard({ href, label, icon, description, signal, alert }: {
         borderRadius: 28,
         padding: "48px 36px",
         minHeight: 300,
+        height: "100%",
+        boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
         justifyContent: "center",
         boxShadow: hovered ? "0 20px 44px rgba(31,47,58,0.14)" : "0 2px 10px rgba(0,0,0,0.04)",
-        transform: hovered ? "translateY(-5px) scale(1.015)" : "none",
-        transition: "transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.2s ease",
+        transition: "box-shadow 0.28s ease, border-color 0.2s ease",
         cursor: "pointer",
       }}>
         <div style={{

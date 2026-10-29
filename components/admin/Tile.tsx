@@ -15,12 +15,14 @@ export default function Tile({ href, name, icon, count = null, countLabel = null
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link href={href} style={{ textDecoration: "none" }}
+    <Link href={href} style={{ textDecoration: "none", display: "block", height: "100%" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div style={{
-        minHeight: 190,
+        minHeight: 210,
+        height: "100%",
+        boxSizing: "border-box",
         backgroundColor: alert ? "#FEF2F2" : "#FFFFFF",
         border: `1.5px solid ${hovered ? (alert ? "#F87171" : "#1F2F3A") : (alert ? "#FCA5A5" : "#E0DBD4")}`,
         borderRadius: 20,
@@ -32,8 +34,7 @@ export default function Tile({ href, name, icon, count = null, countLabel = null
         textAlign: "center",
         gap: 10,
         boxShadow: hovered ? "0 10px 28px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
-        transform: hovered ? "translateY(-3px) scale(1.015)" : "none",
-        transition: "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.15s ease",
+        transition: "box-shadow 0.22s ease, border-color 0.15s ease",
         cursor: "pointer",
         boxSizing: "border-box",
       }}>
