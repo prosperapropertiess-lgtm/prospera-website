@@ -25,14 +25,14 @@ export const ADMIN_NAV: AdminGroup[] = [
     label: "Owners",
     links: [
       { href: "/admin/onboard", name: "Landlords", icon: "add_business" },
+      { href: "/admin/messages", name: "Post an update", icon: "forum" },
+      { href: "/admin/documents", name: "Share a document", icon: "folder" },
     ],
   },
   {
     label: "Tenants",
     links: [
       { href: "/admin/tenants", name: "Tenant portals", icon: "key" },
-      { href: "/admin/messages", name: "Messages", icon: "forum" },
-      { href: "/admin/documents", name: "Documents", icon: "folder" },
     ],
   },
   {

@@ -1,13 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
-const BG = "#F7F5F2";
-const SURFACE = "#FFFFFF";
-const BORDER = "#D8D2C8";
-const TEXT = "#222222";
-const TEXT_SEC = "#666666";
-const ACCENT = "#8B2030";
-const INPUT_BG = "#F7F5F2";
+import { Page, PageHeader, SectionTitle, Card, Button, EmptyState, ErrorNote, SuccessNote, Field, inputStyle, C, shortDate } from "@/components/admin/kit";
 
 interface TokenRecord {
   id: string;
@@ -17,346 +10,138 @@ interface TokenRecord {
   created_at: string;
 }
 
-interface NotionTenant {
-  id: string;
-  name: string;
-  propertyId: string;
-}
-
-interface NotionProperty {
-  id: string;
-  address: string;
-}
+interface NotionTenant { id: string; name: string; propertyId: string }
+interface NotionProperty { id: string; address: string }
 
 interface Props {
   adminSecret: string;
   initialTokens: TokenRecord[];
 }
 
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <label style={{ display: "block", fontSize: "12px", fontFamily: "var(--font-dm-sans)", color: TEXT_SEC, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-      {children}
-    </label>
-  );
-}
-
-const selectStyle: React.CSSProperties = {
-  width: "100%",
-  background: INPUT_BG,
-  border: `1px solid ${BORDER}`,
-  borderRadius: "8px",
-  padding: "10px 14px",
-  color: TEXT,
-  fontSize: "14px",
-  fontFamily: "var(--font-dm-sans)",
-  outline: "none",
-  boxSizing: "border-box",
-  appearance: "none",
-  cursor: "pointer",
-};
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  background: INPUT_BG,
-  border: `1px solid ${BORDER}`,
-  borderRadius: "8px",
-  padding: "10px 14px",
-  color: TEXT,
-  fontSize: "14px",
-  fontFamily: "var(--font-dm-sans)",
-  outline: "none",
-  boxSizing: "border-box",
-};
+const portalUrl = (token: string) => `https://www.prosperaproperties.co/tenants/${token}`;
 
 export function TenantTokensClient({ adminSecret, initialTokens }: Props) {
-  const [notionTenants, setNotionTenants] = useState<NotionTenant[]>([]);
-  const [notionProperties, setNotionProperties] = useState<NotionProperty[]>([]);
+  const [tenants, setTenants] = useState<NotionTenant[]>([]);
+  const [properties, setProperties] = useState<NotionProperty[]>([]);
   const [loadingNotion, setLoadingNotion] = useState(true);
 
-  const [selectedTenantId, setSelectedTenantId] = useState("");
-  const [tenantName, setTenantName] = useState("");
-  const [selectedPropertyId, setSelectedPropertyId] = useState("");
-  const [propertyAddress, setPropertyAddress] = useState("");
-  const [tenantEmail, setTenantEmail] = useState("");
+  const [tenantId, setTenantId] = useState("");
+  const [propertyId, setPropertyId] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{ token: string; portalUrl: string; emailSent?: boolean } | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [result, setResult] = useState<{ portalUrl: string; emailSent?: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const [tokens, setTokens] = useState<TokenRecord[]>(initialTokens);
 
+  const auth = { Authorization: `Bearer ${adminSecret}` };
+
   useEffect(() => {
-    fetch("/api/admin/notion-tenants", {
-      headers: { Authorization: `Bearer ${adminSecret}` },
-    })
+    fetch("/api/admin/notion-tenants", { headers: { Authorization: `Bearer ${adminSecret}` } })
       .then((r) => r.json())
-      .then((data) => {
-        setNotionTenants(data.tenants ?? []);
-        setNotionProperties(data.properties ?? []);
-      })
-      .catch(() => {})
+      .then((d) => { setTenants(d.tenants ?? []); setProperties(d.properties ?? []); })
+      .catch(() => setError("Couldn't load tenants from Notion. Refresh to try again."))
       .finally(() => setLoadingNotion(false));
   }, [adminSecret]);
 
-  function handleTenantSelect(tenantId: string) {
-    setSelectedTenantId(tenantId);
-    const t = notionTenants.find((x) => x.id === tenantId);
-    if (!t) { setTenantName(""); setSelectedPropertyId(""); return; }
-    setTenantName(t.name);
-    // Auto-select their property if it's in the list
-    const matchedProp = notionProperties.find((p) => p.id === t.propertyId);
-    if (matchedProp) setSelectedPropertyId(matchedProp.id);
+  function pickTenant(id: string) {
+    setTenantId(id);
+    const t = tenants.find((x) => x.id === id);
+    if (t && properties.some((p) => p.id === t.propertyId)) setPropertyId(t.propertyId);
   }
 
-  async function handleGenerate(e: React.FormEvent) {
+  async function create(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setResult(null);
+    const tenant = tenants.find((t) => t.id === tenantId);
+    const property = properties.find((p) => p.id === propertyId);
+    if (!tenant || !property) return;
+    setSaving(true); setError(null); setResult(null);
     try {
       const res = await fetch("/api/admin/tenant-tokens", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${adminSecret}`,
-        },
+        headers: { "Content-Type": "application/json", ...auth },
         body: JSON.stringify({
-          notionTenantId: selectedTenantId,
-          tenantName,
-          propertyId: selectedPropertyId,
-          tenantEmail: tenantEmail || undefined,
-          propertyAddress: propertyAddress || undefined,
+          notionTenantId: tenant.id,
+          tenantName: tenant.name,
+          propertyId: property.id,
+          tenantEmail: email || undefined,
+          propertyAddress: property.address,
         }),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setError(data.error ?? "Failed to generate token");
-      } else {
-        setResult(data);
-        setSelectedTenantId("");
-        setTenantName("");
-        setSelectedPropertyId("");
-        setTenantEmail("");
-        setPropertyAddress("");
-        const listRes = await fetch("/api/admin/tenant-tokens", {
-          headers: { Authorization: `Bearer ${adminSecret}` },
-        });
-        if (listRes.ok) {
-          const listData = await listRes.json();
-          setTokens(listData.tokens ?? []);
-        }
-      }
+      if (!res.ok) { setError(data.error ?? "Couldn't create the link. Try again."); return; }
+      setResult(data);
+      setTenantId(""); setPropertyId(""); setEmail("");
+      const list = await fetch("/api/admin/tenant-tokens", { headers: auth });
+      if (list.ok) setTokens((await list.json()).tokens ?? []);
     } catch {
-      setError("Network error");
+      setError("Couldn't create the link. Check your connection.");
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   }
 
-  async function handleCopy(text: string, key: string) {
+  async function copy(text: string, key: string) {
     await navigator.clipboard.writeText(text);
     setCopied(key);
     setTimeout(() => setCopied(null), 2000);
   }
 
-  const canSubmit = !loading && selectedTenantId && tenantName && selectedPropertyId;
+  const propertyName = (id: string) => properties.find((p) => p.id === id)?.address;
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG }}>
-      <div style={{ maxWidth: "800px", margin: "0 auto", padding: "40px 24px" }}>
-        <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "48px", fontWeight: 300, color: TEXT, marginBottom: "8px" }}>
-          Tenant Portals
-        </h1>
-        <p style={{ color: TEXT_SEC, fontSize: "14px", fontFamily: "var(--font-dm-sans)", marginBottom: "48px" }}>
-          Generate a secure portal link for a tenant.
-        </p>
+    <Page width={900}>
+      <PageHeader title="Tenant portals" subtitle="Each tenant gets a private link for repairs, documents and messages." />
+      {error && <ErrorNote>{error}</ErrorNote>}
 
-        {/* Generate form */}
-        <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: "16px", padding: "32px", marginBottom: "40px" }}>
-          <p style={{ color: TEXT, fontSize: "18px", fontFamily: "var(--font-cormorant)", fontWeight: 300, marginBottom: "24px" }}>
-            Generate new token
-          </p>
-
-          <form onSubmit={handleGenerate} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            {/* Tenant dropdown */}
-            <div>
-              <Label>Tenant</Label>
-              <div style={{ position: "relative" }}>
-                <select
-                  value={selectedTenantId}
-                  onChange={(e) => handleTenantSelect(e.target.value)}
-                  disabled={loadingNotion}
-                  style={{ ...selectStyle, opacity: loadingNotion ? 0.5 : 1 }}
-                >
-                  <option value="">{loadingNotion ? "Loading from Notion…" : "Select tenant"}</option>
-                  {notionTenants.map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-                </select>
-                <span style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", color: TEXT_SEC, pointerEvents: "none", fontSize: "12px" }}>▼</span>
-              </div>
-            </div>
-
-            {/* Property dropdown */}
-            <div>
-              <Label>Property</Label>
-              <div style={{ position: "relative" }}>
-                <select
-                  value={selectedPropertyId}
-                  onChange={(e) => setSelectedPropertyId(e.target.value)}
-                  disabled={loadingNotion}
-                  style={{ ...selectStyle, opacity: loadingNotion ? 0.5 : 1 }}
-                >
-                  <option value="">{loadingNotion ? "Loading from Notion…" : "Select property"}</option>
-                  {notionProperties.map((p) => (
-                    <option key={p.id} value={p.id}>{p.address}</option>
-                  ))}
-                </select>
-                <span style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", color: TEXT_SEC, pointerEvents: "none", fontSize: "12px" }}>▼</span>
-              </div>
-            </div>
-
-            <div style={{ height: "1px", background: BORDER, margin: "4px 0" }} />
-
-            <div>
-              <Label>Tenant Email — sends welcome email automatically</Label>
-              <input
-                value={tenantEmail}
-                onChange={(e) => setTenantEmail(e.target.value)}
-                placeholder="tenant@email.com (optional)"
-                style={inputStyle}
-              />
-            </div>
-            <div>
-              <Label>Property Address — shown in welcome email</Label>
-              <input
-                value={propertyAddress}
-                onChange={(e) => setPropertyAddress(e.target.value)}
-                placeholder="e.g. 27 Horton St, London ON"
-                style={inputStyle}
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={!canSubmit}
-              style={{
-                background: ACCENT,
-                color: "#FAF8F5",
-                border: "none",
-                borderRadius: "8px",
-                padding: "12px 24px",
-                fontSize: "14px",
-                fontFamily: "var(--font-dm-sans)",
-                fontWeight: 600,
-                cursor: !canSubmit ? "not-allowed" : "pointer",
-                opacity: !canSubmit ? 0.5 : 1,
-                alignSelf: "flex-start",
-              }}
-            >
-              {loading ? "Creating..." : tenantEmail ? "Create portal & send welcome email" : "Create portal link"}
+      <Card>
+        <h2 style={{ fontSize: 17, fontWeight: 600, color: C.navy, margin: "0 0 18px" }}>Give a tenant their link</h2>
+        <form onSubmit={create} style={{ display: "grid", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+            <Field label="Tenant">
+              <select style={inputStyle} value={tenantId} onChange={(e) => pickTenant(e.target.value)} disabled={loadingNotion} required>
+                <option value="">{loadingNotion ? "Loading from Notion…" : "Pick a tenant…"}</option>
+                {tenants.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+              </select>
+            </Field>
+            <Field label="Home">
+              <select style={inputStyle} value={propertyId} onChange={(e) => setPropertyId(e.target.value)} disabled={loadingNotion} required>
+                <option value="">Pick a home…</option>
+                {properties.map((p) => <option key={p.id} value={p.id}>{p.address}</option>)}
+              </select>
+            </Field>
+          </div>
+          <Field label="Their email" hint="Optional. If you add it, we email them the link with a short welcome.">
+            <input style={inputStyle} type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </Field>
+          <div><Button type="submit" variant="primary" disabled={saving || !tenantId || !propertyId}>{saving ? "Creating…" : "Create link"}</Button></div>
+        </form>
+        {result && (
+          <SuccessNote>
+            Link ready{result.emailSent ? " and emailed" : ""}: <strong>{result.portalUrl}</strong>{" "}
+            <button onClick={() => copy(result.portalUrl, "new")} style={{ marginLeft: 8, background: "none", border: "none", color: C.green, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}>
+              {copied === "new" ? "Copied" : "Copy"}
             </button>
-          </form>
+          </SuccessNote>
+        )}
+      </Card>
 
-          {error && (
-            <p style={{ color: "#f87171", fontSize: "13px", fontFamily: "var(--font-dm-sans)", marginTop: "16px" }}>
-              {error}
-            </p>
-          )}
-
-          {result && (
-            <div style={{ marginTop: "24px", background: "#F0FDF4", border: "1px solid rgba(5,150,105,0.25)", borderRadius: "12px", padding: "20px" }}>
-              <p style={{ color: "#059669", fontSize: "12px", fontFamily: "var(--font-dm-sans)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "12px" }}>
-                Portal created {result.emailSent ? "· Welcome email sent ✓" : ""}
-              </p>
-              <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", marginBottom: "4px" }}>Token</p>
-              <p style={{ color: TEXT, fontSize: "13px", fontFamily: "monospace", marginBottom: "16px", wordBreak: "break-all" }}>
-                {result.token}
-              </p>
-              <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", marginBottom: "4px" }}>Portal URL</p>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-                <p style={{ color: TEXT, fontSize: "13px", fontFamily: "monospace", wordBreak: "break-all", flex: 1 }}>
-                  {result.portalUrl}
-                </p>
-                <button
-                  onClick={() => handleCopy(result.portalUrl, "new")}
-                  style={{
-                    background: "#F7F5F2",
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: "6px",
-                    padding: "6px 14px",
-                    color: copied === "new" ? "#059669" : TEXT,
-                    fontSize: "12px",
-                    fontFamily: "var(--font-dm-sans)",
-                    cursor: "pointer",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {copied === "new" ? "Copied!" : "Copy"}
-                </button>
+      <SectionTitle>Tenants with a link</SectionTitle>
+      {tokens.length === 0 ? <EmptyState title="No links yet" /> : (
+        <Card padding={0}>
+          {tokens.map((t, i) => (
+            <div key={t.id} style={{ padding: "16px 20px", borderTop: i ? `1px solid ${C.border}` : "none", display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+              <div style={{ flex: 1, minWidth: 200 }}>
+                <div style={{ fontWeight: 600, fontSize: 15 }}>{t.tenant_name}</div>
+                <div style={{ fontSize: 14, color: C.muted }}>{propertyName(t.property_id) ?? "Home not found in Notion"} · made {shortDate(t.created_at)}</div>
               </div>
+              <Button size="sm" onClick={() => copy(portalUrl(t.token), t.id)}>{copied === t.id ? "Copied" : "Copy link"}</Button>
+              <Button size="sm" href={portalUrl(t.token)} target="_blank">Open</Button>
             </div>
-          )}
-        </div>
-
-        {/* Recent tokens list */}
-        <div>
-          <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "var(--font-dm-sans)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "16px" }}>
-            Recently generated
-          </p>
-
-          {tokens.length === 0 ? (
-            <p style={{ color: TEXT_SEC, fontSize: "13px", fontFamily: "var(--font-dm-sans)" }}>No tokens yet.</p>
-          ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {tokens.map((t) => (
-                <div
-                  key={t.id}
-                  style={{
-                    background: SURFACE,
-                    border: `1px solid ${BORDER}`,
-                    borderRadius: "12px",
-                    padding: "16px 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: "12px",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div>
-                    <p style={{ color: TEXT, fontSize: "14px", fontFamily: "var(--font-dm-sans)", fontWeight: 500, marginBottom: "2px" }}>
-                      {t.tenant_name}
-                    </p>
-                    <p style={{ color: TEXT_SEC, fontSize: "12px", fontFamily: "monospace" }}>{t.token}</p>
-                  </div>
-                  <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                    <p style={{ color: TEXT_SEC, fontSize: "11px", fontFamily: "var(--font-dm-sans)" }}>
-                      {new Date(t.created_at).toLocaleDateString("en-CA")}
-                    </p>
-                    <button
-                      onClick={() => handleCopy(`https://prosperaproperties.co/tenants/${t.token}`, t.id)}
-                      style={{
-                        background: "#F7F5F2",
-                        border: `1px solid ${BORDER}`,
-                        borderRadius: "6px",
-                        padding: "4px 10px",
-                        color: copied === t.id ? "#059669" : TEXT_SEC,
-                        fontSize: "11px",
-                        fontFamily: "var(--font-dm-sans)",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {copied === t.id ? "Copied!" : "Copy link"}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+          ))}
+        </Card>
+      )}
+    </Page>
   );
 }

@@ -1,6 +1,8 @@
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { DocumentUploadForm, type PropertyOption } from "@/components/admin/DocumentUploadForm";
 
+import { Page, PageHeader, Card } from "@/components/admin/kit";
+
 export const dynamic = "force-dynamic";
 
 interface OwnerAccessRow {
@@ -46,7 +48,7 @@ export default async function AdminDocumentsPage() {
           token: row.token,
           ownerName: row.owner_names,
           propertyId: "unknown",
-          address: `${row.owner_names} (no cached properties)`,
+          address: `${row.owner_names} (properties not loaded yet)`,
         });
         continue;
       }
@@ -65,38 +67,11 @@ export default async function AdminDocumentsPage() {
   const adminSecret = process.env.ADMIN_API_SECRET ?? "";
 
   return (
-    <div style={{ minHeight: "100vh", background: "#F7F5F2", padding: "40px 24px" }}>
-      <div style={{ maxWidth: "680px", margin: "0 auto" }}>
-        <h1
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: "24px",
-            fontWeight: 700,
-            color: "#1F2F3A",
-            marginBottom: "8px",
-          }}
-        >
-          Upload Document
-        </h1>
-        <p style={{ color: "#9AA5B1", fontSize: "14px", marginBottom: "32px" }}>
-          Upload leases, inspection reports, and notices to an owner&apos;s portal.
-        </p>
-
-        <div
-          style={{
-            background: "#FFFFFF",
-            borderRadius: "16px",
-            padding: "28px",
-            boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
-          }}
-        >
-          <DocumentUploadForm properties={propertyOptions} adminSecret={adminSecret} />
-        </div>
-
-        <p style={{ marginTop: "24px", fontSize: "12px", color: "#C8BFB5" }}>
-          Documents are visible to the owner immediately in their property portal.
-        </p>
-      </div>
-    </div>
+    <Page width={760}>
+      <PageHeader title="Share a document" subtitle="Add a lease, inspection report or notice to an owner's portal. They can see it right away." />
+      <Card>
+        <DocumentUploadForm properties={propertyOptions} adminSecret={adminSecret} />
+      </Card>
+    </Page>
   );
 }

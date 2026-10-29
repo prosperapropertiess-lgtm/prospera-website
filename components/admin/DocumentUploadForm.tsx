@@ -1,5 +1,6 @@
 "use client";
 
+import { C, inputStyle as kitInput } from "@/components/admin/kit";
 import { useState, useRef } from "react";
 
 export interface PropertyOption {
@@ -28,27 +29,9 @@ const CATEGORIES = [
   "Other",
 ] as const;
 
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "12px",
-  fontWeight: 600,
-  color: "#5A6A7A",
-  textTransform: "uppercase",
-  letterSpacing: "0.06em",
-  marginBottom: "6px",
-};
+const labelStyle: React.CSSProperties = { display: "block", fontSize: 14, fontWeight: 600, color: C.navy, marginBottom: 6 };
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "10px 14px",
-  fontSize: "14px",
-  color: "#1F2F3A",
-  background: "#FFFFFF",
-  border: "1px solid #E8E4DF",
-  borderRadius: "8px",
-  outline: "none",
-  boxSizing: "border-box",
-};
+const inputStyle = kitInput;
 
 export function DocumentUploadForm({ properties, adminSecret }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -102,7 +85,7 @@ export function DocumentUploadForm({ properties, adminSecret }: Props) {
 
   if (properties.length === 0) {
     return (
-      <p style={{ color: "#9AA5B1", fontSize: "14px", padding: "24px" }}>
+      <p style={{ color: "#666666", fontSize: "14px", padding: "24px" }}>
         No properties found. Make sure owner_access records exist in Supabase.
       </p>
     );
@@ -211,7 +194,7 @@ export function DocumentUploadForm({ properties, adminSecret }: Props) {
               >
                 <div>
                   <p style={{ fontSize: "14px", fontWeight: 600, color: "#1F2F3A" }}>{doc.label}</p>
-                  <p style={{ fontSize: "12px", color: "#9AA5B1", marginTop: "2px" }}>{doc.file_name}</p>
+                  <p style={{ fontSize: "12px", color: "#666666", marginTop: "2px" }}>{doc.file_name}</p>
                 </div>
                 <span style={{ color: "#16a34a", fontSize: "12px", fontWeight: 500 }}>Uploaded</span>
               </div>

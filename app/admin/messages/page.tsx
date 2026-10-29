@@ -1,6 +1,8 @@
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { PostMessageForm, type PropertyOption } from "@/components/admin/PostMessageForm";
 
+import { Page, PageHeader, Card } from "@/components/admin/kit";
+
 export const dynamic = "force-dynamic";
 
 interface OwnerAccessRow {
@@ -43,7 +45,7 @@ export default async function AdminMessagesPage() {
           token: row.token,
           ownerName: row.owner_names,
           propertyId: "unknown",
-          address: `${row.owner_names} (no cached properties)`,
+          address: `${row.owner_names} (properties not loaded yet)`,
         });
         continue;
       }
@@ -62,38 +64,12 @@ export default async function AdminMessagesPage() {
   const adminSecret = process.env.ADMIN_API_SECRET ?? "";
 
   return (
-    <div style={{ minHeight: "100vh", background: "#F7F5F2", padding: "40px 24px" }}>
-      <div style={{ maxWidth: "680px", margin: "0 auto" }}>
-        <h1
-          style={{
-            fontFamily: "var(--font-outfit)",
-            fontSize: "24px",
-            fontWeight: 700,
-            color: "#1F2F3A",
-            marginBottom: "8px",
-          }}
-        >
-          Post Property Update
-        </h1>
-        <p style={{ color: "#9AA5B1", fontSize: "14px", marginBottom: "32px" }}>
-          Post a message to an owner&apos;s property feed. They&apos;ll see it next time they visit their portal.
-        </p>
-
-        <div
-          style={{
-            background: "#FFFFFF",
-            borderRadius: "16px",
-            padding: "28px",
-            boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
-          }}
-        >
-          <PostMessageForm properties={propertyOptions} adminSecret={adminSecret} />
-        </div>
-
-        <p style={{ marginTop: "24px", fontSize: "12px", color: "#C8BFB5" }}>
-          Messages are visible to the owner immediately. Email notifications are sent to the owner on their reply; the Prospera team gets a copy when owners write back.
-        </p>
-      </div>
-    </div>
+    <Page width={760}>
+      <PageHeader title="Post an update" subtitle="Write a note to an owner about their property. It shows up in their portal right away." />
+      <Card>
+        <PostMessageForm properties={propertyOptions} adminSecret={adminSecret} />
+      </Card>
+      <p style={{ marginTop: 16, fontSize: 14, color: "#666666" }}>When an owner replies, you get a copy by email.</p>
+    </Page>
   );
 }

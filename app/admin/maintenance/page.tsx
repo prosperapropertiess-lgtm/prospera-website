@@ -1,63 +1,47 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-
-const BG = "#F7F5F2";
-const SURFACE = "#FFFFFF";
-const BORDER = "#D8D2C8";
-const TEXT = "#222222";
-const TEXT_SEC = "#666666";
-const TEXT_MUT = "#999999";
-const ACCENT = "#8B2030";
-const NAVY = "#1F2F3A";
+import {
+  Page, PageHeader, SectionTitle, Grid, Stat, Card, Tabs, Badge, Button, EmptyState, Loading, ErrorNote, SuccessNote,
+  Field, inputStyle, C, ago, type Tone,
+} from "@/components/admin/kit";
 
 const STATUSES = ["submitted", "acknowledged", "triage", "vendor_assigned", "scheduled", "work_complete", "verified", "closed", "cancelled"] as const;
 type Status = typeof STATUSES[number];
 
-const STATUS_LABELS: Record<Status, string> = {
+const LABEL: Record<Status, string> = {
   submitted: "New",
-  acknowledged: "Acknowledged",
-  triage: "In Triage",
-  vendor_assigned: "Vendor Assigned",
+  acknowledged: "Seen",
+  triage: "Figuring it out",
+  vendor_assigned: "Vendor booked",
   scheduled: "Scheduled",
-  work_complete: "Awaiting Verification",
-  verified: "Verified",
+  work_complete: "Fixed, check with tenant",
+  verified: "Confirmed fixed",
   closed: "Closed",
   cancelled: "Cancelled",
 };
 
-const STATUS_COLORS: Record<Status, { bg: string; text: string }> = {
-  submitted: { bg: "#FEF3C7", text: "#92400E" },
-  acknowledged: { bg: "#DBEAFE", text: "#1E40AF" },
-  triage: { bg: "#EDE9FE", text: "#5B21B6" },
-  vendor_assigned: { bg: "#E0E7FF", text: "#3730A3" },
-  scheduled: { bg: "#CFFAFE", text: "#0E7490" },
-  work_complete: { bg: "#FFEDD5", text: "#9A3412" },
-  verified: { bg: "#D1FAE5", text: "#065F46" },
-  closed: { bg: "#F3F4F6", text: "#374151" },
-  cancelled: { bg: "#FEE2E2", text: "#991B1B" },
+const TONE: Record<Status, Tone> = {
+  submitted: "red", acknowledged: "amber", triage: "amber", vendor_assigned: "blue", scheduled: "blue",
+  work_complete: "amber", verified: "green", closed: "grey", cancelled: "grey",
 };
 
-// Forward-only next step per status, for a "quick advance" button
-const NEXT_STATUS: Partial<Record<Status, Status>> = {
+// The one-tap next step for each status, where there is an obvious one.
+const NEXT: Partial<Record<Status, Status>> = {
   submitted: "acknowledged",
   acknowledged: "triage",
   work_complete: "verified",
   verified: "closed",
 };
 
-interface Vendor {
-  id: string; name: string; trade: string; phone: string | null; email: string | null; active: boolean;
-}
+const DONE: Status[] = ["verified", "closed", "cancelled"];
 
-interface MaintenanceRequest {
+interface Vendor { id: string; name: string; trade: string; phone: string | null; email: string | null; active: boolean }
+
+interface Request {
   id: string;
   category: string;
   description: string;
-  troubleshooting_steps: string;
-  ai_diagnosis: string;
   status: Status;
-  admin_notes: string | null;
-  scheduled_at: string | null;
   created_at: string;
   property_address: string;
   tenant_name: string;
@@ -65,33 +49,24 @@ interface MaintenanceRequest {
   vendors: { id: string; name: string; trade: string; phone: string | null } | null;
 }
 
-function timeAgo(iso: string) {
-  const diff = Date.now() - new Date(iso).getTime();
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor(diff / 60000);
-  if (d > 0) return `${d}d ago`;
-  if (h > 0) return `${h}h ago`;
-  return `${m}m ago`;
-}
+type Filter = "open" | "done" | "all";
 
-export default function MaintenancePage() {
-  const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
+export default function RepairsPage() {
+  const [requests, setRequests] = useState<Request[] | null>(null);
   const [vendors, setVendors] = useState<Vendor[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [filter, setFilter] = useState<Filter>("open");
+  const [openId, setOpenId] = useState<string | null>(null);
   const [vendorPick, setVendorPick] = useState<Record<string, string>>({});
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
-  const [showAddVendor, setShowAddVendor] = useState(false);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [addingVendor, setAddingVendor] = useState(false);
   const [vendorForm, setVendorForm] = useState({ name: "", trade: "", phone: "", email: "" });
 
-  const load = useCallback(async (status: string) => {
-    setLoading(true);
-    const res = await fetch(`/api/admin/maintenance?status=${status}`).then((r) => r.json()).catch(() => ({ requests: [] }));
-    setRequests(res.requests ?? []);
-    setLoading(false);
+  const load = useCallback(async () => {
+    const res = await fetch("/api/admin/maintenance?status=all");
+    if (!res.ok) { setRequests([]); setError("Couldn't load repairs. Refresh to try again."); return; }
+    setRequests((await res.json()).requests ?? []);
   }, []);
 
   const loadVendors = useCallback(async () => {
@@ -99,235 +74,167 @@ export default function MaintenancePage() {
     setVendors(res.vendors ?? []);
   }, []);
 
-  useEffect(() => { load(filter); }, [filter, load]);
-  useEffect(() => { loadVendors(); }, [loadVendors]);
+  useEffect(() => { load(); loadVendors(); }, [load, loadVendors]);
 
-  async function updateStatus(id: string, status: Status) {
-    setBusyId(id);
+  async function setStatus(id: string, status: Status) {
+    setBusy(id);
     const res = await fetch(`/api/admin/maintenance/${id}/status`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }),
     });
-    if (res.ok) await load(filter);
-    setBusyId(null);
+    if (res.ok) await load(); else setError("Couldn't update that repair. Try again.");
+    setBusy(null);
   }
 
-  async function assignVendor(id: string) {
+  async function assign(id: string) {
     const vendorId = vendorPick[id];
     if (!vendorId) return;
-    setBusyId(id);
+    setBusy(id);
     const res = await fetch(`/api/admin/maintenance/${id}/assign-vendor`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ vendorId }),
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ vendorId }),
     });
     if (res.ok) {
       const data = await res.json();
-      await load(filter);
+      await load();
       if (data.vendorPortalUrl) {
         await navigator.clipboard.writeText(data.vendorPortalUrl).catch(() => {});
-        setCopiedUrl(data.vendorPortalUrl);
-        setTimeout(() => setCopiedUrl(null), 4000);
+        setNotice("Vendor booked. Their link is copied, so paste it into a text or email to them.");
       }
-    }
-    setBusyId(null);
+    } else setError("Couldn't book that vendor. Try again.");
+    setBusy(null);
   }
 
   async function addVendor(e: React.FormEvent) {
     e.preventDefault();
-    if (!vendorForm.name.trim() || !vendorForm.trade.trim()) return;
     const res = await fetch("/api/admin/vendors", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(vendorForm),
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(vendorForm),
     });
     if (res.ok) {
       setVendorForm({ name: "", trade: "", phone: "", email: "" });
-      setShowAddVendor(false);
+      setAddingVendor(false);
+      setNotice("Vendor saved.");
       await loadVendors();
-    }
+    } else setError("Couldn't save that vendor. Try again.");
   }
 
-  const counts = {
-    open: requests.filter((r) => !["closed", "cancelled"].includes(r.status)).length,
-    new: requests.filter((r) => r.status === "submitted").length,
-    awaitingVerify: requests.filter((r) => r.status === "work_complete").length,
-  };
+  const all = requests ?? [];
+  const open = all.filter((r) => !DONE.includes(r.status));
+  const shown = filter === "all" ? all : filter === "open" ? open : all.filter((r) => DONE.includes(r.status));
+  const activeVendors = vendors.filter((v) => v.active);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: BG, fontFamily: "var(--font-poppins, sans-serif)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 40px 100px" }}>
+    <Page>
+      <PageHeader
+        title="Repairs"
+        subtitle="What tenants reported, who's fixing it, and what's done."
+        actions={<Button onClick={() => setAddingVendor((v) => !v)}>{addingVendor ? "Close" : "+ Add a vendor"}</Button>}
+      />
+      {error && <ErrorNote>{error}</ErrorNote>}
+      {notice && <SuccessNote>{notice}</SuccessNote>}
 
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
-          <div>
-            <h1 style={{ fontSize: 26, fontWeight: 700, color: NAVY, margin: 0, letterSpacing: "-0.02em" }}>Maintenance</h1>
-            <p style={{ fontSize: 14, color: TEXT_SEC, margin: "4px 0 0" }}>Requests, dispatch, and vendors</p>
-          </div>
-          <button
-            onClick={() => setShowAddVendor(true)}
-            style={{ backgroundColor: NAVY, color: "#FAF8F5", border: "none", padding: "14px 24px", borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}
-          >
-            + Add Vendor
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16, marginBottom: 28 }}>
-          {[
-            { label: "Open requests", value: counts.open, alert: false },
-            { label: "New", value: counts.new, alert: counts.new > 0 },
-            { label: "Awaiting verification", value: counts.awaitingVerify, alert: counts.awaitingVerify > 0 },
-            { label: "Active vendors", value: vendors.filter((v) => v.active).length, alert: false },
-          ].map((s) => (
-            <div key={s.label} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "18px 20px" }}>
-              <p style={{ fontSize: 30, fontWeight: 700, color: s.alert ? ACCENT : NAVY, margin: 0, lineHeight: 1 }}>{s.value}</p>
-              <p style={{ fontSize: 12, color: TEXT_MUT, margin: "6px 0 0" }}>{s.label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Filter tabs */}
-        <div style={{ display: "flex", gap: 10, marginBottom: 24, flexWrap: "wrap" }}>
-          {["all", ...STATUSES].map((s) => (
-            <button
-              key={s}
-              onClick={() => setFilter(s)}
-              style={{
-                padding: "12px 20px", borderRadius: 20, fontSize: 14, fontWeight: 600, minHeight: 44,
-                border: filter === s ? "none" : `1px solid ${BORDER}`,
-                backgroundColor: filter === s ? NAVY : "#FFFFFF",
-                color: filter === s ? "#FAF8F5" : TEXT_SEC,
-                cursor: "pointer", textTransform: "capitalize",
-              }}
-            >
-              {s === "all" ? "All" : STATUS_LABELS[s as Status]}
-            </button>
-          ))}
-        </div>
-
-        {copiedUrl && (
-          <div style={{ marginBottom: 16, padding: "10px 16px", borderRadius: 10, backgroundColor: "#DCFCE7", color: "#166534", fontSize: 13 }}>
-            Vendor portal link copied to clipboard — send it to the vendor.
-          </div>
-        )}
-
-        {/* List */}
-        {loading ? (
-          <p style={{ color: TEXT_MUT, fontSize: 14 }}>Loading...</p>
-        ) : requests.length === 0 ? (
-          <div style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, padding: 40, textAlign: "center" }}>
-            <p style={{ color: TEXT_MUT, fontSize: 14 }}>No requests{filter !== "all" ? ` with status "${STATUS_LABELS[filter as Status]}"` : ""}.</p>
-          </div>
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {requests.map((r) => {
-              const expanded = expandedId === r.id;
-              const colors = STATUS_COLORS[r.status];
-              const nextStatus = NEXT_STATUS[r.status];
-              return (
-                <div key={r.id} style={{ backgroundColor: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 14, overflow: "hidden" }}>
-                  <div
-                    onClick={() => setExpandedId(expanded ? null : r.id)}
-                    style={{ padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, cursor: "pointer", flexWrap: "wrap", minHeight: 48 }}
-                  >
-                    <div style={{ flex: 1, minWidth: 220 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                        <span style={{ fontSize: 16, fontWeight: 600, color: NAVY }}>{r.category}</span>
-                        <span style={{ fontSize: 12, fontWeight: 600, padding: "4px 12px", borderRadius: 20, backgroundColor: colors.bg, color: colors.text, textTransform: "capitalize" }}>
-                          {STATUS_LABELS[r.status]}
-                        </span>
-                      </div>
-                      <p style={{ fontSize: 14, color: TEXT_SEC, margin: 0 }}>{r.property_address} · {r.tenant_name}</p>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      {r.vendors && <span style={{ fontSize: 13, color: TEXT_MUT }}>{r.vendors.name}</span>}
-                      <span style={{ fontSize: 13, color: TEXT_MUT, whiteSpace: "nowrap" }}>{timeAgo(r.created_at)}</span>
-                    </div>
-                  </div>
-
-                  {expanded && (
-                    <div style={{ padding: "0 24px 24px", borderTop: `1px solid ${BORDER}` }}>
-                      <p style={{ fontSize: 15, color: TEXT, lineHeight: 1.7, margin: "20px 0" }}>{r.description}</p>
-
-                      {r.tenant_phone && (
-                        <p style={{ fontSize: 14, color: TEXT_MUT, marginBottom: 20 }}>Tenant phone: {r.tenant_phone}</p>
-                      )}
-
-                      {/* Vendor assignment */}
-                      <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 20, flexWrap: "wrap" }}>
-                        <select
-                          value={vendorPick[r.id] ?? r.vendors?.id ?? ""}
-                          onChange={(e) => setVendorPick((p) => ({ ...p, [r.id]: e.target.value }))}
-                          style={{ padding: "13px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, color: TEXT, fontSize: 15, minHeight: 48 }}
-                        >
-                          <option value="">Select a vendor…</option>
-                          {vendors.filter((v) => v.active).map((v) => (
-                            <option key={v.id} value={v.id}>{v.name} — {v.trade}</option>
-                          ))}
-                        </select>
-                        <button
-                          onClick={() => assignVendor(r.id)}
-                          disabled={busyId === r.id || !vendorPick[r.id]}
-                          style={{ padding: "13px 20px", borderRadius: 10, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", opacity: !vendorPick[r.id] ? 0.5 : 1, minHeight: 48 }}
-                        >
-                          {r.vendors ? "Reassign & copy link" : "Assign & copy link"}
-                        </button>
-                      </div>
-
-                      {/* Status controls */}
-                      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                        {nextStatus && (
-                          <button
-                            onClick={() => updateStatus(r.id, nextStatus)}
-                            disabled={busyId === r.id}
-                            style={{ padding: "13px 20px", borderRadius: 10, border: "none", backgroundColor: NAVY, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}
-                          >
-                            Mark {STATUS_LABELS[nextStatus]}
-                          </button>
-                        )}
-                        {!["closed", "cancelled"].includes(r.status) && (
-                          <button
-                            onClick={() => updateStatus(r.id, "cancelled")}
-                            disabled={busyId === r.id}
-                            style={{ padding: "13px 20px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 15, cursor: "pointer", minHeight: 48 }}
-                          >
-                            Cancel request
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Add vendor modal */}
-      {showAddVendor && (
-        <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 16 }}>
-          <div style={{ backgroundColor: "#FFFFFF", borderRadius: 18, padding: 32, width: "100%", maxWidth: 460 }}>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: NAVY, marginBottom: 24 }}>Add Vendor</h2>
-            <form onSubmit={addVendor} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <input placeholder="Name" value={vendorForm.name} onChange={(e) => setVendorForm((f) => ({ ...f, name: e.target.value }))}
-                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
-              <input placeholder="Trade (e.g. Plumber, Electrician)" value={vendorForm.trade} onChange={(e) => setVendorForm((f) => ({ ...f, trade: e.target.value }))}
-                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
-              <input placeholder="Phone (optional)" value={vendorForm.phone} onChange={(e) => setVendorForm((f) => ({ ...f, phone: e.target.value }))}
-                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
-              <input placeholder="Email (optional)" value={vendorForm.email} onChange={(e) => setVendorForm((f) => ({ ...f, email: e.target.value }))}
-                style={{ padding: "14px 16px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, fontSize: 16, minHeight: 48 }} />
-              <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
-                <button type="button" onClick={() => setShowAddVendor(false)} style={{ flex: 1, padding: "14px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: "transparent", color: TEXT_SEC, fontSize: 15, cursor: "pointer", minHeight: 48 }}>Cancel</button>
-                <button type="submit" style={{ flex: 1, padding: "14px", borderRadius: 10, border: "none", backgroundColor: ACCENT, color: "#FAF8F5", fontSize: 15, fontWeight: 600, cursor: "pointer", minHeight: 48 }}>Save vendor</button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {addingVendor && (
+        <Card style={{ marginBottom: 24 }}>
+          <form onSubmit={addVendor} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 14, alignItems: "end" }}>
+            <Field label="Name"><input style={inputStyle} value={vendorForm.name} onChange={(e) => setVendorForm((f) => ({ ...f, name: e.target.value }))} required /></Field>
+            <Field label="Trade"><input style={inputStyle} placeholder="Plumber" value={vendorForm.trade} onChange={(e) => setVendorForm((f) => ({ ...f, trade: e.target.value }))} required /></Field>
+            <Field label="Phone"><input style={inputStyle} value={vendorForm.phone} onChange={(e) => setVendorForm((f) => ({ ...f, phone: e.target.value }))} /></Field>
+            <Field label="Email"><input style={inputStyle} type="email" value={vendorForm.email} onChange={(e) => setVendorForm((f) => ({ ...f, email: e.target.value }))} /></Field>
+            <Button type="submit" variant="primary">Save vendor</Button>
+          </form>
+        </Card>
       )}
-    </div>
+
+      {!requests ? <Loading /> : (
+        <>
+          <Grid min={200}>
+            <Stat label="Open" value={open.length} />
+            <Stat label="New, not seen yet" value={all.filter((r) => r.status === "submitted").length} tone={all.some((r) => r.status === "submitted") ? "alert" : undefined} />
+            <Stat label="Fixed, check with tenant" value={all.filter((r) => r.status === "work_complete").length} />
+            <Stat label="Vendors" value={activeVendors.length} />
+          </Grid>
+
+          <div style={{ marginTop: 28 }}>
+            <Tabs
+              value={filter}
+              onChange={setFilter}
+              options={[
+                { value: "open", label: "Open", count: open.length },
+                { value: "done", label: "Done", count: all.length - open.length },
+                { value: "all", label: "All", count: all.length },
+              ]}
+            />
+          </div>
+
+          {shown.length === 0 ? (
+            <EmptyState title={filter === "open" ? "No open repairs" : "Nothing here"} body={filter === "open" ? "When a tenant reports something, it shows up here." : undefined} />
+          ) : (
+            <Card padding={0}>
+              {shown.map((r, i) => {
+                const expanded = openId === r.id;
+                const next = NEXT[r.status];
+                return (
+                  <div key={r.id} style={{ borderTop: i ? `1px solid ${C.border}` : "none" }}>
+                    <div onClick={() => setOpenId(expanded ? null : r.id)} style={{ padding: "18px 20px", display: "flex", gap: 16, alignItems: "center", cursor: "pointer", flexWrap: "wrap" }}>
+                      <div style={{ flex: 1, minWidth: 220 }}>
+                        <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                          <span style={{ fontWeight: 600, fontSize: 16 }}>{r.category}</span>
+                          <Badge tone={TONE[r.status]}>{LABEL[r.status]}</Badge>
+                        </div>
+                        <div style={{ fontSize: 14, color: C.muted, marginTop: 3 }}>{r.property_address} · {r.tenant_name}</div>
+                      </div>
+                      <div style={{ fontSize: 14, color: C.muted, textAlign: "right" }}>
+                        {r.vendors && <div>{r.vendors.name}</div>}
+                        <div>{ago(r.created_at)}</div>
+                      </div>
+                    </div>
+
+                    {expanded && (
+                      <div style={{ padding: "0 20px 20px" }}>
+                        <p style={{ fontSize: 15, lineHeight: 1.6, margin: "0 0 10px", whiteSpace: "pre-wrap" }}>{r.description}</p>
+                        {r.tenant_phone && <p style={{ fontSize: 14, color: C.muted, margin: "0 0 16px" }}>Tenant&apos;s phone: <a href={`tel:${r.tenant_phone}`} style={{ color: C.navy }}>{r.tenant_phone}</a></p>}
+
+                        {!DONE.includes(r.status) && (
+                          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 14 }}>
+                            <select
+                              style={{ ...inputStyle, width: "auto", minWidth: 240 }}
+                              value={vendorPick[r.id] ?? r.vendors?.id ?? ""}
+                              onChange={(e) => setVendorPick((p) => ({ ...p, [r.id]: e.target.value }))}
+                            >
+                              <option value="">{activeVendors.length ? "Pick a vendor…" : "Add a vendor first"}</option>
+                              {activeVendors.map((v) => <option key={v.id} value={v.id}>{v.name} ({v.trade})</option>)}
+                            </select>
+                            <Button variant="primary" onClick={() => assign(r.id)} disabled={busy === r.id || !vendorPick[r.id]}>
+                              {r.vendors ? "Switch vendor" : "Book vendor"}
+                            </Button>
+                          </div>
+                        )}
+
+                        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                          {next && <Button onClick={() => setStatus(r.id, next)} disabled={busy === r.id}>Mark as {LABEL[next].toLowerCase()}</Button>}
+                          {!DONE.includes(r.status) && <Button variant="ghost" onClick={() => setStatus(r.id, "cancelled")} disabled={busy === r.id}>Cancel this repair</Button>}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </Card>
+          )}
+
+          {activeVendors.length > 0 && (
+            <>
+              <SectionTitle>Your vendors</SectionTitle>
+              <Card padding={0}>
+                {activeVendors.map((v, i) => (
+                  <div key={v.id} style={{ padding: "14px 20px", borderTop: i ? `1px solid ${C.border}` : "none", display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                    <div><span style={{ fontWeight: 600 }}>{v.name}</span> <span style={{ color: C.muted }}>· {v.trade}</span></div>
+                    <div style={{ color: C.muted, fontSize: 14 }}>{[v.phone, v.email].filter(Boolean).join(" · ") || "No contact saved"}</div>
+                  </div>
+                ))}
+              </Card>
+            </>
+          )}
+        </>
+      )}
+    </Page>
   );
 }
