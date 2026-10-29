@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { fetchAllProperties, fetchAllTenants, fetchRentForYear } from "@/lib/notion";
 
@@ -6,7 +7,11 @@ import { fetchAllProperties, fetchAllTenants, fetchRentForYear } from "@/lib/not
  * MIGRATION ROUTE: One-time sync from Notion to Supabase
  * GET /api/admin/migrate-notion
  */
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  // Writes tenant names, emails and rent into Supabase, so it must never be public.
+  if (!await isAdminAuthenticated(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const sb = getSupabaseAdmin();
     
