@@ -1,6 +1,6 @@
 ---
 title: "Utilities in Ontario Rentals: Who Pays What?"
-date: "2026-04-21"
+date: "2026-11-01"
 slug: "utilities-ontario-rentals"
 excerpt: "Electricity, heat, water — here's how to structure utility responsibilities in your Ontario lease and what the law says about each."
 newsletterHook: "Electricity, heat, water — here's how to structure utility responsibilities in your Ontario lease and what the law says about each. That's exactly the kind of thing Almost Passive covers every week."
@@ -8,6 +8,8 @@ category: "Landlord Tips"
 readTime: "7 min read"
 featuredImage: "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
+
+*Last updated: November 2026*
 
 One of the first questions prospective tenants ask is: "What's included?" Your answer directly affects how you price the unit and who applies. Getting utility arrangements right — and documenting them properly — is one of the most practical things you can do as an Ontario landlord.
 

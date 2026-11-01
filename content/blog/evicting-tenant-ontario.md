@@ -1,6 +1,6 @@
 ---
 title: "How to Evict a Tenant in Ontario: The Full Process"
-date: "2026-04-25"
+date: "2026-11-01"
 slug: "evicting-tenant-ontario"
 excerpt: "Ontario's eviction process is slow and procedurally strict. Here's how it works step by step, and what mistakes can set you back months."
 newsletterHook: "Ontario's eviction process is slow and procedurally strict. Almost Passive exists so you catch things like this before they cost you."
@@ -8,6 +8,8 @@ category: "Landlord Tips"
 readTime: "10 min read"
 featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
+
+*Last updated: November 2026. Ontario's N4 notice period was reduced from 14 days to 7 days effective September 21, 2026. The N12 now offers a 120-day no-compensation option. Timelines in this guide reflect current rules.*
 
 Evicting a tenant in Ontario is one of the most challenging things a landlord will face. The [*Residential Tenancies Act*](https://www.ontario.ca/laws/statute/06r17) heavily favours tenant protections — which is fine — but it means a single procedural misstep can void your notice and force you to start over from scratch.
 
@@ -40,7 +42,7 @@ Every eviction starts with a written notice served to the tenant. The form you u
 
 | Reason | Form | Notice Period |
 |--------|------|---------------|
-| Non-payment of rent | N4 | 14 days |
+| Non-payment of rent | N4 | 7 days (as of Sept 21, 2026) |
 | Persistent late payment | N8 | 60 days (end of term) |
 | Damage to property | N5 | 20 days (or 7 days if second N5 in 6 months) |
 | Illegal activity | N6 | 10 days |
@@ -57,7 +59,7 @@ This part tests your patience. During the notice period, the tenant has the oppo
 
 For an N5 (damage or disturbance), if the tenant corrects the issue within 20 days, the notice is void and you cannot file with the LTB. If they do it again within 6 months, you can serve a second N5 — this time they cannot void it.
 
-For an N4 (non-payment), if the tenant pays everything owed in full before the 14 days are up, the notice is void. Do not accept partial payment during this period.
+For an N4 (non-payment), if the tenant pays everything owed in full before the 7 days are up (current rule as of September 21, 2026), the notice is void. Do not accept partial payment during this period.
 
 ## Step 3: File an Application with the LTB
 
@@ -96,8 +98,8 @@ For a straightforward non-payment eviction:
 | Stage | Time |
 |-------|------|
 | Serve N4 | Day 1 |
-| N4 period expires | Day 15 |
-| File L1 application | Day 16 |
+| N4 period expires (7 days) | Day 8 |
+| File L1 application | Day 9 |
 | LTB hearing | ~Day 60–90 |
 | Eviction order issued | Day 90–100 |
 | Tenant leaves voluntarily | Day 101–111 |
@@ -130,10 +132,10 @@ If you want to take the process entirely off your plate — notices, documentati
 ## Frequently Asked Questions
 
 ### How long does it take to evict a tenant in Ontario for non-payment of rent?
-A straightforward non-payment eviction typically takes 3–5 months from the first missed rent to a vacant unit. The N4 notice period is 14 days, LTB hearings are usually scheduled 6–10 weeks after filing, and if the tenant doesn't leave voluntarily after an eviction order, Sheriff enforcement can add several more weeks.
+A straightforward non-payment eviction typically takes 2.5–4.5 months from the first missed rent to a vacant unit. As of September 21, 2026, the N4 notice period is 7 days (reduced from 14), LTB hearings are usually scheduled 6–10 weeks after filing, and if the tenant doesn't leave voluntarily after an eviction order, Sheriff enforcement can add several more weeks.
 
 ### What form do I use to evict a tenant for non-payment of rent?
-Start with an N4 (Notice to End a Tenancy Early for Non-payment of Rent), which gives the tenant 14 days to pay in full. If they don't pay or vacate within that period, file an L1 application with the Landlord and Tenant Board. Using the wrong form or entering incorrect dates or amounts can result in dismissal.
+Start with an N4 (Notice to End a Tenancy Early for Non-payment of Rent), which gives the tenant 7 days to pay in full (as of September 21, 2026 — reduced from 14 days). If they don't pay or vacate within that period, file an L1 application with the Landlord and Tenant Board. Using the wrong form or entering incorrect dates or amounts can result in dismissal.
 
 ### Can I accept partial rent after serving an N4 notice?
 No. If you accept even a partial payment after serving the N4, the notice is automatically voided and you must start the process over. Only accept payment in full during the 14-day period if you intend to let the tenant stay.

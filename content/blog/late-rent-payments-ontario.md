@@ -2,11 +2,13 @@
 title: "How to Handle Late Rent Payments Legally in Ontario"
 excerpt: "A step-by-step guide to late rent — from the first missed payment to the LTB hearing — and how to protect yourself throughout."
 newsletterHook: "A step-by-step guide to late rent — from the first missed payment to the LTB hearing — and how to protect yourself throughout. That's exactly the kind of thing Almost Passive covers every week."
-date: "2026-03-20"
+date: "2026-11-01"
 category: "Landlord Tips"
 readTime: "13 min read"
 featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
+
+*Last updated: November 2026. Ontario's N4 notice period was reduced from 14 days to 7 days effective September 21, 2026. All timelines in this guide reflect the current rules.*
 
 Late rent is the most common landlord complaint in Ontario. It's also one of the most stressful — especially when you're not sure which step to take next or whether you're handling it correctly under the law.
 
@@ -44,13 +46,13 @@ Most late payments are genuine mistakes — a failed automatic transfer, a banki
 
 If you haven't been paid and you want to preserve your legal options, you can serve an [**N4 notice**](/blog/n4-notice-ontario) (Notice to End a Tenancy Early for Non-payment of Rent) as early as day 1 after rent is due.
 
-The N4 gives the tenant **14 days to pay everything owed in full**. If they pay in full within 14 days, the notice is voided and the tenancy continues. If they don't pay, you can file an L1 application at the LTB.
+The N4 gives the tenant **7 days to pay everything owed in full** (reduced from 14 days effective September 21, 2026). If they pay in full within 7 days, the notice is voided and the tenancy continues. If they don't pay, you can file an L1 application at the LTB.
 
 ### How to fill out the N4 correctly
 
 Use the current N4 form from the [LTB website](https://tribunalsontario.ca/ltb/). Key fields:
 
-- **Termination date:** Must be at least 14 days after the date you serve the notice
+- **Termination date:** Must be at least 7 days after the date you serve the notice (current rule as of September 21, 2026)
 - **Amount owing:** Include only rent — not late fees (these are not permitted), not NSF bank charges (unless your lease includes them and they're expressly allowed under RTA), not any other charges
 - **Period:** State the exact rental period(s) for which rent is unpaid
 
@@ -159,8 +161,8 @@ If you reach a repayment agreement at the LTB hearing, the adjudicator can forma
 | Rent due, not paid | Day 1 |
 | Reach out informally | Day 1–2 |
 | Serve N4 if not resolved | Day 3–5 |
-| 14-day N4 window expires | Day 17–19 |
-| File L1 application | Day 18–20 |
+| 7-day N4 window expires | Day 10–12 |
+| File L1 application | Day 11–13 |
 | LTB hearing scheduled (London area) | 6–14 weeks after filing |
 | Eviction order issued (if applicable) | Day of hearing |
 | 11-day void period | 11 days after order |
@@ -233,10 +235,10 @@ If you're managing multiple properties and rent collection is a recurring drain 
 ## Frequently Asked Questions
 
 **When can a landlord serve an N4 notice for late rent in Ontario?**
-You can serve an N4 as early as day one of non-payment — there is no mandatory grace period under the RTA. Many landlords informally wait a few days before taking formal action, but legally the clock starts on the day rent is due. The notice gives the tenant 14 days to pay in full or face an L1 filing.
+You can serve an N4 as early as day one of non-payment — there is no mandatory grace period under the RTA. Many landlords informally wait a few days before taking formal action, but legally the clock starts on the day rent is due. As of September 21, 2026, the notice gives the tenant 7 days (reduced from 14) to pay in full or face an L1 filing.
 
 **What happens if a tenant pays rent in full after receiving an N4 notice?**
-If the tenant pays everything owed in full within the 14-day period, the N4 is automatically voided and the tenancy continues. You cannot proceed to file an L1 application if full payment has been made. This is why it's critical not to accept partial payments — even $1 of a partial payment voids the notice and forces you to start over.
+If the tenant pays everything owed in full within the 7-day period (current rule as of September 21, 2026), the N4 is automatically voided and the tenancy continues. You cannot proceed to file an L1 application if full payment has been made. This is why it's critical not to accept partial payments — even $1 of a partial payment voids the notice and forces you to start over.
 
 **Can a landlord charge a late fee for overdue rent in Ontario?**
 No. The RTA does not permit late fees or rent payment penalties of any kind. Any clause in a lease attempting to charge a late fee is void and unenforceable. The legal remedy for persistent late payment is an N8 notice after the pattern has been clearly established.
