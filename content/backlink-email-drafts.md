@@ -3970,3 +3970,119 @@ Prospera Properties
 prosperaproperties.co
 
 ---
+
+## Nesto — 2026-11-01
+To: info@nesto.ca
+Subject: London Ontario rental data for your investment property guides
+
+Hi Nesto team,
+
+I came across your Ontario investment property financing guides — they do a great job covering the financing side, but I noticed there's a gap on what comes after the mortgage closes: management costs, vacancy rates, and what investors should realistically expect in London and SW Ontario.
+
+I'm Ebin Jaison, principal of Prospera Properties — we manage residential rentals across London, St. Thomas, and Strathroy. We track vacancy rates and average rents across all three markets and are happy to share that data for use in your guides as a cited local source.
+
+If there's a fit for a resource mention or a short contributed piece on SW Ontario rental economics, I'd love to connect.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## Zolo.ca — 2026-11-01
+To: media@zolo.ca
+Subject: London Ontario rental data to complement your market coverage
+
+Hi Zolo team,
+
+I noticed your London Ontario market pages cover sales-side MLS data well — but the rental market picture (vacancy rates, average asking rents, tenant demand) is harder to find for SW Ontario investors and buyers who want the full picture.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing residential rentals across London, St. Thomas, and Strathroy. I'd be happy to contribute rental market benchmarks you can cite in your London coverage — or contribute a short expert section on the rental-side view.
+
+Would your editorial team be open to that kind of data partnership?
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## RateHub.ca — 2026-11-01
+To: press@ratehub.ca
+Subject: London Ontario rental property data for your investment guides
+
+Hi RateHub team,
+
+Your Ontario investment property guides are among the best financing resources available — but I noticed they rarely include management cost benchmarks or rental yield data for secondary markets like London and St. Thomas.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing residential rentals across London, St. Thomas, and Strathroy. I track management fees, vacancy rates, and rental yields in these markets daily. Happy to provide data your guides can cite, or contribute a short expert piece on "what London Ontario rental property economics actually look like in 2026."
+
+Let me know if there's an interest.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## Perch.ca — 2026-11-01
+To: info@perch.ca
+Subject: Guest post: what happens after your London investment mortgage closes
+
+Hi Perch team,
+
+I've been reading your insights blog — strong financing content for Ontario investors. One gap I noticed: almost nothing covers what investors should do operationally once their investment property mortgage closes.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing rentals across London, St. Thomas, and Strathroy. I'd like to offer a short guest post — "The first 90 days of owning a London rental property" — covering what investors should have in place before handing over the keys: screening, lease setup, inspection protocol, and management structure.
+
+Would that be useful for your audience?
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## Loans Canada — 2026-11-01
+To: editorial@loanscanada.ca
+Subject: SW Ontario rental property data for your landlord guides
+
+Hi Loans Canada editorial team,
+
+Your Ontario landlord and rental property content is some of the most widely read on the subject — I find myself pointing clients to your guides regularly. I noticed your Ontario property management section is light on SW Ontario data: management costs, rental yields, and vacancy rates for markets like London, St. Thomas, and Strathroy.
+
+I'm Ebin Jaison, principal of Prospera Properties — we manage residential rentals across those three markets and track the numbers closely. I'd be happy to contribute local benchmark data as a cited source, or write a short expert piece on SW Ontario landlord economics for your readers.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## PropertyGuys.com — 2026-11-01
+To: via propertyguys.com/contact
+Subject: Referral resource for your London-area clients who choose to rent
+
+Hi PropertyGuys team,
+
+I've been following your network's activity in London, St. Thomas, and Strathroy — a lot of your owner-clients face the rent-versus-sell decision, and some of them end up as landlords who then need professional management.
+
+I'm Ebin Jaison, principal of Prospera Properties — we manage residential rentals across those three markets. I'd like to ask whether we could be listed as a recommended property management resource for PropertyGuys clients in SW Ontario who choose to rent rather than sell.
+
+Happy to reciprocate in any way that makes sense.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## Opta Insurance — 2026-11-01
+To: info@opta.ca
+Subject: Co-authored risk management piece for Ontario landlords?
+
+Hi Opta team,
+
+I read your Ontario landlord insurance guides — good, practical content on a topic that matters. I noticed that professional property management and landlord insurance both address the same underlying risks: tenant damage, missed rent, maintenance liability.
+
+I'm Ebin Jaison, principal of Prospera Properties, managing rentals in London, St. Thomas, and Strathroy. I'd like to propose a co-authored short piece on "how professional property management reduces insurance claim frequency for Ontario landlords" — useful content for your audience that ties our two services together naturally.
+
+Would your team be open to exploring that?
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---
+
+## CREA / Realtor.ca — 2026-11-01
+To: media@crea.ca
+Subject: Expert source: London Ontario rental market for your Ontario landlord content
+
+Hi CREA media team,
+
+I've been following Realtor.ca's Ontario investment and landlord content — thorough on the national picture, but secondary Ontario markets like London and St. Thomas are often underrepresented.
+
+I'm Ebin Jaison, principal of Prospera Properties — we manage residential rentals across London, St. Thomas, and Strathroy, and I track local vacancy rates, average rents, and tenant demand closely. I'd like to offer myself as an expert source for your Ontario secondary market coverage, and I'm happy to contribute benchmark data for use in future landlord or investor guides.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+---

@@ -3038,3 +3038,114 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Digital-first insurance company with a content marketing focus. Not a competitor — complementary service provider. Contact via communications@squareone.ca or website contact form. Best ask: a resource mention in their Ontario landlord guide, or a contributed expert section on how professional property management reduces insurance claim frequency. Tone is practical and consumer-friendly.
 
 ---
+## Nesto — Canadian Digital Mortgage Platform
+- url: https://nesto.ca/en/posts/
+- type: mortgage
+- why: One of Canada's largest digital mortgage brokerages with a high-output content blog covering Ontario investment property financing — their investor and first-time buyer audience overlaps directly with the landlords Prospera serves after closing.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: info@nesto.ca
+- site_focus: Nesto is a Canadian digital-first mortgage brokerage offering rate comparison and pre-approval across Canada. Their content hub covers investment property financing, first-time buyer guides, Ontario mortgage rules, and BRRRR strategy. Large national audience with strong Ontario investor representation. Not a property management company — purely financing and education.
+- hook: Nesto's Ontario investor readers finance rental properties and then immediately face the operational question. A resource mention in their Ontario investment property financing guides — as the trusted SW Ontario management partner for Nesto's London-area clients — or a guest post on "what to expect in the first 90 days of owning a London rental property" would complement their financing content naturally.
+- specific_content: Nesto's Ontario investment property financing and landlord guides — the "what comes after the mortgage" section of the buyer journey where property management is the natural next step.
+- researcher_notes: Major fintech brand with editorial content team. Outreach should go to their content/editorial team. Frame Prospera as a complementary service and expert data source for their Ontario investor content. Note: HTTP verification not possible from this environment; outreach should confirm current content focus.
+---
+
+## Zolo.ca — Canadian Real Estate Marketplace Blog
+- url: https://zolo.ca/blog
+- type: blog
+- why: Popular Canadian real estate search platform with a well-indexed blog covering Ontario market data, landlord guides, and investment property content — a data contribution or expert resource mention in their London Ontario coverage would reach a large audience of Ontario buyers and investors.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: media@zolo.ca
+- site_focus: Zolo is a Canadian real estate listing portal with MLS data and a content-rich blog covering Ontario neighbourhood guides, market statistics, landlord resources, and investment property analysis. Their blog is well-indexed for Ontario real estate search terms and covers London Ontario market data alongside larger Ontario cities. Not a property management company.
+- hook: Zolo's London Ontario market posts attract buyers and investors researching the local market. Prospera can contribute rental market data — vacancy rates, average rents, tenant demand signals — that complements Zolo's sales-side MLS statistics and adds investment-specific depth to their London coverage.
+- specific_content: Their London Ontario market overview and Ontario landlord/investor guides — natural placements for Prospera as the cited SW Ontario rental market expert source.
+- researcher_notes: Established Canadian real estate platform. Media contact at media@zolo.ca. Best approach is a data contribution offer: Prospera provides London/St. Thomas/Strathroy rental benchmarks that Zolo can cite in future market posts. Note: HTTP verification not possible from this environment.
+---
+
+## RateHub.ca Blog — Ontario Investment Property Guides
+- url: https://www.ratehub.ca/blog
+- type: mortgage
+- why: Canada's largest mortgage rate comparison platform with a high-traffic blog covering Ontario investment property financing, rental property guides, and landlord economics — their audience of Ontario buyers and investors frequently moves from rate comparison into property management decisions.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: press@ratehub.ca
+- site_focus: RateHub.ca is Canada's leading mortgage and financial rate comparison platform. Their blog covers Ontario investment property mortgages, landlord cost analysis, rental ROI calculations, and first-time buyer guides. Widely read by Ontario investors and homebuyers making purchase and financing decisions. High domain authority, well-indexed for Ontario real estate search terms.
+- hook: RateHub's Ontario investment property guides cover financing costs but rarely include management fee benchmarks or rental yield data from secondary markets like London. A resource mention citing Prospera's management cost data, or a contributed expert piece on "London Ontario rental property economics in 2026," would add local operational depth to their Ontario investor content.
+- specific_content: Their Ontario investment property financing guides and rental cost calculators — the "what does it actually cost to own and operate a London rental" section where Prospera's management fee data adds genuine value.
+- researcher_notes: Major Canadian fintech brand. Press contact: press@ratehub.ca. Best approach is a data contribution or expert source offer — RateHub publishes data-driven content and would cite credible local benchmark data. Note: HTTP verification not possible from this environment.
+---
+
+## Perch.ca — Canadian Digital Mortgage Platform (Insights Blog)
+- url: https://perch.ca/insights
+- type: mortgage
+- why: Canadian digital mortgage brokerage with an insights blog covering Ontario investment property financing and landlord economics — a post-close resource mention or guest contribution on SW Ontario property management complements their investor-focused financing content.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: info@perch.ca
+- site_focus: Perch is a Canadian digital mortgage brokerage offering mortgage pre-approval, rate comparison, and investor financing tools. Their insights blog covers Ontario investment property guides, landlord financing strategies, and first-time buyer content. Focus is on the financing decision, not ongoing management — a clear complementary positioning for Prospera.
+- hook: Perch's investor clients close on London and SW Ontario rental properties and immediately face the management decision. A resource mention in their Ontario investment property guides, or a contributed piece on "the first 90 days of owning a London rental," positions Prospera as the local management expert for Perch's Ontario investor audience.
+- specific_content: Their Ontario investment property financing and landlord economics content — the "what comes next after financing" section where Prospera is the natural operational partner.
+- researcher_notes: Digital-first mortgage brand with content marketing focus. Best approach is a guest post or resource mention in their Ontario investment property guides. Note: HTTP verification not possible from this environment.
+---
+
+## Loans Canada — Real Estate and Landlord Content
+- url: https://loanscanada.ca/real-estate/
+- type: blog
+- why: One of Canada's largest financial content platforms with a well-indexed real estate section covering Ontario landlord guides, rental property investing, and mortgage resources — a resource mention or data contribution in their Ontario rental content would reach hundreds of thousands of Canadian readers.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: editorial@loanscanada.ca
+- site_focus: Loans Canada is a major Canadian financial content and loan comparison platform with an extensive real estate section. Their Ontario content covers rental property investing, landlord rights, mortgage guides, and first-time buyer resources. Very high domain authority and strong organic search presence for Ontario real estate and landlord-related terms. Not a property management company.
+- hook: Loans Canada's Ontario rental property and landlord guides attract a large audience of investors and new landlords. A resource mention in their "Ontario property management" or "London Ontario real estate" content, or a contributed expert piece on SW Ontario rental market conditions, would place Prospera in front of a high-volume Ontario investor readership.
+- specific_content: Their Ontario rental property investing and landlord guides — natural resource placement for Prospera as the trusted SW Ontario property management expert.
+- researcher_notes: Large content platform with formal editorial process. Contact editorial@loanscanada.ca. Frame Prospera as a local data source and expert contributor for their Ontario landlord content. High-authority backlink opportunity given Loans Canada's domain strength. Note: HTTP verification not possible from this environment.
+---
+
+## PropertyGuys.com — Private Listing Network (Landlord Resources)
+- url: https://propertyguys.com
+- type: other
+- why: Canada's largest private real estate listing network with landlord and seller resources — their owner-clients who sell their own homes often need a property management resource once they become landlords or when they choose to rent rather than sell.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: via propertyguys.com/contact
+- site_focus: PropertyGuys.com is Canada's largest private real estate listing network, helping property owners sell without a traditional agent. Their resources section covers landlord-tenant basics, rental agreements, and property owner guides for Canadians who prefer the DIY approach. Ontario coverage includes London and SW Ontario. Not a property management company — they serve self-managing owners.
+- hook: PropertyGuys' Ontario owner-clients often face the decision: sell privately or rent the property. A resource mention for Prospera in their Ontario landlord section — for PropertyGuys clients in London, St. Thomas, and Strathroy who choose to rent — creates a natural referral for the moment they decide to hire a property manager instead of self-managing.
+- specific_content: Their Ontario landlord resources and rental property guides — the decision point where PropertyGuys' self-managing audience decides professional management is the better option for their London-area properties.
+- researcher_notes: National private listing network with significant Ontario market presence. Outreach should frame Prospera as a trusted referral for PropertyGuys' clients in SW Ontario who choose to rent and need a manager. Contact via website form. Note: HTTP verification not possible from this environment.
+---
+
+## Opta Insurance — Ontario Rental Property Insurance Blog
+- url: https://opta.ca
+- type: blog
+- why: Ontario commercial and rental property insurance brokerage with landlord-facing content — their landlord clients need property management alongside insurance, and a resource mention positions Prospera as the operational partner for Ontario rental property owners who are already insurance-aware.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: info@opta.ca
+- site_focus: Opta Insurance is an Ontario insurance brokerage offering commercial, rental property, and landlord insurance to property owners. Their content targets Ontario landlords and property investors with risk management guidance, coverage explainers, and landlord insurance best practices. Coverage across London, St. Thomas, and SW Ontario. Complementary service to property management — both reduce landlord risk.
+- hook: Opta's landlord clients are already investing in risk management through insurance. Professional property management reduces the same risks their clients insure against — tenant damage, missed rent, maintenance liability. A resource mention in Opta's Ontario landlord content, or a co-authored piece on "how professional management reduces insurance claim frequency," would add genuine risk-reduction value for their SW Ontario audience.
+- specific_content: Their Ontario landlord insurance guides and rental property risk management content — the natural companion to professional property management for London, St. Thomas, and Strathroy landlords.
+- researcher_notes: Ontario insurance brokerage with SW Ontario market coverage — exact geographic alignment with Prospera. Outreach should lead with the complementary risk-reduction angle. Insurance and property management are natural allied services. Note: HTTP verification not possible from this environment.
+---
+
+## CREA (Realtor.ca) — National Real Estate Blog
+- url: https://www.realtor.ca/blog
+- type: association
+- why: The Canadian Real Estate Association's national listing platform and blog with Ontario-specific investment property guides and landlord resources — a data contribution or expert mention in their Ontario rental content reaches Canada's largest real estate audience.
+- researched: true
+- drafted: true
+- added: 2026-11-01
+- contact_email: media@crea.ca
+- site_focus: CREA (Canadian Real Estate Association) operates Realtor.ca, Canada's official national MLS listing platform. Their blog covers Ontario and national real estate investment, buyer guides, landlord resources, and market analysis. Very high domain authority as Canada's official real estate industry body. Not a property management company.
+- hook: Realtor.ca's Ontario investor and landlord content reaches a massive national audience of active real estate participants. Prospera's SW Ontario market data — rental yields, vacancy rates, management cost benchmarks for London, St. Thomas, and Strathroy — fills a regional gap in their Ontario landlord content and positions Ebin as a credible local expert source.
+- specific_content: Their Ontario investment property and landlord guides — particularly any London Ontario or secondary market coverage where Prospera's ground-level operational data adds geographic depth to their national editorial coverage.
+- researcher_notes: National association with high editorial standards. Media contact: media@crea.ca. Best approach is an expert source relationship or data contribution offer — CREA's editorial team actively seeks regional expert voices for their Ontario coverage. Note: HTTP verification not possible from this environment.
+---
