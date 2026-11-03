@@ -167,10 +167,14 @@ function StatementCard({ row, busy, onAct }: { row: Row; busy: boolean; onAct: (
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 16 }}>
         <Button onClick={() => (preview ? setPreview(null) : togglePreview())}>{preview ? "Hide email" : "See the email"}</Button>
-        {row.status === "draft" && <Button variant="primary" disabled={busy} onClick={() => onAct("send", correction)}>{busy ? "Sending…" : "Send to owner"}</Button>}
+        {row.status === "draft" && <Button variant="primary" disabled={busy || red.length > 0} onClick={() => onAct("send", correction)}>{busy ? "Sending…" : "Send to owner"}</Button>}
         {row.status === "draft" && <Button variant="ghost" disabled={busy} onClick={() => onAct("skip")}>Don&apos;t send this month</Button>}
         {row.status === "skipped" && <Button disabled={busy} onClick={() => onAct("unskip")}>Bring it back</Button>}
       </div>
+
+      {row.status === "draft" && red.length > 0 && (
+        <div style={{ fontSize: 14, color: C.muted, marginTop: 10 }}>Fix the red items in Notion, then press Rebuild from ledger. Send unlocks once they&apos;re gone.</div>
+      )}
 
       {preview && (
         <iframe title="Statement email" srcDoc={preview} style={{ width: "100%", height: 720, border: `1px solid ${C.border}`, borderRadius: 10, marginTop: 16, background: C.bg }} />
