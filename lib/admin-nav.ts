@@ -17,6 +17,7 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
 
 export const PROPERTY_MGMT_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/tenants", name: "Tenants", icon: "key" },
+  { href: "/admin/statements", name: "Owner Statements", icon: "receipt_long" },
   { href: "/admin/maintenance", name: "Maintenance", icon: "handyman" },
   { href: "/admin/messages", name: "Messages", icon: "forum" },
   { href: "/admin/documents", name: "Documents", icon: "folder" },

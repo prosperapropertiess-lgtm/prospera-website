@@ -11,9 +11,9 @@ const JOBS = [
   {
     id: "monthly-owner-report",
     name: "Owner statements",
-    what: "Emails each owner last month's rent, expenses and what's coming up.",
-    when: "3rd of every month, 9am",
-    runnable: false, // emails real owners, so it only runs on schedule
+    what: "Builds last month's statements from the General Ledger and emails you to check them. Owners get nothing until you press Send.",
+    when: "3rd of every month, 8am",
+    runnable: true, // only builds drafts and emails Ebin
   },
   {
     id: "listings-integrity",

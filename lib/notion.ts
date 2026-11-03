@@ -13,6 +13,8 @@ export const DB = {
   maintenance: "c08108457c77484a9bb2b60c8f85b486",
   expenses:    "eee5c2d657d84a489709d24eaffb0409",
   tenants:     "6b02fb56874b45538925cae39bbcb4e2",
+  // Double-entry journal the accountant keeps. Owner statements read only this.
+  generalLedger: "934114ec47d34d4e9fafb97ef3514876",
   // Prospera's own P&L inputs (fixed/variable costs, other revenue, bank balance,
   // headcount). "Prospera — Company Finances", child of the Prospera HQ page.
   companyFinances: process.env.NOTION_COMPANY_FINANCES_DB ?? "05310cceb49743b1984d6edca184d62c",
@@ -26,7 +28,7 @@ function headers() {
   };
 }
 
-async function queryDatabase(databaseId: string, filter?: object): Promise<any[]> {
+export async function queryDatabase(databaseId: string, filter?: object): Promise<any[]> {
   const results: any[] = [];
   let cursor: string | undefined;
 
@@ -60,7 +62,7 @@ function prop(page: any, name: string): any {
   return page.properties?.[name];
 }
 
-function text(page: any, name: string): string {
+export function text(page: any, name: string): string {
   const p = prop(page, name);
   if (!p) return "";
   if (p.type === "title") return p.title?.[0]?.plain_text ?? "";
@@ -72,7 +74,7 @@ function text(page: any, name: string): string {
   return "";
 }
 
-function num(page: any, name: string): number | null {
+export function num(page: any, name: string): number | null {
   return prop(page, name)?.number ?? null;
 }
 
@@ -80,7 +82,7 @@ function checkbox(page: any, name: string): boolean {
   return prop(page, name)?.checkbox ?? false;
 }
 
-function dateStart(page: any, name: string): string | null {
+export function dateStart(page: any, name: string): string | null {
   return prop(page, name)?.date?.start ?? null;
 }
 
