@@ -17,6 +17,8 @@ import {
 const OWNER_FUNDS = 2120;
 const MGMT_FEES = 4010;
 
+const KIND_ORDER: LineKind[] = ["rent", "other", "fee", "expense", "payout"];
+
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 export type LineKind = "rent" | "fee" | "expense" | "payout" | "other";
@@ -184,7 +186,6 @@ export async function buildStatements(period: string): Promise<{ statements: Own
 
     const names = group.map((o) => o.name).filter(Boolean);
     const lines: StatementLine[] = during
-      .sort((a, b) => a.date!.localeCompare(b.date!))
       .map((r) => {
         const pair = ledger.filter((x) => x.entry === r.entry && x !== r);
         let kind: LineKind;
@@ -203,7 +204,9 @@ export async function buildStatements(period: string): Promise<{ statements: Own
           description = cleanEntry(r.entry, names);
         }
         return { date: r.date!, description, property: r.property, kind, moneyIn: r.credit, moneyOut: r.debit };
-      });
+      })
+      // Same-day lines read in the order money moves: in, our fee, costs, then the payout.
+      .sort((a, b) => a.date.localeCompare(b.date) || KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind));
 
     const sum = (k: LineKind, f: "moneyIn" | "moneyOut") => lines.filter((l) => l.kind === k).reduce((s, l) => s + l[f], 0);
     const openingBalance = before.reduce((s, r) => s + r.credit - r.debit, 0);
@@ -223,10 +226,10 @@ export async function buildStatements(period: string): Promise<{ statements: Own
       const occupied = /occupied/i.test(p.status);
       const hasRent = lines.some((l) => l.kind === "rent" && sameProperty(l.property, p));
       if (occupied && !hasRent) warnings.push({ level: "red", text: `No rent recorded for ${p.name} in ${monthLabel}. Notion says it's occupied.` });
-      const ended = tenants.filter((t: Tenant) => t.propertyId === p.id && t.leaseEnd && t.leaseEnd <= end && !/moved out|former|past/i.test(t.status));
+      const ended = tenants.filter((t: Tenant) => t.propertyId === p.id && t.leaseEnd && t.leaseEnd >= start && t.leaseEnd <= end && !/moved out|former|past/i.test(t.status));
       if (ended.length) {
         const last = ended.map((t) => t.leaseEnd!).sort().pop()!;
-        warnings.push({ level: "amber", text: `${ended.length} lease${ended.length === 1 ? "" : "s"} at ${p.name} ended by ${last}. Renewed, month-to-month, or moved out? Update Notion so this is right.` });
+        warnings.push({ level: "amber", text: `${ended.length} lease${ended.length === 1 ? "" : "s"} at ${p.name} ended on ${last}. Renewed, month-to-month, or moved out? Update Notion so this is right.` });
       }
     }
     if (lines.length === 0) warnings.push({ level: "red", text: `Nothing in the General Ledger for ${monthLabel}. This statement would be empty.` });
