@@ -8,6 +8,7 @@ export interface AdminDestination {
 
 export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/properties", name: "Properties", icon: "villa" },
+  { href: "/admin/viewing-requests", name: "Viewing Requests", icon: "event_available" },
   { href: "/admin/applications", name: "Applications", icon: "assignment" },
   { href: "/admin/leads", name: "Leads", icon: "person_search" },
   { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business" },
