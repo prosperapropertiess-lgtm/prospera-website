@@ -4,16 +4,17 @@
 // Each answer can reveal the next question. Hidden questions are never asked,
 // and the server drops any answer to a question that wasn't shown.
 
-export const FORM_VERSION = "v2";
+export const FORM_VERSION = "v3";
 
 export type Answers = Record<string, string>;
 
 export interface Question {
   id: string;
-  section: "move" | "work" | "money" | "you";
+  /** Which screen it sits on. Follow-ups appear under their trigger on the same screen. */
+  section: "current" | "work" | "money" | "you" | "contact";
   title: string;
   sub?: string;
-  type: "choice" | "text";
+  type: "choice" | "multi" | "text";
   options?: readonly { value: string; label: string }[];
   placeholder?: string;
   optional?: boolean;
@@ -32,7 +33,7 @@ const employed = (a: Answers) => a.employment === "full_time" || a.employment ==
 
 export const QUESTIONS: Question[] = [
   {
-    id: "living", section: "move", type: "choice",
+    id: "living", section: "current", type: "choice",
     title: "Where are you living now?",
     options: [
       { value: "renting", label: "Renting" },
@@ -42,7 +43,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "notice", section: "move", type: "choice", showIf: (a) => a.living === "renting",
+    id: "notice", section: "current", type: "choice", showIf: (a) => a.living === "renting",
     title: "Have you given notice to your landlord?",
     options: [
       { value: "given", label: "Yes, I've given notice" },
@@ -51,7 +52,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "rental_length", section: "move", type: "choice", showIf: (a) => a.living === "renting",
+    id: "rental_length", section: "current", type: "choice", showIf: (a) => a.living === "renting",
     title: "How long have you rented your current place?",
     options: [
       { value: "lt_1y", label: "Less than a year" },
@@ -61,7 +62,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "landlord_reference", section: "move", type: "choice", showIf: (a) => a.living === "renting",
+    id: "landlord_reference", section: "current", type: "choice", showIf: (a) => a.living === "renting",
     title: "Can we ask your current landlord for a reference?",
     sub: "Only if you apply. We'll check with you first.",
     options: [
@@ -70,7 +71,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "moving_reason", section: "move", type: "choice",
+    id: "moving_reason", section: "current", type: "choice",
     title: "What's the main reason you're moving?",
     options: [
       { value: "more_space", label: "Need more space" },
@@ -219,6 +220,18 @@ export const QUESTIONS: Question[] = [
   },
 ];
 
+QUESTIONS.push({
+  id: "viewing_times", section: "contact", type: "multi",
+  title: "When are you free to see it?",
+  sub: "Pick all that work. We'll suggest a time.",
+  options: [
+    { value: "weekday_day", label: "Weekdays, daytime" },
+    { value: "weekday_eve", label: "Weekday evenings" },
+    { value: "saturday", label: "Saturday" },
+    { value: "sunday", label: "Sunday" },
+  ],
+});
+
 export function visibleQuestions(a: Answers): Question[] {
   return QUESTIONS.filter((q) => !q.showIf || q.showIf(a));
 }
@@ -237,6 +250,12 @@ export function cleanAnswers(raw: unknown): { answers: Answers; errors: string[]
     const v = a[q.id];
     if (!v) { if (!q.optional) errors.push(q.id); continue; }
     if (q.type === "choice" && !q.options!.some((o) => o.value === v)) { errors.push(q.id); continue; }
+    if (q.type === "multi") {
+      const picked = [...new Set(v.split(","))].filter((x) => q.options!.some((o) => o.value === x));
+      if (!picked.length) { errors.push(q.id); continue; }
+      answers[q.id] = picked.join(",");
+      continue;
+    }
     answers[q.id] = v;
   }
   return { answers, errors };
@@ -247,7 +266,8 @@ export function describeAnswers(a: Answers): { id: string; question: string; ans
   return visibleQuestions(a).filter((q) => a[q.id]).map((q) => ({
     id: q.id,
     question: q.title,
-    answer: q.type === "choice" ? q.options!.find((o) => o.value === a[q.id])?.label ?? a[q.id] : a[q.id],
+    answer: q.type === "text" ? a[q.id]
+      : a[q.id].split(",").map((v) => q.options!.find((o) => o.value === v)?.label ?? v).join(", "),
   }));
 }
 
@@ -299,6 +319,11 @@ export function toPublicHome(p: Record<string, unknown>): PublicHome {
 /** Today's date in Toronto as YYYY-MM-DD. */
 export function torontoToday(): string {
   return new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+}
+
+/** Readable link slug for a home, e.g. "1531-mclarenwood-terrace". */
+export function homeSlug(address: string): string {
+  return address.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 export const VIEW_URL = "https://www.prosperaproperties.co/view";

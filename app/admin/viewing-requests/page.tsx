@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   Page, PageHeader, Card, Badge, Button, Tabs, EmptyState, Loading, ErrorNote, SuccessNote, C, money, ago, shortDate, type Tone,
 } from "@/components/admin/kit";
-import { incomeLabel, creditLabel, describeAnswers, VIEW_URL, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import { incomeLabel, creditLabel, describeAnswers, homeSlug, VIEW_URL, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 type Status = "new" | "contacted" | "viewing_booked" | "not_a_fit" | "closed";
 type Priority = "call_today" | "maybe" | "not_now" | null;
@@ -19,6 +19,8 @@ interface Req {
   credit_range: string;
   property_snapshot: PublicHome;
   answers: Answers | null;
+  rentmatch_opt_in: boolean;
+  completion_seconds: number | null;
   status: Status;
   priority: Priority;
   review_reason: string | null;
@@ -34,7 +36,7 @@ const PRIORITY: Record<Exclude<Priority, null>, { label: string; tone: Tone }> =
 const ORDER: Priority[] = ["call_today", "maybe", null, "not_now"];
 
 function replyFor(h: Home) {
-  return `Hi! Yes, ${h.address} is available. To book a viewing, pick the home and answer a few quick questions here: ${VIEW_URL}?home=${h.id}\n\nNo documents or payment needed. We'll call you to set up a time.`;
+  return `Hi! Yes, ${h.address} is available. To book a viewing, pick the home and answer a few quick questions here: ${VIEW_URL}/${homeSlug(h.address)}\n\nNo documents or payment needed. We'll call you to set up a time.`;
 }
 
 export default function ViewingRequestsPage() {
@@ -108,7 +110,7 @@ export default function ViewingRequestsPage() {
                 <div style={{ fontWeight: 600, color: C.navy }}>{h.address} · {money(h.price)}/mo</div>
                 <div style={{ display: "flex", gap: 8 }}>
                   <Button size="sm" onClick={() => copy(replyFor(h), "message")}>Copy message</Button>
-                  <Button size="sm" variant="ghost" onClick={() => copy(`${VIEW_URL}?home=${h.id}`, "link")}>Copy link only</Button>
+                  <Button size="sm" variant="ghost" onClick={() => copy(`${VIEW_URL}/${homeSlug(h.address)}`, "link")}>Copy link only</Button>
                 </div>
               </div>
               <div style={{ fontSize: 14, color: C.text, marginTop: 8, whiteSpace: "pre-wrap" }}>{replyFor(h)}</div>
@@ -149,7 +151,9 @@ function RequestCard({ r, busy, onStatus }: { r: Req; busy: boolean; onStatus: (
             <a href={`tel:${r.phone}`} style={{ color: C.navy, fontWeight: 600 }}>{r.phone}</a>
             {r.email && <> · <a href={`mailto:${r.email}`} style={{ color: C.muted }}>{r.email}</a></>}
           </div>
-          <div style={{ fontSize: 14, color: C.faint, marginTop: 2 }}>Sent {ago(r.created_at)}</div>
+          <div style={{ fontSize: 14, color: C.faint, marginTop: 2 }}>
+            Sent {ago(r.created_at)}{r.completion_seconds ? ` · took ${r.completion_seconds < 120 ? `${r.completion_seconds}s` : `${Math.round(r.completion_seconds / 60)} min`}` : ""}{r.rentmatch_opt_in ? " · added to RentMatch" : ""}
+          </div>
         </div>
         {r.status === "new" && (r.priority ? <Badge tone={PRIORITY[r.priority].tone}>{PRIORITY[r.priority].label}</Badge> : <Badge tone="blue">Not sorted yet</Badge>)}
       </div>

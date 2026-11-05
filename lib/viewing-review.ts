@@ -35,7 +35,7 @@ function factsFor(r: ReqRow, i: number) {
     household_income_per_month: incomeLabel(r.income_range),
     credit_score: creditLabel(r.credit_range),
     other_answers: describeAnswers(r.answers ?? {})
-      .filter((x) => x.id !== "income" && x.id !== "credit")
+      .filter((x) => !["income", "credit", "viewing_times"].includes(x.id))
       .map((x) => `${x.question} ${x.answer}`),
   };
 }
@@ -109,6 +109,7 @@ async function emailCallList(results: { r: ReqRow; v: { priority: Priority; reas
     <tr><td style="padding:12px 0;border-bottom:1px solid #E8E4DF">
       <div style="font-weight:600;color:#1F2F3A">${esc(r.full_name)} · <a href="tel:${esc(r.phone)}" style="color:#1F2F3A">${esc(r.phone)}</a></div>
       <div style="color:#666666;font-size:14px">${esc(r.property_snapshot.address)} · moving in ${r.move_in_date} · ${r.occupants} ${r.occupants === 1 ? "person" : "people"}</div>
+      ${freeTimes(r) ? `<div style="color:#666666;font-size:14px">Free: ${esc(freeTimes(r)!)}</div>` : ""}
       <div style="color:#222222;font-size:14px;margin-top:4px">${esc(v.reason)}</div>
     </td></tr>`;
   const section = (title: string, list: typeof results) =>
@@ -130,6 +131,10 @@ async function emailCallList(results: { r: ReqRow; v: { priority: Priority; reas
       <p><a href="https://www.prosperaproperties.co/admin/viewing-requests" style="color:#8B2030;font-weight:600">Open viewing requests</a></p>
     </div>`,
   });
+}
+
+function freeTimes(r: ReqRow): string | null {
+  return describeAnswers(r.answers ?? {}).find((x) => x.id === "viewing_times")?.answer ?? null;
 }
 
 function esc(s: string) {
