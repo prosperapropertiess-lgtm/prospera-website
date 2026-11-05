@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { incomeLabel, creditLabel, type PublicHome } from "@/lib/viewing-requests";
+import { incomeLabel, creditLabel, torontoToday, type PublicHome } from "@/lib/viewing-requests";
 
 type Priority = "call_today" | "maybe" | "not_now";
 
@@ -28,7 +28,7 @@ function factsFor(r: ReqRow, i: number) {
     rent_per_month: h.price,
     utilities_included: !!h.utilities_included,
     bedrooms: h.bedrooms,
-    home_available_from: h.available_date ?? "now",
+    home_available_from: h.available_date && h.available_date > torontoToday() ? h.available_date : "already available",
     wants_to_move_in: r.move_in_date,
     people: r.occupants,
     household_income_per_month: incomeLabel(r.income_range),
@@ -56,7 +56,7 @@ async function askClaude(rows: ReqRow[]): Promise<Map<number, { priority: Priori
   const res = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 4000,
-    messages: [{ role: "user", content: `${PROMPT}\n\nRequests:\n${JSON.stringify(rows.map(factsFor), null, 1)}` }],
+    messages: [{ role: "user", content: `${PROMPT}\n\nToday is ${torontoToday()}. A move-in date within a couple of weeks of when the home is free is a good match.\n\nRequests:\n${JSON.stringify(rows.map(factsFor), null, 1)}` }],
   });
   const text = res.content.map((b) => (b.type === "text" ? b.text : "")).join("");
   const json = text.slice(text.indexOf("["), text.lastIndexOf("]") + 1);
