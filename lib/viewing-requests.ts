@@ -4,7 +4,7 @@
 // Each answer can reveal the next question. Hidden questions are never asked,
 // and the server drops any answer to a question that wasn't shown.
 
-export const FORM_VERSION = "v3";
+export const FORM_VERSION = "v4";
 
 export type Answers = Record<string, string>;
 
@@ -92,6 +92,7 @@ export const QUESTIONS: Question[] = [
       { value: "self_employed", label: "Self-employed" },
       { value: "student", label: "Student" },
       { value: "retired", label: "Retired" },
+      { value: "gov_support", label: "Government support (ODSP, Ontario Works, CPP-D)" },
       { value: "other", label: "Something else" },
     ],
   },
@@ -135,6 +136,26 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
+    id: "direct_pay", section: "work", type: "choice", showIf: (a) => a.employment === "gov_support",
+    title: "Would you like your rent paid directly to the landlord?",
+    sub: "ODSP and Ontario Works can send rent straight to your landlord if you ask your caseworker. It's your choice.",
+    options: [
+      { value: "yes", label: "Yes, I'd like that" },
+      { value: "no", label: "No, I'll pay it myself" },
+      { value: "not_sure", label: "Not sure yet" },
+    ],
+  },
+  {
+    id: "benefit_docs", section: "work", type: "choice", showIf: (a) => a.employment === "gov_support",
+    title: "Could you show your benefits statement if you apply?",
+    sub: "Nothing to upload now.",
+    options: [
+      { value: "yes", label: "Yes" },
+      { value: "need_to_get", label: "I'd need to ask for one" },
+      { value: "no", label: "No" },
+    ],
+  },
+  {
     id: "work_other", section: "work", type: "text", optional: true, showIf: (a) => a.employment === "other",
     title: "Tell us a little about your situation",
     sub: "A few words is fine. You can skip this.",
@@ -150,6 +171,28 @@ export const QUESTIONS: Question[] = [
       { value: "4000_5000", label: "$4,000 – $5,000" },
       { value: "5000_6000", label: "$5,000 – $6,000" },
       { value: "6000_plus", label: "$6,000 or more" },
+    ],
+  },
+  {
+    id: "other_income", section: "money", type: "multi",
+    title: "Is any of that income from these?",
+    sub: "Pick all that apply. All income counts the same.",
+    options: [
+      { value: "support", label: "Support payments" },
+      { value: "benefits", label: "Government benefits" },
+      { value: "pension", label: "Pension" },
+      { value: "none", label: "None of these" },
+    ],
+  },
+  {
+    id: "other_income_docs", section: "money", type: "choice",
+    showIf: (a) => !!a.other_income && a.other_income.split(",").some((v) => v !== "none"),
+    title: "Could you show paperwork for it if you apply?",
+    sub: "For example a court order, agreement, or benefits or pension statement.",
+    options: [
+      { value: "yes", label: "Yes" },
+      { value: "some", label: "For some of it" },
+      { value: "no", label: "No" },
     ],
   },
   {

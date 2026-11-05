@@ -353,7 +353,11 @@ function QuestionBlock({ q, value, error, onChange }: { q: Question; value: stri
             const selected = q.type === "multi" ? picked.includes(o.value) : value === o.value;
             return (
               <Choice key={o.value} compact selected={selected} onClick={() => {
-                if (q.type === "multi") onChange((selected ? picked.filter((x) => x !== o.value) : [...picked, o.value]).join(","));
+                if (q.type === "multi") {
+                  const next = selected ? picked.filter((x) => x !== o.value)
+                    : o.value === "none" ? ["none"] : [...picked.filter((x) => x !== "none"), o.value];
+                  onChange(next.join(","));
+                }
                 else onChange(o.value);
               }}>{o.label}</Choice>
             );
