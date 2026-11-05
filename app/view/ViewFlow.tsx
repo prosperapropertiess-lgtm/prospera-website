@@ -34,7 +34,6 @@ interface Draft {
   phone: string;
   email: string;
   consent: boolean;
-  rentMatch: boolean;
   key: string;
   startedAt: number;
   savedAt: number;
@@ -42,7 +41,7 @@ interface Draft {
 
 const blank = (): Draft => ({
   screen: "home", home: "", moveIn: "", occupants: null, manyPeople: "", answers: {},
-  name: "", phone: "", email: "", consent: false, rentMatch: false, key: crypto.randomUUID(), startedAt: Date.now(), savedAt: Date.now(),
+  name: "", phone: "", email: "", consent: false, key: crypto.randomUUID(), startedAt: Date.now(), savedAt: Date.now(),
 });
 
 const questionsOn = (screen: ScreenKey, a: Answers) => visibleQuestions(a).filter((q) => q.section === screen);
@@ -63,7 +62,8 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState("");
-  const [done, setDone] = useState<{ ref: string; first: string; address: string } | null>(null);
+  const [done, setDone] = useState<{ ref: string; token: string; first: string; address: string } | null>(null);
+  const [pool, setPool] = useState<"idle" | "saving" | "joined" | "error">("idle");
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Restore a same-tab draft (under 24h old), else start fresh. A link with a home starts on "Your move".
@@ -114,6 +114,30 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
           Thanks{done.first ? `, ${done.first}` : ""}. We&apos;ll contact you about a viewing time for {done.address}.
         </p>
         <p className="text-sm mb-8" style={{ color: MUTED }}>Your reference: {done.ref}</p>
+
+        <div className="rounded-xl border bg-white p-5 mb-8" style={{ borderColor: BORDER }}>
+          {pool === "joined" ? (
+            <p className="text-base" style={{ color: NAVY }}><strong>You&apos;re on the list.</strong> We&apos;ll send you homes that fit what you told us.</p>
+          ) : (
+            <>
+              <p className="text-lg font-semibold mb-1" style={{ color: NAVY }}>Want us to send you other homes that fit?</p>
+              <p className="text-sm mb-4" style={{ color: "#333" }}>
+                If this one doesn&apos;t work out, we&apos;ll use your answers to send you other rentals as they come up. You can ask to be removed any time.
+              </p>
+              <button type="button" disabled={pool === "saving"}
+                onClick={async () => {
+                  setPool("saving");
+                  const res = await fetch("/api/view/rentmatch", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: done.token }) }).catch(() => null);
+                  setPool(res?.ok ? "joined" : "error");
+                }}
+                className="w-full px-6 py-4 text-sm font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80 disabled:opacity-60"
+                style={{ backgroundColor: BURGUNDY, color: "#FAF8F5" }}>
+                {pool === "saving" ? "Adding you…" : "Yes, send me other homes"}
+              </button>
+              {pool === "error" && <Err>That didn&apos;t work. Try again.</Err>}
+            </>
+          )}
+        </div>
         <p className="text-sm" style={{ color: MUTED }}>Questions? Call or text (519) 697-1227.</p>
       </Shell>
     );
@@ -168,7 +192,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     setSending(true); setFormError("");
     const payload = {
       key: d.key, home: d.home, moveIn: d.moveIn, occupants: d.occupants, answers, name: d.name, phone: d.phone, email: d.email,
-      consent: d.consent, rentMatch: d.rentMatch, seconds: secondsSince(d.startedAt),
+      consent: d.consent, seconds: secondsSince(d.startedAt),
     };
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
@@ -176,7 +200,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
         const out = await res.json().catch(() => ({}));
         if (res.ok) {
           try { sessionStorage.removeItem(DRAFT_KEY); } catch {}
-          setDone({ ref: out.ref, first: d.name.trim().split(/\s+/)[0], address: home?.address ?? "the home" });
+          setDone({ ref: out.ref, token: out.token, first: d.name.trim().split(/\s+/)[0], address: home?.address ?? "the home" });
           setSending(false);
           return;
         }
@@ -309,13 +333,6 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
               {errors.consent && <Err>{errors.consent}</Err>}
             </div>
 
-            <label className="flex gap-3 items-start cursor-pointer rounded-xl border bg-white p-4" style={{ borderColor: BORDER }}>
-              <input type="checkbox" checked={d.rentMatch} onChange={(e) => update({ rentMatch: e.target.checked })} className="mt-1 w-5 h-5 shrink-0" style={{ accentColor: NAVY }} />
-              <span className="text-sm" style={{ color: "#333" }}>
-                <span className="font-semibold block mb-1" style={{ color: NAVY }}>Optional: add me to RentMatch</span>
-                If this home doesn&apos;t work out, we&apos;ll use your answers to send you other rentals that might fit. You can ask us to remove you any time.
-              </span>
-            </label>
 
             <div>
               <button type="button" onClick={send} disabled={sending}

@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
   const sb = getSupabaseAdmin();
   if (key) {
     const { data: prior } = await sb.from("viewing_requests").select("id").eq("idempotency_key", key).maybeSingle();
-    if (prior) return NextResponse.json({ ok: true, ref: prior.id.slice(0, 8).toUpperCase() });
+    if (prior) return NextResponse.json({ ok: true, ref: prior.id.slice(0, 8).toUpperCase(), token: prior.id });
   }
 
   const errors: Record<string, string> = {};
@@ -70,7 +70,6 @@ export async function POST(req: NextRequest) {
     credit_range: answers.credit,
     answers,
     form_version: FORM_VERSION,
-    rentmatch_opt_in: body.rentMatch === true,
     completion_seconds: Number.isFinite(Number(body.seconds)) && Number(body.seconds) > 0 && Number(body.seconds) < 86_400 ? Math.round(Number(body.seconds)) : null,
     full_name: name,
     phone,
@@ -84,32 +83,9 @@ export async function POST(req: NextRequest) {
     // A racing duplicate with the same key: return the one that won.
     if (key) {
       const { data: prior } = await sb.from("viewing_requests").select("id").eq("idempotency_key", key).maybeSingle();
-      if (prior) return NextResponse.json({ ok: true, ref: prior.id.slice(0, 8).toUpperCase() });
+      if (prior) return NextResponse.json({ ok: true, ref: prior.id.slice(0, 8).toUpperCase(), token: prior.id });
     }
     return NextResponse.json({ error: "We couldn't save your request. Try again." }, { status: 500 });
-  }
-
-  // RentMatch: only when they ticked the separate opt-in. Adds them to the rental_profiles pool.
-  if (body.rentMatch === true) {
-    const [first, ...rest] = name.split(/\s+/);
-    const { error: poolError } = await sb.from("rental_profiles").insert({
-      source: "/view",
-      first_name: first,
-      last_name: rest.join(" ") || null,
-      email: email || null,
-      phone,
-      move_timing: `Move-in ${moveIn}`,
-      household_size: occupants,
-      current_situation: answers.living ?? null,
-      pets_note: answers.pet_details ?? null,
-      notes: `From a viewing request for ${snapshot.address} ($${snapshot.price}/mo, ${snapshot.bedrooms ?? "?"} bed). Viewing request ${saved.id}.`,
-      marketing_consent: true,
-      completed: true,
-      completed_at: new Date().toISOString(),
-      session_id: `view-${saved.id}`,
-      last_step: "complete",
-    });
-    if (poolError) console.error("[view] rentmatch insert failed", poolError);
   }
 
   // Short heads-up to Ebin. The daily review does the sorting. A failed email doesn't undo the save.
@@ -128,7 +104,7 @@ export async function POST(req: NextRequest) {
     console.error("[view] notify failed", err);
   }
 
-  return NextResponse.json({ ok: true, ref: saved.id.slice(0, 8).toUpperCase() }, { status: 201 });
+  return NextResponse.json({ ok: true, ref: saved.id.slice(0, 8).toUpperCase(), token: saved.id }, { status: 201 });
 }
 
 function escapeHtml(s: string) {
