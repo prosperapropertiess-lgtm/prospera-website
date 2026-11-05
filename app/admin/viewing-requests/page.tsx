@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   Page, PageHeader, Card, Badge, Button, Tabs, EmptyState, Loading, ErrorNote, SuccessNote, C, money, ago, shortDate, type Tone,
 } from "@/components/admin/kit";
-import { incomeLabel, creditLabel, VIEW_URL, type PublicHome } from "@/lib/viewing-requests";
+import { incomeLabel, creditLabel, describeAnswers, VIEW_URL, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 type Status = "new" | "contacted" | "viewing_booked" | "not_a_fit" | "closed";
 type Priority = "call_today" | "maybe" | "not_now" | null;
@@ -18,6 +18,7 @@ interface Req {
   income_range: string;
   credit_range: string;
   property_snapshot: PublicHome;
+  answers: Answers | null;
   status: Status;
   priority: Priority;
   review_reason: string | null;
@@ -138,6 +139,7 @@ export default function ViewingRequestsPage() {
 
 function RequestCard({ r, busy, onStatus }: { r: Req; busy: boolean; onStatus: (s: Status) => void }) {
   const h = r.property_snapshot;
+  const details = describeAnswers(r.answers ?? {}).filter((x) => x.id !== "income" && x.id !== "credit");
   return (
     <Card>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -163,6 +165,17 @@ function RequestCard({ r, busy, onStatus }: { r: Req; busy: boolean; onStatus: (
         <Fact label="Income / month" value={incomeLabel(r.income_range)} />
         <Fact label="Credit" value={creditLabel(r.credit_range)} />
       </div>
+
+      {details.length > 0 && (
+        <div style={{ marginTop: 14, borderTop: `1px solid ${C.border}` }}>
+          {details.map((x) => (
+            <div key={x.id} style={{ display: "flex", gap: 12, justifyContent: "space-between", padding: "9px 0", borderBottom: `1px solid ${C.border}`, fontSize: 14 }}>
+              <span style={{ color: C.muted }}>{x.question}</span>
+              <span style={{ color: C.navy, fontWeight: 600, textAlign: "right" }}>{x.answer}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 16 }}>
         {r.status === "new" && <Button variant="primary" disabled={busy} onClick={() => onStatus("contacted")}>I contacted them</Button>}

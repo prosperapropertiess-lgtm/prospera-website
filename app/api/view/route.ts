@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import {
-  INCOME_RANGES, CREDIT_RANGES, CONSENT_TEXT, PUBLIC_HOME_FIELDS, toPublicHome, torontoToday, incomeLabel, creditLabel,
+  CONSENT_TEXT, FORM_VERSION, PUBLIC_HOME_FIELDS, toPublicHome, torontoToday, incomeLabel, creditLabel, cleanAnswers,
 } from "@/lib/viewing-requests";
 
 export const dynamic = "force-dynamic";
@@ -42,16 +42,14 @@ export async function POST(req: NextRequest) {
   const homeId = clean(body.home, 64);
   const moveIn = clean(body.moveIn, 10);
   const occupants = Number(body.occupants);
-  const income = clean(body.income, 20);
-  const credit = clean(body.credit, 20);
+  const { answers, errors: answerErrors } = cleanAnswers(body.answers);
   const name = clean(body.name, 120);
   const phone = clean(body.phone, 40);
   const email = clean(body.email, 200);
 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(moveIn) || moveIn < torontoToday()) errors.moveIn = "Pick a move-in date from today on.";
   if (!Number.isInteger(occupants) || occupants < 1 || occupants > 99) errors.occupants = "How many people will live there?";
-  if (!INCOME_RANGES.some((r) => r.value === income)) errors.income = "Pick an income range.";
-  if (!CREDIT_RANGES.some((r) => r.value === credit)) errors.credit = "Pick a credit range.";
+  for (const id of answerErrors) errors[id] = "Answer this question.";
   if (!name) errors.name = "Enter your name.";
   if (phone.replace(/\D/g, "").length < 10) errors.phone = "Enter a phone number we can call.";
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Check your email address.";
@@ -68,8 +66,10 @@ export async function POST(req: NextRequest) {
     property_snapshot: snapshot,
     move_in_date: moveIn,
     occupants,
-    income_range: income,
-    credit_range: credit,
+    income_range: answers.income,
+    credit_range: answers.credit,
+    answers,
+    form_version: FORM_VERSION,
     full_name: name,
     phone,
     email: email || null,
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
       subject: `Viewing request: ${snapshot.address}`,
       html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#222">
         <p><strong>${escapeHtml(name)}</strong> wants to see ${escapeHtml(snapshot.address)}.</p>
-        <p>Move in ${moveIn} · ${occupants} ${occupants === 1 ? "person" : "people"} · income ${incomeLabel(income)} · credit ${creditLabel(credit)}</p>
+        <p>Move in ${moveIn} · ${occupants} ${occupants === 1 ? "person" : "people"} · income ${incomeLabel(answers.income)} · credit ${creditLabel(answers.credit)}</p>
         <p><a href="https://www.prosperaproperties.co/admin/viewing-requests" style="color:#8B2030;font-weight:600">Open viewing requests</a></p>
       </div>`,
     });

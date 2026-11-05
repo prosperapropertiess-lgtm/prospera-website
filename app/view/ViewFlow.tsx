@@ -2,24 +2,35 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { INCOME_RANGES, CREDIT_RANGES, CONSENT_TEXT, torontoToday, type PublicHome } from "@/lib/viewing-requests";
+import {
+  CONSENT_TEXT, QUESTIONS, visibleQuestions, torontoToday, type Answers, type PublicHome, type Question,
+} from "@/lib/viewing-requests";
 
 const NAVY = "#1F2F3A";
 const BURGUNDY = "#8B2030";
 const BORDER = "#D8D2C8";
 const MUTED = "#666666";
 const heading = { fontFamily: "var(--font-cormorant)", color: NAVY };
-const DRAFT_KEY = "prospera-view-draft";
-const STEPS = 6;
+const DRAFT_KEY = "prospera-view-draft-v2";
+
+// Sections shown in the progress bar, so people can always see what's left.
+const SECTIONS = [
+  { key: "home", label: "Home" },
+  { key: "move", label: "Your move" },
+  { key: "work", label: "Work" },
+  { key: "money", label: "Money" },
+  { key: "you", label: "About you" },
+  { key: "contact", label: "Contact" },
+] as const;
+type SectionKey = (typeof SECTIONS)[number]["key"];
 
 interface Draft {
-  step: number;
+  screen: string;
   home: string;
   moveIn: string;
   occupants: number | null;
   manyPeople: string;
-  income: string;
-  credit: string;
+  answers: Answers;
   name: string;
   phone: string;
   email: string;
@@ -29,16 +40,27 @@ interface Draft {
 }
 
 const blank = (): Draft => ({
-  step: 0, home: "", moveIn: "", occupants: null, manyPeople: "", income: "", credit: "",
+  screen: "home", home: "", moveIn: "", occupants: null, manyPeople: "", answers: {},
   name: "", phone: "", email: "", consent: false, key: crypto.randomUUID(), savedAt: Date.now(),
 });
+
+/** The screens this person will see, in order. Changes as their answers reveal or hide questions. */
+function pathFor(answers: Answers): string[] {
+  return ["home", "move_in", "occupants", ...visibleQuestions(answers).map((q) => q.id), "contact"];
+}
+function sectionOf(screen: string): SectionKey {
+  if (screen === "home" || screen === "contact") return screen;
+  if (screen === "move_in" || screen === "occupants") return "move";
+  return QUESTIONS.find((q) => q.id === screen)?.section ?? "move";
+}
 
 function fmtDate(d: string | null) {
   if (!d) return null;
   return new Date(`${d}T12:00:00`).toLocaleDateString("en-CA", { month: "long", day: "numeric" });
 }
-function homeLabel(h: PublicHome) {
-  return h.address;
+function defaultMoveIn(h: PublicHome | undefined) {
+  const today = torontoToday();
+  return h?.available_date && h.available_date > today ? h.available_date : today;
 }
 
 export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; preselect: string | null }) {
@@ -49,7 +71,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
   const [done, setDone] = useState<{ ref: string; first: string; address: string } | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
-  // Restore a same-tab draft (under 24h old), else start fresh. A ?home= link jumps past step 1.
+  // Restore a same-tab draft (under 24h old), else start fresh. A ?home= link starts on the move-in date.
   useEffect(() => {
     let draft: Draft | null = null;
     try {
@@ -61,7 +83,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     } catch {}
     if (!draft) draft = blank();
     if (preselect && homes.some((h) => h.id === preselect) && draft.home !== preselect) {
-      draft = { ...draft, home: preselect, moveIn: "", step: 1 };
+      draft = { ...draft, home: preselect, moveIn: "", screen: "move_in" };
     }
     if (draft.home && !draft.moveIn) draft.moveIn = defaultMoveIn(homes.find((h) => h.id === draft!.home));
     const t = setTimeout(() => setD(draft), 0);
@@ -73,13 +95,9 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ ...d, savedAt: Date.now() })); } catch {}
   }, [d]);
 
-  useEffect(() => { headingRef.current?.focus(); }, [d?.step, done]);
+  useEffect(() => { headingRef.current?.focus({ preventScroll: true }); }, [d?.screen, done]);
 
   if (!d) return <Shell><div className="h-64" /></Shell>;
-
-  const home = homes.find((h) => h.id === d.home) ?? null;
-  const update = (patch: Partial<Draft>) => setD((prev) => (prev ? { ...prev, ...patch } : prev));
-  const go = (step: number) => { setErrors({}); setFormError(""); update({ step }); window.scrollTo({ top: 0 }); };
 
   if (homes.length === 0) {
     return (
@@ -106,6 +124,25 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     );
   }
 
+  const home = homes.find((h) => h.id === d.home) ?? null;
+  const path = pathFor(d.answers);
+  const screen = path.includes(d.screen) ? d.screen : path[0];
+  const idx = path.indexOf(screen);
+  const question = QUESTIONS.find((q) => q.id === screen) ?? null;
+
+  const update = (patch: Partial<Draft>) => setD((prev) => (prev ? { ...prev, ...patch } : prev));
+  const goTo = (s: string) => { setErrors({}); setFormError(""); update({ screen: s }); window.scrollTo({ top: 0 }); };
+  // Move forward along the path as it will be after this answer.
+  const next = (answers: Answers = d.answers) => {
+    const p = pathFor(answers);
+    goTo(p[p.indexOf(screen) + 1] ?? "contact");
+  };
+  const answer = (id: string, value: string, advance = true) => {
+    const answers = { ...d.answers, [id]: value };
+    update({ answers });
+    if (advance) next(answers);
+  };
+
   async function send() {
     if (!d) return;
     const errs: Record<string, string> = {};
@@ -116,23 +153,27 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
+    // Only send answers to questions that were actually shown.
+    const shown = new Set(visibleQuestions(d.answers).map((q) => q.id));
+    const answers = Object.fromEntries(Object.entries(d.answers).filter(([k]) => shown.has(k)));
+
     setSending(true); setFormError("");
-    const payload = {
-      key: d.key, home: d.home, moveIn: d.moveIn, occupants: d.occupants, income: d.income, credit: d.credit,
-      name: d.name, phone: d.phone, email: d.email, consent: d.consent,
-    };
+    const payload = { key: d.key, home: d.home, moveIn: d.moveIn, occupants: d.occupants, answers, name: d.name, phone: d.phone, email: d.email, consent: d.consent };
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const res = await fetch("/api/view", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
         const out = await res.json().catch(() => ({}));
         if (res.ok) {
           try { sessionStorage.removeItem(DRAFT_KEY); } catch {}
-          setDone({ ref: out.ref, first: d.name.trim().split(/\s+/)[0], address: home ? homeLabel(home) : "the home" });
+          setDone({ ref: out.ref, first: d.name.trim().split(/\s+/)[0], address: home?.address ?? "the home" });
           setSending(false);
           return;
         }
-        if (res.status === 422) { setErrors(out.errors ?? {}); setFormError("Check the answers marked below."); }
-        else setFormError(out.error ?? "We couldn't send your request. Try again.");
+        if (res.status === 422) {
+          const first = Object.keys(out.errors ?? {}).find((k) => path.includes(k));
+          if (first && first !== "contact") { goTo(first); setErrors(out.errors); }
+          else { setErrors(out.errors ?? {}); setFormError("Check the answers marked below."); }
+        } else setFormError(out.error ?? "We couldn't send your request. Try again.");
         setSending(false);
         return;
       } catch {
@@ -145,29 +186,33 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
 
   return (
     <Shell>
-      <Progress step={d.step} onBack={d.step > 0 ? () => go(d.step - 1) : undefined} />
+      <Progress current={sectionOf(screen)} fraction={idx / path.length} onBack={idx > 0 ? () => goTo(path[idx - 1]) : undefined} />
 
-      {home && d.step > 0 && (
+      {home && screen !== "home" && (
         <div className="flex items-center gap-3 rounded-xl border p-3 mb-7 bg-white" style={{ borderColor: BORDER }}>
           {home.image && <Image src={home.image} alt="" width={56} height={56} className="w-14 h-14 rounded-lg object-cover shrink-0" />}
           <div className="min-w-0 flex-1">
-            <div className="text-sm font-semibold truncate" style={{ color: NAVY }}>{homeLabel(home)}</div>
+            <div className="text-sm font-semibold truncate" style={{ color: NAVY }}>{home.address}</div>
             <div className="text-sm" style={{ color: MUTED }}>${home.price.toLocaleString()}/mo{home.utilities_included ? " · utilities included" : ""}</div>
           </div>
-          {homes.length > 1 && <button type="button" onClick={() => go(0)} className="text-sm font-medium underline shrink-0" style={{ color: NAVY }}>Change</button>}
+          {homes.length > 1 && <button type="button" onClick={() => goTo("home")} className="text-sm font-medium underline shrink-0" style={{ color: NAVY }}>Change</button>}
         </div>
       )}
 
-      <div key={d.step} className="view-step">
-        {d.step === 0 && (
+      <div key={screen} className="view-step">
+        {screen === "home" && (
           <>
-            <Q headingRef={headingRef} title="Which home would you like to see?" sub="A few quick taps. No documents or payment." />
+            <Q headingRef={headingRef} title="Which home would you like to see?" />
+            <div className="rounded-xl border bg-white px-4 py-3 mb-6 text-sm" style={{ borderColor: BORDER, color: "#333" }}>
+              <p className="font-semibold mb-1" style={{ color: NAVY }}>What we&apos;ll ask</p>
+              <p>Your move, your work, your income and credit range, and a few household basics. Most answers are one tap. No documents, no payment, and no credit check today.</p>
+            </div>
             <div className="grid gap-4">
               {homes.map((h) => {
                 const selected = d.home === h.id;
                 return (
                   <button key={h.id} type="button" aria-pressed={selected}
-                    onClick={() => { update({ home: h.id, moveIn: d.home === h.id && d.moveIn ? d.moveIn : defaultMoveIn(h) }); go(1); }}
+                    onClick={() => { update({ home: h.id, moveIn: d.home === h.id && d.moveIn ? d.moveIn : defaultMoveIn(h) }); goTo("move_in"); }}
                     className="text-left bg-white border-2 rounded-xl overflow-hidden transition-colors duration-150 focus-visible:outline focus-visible:outline-2"
                     style={{ borderColor: selected ? NAVY : BORDER }}>
                     {h.image && <Image src={h.image} alt="" width={640} height={300} className="w-full h-40 object-cover" />}
@@ -182,7 +227,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
                       <div className="text-sm mt-1" style={{ color: MUTED }}>
                         {h.utilities_included ? `Includes ${(h.utilities_list ?? []).join(", ").toLowerCase() || "utilities"}` : "Utilities extra"}
                         {h.parking ? " · parking" : ""}
-                        {h.available_date ? ` · available ${fmtDate(h.available_date)}` : ""}
+                        {h.available_date && h.available_date > torontoToday() ? ` · available ${fmtDate(h.available_date)}` : " · available now"}
                       </div>
                     </div>
                   </button>
@@ -192,23 +237,23 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
           </>
         )}
 
-        {d.step === 1 && home && (
+        {screen === "move_in" && home && (
           <>
             <Q headingRef={headingRef} title="When would you like to move in?" sub={home.available_date && home.available_date > torontoToday() ? `This home is available from ${fmtDate(home.available_date)}.` : "This home is available now."} />
             <label className="block text-sm font-semibold mb-2" style={{ color: NAVY }} htmlFor="movein">Move-in date</label>
             <input id="movein" type="date" min={torontoToday()} value={d.moveIn} onChange={(e) => update({ moveIn: e.target.value })}
               className="w-full px-4 py-4 border rounded-lg text-base" style={{ backgroundColor: "#F7F5F2", borderColor: BORDER, color: "#222" }} />
             {errors.moveIn && <Err>{errors.moveIn}</Err>}
-            <Next onClick={() => (d.moveIn && d.moveIn >= torontoToday() ? go(2) : setErrors({ moveIn: "Pick a date from today on." }))} />
+            <Next onClick={() => (d.moveIn && d.moveIn >= torontoToday() ? next() : setErrors({ moveIn: "Pick a date from today on." }))} />
           </>
         )}
 
-        {d.step === 2 && (
+        {screen === "occupants" && (
           <>
             <Q headingRef={headingRef} title="How many people will live there?" sub="Everyone, including you." />
             <div className="grid grid-cols-3 gap-3">
               {[1, 2, 3, 4, 5].map((n) => (
-                <Choice key={n} selected={d.occupants === n && !d.manyPeople} onClick={() => { update({ occupants: n, manyPeople: "" }); go(3); }}>{n}</Choice>
+                <Choice key={n} selected={d.occupants === n && !d.manyPeople} onClick={() => { update({ occupants: n, manyPeople: "" }); next(); }}>{n}</Choice>
               ))}
               <Choice selected={!!d.manyPeople} onClick={() => update({ manyPeople: d.manyPeople || "6", occupants: Number(d.manyPeople || 6) })}>6+</Choice>
             </div>
@@ -218,39 +263,26 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
                 <input id="many" type="number" inputMode="numeric" min={6} max={99} value={d.manyPeople}
                   onChange={(e) => update({ manyPeople: e.target.value, occupants: Number(e.target.value) || null })}
                   className="w-full px-4 py-4 border rounded-lg text-base" style={{ backgroundColor: "#F7F5F2", borderColor: BORDER }} />
-                <Next onClick={() => (d.occupants && d.occupants >= 1 && d.occupants <= 99 ? go(3) : setErrors({ occupants: "Enter a number." }))} />
                 {errors.occupants && <Err>{errors.occupants}</Err>}
+                <Next onClick={() => (d.occupants && d.occupants >= 1 && d.occupants <= 99 ? next() : setErrors({ occupants: "Enter a number." }))} />
               </>
             )}
           </>
         )}
 
-        {d.step === 3 && (
-          <>
-            <Q headingRef={headingRef} title="What's your household income per month?" sub="Before tax, everyone moving in combined. A range is fine." />
-            <div className="grid gap-3">
-              {INCOME_RANGES.map((r) => (
-                <Choice key={r.value} selected={d.income === r.value} onClick={() => { update({ income: r.value }); go(4); }}>{r.label}</Choice>
-              ))}
-            </div>
-          </>
-        )}
+        {question && <QuestionScreen q={question} value={d.answers[question.id] ?? ""} error={errors[question.id]} headingRef={headingRef}
+          onChoice={(v) => answer(question.id, v)}
+          onText={(v) => answer(question.id, v, false)}
+          onContinue={() => {
+            const v = (d.answers[question.id] ?? "").trim();
+            if (!v && !question.optional) { setErrors({ [question.id]: "Answer this to continue." }); return; }
+            next();
+          }} />}
 
-        {d.step === 4 && (
-          <>
-            <Q headingRef={headingRef} title="Roughly what's your credit score?" sub="Your best guess is fine. Nothing is checked today." />
-            <div className="grid gap-3">
-              {CREDIT_RANGES.map((r) => (
-                <Choice key={r.value} selected={d.credit === r.value} onClick={() => { update({ credit: r.value }); go(5); }}>{r.label}</Choice>
-              ))}
-            </div>
-          </>
-        )}
-
-        {d.step === 5 && (
+        {screen === "contact" && (
           <>
             <Q headingRef={headingRef} title="Last step. How do we reach you?" sub="We'll call or text to set up a viewing time." />
-            {formError && <div role="alert" className="rounded-lg border px-4 py-3 mb-5 text-sm" style={{ borderColor: BURGUNDY, color: BURGUNDY, backgroundColor: "#FFFFFF" }}>{formError}</div>}
+            {formError && <div role="alert" className="rounded-lg border px-4 py-3 mb-5 text-sm bg-white" style={{ borderColor: BURGUNDY, color: BURGUNDY }}>{formError}</div>}
             <div className="grid gap-5">
               <Text id="name" label="Your name" autoComplete="name" value={d.name} onChange={(v) => update({ name: v })} error={errors.name} />
               <Text id="phone" label="Phone number" type="tel" inputMode="tel" autoComplete="tel" value={d.phone} onChange={(v) => update({ phone: v })} error={errors.phone} />
@@ -260,7 +292,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
             <label className="flex gap-3 items-start mt-7 cursor-pointer">
               <input type="checkbox" checked={d.consent} onChange={(e) => update({ consent: e.target.checked })} className="mt-1 w-5 h-5 shrink-0" style={{ accentColor: NAVY }} />
               <span className="text-sm" style={{ color: "#333" }}>
-                {CONSENT_TEXT} <a href="/privacy" target="_blank" className="underline" style={{ color: NAVY }}>Privacy policy</a>
+                {CONSENT_TEXT} <Link href="/privacy" target="_blank" className="underline" style={{ color: NAVY }}>Privacy policy</Link>
               </span>
             </label>
             {errors.consent && <Err>{errors.consent}</Err>}
@@ -275,14 +307,32 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
         )}
       </div>
 
-      <p className="text-sm mt-10" style={{ color: MUTED }}>Need help? Call or text (519) 697-1227.</p>
+      <p className="text-sm mt-10" style={{ color: MUTED }}>Your answers stay in this browser tab until you send them. Need help? Call or text (519) 697-1227.</p>
     </Shell>
   );
 }
 
-function defaultMoveIn(h: PublicHome | undefined) {
-  const today = torontoToday();
-  return h?.available_date && h.available_date > today ? h.available_date : today;
+function QuestionScreen({ q, value, error, headingRef, onChoice, onText, onContinue }: {
+  q: Question; value: string; error?: string; headingRef: React.RefObject<HTMLHeadingElement | null>;
+  onChoice: (v: string) => void; onText: (v: string) => void; onContinue: () => void;
+}) {
+  return (
+    <>
+      <Q headingRef={headingRef} title={q.title} sub={q.sub} />
+      {q.type === "choice" ? (
+        <div className="grid gap-3">
+          {q.options!.map((o) => <Choice key={o.value} selected={value === o.value} onClick={() => onChoice(o.value)}>{o.label}</Choice>)}
+        </div>
+      ) : (
+        <>
+          <input id={q.id} aria-label={q.title} value={value} maxLength={300} placeholder={q.placeholder} onChange={(e) => onText(e.target.value)}
+            className="w-full px-4 py-4 border rounded-lg text-base" style={{ backgroundColor: "#F7F5F2", borderColor: error ? BURGUNDY : BORDER, color: "#222" }} />
+          <Next onClick={onContinue} label={q.optional && !value.trim() ? "Skip" : "Continue"} />
+        </>
+      )}
+      {error && <Err>{error}</Err>}
+    </>
+  );
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -303,15 +353,21 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Progress({ step, onBack }: { step: number; onBack?: () => void }) {
+function Progress({ current, fraction, onBack }: { current: SectionKey; fraction: number; onBack?: () => void }) {
+  const at = SECTIONS.findIndex((s) => s.key === current);
   return (
     <div className="mb-7">
       <div className="flex items-center justify-between mb-2 text-sm" style={{ color: MUTED }}>
         {onBack ? <button type="button" onClick={onBack} className="font-medium py-2 pr-3" style={{ color: NAVY }}>← Back</button> : <span />}
-        <span aria-live="polite">Step {step + 1} of {STEPS}</span>
+        <span aria-live="polite">{SECTIONS[at].label} · part {at + 1} of {SECTIONS.length}</span>
       </div>
       <div className="h-1.5 rounded-full" style={{ backgroundColor: BORDER }}>
-        <div className="h-1.5 rounded-full transition-all duration-200" style={{ width: `${(step / STEPS) * 100}%`, backgroundColor: NAVY }} />
+        <div className="h-1.5 rounded-full transition-all duration-200" style={{ width: `${Math.round(fraction * 100)}%`, backgroundColor: NAVY }} />
+      </div>
+      <div className="flex justify-between mt-2 text-xs" style={{ color: MUTED }} aria-hidden="true">
+        {SECTIONS.map((s, i) => (
+          <span key={s.key} style={{ color: i === at ? NAVY : i < at ? "#333" : "#999999", fontWeight: i === at ? 600 : 400 }}>{s.label}</span>
+        ))}
       </div>
     </div>
   );
@@ -337,12 +393,12 @@ function Choice({ children, selected, onClick }: { children: React.ReactNode; se
   );
 }
 
-function Next({ onClick }: { onClick: () => void }) {
+function Next({ onClick, label = "Continue" }: { onClick: () => void; label?: string }) {
   return (
     <button type="button" onClick={onClick}
       className="w-full mt-6 px-8 py-4 text-sm font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
       style={{ backgroundColor: BURGUNDY, color: "#FAF8F5" }}>
-      Continue
+      {label}
     </button>
   );
 }
