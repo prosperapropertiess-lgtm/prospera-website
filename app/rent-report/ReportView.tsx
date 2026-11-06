@@ -44,6 +44,8 @@ export default function ReportView({ data }: { data: ReportData }) {
           <EditionPicker data={data} />
         </header>
 
+        <TrustStrip data={data} />
+
         {/* Centrepiece */}
         <Card>
           <h2 className="text-3xl sm:text-5xl font-bold leading-tight" style={heading} aria-live="polite">
@@ -135,6 +137,29 @@ export default function ReportView({ data }: { data: ReportData }) {
 
         <Archive data={data} />
       </div>
+    </div>
+  );
+}
+
+/** Small, always-visible proof: how many ads, how recent, from where. */
+function TrustStrip({ data }: { data: ReportData }) {
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+  const days = Math.max(0, Math.round((Date.parse(`${today}T00:00:00Z`) - Date.parse(`${data.scanDate}T00:00:00Z`)) / 86_400_000));
+  const ago = days === 0 ? "today" : days === 1 ? "yesterday" : `${days} days ago`;
+  const items = [
+    { big: data.observed.toLocaleString(), small: "rental listings analysed" },
+    { big: ago.charAt(0).toUpperCase() + ago.slice(1), small: `last updated, ${fmtDay(data.scanDate)}` },
+    { big: data.method.rawHits ? data.method.rawHits.toLocaleString() : `${data.counted}`, small: data.method.rawHits ? "search results checked" : "ads counted in prices" },
+    { big: data.sources.length === 1 ? data.sources[0].name : `${data.sources.length} sites`, small: "where the ads come from" },
+  ];
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden border" style={{ borderColor: BORDER, background: BORDER, gap: 1 }}>
+      {items.map((x) => (
+        <div key={x.small} className="bg-white px-5 py-4">
+          <div className="text-xl sm:text-2xl font-bold tabular-nums leading-tight" style={heading}>{x.big}</div>
+          <div className="text-sm mt-0.5" style={{ color: MUTED }}>{x.small}</div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -186,7 +186,6 @@ export default function MarketPage() {
           Ads collected {fmtDate(latest?.scan_date)}. Next update {status ? fmtDateTime(status.nextRun) : "Friday 10am"}
         </span>
         <QuietButton onClick={refresh}>{syncing ? "Checking…" : "Check for new data"}</QuietButton>
-        <QuietButton href={status?.sheetUrl ?? data.snapshot.source_url ?? "#"} target="_blank">Open Sheet ↗</QuietButton>
       </div>
       {syncMsg && <div style={{ marginBottom: 12 }}><Note>{syncMsg}</Note></div>}
       {viewingOld && <div style={{ marginBottom: 12 }}><Note tone="amber">You&apos;re looking at an older scan from {fmtDate(data.snapshot.scan_date)}, not the newest one.</Note></div>}
