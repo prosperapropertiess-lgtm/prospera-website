@@ -5,6 +5,7 @@ import { BEDS_ORDER, bedsLabel, cad, stats, percentileOf } from "@/lib/market/co
 import type { ReportData, PublicDot } from "@/lib/market/report";
 import { Card, Choice, AnimatedNumber, DotPlot, BarList, BasedOn, TextLink, NAVY, MUTED, BORDER, BURGUNDY, heading } from "@/app/admin/market/ui";
 import { Glance, cap, typeWord } from "@/app/admin/market/Overview";
+import { TypeCards, BedsBar, AreaCards, MAP_CREDIT } from "@/app/admin/market/pickers";
 
 interface Pick { kind: "whole" | "room"; beds: string | null; type: string | null; area: string | null }
 
@@ -24,7 +25,6 @@ export default function ReportView({ data }: { data: ReportData }) {
     : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.area ? ` in ${pick.area}` : ""}`;
   const plural = pick.kind === "whole";
 
-  const types = tally(pool.map((d) => d.t));
   const areas = tally(pool.map((d) => d.a).filter((a): a is string => !!a));
   const weekly = data.edition.kind === "weekly";
   const delta = data.prev?.comparable && data.prev.whole.median != null && data.whole.median != null ? data.whole.median - data.prev.whole.median : null;
@@ -56,35 +56,28 @@ export default function ReportView({ data }: { data: ReportData }) {
             {!pick.beds && !pick.type && !pick.area && pick.kind === "whole" && delta != null && delta !== 0 && <> That&apos;s {signed(delta)} from the {data.prev!.label}.</>}
           </p>
 
-          <div className="grid gap-3 mt-6">
-            <Line label="Show me">
-              <Choice size="sm" selected={pick.kind === "whole"} onClick={() => set({ kind: "whole" })}>Whole homes</Choice>
-              <Choice size="sm" selected={pick.kind === "room"} onClick={() => set({ kind: "room", beds: null, type: null })}>Single rooms</Choice>
-            </Line>
+          <div className="grid gap-6 mt-8">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>What kind of place?</div>
+              <TypeCards dots={data.dots} pick={pick} set={set} />
+            </div>
             {pick.kind === "whole" && (
-              <>
-                <Line label="Bedrooms">
-                  <Choice size="sm" selected={!pick.beds} onClick={() => set({ beds: null })}>Any</Choice>
-                  {BEDS_ORDER.filter((b) => b !== "unknown" && pool.some((d) => d.b === b)).map((b) => (
-                    <Choice key={b} size="sm" selected={pick.beds === b} onClick={() => set({ beds: pick.beds === b ? null : b })}>{bedsLabel(b)}</Choice>
-                  ))}
-                </Line>
-                <Line label="Type">
-                  <Choice size="sm" selected={!pick.type} onClick={() => set({ type: null })}>Any</Choice>
-                  {types.filter(([, n]) => n >= 3).map(([t]) => <Choice key={t} size="sm" selected={pick.type === t} onClick={() => set({ type: pick.type === t ? null : t })}>{cap(t)}</Choice>)}
-                </Line>
-              </>
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bedrooms?</div>
+                <BedsBar dots={data.dots} pick={pick} set={set} />
+              </div>
             )}
-            <Line label="Area">
-              <Choice size="sm" selected={!pick.area} onClick={() => set({ area: null })}>All of London</Choice>
-              {areas.filter(([, n]) => n >= 5).slice(0, 7).map(([a]) => <Choice key={a} size="sm" selected={pick.area === a} onClick={() => set({ area: pick.area === a ? null : a })}>{a}</Choice>)}
-            </Line>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Where in London?</div>
+              <AreaCards dots={data.dots} pick={pick} set={set} />
+            </div>
           </div>
 
           <div className="mt-12">
             <DotPlot median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null}
               dots={pool.map((d, i) => ({ id: String(i), price: d.p, title: "", detail: `${pick.kind === "room" ? "Room" : `${bedsLabel(d.b)} ${d.t}`}${d.a ? ` · ${d.a}` : ""}`, on: fits(d) }))} />
             <p className="text-sm mt-2" style={{ color: MUTED }}>Every dot is one real ad. Dark dots match what you picked. Hover over one to see it.</p>
+            <p className="text-xs mt-1" style={{ color: MUTED }}>{MAP_CREDIT}</p>
           </div>
         </Card>
 
@@ -150,15 +143,6 @@ function tally(values: string[]): [string, number][] {
   const c = new Map<string, number>();
   values.forEach((v) => c.set(v, (c.get(v) ?? 0) + 1));
   return [...c].sort((a, b) => b[1] - a[1]);
-}
-
-function Line({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-      <span className="text-sm font-semibold w-24 shrink-0" style={{ color: MUTED }}>{label}</span>
-      <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
-  );
 }
 
 function Tile({ label, value, note, muted }: { label: string; value: React.ReactNode; note?: string; muted?: boolean }) {

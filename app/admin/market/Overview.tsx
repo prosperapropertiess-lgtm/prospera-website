@@ -4,6 +4,7 @@ import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, FLAG_TEXT, BLOCKING_FLAGS
 import type { diffScans } from "@/lib/market/compare";
 import { fmtDate, type Ctx } from "./shared";
 import { Card, Choice, BigNumber, BasedOn, TextLink, AnimatedNumber, DotPlot, MiniStrip, NAVY, MUTED, BORDER, heading } from "./ui";
+import { TypeCards, BedsBar, AreaCards, MAP_CREDIT, type PickDot } from "./pickers";
 
 export interface CompareInfo {
   label: string;
@@ -39,7 +40,7 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
     ? `Rooms${pick.area ? ` in ${pick.area}` : ""}`
     : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.area ? ` in ${pick.area}` : ""}`;
 
-  const types = useMemo(() => counts(pool, (o) => o.norm.type), [pool]);
+  const pickDots: PickDot[] = useMemo(() => [...res.whole, ...res.room].map((o) => ({ p: o.norm.price!, b: o.norm.beds_cat, t: o.norm.type, a: o.norm.area, c: o.cohort as "whole" | "room" })), [res.whole, res.room]);
   const areas = useMemo(() => counts(pool, (o) => o.norm.area).filter(([a]) => a), [pool]);
   const review = res.matched.filter((o) => o.cohort === "review" || o.cohort === "none");
   const comparable = !!compare.diff && !compare.warnings.length;
@@ -59,36 +60,21 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
           <BasedOn n={s.n} />.
         </p>
 
-        <div className="grid gap-3 mt-6">
-          <Line label="Looking at">
-            <Choice size="sm" selected={pick.kind === "whole"} onClick={() => set({ kind: "whole", type: null })}>Whole homes</Choice>
-            <Choice size="sm" selected={pick.kind === "room"} onClick={() => set({ kind: "room", type: null, beds: null })}>Single rooms</Choice>
-          </Line>
+        <div className="grid gap-6 mt-8">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>What kind of place?</div>
+            <TypeCards dots={pickDots} pick={pick} set={set} />
+          </div>
           {pick.kind === "whole" && (
-            <>
-              <Line label="Bedrooms">
-                <Choice size="sm" selected={!pick.beds} onClick={() => set({ beds: null })}>Any</Choice>
-                {BEDS_ORDER.filter((b) => b !== "unknown" && pool.some((o) => o.norm.beds_cat === b)).map((b) => (
-                  <Choice key={b} size="sm" selected={pick.beds === b} onClick={() => set({ beds: pick.beds === b ? null : b })}>{bedsLabel(b)}</Choice>
-                ))}
-              </Line>
-              <Line label="Type">
-                <Choice size="sm" selected={!pick.type} onClick={() => set({ type: null })}>Any</Choice>
-                {types.map(([t]) => <Choice key={t} size="sm" selected={pick.type === t} onClick={() => set({ type: pick.type === t ? null : t })}>{cap(t!)}</Choice>)}
-              </Line>
-            </>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bedrooms?</div>
+              <BedsBar dots={pickDots} pick={pick} set={set} />
+            </div>
           )}
-          <Line label="Area">
-            <Choice size="sm" selected={!pick.area} onClick={() => set({ area: null })}>Anywhere</Choice>
-            {areas.slice(0, 8).map(([a]) => <Choice key={a} size="sm" selected={pick.area === a} onClick={() => set({ area: pick.area === a ? null : a })}>{a}</Choice>)}
-            {areas.length > 8 && (
-              <select aria-label="More areas" value={areas.slice(8).some(([a]) => a === pick.area) ? pick.area! : ""} onChange={(e) => set({ area: e.target.value || null })}
-                className="border-2 rounded-xl px-3 text-sm font-semibold bg-white min-h-[40px]" style={{ borderColor: areas.slice(8).some(([a]) => a === pick.area) ? NAVY : BORDER, color: NAVY }}>
-                <option value="">More areas…</option>
-                {areas.slice(8).map(([a, n]) => <option key={a} value={a!}>{a} ({n})</option>)}
-              </select>
-            )}
-          </Line>
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Where in London?</div>
+            <AreaCards dots={pickDots} pick={pick} set={set} />
+          </div>
         </div>
 
         <div className="mt-10">
@@ -96,7 +82,7 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
             dots={pool.map((o) => ({ id: o.listing_id, price: o.norm.price!, title: o.norm.title || "Untitled ad", detail: `${cap(o.norm.type)} · ${bedsLabel(o.norm.beds_cat)} · ${areaLabel(o.norm.area)}`, on: fits(o) }))}
             median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null} onOpen={ctx.openListing} />
           <p className="text-sm mt-2" style={{ color: MUTED }}>
-            Each dot is one ad. Dark dots match your choices; the shaded band is where the middle half sits. Hover a dot to peek, click to open it.
+            Each dot is one ad. Dark dots match your choices; the shaded band is where the middle half sits. Hover a dot to peek, click to open it. {MAP_CREDIT}
           </p>
         </div>
 
@@ -199,15 +185,6 @@ function Chip({ children, onClick, warn }: { children: React.ReactNode; onClick?
   return onClick
     ? <button type="button" onClick={onClick} className={`${cls} hover:border-[#1F2F3A]`} style={style}>{children} →</button>
     : <span className={cls} style={style}>{children}</span>;
-}
-
-function Line({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-      <span className="text-sm font-semibold w-24 shrink-0" style={{ color: MUTED }}>{label}</span>
-      <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
-  );
 }
 
 export function Row({ label, children }: { label: string; children: React.ReactNode }) {
