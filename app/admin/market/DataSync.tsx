@@ -49,7 +49,7 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
 
   return (
     <div style={{ display: "grid", gap: 18 }}>
-      <Panel title="Sync status" right={
+      <Panel title="Updates" right={
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <Button variant="primary" disabled={!!busy} onClick={() => sync(false)}>{busy === "sync" ? "Reading the Sheet…" : "Refresh now"}</Button>
           <Button disabled={!!busy} onClick={() => sync(true)}>{busy === "dry" ? "Checking…" : "Check without saving"}</Button>
@@ -58,10 +58,10 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
         {!status ? <Loading /> : (
           <div style={{ display: "grid", gap: 12 }}>
             <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", fontSize: 14, ...tabular }}>
-              <Fact label="Source scanned" value={fmtDate(status.latest?.scan_date)} sub={status.sourceAgeDays != null ? `${status.sourceAgeDays} day${status.sourceAgeDays === 1 ? "" : "s"} old` : undefined} />
-              <Fact label="Last successful read" value={fmtDateTime(status.lastGood?.started_at)} sub="Reading doesn't make the data newer" />
-              <Fact label="Next scheduled read" value={fmtDateTime(status.nextRun)} sub={status.schedule} />
-              <Fact label="State" value={<Badge tone={status.lastFailed ? "red" : status.stale ? "amber" : "green"}>{status.lastFailed ? "Last read failed" : status.stale ? "Source not updated" : "Current"}</Badge>} sub={status.stale ? `No new scan in over ${status.staleDays} days` : undefined} />
+              <Fact label="Ads collected" value={fmtDate(status.latest?.scan_date)} sub={status.sourceAgeDays != null ? `${status.sourceAgeDays} day${status.sourceAgeDays === 1 ? "" : "s"} old` : undefined} />
+              <Fact label="Last checked" value={fmtDateTime(status.lastGood?.started_at)} sub="Checking doesn't make the ads newer" />
+              <Fact label="Next check" value={fmtDateTime(status.nextRun)} sub={status.schedule} />
+              <Fact label="State" value={<Badge tone={status.lastFailed ? "red" : status.stale ? "amber" : "green"}>{status.lastFailed ? "Last check failed" : status.stale ? "No new scan" : "Up to date"}</Badge>} sub={status.stale ? `No new scan in over ${status.staleDays} days` : undefined} />
             </div>
             {status.lastFailed && <Note tone="red">{fmtDateTime(status.lastFailed.started_at)}: {status.lastFailed.error?.replace(/\.$/, "")}. The dashboard keeps showing the last good scan.</Note>}
             {result && <Note tone={result.ok ? "grey" : "red"}>{result.text}</Note>}
@@ -87,7 +87,7 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
       {snapId && summary && <Reconcile obs={ctx.obs} summary={summary} />}
       {snapId && <Coverage obs={ctx.obs} summary={summary} />}
 
-      {snapId && <Panel title="Original data" sub="Exactly what was read from the Sheet for this scan, cell by cell." right={
+      {snapId && <Panel title="The original Sheet" sub="Exactly what we read, cell by cell." right={
         <div style={{ display: "flex", gap: 8 }}>
           <a href={`/api/admin/market/source?snapshot=${ctx.snapshot.id}&download=1`} style={buttonStyle("secondary", "sm")}>Download JSON</a>
         </div>}>
@@ -102,7 +102,7 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
         {ctx.snapshot.schema_report.newColumns?.length ? <div style={{ marginTop: 10 }}><Note tone="amber">New columns in the Sheet, kept and shown in each listing&apos;s details: {ctx.snapshot.schema_report.newColumns.join(", ")}</Note></div> : null}
       </Panel>}
 
-      <Panel title="Sync history" sub="Every read attempt, newest first.">
+      <Panel title="Update history" sub="Every time we read the Sheet, newest first.">
         {!status ? <Loading /> : (
           <TableWrap maxHeight={360}>
             <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
@@ -148,7 +148,7 @@ function Quality({ ctx }: { ctx: Ctx }) {
     price_invalid: "No usable monthly price. Still searchable, left out of rents.",
   };
   return (
-    <Panel title="Data quality" sub="Issues found in this scan. Each opens the listings involved.">
+    <Panel title="Things to double-check" sub="Ads with confusing or missing details. Tap to look at them.">
       {!flags.length ? <p style={{ margin: 0, color: C.muted }}>No issues found.</p> : (
         <div style={{ display: "grid", gap: 8 }}>
           {flags.sort((a, b) => Number(BLOCKING_FLAGS.includes(b)) - Number(BLOCKING_FLAGS.includes(a))).map((f) => {
@@ -202,7 +202,7 @@ function Reconcile({ obs, summary }: { obs: Obs[]; summary: ParsedSummary }) {
     { label: "Search coverage", source: r.segments != null ? `${r.segments} segments, ${r.pages} pages, ${r.rawHits?.toLocaleString()} raw hits` : "—", ours: `${obs.length} distinct ads`, why: "Raw hits count the same ad once per search, so they aren't listing counts" },
   ];
   return (
-    <Panel title="Sheet Summary vs dashboard" sub="Numbers the Sheet reports, beside what the dashboard calculates from the listing rows. The Sheet is never edited to match.">
+    <Panel title="Your Sheet vs this page" sub="Where our numbers match your Sheet's Summary, and why some don't. We never change your Sheet.">
       <TableWrap>
         <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
           <thead><tr><th style={th}>Figure</th><th style={th}>Sheet says</th><th style={th}>Dashboard</th><th style={th}>Why they differ</th></tr></thead>
@@ -246,7 +246,7 @@ function Coverage({ obs, summary }: { obs: Obs[]; summary: ParsedSummary | null 
     creation_date: (o) => o.norm.created_at != null, area: (o) => o.norm.area != null,
   };
   return (
-    <Panel title="Field coverage" sub="How many listings state each field, and how many values the dashboard could use. Stated isn't the same as accurate.">
+    <Panel title="How often ads mention each detail" sub="Lots of ads leave things out. This shows how many mention each one.">
       <TableWrap maxHeight={420}>
         <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
           <thead><tr><th style={th}>Field</th><th style={{ ...th, textAlign: "right" }}>Stated</th><th style={{ ...th, textAlign: "right" }}>Usable</th><th style={{ ...th, textAlign: "right" }}>Sheet reports</th></tr></thead>

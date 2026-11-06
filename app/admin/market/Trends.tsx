@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, LabelList } from "recharts";
+import { Card, BarList, NAVY, MUTED, heading } from "./ui";
 import { C, Loading } from "@/components/admin/kit";
 import { cad, stats, quantile, bedsLabel, areaLabel, type Obs } from "@/lib/market/core";
 import { COMPARE_LABEL, type CompareMode } from "@/lib/market/compare";
-import { Panel, Note, Pill, th, tdc, TableWrap, tabular, fmtDate, fmtDateTime, pct, SERIES, SampleTag, type Ctx, type Snapshot } from "./shared";
+import { Panel, Note, Pill, th, tdc, TableWrap, tabular, fmtDate, fmtDateTime, pct, SampleTag, type Ctx, type Snapshot } from "./shared";
 import type { CompareInfo } from "./Overview";
 
 type Row = [string, number | null, string, string | null, string, string, string];
@@ -69,7 +70,7 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
 
   return (
     <div style={{ display: "grid", gap: 18 }}>
-      <Panel title="Scan timeline" sub="One row per scan the dashboard has stored. Dates are when the data was collected, not when it was imported.">
+      <Panel title="Every scan we have" sub="Dates are when the ads were collected.">
         <TableWrap>
           <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
             <thead><tr>
@@ -103,43 +104,42 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
       </Panel>
 
       {snapshots.length < 2 ? (
-        <Panel title="Trends">
-          <Note>History starts {fmtDate(snapshot.scan_date)}. There&apos;s one real scan so far, so there is nothing to compare yet. After next Friday&apos;s scan is imported, this page shows rent trends, price changes, new ads and ads not seen again.</Note>
-          <div style={{ marginTop: 14, fontSize: 14, ...tabular }}>
-            Current scan ({filters.market === "room" ? "per room" : "whole units"}): median {cad(curStats.median)}, middle 50% {cad(curStats.p25)}–{cad(curStats.p75)}, n={curStats.n}.
-          </div>
-        </Panel>
+        <Card>
+          <div className="text-5xl" aria-hidden>📅</div>
+          <h2 className="text-2xl sm:text-3xl font-bold mt-3" style={heading}>Nothing to compare yet</h2>
+          <p className="text-lg mt-2" style={{ color: "#333" }}>
+            We have one scan so far ({fmtDate(snapshot.scan_date)}). After the next one on Friday, this page will tell you:
+          </p>
+          <ul className="text-lg mt-3 grid gap-2" style={{ color: NAVY }}>
+            <li>• Did typical rents go up or down?</li>
+            <li>• Which ads dropped their price?</li>
+            <li>• Which ads are new?</li>
+            <li>• Which ads we didn&apos;t see again?</li>
+          </ul>
+          <p className="text-base mt-4" style={{ color: MUTED }}>
+            Right now a typical {filters.market === "room" ? "room" : "whole home"} asks {cad(curStats.median)} a month.
+          </p>
+        </Card>
       ) : (
         <>
-          <Panel title="Asking rent over time" sub={`${filters.market === "room" ? "Per-room" : "Whole-unit"} rents. Respects market, area, type and bedroom filters. One point per ${interval === "scan" ? "scan" : `${interval} (its last scan)`}; gaps mean no scan.`}
+          <Panel title="Is rent going up or down?" sub={`Typical ${filters.market === "room" ? "room" : "whole-home"} asking rent at each scan, using your area, type and bedroom choices.`}
             right={<div style={{ display: "flex", gap: 6 }}>{(["scan", "week", "month"] as const).map((i) => <Pill key={i} active={interval === i} onClick={() => setInterval(i)}>{i === "scan" ? "Every scan" : i === "week" ? "Weekly" : "Monthly"}</Pill>)}</div>}>
             <div style={{ height: 260 }}>
               <ResponsiveContainer>
-                <LineChart data={points} margin={{ top: 8, right: 12, bottom: 0, left: -6 }}>
-                  <CartesianGrid stroke={C.border} />
-                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: C.muted }} />
-                  <YAxis tick={{ fontSize: 11, fill: C.muted }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} />
-                  <Tooltip formatter={(v, name) => [cad(Number(v)), name]} labelFormatter={(l, p) => `${l}${p?.[0] ? ` · n=${p[0].payload.n}` : ""}`} />
-                  <Legend wrapperStyle={{ fontSize: 12 }} />
-                  <Line dataKey="p75" name="P75" stroke={SERIES[2]} strokeDasharray="4 3" dot connectNulls={false} />
-                  <Line dataKey="median" name="Median" stroke={SERIES[0]} strokeWidth={2} dot connectNulls={false} />
-                  <Line dataKey="mean" name="Mean" stroke={SERIES[1]} dot connectNulls={false} />
-                  <Line dataKey="p25" name="P25" stroke={SERIES[2]} strokeDasharray="4 3" dot connectNulls={false} />
+                <LineChart data={points} margin={{ top: 28, right: 24, bottom: 0, left: -6 }}>
+                  <CartesianGrid stroke="#EFEBE5" vertical={false} />
+                  <XAxis dataKey="label" tick={{ fontSize: 13, fill: MUTED }} />
+                  <YAxis tick={{ fontSize: 12, fill: MUTED }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} domain={["auto", "auto"]} />
+                  <Tooltip formatter={(v) => [cad(Number(v)), "Typical rent"]} labelFormatter={(l, p) => `${l}${p?.[0] ? ` · ${p[0].payload.n} ads` : ""}`} />
+                  <Line dataKey="median" name="Typical rent" stroke={NAVY} strokeWidth={3} dot={{ r: 6, fill: NAVY }} activeDot={{ r: 8 }} connectNulls={false}>
+                    <LabelList dataKey="median" position="top" formatter={(v: unknown) => cad(Number(v))} style={{ fontSize: 13, fontWeight: 700, fill: NAVY }} />
+                  </Line>
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div style={{ height: 160, marginTop: 10 }}>
-              <ResponsiveContainer>
-                <LineChart data={points} margin={{ top: 8, right: 12, bottom: 0, left: -6 }}>
-                  <CartesianGrid stroke={C.border} />
-                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: C.muted }} />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: C.muted }} />
-                  <Tooltip />
-                  <Line dataKey="n" name="Eligible rents (filtered)" stroke={SERIES[0]} dot />
-                  <Line dataKey="observed" name="All observed ads" stroke={SERIES[2]} dot />
-                  <Legend wrapperStyle={{ fontSize: 12 }} />
-                </LineChart>
-              </ResponsiveContainer>
+            <div style={{ marginTop: 18 }}>
+              <div className="font-semibold mb-2" style={{ color: NAVY }}>How many ads each scan found</div>
+              <BarList rows={points.map((p) => ({ key: p.key, label: p.label, value: p.observed, display: `${p.observed} ads` }))} />
             </div>
             <p style={{ fontSize: 12, color: C.muted, margin: "6px 0 0" }}>Observed ads depend on how deep each scan searched. A lower count is not proof the market shrank.</p>
           </Panel>
@@ -172,7 +172,7 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
                 </TableWrap>
               </Panel>
 
-              <Panel title="Same ads, both scans" sub={`Matched-listing comparison: ${compare.diff.pairs.length} ads appear in both scans with usable prices and the same price basis. Median individual change: ${pairsMedianPct == null ? "—" : pct(pairsMedianPct)}. Not an official rent index.`}>
+              <Panel title="Did anyone change their price?" sub={`${compare.diff.pairs.length} ads were in both scans. Here's who moved their price. The typical change was ${pairsMedianPct == null ? "—" : pct(pairsMedianPct)}.`}>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 10, fontSize: 14 }}>
                   <span>Reduced: <strong>{compare.diff.reduced.length}</strong></span>
                   <span>Increased: <strong>{compare.diff.increased.length}</strong></span>
@@ -185,13 +185,13 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
               </Panel>
 
               <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))" }}>
-                <Panel title={`First seen (${trulyNew.length})`} sub="Not in any earlier scan the dashboard has.">
+                <Panel title={`New ads (${trulyNew.length})`} sub="We hadn't seen these before.">
                   <ObsList rows={trulyNew.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
                 </Panel>
-                <Panel title={`Not seen in this scan (${compare.diff.notSeen.length})`} sub="In the earlier scan, missing from this one. Not proof they were rented: scans are newest-first and capped.">
+                <Panel title={`Didn't see again (${compare.diff.notSeen.length})`} sub="These were there last time but not this time. That doesn't always mean they rented.">
                   <ObsList rows={compare.diff.notSeen.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
                 </Panel>
-                <Panel title={`Reappeared (${reappeared.length})`} sub="Seen before, missing from the scan in between, back now.">
+                <Panel title={`Came back (${reappeared.length})`} sub="Gone for a while, now listed again.">
                   <ObsList rows={reappeared.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
                 </Panel>
               </div>

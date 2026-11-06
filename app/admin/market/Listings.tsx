@@ -4,7 +4,9 @@ import { C, Button, inputStyle, buttonStyle } from "@/components/admin/kit";
 import {
   cad, bedsLabel, areaLabel, exclusionReason, FLAG_TEXT, LISTING_FIELDS, csvCell, availabilityLabel, filtersToParams, type CohortResult, type Obs,
 } from "@/lib/market/core";
-import { Panel, Pill, th, tdc, TableWrap, download, fmtDate, tabular, type Ctx } from "./shared";
+import { Pill, th, tdc, TableWrap, download, fmtDate, tabular, type Ctx } from "./shared";
+import { Card, Choice, NAVY, MUTED, BORDER, heading } from "./ui";
+import { cap } from "./Overview";
 
 interface Col { key: string; label: string; get: (o: Obs) => string | number | null; num?: boolean }
 
@@ -40,8 +42,9 @@ export default function Listings({ ctx, res }: { ctx: Ctx; res: CohortResult }) 
   const [cols, setCols] = useState<string[]>(DEFAULT_COLS);
   const [sort, setSort] = useState<{ key: string; dir: 1 | -1 }[]>([{ key: "posted", dir: -1 }]);
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(50);
+  const [size, setSize] = useState(24);
   const [dense, setDense] = useState(false);
+  const [view, setView] = useState<"cards" | "table">("cards");
   const [chooser, setChooser] = useState(false);
   const [views, setViews] = useState<SavedView[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
@@ -106,9 +109,11 @@ export default function Listings({ ctx, res }: { ctx: Ctx; res: CohortResult }) 
 
   return (
     <div style={{ display: "grid", gap: 14 }}>
-      <Panel title={`${rows.length} listings`} sub="Every ad in this scan matching your filters, including ones kept out of rent statistics (marked in the last column)."
+      <Card title={`${rows.length} ${rows.length === 1 ? "ad" : "ads"}`} sub="Tap an ad to see everything about it. Greyed ads aren't counted in the prices because something about them is confusing."
         right={
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Choice size="sm" selected={view === "cards"} onClick={() => setView("cards")}>Cards</Choice>
+            <Choice size="sm" selected={view === "table"} onClick={() => setView("table")}>Table</Choice>
             <select aria-label="Saved views" value="" onChange={(e) => { const v = views.find((x) => x.id === e.target.value); if (v) window.location.search = `?tab=listings&${v.query}`; }}
               style={{ ...inputStyle, width: "auto", padding: "6px 10px", fontSize: 14 }}>
               <option value="">Saved views…</option>
@@ -134,6 +139,28 @@ export default function Listings({ ctx, res }: { ctx: Ctx; res: CohortResult }) 
             )}
           </div>
         )}
+        {view === "cards" && (
+          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {shown.map((o) => {
+              const reason = exclusionReason(o, res.outlierIds, ctx.filters.outliers);
+              return (
+                <button key={`${o.listing_id}-${o.source_row}`} type="button" onClick={() => ctx.openListing(o.listing_id)}
+                  className="text-left bg-white border-2 rounded-2xl p-4 transition-colors hover:border-[#1F2F3A]" style={{ borderColor: BORDER, opacity: reason ? 0.6 : 1 }}>
+                  <div className="text-2xl font-bold tabular-nums" style={heading}>{cad(o.norm.price)}<span className="text-sm font-normal" style={{ color: MUTED }}>{o.norm.price_basis === "per_room" ? " a room" : " a month"}</span></div>
+                  <div className="font-semibold mt-1 line-clamp-2" style={{ color: NAVY }}>{o.norm.title || "Untitled ad"}</div>
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {[cap(o.norm.type), bedsLabel(o.norm.beds_cat), o.norm.baths != null ? `${o.norm.baths} bath` : null, areaLabel(o.norm.area)].filter(Boolean).map((t) => (
+                      <span key={t} className="text-sm rounded-lg px-2 py-1" style={{ background: "#F7F5F2", color: NAVY }}>{t}</span>
+                    ))}
+                  </div>
+                  {reason && <div className="text-sm mt-2" style={{ color: "#7A5200" }}>Not counted: {reason.toLowerCase()}</div>}
+                </button>
+              );
+            })}
+            {!shown.length && <p style={{ color: MUTED }}>No ads match. Try removing a filter.</p>}
+          </div>
+        )}
+        {view === "table" && <>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap", fontSize: 13, color: C.muted }}>
           <span>Click a column to sort; shift-click to add a second sort.</span>
           <span style={{ display: "flex", gap: 6 }}>
@@ -202,18 +229,19 @@ export default function Listings({ ctx, res }: { ctx: Ctx; res: CohortResult }) 
             </tbody>
           </table>
         </TableWrap>
+        </>}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 12, gap: 10, flexWrap: "wrap", fontSize: 14 }}>
           <span style={{ color: C.muted }}>Showing {rows.length ? shownPage * size + 1 : 0}–{Math.min(rows.length, shownPage * size + size)} of {rows.length} (all {rows.length} loaded)</span>
           <span style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <select aria-label="Rows per page" value={size} onChange={(e) => { setSize(Number(e.target.value)); setPage(0); }} style={{ ...inputStyle, width: "auto", padding: "4px 8px" }}>
-              {[25, 50, 100, 500].map((n) => <option key={n} value={n}>{n} per page</option>)}
+              {[24, 48, 96, 500].map((n) => <option key={n} value={n}>{n} per page</option>)}
             </select>
             <Button size="sm" disabled={shownPage === 0} onClick={() => setPage(shownPage - 1)}>Previous</Button>
             <span style={tabular}>{shownPage + 1} / {pages}</span>
             <Button size="sm" disabled={shownPage >= pages - 1} onClick={() => setPage(shownPage + 1)}>Next</Button>
           </span>
         </div>
-      </Panel>
+      </Card>
     </div>
   );
 }

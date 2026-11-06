@@ -46,14 +46,14 @@ export const tabular: CSSProperties = { fontVariantNumeric: "tabular-nums" };
 
 export function Panel({ title, sub, right, children, style }: { title?: ReactNode; sub?: ReactNode; right?: ReactNode; children: ReactNode; style?: CSSProperties }) {
   return (
-    <section style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: 20, minWidth: 0, ...style }}>
+    <section style={{ background: C.surface, border: "1px solid #D8D2C8", borderRadius: 16, padding: 24, minWidth: 0, boxShadow: "0 2px 8px rgba(0,0,0,0.04)", ...style }}>
       {(title || right) && (
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: sub ? 4 : 14, flexWrap: "wrap" }}>
-          {title && <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: C.navy }}>{title}</h3>}
+          {title && <h3 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: C.navy, fontFamily: "var(--font-cormorant)", lineHeight: 1.2 }}>{title}</h3>}
           {right}
         </div>
       )}
-      {sub && <p style={{ margin: "0 0 14px", fontSize: 13, color: C.muted }}>{sub}</p>}
+      {sub && <p style={{ margin: "0 0 16px", fontSize: 15, color: C.muted, lineHeight: 1.5 }}>{sub}</p>}
       {children}
     </section>
   );
@@ -63,8 +63,8 @@ export function Note({ tone = "grey", children }: { tone?: "grey" | "amber" | "r
   const map = { grey: [C.greyBg, C.text], amber: [C.amberBg, C.amber], red: [C.redBg, C.red] } as const;
   const [bg, fg] = map[tone];
   return (
-    <div role={tone === "red" ? "alert" : undefined} style={{ background: bg, color: fg, borderRadius: 10, padding: "10px 14px", fontSize: 14, lineHeight: 1.5 }}>
-      {tone !== "grey" && <strong style={{ marginRight: 6 }}>{tone === "red" ? "Error:" : "Note:"}</strong>}
+    <div role={tone === "red" ? "alert" : undefined} style={{ background: bg, color: fg, borderRadius: 12, padding: "12px 16px", fontSize: 15, lineHeight: 1.55 }}>
+      {tone === "red" && <strong style={{ marginRight: 6 }}>Problem:</strong>}
       {children}
     </div>
   );
@@ -101,8 +101,8 @@ export function Pill({ active, children, onClick, title }: { active?: boolean; c
   return (
     <button type="button" onClick={onClick} title={title} aria-pressed={active}
       style={{
-        border: `1px solid ${active ? C.navy : C.borderStrong}`, background: active ? C.navy : C.surface, color: active ? "#FAF8F5" : C.navy,
-        borderRadius: 999, padding: "6px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap",
+        border: `2px solid ${active ? C.navy : "#D8D2C8"}`, background: active ? C.navy : C.surface, color: active ? "#FAF8F5" : C.navy,
+        borderRadius: 12, padding: "7px 12px", fontSize: 14, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", minHeight: 40,
       }}>
       {children}
     </button>

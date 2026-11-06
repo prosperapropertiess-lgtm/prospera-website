@@ -2,7 +2,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { C, Button, inputStyle, Loading } from "@/components/admin/kit";
 import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, percentileOf, csvCell, type Obs } from "@/lib/market/core";
-import { Panel, Note, Pill, SampleTag, tabular, download, toggle, fmtDate, SERIES, type Ctx } from "./shared";
+import { Panel, Note, Pill, tabular, download, toggle, fmtDate, type Ctx } from "./shared";
+import { RangeBar, BasedOn, heading } from "./ui";
 
 interface Config {
   type: string[]; beds: string[]; area: string[]; basis: "whole" | "room";
@@ -41,6 +42,7 @@ export default function MyProperties({ ctx }: { ctx: Ctx }) {
               style={{ textAlign: "left", border: `1px solid ${x.id === sel ? C.navy : C.border}`, background: x.id === sel ? C.greyBg : C.surface, borderRadius: 10, padding: "10px 12px", cursor: "pointer", font: "inherit" }}>
               <div style={{ fontWeight: 600, color: C.navy, fontSize: 14 }}>{x.label}</div>
               <div style={{ fontSize: 13, color: C.muted, ...tabular }}>{rentText(x)}{x.config.warnings?.length ? " · needs a check" : ""}</div>
+              {(() => { const v = verdict(x.rent_low, compsFor(x, ctx.obs).map((o) => o.norm.price!)); const [bg, fg] = TONE[v.tone]; return <span style={{ display: "inline-block", marginTop: 6, fontSize: 12, fontWeight: 600, background: bg, color: fg, borderRadius: 999, padding: "2px 10px" }}>{v.text}</span>; })()}
             </button>
           ))}
         </div>
@@ -54,6 +56,28 @@ export default function MyProperties({ ctx }: { ctx: Ctx }) {
     </div>
   );
 }
+
+function compsFor(p: Prop, obs: Obs[]): Obs[] {
+  const cfg = p.config;
+  const ex = new Set((cfg.excluded ?? []).map((x) => x.id));
+  return obs.filter((o) => o.cohort === (cfg.basis ?? "whole") && !ex.has(o.listing_id) &&
+    (!cfg.type?.length || cfg.type.includes(o.norm.type)) && (!cfg.beds?.length || cfg.beds.includes(o.norm.beds_cat)) &&
+    (!cfg.area?.length || cfg.area.includes(o.norm.area ?? "__none")) &&
+    (!cfg.laundry?.length || cfg.laundry.includes(o.norm.laundry ?? "unknown")) &&
+    (!cfg.furnished?.length || cfg.furnished.includes(o.norm.furnished ?? "unknown")) &&
+    (cfg.sqftMin == null || (o.norm.sqft != null && o.norm.sqft >= cfg.sqftMin)) &&
+    (cfg.sqftMax == null || (o.norm.sqft != null && o.norm.sqft <= cfg.sqftMax)));
+}
+
+/** Plain-language position of a rent among similar ads. */
+export function verdict(rent: number | null, prices: number[]): { text: string; tone: "low" | "mid" | "high" | "none" } {
+  if (rent == null || prices.length < 5) return { text: "Not enough similar ads", tone: "none" };
+  const pc = percentileOf(rent, prices)!;
+  if (pc < 35) return { text: "Lower than most similar ads", tone: "low" };
+  if (pc > 65) return { text: "Higher than most similar ads", tone: "high" };
+  return { text: "About the same as similar ads", tone: "mid" };
+}
+const TONE = { low: ["#E8F0F8", "#2B5A8A"], mid: ["#EAF3EC", "#2F6B3F"], high: ["#FBF1DC", "#8A5A00"], none: ["#F1EEE9", "#666666"] } as const;
 
 const rentText = (x: Prop) => (x.rent_low == null ? "No rent" : x.rent_high != null && x.rent_high !== x.rent_low ? `${cad(x.rent_low)}–${cad(x.rent_high)}` : cad(x.rent_low));
 
@@ -154,29 +178,20 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
         )}
       </Panel>
 
-      <Panel title="Where your rent sits" sub={`Asking rents of ${s.n} comparable ads in this scan${(cfg.excluded?.length ?? 0) ? `, after ${cfg.excluded!.length} you excluded` : ""}.`}>
-        {!s.n ? <p style={{ color: C.faint }}>No comparables with these rules.</p> : (
+      <Panel title="Is my rent about right?">
+        {!s.n ? <p style={{ color: C.faint }}>No similar ads with these choices. Try &quot;Any area&quot; or another type above.</p> : (
           <>
-            <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", ...tabular }}>
-              <Fig label="Comparables" value={<>{s.n}<SampleTag n={s.n} /></>} />
-              <Fig label="Median" value={cad(s.median)} />
-              <Fig label="Middle 50%" value={`${cad(s.p25)}–${cad(s.p75)}`} />
-              <Fig label="Lowest – highest" value={`${cad(s.min)}–${cad(s.max)}`} />
-            </div>
-            <Strip prices={prices} subjects={subjects} />
-            <div style={{ display: "grid", gap: 4, marginTop: 10, fontSize: 14, ...tabular }}>
-              {subjects.map((v) => {
-                const diff = s.median != null ? v - s.median : null;
-                const pctl = percentileOf(v, prices);
-                return (
-                  <div key={v}>
-                    <strong>{cad(v)}</strong>: {diff == null ? "—" : diff === 0 ? "at the median" : `${cad(Math.abs(diff))} (${Math.abs((diff / s.median!) * 100).toFixed(1)}%) ${diff > 0 ? "above" : "below"} the median asking rent`} in this sample
-                    {s.n >= 5 ? <>, around the {Math.round(pctl!)}th percentile.</> : ". Too few comparables for a percentile."}
-                  </div>
-                );
-              })}
-            </div>
-            <p style={{ fontSize: 12, color: C.muted, margin: "8px 0 0" }}>These are other ads&apos; asking rents, not signed leases or an appraisal. No adjustment is made for utilities, furnishing or condition.</p>
+            <p className="text-xl sm:text-2xl font-bold leading-snug" style={heading}>
+              {subjects.length > 1 ? `Your ${cad(subjects[0])}–${cad(subjects[1])}` : `Your ${cad(subjects[0])}`} is {(() => {
+                const v = verdict(subjects[0], prices);
+                const diff = s.median != null ? subjects[0] - s.median : 0;
+                if (v.tone === "none") return `${diff >= 0 ? cad(diff) + " above" : cad(-diff) + " below"} the typical ${cad(s.median)}, but there are too few similar ads to be sure`;
+                return `${diff === 0 ? "right at" : `${cad(Math.abs(diff))} ${diff > 0 ? "above" : "below"}`} the typical ${cad(s.median)}. ${v.text}.`;
+              })()}
+            </p>
+            <p className="text-base mt-2"><BasedOn n={s.n} what="similar ads" />. Half of them ask between <strong>{cad(s.p25)}</strong> and <strong>{cad(s.p75)}</strong>.</p>
+            <RangeBar min={s.min} p25={s.p25} median={s.median} p75={s.p75} max={s.max} you={subjects} />
+            <p style={{ fontSize: 13, color: C.muted, margin: "14px 0 0" }}>Other ads&apos; asking prices, not signed leases or an appraisal. Nothing is adjusted for utilities, furniture or condition.</p>
           </>
         )}
       </Panel>
@@ -224,31 +239,3 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
-function Fig({ label, value }: { label: string; value: React.ReactNode }) {
-  return <div style={{ background: C.greyBg, borderRadius: 10, padding: "10px 12px" }}><div style={{ fontSize: 13, color: C.muted }}>{label}</div><div style={{ fontSize: 18, fontWeight: 700, color: C.navy }}>{value}</div></div>;
-}
-
-/** Every comparable as a dot on a line, with your rent marked. */
-function Strip({ prices, subjects }: { prices: number[]; subjects: number[] }) {
-  const W = 640, H = 90, pad = 30;
-  const all = [...prices, ...subjects];
-  const lo = Math.min(...all), hi = Math.max(...all);
-  const x = (v: number) => (hi === lo ? W / 2 : pad + ((v - lo) / (hi - lo)) * (W - 2 * pad));
-  const s = stats(prices);
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W, height: "auto", marginTop: 14, display: "block" }} role="img" aria-label="Comparable rents with your rent marked">
-      {s.p25 != null && <rect x={x(s.p25)} y={30} width={Math.max(2, x(s.p75!) - x(s.p25))} height={20} fill={C.greyBg} />}
-      <line x1={pad} x2={W - pad} y1={40} y2={40} stroke={C.borderStrong} strokeWidth={1} />
-      {prices.map((v, i) => <circle key={i} cx={x(v)} cy={40} r={5} fill={SERIES[1]} opacity={0.7} />)}
-      {s.median != null && <line x1={x(s.median)} x2={x(s.median)} y1={24} y2={56} stroke={C.navy} strokeWidth={2} />}
-      {subjects.map((v) => (
-        <g key={v}>
-          <polygon points={`${x(v) - 7},8 ${x(v) + 7},8 ${x(v)},20`} fill={C.burgundy} />
-          <text x={x(v)} y={76} fontSize={13} textAnchor="middle" fill={C.navy} fontWeight={600}>Yours {cad(v)}</text>
-        </g>
-      ))}
-      <text x={pad} y={H - 2} fontSize={12} fill={C.muted} textAnchor="middle">{cad(lo)}</text>
-      <text x={W - pad} y={H - 2} fontSize={12} textAnchor="middle" fill={C.muted}>{cad(hi)}</text>
-    </svg>
-  );
-}

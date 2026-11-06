@@ -1,183 +1,128 @@
 "use client";
 import { useMemo, useState } from "react";
-import { ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-import { C } from "@/components/admin/kit";
 import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, type CohortResult, type Obs, type Filters } from "@/lib/market/core";
-import { Panel, Pill, SampleTag, th, tdc, TableWrap, tabular, SERIES, Note, type Ctx } from "./shared";
+import type { Ctx } from "./shared";
+import { Card, Choice, RangeBar, BarList, BasedOn, Hint, TextLink, NAVY, MUTED, BORDER, heading } from "./ui";
+import { cap, typeWord } from "./Overview";
 
 export default function Areas({ ctx, res }: { ctx: Ctx; res: CohortResult }) {
   const room = ctx.filters.market === "room";
   const used = room ? res.room : res.whole;
   const [picked, setPicked] = useState<(string | null)[]>([]);
+  const [sort, setSort] = useState<"price" | "ads" | "name">("price");
 
   const areas = useMemo(() => {
     const keys = [...new Set(res.matched.map((o) => o.norm.area))];
-    return keys.map((a) => {
-      const all = res.matched.filter((o) => o.norm.area === a);
-      const elig = used.filter((o) => o.norm.area === a);
-      const types = new Map<string, number>();
-      all.forEach((o) => types.set(o.norm.type, (types.get(o.norm.type) ?? 0) + 1));
-      return { area: a, observed: all.length, s: stats(elig.map((o) => o.norm.price!)), mix: [...types].sort((x, y) => y[1] - x[1]) };
-    }).sort((x, y) => y.observed - x.observed);
-  }, [res.matched, used]);
+    const list = keys.map((a) => ({
+      area: a,
+      observed: res.matched.filter((o) => o.norm.area === a).length,
+      rows: used.filter((o) => o.norm.area === a),
+    })).map((x) => ({ ...x, s: stats(x.rows.map((o) => o.norm.price!)) }));
+    return list.sort((x, y) =>
+      x.area == null ? 1 : y.area == null ? -1 :
+      sort === "price" ? (y.s.median ?? -1) - (x.s.median ?? -1) : sort === "ads" ? y.observed - x.observed : x.area.localeCompare(y.area));
+  }, [res.matched, used, sort]);
 
-  const unstated = areas.find((a) => a.area == null);
+  const toggle = (a: string | null) => setPicked(picked.includes(a) ? picked.filter((x) => x !== a) : picked.length < 4 ? [...picked, a] : picked);
 
   return (
-    <div style={{ display: "grid", gap: 18 }}>
-      <Panel title="Areas" sub={`Observed ads and ${room ? "room" : "whole-unit"} asking rents by area. Tick up to four areas to compare side by side.`}>
-        {unstated && <div style={{ marginBottom: 10 }}><Note>{unstated.observed} of {res.matched.length} ads don&apos;t name an area. They&apos;re counted as &quot;Area not stated&quot;, never guessed.</Note></div>}
-        <TableWrap maxHeight={520}>
-          <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
-            <thead><tr>
-              <th style={th}>Compare</th><th style={th}>Area</th><th style={{ ...th, textAlign: "right" }}>Observed ads</th><th style={{ ...th, textAlign: "right" }}>Eligible rents</th>
-              <th style={{ ...th, textAlign: "right" }}>Median</th><th style={{ ...th, textAlign: "right" }}>Middle 50%</th><th style={th}>Type mix</th>
-            </tr></thead>
-            <tbody>
-              {areas.map((a) => (
-                <tr key={a.area ?? "__none"}>
-                  <td style={tdc}><input type="checkbox" aria-label={`Compare ${areaLabel(a.area)}`} checked={picked.includes(a.area)} disabled={!picked.includes(a.area) && picked.length >= 4}
-                    onChange={() => setPicked(picked.includes(a.area) ? picked.filter((x) => x !== a.area) : [...picked, a.area])} /></td>
-                  <td style={{ ...tdc, fontWeight: 600 }}>
-                    <button type="button" onClick={() => ctx.drill({ area: [a.area ?? "__none"] })} style={{ background: "none", border: "none", padding: 0, color: C.navy, fontWeight: 600, cursor: "pointer", font: "inherit", textDecoration: "underline" }}>{areaLabel(a.area)}</button>
-                  </td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{a.observed}</td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{a.s.n}<SampleTag n={a.s.n} /></td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{cad(a.s.median)}</td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{a.s.n ? `${cad(a.s.p25)}–${cad(a.s.p75)}` : "—"}</td>
-                  <td style={{ ...tdc, fontSize: 13, color: C.muted }}>{a.mix.map(([t, n]) => `${t} ${n}`).join(", ")}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </TableWrap>
-      </Panel>
+    <div className="grid gap-5">
+      <Card title="Neighbourhoods" sub={`What ${room ? "a single room" : "a whole home"} usually asks in each part of London. Tap "Compare" on up to four to put them side by side.`}
+        right={<div className="flex gap-2 flex-wrap">
+          <Choice size="sm" selected={sort === "price"} onClick={() => setSort("price")}>Priciest first</Choice>
+          <Choice size="sm" selected={sort === "ads"} onClick={() => setSort("ads")}>Most ads first</Choice>
+          <Choice size="sm" selected={sort === "name"} onClick={() => setSort("name")}>A to Z</Choice>
+        </div>}>
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          {areas.map((a) => (
+            <div key={a.area ?? "__none"} className="border-2 rounded-2xl p-4 bg-white" style={{ borderColor: picked.includes(a.area) ? NAVY : BORDER }}>
+              <div className="flex justify-between items-start gap-2">
+                <div className="text-lg font-bold" style={heading}>{areaLabel(a.area)}</div>
+                <Choice size="sm" selected={picked.includes(a.area)} onClick={() => toggle(a.area)}>Compare</Choice>
+              </div>
+              {a.s.n ? (
+                <>
+                  <div className="text-3xl font-bold tabular-nums mt-1" style={heading}>{cad(a.s.median)}<span className="text-sm font-normal" style={{ color: MUTED }}> typical</span></div>
+                  <div className="text-sm"><BasedOn n={a.s.n} /></div>
+                  {a.s.n >= 3 && <RangeBar compact min={a.s.min} p25={a.s.p25} median={a.s.median} p75={a.s.p75} max={a.s.max} />}
+                </>
+              ) : <div className="text-sm mt-2" style={{ color: MUTED }}>{a.observed} ads, none with a price we can count.</div>}
+              <div className="flex flex-wrap gap-1.5 mt-3">
+                {BEDS_ORDER.map((b) => [b, a.rows.filter((o) => o.norm.beds_cat === b)] as const).filter(([, r]) => r.length).map(([b, r]) => (
+                  <span key={b} className="text-sm rounded-lg px-2 py-1 tabular-nums" style={{ background: "#F7F5F2", color: NAVY }}>{bedsLabel(b)}: {cad(stats(r.map((o) => o.norm.price!)).median)} ({r.length})</span>
+                ))}
+              </div>
+              <div className="mt-3 text-sm"><TextLink onClick={() => ctx.drill({ area: [a.area ?? "__none"] })}>See {a.observed} ads →</TextLink></div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4"><Hint>&quot;Area not stated&quot; is every ad that doesn&apos;t name a neighbourhood. We never guess where they are.</Hint></div>
+      </Card>
 
-      {picked.length > 0 && <AreaCompare picked={picked} all={res.matched} used={used} />}
+      {picked.length > 0 && <SideBySide picked={picked} all={res.matched} used={used} clear={() => setPicked([])} />}
 
-      <TypeBeds rows={used} all={res.matched} drill={ctx.drill} />
-      <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))" }}>
-        <Amenities rows={res.matched} used={used} drill={ctx.drill} />
-        <RentVsSize rows={used.filter((o) => o.norm.sqft != null && o.norm.type !== "room")} total={used.length} open={ctx.openListing} />
+      <div className="grid gap-5 lg:grid-cols-2">
+        <ByType rows={used} drill={ctx.drill} />
+        <Extras rows={res.matched} used={used} drill={ctx.drill} />
       </div>
     </div>
   );
 }
 
-function AreaCompare({ picked, all, used }: { picked: (string | null)[]; all: Obs[]; used: Obs[] }) {
+function SideBySide({ picked, all, used, clear }: { picked: (string | null)[]; all: Obs[]; used: Obs[]; clear: () => void }) {
+  const cards = picked.map((a) => ({ a, s: stats(used.filter((o) => o.norm.area === a).map((o) => o.norm.price!)), n: all.filter((o) => o.norm.area === a).length }));
+  const cheapest = cards.filter((c) => c.s.n >= 3).sort((x, y) => x.s.median! - y.s.median!)[0];
+  const priciest = cards.filter((c) => c.s.n >= 3).sort((x, y) => y.s.median! - x.s.median!)[0];
   return (
-    <Panel title="Side by side" sub="Like-for-like: same market (whole units or rooms) and the same filters for every column.">
-      <div style={{ display: "grid", gap: 12, gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))` }}>
-        {picked.map((a) => {
-          const obs = all.filter((o) => o.norm.area === a);
-          const s = stats(used.filter((o) => o.norm.area === a).map((o) => o.norm.price!));
-          const missing = (fn: (o: Obs) => unknown) => obs.length ? Math.round((100 * obs.filter((o) => fn(o) == null || fn(o) === "").length) / obs.length) : 0;
-          return (
-            <div key={a ?? "__none"} style={{ background: C.greyBg, borderRadius: 10, padding: 14, fontSize: 14, ...tabular }}>
-              <div style={{ fontWeight: 700, color: C.navy, marginBottom: 6 }}>{areaLabel(a)}</div>
-              <div>Observed ads: {obs.length}</div>
-              <div>Eligible rents: {s.n}<SampleTag n={s.n} /></div>
-              <div>Median: <strong>{cad(s.median)}</strong></div>
-              <div>Middle 50%: {s.n ? `${cad(s.p25)}–${cad(s.p75)}` : "—"}</div>
-              <div>Range: {s.n ? `${cad(s.min)}–${cad(s.max)}` : "—"}</div>
-              <div style={{ marginTop: 6, color: C.muted }}>Bedrooms: {BEDS_ORDER.map((b) => [b, obs.filter((o) => o.norm.beds_cat === b).length] as const).filter(([, n]) => n).map(([b, n]) => `${bedsLabel(b)} ${n}`).join(", ")}</div>
-              <div style={{ color: C.muted }}>Not stated: size {missing((o) => o.norm.sqft)}%, laundry {missing((o) => o.norm.laundry)}%, parking {missing((o) => o.norm.parking)}%</div>
-            </div>
-          );
-        })}
+    <Card title="Side by side" right={<TextLink onClick={clear}>Clear</TextLink>}
+      sub={cheapest && priciest && cheapest !== priciest ? `${areaLabel(priciest.a)} asks about ${cad(priciest.s.median! - cheapest.s.median!)} more a month than ${areaLabel(cheapest.a)}.` : "Same filters for every area."}>
+      <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))` }}>
+        {cards.map(({ a, s, n }) => (
+          <div key={a ?? "__none"} className="rounded-2xl p-4" style={{ background: "#F7F5F2" }}>
+            <div className="font-bold" style={heading}>{areaLabel(a)}</div>
+            <div className="text-3xl font-bold tabular-nums mt-1" style={heading}>{cad(s.median)}</div>
+            <div className="text-sm"><BasedOn n={s.n} /> · {n} ads seen</div>
+            {s.n >= 2 && <div className="text-sm mt-2 tabular-nums" style={{ color: "#333" }}>Half ask {cad(s.p25)}–{cad(s.p75)}</div>}
+          </div>
+        ))}
       </div>
-    </Panel>
+    </Card>
   );
 }
 
-function TypeBeds({ rows, all, drill }: { rows: Obs[]; all: Obs[]; drill: (p: Partial<Filters>) => void }) {
-  const types = [...new Set(all.map((o) => o.norm.type))].sort();
-  const beds = BEDS_ORDER.filter((b) => all.some((o) => o.norm.beds_cat === b));
+function ByType({ rows, drill }: { rows: Obs[]; drill: (p: Partial<Filters>) => void }) {
+  const types = [...new Set(rows.map((o) => o.norm.type))];
+  const list = types.map((t) => ({ t, s: stats(rows.filter((o) => o.norm.type === t).map((o) => o.norm.price!)) })).sort((a, b) => b.s.median! - a.s.median!);
   return (
-    <Panel title="Property type × bedrooms" sub="Median asking rent, with observed ads in brackets. Click a cell to see the listings.">
-      <TableWrap>
-        <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
-          <thead><tr><th style={th}>Type</th>{beds.map((b) => <th key={b} style={{ ...th, textAlign: "right" }}>{bedsLabel(b)}</th>)}</tr></thead>
-          <tbody>
-            {types.map((t) => (
-              <tr key={t}>
-                <td style={{ ...tdc, fontWeight: 600 }}>{t}</td>
-                {beds.map((b) => {
-                  const n = all.filter((o) => o.norm.type === t && o.norm.beds_cat === b).length;
-                  const s = stats(rows.filter((o) => o.norm.type === t && o.norm.beds_cat === b).map((o) => o.norm.price!));
-                  return (
-                    <td key={b} style={{ ...tdc, textAlign: "right", padding: 0 }}>
-                      {n ? <button type="button" onClick={() => drill({ type: [t], beds: [b] })} style={{ width: "100%", textAlign: "right", padding: "9px 12px", background: "none", border: "none", cursor: "pointer", font: "inherit", color: C.navy }}>
-                        {s.n ? cad(s.median) : "—"} <span style={{ color: C.faint, fontSize: 12 }}>({n})</span>
-                      </button> : <span style={{ display: "block", padding: "9px 12px", color: C.faint }}>—</span>}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </TableWrap>
-    </Panel>
+    <Card title="Houses, apartments and more" sub="Typical asking rent for each kind of home. Tap one to see the ads.">
+      <BarList rows={list.map(({ t, s }) => ({
+        key: t, label: cap(typeWord(t)), value: s.median!, display: cad(s.median), light: s.n < 5, sub: <BasedOn n={s.n} />,
+        onClick: () => drill({ type: [t], excluded: false }),
+      }))} />
+    </Card>
   );
 }
 
-function Amenities({ rows, used, drill }: { rows: Obs[]; used: Obs[]; drill: (p: Partial<Filters>) => void }) {
+function Extras({ rows, used, drill }: { rows: Obs[]; used: Obs[]; drill: (p: Partial<Filters>) => void }) {
   const [field, setField] = useState<"laundry" | "parking" | "furnished" | "pets" | "util">("laundry");
+  const label = { laundry: "Laundry", parking: "Parking", furnished: "Furnished", pets: "Pets", util: "Utilities" }[field];
   const get = (o: Obs): string[] => field === "util" ? (o.norm.utilities.length ? o.norm.utilities : ["unknown"]) : [(o.norm[field] as string | null) ?? "unknown"];
-  const values = [...new Set(rows.flatMap(get))].sort((a, b) => (a === "unknown" ? 1 : b === "unknown" ? -1 : a.localeCompare(b)));
+  const values = [...new Set(rows.flatMap(get))];
+  const list = values.map((v) => ({ v, n: rows.filter((o) => get(o).includes(v)).length, s: stats(used.filter((o) => get(o).includes(v)).map((o) => o.norm.price!)) }))
+    .sort((a, b) => (a.v === "unknown" ? 1 : b.v === "unknown" ? -1 : b.n - a.n));
   return (
-    <Panel title="Amenities and inclusions" sub="As stated in ads. Differences are observed, not a premium you can add to rent: they mix location, size and type."
-      right={<div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-        {(["laundry", "parking", "furnished", "pets", "util"] as const).map((f) => <Pill key={f} active={field === f} onClick={() => setField(f)}>{f === "util" ? "utilities" : f}</Pill>)}
-      </div>}>
-      <TableWrap>
-        <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
-          <thead><tr><th style={th}>Value</th><th style={{ ...th, textAlign: "right" }}>Ads</th><th style={{ ...th, textAlign: "right" }}>Share</th><th style={{ ...th, textAlign: "right" }}>Median rent</th></tr></thead>
-          <tbody>
-            {values.map((v) => {
-              const n = rows.filter((o) => get(o).includes(v)).length;
-              const s = stats(used.filter((o) => get(o).includes(v)).map((o) => o.norm.price!));
-              return (
-                <tr key={v}>
-                  <td style={tdc}>
-                    <button type="button" onClick={() => drill({ [field]: [v] } as Partial<Filters>)} style={{ background: "none", border: "none", padding: 0, color: v === "unknown" ? C.muted : C.navy, cursor: "pointer", font: "inherit", textDecoration: "underline" }}>{v === "unknown" ? "Not stated" : v}</button>
-                  </td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{n}</td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{rows.length ? `${Math.round((100 * n) / rows.length)}%` : "—"}</td>
-                  <td style={{ ...tdc, textAlign: "right" }}>{cad(s.median)} <span style={{ color: C.faint, fontSize: 12 }}>n={s.n}</span></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </TableWrap>
-      <p style={{ fontSize: 12, color: C.muted, margin: "8px 0 0" }}>Share is out of all {rows.length} matching ads, including ones that don&apos;t say. &quot;Not stated&quot; never means &quot;no&quot;.</p>
-    </Panel>
-  );
-}
-
-function RentVsSize({ rows, total, open }: { rows: Obs[]; total: number; open: (id: string) => void }) {
-  const data = rows.map((o) => ({ x: o.norm.sqft!, y: o.norm.price!, id: o.listing_id, title: o.norm.title, ppsf: o.norm.price! / o.norm.sqft! }));
-  const ppsf = stats(data.map((d) => d.ppsf));
-  return (
-    <Panel title="Asking rent vs stated size" sub={`${rows.length} of ${total} eligible ads state a size. Median rent per sq ft: ${ppsf.n ? `$${ppsf.median!.toFixed(2)}` : "—"} (median of each ad's rent ÷ size). Click a dot to open it.`}>
-      {data.length < 3 ? <p style={{ color: C.faint }}>Too few ads state a size.</p> : (
-        <div style={{ height: 260 }}>
-          <ResponsiveContainer>
-            <ScatterChart margin={{ top: 8, right: 8, bottom: 8, left: -10 }}>
-              <CartesianGrid stroke={C.border} />
-              <XAxis type="number" dataKey="x" name="Size" unit=" sq ft" tick={{ fontSize: 11, fill: C.muted }} />
-              <YAxis type="number" dataKey="y" name="Rent" tick={{ fontSize: 11, fill: C.muted }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} />
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} content={({ payload }) => {
-                const p = payload?.[0]?.payload as (typeof data)[number] | undefined;
-                return p ? <div style={{ background: "#fff", border: `1px solid ${C.border}`, padding: 8, fontSize: 13, borderRadius: 8 }}><strong>{p.title}</strong><br />{cad(p.y)} · {p.x} sq ft · ${p.ppsf.toFixed(2)}/sq ft</div> : null;
-              }} />
-              <Scatter data={data} fill={SERIES[0]} cursor="pointer" onClick={(d) => open((d as unknown as { payload: { id: string } }).payload?.id ?? (d as unknown as { id: string }).id)} />
-            </ScatterChart>
-          </ResponsiveContainer>
-        </div>
-      )}
-    </Panel>
+    <Card title="What do the ads include?" sub="How many ads mention each thing, and what those ads usually ask. Many ads don't say, and that's shown separately.">
+      <div className="flex gap-2 flex-wrap mb-4">
+        {(["laundry", "parking", "furnished", "pets", "util"] as const).map((f) => (
+          <Choice key={f} size="sm" selected={field === f} onClick={() => setField(f)}>{{ laundry: "Laundry", parking: "Parking", furnished: "Furnished", pets: "Pets", util: "Utilities" }[f]}</Choice>
+        ))}
+      </div>
+      <BarList max={rows.length} rows={list.map(({ v, n, s }) => ({
+        key: v, label: v === "unknown" ? `${label}: doesn't say` : cap(v), value: n, light: v === "unknown",
+        display: `${n} ads`, sub: s.n ? <>Usually {cad(s.median)} · <BasedOn n={s.n} /></> : undefined,
+        onClick: () => drill({ [field]: [v] } as Partial<Filters>),
+      }))} />
+      <p className="text-sm mt-3" style={{ color: MUTED }}>A price difference here isn&apos;t the value of the feature itself. Location and size matter too.</p>
+    </Card>
   );
 }

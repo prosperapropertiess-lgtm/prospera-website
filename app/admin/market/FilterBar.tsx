@@ -8,7 +8,7 @@ type ListKey = "area" | "type" | "beds" | "baths" | "parking" | "laundry" | "fur
 
 const LABELS: Record<ListKey, string> = {
   area: "Area", type: "Property type", beds: "Bedrooms", baths: "Bathrooms", parking: "Parking", laundry: "Laundry",
-  furnished: "Furnished", pets: "Pets (as advertised)", util: "Utilities included", queries: "Found by search", flags: "Data quality",
+  furnished: "Furnished", pets: "Pets (as advertised)", util: "Utilities included", queries: "Found by searching for", flags: "Problems in the ad",
 };
 
 function valueLabel(key: ListKey, v: string) {
@@ -58,24 +58,24 @@ export default function FilterBar({ all, filters, setFilters, counts }: {
   if (filters.postedFrom || filters.postedTo) chips.push({ label: `Posted ${filters.postedFrom ?? "…"} to ${filters.postedTo ?? "…"}`, clear: () => set({ postedFrom: null, postedTo: null }) });
   if (filters.avail) chips.push({ label: `Availability mentions "${filters.avail}"`, clear: () => set({ avail: "" }) });
   if (filters.q) chips.push({ label: `Search: "${filters.q}"`, clear: () => { setSearch(""); set({ q: "" }); } });
-  if (!filters.excluded) chips.push({ label: "Hiding rows kept out of statistics", clear: () => set({ excluded: true }) });
-  if (filters.outliers) chips.push({ label: "Unusual prices left out of statistics", clear: () => set({ outliers: false }) });
+  if (!filters.excluded) chips.push({ label: "Only ads counted in the prices", clear: () => set({ excluded: true }) });
+  if (filters.outliers) chips.push({ label: "Odd prices left out", clear: () => set({ outliers: false }) });
 
   return (
-    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: 14, marginBottom: 18 }}>
+    <div style={{ background: C.surface, border: "1px solid #D8D2C8", borderRadius: 16, padding: 18, marginBottom: 20, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
         <div role="group" aria-label="Market" style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-          <Pill active={filters.market === "whole"} onClick={() => set({ market: "whole" })}>Whole units</Pill>
-          <Pill active={filters.market === "room"} onClick={() => set({ market: "room" })}>Per room</Pill>
-          <Pill active={filters.market === "all"} onClick={() => set({ market: "all" })}>All ads</Pill>
+          <Pill active={filters.market === "whole"} onClick={() => set({ market: "whole" })}>Whole homes</Pill>
+          <Pill active={filters.market === "room"} onClick={() => set({ market: "room" })}>Single rooms</Pill>
+          <Pill active={filters.market === "all"} onClick={() => set({ market: "all" })}>Everything</Pill>
         </div>
         <form onSubmit={(e) => { e.preventDefault(); set({ q: search }); }} style={{ flex: "1 1 220px", display: "flex", gap: 6 }}>
-          <input aria-label="Search listings" placeholder="Search title, ID, street, area…" value={search} onChange={(e) => setSearch(e.target.value)}
-            onBlur={() => search !== filters.q && set({ q: search })} style={{ ...inputStyle, padding: "8px 12px", fontSize: 14 }} />
+          <input aria-label="Search listings" placeholder="Search a street, area or word in the ad" value={search} onChange={(e) => setSearch(e.target.value)}
+            onBlur={() => search !== filters.q && set({ q: search })} style={{ ...inputStyle, padding: "10px 14px", fontSize: 16, borderRadius: 10, background: "#F7F5F2", borderColor: "#D8D2C8" }} />
         </form>
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}
-          style={{ border: `1px solid ${C.borderStrong}`, background: open ? C.greyBg : C.surface, borderRadius: 8, padding: "8px 14px", fontWeight: 600, fontSize: 14, color: C.navy, cursor: "pointer" }}>
-          {open ? "Close filters" : "More filters"}
+          style={{ border: "2px solid #D8D2C8", background: open ? C.greyBg : C.surface, borderRadius: 12, padding: "8px 14px", fontWeight: 600, fontSize: 14, color: C.navy, cursor: "pointer", minHeight: 44 }}>
+          {open ? "Done" : "More choices"}
         </button>
       </div>
 
@@ -93,7 +93,7 @@ export default function FilterBar({ all, filters, setFilters, counts }: {
       )}
 
       <div style={{ fontSize: 13, color: C.muted, marginTop: 10 }} aria-live="polite">
-        Listings matching filters: <strong style={{ color: C.navy }}>{counts.matched}</strong> · Used in rent statistics: <strong style={{ color: C.navy }}>{counts.used}</strong> · Kept out of rent statistics: <strong style={{ color: C.navy }}>{counts.excluded}</strong>
+        Showing <strong style={{ color: C.navy }}>{counts.matched}</strong> ads · <strong style={{ color: C.navy }}>{counts.used}</strong> counted in the prices{counts.excluded ? <> · <strong style={{ color: C.navy }}>{counts.excluded}</strong> left out because something looks off</> : null}
       </div>
 
       {open && (
@@ -139,12 +139,12 @@ export default function FilterBar({ all, filters, setFilters, counts }: {
             <input aria-label="Availability text" placeholder="e.g. dec, immediately" defaultValue={filters.avail} onBlur={(e) => set({ avail: e.target.value.trim() })} style={{ ...inputStyle, padding: "6px 10px" }} />
           </fieldset>
           <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
-            <legend style={{ fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>Statistics</legend>
+            <legend style={{ fontSize: 13, fontWeight: 700, color: C.navy, marginBottom: 6 }}>Counting</legend>
             <label style={{ fontSize: 13, display: "flex", gap: 6, color: C.text, marginBottom: 6 }}>
-              <input type="checkbox" checked={filters.excluded} onChange={(e) => set({ excluded: e.target.checked })} /> Show rows kept out of rent statistics
+              <input type="checkbox" checked={filters.excluded} onChange={(e) => set({ excluded: e.target.checked })} /> Also show ads left out of the prices
             </label>
             <label style={{ fontSize: 13, display: "flex", gap: 6, color: C.text }}>
-              <input type="checkbox" checked={filters.outliers} onChange={(e) => set({ outliers: e.target.checked })} /> Leave unusual prices (IQR rule) out of statistics
+              <input type="checkbox" checked={filters.outliers} onChange={(e) => set({ outliers: e.target.checked })} /> Ignore very cheap or very expensive outliers
             </label>
           </fieldset>
         </div>

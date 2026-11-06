@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Page, Tabs, Loading, ErrorNote, Button, C, inputStyle } from "@/components/admin/kit";
+import { Page, Loading, ErrorNote, C, inputStyle } from "@/components/admin/kit";
+import { Choice, QuietButton, heading } from "./ui";
 import {
   applyFilters, applyOverrides, cohortStats, filtersFromParams, filtersToParams, EMPTY_FILTERS, type Filters, type Obs, type Override,
 } from "@/lib/market/core";
@@ -25,12 +26,12 @@ interface Data {
 }
 
 const TABS: { value: Tab; label: string }[] = [
-  { value: "overview", label: "Overview" },
-  { value: "listings", label: "Listings" },
-  { value: "areas", label: "Areas & Configurations" },
-  { value: "trends", label: "Trends & Changes" },
-  { value: "mine", label: "My Properties" },
-  { value: "data", label: "Data & Sync" },
+  { value: "overview", label: "Big picture" },
+  { value: "listings", label: "Browse ads" },
+  { value: "areas", label: "Neighbourhoods" },
+  { value: "trends", label: "What changed" },
+  { value: "mine", label: "My homes" },
+  { value: "data", label: "Where the data comes from" },
 ];
 
 interface UrlState { tab: Tab; snap: string | null; cmp: CompareMode; cmpId: string | null; open: string | null; filters: Filters }
@@ -138,7 +139,7 @@ export default function MarketPage() {
       <Page width={1100}>
         <Header />
         {error && <ErrorNote>{error}</ErrorNote>}
-        <Note>No scan has been imported yet. Press Refresh now to read the Sheet.</Note>
+        <Note>No data yet. Go to &quot;Where the data comes from&quot; and press Refresh now.</Note>
         <div style={{ marginTop: 16 }}>
           <DataSync ctx={{} as Ctx} status={status} summary={null} onSynced={() => { load(null); loadStatus(); }} />
         </div>
@@ -159,39 +160,41 @@ export default function MarketPage() {
   return (
     <Page width={1280}>
       <Header />
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "10px 14px", marginBottom: 14, position: "sticky", top: 0, zIndex: 20 }}>
-        <label style={{ fontSize: 13, color: C.muted, display: "flex", gap: 6, alignItems: "center", maxWidth: "100%" }}>
-          Scan
-          <select value={data.snapshot.id} onChange={(e) => { setPrev(null); update({ snap: e.target.value === latest?.id ? null : e.target.value }); }} style={{ ...inputStyle, width: "auto", maxWidth: "min(320px, 70vw)", padding: "6px 10px", fontSize: 14 }}>
-            {data.snapshots.map((s) => <option key={s.id} value={s.id}>{fmtDate(s.scan_date)}{s.scan_label ? ` · ${s.scan_label}` : ""}{s.revision > 1 ? ` (v${s.revision})` : ""}</option>)}
+      <div className="flex flex-wrap items-center gap-3 bg-white rounded-2xl px-4 py-3 mb-4" style={{ border: "1px solid #D8D2C8" }}>
+        <label className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+          Scan from
+          <select value={data.snapshot.id} onChange={(e) => { setPrev(null); update({ snap: e.target.value === latest?.id ? null : e.target.value }); }}
+            style={{ ...inputStyle, width: "auto", maxWidth: "min(300px, 60vw)", padding: "6px 10px", fontSize: 15, borderRadius: 10 }}>
+            {data.snapshots.map((s) => <option key={s.id} value={s.id}>{fmtDate(s.scan_date)}{s.revision > 1 ? ` (v${s.revision})` : ""}</option>)}
           </select>
         </label>
-        <label style={{ fontSize: 13, color: C.muted, display: "flex", gap: 6, alignItems: "center" }}>
-          Compare with
-          <select value={ui.cmp === "custom" ? `custom:${ui.cmpId ?? ""}` : ui.cmp} onChange={(e) => {
-            const v = e.target.value;
-            if (v.startsWith("custom:")) update({ cmp: "custom", cmpId: v.slice(7) }); else update({ cmp: v as CompareMode, cmpId: null });
-          }} style={{ ...inputStyle, width: "auto", padding: "6px 10px", fontSize: 14 }}>
-            {(["previous", "week", "month", "quarter", "year"] as CompareMode[]).map((m) => <option key={m} value={m}>{COMPARE_LABEL[m]}</option>)}
-            {data.snapshots.filter((s) => s.id !== data.snapshot!.id).map((s) => <option key={s.id} value={`custom:${s.id}`}>Scan {fmtDate(s.scan_date)}</option>)}
-          </select>
-        </label>
-        <span style={{ fontSize: 13, color: C.muted, flex: "1 1 240px" }}>
-          {compare.diff ? `vs ${fmtDate(compare.snapDate)}` : compare.reason ?? ""}
+        {data.snapshots.length > 1 && (
+          <label className="flex items-center gap-2 text-sm" style={{ color: C.muted }}>
+            compared with
+            <select value={ui.cmp === "custom" ? `custom:${ui.cmpId ?? ""}` : ui.cmp} onChange={(e) => {
+              const v = e.target.value;
+              if (v.startsWith("custom:")) update({ cmp: "custom", cmpId: v.slice(7) }); else update({ cmp: v as CompareMode, cmpId: null });
+            }} style={{ ...inputStyle, width: "auto", padding: "6px 10px", fontSize: 15, borderRadius: 10 }}>
+              {(["previous", "week", "month", "quarter", "year"] as CompareMode[]).map((m) => <option key={m} value={m}>{COMPARE_LABEL[m]}</option>)}
+              {data.snapshots.filter((s) => s.id !== data.snapshot!.id).map((s) => <option key={s.id} value={`custom:${s.id}`}>Scan {fmtDate(s.scan_date)}</option>)}
+            </select>
+          </label>
+        )}
+        <span className="text-sm flex-1 min-w-[200px]" style={{ color: C.muted }} title="When the ads were collected, and when this page last read the Sheet.">
+          <span aria-hidden style={{ display: "inline-block", width: 9, height: 9, borderRadius: 999, marginRight: 6, background: status?.lastFailed ? C.red : status?.stale ? C.amber : C.green }} />
+          {status?.lastFailed ? "Last update failed. " : status?.stale ? "No new scan in over a week. " : "Up to date. "}
+          Ads collected {fmtDate(latest?.scan_date)}. Next update {status ? fmtDateTime(status.nextRun) : "Friday 10am"}.
         </span>
-        <span style={{ fontSize: 13, color: C.muted }} title="Source scanned is when the data was collected. Dashboard read is when this site last read the Sheet.">
-          <span aria-hidden style={{ display: "inline-block", width: 8, height: 8, borderRadius: 999, marginRight: 6, background: status?.lastFailed ? C.red : status?.stale ? C.amber : C.green }} />
-          Source scanned {fmtDate(latest?.scan_date)} · Dashboard read {fmtDateTime(status?.lastGood?.started_at ?? latest?.ingested_at)}
-          {status?.stale ? " · source not updated" : ""}{status?.lastFailed ? " · last read failed" : ""}
-        </span>
-        <Button size="sm" onClick={refresh} disabled={syncing}>{syncing ? "Reading…" : "Refresh now"}</Button>
-        <Button size="sm" href={status?.sheetUrl ?? data.snapshot.source_url ?? "#"} target="_blank">Sheet ↗</Button>
+        <QuietButton onClick={refresh}>{syncing ? "Checking…" : "Check for new data"}</QuietButton>
+        <QuietButton href={status?.sheetUrl ?? data.snapshot.source_url ?? "#"} target="_blank">Open Sheet ↗</QuietButton>
       </div>
       {syncMsg && <div style={{ marginBottom: 12 }}><Note>{syncMsg}</Note></div>}
-      {viewingOld && <div style={{ marginBottom: 12 }}><Note tone="amber">Historical view: you&apos;re looking at the {fmtDate(data.snapshot.scan_date)} scan, not the latest.</Note></div>}
+      {viewingOld && <div style={{ marginBottom: 12 }}><Note tone="amber">You&apos;re looking at an older scan from {fmtDate(data.snapshot.scan_date)}, not the newest one.</Note></div>}
       {error && <ErrorNote>{error}</ErrorNote>}
 
-      <Tabs value={ui.tab} onChange={(t) => update({ tab: t })} options={TABS} />
+      <nav aria-label="Sections" className="flex flex-wrap gap-2 mb-5">
+        {TABS.map((t) => <Choice key={t.value} selected={ui.tab === t.value} onClick={() => update({ tab: t.value })}>{t.label}</Choice>)}
+      </nav>
 
       {ui.tab !== "mine" && ui.tab !== "data" && res && (
         <FilterBar all={obs} filters={ui.filters} setFilters={ctx.setFilters}
@@ -226,8 +229,8 @@ export default function MarketPage() {
 function Header() {
   return (
     <div style={{ marginBottom: 14 }}>
-      <h1 style={{ margin: 0, fontSize: 28, fontWeight: 700, color: C.navy }}>London Rental Market</h1>
-      <p style={{ margin: "4px 0 0", fontSize: 15, color: C.muted }}>Facebook Marketplace asking rents in London, Ontario (25 km). Asking rents, not signed leases; observed ads, not the whole market.</p>
+      <h1 className="text-3xl sm:text-4xl font-bold" style={heading}>London Rental Market</h1>
+      <p className="text-base sm:text-lg mt-1" style={{ color: C.muted }}>What landlords are asking for rentals on Facebook Marketplace, within 25 km of London.</p>
     </div>
   );
 }
