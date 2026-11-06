@@ -33,7 +33,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ edition
   const delta = last && prev && last.wholeMedian != null && prev.wholeMedian != null ? Math.round(last.wholeMedian - prev.wholeMedian) : null;
   const period = data.edition.kind === "weekly" ? "this week" : "this month";
   const headline = delta && Math.abs(delta) >= 10 ? `London rent went ${delta > 0 ? "up" : "down"} ${cad(Math.abs(delta))} ${period}.` : "Where does your rent land?";
-  const sub = delta && Math.abs(delta) >= 10 ? "See which homes moved, and where yours sits." : `${data.whole.n} London homes for rent, ${period}. One of them could be yours.`;
+  const sub = delta && Math.abs(delta) >= 10 ? "See which homes moved, and where yours sits." : `${data.whole.n} London homes for rent, ${period}. Is yours priced right?`;
 
   // Dot plot of every whole-home ad, $100 columns.
   const prices = data.dots.filter((d) => d.c === "whole").map((d) => d.p);
@@ -73,8 +73,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ edition
         </div>
 
         {/* the hook: a question-mark pin */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", left: pinX - 80, bottom: 146, width: 160 }}>
-          <span style={{ display: "flex", background: BURG, color: "#FAF8F5", fontSize: 26, fontWeight: 700, padding: "8px 18px", borderRadius: 999 }}>Your home?</span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", left: pinX - 120, bottom: 146, width: 240 }}>
+          <span style={{ display: "flex", background: BURG, color: "#FAF8F5", fontSize: 26, fontWeight: 700, padding: "8px 20px", borderRadius: 999, whiteSpace: "nowrap" }}>Your home?</span>
           <div style={{ display: "flex", width: 4, height: 150, background: BURG }} />
           <div style={{ display: "flex", width: 22, height: 22, borderRadius: 22, background: BURG, marginTop: -11 }} />
         </div>
