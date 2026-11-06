@@ -31,7 +31,7 @@ export default function ReportView({ data }: { data: ReportData }) {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F2", fontFamily: "var(--font-dm-sans)" }}>
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 py-10 sm:py-14 grid gap-6">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 pt-28 sm:pt-32 pb-14 grid gap-6">
 
         {/* Masthead */}
         <header className="flex flex-wrap items-end justify-between gap-4">
@@ -110,8 +110,8 @@ export default function ReportView({ data }: { data: ReportData }) {
             active={pick.beds} onPick={(k) => { set({ kind: "whole", beds: pick.beds === k ? null : k }); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
         </div>
 
-        <Card title="What tenants are being offered" sub="Among whole-home ads that mention each thing. Many ads don't say, so each line shows how many did.">
-          <BarList max={100} rows={data.amenities.filter((a) => a.stated >= 5).map((a) => {
+        <Card title="What tenants are being offered" sub="Among whole-home ads that say either way. We only show a detail when most ads mention it, because ads tend to mention extras only when they have them.">
+          <BarList max={100} rows={data.amenities.filter((a) => a.stated >= Math.max(20, data.whole.n * 0.4)).map((a) => {
             const pct = Math.round((100 * a.yes) / a.stated);
             return { key: a.label, label: a.label, value: pct, display: `${pct}%`, sub: `${a.yes} of ${a.stated} ads that mention it` };
           })} />
@@ -193,14 +193,14 @@ function CheckYourRent({ dots }: { dots: PublicDot[] }) {
           <span className="text-sm" style={{ color: MUTED }}>a month</span>
         </label>
       </div>
-      <div className="mt-8">
+      <div className="mt-16">
         <DotPlot median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null} you={v > 0 ? [v] : undefined}
           dots={prices.map((p, i) => ({ id: String(i), price: p, title: "", detail: `${bedsLabel(beds)} home`, on: true }))} />
       </div>
       <p className="text-lg mt-4 font-semibold" style={{ color: NAVY }} aria-live="polite">
         {pct == null
-          ? v > 0 ? `Only ${prices.length} ${bedsLabel(beds)} ads this time, too few to place your rent.` : `Type your rent to see where it sits among ${prices.length} ${bedsLabel(beds)} ads.`
-          : `${cad(v)} is higher than about ${Math.round(pct)}% of ${bedsLabel(beds)} ads this week, ${v > s.median! ? `${cad(v - s.median!)} above` : v < s.median! ? `${cad(s.median! - v)} below` : "right at"} the typical ${cad(s.median)}.`}
+          ? v > 0 ? `Only ${prices.length} ${bedsLabel(beds).replace(" bed", "-bed")} ads this time, too few to place your rent.` : `Type your rent to see where it sits among ${prices.length} ${bedsLabel(beds).replace(" bed", "-bed")} ads.`
+          : `${cad(v)} is higher than about ${Math.round(pct)}% of ${bedsLabel(beds).replace(" bed", "-bed")} ads this week, ${v > s.median! ? `${cad(v - s.median!)} above` : v < s.median! ? `${cad(s.median! - v)} below` : "right at"} the typical ${cad(s.median)}.`}
       </p>
     </Card>
   );
