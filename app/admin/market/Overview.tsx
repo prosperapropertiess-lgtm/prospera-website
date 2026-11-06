@@ -219,15 +219,15 @@ function ShareKit({ date }: { date: string | null }) {
               <div className="text-xs mt-1" style={{ color: MUTED }}>{i.note}</div>
               <div className="flex flex-wrap gap-2 mt-3">
                 <Choice size="sm" onClick={() => copy(i.url, i.k)} selected={copied === i.k}>{copied === i.k ? "Copied" : "Copy link"}</Choice>
-                {i.k !== "dash" && <Choice size="sm" onClick={() => copy(`${i.url}/opengraph-image`, `${i.k}-img`)} selected={copied === `${i.k}-img`}>{copied === `${i.k}-img` ? "Copied" : "Copy image link"}</Choice>}
+                {i.k !== "dash" && <Choice size="sm" onClick={() => copy(`${i.url}/newsletter-image`, `${i.k}-img`)} selected={copied === `${i.k}-img`}>{copied === `${i.k}-img` ? "Copied" : "Copy newsletter image"}</Choice>}
                 <a href={i.url} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-sm font-semibold underline" style={{ color: NAVY }}>Open ↗</a>
               </div>
             </div>
           ))}
         </div>
-        <a href="/rent-report/weekly/opengraph-image" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border" style={{ borderColor: BORDER }}>
+        <a href="/rent-report/weekly/newsletter-image" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border" style={{ borderColor: BORDER }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/rent-report/weekly/opengraph-image" alt="Newsletter image for this week's London Rent Report" className="w-full h-auto block" />
+          <img src="/rent-report/weekly/newsletter-image" alt="Newsletter image for this week's London Rent Report" className="w-full h-auto block" />
         </a>
       </div>
     </Card>
