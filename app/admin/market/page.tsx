@@ -107,6 +107,8 @@ export default function MarketPage() {
   }, [cmpPick.snap?.id, prev?.id]);
 
   const res = useMemo(() => (ui ? cohortStats(applyFilters(obs, ui.filters), ui.filters) : null), [obs, ui]);
+  // Big picture always starts from every ad; its own cards do the narrowing.
+  const resAll = useMemo(() => cohortStats(applyFilters(obs, { ...EMPTY_FILTERS, market: "all" }), { outliers: false }), [obs]);
 
   const compare: CompareInfo = useMemo(() => {
     if (!data?.snapshot || !ui) return { label: "", snapDate: null, reason: null, warnings: [], diff: null };
@@ -207,10 +209,10 @@ export default function MarketPage() {
       )}
 
       {res && ui.tab === "overview" && (
-        <Overview ctx={ctx} res={res} compare={compare}
+        <Overview ctx={ctx} res={resAll} compare={compare}
           sourceMedian={(() => {
             const row = data.summary?.sections.find((s) => /HEADLINE MEDIANS/i.test(s.heading))?.rows.find((r) => /all whole-unit/i.test(r.cells[0] ?? ""));
-            return row && JSON.stringify(ui.filters) === JSON.stringify({ ...EMPTY_FILTERS, market: ui.filters.market }) ? { n: Number(row.cells[1]), median: Number(row.cells[2]) } : null;
+            return row ? { n: Number(row.cells[1]), median: Number(row.cells[2]) } : null;
           })()} />
       )}
       {res && ui.tab === "listings" && <Listings ctx={ctx} res={res} />}
