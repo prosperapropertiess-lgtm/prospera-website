@@ -8,6 +8,15 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "London Rent Report";
 
+/** Outfit from Google Fonts, so the image matches the site. Falls back to the default font. */
+async function outfit(weight: number): Promise<ArrayBuffer | null> {
+  try {
+    const css = await (await fetch(`https://fonts.googleapis.com/css2?family=Outfit:wght@${weight}`, { headers: { "User-Agent": "Mozilla/5.0 (Windows NT 6.1)" } })).text();
+    const url = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1];
+    return url ? await (await fetch(url)).arrayBuffer() : null;
+  } catch { return null; }
+}
+
 // The newsletter / social image: one headline number and every ad as a dot.
 export default async function Image({ params }: { params: Promise<{ edition: string }> }) {
   const { edition } = await params;
@@ -27,14 +36,17 @@ export default async function Image({ params }: { params: Promise<{ edition: str
     return { b, m: p.length ? p[Math.floor((p.length - 1) / 2)] + (p.length % 2 ? 0 : (p[p.length / 2] - p[(p.length - 1) / 2 | 0]) / 2) : null };
   });
 
+  const [bold, regular] = await Promise.all([outfit(700), outfit(400)]);
+  const fonts = [bold && { name: "Outfit", data: bold, weight: 700 as const }, regular && { name: "Outfit", data: regular, weight: 400 as const }].filter(Boolean) as { name: string; data: ArrayBuffer; weight: 400 | 700 }[];
+
   return new ImageResponse(
     (
-      <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", background: BG, padding: "48px 60px", fontFamily: "sans-serif" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", background: BG, padding: "48px 60px", fontFamily: fonts.length ? "Outfit" : "sans-serif" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: MUTED, textTransform: "uppercase", fontWeight: 700 }}>London Rent Report · {data.edition.label}</div>
           <div style={{ display: "flex", fontSize: 22, color: NAVY, fontWeight: 700 }}>Prospera Properties</div>
         </div>
-        <div style={{ display: "flex", fontSize: 64, fontWeight: 800, color: NAVY, marginTop: 18, lineHeight: 1.05 }}>
+        <div style={{ display: "flex", fontSize: 62, fontWeight: 700, color: NAVY, marginTop: 18, lineHeight: 1.05 }}>
           A typical London home is asking {cad(data.whole.median)} a month.
         </div>
         <div style={{ display: "flex", alignItems: "flex-end", gap: 4, height: 250, marginTop: 26, position: "relative" }}>
@@ -51,14 +63,14 @@ export default async function Image({ params }: { params: Promise<{ edition: str
           <span>$0</span><span>$1k</span><span>$2k</span><span>$3k</span><span>$4k+</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "auto" }}>
-          <div style={{ display: "flex", gap: 28, fontSize: 24, color: NAVY }}>
-            {byBeds.filter((x) => x.m).map((x) => <span key={x.b} style={{ display: "flex" }}><b>{x.b}-bed</b>&nbsp;{cad(x.m)}</span>)}
+          <div style={{ display: "flex", gap: 24, fontSize: 23, color: NAVY }}>
+            {byBeds.filter((x) => x.m).map((x) => <span key={x.b} style={{ display: "flex" }}><span style={{ fontWeight: 700 }}>{x.b}-bed</span>&nbsp;{cad(x.m)}</span>)}
             <span style={{ display: "flex", color: MUTED }}>{data.observed} ads</span>
           </div>
-          <div style={{ display: "flex", background: BURG, color: "#FAF8F5", fontSize: 22, fontWeight: 700, padding: "14px 24px", borderRadius: 8, letterSpacing: 1 }}>EXPLORE THE REPORT →</div>
+          <div style={{ display: "flex", background: BURG, color: "#FAF8F5", fontSize: 20, fontWeight: 700, padding: "14px 22px", borderRadius: 8, letterSpacing: 1, whiteSpace: "nowrap", flexShrink: 0 }}>EXPLORE THE REPORT →</div>
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts },
   );
 }
