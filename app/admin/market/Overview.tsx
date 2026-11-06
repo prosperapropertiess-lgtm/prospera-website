@@ -4,7 +4,7 @@ import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, FLAG_TEXT, BLOCKING_FLAGS
 import type { diffScans } from "@/lib/market/compare";
 import { fmtDate, type Ctx } from "./shared";
 import { Card, Choice, BigNumber, BasedOn, TextLink, AnimatedNumber, DotPlot, MiniStrip, NAVY, MUTED, BORDER, heading } from "./ui";
-import { TypeCards, BedsBar, AreaCards, MAP_CREDIT, type PickDot } from "./pickers";
+import { TypeCards, BedsBar, BathsBar, AreaCards, MAP_CREDIT, bathFits, type PickDot } from "./pickers";
 
 export interface CompareInfo {
   label: string;
@@ -18,29 +18,30 @@ const TYPE_WORD: Record<string, string> = { apartment: "apartments", house: "hou
 export const typeWord = (t: string) => TYPE_WORD[t] ?? `${t}s`;
 export const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
 
-interface Pick { kind: "whole" | "room"; beds: string | null; type: string | null; area: string | null }
+interface Pick { kind: "whole" | "room"; beds: string | null; baths: string | null; type: string | null; area: string | null }
 
 export default function Overview({ ctx, res, compare, sourceMedian }: {
   ctx: Ctx; res: CohortResult; compare: CompareInfo; sourceMedian: { n: number | null; median: number | null } | null;
 }) {
   const { drill, snapshot } = ctx;
-  const [pick, setPick] = useState<Pick>({ kind: "whole", beds: null, type: null, area: null });
+  const [pick, setPick] = useState<Pick>({ kind: "whole", beds: null, baths: null, type: null, area: null });
   const set = (p: Partial<Pick>) => setPick((cur) => ({ ...cur, ...p }));
 
   const pool = pick.kind === "whole" ? res.whole : res.room;
   const fits = (o: Obs, skip?: keyof Pick) =>
     (skip === "beds" || !pick.beds || o.norm.beds_cat === pick.beds) &&
+    (skip === "baths" || bathFits(pick, o.norm.baths)) &&
     (skip === "type" || !pick.type || o.norm.type === pick.type) &&
     (skip === "area" || !pick.area || o.norm.area === pick.area);
   const match = pool.filter((o) => fits(o));
   const s = stats(match.map((o) => o.norm.price!));
-  const anyPick = !!(pick.beds || pick.type || pick.area);
+  const anyPick = !!(pick.beds || pick.baths || pick.type || pick.area);
 
   const what = pick.kind === "room"
     ? `Rooms${pick.area ? ` in ${pick.area}` : ""}`
-    : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.area ? ` in ${pick.area}` : ""}`;
+    : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.baths ? ` with ${pick.baths} bath${pick.baths === "1" ? "" : "s"}` : ""}${pick.area ? ` in ${pick.area}` : ""}`;
 
-  const pickDots: PickDot[] = useMemo(() => [...res.whole, ...res.room].map((o) => ({ p: o.norm.price!, b: o.norm.beds_cat, t: o.norm.type, a: o.norm.area, c: o.cohort as "whole" | "room" })), [res.whole, res.room]);
+  const pickDots: PickDot[] = useMemo(() => [...res.whole, ...res.room].map((o) => ({ p: o.norm.price!, b: o.norm.beds_cat, t: o.norm.type, a: o.norm.area, c: o.cohort as "whole" | "room", h: o.norm.baths })), [res.whole, res.room]);
   const areas = useMemo(() => counts(pool, (o) => o.norm.area).filter(([a]) => a), [pool]);
   const review = res.matched.filter((o) => o.cohort === "review" || o.cohort === "none");
   const comparable = !!compare.diff && !compare.warnings.length;
@@ -71,6 +72,12 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
               <BedsBar dots={pickDots} pick={pick} set={set} />
             </div>
           )}
+          {pick.kind === "whole" && (
+            <div className="min-w-0">
+              <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bathrooms?</div>
+              <BathsBar dots={pickDots} pick={pick} set={set} />
+            </div>
+          )}
           <div className="min-w-0">
             <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Where in London?</div>
             <AreaCards dots={pickDots} pick={pick} set={set} />
@@ -91,7 +98,7 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
             className="px-6 py-3 text-sm font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80" style={{ backgroundColor: "#8B2030", color: "#FAF8F5" }}>
             See these {s.n} ads
           </button>
-          {anyPick && <TextLink onClick={() => set({ beds: null, type: null, area: null })}>Start over</TextLink>}
+          {anyPick && <TextLink onClick={() => set({ beds: null, baths: null, type: null, area: null })}>Start over</TextLink>}
         </div>
       </Card>
 

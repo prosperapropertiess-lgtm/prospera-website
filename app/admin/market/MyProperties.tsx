@@ -4,10 +4,11 @@ import { C, Button, inputStyle, Loading } from "@/components/admin/kit";
 import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, percentileOf, csvCell, type Obs } from "@/lib/market/core";
 import { Panel, Note, Pill, tabular, download, toggle, fmtDate, type Ctx } from "./shared";
 import { DotPlot, BasedOn, heading } from "./ui";
+import { BATH_GROUPS, bathGroup } from "./pickers";
 
 interface Config {
   type: string[]; beds: string[]; area: string[]; basis: "whole" | "room";
-  laundry?: string[]; furnished?: string[]; sqftMin?: number | null; sqftMax?: number | null;
+  laundry?: string[]; furnished?: string[]; baths?: string[]; sqftMin?: number | null; sqftMax?: number | null;
   warnings?: string[]; excluded?: { id: string; reason: string }[];
 }
 interface Prop { id: string; label: string; rent_low: number | null; rent_high: number | null; segment: string | null; source: "summary" | "manual"; source_ref: { row?: number; cells?: string[] } | null; config: Config; notes: string | null }
@@ -65,6 +66,7 @@ function compsFor(p: Prop, obs: Obs[]): Obs[] {
     (!cfg.area?.length || cfg.area.includes(o.norm.area ?? "__none")) &&
     (!cfg.laundry?.length || cfg.laundry.includes(o.norm.laundry ?? "unknown")) &&
     (!cfg.furnished?.length || cfg.furnished.includes(o.norm.furnished ?? "unknown")) &&
+    (!cfg.baths?.length || cfg.baths.includes(bathGroup(o.norm.baths) ?? "unknown")) &&
     (cfg.sqftMin == null || (o.norm.sqft != null && o.norm.sqft >= cfg.sqftMin)) &&
     (cfg.sqftMax == null || (o.norm.sqft != null && o.norm.sqft <= cfg.sqftMax)));
 }
@@ -116,6 +118,7 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
     (!cfg.area.length || cfg.area.includes(o.norm.area ?? "__none")) &&
     (!cfg.laundry?.length || cfg.laundry.includes(o.norm.laundry ?? "unknown")) &&
     (!cfg.furnished?.length || cfg.furnished.includes(o.norm.furnished ?? "unknown")) &&
+    (!cfg.baths?.length || cfg.baths.includes(bathGroup(o.norm.baths) ?? "unknown")) &&
     (cfg.sqftMin == null || (o.norm.sqft != null && o.norm.sqft >= cfg.sqftMin)) &&
     (cfg.sqftMax == null || (o.norm.sqft != null && o.norm.sqft <= cfg.sqftMax));
   const comps = useMemo(() => pool.filter(matches).sort((a, b) => a.norm.price! - b.norm.price!), [pool, cfg]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -153,6 +156,7 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
           </Row>
           <Row label="Type">{options((o) => o.norm.type).map((t) => <Pill key={t} active={cfg.type.includes(t)} onClick={() => setCfg({ type: toggle(cfg.type, t) })}>{t}</Pill>)}</Row>
           <Row label="Bedrooms">{BEDS_ORDER.filter((b) => pool.some((o) => o.norm.beds_cat === b)).map((b) => <Pill key={b} active={cfg.beds.includes(b)} onClick={() => setCfg({ beds: toggle(cfg.beds, b) })}>{bedsLabel(b)}</Pill>)}</Row>
+          <Row label="Bathrooms">{[...BATH_GROUPS, "unknown"].filter((g) => pool.some((o) => (bathGroup(o.norm.baths) ?? "unknown") === g)).map((g) => <Pill key={g} active={!!cfg.baths?.includes(g)} onClick={() => setCfg({ baths: toggle(cfg.baths ?? [], g) })}>{g === "unknown" ? "Not stated" : `${g} bath`}</Pill>)}</Row>
           <Row label="Area">{options((o) => o.norm.area ?? "__none").map((a) => <Pill key={a} active={cfg.area.includes(a)} onClick={() => setCfg({ area: toggle(cfg.area, a) })}>{a === "__none" ? "Not stated" : a}</Pill>)}</Row>
           <Row label="Laundry">{options((o) => o.norm.laundry ?? "unknown").map((v) => <Pill key={v} active={!!cfg.laundry?.includes(v)} onClick={() => setCfg({ laundry: toggle(cfg.laundry ?? [], v) })}>{v === "unknown" ? "Not stated" : v}</Pill>)}</Row>
           <Row label="Furnished">{options((o) => o.norm.furnished ?? "unknown").map((v) => <Pill key={v} active={!!cfg.furnished?.includes(v)} onClick={() => setCfg({ furnished: toggle(cfg.furnished ?? [], v) })}>{v === "unknown" ? "Not stated" : v}</Pill>)}</Row>
@@ -172,7 +176,7 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
               Only {s.n} comparable{s.n === 1 ? "" : "s"}. Widen on purpose:{" "}
               {cfg.area.length > 0 && <Pill onClick={() => setCfg({ area: [] })}>Any area</Pill>}{" "}
               {cfg.type.length > 0 && COMPATIBLE[cfg.type[0]] && <Pill onClick={() => setCfg({ type: [...new Set([...cfg.type, ...COMPATIBLE[cfg.type[0]]])] })}>Add compatible types</Pill>}{" "}
-              {(cfg.laundry?.length || cfg.furnished?.length || cfg.sqftMin != null || cfg.sqftMax != null) ? <Pill onClick={() => setCfg({ laundry: [], furnished: [], sqftMin: null, sqftMax: null })}>Drop amenity and size rules</Pill> : null}
+              {(cfg.laundry?.length || cfg.furnished?.length || cfg.baths?.length || cfg.sqftMin != null || cfg.sqftMax != null) ? <Pill onClick={() => setCfg({ laundry: [], furnished: [], baths: [], sqftMin: null, sqftMax: null })}>Drop bathroom, amenity and size rules</Pill> : null}
             </Note>
           </div>
         )}

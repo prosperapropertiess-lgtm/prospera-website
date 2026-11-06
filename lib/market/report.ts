@@ -11,7 +11,7 @@ export type EditionKind = "weekly" | "monthly";
 export interface Edition { key: string; kind: EditionKind; label: string; date: string }
 
 /** A public dot: price and a few broad facts, nothing that identifies an ad. */
-export interface PublicDot { p: number; b: string; t: string; a: string | null; c: "whole" | "room" }
+export interface PublicDot { p: number; b: string; t: string; a: string | null; c: "whole" | "room"; h: number | null }
 
 export interface ReportData {
   edition: Edition;
@@ -168,7 +168,7 @@ export async function loadReport(key?: string | null): Promise<ReportData | null
   const prevObs = prevSnap ? await observations(prevSnap.id, overrides) : null;
 
   const counted = cur.filter((o) => o.cohort === "whole" || o.cohort === "room");
-  const dots: PublicDot[] = counted.map((o) => ({ p: o.norm.price!, b: o.norm.beds_cat, t: o.norm.type, a: o.norm.area, c: o.cohort as "whole" | "room" }));
+  const dots: PublicDot[] = counted.map((o) => ({ p: o.norm.price!, b: o.norm.beds_cat, t: o.norm.type, a: o.norm.area, c: o.cohort as "whole" | "room", h: o.norm.baths }));
   const whole = stats(cur.filter((o) => o.cohort === "whole").map((o) => o.norm.price!));
   const room = stats(cur.filter((o) => o.cohort === "room").map((o) => o.norm.price!));
 

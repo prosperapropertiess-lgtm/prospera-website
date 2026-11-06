@@ -77,8 +77,20 @@ function Icon({ name, on }: { name: string; on: boolean }) {
 
 // ── Card pickers ────────────────────────────────────────────────────────────
 
-export interface PickDot { p: number; b: string; t: string; a: string | null; c: "whole" | "room" }
-export interface PickState { kind: "whole" | "room"; beds: string | null; type: string | null; area: string | null }
+export interface PickDot { p: number; b: string; t: string; a: string | null; c: "whole" | "room"; h?: number | null }
+export interface PickState { kind: "whole" | "room"; beds: string | null; baths?: string | null; type: string | null; area: string | null }
+
+/** Bathroom groups. Half-baths stay their own group; "0" is treated as not stated. */
+export const BATH_GROUPS = ["1", "1.5", "2", "2.5+"] as const;
+export function bathGroup(n: number | null | undefined): string | null {
+  if (n == null || n <= 0) return null;
+  if (n < 1.5) return "1";
+  if (n < 2) return "1.5";
+  if (n < 2.5) return "2";
+  return "2.5+";
+}
+export const bathLabel = (g: string) => `${g} bath`;
+export const bathFits = (pick: PickState, h: number | null | undefined) => !pick.baths || bathGroup(h) === pick.baths;
 
 const TYPE_LABEL: Record<string, string> = { house: "Houses", apartment: "Apartments", townhouse: "Townhouses", basement: "Basements", condo: "Condos", other: "Other" };
 
@@ -103,7 +115,7 @@ export function TypeCards({ dots, pick, set }: { dots: PickDot[]; pick: PickStat
   const cards = [
     { key: "all", label: "All homes", s: allWhole, on: pick.kind === "whole" && !pick.type, go: () => set({ kind: "whole", type: null }) },
     ...types.map((x) => ({ key: x.t, label: TYPE_LABEL[x.t] ?? x.t, s: x.s, on: pick.kind === "whole" && pick.type === x.t, go: () => set({ kind: "whole", type: pick.type === x.t ? null : x.t }) })),
-    ...(rooms.n ? [{ key: "room", label: "Rooms", s: rooms, on: pick.kind === "room", go: () => set({ kind: "room", type: null, beds: null }) }] : []),
+    ...(rooms.n ? [{ key: "room", label: "Rooms", s: rooms, on: pick.kind === "room", go: () => set({ kind: "room", type: null, beds: null, baths: null }) }] : []),
   ];
   return (
     <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
@@ -122,7 +134,7 @@ export function TypeCards({ dots, pick, set }: { dots: PickDot[]; pick: PickStat
 /** One slim row of bedroom choices. */
 export function BedsBar({ dots, pick, set }: { dots: PickDot[]; pick: PickState; set: (p: Partial<PickState>) => void }) {
   if (pick.kind === "room") return null;
-  const pool = dots.filter((d) => d.c === "whole" && (!pick.type || d.t === pick.type));
+  const pool = dots.filter((d) => d.c === "whole" && (!pick.type || d.t === pick.type) && bathFits(pick, d.h));
   const beds = BEDS_ORDER.filter((b) => b !== "unknown" && pool.some((d) => d.b === b));
   return (
     <div className="flex gap-1 p-1.5 rounded-2xl overflow-x-auto" style={{ background: "#F7F5F2" }} role="group" aria-label="Bedrooms">
@@ -140,9 +152,31 @@ export function BedsBar({ dots, pick, set }: { dots: PickDot[]; pick: PickState;
   );
 }
 
+/** One slim row of bathroom choices, with how many ads each has. */
+export function BathsBar({ dots, pick, set }: { dots: PickDot[]; pick: PickState; set: (p: Partial<PickState>) => void }) {
+  if (pick.kind === "room") return null;
+  const pool = dots.filter((d) => d.c === "whole" && (!pick.type || d.t === pick.type) && (!pick.beds || d.b === pick.beds));
+  const groups = BATH_GROUPS.filter((g) => pool.some((d) => bathGroup(d.h) === g));
+  return (
+    <div className="flex gap-1 p-1.5 rounded-2xl overflow-x-auto" style={{ background: "#F7F5F2" }} role="group" aria-label="Bathrooms">
+      {[null, ...groups].map((g) => {
+        const on = (pick.baths ?? null) === g;
+        const n = g ? pool.filter((d) => bathGroup(d.h) === g).length : pool.length;
+        return (
+          <button key={g ?? "any"} type="button" aria-pressed={on} onClick={() => set({ baths: g })}
+            className="flex-1 min-w-[84px] px-3 py-2 rounded-xl text-[15px] font-semibold whitespace-nowrap transition-colors duration-200"
+            style={{ background: on ? NAVY : "transparent", color: on ? "#FAF8F5" : NAVY }}>
+            {g ? bathLabel(g) : "Any"}<span className="block text-xs font-normal" style={{ opacity: 0.7 }}>{n} ads</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Neighbourhood cards, each with London drawn and that area filled in. */
 export function AreaCards({ dots, pick, set, limit = 8 }: { dots: PickDot[]; pick: PickState; set: (p: Partial<PickState>) => void; limit?: number }) {
-  const pool = dots.filter((d) => d.c === pick.kind && (!pick.type || d.t === pick.type) && (!pick.beds || d.b === pick.beds));
+  const pool = dots.filter((d) => d.c === pick.kind && (!pick.type || d.t === pick.type) && (!pick.beds || d.b === pick.beds) && bathFits(pick, d.h));
   const areas = [...new Set(pool.map((d) => d.a).filter((a): a is string => !!a))]
     .map((a) => ({ a, s: stats(pool.filter((d) => d.a === a).map((d) => d.p)), map: districtsFor(a) }))
     .filter((x) => x.s.n >= 3).sort((x, y) => y.s.n - x.s.n);

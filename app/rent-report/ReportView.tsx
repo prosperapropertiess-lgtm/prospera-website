@@ -5,25 +5,25 @@ import { BEDS_ORDER, bedsLabel, cad, stats, percentileOf } from "@/lib/market/co
 import type { ReportData, PublicDot } from "@/lib/market/report";
 import { Card, Choice, AnimatedNumber, DotPlot, BarList, BasedOn, TextLink, NAVY, MUTED, BORDER, BURGUNDY, heading } from "@/app/admin/market/ui";
 import { Glance, cap, typeWord } from "@/app/admin/market/Overview";
-import { TypeCards, BedsBar, AreaCards, MAP_CREDIT } from "@/app/admin/market/pickers";
+import { TypeCards, BedsBar, BathsBar, AreaCards, MAP_CREDIT, bathFits, bathGroup, BATH_GROUPS } from "@/app/admin/market/pickers";
 import Moving from "./Moving";
 
-interface Pick { kind: "whole" | "room"; beds: string | null; type: string | null; area: string | null }
+interface Pick { kind: "whole" | "room"; beds: string | null; baths: string | null; type: string | null; area: string | null }
 
 const signed = (n: number) => `${n > 0 ? "up" : "down"} ${cad(Math.abs(n))}`;
 const fmtDay = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric" });
 
 export default function ReportView({ data }: { data: ReportData }) {
-  const [pick, setPick] = useState<Pick>({ kind: "whole", beds: null, type: null, area: null });
+  const [pick, setPick] = useState<Pick>({ kind: "whole", beds: null, baths: null, type: null, area: null });
   const set = (p: Partial<Pick>) => setPick((c) => ({ ...c, ...p }));
   const pool = data.dots.filter((d) => d.c === pick.kind);
   const fits = (d: PublicDot, skip?: keyof Pick) =>
-    (skip === "beds" || !pick.beds || d.b === pick.beds) && (skip === "type" || !pick.type || d.t === pick.type) && (skip === "area" || !pick.area || d.a === pick.area);
+    (skip === "beds" || !pick.beds || d.b === pick.beds) && (skip === "baths" || bathFits(pick, d.h)) && (skip === "type" || !pick.type || d.t === pick.type) && (skip === "area" || !pick.area || d.a === pick.area);
   const match = pool.filter((d) => fits(d));
   const s = stats(match.map((d) => d.p));
   const what = pick.kind === "room"
     ? `A room${pick.area ? ` in ${pick.area}` : ""}`
-    : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.area ? ` in ${pick.area}` : ""}`;
+    : `${pick.beds ? `${bedsLabel(pick.beds).replace(" bed", "-bed")} ` : ""}${pick.type ? typeWord(pick.type) : "homes"}${pick.baths ? ` with ${pick.baths} bath${pick.baths === "1" ? "" : "s"}` : ""}${pick.area ? ` in ${pick.area}` : ""}`;
   const plural = pick.kind === "whole";
 
   const areas = tally(pool.map((d) => d.a).filter((a): a is string => !!a));
@@ -66,6 +66,12 @@ export default function ReportView({ data }: { data: ReportData }) {
               <div className="min-w-0">
                 <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bedrooms?</div>
                 <BedsBar dots={data.dots} pick={pick} set={set} />
+              </div>
+            )}
+            {pick.kind === "whole" && (
+              <div className="min-w-0">
+                <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bathrooms?</div>
+                <BathsBar dots={data.dots} pick={pick} set={set} />
               </div>
             )}
             <div className="min-w-0">
@@ -152,16 +158,24 @@ function Tile({ label, value, note, muted }: { label: string; value: React.React
 /** An owner types their rent and bedrooms and sees where it lands. Nothing is sent anywhere. */
 function CheckYourRent({ dots }: { dots: PublicDot[] }) {
   const [beds, setBeds] = useState("2");
+  const [baths, setBaths] = useState<string | null>(null);
   const [rent, setRent] = useState("");
-  const prices = dots.filter((d) => d.c === "whole" && d.b === beds).map((d) => d.p);
+  const prices = dots.filter((d) => d.c === "whole" && d.b === beds && (!baths || bathGroup(d.h) === baths)).map((d) => d.p);
+  const kind = `${bedsLabel(beds).replace(" bed", "-bed")}${baths ? `, ${baths}-bath` : ""}`;
   const s = stats(prices);
   const v = Number(rent.replace(/[^0-9]/g, ""));
   const pct = v > 0 && prices.length >= 5 ? percentileOf(v, prices)! : null;
   return (
-    <Card title="Where does your rent land?" sub="Pick your bedrooms and type your rent. This stays on your screen; nothing is sent.">
+    <Card title="Where does your rent land?" sub="Pick your bedrooms and bathrooms, then type your rent. This stays on your screen; nothing is sent.">
       <div className="flex flex-wrap gap-2 items-center">
         {BEDS_ORDER.filter((b) => b !== "unknown" && dots.some((d) => d.c === "whole" && d.b === b)).map((b) => (
           <Choice key={b} size="sm" selected={beds === b} onClick={() => setBeds(b)}>{bedsLabel(b)}</Choice>
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-2 items-center mt-3">
+        <Choice size="sm" selected={!baths} onClick={() => setBaths(null)}>Any baths</Choice>
+        {BATH_GROUPS.filter((g) => dots.some((d) => d.c === "whole" && d.b === beds && bathGroup(d.h) === g)).map((g) => (
+          <Choice key={g} size="sm" selected={baths === g} onClick={() => setBaths(g)}>{g} bath</Choice>
         ))}
         <label className="flex items-center gap-2 ml-0 sm:ml-2">
           <span className="sr-only">Your monthly rent</span>
@@ -173,12 +187,12 @@ function CheckYourRent({ dots }: { dots: PublicDot[] }) {
       </div>
       <div className="mt-16">
         <DotPlot median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null} you={v > 0 ? [v] : undefined}
-          dots={prices.map((p, i) => ({ id: String(i), price: p, title: "", detail: `${bedsLabel(beds)} home`, on: true }))} />
+          dots={prices.map((p, i) => ({ id: String(i), price: p, title: "", detail: `${kind} home`, on: true }))} />
       </div>
       <p className="text-lg mt-4 font-semibold" style={{ color: NAVY }} aria-live="polite">
         {pct == null
-          ? v > 0 ? `Only ${prices.length} ${bedsLabel(beds).replace(" bed", "-bed")} ads this time, too few to place your rent.` : `Type your rent to see where it sits among ${prices.length} ${bedsLabel(beds).replace(" bed", "-bed")} ads.`
-          : `${cad(v)} is higher than about ${Math.round(pct)}% of ${bedsLabel(beds).replace(" bed", "-bed")} ads this week, ${v > s.median! ? `${cad(v - s.median!)} above` : v < s.median! ? `${cad(s.median! - v)} below` : "right at"} the typical ${cad(s.median)}.`}
+          ? v > 0 ? `Only ${prices.length} ${kind} ads this time, too few to place your rent. Try "Any baths".` : `Type your rent to see where it sits among ${prices.length} ${kind} ads.`
+          : `${cad(v)} is higher than about ${Math.round(pct)}% of ${kind} ads this week, ${v > s.median! ? `${cad(v - s.median!)} above` : v < s.median! ? `${cad(s.median! - v)} below` : "right at"} the typical ${cad(s.median)}.`}
       </p>
     </Card>
   );
