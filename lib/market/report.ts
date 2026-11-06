@@ -27,7 +27,20 @@ export interface ReportData {
   amenities: { label: string; yes: number; stated: number }[];
   method: { radiusKm: number | null; segments: number | null; pages: number | null; rawHits: number | null; pagesPerSearch: number | null };
   areasNamed: number;
+  /** Where this edition's ads came from, worked out from each ad's link. */
+  sources: { name: string; ads: number }[];
+  counted: number;
   editions: Edition[];
+}
+
+const SOURCE_NAMES: [RegExp, string][] = [
+  [/facebook\.com/, "Facebook Marketplace"], [/kijiji\.ca/, "Kijiji"], [/rentals\.ca/, "Rentals.ca"],
+  [/padmapper\.com/, "PadMapper"], [/zumper\.com/, "Zumper"], [/realtor\.ca/, "Realtor.ca"], [/craigslist/, "Craigslist"],
+];
+function sourceOf(o: Obs): string {
+  const url = o.norm.url ?? o.raw.url ?? "";
+  for (const [re, name] of SOURCE_NAMES) if (re.test(url)) return name;
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return "Other public sites"; }
 }
 
 const monthLabel = (ym: string) => new Date(`${ym}-15T12:00:00`).toLocaleDateString("en-CA", { month: "long", year: "numeric" });
@@ -118,6 +131,8 @@ export async function loadReport(key?: string | null): Promise<ReportData | null
     dots, observed: cur.length, whole, room, prev, changes, amenities,
     method: { radiusKm: r.radiusKm ?? null, segments: r.segments ?? null, pages: r.pages ?? null, rawHits: r.rawHits ?? null, pagesPerSearch: r.segments && r.pages ? Math.round(r.pages / r.segments) : null },
     areasNamed: counted.filter((o) => o.norm.area).length,
+    sources: [...cur.reduce((m, o) => m.set(sourceOf(o), (m.get(sourceOf(o)) ?? 0) + 1), new Map<string, number>())].map(([name, ads]) => ({ name, ads })).sort((a, b) => b.ads - a.ads),
+    counted: counted.length,
     editions,
   };
 }

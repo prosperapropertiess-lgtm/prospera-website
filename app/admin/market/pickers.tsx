@@ -97,7 +97,7 @@ export function TypeCards({ dots, pick, set }: { dots: PickDot[]; pick: PickStat
   const whole = dots.filter((d) => d.c === "whole");
   const types = [...new Set(whole.map((d) => d.t))]
     .map((t) => ({ t, s: stats(whole.filter((d) => d.t === t).map((d) => d.p)) }))
-    .filter((x) => x.s.n >= 3).sort((a, b) => b.s.n - a.s.n);
+    .filter((x) => x.s.n >= 5).sort((a, b) => b.s.n - a.s.n).slice(0, 4);
   const rooms = stats(dots.filter((d) => d.c === "room").map((d) => d.p));
   const allWhole = stats(whole.map((d) => d.p));
   const cards = [

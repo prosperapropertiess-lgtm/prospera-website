@@ -60,18 +60,18 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
           <BasedOn n={s.n} />.
         </p>
 
-        <div className="grid gap-6 mt-8">
-          <div>
+        <div className="grid gap-6 mt-8 min-w-0">
+          <div className="min-w-0">
             <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>What kind of place?</div>
             <TypeCards dots={pickDots} pick={pick} set={set} />
           </div>
           {pick.kind === "whole" && (
-            <div>
+            <div className="min-w-0">
               <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bedrooms?</div>
               <BedsBar dots={pickDots} pick={pick} set={set} />
             </div>
           )}
-          <div>
+          <div className="min-w-0">
             <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Where in London?</div>
             <AreaCards dots={pickDots} pick={pick} set={set} />
           </div>

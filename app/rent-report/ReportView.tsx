@@ -52,22 +52,22 @@ export default function ReportView({ data }: { data: ReportData }) {
           </h2>
           <p className="text-base sm:text-lg mt-3" style={{ color: "#333" }}>
             {s.n >= 2 && <>Half of these ads ask between <strong className="tabular-nums">{cad(s.p25)}</strong> and <strong className="tabular-nums">{cad(s.p75)}</strong>. </>}
-            <BasedOn n={s.n} what="ads" /> on Facebook Marketplace{weekly ? " this week" : " this month"}.
+            <BasedOn n={s.n} what="ads" /> from {data.sources.map((x) => x.name).join(" and ")}{weekly ? " this week" : " this month"}.
             {!pick.beds && !pick.type && !pick.area && pick.kind === "whole" && delta != null && delta !== 0 && <> That&apos;s {signed(delta)} from the {data.prev!.label}.</>}
           </p>
 
-          <div className="grid gap-6 mt-8">
-            <div>
+          <div className="grid gap-6 mt-8 min-w-0">
+            <div className="min-w-0">
               <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>What kind of place?</div>
               <TypeCards dots={data.dots} pick={pick} set={set} />
             </div>
             {pick.kind === "whole" && (
-              <div>
+              <div className="min-w-0">
                 <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>How many bedrooms?</div>
                 <BedsBar dots={data.dots} pick={pick} set={set} />
               </div>
             )}
-            <div>
+            <div className="min-w-0">
               <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Where in London?</div>
               <AreaCards dots={data.dots} pick={pick} set={set} />
             </div>
@@ -90,6 +90,8 @@ export default function ReportView({ data }: { data: ReportData }) {
             ? <Tile label="Price cuts" value={data.changes.reduced} note={`Of ${data.changes.pairs} ads seen both ${weekly ? "weeks" : "months"}`} />
             : <Tile label="Price cuts" value="Next week" muted note="Needs two scans to compare" />}
         </div>
+
+        <Method data={data} />
 
         <CheckYourRent dots={data.dots} />
 
@@ -119,8 +121,6 @@ export default function ReportView({ data }: { data: ReportData }) {
             </div>
           </Card>
         )}
-
-        <Method data={data} />
 
         {/* The one action */}
         <section className="rounded-2xl p-7 sm:p-10 text-center" style={{ background: NAVY }}>
@@ -190,18 +190,95 @@ function CheckYourRent({ dots }: { dots: PublicDot[] }) {
   );
 }
 
+const PLANNED_SOURCES = ["Kijiji", "Rentals.ca"];
+
+/** The trust section: limits first, then exactly where the ads came from and how fresh they are. */
 function Method({ data }: { data: ReportData }) {
   const m = data.method;
+  const coming = PLANNED_SOURCES.filter((p) => !data.sources.some((s) => s.name === p));
+  const funnel = [
+    ...(m.rawHits ? [{ label: "Search results read", n: m.rawHits }] : []),
+    { label: "Different ads, repeats removed", n: data.observed },
+    { label: "Counted in these prices", n: data.counted },
+  ];
+  const limits = [
+    { t: "Asking rents, not signed leases", d: "These are the prices landlords put in public ads. What a tenant finally signs for can be different." },
+    { t: "The ads we reached, not every rental", d: `Each search reads the newest ads first and stops after ${m.pagesPerSearch ?? "a set number of"} pages, so older ads are under-counted.` },
+    { t: "Neighbourhoods only when the ad says so", d: `${data.areasNamed} of ${data.counted} counted ads name a neighbourhood. We never guess the rest; they count toward the London-wide numbers only.` },
+    { t: "Unclear ads are left out", d: `${data.observed - data.counted} ads were left out of the prices, for example a "room" priced like a whole home. Homes and rooms are never mixed.` },
+  ];
   return (
-    <Card title="Where these numbers come from" sub="We'd rather you trust a smaller, honest number than a big, vague one.">
-      <ul className="grid gap-3 text-[15px] leading-relaxed" style={{ color: "#333" }}>
-        <li><strong style={{ color: NAVY }}>Source.</strong> Public rental ads on Facebook Marketplace within {m.radiusKm ?? 25} km of London, Ontario, collected on {fmtDay(data.scanDate)}.</li>
-        <li><strong style={{ color: NAVY }}>How deep.</strong> {m.segments ? `${m.segments} separate searches` : "A set of searches"} (by home type and bedrooms){m.pagesPerSearch ? `, reading up to ${m.pagesPerSearch} pages of results each, newest first` : ""}. {m.rawHits ? `That turned up ${m.rawHits.toLocaleString()} search results, which came down to ` : "That came down to "}{data.observed} different ads once repeats were removed.</li>
-        <li><strong style={{ color: NAVY }}>What we count.</strong> {data.whole.n} whole-home ads and {data.room.n} single-room ads have a usable monthly price. Homes and rooms are never mixed in one number. Ads that are unclear (for example, a &quot;room&quot; priced like a whole home) are left out.</li>
-        <li><strong style={{ color: NAVY }}>What it isn&apos;t.</strong> These are asking rents, not signed leases. It&apos;s the ads our scan reached, not every rental in the city; newer ads are easier to reach than older ones. {data.areasNamed} of the counted ads name a neighbourhood; we never guess the rest.</li>
-        <li><strong style={{ color: NAVY }}>Typical.</strong> &quot;Typical&quot; is the median: half the ads ask more, half ask less.</li>
-      </ul>
-    </Card>
+    <section className="bg-white border rounded-2xl p-5 sm:p-8" style={{ borderColor: BORDER, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold" style={heading}>How we get these numbers</h2>
+          <p className="text-base mt-1" style={{ color: MUTED }}>Read this before you use them. We&apos;d rather you trust a smaller, honest number than a big, vague one.</p>
+        </div>
+        <span className="inline-flex items-center gap-2 text-sm font-semibold rounded-full px-3 py-1.5" style={{ background: "#EAF3EC", color: "#2F6B3F" }}>
+          <span className="w-2 h-2 rounded-full" style={{ background: "#2F6B3F" }} aria-hidden /> Collected {fmtDay(data.scanDate)}
+        </span>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2 mt-6">
+        {limits.map((l, i) => (
+          <div key={l.t} className="rounded-2xl p-4 flex gap-3" style={{ background: "#F7F5F2" }}>
+            <span className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold" style={{ background: NAVY, color: "#FAF8F5" }}>{i + 1}</span>
+            <div>
+              <div className="font-semibold" style={{ color: NAVY }}>{l.t}</div>
+              <div className="text-[15px] mt-0.5 leading-relaxed" style={{ color: "#333" }}>{l.d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-3 mt-6">
+        <div className="rounded-2xl border-2 p-5" style={{ borderColor: BORDER }}>
+          <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: MUTED }}>Where the ads come from</div>
+          <ul className="mt-3 grid gap-2">
+            {data.sources.map((src) => (
+              <li key={src.name} className="flex justify-between gap-3 text-[15px]">
+                <span className="font-semibold" style={{ color: NAVY }}>{src.name}</span>
+                <span className="tabular-nums" style={{ color: MUTED }}>{src.ads} ads</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm mt-3" style={{ color: MUTED }}>Public ads only, within {m.radiusKm ?? 25} km of London, Ontario.</p>
+          {coming.length > 0 && (
+            <p className="text-sm mt-3 rounded-xl px-3 py-2" style={{ background: "#F7F5F2", color: "#333" }}>
+              Being added: {coming.join(", ")} and other public rental sites. Their ads count from the first edition that includes them, and this list will show it.
+            </p>
+          )}
+        </div>
+
+        <div className="rounded-2xl border-2 p-5" style={{ borderColor: BORDER }}>
+          <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: MUTED }}>How deep we look</div>
+          <div className="grid gap-3 mt-3">
+            {funnel.map((f) => (
+              <div key={f.label}>
+                <div className="flex justify-between text-sm"><span style={{ color: "#333" }}>{f.label}</span><strong className="tabular-nums" style={{ color: NAVY }}>{f.n.toLocaleString()}</strong></div>
+                <div className="h-2.5 rounded-full mt-1" style={{ background: "#EFEBE5" }}>
+                  <div className="h-2.5 rounded-full" style={{ width: `${Math.max(3, (f.n / funnel[0].n) * 100)}%`, background: NAVY }} />
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm mt-3" style={{ color: MUTED }}>
+            {m.segments ? `${m.segments} searches by home type and size` : "Searches by home type and size"}{m.pagesPerSearch ? `, up to ${m.pagesPerSearch} pages each` : ""}. The same ad shows up in many searches, so we count each one once.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border-2 p-5" style={{ borderColor: BORDER }}>
+          <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: MUTED }}>How fresh it is</div>
+          <ul className="mt-3 grid gap-2 text-[15px]" style={{ color: "#333" }}>
+            <li><strong style={{ color: NAVY }}>This edition:</strong> ads collected {fmtDay(data.scanDate)}.</li>
+            <li><strong style={{ color: NAVY }}>Every week:</strong> a fresh scan at 8 a.m.</li>
+            <li><strong style={{ color: NAVY }}>Every month:</strong> a deeper sweep.</li>
+            <li>Each edition keeps its own link, so the numbers you read today won&apos;t change later.</li>
+          </ul>
+          <p className="text-sm mt-3" style={{ color: MUTED }}>&quot;Typical&quot; means the median: half the ads ask more, half ask less.</p>
+        </div>
+      </div>
+    </section>
   );
 }
 
