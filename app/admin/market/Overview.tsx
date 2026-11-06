@@ -119,13 +119,13 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
-        <Glance title="Neighbourhoods at a glance" sub={`${what.replace(/ in .*$/, "")} in each area. Tap one to focus on it above.`}
+        <Glance limit={8} title="Neighbourhoods at a glance" sub={`${cap(what.replace(/ in .*$/, ""))} in each area, priciest first. Tap one to focus on it above.`}
           rows={areas.map(([a]) => ({ key: a!, label: a!, prices: pool.filter((o) => o.norm.area === a && fits(o, "area")).map((o) => o.norm.price!) }))
             .filter((r) => r.prices.length >= 3)}
           active={pick.area} onPick={(k) => { set({ area: pick.area === k ? null : k }); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           foot={`${pool.filter((o) => !o.norm.area && fits(o, "area")).length} matching ads don't say where they are, and areas with fewer than 3 ads are hidden.`} />
         {pick.kind === "whole" ? (
-          <Glance title="Bedrooms at a glance" sub={`More bedrooms, higher rent. Tap one to focus on it above.`}
+          <Glance keepOrder title="Bedrooms at a glance" sub="How rent climbs with each bedroom. Tap one to focus on it above."
             rows={BEDS_ORDER.filter((b) => b !== "unknown").map((b) => ({ key: b, label: bedsLabel(b), prices: pool.filter((o) => o.norm.beds_cat === b && fits(o, "beds")).map((o) => o.norm.price!) })).filter((r) => r.prices.length)}
             active={pick.beds} onPick={(k) => { set({ beds: pick.beds === k ? null : k }); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
         ) : (
@@ -157,11 +157,16 @@ function counts(rows: Obs[], key: (o: Obs) => string | null): [string | null, nu
   return [...c].sort((a, b) => b[1] - a[1]);
 }
 
-function Glance({ title, sub, rows, active, onPick, foot }: {
+function Glance({ title, sub, rows, active, onPick, foot, keepOrder, limit }: {
   title: string; sub: string; rows: { key: string; label: string; prices: number[] }[];
-  active: string | null; onPick: (k: string) => void; foot?: string;
+  active: string | null; onPick: (k: string) => void; foot?: string; keepOrder?: boolean; limit?: number;
 }) {
-  const withStats = rows.map((r) => ({ ...r, s: stats(r.prices) })).sort((a, b) => (b.s.median ?? 0) - (a.s.median ?? 0));
+  const [all, setAll] = useState(false);
+  const sorted = rows.map((r) => ({ ...r, s: stats(r.prices) }));
+  if (!keepOrder) sorted.sort((a, b) => (b.s.median ?? 0) - (a.s.median ?? 0));
+  // Show the areas with the most ads first; the full list is one tap away.
+  const top = limit && !all ? new Set([...sorted].sort((a, b) => b.s.n - a.s.n).slice(0, limit).map((r) => r.key)) : null;
+  const withStats = top ? sorted.filter((r) => top.has(r.key) || r.key === active) : sorted;
   return (
     <Card title={title} sub={sub}>
       <div className="grid gap-1">
@@ -178,6 +183,9 @@ function Glance({ title, sub, rows, active, onPick, foot }: {
           </button>
         ))}
       </div>
+      {limit && rows.length > limit && (
+        <div className="mt-3"><TextLink onClick={() => setAll(!all)}>{all ? "Show fewer" : `Show all ${rows.length} areas`}</TextLink></div>
+      )}
       {foot && <p className="text-sm mt-3" style={{ color: MUTED }}>{foot}</p>}
     </Card>
   );

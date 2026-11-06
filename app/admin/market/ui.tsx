@@ -187,7 +187,7 @@ const xOf = (p: number) => (Math.min(p, AXIS_MAX) / AXIS_MAX) * 100;
  * Every ad is one dot on a price line, stacked where prices bunch up.
  * Dots that match the current choices are dark; the rest fade back.
  */
-export function DotPlot({ dots, median, p25, p75, onOpen }: { dots: Dot[]; median: number | null; p25: number | null; p75: number | null; onOpen: (id: string) => void }) {
+export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; median: number | null; p25: number | null; p75: number | null; onOpen: (id: string) => void; you?: number[] }) {
   const [hover, setHover] = useStateM<(Dot & { x: number; y: number }) | null>(null);
   const R = 5, STEP = 11, BUCKET = 50;
   const placed = useMemoM(() => {
@@ -224,6 +224,11 @@ export function DotPlot({ dots, median, p25, p75, onOpen }: { dots: Dot[]; media
             <span className="absolute -top-6 -translate-x-1/2 text-xs font-bold whitespace-nowrap px-2 py-0.5 rounded-full" style={{ background: BURGUNDY, color: "#FAF8F5" }}>Typical {cad(median)}</span>
           </div>
         )}
+        {(you ?? []).map((v) => (
+          <div key={v} className="absolute top-0 bottom-0 pointer-events-none" style={{ left: `${xOf(v)}%`, width: 0, borderLeft: `2px dashed ${NAVY}` }}>
+            <span className="absolute -top-6 -translate-x-1/2 text-xs font-bold whitespace-nowrap px-2 py-0.5 rounded-full border-2 bg-white" style={{ borderColor: NAVY, color: NAVY }}>You {cad(v)}</span>
+          </div>
+        ))}
         {hover && (
           <div className="absolute z-10 pointer-events-none rounded-xl px-3 py-2 text-sm shadow-lg" role="status"
             style={{ left: `clamp(0px, calc(${hover.x}% - 110px), calc(100% - 220px))`, bottom: height - hover.y + 14, width: 220, background: NAVY, color: "#FAF8F5" }}>

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { C, Button, inputStyle, Loading } from "@/components/admin/kit";
 import { BEDS_ORDER, bedsLabel, areaLabel, cad, stats, percentileOf, csvCell, type Obs } from "@/lib/market/core";
 import { Panel, Note, Pill, tabular, download, toggle, fmtDate, type Ctx } from "./shared";
-import { RangeBar, BasedOn, heading } from "./ui";
+import { DotPlot, BasedOn, heading } from "./ui";
 
 interface Config {
   type: string[]; beds: string[]; area: string[]; basis: "whole" | "room";
@@ -190,7 +190,11 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
               })()}
             </p>
             <p className="text-base mt-2"><BasedOn n={s.n} what="similar ads" />. Half of them ask between <strong>{cad(s.p25)}</strong> and <strong>{cad(s.p75)}</strong>.</p>
-            <RangeBar min={s.min} p25={s.p25} median={s.median} p75={s.p75} max={s.max} you={subjects} />
+            <div className="mt-10">
+              <DotPlot you={subjects} median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null} onOpen={ctx.openListing}
+                dots={used.map((o) => ({ id: o.listing_id, price: o.norm.price!, title: o.norm.title || "Untitled ad", detail: `${o.norm.type} · ${bedsLabel(o.norm.beds_cat)} · ${areaLabel(o.norm.area)}`, on: true }))} />
+              <p className="text-sm mt-2" style={{ color: C.muted }}>Each dot is a similar ad. Hover to peek, click to open. The dashed line is your rent.</p>
+            </div>
             <p style={{ fontSize: 13, color: C.muted, margin: "14px 0 0" }}>Other ads&apos; asking prices, not signed leases or an appraisal. Nothing is adjusted for utilities, furniture or condition.</p>
           </>
         )}
