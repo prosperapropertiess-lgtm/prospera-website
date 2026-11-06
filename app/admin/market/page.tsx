@@ -183,7 +183,7 @@ export default function MarketPage() {
         <span className="text-sm flex-1 min-w-[200px]" style={{ color: C.muted }} title="When the ads were collected, and when this page last read the Sheet.">
           <span aria-hidden style={{ display: "inline-block", width: 9, height: 9, borderRadius: 999, marginRight: 6, background: status?.lastFailed ? C.red : status?.stale ? C.amber : C.green }} />
           {status?.lastFailed ? "Last update failed. " : status?.stale ? "No new scan in over a week. " : "Up to date. "}
-          Ads collected {fmtDate(latest?.scan_date)}. Next update {status ? fmtDateTime(status.nextRun) : "Friday 10am"}.
+          Ads collected {fmtDate(latest?.scan_date)}. Next update {status ? fmtDateTime(status.nextRun) : "Friday 10am"}
         </span>
         <QuietButton onClick={refresh}>{syncing ? "Checking…" : "Check for new data"}</QuietButton>
         <QuietButton href={status?.sheetUrl ?? data.snapshot.source_url ?? "#"} target="_blank">Open Sheet ↗</QuietButton>

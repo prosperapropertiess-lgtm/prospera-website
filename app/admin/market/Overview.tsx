@@ -113,7 +113,7 @@ function RentFinder({ obs, drill }: { obs: Obs[]; drill: Ctx["drill"] }) {
 
   const match = whole.filter((o) => (!beds || o.norm.beds_cat === beds) && (!type || o.norm.type === type) && (!area || o.norm.area === area));
   const s = stats(match.map((o) => o.norm.price!));
-  const what = `${beds ? `${bedsLabel(beds)} ` : ""}${type ? typeWord(type) : "homes"}${area ? ` in ${area}` : ""}`;
+  const what = `${beds ? `${bedsLabel(beds).replace(" bed", "-bed")} ` : ""}${type ? typeWord(type) : "homes"}${area ? ` in ${area}` : ""}`;
 
   return (
     <Card title="What does a home like this cost?" sub="Tap to choose. The answer changes as you go.">
@@ -176,10 +176,10 @@ function Neighbourhoods({ rows, drill }: { rows: Obs[]; drill: Ctx["drill"] }) {
   const list = useMemo(() => {
     const g = new Map<string, number[]>();
     rows.forEach((o) => { if (o.norm.area) g.set(o.norm.area, [...(g.get(o.norm.area) ?? []), o.norm.price!]); });
-    return [...g].map(([a, p]) => ({ a, ...stats(p) })).filter((x) => all || x.n >= 3).sort((x, y) => y.median! - x.median!);
+    return [...g].map(([a, p]) => ({ a, ...stats(p) })).filter((x) => all || x.n >= 5).sort((x, y) => y.median! - x.median!);
   }, [rows, all]);
   return (
-    <Card title="Which areas cost more?" sub="Typical whole-home rent by neighbourhood, most expensive first. Pale bars have fewer than 5 ads, so treat them as rough."
+    <Card title="Which areas cost more?" sub="Typical whole-home rent by neighbourhood, most expensive first. Showing areas with at least 5 ads. Pale bars mean fewer than 5."
       right={<Choice size="sm" selected={all} onClick={() => setAll(!all)}>{all ? "Showing every area" : "Show every area"}</Choice>}>
       <BarList rows={list.map((x) => ({
         key: x.a, label: x.a, value: x.median!, display: cad(x.median), light: x.n < 5,
