@@ -19,6 +19,14 @@
     {
       "path": "/api/cron/viewing-review",
       "schedule": "0 13 * * *"
+    },
+    {
+      "path": "/api/cron/market-sync",
+      "schedule": "0 14 * * 5"
+    },
+    {
+      "path": "/api/cron/market-sync",
+      "schedule": "0 15 * * 5"
     }
   ]
 }

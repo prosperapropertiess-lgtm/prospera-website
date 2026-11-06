@@ -1,0 +1,228 @@
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
+import { C, Loading } from "@/components/admin/kit";
+import { cad, stats, quantile, bedsLabel, areaLabel, type Obs } from "@/lib/market/core";
+import { COMPARE_LABEL, type CompareMode } from "@/lib/market/compare";
+import { Panel, Note, Pill, th, tdc, TableWrap, tabular, fmtDate, fmtDateTime, pct, SERIES, SampleTag, type Ctx, type Snapshot } from "./shared";
+import type { CompareInfo } from "./Overview";
+
+type Row = [string, number | null, string, string | null, string, string, string];
+
+export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, setCmpCustom, prevObs }: {
+  ctx: Ctx; compare: CompareInfo; cmpMode: CompareMode; setCmpMode: (m: CompareMode) => void;
+  cmpCustom: string | null; setCmpCustom: (id: string | null) => void; prevObs: Obs[] | null;
+}) {
+  const [series, setSeries] = useState<{ snapshots: Snapshot[]; series: Record<string, Row[]> } | null>(null);
+  const [interval, setInterval] = useState<"scan" | "week" | "month">("scan");
+  const { filters, snapshots, snapshot } = ctx;
+
+  useEffect(() => {
+    let live = true;
+    fetch("/api/admin/market/series").then((r) => r.json()).then((d) => live && setSeries(d)).catch(() => live && setSeries({ snapshots: [], series: {} }));
+    return () => { live = false; };
+  }, [snapshots.length]);
+
+  // Trend lines respect market, area, type and bedroom filters.
+  const points = useMemo(() => {
+    if (!series) return [];
+    const keep = (r: Row) =>
+      (filters.market === "room" ? r[2] === "room" : r[2] === "whole") &&
+      (!filters.area.length || filters.area.includes(r[3] ?? "__none")) &&
+      (!filters.type.length || filters.type.includes(r[4])) &&
+      (!filters.beds.length || filters.beds.includes(r[5]));
+    const scans = [...series.snapshots].filter((s) => s.scan_date).sort((a, b) => (a.scan_date! < b.scan_date! ? -1 : 1));
+    // Week/month: the last scan in each period represents it. Never summed or averaged.
+    const periodKey = (d: string) => interval === "month" ? d.slice(0, 7) : interval === "week" ? weekStart(d) : d;
+    const reps = new Map<string, Snapshot>();
+    for (const s of scans) reps.set(periodKey(s.scan_date!), s);
+    const currentMonth = new Date().toISOString().slice(0, 7);
+    return [...reps].map(([k, s]) => {
+      const prices = (series.series[s.id] ?? []).filter(keep).map((r) => Number(r[1])).sort((a, b) => a - b);
+      return {
+        key: k, label: interval === "month" ? `${k}${k === currentMonth ? " (to date)" : ""}` : fmtDate(s.scan_date),
+        date: s.scan_date, n: prices.length, observed: (series.series[s.id] ?? []).length,
+        median: quantile(prices, 0.5), p25: quantile(prices, 0.25), p75: quantile(prices, 0.75),
+        mean: prices.length ? prices.reduce((a, b) => a + b, 0) / prices.length : null,
+      };
+    });
+  }, [series, filters, interval]);
+
+  const ids = useMemo(() => {
+    if (!series) return null;
+    const sorted = [...series.snapshots].filter((s) => s.scan_date).sort((a, b) => (a.scan_date! < b.scan_date! ? -1 : 1));
+    return sorted.map((s) => ({ s, ids: new Set((series.series[s.id] ?? []).map((r) => r[0])) }));
+  }, [series]);
+  // Back after a gap: first seen vs the comparison scan, but present in some scan before it.
+  const reappeared = useMemo(() => {
+    if (!ids || !compare.diff || !compare.snapDate) return [];
+    const earlier = ids.filter((x) => x.s.scan_date! < compare.snapDate!);
+    return compare.diff.firstSeen.filter((o) => earlier.some((e) => e.ids.has(o.listing_id)));
+  }, [ids, compare]);
+  const trulyNew = compare.diff ? compare.diff.firstSeen.filter((o) => !reappeared.includes(o)) : [];
+
+  if (!series) return <Loading />;
+
+  const curStats = stats((filters.market === "room" ? ctx.obs.filter((o) => o.cohort === "room") : ctx.obs.filter((o) => o.cohort === "whole")).map((o) => o.norm.price!));
+  const prevStats = prevObs ? stats((filters.market === "room" ? prevObs.filter((o) => o.cohort === "room") : prevObs.filter((o) => o.cohort === "whole")).map((o) => o.norm.price!)) : null;
+  const pairsMedianPct = compare.diff ? quantile(compare.diff.pairs.map((p) => p.pct ?? 0).sort((a, b) => a - b), 0.5) : null;
+
+  return (
+    <div style={{ display: "grid", gap: 18 }}>
+      <Panel title="Scan timeline" sub="One row per scan the dashboard has stored. Dates are when the data was collected, not when it was imported.">
+        <TableWrap>
+          <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
+            <thead><tr>
+              <th style={th}>Scan date</th><th style={th}>Scan</th><th style={{ ...th, textAlign: "right" }}>Ads</th><th style={{ ...th, textAlign: "right" }}>Usable whole-unit rents</th>
+              <th style={{ ...th, textAlign: "right" }}>Per-room rents</th><th style={th}>Search scope</th><th style={th}>Imported</th><th style={th}></th>
+            </tr></thead>
+            <tbody>
+              {snapshots.map((s) => {
+                const rep = s.reported ?? {};
+                const elig = (s.schema_report as { eligible?: Record<string, number> }).eligible ?? {};
+                return (
+                  <tr key={s.id} style={{ background: s.id === snapshot.id ? C.greyBg : undefined }}>
+                    <td style={tdc}>{fmtDate(s.scan_date)}{!s.scan_identity_verified && <div style={{ fontSize: 12, color: C.amber }}>Scan date not confirmed</div>}</td>
+                    <td style={tdc}>{s.scan_label ?? "—"}{s.revision > 1 ? ` · corrected (v${s.revision})` : ""}</td>
+                    <td style={{ ...tdc, textAlign: "right" }}>{s.listing_count}</td>
+                    <td style={{ ...tdc, textAlign: "right" }}>{elig.whole ?? "—"}</td>
+                    <td style={{ ...tdc, textAlign: "right" }}>{elig.room ?? "—"}</td>
+                    <td style={{ ...tdc, fontSize: 13, color: C.muted }}>{rep.radiusKm != null ? `${rep.radiusKm} km · ` : ""}{rep.segments != null ? `${rep.segments} segments · ` : ""}{rep.pages != null ? `${rep.pages} pages` : "Not reported"}</td>
+                    <td style={{ ...tdc, fontSize: 13 }}>{fmtDateTime(s.ingested_at)}</td>
+                    <td style={tdc}>{s.id === snapshot.id ? <strong>Viewing</strong> : <Pill onClick={() => { setCmpMode("custom"); setCmpCustom(s.id); }} active={cmpMode === "custom" && cmpCustom === s.id}>Compare</Pill>}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableWrap>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 12, alignItems: "center" }}>
+          <span style={{ fontSize: 13, color: C.muted, marginRight: 4 }}>Compare with:</span>
+          {(Object.keys(COMPARE_LABEL) as CompareMode[]).filter((m) => m !== "custom").map((m) => <Pill key={m} active={cmpMode === m} onClick={() => setCmpMode(m)}>{COMPARE_LABEL[m]}</Pill>)}
+        </div>
+      </Panel>
+
+      {snapshots.length < 2 ? (
+        <Panel title="Trends">
+          <Note>History starts {fmtDate(snapshot.scan_date)}. There&apos;s one real scan so far, so there is nothing to compare yet. After next Friday&apos;s scan is imported, this page shows rent trends, price changes, new ads and ads not seen again.</Note>
+          <div style={{ marginTop: 14, fontSize: 14, ...tabular }}>
+            Current scan ({filters.market === "room" ? "per room" : "whole units"}): median {cad(curStats.median)}, middle 50% {cad(curStats.p25)}–{cad(curStats.p75)}, n={curStats.n}.
+          </div>
+        </Panel>
+      ) : (
+        <>
+          <Panel title="Asking rent over time" sub={`${filters.market === "room" ? "Per-room" : "Whole-unit"} rents. Respects market, area, type and bedroom filters. One point per ${interval === "scan" ? "scan" : `${interval} (its last scan)`}; gaps mean no scan.`}
+            right={<div style={{ display: "flex", gap: 6 }}>{(["scan", "week", "month"] as const).map((i) => <Pill key={i} active={interval === i} onClick={() => setInterval(i)}>{i === "scan" ? "Every scan" : i === "week" ? "Weekly" : "Monthly"}</Pill>)}</div>}>
+            <div style={{ height: 260 }}>
+              <ResponsiveContainer>
+                <LineChart data={points} margin={{ top: 8, right: 12, bottom: 0, left: -6 }}>
+                  <CartesianGrid stroke={C.border} />
+                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: C.muted }} />
+                  <YAxis tick={{ fontSize: 11, fill: C.muted }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} />
+                  <Tooltip formatter={(v, name) => [cad(Number(v)), name]} labelFormatter={(l, p) => `${l}${p?.[0] ? ` · n=${p[0].payload.n}` : ""}`} />
+                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                  <Line dataKey="p75" name="P75" stroke={SERIES[2]} strokeDasharray="4 3" dot connectNulls={false} />
+                  <Line dataKey="median" name="Median" stroke={SERIES[0]} strokeWidth={2} dot connectNulls={false} />
+                  <Line dataKey="mean" name="Mean" stroke={SERIES[1]} dot connectNulls={false} />
+                  <Line dataKey="p25" name="P25" stroke={SERIES[2]} strokeDasharray="4 3" dot connectNulls={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div style={{ height: 160, marginTop: 10 }}>
+              <ResponsiveContainer>
+                <LineChart data={points} margin={{ top: 8, right: 12, bottom: 0, left: -6 }}>
+                  <CartesianGrid stroke={C.border} />
+                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: C.muted }} />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: C.muted }} />
+                  <Tooltip />
+                  <Line dataKey="n" name="Eligible rents (filtered)" stroke={SERIES[0]} dot />
+                  <Line dataKey="observed" name="All observed ads" stroke={SERIES[2]} dot />
+                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <p style={{ fontSize: 12, color: C.muted, margin: "6px 0 0" }}>Observed ads depend on how deep each scan searched. A lower count is not proof the market shrank.</p>
+          </Panel>
+
+          {!compare.diff ? <Note tone="amber">{compare.reason}</Note> : (
+            <>
+              {compare.warnings.length > 0 && <Note tone="amber">The two scans were collected differently: {compare.warnings.join(" ")} Change figures below are shown side by side, not as like-for-like changes.</Note>}
+              <Panel title={`This scan (${fmtDate(snapshot.scan_date)}) vs ${fmtDate(compare.snapDate)}`} sub="Snapshot comparison: the sample mix can change between scans, so a different median doesn't mean rents moved.">
+                <TableWrap>
+                  <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>
+                    <thead><tr><th style={th}>Measure</th><th style={{ ...th, textAlign: "right" }}>{fmtDate(compare.snapDate)}</th><th style={{ ...th, textAlign: "right" }}>{fmtDate(snapshot.scan_date)}</th><th style={{ ...th, textAlign: "right" }}>Change</th><th style={{ ...th, textAlign: "right" }}>%</th></tr></thead>
+                    <tbody>
+                      {prevStats && ([
+                        ["Eligible rents (n)", prevStats.n, curStats.n, false],
+                        ["Median asking rent", prevStats.median, curStats.median, true],
+                        ["P25", prevStats.p25, curStats.p25, true],
+                        ["P75", prevStats.p75, curStats.p75, true],
+                        ["Mean", prevStats.mean, curStats.mean, true],
+                      ] as [string, number | null, number | null, boolean][]).map(([label, a, b, money]) => (
+                        <tr key={label}>
+                          <td style={tdc}>{label}</td>
+                          <td style={{ ...tdc, textAlign: "right" }}>{money ? cad(a) : a ?? "—"}</td>
+                          <td style={{ ...tdc, textAlign: "right" }}>{money ? cad(b) : b ?? "—"}</td>
+                          <td style={{ ...tdc, textAlign: "right" }}>{a != null && b != null && !compare.warnings.length ? (money ? cad(b - a) : b - a) : "—"}</td>
+                          <td style={{ ...tdc, textAlign: "right" }}>{a && b != null && !compare.warnings.length ? pct(((b - a) / a) * 100) : "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </TableWrap>
+              </Panel>
+
+              <Panel title="Same ads, both scans" sub={`Matched-listing comparison: ${compare.diff.pairs.length} ads appear in both scans with usable prices and the same price basis. Median individual change: ${pairsMedianPct == null ? "—" : pct(pairsMedianPct)}. Not an official rent index.`}>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 10, fontSize: 14 }}>
+                  <span>Reduced: <strong>{compare.diff.reduced.length}</strong></span>
+                  <span>Increased: <strong>{compare.diff.increased.length}</strong></span>
+                  <span>Unchanged: <strong>{compare.diff.unchanged.length}</strong></span>
+                  <SampleTag n={compare.diff.pairs.length} />
+                </div>
+                <ObsList rows={[...compare.diff.reduced, ...compare.diff.increased].sort((a, b) => a.change - b.change).map((p) => ({
+                  o: p.cur, extra: `${cad(p.prev.norm.price)} → ${cad(p.cur.norm.price)} (${p.change > 0 ? "+" : ""}${cad(p.change)}, ${pct(p.pct)})`,
+                }))} open={ctx.openListing} empty="No price changes among matched ads." />
+              </Panel>
+
+              <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))" }}>
+                <Panel title={`First seen (${trulyNew.length})`} sub="Not in any earlier scan the dashboard has.">
+                  <ObsList rows={trulyNew.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
+                </Panel>
+                <Panel title={`Not seen in this scan (${compare.diff.notSeen.length})`} sub="In the earlier scan, missing from this one. Not proof they were rented: scans are newest-first and capped.">
+                  <ObsList rows={compare.diff.notSeen.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
+                </Panel>
+                <Panel title={`Reappeared (${reappeared.length})`} sub="Seen before, missing from the scan in between, back now.">
+                  <ObsList rows={reappeared.map((o) => ({ o }))} open={ctx.openListing} empty="None." />
+                </Panel>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function weekStart(d: string) {
+  const t = new Date(`${d}T12:00:00Z`);
+  t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 6) % 7));
+  return t.toISOString().slice(0, 10);
+}
+
+function ObsList({ rows, open, empty }: { rows: { o: Obs; extra?: string }[]; open: (id: string) => void; empty: string }) {
+  const [all, setAll] = useState(false);
+  if (!rows.length) return <p style={{ margin: 0, color: C.faint, fontSize: 14 }}>{empty}</p>;
+  const shown = all ? rows : rows.slice(0, 12);
+  return (
+    <div style={{ display: "grid", gap: 4 }}>
+      {shown.map(({ o, extra }) => (
+        <button key={o.listing_id} type="button" onClick={() => open(o.listing_id)}
+          style={{ textAlign: "left", background: C.greyBg, border: "none", borderRadius: 8, padding: "8px 10px", cursor: "pointer", fontSize: 14, color: C.text, ...tabular }}>
+          <strong style={{ color: C.navy }}>{o.norm.title || o.listing_id}</strong>
+          <div style={{ color: C.muted, fontSize: 13 }}>{extra ?? cad(o.norm.price)} · {o.norm.type}, {bedsLabel(o.norm.beds_cat)} · {areaLabel(o.norm.area)}</div>
+        </button>
+      ))}
+      {rows.length > 12 && <button type="button" onClick={() => setAll(!all)} style={{ background: "none", border: "none", color: C.navy, textDecoration: "underline", cursor: "pointer", justifySelf: "start" }}>{all ? "Show fewer" : `Show all ${rows.length}`}</button>}
+    </div>
+  );
+}

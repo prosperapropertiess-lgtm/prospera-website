@@ -10,6 +10,7 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/properties", name: "Properties", icon: "villa" },
   { href: "/admin/viewing-requests", name: "Viewing Requests", icon: "event_available" },
   { href: "/admin/applications", name: "Applications", icon: "assignment" },
+  { href: "/admin/market", name: "Rental Market", icon: "query_stats" },
   { href: "/admin/leads", name: "Leads", icon: "person_search" },
   { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business" },
   { href: "/admin/move-in-coordinator", name: "Move-In Coordinator", icon: "inventory_2" },
