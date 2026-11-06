@@ -27,18 +27,20 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   const isMarketComp = pathname?.startsWith("/market-comp");
   const isView = pathname === "/view" || pathname?.startsWith("/view/");
   const isListingDetail = /^\/listings\/[^/]+/.test(pathname ?? "");
+  // The rent report keeps the site header and footer but none of the pop-ups.
+  const isReport = pathname === "/rent-report" || pathname?.startsWith("/rent-report/");
   const isPortal = isAdmin || isOwners || isLP || isTenants || isOnboard || isFit || isDemo || isMarketComp || isRent || isView;
 
   return (
     <>
-      {!isPortal && <ScrollProgress />}
+      {!isPortal && !isReport && <ScrollProgress />}
       {!isPortal && <Navbar />}
       <main className="flex-1">{children}</main>
       {!isPortal && <Footer />}
-      {!isPortal && <PopupController />}
-      {!isPortal && <ChatWidget />}
-      {!isPortal && !isListingDetail && <StickyBottomCTA />}
-      {!isPortal && <RentActivityToast />}
+      {!isPortal && !isReport && <PopupController />}
+      {!isPortal && !isReport && <ChatWidget />}
+      {!isPortal && !isListingDetail && !isReport && <StickyBottomCTA />}
+      {!isPortal && !isReport && <RentActivityToast />}
     </>
   );
 }

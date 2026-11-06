@@ -135,6 +135,8 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
         )}
       </div>
 
+      <ShareKit date={snapshot.scan_date} />
+
       <Card title="Good to know">
         <div className="flex flex-wrap gap-2">
           {ctx.snapshots.length < 2 && <Chip>First scan: changes show up after next Friday</Chip>}
@@ -157,7 +159,7 @@ function counts(rows: Obs[], key: (o: Obs) => string | null): [string | null, nu
   return [...c].sort((a, b) => b[1] - a[1]);
 }
 
-function Glance({ title, sub, rows, active, onPick, foot, keepOrder, limit }: {
+export function Glance({ title, sub, rows, active, onPick, foot, keepOrder, limit }: {
   title: string; sub: string; rows: { key: string; label: string; prices: number[] }[];
   active: string | null; onPick: (k: string) => void; foot?: string; keepOrder?: boolean; limit?: number;
 }) {
@@ -214,5 +216,40 @@ export function Row({ label, children }: { label: string; children: React.ReactN
       <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>{label}</div>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
+  );
+}
+
+/** Links and the ready-made image for the owner newsletter. */
+function ShareKit({ date }: { date: string | null }) {
+  const [copied, setCopied] = useState<string | null>(null);
+  if (!date) return null;
+  const site = "https://www.prosperaproperties.co";
+  const items = [
+    { k: "weekly", label: "This week's report", url: `${site}/rent-report/${date}` },
+    { k: "monthly", label: "This month's report", url: `${site}/rent-report/${date.slice(0, 7)}` },
+  ];
+  const copy = async (text: string, k: string) => { try { await navigator.clipboard.writeText(text); setCopied(k); setTimeout(() => setCopied(null), 1500); } catch {} };
+  return (
+    <Card title="Share with owners" sub="The public London Rent Report for your newsletter. Paste the image, link it to the report.">
+      <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr] items-start">
+        <div className="grid gap-3">
+          {items.map((i) => (
+            <div key={i.k} className="rounded-2xl p-4" style={{ background: "#F7F5F2" }}>
+              <div className="font-semibold" style={{ color: NAVY }}>{i.label}</div>
+              <div className="text-sm break-all mt-1" style={{ color: MUTED }}>{i.url}</div>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <Choice size="sm" onClick={() => copy(i.url, i.k)} selected={copied === i.k}>{copied === i.k ? "Copied" : "Copy link"}</Choice>
+                <Choice size="sm" onClick={() => copy(`${i.url}/opengraph-image`, `${i.k}-img`)} selected={copied === `${i.k}-img`}>{copied === `${i.k}-img` ? "Copied" : "Copy image link"}</Choice>
+                <a href={i.url} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-sm font-semibold underline" style={{ color: NAVY }}>Open ↗</a>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a href={`/rent-report/${date}/opengraph-image`} target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border" style={{ borderColor: BORDER }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`/rent-report/${date}/opengraph-image`} alt="Newsletter image for this week's London Rent Report" className="w-full h-auto block" />
+        </a>
+      </div>
+    </Card>
   );
 }

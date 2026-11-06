@@ -187,7 +187,7 @@ const xOf = (p: number) => (Math.min(p, AXIS_MAX) / AXIS_MAX) * 100;
  * Every ad is one dot on a price line, stacked where prices bunch up.
  * Dots that match the current choices are dark; the rest fade back.
  */
-export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; median: number | null; p25: number | null; p75: number | null; onOpen: (id: string) => void; you?: number[] }) {
+export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; median: number | null; p25: number | null; p75: number | null; onOpen?: (id: string) => void; you?: number[] }) {
   const [hover, setHover] = useStateM<(Dot & { x: number; y: number }) | null>(null);
   const R = 5, STEP = 11, BUCKET = 50;
   const placed = useMemoM(() => {
@@ -211,11 +211,11 @@ export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; 
         {placed.map((d) => (
           <button key={d.id} type="button" tabIndex={-1} aria-label={`${cad(d.price)} ${d.title}`}
             onMouseEnter={() => setHover({ ...d, x: d.x, y: height - 8 - d.level * STEP })} onFocus={() => setHover({ ...d, x: d.x, y: height - 8 - d.level * STEP })}
-            onClick={() => onOpen(d.id)}
+            onClick={() => onOpen?.(d.id)}
             className="absolute rounded-full transition-all duration-500 ease-out hover:scale-150"
             style={{
               width: R * 2, height: R * 2, left: `calc(${d.x}% - ${R}px)`, bottom: 8 + d.level * STEP,
-              background: d.on ? NAVY : "#DDD6CC", opacity: d.on ? 1 : 0.7, cursor: "pointer", zIndex: d.on ? 2 : 1,
+              background: d.on ? NAVY : "#DDD6CC", opacity: d.on ? 1 : 0.7, cursor: onOpen ? "pointer" : "default", zIndex: d.on ? 2 : 1,
               boxShadow: hover?.id === d.id ? `0 0 0 3px ${BURGUNDY}` : undefined,
             }} />
         ))}
@@ -233,9 +233,9 @@ export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; 
           <div className="absolute z-10 pointer-events-none rounded-xl px-3 py-2 text-sm shadow-lg" role="status"
             style={{ left: `clamp(0px, calc(${hover.x}% - 110px), calc(100% - 220px))`, bottom: height - hover.y + 14, width: 220, background: NAVY, color: "#FAF8F5" }}>
             <div className="text-lg font-bold tabular-nums">{cad(hover.price)}</div>
-            <div className="truncate">{hover.title}</div>
+            {hover.title && <div className="truncate">{hover.title}</div>}
             <div className="opacity-75 truncate">{hover.detail}</div>
-            <div className="opacity-75 text-xs mt-1">Click to open</div>
+            {onOpen && <div className="opacity-75 text-xs mt-1">Click to open</div>}
           </div>
         )}
       </div>
