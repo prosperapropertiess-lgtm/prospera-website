@@ -57,7 +57,9 @@ export async function syncStatus() {
   const latest = snapshots[0] ?? null;
   const lastGood = (attempts ?? []).find((a) => a.status !== "failed" && a.status !== "running" && a.status !== "dry_run") ?? null;
   const lastFailed = (attempts ?? []).find((a) => a.status === "failed") ?? null;
-  const ageDays = latest?.scan_date ? Math.floor((Date.now() - new Date(`${latest.scan_date}T12:00:00-05:00`).getTime()) / 86_400_000) : null;
+  // Whole days between the scan date and today, both as Toronto calendar dates.
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+  const ageDays = latest?.scan_date ? Math.round((Date.parse(`${today}T00:00:00Z`) - Date.parse(`${latest.scan_date}T00:00:00Z`)) / 86_400_000) : null;
   return {
     latest,
     snapshots,
