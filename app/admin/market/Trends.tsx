@@ -2,6 +2,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, LabelList } from "recharts";
 import { Card, BarList, NAVY, MUTED, heading } from "./ui";
+import Moving from "@/app/rent-report/Moving";
+import type { ReportData } from "@/lib/market/report";
 import { C, Loading } from "@/components/admin/kit";
 import { cad, stats, quantile, bedsLabel, areaLabel, type Obs } from "@/lib/market/core";
 import { COMPARE_LABEL, type CompareMode } from "@/lib/market/compare";
@@ -16,6 +18,12 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
 }) {
   const [series, setSeries] = useState<{ snapshots: Snapshot[]; series: Record<string, Row[]> } | null>(null);
   const [interval, setInterval] = useState<"scan" | "week" | "month">("scan");
+  const [moving, setMoving] = useState<Pick<ReportData, "history" | "sitting"> | null>(null);
+  useEffect(() => {
+    let live = true;
+    fetch("/api/admin/market/report?edition=weekly").then((r) => r.json()).then((d) => live && setMoving(d)).catch(() => {});
+    return () => { live = false; };
+  }, [ctx.snapshots.length]);
   const { filters, snapshots, snapshot } = ctx;
 
   useEffect(() => {
@@ -70,6 +78,7 @@ export default function Trends({ ctx, compare, cmpMode, setCmpMode, cmpCustom, s
 
   return (
     <div style={{ display: "grid", gap: 18 }}>
+      {moving && <Moving history={moving.history} sitting={moving.sitting} period="week" />}
       <Panel title="Every scan we have" sub="Dates are when the ads were collected.">
         <TableWrap>
           <table style={{ width: "100%", borderCollapse: "collapse", ...tabular }}>

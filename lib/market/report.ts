@@ -30,7 +30,86 @@ export interface ReportData {
   /** Where this edition's ads came from, worked out from each ad's link. */
   sources: { name: string; ads: number }[];
   counted: number;
+  /** One point per scan up to this edition. Empty until there are at least two scans. */
+  history: HistoryPoint[];
+  /** "Still advertised two weeks later", split by price. Null until scans span two weeks. */
+  sitting: { from: string; to: string; above: { n: number; still: number }; below: { n: number; still: number } } | null;
   editions: Edition[];
+}
+
+export interface HistoryPoint {
+  date: string;
+  ads: number;
+  newAds: number | null;
+  returning: number | null;
+  wholeMedian: number | null;
+  roomMedian: number | null;
+  byBeds: Record<string, { median: number | null; n: number }>;
+  cuts: { pairs: number; reduced: number; medianCutPct: number | null } | null;
+}
+
+type Lite = { id: string; p: number | null; c: string; b: string };
+
+async function lite(snapshotId: string): Promise<Lite[]> {
+  const out: Lite[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data } = await getSupabaseAdmin().from("market_observations")
+      .select("listing_id, cohort, price:norm->price, beds:norm->>beds_cat").eq("snapshot_id", snapshotId).range(from, from + 999);
+    for (const d of data ?? []) out.push({ id: d.listing_id, p: d.price as number | null, c: d.cohort, b: d.beds as string });
+    if (!data || data.length < 1000) break;
+  }
+  return out;
+}
+
+const med = (xs: number[]) => stats(xs).median;
+
+async function buildHistory(snaps: SnapshotMeta[], upTo: string): Promise<{ history: HistoryPoint[]; sitting: ReportData["sitting"] }> {
+  const ordered = snaps.filter((s) => s.scan_date! <= upTo).sort((a, b) => (a.scan_date! < b.scan_date! ? -1 : 1));
+  if (ordered.length < 2) return { history: [], sitting: null };
+  const rows = await Promise.all(ordered.map((s) => lite(s.id)));
+  const seenBefore = new Set<string>();
+  const history: HistoryPoint[] = ordered.map((s, i) => {
+    const cur = rows[i];
+    const counted = cur.filter((o) => (o.c === "whole" || o.c === "room") && o.p != null);
+    const whole = counted.filter((o) => o.c === "whole");
+    const byBeds: HistoryPoint["byBeds"] = {};
+    for (const b of ["1", "2", "3", "4", "5+"]) {
+      const ps = whole.filter((o) => o.b === b).map((o) => o.p!);
+      byBeds[b] = { median: med(ps), n: ps.length };
+    }
+    const fresh = i === 0 ? null : cur.filter((o) => !seenBefore.has(o.id)).length;
+    let cuts: HistoryPoint["cuts"] = null;
+    if (i > 0) {
+      const prev = new Map(rows[i - 1].filter((o) => o.p != null).map((o) => [o.id, o.p!]));
+      const pairs = counted.filter((o) => prev.has(o.id));
+      const drops = pairs.filter((o) => o.p! < prev.get(o.id)!).map((o) => ((o.p! - prev.get(o.id)!) / prev.get(o.id)!) * 100);
+      cuts = { pairs: pairs.length, reduced: drops.length, medianCutPct: drops.length ? med(drops) : null };
+    }
+    cur.forEach((o) => seenBefore.add(o.id));
+    return {
+      date: s.scan_date!, ads: cur.length, newAds: fresh, returning: fresh == null ? null : cur.length - fresh,
+      wholeMedian: med(whole.map((o) => o.p!)), roomMedian: med(counted.filter((o) => o.c === "room").map((o) => o.p!)), byBeds, cuts,
+    };
+  });
+
+  // Of the whole-home ads seen about two weeks before this edition, how many are still advertised now?
+  let sitting: ReportData["sitting"] = null;
+  const last = ordered[ordered.length - 1];
+  const cutoff = new Date(`${last.scan_date}T12:00:00Z`); cutoff.setUTCDate(cutoff.getUTCDate() - 13);
+  const fromIdx = ordered.map((s) => s.scan_date! <= cutoff.toISOString().slice(0, 10)).lastIndexOf(true);
+  if (fromIdx >= 0) {
+    const then = rows[fromIdx].filter((o) => o.c === "whole" && o.p != null);
+    const now = new Set(rows[rows.length - 1].map((o) => o.id));
+    const typicalByBeds = new Map(["1", "2", "3", "4", "5+"].map((b) => [b, med(then.filter((o) => o.b === b).map((o) => o.p!))]));
+    const above = then.filter((o) => typicalByBeds.get(o.b) != null && o.p! > typicalByBeds.get(o.b)!);
+    const below = then.filter((o) => typicalByBeds.get(o.b) != null && o.p! <= typicalByBeds.get(o.b)!);
+    sitting = {
+      from: ordered[fromIdx].scan_date!, to: last.scan_date!,
+      above: { n: above.length, still: above.filter((o) => now.has(o.id)).length },
+      below: { n: below.length, still: below.filter((o) => now.has(o.id)).length },
+    };
+  }
+  return { history, sitting };
 }
 
 const SOURCE_NAMES: [RegExp, string][] = [
@@ -125,6 +204,7 @@ export async function loadReport(key?: string | null): Promise<ReportData | null
     share("Furnished", (o) => !!o.norm.furnished, (o) => o.norm.furnished === "furnished"),
   ];
 
+  const { history, sitting } = await buildHistory(snaps, snap.scan_date!);
   const { data: full } = await getSupabaseAdmin().from("market_snapshots").select("summary").eq("id", snap.id).single();
   const r = (full?.summary?.reported ?? {}) as Record<string, number | null>;
 
@@ -135,6 +215,7 @@ export async function loadReport(key?: string | null): Promise<ReportData | null
     areasNamed: counted.filter((o) => o.norm.area).length,
     sources: [...cur.reduce((m, o) => m.set(sourceOf(o), (m.get(sourceOf(o)) ?? 0) + 1), new Map<string, number>())].map(([name, ads]) => ({ name, ads })).sort((a, b) => b.ads - a.ads),
     counted: counted.length,
+    history, sitting,
     editions,
   };
 }

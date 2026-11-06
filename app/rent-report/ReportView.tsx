@@ -6,6 +6,7 @@ import type { ReportData, PublicDot } from "@/lib/market/report";
 import { Card, Choice, AnimatedNumber, DotPlot, BarList, BasedOn, TextLink, NAVY, MUTED, BORDER, BURGUNDY, heading } from "@/app/admin/market/ui";
 import { Glance, cap, typeWord } from "@/app/admin/market/Overview";
 import { TypeCards, BedsBar, AreaCards, MAP_CREDIT } from "@/app/admin/market/pickers";
+import Moving from "./Moving";
 
 interface Pick { kind: "whole" | "room"; beds: string | null; type: string | null; area: string | null }
 
@@ -91,6 +92,8 @@ export default function ReportView({ data }: { data: ReportData }) {
             : <Tile label="Price cuts" value="Next week" muted note="Needs two scans to compare" />}
         </div>
 
+        <Moving history={data.history} sitting={data.sitting} period={weekly ? "week" : "month"} />
+
         <Method data={data} />
 
         <CheckYourRent dots={data.dots} />
@@ -112,15 +115,6 @@ export default function ReportView({ data }: { data: ReportData }) {
           })} />
         </Card>
 
-        {data.changes && (
-          <Card title={`Since the ${data.prev!.label}`} sub={data.prev!.comparable ? undefined : "The two scans searched differently, so these counts aren't a like-for-like comparison."}>
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
-              <Tile label="New ads" value={data.changes.firstSeen} note="Not in the previous scan" />
-              <Tile label="Price cuts" value={data.changes.reduced} note={data.changes.medianCutPct != null ? `Typical cut ${Math.abs(data.changes.medianCutPct).toFixed(1)}%` : "Among ads seen both times"} />
-              <Tile label="Gone from the scan" value={data.changes.notSeen} note="Not seen again. That doesn't always mean rented." />
-            </div>
-          </Card>
-        )}
 
         {/* The one action */}
         <section className="rounded-2xl p-7 sm:p-10 text-center" style={{ background: NAVY }}>
