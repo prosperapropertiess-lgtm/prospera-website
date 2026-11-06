@@ -150,7 +150,14 @@ function TrustStrip({ data }: { data: ReportData }) {
     { big: data.observed.toLocaleString(), small: "rental listings analysed" },
     { big: ago.charAt(0).toUpperCase() + ago.slice(1), small: `last updated, ${fmtDay(data.scanDate)}` },
     { big: data.method.rawHits ? data.method.rawHits.toLocaleString() : `${data.counted}`, small: data.method.rawHits ? "search results checked" : "ads counted in prices" },
-    { big: data.sources.length === 1 ? data.sources[0].name : `${data.sources.length} sites`, small: "where the ads come from" },
+    {
+      big: data.sources.length === 1 ? data.sources[0].name : `${data.sources.length} rental sites`,
+      small: (() => {
+        const coming = PLANNED_SOURCES.filter((p) => !data.sources.some((x) => x.name === p));
+        const now = data.sources.length > 1 ? data.sources.map((x) => x.name).join(", ") : "this week's source";
+        return coming.length ? `${now} · ${coming.join(" and ")} being added` : now;
+      })(),
+    },
   ];
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden border" style={{ borderColor: BORDER, background: BORDER, gap: 1 }}>
