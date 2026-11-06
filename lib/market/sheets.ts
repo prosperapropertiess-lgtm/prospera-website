@@ -44,7 +44,7 @@ async function token(): Promise<string> {
 }
 
 export class SheetError extends Error {
-  constructor(public code: "no_credentials" | "auth_failed" | "no_access" | "not_found" | "quota" | "failed", message: string) {
+  constructor(public code: "no_credentials" | "auth_failed" | "no_access" | "api_disabled" | "not_found" | "quota" | "failed", message: string) {
     super(message);
   }
 }
@@ -53,7 +53,15 @@ async function get(url: string, auth: string): Promise<unknown> {
   for (let attempt = 0; ; attempt++) {
     const res = await fetch(url, { headers: { Authorization: `Bearer ${auth}` } });
     if (res.ok) return res.json();
-    if (res.status === 403) throw new SheetError("no_access", "The service account can't open the Sheet. Share it with the service account as a Viewer.");
+    if (res.status === 403) {
+      const detail = await res.json().catch(() => null) as { error?: { message?: string } } | null;
+      const msg = detail?.error?.message ?? "";
+      const project = msg.match(/project (\d+)/)?.[1];
+      if (/has not been used|is disabled|SERVICE_DISABLED/i.test(msg)) {
+        throw new SheetError("api_disabled", `The Google Sheets API is turned off for the service account's Google Cloud project. Turn it on at https://console.cloud.google.com/apis/library/sheets.googleapis.com${project ? `?project=${project}` : ""}, wait a few minutes, then refresh.`);
+      }
+      throw new SheetError("no_access", "The service account can't open the Sheet. Share it with the service account as a Viewer.");
+    }
     if (res.status === 404) throw new SheetError("not_found", "The Sheet wasn't found.");
     if ((res.status === 429 || res.status >= 500) && attempt < 3) {
       await new Promise((r) => setTimeout(r, 500 * 2 ** attempt + Math.random() * 300));
