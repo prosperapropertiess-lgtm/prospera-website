@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ edition: 
 
 export default async function EditionPage({ params }: { params: Promise<{ edition: string }> }) {
   const { edition } = await params;
-  if (!/^\d{4}-\d{2}(-\d{2})?$/.test(edition)) notFound();
+  if (!/^(\d{4}-\d{2}(-\d{2})?|weekly|monthly)$/.test(edition)) notFound();
   const data = await loadReport(edition);
   if (!data) notFound();
   return <ReportView data={data} />;

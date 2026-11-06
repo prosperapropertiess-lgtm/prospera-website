@@ -69,7 +69,9 @@ async function observations(snapshotId: string, overrides: Override[]): Promise<
 export async function loadReport(key?: string | null): Promise<ReportData | null> {
   const { editions, snaps } = await listEditions();
   if (!snaps.length) return null;
-  const edition = key ? editions.find((e) => e.key === key) : editions.find((e) => e.kind === "weekly");
+  // "weekly" / "monthly" are evergreen: always the newest edition of that kind.
+  const latestOf = (kind: EditionKind) => editions.filter((e) => e.kind === kind).sort((a, b) => (a.key < b.key ? 1 : -1))[0];
+  const edition = !key || key === "weekly" ? latestOf("weekly") : key === "monthly" ? latestOf("monthly") : editions.find((e) => e.key === key);
   if (!edition) return null;
 
   // Weekly: that scan. Monthly: the last scan in the month, compared with the last scan of an earlier month.

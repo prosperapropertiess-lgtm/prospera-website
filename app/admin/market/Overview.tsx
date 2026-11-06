@@ -202,29 +202,32 @@ function ShareKit({ date }: { date: string | null }) {
   if (!date) return null;
   const site = "https://www.prosperaproperties.co";
   const items = [
-    { k: "weekly", label: "This week's report", url: `${site}/rent-report/${date}` },
-    { k: "monthly", label: "This month's report", url: `${site}/rent-report/${date.slice(0, 7)}` },
+    { k: "weekly", label: "Weekly report: always the latest", url: `${site}/rent-report/weekly`, note: `Right now: week of ${date}. Use this in your newsletter template; it moves forward each week.` },
+    { k: "monthly", label: "Monthly report: always the latest", url: `${site}/rent-report/monthly`, note: `Right now: ${date.slice(0, 7)}. Moves forward each month.` },
+    { k: "dash", label: "Your dashboard (private)", url: `${site}/admin/market`, note: "Always today's data. Needs your admin login." },
+    { k: "this", label: "This exact edition (never changes)", url: `${site}/rent-report/${date}`, note: "Use when you want an old newsletter to keep showing that week's numbers." },
   ];
   const copy = async (text: string, k: string) => { try { await navigator.clipboard.writeText(text); setCopied(k); setTimeout(() => setCopied(null), 1500); } catch {} };
   return (
-    <Card title="Share with owners" sub="The public London Rent Report for your newsletter. Paste the image, link it to the report.">
+    <Card title="Your links" sub="Bookmark these. The weekly and monthly links always open the newest edition; paste the image link into your newsletter and link it to the report.">
       <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr] items-start">
         <div className="grid gap-3">
           {items.map((i) => (
             <div key={i.k} className="rounded-2xl p-4" style={{ background: "#F7F5F2" }}>
               <div className="font-semibold" style={{ color: NAVY }}>{i.label}</div>
               <div className="text-sm break-all mt-1" style={{ color: MUTED }}>{i.url}</div>
+              <div className="text-xs mt-1" style={{ color: MUTED }}>{i.note}</div>
               <div className="flex flex-wrap gap-2 mt-3">
                 <Choice size="sm" onClick={() => copy(i.url, i.k)} selected={copied === i.k}>{copied === i.k ? "Copied" : "Copy link"}</Choice>
-                <Choice size="sm" onClick={() => copy(`${i.url}/opengraph-image`, `${i.k}-img`)} selected={copied === `${i.k}-img`}>{copied === `${i.k}-img` ? "Copied" : "Copy image link"}</Choice>
+                {i.k !== "dash" && <Choice size="sm" onClick={() => copy(`${i.url}/opengraph-image`, `${i.k}-img`)} selected={copied === `${i.k}-img`}>{copied === `${i.k}-img` ? "Copied" : "Copy image link"}</Choice>}
                 <a href={i.url} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-sm font-semibold underline" style={{ color: NAVY }}>Open ↗</a>
               </div>
             </div>
           ))}
         </div>
-        <a href={`/rent-report/${date}/opengraph-image`} target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border" style={{ borderColor: BORDER }}>
+        <a href="/rent-report/weekly/opengraph-image" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border" style={{ borderColor: BORDER }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`/rent-report/${date}/opengraph-image`} alt="Newsletter image for this week's London Rent Report" className="w-full h-auto block" />
+          <img src="/rent-report/weekly/opengraph-image" alt="Newsletter image for this week's London Rent Report" className="w-full h-auto block" />
         </a>
       </div>
     </Card>
