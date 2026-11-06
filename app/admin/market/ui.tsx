@@ -226,7 +226,7 @@ export function DotPlot({ dots, median, p25, p75, onOpen, you }: { dots: Dot[]; 
         )}
         {(you ?? []).map((v) => (
           <div key={v} className="absolute top-0 bottom-0 pointer-events-none" style={{ left: `${xOf(v)}%`, width: 0, borderLeft: `2px dashed ${NAVY}` }}>
-            <span className="absolute -top-6 -translate-x-1/2 text-xs font-bold whitespace-nowrap px-2 py-0.5 rounded-full border-2 bg-white" style={{ borderColor: NAVY, color: NAVY }}>You {cad(v)}</span>
+            <span className="absolute -top-12 -translate-x-1/2 text-xs font-bold whitespace-nowrap px-2 py-0.5 rounded-full border-2 bg-white" style={{ borderColor: NAVY, color: NAVY }}>You {cad(v)}</span>
           </div>
         ))}
         {hover && (

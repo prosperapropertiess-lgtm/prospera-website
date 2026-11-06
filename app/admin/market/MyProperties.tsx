@@ -190,7 +190,7 @@ function Comparison({ p, ctx, onSave }: { p: Prop; ctx: Ctx; onSave: (patch: Par
               })()}
             </p>
             <p className="text-base mt-2"><BasedOn n={s.n} what="similar ads" />. Half of them ask between <strong>{cad(s.p25)}</strong> and <strong>{cad(s.p75)}</strong>.</p>
-            <div className="mt-10">
+            <div className="mt-16">
               <DotPlot you={subjects} median={s.median} p25={s.n >= 2 ? s.p25 : null} p75={s.n >= 2 ? s.p75 : null} onOpen={ctx.openListing}
                 dots={used.map((o) => ({ id: o.listing_id, price: o.norm.price!, title: o.norm.title || "Untitled ad", detail: `${o.norm.type} · ${bedsLabel(o.norm.beds_cat)} · ${areaLabel(o.norm.area)}`, on: true }))} />
               <p className="text-sm mt-2" style={{ color: C.muted }}>Each dot is a similar ad. Hover to peek, click to open. The dashed line is your rent.</p>
