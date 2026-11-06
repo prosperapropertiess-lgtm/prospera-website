@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { useEffect as useEffectM, useMemo as useMemoM, useRef as useRefM, useState as useStateM, type ReactNode } from "react";
 import { cad } from "@/lib/market/core";
 
 // Same look as the public viewing form: warm background, white rounded cards,
@@ -150,4 +150,108 @@ export function BasedOn({ n, what = "ads" }: { n: number; what?: string }) {
   if (n < 5) return <span style={{ color: "#7A5200" }}>Only {n} {n === 1 ? what.replace(/s$/, "") : what}, so this is a rough guess</span>;
   if (n < 10) return <span style={{ color: MUTED }}>Based on {n} {what} (a small sample)</span>;
   return <span style={{ color: MUTED }}>Based on {n} {what}</span>;
+}
+
+// ── Motion and the dot plot ─────────────────────────────────────────────────
+
+
+/** Rolls smoothly to a new number (instant when the person prefers reduced motion). */
+export function AnimatedNumber({ value, format = (v: number) => cad(v) }: { value: number | null; format?: (v: number) => string }) {
+  const [shown, setShown] = useStateM(value ?? 0);
+  const from = useRefM(value ?? 0);
+  useEffectM(() => {
+    if (value == null) return;
+    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const start = from.current, t0 = performance.now(), dur = reduce ? 0 : 450;
+    let raf = 0;
+    const tick = (t: number) => {
+      const k = dur ? Math.min(1, (t - t0) / dur) : 1;
+      const eased = 1 - Math.pow(1 - k, 3);
+      const v = start + (value - start) * eased;
+      setShown(v);
+      if (k < 1) raf = requestAnimationFrame(tick); else from.current = value;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  if (value == null) return <>—</>;
+  return <span className="tabular-nums">{format(Math.round(shown))}</span>;
+}
+
+export interface Dot { id: string; price: number; title: string; detail: string; on: boolean }
+
+const AXIS_MAX = 4000;
+const xOf = (p: number) => (Math.min(p, AXIS_MAX) / AXIS_MAX) * 100;
+
+/**
+ * Every ad is one dot on a price line, stacked where prices bunch up.
+ * Dots that match the current choices are dark; the rest fade back.
+ */
+export function DotPlot({ dots, median, p25, p75, onOpen }: { dots: Dot[]; median: number | null; p25: number | null; p75: number | null; onOpen: (id: string) => void }) {
+  const [hover, setHover] = useStateM<(Dot & { x: number; y: number }) | null>(null);
+  const R = 5, STEP = 11, BUCKET = 50;
+  const placed = useMemoM(() => {
+    const stacks = new Map<number, number>();
+    // Matching dots go to the bottom of each stack so they read as one solid shape.
+    return [...dots].sort((a, b) => Number(b.on) - Number(a.on) || a.price - b.price).map((d) => {
+      const b = Math.round(Math.min(d.price, AXIS_MAX) / BUCKET);
+      const i = stacks.get(b) ?? 0;
+      stacks.set(b, i + 1);
+      return { ...d, x: xOf(b * BUCKET), level: i };
+    });
+  }, [dots]);
+  const height = Math.max(90, (Math.max(0, ...placed.map((d) => d.level)) + 1) * STEP + 16);
+  const ticks = [0, 1000, 2000, 3000, 4000];
+  return (
+    <div className="relative select-none" onMouseLeave={() => setHover(null)}>
+      <div className="relative" style={{ height }}>
+        {p25 != null && p75 != null && (
+          <div className="absolute bottom-0 rounded-t-xl transition-all duration-500" style={{ left: `${xOf(p25)}%`, width: `${xOf(p75) - xOf(p25)}%`, top: 0, background: "rgba(31,47,58,0.06)" }} />
+        )}
+        {placed.map((d) => (
+          <button key={d.id} type="button" tabIndex={-1} aria-label={`${cad(d.price)} ${d.title}`}
+            onMouseEnter={() => setHover({ ...d, x: d.x, y: height - 8 - d.level * STEP })} onFocus={() => setHover({ ...d, x: d.x, y: height - 8 - d.level * STEP })}
+            onClick={() => onOpen(d.id)}
+            className="absolute rounded-full transition-all duration-500 ease-out hover:scale-150"
+            style={{
+              width: R * 2, height: R * 2, left: `calc(${d.x}% - ${R}px)`, bottom: 8 + d.level * STEP,
+              background: d.on ? NAVY : "#DDD6CC", opacity: d.on ? 1 : 0.7, cursor: "pointer", zIndex: d.on ? 2 : 1,
+              boxShadow: hover?.id === d.id ? `0 0 0 3px ${BURGUNDY}` : undefined,
+            }} />
+        ))}
+        {median != null && (
+          <div className="absolute top-0 bottom-0 transition-all duration-500 pointer-events-none" style={{ left: `${xOf(median)}%`, width: 2, marginLeft: -1, background: BURGUNDY }}>
+            <span className="absolute -top-6 -translate-x-1/2 text-xs font-bold whitespace-nowrap px-2 py-0.5 rounded-full" style={{ background: BURGUNDY, color: "#FAF8F5" }}>Typical {cad(median)}</span>
+          </div>
+        )}
+        {hover && (
+          <div className="absolute z-10 pointer-events-none rounded-xl px-3 py-2 text-sm shadow-lg" role="status"
+            style={{ left: `clamp(0px, calc(${hover.x}% - 110px), calc(100% - 220px))`, bottom: height - hover.y + 14, width: 220, background: NAVY, color: "#FAF8F5" }}>
+            <div className="text-lg font-bold tabular-nums">{cad(hover.price)}</div>
+            <div className="truncate">{hover.title}</div>
+            <div className="opacity-75 truncate">{hover.detail}</div>
+            <div className="opacity-75 text-xs mt-1">Click to open</div>
+          </div>
+        )}
+      </div>
+      <div className="relative h-6 border-t" style={{ borderColor: BORDER }}>
+        {ticks.map((t) => (
+          <span key={t} className="absolute text-xs -translate-x-1/2 mt-1 tabular-nums" style={{ left: `${xOf(t)}%`, color: MUTED }}>{t === AXIS_MAX ? "$4k+" : t === 0 ? "$0" : `$${t / 1000}k`}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** One thin row of dots on the same price line, for comparing groups at a glance. */
+export function MiniStrip({ prices, median, active }: { prices: number[]; median: number | null; active?: boolean }) {
+  return (
+    <div className="relative h-5">
+      <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: BORDER }} />
+      {prices.map((p, i) => (
+        <span key={i} className="absolute top-1/2 rounded-full transition-all duration-500" style={{ left: `calc(${xOf(p)}% - 3px)`, width: 6, height: 6, marginTop: -3, background: active ? NAVY : "#8597A3", opacity: 0.55 }} />
+      ))}
+      {median != null && <span className="absolute top-0 bottom-0 transition-all duration-500" style={{ left: `${xOf(median)}%`, width: 3, marginLeft: -1.5, borderRadius: 2, background: active ? BURGUNDY : NAVY }} />}
+    </div>
+  );
 }

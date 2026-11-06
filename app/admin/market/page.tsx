@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Page, Loading, ErrorNote, C, inputStyle } from "@/components/admin/kit";
-import { Choice, QuietButton, heading } from "./ui";
+import { QuietButton, heading } from "./ui";
 import {
   applyFilters, applyOverrides, cohortStats, filtersFromParams, filtersToParams, EMPTY_FILTERS, type Filters, type Obs, type Override,
 } from "@/lib/market/core";
@@ -192,11 +192,17 @@ export default function MarketPage() {
       {viewingOld && <div style={{ marginBottom: 12 }}><Note tone="amber">You&apos;re looking at an older scan from {fmtDate(data.snapshot.scan_date)}, not the newest one.</Note></div>}
       {error && <ErrorNote>{error}</ErrorNote>}
 
-      <nav aria-label="Sections" className="flex flex-wrap gap-2 mb-5">
-        {TABS.map((t) => <Choice key={t.value} selected={ui.tab === t.value} onClick={() => update({ tab: t.value })}>{t.label}</Choice>)}
+      <nav aria-label="Sections" className="flex gap-1 mb-6 p-1.5 rounded-2xl bg-white overflow-x-auto" style={{ border: "1px solid #D8D2C8" }}>
+        {TABS.map((t) => (
+          <button key={t.value} type="button" onClick={() => update({ tab: t.value })} aria-current={ui.tab === t.value ? "page" : undefined}
+            className="px-4 py-2.5 rounded-xl text-[15px] font-semibold whitespace-nowrap transition-colors duration-200"
+            style={{ background: ui.tab === t.value ? "#1F2F3A" : "transparent", color: ui.tab === t.value ? "#FAF8F5" : "#1F2F3A" }}>
+            {t.label}
+          </button>
+        ))}
       </nav>
 
-      {ui.tab !== "mine" && ui.tab !== "data" && res && (
+      {ui.tab !== "overview" && ui.tab !== "mine" && ui.tab !== "data" && res && (
         <FilterBar all={obs} filters={ui.filters} setFilters={ctx.setFilters}
           counts={{ matched: res.matched.length, used: res.whole.length + res.room.length, excluded: res.excluded.length }} />
       )}
