@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { C, Button, Badge, Loading } from "@/components/admin/kit";
+import { C, Button, Badge, Loading, buttonStyle } from "@/components/admin/kit";
 import { cad, stats, FLAG_TEXT, BLOCKING_FLAGS, LISTING_FIELDS, type Obs, type Flag } from "@/lib/market/core";
 import type { ParsedSummary } from "@/lib/market/ingest";
 import { Panel, Note, Pill, th, tdc, TableWrap, tabular, fmtDate, fmtDateTime, type Ctx } from "./shared";
@@ -63,7 +63,7 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
               <Fact label="Next scheduled read" value={fmtDateTime(status.nextRun)} sub={status.schedule} />
               <Fact label="State" value={<Badge tone={status.lastFailed ? "red" : status.stale ? "amber" : "green"}>{status.lastFailed ? "Last read failed" : status.stale ? "Source not updated" : "Current"}</Badge>} sub={status.stale ? `No new scan in over ${status.staleDays} days` : undefined} />
             </div>
-            {status.lastFailed && <Note tone="red">{fmtDateTime(status.lastFailed.started_at)}: {status.lastFailed.error}. The dashboard keeps showing the last good scan.</Note>}
+            {status.lastFailed && <Note tone="red">{fmtDateTime(status.lastFailed.started_at)}: {status.lastFailed.error?.replace(/\.$/, "")}. The dashboard keeps showing the last good scan.</Note>}
             {result && <Note tone={result.ok ? "grey" : "red"}>{result.text}</Note>}
             {(result?.code === "no_access" || result?.code === "auth_failed" || status.lastFailed?.error?.includes("Share it")) && status.serviceAccount && (
               <Note tone="amber">
@@ -89,7 +89,7 @@ export default function DataSync({ ctx, status, summary, onSynced }: { ctx: Ctx;
 
       {snapId && <Panel title="Original data" sub="Exactly what was read from the Sheet for this scan, cell by cell." right={
         <div style={{ display: "flex", gap: 8 }}>
-          <Button size="sm" href={`/api/admin/market/source?snapshot=${ctx.snapshot.id}&download=1`}>Download JSON</Button>
+          <a href={`/api/admin/market/source?snapshot=${ctx.snapshot.id}&download=1`} style={buttonStyle("secondary", "sm")}>Download JSON</a>
         </div>}>
         {!source ? <Button onClick={loadSource}>Show the original tabs</Button> : (
           <>
@@ -193,7 +193,8 @@ function Reconcile({ obs, summary }: { obs: Obs[]; summary: ParsedSummary }) {
       const same = Number(n) === ours.n && Number(med) === ours.median;
       return {
         label: `Median: ${label}`, source: `${cad(Number(med))} (n=${Number(n)})`, ours: `${cad(ours.median)} (n=${ours.n})`,
-        why: same ? "Match" : label.toLowerCase().startsWith("all") || label.toLowerCase().startsWith("2-bed") || label.toLowerCase().startsWith("1-bed")
+        why: same ? "Match" : label.toLowerCase().startsWith("rooms")
+          ? "The Sheet counts every ad typed as a room; the dashboard uses only the ones priced per room" : label.toLowerCase().startsWith("all") || label.toLowerCase().startsWith("2-bed") || label.toLowerCase().startsWith("1-bed")
           ? "The source includes ads typed as rooms but labelled whole-unit; the dashboard leaves them out" : "Reason unknown",
       };
     }),

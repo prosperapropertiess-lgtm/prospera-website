@@ -74,7 +74,7 @@ export default function FilterBar({ all, filters, setFilters, counts }: {
             onBlur={() => search !== filters.q && set({ q: search })} style={{ ...inputStyle, padding: "8px 12px", fontSize: 14 }} />
         </form>
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}
-          style={{ border: `1px solid ${C.borderStrong}`, background: open ? C.greyBg : C.surface, borderRadius: 8, padding: "8px 14px", fontWeight: 600, color: C.navy, cursor: "pointer" }}>
+          style={{ border: `1px solid ${C.borderStrong}`, background: open ? C.greyBg : C.surface, borderRadius: 8, padding: "8px 14px", fontWeight: 600, fontSize: 14, color: C.navy, cursor: "pointer" }}>
           {open ? "Close filters" : "More filters"}
         </button>
       </div>

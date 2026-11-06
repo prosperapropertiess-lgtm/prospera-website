@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { C, Button, inputStyle } from "@/components/admin/kit";
+import { C, Button, inputStyle, buttonStyle } from "@/components/admin/kit";
 import {
   cad, bedsLabel, areaLabel, exclusionReason, FLAG_TEXT, LISTING_FIELDS, csvCell, availabilityLabel, filtersToParams, type CohortResult, type Obs,
 } from "@/lib/market/core";
@@ -117,7 +117,7 @@ export default function Listings({ ctx, res }: { ctx: Ctx; res: CohortResult }) 
             <Button size="sm" onClick={saveView}>Save this view</Button>
             <Button size="sm" onClick={() => setChooser(!chooser)}>Columns</Button>
             <Button size="sm" onClick={exportCsv}>Export CSV</Button>
-            <Button size="sm" href={`/api/admin/market/source?snapshot=${ctx.snapshot.id}&download=1`}>Full data (JSON)</Button>
+            <a href={`/api/admin/market/source?snapshot=${ctx.snapshot.id}&download=1`} style={buttonStyle("secondary", "sm")}>Full data (JSON)</a>
           </div>
         }>
         {chooser && (

@@ -160,9 +160,9 @@ export default function MarketPage() {
     <Page width={1280}>
       <Header />
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "10px 14px", marginBottom: 14, position: "sticky", top: 0, zIndex: 20 }}>
-        <label style={{ fontSize: 13, color: C.muted, display: "flex", gap: 6, alignItems: "center" }}>
+        <label style={{ fontSize: 13, color: C.muted, display: "flex", gap: 6, alignItems: "center", maxWidth: "100%" }}>
           Scan
-          <select value={data.snapshot.id} onChange={(e) => { setPrev(null); update({ snap: e.target.value === latest?.id ? null : e.target.value }); }} style={{ ...inputStyle, width: "auto", padding: "6px 10px", fontSize: 14 }}>
+          <select value={data.snapshot.id} onChange={(e) => { setPrev(null); update({ snap: e.target.value === latest?.id ? null : e.target.value }); }} style={{ ...inputStyle, width: "auto", maxWidth: "min(320px, 70vw)", padding: "6px 10px", fontSize: 14 }}>
             {data.snapshots.map((s) => <option key={s.id} value={s.id}>{fmtDate(s.scan_date)}{s.scan_label ? ` · ${s.scan_label}` : ""}{s.revision > 1 ? ` (v${s.revision})` : ""}</option>)}
           </select>
         </label>

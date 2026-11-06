@@ -48,11 +48,11 @@ export default function Overview({ ctx, res, compare, sourceMedian }: {
           onClick={() => drill({ excluded: false })} />
         <Kpi label="Middle 50% asking range" value={s.n ? `${cad(s.p25)}–${cad(s.p75)}` : "—"} sub={s.n ? `Range ${cad(s.min)}–${cad(s.max)}` : "No eligible prices"} onClick={() => drill({ excluded: false })} />
         <Kpi label="First seen since last scan" unavailable={!comparable}
-          value={comparable ? compare.diff!.firstSeen.length : compare.reason ?? "Scan coverage differs"}
-          sub={comparable ? `vs ${fmtDate(compare.snapDate)}` : "Needs a comparable earlier scan"} onClick={comparable ? () => ctx.setTab("trends") : undefined} />
+          value={comparable ? compare.diff!.firstSeen.length : "Not yet"}
+          sub={comparable ? `vs ${fmtDate(compare.snapDate)}` : compare.diff ? "The scans were collected differently" : "Needs a second scan to compare with"} onClick={comparable ? () => ctx.setTab("trends") : undefined} />
         <Kpi label="Price reductions" unavailable={!comparable}
-          value={comparable ? `${compare.diff!.reduced.length} of ${compare.diff!.pairs.length}` : compare.reason ?? "Scan coverage differs"}
-          sub={comparable ? "Same ads in both scans" : "Needs a comparable earlier scan"} onClick={comparable ? () => ctx.setTab("trends") : undefined} />
+          value={comparable ? `${compare.diff!.reduced.length} of ${compare.diff!.pairs.length}` : "Not yet"}
+          sub={comparable ? "Same ads in both scans" : compare.diff ? "The scans were collected differently" : "Needs a second scan to compare with"} onClick={comparable ? () => ctx.setTab("trends") : undefined} />
         <Kpi label="Listings needing review" value={review.length}
           sub={reviewFlags.length ? reviewFlags.slice(0, 2).map((f) => FLAG_TEXT[f as Flag]).join("; ") : "Nothing blocking"}
           onClick={() => drill({ flags: reviewFlags.filter((f) => BLOCKING_FLAGS.includes(f as Flag)), excluded: true })} />
@@ -130,7 +130,7 @@ function RentHistogram({ rows, room, onBin }: { rows: Obs[]; room: boolean; onBi
         <>
           <div style={{ height: 240 }}>
             <ResponsiveContainer>
-              <BarChart data={bins} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
+              <BarChart data={bins} margin={{ top: 22, right: 8, bottom: 0, left: -18 }}>
                 <CartesianGrid stroke={C.border} vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 11, fill: C.muted }} interval="preserveStartEnd" />
                 <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: C.muted }} />

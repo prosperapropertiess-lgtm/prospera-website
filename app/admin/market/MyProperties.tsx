@@ -230,24 +230,25 @@ function Fig({ label, value }: { label: string; value: React.ReactNode }) {
 
 /** Every comparable as a dot on a line, with your rent marked. */
 function Strip({ prices, subjects }: { prices: number[]; subjects: number[] }) {
+  const W = 640, H = 90, pad = 30;
   const all = [...prices, ...subjects];
   const lo = Math.min(...all), hi = Math.max(...all);
-  const x = (v: number) => (hi === lo ? 50 : 4 + ((v - lo) / (hi - lo)) * 92);
+  const x = (v: number) => (hi === lo ? W / 2 : pad + ((v - lo) / (hi - lo)) * (W - 2 * pad));
   const s = stats(prices);
   return (
-    <svg viewBox="0 0 100 26" style={{ width: "100%", height: 80, marginTop: 14 }} role="img" aria-label="Comparable rents with your rent marked">
-      {s.p25 != null && <rect x={x(s.p25)} y={8} width={Math.max(0.5, x(s.p75!) - x(s.p25))} height={8} fill={C.greyBg} />}
-      <line x1={4} x2={96} y1={12} y2={12} stroke={C.borderStrong} strokeWidth={0.3} />
-      {prices.map((v, i) => <circle key={i} cx={x(v)} cy={12} r={0.9} fill={SERIES[1]} opacity={0.75} />)}
-      {s.median != null && <line x1={x(s.median)} x2={x(s.median)} y1={6} y2={18} stroke={C.navy} strokeWidth={0.4} />}
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W, height: "auto", marginTop: 14, display: "block" }} role="img" aria-label="Comparable rents with your rent marked">
+      {s.p25 != null && <rect x={x(s.p25)} y={30} width={Math.max(2, x(s.p75!) - x(s.p25))} height={20} fill={C.greyBg} />}
+      <line x1={pad} x2={W - pad} y1={40} y2={40} stroke={C.borderStrong} strokeWidth={1} />
+      {prices.map((v, i) => <circle key={i} cx={x(v)} cy={40} r={5} fill={SERIES[1]} opacity={0.7} />)}
+      {s.median != null && <line x1={x(s.median)} x2={x(s.median)} y1={24} y2={56} stroke={C.navy} strokeWidth={2} />}
       {subjects.map((v) => (
         <g key={v}>
-          <polygon points={`${x(v) - 1.4},3 ${x(v) + 1.4},3 ${x(v)},6.5`} fill={C.burgundy} />
-          <text x={x(v)} y={24} fontSize={2.6} textAnchor="middle" fill={C.navy}>Yours {cad(v)}</text>
+          <polygon points={`${x(v) - 7},8 ${x(v) + 7},8 ${x(v)},20`} fill={C.burgundy} />
+          <text x={x(v)} y={76} fontSize={13} textAnchor="middle" fill={C.navy} fontWeight={600}>Yours {cad(v)}</text>
         </g>
       ))}
-      <text x={4} y={24} fontSize={2.4} fill={C.muted}>{cad(lo)}</text>
-      <text x={96} y={24} fontSize={2.4} textAnchor="end" fill={C.muted}>{cad(hi)}</text>
+      <text x={pad} y={H - 2} fontSize={12} fill={C.muted} textAnchor="middle">{cad(lo)}</text>
+      <text x={W - pad} y={H - 2} fontSize={12} textAnchor="middle" fill={C.muted}>{cad(hi)}</text>
     </svg>
   );
 }
