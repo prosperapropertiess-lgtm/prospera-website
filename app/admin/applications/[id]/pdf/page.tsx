@@ -73,6 +73,18 @@ const CHECK_MARK: Record<string, { icon: string; bg: string; fg: string; word: s
   missing:      { icon: "○", bg: "#FFFFFF", fg: BURGUNDY, word: "Missing" },
 };
 
+function shortDate(v: string | null | undefined) {
+  if (!v) return null;
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(v) ? new Date(`${v}T12:00:00`) : new Date(v);
+  if (isNaN(d.getTime())) return v;
+  return d.toLocaleDateString("en-CA", { year: "numeric", month: "short", day: "numeric" });
+}
+
+const phone = (v: string | null | undefined) => {
+  const d = (v ?? "").replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
+  return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : v ?? null;
+};
+
 function longDate(v: string | null | undefined) {
   if (!v) return null;
   const d = /^\d{4}-\d{2}-\d{2}$/.test(v) ? new Date(`${v}T12:00:00`) : new Date(v);
@@ -179,7 +191,7 @@ export default function ApplicationPdfPage() {
 
         {/* Key facts */}
         <div className="ap-facts">
-          <div><div className="ap-label">Wants to move in</div><div className="ap-big">{longDate(app.move_in_date) ?? "—"}</div></div>
+          <div><div className="ap-label">Wants to move in</div><div className="ap-big">{shortDate(app.move_in_date) ?? "—"}</div></div>
           <div><div className="ap-label">People living there</div><div className="ap-big">{app.occupants ?? "—"}</div></div>
           <div><div className="ap-label">Monthly income stated</div><div className="ap-big">{money(app.monthly_income) ?? "—"}</div></div>
           <div><div className="ap-label">Rent share of income</div><div className="ap-big">{rentShare != null ? `${rentShare}%` : "—"}</div></div>
@@ -221,7 +233,7 @@ export default function ApplicationPdfPage() {
         <div className="ap-grid">
           <Card n="01" title="Applicant">
             <Field label="Full name" value={app.tenant_name} />
-            {showContact && <Field label="Phone" value={app.tenant_phone} />}
+            {showContact && <Field label="Phone" value={phone(app.tenant_phone)} />}
             {showContact && <Field label="Email" value={app.tenant_email} />}
             {showDob && <Field label="Date of birth" value={longDate(app.tenant_dob)} />}
           </Card>
@@ -258,13 +270,13 @@ export default function ApplicationPdfPage() {
               <div>
                 <div className="ap-sub">Previous landlord</div>
                 <Field label="Name" value={app.landlord_ref_name} />
-                <Field label="Phone" value={app.landlord_ref_phone} />
+                <Field label="Phone" value={phone(app.landlord_ref_phone)} />
                 <Field label="Email" value={app.landlord_ref_email} />
               </div>
               <div>
                 <div className="ap-sub">Employer</div>
                 <Field label="Name" value={app.employer_ref_name} />
-                <Field label="Phone" value={app.employer_ref_phone} />
+                <Field label="Phone" value={phone(app.employer_ref_phone)} />
                 <Field label="Email" value={app.employer_ref_email} />
               </div>
             </div>
@@ -338,7 +350,7 @@ const CSS = `
 .ap-field { padding: 7px 0; border-bottom: 1px solid #EFEBE4; }
 .ap-field:last-child { border-bottom: 0; }
 
-.ap-summary { margin-top: 18px; border: 1px solid ${BORDER}; border-radius: 10px; padding: 20px 22px; break-inside: avoid; }
+.ap-summary { margin-top: 18px; border: 1px solid ${BORDER}; border-radius: 10px; padding: 20px 22px; }
 .ap-summary-top { display: flex; justify-content: space-between; align-items: center; }
 .ap-verdict { background: ${NAVY}; color: ${LIGHT}; border-radius: 999px; padding: 5px 13px; font-size: 12px; font-weight: 600; }
 .ap-headline { font-size: 17px; font-weight: 600; color: ${NAVY}; line-height: 1.4; margin: 10px 0 14px; }
@@ -349,10 +361,12 @@ const CSS = `
 .ap-check-topic span { font-weight: 500; font-size: 11px; color: ${MUTED}; margin-left: 4px; }
 .ap-check-detail { font-size: 12.5px; color: #333; line-height: 1.5; margin-top: 1px; }
 .ap-ask { background: ${WARM}; border-radius: 8px; padding: 12px 16px; margin-top: 16px; }
-.ap-ask ol { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: ${TEXT}; }
+.ap-ask { break-inside: avoid; }
+.ap-ask ol { list-style: decimal; margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: ${TEXT}; }
 .ap-fine { font-size: 11px; color: ${MUTED}; margin: 12px 0 0; }
 
 .ap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.ap-summary-top, .ap-headline { break-after: avoid; }
 .ap-card { border: 1px solid ${BORDER}; border-radius: 10px; padding: 16px 18px 10px; break-inside: avoid; }
 .ap-wide { grid-column: 1 / -1; }
 .ap-card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
