@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { DOC_LABELS } from "@/lib/application-requirements";
+import { VERDICT_STYLE, CHECK_ICON, INCOME_SOURCE_LABEL, TIME_AT_ADDRESS_LABEL } from "./labels";
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   pending:    { bg: "#FEF3C7", text: "#92400E" },
@@ -11,28 +12,6 @@ const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   reviewed:   { bg: "#EDE9FE", text: "#5B21B6" },
   approved:   { bg: "#D1FAE5", text: "#065F46" },
   rejected:   { bg: "#FEE2E2", text: "#991B1B" },
-};
-
-const VERDICT_STYLE: Record<string, { label: string; bg: string; text: string }> = {
-  strong:          { label: "Strong",            bg: "#D1FAE5", text: "#065F46" },
-  worth_a_call:    { label: "Worth a call",      bg: "#E0F2FE", text: "#075985" },
-  needs_more_info: { label: "Needs more info",   bg: "#FEF3C7", text: "#92400E" },
-  not_a_fit:       { label: "Probably not a fit", bg: "#FEE2E2", text: "#991B1B" },
-};
-
-const CHECK_ICON: Record<string, { icon: string; color: string }> = {
-  verified:     { icon: "✓", color: "#065F46" },
-  claimed_only: { icon: "•", color: "#64748B" },
-  concern:      { icon: "!", color: "#B45309" },
-  missing:      { icon: "○", color: "#991B1B" },
-};
-
-const INCOME_SOURCE_LABEL: Record<string, string> = {
-  employed: "Has a job", self_employed: "Self-employed", student: "Student", retired: "Retired", other: "Other",
-};
-
-const TIME_AT_ADDRESS_LABEL: Record<string, string> = {
-  under_1: "Under 1 year", "1_2": "1–2 years", "2_5": "2–5 years", "5_plus": "5+ years",
 };
 
 interface Summary {
@@ -239,8 +218,27 @@ export default function ApplicationDetailPage() {
         </div>
 
         {/* Action buttons */}
+        <div style={{ display: "flex", gap: 10 }}>
+          <a
+            href={`/admin/applications/${id}/pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #1F2F3A",
+              color: "#1F2F3A",
+              borderRadius: 8,
+              fontSize: 13,
+              fontWeight: 600,
+              textDecoration: "none",
+              fontFamily: FONT,
+            }}
+          >
+            Download PDF
+          </a>
         {canAct && (
-          <div style={{ display: "flex", gap: 10 }}>
+          <>
             <button
               onClick={() => handleAction("reject")}
               disabled={actionLoading !== null}
@@ -275,8 +273,9 @@ export default function ApplicationDetailPage() {
             >
               {actionLoading === "approve" ? "Approving..." : "Approve"}
             </button>
-          </div>
+          </>
         )}
+        </div>
       </div>
 
       {error && (
