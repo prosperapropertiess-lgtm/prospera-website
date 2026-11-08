@@ -4086,3 +4086,129 @@ I'm Ebin Jaison, principal of Prospera Properties — we manage residential rent
 
 Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
 ---
+
+## Steps to Justice (CLEO) — 2026-11-08
+To: info@cleo.on.ca
+Subject: SW Ontario landlord case study for your "Being a Landlord" guides
+
+Hi,
+
+I noticed your "Being a Landlord" guided path on Steps to Justice walks through every LTB step with great precision — but it stops short of showing what the process looks like when a professional manager handles it.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential rentals in London, St. Thomas, and Strathroy, and we handle N4 filings, L1 applications, and LTB hearings on behalf of our clients regularly.
+
+I'd love to contribute a short practitioner piece — "What professional property management looks like at the LTB" — to add a real-world SW Ontario example to your platform. No fee required; happy to draft it to your editorial guidelines.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## BILD Ontario — 2026-11-08
+To: info@bild.ca
+Subject: SW Ontario rental operations data for your secondary-market coverage
+
+Hi,
+
+I read BILD's recent pieces on Ontario's rental supply gap — they cover the development side thoroughly but rarely get into what happens on the management side once units are delivered.
+
+I'm Ebin Jaison, principal of Prospera Properties in London, Ontario. We manage residential portfolios across London, St. Thomas, and Strathroy, and I track vacancy rates, rent benchmarks, and tenant demand in these markets closely.
+
+If you're covering SW Ontario or secondary market rental conditions, I'm happy to share ground-level data or be quoted as an operator source.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Landlord Web Solutions Blog — 2026-11-08
+To: info@landlordwebsolutions.com
+Subject: Guest post idea: signs you've outgrown self-management in Ontario
+
+Hi,
+
+Your Ontario landlord guides are genuinely useful — I've referred them to new clients who want to understand their obligations before handing management over to us.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential properties in London, St. Thomas, and Strathroy, and I'd like to offer a guest post for your blog: "Five signs an Ontario landlord has outgrown self-management."
+
+It's a topic your readers are likely already wondering about, and I can write it without any sales pitch — just practical indicators drawn from real cases.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Buildium Blog — 2026-11-08
+To: press@buildium.com
+Subject: Ontario secondary market case study for your Canadian landlord content
+
+Hi,
+
+Your Canadian property management content is solid — the Ontario RTA coverage in particular stands out. I noticed most of your Ontario examples skew toward the GTA. I wanted to offer a SW Ontario perspective.
+
+I'm Ebin Jaison, principal of Prospera Properties in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy, and I'd be glad to contribute a case study or be quoted in your Ontario landlord coverage — particularly anything covering LTB processes, rent increases, or secondary market management challenges.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Innago Blog — 2026-11-08
+To: support@innago.com
+Subject: Guest post: the hidden cost of self-managing in Ontario
+
+Hi,
+
+I was reading your Ontario landlord guides — good practical content. The gap I noticed is that none of them address the point where self-management starts costing more than it saves.
+
+I'm Ebin Jaison, I run Prospera Properties in London, Ontario. We manage residential rentals for landlords who've hit that wall. I'd like to offer a guest post — "The hidden costs of self-managing an Ontario rental" — aimed directly at your audience of independent landlords.
+
+Happy to write it at whatever length fits your format. No promotional fluff, just real numbers and situations your readers will recognize.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## London Economic Development Corporation (LEDC) — 2026-11-08
+To: info@ledc.com
+Subject: London Ontario rental market data — available for your economic reporting
+
+Hi,
+
+I follow LEDC's market intelligence reports closely — your quarterly economic updates are one of the more reliable windows into London's investment climate.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential rental portfolios in London, St. Thomas, and Strathroy, and I track local vacancy rates, average rents, and tenant demand on a monthly basis.
+
+If your team covers London's residential rental market, I'm happy to share data or be quoted as a local operator source. I'd also be glad to be featured in a business spotlight if that's something you do.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Strathroy Age Dispatch — 2026-11-08
+To: news@theagedispatch.com
+Subject: Strathroy rental market — local expert available for comment
+
+Hi,
+
+I noticed your coverage of Strathroy's housing market and wanted to introduce myself as a local source.
+
+I'm Ebin Jaison, principal of Prospera Properties. We're the professional property management firm actively operating in Strathroy — managing residential rentals and working with landlords across Middlesex County. We see rental vacancy, tenant demand, and investment activity in this market firsthand.
+
+If you're ever covering Strathroy's rental supply, housing affordability, or local landlord issues, I'm happy to be a resource or comment on the ground-level picture. Happy to submit a brief community perspective piece as well.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## BrokerLink Insurance Blog — 2026-11-08
+To: customerservice@brokerlink.ca
+Subject: Guest post: how professional property management reduces landlord insurance claims in Ontario
+
+Hi,
+
+Your Ontario landlord insurance guides are well done — they explain what coverage landlords need, but they don't address one of the biggest risk reducers: professional property management.
+
+I'm Ebin Jaison, principal of Prospera Properties in London, Ontario. We manage residential rentals across London, St. Thomas, and Strathroy. I'd like to offer a guest post — "How professional property management reduces landlord insurance claims in Ontario" — that shows how documented inspections, proper screening, and proactive maintenance directly reduce claims risk.
+
+It would add practical depth to your landlord content and I'm happy to write it to your editorial guidelines.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---

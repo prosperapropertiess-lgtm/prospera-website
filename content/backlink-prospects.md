@@ -3149,3 +3149,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - specific_content: Their Ontario investment property and landlord guides — particularly any London Ontario or secondary market coverage where Prospera's ground-level operational data adds geographic depth to their national editorial coverage.
 - researcher_notes: National association with high editorial standards. Media contact: media@crea.ca. Best approach is an expert source relationship or data contribution offer — CREA's editorial team actively seeks regional expert voices for their Ontario coverage. Note: HTTP verification not possible from this environment.
 ---
+
+## Steps to Justice — CLEO Ontario Landlord & Tenant Guide
+- url: https://stepstojustice.ca/legal-topic/housing-law/
+- type: association
+- why: Community Legal Education Ontario's public legal information platform covers Ontario landlord/tenant law step-by-step — a credible provincial resource that could reference Prospera as a trusted local property management expert for landlords who need professional help.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: info@cleo.on.ca
+- site_focus: Steps to Justice is CLEO's (Community Legal Education Ontario) flagship public legal education website. The housing section walks Ontario tenants and landlords through every stage of the rental relationship — from signing a standard lease to filing LTB applications. The platform targets non-lawyers navigating the Ontario Residential Tenancies Act, with plain-language guides, checklists, and "what happens next" flowcharts. High editorial credibility; funded by Law Foundation of Ontario.
+- hook: CLEO's landlord guides tell readers what their legal obligations are but don't tell them how a professional property manager handles those obligations daily. A contributed case-study piece ("How professional management reduces LTB risk in SW Ontario") would add practical depth to their platform while positioning Prospera as the local expert CLEO's SW Ontario landlord readers can turn to.
+- specific_content: Their "Renting in Ontario" and "Being a Landlord" guided paths — specifically the LTB application sections where Prospera's end-to-end N4/L1 handling is a concrete example of how landlords avoid costly procedural errors.
+- researcher_notes: Non-profit legal education organization; editorial contact at info@cleo.on.ca. Best angle is a resource contribution or expert guest piece — CLEO occasionally features practitioner perspectives to complement their legal guides. Note: live URL verification not possible from this environment.
+
+---
+
+## BILD — Building Industry and Land Development Association (Ontario)
+- url: https://bild.ca/news/
+- type: association
+- why: Ontario's largest builder and developer industry association; their news and advocacy content covers rental housing supply, investor returns, and the provincial regulatory environment — a natural editorial home for a SW Ontario landlord operations perspective.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: info@bild.ca
+- site_focus: BILD (Building Industry and Land Development Association) is Ontario's foremost voice for the new home, condo, and rental construction industry. Their editorial content covers provincial housing policy, development approvals, municipal regulations, and the economics of rental supply. BILD's audience spans developers, investors, municipal planners, and government stakeholders. Very high domain authority; not a property management company.
+- hook: BILD covers the supply side of Ontario's rental crisis in depth but rarely features the operations side — what happens after units are built. Prospera's SW Ontario landlord management data (vacancy rates, tenant demand, rent benchmarks for London, St. Thomas, Strathroy) fills that gap and positions Ebin as a credible secondary-market operator voice for BILD's investor and policy audience.
+- specific_content: Their Ontario rental housing supply coverage and investor-focused articles — particularly any secondary market (outside GTA) content where Prospera's ground-level SW Ontario operational perspective adds regional depth.
+- researcher_notes: Industry association with active editorial presence. Media/editorial contact at info@bild.ca. Best approach is an expert source offer for their rental housing coverage — BILD regularly quotes operators for industry perspective. Note: live URL verification not possible from this environment.
+
+---
+
+## Landlord Web Solutions Blog — Canadian Independent Landlord Resources
+- url: https://www.landlordwebsolutions.com/blog/
+- type: blog
+- why: Canadian property management software company specifically targeting independent landlords with educational content on screening, leases, Ontario law, and tenant communications — an ideal resource-link partner.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: info@landlordwebsolutions.com
+- site_focus: Landlord Web Solutions (LWS) builds website and software tools for independent Canadian landlords and small property managers. Their blog covers tenant screening best practices, lease management, rent collection, and Ontario rental law updates. The audience is small-scale landlords (1–20 units) managing their own properties — exactly the demographic Prospera targets for management conversions.
+- hook: LWS's readers are DIY landlords who often reach the point of considering professional management when stress or complexity exceeds their capacity. A contributed article from Ebin ("Signs you've outgrown self-management") or a resource mention on their Ontario landlord guides page would reach prospects at exactly the right decision moment.
+- specific_content: Their Ontario landlord resource pages and tenant screening guides — Prospera's professional screening and LTB track record would add credibility as a real-world example of what professional management looks like in SW Ontario.
+- researcher_notes: Smaller Canadian software company; accessible editorial contact. Guest post or resource link ask appropriate. Note: live URL verification not possible from this environment.
+
+---
+
+## Buildium Blog — Property Management Education (Canadian Landlord Content)
+- url: https://www.buildium.com/blog/
+- type: blog
+- why: Leading North American property management software brand with deep educational content; their Canadian landlord articles occasionally feature regional examples — a guest post or expert quote from a London ON operator would be a strong fit.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: press@buildium.com
+- site_focus: Buildium is one of North America's most-used property management platforms (now part of RealPage). Their blog is a high-authority resource covering tenant screening, lease management, maintenance, rent collection, and market trends. While US-focused, they publish Canadian-specific content on provincial tenancy law, Ontario RTA updates, and investment property management best practices. Very high domain authority.
+- hook: Buildium's Canadian landlord content is strong but often nationally generic — their audience would benefit from a SW Ontario case study showing how professional management operates in a mid-sized Ontario market. Ebin's data-driven approach (LTB outcomes, vacancy rates, rent benchmarks for London/St. Thomas/Strathroy) fits Buildium's editorial voice and fills a regional gap in their Ontario coverage.
+- specific_content: Their Ontario rental law and property management best practices articles — a guest contribution on "Managing rentals in Ontario's secondary markets" or a quoted expert perspective in their LTB or rent increase coverage.
+- researcher_notes: Large software company with active editorial team. press@buildium.com for media/contributor outreach. Guest post pitch or expert source offer are both appropriate. Very high DA; link would be valuable. Note: live URL verification not possible from this environment.
+
+---
+
+## Innago Blog — Small Landlord Property Management Resources
+- url: https://innago.com/blog/
+- type: blog
+- why: Free property management software brand built specifically for small independent landlords; their educational blog covers Ontario tenancy topics and tenant relations — a natural link partner positioned at the exact landlord audience Prospera converts to management clients.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: support@innago.com
+- site_focus: Innago offers free property management software for independent landlords with 1–100 units. Their blog is educational and landlord-focused, covering topics like lease agreements, tenant screening, Ontario rent increase rules, maintenance requests, and landlord-tenant communications. The brand positions itself as helping small landlords manage professionally without hiring a manager — which means their audience is exactly the demographic that eventually converts to Prospera's services.
+- hook: Innago's Ontario content tells small landlords how to manage themselves more effectively. Prospera can offer the other side of the story — a local expert explaining when DIY management creates more cost and risk than hiring a professional. A guest post ("The hidden costs of self-managing in Ontario") or resource mention would serve Innago's audience while generating high-intent referral traffic for Prospera.
+- specific_content: Their Ontario landlord guides — particularly rent increase and LTB content where Prospera's professional track record illustrates the gap between self-management and professional outcomes.
+- researcher_notes: Approachable brand with active editorial team. Contact via support@innago.com or their blog contributor form. Guest post pitch appropriate given shared audience. Note: live URL verification not possible from this environment.
+
+---
+
+## London Economic Development Corporation (LEDC)
+- url: https://ledc.com/news/
+- type: blog
+- why: London Ontario's official economic development body; they cover business growth, real estate investment, and market conditions in London — a credible local citation for Prospera as SW Ontario's leading property management firm.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: info@ledc.com
+- site_focus: The London Economic Development Corporation (LEDC) is the City of London's official economic development arm. They publish market intelligence reports, business spotlights, and investment news covering London Ontario's real estate, commercial, and industrial sectors. Their audience includes investors, developers, businesses considering London, and local growth companies. High local credibility; not a competitor.
+- hook: LEDC regularly features London-based businesses and market data in their economic reporting. Prospera's rental market data — vacancy trends, average rents, tenant demand shifts in London Ontario — fills a gap in their residential real estate market intelligence, and Ebin's profile as a local landlord management expert fits their business spotlight format.
+- specific_content: Their London Ontario real estate investment and market data content — Prospera's rental market data and local operator perspective would directly complement LEDC's business-attraction and investor-information mandate.
+- researcher_notes: Municipal economic development body; professional tone appropriate. Contact at info@ledc.com. Business spotlight or expert data-contribution offer is best angle. High local SEO value for a London Ontario citation. Note: live URL verification not possible from this environment.
+
+---
+
+## Strathroy Age Dispatch — Local Strathroy/Middlesex News
+- url: https://www.theagedispatch.com/
+- type: blog
+- why: Strathroy's community newspaper serving Middlesex County; they cover local real estate market trends and business news — a hyperlocal citation for Prospera's presence in Strathroy.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: news@theagedispatch.com
+- site_focus: The Strathroy Age Dispatch is the primary local newspaper serving Strathroy and Middlesex County, Ontario. They cover municipal news, real estate, local business, and community events. Hyperlocal audience — homeowners, landlords, and renters in Strathroy, Caradoc, and the broader Middlesex area. Direct overlap with Prospera's Strathroy service area.
+- hook: The Age Dispatch regularly covers local housing affordability and rental market conditions in Middlesex County. Ebin and Prospera Properties are the only professional property management firm actively serving Strathroy — a local expert perspective on rental supply, tenant demand, and investment property in the area would make a strong community story or letter-to-editor piece.
+- specific_content: Any coverage of Strathroy's rental market, affordable housing, or local business news — Ebin can provide ground-level data on rental vacancy, demand, and investment activity in Strathroy that no other source has.
+- researcher_notes: Small community newspaper; editor/reporter outreach appropriate. Direct email to news@theagedispatch.com or a letter to editor works well. Hyperlocal NAP citation value is high for Strathroy SEO. Note: live URL verification not possible from this environment.
+
+---
+
+## BrokerLink Insurance Blog — Landlord & Rental Property Resources
+- url: https://www.brokerlink.ca/blog/
+- type: blog
+- why: National insurance broker with strong Ontario presence; their landlord insurance content educates property owners across Ontario and would naturally reference professional management as a risk-mitigation tool.
+- researched: true
+- drafted: true
+- added: 2026-11-08
+- contact_email: customerservice@brokerlink.ca
+- site_focus: BrokerLink is one of Canada's largest insurance broker networks (owned by Intact Financial), with strong Ontario retail presence. Their blog covers home insurance, landlord insurance, liability, and risk management for property owners. Ontario rental property insurance content targets small landlords and real estate investors — the same demographic as Prospera's target client base.
+- hook: BrokerLink's landlord insurance guides explain what coverage landlords need but rarely address how professional property management reduces claims risk — through proper inspections, documented maintenance, and tenant screening. Ebin can offer an expert angle for their Ontario landlord content on how managed properties have better insurance outcomes, with a natural mention of Prospera's services.
+- specific_content: Their Ontario landlord insurance guides and rental property risk content — a contributed piece or quoted expert perspective on "How professional property management reduces landlord insurance claims in Ontario" would fit their editorial model directly.
+- researcher_notes: Large national brand; editorial contact via customerservice@brokerlink.ca or media@brokerlink.ca. Guest contribution or expert source offer appropriate. Note: live URL verification not possible from this environment.
+
+---
