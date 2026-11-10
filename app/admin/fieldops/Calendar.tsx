@@ -13,7 +13,7 @@ interface Data {
   capacity: Record<string, Record<string, number>>;
 }
 
-const HOUR = 46;
+const HOUR = 64;
 const TZ = "America/Toronto";
 
 function addDays(day: string, n: number) {
@@ -117,14 +117,14 @@ export default function Calendar({ onOpen }: { onOpen: (id: string) => void }) {
                     return (
                       <button key={a.id} onClick={() => onOpen(a.id)} title={`${fTime(a.starts_at)} ${a.properties.address} · ${a.tenant_name} · ${st?.label}`}
                         style={{
-                          position: "absolute", left: 4, right: 4, top: y(s) + 1, height: Math.max(22, y(e) - y(s) - 2), borderRadius: 7, cursor: "pointer", textAlign: "left",
-                          padding: "3px 7px", overflow: "hidden", fontFamily: "inherit", lineHeight: 1.25,
+                          position: "absolute", left: 4, right: 4, top: y(s) + 1, height: Math.max(16, y(e) - y(s) - 2), borderRadius: 6, cursor: "pointer", textAlign: "left",
+                          padding: "1px 7px", overflow: "hidden", fontFamily: "inherit", lineHeight: 1.2, boxSizing: "border-box",
                           background: a.status === "reassignment_pending" ? C.redBg : dim ? "#EDEAE5" : a.agent_id ? colour.get(a.agent_id) ?? C.navy : C.redBg,
                           color: a.status === "reassignment_pending" || !a.agent_id ? C.red : dim ? C.muted : "#fff",
                           border: unacked ? `2px dashed ${C.burgundy}` : "1px solid rgba(0,0,0,0.05)",
                         }}>
-                        <div style={{ fontSize: 12, fontWeight: 700 }}>{fTime(a.starts_at)} {a.tenant_name.split(" ")[0]}</div>
-                        <div style={{ fontSize: 11, opacity: 0.85, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{a.properties.address}</div>
+                        <div style={{ fontSize: 12, fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{fTime(a.starts_at)} {a.tenant_name.split(" ")[0]}</div>
+                        {y(e) - y(s) >= 34 && <div style={{ fontSize: 11, opacity: 0.85, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{a.properties.address}</div>}
                       </button>
                     );
                   })}

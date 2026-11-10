@@ -67,9 +67,9 @@ export default function TeamHome() {
           <Label>Coming up</Label>
           <div className="mt-3 grid gap-2.5">
             {rest.map((s) => (
-              <Link key={s.id} href={`/team/showings/${s.id}`}>
+              <Link key={s.id} href={`/team/showings/${s.id}`} className="block min-w-0">
                 <Box className="px-4 py-3.5 flex items-center gap-4">
-                  <div className="w-16 shrink-0">
+                  <div className="w-[76px] shrink-0 whitespace-nowrap">
                     <div className="text-xs font-semibold" style={{ color: MUTED }}>{relDay(s.starts_at)}</div>
                     <div className="text-[17px] font-bold" style={{ color: NAVY }}>{tTime(s.starts_at)}</div>
                   </div>
@@ -77,7 +77,7 @@ export default function TeamHome() {
                     <div className="font-semibold truncate" style={{ color: NAVY }}>{s.address}</div>
                     <div className="text-sm" style={{ color: MUTED }}>with {s.tenant_first}</div>
                   </div>
-                  {!s.acknowledged && s.status === "confirmed" ? <Pill tone="red">New</Pill> : <Pill tone={STATUS[s.status]?.tone}>{STATUS[s.status]?.label}</Pill>}
+                  <span className="shrink-0">{!s.acknowledged && s.status === "confirmed" ? <Pill tone="red">New</Pill> : <Pill tone={STATUS[s.status]?.tone}>{STATUS[s.status]?.label}</Pill>}</span>
                 </Box>
               </Link>
             ))}
