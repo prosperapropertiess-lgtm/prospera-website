@@ -306,3 +306,25 @@ end $$;
 
 revoke all on function fo_try_book(uuid, uuid, timestamptz, timestamptz, int, int, uuid, uuid, text, text, text, text, text, text, int) from public, anon, authenticated;
 revoke all on function fo_try_move(uuid, uuid, timestamptz, timestamptz, int, int, int, text, text) from public, anon, authenticated;
+
+-- 026: the 15-minute job. Supabase pg_cron calls /api/cron/fieldops with a
+-- token generated inside the vault, so it never leaves the database.
+create extension if not exists pg_cron;
+create extension if not exists pg_net;
+do $$ begin
+  if not exists (select 1 from vault.secrets where name = 'fieldops_tick') then
+    perform vault.create_secret(encode(gen_random_bytes(32), 'hex'), 'fieldops_tick', 'Auth for the FieldOps 15-minute job');
+  end if;
+end $$;
+create or replace function fo_check_tick(p_token text) returns boolean
+language sql security definer set search_path = public, vault as $$
+  select exists (select 1 from vault.decrypted_secrets where name = 'fieldops_tick' and decrypted_secret = p_token);
+$$;
+revoke all on function fo_check_tick(text) from public, anon, authenticated;
+select cron.schedule('fieldops-tick', '*/15 * * * *', $$
+  select net.http_get(
+    url := 'https://www.prosperaproperties.co/api/cron/fieldops',
+    headers := jsonb_build_object('Authorization', 'Bearer ' || (select decrypted_secret from vault.decrypted_secrets where name = 'fieldops_tick')),
+    timeout_milliseconds := 60000
+  );
+$$);

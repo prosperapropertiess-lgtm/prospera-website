@@ -12,11 +12,16 @@ export const maxDuration = 120;
 // are due, and flags showings nobody closed out. Safe to run twice: every
 // message has an idempotency key.
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("authorization");
-  const ok = [process.env.FIELDOPS_CRON_SECRET, process.env.CRON_SECRET].filter(Boolean).some((s) => auth === `Bearer ${s}`);
+  const auth = req.headers.get("authorization") ?? "";
+  const sb = getSupabaseAdmin();
+  // Either a Vercel secret, or the token pg_cron reads from the database vault.
+  let ok = [process.env.FIELDOPS_CRON_SECRET, process.env.CRON_SECRET].filter(Boolean).some((s) => auth === `Bearer ${s}`);
+  if (!ok && auth.startsWith("Bearer ") && auth.length > 40) {
+    const { data } = await sb.rpc("fo_check_tick", { p_token: auth.slice(7) });
+    ok = data === true;
+  }
   if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const sb = getSupabaseAdmin();
   const settings = await loadSettings();
   const now = Date.now();
   const maxH = Math.max(24, ...settings.reminder_hours);
