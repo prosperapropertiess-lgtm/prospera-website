@@ -67,6 +67,17 @@ export default function ViewingRequestsPage() {
     setBusy(null);
   }
 
+  async function sendLink(r: Req) {
+    setBusy(r.id); setError(null); setNotice(null);
+    const res = await fetch("/api/admin/fieldops", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "send_booking_link", request: r.id }) });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) setError(d.error ?? "Couldn't create the link.");
+    else if (d.delivery === "sent") setNotice(`Booking link emailed to ${r.full_name}. They pick a time; you'll see it in Showings.`);
+    else { await navigator.clipboard.writeText(d.url).catch(() => null); setNotice(`${r.full_name} has no email, so the link was copied. Text it to them: ${d.url}`); }
+    await load();
+    setBusy(null);
+  }
+
   const list = reqs ?? [];
   const byTab = {
     todo: list.filter((r) => r.status === "new"),
@@ -99,7 +110,7 @@ export default function ViewingRequestsPage() {
       ) : (
         <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
           {(tab === "todo" ? [...shown].sort((a, b) => ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority)) : shown).map((r) => (
-            <RequestCard key={r.id} r={r} busy={busy === r.id} onStatus={(s) => setStatus(r, s)} />
+            <RequestCard key={r.id} r={r} busy={busy === r.id} onStatus={(s) => setStatus(r, s)} onLink={() => sendLink(r)} />
           ))}
         </div>
       )}
@@ -107,7 +118,7 @@ export default function ViewingRequestsPage() {
   );
 }
 
-function RequestCard({ r, busy, onStatus }: { r: Req; busy: boolean; onStatus: (s: Status) => void }) {
+function RequestCard({ r, busy, onStatus, onLink }: { r: Req; busy: boolean; onStatus: (s: Status) => void; onLink: () => void }) {
   const h = r.property_snapshot;
   const details = describeAnswers(r.answers ?? {}).filter((x) => x.id !== "income" && x.id !== "credit");
   return (
@@ -150,7 +161,8 @@ function RequestCard({ r, busy, onStatus }: { r: Req; busy: boolean; onStatus: (
       )}
 
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 16 }}>
-        {r.status === "new" && <Button variant="primary" disabled={busy} onClick={() => onStatus("contacted")}>I contacted them</Button>}
+        {(r.status === "new" || r.status === "contacted") && <Button variant="primary" disabled={busy} onClick={onLink}>{r.email ? "Send booking link" : "Copy booking link"}</Button>}
+        {r.status === "new" && <Button disabled={busy} onClick={() => onStatus("contacted")}>I contacted them</Button>}
         {(r.status === "new" || r.status === "contacted") && <Button disabled={busy} onClick={() => onStatus("viewing_booked")}>Viewing booked</Button>}
         {r.status !== "not_a_fit" && r.status !== "closed" && <Button variant="ghost" disabled={busy} onClick={() => onStatus(r.status === "viewing_booked" ? "closed" : "not_a_fit")}>{r.status === "viewing_booked" ? "Done" : "Not a fit"}</Button>}
         {(r.status === "not_a_fit" || r.status === "closed") && <Button variant="ghost" disabled={busy} onClick={() => onStatus("new")}>Move back to To call</Button>}

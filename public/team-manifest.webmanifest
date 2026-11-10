@@ -1,0 +1,10 @@
+{
+  "name": "Prospera FieldOps",
+  "short_name": "FieldOps",
+  "start_url": "/team",
+  "scope": "/team",
+  "display": "standalone",
+  "background_color": "#F7F5F2",
+  "theme_color": "#1F2F3A",
+  "icons": [{ "src": "/logo.png", "sizes": "512x512", "type": "image/png" }]
+}
