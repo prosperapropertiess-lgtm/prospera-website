@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import {
-  CONSENT_TEXT, FORM_VERSION, PUBLIC_HOME_FIELDS, toPublicHome, torontoToday, incomeLabel, creditLabel, cleanAnswers,
+  CONSENT_TEXT, FORM_VERSION, PUBLIC_HOME_FIELDS, toPublicHome, torontoToday, cleanAnswers,
 } from "@/lib/viewing-requests";
+import { viewingRequestEmail } from "@/lib/viewing-email";
 
 export const dynamic = "force-dynamic";
 
@@ -88,25 +89,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "We couldn't save your request. Try again." }, { status: 500 });
   }
 
-  // Short heads-up to Ebin. The daily review does the sorting. A failed email doesn't undo the save.
+  // Card-style summary to Ebin. The daily review does the sorting. A failed email doesn't undo the save.
   try {
+    const seconds = Number.isFinite(Number(body.seconds)) && Number(body.seconds) > 0 && Number(body.seconds) < 86_400 ? Math.round(Number(body.seconds)) : null;
+    const mail = viewingRequestEmail({ name, phone, email: email || null, moveIn, occupants, answers, home: snapshot, seconds });
     await new Resend(process.env.RESEND_API_KEY).emails.send({
       from: "Prospera Admin <hello@prosperaproperties.co>",
       to: ["prosperapropertiess@gmail.com"],
-      subject: `Viewing request: ${snapshot.address}`,
-      html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#222">
-        <p><strong>${escapeHtml(name)}</strong> wants to see ${escapeHtml(snapshot.address)}.</p>
-        <p>Move in ${moveIn} · ${occupants} ${occupants === 1 ? "person" : "people"} · income ${incomeLabel(answers.income)} · credit ${creditLabel(answers.credit)}</p>
-        <p><a href="https://www.prosperaproperties.co/admin/viewing-requests" style="color:#8B2030;font-weight:600">Open viewing requests</a></p>
-      </div>`,
+      subject: mail.subject,
+      html: mail.html,
     });
   } catch (err) {
     console.error("[view] notify failed", err);
   }
 
   return NextResponse.json({ ok: true, ref: saved.id.slice(0, 8).toUpperCase(), token: saved.id }, { status: 201 });
-}
-
-function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 }

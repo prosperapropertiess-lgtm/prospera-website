@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   Page, PageHeader, Card, Badge, Button, Tabs, EmptyState, Loading, ErrorNote, SuccessNote, C, money, ago, shortDate, type Tone,
 } from "@/components/admin/kit";
-import { incomeLabel, creditLabel, describeAnswers, homeSlug, VIEW_URL, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import { incomeLabel, creditLabel, describeAnswers, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 type Status = "new" | "contacted" | "viewing_booked" | "not_a_fit" | "closed";
 type Priority = "call_today" | "maybe" | "not_now" | null;
@@ -26,7 +26,6 @@ interface Req {
   review_reason: string | null;
   created_at: string;
 }
-interface Home { id: string; address: string; city: string; price: number }
 
 const PRIORITY: Record<Exclude<Priority, null>, { label: string; tone: Tone }> = {
   call_today: { label: "Call today", tone: "green" },
@@ -35,13 +34,8 @@ const PRIORITY: Record<Exclude<Priority, null>, { label: string; tone: Tone }> =
 };
 const ORDER: Priority[] = ["call_today", "maybe", null, "not_now"];
 
-function replyFor(h: Home) {
-  return `Hi! Yes, ${h.address} is available. To book a viewing, pick the home and answer a few quick questions here: ${VIEW_URL}/${homeSlug(h.address)}\n\nNo documents or payment needed. We'll call you to set up a time.`;
-}
-
 export default function ViewingRequestsPage() {
   const [reqs, setReqs] = useState<Req[] | null>(null);
-  const [homes, setHomes] = useState<Home[]>([]);
   const [tab, setTab] = useState<"todo" | "contacted" | "booked" | "done">("todo");
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +45,7 @@ export default function ViewingRequestsPage() {
     const res = await fetch("/api/admin/viewing-requests");
     if (!res.ok) { setReqs([]); setError("Couldn't load requests. Refresh to try again."); return; }
     const d = await res.json();
-    setReqs(d.requests); setHomes(d.homes);
+    setReqs(d.requests);
   }, []);
 
   useEffect(() => { const t = setTimeout(load, 0); return () => clearTimeout(t); }, [load]);
@@ -73,10 +67,6 @@ export default function ViewingRequestsPage() {
     setBusy(null);
   }
 
-  async function copy(text: string, what: string) {
-    try { await navigator.clipboard.writeText(text); setNotice(`Copied the ${what}.`); } catch { setError("Couldn't copy. Select the text and copy it by hand."); }
-  }
-
   const list = reqs ?? [];
   const byTab = {
     todo: list.filter((r) => r.status === "new"),
@@ -96,28 +86,6 @@ export default function ViewingRequestsPage() {
       />
       {error && <ErrorNote>{error}</ErrorNote>}
       {notice && <div style={{ marginBottom: 16 }}><SuccessNote>{notice}</SuccessNote></div>}
-
-      <Card style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 17, fontWeight: 700, color: C.navy }}>Marketplace auto-reply</div>
-        <div style={{ fontSize: 14, color: C.muted, marginTop: 4, marginBottom: 14 }}>
-          Paste this into the listing&apos;s automatic reply on Facebook Marketplace. The link opens the form with that home already picked.
-        </div>
-        {homes.length === 0 && <div style={{ fontSize: 15, color: C.faint }}>No homes are marked available right now.</div>}
-        <div style={{ display: "grid", gap: 14 }}>
-          {homes.map((h) => (
-            <div key={h.id} style={{ background: C.greyBg, borderRadius: 10, padding: 14 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-                <div style={{ fontWeight: 600, color: C.navy }}>{h.address} · {money(h.price)}/mo</div>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <Button size="sm" onClick={() => copy(replyFor(h), "message")}>Copy message</Button>
-                  <Button size="sm" variant="ghost" onClick={() => copy(`${VIEW_URL}/${homeSlug(h.address)}`, "link")}>Copy link only</Button>
-                </div>
-              </div>
-              <div style={{ fontSize: 14, color: C.text, marginTop: 8, whiteSpace: "pre-wrap" }}>{replyFor(h)}</div>
-            </div>
-          ))}
-        </div>
-      </Card>
 
       <Tabs value={tab} onChange={setTab} options={[
         { value: "todo", label: "To call", count: byTab.todo.length },
