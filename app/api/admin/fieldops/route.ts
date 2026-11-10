@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { DEFAULT_RULES, hashToken, loadCtx, loadPropertyRules, loadSettings, signId, slotsFor, agentAvailable, LIVE } from "@/lib/fieldops/engine";
+import { ALL_SHOWINGS, calendarUrl, DEFAULT_RULES, hashToken, loadCtx, loadPropertyRules, loadSettings, signId, slotsFor, agentAvailable, LIVE } from "@/lib/fieldops/engine";
 import {
   adminBook, cancel, createDirectInvite, createInvite, markLeaseSigned, reassign, replacementsFor, reschedule, manageUrl, bookUrl,
 } from "@/lib/fieldops/service";
@@ -193,7 +193,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ rows: data ?? [], settings: await loadSettings() });
   }
 
-  if (view === "settings") return NextResponse.json({ settings: await loadSettings() });
+  if (view === "settings") return NextResponse.json({ settings: await loadSettings(), calendarUrl: calendarUrl(ALL_SHOWINGS) });
 
   if (view === "slots") {
     const property = q.get("property") ?? "";

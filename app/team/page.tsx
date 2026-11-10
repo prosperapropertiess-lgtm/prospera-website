@@ -10,6 +10,7 @@ interface Home {
   me: { name: string };
   showings: Showing[];
   hasAvailability: boolean;
+  calendarUrl: string;
   earnings: { pending: number; approved: number; paid: number; bonusPending: number };
 }
 
@@ -85,7 +86,17 @@ export default function TeamHome() {
         </div>
       )}
 
-      <Link href="/team/earnings" className="block mt-8">
+      <a href={data.calendarUrl.replace(/^https:/, "webcal:")} className="block mt-8">
+        <Box className="px-5 py-4 flex items-center justify-between gap-3">
+          <span>
+            <span className="block font-semibold text-[15px]" style={{ color: NAVY }}>Show my showings in my phone&apos;s calendar</span>
+            <span className="block text-sm" style={{ color: MUTED }}>Updates by itself. Tap once to subscribe.</span>
+          </span>
+          <span className="text-xl" style={{ color: NAVY }} aria-hidden="true">→</span>
+        </Box>
+      </a>
+
+      <Link href="/team/earnings" className="block mt-3">
         <Box className="p-5">
           <Label>Earnings</Label>
           <div className="grid grid-cols-3 gap-3 mt-3">

@@ -11,8 +11,9 @@ interface S {
 
 export default function Settings() {
   const [s, setS] = useState<S | null>(null);
+  const [feed, setFeed] = useState("");
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
-  useEffect(() => { api<{ settings: S }>("settings").then((d) => setS(d.settings)).catch((e) => setMsg({ ok: false, text: e.message })); }, []);
+  useEffect(() => { api<{ settings: S; calendarUrl: string }>("settings").then((d) => { setS(d.settings); setFeed(d.calendarUrl); }).catch((e) => setMsg({ ok: false, text: e.message })); }, []);
   if (!s) return msg ? <ErrorNote>{msg.text}</ErrorNote> : <Loading />;
 
   async function save() {
@@ -70,6 +71,15 @@ export default function Settings() {
           <div><Label>Share work fairly</Label><input style={input} value={String(s.weight_fair)} onChange={(e) => n("weight_fair", e.target.value)} /></div>
           <div><Label>Reliable record</Label><input style={input} value={String(s.weight_reliable)} onChange={(e) => n("weight_reliable", e.target.value)} /></div>
           <div><Label>Less driving</Label><input style={input} value={String(s.weight_travel)} onChange={(e) => n("weight_travel", e.target.value)} /></div>
+        </div>
+      </Card>
+
+      <Card>
+        <div style={{ fontSize: 17, fontWeight: 700, color: C.navy }}>Your calendar</div>
+        <div style={{ fontSize: 14, color: C.muted, marginTop: 6 }}>Subscribe once in Google or Apple Calendar to see every showing (with who&apos;s doing it). Read-only; changes are made here. Keep this link private.</div>
+        <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+          <Button size="sm" href={feed.replace(/^https:/, "webcal:")}>Open in my calendar app</Button>
+          <Button size="sm" onClick={() => navigator.clipboard.writeText(feed)}>Copy link (for Google Calendar → From URL)</Button>
         </div>
       </Card>
 

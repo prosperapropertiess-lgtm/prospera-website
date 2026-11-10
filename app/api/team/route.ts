@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { getAgentFromRequest } from "@/lib/agent-auth";
-import { hashToken, verifyId, loadSettings, LIVE } from "@/lib/fieldops/engine";
+import { hashToken, verifyId, loadSettings, calendarUrl, LIVE } from "@/lib/fieldops/engine";
 import { complete, markStep, reportUnavailable, STEPS, type Report, type Step } from "@/lib/fieldops/service";
 import { todayToronto, localParts } from "@/lib/fieldops/time";
 
@@ -39,6 +39,7 @@ export async function GET(req: NextRequest) {
       me: { id: me.id, name: me.name, email: me.email },
       showings,
       hasAvailability: (hasAvailability ?? 0) > 0,
+      calendarUrl: calendarUrl(me.id),
       earnings: { pending: sum((e) => e.status === "pending" && e.kind !== "lease_bonus"), approved: sum((e) => e.status === "approved"), paid: sum((e) => e.status === "paid"), bonusPending: sum((e) => e.status === "pending" && e.kind === "lease_bonus") },
     });
   }

@@ -257,11 +257,15 @@ function secret() {
   if (!s) throw new Error("FIELDOPS_SECRET is not set");
   return s;
 }
-export function signId(kind: "book" | "manage" | "invite", id: string) {
+export function signId(kind: "book" | "manage" | "invite" | "ics", id: string) {
   const sig = crypto.createHmac("sha256", secret()).update(`${kind}:${id}`).digest("base64url").slice(0, 32);
   return `${id}.${sig}`;
 }
-export function verifyId(kind: "book" | "manage" | "invite", token: string): string | null {
+/** Calendar feed id that means "every showing" (Ebin's feed). */
+export const ALL_SHOWINGS = "00000000-0000-4000-8000-000000000000";
+export const calendarUrl = (id: string) => `https://www.prosperaproperties.co/api/calendar/${signId("ics", id)}.ics`;
+
+export function verifyId(kind: "book" | "manage" | "invite" | "ics", token: string): string | null {
   const [id, sig] = token.split(".");
   if (!id || !sig || !/^[0-9a-f-]{36}$/.test(id)) return null;
   const want = signId(kind, id).split(".")[1];
