@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { availabilityLabel } from "@/lib/listing-format";
 import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/animations/FadeIn";
@@ -271,9 +272,7 @@ export default function ListingsPage() {
                             className="text-xs px-3 py-1 rounded-full font-semibold"
                             style={{ backgroundColor: "rgba(255,255,255,0.93)", color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}
                           >
-                            {p.available_date
-                              ? `Available ${new Date(p.available_date).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}`
-                              : "Available Now"}
+                            {availabilityLabel(p.available_date)}
                           </span>
                         </div>
 

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { PropertyRecord } from "./ListingPage";
+import { typeLabel } from "@/lib/listing-format";
 
 interface Props {
   property: PropertyRecord;
@@ -10,9 +11,8 @@ interface Props {
 
 function buildImageAlt(property: PropertyRecord): string {
   const beds = property.bedrooms ? `${property.bedrooms}-bedroom ` : "";
-  const type = property.property_type
-    ? property.property_type.replace(/_/g, " ") + " "
-    : "rental ";
+  const t = typeLabel(property.property_type);
+  const type = t ? t.toLowerCase() + " " : "rental ";
   const city = property.city || "London";
   return `${beds}${type}for rent in ${city}, Ontario, Prospera Properties`;
 }
@@ -70,7 +70,7 @@ export default function LifeSimHero({ property }: Props) {
               className="text-xs uppercase tracking-widest mb-4"
               style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
             >
-              {[property.property_type, property.city, "Ontario"].filter(Boolean).join(" · ")}
+              {[typeLabel(property.property_type), property.city, "Ontario"].filter(Boolean).join(" · ")}
             </p>
 
             {/* Title — always rendered for SEO */}

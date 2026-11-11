@@ -1,22 +1,17 @@
 
 import Link from "next/link";
-import { Clock, CreditCard, Phone, FileText } from "lucide-react";
+import { Wrench, Phone, FileText } from "lucide-react";
 
 const BENEFITS = [
   {
-    icon: Clock,
-    title: "24-Hour Response",
-    desc: "Every maintenance request, every question, acknowledged within 24 hours. No voicemail black holes.",
-  },
-  {
-    icon: CreditCard,
-    title: "Online Rent Payment",
-    desc: "Pay rent from your phone. No cheques, no e-transfers, no chasing anyone.",
+    icon: Wrench,
+    title: "Repair Requests Online",
+    desc: "Send a repair request with photos from your phone, and see where it's at.",
   },
   {
     icon: Phone,
-    title: "Direct Line to Ebin",
-    desc: "You get a real person, not a ticket queue. Call or text (519) 697-1227 any time something comes up.",
+    title: "A Real Person",
+    desc: "Call or text (519) 697-1227 and you reach Prospera directly, not a call centre.",
   },
   {
     icon: FileText,

@@ -74,7 +74,7 @@ export default function CostsBreakdown({ property }: Props) {
             per month, fixed for the term of your lease
           </p>
 
-          {/* Deposit note — framed as refundable, not a cost */}
+          {/* Ontario allows a last month's rent deposit, not a damage deposit. */}
           {deposit && (
             <div
               className="mt-6 flex items-start gap-3 px-5 py-4 rounded-xl"
@@ -86,10 +86,10 @@ export default function CostsBreakdown({ property }: Props) {
               </svg>
               <div>
                 <p className="text-sm font-medium" style={{ color: "#1F2F3A", fontFamily: "var(--font-dm-sans)" }}>
-                  Security deposit: ${deposit.toLocaleString()}, fully refundable
+                  Last month&apos;s rent deposit: ${deposit.toLocaleString()}
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
-                  Returned in full at move-out when the unit is left in good condition. This is your money held in trust, not a fee.
+                  Paid with your first month&apos;s rent when you sign, then used as your rent for the last month of your tenancy. It&apos;s not a damage deposit.
                 </p>
               </div>
             </div>

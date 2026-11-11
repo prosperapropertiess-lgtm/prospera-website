@@ -122,7 +122,7 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
         <p className="text-sm mb-7" style={{ color: "#666666", fontFamily: "var(--font-dm-sans)" }}>
           {isRented
             ? "This property has been rented. New listings are added regularly."
-            : `$${property.price.toLocaleString()}/mo · Applications reviewed within 24 hours.`}
+            : `$${property.price.toLocaleString()}/mo`}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           {isRented ? (

@@ -32,7 +32,7 @@ const rights = [
   },
   {
     title: "First + last only",
-    body: "A landlord can only legally collect first and last month's rent upfront. A 'damage deposit' or 'key deposit' beyond this is not permitted under Ontario law.",
+    body: "A landlord can collect first month's rent, a last month's rent deposit, and a refundable key deposit. A 'damage deposit' is not permitted under Ontario law.",
   },
 ];
 

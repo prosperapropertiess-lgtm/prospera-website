@@ -5,22 +5,22 @@ const STEPS = [
   {
     icon: "event_available",
     title: "Book a Viewing",
-    desc: "Schedule a time to see the unit in person. Viewings are typically within 48 hours of request.",
+    desc: "Answer a few short questions and pick when you're free. We'll contact you to set up a time to see the home.",
   },
   {
     icon: "assignment",
     title: "Submit Your Application",
-    desc: "Fill out our rental application online. Takes about 10 minutes.",
+    desc: "If you like the home, fill out our rental application online and upload your documents.",
   },
   {
     icon: "fact_check",
-    title: "Screening & Verification",
-    desc: "We verify: employment or income, 6 months of bank statements, a soft credit check (no impact to your score), and a previous landlord reference.",
+    title: "Review",
+    desc: "We check your ID and proof of income, and we may contact the references you list. A person reviews every application.",
   },
   {
     icon: "draw",
     title: "Lease Signing",
-    desc: "Review and sign your lease digitally. We walk you through everything.",
+    desc: "We go through the lease with you before you sign it.",
   },
   {
     icon: "key",
@@ -32,8 +32,8 @@ const STEPS = [
 
 const REQUIREMENTS = [
   { icon: "badge", text: "Identity verification: government-issued photo ID" },
-  { icon: "payments", text: "Income verification: pay stubs, employment letter, or bank statements" },
-  { icon: "contact_phone", text: "References: previous landlord contact" },
+  { icon: "payments", text: "Proof of income: pay stubs, an employment letter, or a benefits or pension statement" },
+  { icon: "contact_phone", text: "References: a previous landlord, if you have one" },
 ];
 
 export default function ApplicationProcess() {

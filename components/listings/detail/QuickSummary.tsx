@@ -4,6 +4,8 @@ import { BedDouble, Bath, Maximize, Home } from "lucide-react";
 import BookViewingButton from "./BookViewingButton";
 import ApplyButton from "./ApplyButton";
 import type { PropertyRecord } from "./ListingPage";
+import { availabilityLabel } from "@/lib/listing-format";
+import { typeLabel } from "@/lib/listing-format";
 
 interface Props {
   property: PropertyRecord;
@@ -16,11 +18,6 @@ function rentClarityLine(property: PropertyRecord): string | null {
   const tenantUtils = property.utilities_tenant_paid ?? [];
   if (tenantUtils.length > 0) return "+ utilities";
   return null;
-}
-
-function formatAvailableDate(dateStr: string): string {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" });
 }
 
 interface Chip {
@@ -94,9 +91,9 @@ export default function QuickSummary({ property }: Props) {
       value: property.sqft.toLocaleString(),
       label: "sqft",
     },
-    property.property_type && {
+    typeLabel(property.property_type) && {
       icon: Home,
-      value: property.property_type.charAt(0).toUpperCase() + property.property_type.slice(1),
+      value: typeLabel(property.property_type)!,
       label: "",
     },
   ].filter(Boolean) as StatItem[];
@@ -139,7 +136,7 @@ export default function QuickSummary({ property }: Props) {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 flex-wrap">
-            {property.available_date && (
+            {property.available !== false && (
               <div
                 className="px-4 py-2 rounded-full text-xs font-semibold"
                 style={{
@@ -149,7 +146,7 @@ export default function QuickSummary({ property }: Props) {
                   fontFamily: "var(--font-dm-sans)",
                 }}
               >
-                Available {formatAvailableDate(property.available_date)}
+                {availabilityLabel(property.available_date, { year: true })}
               </div>
             )}
             <ApplyButton property={property} variant="primary" label="Apply Now" />

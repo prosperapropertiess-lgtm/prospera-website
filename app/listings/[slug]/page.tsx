@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import ListingPage from "@/components/listings/detail/ListingPage";
 import JsonLd from "@/components/seo/JsonLd";
+import { typeLabel } from "@/lib/listing-format";
 
 // ISR — revalidate every 10 minutes so edits propagate without per-request overhead
 export const revalidate = 600;
@@ -43,10 +44,8 @@ async function resolveProperty(param: string) {
 
 function buildMetaTitle(p: Record<string, unknown>): string {
   const beds = p.bedrooms ? `${p.bedrooms}-Bedroom ` : "";
-  const type = p.property_type
-    ? (p.property_type as string).charAt(0).toUpperCase() +
-      (p.property_type as string).slice(1).replace(/_/g, " ") + " "
-    : "Rental ";
+  const t = typeLabel(p.property_type as string | null);
+  const type = t ? `${t} ` : "Home ";
   const status = p.available === false ? "Recently Rented" : "for Rent";
   const city = (p.city as string) || "London";
   return `${beds}${type}${status} in ${city}, Ontario | Prospera Properties`;
@@ -227,13 +226,13 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
   const baths = p.bathrooms as number | null;
   const availDate = p.available_date as string | null;
 
-  if (availDate) {
-    const formatted = new Date(availDate).toLocaleDateString("en-CA", {
-      month: "long", day: "numeric", year: "numeric",
-    });
+  {
+    const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+    const future = availDate && availDate.slice(0, 10) > today;
+    const formatted = future ? new Date(`${availDate!.slice(0, 10)}T12:00:00Z`).toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }) : null;
     faqs.push({
       q: "When is this property available?",
-      a: `This property is available starting ${formatted}. We recommend booking a viewing as soon as possible: similar units in ${city} typically receive multiple applications within the first week of listing.`,
+      a: future ? `This property is available starting ${formatted}. Book a viewing to see it before then.` : `This property is available now. Book a viewing to see it.`,
     });
   }
 
@@ -248,7 +247,7 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
   } else {
     faqs.push({
       q: "Are utilities included in the rent?",
-      a: `Utilities are not included. Budget an additional $150–$300/month for hydro, water, and heat, typical for a ${beds || ""}-bedroom unit in ${city} depending on season and usage.`,
+      a: `Utilities are not included in the rent. Ask us at your viewing which ones you'd set up and pay for.`,
     });
   }
 
@@ -263,7 +262,7 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
     const policy = typeof p.pet_policy === "string" ? p.pet_policy : null;
     faqs.push({
       q: "Are pets allowed?",
-      a: policy || `Pets are welcome at this property. Please disclose your pet's type and size during your application. Under Ontario's Residential Tenancies Act, landlords cannot refuse a tenant solely because they have pets.`,
+      a: policy || `Pets are welcome at this property. Please tell us about your pet (type and size) when you request a viewing.`,
     });
   } else {
     faqs.push({
@@ -274,7 +273,7 @@ function buildFaqs(p: Record<string, unknown>): FaqItem[] {
 
   faqs.push({
     q: "How do I apply for this property?",
-    a: `Book a viewing through this page or call (519) 697-1227. After viewing, we'll send you an application link. The process is straightforward: we verify your identity, income, and references. Applications are reviewed within 24–48 hours.`,
+    a: `Book a viewing through this page or call (519) 697-1227. If you'd like the home after seeing it, apply online with photo ID and proof of income. A person reviews every application.`,
   });
 
   const leaseTerm = p.lease_term as string | null;
