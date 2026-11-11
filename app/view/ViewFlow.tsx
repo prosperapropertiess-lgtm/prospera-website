@@ -305,7 +305,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
                 const picked = (v: string) => !otherDate && d.moveIn === v;
                 return (
                   <div className="grid gap-2">
-                    <Choice selected={picked(asap)} onClick={() => { setOtherDate(false); update({ moveIn: asap }); }}>
+                    <Choice compact selected={picked(asap)} onClick={() => { setOtherDate(false); update({ moveIn: asap }); }}>
                       As soon as possible{asap > torontoToday() ? ` (${fmtDate(asap)})` : ""}
                     </Choice>
                     <div className="grid grid-cols-2 gap-2">

@@ -1,6 +1,6 @@
 // The card-style email Ebin gets the moment someone sends the viewing form.
 
-import { describeAnswers, incomeLabel, creditLabel, QUESTIONS, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import { describeAnswers, incomeLabel, creditLabel, torontoToday, QUESTIONS, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 const SHORT: Record<string, string> = {
   living: "Living now", notice: "Notice given", rental_length: "Renting there", landlord_reference: "Landlord reference",
@@ -25,6 +25,7 @@ const IN_GRID = new Set(["income", "credit", "viewing_times"]);
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 
 function niceDate(v: string) {
+  if (v <= torontoToday()) return "As soon as possible";
   const d = new Date(`${v}T12:00:00`);
   return isNaN(d.getTime()) ? v : d.toLocaleDateString("en-CA", { weekday: "short", month: "long", day: "numeric" });
 }
