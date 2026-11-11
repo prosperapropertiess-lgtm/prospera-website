@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { incomeLabel, creditLabel, torontoToday, describeAnswers, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import { incomeLabel, creditLabel, torontoToday, targetMoveIn, describeAnswers, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 type Priority = "call_today" | "maybe" | "not_now";
 
@@ -31,6 +31,7 @@ function factsFor(r: ReqRow, i: number) {
     bedrooms: h.bedrooms,
     home_available_from: h.available_date && h.available_date > torontoToday() ? h.available_date : "already available",
     wants_to_move_in: r.move_in_date,
+    hoping_to_fill_by: targetMoveIn(h.available_date),
     people: r.occupants,
     household_income_per_month: incomeLabel(r.income_range),
     credit_score: creditLabel(r.credit_range),
@@ -43,8 +44,8 @@ function factsFor(r: ReqRow, i: number) {
 const PROMPT = `You help a property manager in London, Ontario decide which viewing requests to phone first. A person makes every decision; you only sort the call list.
 
 For each request, choose:
-- call_today: a strong fit. Income comfortably covers the rent (roughly 2.5x or more is comfortable), the move-in date is close to when the home is free, and the home's size suits the number of people.
-- maybe: worth a call, but something needs a conversation (income is tight, the move-in date is far off, credit is low or unknown).
+- call_today: a strong fit. Income comfortably covers the rent (roughly 2.5x or more is comfortable), they can move in by hoping_to_fill_by, and the home's size suits the number of people.
+- maybe: worth a call, but something needs a conversation (income is tight, they want to move in after hoping_to_fill_by, credit is low or unknown).
 - not_now: a clear mismatch on facts (for example the income range is well under the rent, or they want to move in many months after the home is free).
 
 Rules:
@@ -65,7 +66,7 @@ async function askClaude(rows: ReqRow[]): Promise<Map<number, { priority: Priori
   const res = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 4000,
-    messages: [{ role: "user", content: `${PROMPT}\n\nToday is ${torontoToday()}. A move-in date within a couple of weeks of when the home is free is a good match.\n\nRequests:\n${JSON.stringify(rows.map(factsFor), null, 1)}` }],
+    messages: [{ role: "user", content: `${PROMPT}\n\nToday is ${torontoToday()}. Moving in on or before hoping_to_fill_by is a good match; later is fine to call but lower priority.\n\nRequests:\n${JSON.stringify(rows.map(factsFor), null, 1)}` }],
   });
   const text = res.content.map((b) => (b.type === "text" ? b.text : "")).join("");
   const json = text.slice(text.indexOf("["), text.lastIndexOf("]") + 1);

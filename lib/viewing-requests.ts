@@ -364,6 +364,19 @@ export function torontoToday(): string {
   return new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
 }
 
+/**
+ * The latest move-in we'd like for a home: the 1st of the month on or after it's
+ * free (free now in November → December 1). Later dates are still accepted;
+ * the form shows a friendly heads-up and the daily sort gives them lower priority.
+ */
+export function targetMoveIn(availableDate: string | null | undefined): string {
+  const today = torontoToday();
+  const from = availableDate && availableDate > today ? availableDate : today;
+  const [y, m, day] = from.split("-").map(Number);
+  if (day === 1) return from;
+  return `${m === 12 ? y + 1 : y}-${String(m === 12 ? 1 : m + 1).padStart(2, "0")}-01`;
+}
+
 /** Readable link slug for a home, e.g. "1531-mclarenwood-terrace". */
 export function homeSlug(address: string): string {
   return address.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

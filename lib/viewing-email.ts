@@ -1,6 +1,6 @@
 // The card-style email Ebin gets the moment someone sends the viewing form.
 
-import { describeAnswers, incomeLabel, creditLabel, torontoToday, QUESTIONS, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import { describeAnswers, incomeLabel, creditLabel, torontoToday, targetMoveIn, QUESTIONS, type Answers, type PublicHome } from "@/lib/viewing-requests";
 
 const SHORT: Record<string, string> = {
   living: "Living now", notice: "Notice given", rental_length: "Renting there", landlord_reference: "Landlord reference",
@@ -53,6 +53,8 @@ export function viewingRequestEmail(input: {
   const sectionOf = (id: string) => QUESTIONS.find((q) => q.id === id)?.section;
   const times = rows.find((r) => r.id === "viewing_times")?.answer ?? "Not given";
   const beds = home.bedrooms != null ? `${home.bedrooms} bed` : null;
+  const target = targetMoveIn(home.available_date);
+  const late = moveIn > target;
 
   const groups = GROUPS.map((g) => {
     const items = rows.filter((r) => sectionOf(r.id) === g.section && !IN_GRID.has(r.id));
@@ -94,7 +96,7 @@ export function viewingRequestEmail(input: {
           <tr><td style="padding: 0 40px 22px">
             <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width: 100%; border: 1px solid rgb(232, 232, 232); border-radius: 12px; overflow: hidden; background: rgb(250, 250, 250)">
               <tbody>
-                <tr>${cell("Move in", niceDate(moveIn), { right: true, bottom: true })}${cell("People", String(occupants), { bottom: true })}</tr>
+                <tr>${cell(late ? `Move in · later than ${new Date(`${target}T12:00:00`).toLocaleDateString("en-CA", { month: "short", day: "numeric" })}` : "Move in", niceDate(moveIn), { right: true, bottom: true })}${cell("People", String(occupants), { bottom: true })}</tr>
                 <tr>${cell("Household income", incomeLabel(answers.income), { right: true, bottom: true })}${cell("Credit score", creditLabel(answers.credit), { bottom: true })}</tr>
                 <tr><td colspan="2" style="padding: 15px 18px"><div style="${LABEL}">FREE TO VIEW</div><div style="${VALUE}">${esc(times)}</div></td></tr>
               </tbody>

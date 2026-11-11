@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CONSENT_TEXT, visibleQuestions, torontoToday, type Answers, type PublicHome, type Question } from "@/lib/viewing-requests";
+import { CONSENT_TEXT, visibleQuestions, torontoToday, targetMoveIn, type Answers, type PublicHome, type Question } from "@/lib/viewing-requests";
 
 const NAVY = "#1F2F3A";
 const BURGUNDY = "#8B2030";
@@ -317,6 +317,11 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
                     {(otherDate || (!!d.moveIn && d.moveIn !== asap && !choices.includes(d.moveIn))) && (
                       <input id="movein" type="date" aria-label="Move-in date" min={asap} value={d.moveIn} onChange={(e) => update({ moveIn: e.target.value })}
                         className="w-full px-4 py-4 border rounded-lg text-base bg-white" style={{ borderColor: errors.moveIn ? BURGUNDY : BORDER, color: "#222" }} />
+                    )}
+                    {d.moveIn && d.moveIn > targetMoveIn(home.available_date) && (
+                      <div role="status" className="view-step rounded-xl px-4 py-3.5 text-[15px] leading-relaxed" style={{ background: "#FFFFFF", border: `1px solid ${BORDER}`, borderLeft: `4px solid ${NAVY}`, color: "#333" }}>
+                        <b style={{ color: NAVY }}>Just so you know:</b> this home is ready {asap > torontoToday() ? `on ${fmtDate(asap)}` : "now"}, so we&apos;re giving priority to people who can move in by <b style={{ color: NAVY }}>{fmtDate(targetMoveIn(home.available_date))}</b>. You&apos;re still welcome to send your request, and we&apos;ll reach out if the timing works.
+                      </div>
                     )}
                   </div>
                 );
