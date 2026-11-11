@@ -1,9 +1,12 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { neighbourhoods } from "@/lib/neighbourhoods";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 const BASE_URL = "https://www.prosperaproperties.co";
+
+// Rebuilt hourly so new or re-listed homes show up for search engines.
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = getAllPosts();
@@ -11,11 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch live property IDs from Supabase
   let propertyRoutes: MetadataRoute.Sitemap = [];
   try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-    const { data } = await supabase
+    const { data } = await getSupabaseAdmin()
       .from("properties")
       .select("id, slug, created_at")
       .eq("status", "published");
