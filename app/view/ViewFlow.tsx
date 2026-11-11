@@ -52,9 +52,24 @@ function fmtDate(d: string | null) {
   if (!d) return null;
   return new Date(`${d}T12:00:00`).toLocaleDateString("en-CA", { month: "long", day: "numeric" });
 }
-function defaultMoveIn(h: PublicHome | undefined) {
+function earliestMoveIn(h: PublicHome | undefined) {
   const today = torontoToday();
   return h?.available_date && h.available_date > today ? h.available_date : today;
+}
+
+/** The next four 1st-or-15th dates on or after the home is available. Rolls forward by itself every month. */
+function moveInChoices(h: PublicHome | undefined): string[] {
+  const from = earliestMoveIn(h);
+  const [y, m] = from.split("-").map(Number);
+  const out: string[] = [];
+  for (let i = 0; out.length < 4 && i < 12; i++) {
+    const yy = y + Math.floor((m - 1 + i) / 12), mm = ((m - 1 + i) % 12) + 1;
+    for (const day of [1, 15]) {
+      const iso = `${yy}-${String(mm).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      if (iso > from && out.length < 4) out.push(iso);
+    }
+  }
+  return out;
 }
 
 export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; preselect: string | null }) {
@@ -64,6 +79,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
   const [formError, setFormError] = useState("");
   const [done, setDone] = useState<{ ref: string; token: string; first: string; address: string } | null>(null);
   const [pool, setPool] = useState<"idle" | "saving" | "joined" | "error">("idle");
+  const [otherDate, setOtherDate] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   // Restore a same-tab draft (under 24h old), else start fresh. A link with a home starts on "Your move".
@@ -80,7 +96,6 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     if (preselect && homes.some((h) => h.id === preselect) && draft.home !== preselect) {
       draft = { ...draft, home: preselect, moveIn: "", screen: "move" };
     }
-    if (draft.home && !draft.moveIn) draft.moveIn = defaultMoveIn(homes.find((h) => h.id === draft!.home));
     const t = setTimeout(() => setD(draft), 0);
     return () => clearTimeout(t);
   }, [homes, preselect]);
@@ -156,7 +171,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
     const errs: Record<string, string> = {};
     if (!d) return errs;
     if (key === "move") {
-      if (!d.moveIn || d.moveIn < torontoToday()) errs.moveIn = "Pick a date from today on.";
+      if (!d.moveIn || d.moveIn < torontoToday()) errs.moveIn = "Pick when you'd like to move in.";
       if (!d.occupants || d.occupants < 1 || d.occupants > 99) errs.occupants = "How many people will live there?";
     }
     for (const q of questionsOn(key, d.answers)) {
@@ -252,7 +267,7 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
                 const selected = d.home === h.id;
                 return (
                   <button key={h.id} type="button" aria-pressed={selected}
-                    onClick={() => { update({ home: h.id, moveIn: d.home === h.id && d.moveIn ? d.moveIn : defaultMoveIn(h) }); goTo("move"); }}
+                    onClick={() => { update({ home: h.id, moveIn: d.home === h.id ? d.moveIn : "" }); goTo("move"); }}
                     className="text-left bg-white border-2 rounded-xl overflow-hidden transition-colors duration-150 focus-visible:outline focus-visible:outline-2"
                     style={{ borderColor: selected ? NAVY : BORDER }}>
                     {h.image && <Image src={h.image} alt="" width={640} height={300} className="w-full h-40 object-cover" />}
@@ -280,12 +295,32 @@ export default function ViewFlow({ homes, preselect }: { homes: PublicHome[]; pr
         {screen.key === "move" && home && (
           <div className="grid gap-8">
             <div id="q-moveIn">
-              <label className="block text-lg font-semibold mb-1" style={{ color: NAVY }} htmlFor="movein">When would you like to move in?</label>
+              <p className="text-lg font-semibold mb-1" style={{ color: NAVY }}>When would you like to move in?</p>
               <p className="text-sm mb-3" style={{ color: MUTED }}>
                 {home.available_date && home.available_date > torontoToday() ? `This home is available from ${fmtDate(home.available_date)}.` : "This home is available now."}
               </p>
-              <input id="movein" type="date" min={torontoToday()} value={d.moveIn} onChange={(e) => update({ moveIn: e.target.value })}
-                className="w-full px-4 py-4 border rounded-lg text-base bg-white" style={{ borderColor: errors.moveIn ? BURGUNDY : BORDER, color: "#222" }} />
+              {(() => {
+                const asap = earliestMoveIn(home);
+                const choices = moveInChoices(home);
+                const picked = (v: string) => !otherDate && d.moveIn === v;
+                return (
+                  <div className="grid gap-2">
+                    <Choice selected={picked(asap)} onClick={() => { setOtherDate(false); update({ moveIn: asap }); }}>
+                      As soon as possible{asap > torontoToday() ? ` (${fmtDate(asap)})` : ""}
+                    </Choice>
+                    <div className="grid grid-cols-2 gap-2">
+                      {choices.map((c) => (
+                        <Choice key={c} compact selected={picked(c)} onClick={() => { setOtherDate(false); update({ moveIn: c }); }}>{fmtDate(c)}</Choice>
+                      ))}
+                    </div>
+                    <Choice compact selected={otherDate || (!!d.moveIn && d.moveIn !== asap && !choices.includes(d.moveIn))} onClick={() => { setOtherDate(true); update({ moveIn: "" }); }}>Another date</Choice>
+                    {(otherDate || (!!d.moveIn && d.moveIn !== asap && !choices.includes(d.moveIn))) && (
+                      <input id="movein" type="date" aria-label="Move-in date" min={asap} value={d.moveIn} onChange={(e) => update({ moveIn: e.target.value })}
+                        className="w-full px-4 py-4 border rounded-lg text-base bg-white" style={{ borderColor: errors.moveIn ? BURGUNDY : BORDER, color: "#222" }} />
+                    )}
+                  </div>
+                );
+              })()}
               {errors.moveIn && <Err>{errors.moveIn}</Err>}
             </div>
             <div id="q-occupants">
