@@ -88,6 +88,21 @@ export interface SendOpts {
   appointmentId?: string | null;
   tokenId?: string | null;
   from?: string;
+  attachments?: { filename: string; content: string; contentType?: string }[];
+}
+
+/** A calendar file so the viewing lands in the person's calendar (Gmail, Apple, Outlook show "Add"). */
+export function icsFile(o: { id: string; start: string; end: string; title: string; where: string; url?: string; cancelled?: boolean }) {
+  const f = (d: string) => new Date(d).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const e = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  return [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Prospera Properties//FieldOps//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
+    `UID:${o.id}@fieldops.prosperaproperties.co`, `DTSTAMP:${f(new Date().toISOString())}`, `SEQUENCE:${Math.floor(Date.now() / 1000) % 2147483647}`,
+    `DTSTART:${f(o.start)}`, `DTEND:${f(o.end)}`, `SUMMARY:${e(o.title)}`, `LOCATION:${e(o.where)}`,
+    ...(o.url ? [`DESCRIPTION:${e(o.url)}`] : []), `STATUS:${o.cancelled ? "CANCELLED" : "CONFIRMED"}`,
+    "BEGIN:VALARM", "TRIGGER:-PT1H", "ACTION:DISPLAY", "DESCRIPTION:Viewing in 1 hour", "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR",
+  ].join("\r\n");
 }
 
 export async function send(o: SendOpts): Promise<"sent" | "failed" | "skipped" | "duplicate"> {
@@ -106,6 +121,7 @@ export async function send(o: SendOpts): Promise<"sent" | "failed" | "skipped" |
     const { data, error } = await new Resend(process.env.RESEND_API_KEY).emails.send({
       from: o.from ?? "Prospera Properties <hello@prosperaproperties.co>",
       to: [o.to], subject: o.subject, html: o.html,
+      ...(o.attachments?.length ? { attachments: o.attachments.map((a) => ({ filename: a.filename, content: Buffer.from(a.content).toString("base64"), contentType: a.contentType })) } : {}),
     });
     if (error || !data?.id) { await log("failed", { error: error?.message ?? "No id returned" }); return "failed"; }
     await log("sent", { provider_id: data.id });
@@ -176,13 +192,13 @@ export const T = {
     }),
   }),
 
-  assigned: (a: ApptInfo, url: string) => ({
+  assigned: (a: ApptInfo, url: string, tenantRows: [string, string][] = []) => ({
     subject: `New showing: ${a.address} · ${fmtDay(a.starts_at)}, ${fmtTime(a.starts_at)}`,
     html: card({
       label: "NEW SHOWING", pill: { text: "ASSIGNED TO YOU" },
       title: `${fmtTime(a.starts_at)}, ${fmtDay(a.starts_at)}`,
       intro: `You're showing <b style="color: rgb(34, 34, 34)">${esc(a.address)}</b> to ${esc(first(a.tenant_name))}.`,
-      rows: [["When", when(a)], ["Where", `${a.address}, ${a.city}`]],
+      rows: [["When", when(a)], ["Where", `${a.address}, ${a.city}`], ...tenantRows],
       note: "Please open it and tap <b>Got it</b> so we know you've seen it. Access instructions show up in the app the day before.",
       button: { text: "Open the showing →", href: url },
     }),

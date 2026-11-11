@@ -155,11 +155,16 @@ export function blocker(ctx: Ctx, agentId: string, propertyId: string, start: Da
   const agent = ctx.agents.find((a) => a.id === agentId);
   const mine = ctx.appts.filter((a) => a.agent_id === agentId && a.id !== ignoreAppt && (LIVE as readonly string[]).includes(a.status));
   for (const a of mine) {
+    const sameSlot = a.property_id === propertyId && new Date(a.starts_at).getTime() === start.getTime() && new Date(a.ends_at).getTime() === end.getTime();
+    if (sameSlot) continue; // joining their own group showing
     const gap = travelMin(ctx, a.property_id, propertyId, buffer) * 60_000;
     if (overlaps(new Date(a.starts_at).getTime() - gap, new Date(a.ends_at).getTime() + gap, start.getTime(), end.getTime())) {
       return a.property_id === propertyId ? "already showing then" : "not enough travel time";
     }
   }
+  const othersGroup = ctx.appts.some((a) => a.property_id === propertyId && a.agent_id && a.agent_id !== agentId && a.id !== ignoreAppt
+    && (LIVE as readonly string[]).includes(a.status) && new Date(a.starts_at).getTime() === start.getTime());
+  if (othersGroup) return "someone else is showing it then";
   const sameDay = mine.filter((a) => localParts(new Date(a.starts_at)).day === s.day).length;
   if (agent && sameDay >= agent.max_per_day) return "daily limit reached";
   return null;
@@ -183,7 +188,9 @@ export function candidates(ctx: Ctx, propertyId: string, start: Date, end: Date,
       const mine = ctx.appts.filter((x) => x.agent_id === a.id && x.id !== ignoreAppt);
       const adjacentHere = mine.some((x) => x.property_id === propertyId
         && (Math.abs(new Date(x.ends_at).getTime() - start.getTime()) <= 15 * 60_000 || Math.abs(new Date(x.starts_at).getTime() - end.getTime()) <= 15 * 60_000));
-      if (adjacentHere) { score += weight_batch; reasons.push("already at this home then"); }
+      const sameSlotHere = mine.some((x) => x.property_id === propertyId && new Date(x.starts_at).getTime() === start.getTime());
+      if (sameSlotHere) { score += weight_batch * 1.5; reasons.push("joins their group showing"); }
+      else if (adjacentHere) { score += weight_batch; reasons.push("already at this home then"); }
 
       const sameDay = mine.filter((x) => x.property_id !== propertyId && localParts(new Date(x.starts_at)).day === localParts(start).day);
       if (sameDay.length) {
@@ -240,6 +247,51 @@ export function slotsFor(ctx: Ctx, rules: PropertyRules, now = new Date(), onlyD
   return out.sort((a, b) => a.start.localeCompare(b.start));
 }
 
+export interface AgentSlot {
+  start: string;
+  end: string;
+  agents: { id: string; name: string; reason: string; group: boolean }[];
+  booked: { agentId: string | null; agentName: string | null; count: number }[];
+}
+
+/** For the admin swipe deck: each time at a home, the specialists who could take it, and any showing already there. */
+export async function agentSlots(propertyId: string, days = 10): Promise<{ rules: PropertyRules; slots: AgentSlot[] }> {
+  const rules = await loadPropertyRules(propertyId);
+  const from = new Date();
+  const ctx = await loadCtx(from.toISOString(), new Date(from.getTime() + (days + 1) * 864e5).toISOString());
+  const windows = rules.windows.length ? rules.windows : DEFAULT_WINDOWS;
+  const earliest = Date.now() + 2 * 3_600_000; // admin can book sooner than tenants
+  const names = new Map(ctx.agents.map((a) => [a.id, a.name]));
+  const out: AgentSlot[] = [];
+  const today = todayToronto();
+  for (let i = 0; i <= days; i++) {
+    const day = addDays(today, i);
+    const wd = weekdayOf(day);
+    const seen = new Set<number>();
+    for (const w of windows.filter((x) => x.weekday === wd)) {
+      for (let m = w.start_min; m + rules.duration_min <= w.end_min; m += rules.duration_min) {
+        if (seen.has(m)) continue;
+        seen.add(m);
+        const start = zonedToUtc(day, m);
+        if (!start || start.getTime() < earliest) continue;
+        const end = new Date(start.getTime() + rules.duration_min * 60_000);
+        if (ctx.blackouts.some((b) => b.property_id === propertyId && overlaps(new Date(b.starts_at).getTime(), new Date(b.ends_at).getTime(), start.getTime(), end.getTime()))) continue;
+        const here = ctx.appts.filter((a) => a.property_id === propertyId && (LIVE as readonly string[]).includes(a.status) && new Date(a.starts_at).getTime() === start.getTime());
+        const agents = candidates(ctx, propertyId, start, end, rules.travel_buffer_min)
+          .map((c) => ({ id: c.agentId, name: c.name, reason: c.reason, group: here.some((h) => h.agent_id === c.agentId) }));
+        if (!agents.length) continue;
+        const byAgent = new Map<string | null, number>();
+        for (const h of here) byAgent.set(h.agent_id, (byAgent.get(h.agent_id) ?? 0) + 1);
+        out.push({
+          start: start.toISOString(), end: end.toISOString(), agents,
+          booked: [...byAgent.entries()].map(([agentId, count]) => ({ agentId, agentName: agentId ? names.get(agentId) ?? null : null, count })),
+        });
+      }
+    }
+  }
+  return { rules, slots: out };
+}
+
 export async function availableSlots(propertyId: string): Promise<{ rules: PropertyRules; slots: Slot[] }> {
   const rules = await loadPropertyRules(propertyId);
   if (!rules.booking_enabled) return { rules, slots: [] };
@@ -283,6 +335,7 @@ export interface BookInput {
   email: string | null;
   createdBy: "tenant" | "admin";
   agentId?: string;          // admin override
+  group?: boolean;           // admin: allow several households in the same slot
 }
 
 export type BookResult =
@@ -320,7 +373,7 @@ export async function book(input: BookInput): Promise<BookResult> {
       .map((a) => travelMin(ctx, a.property_id, input.propertyId, rules.travel_buffer_min)));
     const { data, error } = await sb.rpc("fo_try_book", {
       p_agent: c.agentId, p_property: input.propertyId, p_start: input.start.toISOString(), p_end: end.toISOString(),
-      p_travel_min: travel, p_max_per_slot: rules.max_per_slot, p_token: input.tokenId, p_request: input.requestId,
+      p_travel_min: travel, p_max_per_slot: input.group ? Math.max(rules.max_per_slot, 10) : rules.max_per_slot, p_token: input.tokenId, p_request: input.requestId,
       p_name: input.name, p_phone: input.phone, p_email: input.email, p_manage_hash: null,
       p_reason: c.reason, p_created_by: input.createdBy, p_max_per_day: agent.max_per_day,
     });

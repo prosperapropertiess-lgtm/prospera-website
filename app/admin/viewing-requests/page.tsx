@@ -4,6 +4,7 @@ import {
   Page, PageHeader, Card, Badge, Button, Tabs, EmptyState, Loading, ErrorNote, SuccessNote, C, money, ago, shortDate, type Tone,
 } from "@/components/admin/kit";
 import { incomeLabel, creditLabel, describeAnswers, type Answers, type PublicHome } from "@/lib/viewing-requests";
+import SwipeDeck from "./SwipeDeck";
 
 type Status = "new" | "contacted" | "viewing_booked" | "not_a_fit" | "closed";
 type Priority = "call_today" | "maybe" | "not_now" | null;
@@ -17,6 +18,7 @@ interface Req {
   occupants: number;
   income_range: string;
   credit_range: string;
+  property_id: string | null;
   property_snapshot: PublicHome;
   answers: Answers | null;
   rentmatch_opt_in: boolean;
@@ -37,6 +39,7 @@ const ORDER: Priority[] = ["call_today", "maybe", null, "not_now"];
 export default function ViewingRequestsPage() {
   const [reqs, setReqs] = useState<Req[] | null>(null);
   const [tab, setTab] = useState<"todo" | "contacted" | "booked" | "done">("todo");
+  const [mode, setMode] = useState<"swipe" | "list">("swipe");
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -98,6 +101,15 @@ export default function ViewingRequestsPage() {
       {error && <ErrorNote>{error}</ErrorNote>}
       {notice && <div style={{ marginBottom: 16 }}><SuccessNote>{notice}</SuccessNote></div>}
 
+      <div style={{ display: "inline-flex", background: C.surface, border: `1px solid ${C.borderStrong}`, borderRadius: 999, padding: 3, marginBottom: 20 }}>
+        {(["swipe", "list"] as const).map((m) => (
+          <button key={m} onClick={() => setMode(m)} style={{ border: 0, cursor: "pointer", fontFamily: "inherit", fontSize: 14, fontWeight: 600, padding: "7px 18px", borderRadius: 999, background: mode === m ? C.navy : "transparent", color: mode === m ? "#fff" : C.navy }}>
+            {m === "swipe" ? "Swipe" : "List"}
+          </button>
+        ))}
+      </div>
+
+      {mode === "swipe" ? (reqs ? <SwipeDeck requests={reqs} onChanged={load} /> : <Loading />) : (<>
       <Tabs value={tab} onChange={setTab} options={[
         { value: "todo", label: "To call", count: byTab.todo.length },
         { value: "contacted", label: "Contacted", count: byTab.contacted.length },
@@ -114,6 +126,7 @@ export default function ViewingRequestsPage() {
           ))}
         </div>
       )}
+      </>)}
     </Page>
   );
 }

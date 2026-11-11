@@ -128,3 +128,17 @@ test("links: signed ids verify, edited ones don't, kinds don't mix", () => {
   assert.equal(verifyId("book", t.slice(0, -1) + (t.endsWith("A") ? "B" : "A")), null);
   assert.equal(verifyId("book", "garbage"), null);
 });
+
+test("group showings: same specialist can join the exact same slot at the same home", () => {
+  const c = ctx({ appts: [appt("x", ANA, HOME_A, 17 * 60)] });
+  assert.equal(blocker(c, ANA, HOME_A, at(17 * 60), at(17 * 60 + 20), 20), null);
+  assert.equal(blocker(c, BEN, HOME_A, at(17 * 60), at(17 * 60 + 20), 20), "someone else is showing it then");
+  const ranked = candidates(c, HOME_A, at(17 * 60), at(17 * 60 + 20), 20);
+  assert.equal(ranked[0].agentId, ANA);
+  assert.match(ranked[0].reason, /group showing/);
+});
+
+test("group showings: still no overlapping times at another home", () => {
+  const c = ctx({ appts: [appt("x", ANA, HOME_A, 17 * 60)] });
+  assert.equal(blocker(c, ANA, HOME_B, at(17 * 60), at(17 * 60 + 20), 20), "not enough travel time");
+});

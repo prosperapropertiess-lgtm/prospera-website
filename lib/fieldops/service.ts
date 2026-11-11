@@ -5,7 +5,8 @@ import crypto from "crypto";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { sendApplicationInvite } from "@/lib/application-invite";
 import { book, hashToken, loadCtx, loadPropertyRules, loadSettings, candidates, move, signId, LIVE, type Candidate } from "./engine";
-import { send, T, SITE, ADMIN_EMAIL, type ApptInfo } from "./messages";
+import { send, T, SITE, ADMIN_EMAIL, icsFile, type ApptInfo } from "./messages";
+import { describeAnswers, type Answers } from "@/lib/viewing-requests";
 import { fmtDay, fmtTime } from "./time";
 
 const sb = () => getSupabaseAdmin();
@@ -93,14 +94,37 @@ export async function loadToken(tokenId: string) {
 
 // ── Booking ────────────────────────────────────────────────────────────────
 
+// What the specialist needs to know about who's coming. Leaves out income, credit
+// and benefits: that's screening information, not something they need to run a showing.
+const SPECIALIST_FIELDS = ["living", "moving_reason", "pets", "pet_details", "smoking", "vehicles", "viewing_times"];
+async function tenantCard(row: { viewing_request_id: string | null; tenant_name: string; tenant_phone: string | null }): Promise<[string, string][]> {
+  const rows: [string, string][] = [["Tenant", `${row.tenant_name}${row.tenant_phone ? ` · ${row.tenant_phone}` : ""}`]];
+  if (!row.viewing_request_id) return rows;
+  const { data: r } = await sb().from("viewing_requests").select("move_in_date, occupants, answers").eq("id", row.viewing_request_id).maybeSingle();
+  if (!r) return rows;
+  rows.push(["Wants to move in", new Date(`${r.move_in_date}T12:00:00Z`).toLocaleDateString("en-CA", { month: "long", day: "numeric", timeZone: "UTC" })]);
+  rows.push(["People", String(r.occupants)]);
+  for (const a of describeAnswers((r.answers ?? {}) as Answers)) {
+    if (SPECIALIST_FIELDS.includes(a.id)) rows.push([a.question.replace(/\?$/, ""), a.answer]);
+  }
+  return rows;
+}
+
 async function notifyBooked(apptId: string, updated = false) {
   const { appt, row, agent } = await info(apptId);
   const tag = `${apptId}:${row.starts_at}:${row.agent_id}`;
+  const where = `${appt.address}, ${appt.city}, ON`;
   const t = T.confirmed(appt, manageUrl(apptId), updated);
-  await send({ to: row.tenant_email, ...t, template: updated ? "tenant_updated" : "tenant_confirmed", key: `confirm:${tag}`, appointmentId: apptId });
+  await send({
+    to: row.tenant_email, ...t, template: updated ? "tenant_updated" : "tenant_confirmed", key: `confirm:${tag}`, appointmentId: apptId,
+    attachments: [{ filename: "viewing.ics", contentType: "text/calendar", content: icsFile({ id: apptId, start: row.starts_at, end: row.ends_at, title: `Viewing: ${appt.address}`, where, url: manageUrl(apptId) }) }],
+  });
   if (agent) {
-    const s = T.assigned(appt, teamUrl(apptId));
-    await send({ to: agent.email, ...s, template: "specialist_assigned", key: `assigned:${tag}`, appointmentId: apptId, from: "Prospera FieldOps <hello@prosperaproperties.co>" });
+    const s = T.assigned(appt, teamUrl(apptId), await tenantCard(row));
+    await send({
+      to: agent.email, ...s, template: "specialist_assigned", key: `assigned:${tag}`, appointmentId: apptId, from: "Prospera FieldOps <hello@prosperaproperties.co>",
+      attachments: [{ filename: "showing.ics", contentType: "text/calendar", content: icsFile({ id: `${apptId}-s`, start: row.starts_at, end: row.ends_at, title: `Showing: ${appt.address} · ${appt.tenant_name.split(/\s+/)[0]}`, where, url: teamUrl(apptId) }) }],
+    });
   }
 }
 
@@ -126,6 +150,22 @@ export async function adminBook(input: { propertyId: string; start: Date; name: 
   if (!r.ok) return { ok: false as const, error: r.error === "no_capacity" ? "No specialist can take that time (busy, travel, or daily limit)." : "Couldn't book that." };
   if (input.notify !== false) await notifyBooked(r.appointmentId);
   return { ok: true as const, appointmentId: r.appointmentId };
+}
+
+/** Swipe right: book a viewing request into a chosen time with a chosen specialist. */
+export async function bookFromRequest(input: { requestId: string; start: Date; agentId: string; group?: boolean }) {
+  const { data: req } = await sb().from("viewing_requests").select("id, full_name, phone, email, property_id").eq("id", input.requestId).maybeSingle();
+  if (!req?.property_id) return { ok: false as const, error: "That request has no home attached." };
+  const { data: live } = await sb().from("fo_appointments").select("id").eq("viewing_request_id", req.id).in("status", [...LIVE]).maybeSingle();
+  if (live) return { ok: false as const, error: "They already have a viewing booked.", appointmentId: live.id };
+  const r = await book({
+    propertyId: req.property_id, start: input.start, tokenId: null, requestId: req.id, name: req.full_name,
+    phone: req.phone, email: req.email, createdBy: "admin", agentId: input.agentId, group: input.group,
+  });
+  if (!r.ok) return { ok: false as const, error: "That time was just taken or no longer works for that specialist. Pick another." };
+  await sb().from("viewing_requests").update({ status: "viewing_booked" }).eq("id", req.id);
+  await notifyBooked(r.appointmentId);
+  return { ok: true as const, appointmentId: r.appointmentId, emailed: !!req.email };
 }
 
 // ── Changes ────────────────────────────────────────────────────────────────

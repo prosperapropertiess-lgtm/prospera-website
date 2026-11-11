@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { ALL_SHOWINGS, calendarUrl, DEFAULT_RULES, hashToken, loadCtx, loadPropertyRules, loadSettings, signId, slotsFor, agentAvailable, LIVE } from "@/lib/fieldops/engine";
+import { agentSlots, ALL_SHOWINGS, calendarUrl, DEFAULT_RULES, hashToken, loadCtx, loadPropertyRules, loadSettings, signId, slotsFor, agentAvailable, LIVE } from "@/lib/fieldops/engine";
 import {
-  adminBook, cancel, createDirectInvite, createInvite, markLeaseSigned, reassign, replacementsFor, reschedule, manageUrl, bookUrl,
+  adminBook, bookFromRequest, cancel, createDirectInvite, createInvite, markLeaseSigned, reassign, replacementsFor, reschedule, manageUrl, bookUrl,
 } from "@/lib/fieldops/service";
 import { send, card, SITE } from "@/lib/fieldops/messages";
 import { addDays, localParts, todayToronto, zonedToUtc } from "@/lib/fieldops/time";
@@ -195,6 +195,13 @@ export async function GET(req: NextRequest) {
 
   if (view === "settings") return NextResponse.json({ settings: await loadSettings(), calendarUrl: calendarUrl(ALL_SHOWINGS) });
 
+  if (view === "agent_slots") {
+    const property = q.get("property") ?? "";
+    const { rules, slots } = await agentSlots(property, 10);
+    const { data: specialists } = await sb().from("agents").select("id").eq("role", "specialist").eq("is_active", true).not("activated_at", "is", null);
+    return NextResponse.json({ slots, duration: rules.duration_min, maxPerSlot: rules.max_per_slot, specialists: specialists?.length ?? 0 });
+  }
+
   if (view === "slots") {
     const property = q.get("property") ?? "";
     const rules = await loadPropertyRules(property);
@@ -303,6 +310,12 @@ export async function POST(req: NextRequest) {
         const start = new Date(String(b.start));
         if (isNaN(start.getTime()) || !b.property || !String(b.name ?? "").trim()) return err("Pick a home, a time and a name.");
         const r = await adminBook({ propertyId: String(b.property), start, name: String(b.name).trim(), phone: b.phone || null, email: b.email || null, agentId: b.agent || undefined, notify: b.notify !== false });
+        return r.ok ? NextResponse.json(r) : err(r.error, 409);
+      }
+      case "book_request": {
+        const start = new Date(String(b.start));
+        if (isNaN(start.getTime()) || !b.request || !b.agent) return err("Pick a time and a specialist.");
+        const r = await bookFromRequest({ requestId: String(b.request), start, agentId: String(b.agent), group: !!b.group });
         return r.ok ? NextResponse.json(r) : err(r.error, 409);
       }
       case "cancel": {
