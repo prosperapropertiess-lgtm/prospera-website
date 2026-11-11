@@ -321,9 +321,9 @@ function BookSheet({ r, onClose, onBooked }: { r: DeckReq; onClose: () => void; 
                   const here = s.booked.reduce((n, b) => n + b.count, 0);
                   return (
                     <div key={s.start} style={{ background: C.surface, border: `1px solid ${here ? C.navy : C.border}`, borderRadius: 12, padding: "10px 12px", display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-                      <div style={{ width: 74 }}>
+                      <div style={{ width: 86, whiteSpace: "nowrap" }}>
                         <div style={{ fontWeight: 700, color: C.navy }}>{fTime(s.start)}</div>
-                        {here > 0 && <div style={{ fontSize: 11, color: C.navy, fontWeight: 600 }}>{here} booked{s.booked[0]?.agentName ? ` · ${s.booked[0].agentName.split(" ")[0]}` : ""}</div>}
+                        {here > 0 && <div style={{ fontSize: 11, color: C.navy, fontWeight: 600, whiteSpace: "normal" }}>{here} booked{s.booked[0]?.agentName ? ` · ${s.booked[0].agentName}` : ""}</div>}
                       </div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", flex: 1 }}>
                         {s.agents.map((a) => {
@@ -331,7 +331,7 @@ function BookSheet({ r, onClose, onBooked }: { r: DeckReq; onClose: () => void; 
                           return (
                             <button key={a.id} title={a.reason} onClick={() => setPick({ slot: s, agentId: a.id, name: a.name, group: a.group })}
                               style={{ padding: "6px 12px", borderRadius: 999, cursor: "pointer", fontFamily: "inherit", fontSize: 13, fontWeight: 600, border: `1px solid ${on ? C.navy : a.group || a.reason.includes("already at this home") ? C.green : C.borderStrong}`, background: on ? C.navy : a.group ? C.greenBg : "#fff", color: on ? "#fff" : C.navy }}>
-                              {a.name.split(" ")[0]}{a.group ? " · group" : a.reason.includes("already at this home") ? " · back-to-back" : ""}
+                              {a.name}{a.group ? " · group" : a.reason.includes("already at this home") ? " · back-to-back" : ""}
                             </button>
                           );
                         })}
@@ -346,7 +346,7 @@ function BookSheet({ r, onClose, onBooked }: { r: DeckReq; onClose: () => void; 
         {pick && (
           <div style={{ position: "sticky", bottom: 0, background: "#fff", borderTop: `1px solid ${C.border}`, padding: "14px 22px" }}>
             <div style={{ fontSize: 14, color: C.text, marginBottom: 8 }}><b>{fDay(pick.slot.start)} {fTime(pick.slot.start)}</b> with <b>{pick.name}</b>{pick.group ? " (joins the group showing)" : ""}</div>
-            <Button variant="primary" disabled={busy} onClick={book}>{busy ? "Booking…" : `Book and email ${r.email ? "both" : pick.name.split(" ")[0]}`}</Button>
+            <Button variant="primary" disabled={busy} onClick={book}>{busy ? "Booking…" : `Book and email ${r.email ? "both" : pick.name}`}</Button>
           </div>
         )}
       </div>
