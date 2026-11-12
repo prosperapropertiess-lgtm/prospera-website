@@ -37,7 +37,8 @@ interface Slot {
 
 const TZ = "America/Toronto";
 const PRI: Record<string, { label: string; tone: Tone }> = { call_today: { label: "Strong", tone: "green" }, maybe: { label: "Maybe", tone: "amber" }, not_now: { label: "Not now", tone: "grey" } };
-const ORDER = ["call_today", "maybe", null, "not_now"];
+// Not sorted yet goes first: those are the newest requests and nobody has seen them.
+const ORDER = [null, "call_today", "maybe", "not_now"];
 const fDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-CA", { weekday: "short", month: "long", day: "numeric", timeZone: "UTC" });
 const fTime = (iso: string) => new Date(iso).toLocaleTimeString("en-CA", { timeZone: TZ, hour: "numeric", minute: "2-digit" }).replace(/\./g, "");
 const fDay = (iso: string) => new Date(iso).toLocaleDateString("en-CA", { timeZone: TZ, weekday: "short", month: "short", day: "numeric" });
@@ -55,10 +56,11 @@ const SHORT: Record<string, string> = {
   moving_reason: "Why moving", pets: "Pets", pet_details: "Pet", smoking: "Smoking", vehicles: "Vehicles",
 };
 
-export default function SwipeDeck({ requests, onChanged }: { requests: DeckReq[]; onChanged: () => void }) {
+export default function SwipeDeck({ requests, focusId, onChanged }: { requests: DeckReq[]; focusId?: string | null; onChanged: () => void }) {
   const queue = useMemo(() => requests
     .filter((r) => r.status === "new" || r.status === "contacted")
-    .sort((a, b) => ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority) || a.created_at.localeCompare(b.created_at)), [requests]);
+    .sort((a, b) => Number(b.id === focusId) - Number(a.id === focusId)
+      || ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority) || a.created_at.localeCompare(b.created_at)), [requests, focusId]);
   const [skipped, setSkipped] = useState<string[]>([]);
   const [gone, setGone] = useState<string[]>([]);
   const deck = useMemo(() => {

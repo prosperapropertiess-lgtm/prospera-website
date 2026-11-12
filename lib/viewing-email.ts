@@ -44,10 +44,10 @@ function cell(label: string, value: string, opts: { right?: boolean; bottom?: bo
 }
 
 export function viewingRequestEmail(input: {
-  name: string; phone: string; email: string | null; moveIn: string; occupants: number;
+  id: string; name: string; phone: string; email: string | null; moveIn: string; occupants: number;
   answers: Answers; home: PublicHome; seconds: number | null;
 }) {
-  const { name, phone, email, moveIn, occupants, answers, home, seconds } = input;
+  const { id, name, phone, email, moveIn, occupants, answers, home, seconds } = input;
   const first = name.split(/\s+/)[0] || name;
   const rows = describeAnswers(answers);
   const sectionOf = (id: string) => QUESTIONS.find((q) => q.id === id)?.section;
@@ -114,7 +114,7 @@ export function viewingRequestEmail(input: {
                 <table cellspacing="0" cellpadding="0" border="0" style="margin-top: 14px"><tbody><tr>
                   <td style="background: rgb(255, 255, 255); border-radius: 8px"><a href="tel:${esc(phone.replace(/[^\d+]/g, ""))}" style="display: inline-block; padding: 10px 18px; font-size: 13px; font-weight: 700; color: rgb(34, 34, 34); text-decoration: none">Call ${esc(first)}</a></td>
                   <td width="10" style="width: 10px">&nbsp;</td>
-                  <td style="border: 1px solid rgb(90, 90, 90); border-radius: 8px"><a href="https://www.prosperaproperties.co/admin/viewing-requests" style="display: inline-block; padding: 9px 16px; font-size: 13px; font-weight: 700; color: rgb(255, 255, 255); text-decoration: none">Open in admin &rarr;</a></td>
+                  <td style="border: 1px solid rgb(90, 90, 90); border-radius: 8px"><a href="https://www.prosperaproperties.co/admin/viewing-requests?id=${encodeURIComponent(id)}" style="display: inline-block; padding: 9px 16px; font-size: 13px; font-weight: 700; color: rgb(255, 255, 255); text-decoration: none">Open in admin &rarr;</a></td>
                 </tr></tbody></table>
               </td></tr></tbody>
             </table>
