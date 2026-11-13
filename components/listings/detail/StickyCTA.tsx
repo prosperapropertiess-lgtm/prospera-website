@@ -31,7 +31,7 @@ export default function StickyCTA({ property }: Props) {
   return (
     <>
       {/* Sentinel placed right after the hero */}
-      <div ref={sentinelRef} className="absolute top-[60vh] left-0 w-px h-px pointer-events-none" aria-hidden />
+      <div ref={sentinelRef} className="absolute top-[90vh] left-0 w-px h-px pointer-events-none" aria-hidden />
 
       <div
         className={[
@@ -54,8 +54,8 @@ export default function StickyCTA({ property }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <ApplyButton property={property} variant="primary" label="Apply" className="!px-4 !py-2.5" />
-              <BookViewingButton property={property} variant="outline-light" label="View" className="!px-4 !py-2.5" />
+              <BookViewingButton property={property} variant="primary" label="Book a Viewing" className="!px-4 !py-2.5" />
+              <ApplyButton property={property} variant="outline-light" label="Apply" className="!px-4 !py-2.5" />
             </div>
           </div>
 
@@ -72,8 +72,8 @@ export default function StickyCTA({ property }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <ApplyButton property={property} variant="primary" label="Apply Now" />
-              <BookViewingButton property={property} variant="outline-light" label="Book a Viewing" />
+              <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+              <ApplyButton property={property} variant="outline-light" label="Apply Now" />
             </div>
           </div>
         </div>

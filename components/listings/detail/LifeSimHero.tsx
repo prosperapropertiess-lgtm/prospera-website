@@ -25,8 +25,8 @@ export default function LifeSimHero({ property }: Props) {
     <>
       {/* ── Cover image hero ─────────────────────────────────────────────────── */}
       <section
-        className="relative flex flex-col"
-        style={{ minHeight: "70vh", backgroundColor: "#1F2F3A" }}
+        className="relative flex flex-col min-h-[46vh] sm:min-h-[62vh]"
+        style={{ backgroundColor: "#1F2F3A" }}
       >
         {/* Cover photo — next/image for optimization + LCP */}
         {coverImage && (
@@ -51,7 +51,7 @@ export default function LifeSimHero({ property }: Props) {
         />
 
         {/* Content */}
-        <div className="relative flex flex-col flex-1 px-5 sm:px-8 pt-28 pb-12 max-w-5xl mx-auto w-full">
+        <div className="relative flex flex-col flex-1 px-5 sm:px-8 pt-24 sm:pt-28 pb-6 sm:pb-10 max-w-5xl mx-auto w-full">
           {/* Back link */}
           <div className="mb-auto">
             <Link
@@ -67,7 +67,7 @@ export default function LifeSimHero({ property }: Props) {
           <div className="mt-auto">
             {/* Property type + city pill */}
             <p
-              className="text-xs uppercase tracking-widest mb-4"
+              className="text-xs uppercase tracking-widest mb-3"
               style={{ color: "rgba(250,248,245,0.55)", fontFamily: "var(--font-dm-sans)" }}
             >
               {[typeLabel(property.property_type), property.city, "Ontario"].filter(Boolean).join(" · ")}
@@ -75,7 +75,7 @@ export default function LifeSimHero({ property }: Props) {
 
             {/* Title — always rendered for SEO */}
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-3 max-w-3xl"
+              className="text-3xl sm:text-5xl md:text-6xl font-light leading-tight mb-2 sm:mb-3 max-w-3xl"
               style={{ color: "#FAF8F5", fontFamily: "var(--font-cormorant)" }}
             >
               {property.title}

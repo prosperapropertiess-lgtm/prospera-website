@@ -103,7 +103,7 @@ export default function QuickSummary({ property }: Props) {
 
   return (
     <section
-      className="px-5 sm:px-8 py-6 sm:py-8"
+      className="px-5 sm:px-8 py-5 sm:py-8"
       style={{ backgroundColor: "#FFFFFF", borderBottom: "1px solid #E8E4DE" }}
     >
       <div className="max-w-5xl mx-auto">
@@ -135,10 +135,10 @@ export default function QuickSummary({ property }: Props) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-wrap w-full sm:w-auto">
             {property.available !== false && (
               <div
-                className="px-4 py-2 rounded-full text-xs font-semibold"
+                className="self-start px-4 py-2 rounded-full text-xs font-semibold"
                 style={{
                   backgroundColor: "rgba(45,122,79,0.08)",
                   color: "#2D7A4F",
@@ -149,8 +149,12 @@ export default function QuickSummary({ property }: Props) {
                 {availabilityLabel(property.available_date, { year: true })}
               </div>
             )}
-            <ApplyButton property={property} variant="primary" label="Apply Now" />
-            <BookViewingButton property={property} variant="outline" label="Book a Viewing" />
+            {property.available !== false && (
+              <div className="grid grid-cols-2 sm:flex gap-3">
+                <BookViewingButton property={property} variant="primary" label="Book a Viewing" className="!px-4 sm:!px-7" />
+                <ApplyButton property={property} variant="outline" label="Apply Now" className="!px-4 sm:!px-7" />
+              </div>
+            )}
           </div>
         </div>
 

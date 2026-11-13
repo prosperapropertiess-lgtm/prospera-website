@@ -8,7 +8,7 @@ import CostsBreakdown from "./CostsBreakdown";
 import SocialProof from "./SocialProof";
 import PoliciesSection from "./PoliciesSection";
 import ApplicationProcess from "./ApplicationProcess";
-import ProspaBenefits from "./ProspaBenefits";
+import LocationMap from "./LocationMap";
 import StickyCTA from "./StickyCTA";
 import BookViewingButton from "./BookViewingButton";
 import ApplyButton from "./ApplyButton";
@@ -79,11 +79,11 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
       {/* 2. Rented banner — captures rental alert leads on rented properties */}
       {isRented && <RentedBanner property={property} />}
 
-      {/* 3. Photos */}
-      {hasPhotos && <PhotoGallery property={property} />}
-
-      {/* 4. Price, CTA, quick stats */}
+      {/* 3. Price, CTA, quick stats — straight after the hero so it's on the first screen */}
       <QuickSummary property={property} />
+
+      {/* 4. Photos */}
+      {hasPhotos && <PhotoGallery property={property} />}
 
       {/* 5. Inquiry count + virtual tour if available */}
       <SocialProof property={property} />
@@ -102,17 +102,17 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
       {/* 9. Pet, smoking, guest policies */}
       <PoliciesSection property={property} />
 
+      {/* 10. Where it is */}
+      <LocationMap property={property} />
+
       {/* 10. Application process — only for available properties */}
       {!isRented && <ApplicationProcess />}
 
       {/* 11. FAQ — SEO value + renter confidence */}
       {faqs && faqs.length > 0 && <FaqSection faqs={faqs} />}
 
-      {/* 12. Why Prospera */}
-      <ProspaBenefits />
-
       {/* 13. Bottom CTA */}
-      <div className="py-14 px-5 sm:px-8 text-center" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
+      <div className="py-10 sm:py-14 px-5 sm:px-8 text-center" style={{ backgroundColor: "#F7F5F2", borderTop: "1px solid #D8D2C8" }}>
         <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#999999", fontFamily: "var(--font-dm-sans)" }}>
           {isRented ? "Similar Properties Available" : "Ready to Move Forward?"}
         </p>
@@ -135,8 +135,8 @@ export default function ListingPage({ property, faqs }: ListingPageProps) {
             </a>
           ) : (
             <>
-              <ApplyButton property={property} variant="primary" label="Apply Now" />
-              <BookViewingButton property={property} variant="outline" label="Book a Viewing" />
+              <BookViewingButton property={property} variant="primary" label="Book a Viewing" />
+              <ApplyButton property={property} variant="outline" label="Apply Now" />
               <a
                 href="tel:5196971227"
                 className="px-7 py-4 text-xs font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-70"
