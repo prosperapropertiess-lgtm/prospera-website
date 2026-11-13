@@ -1,6 +1,7 @@
 // What an owner sees for one placement. Only client-visible files, only
 // released applications, only published weekly updates. Never internal notes.
 import { db, computeStage, PREP_ITEMS, STAGES } from "./core";
+import { liveData, marketCompare } from "./live";
 
 const BUCKET = "placement-files";
 
@@ -30,6 +31,10 @@ export async function placementView(placementId: string, accountId: string | nul
     computeStage(pl),
   ]);
 
+  const [live, market] = await Promise.all([
+    liveData(pl).catch(() => null),
+    marketCompare(pl.property_id, pl.asking_rent ? Number(pl.asking_rent) : null).catch(() => null),
+  ]);
   const reviewIds = (reviews ?? []).map((r) => r.id);
   const [{ data: steps }, { data: messages }] = await Promise.all([
     reviewIds.length ? db().from("placement_steps").select("*").in("review_id", reviewIds).order("step_no") : Promise.resolve({ data: [] as Record<string, unknown>[] }),
@@ -54,6 +59,8 @@ export async function placementView(placementId: string, accountId: string | nul
       welcome_sent_at: pl.welcome_sent_at, account_id: pl.account_id,
     },
     stage,
+    live,
+    market,
     stageIndex: STAGES.findIndex((s) => s.key === stage),
     latestUpdate: latest ?? null,
     prep: PREP_ITEMS.map((i) => {
