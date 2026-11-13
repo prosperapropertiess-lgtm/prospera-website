@@ -65,8 +65,9 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/admin") &&
     !pathname.startsWith("/admin/login") &&
-    // PWA manifest for the Business Numbers app must be publicly fetchable
-    pathname !== "/admin/ceo/manifest.json"
+    // PWA manifests for the home-screen apps must be publicly fetchable
+    pathname !== "/admin/ceo/manifest.json" &&
+    pathname !== "/admin/scorecard/manifest.json"
   ) {
     if (!isAdminSession) {
       const loginUrl = req.nextUrl.clone();

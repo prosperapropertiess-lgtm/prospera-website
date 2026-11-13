@@ -24,13 +24,14 @@ export function serviceAccountEmail(): string | null {
   return credentials()?.email ?? null;
 }
 
-async function token(): Promise<string> {
+/** An access token for the site's service account. Read-only unless a wider scope is asked for. */
+export async function googleToken(scope = "https://www.googleapis.com/auth/spreadsheets.readonly"): Promise<string> {
   const c = credentials();
   if (!c) throw new SheetError("no_credentials", "No Google service account is configured on the server.");
   const now = Math.floor(Date.now() / 1000);
   const enc = (o: object) => Buffer.from(JSON.stringify(o)).toString("base64url");
   const input = `${enc({ alg: "RS256", typ: "JWT" })}.${enc({
-    iss: c.email, scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+    iss: c.email, scope,
     aud: "https://oauth2.googleapis.com/token", iat: now, exp: now + 3600,
   })}`;
   const sig = crypto.createSign("RSA-SHA256").update(input).sign(c.key, "base64url");
@@ -75,7 +76,7 @@ export interface SheetTab { name: string; grid: string[][] }
 
 /** Reads every tab's populated values as text, exactly as the Sheet displays them. */
 export async function readMarketSheet(): Promise<{ tabs: SheetTab[]; title: string }> {
-  const auth = await token();
+  const auth = await googleToken();
   const base = `https://sheets.googleapis.com/v4/spreadsheets/${MARKET_SHEET_ID}`;
   const meta = (await get(`${base}?fields=properties.title,sheets.properties.title`, auth)) as {
     properties: { title: string }; sheets: { properties: { title: string } }[];
