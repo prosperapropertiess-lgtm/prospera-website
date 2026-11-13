@@ -41,16 +41,34 @@ export function Progress({ index, total, label, onBack }: { index: number; total
   );
 }
 
-/** The home being asked about, shown above each step. */
-export function HomeCard({ image, address, price, utilitiesIncluded, extra, onChange }: {
-  image?: string | null; address: string; price: number; utilitiesIncluded?: boolean; extra?: string; onChange?: () => void;
+/** The home being asked about, shown above each step. The address wraps instead of being cut off. */
+export function HomeCard({ image, address, city, price, beds, utilitiesIncluded, available, onChange }: {
+  image?: string | null; address: string; city?: string | null; price: number; beds?: number | null;
+  utilitiesIncluded?: boolean; available?: string; onChange?: () => void;
 }) {
+  const facts = [`$${price.toLocaleString()}/mo`, beds != null ? `${beds} bed` : null, utilitiesIncluded ? "utilities included" : null].filter(Boolean);
   return (
-    <div className="flex items-center gap-3 rounded-xl border p-3 mb-6 bg-white" style={{ borderColor: BORDER }}>
-      {image && <Image src={image} alt="" width={56} height={56} className="w-14 h-14 rounded-lg object-cover shrink-0" />}
-      <div className="min-w-0 flex-1">
-        <div className="text-sm font-semibold truncate" style={{ color: NAVY }}>{address}</div>
-        <div className="text-sm" style={{ color: MUTED }}>${price.toLocaleString()}/mo{utilitiesIncluded ? " · utilities included" : ""}{extra ? ` · ${extra}` : ""}</div>
+    <div className="flex items-start gap-4 rounded-xl border p-3 mb-6 bg-white" style={{ borderColor: BORDER }}>
+      {image && <Image src={image} alt="" width={80} height={80} className="w-20 h-20 rounded-lg object-cover shrink-0" />}
+      <div className="min-w-0 flex-1 py-0.5">
+        <div className="text-base font-semibold leading-snug capitalize" style={{ color: NAVY }}>{address}</div>
+        <div className="text-sm mt-1" style={{ color: "#333" }}>{facts.join(" · ")}</div>
+        {(city || available) && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-sm" style={{ color: MUTED }}>
+            {city && (
+              <span className="inline-flex items-center gap-1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+                {city}
+              </span>
+            )}
+            {available && (
+              <span className="inline-flex items-center gap-1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" /></svg>
+                {available}
+              </span>
+            )}
+          </div>
+        )}
       </div>
       {onChange && <button type="button" onClick={onChange} className="text-sm font-medium underline shrink-0" style={{ color: NAVY }}>Change</button>}
     </div>

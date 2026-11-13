@@ -236,9 +236,11 @@ export default function ApplyPage({ params }: { params: Promise<{ agentId: strin
       <HomeCard
         image={property.images?.[0]}
         address={property.address}
+        city={property.city}
         price={property.price}
+        beds={property.bedrooms}
         utilitiesIncluded={property.utilities_included}
-        extra={`${property.bedrooms} bed`}
+        available={property.available_date && property.available_date > torontoToday() ? `Available ${fmtDate(property.available_date)}` : "Available now"}
       />
 
       {resumed && idx > 0 && (
