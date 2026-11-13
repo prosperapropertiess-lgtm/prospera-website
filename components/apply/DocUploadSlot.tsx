@@ -96,9 +96,9 @@ export default function DocUploadSlot({ slot, files, onChange }: Props) {
   return (
     <div style={{ marginBottom: 24 }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 4 }}>
-        <p style={{ margin: 0, fontSize: 15, fontWeight: 600, color: "#1F2F3A", fontFamily: FONT }}>{slot.label}</p>
+        <p style={{ margin: 0, fontSize: 18, fontWeight: 600, color: "#1F2F3A", fontFamily: FONT, lineHeight: 1.35 }}>{slot.label}</p>
         {slot.max > 1 && (
-          <span style={{ fontSize: 13, fontWeight: 600, color: done ? "#2D7A4F" : "#666666", fontFamily: FONT, flexShrink: 0 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, color: done ? "#1F2F3A" : "#666666", fontFamily: FONT, flexShrink: 0 }}>
             {files.length}{slot.min > 1 ? ` of ${slot.min}` : ""}
           </span>
         )}
@@ -110,12 +110,12 @@ export default function DocUploadSlot({ slot, files, onChange }: Props) {
           key={f.path}
           style={{
             display: "flex", alignItems: "center", justifyContent: "space-between",
-            backgroundColor: "rgba(45,122,79,0.06)", border: "1px solid rgba(45,122,79,0.18)",
-            borderRadius: 10, padding: "10px 14px", marginBottom: 8,
+            backgroundColor: "#FFFFFF", border: "2px solid #1F2F3A",
+            borderRadius: 12, padding: "12px 14px", marginBottom: 8, minHeight: 48,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
-            <FileCheck2 size={16} color="#2D7A4F" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <FileCheck2 size={16} color="#1F2F3A" strokeWidth={2} style={{ flexShrink: 0 }} />
             <span style={{ fontSize: 14, color: "#1F2F3A", fontFamily: FONT, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {f.name}
             </span>
@@ -147,8 +147,8 @@ export default function DocUploadSlot({ slot, files, onChange }: Props) {
             disabled={uploading}
             style={{
               width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-              padding: "14px", backgroundColor: uploading ? "#F7F5F2" : "#FFFFFF",
-              border: "1px dashed #D8D2C8", borderRadius: 10, fontSize: 14, fontWeight: 500,
+              padding: "14px", minHeight: 56, backgroundColor: uploading ? "#F7F5F2" : "#FFFFFF",
+              border: "2px dashed #D8D2C8", borderRadius: 12, fontSize: 15, fontWeight: 600,
               color: uploading ? "#666666" : "#1F2F3A", fontFamily: FONT,
               cursor: uploading ? "not-allowed" : "pointer",
             }}

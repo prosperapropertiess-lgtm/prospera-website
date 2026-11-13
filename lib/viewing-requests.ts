@@ -383,3 +383,24 @@ export function homeSlug(address: string): string {
 }
 
 export const VIEW_URL = "https://www.prosperaproperties.co/view";
+
+/** Earliest move-in for a home: today, or the day it becomes available. */
+export function earliestMoveIn(availableDate: string | null | undefined): string {
+  const today = torontoToday();
+  return availableDate && availableDate > today ? availableDate : today;
+}
+
+/** The next four 1st-or-15th dates after a home is available. Rolls forward on its own every month. */
+export function moveInOptions(availableDate: string | null | undefined): string[] {
+  const from = earliestMoveIn(availableDate);
+  const [y, m] = from.split("-").map(Number);
+  const out: string[] = [];
+  for (let i = 0; out.length < 4 && i < 12; i++) {
+    const yy = y + Math.floor((m - 1 + i) / 12), mm = ((m - 1 + i) % 12) + 1;
+    for (const day of [1, 15]) {
+      const iso = `${yy}-${String(mm).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      if (iso > from && out.length < 4) out.push(iso);
+    }
+  }
+  return out;
+}

@@ -4,11 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CONSENT_TEXT, visibleQuestions, torontoToday, targetMoveIn, type Answers, type PublicHome, type Question } from "@/lib/viewing-requests";
 
-const NAVY = "#1F2F3A";
-const BURGUNDY = "#8B2030";
-const BORDER = "#D8D2C8";
-const MUTED = "#666666";
-const heading = { fontFamily: "var(--font-cormorant)", color: NAVY };
+import { NAVY, BURGUNDY, BORDER, MUTED, heading, Shell, Progress as FlowProgress, Choice, Next, Text, Err } from "@/components/flow/FlowUI";
 const DRAFT_KEY = "prospera-view-draft-v3";
 
 // One screen per section. Follow-up questions appear on the same screen, under the answer that triggers them.
@@ -426,72 +422,6 @@ function QuestionBlock({ q, value, error, onChange }: { q: Question; value: stri
   );
 }
 
-function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F7F5F2", fontFamily: "var(--font-dm-sans)" }}>
-      <header className="px-5 py-4 border-b bg-white" style={{ borderColor: BORDER }}>
-        <Link href="/" className="text-lg font-bold" style={heading}>Prospera Properties</Link>
-      </header>
-      <div className="max-w-xl mx-auto px-5 py-8">{children}</div>
-      <style>{`
-        .view-step{animation:viewIn .18s ease-out}
-        @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-        .view-pop{animation:viewPop .35s ease-out}
-        @keyframes viewPop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
-        @media (prefers-reduced-motion: reduce){.view-step,.view-pop{animation:none}}
-      `}</style>
-    </div>
-  );
-}
-
 function Progress({ index, onBack }: { index: number; onBack?: () => void }) {
-  return (
-    <div className="mb-6">
-      <div className="flex items-center justify-between mb-2 text-sm" style={{ color: MUTED }}>
-        {onBack ? <button type="button" onClick={onBack} className="font-medium py-2 pr-3" style={{ color: NAVY }}>← Back</button> : <span />}
-        <span aria-live="polite">Step {index + 1} of {SCREENS.length} · {SCREENS[index].label}</span>
-      </div>
-      <div className="h-1.5 rounded-full" style={{ backgroundColor: BORDER }}>
-        <div className="h-1.5 rounded-full transition-all duration-200" style={{ width: `${Math.round((index / SCREENS.length) * 100)}%`, backgroundColor: NAVY }} />
-      </div>
-    </div>
-  );
-}
-
-function Choice({ children, selected, onClick, compact }: { children: React.ReactNode; selected: boolean; onClick: () => void; compact?: boolean }) {
-  return (
-    <button type="button" aria-pressed={selected} onClick={onClick}
-      className={`w-full ${compact ? "min-h-[48px] px-3 py-3 text-[15px]" : "min-h-[56px] px-5 py-4 text-base"} text-left font-semibold border-2 rounded-xl transition-colors duration-150 flex items-center justify-between gap-2`}
-      style={{ borderColor: selected ? NAVY : BORDER, color: selected ? "#FAF8F5" : NAVY, backgroundColor: selected ? NAVY : "#FFFFFF" }}>
-      <span>{children}</span>
-      {selected && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FAF8F5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0"><path d="M5 12l5 5L20 7" /></svg>}
-    </button>
-  );
-}
-
-function Next({ onClick }: { onClick: () => void }) {
-  return (
-    <button type="button" onClick={onClick}
-      className="w-full px-8 py-4 text-sm font-semibold uppercase tracking-widest rounded transition-opacity hover:opacity-80"
-      style={{ backgroundColor: BURGUNDY, color: "#FAF8F5" }}>
-      Continue
-    </button>
-  );
-}
-
-function Text({ id, label, value, onChange, error, ...rest }: {
-  id: string; label: string; value: string; onChange: (v: string) => void; error?: string;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "id">) {
-  return (
-    <div>
-      <label htmlFor={id} className="block text-sm font-semibold mb-2" style={{ color: NAVY }}>{label}</label>
-      <input id={id} value={value} onChange={(e) => onChange(e.target.value)} aria-invalid={!!error} aria-describedby={error ? `${id}-err` : undefined}
-        className="w-full px-4 py-4 border rounded-lg text-base bg-white" style={{ borderColor: error ? BURGUNDY : BORDER, color: "#222" }} {...rest} />
-      {error && <Err id={`${id}-err`}>{error}</Err>}
-    </div>
-  );
-}
-
-function Err({ children, id }: { children: React.ReactNode; id?: string }) {
-  return <p id={id} role="alert" className="text-sm mt-2" style={{ color: BURGUNDY }}>{children}</p>;
+  return <FlowProgress index={index} total={SCREENS.length} label={SCREENS[index].label} onBack={onBack} />;
 }
