@@ -46,9 +46,10 @@ export async function teamPost(body: object): Promise<{ ok: boolean; data: Recor
 }
 
 const NAV = [
-  { href: "/team", label: "Showings", icon: "M4 6h16M4 12h16M4 18h10" },
+  { href: "/team", label: "Home", icon: "M3 11l9-8 9 8M5 10v10h14V10" },
+  { href: "/team/fieldops", label: "Field Ops", icon: "M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" },
+  { href: "/team/dashboard", label: "Dashboard", icon: "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z" },
   { href: "/team/availability", label: "My times", icon: "M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" },
-  { href: "/team/earnings", label: "Earnings", icon: "M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" },
 ];
 
 export function TeamShell({ children, title, back }: { children: React.ReactNode; title?: string; back?: string }) {
@@ -69,9 +70,9 @@ export function TeamShell({ children, title, back }: { children: React.ReactNode
       </header>
       <main className="max-w-xl mx-auto px-5 py-6 team-in">{children}</main>
       <nav className="fixed bottom-0 inset-x-0 border-t bg-white z-10" style={{ borderColor: BORDER, paddingBottom: "env(safe-area-inset-bottom)" }}>
-        <div className="max-w-xl mx-auto grid grid-cols-3">
+        <div className="max-w-xl mx-auto grid grid-cols-4">
           {NAV.map((n) => {
-            const on = n.href === "/team" ? path === "/team" || path?.startsWith("/team/showings") : path?.startsWith(n.href);
+            const on = n.href === "/team" ? path === "/team" : n.href === "/team/fieldops" ? path?.startsWith("/team/fieldops") || path?.startsWith("/team/session") || path?.startsWith("/team/showings") : path?.startsWith(n.href);
             return (
               <Link key={n.href} href={n.href} className="flex flex-col items-center gap-1 py-2.5 text-xs font-semibold" style={{ color: on ? NAVY : "#999" }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={n.icon} /></svg>

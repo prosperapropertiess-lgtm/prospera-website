@@ -271,7 +271,7 @@ export async function markStep(apptId: string, agentId: string, step: Step) {
 }
 
 export interface Report {
-  outcome: "showed" | "no_show" | "tenant_cancelled_on_site" | "could_not_access";
+  outcome: "showed" | "no_show" | "tenant_cancelled_on_site" | "could_not_access" | "cancelled";
   interest?: "high" | "medium" | "low" | "none" | null;
   concerns?: string[];
   secured: boolean;
@@ -295,7 +295,7 @@ export async function complete(apptId: string, agentId: string, rep: Report) {
     secured: rep.secured, issue: rep.issue ?? null, notes: rep.notes ?? null, completed_at: now, updated_at: now,
   });
 
-  const status = rep.outcome === "no_show" ? "no_show" : "completed";
+  const status = rep.outcome === "no_show" ? "no_show" : rep.outcome === "cancelled" ? "cancelled" : "completed";
   await sb().from("fo_appointments").update({ status, updated_at: now }).eq("id", apptId);
   await event(apptId, "completed", `specialist:${agentId}`, { outcome: rep.outcome, interest: rep.interest }, agentId);
 
@@ -342,7 +342,7 @@ export async function complete(apptId: string, agentId: string, rep: Report) {
     }
   }
 
-  if (rep.issue || rep.outcome === "could_not_access" || !rep.secured) {
+  if (rep.issue || rep.outcome === "could_not_access" || (!rep.secured && rep.outcome === "showed")) {
     const m = T.admin({ title: `Issue at ${appt.address}`, pill: "CHECK THIS", intro: rep.issue || (rep.outcome === "could_not_access" ? "The specialist couldn't get in." : "The specialist couldn't confirm the home is locked up."), rows: [["Showing", `${fmtDay(appt.starts_at)}, ${fmtTime(appt.starts_at)}`]] });
     await send({ to: ADMIN_EMAIL, ...m, template: "admin_issue", key: `admin-issue:${apptId}`, appointmentId: apptId });
   }

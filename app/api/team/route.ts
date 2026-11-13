@@ -6,6 +6,7 @@ import { getAgentFromRequest } from "@/lib/agent-auth";
 import { hashToken, verifyId, loadSettings, calendarUrl, LIVE } from "@/lib/fieldops/engine";
 import { complete, markStep, reportUnavailable, sendApplicationFor, STEPS, type Report, type Step } from "@/lib/fieldops/service";
 import { todayToronto, localParts } from "@/lib/fieldops/time";
+import { loadSessionView, togglePrep, saveProspect, sendProspectApplication, closeSession, groupIntoSessions, type ProspectFeedback, type Closing } from "@/lib/fieldops/sessions";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +43,33 @@ export async function GET(req: NextRequest) {
       calendarUrl: calendarUrl(me.id),
       earnings: { pending: sum((e) => e.status === "pending" && e.kind !== "lease_bonus"), approved: sum((e) => e.status === "approved"), paid: sum((e) => e.status === "paid"), bonusPending: sum((e) => e.status === "pending" && e.kind === "lease_bonus") },
     });
+  }
+
+  if (view === "fieldops") {
+    // Sessions: back-to-back prospects at one home on one visit.
+    const since = new Date(Date.now() - 7 * 864e5).toISOString();
+    const { data } = await sb().from("fo_appointments")
+      .select("id, property_id, starts_at, ends_at, status, acknowledged_at, tenant_name, properties(address, city, unit_number)")
+      .eq("agent_id", me.id).gte("ends_at", since).not("status", "in", "(cancelled,reassignment_pending)").order("starts_at");
+    const { data: closed } = await sb().from("fo_sessions").select("session_key, completed_at").eq("agent_id", me.id).not("completed_at", "is", null).gte("starts_at", since);
+    const done = new Set((closed ?? []).map((c) => c.session_key));
+    const sessions = groupIntoSessions(data ?? []).map((g) => {
+      const p = g[0].properties as unknown as { address: string; city: string; unit_number: string | null };
+      const key = `${me.id}:${g[0].property_id}:${g[0].starts_at}`;
+      const live = g.some((a) => ["confirmed", "in_progress"].includes(a.status));
+      return {
+        id: g[0].id, address: p.address, unit: p.unit_number, city: p.city, startsAt: g[0].starts_at, endsAt: g[g.length - 1].ends_at,
+        prospects: g.map((a) => a.tenant_name.split(/\s+/)[0]), count: g.length,
+        unacknowledged: g.some((a) => !a.acknowledged_at && a.status === "confirmed"),
+        state: done.has(key) || !live ? "done" : new Date(g[g.length - 1].ends_at).getTime() < Date.now() ? "needs_report" : g.some((a) => a.status === "in_progress") ? "now" : "upcoming",
+      };
+    });
+    return NextResponse.json({ me: { name: me.name }, sessions });
+  }
+
+  if (view === "session") {
+    const v = await loadSessionView(me.id, req.nextUrl.searchParams.get("id") ?? "");
+    return v ? NextResponse.json(v) : err("Not found.", 404);
   }
 
   if (view === "showing") {
@@ -175,6 +203,29 @@ export async function POST(req: NextRequest) {
   }
   if (body.action === "complete") {
     const r = await complete(id, me.id, body.report as Report);
+    return r.ok ? NextResponse.json(r) : err(r.error, 400);
+  }
+  if (body.action === "ack_session") {
+    const v = await loadSessionView(me.id, id);
+    if (!v) return err("Not found.", 404);
+    const ids = v.prospects.map((p) => p.id);
+    await sb().from("fo_appointments").update({ acknowledged_at: new Date().toISOString() }).in("id", ids).eq("agent_id", me.id).is("acknowledged_at", null);
+    return NextResponse.json({ ok: true });
+  }
+  if (body.action === "prep") {
+    const r = await togglePrep(me.id, id, String(body.item ?? ""));
+    return r.ok ? NextResponse.json(r) : err(r.error, 404);
+  }
+  if (body.action === "prospect_save") {
+    const r = await saveProspect(me.id, id, (body.feedback ?? {}) as ProspectFeedback);
+    return r.ok ? NextResponse.json(r) : err(r.error, 400);
+  }
+  if (body.action === "prospect_send_app") {
+    const r = await sendProspectApplication(me.id, me.name ?? "Prospera Properties", id);
+    return r.ok ? NextResponse.json(r) : err(r.error, 400);
+  }
+  if (body.action === "session_close") {
+    const r = await closeSession(me.id, me.name ?? "Specialist", id, (body.closing ?? {}) as Closing);
     return r.ok ? NextResponse.json(r) : err(r.error, 400);
   }
   if (body.action === "send_application") {
