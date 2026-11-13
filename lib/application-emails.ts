@@ -2,11 +2,11 @@
 // personalized application link, the owner's report link, and the first month's
 // rent request. Same card look as the FieldOps emails.
 
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 const SITE = "https://www.prosperaproperties.co";
 const F = "-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
 
-function shell(label: string, inner: string) {
+export function shell(label: string, inner: string) {
   return `<div style="background:#F5F5F3;margin:0;padding:0">
 <table width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#F5F5F3"><tbody><tr><td align="center" style="padding:30px 12px">
 <table width="560" cellspacing="0" cellpadding="0" border="0" style="width:560px;max-width:560px;background:#FFFFFF;border-radius:14px;overflow:hidden;font-family:${F}"><tbody>
@@ -24,13 +24,13 @@ ${inner}
 </tbody></table></td></tr></tbody></table></div>`;
 }
 
-const p = (html: string, pad = "0 36px 18px") => `<tr><td style="padding:${pad};font-size:15px;line-height:1.65;color:#444">${html}</td></tr>`;
-const h1 = (t: string) => `<tr><td style="padding:6px 36px 10px"><h1 style="margin:0;font-size:27px;line-height:1.2;font-weight:700;color:#222;letter-spacing:-0.4px">${t}</h1></td></tr>`;
-const button = (text: string, href: string, dark = true) => `<tr><td style="padding:4px 36px 24px">
+export const p = (html: string, pad = "0 36px 18px") => `<tr><td style="padding:${pad};font-size:15px;line-height:1.65;color:#444">${html}</td></tr>`;
+export const h1 = (t: string) => `<tr><td style="padding:6px 36px 10px"><h1 style="margin:0;font-size:27px;line-height:1.2;font-weight:700;color:#222;letter-spacing:-0.4px">${t}</h1></td></tr>`;
+export const button = (text: string, href: string, dark = true) => `<tr><td style="padding:4px 36px 24px">
   <table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td align="center" style="background:${dark ? "#8B2030" : "#FFFFFF"};border:${dark ? "0" : "1px solid #D8D2C8"};border-radius:10px">
   <a href="${esc(href)}" style="display:block;padding:15px 20px;font-size:15px;font-weight:700;color:${dark ? "#FFFFFF" : "#1F2F3A"};text-decoration:none">${esc(text)}</a></td></tr></tbody></table></td></tr>`;
 
-function step(n: number, title: string, body: string) {
+export function step(n: number, title: string, body: string) {
   return `<tr><td style="padding:0 36px 16px"><table width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr>
     <td valign="top" width="34"><div style="width:26px;height:26px;border-radius:13px;background:#1F2F3A;color:#FFF;font-size:13px;font-weight:700;line-height:26px;text-align:center">${n}</div></td>
     <td valign="top" style="font-size:15px;line-height:1.6;color:#444"><div style="font-weight:700;color:#222;margin:2px 0 4px">${title}</div>${body}</td>

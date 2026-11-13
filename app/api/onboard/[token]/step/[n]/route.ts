@@ -1,3 +1,4 @@
+import { createPlacement, sendWelcome } from "@/lib/placements/onboarding";
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
@@ -105,8 +106,25 @@ export async function POST(
       current_step: 4,
     }).eq("token", token);
 
+    // Placement clients get their property dashboard, and the welcome email with its link,
+    // instead of the plain confirmation. Falls back to the old email if anything fails.
+    let dashboardWelcomeSent = false;
+    if (session.service_type === "placement" && session.owner_email) {
+      try {
+        const { placementId } = await createPlacement({
+          name: session.owner_name || "Owner", email: session.owner_email, phone: session.owner_phone ?? null,
+          address: session.property_address || "Your property", city: session.property_city ?? null, propertyId: session.property_id ?? null,
+          onboardingSessionId: session.id, askingRent: session.approx_monthly_rent ? Number(session.approx_monthly_rent) : null,
+          agreementSignedAt: signedAt, actor: "onboarding",
+        });
+        dashboardWelcomeSent = (await sendWelcome(placementId, "onboarding")) !== "failed";
+      } catch (e) {
+        console.error("[onboard] placement dashboard setup failed:", e);
+      }
+    }
+
     // Email to owner confirming agreement + next steps (different for placement vs management)
-    if (session.owner_email) {
+    if (session.owner_email && !dashboardWelcomeSent) {
       try {
         const isPlacement = session.service_type === "placement";
         const html = isPlacement

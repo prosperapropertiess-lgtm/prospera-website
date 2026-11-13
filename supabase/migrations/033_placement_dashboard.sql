@@ -1,0 +1,1 @@
+-- Applied via MCP 2026-11-13 as 033_placement_dashboard. Tenant placement client dashboard (/client). See lib/placements/.
