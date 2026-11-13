@@ -34,7 +34,8 @@ const PRIORITY: Record<Exclude<Priority, null>, { label: string; tone: Tone }> =
   maybe: { label: "Maybe", tone: "amber" },
   not_now: { label: "Not now", tone: "grey" },
 };
-const ORDER: Priority[] = ["call_today", "maybe", null, "not_now"];
+// Not sorted yet goes first: those are the newest requests and nobody has seen them.
+const ORDER: Priority[] = [null, "call_today", "maybe", "not_now"];
 
 export default function ViewingRequestsPage() {
   const [reqs, setReqs] = useState<Req[] | null>(null);
@@ -43,6 +44,8 @@ export default function ViewingRequestsPage() {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  // ?id=… from the email: show that request first.
+  const [focusId, setFocusId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     const res = await fetch("/api/admin/viewing-requests");
@@ -52,6 +55,19 @@ export default function ViewingRequestsPage() {
   }, []);
 
   useEffect(() => { const t = setTimeout(load, 0); return () => clearTimeout(t); }, [load]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setFocusId(new URLSearchParams(window.location.search).get("id")), 0);
+    return () => clearTimeout(t);
+  }, []);
+
+  // A linked request that's already handled isn't in the deck: open its tab in the list instead.
+  useEffect(() => {
+    const r = focusId && reqs?.find((x) => x.id === focusId);
+    if (!r || r.status === "new" || r.status === "contacted") return;
+    const t = setTimeout(() => { setMode("list"); setTab(r.status === "viewing_booked" ? "booked" : "done"); }, 0);
+    return () => clearTimeout(t);
+  }, [focusId, reqs]);
 
   async function setStatus(r: Req, status: Status) {
     setBusy(r.id);
@@ -109,7 +125,7 @@ export default function ViewingRequestsPage() {
         ))}
       </div>
 
-      {mode === "swipe" ? (reqs ? <SwipeDeck requests={reqs} onChanged={load} /> : <Loading />) : (<>
+      {mode === "swipe" ? (reqs ? <SwipeDeck requests={reqs} focusId={focusId} onChanged={load} /> : <Loading />) : (<>
       <Tabs value={tab} onChange={setTab} options={[
         { value: "todo", label: "To call", count: byTab.todo.length },
         { value: "contacted", label: "Contacted", count: byTab.contacted.length },
@@ -121,7 +137,8 @@ export default function ViewingRequestsPage() {
         <EmptyState title={tab === "todo" ? "No one waiting for a call" : "Nothing here yet"} body={tab === "todo" ? "New requests show up here as soon as someone sends the form." : undefined} />
       ) : (
         <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
-          {(tab === "todo" ? [...shown].sort((a, b) => ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority)) : shown).map((r) => (
+          {(tab === "todo" ? [...shown].sort((a, b) => ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority)) : shown)
+            .sort((a, b) => Number(b.id === focusId) - Number(a.id === focusId)).map((r) => (
             <RequestCard key={r.id} r={r} busy={busy === r.id} onStatus={(s) => setStatus(r, s)} onLink={() => sendLink(r)} />
           ))}
         </div>

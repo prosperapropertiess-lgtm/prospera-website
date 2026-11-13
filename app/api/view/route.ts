@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
   // Card-style summary to Ebin. The daily review does the sorting. A failed email doesn't undo the save.
   try {
     const seconds = Number.isFinite(Number(body.seconds)) && Number(body.seconds) > 0 && Number(body.seconds) < 86_400 ? Math.round(Number(body.seconds)) : null;
-    const mail = viewingRequestEmail({ name, phone, email: email || null, moveIn, occupants, answers, home: snapshot, seconds });
+    const mail = viewingRequestEmail({ id: saved.id, name, phone, email: email || null, moveIn, occupants, answers, home: snapshot, seconds });
     await new Resend(process.env.RESEND_API_KEY).emails.send({
       from: "Prospera Admin <hello@prosperaproperties.co>",
       to: ["prosperapropertiess@gmail.com"],
