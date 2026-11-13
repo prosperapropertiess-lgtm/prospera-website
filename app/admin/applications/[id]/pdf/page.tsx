@@ -27,6 +27,7 @@ interface Summary {
   checks: { topic: string; status: string; detail: string }[];
   questions_to_ask: string[];
   verified_monthly_income: number | null;
+  owner_summary?: string;
 }
 
 interface Application {
@@ -49,6 +50,7 @@ interface Application {
   employer_ref_email: string | null;
   monthly_rent: number;
   ai_summary: Summary | null;
+  viewing_form?: Record<string, string> | null;
   income_source: string | null;
   income_notes: string | null;
   move_in_date: string | null;
@@ -171,7 +173,7 @@ export default function ApplicationPdfPage() {
             </div>
           </div>
           <div className="ap-mast-right">
-            <div className="ap-eyebrow">Rental application</div>
+            <div className="ap-eyebrow">Tenant report</div>
             <div className="ap-mast-date">Prepared {prepared}</div>
           </div>
         </header>
@@ -204,7 +206,7 @@ export default function ApplicationPdfPage() {
               <div className="ap-eyebrow">Screening summary</div>
               {verdict && <span className="ap-verdict">{verdict.label}</span>}
             </div>
-            <p className="ap-headline">{s.headline}</p>
+            <p className="ap-headline">{s.owner_summary || s.headline}</p>
             <div className="ap-checks">
               {s.checks.map((c, i) => {
                 const m = CHECK_MARK[c.status] ?? CHECK_MARK.claimed_only;
@@ -237,6 +239,11 @@ export default function ApplicationPdfPage() {
             {showContact && <Field label="Email" value={app.tenant_email} />}
             {showDob && <Field label="Date of birth" value={longDate(app.tenant_dob)} />}
           </Card>
+          {app.viewing_form && (
+            <Card n="✓" title="Before the viewing">
+              {Object.entries(app.viewing_form).filter(([k]) => k !== "submitted").slice(0, 10).map(([k, v]) => <Field key={k} label={k} value={v} />)}
+            </Card>
+          )}
 
           <Card n="02" title="Household">
             <Field label="Names on the lease" value={household.join(", ")} />

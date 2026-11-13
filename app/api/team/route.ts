@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { getAgentFromRequest } from "@/lib/agent-auth";
 import { hashToken, verifyId, loadSettings, calendarUrl, LIVE } from "@/lib/fieldops/engine";
-import { complete, markStep, reportUnavailable, STEPS, type Report, type Step } from "@/lib/fieldops/service";
+import { complete, markStep, reportUnavailable, sendApplicationFor, STEPS, type Report, type Step } from "@/lib/fieldops/service";
 import { todayToronto, localParts } from "@/lib/fieldops/time";
 
 export const dynamic = "force-dynamic";
@@ -175,6 +175,10 @@ export async function POST(req: NextRequest) {
   }
   if (body.action === "complete") {
     const r = await complete(id, me.id, body.report as Report);
+    return r.ok ? NextResponse.json(r) : err(r.error, 400);
+  }
+  if (body.action === "send_application") {
+    const r = await sendApplicationFor({ appointmentId: id, onlyAgentId: me.id, sentBy: me.id, senderName: me.name ?? "Prospera Properties" });
     return r.ok ? NextResponse.json(r) : err(r.error, 400);
   }
   return err("Unknown action");

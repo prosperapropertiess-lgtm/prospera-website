@@ -4,7 +4,8 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { applicationReceivedAgentEmail, applicationEbinReviewEmail } from "@/lib/emails";
 import { createQuickActionToken } from "@/lib/application-quick-action-token";
 import { screenAndSave, VERDICTS } from "@/lib/application-screening";
-import { ALL_DOC_TYPES, missingDocs, type IncomeSource } from "@/lib/application-requirements";
+import { ALL_DOC_TYPES, missingDocs, missingOptionDocs, type IncomeSource, type DocOption } from "@/lib/application-requirements";
+import { inviteIdFromToken } from "@/lib/application-invite";
 
 // The AI review runs after the response is sent; give it room to read every document.
 export const maxDuration = 300;
@@ -49,7 +50,9 @@ export async function POST(req: NextRequest) {
         typeof d?.storage_path === "string" &&
         /^temp\/[\w.-]+$/.test(d.storage_path),
     );
-    const missing = missingDocs(income_source, docEntries);
+    // Personalized applications pick a document option (bank statements, or stubs + credit + letter).
+    const doc_option: DocOption | null = body.doc_option === "bank" || body.doc_option === "stubs" ? body.doc_option : null;
+    const missing = doc_option ? missingOptionDocs(doc_option, docEntries) : missingDocs(income_source, docEntries);
     if (missing) return NextResponse.json({ error: missing }, { status: 400 });
 
     const { data: agent } = await supabaseAdmin
@@ -68,6 +71,13 @@ export async function POST(req: NextRequest) {
       .eq("available", true)
       .maybeSingle();
     if (!property) return NextResponse.json({ error: "This property is no longer available" }, { status: 400 });
+
+    // A personal link from the after-viewing email ties this application to the invite and viewing request.
+    const inviteId = typeof body.invite_token === "string" ? inviteIdFromToken(body.invite_token) : null;
+    const { data: invite } = inviteId
+      ? await supabaseAdmin.from("application_invites").select("id, property_id, viewing_request_id").eq("id", inviteId).maybeSingle()
+      : { data: null };
+    if (invite && invite.property_id !== property_id) return NextResponse.json({ error: "Invalid application link" }, { status: 400 });
 
     const { data: existing } = await supabaseAdmin
       .from("applications")
@@ -117,6 +127,11 @@ export async function POST(req: NextRequest) {
         landlord_ref_phone: body.rents_now === "yes" ? text(body.landlord_ref_phone) : null,
         landlord_ref_email: body.rents_now === "yes" ? text(body.landlord_ref_email) : null,
         reason_for_moving: text(body.reason_for_moving),
+        tenant_dob: text(body.tenant_dob),
+        doc_option,
+        invite_id: invite?.id ?? null,
+        viewing_request_id: invite?.viewing_request_id ?? null,
+        stage: "review",
         consent_at: new Date().toISOString(),
         monthly_rent: Number(property.price),
         status: "pending",
@@ -141,6 +156,7 @@ export async function POST(req: NextRequest) {
     }
 
     await supabaseAdmin.from("applications").update({ status: "processing" }).eq("id", application.id);
+    if (invite) await supabaseAdmin.from("application_invites").update({ application_id: application.id }).eq("id", invite.id);
 
     const resendKey = process.env.RESEND_API_KEY;
     const propertyAddress = `${property.address}, ${property.city}`;

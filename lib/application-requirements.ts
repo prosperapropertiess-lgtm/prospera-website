@@ -10,7 +10,9 @@ export type DocType =
   | "employment_letter"
   | "notice_of_assessment"
   | "income_proof"
-  | "bank_statement";
+  | "bank_statement"
+  | "credit_report"
+  | "singlekey_report";
 
 export const INCOME_SOURCES: { value: IncomeSource; label: string; hint: string }[] = [
   { value: "employed", label: "I have a job", hint: "Full-time, part-time, or contract" },
@@ -75,6 +77,8 @@ export const DOC_LABELS: Record<DocType, string> = {
   notice_of_assessment: "Notice of Assessment",
   income_proof: "Proof of income",
   bank_statement: "Bank statement",
+  credit_report: "Credit report",
+  singlekey_report: "SingleKey report",
 };
 
 export const ALL_DOC_TYPES = Object.keys(DOC_LABELS) as DocType[];
@@ -88,6 +92,38 @@ export function missingDocs(source: IncomeSource | "", docs: { doc_type: string 
         ? `Please upload your ${slot.label.toLowerCase()}.`
         : `Please upload at least ${slot.min} ${slot.label.toLowerCase()}.`;
     }
+  }
+  return null;
+}
+
+// ── Document options (personalized application, Nov 2026) ─────────────
+// Everyone sends photo ID, then picks one of two ways to show they can pay.
+export type DocOption = "bank" | "stubs";
+
+export const DOC_OPTIONS: { value: DocOption; label: string; hint: string; time: string }[] = [
+  { value: "bank", label: "3 months of bank statements", hint: "The quickest. Download them from your bank's app or website.", time: "About 2 minutes" },
+  { value: "stubs", label: "Pay stubs, credit report and job letter", hint: "Your last 6 pay stubs, a credit report and a letter from your employer.", time: "About 15 minutes" },
+];
+
+const OPTION_SLOTS: Record<DocOption, DocSlot[]> = {
+  bank: [
+    { type: "bank_statement", label: "Bank statements, last 3 months", hint: "In most bank apps: Accounts, then Statements or Documents. One PDF per month, or one combined PDF.", min: 1, max: 6 },
+  ],
+  stubs: [
+    { type: "paystub", label: "Your last 6 pay stubs", hint: "From your payroll app or employer portal. One combined PDF is fine.", min: 1, max: 8 },
+    { type: "credit_report", label: "Credit report", hint: "Free in about 5 minutes from Borrowell or Credit Karma. Download the full report as a PDF.", min: 1, max: 2 },
+    { type: "employment_letter", label: "Employment letter", hint: "A letter or email from your employer with your role, start date and pay.", min: 1, max: 2 },
+  ],
+};
+
+export function optionSlots(option: DocOption | ""): DocSlot[] {
+  return [{ ...ID_SLOT, max: 2 }, ...(option ? OPTION_SLOTS[option] : [])];
+}
+
+export function missingOptionDocs(option: DocOption | "", docs: { doc_type: string }[]): string | null {
+  if (!option) return "Pick how you'd like to show your income.";
+  for (const slot of optionSlots(option)) {
+    if (docs.filter((d) => d.doc_type === slot.type).length < slot.min) return `Please upload your ${slot.label.toLowerCase()}.`;
   }
   return null;
 }

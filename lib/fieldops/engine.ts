@@ -310,7 +310,7 @@ function secret() {
   return s;
 }
 /** brief = agent property brief (access details), shared with showing specialists. */
-export type LinkKind = "book" | "manage" | "invite" | "ics" | "brief";
+export type LinkKind = "book" | "manage" | "invite" | "ics" | "brief" | "apply" | "owner_report";
 export function signId(kind: LinkKind, id: string) {
   const sig = crypto.createHmac("sha256", secret()).update(`${kind}:${id}`).digest("base64url").slice(0, 32);
   return `${id}.${sig}`;

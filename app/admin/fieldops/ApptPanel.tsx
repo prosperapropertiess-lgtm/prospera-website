@@ -79,6 +79,7 @@ export default function ApptPanel({ id, onClose, onChanged }: { id: string; onCl
 
       {live && (
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "18px 0 6px" }}>
+          <Button size="sm" variant="primary" onClick={() => run({ action: "send_application", appointment: id }, "Thank-you and application link emailed.")} disabled={busy || !a.tenant_email}>Send application</Button>
           <Button size="sm" onClick={openMove}>Move time</Button>
           <Button size="sm" onClick={() => setMode("reassign")}>Change specialist</Button>
           <Button size="sm" onClick={() => run({ action: "resend" }, "Confirmation re-sent.")} disabled={busy || !a.tenant_email}>Re-send confirmation</Button>
@@ -88,6 +89,7 @@ export default function ApptPanel({ id, onClose, onChanged }: { id: string; onCl
       {!live && (
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "18px 0 6px" }}>
           {!a.lease_signed_at && ["completed", "followed_up"].includes(a.status) && <Button size="sm" variant="primary" onClick={() => setMode("lease")}>They signed the lease</Button>}
+          <Button size="sm" variant="primary" onClick={() => run({ action: "send_application", appointment: id }, "Thank-you and application link emailed.")} disabled={busy || !a.tenant_email}>Send application</Button>
           <Button size="sm" variant="ghost" onClick={() => setMode("status")}>Fix status</Button>
         </div>
       )}

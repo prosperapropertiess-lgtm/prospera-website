@@ -3,6 +3,7 @@ import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
 import { supabaseAdmin } from "@/lib/supabase";
 import { DOC_LABELS, type DocType } from "@/lib/application-requirements";
+import { visibleQuestions } from "@/lib/viewing-requests";
 
 // Reads an application's answers and documents in one pass and produces a
 // short, structured summary for Ebin. The AI advises; a person decides.
@@ -26,6 +27,7 @@ const SummarySchema = z.object({
     }),
   ),
   questions_to_ask: z.array(z.string()),
+  owner_summary: z.string(),
   verified_monthly_income: z.number().nullable(),
   rent_share_of_income_pct: z.number().nullable(),
   id_name_matches: z.boolean().nullable(),
@@ -56,6 +58,9 @@ Output:
 - checks: 4 to 7 items, most important first. Each detail is one short sentence with the real numbers.
 - questions_to_ask: 1 to 4 specific questions for the applicant or their landlord.
 - documents: one entry per uploaded document, saying whether you could read it.
+- owner_summary: 2 to 3 plain sentences for the property owner deciding on a conditional approval: income compared with rent, how long they've rented and whether references were given, and anything still to confirm. No ID numbers, birth dates, account numbers or contact details.
+
+Earlier viewing form: if "viewing_form" is present, the applicant answered those questions before their viewing (income range, self-reported credit range, job length, rental history, etc.). Compare it with the application and documents. Note anything that changed or doesn't line up; matching answers are a good sign. A self-reported credit range is only a claim; a SingleKey screening comes later.
 Write plainly, like a sharp property manager briefing a colleague. No jargon.`;
 
 const MAX_DOC_BYTES = 24 * 1024 * 1024; // keep the request under the API's 32MB cap
@@ -140,7 +145,9 @@ export async function screenApplication(applicationId: string): Promise<Screenin
         ? `${app.landlord_ref_name} (${[app.landlord_ref_phone && "phone given", app.landlord_ref_email && "email given"].filter(Boolean).join(", ") || "no contact info"}). Not yet contacted.`
         : "none given",
       reason_for_moving: app.reason_for_moving,
+      document_option_chosen: app.doc_option === "bank" ? "3 months of bank statements" : app.doc_option === "stubs" ? "pay stubs, credit report and employment letter" : null,
       documents_not_included: skipped,
+      viewing_form: await viewingFormAnswers(app.viewing_request_id),
     };
 
     content.push({
@@ -172,6 +179,24 @@ export async function screenApplication(applicationId: string): Promise<Screenin
     console.error(`[screenApplication] ${applicationId}:`, err);
     return { summary: null, error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/** The applicant's earlier viewing-form answers, as question → answer labels. */
+export async function viewingFormAnswers(id: string | null): Promise<Record<string, string> | null> {
+  if (!id) return null;
+  const { data: vr } = await supabaseAdmin.from("viewing_requests").select("answers, move_in_date, occupants, created_at").eq("id", id).maybeSingle();
+  if (!vr) return null;
+  const a = (vr.answers ?? {}) as Record<string, string>;
+  const out: Record<string, string> = { submitted: String(vr.created_at).slice(0, 10) };
+  if (vr.move_in_date) out["Move-in date"] = vr.move_in_date;
+  if (vr.occupants) out["People"] = String(vr.occupants);
+  for (const q of visibleQuestions(a)) {
+    const v = a[q.id];
+    if (!v || q.id === "viewing_times") continue;
+    const label = q.options ? v.split(",").map((x) => q.options!.find((o) => o.value === x)?.label ?? x).join(", ") : v;
+    out[q.title] = label;
+  }
+  return out;
 }
 
 // Plain-text version for places that still show ai_report (list views, older emails).

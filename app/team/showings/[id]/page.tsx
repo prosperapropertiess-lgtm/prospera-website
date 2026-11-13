@@ -105,6 +105,13 @@ export default function ShowingPage() {
             ${data.home.price.toLocaleString("en-CA")}/month{data.home.bedrooms != null ? ` · ${data.home.bedrooms} bed` : ""}{data.home.bathrooms != null ? ` · ${data.home.bathrooms} bath` : ""}
           </p>
         </Box>
+        <Box className="p-5">
+          <Label>They want to apply?</Label>
+          <p className="mt-1 mb-3 text-[15px]" style={{ color: "#222" }}>Sends a thank-you from you with their personal application link and what to have ready.</p>
+          <Secondary disabled={busy === "apply"} onClick={() => post({ action: "send_application" }, "apply", "Sent. They'll get the thank-you and application link by email.")}>
+            {busy === "apply" ? "Sending…" : "Send application"}
+          </Secondary>
+        </Box>
       </div>
 
       {live && (

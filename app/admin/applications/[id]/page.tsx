@@ -1,4 +1,5 @@
 "use client";
+import Pipeline, { type PipelineApp } from "./Pipeline";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -118,6 +119,8 @@ export default function ApplicationDetailPage() {
   const [notesSaving, setNotesSaving] = useState(false);
   const [notesSaved, setNotesSaved] = useState(false);
   const [rescreening, setRescreening] = useState(false);
+
+  const reload = () => fetch(`/api/admin/applications/${id}`).then((r) => r.json()).then((data) => setApp(data)).catch(() => {});
 
   useEffect(() => {
     fetch(`/api/admin/applications/${id}`)
@@ -283,6 +286,8 @@ export default function ApplicationDetailPage() {
           {error}
         </div>
       )}
+
+      <Pipeline app={app as unknown as PipelineApp} onChanged={reload} />
 
       {/* AI summary */}
       {app.ai_summary ? (() => {

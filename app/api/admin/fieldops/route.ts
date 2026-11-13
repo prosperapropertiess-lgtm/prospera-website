@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { agentSlots, ALL_SHOWINGS, calendarUrl, DEFAULT_RULES, hashToken, loadCtx, loadPropertyRules, loadSettings, signId, slotsFor, agentAvailable, LIVE } from "@/lib/fieldops/engine";
 import {
-  adminBook, bookFromRequest, cancel, createDirectInvite, createInvite, markLeaseSigned, reassign, replacementsFor, reschedule, manageUrl, bookUrl,
+  adminBook, bookFromRequest, cancel, sendApplicationFor, createDirectInvite, createInvite, markLeaseSigned, reassign, replacementsFor, reschedule, manageUrl, bookUrl,
 } from "@/lib/fieldops/service";
 import { send, card, SITE } from "@/lib/fieldops/messages";
 import { addDays, localParts, todayToronto, zonedToUtc } from "@/lib/fieldops/time";
@@ -300,6 +300,10 @@ export async function POST(req: NextRequest) {
       case "send_booking_link": {
         const r = await createInvite(String(b.request), { email: b.email || null, sendEmail: b.sendEmail !== false });
         return NextResponse.json({ ok: true, ...r });
+      }
+      case "send_application": {
+        const r = await sendApplicationFor({ requestId: b.request ? String(b.request) : undefined, appointmentId: b.appointment ? String(b.appointment) : undefined, sentBy: "admin", senderName: "Ebin" });
+        return r.ok ? NextResponse.json(r) : NextResponse.json({ error: r.error }, { status: 400 });
       }
       case "direct_booking_link": {
         const r = await createDirectInvite({ propertyId: String(b.property), name: String(b.name ?? "").trim(), phone: b.phone || null, email: b.email || null, sendEmail: b.sendEmail !== false });

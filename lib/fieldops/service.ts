@@ -324,9 +324,14 @@ export async function complete(apptId: string, agentId: string, rep: Report) {
   if (rep.outcome === "showed" && rep.sendApplication !== false && row.tenant_email) {
     const key = `apply:${apptId}`;
     const { data: done } = await sb().from("fo_messages").select("status").eq("idempotency_key", key).maybeSingle();
-    if (done?.status !== "sent") {
+    // Already sent by hand from the showing screen? Don't send a second thank-you.
+    const { data: invited } = await sb().from("application_invites").select("id").eq("appointment_id", apptId).limit(1).maybeSingle();
+    if (done?.status !== "sent" && !invited) {
       try {
-        await sendApplicationInvite(row.property_id, row.tenant_name, row.tenant_email);
+        const { data: me } = await sb().from("agents").select("name").eq("id", agentId).maybeSingle();
+        await sendApplicationInvite(row.property_id, row.tenant_name, row.tenant_email, {
+          phone: row.tenant_phone, viewingRequestId: row.viewing_request_id, appointmentId: apptId, sentBy: agentId, senderName: me?.name ?? "Ebin",
+        });
         await sb().from("fo_messages").upsert({ appointment_id: apptId, recipient: row.tenant_email, template: "application_link", status: "sent", idempotency_key: key }, { onConflict: "idempotency_key" });
         await sb().from("fo_appointments").update({ status: "followed_up", updated_at: new Date().toISOString() }).eq("id", apptId);
         steps.followed_up = new Date().toISOString();
@@ -358,4 +363,29 @@ export async function markLeaseSigned(apptId: string, rent: number) {
     note: "Pending until the lease and first payment are verified.",
   });
   return { ok: true as const, bonus: error ? null : amount };
+}
+
+/**
+ * One click from the viewings manager, the showing calendar, or a specialist's phone:
+ * the after-viewing thank-you with a personal application link.
+ */
+export async function sendApplicationFor(o: { requestId?: string; appointmentId?: string; sentBy: string; senderName: string; onlyAgentId?: string }) {
+  let propertyId: string | null = null, name = "", email: string | null = null, phone: string | null = null, viewingRequestId: string | null = null;
+  if (o.appointmentId) {
+    const { data: a } = await sb().from("fo_appointments").select("id, agent_id, property_id, tenant_name, tenant_email, tenant_phone, viewing_request_id").eq("id", o.appointmentId).maybeSingle();
+    if (!a || (o.onlyAgentId && a.agent_id !== o.onlyAgentId)) return { ok: false as const, error: "Showing not found." };
+    ({ property_id: propertyId, tenant_name: name, tenant_email: email, tenant_phone: phone, viewing_request_id: viewingRequestId } = a);
+  } else if (o.requestId) {
+    const { data: r } = await sb().from("viewing_requests").select("id, property_id, full_name, email, phone").eq("id", o.requestId).maybeSingle();
+    if (!r) return { ok: false as const, error: "Request not found." };
+    propertyId = r.property_id; name = r.full_name; email = r.email; phone = r.phone; viewingRequestId = r.id;
+  }
+  if (!propertyId) return { ok: false as const, error: "No home on this one." };
+  if (!email) return { ok: false as const, error: `${name || "They"} didn't leave an email. Ask for one, then try again.` };
+  try {
+    const r = await sendApplicationInvite(propertyId, name, email, { phone, viewingRequestId, appointmentId: o.appointmentId ?? null, sentBy: o.sentBy, senderName: o.senderName });
+    return { ok: true as const, url: r.applyUrl, email };
+  } catch (err) {
+    return { ok: false as const, error: err instanceof Error ? err.message : String(err) };
+  }
 }

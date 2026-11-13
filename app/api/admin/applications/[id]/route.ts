@@ -1,3 +1,4 @@
+import { viewingFormAnswers } from "@/lib/application-screening";
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
@@ -22,6 +23,8 @@ export async function GET(
     .from("applications")
     .select(`
       id,
+      stage, doc_option, viewing_request_id, owner_name, owner_email, owner_sent_at, owner_decided_at, owner_note,
+      rent_amount_due, rent_reference, rent_etransfer_to, rent_requested_at, rent_received_at, singlekey_done_at, move_in_started_at,
       tenant_name,
       tenant_email,
       tenant_phone,
@@ -95,7 +98,8 @@ export async function GET(
     .neq("id", id)
     .order("ai_score", { ascending: false, nullsFirst: false });
 
-  return NextResponse.json({ ...application, documents: docsWithUrls, other_applicants: others ?? [] });
+  const viewing_form = await viewingFormAnswers((application as { viewing_request_id?: string | null }).viewing_request_id ?? null);
+  return NextResponse.json({ ...application, documents: docsWithUrls, other_applicants: others ?? [], viewing_form });
 }
 
 export async function PATCH(
