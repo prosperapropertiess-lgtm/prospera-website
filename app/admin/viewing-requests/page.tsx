@@ -4,7 +4,7 @@ import {
   Page, PageHeader, Card, Badge, Button, Tabs, EmptyState, Loading, ErrorNote, SuccessNote, C, money, ago, shortDate, type Tone,
 } from "@/components/admin/kit";
 import { incomeLabel, creditLabel, describeAnswers, type Answers, type PublicHome } from "@/lib/viewing-requests";
-import SwipeDeck from "./SwipeDeck";
+import SwipeDeck, { BookSheet } from "./SwipeDeck";
 
 type Status = "new" | "contacted" | "viewing_booked" | "not_a_fit" | "closed";
 type Priority = "call_today" | "maybe" | "not_now" | null;
@@ -27,6 +27,7 @@ interface Req {
   priority: Priority;
   review_reason: string | null;
   created_at: string;
+  showing: { starts_at: string; status: string; specialist: string | null } | null;
 }
 
 const PRIORITY: Record<Exclude<Priority, null>, { label: string; tone: Tone }> = {
@@ -46,6 +47,7 @@ export default function ViewingRequestsPage() {
   const [notice, setNotice] = useState<string | null>(null);
   // ?id=… from the email: show that request first.
   const [focusId, setFocusId] = useState<string | null>(null);
+  const [booking, setBooking] = useState<Req | null>(null);
 
   const load = useCallback(async () => {
     const res = await fetch("/api/admin/viewing-requests");
@@ -86,17 +88,6 @@ export default function ViewingRequestsPage() {
     setBusy(null);
   }
 
-  async function sendLink(r: Req) {
-    setBusy(r.id); setError(null); setNotice(null);
-    const res = await fetch("/api/admin/fieldops", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "send_booking_link", request: r.id }) });
-    const d = await res.json().catch(() => ({}));
-    if (!res.ok) setError(d.error ?? "Couldn't create the link.");
-    else if (d.delivery === "sent") setNotice(`Booking link emailed to ${r.full_name}. They pick a time; you'll see it in Showings.`);
-    else { await navigator.clipboard.writeText(d.url).catch(() => null); setNotice(`${r.full_name} has no email, so the link was copied. Text it to them: ${d.url}`); }
-    await load();
-    setBusy(null);
-  }
-
   async function sendApplication(r: Req) {
     setBusy(r.id); setError(null); setNotice(null);
     const res = await fetch("/api/admin/fieldops", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "send_application", request: r.id }) });
@@ -117,7 +108,7 @@ export default function ViewingRequestsPage() {
   const unsorted = byTab.todo.filter((r) => !r.priority).length;
 
   return (
-    <Page width={960}>
+    <Page width={1240}>
       <PageHeader
         title="Viewing Requests"
         subtitle="People who filled in the viewing form. Claude sorts new ones every morning at 8am and emails you who to call."
@@ -145,53 +136,74 @@ export default function ViewingRequestsPage() {
       {!reqs ? <Loading /> : shown.length === 0 ? (
         <EmptyState title={tab === "todo" ? "No one waiting for a call" : "Nothing here yet"} body={tab === "todo" ? "New requests show up here as soon as someone sends the form." : undefined} />
       ) : (
-        <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+        <div style={{ display: "grid", gap: 12, marginTop: 12, gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))", alignItems: "start" }}>
           {(tab === "todo" ? [...shown].sort((a, b) => ORDER.indexOf(a.priority) - ORDER.indexOf(b.priority)) : shown)
             .sort((a, b) => Number(b.id === focusId) - Number(a.id === focusId)).map((r) => (
-            <RequestCard key={r.id} r={r} busy={busy === r.id} onStatus={(s) => setStatus(r, s)} onLink={() => sendLink(r)} onApply={() => sendApplication(r)} />
+            <RequestCard key={r.id} r={r} busy={busy === r.id} onStatus={(s) => setStatus(r, s)} onBook={() => setBooking(r)} onApply={() => sendApplication(r)} />
           ))}
         </div>
       )}
       </>)}
+      {booking && (
+        <BookSheet r={booking} onClose={() => setBooking(null)}
+          onBooked={async (text) => { setBooking(null); setNotice(`${text} Reminders go out 24 hours and 2 hours before.`); setTab("booked"); await load(); }} />
+      )}
     </Page>
   );
 }
 
-function RequestCard({ r, busy, onStatus, onLink, onApply }: { r: Req; busy: boolean; onStatus: (s: Status) => void; onLink: () => void; onApply: () => void }) {
+const isFuture = (iso: string) => new Date(iso).getTime() > Date.now();
+const fWhen = (iso: string) => new Date(iso).toLocaleString("en-CA", { timeZone: "America/Toronto", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }).replace(/\./g, "");
+
+// Compact card: the essentials up top, the full answers one tap away.
+function RequestCard({ r, busy, onStatus, onBook, onApply }: { r: Req; busy: boolean; onStatus: (s: Status) => void; onBook: () => void; onApply: () => void }) {
+  const [open, setOpen] = useState(false);
   const h = r.property_snapshot;
   const details = describeAnswers(r.answers ?? {}).filter((x) => x.id !== "income" && x.id !== "credit");
+  const upcoming = r.showing && isFuture(r.showing.starts_at);
   return (
-    <Card>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}>
-        <div>
-          <div style={{ fontSize: 19, fontWeight: 700, color: C.navy }}>{r.full_name}</div>
-          <div style={{ fontSize: 15, marginTop: 2 }}>
+    <Card padding={16}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "flex-start" }}>
+        <div style={{ minWidth: 0 }}>
+          <div style={{ fontSize: 17, fontWeight: 700, color: C.navy }}>{r.full_name}</div>
+          <div style={{ fontSize: 14, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             <a href={`tel:${r.phone}`} style={{ color: C.navy, fontWeight: 600 }}>{r.phone}</a>
             {r.email && <> · <a href={`mailto:${r.email}`} style={{ color: C.muted }}>{r.email}</a></>}
           </div>
-          <div style={{ fontSize: 14, color: C.faint, marginTop: 2 }}>
-            Sent {ago(r.created_at)}{r.completion_seconds ? ` · took ${r.completion_seconds < 120 ? `${r.completion_seconds}s` : `${Math.round(r.completion_seconds / 60)} min`}` : ""}{r.rentmatch_opt_in ? " · added to RentMatch" : ""}
-          </div>
+          <div style={{ fontSize: 13, color: C.faint }}>Sent {ago(r.created_at)}{r.rentmatch_opt_in ? " · RentMatch" : ""}</div>
         </div>
-        {r.status === "new" && (r.priority ? <Badge tone={PRIORITY[r.priority].tone}>{PRIORITY[r.priority].label}</Badge> : <Badge tone="blue">Not sorted yet</Badge>)}
+        {r.status === "new" && (r.priority ? <Badge tone={PRIORITY[r.priority].tone}>{PRIORITY[r.priority].label}</Badge> : <Badge tone="blue">Not sorted</Badge>)}
       </div>
 
+      {r.showing && (
+        <div style={{ marginTop: 10, borderRadius: 10, padding: "8px 12px", background: upcoming ? C.navy : C.greyBg, color: upcoming ? "#fff" : C.navy, fontSize: 14 }}>
+          <b>{fWhen(r.showing.starts_at)}</b> · {r.showing.specialist ? `with ${r.showing.specialist}` : "no specialist yet"}
+          {!upcoming && <span style={{ color: C.muted }}> · {r.showing.status.replace(/_/g, " ")}</span>}
+        </div>
+      )}
+      {!r.showing && r.status === "viewing_booked" && <div style={{ marginTop: 10, fontSize: 13, color: C.amber }}>Marked booked, but not on the showing calendar. Use Book viewing to add it.</div>}
+
       {r.review_reason && r.status === "new" && (
-        <div style={{ marginTop: 12, fontSize: 15, color: C.text, background: C.greyBg, borderRadius: 10, padding: "10px 14px" }}>{r.review_reason}</div>
+        <div style={{ marginTop: 10, fontSize: 14, color: C.text, background: C.greyBg, borderRadius: 10, padding: "8px 12px", display: "-webkit-box", WebkitLineClamp: open ? undefined : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{r.review_reason}</div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, marginTop: 14 }}>
-        <Fact label="Home" value={`${h.address} · ${money(h.price)}`} />
-        <Fact label="Move-in" value={shortDate(r.move_in_date)} />
-        <Fact label="People" value={String(r.occupants)} />
-        <Fact label="Income / month" value={incomeLabel(r.income_range)} />
-        <Fact label="Credit" value={creditLabel(r.credit_range)} />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10, fontSize: 13 }}>
+        <Chip>{h.address} · {money(h.price)}</Chip>
+        <Chip>Move-in {shortDate(r.move_in_date)}</Chip>
+        <Chip>{r.occupants} {r.occupants === 1 ? "person" : "people"}</Chip>
+        <Chip>{incomeLabel(r.income_range)}/mo</Chip>
+        <Chip>Credit {creditLabel(r.credit_range)}</Chip>
       </div>
 
       {details.length > 0 && (
-        <div style={{ marginTop: 14, borderTop: `1px solid ${C.border}` }}>
+        <button type="button" onClick={() => setOpen(!open)} style={{ marginTop: 8, background: "none", border: 0, padding: 0, color: C.navy, fontWeight: 600, fontSize: 13, cursor: "pointer", fontFamily: "inherit", textDecoration: "underline" }}>
+          {open ? "Hide answers" : `Answers (${details.length})`}
+        </button>
+      )}
+      {open && (
+        <div style={{ marginTop: 6, borderTop: `1px solid ${C.border}` }}>
           {details.map((x) => (
-            <div key={x.id} style={{ display: "flex", gap: 12, justifyContent: "space-between", padding: "9px 0", borderBottom: `1px solid ${C.border}`, fontSize: 14 }}>
+            <div key={x.id} style={{ display: "flex", gap: 10, justifyContent: "space-between", padding: "6px 0", borderBottom: `1px solid ${C.border}`, fontSize: 13 }}>
               <span style={{ color: C.muted }}>{x.question}</span>
               <span style={{ color: C.navy, fontWeight: 600, textAlign: "right" }}>{x.answer}</span>
             </div>
@@ -199,23 +211,17 @@ function RequestCard({ r, busy, onStatus, onLink, onApply }: { r: Req; busy: boo
         </div>
       )}
 
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 16 }}>
-        {(r.status === "new" || r.status === "contacted") && <Button variant="primary" disabled={busy} onClick={onLink}>{r.email ? "Send booking link" : "Copy booking link"}</Button>}
-        {r.status !== "not_a_fit" && r.email && <Button variant={r.status === "viewing_booked" ? "primary" : undefined} disabled={busy} onClick={onApply}>Send application</Button>}
-        {r.status === "new" && <Button disabled={busy} onClick={() => onStatus("contacted")}>I contacted them</Button>}
-        {(r.status === "new" || r.status === "contacted") && <Button disabled={busy} onClick={() => onStatus("viewing_booked")}>Viewing booked</Button>}
-        {r.status !== "not_a_fit" && r.status !== "closed" && <Button variant="ghost" disabled={busy} onClick={() => onStatus(r.status === "viewing_booked" ? "closed" : "not_a_fit")}>{r.status === "viewing_booked" ? "Done" : "Not a fit"}</Button>}
-        {(r.status === "not_a_fit" || r.status === "closed") && <Button variant="ghost" disabled={busy} onClick={() => onStatus("new")}>Move back to To call</Button>}
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 12 }}>
+        {r.status !== "not_a_fit" && r.status !== "closed" && <Button size="sm" variant={r.status === "viewing_booked" && r.showing ? undefined : "primary"} disabled={busy || !r.property_id} onClick={onBook}>{r.showing ? "Book another time" : "Book viewing"}</Button>}
+        {r.status !== "not_a_fit" && r.email && <Button size="sm" variant={r.status === "viewing_booked" ? "primary" : undefined} disabled={busy} onClick={onApply}>Send application</Button>}
+        {r.status === "new" && <Button size="sm" disabled={busy} onClick={() => onStatus("contacted")}>Contacted</Button>}
+        {r.status !== "not_a_fit" && r.status !== "closed" && <Button size="sm" variant="ghost" disabled={busy} onClick={() => onStatus(r.status === "viewing_booked" ? "closed" : "not_a_fit")}>{r.status === "viewing_booked" ? "Done" : "Not a fit"}</Button>}
+        {(r.status === "not_a_fit" || r.status === "closed") && <Button size="sm" variant="ghost" disabled={busy} onClick={() => onStatus("new")}>Move back to To call</Button>}
       </div>
     </Card>
   );
 }
 
-function Fact({ label, value }: { label: string; value: string }) {
-  return (
-    <div style={{ background: C.greyBg, borderRadius: 10, padding: "10px 12px" }}>
-      <div style={{ fontSize: 13, color: C.muted }}>{label}</div>
-      <div style={{ fontSize: 15, fontWeight: 600, color: C.navy, marginTop: 2 }}>{value}</div>
-    </div>
-  );
+function Chip({ children }: { children: React.ReactNode }) {
+  return <span style={{ background: C.greyBg, borderRadius: 999, padding: "4px 10px", color: C.navy, fontWeight: 600 }}>{children}</span>;
 }

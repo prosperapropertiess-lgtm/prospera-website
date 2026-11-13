@@ -53,7 +53,7 @@ export default function Pipeline({ app, onChanged }: { app: PipelineApp; onChang
     const res = await fetch(`/api/admin/applications/${app.id}/pipeline`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...body }) });
     const d = await res.json().catch(() => ({}));
     setBusy("");
-    if (res.ok) { setMsg({ ok: true, text: ok }); onChanged(); } else setMsg({ ok: false, text: d.error ?? "That didn't work." });
+    if (res.ok) { setMsg({ ok: true, text: d.via === "dashboard" ? "Released to the owner's dashboard. They were emailed to review it there." : ok }); onChanged(); } else setMsg({ ok: false, text: d.error ?? "That didn't work." });
   }
   async function upload(file: File) {
     setBusy("singlekey"); setMsg(null);
@@ -78,7 +78,7 @@ export default function Pipeline({ app, onChanged }: { app: PipelineApp; onChang
 
       <Step n={1} title="Tenant report" done={at >= 1} current={at === 0 && !closed} when={reportReady ? "Ready" : "AI is still reading"}>
         <a href={`/admin/applications/${app.id}/pdf`} target="_blank" style={{ ...btn(false), textDecoration: "none", textAlign: "center" }}>Download tenant report (PDF)</a>
-        <p style={{ fontSize: 13, color: MUTED, margin: 0 }}>Send it to the owner. They get a private link with the report and a Conditionally approve button.</p>
+        <p style={{ fontSize: 13, color: MUTED, margin: 0 }}>Send it to the owner. If they have a client dashboard it goes there; otherwise they get a private link with a Conditionally approve button.</p>
         <input style={input} placeholder="Owner name" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} />
         <input style={input} placeholder="Owner email" type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} />
         <button style={btn()} disabled={!!busy || !reportReady} onClick={() => act("send_to_owner", { name: ownerName, email: ownerEmail }, "Report emailed to the owner. You're cc'd.")}>{busy === "send_to_owner" ? "Sending…" : "Send report to owner"}</button>

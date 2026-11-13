@@ -83,6 +83,7 @@ type Props = { d: Any; act: (b: Record<string, unknown>, ok?: string) => Promise
 
 function Overview({ d, act, busy }: Props) {
   const p = d.placement, acct = d.account;
+  const [listing, setListing] = useState(p.property_id ?? "");
   const [f, setF] = useState({ address: p.address, city: p.city ?? "", cover_url: p.cover_url ?? "", asking_rent: p.asking_rent ?? "", target_date: p.target_date ?? "", next_action: p.next_action ?? "", next_action_owner: p.next_action_owner ?? "Prospera", next_action_due: p.next_action_due ?? "", stage_override: p.stage_override ?? "", status: p.status });
   const [copied, setCopied] = useState(false);
   const set = (k: string, v: string) => setF((x) => ({ ...x, [k]: v }));
@@ -99,6 +100,16 @@ function Overview({ d, act, busy }: Props) {
           <Button size="sm" variant="danger" disabled={busy} onClick={() => act({ action: "access", accountId: acct.id, on: !!acct.revoked_at }, acct.revoked_at ? "Access turned on." : "Access turned off.")}>{acct.revoked_at ? "Turn access on" : "Turn access off"}</Button>
         </div>
         {p.welcome_sent_at && <p style={{ fontSize: 13, color: C.muted, marginTop: 10 }}>Welcome sent {shortDate(p.welcome_sent_at)}. Re-sending uses the same email once; failed sends can be retried under Emails.</p>}
+      </Card>
+      <Card>
+        <SectionTitle>Linked listing</SectionTitle>
+        <p style={{ fontSize: 14, color: C.muted, margin: "0 0 10px" }}>Links showings, applications, listing photos, the floor plan and the property brief to this dashboard. Listings link by themselves when published if the address matches.</p>
+        <div style={{ display: "flex", gap: 8 }}>
+          <select style={inputStyle} value={listing} onChange={(e) => setListing(e.target.value)}>
+            <option value="">Not linked</option>{d.listings.map((l: Any) => <option key={l.id} value={l.id}>{l.address}{l.status !== "published" ? ` (${l.status})` : ""}</option>)}
+          </select>
+          <Button variant="primary" disabled={busy || listing === (p.property_id ?? "")} onClick={() => act({ action: "update", patch: { property_id: listing || null } }, "Listing linked. Photos, floor plan and brief pulled in.")}>Link</Button>
+        </div>
       </Card>
       <Card>
         <SectionTitle>Property overview</SectionTitle>

@@ -1,3 +1,4 @@
+import { emailOwnerReviewReady, syncFromProperty } from "./sync";
 // Things owners and Admin do on a placement. Each records an event so there's a history.
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
@@ -82,6 +83,7 @@ export async function updatePlacement(id: string, patch: Record<string, unknown>
   if (clean.status === "completed") clean.completed_at = new Date().toISOString();
   await db().from("placements").update({ ...clean, updated_at: new Date().toISOString() }).eq("id", id);
   await event(id, "updated", "admin", clean);
+  if (typeof clean.property_id === "string") await syncFromProperty(clean.property_id);
 }
 
 export async function updatePrep(id: string, item: PrepKey, patch: { status?: string; completed_on?: string | null; notes?: string | null; links?: { label: string; url: string }[] }) {
@@ -229,6 +231,7 @@ export async function releaseApplication(id: string, applicationId: string) {
   }).select("id").single();
   await db().from("applications").update({ stage: "sent_to_owner", owner_sent_at: new Date().toISOString() }).eq("id", applicationId);
   await event(id, "application_released", "admin", { application_id: applicationId });
+  await emailOwnerReviewReady(id, applicantSummary.split(",")[0]);
   return r!.id as string;
 }
 

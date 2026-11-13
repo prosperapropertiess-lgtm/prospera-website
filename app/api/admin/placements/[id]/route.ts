@@ -27,7 +27,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       : Promise.resolve({ data: [] }),
     recordedWeek(view.placement.property_id, week.start, week.end),
   ]);
-  return NextResponse.json({ ...view, account: acct, link: acct ? dashboardUrl(acct.token, id) : null, emails: emails ?? [], events: events ?? [], applications: apps ?? [], week, recorded });
+  const { data: listings } = await db().from("properties").select("id, address, status").eq("is_managed", true).order("created_at", { ascending: false }).limit(80);
+  return NextResponse.json({ ...view, account: acct, link: acct ? dashboardUrl(acct.token, id) : null, emails: emails ?? [], events: events ?? [], applications: apps ?? [], week, recorded, listings: listings ?? [] });
 }
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {

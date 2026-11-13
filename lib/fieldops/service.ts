@@ -1,3 +1,4 @@
+import { syncApplication } from "@/lib/placements/sync";
 // FieldOps actions: each one changes the appointment record first, then
 // notifies only the people affected. Emails never decide state.
 
@@ -354,6 +355,11 @@ export async function markLeaseSigned(apptId: string, rent: number) {
   const { row } = await info(apptId);
   await sb().from("fo_appointments").update({ lease_signed_at: new Date().toISOString() }).eq("id", apptId);
   await event(apptId, "lease_signed", "admin", { rent });
+  // Mirror on the owner's placement timeline if this tenant's application was released to them.
+  if (row.tenant_email) {
+    const { data: app } = await sb().from("applications").select("id").eq("property_id", row.property_id).ilike("tenant_email", row.tenant_email).order("created_at", { ascending: false }).limit(1).maybeSingle();
+    if (app) await syncApplication(app.id, "lease_signed");
+  }
   const settings = await loadSettings();
   if (!settings.bonus_enabled || !row.agent_id) return { ok: true as const, bonus: null };
   const amount = Math.round(rent * settings.bonus_pct) / 100;

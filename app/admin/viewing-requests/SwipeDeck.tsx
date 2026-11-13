@@ -246,7 +246,7 @@ function Tile({ k, v, warn }: { k: string; v: string; warn?: string }) {
   );
 }
 
-function BookSheet({ r, onClose, onBooked }: { r: DeckReq; onClose: () => void; onBooked: (text: string) => void }) {
+export function BookSheet({ r, onClose, onBooked }: { r: DeckReq; onClose: () => void; onBooked: (text: string) => void }) {
   const [data, setData] = useState<{ slots: Slot[]; duration: number; specialists: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [day, setDay] = useState<string | null>(null);

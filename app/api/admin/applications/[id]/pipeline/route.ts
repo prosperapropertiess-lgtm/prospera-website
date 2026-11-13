@@ -33,8 +33,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       case "send_to_owner": {
         const email = String(b.email ?? "").trim();
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: "Enter the owner's email." }, { status: 400 });
-        await sendToOwner(id, { name: String(b.name ?? "").trim(), email });
-        break;
+        const via = await sendToOwner(id, { name: String(b.name ?? "").trim(), email });
+        return NextResponse.json({ ok: true, via: via ?? "email" });
       }
       case "owner_approved": await ownerDecision(id, "approved", b.note ?? null, "admin"); break;
       case "owner_declined": await ownerDecision(id, "declined", b.note ?? null, "admin"); break;

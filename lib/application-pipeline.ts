@@ -1,3 +1,5 @@
+import { placementForProperty, syncApplication } from "@/lib/placements/sync";
+import { releaseApplication } from "@/lib/placements/actions";
 // What happens after an application is in and the AI report is ready:
 // owner conditional approval → first month's rent by e-transfer → SingleKey → move-in.
 // Every step is a button for Ebin; the owner can also decide from their report link.
@@ -44,6 +46,12 @@ export async function knownOwner(propertyId: string): Promise<{ name: string | n
 
 export async function sendToOwner(id: string, owner: { name: string; email: string }) {
   const a = await load(id);
+  // Owner has a placement dashboard: put it there (with an email pointing to it) instead of a separate link.
+  const pl = await placementForProperty(a.property_id);
+  if (pl) {
+    await releaseApplication(pl.id, id);
+    return "dashboard" as const;
+  }
   const summary = (a.ai_summary as { owner_summary?: string; headline?: string } | null);
   const { subject, html } = ownerReportEmail({
     ownerName: owner.name, applicant: a.tenant_name, address: a.properties?.address ?? "your property",
@@ -61,6 +69,7 @@ export async function ownerDecision(id: string, decision: "approved" | "declined
     stage: decision === "approved" ? "owner_approved" : "owner_declined",
     owner_decided_at: new Date().toISOString(), owner_note: note, updated_at: new Date().toISOString(),
   }).eq("id", id);
+  await syncApplication(id, decision === "approved" ? "owner_approved" : "owner_declined");
   if (by === "owner") {
     await sendEmail(EBIN, `Owner ${decision === "approved" ? "conditionally approved" : "declined"} ${a.tenant_name} for ${a.properties?.address}`,
       `<p style="font-family:Arial;font-size:15px">${a.owner_name || "The owner"} ${decision === "approved" ? "<b>conditionally approved</b>" : "<b>declined</b>"} ${a.tenant_name} for ${a.properties?.address}.</p>${note ? `<p style="font-family:Arial;font-size:15px">Note: ${note.replace(/</g, "&lt;")}</p>` : ""}<p style="font-family:Arial;font-size:15px"><a href="${SITE}/admin/applications/${id}">Open the application</a></p>`,
@@ -77,6 +86,7 @@ export async function requestRent(id: string, o: { amount: number; to: string })
     stage: "rent_requested", rent_amount_due: o.amount, rent_etransfer_to: o.to, rent_reference: reference,
     rent_requested_at: new Date().toISOString(), updated_at: new Date().toISOString(),
   }).eq("id", id);
+  await syncApplication(id, "rent_requested");
 }
 
 export async function rentReceived(id: string) {
@@ -85,6 +95,7 @@ export async function rentReceived(id: string) {
   const { subject, html } = rentReceivedEmail({ first: firstName(a.tenant_name), address: a.properties?.address ?? "the home", amount });
   await sendEmail(a.tenant_email, subject, html, [EBIN]);
   await db().from("applications").update({ stage: "rent_received", rent_received_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq("id", id);
+  await syncApplication(id, "rent_received");
 }
 
 export async function saveSingleKey(id: string, file: File) {
@@ -94,6 +105,7 @@ export async function saveSingleKey(id: string, file: File) {
   if (error) throw new Error(error.message);
   await db().from("application_documents").insert({ application_id: id, doc_type: "singlekey_report", storage_path: path });
   await db().from("applications").update({ stage: "screened", singlekey_path: path, singlekey_done_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq("id", id);
+  await syncApplication(id, "screened");
 }
 
 /** Final approval + hands the home to the move-in coordinator (lease, keys, inspection). */
@@ -113,10 +125,12 @@ export async function startMoveIn(id: string) {
   const r = await decideApplication(id, "approved");
   if (!r.ok) throw new Error(r.error);
   await db().from("applications").update({ stage: "move_in", move_in_started_at: now, updated_at: now }).eq("id", id);
+  await syncApplication(id, "move_in");
 }
 
 export async function decline(id: string) {
   const r = await decideApplication(id, "rejected");
   if (!r.ok) throw new Error(r.error);
   await db().from("applications").update({ stage: "declined", updated_at: new Date().toISOString() }).eq("id", id);
+  await syncApplication(id, "declined");
 }

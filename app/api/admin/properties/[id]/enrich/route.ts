@@ -1,3 +1,4 @@
+import { syncFromProperty } from "@/lib/placements/sync";
 import { NextRequest, NextResponse, after } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
@@ -33,6 +34,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
     let p = await load();
     if (!p) return;
+    await syncFromProperty(id);
 
     // 1. Neighbourhood (saves itself when given property_id) + write-up, and photo labels, side by side.
     const hasArea = p.neighbourhood_data && Object.keys(p.neighbourhood_data).length > 0;

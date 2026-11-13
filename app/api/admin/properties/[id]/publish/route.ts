@@ -1,3 +1,4 @@
+import { syncFromProperty } from "@/lib/placements/sync";
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
@@ -86,6 +87,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     console.error("Publish error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  // ── Owner's placement dashboard: link the listing, photos, floor plan, brief ──
+  if (data) await syncFromProperty(data.id);
 
   // ── Sync to Notion (non-blocking) ──
   if (data && process.env.NOTION_API_KEY) {
