@@ -210,7 +210,7 @@ export default function ApplicationForm({ property, agentId, inviteToken, invite
       <Shell>
         {homeCard}
         <h1 ref={headingRef} tabIndex={-1} className="text-3xl font-bold mb-3 outline-none leading-tight" style={heading}>
-          {first ? `Welcome back, ${first}.` : "Welcome."} Let&apos;s get your application in.
+          {first ? `Welcome back, ${first}. ` : "Welcome. "}Let&apos;s get your application in.
         </h1>
         <p className="text-base mb-6" style={{ color: "#333" }}>
           About 10 minutes.{known.size > 4 ? " We kept your answers from the viewing form, so a good part of this is already done." : ""} Your answers save on this device as you go.
@@ -238,10 +238,10 @@ export default function ApplicationForm({ property, agentId, inviteToken, invite
         <p className="text-sm font-semibold mb-2" style={{ color: NAVY }}>From your viewing form</p>
         {shown.map(([k, label, value]) => (
           <div key={k} className="flex items-center justify-between gap-3 py-1.5 text-[15px]">
-            <span style={{ color: MUTED }}>{label}</span>
-            <span className="flex items-center gap-3 text-right">
-              <b style={{ color: "#222" }}>{value}</b>
-              <button type="button" className="text-sm underline" style={{ color: NAVY }} onClick={() => setEditing((e) => ({ ...e, [k]: true }))}>Change</button>
+            <span className="shrink-0" style={{ color: MUTED }}>{label}</span>
+            <span className="flex items-center gap-3 text-right min-w-0">
+              <b className="min-w-0 break-all" style={{ color: "#222" }}>{value}</b>
+              <button type="button" className="text-sm underline shrink-0" style={{ color: NAVY }} onClick={() => setEditing((e) => ({ ...e, [k]: true }))}>Change</button>
             </span>
           </div>
         ))}
