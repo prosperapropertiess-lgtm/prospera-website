@@ -6,12 +6,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { Outfit, Inter } from "next/font/google";
 import { DOC_LABELS } from "@/lib/application-requirements";
 import { VERDICT_STYLE, INCOME_SOURCE_LABEL, TIME_AT_ADDRESS_LABEL } from "../labels";
 
-const outfit = Outfit({ subsets: ["latin"], weight: ["300", "600", "700"], variable: "--ap-head" });
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--ap-body" });
+// Fonts come from a plain stylesheet link: next/font in this client page kept
+// failing Vercel builds ("next/font/google queries have exactly one entry").
+const FONTS_HREF = "https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;700&family=Inter:wght@400;500;600&display=swap";
 
 const NAVY = "#1F2F3A";
 const BURGUNDY = "#8B2030";
@@ -146,7 +146,9 @@ export default function ApplicationPdfPage() {
   const prepared = longDate(new Date().toISOString());
 
   return (
-    <div className={`${outfit.variable} ${inter.variable} ap-root`}>
+    <div className="ap-root" style={{ "--ap-head": "'Outfit'", "--ap-body": "'Inter'" } as React.CSSProperties}>
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link rel="stylesheet" href={FONTS_HREF} />
       <style>{CSS}</style>
 
       {/* Toolbar: screen only */}
