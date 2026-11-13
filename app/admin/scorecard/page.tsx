@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card, Tabs, Loading, ErrorNote, C, font } from "@/components/admin/kit";
+import { haptic } from "@/lib/haptics";
 
 // Daily sales scorecard. Each Toronto day is its own row, so there's nothing to reset:
 // a new day starts at zero on its own. Taps save after a short pause and are copied to the Sheet.
@@ -87,7 +88,13 @@ export default function ScorecardPage() {
     return () => window.removeEventListener("pagehide", flush);
   }, [saving, current]);
 
-  const set = (patch: Partial<Day>) => current && save({ ...current, ...patch });
+  const set = (patch: Partial<Day>) => {
+    if (!current) return;
+    const next = { ...current, ...patch };
+    // A stronger buzz the moment the target is reached; a light tick for everything else.
+    haptic(current.outreaches < current.target && next.outreaches >= next.target ? "success" : "tap");
+    save(next);
+  };
 
   return (
     <div style={{ maxWidth: 560, margin: "0 auto", padding: "24px 16px 80px", fontFamily: font }}>
@@ -112,9 +119,9 @@ function TodayScreen({ d, today, onDay, onChange, saving, sheet, shareWith }: {
   return (
     <>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-        <NavButton label="Previous day" icon="chevron_left" onClick={() => onDay(shiftDay(d.day, -1))} />
+        <NavButton label="Previous day" icon="chevron_left" onClick={() => { haptic(); onDay(shiftDay(d.day, -1)); }} />
         <div style={{ fontSize: 16, fontWeight: 600, color: C.navy }}>{dayLabel(d.day, today)}</div>
-        <NavButton label="Next day" icon="chevron_right" disabled={d.day >= today} onClick={() => onDay(shiftDay(d.day, 1))} />
+        <NavButton label="Next day" icon="chevron_right" disabled={d.day >= today} onClick={() => { haptic(); onDay(shiftDay(d.day, 1)); }} />
       </div>
 
       <Card padding={22}>
@@ -131,7 +138,7 @@ function TodayScreen({ d, today, onDay, onChange, saving, sheet, shareWith }: {
         <div style={{ fontSize: 14, fontWeight: 600, color: C.muted, margin: "22px 0 8px" }}>Daily new outreach target</div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, background: C.greyBg, borderRadius: 999, padding: 4 }}>
           {TARGETS.map((t) => (
-            <button key={t} onClick={() => onChange({ target: t })} aria-pressed={d.target === t}
+            <button key={t} onClick={() => { if (d.target !== t) onChange({ target: t }); }} aria-pressed={d.target === t}
               style={{ border: 0, borderRadius: 999, padding: "10px 0", fontFamily: font, fontSize: 16, fontWeight: 600, cursor: "pointer",
                 background: d.target === t ? C.navy : "transparent", color: d.target === t ? "#fff" : C.navy }}>
               {t}
