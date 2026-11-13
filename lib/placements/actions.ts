@@ -17,8 +17,8 @@ async function placementWithAccount(id: string) {
 // ── Owner ─────────────────────────────────────────────────────────────
 
 async function ownerReview(reviewId: string, accountId: string) {
-  const { data: r } = await db().from("placement_reviews").select("*, placements!inner(id, account_id, address)").eq("id", reviewId).maybeSingle();
-  const pl = r?.placements as unknown as { id: string; account_id: string; address: string } | undefined;
+  const { data: r } = await db().from("placement_reviews").select("*, placements!inner(id, account_id, address, is_demo)").eq("id", reviewId).maybeSingle();
+  const pl = r?.placements as unknown as { id: string; account_id: string; address: string; is_demo: boolean } | undefined;
   if (!r || !pl || pl.account_id !== accountId) throw new Error("Not found");
   return { r, pl };
 }
@@ -34,7 +34,7 @@ export async function ownerApprove(reviewId: string, accountId: string, ownerNam
   await db().from("placements").update({ next_action: "Full verification of the approved applicant", next_action_owner: "Prospera", updated_at: now }).eq("id", pl.id);
   await event(pl.id, "owner_approved", `owner:${ownerName}`, { review_id: reviewId });
   const m = adminNoticeEmail({ title: `Approved to proceed: ${r.applicant_summary.split(".")[0]} for ${pl.address}`, lines: [`${ownerName} approved this applicant to proceed at ${new Date(now).toLocaleString("en-CA", { timeZone: "America/Toronto" })}.`, "Next: full verification. Nothing else is marked done."], url: adminUrl(pl.id) });
-  await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-approved:${reviewId}` });
+  if (!pl.is_demo) await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-approved:${reviewId}` });
 }
 
 export async function ownerDecline(reviewId: string, accountId: string, ownerName: string, reason: string, comments: string) {
@@ -48,7 +48,7 @@ export async function ownerDecline(reviewId: string, accountId: string, ownerNam
   if (r.application_id) await db().from("applications").update({ stage: "owner_declined", owner_decided_at: now, owner_note: `${reason}${comments ? `: ${comments}` : ""}`, updated_at: now }).eq("id", r.application_id);
   await event(pl.id, "owner_declined", `owner:${ownerName}`, { review_id: reviewId, reason, flagged: !!flag });
   const m = adminNoticeEmail({ title: `Declined: application for ${pl.address}`, flag, lines: [`${ownerName} declined.`, `Reason: ${reason}`, comments ? `Comments: ${comments}` : "", "The applicant has not been contacted."].filter(Boolean), url: adminUrl(pl.id) });
-  await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-declined:${reviewId}` });
+  if (!pl.is_demo) await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-declined:${reviewId}` });
 }
 
 export async function ownerAsk(reviewId: string, accountId: string, ownerName: string, body: string) {
@@ -58,7 +58,7 @@ export async function ownerAsk(reviewId: string, accountId: string, ownerName: s
   if (r.status === "released") await db().from("placement_reviews").update({ status: "clarification", updated_at: new Date().toISOString() }).eq("id", reviewId);
   await event(pl.id, "owner_question", `owner:${ownerName}`, { review_id: reviewId });
   const m = adminNoticeEmail({ title: `Question from ${ownerName} about an applicant`, lines: [pl.address, `"${body.trim()}"`], url: adminUrl(pl.id) });
-  await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-question:${reviewId}:${Date.now()}` });
+  if (!pl.is_demo) await sendLogged({ placementId: pl.id, kind: "admin_notice", to: ADMIN_EMAIL, ...m, key: `owner-question:${reviewId}:${Date.now()}` });
 }
 
 // ── Admin ─────────────────────────────────────────────────────────────
