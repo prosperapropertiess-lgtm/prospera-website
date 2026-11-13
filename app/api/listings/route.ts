@@ -1,3 +1,4 @@
+import { publicProperty } from "@/lib/listing-format";
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { verifyApiKey, logApiKeyActivity } from "@/lib/api-key-auth";
@@ -54,7 +55,7 @@ export async function GET(req: NextRequest) {
   const rentedProperties = rentedErr ? [] : (rented || []).map((p) => ({ ...p, _rented: true }));
 
   return NextResponse.json({
-    available: available || [],
+    available: (available || []).map(publicProperty),
     rented: rentedProperties,
   });
 }

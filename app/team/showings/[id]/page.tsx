@@ -8,7 +8,7 @@ interface Showing {
   id: string; starts_at: string; ends_at: string; status: string; acknowledged: boolean;
   home: { address: string; city: string; bedrooms: number | null; bathrooms: number | null; price: number; latitude: number | null; longitude: number | null };
   tenant: { first: string; phone: string | null };
-  highlights: string | null; occupied: boolean; access: string | null; accessOpensAt: string | null;
+  highlights: string | null; brief?: string; occupied: boolean; access: string | null; accessOpensAt: string | null;
   checklist: { steps: Record<string, string>; outcome: string | null; completed_at: string | null } | null;
 }
 
@@ -82,6 +82,17 @@ export default function ShowingPage() {
             ? <p className="mt-2 text-[15px] whitespace-pre-wrap" style={{ color: "#222" }}>{data.access}</p>
             : <p className="mt-2 text-sm" style={{ color: MUTED }}>{data.accessOpensAt ? `Shows here from ${tDay(data.accessOpensAt)}, ${tTime(data.accessOpensAt)}.` : "No instructions added. Ask Ebin before you go."}</p>}
         </Box>
+        {data.brief && (
+          <a href={data.brief} target="_blank" rel="noreferrer" className="block">
+            <Box className="p-5 flex items-center justify-between">
+              <div>
+                <Label>Property brief</Label>
+                <p className="mt-1 text-[15px]" style={{ color: "#222" }}>Rent, utilities, parking, appliances. The same page the renter gets.</p>
+              </div>
+              <span className="text-lg" style={{ color: MUTED }}>→</span>
+            </Box>
+          </a>
+        )}
         {data.highlights && (
           <Box className="p-5">
             <Label>Talking points</Label>

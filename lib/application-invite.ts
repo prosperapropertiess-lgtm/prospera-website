@@ -23,7 +23,7 @@ export async function sendApplicationInvite(
 
   const { data: property, error: propErr } = await supabase
     .from("properties")
-    .select("id, address, city, price, utilities_included, available_date, is_managed, available")
+    .select("id, slug, address, city, price, utilities_included, available_date, is_managed, available, status")
     .eq("id", propertyId)
     .maybeSingle();
   if (propErr) throw new Error(`Property lookup failed: ${propErr.message}`);
@@ -60,6 +60,7 @@ export async function sendApplicationInvite(
       utilitiesIncluded: property.utilities_included,
       availableDate: property.available_date,
       applyUrl,
+      briefUrl: property.status === "published" ? `https://www.prosperaproperties.co/brief/${property.slug ?? property.id}` : undefined,
     }),
   });
   if (sendErr) {

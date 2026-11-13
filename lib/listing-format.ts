@@ -17,3 +17,12 @@ export function typeLabel(t: string | null | undefined): string | null {
   if (!v || /^(other|unknown|n\/?a|none)$/i.test(v)) return null;
   return v.charAt(0).toUpperCase() + v.slice(1);
 }
+
+/** Staff-only property columns (lockbox codes, occupancy, showing notes). Never send these to a public page or API. */
+export const PRIVATE_PROPERTY_FIELDS = ["access_instructions", "occupancy", "showing_notes"] as const;
+
+export function publicProperty<T extends Record<string, unknown>>(row: T): T {
+  const out = { ...row };
+  for (const k of PRIVATE_PROPERTY_FIELDS) delete out[k];
+  return out;
+}

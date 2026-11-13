@@ -1078,6 +1078,7 @@ export function applicationInviteEmail({
   utilitiesIncluded,
   availableDate,
   applyUrl,
+  briefUrl,
 }: {
   tenantName: string;
   propertyAddress: string;
@@ -1086,6 +1087,7 @@ export function applicationInviteEmail({
   utilitiesIncluded?: boolean;
   availableDate?: string | null;
   applyUrl: string;
+  briefUrl?: string;
 }): string {
   const moveIn = availableDate
     ? new Date(availableDate + "T00:00:00").toLocaleDateString("en-CA", { month: "short", day: "numeric", year: "numeric" })
@@ -1109,6 +1111,8 @@ export function applicationInviteEmail({
     ])}
 
     ${cta("Start My Application", applyUrl)}
+
+    ${briefUrl ? `<p style="margin:0 0 28px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:1.8;">Want another look first? <a href="${briefUrl}" style="color:${TEXT};font-weight:600;">Here's everything about the home</a>: rent, utilities, parking, appliances and what's nearby, on one page you can save or share.</p>` : ""}
 
     ${stepsList([
       { title: "You apply", desc: "Fill in your info and upload your documents — takes about 10 minutes." },

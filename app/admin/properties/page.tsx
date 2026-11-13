@@ -101,12 +101,13 @@ export default function ListingsPage() {
                   <td style={{ ...td, whiteSpace: "nowrap" }}>{p.bedrooms || "—"}</td>
                   <td style={td}>
                     {p.status === "published" ? <Badge tone="green">Live</Badge>
-                      : p.status === "draft" ? <Badge tone="amber">Draft, step {p.wizard_step || 1} of 8</Badge>
+                      : p.status === "draft" ? <Badge tone="amber">Draft</Badge>
                       : <Badge>Archived</Badge>}
                   </td>
                   <td style={{ ...td, textAlign: "right" }}>
                     <div style={{ display: "inline-flex", gap: 8 }}>
                       <Button href={`/admin/properties/${p.id}`} size="sm">Edit</Button>
+                      <Button href={`/admin/properties/${p.id}/brief`} size="sm">Brief</Button>
                       <Button size="sm" onClick={() => togglePublish(p)} disabled={busy === p.id}>
                         {p.status === "published" ? "Take down" : "Publish"}
                       </Button>

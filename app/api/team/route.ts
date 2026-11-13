@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
   if (view === "showing") {
     const id = req.nextUrl.searchParams.get("id") ?? "";
     const { data: a } = await sb().from("fo_appointments")
-      .select("id, property_id, starts_at, ends_at, status, acknowledged_at, tenant_name, tenant_phone, properties(address, city, bedrooms, bathrooms, price, latitude, longitude)")
+      .select("id, property_id, starts_at, ends_at, status, acknowledged_at, tenant_name, tenant_phone, properties(address, city, bedrooms, bathrooms, price, latitude, longitude, slug, access_instructions, occupancy, showing_notes)")
       .eq("id", id).eq("agent_id", me.id).maybeSingle();
     if (!a) return err("Not found.", 404);
     const [{ data: rules }, { data: cl }] = await Promise.all([
@@ -55,14 +55,19 @@ export async function GET(req: NextRequest) {
       sb().from("fo_checklists").select("*").eq("appointment_id", id).maybeSingle(),
     ]);
     const open = instructionsOpen(a.starts_at, a.ends_at);
+    const { access_instructions: _a, occupancy: _o, showing_notes: _n, ...home } = (a.properties ?? {}) as unknown as Record<string, unknown>;
+    const prop = { access_instructions: _a, occupancy: _o, showing_notes: _n, slug: home.slug } as Record<string, unknown>;
     const live = (LIVE as readonly string[]).includes(a.status);
     return NextResponse.json({
       id: a.id, starts_at: a.starts_at, ends_at: a.ends_at, status: a.status, acknowledged: !!a.acknowledged_at,
-      home: a.properties,
+      home,
       tenant: { first: a.tenant_name.split(/\s+/)[0], phone: live && open ? a.tenant_phone : null },
-      highlights: rules?.highlights ?? null,
-      occupied: rules?.occupied ?? false,
-      access: open ? rules?.access_instructions ?? null : null,
+      // FieldOps per-home rules win; the property's own fields (from the property wizard) fill the gaps.
+      highlights: rules?.highlights ?? (prop?.showing_notes as string | null) ?? null,
+      occupied: rules?.occupied ?? prop?.occupancy === "occupied",
+      access: open ? rules?.access_instructions ?? (prop?.access_instructions as string | null) ?? null : null,
+      // Renter brief: what the visitor will want to know. No access details on it.
+      brief: `/brief/${prop?.slug ?? a.property_id}`,
       accessOpensAt: open ? null : new Date(new Date(a.starts_at).getTime() - 24 * 3_600_000).toISOString(),
       checklist: cl ?? null,
     });

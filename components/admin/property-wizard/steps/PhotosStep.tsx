@@ -34,6 +34,24 @@ interface Props {
   propertyId: string | null;
 }
 
+// Phone photos are 3–8MB. Shrink to a 2400px JPEG in the browser first: uploads
+// finish several times faster and stay under the server's request size limit.
+async function shrink(file: File): Promise<File> {
+  if (!file.type.startsWith("image/") || file.size < 900 * 1024) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 2400 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/jpeg", 0.85));
+    return blob ? new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" }) : file;
+  } catch {
+    return file; // e.g. HEIC the browser can't decode: send as-is
+  }
+}
+
 type FileStatus = { name: string; status: "uploading" | "done" | "error"; error?: string };
 
 export default function PhotosStep({ data, onChange, propertyId }: Props) {
@@ -61,7 +79,7 @@ export default function PhotosStep({ data, onChange, propertyId }: Props) {
     const results = await Promise.allSettled(
       toUpload.map(async (file, i) => {
         const fd = new FormData();
-        fd.append("file", file);
+        fd.append("file", await shrink(file));
         fd.append("propertyId", propertyId || "new");
 
         const res = await fetch("/api/admin/upload", { method: "POST", body: fd });

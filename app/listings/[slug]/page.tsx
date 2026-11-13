@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import ListingPage from "@/components/listings/detail/ListingPage";
 import JsonLd from "@/components/seo/JsonLd";
-import { typeLabel } from "@/lib/listing-format";
+import { typeLabel, publicProperty } from "@/lib/listing-format";
 
 // ISR — revalidate every 10 minutes so edits propagate without per-request overhead
 export const revalidate = 600;
@@ -25,7 +25,7 @@ async function resolveProperty(param: string) {
     .eq("slug", param)
     .eq("status", "published")
     .maybeSingle();
-  if (bySlug) return { property: bySlug, isLegacyId: false };
+  if (bySlug) return { property: publicProperty(bySlug), isLegacyId: false };
 
   // Fall back to UUID (legacy /listings/[id] links — we'll 301 to slug)
   const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -36,7 +36,7 @@ async function resolveProperty(param: string) {
       .eq("id", param)
       .eq("status", "published")
       .maybeSingle();
-    if (byId) return { property: byId, isLegacyId: true };
+    if (byId) return { property: publicProperty(byId), isLegacyId: true };
   }
 
   return null;
