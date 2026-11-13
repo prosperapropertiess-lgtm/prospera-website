@@ -1,26 +1,12 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { outfit, inter } from "@/app/fonts";
 import "./globals.css";
 import SiteShell from "@/components/layout/SiteShell";
 import JsonLd from "@/components/seo/JsonLd";
 import TrafficSourceTracker from "@/components/TrafficSourceTracker";
 import Tracking from "@/components/layout/Tracking";
 
-const outfit = Outfit({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "600", "700"],
-  display: "swap",
-  preload: true,
-});
 
-const inter = Inter({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  display: "swap",
-  preload: true,
-});
 
 export const metadata: Metadata = {
   title: {

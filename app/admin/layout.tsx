@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import React from "react";
-import { Poppins } from "next/font/google";
+import { poppins } from "@/app/fonts";
 import AdminTopBar from "./AdminTopBar";
 
 // Fallback title for any admin route without its own more specific
@@ -9,12 +9,6 @@ import AdminTopBar from "./AdminTopBar";
 // inherit their section's title rather than needing their own).
 export const metadata: Metadata = { title: { absolute: "Prospera Admin" }, robots: { index: false, follow: false } };
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
