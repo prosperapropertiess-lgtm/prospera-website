@@ -30,6 +30,7 @@ export default function AdminHome() {
       signal: live.leadsWaiting !== null && live.leadsWaiting > 0 ? `${live.leadsWaiting} application${live.leadsWaiting === 1 ? "" : "s"} to review` : null,
       alert: (live.leadsWaiting ?? 0) > 0,
     },
+    { ...SECTION_META.operations, signal: null, alert: false },
     {
       ...SECTION_META["property-management"],
       signal: live.maintenanceOpen !== null && live.maintenanceOpen > 0 ? `${live.maintenanceOpen} maintenance request${live.maintenanceOpen === 1 ? "" : "s"} open` : null,
@@ -45,7 +46,7 @@ export default function AdminHome() {
           <p style={{ fontSize: 15, color: "#666666", margin: "5px 0 0" }}>{today}</p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
           {cards.map((card) => (
             <HomeCard key={card.href} {...card} />
           ))}

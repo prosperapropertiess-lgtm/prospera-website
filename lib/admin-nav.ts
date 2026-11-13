@@ -1,4 +1,4 @@
-export type AdminSection = "leasing" | "property-management";
+export type AdminSection = "leasing" | "property-management" | "operations";
 
 export interface AdminDestination {
   href: string;
@@ -11,12 +11,15 @@ export const LEASING_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/viewing-requests", name: "Viewing Requests", icon: "event_available" },
   { href: "/admin/fieldops", name: "Showings (FieldOps)", icon: "calendar_month" },
   { href: "/admin/applications", name: "Applications", icon: "assignment" },
-  { href: "/admin/market", name: "Rental Market", icon: "query_stats" },
-  { href: "/admin/leads", name: "Leads", icon: "person_search" },
-  { href: "/admin/scorecard", name: "Sales Scorecard", icon: "scoreboard" },
   { href: "/admin/onboard", name: "Add a Landlord", icon: "add_business" },
+];
+
+export const OPERATIONS_DESTINATIONS: AdminDestination[] = [
   { href: "/admin/placements", name: "Client Dashboards", icon: "dashboard" },
   { href: "/admin/move-in-coordinator", name: "Move-In Coordinator", icon: "inventory_2" },
+  { href: "/admin/leads", name: "Leads", icon: "person_search" },
+  { href: "/admin/market", name: "Rental Market", icon: "query_stats" },
+  { href: "/admin/scorecard", name: "Sales Scorecard", icon: "scoreboard" },
   { href: "/admin/qr-codes", name: "QR Codes", icon: "qr_code" },
 ];
 
@@ -36,7 +39,13 @@ export const SECTION_META: Record<AdminSection, { label: string; href: string; i
     label: "Leasing",
     href: "/admin/hub/leasing",
     icon: "home_work",
-    description: "Listings, applications, leads, and new landlords",
+    description: "Listings, viewings, showings, applications and new landlords",
+  },
+  operations: {
+    label: "Operations",
+    href: "/admin/hub/operations",
+    icon: "hub",
+    description: "Client dashboards, move-ins, leads, market and sales",
   },
   "property-management": {
     label: "Property Management",
@@ -51,6 +60,7 @@ export function sectionForPath(pathname: string): AdminSection | null {
   const all = [
     ...LEASING_DESTINATIONS.map((d) => ({ ...d, section: "leasing" as AdminSection })),
     ...PROPERTY_MGMT_DESTINATIONS.map((d) => ({ ...d, section: "property-management" as AdminSection })),
+    ...OPERATIONS_DESTINATIONS.map((d) => ({ ...d, section: "operations" as AdminSection })),
   ];
   const match = all
     .filter((d) => pathname === d.href || pathname.startsWith(d.href + "/"))

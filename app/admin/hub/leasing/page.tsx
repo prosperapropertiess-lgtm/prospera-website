@@ -34,7 +34,7 @@ export default function LeasingHub() {
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 24px 100px" }}>
         <div style={{ marginBottom: 32 }}>
           <h1 style={{ fontSize: 26, fontWeight: 700, color: "#1F2F3A", margin: 0, letterSpacing: "-0.02em" }}>Leasing</h1>
-          <p style={{ fontSize: 14, color: "#666666", margin: "4px 0 0" }}>Listings, applications, leads, and new landlords</p>
+          <p style={{ fontSize: 14, color: "#666666", margin: "4px 0 0" }}>Listings, viewings, showings, applications and new landlords</p>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
