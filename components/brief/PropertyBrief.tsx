@@ -53,7 +53,7 @@ export default function PropertyBrief({ p, links, agent, shareUrl, agentUrl }: {
           </div>
           {photos[0] && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={photos[0]} alt="" className="w-full h-64 sm:h-80 object-cover rounded-2xl" />
+            <img src={photos[0]} alt="" className="brief-hero w-full h-64 sm:h-80 object-cover rounded-2xl" />
           )}
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -129,6 +129,7 @@ export default function PropertyBrief({ p, links, agent, shareUrl, agentUrl }: {
           .brief-actions { display: none !important; }
           .brief-sheet { position: absolute; left: 0; top: 0; width: 100%; padding: 0 !important; max-width: none !important; gap: 14px !important; }
           .brief-block { break-inside: avoid; }
+          .brief-hero { height: 2.6in !important; }
           * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}</style>

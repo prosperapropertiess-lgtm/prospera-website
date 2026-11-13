@@ -53,8 +53,12 @@ export type Line = { label: string; value: string };
 
 export function briefSections(p: PropertyRow) {
   const util = (p.utilities_detail ?? {}) as Record<string, { included: boolean; avg_cost: number | "" }>;
-  const included = Object.entries(util).filter(([, v]) => v.included).map(([k]) => UTIL_NAMES[k] ?? cap(k));
-  const paid = Object.entries(util).filter(([, v]) => !v.included);
+  // Older listings only filled utilities_list ("Heat", "Hydro / Electricity"), not utilities_detail.
+  const listed = ((p.utilities_list ?? []) as string[]).map((x) => x.trim()).filter(Boolean);
+  const fromDetail = Object.entries(util).filter(([, v]) => v.included).map(([k]) => UTIL_NAMES[k] ?? cap(k));
+  const included = fromDetail.length ? fromDetail : listed;
+  const isListed = (k: string) => listed.some((x) => x.toLowerCase().startsWith(k));
+  const paid = Object.entries(util).filter(([k, v]) => !v.included && !(fromDetail.length === 0 && isListed(k)));
   const estimate = paid.reduce((s, [, v]) => s + (Number(v.avg_cost) || 0), 0);
   const keyDeposit = Number((p.move_in_costs ?? {})["Key Deposit"]) || 0;
   const rent = Number(p.price) || 0;
@@ -70,7 +74,7 @@ export function briefSections(p: PropertyRow) {
 
   const costs: Line[] = [
     { label: "Rent", value: `${money(rent)} a month` },
-    { label: "Included in rent", value: included.length ? included.join(", ") : "No utilities" },
+    { label: "Included in rent", value: included.length ? included.join(", ") : p.utilities_included ? "Utilities included" : "No utilities" },
     paid.length ? { label: "You pay", value: `${paid.map(([k]) => UTIL_NAMES[k] ?? cap(k)).join(", ")}${estimate ? ` (about ${money(estimate)} a month)` : ""}` } : null,
     p.other_costs ? { label: "Other costs", value: p.other_costs } : null,
     p.last_month_required ? { label: "Last month's rent deposit", value: `${money(rent)}, paid at signing and used for your last month` } : null,
@@ -85,7 +89,9 @@ export function briefSections(p: PropertyRow) {
   ].filter((x): x is Line => !!x);
 
   const outside: Line[] = [
-    p.parking_type ? { label: "Parking", value: `${PARKING[p.parking_type] ?? p.parking_type}${p.parking_spaces ? `, ${p.parking_spaces} spot${p.parking_spaces > 1 ? "s" : ""}` : ""}` } : null,
+    p.parking_type && !(p.parking_type === "none" && p.parking)
+      ? { label: "Parking", value: `${PARKING[p.parking_type] ?? p.parking_type}${p.parking_spaces ? `, ${p.parking_spaces} spot${p.parking_spaces > 1 ? "s" : ""}` : ""}` }
+      : p.parking ? { label: "Parking", value: "Included" } : null,
     p.outdoor_space ? { label: "Outdoor space", value: OUTDOOR[p.outdoor_space] ?? p.outdoor_space } : null,
     p.storage ? { label: "Storage", value: p.storage_details || "Yes" } : null,
     p.entrance ? { label: "Entrance", value: p.entrance } : null,
