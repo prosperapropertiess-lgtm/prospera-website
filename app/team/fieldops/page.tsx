@@ -21,7 +21,7 @@ function Card({ s }: { s: Session }) {
           <div className="text-[18px] font-bold" style={{ color: NAVY }}>{tTime(s.startsAt)}</div>
         </div>
         <div className="min-w-0 flex-1">
-          <div className="font-semibold truncate" style={{ color: NAVY }}>{s.address}{s.unit ? `, ${s.unit}` : ""}</div>
+          <div className="font-semibold truncate capitalize" style={{ color: NAVY }}>{s.address}{s.unit ? `, ${s.unit}` : ""}</div>
           <div className="text-sm truncate" style={{ color: MUTED }}>{s.count} {s.count === 1 ? "prospect" : "prospects"} · {s.prospects.join(", ")}</div>
         </div>
         <span className="shrink-0">{s.unacknowledged && s.state === "upcoming" ? <Pill tone="red">New</Pill> : <Pill tone={STATE[s.state].tone}>{STATE[s.state].label}</Pill>}</span>

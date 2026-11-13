@@ -107,7 +107,7 @@ export default function SessionPage() {
 
   return (
     <TeamShell back="/team/fieldops" title={tDay(data.startsAt).split(",")[0]}>
-      <H1>{data.home.address}{data.home.unit ? `, ${data.home.unit}` : ""}</H1>
+      <div className="capitalize"><H1>{data.home.address}{data.home.unit ? `, ${data.home.unit}` : ""}</H1></div>
       <p className="mt-1 text-[15px]" style={{ color: MUTED }}>
         {tDay(data.startsAt)} · {tTime(data.startsAt)}–{tTime(data.endsAt)} · {data.prospects.length} {data.prospects.length === 1 ? "prospect" : "prospects"}
       </p>

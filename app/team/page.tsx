@@ -31,7 +31,7 @@ export default function TeamHome() {
             <>
               <div className="text-sm mt-3" style={{ opacity: 0.75 }}>Next viewing · {relDay(next.startsAt)}</div>
               <div className="text-[34px] font-bold leading-none mt-1" style={{ fontFamily: "var(--font-cormorant)" }}>{tTime(next.startsAt)}</div>
-              <div className="text-[17px] font-semibold mt-2">{next.address}{next.unit ? `, ${next.unit}` : ""}</div>
+              <div className="text-[17px] font-semibold mt-2 capitalize">{next.address}{next.unit ? `, ${next.unit}` : ""}</div>
               <div className="text-sm mt-0.5" style={{ opacity: 0.75 }}>{next.count} {next.count === 1 ? "prospect" : "prospects"}: {next.prospects.join(", ")}</div>
             </>
           ) : (
