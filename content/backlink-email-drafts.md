@@ -4212,3 +4212,137 @@ It would add practical depth to your landlord content and I'm happy to write it 
 Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
 
 ---
+
+## Marda Management — 2026-11-15
+To: via contact form at mardamanagement.com/contact
+Subject: Guest post: when LTB forms aren't the answer
+
+Hi,
+
+I was reading your LTB N-Forms Directory — genuinely useful resource. What struck me was how much complexity it covers for landlords who are essentially teaching themselves a process that professionals handle routinely.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential rentals in London, St. Thomas, and Strathroy, Ontario.
+
+I'd like to offer a guest post for your blog: "When hiring a property manager is cheaper than filing another LTB form." It's a practical companion to your forms content — written for the landlord who has used the guide twice and is wondering if there's a better way.
+
+Happy to adjust angle or length to fit your audience.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## AVS Hospitality — 2026-11-15
+To: via contact form at avshospitality.ca
+Subject: Guest post idea for your Ontario multiplex investors
+
+Hi,
+
+Your Ontario rental market trends content stood out — especially the Bill 60 coverage. Most Ontario landlord blogs treat it as a legal update; you actually explained the operational impact for small investors.
+
+I'm Ebin Jaison, I run Prospera Properties in London, Ontario, managing residential and multiplex properties across SW Ontario.
+
+I'd like to offer a guest post: "When to outsource management on your Ontario multiplex." It's a question your readers are likely wrestling with as their portfolios grow, and I can write it from real operator experience — no sales pitch, just the honest calculus.
+
+Let me know if that fits your editorial calendar.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## E&S Management — 2026-11-15
+To: via contact form at eandsmgmt.ca
+Subject: Guest post on preventing LTB filings before they happen
+
+Hi,
+
+Your September 2026 compliance guide is one of the cleaner analyses of the N4 changes I've seen — the distinction between the new 7-day period and what it means in practice is well handled.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential properties in London, St. Thomas, and Strathroy, Ontario.
+
+One angle your compliance guides haven't explored is how professional management prevents most LTB applications from ever being filed. I'd like to contribute a piece on that — "How professional property management keeps landlords out of the LTB queue" — as a practical companion to your procedural content.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Manage Your Property — 2026-11-15
+To: via contact form at manageyourproperty.ca
+Subject: Guest post: what your compliance checklist can't do
+
+Hi,
+
+Your 2026 landlord responsibilities checklist is well-structured — I've seen landlords use resources like this as a foundation, then hit the judgment-call situations that checklists don't cover.
+
+I'm Ebin Jaison, I run Prospera Properties in London, Ontario, managing residential rentals across SW Ontario.
+
+I'd like to offer a guest post: "What a property manager handles that your compliance checklist can't." It's a natural next-step piece for your checklist readers — practical, not promotional.
+
+Would that be a fit for your blog?
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## D&D Property Management — 2026-11-15
+To: via contact form at ddpropertymanagement.ca
+Subject: SW Ontario perspective for your investor guides
+
+Hi,
+
+Your Ontario investor guide series is solid — one of the more comprehensive landlord education libraries I've come across. I noticed most of the examples skew toward Central Ontario and the GTA.
+
+I'm Ebin Jaison, principal of Prospera Properties in London, Ontario. We manage residential rentals in London, St. Thomas, and Strathroy — the SW Ontario secondary market that GTA investors often buy into without fully understanding.
+
+I'd like to offer a guest post: "SW Ontario rental investing: what GTA investors miss when they buy outside the 416." It would add regional depth to your investor content and serve the investors you're already reaching who may own properties in our area.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Everlast Property Management — 2026-11-15
+To: via contact form at everlastpro.ca
+Subject: SW Ontario expert quote for your 2026 landlord guide
+
+Hi,
+
+Your Ontario Landlord Guide 2026 is well maintained — the LTB process section in particular is accurate and readable, which is rarer than it should be.
+
+I'm Ebin Jaison, principal of Prospera Properties. We manage residential properties in London, St. Thomas, and Strathroy, Ontario.
+
+I noticed your guide covers Ontario broadly. If you're planning to add regional depth or update with 2026 secondary-market data, I'd be glad to contribute a SW Ontario operator's perspective — either as a guest section or as a quoted expert source. No obligation, just a practical offer to add value to content you've already built.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Solutions Property Management — 2026-11-15
+To: via contact form at solutionspropertymanagement.ca
+Subject: Cross-referral idea — Hamilton + SW Ontario
+
+Hi,
+
+Your Hamilton and Niagara 2026 guide is a solid resource — the section on RTA compliance for Hamilton landlords covers ground I've had to explain to investors buying in that area.
+
+I'm Ebin Jaison, I run Prospera Properties in London, Ontario. We manage rentals in London, St. Thomas, and Strathroy — which means we don't overlap with your market at all.
+
+Some investors hold properties in both Hamilton and London. I'd like to explore a simple reciprocal arrangement: each of us points multi-market investors to the other as the local operator in their respective area. Worth a quick call?
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---
+
+## Blue Anchor Property Management — 2026-11-15
+To: via contact form at blueanchorpm.rent
+Subject: Cross-referral idea — Central Ontario + SW Ontario
+
+Hi,
+
+Your "Central Ontario Landlords: What You Need to Know in 2026" is well done — the September 2026 rule changes are explained clearly without the usual vagueness. I referenced it when updating our own client communications.
+
+I'm Ebin Jaison, principal of Prospera Properties in London, Ontario. We serve London, St. Thomas, and Strathroy — your market and ours have zero overlap.
+
+Some Ontario investors hold properties across multiple regions. A simple reciprocal mention — each of us as the go-to operator in our respective area — would serve those investors well and costs both of us nothing. Happy to discuss.
+
+Ebin Jaison / Prospera Properties / (519) 697-1227 / prosperaproperties.co
+
+---

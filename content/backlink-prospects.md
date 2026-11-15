@@ -3269,3 +3269,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Large national brand; editorial contact via customerservice@brokerlink.ca or media@brokerlink.ca. Guest contribution or expert source offer appropriate. Note: live URL verification not possible from this environment.
 
 ---
+
+## Marda Management — Ontario Landlord Blog
+- url: https://mardamanagement.com/
+- type: blog
+- why: Ontario-based property management company publishing practical landlord guides including an LTB N-Forms Directory and tenant communication resources — complementary, non-competing content for landlords in markets outside SW Ontario.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at mardamanagement.com/contact
+- site_focus: Marda Management publishes Ontario landlord education content covering LTB forms, notice procedures, habitability standards, and tenant management workflows. Their 2026 blog library includes a Complete LTB N-Forms Directory and Ontario landlord compliance guides — practical, process-focused content aimed at independent landlords and small investors.
+- hook: Marda's LTB guides cover forms and procedures but rarely address the professional management alternative for landlords who find the process overwhelming. A guest post from Ebin on "When to hire a property manager instead of filing another LTB form" offers their readers a practical next step and positions Prospera as the SW Ontario expert.
+- specific_content: Their "Complete LTB N-Forms Directory" and Ontario landlord compliance guides — a contributed piece or expert quote on the real-world cost of navigating LTB processes without professional help would complement their procedural content well.
+- researcher_notes: Ontario-based PM blog, operates outside SW Ontario based on content focus. Not a direct competitor. Contact via website form. Guest post pitch is the right angle given shared Ontario landlord audience. Note: live URL verification not possible from this environment.
+
+---
+
+## AVS Hospitality — Ontario Multiplex & Investment Blog
+- url: https://avshospitality.ca/blog-2/
+- type: blog
+- why: Ontario multiplex property management firm and investor education blog covering Bill 60, rental market trends, and secondary-suite investment guides — strong overlap with Prospera's investor-landlord audience.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at avshospitality.ca
+- site_focus: AVS Hospitality is an Ontario full-service multiplex property management company with an active investor-education blog. Their 2026 content covers Ontario rental market trends, Bill 60 (Fighting Delays, Building Faster Act), above-guideline rent increases, and multiplex conversion guides. Content targets small landlords and real estate investors building multi-unit portfolios across Ontario.
+- hook: AVS's investment guides explain how to maximize returns on multiplex properties but rarely address the point where self-management of multiple units becomes a liability — Ebin can contribute a practical piece on "When to outsource management on your Ontario multiplex" aimed directly at their investor readers.
+- specific_content: Their Ontario rental market trends 2026 and Bill 60 content — a guest post or expert quote on how professional management reduces risk during legislative transitions (like Bill 60) would naturally extend their editorial coverage.
+- researcher_notes: Ontario multiplex PM, not serving London/St. Thomas/Strathroy based on available info — not a direct competitor. Active 2026 blog. Contact via website form. Guest post pitch is appropriate. Note: live URL verification not possible from this environment.
+
+---
+
+## E&S Management — Ontario LTB Compliance Blog
+- url: https://eandsmgmt.ca/
+- type: blog
+- why: Ontario property management firm publishing 2026 LTB compliance guides including analysis of the September 2026 rule changes — practical, authoritative content for Ontario landlords seeking compliance help.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at eandsmgmt.ca
+- site_focus: E&S Management publishes Ontario landlord compliance content with particular depth on LTB procedural changes. Their 2026 coverage includes a detailed compliance guide for the September 21, 2026 rule changes (N4 notice period reduction from 14 to 7 days, partial-arrears hearing rules) and an Ontario Landlord Tenant Board 2026 guide. Content is technical and process-focused, targeting compliance-minded landlords.
+- hook: E&S Management's compliance guides give landlords the procedural framework but don't explore how professional property management keeps landlords in compliance automatically — Ebin can offer a SW Ontario operator's perspective on how managed properties consistently avoid LTB applications in the first place.
+- specific_content: Their "Ontario Landlord Tenant Board: 2026 Compliance Guide" — a contributed piece on "How professional property management prevents most LTB applications before they're filed" would naturally extend their compliance angle.
+- researcher_notes: Ontario PM blog; content focus suggests operations outside SW Ontario. Not a direct competitor. Contact via website form. Expert guest post pitch appropriate. Note: live URL verification not possible from this environment.
+
+---
+
+## Manage Your Property — Ontario Landlord Checklist Blog
+- url: https://manageyourproperty.ca/blog/
+- type: blog
+- why: Ontario-focused landlord education blog covering rental property compliance checklists and landlord responsibilities — an informational resource that would naturally reference professional management as a service option.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at manageyourproperty.ca
+- site_focus: Manage Your Property publishes Ontario landlord compliance guides and checklists, including a 2026 landlord responsibilities checklist covering maintenance obligations, notice requirements, and tenant communication best practices. The site targets independent Ontario landlords seeking to stay compliant without full professional management.
+- hook: Manage Your Property's compliance checklists serve DIY landlords but would be more complete with a companion piece on what professional property managers handle that checklists can't — Ebin can contribute a practical piece distinguishing compliance tasks from management judgment calls, adding depth to their existing checklist content.
+- specific_content: Their "Ontario Rental Property Compliance: The 2026 Landlord Checklist" — a resource mention or guest post on "What a property manager does that your compliance checklist can't" would complement their checklist approach.
+- researcher_notes: Ontario landlord education site; not clearly a property management company (site name suggests tools/resources for self-managers). Not a competitor. Contact via website form. Guest post or resource mention pitch both appropriate. Note: live URL verification not possible from this environment.
+
+---
+
+## D&D Property Management — Ontario PM Blog
+- url: https://ddpropertymanagement.ca/blog
+- type: blog
+- why: Ontario property management company with one of the largest 2026 landlord education libraries, covering investor guides, condo board resources, and landlord duty checklists — a credible blog for a cross-referral or expert contribution arrangement.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at ddpropertymanagement.ca
+- site_focus: D&D Property Management publishes a comprehensive Ontario landlord and investor education blog. Their 2026 content library includes complete landlord duty checklists, Ontario investor guides, condo board resources, and rental compliance guides. Content is well-structured and targets both new and experienced Ontario landlords — a substantial, regularly updated editorial presence.
+- hook: D&D's Ontario investor guides cover the province broadly but lack the Southwest Ontario (London, St. Thomas, Strathroy) secondary-market perspective — Ebin can offer a contributed piece on "SW Ontario rental investing: what GTA investors miss when they buy outside the 416."
+- specific_content: Their Ontario investor guides and 2026 landlord duty checklist series — a guest post on the SW Ontario secondary rental market would add geographic depth to their provincial coverage and position Prospera as the go-to operator in that region.
+- researcher_notes: Ontario PM company; content suggests GTA or Central Ontario focus — not a direct competitor for London/St. Thomas/Strathroy. Active 2026 blog with strong editorial output. Contact via website form. Guest post pitch with regional angle is the right approach. Note: live URL verification not possible from this environment.
+
+---
+
+## Everlast Property Management — Ontario Landlord Guide Blog
+- url: https://everlastpro.ca/blog
+- type: blog
+- why: Ontario property management company publishing updated 2026 Ontario landlord guides covering RTA requirements, LTB processes, and rent increase rules — peer PM company with active educational content.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at everlastpro.ca
+- site_focus: Everlast Property Management publishes well-maintained Ontario landlord education content. Their "Ontario Landlord Guide 2026" (updated June 8, 2026) covers lease requirements, the 2.1% rent increase guideline, LTB process realities, maintenance record-keeping, and tenant communication protocols. The guide is well-structured and regularly maintained — above average for PM company blogs.
+- hook: Everlast's Ontario Landlord Guide covers the province broadly but doesn't address regional differences — Ebin can contribute a SW Ontario operator's perspective or be quoted as a local expert source, extending Everlast's guide with concrete examples from London and secondary markets.
+- specific_content: Their "Ontario Landlord Guide 2026" — a resource link or expert quote from Ebin on how SW Ontario rental dynamics differ from the GTA would add practical regional depth to their provincial guide.
+- researcher_notes: Ontario PM company; no indication they serve London/St. Thomas/Strathroy — not a direct competitor. Active, well-maintained blog. Contact via website form. Expert source or resource mention pitch appropriate. Note: live URL verification not possible from this environment.
+
+---
+
+## Solutions Property Management — Hamilton & Niagara Landlord Blog
+- url: https://solutionspropertymanagement.ca/blogs/
+- type: blog
+- why: Hamilton and Niagara property management company (explicitly not serving SW Ontario) with a 2026 guide covering Ontario landlord law, fees, and RTA compliance — a natural peer-company cross-referral opportunity for investors who own properties in multiple Ontario markets.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at solutionspropertymanagement.ca
+- site_focus: Solutions Property Management serves Hamilton and Niagara Region exclusively. Their blog covers Ontario landlord law, property management fees, tenant relations, and RTA compliance from a Hamilton/Niagara operator's perspective. Their "Complete 2026 Guide for Hamilton and Niagara Landlords" is a substantial resource covering fees, maintenance obligations, and the Residential Tenancies Act — peer-quality editorial content in a neighbouring market.
+- hook: Some investors own properties in both Hamilton and London Ontario. Solutions and Prospera serve adjacent but non-overlapping markets — a mutual resource mention or cross-referral arrangement for multi-market investors is a natural, low-friction win for both firms.
+- specific_content: Their "Property Management in Hamilton & Niagara: The Complete 2026 Guide for Landlords" — a resource exchange where both companies mention each other as the go-to operator for their respective markets would serve investors with properties across SW and Central Ontario.
+- researcher_notes: Explicitly Hamilton & Niagara market — zero competitive overlap with Prospera's London/St. Thomas/Strathroy territory. Best peer-company cross-referral prospect in this batch. Contact via website form. Direct peer-to-peer outreach from Ebin is appropriate — equal standing, shared interest in serving multi-market investors. Note: live URL verification not possible from this environment.
+
+---
+
+## Blue Anchor Property Management — Central Ontario Compliance Blog
+- url: https://www.blueanchorpm.rent/blog
+- type: blog
+- why: Central Ontario property management company (Kingston/Trenton area) publishing detailed 2026 Ontario rental law compliance guides and a Central Ontario landlord resource series — peer PM company in a non-competing market.
+- researched: true
+- drafted: true
+- added: 2026-11-15
+- contact_email: via contact form at blueanchorpm.rent
+- site_focus: Blue Anchor Property Management operates in Central Ontario (Kingston/Brighton/Trenton area) and publishes a well-maintained Ontario landlord compliance blog. Their 2026 content includes a detailed compliance guide for the September 21 rule changes, a "Central Ontario Landlords: What You Need to Know in 2026" guide, and Ontario rental law analysis. Content is technical and regularly updated, with a focus on compliance rather than marketing.
+- hook: Blue Anchor's Central Ontario landlord guides are strong but lack a SW Ontario counterpart — a cross-reference between their Central Ontario guide and Prospera's coverage of London, St. Thomas, and Strathroy would give landlords with properties across Ontario a complete regional picture.
+- specific_content: Their "Ontario Rental Law Compliance Guide 2026: What Changes September 21" and "Central Ontario Landlords: What You Need to Know in 2026" — a reciprocal resource mention positioning Prospera as the SW Ontario complement to Blue Anchor's Central Ontario coverage is a natural fit.
+- researcher_notes: Central Ontario PM (Kingston/Trenton/Brighton area) — zero competitive overlap with Prospera. Active 2026 compliance blog with solid editorial quality. BBB A+ rating. Contact via website form. Peer-to-peer cross-referral pitch is the right angle. Note: live URL verification not possible from this environment.
+
+---
