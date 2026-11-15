@@ -1,5 +1,5 @@
 ---
-Last updated: 2026-11-08
+Last updated: 2026-11-15
 
 ## New Topic Opportunities
 
@@ -35,6 +35,16 @@ Last updated: 2026-11-08
 
 - condo-rental-rules-ontario-landlord | Est. difficulty: MEDIUM | Vol: ~300–500/mo | Renting out a condo in Ontario is subject to both the RTA and the condo corporation's declaration/rules — a distinction that trips up many condo investor-landlords. No existing post covers the specific intersection of RTA obligations and condo board compliance. Distinct audience (condo investors) from the existing residential rental posts. Good for topical depth.
 
+- ontario-rent-increase-guideline-2027 | Est. difficulty: LOW | Vol: ~400–700/mo | The 2027 Ontario rent increase guideline is confirmed at 1.9% — landlords serving N1 notices now (Nov 2026) are serving for 2027 increases. No existing post covers the 2027 guideline specifically, and landlords are actively searching now. Time-sensitive first-mover opportunity; a dedicated post capturing "2027 rent increase Ontario" before competitors is high value.
+
+- ltb-payment-agreement-rules-ontario-2026 | Est. difficulty: LOW | Vol: ~200–350/mo | As of July 1, 2026, Ontario landlords filing for a consent order that includes a payment agreement must use the LTB's official Payment Agreement Form — informal agreements no longer accepted by the Board. No existing post covers this specific July 2026 change. The rent-repayment-agreement-ontario.md post predates this change. Landlords searching for how to formalize payment plans need updated guidance.
+
+- ontario-rta-all-changes-2026-summary | Est. difficulty: LOW | Vol: ~600–1,200/mo | A single comprehensive post summarizing ALL Ontario RTA changes in 2026 (July 1 and September 21 waves from Bill 60 + Bill 97) in one place would rank well for the umbrella query and serve as an internal linking hub for the individual change posts. The separate posts on N4 changes, N12 changes, and payment agreement rules don't have a summary parent post. High value for both SEO and internal link authority.
+
+- st-thomas-ontario-rental-market-2026 | Est. difficulty: LOW | Vol: ~100–200/mo | Hyperlocal content for St. Thomas rental investors — vacancy rates, average rents, tenant demand, and investment outlook for 2026/2027. Prospera operates in St. Thomas and has ground-level market data no AI-generated competitor can replicate. st-thomas-ontario-rental-bylaws-landlord-guide.md covers regulations but not investment/market conditions. Hyperlocal posts drive high-intent local traffic.
+
+- strathroy-ontario-rental-market-guide | Est. difficulty: LOW | Vol: ~100–150/mo | Hyperlocal investment and market guide for Strathroy landlords and prospective investors — vacancy, demand drivers (proximity to London, population growth), typical rents, and property types. strathroy-landlord-guide-ontario.md covers RTA compliance but not market conditions. Zero competition from other property management company blogs for this specific query.
+
 ## SKIPPED (too competitive, already covered, or wrong intent)
 
 - Ontario landlord rights 2026 — covered by ontario-landlord-tenant-act-2026.md
@@ -60,6 +70,14 @@ Last updated: 2026-11-08
 - rent control Ontario 2026 — covered by ontario-rent-control-exemptions-2026.md + ontario-rent-control-exempt-properties.md
 - property management fees Ontario — covered by property-management-fees-ontario.md
 - london ontario average rent 2026 — covered by london-ontario-average-rent-2026.md
+- N4 7-day notice rule — covered via n4-notice-ontario.md (see Topics to Expand for update needed)
+- N12 120-day no-compensation rule — covered via n12-notice-ontario.md (see Topics to Expand for update needed)
+- persistent late payment definition Ontario — covered via n8-notice-ontario.md (see Topics to Expand for update needed)
+- Ontario rent increase guideline 2026 2.1% — covered by how-much-rent-increase-allowed-ontario-2026.md + rent-increase-ontario-guidelines.md
+- LTB L1 application how to file — covered by l1-application-ltb-ontario.md + l1-application-ontario-landlord-guide.md
+- LTB hearing what to expect — covered by ltb-hearing-preparation-ontario-landlords.md
+- can landlord require tenant insurance Ontario — wait for mold post and air conditioning post to publish first; re-evaluate
+- Ontario landlord entry 24 hours notice — covered by landlord-entry-rights-ontario.md
 
 ## Topics to Expand (existing posts that need updates)
 
@@ -71,3 +89,6 @@ Last updated: 2026-11-08
 - london-ontario-average-rent-2026.md — Add a "2027 outlook" section with rental demand projections for London, St. Thomas, and Strathroy; this keeps the post fresh and captures forward-looking search intent before a dedicated forecast post is published.
 - ontario-standard-lease-2026.md — Review for any changes to the standard form post-September 2026 rule changes; ensure language around entry notice, rent deposit, and pet accommodation reflects current RTA.
 - landlord-maintenance-responsibilities-ontario.md — Add a dedicated section on mold to link to the forthcoming mold-in-rental-unit-ontario-landlord.md post; current post handles general maintenance but mold warrants explicit treatment.
+- rent-repayment-agreement-ontario.md — Update to reflect July 1, 2026 requirement that payment agreements filed with the LTB must use the Board's official Payment Agreement Form; informal written agreements are no longer accepted as LTB consent orders.
+- above-guideline-rent-increase-ontario.md — Add the post-Bill 60 change to AGI service timing (AGI service now due within 7 days with certificate of service within 5 days under the new rules); update any timeline tables that reference the old 14-day service window.
+- bill-60-ontario-landlords.md — Add a comprehensive "September 21, 2026 Changes" section summarizing the N4 7-day period, N12 120-day compensation waiver, persistent late payment redefinition, and partial-arrears requirement for tenant counterclaims; link to the forthcoming ontario-rta-all-changes-2026-summary post when published.
