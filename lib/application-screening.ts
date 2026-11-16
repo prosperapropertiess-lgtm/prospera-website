@@ -95,7 +95,7 @@ export async function screenApplication(applicationId: string): Promise<Screenin
 
     const { data: docRows } = await supabaseAdmin
       .from("application_documents")
-      .select("doc_type, storage_path")
+      .select("doc_type, storage_path, uploaded_by, created_at")
       .eq("application_id", applicationId);
 
     const content: ContentBlock[] = [];
@@ -111,7 +111,8 @@ export async function screenApplication(applicationId: string): Promise<Screenin
 
       const data = Buffer.from(await file.arrayBuffer()).toString("base64");
       const type = mediaType(doc.storage_path);
-      content.push({ type: "text", text: `Document: ${label}` });
+      const staff = doc.uploaded_by === "staff" ? ` (added by Prospera staff on ${String(doc.created_at).slice(0, 10)}, after the application was sent)` : "";
+      content.push({ type: "text", text: `Document: ${label}${staff}` });
       content.push(
         type === "application/pdf"
           ? { type: "document", source: { type: "base64", media_type: type, data } }
@@ -213,25 +214,20 @@ export function summaryToText(s: ApplicationSummary): string {
   ].join("\n");
 }
 
-// Runs the screening and stores the result. Always leaves the application in
-// "reviewed" so it never sits invisible in "processing".
+// Runs the screening and stores the result. Always leaves a new application in
+// "reviewed" so it never sits invisible in "processing". On an application that's
+// already approved or declined, a re-run updates the summary but not the decision.
 export async function screenAndSave(applicationId: string): Promise<ScreeningResult> {
   const result = await screenApplication(applicationId);
+  const now = new Date().toISOString();
   await supabaseAdmin
     .from("applications")
     .update(
       result.summary
-        ? {
-            ai_summary: result.summary,
-            ai_score: result.summary.score,
-            ai_report: summaryToText(result.summary),
-            ai_error: null,
-            ai_completed_at: new Date().toISOString(),
-            status: "reviewed",
-          }
-        : { ai_error: result.error, ai_completed_at: new Date().toISOString(), status: "reviewed" },
+        ? { ai_summary: result.summary, ai_score: result.summary.score, ai_report: summaryToText(result.summary), ai_error: null, ai_completed_at: now }
+        : { ai_error: result.error, ai_completed_at: now },
     )
-    .eq("id", applicationId)
-    .in("status", ["pending", "processing", "reviewed"]);
+    .eq("id", applicationId);
+  await supabaseAdmin.from("applications").update({ status: "reviewed" }).eq("id", applicationId).in("status", ["pending", "processing"]);
   return result;
 }

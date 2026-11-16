@@ -78,8 +78,9 @@ export async function GET(
   // Fetch documents and generate fresh 1-hour signed URLs
   const { data: docs } = await supabaseAdmin
     .from("application_documents")
-    .select("id, doc_type, storage_path, created_at")
-    .eq("application_id", id);
+    .select("id, doc_type, storage_path, created_at, uploaded_by, file_name")
+    .eq("application_id", id)
+    .order("created_at");
 
   const docsWithUrls = await Promise.all(
     (docs ?? []).map(async (doc) => {

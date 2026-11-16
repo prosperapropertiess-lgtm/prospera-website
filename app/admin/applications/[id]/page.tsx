@@ -1,5 +1,6 @@
 "use client";
 import Pipeline, { type PipelineApp } from "./Pipeline";
+import AddDocuments from "./AddDocuments";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -33,6 +34,8 @@ interface Document {
   storage_path: string;
   signed_url: string | null;
   created_at: string;
+  uploaded_by: "applicant" | "staff";
+  file_name: string | null;
 }
 
 interface Application {
@@ -59,6 +62,7 @@ interface Application {
   ai_report: string | null;
   ai_summary: Summary | null;
   ai_error: string | null;
+  ai_completed_at: string | null;
   admin_notes: string | null;
   income_source: string | null;
   income_notes: string | null;
@@ -165,6 +169,13 @@ export default function ApplicationDetailPage() {
     } finally {
       setRescreening(false);
     }
+  }
+
+  async function removeDoc(docId: string) {
+    if (!confirm("Remove this document? Run the AI again afterwards so the summary stops counting it.")) return;
+    const res = await fetch(`/api/admin/applications/${id}/documents?doc=${docId}`, { method: "DELETE" });
+    if (!res.ok) setError((await res.json().catch(() => ({}))).error ?? "Couldn't remove it.");
+    await reload();
   }
 
   async function saveNotes() {
@@ -434,6 +445,12 @@ export default function ApplicationDetailPage() {
               }}>
                 <span style={{ fontSize: 13, color: "#1F2F3A", fontWeight: 500 }}>
                   {DOC_LABELS[doc.doc_type as keyof typeof DOC_LABELS] ?? doc.doc_type}
+                  {doc.uploaded_by === "staff" && (
+                    <span style={{ color: "#666666", fontWeight: 400 }}>
+                      {" "}· added by you{doc.file_name ? ` · ${doc.file_name}` : ""}
+                      {" "}· <button onClick={() => removeDoc(doc.id)} style={{ background: "none", border: 0, padding: 0, color: "#991B1B", fontSize: 13, cursor: "pointer", textDecoration: "underline" }}>remove</button>
+                    </span>
+                  )}
                 </span>
                 {doc.signed_url ? (
                   <a
@@ -459,6 +476,13 @@ export default function ApplicationDetailPage() {
             ))}
           </div>
         )}
+        <AddDocuments
+          appId={id}
+          onAdded={reload}
+          onRerun={rescreen}
+          rerunning={rescreening}
+          pending={(app.documents ?? []).filter((d) => d.uploaded_by === "staff" && (!app.ai_completed_at || d.created_at > app.ai_completed_at)).length}
+        />
       </Section>
 
       {/* AI Report */}

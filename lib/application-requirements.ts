@@ -12,7 +12,9 @@ export type DocType =
   | "income_proof"
   | "bank_statement"
   | "credit_report"
-  | "singlekey_report";
+  | "singlekey_report"
+  | "reference_letter"
+  | "other";
 
 export const INCOME_SOURCES: { value: IncomeSource; label: string; hint: string }[] = [
   { value: "employed", label: "I have a job", hint: "Full-time, part-time, or contract" },
@@ -79,6 +81,8 @@ export const DOC_LABELS: Record<DocType, string> = {
   bank_statement: "Bank statement",
   credit_report: "Credit report",
   singlekey_report: "SingleKey report",
+  reference_letter: "Reference letter",
+  other: "Other document",
 };
 
 export const ALL_DOC_TYPES = Object.keys(DOC_LABELS) as DocType[];
