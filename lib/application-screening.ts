@@ -111,7 +111,7 @@ export async function screenApplication(applicationId: string): Promise<Screenin
 
       const data = Buffer.from(await file.arrayBuffer()).toString("base64");
       const type = mediaType(doc.storage_path);
-      content.push({ type: "text", text: `Document: ${label}` });
+      content.push({ type: "text", text: `Document: ${label}${doc.storage_path.includes("/admin-") ? " (sent in later; added by Prospera staff)" : ""}` });
       content.push(
         type === "application/pdf"
           ? { type: "document", source: { type: "base64", media_type: type, data } }

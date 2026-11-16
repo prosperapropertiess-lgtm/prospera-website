@@ -21,7 +21,7 @@ const MAX_EDGE = 2000; // px — plenty for reading a document, keeps photos sma
 
 // Phone photos are often 3–8MB. Shrink them to a readable JPEG before upload so
 // uploads are fast on mobile data and the AI can read them.
-async function prepareFile(file: File): Promise<File> {
+export async function prepareFile(file: File): Promise<File> {
   if (file.type === "application/pdf") return file;
   if (!file.type.startsWith("image/")) throw new Error("Please upload a PDF or a photo.");
 

@@ -1,10 +1,10 @@
 "use client";
 import Pipeline, { type PipelineApp } from "./Pipeline";
+import Documents from "./Documents";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { DOC_LABELS } from "@/lib/application-requirements";
 import { VERDICT_STYLE, CHECK_ICON, INCOME_SOURCE_LABEL, TIME_AT_ADDRESS_LABEL } from "./labels";
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
@@ -418,47 +418,7 @@ export default function ApplicationDetailPage() {
 
       {/* Documents */}
       <Section title={`Documents (${app.documents?.length ?? 0})`}>
-        {!app.documents?.length ? (
-          <p style={{ margin: 0, fontSize: 13, color: "#94A3B8" }}>No documents uploaded.</p>
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {app.documents.map((doc) => (
-              <div key={doc.id} style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "10px 14px",
-                backgroundColor: "#F8FAFC",
-                borderRadius: 8,
-                border: "1px solid #E2E8F0",
-              }}>
-                <span style={{ fontSize: 13, color: "#1F2F3A", fontWeight: 500 }}>
-                  {DOC_LABELS[doc.doc_type as keyof typeof DOC_LABELS] ?? doc.doc_type}
-                </span>
-                {doc.signed_url ? (
-                  <a
-                    href={doc.signed_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      padding: "5px 14px",
-                      backgroundColor: "#1F2F3A",
-                      color: "#FFFFFF",
-                      borderRadius: 6,
-                      fontSize: 12,
-                      textDecoration: "none",
-                      fontWeight: 500,
-                    }}
-                  >
-                    View
-                  </a>
-                ) : (
-                  <span style={{ fontSize: 12, color: "#94A3B8" }}>Link expired</span>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        <Documents appId={id} docs={app.documents ?? []} onChanged={reload} onRescreened={reload} />
       </Section>
 
       {/* AI Report */}
