@@ -5,7 +5,7 @@ date: "2026-10-14"
 slug: "ltb-review-order-ontario"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-7f1e24e44fe0?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You lost an LTB hearing. The order is in your inbox. Eviction was denied, rent was abated, or the application was dismissed entirely.

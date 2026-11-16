@@ -5,7 +5,7 @@ date: "2026-09-28"
 slug: "ontario-rent-control-exempt-properties"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords have heard that some rental units are "exempt from rent control." Far fewer understand what that actually means in practice — or how to tell whether their unit qualifies.

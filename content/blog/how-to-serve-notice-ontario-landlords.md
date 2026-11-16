@@ -5,7 +5,7 @@ date: "2026-09-30"
 slug: "how-to-serve-notice-ontario-landlords"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1586769852836-b8bdd1620df4?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You served your N4 notice. You waited. You filed your L1 application. Then, at the LTB hearing, the adjudicator dismisses your application.

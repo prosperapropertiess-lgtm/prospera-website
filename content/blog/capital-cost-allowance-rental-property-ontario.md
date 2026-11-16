@@ -5,7 +5,7 @@ date: "2026-11-13"
 slug: "capital-cost-allowance-rental-property-ontario"
 category: "Landlord Guide"
 readTime: "12 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Capital cost allowance — CCA — is one of the most misunderstood deductions available to Ontario landlords. Used correctly, it defers tax on rental income. Used without understanding the full picture, it creates a large, unexpected tax bill when you sell.

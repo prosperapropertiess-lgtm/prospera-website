@@ -5,7 +5,7 @@ date: "2026-09-18"
 slug: "property-manager-vs-self-managing-ontario"
 category: "Property Management"
 readTime: "12 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords who self-manage believe they are saving money. They are not counting correctly.

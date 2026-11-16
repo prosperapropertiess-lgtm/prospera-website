@@ -5,7 +5,7 @@ date: "2026-10-07"
 slug: "n9-notice-ontario"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1586769852836-b8bdd1620df4?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 # N9 Notice Ontario: The Tenant's Notice to End a Tenancy (Landlord Guide)

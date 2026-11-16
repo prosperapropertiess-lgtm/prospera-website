@@ -5,7 +5,7 @@ date: "2026-10-05"
 slug: "co-signer-guarantor-ontario-rental"
 category: "Landlord Guide"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Many Ontario landlords have been here: a tenant applicant looks promising but has thin credit, a short employment history, or income that's borderline for the rent amount. Someone suggests getting a co-signer or guarantor.

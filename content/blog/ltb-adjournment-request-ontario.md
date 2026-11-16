@@ -5,7 +5,7 @@ date: "2026-10-09"
 slug: "ltb-adjournment-request-ontario"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872952f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 When you receive an LTB hearing notice and realize you cannot attend, your first instinct is probably to panic. A hearing about rent arrears or eviction feels too important to miss. The good news: the LTB has a formal process for requesting a postponement. It is called an adjournment.

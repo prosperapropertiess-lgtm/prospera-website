@@ -5,7 +5,7 @@ date: "2026-11-11"
 slug: "condo-rental-ontario-rta-vs-condo-rules"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you rent out a condo in Ontario, you operate under two separate rule systems at the same time: the **Residential Tenancies Act (RTA)** and your **condominium corporation's rules, bylaws, and declaration**.

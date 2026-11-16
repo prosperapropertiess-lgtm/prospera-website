@@ -5,7 +5,7 @@ date: "2026-09-25"
 slug: "how-long-does-it-take-to-find-tenant-london-ontario"
 category: "Property Management"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Every day a rental unit sits empty costs you money. The question every landlord asks when a tenant gives notice — or when they're listing for the first time — is: how long is this going to take?

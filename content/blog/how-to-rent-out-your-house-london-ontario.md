@@ -5,7 +5,7 @@ date: "2026-09-16"
 slug: "how-to-rent-out-your-house-london-ontario"
 category: "Landlord Guide"
 readTime: "13 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You own a house or unit in London, Ontario. Now you need a tenant. Whether you inherited the property, bought it as an investment, or are renting out your old home after moving, the process is the same — and the Ontario rules that govern it apply from day one.

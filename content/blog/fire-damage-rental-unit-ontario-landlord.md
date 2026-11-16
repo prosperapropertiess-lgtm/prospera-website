@@ -5,7 +5,7 @@ date: "2026-10-23"
 slug: "fire-damage-rental-unit-ontario-landlord"
 category: "Ontario Law"
 readTime: "12 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1557672172-87a3df3f7c88?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A fire at your rental property is one of the highest-stress situations you will face as a landlord. In the first 24 hours, you are dealing with emergency services, insurance adjusters, displaced tenants, and a damaged building — while Ontario's *Residential Tenancies Act* keeps running in the background with rules most landlords have never read.

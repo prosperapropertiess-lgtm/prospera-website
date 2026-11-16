@@ -5,7 +5,7 @@ date: "2026-09-21"
 slug: "tenant-placement-vs-property-management-ontario"
 category: "Property Management"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Two services. Different scopes. One decision that shapes how much time you spend managing your rental for the next year — or the next decade.

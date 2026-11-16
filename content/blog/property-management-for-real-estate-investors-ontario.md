@@ -5,7 +5,7 @@ date: "2026-11-06"
 slug: "property-management-for-real-estate-investors-ontario"
 category: "Property Management"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1611974789855-9c6c321e9c8e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 If you own one rental property and self-manage it, property management is an optional service.

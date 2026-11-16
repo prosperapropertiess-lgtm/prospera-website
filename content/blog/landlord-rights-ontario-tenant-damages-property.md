@@ -5,7 +5,7 @@ date: "2026-10-26"
 slug: "landlord-rights-ontario-tenant-damages-property"
 category: "Ontario Law"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 The tenant just left and you are standing in the unit looking at a hole in the wall, stained carpets, and a broken door. You want to know what you can do about it. The answer: more than most landlords think, but only if you follow the right steps in the right order.

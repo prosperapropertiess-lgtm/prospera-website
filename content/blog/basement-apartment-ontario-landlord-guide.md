@@ -5,7 +5,7 @@ date: "2026-10-16"
 slug: "basement-apartment-ontario-landlord-guide"
 category: "Landlord Guide"
 readTime: "12 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1522771739844-7a05b68bb576?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Basement apartments are the most common rental type in London, St. Thomas, and Strathroy. They are also the most frequently operated without full compliance — not because landlords are cutting corners, but because the requirements span four different regulatory systems most people don't know exist.

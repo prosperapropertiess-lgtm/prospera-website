@@ -5,7 +5,7 @@ date: "2026-10-12"
 slug: "death-of-tenant-ontario-landlord"
 category: "Ontario Law"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1521791055366-0d553872952f?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords never think about what happens when a tenant dies mid-tenancy — until it happens. When it does, almost every instinct you have will be wrong.

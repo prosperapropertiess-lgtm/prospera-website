@@ -5,7 +5,7 @@ date: "2026-09-23"
 slug: "last-month-rent-interest-ontario"
 category: "Ontario Law"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most Ontario landlords collected a last month's rent deposit when they signed their tenant's lease. Most of them have also never paid a single cent of interest on it.

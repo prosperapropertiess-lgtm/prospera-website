@@ -5,7 +5,7 @@ date: "2026-11-02"
 slug: "cash-flow-rental-property-london-ontario"
 category: "Landlord Guide"
 readTime: "12 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1565514020179-026b92b2d070?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Most landlords buy a rental property in London knowing roughly what rent they will collect. Fewer know their actual cash flow — the amount left over after every expense, every vacancy period, and every debt payment. Fewer still know their cap rate or their cash-on-cash return.

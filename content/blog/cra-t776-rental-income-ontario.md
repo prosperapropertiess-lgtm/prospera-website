@@ -5,7 +5,7 @@ date: "2026-11-09"
 slug: "cra-t776-rental-income-ontario"
 category: "Landlord Guide"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1611974789855-9c6c321e9c8e?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Every Ontario landlord who earns rental income files a T776 — Statement of Real Estate Rentals — with their personal tax return each year. It is not optional, and it is not complicated once you understand what goes where. But most landlords file it without fully understanding it, which means they miss deductions, make errors that attract CRA review, or calculate the wrong net income.

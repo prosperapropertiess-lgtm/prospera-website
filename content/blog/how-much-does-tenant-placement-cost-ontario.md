@@ -5,7 +5,7 @@ date: "2026-10-19"
 slug: "how-much-does-tenant-placement-cost-ontario"
 category: "Property Management"
 readTime: "10 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1559526324-593bc073d938?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 You have a vacant unit and you need a good tenant in it — fast. A property management company says they can handle the whole process. You want to know what that costs before you commit.

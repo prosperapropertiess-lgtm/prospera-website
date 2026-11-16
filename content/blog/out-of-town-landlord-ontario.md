@@ -5,7 +5,7 @@ date: "2026-10-21"
 slug: "out-of-town-landlord-ontario"
 category: "Property Management"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1544715305-aab7c0c8a0e0?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Owning a rental property in London or southwestern Ontario from a distance is common. You might have relocated for work, inherited a property you didn't plan on, bought as an investment while living in another city, or simply moved to a new neighbourhood while keeping your old house as a rental.

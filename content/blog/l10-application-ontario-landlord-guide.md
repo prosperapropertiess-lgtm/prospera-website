@@ -5,7 +5,7 @@ date: "2026-11-04"
 slug: "l10-application-ontario-landlord-guide"
 category: "Ontario Law"
 readTime: "11 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1589829545856-7f1e24e44fe0?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A tenant moves out. You walk through the unit and find holes in the walls, a damaged door, and a carpet that needs replacing. The last month's rent deposit covered a fraction of it. What now?

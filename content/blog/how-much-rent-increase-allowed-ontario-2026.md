@@ -5,7 +5,7 @@ date: "2026-10-02"
 slug: "how-much-rent-increase-allowed-ontario-2026"
 category: "Ontario Law"
 readTime: "9 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 Every year in Ontario, the province sets a rent increase guideline — the maximum percentage landlords can raise rent for existing tenants without applying to the Landlord and Tenant Board.

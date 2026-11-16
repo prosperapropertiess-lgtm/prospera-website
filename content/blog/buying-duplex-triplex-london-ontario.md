@@ -5,7 +5,7 @@ date: "2026-10-30"
 slug: "buying-duplex-triplex-london-ontario"
 category: "Landlord Guide"
 readTime: "13 min read"
-featuredImage: "/blog-images/default.jpg"
+featuredImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop&auto=format&q=80"
 ---
 
 A single-unit rental property is straightforward to understand. One tenant, one lease, one rent cheque, one repair call at a time. A duplex or triplex is structurally different — more income streams, more tenants, more compliance obligations, and a different analysis framework before you buy.
