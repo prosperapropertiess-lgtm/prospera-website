@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Page, PageHeader, Tabs, Table, td, Badge, Button, EmptyState, Loading, ErrorNote, C, money, titleCaseAddress } from "@/components/admin/kit";
+import { Page, PageHeader, Tabs, Badge, Button, EmptyState, Loading, ErrorNote, C, money, titleCaseAddress } from "@/components/admin/kit";
 
 interface Property {
   id: string;
@@ -80,43 +80,46 @@ export default function ListingsPage() {
               action={filter === "all" ? <Button href="/admin/properties/new" variant="primary">+ Add a listing</Button> : undefined}
             />
           ) : (
-            <Table head={["", "Home", "Rent", "Beds", "Status", ""]}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 20 }}>
               {shown.map((p) => (
-                <tr key={p.id}>
-                  <td style={{ ...td, width: 72 }}>
+                <div key={p.id} style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", opacity: busy === p.id ? 0.6 : 1 }}>
+                  <Link href={`/admin/properties/${p.id}`} style={{ position: "relative", display: "block", aspectRatio: "4 / 3", background: C.greyBg }}>
                     {p.images?.[0] ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.images[0]} alt="" style={{ width: 56, height: 56, objectFit: "cover", borderRadius: 10, display: "block" }} />
+                      <img src={p.images[0]} alt="" onError={(e) => { e.currentTarget.style.display = "none"; }} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     ) : (
-                      <div style={{ width: 56, height: 56, borderRadius: 10, background: C.greyBg }} />
+                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: C.faint, fontSize: 14 }}>No photos yet</div>
                     )}
-                  </td>
-                  <td style={td}>
-                    <Link href={`/admin/properties/${p.id}`} style={{ color: C.text, fontWeight: 600, textDecoration: "none" }}>
+                    <span style={{ position: "absolute", top: 12, left: 12 }}>
+                      {p.status === "published" ? <Badge tone="green">Live</Badge>
+                        : p.status === "draft" ? <Badge tone="amber">Draft</Badge>
+                        : <Badge>Archived</Badge>}
+                    </span>
+                  </Link>
+                  <div style={{ padding: "16px 18px 18px", display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
+                    <Link href={`/admin/properties/${p.id}`} style={{ color: C.text, fontWeight: 700, fontSize: 17, lineHeight: 1.3, textDecoration: "none" }}>
                       {p.title || "Untitled listing"}
                     </Link>
-                    <div style={{ fontSize: 14, color: C.muted, marginTop: 2 }}>{titleCaseAddress(p.address)}{p.city ? `, ${p.city}` : ""}</div>
-                  </td>
-                  <td style={{ ...td, fontWeight: 600, whiteSpace: "nowrap" }}>{p.price ? `${money(p.price)}/mo` : "—"}</td>
-                  <td style={{ ...td, whiteSpace: "nowrap" }}>{p.bedrooms || "—"}</td>
-                  <td style={td}>
-                    {p.status === "published" ? <Badge tone="green">Live</Badge>
-                      : p.status === "draft" ? <Badge tone="amber">Draft</Badge>
-                      : <Badge>Archived</Badge>}
-                  </td>
-                  <td style={{ ...td, textAlign: "right" }}>
-                    <div style={{ display: "inline-flex", gap: 8 }}>
+                    <div style={{ fontSize: 14, color: C.muted }}>{titleCaseAddress(p.address)}{p.city ? `, ${p.city}` : ""}</div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 8 }}>
+                      <span style={{ fontSize: 20, fontWeight: 700, color: C.navy }}>{p.price ? money(p.price) : "No rent set"}</span>
+                      {p.price ? <span style={{ fontSize: 14, color: C.muted }}>/mo</span> : null}
+                      <span style={{ fontSize: 14, color: C.muted, marginLeft: "auto" }}>
+                        {[p.bedrooms ? `${p.bedrooms} bed` : null, p.bathrooms ? `${p.bathrooms} bath` : null].filter(Boolean).join(" · ")}
+                      </span>
+                    </div>
+                    <div style={{ display: "flex", gap: 8, marginTop: "auto", paddingTop: 16, flexWrap: "wrap", alignItems: "center" }}>
                       <Button href={`/admin/properties/${p.id}`} size="sm">Edit</Button>
                       <Button href={`/admin/properties/${p.id}/brief`} size="sm">Brief</Button>
                       <Button size="sm" onClick={() => togglePublish(p)} disabled={busy === p.id}>
                         {p.status === "published" ? "Take down" : "Publish"}
                       </Button>
-                      <Button size="sm" variant="danger" onClick={() => remove(p)} disabled={busy === p.id}>Delete</Button>
+                      <button type="button" onClick={() => remove(p)} disabled={busy === p.id} style={{ marginLeft: "auto", background: "none", border: "none", color: C.red, fontSize: 14, fontWeight: 600, cursor: "pointer", padding: "6px 4px" }}>Delete</button>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
-            </Table>
+            </div>
           )}
         </>
       )}
