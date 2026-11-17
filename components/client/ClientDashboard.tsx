@@ -603,7 +603,8 @@ function ReviewCard({ r, disabled, act }: { r: Any; disabled: boolean; act: (b: 
     released: ["Your decision needed", BURGUNDY], clarification: ["Question sent to Ebin", "#7A5200"], approved: ["Approved to proceed", GREEN], completed: ["Placed", GREEN],
     declined: ["Declined", MUTED], paused: ["On hold", "#7A5200"], withdrawn: ["Withdrawn", MUTED],
   };
-  const [lbl, col] = label[r.status] ?? [r.status, MUTED];
+  const final = r.status === "approved" ? (r.steps ?? []).find((s: Any) => s.step_no === 2 && s.status === "done") : null;
+  const [lbl, col] = final ? ["Approved", GREEN] : label[r.status] ?? [r.status, MUTED];
   return (
     <Card>
       <div className="flex justify-between gap-3 items-start">
@@ -631,7 +632,13 @@ function ReviewCard({ r, disabled, act }: { r: Any; disabled: boolean; act: (b: 
         </div>
       )}
       {r.status === "declined" && <p className="text-sm mt-4" style={{ color: MUTED }}>You declined on {fDate(r.decided_at)}. Reason: {r.decision_reason}. We haven&apos;t passed your comments to the applicant.</p>}
-      {r.status === "approved" && <p className="text-sm mt-4 font-semibold" style={{ color: GREEN }}>You approved this applicant to proceed on {fDate(r.decided_at)}. Follow the steps below.</p>}
+      {final && (
+        <div className="rounded-2xl p-4 mt-4" style={{ background: "#EAF4EE" }}>
+          <p className="text-[15px] font-bold" style={{ color: GREEN }}>Final approval done{final.completed_at ? ` on ${fDate(final.completed_at)}` : ""}</p>
+          <p className="text-[15px] mt-1" style={{ color: "#222" }}>Verification is complete and this applicant is approved. Next, we prepare the lease for you and the tenant to sign. Follow the steps below.</p>
+        </div>
+      )}
+      {r.status === "approved" && !final && <p className="text-sm mt-4 font-semibold" style={{ color: GREEN }}>You approved this applicant to proceed on {fDate(r.decided_at)}. Follow the steps below.</p>}
 
       {open && !mode && (
         <div className="grid gap-2 mt-5">

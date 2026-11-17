@@ -16,7 +16,7 @@ export async function liveData(p: { id: string; property_id: string | null; agre
   const weekAgo = new Date(Date.now() - 7 * 864e5).toISOString();
   const empty = { counts: null as null | Record<string, number>, upcoming: [] as { at: string; count: number }[], activity: [] as ActivityItem[], firstListed: null as string | null };
   const [{ data: events }] = await Promise.all([
-    db().from("placement_events").select("kind, detail, created_at").eq("placement_id", p.id).in("kind", ["listing_published", "prep", "update_published", "owner_approved", "owner_declined", "application_released"]).order("created_at", { ascending: false }).limit(40),
+    db().from("placement_events").select("kind, detail, created_at").eq("placement_id", p.id).in("kind", ["listing_published", "prep", "update_published", "owner_approved", "owner_declined", "application_released", "application_move_in", "application_lease_signed"]).order("created_at", { ascending: false }).limit(40),
   ]);
   const activity: ActivityItem[] = [];
   for (const e of events ?? []) {
@@ -26,6 +26,8 @@ export async function liveData(p: { id: string; property_id: string | null; agre
     if (e.kind === "update_published") activity.push({ at: e.created_at, kind: "update", title: "New weekly update posted" });
     if (e.kind === "application_released") activity.push({ at: e.created_at, kind: "application", title: "An application is ready for your review", tone: "warn" });
     if (e.kind === "owner_approved") activity.push({ at: e.created_at, kind: "decision", title: "You approved an applicant to proceed", tone: "good" });
+    if (e.kind === "application_move_in") activity.push({ at: e.created_at, kind: "decision", title: "Final approval done. We're preparing the lease.", tone: "good" });
+    if (e.kind === "application_lease_signed") activity.push({ at: e.created_at, kind: "decision", title: "Lease signed", tone: "good" });
     if (e.kind === "owner_declined") activity.push({ at: e.created_at, kind: "decision", title: "You declined an applicant" });
   }
   if (!p.property_id) return { ...empty, activity };
