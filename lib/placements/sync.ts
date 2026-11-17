@@ -116,8 +116,9 @@ export async function syncApplication(applicationId: string, what: "owner_approv
       return;
     }
     await ensureSteps(r.id);
-    if (what === "owner_approved" || what === "rent_requested" || what === "rent_received") await setStep(r.id, 1, "in_progress");
-    if (what === "rent_requested") await setStep(r.id, 4, "in_progress");
+    // The owner hears nothing about payment until the first month's rent is actually in.
+    if (what === "rent_requested") return;
+    if (what === "owner_approved" || what === "rent_received") await setStep(r.id, 1, "in_progress");
     if (what === "rent_received") await setStep(r.id, 4, "done");
     if (what === "screened") await setStep(r.id, 1, "done");
     if (what === "move_in") { await setStep(r.id, 1, "done"); await setStep(r.id, 2, "done"); await setStep(r.id, 3, "in_progress"); }

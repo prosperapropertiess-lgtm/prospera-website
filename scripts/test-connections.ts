@@ -64,7 +64,7 @@ async function main() {
 
     await syncApplication(app!.id, "rent_requested");
     s = await steps();
-    check(s.find((x) => x.step_no === 4)?.status === "in_progress", "rent request shows payments in progress");
+    check(s.find((x) => x.step_no === 4)?.status === "pending", "asking for rent shows the owner nothing until it arrives");
     await syncApplication(app!.id, "rent_received");
     await syncApplication(app!.id, "screened");
     s = await steps();
