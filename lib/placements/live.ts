@@ -12,7 +12,6 @@ const INTEREST: Record<string, string> = { interested: "Interested", unsure: "Un
 const fTime = (iso: string) => new Date(iso).toLocaleString("en-CA", { timeZone: "America/Toronto", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }).replace(/\./g, "");
 
 export async function liveData(p: { id: string; property_id: string | null; agreement_signed_at: string | null; asking_rent: number | null }) {
-  const since = p.agreement_signed_at ?? new Date(Date.now() - 90 * 864e5).toISOString();
   const weekAgo = new Date(Date.now() - 7 * 864e5).toISOString();
   const empty = { counts: null as null | Record<string, number>, upcoming: [] as { at: string; count: number }[], activity: [] as ActivityItem[], firstListed: null as string | null };
   const [{ data: events }] = await Promise.all([
@@ -32,11 +31,15 @@ export async function liveData(p: { id: string; property_id: string | null; agre
   }
   if (!p.property_id) return { ...empty, activity };
 
-  const [{ data: reqs }, { data: appts }, { data: apps }, { data: prop }] = await Promise.all([
+  // Count from when the listing went live if that was before the agreement date was recorded,
+  // so early inquiries on the same listing aren't lost.
+  const { data: prop } = await db().from("properties").select("published_at, created_at").eq("id", p.property_id).maybeSingle();
+  const since = [p.agreement_signed_at, prop?.published_at ?? prop?.created_at].filter(Boolean).sort()[0] ?? new Date(Date.now() - 90 * 864e5).toISOString();
+
+  const [{ data: reqs }, { data: appts }, { data: apps }] = await Promise.all([
     db().from("viewing_requests").select("created_at, move_in_date, occupants, email, phone").eq("property_id", p.property_id).gte("created_at", since).order("created_at", { ascending: false }).limit(200),
     db().from("fo_appointments").select("id, starts_at, status, fo_checklists(interest, feedback, completed_at)").eq("property_id", p.property_id).gte("created_at", since).order("starts_at", { ascending: false }).limit(200),
     db().from("applications").select("created_at").eq("property_id", p.property_id).gte("created_at", since),
-    db().from("properties").select("published_at").eq("id", p.property_id).maybeSingle(),
   ]);
 
   // One person who asked more than once counts once.
