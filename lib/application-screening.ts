@@ -61,6 +61,7 @@ Output:
 - owner_summary: 2 to 3 plain sentences for the property owner deciding on a conditional approval: income compared with rent, how long they've rented and whether references were given, and anything still to confirm. No ID numbers, birth dates, account numbers or contact details.
 
 Earlier viewing form: if "viewing_form" is present, the applicant answered those questions before their viewing (income range, self-reported credit range, job length, rental history, etc.). Compare it with the application and documents. Note anything that changed or doesn't line up; matching answers are a good sign. A self-reported credit range is only a claim; a SingleKey screening comes later.
+Follow-up: if "follow_up_answers" is present, we asked the applicant for more after they applied and these are their answers. Use them, and check them against the documents like any other claim.
 Write plainly, like a sharp property manager briefing a colleague. No jargon.`;
 
 const MAX_DOC_BYTES = 24 * 1024 * 1024; // keep the request under the API's 32MB cap
@@ -111,7 +112,7 @@ export async function screenApplication(applicationId: string): Promise<Screenin
 
       const data = Buffer.from(await file.arrayBuffer()).toString("base64");
       const type = mediaType(doc.storage_path);
-      content.push({ type: "text", text: `Document: ${label}${doc.storage_path.includes("/admin-") ? " (sent in later; added by Prospera staff)" : ""}` });
+      content.push({ type: "text", text: `Document: ${label}${doc.storage_path.includes("/admin-") ? " (sent in later; added by Prospera staff)" : doc.storage_path.includes("/more-") ? " (sent in later by the applicant, when we asked for more)" : ""}` });
       content.push(
         type === "application/pdf"
           ? { type: "document", source: { type: "base64", media_type: type, data } }
@@ -148,6 +149,7 @@ export async function screenApplication(applicationId: string): Promise<Screenin
       document_option_chosen: app.doc_option === "bank" ? "3 months of bank statements" : app.doc_option === "stubs" ? "pay stubs, credit report and employment letter" : null,
       documents_not_included: skipped,
       viewing_form: await viewingFormAnswers(app.viewing_request_id),
+      follow_up_answers: await followUpAnswers(applicationId),
     };
 
     content.push({
@@ -234,4 +236,10 @@ export async function screenAndSave(applicationId: string): Promise<ScreeningRes
     .eq("id", applicationId)
     .in("status", ["pending", "processing", "reviewed"]);
   return result;
+}
+
+/** Answers the applicant sent later, when we asked for more. */
+async function followUpAnswers(applicationId: string) {
+  const { data } = await supabaseAdmin.from("application_info_requests").select("answers, completed_at").eq("application_id", applicationId).not("completed_at", "is", null).order("completed_at");
+  return data?.length ? data.map((r) => ({ sent: String(r.completed_at).slice(0, 10), answers: r.answers })) : null;
 }

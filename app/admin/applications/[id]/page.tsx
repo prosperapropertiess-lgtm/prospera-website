@@ -1,6 +1,7 @@
 "use client";
 import Pipeline, { type PipelineApp } from "./Pipeline";
 import Documents from "./Documents";
+import RequestInfo from "./RequestInfo";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -347,6 +348,10 @@ export default function ApplicationDetailPage() {
       )}
 
       {/* Property + Agent */}
+      <Section title="Ask for more">
+        <RequestInfo appId={id} firstName={app.tenant_name.split(" ")[0]} suggestions={app.ai_summary?.questions_to_ask ?? []} closed={["approved", "rejected"].includes(app.status)} onCompleted={reload} />
+      </Section>
+
       <Section title="Application Details">
         <InfoRow label="Property" value={app.properties ? `${app.properties.address}, ${app.properties.city}` : null} />
         <InfoRow label="Monthly Rent" value={`$${app.monthly_rent?.toLocaleString()}/mo`} />

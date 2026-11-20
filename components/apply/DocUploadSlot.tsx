@@ -14,6 +14,8 @@ interface Props {
   slot: DocSlot;
   files: UploadedFile[];
   onChange: (files: UploadedFile[]) => void;
+  /** Where to get a signed upload URL, if not the main application form's. */
+  signUrl?: string;
 }
 
 const FONT = "var(--font-dm-sans)";
@@ -45,13 +47,13 @@ export async function prepareFile(file: File): Promise<File> {
   return new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" });
 }
 
-async function uploadOne(file: File, docType: string): Promise<UploadedFile> {
+async function uploadOne(file: File, docType: string, signUrl?: string): Promise<UploadedFile> {
   const prepared = await prepareFile(file);
 
-  const res = await fetch("/api/applications/upload-doc", {
+  const res = await fetch(signUrl ?? "/api/applications/upload-doc", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ doc_type: docType, content_type: prepared.type, size: prepared.size }),
+    body: JSON.stringify({ ...(signUrl ? { action: "sign" } : {}), doc_type: docType, content_type: prepared.type, size: prepared.size }),
   });
   const json = await res.json();
   if (!res.ok) throw new Error(json.error ?? "Upload failed");
@@ -64,7 +66,7 @@ async function uploadOne(file: File, docType: string): Promise<UploadedFile> {
   return { name: file.name, path: json.storage_path };
 }
 
-export default function DocUploadSlot({ slot, files, onChange }: Props) {
+export default function DocUploadSlot({ slot, files, onChange, signUrl }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
@@ -79,7 +81,7 @@ export default function DocUploadSlot({ slot, files, onChange }: Props) {
     let current = files;
     for (const file of selected) {
       try {
-        const uploaded = await uploadOne(file, slot.type);
+        const uploaded = await uploadOne(file, slot.type, signUrl);
         current = [...current, uploaded];
         onChange(current);
       } catch (err) {
