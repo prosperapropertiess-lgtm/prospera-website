@@ -1,116 +1,96 @@
-import { createClient } from "@supabase/supabase-js";
+import type { Metadata } from "next";
+import { getSupabaseAdmin } from "@/lib/supabase";
+import { Shell, heading, NAVY, BURGUNDY, BORDER, MUTED } from "@/components/flow/FlowUI";
+import { infoRequestLink } from "@/lib/application-info-request";
 
-const STATUS_INFO: Record<string, { label: string; desc: string; color: string; bg: string }> = {
-  pending:    { label: "Received", desc: "We have your application and it's in the queue.", color: "#92400E", bg: "#FEF3C7" },
-  processing: { label: "Under Review", desc: "Your documents are being verified. This usually takes 1–2 business days.", color: "#1E40AF", bg: "#DBEAFE" },
-  reviewed:   { label: "Decision Pending", desc: "Your file has been reviewed. A final decision is being made.", color: "#5B21B6", bg: "#EDE9FE" },
-  approved:   { label: "Approved", desc: "Congratulations — your application has been approved! Check your email for next steps.", color: "#065F46", bg: "#D1FAE5" },
-  rejected:   { label: "Not Approved", desc: "Unfortunately we were unable to move forward with your application at this time.", color: "#991B1B", bg: "#FEE2E2" },
-};
+export const dynamic = "force-dynamic";
+export const metadata: Metadata = { title: { absolute: "Your application | Prospera Properties" }, robots: { index: false } };
 
-export default async function ApplicationStatusPage({
-  params,
-}: {
-  params: Promise<{ applicationId: string }>;
-}) {
+// One page for the applicant from "submitted" to "keys": where they are, and what (if anything) they need to do.
+const STEPS = ["Application received", "We review it", "Owner's go-ahead", "First month's rent", "Screening", "Approved, lease and keys"];
+
+function where(stage: string | null, status: string): number {
+  if (status === "approved" || stage === "move_in") return 5;
+  return { review: 1, sent_to_owner: 2, owner_approved: 3, rent_requested: 3, rent_received: 4, screened: 4 }[stage ?? "review"] ?? 1;
+}
+
+const money = (n: number) => `$${Number(n).toLocaleString("en-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+export default async function ApplicationStatusPage({ params }: { params: Promise<{ applicationId: string }> }) {
   const { applicationId } = await params;
+  const db = getSupabaseAdmin();
+  const ok = /^[0-9a-f-]{36}$/.test(applicationId);
+  const { data: a } = ok ? await db.from("applications").select("id, tenant_name, status, stage, created_at, rent_amount_due, rent_etransfer_to, rent_reference, properties(address, city)").eq("id", applicationId).maybeSingle() : { data: null };
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-
-  const { data: application } = await supabase
-    .from("applications")
-    .select("tenant_name, status, created_at, properties(address, city)")
-    .eq("id", applicationId)
-    .maybeSingle();
-
-  const FONT = "var(--font-dm-sans, sans-serif)";
-
-  if (!application) {
+  if (!a) {
     return (
-      <div style={{ minHeight: "100vh", backgroundColor: "#F8FAFC", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: FONT }}>
-        <div style={{ backgroundColor: "#FFFFFF", borderRadius: 16, padding: "48px 40px", maxWidth: 480, width: "100%", textAlign: "center", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
-          <p style={{ fontSize: 40, marginBottom: 16 }}>🔍</p>
-          <h1 style={{ margin: "0 0 12px", fontSize: 20, fontWeight: 700, color: "#1F2F3A" }}>Application not found</h1>
-          <p style={{ margin: 0, fontSize: 14, color: "#64748B" }}>Double-check your link or contact us at hello@prosperaproperties.co</p>
-        </div>
-      </div>
+      <Shell>
+        <h1 className="text-3xl font-bold mb-3" style={heading}>We couldn&apos;t find that application</h1>
+        <p className="text-base" style={{ color: "#333" }}>Try the link in your email again, or call or text (519) 697-1227.</p>
+      </Shell>
     );
   }
 
-  const info = STATUS_INFO[application.status] ?? STATUS_INFO.pending;
-  const property = application.properties as unknown as { address: string; city: string } | null;
+  const { data: req } = await db.from("application_info_requests").select("id, doc_types, questions").eq("application_id", a.id).is("completed_at", null).is("cancelled_at", null).order("sent_at", { ascending: false }).limit(1).maybeSingle();
+  const home = a.properties as unknown as { address: string; city: string } | null;
+  const first = a.tenant_name.trim().split(/\s+/)[0];
+  const declined = a.status === "rejected" || a.stage === "declined" || a.stage === "owner_declined";
+  const at = where(a.stage, a.status);
 
-  const steps = ["pending", "processing", "reviewed", "approved"];
-  const currentStep = steps.indexOf(application.status === "rejected" ? "reviewed" : application.status);
+  let next: { title: string; body: React.ReactNode; you: boolean; action?: { label: string; href: string } };
+  if (declined) next = { you: false, title: "We weren't able to move forward", body: "Thank you for applying. This home won't be going ahead with your application. You're welcome to apply for another of our homes." };
+  else if (req) next = { you: true, title: "We need a little more from you", body: "Send a few more details so we can finish reviewing your application.", action: { label: "Send the details", href: infoRequestLink(req.id) } };
+  else if (a.stage === "rent_requested") next = {
+    you: true, title: "Send the first month's rent", body: (
+      <div className="grid gap-2 mt-1">
+        {[["Amount", a.rent_amount_due ? money(a.rent_amount_due) : "See your email"], ["Interac e-Transfer to", a.rent_etransfer_to ?? "See your email"], ["Message / reference", a.rent_reference ?? ""]].map(([k, v]) => (
+          <div key={k} className="rounded-lg bg-white border px-4 py-3" style={{ borderColor: BORDER }}>
+            <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: MUTED }}>{k}</div>
+            <div className="text-base font-bold mt-0.5" style={{ color: "#222" }}>{v}</div>
+          </div>
+        ))}
+        <p className="text-sm" style={{ color: MUTED }}>Put the reference in the e-Transfer message so we can match it to you.</p>
+      </div>
+    ),
+  };
+  else next = {
+    you: false,
+    title: ["", "We're reviewing your application", "The owner is looking at your application", "Good news: the owner gave the go-ahead", "Watch for an email from SingleKey", "You're approved"][at],
+    body: ["", "We're checking your documents. We'll email you if we need anything else.", "We've sent the owner a summary. We'll email you as soon as they decide.", "We'll email you the payment details for the first month's rent shortly.", a.stage === "screened" ? "Your screening is back. We'll confirm your approval soon." : "It's a short screening that takes about 10 minutes. Once it's back, we confirm your approval.", "Next: we send your lease to sign and book your move-in and key pickup."][at],
+  };
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#F8FAFC", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: FONT }}>
-      <div style={{ backgroundColor: "#FFFFFF", borderRadius: 16, padding: "40px", maxWidth: 520, width: "100%", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
-        {/* Header */}
-        <div style={{ marginBottom: 28 }}>
-          <p style={{ margin: "0 0 4px", fontSize: 12, color: "#94A3B8", letterSpacing: "0.08em", textTransform: "uppercase" }}>Application Status</p>
-          <h1 style={{ margin: "0 0 4px", fontSize: 22, fontWeight: 700, color: "#1F2F3A" }}>{application.tenant_name}</h1>
-          {property && (
-            <p style={{ margin: 0, fontSize: 13, color: "#64748B" }}>{property.address}, {property.city}</p>
-          )}
-        </div>
+    <Shell>
+      <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: MUTED }}>Your application{home ? ` · ${home.address}, ${home.city}` : ""}</p>
+      <h1 className="text-3xl font-bold mb-6" style={heading}>Hi {first}</h1>
 
-        {/* Status badge */}
-        <div style={{
-          padding: "16px 20px",
-          backgroundColor: info.bg,
-          borderRadius: 10,
-          marginBottom: 28,
-        }}>
-          <p style={{ margin: "0 0 4px", fontSize: 13, fontWeight: 700, color: info.color, textTransform: "uppercase", letterSpacing: "0.06em" }}>{info.label}</p>
-          <p style={{ margin: 0, fontSize: 14, color: info.color, opacity: 0.8, lineHeight: 1.5 }}>{info.desc}</p>
-        </div>
-
-        {/* Progress steps */}
-        {application.status !== "rejected" && (
-          <div style={{ marginBottom: 28 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-              {["Received", "Verifying", "Decision", "Approved"].map((label, i) => {
-                const done = i <= currentStep;
-                const active = i === currentStep;
-                return (
-                  <div key={label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
-                    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-                      {i > 0 && <div style={{ flex: 1, height: 2, backgroundColor: i <= currentStep ? "#1F2F3A" : "#E2E8F0" }} />}
-                      <div style={{
-                        width: 28, height: 28, borderRadius: "50%", flexShrink: 0,
-                        backgroundColor: done ? "#1F2F3A" : "#F1F5F9",
-                        border: active ? "2px solid #1F2F3A" : "none",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 11, fontWeight: 700, color: done ? "#FFFFFF" : "#94A3B8",
-                      }}>
-                        {done && i < currentStep ? "✓" : i + 1}
-                      </div>
-                      {i < 3 && <div style={{ flex: 1, height: 2, backgroundColor: i < currentStep ? "#1F2F3A" : "#E2E8F0" }} />}
-                    </div>
-                    <p style={{ margin: "6px 0 0", fontSize: 10, color: done ? "#1F2F3A" : "#94A3B8", fontWeight: done ? 600 : 400, textAlign: "center" }}>{label}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+      <div className="rounded-xl border p-5 mb-8" style={{ borderColor: next.you ? BURGUNDY : BORDER, background: next.you ? "#FFF" : "#FFF" }}>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: MUTED }}>{next.you ? "Your next step" : "What's happening"}</p>
+        <p className="text-xl font-bold mb-1" style={{ color: NAVY }}>{next.title}</p>
+        <div className="text-base" style={{ color: "#333" }}>{next.body}</div>
+        {next.action && (
+          <a href={next.action.href} className="block text-center w-full mt-4 px-8 py-4 text-sm font-semibold uppercase tracking-widest rounded" style={{ backgroundColor: BURGUNDY, color: "#FAF8F5" }}>{next.action.label}</a>
         )}
-
-        {/* Footer */}
-        <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 20, textAlign: "center" }}>
-          <p style={{ margin: 0, fontSize: 12, color: "#94A3B8" }}>
-            Submitted {new Date(application.created_at).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
-            {" · "}Questions? <a href="mailto:hello@prosperaproperties.co" style={{ color: "#8B2030", textDecoration: "none" }}>hello@prosperaproperties.co</a>
-          </p>
-        </div>
-
-        <p style={{ margin: "20px 0 0", fontSize: 11, color: "#E2E8F0", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
-          Prospera Properties
-        </p>
       </div>
-    </div>
+
+      {!declined && (
+        <ol className="grid gap-0">
+          {STEPS.map((s, i) => {
+            const done = i < at || (i === 5 && at === 5), current = i === at && at < 5;
+            return (
+              <li key={s} className="flex items-center gap-3 py-2.5">
+                <span className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                  style={{ background: done ? NAVY : "#FFF", color: done ? "#FFF" : current ? NAVY : MUTED, border: `2px solid ${done || current ? NAVY : BORDER}` }}>{done ? "✓" : i + 1}</span>
+                <span className="text-base" style={{ color: done || current ? NAVY : MUTED, fontWeight: current ? 700 : 500 }}>{s}</span>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+
+      <p className="text-sm mt-8" style={{ color: MUTED }}>
+        Applied {new Date(a.created_at).toLocaleDateString("en-CA", { month: "long", day: "numeric", year: "numeric" })}. Bookmark this page to check in anytime. Questions? Call or text <a href="tel:5196971227" className="underline">(519) 697-1227</a>.
+      </p>
+    </Shell>
   );
 }

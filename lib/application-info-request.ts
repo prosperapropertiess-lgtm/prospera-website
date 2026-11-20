@@ -25,7 +25,7 @@ async function sendEmail(to: string, subject: string, html: string) {
   if (error) throw new Error(`Email failed: ${error.message}`);
 }
 
-function requestEmail(o: { first: string; address: string; docs: string[]; questions: string[]; note: string | null; url: string }) {
+function requestEmail(o: { first: string; address: string; docs: string[]; questions: string[]; note: string | null; url: string; trackUrl?: string }) {
   const list = (items: string[]) => items.map((x) => `• ${esc(x)}`).join("<br>");
   const html = shell("A FEW MORE DETAILS", `
 ${h1(`Hi ${esc(o.first)}, we need a little more.`)}
@@ -35,6 +35,7 @@ ${o.docs.length ? p(`<b style="color:#222">Documents</b><br>${list(o.docs)}`) : 
 ${o.questions.length ? p(`<b style="color:#222">Questions</b><br>${list(o.questions)}`) : ""}
 ${button("Send the details", o.url)}
 ${p(`It takes a few minutes. Photos from your phone are fine.`)}
+${o.trackUrl ? p(`<a href="${esc(o.trackUrl)}" style="color:#1F2F3A">See where your application is anytime</a>`) : ""}
 ${p(`Thanks,<br><b style="color:#222">Ebin</b><br>Prospera Properties`, "0 36px 26px")}
 `);
   return { subject: `A few more details for your application: ${o.address}`, html };
@@ -53,7 +54,7 @@ export async function sendInfoRequest(applicationId: string, o: { docTypes: stri
   if (error || !req) throw new Error("Couldn't save the request.");
   const address = (app.properties as unknown as { address: string } | null)?.address ?? "the home";
   const url = infoRequestLink(req.id);
-  const { subject, html } = requestEmail({ first: app.tenant_name.trim().split(/\s+/)[0] || "there", address, docs: docTypes.map((t) => DOC_LABELS[t as DocType]), questions, note: o.note?.trim() || null, url });
+  const { subject, html } = requestEmail({ first: app.tenant_name.trim().split(/\s+/)[0] || "there", address, docs: docTypes.map((t) => DOC_LABELS[t as DocType]), questions, note: o.note?.trim() || null, url, trackUrl: `${SITE}/apply/status/${applicationId}` });
   try {
     await sendEmail(app.tenant_email, subject, html);
   } catch (e) {

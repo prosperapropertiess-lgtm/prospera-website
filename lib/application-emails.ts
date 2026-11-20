@@ -79,7 +79,7 @@ ${p(`Thanks,<br><b style="color:#222">Ebin</b><br>Prospera Properties`, "0 36px 
   return { subject, html };
 }
 
-export function rentRequestEmail(o: { first: string; address: string; amount: number; to: string; reference: string }) {
+export function rentRequestEmail(o: { first: string; address: string; amount: number; to: string; reference: string; trackUrl?: string }) {
   const amount = `$${o.amount.toLocaleString("en-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   const subject = `Good news about ${o.address}. Next step: first month's rent`;
   const html = shell("CONDITIONALLY APPROVED", `
@@ -89,6 +89,7 @@ ${p(`The owner of <b>${esc(o.address)}</b> has conditionally approved your appli
 ${[["Amount", amount], ["Send to", o.to], ["Message / reference", o.reference]].map(([k, v], i) => `<tr><td style="padding:14px 18px;${i < 2 ? "border-bottom:1px solid #E8E8E8;" : ""}"><div style="font-size:10px;font-weight:700;letter-spacing:0.5px;color:#777">${k.toUpperCase()}</div><div style="margin-top:5px;font-size:16px;font-weight:700;color:#222">${esc(v)}</div></td></tr>`).join("")}
 </tbody></table></td></tr>
 ${p(`Put the reference in the e-Transfer message so we can match it to you.`)}
+${o.trackUrl ? p(`<a href="${esc(o.trackUrl)}" style="color:#1F2F3A">See where your application is anytime</a>`) : ""}
 ${p(`<div style="font-size:12px;font-weight:700;letter-spacing:0.5px;color:#777;margin:6px 0 8px">WHAT HAPPENS NEXT</div>
 1. We confirm your payment by email.<br>
 2. You'll get an email from SingleKey to complete a short screening.<br>
@@ -98,12 +99,13 @@ ${p(`Thanks,<br><b style="color:#222">Ebin</b><br>Prospera Properties`, "0 36px 
   return { subject, html };
 }
 
-export function rentReceivedEmail(o: { first: string; address: string; amount: number }) {
+export function rentReceivedEmail(o: { first: string; address: string; amount: number; trackUrl?: string }) {
   const subject = `Payment received for ${o.address}`;
   const html = shell("PAYMENT RECEIVED", `
 ${h1(`Got it, ${esc(o.first)}. Thank you.`)}
 ${p(`We received your $${o.amount.toLocaleString("en-CA")} for <b>${esc(o.address)}</b>. The home is being held for you.`)}
 ${p(`<b>Next:</b> watch for an email from SingleKey with a link to a short screening. It takes about 10 minutes. Once it's back, we'll send your lease and set up your move-in.`)}
+${o.trackUrl ? p(`<a href="${esc(o.trackUrl)}" style="color:#1F2F3A">See where your application is anytime</a>`) : ""}
 ${p(`Thanks,<br><b style="color:#222">Ebin</b><br>Prospera Properties`, "0 36px 26px")}
 `);
   return { subject, html };

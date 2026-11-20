@@ -14,6 +14,7 @@ export const DEFAULT_ETRANSFER_TO = EBIN;
 
 export type Stage = "review" | "sent_to_owner" | "owner_approved" | "owner_declined" | "rent_requested" | "rent_received" | "screened" | "move_in" | "declined";
 
+export const trackUrl = (applicationId: string) => `${SITE}/apply/status/${applicationId}`;
 export const ownerReportUrl = (applicationId: string) => `${SITE}/owner-report/${signId("owner_report", applicationId)}`;
 export const applicationIdFromOwnerToken = (token: string) => verifyId("owner_report", token);
 export const rentReference = (applicationId: string) => `PP-${applicationId.replace(/-/g, "").slice(0, 6).toUpperCase()}`;
@@ -80,7 +81,7 @@ export async function ownerDecision(id: string, decision: "approved" | "declined
 export async function requestRent(id: string, o: { amount: number; to: string }) {
   const a = await load(id);
   const reference = rentReference(id);
-  const { subject, html } = rentRequestEmail({ first: firstName(a.tenant_name), address: a.properties?.address ?? "the home", amount: o.amount, to: o.to, reference });
+  const { subject, html } = rentRequestEmail({ first: firstName(a.tenant_name), address: a.properties?.address ?? "the home", amount: o.amount, to: o.to, reference, trackUrl: trackUrl(id) });
   await sendEmail(a.tenant_email, subject, html, [EBIN]);
   await db().from("applications").update({
     stage: "rent_requested", rent_amount_due: o.amount, rent_etransfer_to: o.to, rent_reference: reference,
@@ -92,7 +93,7 @@ export async function requestRent(id: string, o: { amount: number; to: string })
 export async function rentReceived(id: string) {
   const a = await load(id);
   const amount = Number(a.rent_amount_due ?? a.monthly_rent);
-  const { subject, html } = rentReceivedEmail({ first: firstName(a.tenant_name), address: a.properties?.address ?? "the home", amount });
+  const { subject, html } = rentReceivedEmail({ first: firstName(a.tenant_name), address: a.properties?.address ?? "the home", amount, trackUrl: trackUrl(id) });
   await sendEmail(a.tenant_email, subject, html, [EBIN]);
   await db().from("applications").update({ stage: "rent_received", rent_received_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq("id", id);
   await syncApplication(id, "rent_received");
