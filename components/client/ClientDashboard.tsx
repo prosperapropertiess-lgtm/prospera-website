@@ -224,7 +224,7 @@ export default function ClientDashboard({ token, placementId }: { token: string;
         </div>
       </nav>
 
-      <div key={tab} className="grid gap-4 pp-in">
+      <div key={tab} className="grid grid-cols-[minmax(0,1fr)] gap-4 pp-in">
         {tab === "overview" && <Overview v={v} go={go} />}
         {tab === "activity" && <Activity items={live?.activity ?? []} />}
         {tab === "market" && <Market m={v.market} rent={p.asking_rent} metrics={v.metrics} />}
@@ -277,7 +277,7 @@ function Shell({ children, top }: { children: React.ReactNode; top?: React.React
         </span>
         {top}
       </header>
-      <main className="max-w-3xl mx-auto px-4 py-4 grid gap-4">{children}</main>
+      <main className="max-w-3xl mx-auto px-4 py-4 grid grid-cols-[minmax(0,1fr)] gap-4">{children}</main>
     </div>
   );
 }
