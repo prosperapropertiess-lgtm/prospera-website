@@ -33,6 +33,18 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   const { id } = await params;
   const supabase = getSupabaseAdmin();
 
+  // A home with applications or showings can't be wiped without losing those records,
+  // so it's archived instead: gone from the website and the listings page, records kept.
+  const [{ count: apps }, { count: appts }] = await Promise.all([
+    supabase.from("applications").select("id", { count: "exact", head: true }).eq("property_id", id),
+    supabase.from("fo_appointments").select("id", { count: "exact", head: true }).eq("property_id", id),
+  ]);
+  if ((apps ?? 0) + (appts ?? 0) > 0) {
+    const { error } = await supabase.from("properties").update({ status: "archived", available: false, published_at: null }).eq("id", id);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true, archived: true });
+  }
+
   // Delete photos from storage first
   const { data: property } = await supabase.from("properties").select("images").eq("id", id).single();
   if (property?.images?.length) {

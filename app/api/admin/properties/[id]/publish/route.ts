@@ -77,6 +77,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     .update({
       status: "published",
       published_at: new Date().toISOString(),
+      available: true,
+      rented_at: null,
       marketplace_description,
     })
     .eq("id", id)

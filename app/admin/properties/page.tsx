@@ -17,7 +17,7 @@ interface Property {
   wizard_step: number | null;
 }
 
-type Filter = "all" | "published" | "draft";
+type Filter = "all" | "published" | "rented" | "draft";
 
 export default function ListingsPage() {
   const [properties, setProperties] = useState<Property[] | null>(null);
@@ -37,6 +37,7 @@ export default function ListingsPage() {
     setBusy(p.id);
     const res = await fetch(`/api/admin/properties/${p.id}`, { method: "DELETE" });
     if (res.ok) setProperties((prev) => prev?.filter((x) => x.id !== p.id) ?? null);
+    else if (res.status === 401) setError("You've been signed out. Sign in again, then delete.");
     else setError("Couldn't delete that listing. Try again.");
     setBusy(null);
   }
@@ -51,8 +52,17 @@ export default function ListingsPage() {
     setBusy(null);
   }
 
-  const all = properties ?? [];
-  const shown = filter === "all" ? all : all.filter((p) => (filter === "draft" ? p.status !== "published" : p.status === filter));
+  async function markRented(p: Property) {
+    setBusy(p.id);
+    const res = await fetch(`/api/admin/properties/${p.id}/rented`, { method: "POST" });
+    if (res.ok) setProperties((prev) => prev?.map((x) => (x.id === p.id ? { ...x, status: "rented" } : x)) ?? null);
+    else setError("Couldn't mark that listing rented. Try again.");
+    setBusy(null);
+  }
+
+  // Archived homes were deleted but kept because they have applications or showings on file.
+  const all = (properties ?? []).filter((p) => p.status !== "archived");
+  const shown = filter === "all" ? all : all.filter((p) => p.status === filter);
 
   return (
     <Page>
@@ -71,12 +81,13 @@ export default function ListingsPage() {
             options={[
               { value: "all", label: "All", count: all.length },
               { value: "published", label: "Live", count: all.filter((p) => p.status === "published").length },
-              { value: "draft", label: "Drafts", count: all.filter((p) => p.status !== "published").length },
+              { value: "rented", label: "Rented", count: all.filter((p) => p.status === "rented").length },
+              { value: "draft", label: "Drafts", count: all.filter((p) => p.status === "draft").length },
             ]}
           />
           {shown.length === 0 ? (
             <EmptyState
-              title={filter === "draft" ? "No drafts" : filter === "published" ? "Nothing live right now" : "No listings yet"}
+              title={filter === "draft" ? "No drafts" : filter === "published" ? "Nothing live right now" : filter === "rented" ? "No rented homes yet" : "No listings yet"}
               action={filter === "all" ? <Button href="/admin/properties/new" variant="primary">+ Add a listing</Button> : undefined}
             />
           ) : (
@@ -92,8 +103,8 @@ export default function ListingsPage() {
                     )}
                     <span style={{ position: "absolute", top: 12, left: 12 }}>
                       {p.status === "published" ? <Badge tone="green">Live</Badge>
-                        : p.status === "draft" ? <Badge tone="amber">Draft</Badge>
-                        : <Badge>Archived</Badge>}
+                        : p.status === "rented" ? <Badge tone="blue">Rented</Badge>
+                        : <Badge tone="amber">Draft</Badge>}
                     </span>
                   </Link>
                   <div style={{ padding: "16px 18px 18px", display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
@@ -111,8 +122,11 @@ export default function ListingsPage() {
                     <div style={{ display: "flex", gap: 8, marginTop: "auto", paddingTop: 16, flexWrap: "wrap", alignItems: "center" }}>
                       <Button href={`/admin/properties/${p.id}`} size="sm">Edit</Button>
                       <Button href={`/admin/properties/${p.id}/brief`} size="sm">Brief</Button>
+                      {p.status === "published" && (
+                        <Button size="sm" onClick={() => markRented(p)} disabled={busy === p.id}>Mark rented</Button>
+                      )}
                       <Button size="sm" onClick={() => togglePublish(p)} disabled={busy === p.id}>
-                        {p.status === "published" ? "Take down" : "Publish"}
+                        {p.status === "published" ? "Take down" : p.status === "rented" ? "Relist" : "Publish"}
                       </Button>
                       <button type="button" onClick={() => remove(p)} disabled={busy === p.id} style={{ marginLeft: "auto", background: "none", border: "none", color: C.red, fontSize: 14, fontWeight: 600, cursor: "pointer", padding: "6px 4px" }}>Delete</button>
                     </div>
