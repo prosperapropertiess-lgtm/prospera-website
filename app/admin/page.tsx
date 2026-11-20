@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { SECTION_META } from "@/lib/admin-nav";
+import Today from "./Today";
 
 const NAVY = "#1F2F3A";
 const ACCENT = "#8B2030";
@@ -41,12 +42,15 @@ export default function AdminHome() {
   return (
     <div style={{ minHeight: "calc(100vh - 60px)", backgroundColor: "#F7F5F2", fontFamily: "var(--font-poppins, sans-serif)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 60px" }}>
-        <div style={{ marginBottom: 40 }}>
+        <div style={{ marginBottom: 24 }}>
           <h1 style={{ fontSize: 30, fontWeight: 700, color: NAVY, margin: 0, letterSpacing: "-0.02em" }}>Good day</h1>
           <p style={{ fontSize: 15, color: "#666666", margin: "5px 0 0" }}>{today}</p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+        <Today />
+
+        <h2 style={{ fontSize: 13, fontWeight: 700, color: "#666666", textTransform: "uppercase", letterSpacing: "0.08em", margin: "40px 0 14px" }}>Everything else</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
           {cards.map((card) => (
             <HomeCard key={card.href} {...card} />
           ))}
@@ -78,8 +82,8 @@ function HomeCard({ href, label, icon, description, signal, alert }: {
         backgroundColor: "#FFFFFF",
         border: `2px solid ${hovered ? NAVY : "#E0DBD4"}`,
         borderRadius: 28,
-        padding: "48px 36px",
-        minHeight: 300,
+        padding: "28px 24px",
+        minHeight: 200,
         height: "100%",
         boxSizing: "border-box",
         display: "flex",

@@ -19,6 +19,7 @@ export default function PlacementAdmin() {
   const { id } = useParams() as { id: string };
   const [d, setD] = useState<Any>(null);
   const [tab, setTab] = useState<Tab>("overview");
+  useEffect(() => { const t = new URLSearchParams(window.location.search).get("tab"); if (t) setTab(t as Tab); }, []);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
