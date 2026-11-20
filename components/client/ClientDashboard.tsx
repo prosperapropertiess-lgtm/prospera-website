@@ -1,7 +1,7 @@
 "use client";
 // The owner's placement dashboard. Most important first: where things stand,
 // anything waiting on them, live numbers. Then tabs for the detail.
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import InstallGuide from "./InstallGuide";
 
@@ -73,12 +73,15 @@ export default function ClientDashboard({ token, placementId }: { token: string;
   const [help, setHelp] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [preview, setPreview] = useState<boolean | null>(null);
+  const [approveId, setApproveId] = useState<string | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => {
       setPreview(new URLSearchParams(window.location.search).get("preview") === "1");
       const h = window.location.hash.replace("#", "") as Tab;
       if (TABS.includes(h)) setTab(h);
+      // "Approve to Proceed" from the email opens that applicant with the approval ready to confirm.
+      if (h.startsWith("approve-")) { setTab("applications"); setApproveId(h.slice(8)); }
     }, 0);
     return () => clearTimeout(t);
   }, []);
@@ -216,16 +219,17 @@ export default function ClientDashboard({ token, placementId }: { token: string;
       <nav id="tabs" className="sticky top-[57px] z-20 -mx-4 px-4 py-2" style={{ background: BG }}>
         <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
           {([
-            ["overview", "Overview"], ["activity", "Activity"], ["market", "Market"], ["updates", "Weekly updates"], ["applications", `Applications${pending.length ? ` (${pending.length})` : ""}`], ["files", "Photos & files"],
+            ["overview", "Home"], ["applications", `Applicants${pending.length ? ` (${pending.length})` : ""}`], ["market", "Market"], ["files", "Photos & files"],
           ] as [Tab, string][]).map(([k, l]) => (
             <button key={k} type="button" onClick={() => go(k)} className="shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors"
-              style={{ background: tab === k ? NAVY : "#fff", color: tab === k ? "#FAF8F5" : NAVY, border: `1px solid ${tab === k ? NAVY : BORDER}` }}>{l}</button>
+              style={{ background: (tab === k || (k === "overview" && (tab === "activity" || tab === "updates"))) ? NAVY : "#fff", color: (tab === k || (k === "overview" && (tab === "activity" || tab === "updates"))) ? "#FAF8F5" : NAVY, border: `1px solid ${(tab === k || (k === "overview" && (tab === "activity" || tab === "updates"))) ? NAVY : BORDER}` }}>{l}</button>
           ))}
         </div>
       </nav>
 
       <div key={tab} className="grid grid-cols-[minmax(0,1fr)] gap-4 pp-in">
         {tab === "overview" && <Overview v={v} go={go} />}
+        {(tab === "activity" || tab === "updates") && <button type="button" onClick={() => go("overview")} className="text-sm font-semibold text-left" style={{ color: NAVY }}>← Back to Home</button>}
         {tab === "activity" && <Activity items={live?.activity ?? []} />}
         {tab === "market" && <Market m={v.market} rent={p.asking_rent} metrics={v.metrics} />}
         {tab === "updates" && <Updates updates={v.updates} />}
@@ -233,7 +237,7 @@ export default function ClientDashboard({ token, placementId }: { token: string;
           <>
             {v.reviews.length === 0
               ? <Empty icon="doc" title="Applications show up here for your approval" body="We screen every applicant first: income, documents and references. When one is ready, you'll get an email and see a short summary here with Approve to Proceed or Decline." />
-              : v.reviews.map((r: Any) => <ReviewCard key={r.id} r={r} disabled={!!data.preview} act={act} />)}
+              : v.reviews.map((r: Any) => <ReviewCard key={r.id} r={r} disabled={!!data.preview} act={act} autoApprove={approveId === r.id} />)}
             {approved.map((r: Any) => <NextSteps key={r.id} r={r} />)}
           </>
         )}
@@ -368,10 +372,12 @@ function Overview({ v, go }: { v: Any; go: (t: Tab) => void }) {
         ) : <p className="text-[15px]" style={{ color: MUTED }}>After each showing, our specialist records how interested the prospect was, what they liked and any concerns. It shows up here right away.</p>}
       </Card>
 
-      <Card>
-        <Title sub={`${done} of ${v.prep.length} done`}>Getting your home ready</Title>
-        <div className="grid gap-2">{v.prep.map((x: Any) => <PrepRow key={x.key} x={x} />)}</div>
-      </Card>
+      {done < v.prep.length ? (
+        <Card>
+          <Title sub={`${done} of ${v.prep.length} done`}>Getting your home ready</Title>
+          <div className="grid gap-2">{v.prep.map((x: Any) => <PrepRow key={x.key} x={x} />)}</div>
+        </Card>
+      ) : null}
 
       <Card>
         <Title>Latest weekly update</Title>
@@ -379,7 +385,7 @@ function Overview({ v, go }: { v: Any; go: (t: Tab) => void }) {
           <>
             <p className="text-sm mb-2" style={{ color: MUTED }}>Week of {fShort(latest.week_start)}–{fShort(latest.week_end)}</p>
             <p className="text-[15px] leading-relaxed line-clamp-4" style={{ color: "#222" }}>{latest.summary}</p>
-            <button type="button" onClick={() => go("updates")} className="text-sm font-semibold underline mt-3" style={{ color: NAVY }}>Read the full update</button>
+            <button type="button" onClick={() => go("updates")} className="text-sm font-semibold underline mt-3" style={{ color: NAVY }}>Read the full update{v.updates.length > 1 ? ` and past weeks` : ""}</button>
           </>
         ) : <p className="text-[15px]" style={{ color: MUTED }}>Every week we post what happened: showings, what prospects said, the market and what we recommend. The first one comes after your home&apos;s first full week on the market.</p>}
       </Card>
@@ -592,8 +598,10 @@ function List({ title, items, tone }: { title: string; items: Any[]; tone: strin
   );
 }
 
-function ReviewCard({ r, disabled, act }: { r: Any; disabled: boolean; act: (b: Record<string, unknown>, ok?: string) => Promise<boolean> }) {
-  const [mode, setMode] = useState<null | "approve" | "decline" | "ask">(null);
+function ReviewCard({ r, disabled, act, autoApprove }: { r: Any; disabled: boolean; act: (b: Record<string, unknown>, ok?: string) => Promise<boolean>; autoApprove?: boolean }) {
+  const [mode, setMode] = useState<null | "approve" | "decline" | "ask">(autoApprove && ["released", "clarification"].includes(r.status) ? "approve" : null);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (autoApprove) setTimeout(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 300); }, [autoApprove]);
   const [reason, setReason] = useState("");
   const [comments, setComments] = useState("");
   const [q, setQ] = useState("");
@@ -606,7 +614,7 @@ function ReviewCard({ r, disabled, act }: { r: Any; disabled: boolean; act: (b: 
   const final = r.status === "approved" ? (r.steps ?? []).find((s: Any) => s.step_no === 2 && s.status === "done") : null;
   const [lbl, col] = final ? ["Approved", GREEN] : label[r.status] ?? [r.status, MUTED];
   return (
-    <Card>
+    <div ref={ref} className="scroll-mt-28"><Card>
       <div className="flex justify-between gap-3 items-start">
         <div className="text-[17px] font-bold leading-snug" style={{ color: NAVY }}>{r.applicant_summary}</div>
         <span className="text-xs font-semibold shrink-0 rounded-full px-2.5 py-1" style={{ color: col, background: BG }}>{lbl}</span>
@@ -679,7 +687,7 @@ function ReviewCard({ r, disabled, act }: { r: Any; disabled: boolean; act: (b: 
           <button type="button" onClick={() => setMode(null)} className="text-sm underline" style={{ color: MUTED }}>Cancel</button>
         </div>
       )}
-    </Card>
+    </Card></div>
   );
 }
 

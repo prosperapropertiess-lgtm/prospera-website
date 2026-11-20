@@ -272,7 +272,7 @@ function Updates({ d, act, busy, setWeek }: Props & { setWeek: (w: string) => vo
         }}>{drafting ? "Drafting…" : "Draft with AI"}</Button>
         <div style={{ display: "grid", gap: 12, marginTop: 14 }}>
           <Field label="Summary (goes in the email too)"><textarea style={{ ...inputStyle, minHeight: 90 }} value={u.summary ?? ""} onChange={(e) => set("summary", e.target.value)} /></Field>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(120px,1fr))", gap: 10 }}>
             {[["showings_scheduled", "Scheduled"], ["showings_completed", "Completed"], ["cancellations", "Cancellations"], ["no_shows", "No-shows"]].map(([k, l]) => <Field key={k} label={l}><input style={inputStyle} type="number" value={u[k] ?? ""} onChange={(e) => set(k, e.target.value)} /></Field>)}
           </div>
           {[["specialist_feedback", "Showing specialist feedback"], ["prospect_feedback", "Common prospect feedback and objections"], ["market_feedback", "Market feedback"], ["recommendations", "Prospera's recommendations"]].map(([k, l]) => (

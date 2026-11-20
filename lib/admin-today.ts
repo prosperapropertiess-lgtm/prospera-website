@@ -79,11 +79,12 @@ export async function todayList(): Promise<{ items: TodayItem[]; showingsToday: 
   }
 
   const published = new Set((updates.data ?? []).filter((u) => u.status === "published").map((u) => u.placement_id));
+  const drafted = new Set((updates.data ?? []).filter((u) => u.status === "draft").map((u) => u.placement_id));
   const dow = (new Date(now.toLocaleDateString("en-CA", { timeZone: "America/Toronto" }) + "T12:00:00Z").getUTCDay() + 6) % 7; // Mon=0
   for (const p of placements.data ?? []) {
     if (p.is_demo) continue;
     if (dow >= 3 && !published.has(p.id)) {
-      items.push({ id: `wk-${p.id}`, kind: "update", title: "Send this week's owner update", detail: dow >= 4 ? "Due today" : "Due Friday", home: p.address, href: `/admin/placements/${p.id}?tab=updates`, at: `${week.start}T12:00:00Z`, urgent: dow >= 4 });
+      items.push({ id: `wk-${p.id}`, kind: "update", title: drafted.has(p.id) ? "Read and publish this week's owner update" : "Send this week's owner update", detail: [drafted.has(p.id) ? "AI draft ready" : null, dow >= 4 ? "Due today" : "Due Friday"].filter(Boolean).join(" · "), home: p.address, href: `/admin/placements/${p.id}?tab=updates`, at: `${week.start}T12:00:00Z`, urgent: dow >= 4 });
     }
     if (p.next_action && p.next_action_owner !== "Owner" && p.next_action_due && p.next_action_due <= now.toISOString().slice(0, 10)) {
       items.push({ id: `na-${p.id}`, kind: "next_action", title: p.next_action, detail: `Due ${p.next_action_due}`, home: p.address, href: `/admin/placements/${p.id}`, at: `${p.next_action_due}T12:00:00Z`, urgent: true });

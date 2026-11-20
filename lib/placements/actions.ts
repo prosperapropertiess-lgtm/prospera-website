@@ -231,7 +231,7 @@ export async function releaseApplication(id: string, applicationId: string) {
   }).select("id").single();
   await db().from("applications").update({ stage: "sent_to_owner", owner_sent_at: new Date().toISOString() }).eq("id", applicationId);
   await event(id, "application_released", "admin", { application_id: applicationId });
-  await emailOwnerReviewReady(id, applicantSummary.split(",")[0]);
+  await emailOwnerReviewReady(id, applicantSummary.split(",")[0], r!.id);
   return r!.id as string;
 }
 

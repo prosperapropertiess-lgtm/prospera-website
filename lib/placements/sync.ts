@@ -68,15 +68,22 @@ export async function syncFromProperty(propertyId: string) {
 }
 
 /** Tell the owner an application is waiting on their dashboard. */
-export async function emailOwnerReviewReady(placementId: string, applicant: string) {
+export async function emailOwnerReviewReady(placementId: string, applicant: string, reviewId?: string) {
   const { data: pl } = await db().from("placements").select("id, address, is_demo, client_accounts(token, name, email)").eq("id", placementId).single();
   const a = pl?.client_accounts as unknown as { token: string; name: string; email: string | null } | null;
   if (!pl || !a?.email || pl.is_demo) return "skipped";
+  const { data: r } = reviewId ? await db().from("placement_reviews").select("admin_summary, recommendation, verified, proposed_rent, move_in").eq("id", reviewId).maybeSingle() : { data: null };
+  const verified = ((r?.verified ?? []) as ({ item?: string; detail?: string } | string)[]).slice(0, 4).map((v) => typeof v === "string" ? v : `${v.item}: ${v.detail}`);
+  const base = dashboardUrl(a.token, pl.id);
   const html = shell("YOUR DECISION NEEDED", `
 ${h1(`An applicant for ${esc(pl.address)}`)}
-${p(`Hi ${esc(a.name.split(" ")[0])}, we've screened an application from <b>${esc(applicant)}</b> and it's ready for you on your dashboard.`)}
-${p(`Open it to see what's verified, what's still to check, and our recommendation. Then choose <b>Approve to Proceed</b>, <b>Decline</b>, or ask us a question.`)}
-${button("Review the application", `${dashboardUrl(a.token, pl.id)}#applications`)}
+${p(`Hi ${esc(a.name.split(" ")[0])}, we've screened an application from <b>${esc(applicant)}</b>.`)}
+${r?.admin_summary ? p(esc(r.admin_summary)) : ""}
+${verified.length ? p(`<b style="color:#222">Verified by documents</b><br>${verified.map((x) => `✓ ${esc(x)}`).join("<br>")}`) : ""}
+${r?.recommendation ? p(`<b style="color:#222">Our recommendation:</b> ${esc(r.recommendation)}`) : ""}
+${reviewId ? button("Approve to Proceed", `${base}#approve-${reviewId}`) : ""}
+${button(reviewId ? "See the full summary, ask a question or decline" : "Review the application", `${base}#applications`, !reviewId)}
+${p(`<span style="font-size:13px;color:#777">Approve to Proceed lets us run full verification (SingleKey credit and background check, reference calls). It is not final approval or a signed lease.</span>`)}
 ${p(`Ebin<br>Prospera Properties`, "0 36px 26px")}
 `);
   return sendLogged({ placementId, kind: "review_ready", to: a.email, subject: `Your decision needed: applicant for ${pl.address}`, html, key: `review-ready:${placementId}:${applicant}` });
