@@ -3389,3 +3389,123 @@ Maintained by the Backlink Prospector agent. Each entry includes enough context 
 - researcher_notes: Central Ontario PM (Kingston/Trenton/Brighton area) — zero competitive overlap with Prospera. Active 2026 compliance blog with solid editorial quality. BBB A+ rating. Contact via website form. Peer-to-peer cross-referral pitch is the right angle. Note: live URL verification not possible from this environment.
 
 ---
+
+## Westland Insurance — Ontario Landlord Tips Blog
+- url: https://www.westlandinsurance.ca/news/landlord/
+- type: blog
+- why: National insurance provider with a dedicated Ontario landlord blog covering tenant vetting, lease agreements, and rental property coverage — a natural resource partner for Prospera's landlord audience.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: via client support form at westlandinsurance.ca or 1-800-899-3093
+- site_focus: National insurance company with Ontario-specific landlord and rental property insurance products. News/blog covers landlord tips including tenant vetting, maintenance responsibilities, and rental coverage. Westland Express is their digital-first sub-brand for landlords. Ontario rental property insurance pages active at westlandinsurance.ca/home/rental-property/on/.
+- hook: Westland's Ontario landlord insurance content educates property owners on protecting investments — a resource mention or expert contribution from Prospera on what London Ontario landlords need operationally before choosing insurance positions Prospera as the professional management voice in their content ecosystem.
+- specific_content: "Seven tips for a successful landlord journey: making the most of your rental property" — Prospera's property management lens adds the operational angle their insurance-focused tips lack (tenant screening outcomes, maintenance cost data, vacancy risk).
+- researcher_notes: National insurance company, non-competitor. Westland Express handles landlord insurance digitally. Contact via client support form or 1-800-899-3093. No direct blog editorial email found — contact form is the best route. Live URL verification not possible from this environment.
+
+---
+
+## Insight Accounting CPA — Ontario Real Estate Investor Tax Blog
+- url: https://insightscpa.ca/
+- type: blog
+- why: Ontario CPA firm publishing 2026-specific guides on rental property tax, corporation vs. personal ownership, and CRA compliance — the financial side that complements Prospera's operational expertise.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: bader@insightscpa.ca
+- site_focus: Mississauga CPA firm led by Bader A. Chowdry, CPA, CA, LPA. Specializes in Ontario real estate investor accounting. Active 2026 blog covering: rental property tax, capital gains inclusion rate, corporation vs. personal rental ownership, CRA audit preparation, real estate flipping tax, and an interactive rental income tax calculator. Clients are GTA and Ontario-wide landlords, flippers, and portfolio investors.
+- hook: Insight's investor clients need accounting help AND property management — a resource mention or expert contribution from Prospera on SW Ontario management fee benchmarks and operational costs would strengthen their investor ROI guides and serve their clients who invest in London-area properties.
+- specific_content: "CPA for Real Estate Investors in Ontario 2026", "Rental Property Corporation vs Personal Ontario 2026", and their interactive rental income tax calculator — Prospera's SW Ontario management fee and vacancy cost data would add real local depth to their investor analysis tools.
+- researcher_notes: Mississauga CPA firm, non-competitor. Highly active 2026 blog. Direct email: bader@insightscpa.ca. Expert data contribution is the best pitch — offer specific London/St. Thomas management fee benchmarks and vacancy data to add value to their investor guides. Free 30-min consultation offered on site. High value prospect with clear complementary positioning.
+
+---
+
+## GRLLP — Ontario Real Estate Law Blog
+- url: https://www.grllp.com/blog/tags/real-estate
+- type: blog
+- why: Ontario real estate law firm with an active blog covering current landlord-tenant law, including 2026 posts on RTA exemptions and tenant liability — high authority legal content that links to operational PM resources.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: via contact form at grllp.com
+- site_focus: Ontario real estate law firm (grllp.com) with an active blog covering landlord-tenant law. Authors include James R.G. Cook and Baruch Wise. January 2026 post: "When 'Residential' Is Not Residential: Corporate Tenants, Jurisdiction, and the Limits of the RTA." Also covers agent liability (Feb 2025) and LTB jurisdiction rulings. Current editorial cadence with multiple lawyer authors.
+- hook: GRLLP's blog covers the legal framework — Prospera handles the operational execution. A resource mention linking Prospera's LTB guides from their legal commentary (or a contributed practical piece on "what landlords should do after getting an eviction order") would add operational depth to their legal content.
+- specific_content: "When 'Residential' Is Not Residential: Corporate Tenants, Jurisdiction, and the Limits of the RTA" (Baruch Wise, Jan 2026) — a companion resource from Prospera on how to screen and manage corporate tenants would complement this post at a practical level.
+- researcher_notes: Ontario law firm, non-competitor. Active 2026 blog with multiple lawyer authors. Contact via grllp.com contact page — no direct email found. Conservative editorial style; pitch must frame Prospera as a practical operational resource, not a competitor to legal services. Live URL verification not possible from this environment.
+
+---
+
+## Devry Law — Ontario Landlord Legal Resources
+- url: https://devrylaw.ca/tag/landlords
+- type: blog
+- why: Toronto-based real estate law firm with a landlord-focused blog covering evictions, LTB hearings, and Ontario tenancy law — a trusted authority source serving the same landlord audience Prospera manages for.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: 416-449-1400 / via contact form at devrylaw.ca
+- site_focus: Devry Smith Frank LLP, Toronto. Blog covers Ontario RTA including landlord exemptions (Ontario Human Rights Code s.21(1) shared kitchen/bathroom), rent circumvention penalties, and re-renting rules. Accessible via /tag/landlords and /tag/rentals. Formal legal editorial with practical landlord applications.
+- hook: Devry's Ontario landlord articles cover the law but rarely reference how property managers handle these situations operationally. A resource mention linking Prospera's LTB guides from their legal content, or a contributed practical piece on "what London Ontario landlords need from a property manager when facing LTB hearings," would add the operational layer their legal readers need.
+- specific_content: Their Ontario Human Rights Code s.21(1) landlord exemption article (shared kitchen/bathroom rule) — Prospera can offer a companion resource on how professional managers handle tenant screening without violating the Code, linking the legal rule to the practical workflow.
+- researcher_notes: Toronto law firm, non-competitor. Contact: 416-449-1400 / website form. Formal editorial — pitch must be professional and educational. Barrie office email found (cayley.rodd@devrylaw.ca) but likely not the right contact for a blog collaboration; use the website form or main line. Live URL verification not possible from this environment.
+
+---
+
+## Ontario Landlord and Tenant Law Blog — Michael Thiele
+- url: https://ontariolandlordandtenantlaw.blogspot.com/
+- type: blog
+- why: Ottawa landlord-tenant lawyer blog regularly recommended by Ontario RE investors for its accurate legal commentary — a niche authority source whose readership includes London-area landlords.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: mthiele@pqtlaw.com / 613-563-1131
+- site_focus: Ottawa-based residential landlord-tenant lawyer Michael Thiele's personal blog. Covers Ontario LTB procedures, N-forms, eviction notices, tenancy law from both landlord and tenant perspectives. Last confirmed post from 2019 — blog likely dormant. Consistently recommended on BiggerPockets for accurate Ontario landlord-tenant information.
+- hook: If Thiele is still occasionally publishing, a resource mention linking Prospera's operational LTB guides (N4, L1 timelines, eviction process) from his legal explanations would add practical context for his London-area readers at no cost to either party.
+- specific_content: His "No Written Lease — Am I In Trouble?" and "No Eviction in Winter in Ontario" posts from 2012 — Prospera's 2026 updated content on the same topics would be a natural modern companion resource to cite.
+- researcher_notes: Ottawa RE lawyer, non-competitor. Blog appears mostly dormant (last confirmed post 2019). Firm: Quinn Thiele Mineault Grodzki LLP, 310 O'Connor St., Ottawa. Website: ottawalawyers.com. Email from older posts: mthiele@pqtlaw.com — may be outdated. Low probability of active collaboration; worth a brief outreach but not a priority. Live URL verification not possible from this environment.
+
+---
+
+## Houston Stevenson — London Ontario Real Estate Blog
+- url: https://houstonstevenson.com/
+- type: blog
+- why: London Ontario real estate blog covering the local market for buyers and investors — a local content partner whose investor readers need property management after they close.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: via contact form at houstonstevenson.com (no direct email found)
+- site_focus: London Ontario real estate and mortgage blog covering the local housing market for buyers and investors. Published a piece arguing buyers should start with a broker over a bank for London properties. Targets London-area first-time buyers and investment property buyers. Local editorial focus, smaller site but highly geographically relevant.
+- hook: Houston Stevenson's London market content targets investors and buyers — after they close, they need property management. A resource mention or contributed article on "what London Ontario investors need to know about property management" would serve their readers at exactly the right post-purchase moment.
+- specific_content: "London's Mortgage Market Decoded: What Ontario Buyers Need Now?" — a companion resource on London Ontario property management costs and what first-time investors should expect from a PM company would add the post-purchase piece their content currently lacks.
+- researcher_notes: London Ontario real estate blog, non-competitor. Contact via website form — no direct email confirmed in research. Local site with strong geographic alignment. Peer-to-peer pitch from Ebin as a fellow London-based professional is the right approach. Live URL verification not possible from this environment.
+
+---
+
+## David Giovanniello — C21 London Ontario Investor Blog
+- url: https://david-giovanniello.c21.ca/
+- type: blog
+- why: London Ontario Century 21 agent focused on investors, with a blog making the case for London as an investment market — buyers from this blog are exactly the clients who need a SW Ontario property manager next.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: david.giovanniello@century21.ca / 519-777-0795
+- site_focus: London Ontario investor-focused Century 21 First Canadian agent with 27 years of London investing experience. Self-described "real estate investor and investor specialist." Blog from December 2024 covers London as an affordable investment market vs. GTA/Hamilton/Kitchener/Barrie. Active local investor network.
+- hook: David's investor clients buy London properties and immediately need property management — a resource mention or reciprocal referral arrangement with Prospera serves both parties. David refers management-seeking investors; Prospera refers management clients who want to buy more investment properties.
+- specific_content: His December 2024 post on London Ontario as an investment market (London's affordability advantage over GTA/Hamilton/Kitchener/Barrie) — Prospera can add a companion resource on "what investors need from a London Ontario PM company" that David can link from his investor content.
+- researcher_notes: London Ontario investor specialist, non-competitor. Direct email: david.giovanniello@century21.ca / 519-777-0795. 27 years local investing experience — peer-to-peer referral pitch from Ebin is ideal. High value prospect with direct geographic overlap and complementary investor client base. Personal outreach is appropriate.
+
+---
+
+## Lifemoney.ca — Canadian Rental Income Tax Guide 2026
+- url: https://lifemoney.ca/
+- type: blog
+- why: Canadian personal finance site publishing a 2026 rental income tax guide for landlords — a high-traffic informational resource whose Ontario landlord readers are a direct match for Prospera's services.
+- researched: true
+- drafted: true
+- added: 2026-11-22
+- contact_email: via contact form at lifemoney.ca (no direct email found)
+- site_focus: Canadian personal finance site with comprehensive 2026 rental income tax guide. Covers T776 form, marginal tax rates (20–53%), deductible expenses, and an interactive rental income tax calculator with after-tax cash flow modeling. Active 2026 content updated for current CRA rules. Audiences are Canadian landlords calculating rental ROI and tax exposure.
+- hook: Lifemoney's rental tax calculator reaches landlords at the moment they're calculating net rental income — Prospera's property management fees directly reduce taxable rental income (deductible expense). A resource mention or expert contribution on "SW Ontario management fee benchmarks and what London landlords actually budget" would add local operational data to their Ontario guides.
+- specific_content: "Rental Income Tax Canada 2026: How to Report, Deductions & CRA Rules" and their interactive rental income tax calculator — Prospera can contribute SW Ontario management fee and maintenance cost data to strengthen their Ontario-specific deduction examples.
+- researcher_notes: Canadian personal finance site, non-competitor. Active 2026 content. No direct contact email found — reach via website contact form. Data-led pitch is ideal: offer specific London/St. Thomas management fee benchmarks and rental cost data to enhance their Ontario landlord guides. Live URL verification not possible from this environment.
+
+---
