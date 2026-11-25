@@ -23,41 +23,70 @@ const CONDITIONS: { value: Condition; label: string; color: string }[] = [
   { value: "not_applicable", label: "N/A", color: TEXT_MUT },
 ];
 
-// Guides the walkthrough instead of leaving "what room comes next" and
-// "what goes in this room" as blank text boxes. Numbered rooms (Bedroom,
-// Bathroom) auto-increment — suggests Bedroom 2 once Bedroom 1 exists,
-// instead of only ever offering one bedroom.
-const ROOM_WALK_ORDER = ["Entrance", "Living Room", "Dining Room", "Kitchen", "Bedroom", "Bathroom", "Laundry", "Basement", "Exterior"];
-const NUMBERED_ROOMS = new Set(["Bedroom", "Bathroom"]);
-const MAX_NUMBERED = 6;
+// Rooms and items follow Prospera's own Property Survey checklist
+// (05_Templates/24 Property Survey Chklst), in the order you walk it.
+// Adding a section drops its whole checklist in; "Mark the rest Good"
+// handles everything that's fine.
+const BEDROOM_ITEMS = ["Floors", "Walls", "Ceiling", "Lights/Fans", "Doors", "Windows", "Window coverings", "Screens", "Closets"];
+const BATHROOM_ITEMS = ["Floors", "Walls/Ceilings", "Lights/Fans", "Doors", "Windows/Screens/Curtain", "Sinks/Faucets", "Caulking", "Tub/Shower", "Toilet", "Countertops/Cabinets"];
+const LANDSCAPE_ITEMS = ["Trees/Shrubs", "Grass", "Ground Cover/Bark/Rock", "Watering system"];
 
-function suggestedNextRooms(existing: { name: string }[], count = 4): string[] {
+const ROOM_TEMPLATES: { name: string; items: string[] }[] = [
+  { name: "General Exterior", items: ["Paint", "Dry rot", "Roof", "Gutters"] },
+  { name: "General Interior", items: ["Paint", "Flooring"] },
+  { name: "Outside Areas", items: ["Front porch", "Front yard", "Side yards", "Back yard", "Decks", "Driveway"] },
+  { name: "Landscape, Front", items: LANDSCAPE_ITEMS },
+  { name: "Landscape, Back", items: LANDSCAPE_ITEMS },
+  { name: "Pool / Spa", items: ["Pool", "Spa", "Waterfall"] },
+  { name: "Entry", items: ["Floors", "Walls/Ceiling", "Lights/Fans", "Doors/Closets", "Windows/Screens"] },
+  { name: "Living Room", items: ["Floors", "Walls/Ceiling", "Lights/Fans", "Doors", "Windows/Screens", "Window coverings", "Fireplace"] },
+  { name: "Family Room", items: ["Floors", "Walls/Ceiling", "Lights/Fans", "Doors", "Windows/Screens", "Window coverings", "Fireplace"] },
+  { name: "Dining Room", items: ["Floors", "Walls/Ceilings", "Lights/Fans", "Doors", "Windows/Screens", "Window coverings"] },
+  { name: "Hallway", items: ["Floors", "Walls/Ceiling", "Lights", "Doors", "Hardware", "Windows"] },
+  { name: "Kitchen", items: ["Floors", "Walls/Ceilings", "Lights/Fans", "Doors", "Windows/Screens/Drape", "Sink/Faucets", "Dishwasher", "Garbage Disposal", "Stove/Oven/Microwave", "Refrigerator", "Countertops", "Cabinets"] },
+  { name: "Master Bedroom", items: ["Floors", "Walls", "Ceiling", "Lights/Fans", "Doors", "Windows", "Window coverings", "Screens", "Fireplace", "Closets"] },
+  { name: "Bedroom 1", items: BEDROOM_ITEMS },
+  { name: "Bedroom 2", items: BEDROOM_ITEMS },
+  { name: "Bedroom 3", items: BEDROOM_ITEMS },
+  { name: "Bedroom 4", items: BEDROOM_ITEMS },
+  { name: "Bedroom 5", items: BEDROOM_ITEMS },
+  { name: "Master Bathroom", items: BATHROOM_ITEMS },
+  { name: "Bathroom 2", items: BATHROOM_ITEMS },
+  { name: "Bathroom 3", items: BATHROOM_ITEMS },
+  { name: "Garage", items: ["Walls", "Floor", "Laundry area", "Door to house", "Door to front of garage", "Side garage door to outside"] },
+  { name: "Laundry / Utility", items: ["Washer", "Dryer", "Sink/Faucets", "Walls/Ceilings", "Floor", "Lights/Fans", "Doors", "Windows/Screens/Curtain"] },
+  { name: "General Systems", items: ["Electrical", "Plumbing", "Water Heater", "Heating", "Air-conditioning"] },
+  { name: "Life Safety & Code", items: ["Smoke alarms", "Carbon monoxide detectors", "Fire extinguisher", "Bedroom egress windows", "Stair handrails", "Balcony / deck guardrails", "GFCI outlets", "Stair / hallway lighting", "Emergency exit paths clear"] },
+  { name: "Moisture & Mold", items: ["Visible mold", "Musty odors", "Bathroom exhaust fan working", "Kitchen hood vent exhausts outside", "Foundation cracks / water staining", "Sump pump", "Signs of past flooding"] },
+  { name: "Pest / Infestation", items: ["Rodent activity (droppings, nests)", "Insect activity (roaches, ants, bed bugs)", "Damaged screens / gaps at doors", "Sealed entry points"] },
+  { name: "Lease Compliance", items: ["Unauthorized occupants", "Unauthorized pets", "Smoking / vaping evidence", "Cannabis growing", "Hoarding / excessive clutter"] },
+  { name: "Mechanical & Emergency", items: ["Main water shutoff labeled & accessible", "Electrical panel labeled", "Furnace filter condition", "Hot water tank age & TPR valve", "Gas shutoff location", "Dryer vent clear (fire risk)"] },
+];
+
+// Every section not added yet, in walk order. All of them are offered
+// (not just the next few) so a home with no pool or garage never gets stuck
+// waiting on a section it doesn't have.
+function remainingRooms(existing: { name: string }[]): string[] {
   const names = new Set(existing.map((r) => r.name.trim().toLowerCase()));
-  const out: string[] = [];
-  for (const base of ROOM_WALK_ORDER) {
-    if (out.length >= count) break;
-    if (NUMBERED_ROOMS.has(base)) {
-      for (let i = 1; i <= MAX_NUMBERED; i++) {
-        const label = `${base} ${i}`;
-        if (!names.has(label.toLowerCase())) { out.push(label); break; }
-      }
-    } else if (!names.has(base.toLowerCase())) {
-      out.push(base);
-    }
-  }
-  return out;
+  return ROOM_TEMPLATES.map((t) => t.name).filter((n) => !names.has(n.toLowerCase()));
 }
 
-const DEFAULT_ITEMS = ["Walls", "Flooring", "Ceiling", "Windows", "Doors", "Light Fixtures", "Outlets & Switches"];
-const ROOM_EXTRA_ITEMS: Record<string, string[]> = {
-  kitchen: ["Countertops", "Cabinets", "Sink & Faucet", "Backsplash"],
-  bathroom: ["Toilet", "Tub / Shower", "Vanity & Sink", "Exhaust Fan"],
-  laundry: ["Washer Hookup", "Dryer Vent"],
-  exterior: ["Siding / Exterior Walls", "Deck / Porch", "Yard / Landscaping"],
-};
+// The next section after the one you're in, skipping ones already added.
+function nextRoomAfter(current: string, existing: { name: string }[]): string | null {
+  const remaining = new Set(remainingRooms(existing));
+  const idx = ROOM_TEMPLATES.findIndex((t) => t.name.toLowerCase() === current.trim().toLowerCase());
+  for (let i = idx + 1; i < ROOM_TEMPLATES.length; i++) if (remaining.has(ROOM_TEMPLATES[i].name)) return ROOM_TEMPLATES[i].name;
+  return remainingRooms(existing)[0] ?? null;
+}
+
+const DEFAULT_ITEMS = ["Floors", "Walls/Ceiling", "Lights/Fans", "Doors", "Windows/Screens"];
 function suggestedItems(roomName: string): string[] {
-  const key = Object.keys(ROOM_EXTRA_ITEMS).find((k) => roomName.toLowerCase().includes(k));
-  return [...DEFAULT_ITEMS, ...(key ? ROOM_EXTRA_ITEMS[key] : [])];
+  const n = roomName.trim().toLowerCase();
+  const exact = ROOM_TEMPLATES.find((t) => t.name.toLowerCase() === n);
+  if (exact) return exact.items;
+  if (n.includes("bedroom")) return BEDROOM_ITEMS;
+  if (n.includes("bath")) return BATHROOM_ITEMS;
+  return DEFAULT_ITEMS;
 }
 
 // Burns a visible timestamp (and what it's a photo of) onto the image
@@ -403,7 +432,8 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
     }
   }
 
-  const roomSuggestions = suggestedNextRooms(state.rooms);
+  const roomSuggestions = remainingRooms(state.rooms);
+  const nextRoom = room ? nextRoomAfter(room.name, state.rooms) : null;
   const restCount = room ? room.items.filter((it) => it.condition === "not_inspected").length : 0;
   const roomComplete = room && room.items.length > 0 && room.items.every((it) => it.condition !== "not_inspected");
   const itemSuggestions = room ? suggestedItems(room.name).filter((s) => !room.items.some((it) => it.label.toLowerCase() === s.toLowerCase())) : [];
@@ -521,16 +551,16 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
           {roomComplete && (
             <div style={{ marginTop: 20, backgroundColor: "#E5EDE8", borderRadius: 12, padding: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: GREEN }}>✓ {room.name} done.</span>
-              {roomSuggestions[0] && (
-                <button onClick={() => addRoom(roomSuggestions[0])} style={{ ...bigButton(GREEN), padding: "10px 18px", fontSize: 13 }}>
-                  Next: {roomSuggestions[0]} →
+              {nextRoom && (
+                <button onClick={() => addRoom(nextRoom)} style={{ ...bigButton(GREEN), padding: "10px 18px", fontSize: 13 }}>
+                  Next: {nextRoom} →
                 </button>
               )}
             </div>
           )}
         </Card>
       ) : (
-        <Card><p style={{ color: TEXT_MUT }}>Add a room above to get started — Living Room and Kitchen are a good place to begin the walk.</p></Card>
+        <Card><p style={{ color: TEXT_MUT }}>Tap a section above to start. It follows your Property Survey, from General Exterior to Mechanical. Skip any the home doesn&apos;t have.</p></Card>
       )}
 
       <button onClick={onNext} style={{ ...bigButton(ACCENT), width: "100%", marginTop: 20 }}>I'm Done With Rooms — Continue →</button>
