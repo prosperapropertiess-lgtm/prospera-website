@@ -213,10 +213,14 @@ export default function MoveInCoordinatorPage() {
 }
 
 // ── Step 1: Start ────────────────────────────────────────────────────────
+const DEFAULT_METERS = ["Hydro", "Gas", "Water"];
+
 function StartStep({ state, onSaved, onNext }: { state: State; onSaved: (s: Session) => void; onNext: () => void }) {
   const [inspector, setInspector] = useState(state.session.inspector_name ?? "");
   const [moveInDate, setMoveInDate] = useState(state.session.move_in_date ?? new Date().toISOString().split("T")[0]);
-  const [meters, setMeters] = useState<{ utility: string; reading: string }[]>(state.session.meter_readings ?? []);
+  const [meters, setMeters] = useState<{ utility: string; reading: string }[]>(
+    state.session.meter_readings?.length ? state.session.meter_readings : DEFAULT_METERS.map((utility) => ({ utility, reading: "" })),
+  );
   const [saving, setSaving] = useState(false);
 
   async function save(andNext: boolean) {
@@ -224,7 +228,7 @@ function StartStep({ state, onSaved, onNext }: { state: State; onSaved: (s: Sess
     const res = await fetch(`/api/admin/leasing/properties/${state.campaign.id}/move-in/session`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: state.session.id, inspector_name: inspector, move_in_date: moveInDate, meter_readings: meters }),
+      body: JSON.stringify({ sessionId: state.session.id, inspector_name: inspector, move_in_date: moveInDate, meter_readings: meters.filter((m) => m.utility.trim() && m.reading.trim()) }),
     });
     setSaving(false);
     if (res.ok) { onSaved(await res.json()); if (andNext) onNext(); }
@@ -270,25 +274,50 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
   const [customItemOpen, setCustomItemOpen] = useState(false);
   const [newItemLabel, setNewItemLabel] = useState("");
   const room = state.rooms.find((r) => r.id === activeRoom) ?? null;
+  const latest = useRef(state);
+  useEffect(() => { latest.current = state; }, [state]);
 
   // Adds immediately with a temp id (no waiting on the network to see it
   // appear), then swaps in the real row once the server confirms — this is
   // what was causing the "adding an item takes too much lag" complaint.
   async function addRoom(name: string) {
     if (!name.trim()) return;
-    const temp: Room = { id: tempId(), session_id: state.session.id, name: name.trim(), sort_order: state.rooms.length, items: [] };
+    // The room arrives with its usual checklist already on it — no tapping
+    // "+ Walls", "+ Flooring"… one by one.
+    const labels = suggestedItems(name.trim());
+    const tempRoomId = tempId();
+    const tempItems: Item[] = labels.map((label) => ({ id: tempId(), room_id: tempRoomId, label, condition: "not_inspected", notes: null, repair_needed: false, photos: [] }));
+    const temp: Room = { id: tempRoomId, session_id: state.session.id, name: name.trim(), sort_order: state.rooms.length, items: tempItems };
     setState({ ...state, rooms: [...state.rooms, temp] });
     setActiveRoom(temp.id);
     setNewRoomName("");
     setCustomRoomOpen(false);
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/rooms`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: state.session.id, name: name.trim() }),
+      body: JSON.stringify({ sessionId: state.session.id, name: name.trim(), items: labels }),
     });
     if (res.ok) {
-      const created = await res.json();
-      setState((prev) => ({ ...prev, rooms: prev.rooms.map((r) => r.id === temp.id ? created : r) }));
+      const created: Room = await res.json();
+      // Anything tapped while the room was still saving (condition, notes,
+      // "mark the rest Good") is carried over onto the real rows and saved,
+      // instead of being dropped when the temp ids are swapped out.
+      const local = latest.current.rooms.find((r) => r.id === temp.id);
+      const pending: { id: string; patch: Partial<Item> }[] = [];
+      const items = created.items.map((it, i) => {
+        const l = local?.items.find((x) => x.id === tempItems[i]?.id);
+        if (!l) return it;
+        const patch: Partial<Item> = {};
+        if (l.condition !== it.condition) patch.condition = l.condition;
+        if (l.notes) patch.notes = l.notes;
+        if (l.repair_needed) patch.repair_needed = true;
+        if (Object.keys(patch).length) pending.push({ id: it.id, patch });
+        return { ...it, ...patch };
+      });
+      setState((prev) => ({ ...prev, rooms: prev.rooms.map((r) => r.id === temp.id ? { ...created, items } : r) }));
       setActiveRoom((cur) => cur === temp.id ? created.id : cur);
+      await Promise.all(pending.map(({ id, patch }) => fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items/${id}`, {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch),
+      })));
     }
     onSaved();
   }
@@ -319,10 +348,31 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
   }
 
   function updateItemLocal(itemId: string, patch: Partial<Item>) {
-    setState({
-      ...state,
-      rooms: state.rooms.map((r) => ({ ...r, items: r.items.map((it) => it.id === itemId ? { ...it, ...patch } : it) })),
-    });
+    setState((prev) => ({
+      ...prev,
+      rooms: prev.rooms.map((r) => ({ ...r, items: r.items.map((it) => it.id === itemId ? { ...it, ...patch } : it) })),
+    }));
+  }
+
+  // One tap for everything not yet checked in this room. Only the items
+  // still 'not_inspected' change, and it's an explicit tap — nothing
+  // becomes "Good" on its own.
+  async function markRestGood(roomId: string) {
+    const target = latest.current.rooms.find((r) => r.id === roomId);
+    if (!target) return;
+    const ids = target.items.filter((it) => it.condition === "not_inspected").map((it) => it.id);
+    if (!ids.length) return;
+    setState((prev) => ({
+      ...prev,
+      rooms: prev.rooms.map((r) => r.id === roomId ? { ...r, items: r.items.map((it) => ids.includes(it.id) ? { ...it, condition: "good" as Condition } : it) } : r),
+    }));
+    const saved = ids.filter((id) => !id.startsWith("temp-")); // temp ones are saved when the room finishes creating
+    if (saved.length) {
+      await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/items`, {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids: saved, condition: "good" }),
+      });
+    }
+    onSaved();
   }
 
   async function saveItem(itemId: string, patch: Partial<Item>) {
@@ -354,6 +404,7 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
   }
 
   const roomSuggestions = suggestedNextRooms(state.rooms);
+  const restCount = room ? room.items.filter((it) => it.condition === "not_inspected").length : 0;
   const roomComplete = room && room.items.length > 0 && room.items.every((it) => it.condition !== "not_inspected");
   const itemSuggestions = room ? suggestedItems(room.name).filter((s) => !room.items.some((it) => it.label.toLowerCase() === s.toLowerCase())) : [];
 
@@ -402,6 +453,14 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
           {room.items.length === 0 && (
             <p style={{ fontSize: 13, color: TEXT_SEC, margin: "0 0 14px" }}>What goes here? Tap the usual things to check in a {room.name.toLowerCase()}, or add your own below.</p>
           )}
+          {restCount > 0 && (
+            <div style={{ margin: "4px 0 14px" }}>
+              <p style={{ fontSize: 13, color: TEXT_SEC, margin: "0 0 10px" }}>Tap only what has a problem. Then mark everything else Good in one go.</p>
+              <button onClick={() => markRestGood(room.id)} style={{ ...bigButton(GREEN), width: "100%" }}>
+                ✓ Mark the rest Good ({restCount})
+              </button>
+            </div>
+          )}
 
           {room.items.map((item) => (
             <div key={item.id} style={{ borderTop: `1px solid ${BORDER}`, padding: "16px 0" }}>
@@ -420,16 +479,21 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
                   </button>
                 ))}
               </div>
-              <textarea
-                value={item.notes ?? ""} onChange={(e) => updateItemLocal(item.id, { notes: e.target.value })}
-                onBlur={(e) => saveItem(item.id, { notes: e.target.value })}
-                placeholder="Notes / required repairs…" rows={2}
-                style={{ ...inputStyle, width: "100%", boxSizing: "border-box", marginBottom: 8, resize: "vertical" }}
-              />
-              <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, cursor: "pointer" }}>
-                <input type="checkbox" checked={item.repair_needed} onChange={(e) => saveItem(item.id, { repair_needed: e.target.checked })} style={{ width: 16, height: 16, accentColor: ACCENT }} />
-                <span style={{ fontSize: 13, color: TEXT }}>Repair needed</span>
-              </label>
+              {/* Notes and the repair box only matter when something's wrong — hidden for Good / N/A to keep the walk short */}
+              {(item.condition === "existing_damage" || item.condition === "needs_attention" || item.notes || item.repair_needed) && (
+                <>
+                  <textarea
+                    value={item.notes ?? ""} onChange={(e) => updateItemLocal(item.id, { notes: e.target.value })}
+                    onBlur={(e) => saveItem(item.id, { notes: e.target.value })}
+                    placeholder="What's wrong? e.g. scuff by the door, 10cm" rows={2}
+                    style={{ ...inputStyle, width: "100%", boxSizing: "border-box", marginBottom: 8, resize: "vertical" }}
+                  />
+                  <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, cursor: "pointer" }}>
+                    <input type="checkbox" checked={item.repair_needed} onChange={(e) => saveItem(item.id, { repair_needed: e.target.checked })} style={{ width: 18, height: 18, accentColor: ACCENT }} />
+                    <span style={{ fontSize: 14, color: TEXT }}>Repair needed</span>
+                  </label>
+                </>
+              )}
               <PhotoStrip photos={item.photos} onAdd={(file) => uploadPhoto(item.id, file, item.label)} />
             </div>
           ))}
@@ -492,6 +556,7 @@ function PhotoStrip({ photos, onAdd }: { photos: Photo[]; onAdd: (file: File) =>
 }
 
 // ── Step 3: Appliances & Keys ────────────────────────────────────────────
+const KEY_SUGGESTIONS = ["Front door key", "Back door key", "Mailbox key", "Garage remote", "Building fob"];
 const APPLIANCE_SUGGESTIONS = ["Fridge", "Stove / Oven", "Microwave", "Dishwasher", "Washer", "Dryer", "Water Heater", "Furnace / HVAC", "Air Conditioner"];
 
 function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void }) {
@@ -517,7 +582,7 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
   }
 
   function updateApplianceLocal(id: string, patch: Partial<Appliance>) {
-    setState({ ...state, appliances: state.appliances.map((a) => a.id === id ? { ...a, ...patch } : a) });
+    setState((prev) => ({ ...prev, appliances: prev.appliances.map((a) => a.id === id ? { ...a, ...patch } : a) }));
   }
   async function saveAppliance(id: string, patch: Partial<Appliance>) {
     updateApplianceLocal(id, patch);
@@ -537,9 +602,9 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
     if (res.ok) { const { photos } = await res.json(); updateApplianceLocal(id, { photos }); onSaved(); }
   }
 
-  async function addKey() {
-    if (!newKey.trim()) return;
-    const temp: KeyRow = { id: tempId(), session_id: state.session.id, item_name: newKey.trim(), quantity: Number(newKeyQty) || 1 };
+  async function addKey(name = newKey, qty = Number(newKeyQty) || 1) {
+    if (!name.trim()) return;
+    const temp: KeyRow = { id: tempId(), session_id: state.session.id, item_name: name.trim(), quantity: qty };
     setState((prev) => ({ ...prev, keys: [...prev.keys, temp] }));
     setNewKey(""); setNewKeyQty("1");
     const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/keys`, {
@@ -556,12 +621,24 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
     if (!id.startsWith("temp-")) await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/keys/${id}`, { method: "DELETE" });
   }
 
+  const untested = state.appliances.filter((a) => a.test_status === "not_tested");
+  async function markAllWorking() {
+    await Promise.all(untested.map((a) => saveAppliance(a.id, { test_status: "working" })));
+  }
+
+  const keySuggestions = KEY_SUGGESTIONS.filter((k) => !state.keys.some((x) => x.item_name.toLowerCase() === k.toLowerCase()));
+
   const applianceSuggestions = APPLIANCE_SUGGESTIONS.filter((s) => !state.appliances.some((a) => a.name.toLowerCase() === s.toLowerCase()));
 
   return (
     <div>
       <Card>
         <SectionTitle>Appliances</SectionTitle>
+        {untested.length > 1 && (
+          <button onClick={markAllWorking} style={{ ...bigButton(GREEN), width: "100%", margin: "8px 0 12px" }}>
+            ✓ Tested — all working ({untested.length})
+          </button>
+        )}
         {state.appliances.map((a) => (
           <div key={a.id} style={{ borderTop: `1px solid ${BORDER}`, padding: "16px 0" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
@@ -620,8 +697,15 @@ function AppliancesStep({ campaignId, state, setState, onSaved, onNext }: { camp
         <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
           <input value={newKey} onChange={(e) => setNewKey(e.target.value)} placeholder="e.g. Front door key" style={{ ...inputStyle, flex: 1 }} />
           <input value={newKeyQty} onChange={(e) => setNewKeyQty(e.target.value)} type="number" min={1} style={{ ...inputStyle, width: 70 }} />
-          <button onClick={addKey} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>+ Add</button>
+          <button onClick={() => addKey()} style={{ ...bigButton(NAVY), padding: "12px 20px" }}>+ Add</button>
         </div>
+        {keySuggestions.length > 0 && (
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 12 }}>
+            {keySuggestions.map((k) => (
+              <button key={k} onClick={() => addKey(k, 1)} style={{ ...smallGhostButton }}>+ {k}</button>
+            ))}
+          </div>
+        )}
       </Card>
 
       <button onClick={onNext} style={{ ...bigButton(ACCENT), width: "100%", marginTop: 4 }}>Continue to Welcome Guide →</button>
