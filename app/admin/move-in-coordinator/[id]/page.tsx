@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import SignaturePad from "@/components/ui/SignaturePad";
+import RapidCamera, { type CameraTarget } from "@/components/admin/RapidCamera";
 
 const BG = "#F7F5F2";
 const SURFACE = "#FFFFFF";
@@ -94,8 +95,8 @@ function suggestedItems(roomName: string): string[] {
 // goes looking for it and gets stripped by a lot of sharing/export paths.
 // Also downsizes to a sane max width, since full phone-camera resolution
 // was the real driver of storage cost, not photo count.
-async function stampAndResizePhoto(file: File, label: string): Promise<Blob> {
-  const bitmap = await createImageBitmap(file);
+async function stampAndResizePhoto(source: Blob | HTMLVideoElement, label: string): Promise<Blob> {
+  const bitmap = await createImageBitmap(source);
   const MAX_W = 1600;
   const scale = Math.min(1, MAX_W / bitmap.width);
   const w = Math.round(bitmap.width * scale);
@@ -120,7 +121,7 @@ async function stampAndResizePhoto(file: File, label: string): Promise<Blob> {
 
 interface Photo { url: string; path: string }
 interface Item { id: string; room_id: string; label: string; condition: Condition; notes: string | null; repair_needed: boolean; photos: Photo[] }
-interface Room { id: string; session_id: string; name: string; sort_order: number; items: Item[] }
+interface Room { id: string; session_id: string; name: string; sort_order: number; photos?: Photo[]; items: Item[] }
 interface Appliance { id: string; session_id: string; name: string; location: string | null; cosmetic_condition: Condition; test_status: "working" | "issue" | "not_tested"; brand: string | null; model: string | null; serial_number: string | null; photos: Photo[] }
 interface KeyRow { id: string; session_id: string; item_name: string; quantity: number }
 interface WelcomeGuide {
@@ -134,6 +135,7 @@ interface Session {
   id: string; campaign_id: string; property_id: string | null; application_id: string | null;
   inspector_name: string | null; move_in_date: string | null; status: "draft" | "awaiting_signatures" | "completed";
   report_version: number; meter_readings: { utility: string; reading: string }[];
+  owner_token?: string; tenant_token?: string; comments_close_at?: string | null;
 }
 interface State {
   campaign: { id: string; owner_name: string | null; owner_email: string | null; property: { id: string; title: string | null; address: string | null; city: string | null; name: string | null } };
@@ -159,6 +161,77 @@ const STEPS: { id: Step; label: string }[] = [
 const inputStyle: React.CSSProperties = { fontSize: 15, padding: "12px 14px", borderRadius: 10, border: `1px solid ${BORDER}`, backgroundColor: BG, color: TEXT, fontFamily: "inherit" };
 const bigButton = (bg: string, color = "#FFFFFF"): React.CSSProperties => ({ backgroundColor: bg, color, fontSize: 15, fontWeight: 700, padding: "16px 24px", borderRadius: 12, border: "none", cursor: "pointer" });
 
+// ── Background photo uploads ─────────────────────────────────────────────
+// Shots from the rapid camera go into this queue so the shutter never waits
+// on the network. One upload at a time, retried with backoff (basements have
+// bad signal); anything that still fails stays listed with a Retry button.
+type UploadJob = { key: string; targetType: CameraTarget["type"]; targetId: string; blob: Blob; attempts: number; status: "pending" | "failed" };
+
+function useUploadQueue(campaignId: string, onUploaded: (targetType: CameraTarget["type"], targetId: string, photos: Photo[]) => void) {
+  const jobs = useRef<UploadJob[]>([]);
+  const running = useRef(false);
+  const [, rerender] = useState(0);
+  const bump = () => rerender((n) => n + 1);
+  const onUploadedRef = useRef(onUploaded);
+  useEffect(() => { onUploadedRef.current = onUploaded; }, [onUploaded]);
+
+  const run = useCallback(async () => {
+    if (running.current) return;
+    running.current = true;
+    for (;;) {
+      const job = jobs.current.find((j) => j.status === "pending");
+      if (!job) break;
+      const fd = new FormData();
+      fd.append("photo", job.blob, "photo.jpg");
+      fd.append("targetType", job.targetType);
+      fd.append("targetId", job.targetId);
+      let ok = false;
+      try {
+        const res = await fetch(`/api/admin/leasing/properties/${campaignId}/move-in/photos`, { method: "POST", body: fd });
+        if (res.ok) {
+          const { photos } = await res.json();
+          onUploadedRef.current(job.targetType, job.targetId, photos);
+          ok = true;
+        }
+      } catch { /* network — retried below */ }
+      if (ok) {
+        jobs.current = jobs.current.filter((j) => j !== job);
+      } else {
+        job.attempts++;
+        if (job.attempts >= 4) job.status = "failed";
+        else await new Promise((r) => setTimeout(r, 1000 * 2 ** job.attempts));
+      }
+      bump();
+    }
+    running.current = false;
+  }, [campaignId]);
+
+  const enqueue = useCallback((targetType: CameraTarget["type"], targetId: string, blob: Blob) => {
+    jobs.current.push({ key: `${Date.now()}-${Math.random()}`, targetType, targetId, blob, attempts: 0, status: "pending" });
+    bump();
+    run();
+  }, [run]);
+
+  const retryFailed = useCallback(() => {
+    for (const j of jobs.current) if (j.status === "failed") { j.status = "pending"; j.attempts = 0; }
+    bump();
+    run();
+  }, [run]);
+
+  const pending = jobs.current.filter((j) => j.status === "pending").length;
+  const failed = jobs.current.filter((j) => j.status === "failed").length;
+
+  // Leaving the page with photos still in the queue would lose them.
+  useEffect(() => {
+    if (pending + failed === 0) return;
+    const warn = (e: BeforeUnloadEvent) => { e.preventDefault(); e.returnValue = ""; };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [pending, failed]);
+
+  return { enqueue, retryFailed, pending, failed };
+}
+
 export default function MoveInCoordinatorPage() {
   const { id: campaignId } = useParams<{ id: string }>();
   const [state, setState] = useState<State | null>(null);
@@ -171,6 +244,16 @@ export default function MoveInCoordinatorPage() {
   }, [campaignId]);
 
   useEffect(() => { load(); }, [load]);
+
+  const onUploaded = useCallback((targetType: CameraTarget["type"], targetId: string, photos: Photo[]) => {
+    setState((prev) => {
+      if (!prev) return prev;
+      if (targetType === "room") return { ...prev, rooms: prev.rooms.map((r) => r.id === targetId ? { ...r, photos } : r) };
+      if (targetType === "appliance") return { ...prev, appliances: prev.appliances.map((a) => a.id === targetId ? { ...a, photos } : a) };
+      return { ...prev, rooms: prev.rooms.map((r) => ({ ...r, items: r.items.map((it) => it.id === targetId ? { ...it, photos } : it) })) };
+    });
+  }, []);
+  const uploads = useUploadQueue(campaignId, onUploaded);
 
   const flash = () => {
     setSaveTag("saving");
@@ -206,6 +289,16 @@ export default function MoveInCoordinatorPage() {
             <span style={{ fontSize: 12, color: saveTag === "idle" ? "transparent" : GREEN, fontWeight: 600 }}>
               {saveTag === "saving" ? "Saving…" : saveTag === "saved" ? "✓ Saved" : ""}
             </span>
+            {(uploads.pending > 0 || uploads.failed > 0) && (
+              <span style={{ fontSize: 12, fontWeight: 700, color: uploads.failed ? ACCENT : TEXT_SEC }}>
+                {uploads.pending > 0 ? `Uploading ${uploads.pending} photo${uploads.pending === 1 ? "" : "s"}…` : ""}
+                {uploads.failed > 0 && (
+                  <button onClick={uploads.retryFailed} style={{ marginLeft: 8, background: "none", border: `1px solid ${ACCENT}`, color: ACCENT, borderRadius: 6, padding: "4px 8px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+                    {uploads.failed} failed · Retry
+                  </button>
+                )}
+              </span>
+            )}
           </div>
           <h1 style={{ fontSize: 19, fontWeight: 700, color: TEXT, margin: "0 0 12px" }}>{address}</h1>
           {step !== "done" && (
@@ -231,7 +324,7 @@ export default function MoveInCoordinatorPage() {
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px" }}>
         {step === "start" && <StartStep state={state} onSaved={(s) => { setState({ ...state, session: s }); flash(); }} onNext={() => setStep("rooms")} />}
-        {step === "rooms" && <RoomsStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("appliances")} />}
+        {step === "rooms" && <RoomsStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("appliances")} uploads={uploads} />}
         {step === "appliances" && <AppliancesStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("guide")} />}
         {step === "guide" && <GuideStep campaignId={campaignId} state={state} setState={updateState} onSaved={flash} onNext={() => setStep("review")} />}
         {step === "review" && <ReviewStep campaignId={campaignId} state={state} setState={updateState} onFinished={() => setStep("done")} />}
@@ -296,7 +389,8 @@ function StartStep({ state, onSaved, onNext }: { state: State; onSaved: (s: Sess
 let tempIdCounter = 0;
 const tempId = () => `temp-${Date.now()}-${tempIdCounter++}`;
 
-function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void }) {
+function RoomsStep({ campaignId, state, setState, onSaved, onNext, uploads }: { campaignId: string; state: State; setState: (updater: State | ((prev: State) => State)) => void; onSaved: () => void; onNext: () => void; uploads: ReturnType<typeof useUploadQueue> }) {
+  const [cameraOpen, setCameraOpen] = useState(false);
   const [activeRoom, setActiveRoom] = useState(state.rooms[0]?.id ?? null);
   const [customRoomOpen, setCustomRoomOpen] = useState(false);
   const [newRoomName, setNewRoomName] = useState("");
@@ -434,6 +528,17 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
 
   const roomSuggestions = remainingRooms(state.rooms);
   const nextRoom = room ? nextRoomAfter(room.name, state.rooms) : null;
+  // The camera needs real ids to file photos under — wait for a just-added room to finish saving.
+  const roomSaving = !!room && (room.id.startsWith("temp-") || room.items.some((it) => it.id.startsWith("temp-")));
+  const cameraTargets: CameraTarget[] = room
+    ? [{ type: "room", id: room.id, label: "Whole room" }, ...room.items.map((it) => ({ type: "item" as const, id: it.id, label: it.label }))]
+    : [];
+  async function capture(target: CameraTarget, source: HTMLVideoElement | Blob) {
+    // Grab + stamp the frame right away (the video keeps moving); upload later.
+    const blob = await stampAndResizePhoto(source, target.type === "room" ? `${room?.name ?? ""}` : `${room?.name ?? ""} — ${target.label}`);
+    uploads.enqueue(target.type, target.id, blob);
+  }
+
   const restCount = room ? room.items.filter((it) => it.condition === "not_inspected").length : 0;
   const roomComplete = room && room.items.length > 0 && room.items.every((it) => it.condition !== "not_inspected");
   const itemSuggestions = room ? suggestedItems(room.name).filter((s) => !room.items.some((it) => it.label.toLowerCase() === s.toLowerCase())) : [];
@@ -479,6 +584,27 @@ function RoomsStep({ campaignId, state, setState, onSaved, onNext }: { campaignI
             <SectionTitle>{room.name}</SectionTitle>
             <button onClick={() => removeRoom(room.id)} style={{ fontSize: 12, color: ACCENT, background: "none", border: "none", cursor: "pointer" }}>Remove Room</button>
           </div>
+
+          <button onClick={() => setCameraOpen(true)} disabled={roomSaving} style={{ ...bigButton(NAVY), width: "100%", margin: "8px 0 12px", opacity: roomSaving ? 0.5 : 1 }}>
+            📷 Take Photos of {room.name}
+          </button>
+          {(room.photos?.length ?? 0) > 0 && (
+            <div style={{ display: "flex", gap: 8, overflowX: "auto", marginBottom: 14 }}>
+              {room.photos!.map((p, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={i} src={p.url} alt="" style={{ width: 72, height: 72, borderRadius: 8, objectFit: "cover", flexShrink: 0, border: `1px solid ${BORDER}` }} />
+              ))}
+            </div>
+          )}
+          {cameraOpen && (
+            <RapidCamera
+              title={room.name}
+              targets={cameraTargets}
+              onCapture={capture}
+              onClose={() => setCameraOpen(false)}
+              queueStatus={{ pending: uploads.pending, failed: uploads.failed }}
+            />
+          )}
 
           {room.items.length === 0 && (
             <p style={{ fontSize: 13, color: TEXT_SEC, margin: "0 0 14px" }}>What goes here? Tap the usual things to check in a {room.name.toLowerCase()}, or add your own below.</p>
@@ -924,7 +1050,12 @@ function DoneStep({ state, campaignId }: { state: State; campaignId: string }) {
       <div style={{ textAlign: "center", padding: "20px 0" }}>
         <p style={{ fontSize: 40, margin: "0 0 12px" }}>✅</p>
         <SectionTitle>Move-In Complete</SectionTitle>
-        <p style={{ fontSize: 13, color: TEXT_SEC, marginBottom: 20 }}>The signed report and welcome guide have been emailed.</p>
+        <p style={{ fontSize: 13, color: TEXT_SEC, marginBottom: 20 }}>The owner and tenant each got an email with their report link. The tenant has 7 days to add comments or photos.</p>
+        {state.session.owner_token && (
+          <a href={`/inspection/${state.session.owner_token}`} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: 10, color: NAVY, fontWeight: 700, textDecoration: "none" }}>
+            Open the Online Report →
+          </a>
+        )}
         {state.documents.map((d) => d && (
           <a key={d.id} href={d.file_url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: 10, color: ACCENT, fontWeight: 700, textDecoration: "none" }}>
             {d.doc_type === "inspection_report" ? "View Inspection Report" : "View Welcome Guide"} →

@@ -96,7 +96,7 @@ const CONDITION_COLORS: Record<string, ReturnType<typeof rgb>> = {
 };
 
 interface RoomItem { label: string; condition: string; notes: string | null; repair_needed: boolean; photos: { url: string }[] }
-interface Room { name: string; items: RoomItem[] }
+interface Room { name: string; items: RoomItem[]; photos?: { url: string }[] }
 interface Appliance { name: string; location: string | null; cosmetic_condition: string; test_status: string; brand: string | null; model: string | null; serial_number: string | null; photos: { url: string }[] }
 interface KeyItem { item_name: string; quantity: number }
 interface Signature { signer_name: string; signer_role: string; signature_data: string; signed_at: string }
@@ -113,7 +113,13 @@ export interface InspectionReportInput {
   keys: KeyItem[];
   meterReadings: { utility: string; reading: string }[];
   signatures: Signature[];
+  /** Web report with every photo. The PDF itself only carries photos of flagged items so it stays small. */
+  reportUrl?: string;
+  photoCount?: number;
 }
+
+const FLAGGED = new Set(["existing_damage", "needs_attention"]);
+const PDF_PHOTOS_PER_FLAGGED_ITEM = 2;
 
 const TEST_LABELS: Record<string, string> = { working: "Working", issue: "Issue Observed", not_tested: "Not Tested" };
 
@@ -135,6 +141,12 @@ export async function generateInspectionReportPdf(input: InspectionReportInput):
   bodyLines(ctx, `Inspector: ${input.inspectorName || "—"}`, { size: 10 });
   bodyLines(ctx, `Move-In Date: ${input.moveInDate || "—"}`, { size: 10 });
   bodyLines(ctx, `Report Version: ${input.reportVersion}`, { size: 10 });
+  ctx.y -= 6;
+  if (input.reportUrl) {
+    bodyLines(ctx, input.photoCount ? `All ${input.photoCount} photos, room by room:` : "All photos, room by room:", { size: 10, color: NAVY });
+    bodyLines(ctx, input.reportUrl, { size: 9, color: NAVY });
+    bodyLines(ctx, "This PDF includes photos of flagged items only. Every photo is in the online report.", { size: 8, color: GREY });
+  }
   ctx.y -= 10;
 
   for (const room of input.rooms) {
@@ -150,7 +162,10 @@ export async function generateInspectionReportPdf(input: InspectionReportInput):
       if (item.repair_needed) bodyLines(ctx, "⚠ Repair needed", { size: 9, color: CRIMSON, indent: 10 });
       if (item.notes) bodyLines(ctx, item.notes, { size: 9, color: GREY, indent: 10 });
 
-      for (const photo of item.photos.slice(0, 4)) {
+      const isFlagged = FLAGGED.has(item.condition) || item.repair_needed;
+      const pdfPhotos = input.reportUrl ? (isFlagged ? item.photos.slice(0, PDF_PHOTOS_PER_FLAGGED_ITEM) : []) : item.photos.slice(0, 4);
+      if (input.reportUrl && !isFlagged && item.photos.length) bodyLines(ctx, `${item.photos.length} photo${item.photos.length === 1 ? "" : "s"} in online report`, { size: 8, color: GREY, indent: 10 });
+      for (const photo of pdfPhotos) {
         const embedded = await embedPhoto(ctx, photo.url);
         if (!embedded) continue;
         const targetW = 130;

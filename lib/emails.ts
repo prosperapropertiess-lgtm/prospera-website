@@ -2784,38 +2784,48 @@ export function ownerPlacementCloseoutEmail(data: {
 export function moveInTenantEmail(
   tenantName: string,
   propertyAddress: string,
-  reportUrl: string,
-  guideUrl: string | null
+  reportPageUrl: string,
+  guideUrl: string | null,
+  commentsCloseAt: string | null,
 ): { subject: string; html: string } {
+  const deadline = commentsCloseAt
+    ? new Date(commentsCloseAt).toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" })
+    : null;
   const html = wrapper(`
-    ${heroCard(`Welcome home, ${tenantName || "there"}.`, `Your signed move-in inspection for ${propertyAddress} is attached below.`)}
+    ${heroCard(`Welcome home, ${tenantName || "there"}.`, `Your signed move-in report for ${propertyAddress} is ready.`)}
     <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      This report documents the condition of the unit as of your move-in date — everything on it is what both
-      you and the inspector signed off on. Keep it somewhere you can find it; it's your record too.
+      It shows every room and every photo from move-in day. Keep this link. When you move out, it&rsquo;s the record
+      of what was already there.
     </p>
-    ${cta("View Signed Inspection Report", reportUrl)}
-    ${guideUrl ? cta("View Welcome Guide", guideUrl) : ""}
+    ${deadline ? `<p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
+      Spot something we missed? Add a note or photo on the report by <strong>${deadline}</strong> and it becomes part of the record.
+    </p>` : ""}
+    ${cta("Open Your Move-In Report", reportPageUrl)}
+    ${guideUrl ? `<p style="margin:0 0 24px;font-size:15px;font-family:${FONT};"><a href="${guideUrl}" style="color:${TEXT};">Your welcome guide (garbage day, parking, who to call)</a></p>` : ""}
     ${divider()}
-    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Questions about the unit or anything on the report? Just reply to this email.</p>
+    <p style="margin:0 0 32px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">Questions? Just reply to this email.</p>
     ${divider()}
     ${signoff()}
   `);
-  return { subject: `Your Signed Move-In Report — ${propertyAddress}`, html };
+  return { subject: `Your Move-In Report — ${propertyAddress}`, html };
 }
 
 export function moveInOwnerEmail(
   ownerName: string,
   propertyAddress: string,
   tenantNames: string[],
-  reportUrl: string
+  reportPageUrl: string,
+  photoCount: number,
+  flaggedCount: number,
 ): { subject: string; html: string } {
   const html = wrapper(`
-    ${heroCard(`Move-in complete, ${ownerName || "there"}.`, `${propertyAddress} — signed inspection report attached.`)}
+    ${heroCard(`Move-in complete, ${ownerName || "there"}.`, `${propertyAddress} — signed inspection report.`)}
     <p style="margin:0 0 24px;font-size:17px;color:${TEXT};font-family:${FONT};line-height:2.0;">
-      ${tenantNames.join(", ") || "Your tenant"} has moved in. The full room-by-room inspection, appliance
-      condition, keys handed over, and everyone's signatures are in the attached report.
+      ${tenantNames.join(", ") || "Your tenant"} has moved in. The report has ${photoCount} photo${photoCount === 1 ? "" : "s"}, room by room,
+      ${flaggedCount ? `with ${flaggedCount} item${flaggedCount === 1 ? "" : "s"} noted for existing damage or attention` : "with nothing flagged"}.
+      Keys, meter readings and signatures are in it too. It&rsquo;s what we compare against at move-out.
     </p>
-    ${cta("View Signed Inspection Report", reportUrl)}
+    ${cta("Open the Move-In Report", reportPageUrl)}
     ${divider()}
     ${signoff()}
   `);

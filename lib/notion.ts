@@ -715,3 +715,38 @@ export async function createRentTrackerSeries(data: {
     cursor.setMonth(cursor.getMonth() + 1);
   }
 }
+
+/** Appends blocks to the bottom of a Notion page (doesn't touch its properties). */
+export async function appendNotionBlocks(pageId: string, children: object[]): Promise<void> {
+  const res = await fetch(`${NOTION_API}/blocks/${pageId}/children`, {
+    method: "PATCH",
+    headers: headers(),
+    body: JSON.stringify({ children }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Notion append failed (${pageId}): ${err}`);
+  }
+}
+
+/**
+ * Finds the Notion property page for a street address. Matches on the
+ * normalized "number + street" so "1864 Dundas St, Unit 3" finds
+ * "1864 Dundas Street Unit 3". Returns null rather than guessing when
+ * nothing (or more than one page) matches.
+ */
+export async function findNotionPropertyByAddress(address: string): Promise<Property | null> {
+  const norm = (s: string) => s.toLowerCase()
+    .replace(/\b(street|st)\b/g, "st").replace(/\b(avenue|ave)\b/g, "ave").replace(/\b(road|rd)\b/g, "rd")
+    .replace(/\b(drive|dr)\b/g, "dr").replace(/\b(crescent|cres)\b/g, "cres").replace(/\b(boulevard|blvd)\b/g, "blvd")
+    .replace(/[^a-z0-9]+/g, " ").trim();
+  const target = norm(address);
+  if (!target) return null;
+  const all = await fetchAllProperties();
+  const exact = all.filter((p) => norm(p.address || p.name) === target);
+  if (exact.length === 1) return exact[0];
+  // Fall back to the leading "number street" words, e.g. "1864 dundas st".
+  const head = target.split(" ").slice(0, 3).join(" ");
+  const loose = all.filter((p) => norm(p.address || p.name).startsWith(head));
+  return loose.length === 1 ? loose[0] : null;
+}

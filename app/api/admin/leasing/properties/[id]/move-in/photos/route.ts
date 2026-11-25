@@ -26,13 +26,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   const file = formData.get("photo") as File | null;
-  const targetType = formData.get("targetType") as string | null; // 'item' | 'appliance'
+  const targetType = formData.get("targetType") as string | null; // 'item' | 'appliance' | 'room'
   const targetId = formData.get("targetId") as string | null;
   if (!file || !targetType || !targetId) {
     return NextResponse.json({ error: "photo, targetType, targetId required" }, { status: 400 });
   }
-  if (!["item", "appliance"].includes(targetType)) {
-    return NextResponse.json({ error: "targetType must be 'item' or 'appliance'" }, { status: 400 });
+  if (!["item", "appliance", "room"].includes(targetType)) {
+    return NextResponse.json({ error: "targetType must be 'item', 'appliance' or 'room'" }, { status: 400 });
   }
 
   const db = getSupabaseAdmin();
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { data: signed, error: signErr } = await db.storage.from(BUCKET).createSignedUrl(path, SIGNED_URL_TTL);
   if (signErr) return NextResponse.json({ error: signErr.message }, { status: 500 });
 
-  const table = targetType === "item" ? "move_in_items" : "move_in_appliances";
+  const table = targetType === "item" ? "move_in_items" : targetType === "room" ? "move_in_rooms" : "move_in_appliances";
   const { data: existing, error: fetchErr } = await db.from(table).select("photos").eq("id", targetId).single();
   if (fetchErr) return NextResponse.json({ error: fetchErr.message }, { status: 500 });
 

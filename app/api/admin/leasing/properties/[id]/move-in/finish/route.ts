@@ -16,6 +16,8 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 import { generateInspectionReportPdf, generateWelcomeGuidePdf } from "@/lib/move-in-pdf";
 import { moveInTenantEmail, moveInOwnerEmail } from "@/lib/emails";
 import { Resend } from "resend";
+import { reportUrls, COMMENT_WINDOW_DAYS } from "@/lib/move-in-report";
+import { appendNotionBlocks, findNotionPropertyByAddress } from "@/lib/notion";
 
 // Separate bucket from photos (tenant-inspection) — that bucket's
 // allowed_mime_types is images only (jpeg/png/webp/heic), which is exactly
@@ -63,7 +65,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const tenantEmails = [application?.email].filter(Boolean) as string[];
 
   const [{ data: rooms }, { data: appliances }, { data: keys }, { data: guide }, { data: signatures }] = await Promise.all([
-    db.from("move_in_rooms").select("name, items:move_in_items(*)").eq("session_id", sessionId).order("sort_order"),
+    db.from("move_in_rooms").select("name, photos, items:move_in_items(*)").eq("session_id", sessionId).order("sort_order"),
     db.from("move_in_appliances").select("*").eq("session_id", sessionId).order("sort_order"),
     db.from("move_in_keys").select("*").eq("session_id", sessionId),
     session.property_id ? db.from("property_welcome_guides").select("*").eq("property_id", session.property_id).maybeSingle() : Promise.resolve({ data: null }),
@@ -80,6 +82,15 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (missing.length > 0) {
     return NextResponse.json({ error: `Can't finish yet — missing: ${missing.join(", ")}` }, { status: 400 });
   }
+
+  const links = reportUrls(session);
+  const allItems = (rooms ?? []).flatMap((r) => r.items ?? []);
+  const photoCount =
+    (rooms ?? []).reduce((n, r) => n + (r.photos?.length ?? 0), 0) +
+    allItems.reduce((n: number, it: { photos?: unknown[] }) => n + (it.photos?.length ?? 0), 0) +
+    (appliances ?? []).reduce((n, a) => n + (a.photos?.length ?? 0), 0);
+  const flaggedCount = allItems.filter((it: { condition: string; repair_needed: boolean }) =>
+    it.condition === "existing_damage" || it.condition === "needs_attention" || it.repair_needed).length;
 
   // ── 1. Documents (skip regeneration if this exact version is already done) ──
   const { data: existingDocs } = await db
@@ -104,6 +115,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       keys: keys ?? [],
       meterReadings: session.meter_readings ?? [],
       signatures: signatures ?? [],
+      reportUrl: links.owner,
+      photoCount,
     });
     const path = `${campaignId}/reports/inspection-v${session.report_version}-${Date.now()}.pdf`;
     const { error: upErr } = await db.storage.from(BUCKET).upload(path, pdfBytes, { contentType: "application/pdf", upsert: false });
@@ -147,6 +160,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     guideDoc = inserted;
   }
 
+  // The web report only opens once the session is completed, so mark it
+  // complete (and start the tenant's comment window) before emailing links.
+  const commentsCloseAt = session.comments_close_at ?? new Date(Date.now() + COMMENT_WINDOW_DAYS * 86400000).toISOString();
+  await db.from("move_in_sessions").update({ status: "completed", finished_at: session.finished_at ?? new Date().toISOString(), comments_close_at: commentsCloseAt }).eq("id", sessionId);
+
   // ── 2. Emails (per-recipient idempotent send/retry) ──
   const resend = new Resend(process.env.RESEND_API_KEY);
   const results: { recipient: string; type: string; status: string; error?: string }[] = [];
@@ -173,16 +191,44 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   for (const email of tenantEmails) {
     const first = tenantNames[0] || "there";
-    const { subject, html } = moveInTenantEmail(first, propertyAddress, reportDoc!.file_url, guideDoc?.file_url ?? null);
+    const { subject, html } = moveInTenantEmail(first, propertyAddress, links.tenant, guideDoc?.file_url ?? null, commentsCloseAt);
     await sendOnce(email, "tenant", "inspection_report", subject, html);
   }
   if (campaign.owner_email) {
-    const { subject, html } = moveInOwnerEmail(campaign.owner_name || "", propertyAddress, tenantNames, reportDoc!.file_url);
+    const { subject, html } = moveInOwnerEmail(campaign.owner_name || "", propertyAddress, tenantNames, links.owner, photoCount, flaggedCount);
     await sendOnce(campaign.owner_email, "owner", "inspection_report", subject, html);
   }
 
-  // ── 3. Mark complete + schedule review request (only once) ──
-  await db.from("move_in_sessions").update({ status: "completed", finished_at: new Date().toISOString() }).eq("id", sessionId);
+  // ── 3. Link the report on the property's Notion page (once) ──
+  let notion: "linked" | "already" | "no_match" | "failed" = "already";
+  if (!session.notion_linked_at) {
+    try {
+      const page = await findNotionPropertyByAddress(propertyAddress);
+      if (!page) {
+        notion = "no_match";
+      } else {
+        const date = session.move_in_date || new Date().toISOString().slice(0, 10);
+        await appendNotionBlocks(page.id, [{
+          object: "block",
+          type: "paragraph",
+          paragraph: {
+            rich_text: [
+              { type: "text", text: { content: `Move-in inspection ${date} (${tenantNames.join(", ") || "tenant"}): ` }, annotations: { bold: true } },
+              { type: "text", text: { content: "open report", link: { url: links.owner } } },
+              { type: "text", text: { content: ` · ${photoCount} photos · ${flaggedCount} flagged` } },
+            ],
+          },
+        }]);
+        await db.from("move_in_sessions").update({ notion_linked_at: new Date().toISOString() }).eq("id", sessionId);
+        notion = "linked";
+      }
+    } catch (err) {
+      console.error("move-in notion link failed", err);
+      notion = "failed";
+    }
+  }
+
+  // ── 4. Schedule review request (only once) ──
 
   const { data: existingReview } = await db.from("move_in_review_requests").select("id").eq("session_id", sessionId).maybeSingle();
   if (!existingReview) {
@@ -194,5 +240,5 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     }
   }
 
-  return NextResponse.json({ ok: true, reportDoc, guideDoc, emailResults: results });
+  return NextResponse.json({ ok: true, reportDoc, guideDoc, emailResults: results, reportLinks: links, notion });
 }
